@@ -2,7 +2,6 @@ package org.edmcouncil.spec.fibo.config.configuration.model;
 
 import org.edmcouncil.spec.fibo.config.configuration.model.Pair;
 
-
 /**
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -22,8 +21,6 @@ public class PairImpl<A, B> implements Pair<A, B> {
     this.valA = valA;
     this.valB = valB;
   }
-
-
 
   @Override
   public A getValueA() {

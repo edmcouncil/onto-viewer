@@ -63,7 +63,7 @@ public class WeaselOntologyManager {
   }
 
   private void loadOntologyFromFile() throws IOException, OWLOntologyCreationException {
-   
+
     FileSystemManager fsm = new FileSystemManager();
     File inputOntologyFile = fsm.getPathToOntologyFile().toFile();
 
@@ -113,42 +113,49 @@ public class WeaselOntologyManager {
 
   public Collection getDetailsByIri(String iriString) {
     IRI iri = IRI.create(iriString);
-    // TODO: change result type from list to single OwlDetails element.
+    //TODO: change result type from list to single OwlDetails element.
     List<OwlDetails> result = new LinkedList<>();
 
-    if (ontology.containsClassInSignature(iri)) {
-      LOGGER.debug("Handle class data.");
-      OwlDetails wd = dataHandler.handleParticularClass(iri, ontology);
-      if (!result.contains(wd)) {
-        result.add(wd);
+    //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
+    if (iriString.endsWith("/")) {
+      LOGGER.debug("Handle ontology metadata. IRI: {}", iriString);
+      dataHandler.handleOntologyMetadata(iri, ontology);
+    } else {
+
+      if (ontology.containsClassInSignature(iri)) {
+        LOGGER.debug("Handle class data. IRI: {}", iriString);
+        OwlDetails wd = dataHandler.handleParticularClass(iri, ontology);
+        if (!result.contains(wd)) {
+          result.add(wd);
+        }
+      }
+      if (ontology.containsDataPropertyInSignature(iri)) {
+        LOGGER.info("Handle data property. IRI: {}", iriString);
+        OwlDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
+        if (!result.contains(wd)) {
+          result.add(wd);
+        }
+      }
+      if (ontology.containsObjectPropertyInSignature(iri)) {
+        LOGGER.info("Handle object property. IRI: {}", iriString);
+        OwlDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
+        if (!result.contains(wd)) {
+          result.add(wd);
+        }
+      }
+      if (ontology.containsIndividualInSignature(iri)) {
+        LOGGER.info("Handle individual data. IRI: {}", iriString);
+        OwlDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
+        if (!result.contains(wd)) {
+          result.add(wd);
+        }
       }
     }
-    if (ontology.containsDataPropertyInSignature(iri)) {
-      LOGGER.info("Handle data property.");
-      OwlDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
-      if (!result.contains(wd)) {
-        result.add(wd);
-      }
-    }
-    if (ontology.containsObjectPropertyInSignature(iri)) {
-      LOGGER.info("Handle object property.");
-      OwlDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
-      if (!result.contains(wd)) {
-        result.add(wd);
-      }
-    }
-    if (ontology.containsIndividualInSignature(iri)) {
-      LOGGER.info("Handle individual data.");
-      OwlDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
-      if (!result.contains(wd)) {
-        result.add(wd);
-      }
-    }
-    
+
     for (OwlDetails owlDetails : result) {
       owlDetails.setIri(iriString);
     }
-    
+
     if (!config.getWeaselConfig().isEmpty()) {
       WeaselConfiguration cfg = (WeaselConfiguration) config.getWeaselConfig();
       if (cfg.isGrouped()) {
