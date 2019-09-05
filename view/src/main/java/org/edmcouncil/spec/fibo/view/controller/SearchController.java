@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -50,18 +49,5 @@ public class SearchController {
     searchService.search(query, modelBuilder);
 
     return "search";
-  }
-  
-  @GetMapping("/json")
-  public ResponseEntity searchJson(@RequestParam("query") String query, Model model) {
-
-    LOGGER.info("[GET]: search ? query = {}", query);
-    Query q = new Query();
-    q.setValue(query);
-    ModelBuilder modelBuilder = new ModelBuilder(model);
-
-    searchService.search(query, modelBuilder);
-
-    return ResponseEntity.ok(model);
   }
 }

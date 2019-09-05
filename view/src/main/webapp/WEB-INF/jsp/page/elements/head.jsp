@@ -1,5 +1,5 @@
 <meta charset="UTF-8" />
-<title>Fibo Viewer</title>
+<title>Fibo Weasel</title>
 <!-- CSS files -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/bootstrap.cosmo.min.css" />

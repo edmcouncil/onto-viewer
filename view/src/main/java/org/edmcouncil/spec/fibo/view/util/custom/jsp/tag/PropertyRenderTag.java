@@ -11,7 +11,6 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
-import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 
 /**
@@ -66,9 +65,6 @@ public class PropertyRenderTag extends SimpleTagSupport {
         break;
       case INSTANCES: 
         renderInstances(property);
-        break;
-      case MODULES: 
-        renderModules(property);
         break;
     }
 
@@ -197,13 +193,6 @@ public class PropertyRenderTag extends SimpleTagSupport {
   private void renderInstances(PropertyValue property) throws IOException {
     OwlListElementIndividualProperty instanceProperty = (OwlListElementIndividualProperty) property;
     PairImpl value = instanceProperty.getValue();
-    String link = wrapIri((String)value.getValueB(), (String)value.getValueA());
-    renderProperty(link);
-  }
-
-  private void renderModules(PropertyValue property) throws IOException {
-    OwlFiboModuleProperty fiboModuleProperty = (OwlFiboModuleProperty) property;
-    PairImpl value = fiboModuleProperty.getValue();
     String link = wrapIri((String)value.getValueB(), (String)value.getValueA());
     renderProperty(link);
   }

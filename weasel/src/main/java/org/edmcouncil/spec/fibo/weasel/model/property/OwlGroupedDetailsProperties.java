@@ -14,7 +14,10 @@ import java.util.TreeSet;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.comparator.WeaselComparators;
+import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -101,6 +104,10 @@ public class OwlGroupedDetailsProperties<T> {
 
   public void sort(Set<ConfigElement> groups) {
 
+  }
+
+  public void sort(Set<ConfigElement> groups, WeaselConfiguration cfg) {
+
     Map<String, Map<String, List<T>>> sortedResults = new LinkedHashMap<>();
 
     Map<String, List<T>> others = properties.get("other");
@@ -111,10 +118,20 @@ public class OwlGroupedDetailsProperties<T> {
       if (prop == null) {
         continue;
       }
+
       Map<String, List<T>> newprop = new LinkedHashMap();
 
-      List priotityList = new LinkedList(group.getElements());
-  
+      List<ConfigStringElement> priotityList = new LinkedList(group.getElements());
+      if (cfg.hasRenamedGroups()) {
+      List<ConfigStringElement> priotityListRenamed = new LinkedList();
+        for (ConfigStringElement object : priotityList) {
+          String configElement = object.toString();
+          String newName = cfg.getNewName(configElement);
+          newName = newName == null ? configElement : newName;
+          priotityListRenamed.add(new ConfigStringElement(newName));
+        }
+        priotityList = priotityListRenamed;
+      }
 
       Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(priotityList);
       SortedSet<String> keys = new TreeSet<>(comparator);
@@ -136,7 +153,7 @@ public class OwlGroupedDetailsProperties<T> {
       keys.forEach((key) -> {
         newothers.put(key, others.get(key));
       });
-      
+
       sortedResults.put("other", newothers);
     }
 

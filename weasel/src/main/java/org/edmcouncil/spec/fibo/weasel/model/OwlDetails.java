@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
+import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 
 /**
@@ -14,7 +15,6 @@ import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 public class OwlDetails {
 
   private String label;
-  private String iri;
   private OwlDetailsProperties<PropertyValue> properties;
   private String type;
   private OwlTaxonomyImpl taxonomy;
@@ -45,14 +45,10 @@ public class OwlDetails {
     this.type = type;
   }
 
-  public String getIri() {
-    return iri;
+  public void setProperties(OwlDetailsProperties<PropertyValue> properties) {
+    this.properties = properties;
   }
-
-  public void setIri(String iri) {
-    this.iri = iri;
-  }
-
+  
   public void addProperty(String key, OwlAnnotationPropertyValue property) {
     properties.addProperty(key, property);
   }
