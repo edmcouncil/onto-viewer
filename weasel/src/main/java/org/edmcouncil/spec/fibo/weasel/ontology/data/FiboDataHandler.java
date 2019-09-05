@@ -16,13 +16,16 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * This data handler working with FIBO ontology.
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class FiboDataHandler extends OwlDataHandler{
+@Component
+public class FiboDataHandler {
 
   private static final String DOMAIN_POSTFIX = "Domain";
   private static final String DOMAIN_KEY = "domain";
@@ -34,7 +37,10 @@ public class FiboDataHandler extends OwlDataHandler{
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FiboDataHandler.class);
 
-  static OwlDetailsProperties<PropertyValue> handleFiboModulesData(OWLOntology ontology, OWLEntity entity) {
+  @Autowired
+  private AnnotationsDataHandler annotationsDataHandler;
+
+  public OwlDetailsProperties<PropertyValue> handleFiboModulesData(OWLOntology ontology, OWLEntity entity) {
 
     OWLDataFactory df = OWLManager.getOWLDataFactory();
 
@@ -72,7 +78,7 @@ public class FiboDataHandler extends OwlDataHandler{
     return result;
   }
 
-  private static OwlFiboModuleProperty createProperty(String name, String iriString) {
+  private OwlFiboModuleProperty createProperty(String name, String iriString) {
     OwlFiboModuleProperty property = new OwlFiboModuleProperty();
     property.setIri(iriString);
     property.setName(name);
@@ -81,7 +87,7 @@ public class FiboDataHandler extends OwlDataHandler{
     return property;
   }
 
-  private static String prepareFiboPath(String[] splitedStr) {
+  private String prepareFiboPath(String[] splitedStr) {
     StringBuilder stringBuilder = new StringBuilder();
     for (String fragment : splitedStr) {
       if (fragment.equals("http:") || fragment.equals("https:")) {
@@ -97,7 +103,7 @@ public class FiboDataHandler extends OwlDataHandler{
     return fiboPath;
   }
 
-  private static String prepareModuleIri(String fiboPath, String domain, String module) {
+  private String prepareModuleIri(String fiboPath, String domain, String module) {
     String moduleIriString = fiboPath.concat(domain).concat(URL_DELIMITER)
         .concat(module).concat(URL_DELIMITER)
         .concat(METADATA_PREFIX).concat(domain).concat(module).concat(URL_DELIMITER)
@@ -105,7 +111,7 @@ public class FiboDataHandler extends OwlDataHandler{
     return moduleIriString;
   }
 
-  private static String prepareDomainIri(String fiboPath, String domain) {
+  private String prepareDomainIri(String fiboPath, String domain) {
     String domainIri = fiboPath.concat(domain).concat(URL_DELIMITER)
         .concat(METADATA_PREFIX).concat(domain).concat(URL_DELIMITER)
         .concat(domain).concat(DOMAIN_POSTFIX);
@@ -113,21 +119,16 @@ public class FiboDataHandler extends OwlDataHandler{
   }
 
   //TODO: change void
-  public static void handleFiboOntologyMetadata(IRI iri, OWLOntology ontology) {
+  public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OWLOntology ontology) {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
-
+    OwlDetailsProperties<PropertyValue> annotations = null;
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
-        LOGGER.debug(onto.getOntologyID().toString());
-        LOGGER.debug(onto.annotationsAsList().toString());
-      }else {
-        
+        annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations());
       }
-      
 
-      //LOGGER.debug(onto.);
     }
-
+    return annotations;
   }
 
 }

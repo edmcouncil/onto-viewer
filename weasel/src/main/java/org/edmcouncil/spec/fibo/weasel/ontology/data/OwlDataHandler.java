@@ -62,7 +62,9 @@ public class OwlDataHandler {
   @Autowired
   private OwlDataExtractor dataExtractor;
   @Autowired
-  private AppConfiguration appConfiguration;
+  private FiboDataHandler fiboDataHandler;
+  @Autowired
+  private AnnotationsDataHandler annotationsDataHandler;
 
   public OwlDetails handleParticularClass(IRI iri, OWLOntology ontology) {
     OwlDetails resultDetails = new OwlDetails();
@@ -87,9 +89,9 @@ public class OwlDataHandler {
             .collect(Collectors.toList());
         OwlDetailsProperties<PropertyValue> handleSubClassOf = handleParticularSubClassOf(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleParticularIndividual(ontology, clazz);
-        
+
         //This code is only for fibo ontology, this line can be deleted for other ontologies.
-        OwlDetailsProperties<PropertyValue> modules = FiboDataHandler.handleFiboModulesData(ontology, clazz);
+        OwlDetailsProperties<PropertyValue> modules = fiboDataHandler.handleFiboModulesData(ontology, clazz);
 
         subclasses = subclasses.stream().filter((pv) -> (!pv.getType().equals(WeaselOwlType.TAXONOMY))).collect(Collectors.toList());
         axioms.getProperties().put(AxiomType.SUBCLASS_OF.getName(), subclasses);
@@ -134,29 +136,9 @@ public class OwlDataHandler {
     return resultDetails;
   }
 
-  protected OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
-    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+  public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
 
-    Iterator<OWLAnnotationAssertionAxiom> annotationAssertionAxiom
-        = ontology.annotationAssertionAxioms(iri).iterator();
-    while (annotationAssertionAxiom.hasNext()) {
-      OWLAnnotationAssertionAxiom next = annotationAssertionAxiom.next();
-      String property = rendering.render(next.getProperty());
-      String value = next.getValue().toString();
-
-      LOGGER.trace("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", value, property);
-
-      OwlAnnotationPropertyValue opv = new OwlAnnotationPropertyValue();
-
-      opv.setType(dataExtractor.extractAnnotationType(next));
-      if (opv.getType().equals(WeaselOwlType.ANY_URI)) {
-        opv.setValue(dataExtractor.extractAnyUriToString(value));
-      } else {
-        opv.setValue(value);
-      }
-      result.addProperty(property, opv);
-    }
-    return result;
+    return annotationsDataHandler.handleAnnotations(iri, ontology);
   }
 
   private OwlDetailsProperties<PropertyValue> handleAxioms(
@@ -454,8 +436,18 @@ public class OwlDataHandler {
     return result;
   }
 
-  public void handleOntologyMetadata(IRI iri, OWLOntology ontology) {
-    FiboDataHandler.handleFiboOntologyMetadata(iri, ontology);
+  public OwlDetails handleOntologyMetadata(IRI iri, OWLOntology ontology) {
+    
+    OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontology);
+      OwlDetails wd = new OwlDetails();
+      
+      wd.addAllProperties(metadata);
+      wd.setIri(iri.toString());
+      String [] iriSplited = iri.toString().split("/");
+      wd.setLabel(iriSplited[iriSplited.length-1]);
+      
+      return wd;
+    
   }
 
 }

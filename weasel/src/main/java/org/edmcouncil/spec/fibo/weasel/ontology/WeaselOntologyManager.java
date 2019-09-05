@@ -20,6 +20,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElem
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataHandler;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
@@ -119,7 +120,9 @@ public class WeaselOntologyManager {
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
     if (iriString.endsWith("/")) {
       LOGGER.debug("Handle ontology metadata. IRI: {}", iriString);
-      dataHandler.handleOntologyMetadata(iri, ontology);
+      OwlDetails wd  = dataHandler.handleOntologyMetadata(iri, ontology);
+     
+      result.add(wd);
     } else {
 
       if (ontology.containsClassInSignature(iri)) {
