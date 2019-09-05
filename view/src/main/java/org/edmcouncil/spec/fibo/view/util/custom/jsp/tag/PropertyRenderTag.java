@@ -4,7 +4,6 @@ import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.regex.Pattern;
 import javax.servlet.jsp.JspException;
@@ -12,6 +11,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 
 /**
@@ -67,6 +67,9 @@ public class PropertyRenderTag extends SimpleTagSupport {
       case INSTANCES: 
         renderInstances(property);
         break;
+      case MODULES: 
+        renderModules(property);
+        break;
     }
 
   }
@@ -96,19 +99,10 @@ public class PropertyRenderTag extends SimpleTagSupport {
   private void renderAxiom(PropertyValue property) throws IOException {
     OwlAxiomPropertyValue axiomPropertyVal = (OwlAxiomPropertyValue) property;
     String result = axiomPropertyVal.getValue();
-    String[] list = result.split(" ");
-    String[] checkList = result.split(" ");
     for (Map.Entry<String, String> entry : axiomPropertyVal.getEntityMaping().entrySet()) {
       String replecment = parseIriWithoutWraping(entry.getValue(), entry.getKey());
-      
-      for (int i = 0; i < checkList.length; i++) {
-        String string = checkList[i];
-        if(string.equals(entry.getKey())){
-          list[i] = replecment;
-        }
-      }
-        result = String.join(" ", list);
-      
+      String regex = String.format("\\b%s\\b", entry.getKey());
+      result = Pattern.compile(regex).matcher(result).replaceAll(replecment);
     }
     if (elementWrapper != null && !elementWrapper.isEmpty()) {
       result = wrapElement(result);
@@ -203,6 +197,13 @@ public class PropertyRenderTag extends SimpleTagSupport {
   private void renderInstances(PropertyValue property) throws IOException {
     OwlListElementIndividualProperty instanceProperty = (OwlListElementIndividualProperty) property;
     PairImpl value = instanceProperty.getValue();
+    String link = wrapIri((String)value.getValueB(), (String)value.getValueA());
+    renderProperty(link);
+  }
+
+  private void renderModules(PropertyValue property) throws IOException {
+    OwlFiboModuleProperty fiboModuleProperty = (OwlFiboModuleProperty) property;
+    PairImpl value = fiboModuleProperty.getValue();
     String link = wrapIri((String)value.getValueB(), (String)value.getValueA());
     renderProperty(link);
   }

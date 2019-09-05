@@ -13,7 +13,7 @@
   <groupId>org.edbcouncil.spec.fibo</groupId>
   <artifactId>view</artifactId>
   <version>0.1-SNAPSHOT</version>
-  <name>Fibo-View</name>
+  <name>Fibo-Viewer</name>
   <description>Description needs to be completed</description>
   <packaging>war</packaging>
 

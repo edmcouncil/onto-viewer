@@ -16,36 +16,34 @@
       <groupElement>label</groupElement>
       <groupElement>abbreviation</groupElement>
       <groupElement>definition</groupElement>
-      <groupElement>definitionOrigin</groupElement>
-      <groupElement>adaptedFrom</groupElement>
       <groupElement>synonym</groupElement>
       <groupElement>example</groupElement>
       <groupElement>scopeNote</groupElement>
-      <groupElement>seeAlso</groupElement>            
       <groupElement>explanatoryNote</groupElement>
-      <groupElement>usageNote</groupElement>
       <groupElement>editorialNote</groupElement>
+      <groupElement>seeAlso</groupElement>      
     </group>
 
     <group>
       <groupName>Ontological characteristic</groupName>
       <groupElement>EquivalentClasses</groupElement>
       <groupElement>SubClassOf</groupElement>
-      <groupType>ANONYMOUS_ANCESTOR</groupType>
-      <groupElement>DisjointClasses</groupElement>      
-      <groupType>DIRECT_SUBCLASSES</groupType>
-      <groupType>INSTANCES</groupType>      
+      <groupElement>DisjointClasses</groupElement>
       <groupElement>ClassAssertion</groupElement>
       <groupElement>SameIndividual</groupElement>
       <groupElement>ObjectPropertyAssertion</groupElement>    
       <groupElement>DataPropertyAssertion</groupElement>
-      <groupElement>SubObjectPropertyOf</groupElement>
-      <groupElement>EquivalentObjectProperties</groupElement>
-      <groupElement>ObjectPropertyDomain</groupElement>
-      <groupElement>ObjectPropertyRange</groupElement>
-      <groupElement>InverseObjectProperties</groupElement>
-
     </group>
+
+    <group>
+      <groupName>Direct subClasses</groupName>
+      <groupType>DIRECT_SUBCLASSES</groupType>
+    </group>
+    
+    <group>
+      <groupName>Instances</groupName>
+      <groupType>INSTANCES</groupType>
+    </group> 
 
     <group>
       <groupName>Meta-information</groupName>

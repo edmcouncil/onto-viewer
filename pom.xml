@@ -9,7 +9,7 @@
   <version>0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>Fibo Weasel Project</name>
+  <name>FIBO Viewer Project</name>
   <description>Weasel for DGFISMA project</description>
 
   <parent>

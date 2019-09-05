@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-6">
       <h3 class="font-weight-bold">
-        <a href="${pageContext.request.contextPath}/index" class="custom-header-text">Fibo Weasel</a>
+        <a href="${pageContext.request.contextPath}/index" class="custom-header-text">Fibo Viewer</a>
       </h3>
     </div>
     <div class="col-6">
