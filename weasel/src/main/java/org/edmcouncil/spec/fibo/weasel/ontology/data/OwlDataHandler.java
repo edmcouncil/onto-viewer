@@ -33,6 +33,7 @@ import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
 import org.edmcouncil.spec.fibo.weasel.ontology.visitor.WeaselOntologyVisitors;
+import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
@@ -65,6 +66,8 @@ public class OwlDataHandler {
   private FiboDataHandler fiboDataHandler;
   @Autowired
   private AnnotationsDataHandler annotationsDataHandler;
+  @Autowired
+  private IndividualDataHandler individualDataHandler;
 
   public OwlDetails handleParticularClass(IRI iri, OWLOntology ontology) {
     OwlDetails resultDetails = new OwlDetails();
@@ -88,7 +91,7 @@ public class OwlDataHandler {
             .filter((pv) -> (pv.getType().equals(WeaselOwlType.TAXONOMY)))
             .collect(Collectors.toList());
         OwlDetailsProperties<PropertyValue> handleSubClassOf = handleParticularSubClassOf(ontology, clazz);
-        OwlDetailsProperties<PropertyValue> individuals = handleParticularIndividual(ontology, clazz);
+        OwlDetailsProperties<PropertyValue> individuals = individualDataHandler.handleClassIndividuals(ontology, clazz);
 
         //This code is only for fibo ontology, this line can be deleted for other ontologies.
         OwlDetailsProperties<PropertyValue> modules = fiboDataHandler.handleFiboModulesData(ontology, clazz);
@@ -418,36 +421,17 @@ public class OwlDataHandler {
     return result;
   }
 
-  private OwlDetailsProperties<PropertyValue> handleParticularIndividual(OWLOntology ontology, OWLClass clazz) {
-    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<PropertyValue>();
-    OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
-    OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
-    NodeSet<OWLNamedIndividual> instances = reasoner.getInstances(clazz, true);
 
-    for (OWLNamedIndividual namedIndividual : instances.entities().collect(Collectors.toSet())) {
-      String fragment = namedIndividual.getIRI().getFragment();
-      //LOGGER.debug(namedIndividual.getIRI().toString());
-      OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
-      s.setType(WeaselOwlType.INSTANCES);
-      s.setValue(new PairImpl(fragment, namedIndividual.getIRI().toString()));
-      result.addProperty(WeaselOwlType.INSTANCES.name(), s);
-      namedIndividual.getEntityType();
-    }
-    return result;
-  }
 
   public OwlDetails handleOntologyMetadata(IRI iri, OWLOntology ontology) {
-    
+
     OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontology);
-      OwlDetails wd = new OwlDetails();
-      
-      wd.addAllProperties(metadata);
-      wd.setIri(iri.toString());
-      String [] iriSplited = iri.toString().split("/");
-      wd.setLabel(iriSplited[iriSplited.length-1]);
-      
-      return wd;
-    
+    OwlDetails wd = new OwlDetails();
+    wd.addAllProperties(metadata);
+    wd.setIri(iri.toString());
+    wd.setLabel(StringSplitter.getFragment(iri));
+    return wd;
+
   }
 
 }

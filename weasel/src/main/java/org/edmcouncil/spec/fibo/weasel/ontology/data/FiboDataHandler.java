@@ -1,7 +1,10 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
 import java.util.Iterator;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
@@ -9,6 +12,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -35,10 +39,14 @@ public class FiboDataHandler {
   private static final String METADATA_PREFIX = "Metadata";
   private static final String URL_DELIMITER = "/";
 
+  private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
+
   private static final Logger LOGGER = LoggerFactory.getLogger(FiboDataHandler.class);
 
   @Autowired
   private AnnotationsDataHandler annotationsDataHandler;
+  @Autowired
+  private IndividualDataHandler individualDataHandler;
 
   public OwlDetailsProperties<PropertyValue> handleFiboModulesData(OWLOntology ontology, OWLEntity entity) {
 
@@ -118,17 +126,31 @@ public class FiboDataHandler {
     return domainIri;
   }
 
-  //TODO: change void
   public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OWLOntology ontology) {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
         annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations());
+        break;
       }
 
     }
     return annotations;
+  }
+
+  public Set<FiboModule> getAllModulesData(OWLOntology ontology) {
+
+    IRI moduleIri = IRI.create(MODULE_IRI);
+    OWLClass clazz = ontology
+        .classesInSignature()
+        .filter(c-> c.getIRI().equals(moduleIri))
+        .findFirst()
+        .get();
+    
+    OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
+    
+    return null;
   }
 
 }
