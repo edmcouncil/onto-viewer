@@ -50,9 +50,15 @@ public class OwlDataExtractor {
   }
 
   public String extractAnyUriToString(String anyUri) {
-
-    String uriString = anyUri.replaceFirst("\"", "").replaceFirst("\"^^xsd:anyURI", "");
+    String uriString = anyUri.replaceFirst("\"", "");
+    uriString = uriString.substring(0, uriString.length()-13);
     return uriString;
+ 
+//    if(anyUri.endsWith("/")) {
+//        return anyUri.substring(0, anyUri.lastIndexOf("/"));
+//    } else {
+//        return anyUri;
+//    }
+}
   }
 
-}
