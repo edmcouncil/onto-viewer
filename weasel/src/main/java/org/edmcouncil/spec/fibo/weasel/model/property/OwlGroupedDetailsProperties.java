@@ -16,8 +16,6 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElem
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.comparator.WeaselComparators;
-import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
-import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -60,6 +58,7 @@ public class OwlGroupedDetailsProperties<T> {
     return properties;
   }
 
+  //TODO: Check where we used that and do something with this.. this is very ugly..
   public void sort(List<ConfigStringElement> priotityList) {
 
     /*Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(priotityList);
@@ -71,6 +70,10 @@ public class OwlGroupedDetailsProperties<T> {
       result.put(key, properties.get(key));
     });
     properties = result;*/
+  }
+  //TODO: The same as up
+   public void sort(Set<ConfigElement> groups) {
+
   }
 
   @Override
@@ -102,9 +105,7 @@ public class OwlGroupedDetailsProperties<T> {
     return true;
   }
 
-  public void sort(Set<ConfigElement> groups) {
-
-  }
+ 
 
   public void sort(Set<ConfigElement> groups, WeaselConfiguration cfg) {
 

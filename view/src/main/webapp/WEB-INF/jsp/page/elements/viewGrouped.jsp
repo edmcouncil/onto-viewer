@@ -7,6 +7,9 @@
     <div class="row">
       <h3><b class="custom-link text-primary">${clazz.label}</b></h3>
     </div>
+    <div class="row">
+      <h6><span class="text-secondary">${clazz.iri}</span></h6>
+    </div>
 
     <c:if test="${not empty clazz.taxonomy}">
       <div class="row my-3">

@@ -1,6 +1,4 @@
 package org.edmcouncil.spec.fibo.config.configuration.model.impl;
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
-import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
 
 /**
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
@@ -24,4 +22,14 @@ public class ConfigRenameElement extends ConfigPairElement {
     super.setValueB(newName);
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    return super.equals(obj);
+  }
+
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
+  
 }

@@ -44,10 +44,8 @@ public class ConfigStringElement extends ConfigElementAbstract {
       return false;
     }
     final ConfigStringElement other = (ConfigStringElement) obj;
-    if (!Objects.equals(this.value, other.value)) {
-      return false;
-    }
-    return true;
+    
+    return Objects.equals(this.value, other.value);
   }
 
 }

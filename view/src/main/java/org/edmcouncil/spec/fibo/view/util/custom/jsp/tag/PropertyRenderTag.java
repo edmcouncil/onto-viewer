@@ -11,6 +11,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 
 /**
@@ -43,7 +44,6 @@ public class PropertyRenderTag extends SimpleTagSupport {
   public void doTag()
       throws JspException, IOException {
 
-    
     switch (property.getType()) {
       case STRING:
         renderStringProperty(property);
@@ -63,8 +63,11 @@ public class PropertyRenderTag extends SimpleTagSupport {
       case DIRECT_SUBCLASSES:
         renderDirectedSubclasses(property);
         break;
-      case INSTANCES: 
+      case INSTANCES:
         renderInstances(property);
+        break;
+      case MODULES:
+        renderModules(property);
         break;
     }
 
@@ -187,12 +190,20 @@ public class PropertyRenderTag extends SimpleTagSupport {
   private void renderDirectedSubclasses(PropertyValue property) throws IOException {
     OwlDirectedSubClassesProperty subclassProperty = (OwlDirectedSubClassesProperty) property;
     PairImpl value = subclassProperty.getValue();
-    String link = wrapIri((String)value.getValueB(), (String)value.getValueA());
+    String link = wrapIri((String) value.getValueB(), (String) value.getValueA());
     renderProperty(link);
   }
+
   private void renderInstances(PropertyValue property) throws IOException {
     OwlListElementIndividualProperty instanceProperty = (OwlListElementIndividualProperty) property;
     PairImpl value = instanceProperty.getValue();
+    String link = wrapIri((String) value.getValueB(), (String) value.getValueA());
+    renderProperty(link);
+  }
+  
+   private void renderModules(PropertyValue property) throws IOException {
+    OwlFiboModuleProperty fiboModuleProperty = (OwlFiboModuleProperty) property;
+    PairImpl value = fiboModuleProperty.getValue();
     String link = wrapIri((String)value.getValueB(), (String)value.getValueA());
     renderProperty(link);
   }

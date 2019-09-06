@@ -7,14 +7,18 @@ import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElementType;
 import org.edmcouncil.spec.fibo.config.configuration.model.GroupType;
 
 /**
- * Create by Michał Daniel (michal.daniel@makolab.com) Create by Patrycja Miazek
- * (patrycja.miazek@makolab.com)
+ * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public class ConfigGroupsElement extends ConfigElementAbstract {
 
   private String name;
   private Set<ConfigStringElement> elements;
   private GroupType groupType;
+  
+  public ConfigGroupsElement() {
+    elements = new LinkedHashSet<>();
+  }
 
   public String getName() {
     return name;
@@ -31,10 +35,7 @@ public class ConfigGroupsElement extends ConfigElementAbstract {
   public void setElements(Set<ConfigStringElement> elements) {
     this.elements = elements;
   }
-  
 
-  public ConfigGroupsElement() {
-  }
 
   public ConfigGroupsElement(ConfigElementType type) {
     super(type);
@@ -48,18 +49,28 @@ public class ConfigGroupsElement extends ConfigElementAbstract {
   }
 
   public boolean contains(String val) {
-    return elements.stream()
+    if (elements == null) {
+      return false;
+    }
+    //return elements.contains(new ConfigStringElement(val));
+    /*return elements.stream()
         .map(ConfigStringElement::toString)
         .filter(val::equals)
         .findFirst()
-        .isPresent();
+        .isPresent();*/
+
+    for (ConfigStringElement element : elements) {
+      if (element.toString().equals(val)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
   public String toString() {
     return "ConfigGroupsElement{" + "name=" + name + ", elements=" + elements + ", groupType=" + groupType + '}';
   }
-
 
   public GroupType getGroupType() {
     return groupType;
@@ -70,6 +81,4 @@ public class ConfigGroupsElement extends ConfigElementAbstract {
     addElement(new ConfigStringElement(groupType.name()));
   }
 
-  
-  
 }

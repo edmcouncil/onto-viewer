@@ -48,8 +48,6 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
   }
 
   public String getNewName(String oldName) {
-
-
     Set<ConfigElement> renamedGroups = configuration.getOrDefault(WeaselConfigKeys.RENAME_GROUPS, new HashSet<>());
     for (ConfigElement renamedG : renamedGroups) {
       ConfigRenameElement rename = (ConfigRenameElement) renamedG;
@@ -57,26 +55,16 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
         return rename.getNewName();
       }
     }
-
-//
-//    for (ConfigElement ConfigElement : l){
-//      ConfigRenameElement element = (ConfigRenameElement) l;
-//      if (element.getOLD_NAME() != null && !element.getNEW_NAME().isEmpty()) {
-//        if (element.getNEW_NAME().equals(element)) {
-//          return element.NEW_NAME;
-//        }
-//      }
-//    }
     return null;
 
   }
-  
-  public boolean hasRenamedGroups(){
-    return configuration.get(WeaselConfigKeys.RENAME_GROUPS)!=null;
+
+  public boolean hasRenamedGroups() {
+    return configuration.get(WeaselConfigKeys.RENAME_GROUPS) != null;
   }
 
   public String getOldName(String newName) {
-     Set<ConfigElement> renamedGroups = configuration.getOrDefault(WeaselConfigKeys.RENAME_GROUPS, new HashSet<>());
+    Set<ConfigElement> renamedGroups = configuration.getOrDefault(WeaselConfigKeys.RENAME_GROUPS, new HashSet<>());
     for (ConfigElement renamedG : renamedGroups) {
       ConfigRenameElement rename = (ConfigRenameElement) renamedG;
       if (rename.getNewName().equals(newName)) {

@@ -135,35 +135,43 @@ public class WeaselOntologyManager {
   public Collection getDetailsByIri(String iriString) {
     IRI iri = IRI.create(iriString);
     List<OwlDetails> result = new LinkedList<>();
+    //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
+    if (iriString.endsWith("/")) {
+      LOGGER.debug("Handle ontology metadata. IRI: {}", iriString);
+      OwlDetails wd = dataHandler.handleOntologyMetadata(iri, ontology);
 
-    if (ontology.containsClassInSignature(iri)) {
-      LOGGER.debug("Handle class data.");
-      OwlDetails wd = dataHandler.handleParticularClass(iri, ontology);
-      if (!result.contains(wd)) {
-        result.add(wd);
+      result.add(wd);
+    } else {
+      if (ontology.containsClassInSignature(iri)) {
+        LOGGER.debug("Handle class data.");
+        OwlDetails wd = dataHandler.handleParticularClass(iri, ontology);
+        if (!result.contains(wd)) {
+          result.add(wd);
+        }
+      }
+      if (ontology.containsDataPropertyInSignature(iri)) {
+        LOGGER.info("Handle data property.");
+        OwlDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
+        if (!result.contains(wd)) {
+          result.add(wd);
+        }
+      }
+      if (ontology.containsObjectPropertyInSignature(iri)) {
+        LOGGER.info("Handle object property.");
+        OwlDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
+        if (!result.contains(wd)) {
+          result.add(wd);
+        }
+      }
+      if (ontology.containsIndividualInSignature(iri)) {
+        LOGGER.info("Handle individual data.");
+        OwlDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
+        if (!result.contains(wd)) {
+          result.add(wd);
+        }
       }
     }
-    if (ontology.containsDataPropertyInSignature(iri)) {
-      LOGGER.info("Handle data property.");
-      OwlDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
-      if (!result.contains(wd)) {
-        result.add(wd);
-      }
-    }
-    if (ontology.containsObjectPropertyInSignature(iri)) {
-      LOGGER.info("Handle object property.");
-      OwlDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
-      if (!result.contains(wd)) {
-        result.add(wd);
-      }
-    }
-    if (ontology.containsIndividualInSignature(iri)) {
-      LOGGER.info("Handle individual data.");
-      OwlDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
-      if (!result.contains(wd)) {
-        result.add(wd);
-      }
-    }
+
     WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
     if (weaselConfig.hasRenamedGroups()) {
       for (OwlDetails owlDetails : result) {
@@ -178,6 +186,9 @@ public class WeaselOntologyManager {
         }
         owlDetails.setProperties(prop);
       }
+    }
+    for (OwlDetails owlDetails : result) {
+      owlDetails.setIri(iriString);
     }
 
     if (!config.getWeaselConfig().isEmpty()) {
@@ -214,6 +225,7 @@ public class WeaselOntologyManager {
       }
       groupedDetails.setTaxonomy(owlDetails.getTaxonomy());
       groupedDetails.setLabel(owlDetails.getLabel());
+      groupedDetails.setIri(owlDetails.getIri());
       groupedDetails.sortProperties(groups, cfg);
 
       newResult.add(groupedDetails);
@@ -223,6 +235,9 @@ public class WeaselOntologyManager {
 
   private String getGroupName(Set<ConfigElement> groups, String propertyKey) {
     String result = null;
+    if (propertyKey == null || propertyKey.isEmpty()) {
+      return result;
+    }
     for (ConfigElement g : groups) {
       ConfigGroupsElement group = (ConfigGroupsElement) g;
       if (group.getElements() != null && group.getElements().size() > 0) {
