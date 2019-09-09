@@ -1,7 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
 import java.util.Iterator;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
@@ -38,7 +37,7 @@ public class FiboDataHandler {
   private static final String ONTOLOGY_KEY = "ontology";
   private static final String METADATA_PREFIX = "Metadata";
   private static final String URL_DELIMITER = "/";
-
+  //TODO: move this to set to configuration 
   private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FiboDataHandler.class);
@@ -149,6 +148,7 @@ public class FiboDataHandler {
         .get();
     
     OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
+    LOGGER.debug(indi.toString());
     
     return null;
   }
