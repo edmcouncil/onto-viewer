@@ -53,12 +53,6 @@ public class OwlDataExtractor {
     String uriString = anyUri.replaceFirst("\"", "");
     uriString = uriString.substring(0, uriString.length()-13);
     return uriString;
- 
-//    if(anyUri.endsWith("/")) {
-//        return anyUri.substring(0, anyUri.lastIndexOf("/"));
-//    } else {
-//        return anyUri;
-//    }
 }
   }
 

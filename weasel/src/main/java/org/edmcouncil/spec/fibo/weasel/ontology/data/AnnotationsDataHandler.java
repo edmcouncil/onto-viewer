@@ -40,8 +40,6 @@ public class AnnotationsDataHandler {
       OWLAnnotationAssertionAxiom next = annotationAssertionAxiom.next();
       String property = rendering.render(next.getProperty());
       String value = next.annotationValue().toString();
-      //rendering.render(next.getAnnotation().getValue());
-      //String value = next.annotationValue().toString();
 
       OwlAnnotationPropertyValue opv = new OwlAnnotationPropertyValue();
       WeaselOwlType extractAnnotationType = dataExtractor.extractAnnotationType(next);
@@ -55,13 +53,11 @@ public class AnnotationsDataHandler {
           value = asLiteral.get().getLiteral();
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
-
-//value = value.concat(" [language: ").concat(la);
         }
       }
       LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", value, property);
       opv.setValue(value);
-      //}
+
       result.addProperty(property, opv);
     }
     return result;
@@ -75,8 +71,6 @@ public class AnnotationsDataHandler {
       OWLAnnotation next = annotationIterator.next();
       String property = rendering.render(next.getProperty());
       String value = next.annotationValue().toString();
-      //rendering.render(next.getAnnotation().getValue());
-      //String value = next.annotationValue().toString();
 
       OwlAnnotationPropertyValue opv = new OwlAnnotationPropertyValue();
       WeaselOwlType extractAnnotationType = dataExtractor.extractAnnotationType(next);
@@ -90,8 +84,6 @@ public class AnnotationsDataHandler {
           value = asLiteral.get().getLiteral();
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
-
-//value = value.concat(" [language: ").concat(la);
         }
       }
       LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", value, property);
