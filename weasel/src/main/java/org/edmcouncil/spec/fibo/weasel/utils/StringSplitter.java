@@ -9,9 +9,13 @@ public class StringSplitter {
 
   public static String getFragment(IRI iri) {
     String iriString = iri.toString();
-    String[] splitIri = iriString.split("/");
+    return getFragment(iriString);
+  }
+
+  public static String getFragment(String iri) {
+    String[] splitIri = iri.split("/");
     String lastElement = splitIri[splitIri.length - 1];
-    if (iriString.endsWith("/")) {
+    if (iri.endsWith("/")) {
       return lastElement;
     } else if (lastElement.contains("#")) {
       return lastElement.substring(lastElement.indexOf("#"));

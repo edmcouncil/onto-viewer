@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.fibo.weasel.model.property;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -95,6 +96,11 @@ public class OwlDetailsProperties<T> {
       return false;
     }
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties=" + properties.toString() + '}';
   }
 
 }

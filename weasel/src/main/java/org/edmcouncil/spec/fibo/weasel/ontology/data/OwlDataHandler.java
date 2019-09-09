@@ -465,14 +465,16 @@ public class OwlDataHandler {
 
     OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontology);
     OwlDetails wd = new OwlDetails();
-    wd.addAllProperties(metadata);
+    if (metadata != null && metadata.getProperties().keySet().size() > 0) {
+      wd.addAllProperties(metadata);
+    }
     wd.setIri(iri.toString());
     wd.setLabel(StringSplitter.getFragment(iri));
     return wd;
 
   }
-  
-  public Set<FiboModule> getAllModulesData(OWLOntology ontology){
+
+  public Set<FiboModule> getAllModulesData(OWLOntology ontology) {
     return fiboDataHandler.getAllModulesData(ontology);
   }
 

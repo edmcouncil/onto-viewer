@@ -1,22 +1,32 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
+import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.search.EntitySearcher;
+import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,18 +149,79 @@ public class FiboDataHandler {
   }
 
   public Set<FiboModule> getAllModulesData(OWLOntology ontology) {
-
+    Set<FiboModule> result = new LinkedHashSet<>();
     IRI moduleIri = IRI.create(MODULE_IRI);
     OWLClass clazz = ontology
         .classesInSignature()
-        .filter(c-> c.getIRI().equals(moduleIri))
+        .filter(c -> c.getIRI().equals(moduleIri))
         .findFirst()
         .get();
-    
+
     OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
-    LOGGER.debug(indi.toString());
-    
-    return null;
+
+    //TODO: change this stupid filter to more pretty solution
+    //Set<FiboModule> modules = new HashSet<>();
+    for (PropertyValue propertyValue : indi.getProperties().get(WeaselOwlType.INSTANCES.name())) {
+      OwlListElementIndividualProperty individProperty = (OwlListElementIndividualProperty) propertyValue;
+
+      FiboModule fiboModule = new FiboModule();
+      String elIri = (String) ((PairImpl) propertyValue.getValue()).getValueB();
+      fiboModule.setLabel(StringSplitter.getFragment(elIri));
+      fiboModule.setIri(elIri);
+
+      if (individProperty.getValue().getValueA().toString().contains("Domain")) {
+        result.add(fiboModule);
+      } //else {
+      //modules.add(fiboModule);
+      //}
+    }
+    for (FiboModule fiboModule : result) {
+      List<FiboModule> modulesPerDomain = new LinkedList<>();
+      String sIri = fiboModule.getIri();
+      Set<String> hasPartModules = getHasPartElements(IRI.create(sIri), ontology);
+      for (String hasPartModule : hasPartModules) {
+        FiboModule module = new FiboModule();
+        module.setIri(hasPartModule);
+        module.setLabel(StringSplitter.getFragment(hasPartModule));
+        List<FiboModule> ontologiesModule = new LinkedList<>();
+        Set<String> hasPartOntologies = getHasPartElements(IRI.create(hasPartModule), ontology);
+        
+        for (String hasPartOntology : hasPartOntologies) {
+          FiboModule ontologyModule = new FiboModule();
+          ontologyModule.setIri(hasPartOntology);
+          ontologyModule.setLabel(StringSplitter.getFragment(hasPartOntology));
+          ontologiesModule.add(ontologyModule);
+        }
+        
+        module.setSubModule(ontologiesModule);
+        modulesPerDomain.add(module);
+      }
+      fiboModule.setSubModule(modulesPerDomain);
+    }
+
+    return result;
+  }
+
+  public Set<String> getHasPartElements(IRI iri, OWLOntology ontology) {
+
+    OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
+    OWLNamedIndividual individual = ontology
+        .individualsInSignature()
+        .filter(c -> c.getIRI().equals(iri))
+        .findFirst()
+        .get();
+
+    Iterator<OWLAnnotation> iteratorAnnotation = EntitySearcher
+        .getAnnotations(individual, ontology,
+            dataFactory.getOWLAnnotationProperty(IRI.create("http://purl.org/dc/terms/hasPart"))).iterator();
+
+    Set<String> result = new HashSet<>();
+    while (iteratorAnnotation.hasNext()) {
+      OWLAnnotation annotation = iteratorAnnotation.next();
+      String s = annotation.annotationValue().toString();
+      result.add(s);
+    }
+    return result;
   }
 
 }
