@@ -17,8 +17,7 @@ public class FileSystemManager{
   private static final String WEASEL_HOME_DIR_NAME = ".weasel";
   private static final String WEASEL_ONTOLOGY_FILE_NAME = "AboutFIBOProd.rdf";
   private static final String WEASEL_CONFIG_FILE_NAME = "weasel_config.xml";
-  private static final String WEASEL_ONTO1 = "onto1.rdf";
-  private static final String WEASEL_ONTO2 = "onto2.rdf";
+
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FileSystemManager.class);
 
@@ -56,15 +55,6 @@ public class FileSystemManager{
     return createDirIfNotExists(homeDir).resolve(WEASEL_CONFIG_FILE_NAME);
   }
 
-  public Path getPathOnto1() throws IOException {
-    Path onto1 = getWeaselHomeDir();
-    return createDirIfNotExists(onto1).resolve(WEASEL_ONTO1);
-  }
 
-  public Path getPathOnto2() throws IOException {
-    Path onto2 = getWeaselHomeDir();
-    return createDirIfNotExists(onto2).resolve(WEASEL_ONTO2);
-
-  }
 
 }

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import static java.lang.System.load;
 import java.nio.file.Files;
@@ -27,6 +28,7 @@ import static javafx.fxml.FXMLLoader.load;
 import static javafx.fxml.FXMLLoader.load;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import org.apache.commons.io.IOUtils;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
@@ -100,6 +102,28 @@ public class WeaselOntologyManager {
 
   }
 
+  
+  //TODO
+  private void loadOntologyFromURL() throws IOException {
+
+//    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+//    // URL fiboURL = URL.setURLStreamHandlerFactory(https//spec.edmcouncil.org/fibo/ontology/master/2019Q2/AboutFIBOProd.ttl);
+//    FileSystemManager fsm = new FileSystemManager();
+//
+//    File inputOntologyFile = fsm.getPathToOntologyFile().toFile();
+//    OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+//    InputStream inputStream = (InputStream) fsm.getPathToWeaselConfigFile().toRealPath();
+//
+//    OutputStream outputStream = new FileOutputStream(inputOntologyFile);
+//    IOUtils.copy(inputStream, outputStream);
+    
+    
+        
+    
+    
+  }
+
+  // https://spec.edmcouncil.org/fibo/ontology/master/2019Q2/AboutFIBOProd.ttl
   private Set<OWLOntology> openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager) throws OWLOntologyCreationException {
     Set<OWLOntology> result = new HashSet<>();
     for (File file : ontologiesDir.listFiles()) {
