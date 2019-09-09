@@ -3,12 +3,10 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data;
 import java.util.ArrayList;
 import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
-import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.semanticweb.owlapi.io.OWLObjectRenderer;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAxiom;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
@@ -21,10 +19,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
+import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
@@ -466,11 +465,17 @@ public class OwlDataHandler {
 
     OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontology);
     OwlDetails wd = new OwlDetails();
-    wd.addAllProperties(metadata);
+    if (metadata != null && metadata.getProperties().keySet().size() > 0) {
+      wd.addAllProperties(metadata);
+    }
     wd.setIri(iri.toString());
     wd.setLabel(StringSplitter.getFragment(iri));
     return wd;
 
+  }
+
+  public Set<FiboModule> getAllModulesData(OWLOntology ontology) {
+    return fiboDataHandler.getAllModulesData(ontology);
   }
 
 }

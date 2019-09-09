@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-@Controller
+//@Controller
 public class IndexController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);

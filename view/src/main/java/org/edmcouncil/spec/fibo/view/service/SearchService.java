@@ -24,10 +24,10 @@ public class SearchService {
   private AppConfiguration config;
 
   public void search(String query, ModelBuilder mb) {
-    Collection weaselTerms = ontologyManager.getDetailsByIri(query);
+    Collection details = ontologyManager.getDetailsByIri(query);
     boolean isGrouped = ((WeaselConfiguration) config.getWeaselConfig()).isGrouped();
     mb.setQuery(query)
-        .ontoDetails(weaselTerms)
+        .ontoDetails(details)
         .isGrouped(isGrouped);
     
   }

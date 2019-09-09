@@ -4,12 +4,14 @@ import java.util.Collection;
 import org.edmcouncil.spec.fibo.view.model.Query;
 import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
 import java.util.List;
+import java.util.Set;
+import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 
 import org.springframework.ui.Model;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
- */ 
+ */
 public class ModelBuilder {
 
   private final Model model;
@@ -48,6 +50,21 @@ public class ModelBuilder {
 
   public ModelBuilder isGrouped(boolean grouped) {
     model.addAttribute("grouped_details", grouped);
+    return this;
+  }
+
+  public ModelBuilder modelTree(Set<FiboModule> modules) {
+    model.addAttribute("modelTree", modules);
+    return this;
+  }
+
+  public ModelBuilder treeLvl1(String lvl) {
+    model.addAttribute("lvl1", lvl);
+    return this;
+  }
+
+  public ModelBuilder treeLvl2(String lvl) {
+    model.addAttribute("lvl2", lvl);
     return this;
   }
 
