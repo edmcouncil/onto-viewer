@@ -32,7 +32,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
 
   ConfigRenameElement cre = null;
   ConfigGroupsElement cge = null;
-  //Set<ConfigGroupsElement> groups = new LinkedHashSet<>();
+ 
 
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {

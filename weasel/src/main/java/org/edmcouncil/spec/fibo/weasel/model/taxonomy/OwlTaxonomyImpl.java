@@ -36,7 +36,6 @@ public class OwlTaxonomyImpl implements OwlTaxonomy<OwlTaxonomyElementImpl> {
 
     for (List<OwlTaxonomyElementImpl> list : subCLassTax.getValue()) {
       list.add(taxEl);
-      //list.add(0,taxEl);
       value.add(list);
     }
   }

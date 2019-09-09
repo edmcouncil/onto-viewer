@@ -8,12 +8,5 @@ import org.semanticweb.owlapi.model.OWLAnnotationValue;
  */
 public class OwlAnnotationPropertyValue extends PropertyValueAbstract<String>{
 
-//  public void setValue(OWLAnnotationValue value) {
-//    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//  }
-//
-//  public void setValue(WeaselOwlType extractAnnotationType) {
-//    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//  }
 
 }
