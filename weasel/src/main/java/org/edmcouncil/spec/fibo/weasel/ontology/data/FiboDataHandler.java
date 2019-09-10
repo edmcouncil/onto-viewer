@@ -141,6 +141,7 @@ public class FiboDataHandler {
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
         annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations());
+        LOGGER.debug(onto.classesInSignature().collect(Collectors.toList()).toString());
         break;
       }
 
@@ -175,29 +176,31 @@ public class FiboDataHandler {
       //modules.add(fiboModule);
       //}
     }
-    for (FiboModule fiboModule : result) {
+    result.forEach((fiboModule) -> {
       List<FiboModule> modulesPerDomain = new LinkedList<>();
       String sIri = fiboModule.getIri();
       Set<String> hasPartModules = getHasPartElements(IRI.create(sIri), ontology);
-      for (String hasPartModule : hasPartModules) {
+      hasPartModules.stream().map((hasPartModule) -> {
         FiboModule module = new FiboModule();
         module.setIri(hasPartModule);
         module.setLabel(StringSplitter.getFragment(hasPartModule));
         List<FiboModule> ontologiesModule = new LinkedList<>();
         Set<String> hasPartOntologies = getHasPartElements(IRI.create(hasPartModule), ontology);
-        
-        for (String hasPartOntology : hasPartOntologies) {
+        hasPartOntologies.stream().map((hasPartOntology) -> {
           FiboModule ontologyModule = new FiboModule();
           ontologyModule.setIri(hasPartOntology);
           ontologyModule.setLabel(StringSplitter.getFragment(hasPartOntology));
+          return ontologyModule;
+        }).forEachOrdered((ontologyModule) -> {
           ontologiesModule.add(ontologyModule);
-        }
-        
+        });
         module.setSubModule(ontologiesModule);
+        return module;
+      }).forEachOrdered((module) -> {
         modulesPerDomain.add(module);
-      }
+      });
       fiboModule.setSubModule(modulesPerDomain);
-    }
+    });
 
     return result;
   }
