@@ -30,7 +30,7 @@ public class ModuleController {
 
   @GetMapping("/json")
   public ResponseEntity getAllModulesDataAsJson() {
-    LOGGER.debug("[GET]: module/");
+    LOGGER.debug("[GET]: module/json");
     Set<FiboModule> modules = ontologyManager.getAllModulesData();
     return ResponseEntity.ok(modules);
   }
@@ -41,7 +41,7 @@ public class ModuleController {
       Model model,
       @RequestParam(value = "lvl1", required = false) String lvl1,
       @RequestParam(value = "lvl2", required = false) String lvl2) {
-    
+    LOGGER.debug("[GET]: module/");
     Set<FiboModule> modules = ontologyManager.getAllModulesData();
     ModelBuilder mb = new ModelBuilder(model);
 

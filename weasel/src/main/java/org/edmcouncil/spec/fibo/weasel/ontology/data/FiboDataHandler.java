@@ -62,8 +62,8 @@ public class FiboDataHandler {
     OWLDataFactory df = OWLManager.getOWLDataFactory();
 
     Iterator<OWLAnnotation> iterator = EntitySearcher
-        .getAnnotations(entity, ontology, df.getRDFSIsDefinedBy())
-        .iterator();
+            .getAnnotations(entity, ontology, df.getRDFSIsDefinedBy())
+            .iterator();
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -89,7 +89,7 @@ public class FiboDataHandler {
       result.addProperty(ONTOLOGY_KEY, createProperty(onto, ontologyIriString));
 
       LOGGER.debug("[Fibo Data Handler] domainIRI: {};\n\tmoduleIRI: {};\n\t ontologyIRI: {};",
-          domainIriString, moduleIriString, ontologyIriString);
+              domainIriString, moduleIriString, ontologyIriString);
     }
 
     return result;
@@ -122,16 +122,16 @@ public class FiboDataHandler {
 
   private String prepareModuleIri(String fiboPath, String domain, String module) {
     String moduleIriString = fiboPath.concat(domain).concat(URL_DELIMITER)
-        .concat(module).concat(URL_DELIMITER)
-        .concat(METADATA_PREFIX).concat(domain).concat(module).concat(URL_DELIMITER)
-        .concat(module).concat(MODULE_POSTFIX);
+            .concat(module).concat(URL_DELIMITER)
+            .concat(METADATA_PREFIX).concat(domain).concat(module).concat(URL_DELIMITER)
+            .concat(module).concat(MODULE_POSTFIX);
     return moduleIriString;
   }
 
   private String prepareDomainIri(String fiboPath, String domain) {
     String domainIri = fiboPath.concat(domain).concat(URL_DELIMITER)
-        .concat(METADATA_PREFIX).concat(domain).concat(URL_DELIMITER)
-        .concat(domain).concat(DOMAIN_POSTFIX);
+            .concat(METADATA_PREFIX).concat(domain).concat(URL_DELIMITER)
+            .concat(domain).concat(DOMAIN_POSTFIX);
     return domainIri;
   }
 
@@ -152,10 +152,10 @@ public class FiboDataHandler {
     Set<FiboModule> result = new LinkedHashSet<>();
     IRI moduleIri = IRI.create(MODULE_IRI);
     OWLClass clazz = ontology
-        .classesInSignature()
-        .filter(c -> c.getIRI().equals(moduleIri))
-        .findFirst()
-        .get();
+            .classesInSignature()
+            .filter(c -> c.getIRI().equals(moduleIri))
+            .findFirst()
+            .get();
 
     OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
 
@@ -175,29 +175,31 @@ public class FiboDataHandler {
       //modules.add(fiboModule);
       //}
     }
-    for (FiboModule fiboModule : result) {
+    result.forEach((fiboModule) -> {
       List<FiboModule> modulesPerDomain = new LinkedList<>();
       String sIri = fiboModule.getIri();
       Set<String> hasPartModules = getHasPartElements(IRI.create(sIri), ontology);
-      for (String hasPartModule : hasPartModules) {
+      hasPartModules.stream().map((hasPartModule) -> {
         FiboModule module = new FiboModule();
         module.setIri(hasPartModule);
         module.setLabel(StringSplitter.getFragment(hasPartModule));
         List<FiboModule> ontologiesModule = new LinkedList<>();
         Set<String> hasPartOntologies = getHasPartElements(IRI.create(hasPartModule), ontology);
-        
-        for (String hasPartOntology : hasPartOntologies) {
+        hasPartOntologies.stream().map((hasPartOntology) -> {
           FiboModule ontologyModule = new FiboModule();
           ontologyModule.setIri(hasPartOntology);
           ontologyModule.setLabel(StringSplitter.getFragment(hasPartOntology));
+          return ontologyModule;
+        }).forEachOrdered((ontologyModule) -> {
           ontologiesModule.add(ontologyModule);
-        }
-        
+        });
         module.setSubModule(ontologiesModule);
+        return module;
+      }).forEachOrdered((module) -> {
         modulesPerDomain.add(module);
-      }
+      });
       fiboModule.setSubModule(modulesPerDomain);
-    }
+    });
 
     return result;
   }
@@ -206,14 +208,14 @@ public class FiboDataHandler {
 
     OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
     OWLNamedIndividual individual = ontology
-        .individualsInSignature()
-        .filter(c -> c.getIRI().equals(iri))
-        .findFirst()
-        .get();
+            .individualsInSignature()
+            .filter(c -> c.getIRI().equals(iri))
+            .findFirst()
+            .get();
 
     Iterator<OWLAnnotation> iteratorAnnotation = EntitySearcher
-        .getAnnotations(individual, ontology,
-            dataFactory.getOWLAnnotationProperty(IRI.create("http://purl.org/dc/terms/hasPart"))).iterator();
+            .getAnnotations(individual, ontology,
+                    dataFactory.getOWLAnnotationProperty(IRI.create("http://purl.org/dc/terms/hasPart"))).iterator();
 
     Set<String> result = new HashSet<>();
     while (iteratorAnnotation.hasNext()) {
