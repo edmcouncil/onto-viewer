@@ -251,17 +251,14 @@ public class OwlDataHandler {
   private <T extends OWLAxiom> OwlDetailsProperties<PropertyValue> handleAxioms(
           Iterator<T> axiomsIterator, IRI elementIri) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-   
+    String iriFragment = elementIri.getFragment();
+    String splitFragment = StringSplitter.getFragment(elementIri);
+    Boolean fixRenderedIri = !iriFragment.equals(splitFragment); //if fragments is not the same we must repair rendered value
     while (axiomsIterator.hasNext()) {
       T axiom = axiomsIterator.next();
       String value = rendering.render(axiom);
 
-      String[] split = value.split(" ");
-      split[0] = "";
-      if (split[1].equals("SubClassOf")) {
-        split[1] = "";
-      }
-      value = String.join(" ", split);
+      value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
 
       String key = axiom.getAxiomType().getName();
       OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
@@ -280,6 +277,7 @@ public class OwlDataHandler {
       while (iterator.hasNext()) {
         OWLEntity next = iterator.next();
         String eSignature = rendering.render(next);
+        eSignature = fixRenderedIri && iriFragment.equals(eSignature) ? splitFragment : eSignature;
         String eIri = next.getIRI().toString();
         opv.addEntityValues(eSignature, eIri);
       }
@@ -287,6 +285,29 @@ public class OwlDataHandler {
     }
     result.sortPropertiesInAlphabeticalOrder();
     return result;
+  }
+
+  private String fixRenderedValue(String value, String iriFragment, String splitFragment, Boolean fixRenderedIri) {
+    String[] split = value.split(" ");
+    if (split[1].equals("SubClassOf")) {
+      split[0] = "";
+      split[1] = "";
+    }
+    if (fixRenderedIri) {
+      int iriFragmentIndex = -1;
+      for (int i = 0; i < split.length; i++) {
+        String sString = split[i];
+        if (iriFragment.equals(sString)) {
+          iriFragmentIndex = i;
+          break;
+        }
+      }
+      if (iriFragmentIndex != -1) {
+        split[iriFragmentIndex] = splitFragment;
+      }
+    }
+    value = String.join(" ", split);
+    return value;
   }
 
   private static <T extends OWLAxiom> Boolean isRestriction(T axiom) {
