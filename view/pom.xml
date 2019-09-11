@@ -33,7 +33,7 @@
     <dependency>
       <groupId>org.edmcouncil.spec</groupId>
       <artifactId>weasel</artifactId>
-      <version>0.1-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
     
     <dependency>
