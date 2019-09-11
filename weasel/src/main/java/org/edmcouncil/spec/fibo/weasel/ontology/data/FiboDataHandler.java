@@ -141,7 +141,6 @@ public class FiboDataHandler {
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
         annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations());
-        LOGGER.debug(onto.classesInSignature().collect(Collectors.toList()).toString());
         break;
       }
 
