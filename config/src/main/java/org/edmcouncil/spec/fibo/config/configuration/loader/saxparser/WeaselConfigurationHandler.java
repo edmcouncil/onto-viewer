@@ -1,9 +1,6 @@
 package org.edmcouncil.spec.fibo.config.configuration.loader.saxparser;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElementType;
 import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
 import org.edmcouncil.spec.fibo.config.configuration.model.GroupType;
 import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
@@ -39,7 +36,9 @@ public class WeaselConfigurationHandler extends DefaultHandler {
 
     switch (qName) {
       case WeaselConfigKeys.PRIORITY_LIST:
-      case WeaselConfigKeys.IGNORED_TO_DISPLAY:
+      case WeaselConfigKeys.IGNORE_TO_DISPLAYING:
+      case WeaselConfigKeys.IGNORE_TO_LINKING:
+      case WeaselConfigKeys.SCOPE_IRI:
       case WeaselConfigKeys.GROUPS:
       case WeaselConfigKeys.RENAME_GROUPS:
         this.key = qName;
@@ -60,7 +59,8 @@ public class WeaselConfigurationHandler extends DefaultHandler {
 
     switch (qName) {
       case WeaselConfigKeys.PRIORITY_LIST_ELEMENT:
-      case WeaselConfigKeys.IGNORED_TO_DISPLAY_ELEMENT:
+      case WeaselConfigKeys.IGNORED_ELEMENT:
+      case WeaselConfigKeys.URI_NAMESPACE:
         if (!val.trim().isEmpty()) {
           ConfigElement configEl = new ConfigStringElement(val);
 

@@ -3,6 +3,8 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.stream.Stream;
+import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
@@ -31,11 +33,14 @@ public class AnnotationsDataHandler {
   @Autowired
   private OwlDataExtractor dataExtractor;
 
+  @Autowired
+  private AppConfiguration appConfig;
+
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
     Iterator<OWLAnnotationAssertionAxiom> annotationAssertionAxiom
-        = ontology.annotationAssertionAxioms(iri).iterator();
+            = ontology.annotationAssertionAxioms(iri).iterator();
     while (annotationAssertionAxiom.hasNext()) {
       OWLAnnotationAssertionAxiom next = annotationAssertionAxiom.next();
       String property = rendering.render(next.getProperty());
@@ -53,6 +58,7 @@ public class AnnotationsDataHandler {
           value = asLiteral.get().getLiteral();
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
+          checkUriAsIri(opv, value);
         }
       }
       LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", value, property);
@@ -84,6 +90,7 @@ public class AnnotationsDataHandler {
           value = asLiteral.get().getLiteral();
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
+          checkUriAsIri(opv, value);
         }
       }
       LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", value, property);
@@ -91,5 +98,15 @@ public class AnnotationsDataHandler {
       result.addProperty(property, opv);
     }
     return result;
+  }
+
+  private void checkUriAsIri(OwlAnnotationPropertyValue opv, String value) {
+    //TODO: Change this to more pretty solution
+    if (opv.getType() == WeaselOwlType.ANY_URI) {
+      WeaselConfiguration weaselConfiguration = (WeaselConfiguration) appConfig.getWeaselConfig();
+      if (weaselConfiguration.isUriIri(value)) {
+        opv.setType(WeaselOwlType.IRI);
+      }
+    }
   }
 }
