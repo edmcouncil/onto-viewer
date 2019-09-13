@@ -5,7 +5,6 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import java.io.IOException;
 import java.util.Map;
-import java.util.regex.Pattern;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -42,7 +41,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   @Override
   public void doTag()
-      throws JspException, IOException {
+          throws JspException, IOException {
 
     switch (property.getType()) {
       case STRING:
@@ -158,7 +157,8 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   private String parseSearchPath(String link, String val) {
     String result;
-    result = String.format(URL_SEARCH_QUERY_PATTERN, searchPath, link, val);
+    String tmpSearchPath = searchPath.equals("*") ? "" : searchPath;
+    result = String.format(URL_SEARCH_QUERY_PATTERN, tmpSearchPath, link, val);
     return result;
   }
 

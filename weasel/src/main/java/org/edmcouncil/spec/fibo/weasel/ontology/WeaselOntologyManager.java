@@ -79,7 +79,9 @@ public class WeaselOntologyManager {
     ontology = o;
 
   }
-
+  /**
+   *  
+   */
   private Set<OWLOntology> openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager) throws OWLOntologyCreationException {
     Set<OWLOntology> result = new HashSet<>();
     for (File file : ontologiesDir.listFiles()) {
