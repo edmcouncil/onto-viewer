@@ -2,6 +2,7 @@ package org.edmcouncil.spec.fibo.config.configuration.model;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public class WeaselConfigKeys {
 
@@ -18,4 +19,11 @@ public class WeaselConfigKeys {
   public static final String RENAME = "rename";
   public static final String OLD_NAME = "oldName";
   public static final String NEW_NAME = "newName";
+  public static final String ONTOLOGY_URL = "ontologyURL";
+  public static final String ONTOLOGY_PATH = "ontologyPath";
+  
+  
+  
+  
+  
 }

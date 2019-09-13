@@ -11,7 +11,8 @@ import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
 import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
 
 /**
- * Create by Michał Daniel (michal.daniel@makolab.com)
+ * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
 
@@ -71,7 +72,31 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
         return rename.getOldName();
       }
     }
+    return null;
+  }
 
+  public boolean isOntologyLocationSet() {
+    return configuration.containsKey(WeaselConfigKeys.ONTOLOGY_URL)
+        || configuration.containsKey(WeaselConfigKeys.ONTOLOGY_PATH);
+  }
+
+  public boolean isOntologyLocationURL() {
+    return configuration.containsKey(WeaselConfigKeys.ONTOLOGY_URL);
+  }
+
+  public String getURLOntology() {
+    Set<ConfigElement> elements = configuration.get(WeaselConfigKeys.ONTOLOGY_URL);
+    for (ConfigElement element : elements) {
+      return element.toString();
+    }
+    return null;
+  }
+
+  public String getPathOntology() {
+    Set<ConfigElement> elements = configuration.get(WeaselConfigKeys.ONTOLOGY_PATH);
+    for (ConfigElement element : elements) {
+      return element.toString();
+    }
     return null;
   }
 

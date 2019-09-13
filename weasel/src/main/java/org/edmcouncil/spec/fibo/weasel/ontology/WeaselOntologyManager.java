@@ -29,6 +29,13 @@ import static javafx.fxml.FXMLLoader.load;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
@@ -53,6 +60,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
+import uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -72,10 +80,21 @@ public class WeaselOntologyManager {
 
   @PostConstruct
   public void init() throws IOException {
+    WeaselConfiguration weaselConfiguration = (WeaselConfiguration) config.getWeaselConfig();
     try {
-      loadOntologyFromFile();
+      if (weaselConfiguration.isOntologyLocationSet()) {
+        if (weaselConfiguration.isOntologyLocationURL()) {
+          String ontoURL = weaselConfiguration.getURLOntology();
+          loadOntologyFromURL(ontoURL);
+        } else {
+          String ontoPath = weaselConfiguration.getPathOntology();
+          loadOntologyFromFile(ontoPath);
+        }
+      } else {
+        loadOntologyFromFile(null);
+      }
     } catch (OWLOntologyCreationException ex) {
-      LOGGER.error("[ERROR]: Error when creating ontology.");
+      LOGGER.error("[ERROR]: Error when creating ontology. Exception: {}", ex.getStackTrace(), ex.getMessage());
     }
   }
 
@@ -84,16 +103,24 @@ public class WeaselOntologyManager {
 
   }
 
-  private void loadOntologyFromFile() throws IOException, OWLOntologyCreationException {
+  private void loadOntologyFromFile(String ontoPath) throws IOException, OWLOntologyCreationException {
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-
     FileSystemManager fsm = new FileSystemManager();
-    File inputOntologyFile = fsm.getPathToOntologyFile().toFile();
+    Path pathToOnto = null;
+    if (ontoPath == null) {
+      pathToOnto = fsm.getDefaultPathToOntologyFile();
+    } else {
+      pathToOnto = fsm.getPathToOntologyFile(ontoPath);
+
+    }
+    LOGGER.debug("Path to ontology : {}", pathToOnto.toString());
+    File inputOntologyFile = pathToOnto.toFile();
 
     OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+
     OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
 
-    IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutF/IBOProd/");
+    IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
 
     m.makeLoadImportRequest(new OWLImportsDeclarationImpl(m.getOntologyDocumentIRI(o)));
     Stream<OWLOntology> directImports = m.imports(o);
@@ -102,28 +129,28 @@ public class WeaselOntologyManager {
 
   }
 
-  
-  //TODO
-  private void loadOntologyFromURL() throws IOException {
+  private Set<OWLOntology> loadOntologyFromURL(String ontoURL) throws IOException, OWLOntologyCreationException {
 
-//    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-//    // URL fiboURL = URL.setURLStreamHandlerFactory(https//spec.edmcouncil.org/fibo/ontology/master/2019Q2/AboutFIBOProd.ttl);
-//    FileSystemManager fsm = new FileSystemManager();
-//
-//    File inputOntologyFile = fsm.getPathToOntologyFile().toFile();
-//    OWLOntologyManager m = OWLManager.createOWLOntologyManager();
-//    InputStream inputStream = (InputStream) fsm.getPathToWeaselConfigFile().toRealPath();
-//
-//    OutputStream outputStream = new FileOutputStream(inputOntologyFile);
-//    IOUtils.copy(inputStream, outputStream);
-    
-    
-        
-    
-    
+    LOGGER.debug("URL to Ontology : {} ", ontoURL);
+    HttpGet httpGet = new HttpGet(ontoURL);
+    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+    HttpResponse response = httpClient.execute(httpGet);
+    Set<OWLOntology> result = new HashSet<>();
+    HttpEntity entity = response.getEntity();
+    if (entity != null) {
+      long len = entity.getContentLength();
+      InputStream inputStream = entity.getContent();
+      OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
+      IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
+      manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology)));
+      Stream<OWLOntology> directImports = manager.imports(newOntology);
+      newOntology = manager.createOntology(fiboIRI, directImports, false);
+      ontology = newOntology;
+    }
+    return result;
   }
 
-  // https://spec.edmcouncil.org/fibo/ontology/master/2019Q2/AboutFIBOProd.ttl
   private Set<OWLOntology> openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager) throws OWLOntologyCreationException {
     Set<OWLOntology> result = new HashSet<>();
     for (File file : ontologiesDir.listFiles()) {
