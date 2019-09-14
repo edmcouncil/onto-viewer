@@ -18,7 +18,7 @@ public class StringSplitter {
     if (iri.endsWith("/")) {
       return lastElement;
     } else if (lastElement.contains("#")) {
-      return lastElement.substring(lastElement.indexOf("#"));
+      return lastElement.substring(lastElement.indexOf("#")+1);
     } else {
       return lastElement;
     }

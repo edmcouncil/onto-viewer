@@ -4,6 +4,7 @@ import java.util.Collection;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.ontology.WeaselOntologyManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +24,14 @@ public class SearchService {
   @Autowired
   private AppConfiguration config;
 
-  public void search(String query, ModelBuilder mb) {
-    Collection details = ontologyManager.getDetailsByIri(query);
+  public OwlDetails search(String query, ModelBuilder mb) {
+    //Collection details = ontologyManager.getDetailsByIri(query);
+    OwlDetails details = ontologyManager.getDetailsByIri(query);
     boolean isGrouped = ((WeaselConfiguration) config.getWeaselConfig()).isGrouped();
     mb.setQuery(query)
         .ontoDetails(details)
         .isGrouped(isGrouped);
-    
+    return details;
   }
 
 }

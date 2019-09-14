@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
 import java.util.ArrayList;
-import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetailsDetails;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.semanticweb.owlapi.io.OWLObjectRenderer;
@@ -70,8 +70,8 @@ public class OwlDataHandler {
   @Autowired
   private IndividualDataHandler individualDataHandler;
 
-  public OwlDetails handleParticularClass(IRI iri, OWLOntology ontology) {
-    OwlDetails resultDetails = new OwlDetails();
+  public OwlListDetailsDetails handleParticularClass(IRI iri, OWLOntology ontology) {
+    OwlListDetailsDetails resultDetails = new OwlListDetailsDetails();
     Iterator<OWLClass> classesIterator = ontology.classesInSignature().iterator();
 
     while (classesIterator.hasNext()) {
@@ -120,8 +120,8 @@ public class OwlDataHandler {
     return resultDetails;
   }
 
-  public OwlDetails handleParticularIndividual(IRI iri, OWLOntology ontology) {
-    OwlDetails resultDetails = new OwlDetails();
+  public OwlListDetailsDetails handleParticularIndividual(IRI iri, OWLOntology ontology) {
+    OwlListDetailsDetails resultDetails = new OwlListDetailsDetails();
     Iterator<OWLNamedIndividual> individualIterator = ontology.individualsInSignature().iterator();
 
     while (individualIterator.hasNext()) {
@@ -318,8 +318,8 @@ public class OwlDataHandler {
     return isRestriction;
   }
 
-  public OwlDetails handleParticularDataProperty(IRI iri, OWLOntology ontology) {
-    OwlDetails resultDetails = new OwlDetails();
+  public OwlListDetailsDetails handleParticularDataProperty(IRI iri, OWLOntology ontology) {
+    OwlListDetailsDetails resultDetails = new OwlListDetailsDetails();
     Iterator<OWLDataProperty> dataPropertyIt = ontology.dataPropertiesInSignature().iterator();
 
     while (dataPropertyIt.hasNext()) {
@@ -348,8 +348,8 @@ public class OwlDataHandler {
 
   }
 
-  public OwlDetails handleParticularObjectProperty(IRI iri, OWLOntology ontology) {
-    OwlDetails resultDetails = new OwlDetails();
+  public OwlListDetailsDetails handleParticularObjectProperty(IRI iri, OWLOntology ontology) {
+    OwlListDetailsDetails resultDetails = new OwlListDetailsDetails();
     Iterator<OWLObjectProperty> dataPropertyIt = ontology.objectPropertiesInSignature().iterator();
 
     while (dataPropertyIt.hasNext()) {
@@ -497,10 +497,10 @@ public class OwlDataHandler {
     return result;
   }
 
-  public OwlDetails handleOntologyMetadata(IRI iri, OWLOntology ontology) {
+  public OwlListDetailsDetails handleOntologyMetadata(IRI iri, OWLOntology ontology) {
 
     OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontology);
-    OwlDetails wd = new OwlDetails();
+    OwlListDetailsDetails wd = new OwlListDetailsDetails();
     if (metadata != null && metadata.getProperties().keySet().size() > 0) {
       wd.addAllProperties(metadata);
     }
