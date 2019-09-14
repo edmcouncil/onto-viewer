@@ -5,7 +5,6 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import java.io.IOException;
 import java.util.Map;
-import java.util.regex.Pattern;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -42,7 +41,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   @Override
   public void doTag()
-      throws JspException, IOException {
+          throws JspException, IOException {
 
     switch (property.getType()) {
       case STRING:
@@ -80,6 +79,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   private void renderStringProperty(PropertyValue property) throws IOException {
     String val = (String) property.getValue();
+    val = val.replaceAll("\n", "<br />");
     String result = wrapString(val);
     renderProperty(result);
   }
@@ -98,10 +98,19 @@ public class PropertyRenderTag extends SimpleTagSupport {
   private void renderAxiom(PropertyValue property) throws IOException {
     OwlAxiomPropertyValue axiomPropertyVal = (OwlAxiomPropertyValue) property;
     String result = axiomPropertyVal.getValue();
+    String[] list = result.split(" ");
+    String[] checkList = result.split(" ");
     for (Map.Entry<String, String> entry : axiomPropertyVal.getEntityMaping().entrySet()) {
       String replecment = parseIriWithoutWraping(entry.getValue(), entry.getKey());
-      String regex = String.format("\\b%s\\b", entry.getKey());
-      result = Pattern.compile(regex).matcher(result).replaceAll(replecment);
+
+      for (int i = 0; i < checkList.length; i++) {
+        String string = checkList[i];
+        if (string.equals(entry.getKey())) {
+          list[i] = replecment;
+        }
+      }
+      result = String.join(" ", list);
+
     }
     if (elementWrapper != null && !elementWrapper.isEmpty()) {
       result = wrapElement(result);
@@ -148,7 +157,8 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   private String parseSearchPath(String link, String val) {
     String result;
-    result = String.format(URL_SEARCH_QUERY_PATTERN, searchPath, link, val);
+    String tmpSearchPath = searchPath.equals("*") ? "" : searchPath;
+    result = String.format(URL_SEARCH_QUERY_PATTERN, tmpSearchPath, link, val);
     return result;
   }
 
@@ -200,11 +210,11 @@ public class PropertyRenderTag extends SimpleTagSupport {
     String link = wrapIri((String) value.getValueB(), (String) value.getValueA());
     renderProperty(link);
   }
-  
-   private void renderModules(PropertyValue property) throws IOException {
+
+  private void renderModules(PropertyValue property) throws IOException {
     OwlFiboModuleProperty fiboModuleProperty = (OwlFiboModuleProperty) property;
     PairImpl value = fiboModuleProperty.getValue();
-    String link = wrapIri((String)value.getValueB(), (String)value.getValueA());
+    String link = wrapIri((String) value.getValueB(), (String) value.getValueA());
     renderProperty(link);
   }
 

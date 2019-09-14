@@ -1,66 +1,45 @@
 package org.edmcouncil.spec.fibo.weasel.ontology;
 
-import com.sun.scenario.effect.Merge;
 import java.io.File;
-import java.io.FileOutputStream;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import static java.lang.System.load;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import static java.util.ServiceLoader.load;
-import static java.util.ServiceLoader.load;
-import static java.util.ServiceLoader.load;
-import static java.util.ServiceLoader.load;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.stream.Stream;
-import static javafx.fxml.FXMLLoader.load;
-import static javafx.fxml.FXMLLoader.load;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataHandler;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
-import org.semanticweb.owlapi.model.OWLDataFactory;
-import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
-import uk.ac.manchester.cs.owl.owlapi.OWLOntologyManagerImpl;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -104,7 +83,6 @@ public class WeaselOntologyManager {
   }
 
   private void loadOntologyFromFile(String ontoPath) throws IOException, OWLOntologyCreationException {
-    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
     FileSystemManager fsm = new FileSystemManager();
     Path pathToOnto = null;
     if (ontoPath == null) {
@@ -312,4 +290,7 @@ public class WeaselOntologyManager {
     });
   }
 
+  public Set<FiboModule> getAllModulesData(){
+    return dataHandler.getAllModulesData(ontology);
+  }
 }

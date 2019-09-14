@@ -2,7 +2,6 @@ package org.edmcouncil.spec.fibo.config.configuration.model.impl;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +16,10 @@ import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
 public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
 
   private Map<String, Set<ConfigElement>> configuration;
+
+  public WeaselConfiguration() {
+    configuration = new HashMap<>();
+  }
 
   @Override
   public Map<String, Set<ConfigElement>> getConfiguration() {
@@ -98,6 +101,23 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
       return element.toString();
     }
     return null;
+  }
+
+  //TODO: Change this method name..
+  /**
+   *
+   * @param uri - String representation of URI
+   * @return True if it finds representation in the configuration, otherwise false.
+   */
+  public Boolean isUriIri(String uri) {
+    Set<ConfigElement> scopeIri = configuration.getOrDefault(WeaselConfigKeys.SCOPE_IRI, new HashSet<>());
+    for (ConfigElement configElement : scopeIri) {
+      ConfigStringElement element = (ConfigStringElement) configElement;
+      if (uri.contains(element.toString())) {
+        return Boolean.TRUE;
+      }
+    }
+    return Boolean.FALSE;
   }
 
 }

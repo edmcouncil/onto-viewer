@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.fibo.weasel.model.property;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -20,7 +21,6 @@ public class OwlDetailsProperties<T> {
 
   private List taxonomy;
   private Map<String, List<T>> properties;
-  
 
   public OwlDetailsProperties() {
     properties = new HashMap<>();
@@ -95,6 +95,18 @@ public class OwlDetailsProperties<T> {
       return false;
     }
     return true;
+  }
+
+  public void sortPropertiesInAlphabeticalOrder() {
+    for (Map.Entry<String, List<T>> entry : properties.entrySet()) {
+      List<T> value = entry.getValue();
+      value.sort(WeaselComparators.getComparatorWithAlphabeticalOrder());
+    }
+  }
+
+  @Override
+  public String toString() {
+    return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties=" + properties.toString() + '}';
   }
 
 }

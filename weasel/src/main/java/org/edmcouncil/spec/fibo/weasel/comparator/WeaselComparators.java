@@ -25,15 +25,15 @@ public class WeaselComparators {
       }
 
       Optional var1 = prioritySortList
-          .stream()
-          .map(ConfigStringElement::toString)
-          .filter(obj1::equals)
-          .findFirst();
+              .stream()
+              .map(ConfigStringElement::toString)
+              .filter(obj1::equals)
+              .findFirst();
       Optional var2 = prioritySortList
-          .stream()
-          .map(ConfigStringElement::toString)
-          .filter(obj2::equals)
-          .findFirst();
+              .stream()
+              .map(ConfigStringElement::toString)
+              .filter(obj2::equals)
+              .findFirst();
 
       boolean containsObj1 = var1.isPresent();
       boolean containsObj2 = var2.isPresent();
@@ -52,6 +52,23 @@ public class WeaselComparators {
       }
 
       return obj1.toLowerCase().compareTo(obj2.toLowerCase());
+
+    };
+  }
+
+  public static Comparator<Object> getComparatorWithAlphabeticalOrder() {
+    return (Object obj1, Object obj2) -> {
+      if (obj1 == obj2) {
+        return 0;
+      }
+      if (obj1 == null) {
+        return -1;
+      }
+      if (obj2 == null) {
+        return 1;
+      }
+      return obj1.toString().toLowerCase()
+              .compareTo(obj2.toString().toLowerCase());
 
     };
   }

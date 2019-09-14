@@ -8,8 +8,9 @@ public class WeaselConfigKeys {
 
   public static final String PRIORITY_LIST = "priorityList";
   public static final String PRIORITY_LIST_ELEMENT = "priority";
-  public static final String IGNORED_TO_DISPLAY = "ignoredToDisplay";
-  public static final String IGNORED_TO_DISPLAY_ELEMENT = "ignore";
+  public static final String IGNORE_TO_DISPLAYING = "ignoreToDisplaying";
+  public static final String IGNORE_TO_LINKING = "ignoreToLinking";
+  public static final String IGNORED_ELEMENT = "ignore";
   public static final String GROUPS = "groups";
   public static final String GROUP = "group";
   public static final String GROUP_NAME = "groupName";
@@ -21,9 +22,6 @@ public class WeaselConfigKeys {
   public static final String NEW_NAME = "newName";
   public static final String ONTOLOGY_URL = "ontologyURL";
   public static final String ONTOLOGY_PATH = "ontologyPath";
-  
-  
-  
-  
-  
+  public static final String SCOPE_IRI = "scopeIri";
+  public static final String URI_NAMESPACE = "uriNamespace";
 }

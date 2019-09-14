@@ -1,5 +1,5 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var = "context" value = "http://localhost:8080"/>
+<c:set var = "context" value = "*"/>
 
 <c:forEach items="${details_list}" var="clazz">
   <div class="my-3 px-3">
