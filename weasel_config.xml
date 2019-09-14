@@ -45,7 +45,8 @@
          <groupElement>editorialNote</groupElement>
          <groupElement>title</groupElement>
          <groupElement>abstract</groupElement>
-         <groupElement>keyword</groupElement>         
+         <groupElement>keyword</groupElement>
+         <groupElement>fileAbstract</groupElement> 
       </group>
 
       <group>
@@ -89,7 +90,9 @@
          <groupElement>filename</groupElement>         
          <groupElement>comment</groupElement>
          <groupElement>isDefinedBy</groupElement>
-         <groupElement>seeAlso</groupElement>         
+         <groupElement>seeAlso</groupElement>
+         <groupElement>historyNote</groupElement> 
+         <groupElement>relatedSpecification</groupElement>                  
       </group>
    </groups>
 
