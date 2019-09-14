@@ -52,5 +52,10 @@
       <version>1.7.25</version>
       <type>jar</type>
     </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.10</version>
+    </dependency>
   </dependencies>
 </project>

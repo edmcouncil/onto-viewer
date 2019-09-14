@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
+  
+  <!-- To load an ontology from the internet, enter the URL between the <ontologyURL> tags -->
+  <!-- To load an ontology from a folder, enter the path address with application between <ontologyPath> tags or enter the file name  -->
+  <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
+  <ontology>
+    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q2/AboutFIBOProd.ttl</ontologyURL>
+    <!--<ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>-->
+    <!-- <ontologyPath>AboutFIBOProd.rdf</ontologyPath>--> 
+  </ontology>
+  
   <filter><!--Here we place the definition of all filters used in the program-->
    
     <!--Feature will be added if future-->
@@ -21,13 +31,13 @@
        
   </filter>
 
-  <priorityList><!--This list will be used when groups is not present-->
+  <priorityList>
+    <!--This list will be used when groups is not present-->
     <priority>http://www.w3.org/2000/01/rdf-schema#subClassOf</priority>
     <priority>http://www.w3.org/2000/01/rdf-schema#seeAlso</priority>
   </priorityList>
-
-
-   <groups>
+   
+    <groups>
       <!--The order of elements in groups will be their priority-->
       <group>
          <groupName>Natural Language characteristic</groupName>

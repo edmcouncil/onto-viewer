@@ -29,11 +29,9 @@ public class WeaselConfigurationHandler extends DefaultHandler {
 
   ConfigRenameElement cre = null;
   ConfigGroupsElement cge = null;
- 
 
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-
     switch (qName) {
       case WeaselConfigKeys.PRIORITY_LIST:
       case WeaselConfigKeys.IGNORE_TO_DISPLAYING:
@@ -41,6 +39,8 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case WeaselConfigKeys.SCOPE_IRI:
       case WeaselConfigKeys.GROUPS:
       case WeaselConfigKeys.RENAME_GROUPS:
+      case WeaselConfigKeys.ONTOLOGY_URL:
+      case WeaselConfigKeys.ONTOLOGY_PATH:
         this.key = qName;
         break;
       case WeaselConfigKeys.GROUP:
@@ -50,7 +50,6 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case WeaselConfigKeys.RENAME:
         cre = new ConfigRenameElement();
         break;
-
     }
   }
 
@@ -63,7 +62,6 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case WeaselConfigKeys.URI_NAMESPACE:
         if (!val.trim().isEmpty()) {
           ConfigElement configEl = new ConfigStringElement(val);
-
           config.addCongigElement(key, configEl);
         }
         break;
@@ -87,6 +85,14 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         break;
       case WeaselConfigKeys.RENAME:
         config.addCongigElement(key, cre);
+        break;
+      case WeaselConfigKeys.ONTOLOGY_URL:
+        ConfigStringElement ontologyURL = new ConfigStringElement(val);
+        config.addCongigElement(key, ontologyURL);
+        break;
+      case WeaselConfigKeys.ONTOLOGY_PATH:
+        ConfigStringElement ontologyPath = new ConfigStringElement(val);
+        config.addCongigElement(key, ontologyPath);
         break;
     }
   }
