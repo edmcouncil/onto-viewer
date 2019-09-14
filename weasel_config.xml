@@ -36,6 +36,7 @@
          <groupElement>abbreviation</groupElement>
          <groupElement>definition</groupElement>
          <groupElement>definitionOrigin</groupElement>
+         <groupElement>source</groupElement>         
          <groupElement>adaptedFrom</groupElement>
          <groupElement>example</groupElement>
          <groupElement>scopeNote</groupElement>
