@@ -83,6 +83,12 @@ public class WeaselOntologyManager {
 
   }
 
+  /**
+   * This method is used to load ontology from file
+   * 
+   * @param ontoPath OntoPath is the access path from which the ontology is being loaded.
+   */
+  
   private void loadOntologyFromFile(String ontoPath) throws IOException, OWLOntologyCreationException {
     FileSystemManager fsm = new FileSystemManager();
     Path pathToOnto = null;
@@ -108,6 +114,12 @@ public class WeaselOntologyManager {
 
   }
 
+  /**
+   * This method is used to load ontology from URL
+   *
+   * @param ontoURL OntoUrl is the web address from which the ontology is being loaded.
+   * @return set of ontology
+   */
   private Set<OWLOntology> loadOntologyFromURL(String ontoURL) throws IOException, OWLOntologyCreationException {
 
     LOGGER.debug("URL to Ontology : {} ", ontoURL);
@@ -130,6 +142,13 @@ public class WeaselOntologyManager {
     return result;
   }
 
+  /**
+   * This method is used to open all Ontologies from directory
+   *
+   * @param ontologiesDir OntologiesDir is a loaded ontology file.
+   * @param manager Manager loading and acessing ontologies.
+   * @return set of ontology.
+   */
   private Set<OWLOntology> openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager) throws OWLOntologyCreationException {
     Set<OWLOntology> result = new HashSet<>();
     for (File file : ontologiesDir.listFiles()) {
@@ -193,18 +212,18 @@ public class WeaselOntologyManager {
 
     WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
     if (weaselConfig.hasRenamedGroups()) {
-        OwlDetailsProperties<PropertyValue> prop = new OwlDetailsProperties<>();
-        for (Map.Entry<String, List<PropertyValue>> entry : result.getProperties().entrySet()) {
-          String key = entry.getKey();
-          String newName = weaselConfig.getNewName(key);
-          newName = newName == null ? key : newName;
-          for (PropertyValue propertyValue : entry.getValue()) {
-            prop.addProperty(newName, propertyValue);
-          }
+      OwlDetailsProperties<PropertyValue> prop = new OwlDetailsProperties<>();
+      for (Map.Entry<String, List<PropertyValue>> entry : result.getProperties().entrySet()) {
+        String key = entry.getKey();
+        String newName = weaselConfig.getNewName(key);
+        newName = newName == null ? key : newName;
+        for (PropertyValue propertyValue : entry.getValue()) {
+          prop.addProperty(newName, propertyValue);
         }
-        result.setProperties(prop);
+      }
+      result.setProperties(prop);
     }
-      result.setIri(iriString);
+    result.setIri(iriString);
 
     if (!config.getWeaselConfig().isEmpty()) {
       WeaselConfiguration cfg = (WeaselConfiguration) config.getWeaselConfig();
@@ -220,29 +239,29 @@ public class WeaselOntologyManager {
 
   private OwlGroupedDetails groupDetails(OwlListDetailsDetails owlDetails, WeaselConfiguration cfg) {
     OwlGroupedDetails newResult = null;
-      OwlGroupedDetails groupedDetails = new OwlGroupedDetails();
-      Set<ConfigElement> groups = cfg.getConfiguration().get(WeaselConfigKeys.GROUPS);
+    OwlGroupedDetails groupedDetails = new OwlGroupedDetails();
+    Set<ConfigElement> groups = cfg.getConfiguration().get(WeaselConfigKeys.GROUPS);
 
-      for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
-        String propertyKey = entry.getKey();
-        String propertyName = null;
-        if (cfg.hasRenamedGroups()) {
-          propertyName = cfg.getOldName(propertyKey);
-          propertyName = propertyName == null ? propertyKey : propertyName;
-        }
-        String groupName = null;
-        groupName = getGroupName(groups, propertyName);
-        groupName = groupName == null ? DEFAULT_GROUP_NAME : groupName;
-        for (PropertyValue property : entry.getValue()) {
-          groupedDetails.addProperty(groupName, propertyKey, property);
-        }
+    for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
+      String propertyKey = entry.getKey();
+      String propertyName = null;
+      if (cfg.hasRenamedGroups()) {
+        propertyName = cfg.getOldName(propertyKey);
+        propertyName = propertyName == null ? propertyKey : propertyName;
       }
-      groupedDetails.setTaxonomy(owlDetails.getTaxonomy());
-      groupedDetails.setLabel(owlDetails.getLabel());
-      groupedDetails.setIri(owlDetails.getIri());
-      groupedDetails.sortProperties(groups, cfg);
+      String groupName = null;
+      groupName = getGroupName(groups, propertyName);
+      groupName = groupName == null ? DEFAULT_GROUP_NAME : groupName;
+      for (PropertyValue property : entry.getValue()) {
+        groupedDetails.addProperty(groupName, propertyKey, property);
+      }
+    }
+    groupedDetails.setTaxonomy(owlDetails.getTaxonomy());
+    groupedDetails.setLabel(owlDetails.getLabel());
+    groupedDetails.setIri(owlDetails.getIri());
+    groupedDetails.sortProperties(groups, cfg);
 
-      newResult = groupedDetails;
+    newResult = groupedDetails;
     return newResult;
   }
 
@@ -264,7 +283,7 @@ public class WeaselOntologyManager {
 
   private void sortResults(OwlListDetailsDetails result) {
     Set set = (Set) config.getWeaselConfig()
-            .getConfigVal(WeaselConfigKeys.PRIORITY_LIST);
+        .getConfigVal(WeaselConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;
     }

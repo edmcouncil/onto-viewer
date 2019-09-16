@@ -438,6 +438,13 @@ public class OwlDataHandler {
     return result;
   }
 
+  /**
+   * This method is used to display SubClassOf
+   *
+   * @param ontology This is a loaded ontology.
+   * @param clazz Clazz are all properties of Inherited Axioms.
+   * @return properties of Inherited Axioms.
+   */
   public OwlDetailsProperties<PropertyValue> handleParticularSubClassOf(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<PropertyValue>();
 
@@ -455,6 +462,13 @@ public class OwlDataHandler {
     return result;
   }
 
+  /**
+   * This method is used to display Particular Individual
+   *
+   * @param ontology This is a loaded ontology.
+   * @param clazz Clazz are all properties of Inherited Axioms.
+   * @return properties of Inherited Axioms.
+   */
   private OwlDetailsProperties<PropertyValue> handleParticularIndividual(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
@@ -473,6 +487,13 @@ public class OwlDataHandler {
     return result;
   }
 
+  /**
+   * This method is used to display Inherited Axioms
+   *
+   * @param ontology Paramter which loaded ontology.
+   * @param clazz Class are all properties of Inherited Axioms.
+   * @return properties of Inherited Axioms.
+   */
   private OwlDetailsProperties<PropertyValue> handleInheritedAxioms(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
@@ -493,7 +514,7 @@ public class OwlDataHandler {
             }
           }
         });
- 
+
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
