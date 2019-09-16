@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.view.service.SearchService;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class ModuleController {
   private WeaselOntologyManager ontologyManager;
 
   @GetMapping("/json")
-  public ResponseEntity getAllModulesDataAsJson() {
+  public ResponseEntity<Set<FiboModule>> getAllModulesDataAsJson() {
     LOGGER.debug("[GET]: module/json");
     Set<FiboModule> modules = ontologyManager.getAllModulesData();
     return ResponseEntity.ok(modules);
@@ -46,7 +47,7 @@ public class ModuleController {
     ModelBuilder mb = new ModelBuilder(model);
 
     if (query != null) {
-      Collection details = ontologyManager.getDetailsByIri(query);
+      OwlDetails details = ontologyManager.getDetailsByIri(query);
       mb.ontoDetails(details).isGrouped(true);
     }
 

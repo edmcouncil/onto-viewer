@@ -1,7 +1,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var = "context" value = "http://localhost:8080"/>
 
-<c:forEach items="${details_list}" var="clazz">
+  <c:set var = "clazz" value = "${details}"/>
   <div class="my-3 px-3">
 
     <div class="row">
@@ -58,6 +58,4 @@
     <c:if test="${empty clazz.properties}">
       There is nothing to display...
     </c:if>
-    <div class="border-bottom col-12 mt-1"></div>
   </div>
-</c:forEach>

@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.model;
+package org.edmcouncil.spec.fibo.weasel.model.details;
 
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
@@ -6,51 +6,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
+import org.edmcouncil.spec.fibo.weasel.model.OwlTaxonomy;
+import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class OwlDetails {
+public class OwlListDetailsDetails extends OwlDetails{
 
-  private String label;
-  private String iri;
   private OwlDetailsProperties<PropertyValue> properties;
-  private String type;
-  private OwlTaxonomyImpl taxonomy;
 
-  public OwlDetails() {
+  public OwlListDetailsDetails() {
     if (properties == null) {
       properties = new OwlDetailsProperties<>();
     }
   }
 
-  public String getIri() {
-    return iri;
-  }
-
-  public void setIri(String iri) {
-    this.iri = iri;
-  }
-
-  public String getLabel() {
-    return label;
-  }
-
-  public void setLabel(String label) {
-    this.label = label;
-  }
+ 
 
   public Map<String, List<PropertyValue>> getProperties() {
     return properties.getProperties();
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
   }
 
   public void setProperties(OwlDetailsProperties<PropertyValue> properties) {
@@ -59,14 +35,6 @@ public class OwlDetails {
 
   public void addProperty(String key, OwlAnnotationPropertyValue property) {
     properties.addProperty(key, property);
-  }
-
-  public void setTaxonomy(OwlTaxonomyImpl tax) {
-    this.taxonomy = tax;
-  }
-
-  public OwlTaxonomy getTaxonomy() {
-    return this.taxonomy;
   }
 
   public void sortProperties(List<ConfigStringElement> priorityList) {
@@ -84,10 +52,8 @@ public class OwlDetails {
   @Override
   public int hashCode() {
     int hash = 7;
-    hash = 71 * hash + Objects.hashCode(this.label);
+    hash = 71 * hash + super.hashCode();
     hash = 71 * hash + Objects.hashCode(this.properties);
-    hash = 71 * hash + Objects.hashCode(this.type);
-    hash = 71 * hash + Objects.hashCode(this.taxonomy);
     return hash;
   }
 
@@ -102,17 +68,8 @@ public class OwlDetails {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final OwlDetails other = (OwlDetails) obj;
-    if (!Objects.equals(this.label, other.label)) {
-      return false;
-    }
-    if (!Objects.equals(this.type, other.type)) {
-      return false;
-    }
+    final OwlListDetailsDetails other = (OwlListDetailsDetails) obj;
     if (!Objects.equals(this.properties, other.properties)) {
-      return false;
-    }
-    if (!Objects.equals(this.taxonomy, other.taxonomy)) {
       return false;
     }
     return true;

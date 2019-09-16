@@ -6,6 +6,7 @@ import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.validation.Valid;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -51,17 +53,27 @@ public class SearchController {
 
     return "search";
   }
-  
-    @GetMapping("/json")
-  public ResponseEntity searchJson(@RequestParam("query") String query, Model model) {
 
-    LOGGER.info("[GET]: search ? query = {}", query);
-    Query q = new Query();
-    q.setValue(query);
+//  @GetMapping("/json")
+//  public <T extends OwlDetails> ResponseEntity<T> searchJson(@RequestParam("query") String query, Model model) {
+//
+//    LOGGER.info("[GET]: search ? query = {}", query);
+//    Query q = new Query();
+//    q.setValue(query);
+//    ModelBuilder modelBuilder = new ModelBuilder(model);
+//
+//    OwlDetails search = searchService.search(query, modelBuilder);
+//
+//    return ResponseEntity.ok((T)search);
+//  }
+  @PostMapping("/json")
+  public <T extends OwlDetails> ResponseEntity<T> searchJson(@RequestBody String query, Model model) {
+
+    LOGGER.info("[GET]: search / json   RequestBody = {}", query);
     ModelBuilder modelBuilder = new ModelBuilder(model);
 
-    searchService.search(query, modelBuilder);
+    OwlDetails search = searchService.search(query, modelBuilder);
 
-    return ResponseEntity.ok(model);
+    return ResponseEntity.ok((T)search);
   }
 }

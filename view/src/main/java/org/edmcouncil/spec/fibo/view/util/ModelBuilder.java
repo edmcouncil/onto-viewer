@@ -2,10 +2,11 @@ package org.edmcouncil.spec.fibo.view.util;
 
 import java.util.Collection;
 import org.edmcouncil.spec.fibo.view.model.Query;
-import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetailsDetails;
 import java.util.List;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 
 import org.springframework.ui.Model;
 
@@ -40,9 +41,9 @@ public class ModelBuilder {
     return this;
   }
 
-  public ModelBuilder ontoDetails(Collection details) {
+  public ModelBuilder ontoDetails(OwlDetails details) {
 
-    model.addAttribute("details_list", details);
+    model.addAttribute("details", details);
     model.addAttribute("details_display", true);
 
     return this;

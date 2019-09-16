@@ -2,7 +2,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology;
 
 import java.io.File;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
-import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetailsDetails;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -26,8 +26,9 @@ import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
-import org.edmcouncil.spec.fibo.weasel.model.OwlGroupedDetails;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataHandler;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -161,51 +162,39 @@ public class WeaselOntologyManager {
     return ontology;
   }
 
-  public Collection getDetailsByIri(String iriString) {
+  public <T extends OwlDetails> T getDetailsByIri(String iriString) {
     IRI iri = IRI.create(iriString);
-    List<OwlDetails> result = new LinkedList<>();
+    OwlListDetailsDetails result = null;
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
     if (iriString.endsWith("/")) {
       LOGGER.debug("Handle ontology metadata. IRI: {}", iriString);
-      OwlDetails wd = dataHandler.handleOntologyMetadata(iri, ontology);
+      OwlListDetailsDetails wd = dataHandler.handleOntologyMetadata(iri, ontology);
 
-      result.add(wd);
+      result = wd;
     } else {
       if (ontology.containsClassInSignature(iri)) {
         LOGGER.debug("Handle class data.");
-        OwlDetails wd = dataHandler.handleParticularClass(iri, ontology);
-        if (!result.contains(wd)) {
-          result.add(wd);
-        }
-      }
-      if (ontology.containsDataPropertyInSignature(iri)) {
+        OwlListDetailsDetails wd = dataHandler.handleParticularClass(iri, ontology);
+        result = wd;
+      } else if (ontology.containsDataPropertyInSignature(iri)) {
         LOGGER.info("Handle data property.");
-        OwlDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
-        if (!result.contains(wd)) {
-          result.add(wd);
-        }
-      }
-      if (ontology.containsObjectPropertyInSignature(iri)) {
+        OwlListDetailsDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
+        result = wd;
+      } else if (ontology.containsObjectPropertyInSignature(iri)) {
         LOGGER.info("Handle object property.");
-        OwlDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
-        if (!result.contains(wd)) {
-          result.add(wd);
-        }
-      }
-      if (ontology.containsIndividualInSignature(iri)) {
+        OwlListDetailsDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
+        result = wd;
+      } else if (ontology.containsIndividualInSignature(iri)) {
         LOGGER.info("Handle individual data.");
-        OwlDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
-        if (!result.contains(wd)) {
-          result.add(wd);
-        }
+        OwlListDetailsDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
+        result = wd;
       }
     }
 
     WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
     if (weaselConfig.hasRenamedGroups()) {
-      for (OwlDetails owlDetails : result) {
         OwlDetailsProperties<PropertyValue> prop = new OwlDetailsProperties<>();
-        for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
+        for (Map.Entry<String, List<PropertyValue>> entry : result.getProperties().entrySet()) {
           String key = entry.getKey();
           String newName = weaselConfig.getNewName(key);
           newName = newName == null ? key : newName;
@@ -213,28 +202,24 @@ public class WeaselOntologyManager {
             prop.addProperty(newName, propertyValue);
           }
         }
-        owlDetails.setProperties(prop);
-      }
+        result.setProperties(prop);
     }
-    for (OwlDetails owlDetails : result) {
-      owlDetails.setIri(iriString);
-    }
+      result.setIri(iriString);
 
     if (!config.getWeaselConfig().isEmpty()) {
       WeaselConfiguration cfg = (WeaselConfiguration) config.getWeaselConfig();
       if (cfg.isGrouped()) {
-        List<OwlGroupedDetails> newResult = groupDetails(result, cfg);
-        return newResult;
+        OwlGroupedDetails newResult = groupDetails(result, cfg);
+        return (T) newResult;
       } else {
         sortResults(result);
       }
     }
-    return result;
+    return (T) result;
   }
 
-  private List<OwlGroupedDetails> groupDetails(List<OwlDetails> result, WeaselConfiguration cfg) {
-    List<OwlGroupedDetails> newResult = new LinkedList<>();
-    for (OwlDetails owlDetails : result) {
+  private OwlGroupedDetails groupDetails(OwlListDetailsDetails owlDetails, WeaselConfiguration cfg) {
+    OwlGroupedDetails newResult = null;
       OwlGroupedDetails groupedDetails = new OwlGroupedDetails();
       Set<ConfigElement> groups = cfg.getConfiguration().get(WeaselConfigKeys.GROUPS);
 
@@ -257,8 +242,7 @@ public class WeaselOntologyManager {
       groupedDetails.setIri(owlDetails.getIri());
       groupedDetails.sortProperties(groups, cfg);
 
-      newResult.add(groupedDetails);
-    }
+      newResult = groupedDetails;
     return newResult;
   }
 
@@ -278,19 +262,17 @@ public class WeaselOntologyManager {
     return result;
   }
 
-  private void sortResults(List<OwlDetails> result) {
+  private void sortResults(OwlListDetailsDetails result) {
     Set set = (Set) config.getWeaselConfig()
-        .getConfigVal(WeaselConfigKeys.PRIORITY_LIST);
+            .getConfigVal(WeaselConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;
     }
     List prioritySortList = new LinkedList();
-    result.forEach((owlDetails) -> {
-      owlDetails.sortProperties(prioritySortList);
-    });
+    result.sortProperties(prioritySortList);
   }
 
-  public Set<FiboModule> getAllModulesData(){
+  public Set<FiboModule> getAllModulesData() {
     return dataHandler.getAllModulesData(ontology);
   }
 }
