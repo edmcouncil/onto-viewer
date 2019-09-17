@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "weasel" uri = "tags/propertyRender.tld"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="templateTree" tagdir="/WEB-INF/tags" %> 
 
 <!DOCTYPE HTML>
 <html>
@@ -49,9 +51,9 @@
                                     </c:choose> 
                                     <c:forEach items="${moduleElement.subModule}" var="ontoElement">
                                       <li>${ontoElement.label} 
-                                      <a href="/module?lvl1=${domainElement.label}&lvl2=${moduleElement.label}&meta=${ontoElement.iri}" class="btn btn-link" >(Show meta)</a>
+                                        <a href="/module?lvl1=${domainElement.label}&lvl2=${moduleElement.label}&meta=${ontoElement.iri}" class="btn btn-link" >(Show meta)</a>
                                       </li>
-                                      </c:forEach>
+                                    </c:forEach>
                                   </ul>
                                 </c:if>
                             </li>  
@@ -61,6 +63,14 @@
 
                   </li>
 
+                </c:forEach>
+              </ul>
+
+              <ul>
+                <c:forEach items="${modelTree}" var="domainElement">
+                  <li>
+                    <templateTree:nodeTree node="${domainElement}"/>
+                  </li>
                 </c:forEach>
               </ul>
 

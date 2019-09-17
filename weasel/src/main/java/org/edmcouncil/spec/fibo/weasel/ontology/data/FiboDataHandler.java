@@ -1,17 +1,23 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
+import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResources;
+import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResourcesTypeDefaultKeys;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
@@ -56,6 +62,17 @@ public class FiboDataHandler {
   private AnnotationsDataHandler annotationsDataHandler;
   @Autowired
   private IndividualDataHandler individualDataHandler;
+  @Autowired
+  private AppConfiguration configuration;
+
+  private String resourcesClassKey;
+  private String resourcesDataPropertyKey;
+  private String resourcesObjectPropertyKey;
+  private String resourcesInstanceKey;
+
+  private Set<FiboModule> modules;
+
+  private Map<String, OntologyResources> resources = null;
 
   public OwlDetailsProperties<PropertyValue> handleFiboModulesData(OWLOntology ontology, OWLEntity entity) {
 
@@ -141,7 +158,10 @@ public class FiboDataHandler {
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
         annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations());
-        LOGGER.debug(onto.classesInSignature().collect(Collectors.toList()).toString());
+        OntologyResources ors = getOntologyResources(iri.toString(), ontology);
+        String log = ors != null ? ors.toString() : "Empty OntologyResources ";
+        LOGGER.debug(log);
+
         break;
       }
 
@@ -150,6 +170,9 @@ public class FiboDataHandler {
   }
 
   public Set<FiboModule> getAllModulesData(OWLOntology ontology) {
+    if (modules != null) {
+      return modules;
+    }
     Set<FiboModule> result = new LinkedHashSet<>();
     IRI moduleIri = IRI.create(MODULE_IRI);
     OWLClass clazz = ontology
@@ -161,7 +184,8 @@ public class FiboDataHandler {
     OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
 
     //TODO: change this stupid filter to more pretty solution
-    //Set<FiboModule> modules = new HashSet<>();
+    //map individual, int is count of how much reference this have
+    //individuals with 0 reference is a domain
     for (PropertyValue propertyValue : indi.getProperties().get(WeaselOwlType.INSTANCES.name())) {
       OwlListElementIndividualProperty individProperty = (OwlListElementIndividualProperty) propertyValue;
 
@@ -172,9 +196,7 @@ public class FiboDataHandler {
 
       if (individProperty.getValue().getValueA().toString().contains("Domain")) {
         result.add(fiboModule);
-      } //else {
-      //modules.add(fiboModule);
-      //}
+      }
     }
     result.forEach((fiboModule) -> {
       List<FiboModule> modulesPerDomain = new LinkedList<>();
@@ -201,8 +223,49 @@ public class FiboDataHandler {
       });
       fiboModule.setSubModule(modulesPerDomain);
     });
-
+    modules = result;
     return result;
+  }
+
+  private void loadAllOntologyResources(OWLOntology ontology) {
+    OWLOntologyManager manager = ontology.getOWLOntologyManager();
+    Map<String, OntologyResources> allResources = new HashMap<>();
+
+    completeKeysUsingTheConfiguration();
+
+    manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
+      OntologyResources ontoResources = extractOntologyResources(owlOntology);
+
+      allResources.put(owlOntology.getOntologyID().getOntologyIRI().get().toString(), ontoResources);
+    });
+    resources = allResources;
+  }
+
+  private OntologyResources extractOntologyResources(OWLOntology owlOntology) {
+    OntologyResources ontoResources = new OntologyResources();
+    owlOntology.classesInSignature()
+        .map(c -> c.getIRI().toString())
+        .forEachOrdered(c -> ontoResources.addElement(resourcesClassKey, c));
+    owlOntology.dataPropertiesInSignature()
+        .map(c -> c.getIRI().toString())
+        .forEachOrdered(c -> ontoResources.addElement(resourcesDataPropertyKey, c));
+    owlOntology.objectPropertiesInSignature()
+        .map(c -> c.getIRI().toString())
+        .forEachOrdered(c -> ontoResources.addElement(resourcesObjectPropertyKey, c));
+    owlOntology.individualsInSignature()
+        .map(c -> c.getIRI().toString())
+        .forEachOrdered(c -> ontoResources.addElement(resourcesInstanceKey, c));
+
+    return ontoResources;
+  }
+
+  public OntologyResources getOntologyResources(String iri, OWLOntology ontology) {
+
+    if (resources == null) {
+      loadAllOntologyResources(ontology);
+    }
+
+    return resources.get(iri);
   }
 
   public Set<String> getHasPartElements(IRI iri, OWLOntology ontology) {
@@ -216,7 +279,8 @@ public class FiboDataHandler {
 
     Iterator<OWLAnnotation> iteratorAnnotation = EntitySearcher
         .getAnnotations(individual, ontology,
-            dataFactory.getOWLAnnotationProperty(IRI.create("http://purl.org/dc/terms/hasPart"))).iterator();
+            dataFactory.getOWLAnnotationProperty(IRI.create("http://purl.org/dc/terms/hasPart")))
+        .iterator();
 
     Set<String> result = new HashSet<>();
     while (iteratorAnnotation.hasNext()) {
@@ -225,6 +289,23 @@ public class FiboDataHandler {
       result.add(s);
     }
     return result;
+  }
+
+  private void completeKeysUsingTheConfiguration() {
+
+    WeaselConfiguration weaselConfiguration = (WeaselConfiguration) configuration.getWeaselConfig();
+    String tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.CLASSES);
+    resourcesClassKey = tmp == null ? OntologyResourcesTypeDefaultKeys.CLASSES : tmp;
+
+    tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.DATA_PROPERTY);
+    resourcesDataPropertyKey = tmp == null ? OntologyResourcesTypeDefaultKeys.DATA_PROPERTY : tmp;
+
+    tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.OBJECT_PROPERTY);
+    resourcesObjectPropertyKey = tmp == null ? OntologyResourcesTypeDefaultKeys.OBJECT_PROPERTY : tmp;
+
+    tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.INSTANCES);
+    resourcesInstanceKey = tmp == null ? OntologyResourcesTypeDefaultKeys.INSTANCES : tmp;
+
   }
 
 }
