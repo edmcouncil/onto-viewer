@@ -66,10 +66,10 @@
                 </c:forEach>
               </ul>
 
-              <ul>
+              <ul id="myUL">
                 <c:forEach items="${modelTree}" var="domainElement">
                   <li>
-                    <templateTree:nodeTree node="${domainElement}"/>
+                    <weasel:RenderTree element="${domainElement}" searchPath="*"/>
                   </li>
                 </c:forEach>
               </ul>
