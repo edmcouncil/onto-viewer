@@ -1,12 +1,15 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -70,7 +73,7 @@ public class FiboDataHandler {
   private String resourcesObjectPropertyKey;
   private String resourcesInstanceKey;
 
-  private Set<FiboModule> modules;
+  private List<FiboModule> modules;
 
   private Map<String, OntologyResources> resources = null;
 
@@ -168,12 +171,72 @@ public class FiboDataHandler {
     }
     return annotations;
   }
+//<editor-fold defaultstate="collapsed" desc="get all modules data backup (isDefineBy extraction)">
 
+  /*
   public Set<FiboModule> getAllModulesData(OWLOntology ontology) {
+  if (modules != null) {
+  return modules;
+  }
+  Set<FiboModule> result = new LinkedHashSet<>();
+  IRI moduleIri = IRI.create(MODULE_IRI);
+  OWLClass clazz = ontology
+  .classesInSignature()
+  .filter(c -> c.getIRI().equals(moduleIri))
+  .findFirst()
+  .get();
+  
+  OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
+  
+  //TODO: change this stupid filter to more pretty solution
+  //map individual, int is count of how much reference this have
+  //individuals with 0 reference is a domain
+  for (PropertyValue propertyValue : indi.getProperties().get(WeaselOwlType.INSTANCES.name())) {
+  OwlListElementIndividualProperty individProperty = (OwlListElementIndividualProperty) propertyValue;
+  
+  FiboModule fiboModule = new FiboModule();
+  String elIri = (String) ((PairImpl) propertyValue.getValue()).getValueB();
+  fiboModule.setLabel(StringSplitter.getFragment(elIri));
+  fiboModule.setIri(elIri);
+  
+  if (individProperty.getValue().getValueA().toString().contains("Domain")) {
+  result.add(fiboModule);
+  }
+  }
+  result.forEach((fiboModule) -> {
+  List<FiboModule> modulesPerDomain = new LinkedList<>();
+  String sIri = fiboModule.getIri();
+  Set<String> hasPartModules = getHasPartElements(IRI.create(sIri), ontology);
+  hasPartModules.stream().map((hasPartModule) -> {
+  FiboModule module = new FiboModule();
+  module.setIri(hasPartModule);
+  module.setLabel(StringSplitter.getFragment(hasPartModule));
+  List<FiboModule> ontologiesModule = new LinkedList<>();
+  Set<String> hasPartOntologies = getHasPartElements(IRI.create(hasPartModule), ontology);
+  hasPartOntologies.stream().map((hasPartOntology) -> {
+  FiboModule ontologyModule = new FiboModule();
+  ontologyModule.setIri(hasPartOntology);
+  ontologyModule.setLabel(StringSplitter.getFragment(hasPartOntology));
+  return ontologyModule;
+  }).forEachOrdered((ontologyModule) -> {
+  ontologiesModule.add(ontologyModule);
+  });
+  module.setSubModule(ontologiesModule);
+  return module;
+  }).forEachOrdered((module) -> {
+  modulesPerDomain.add(module);
+  });
+  fiboModule.setSubModule(modulesPerDomain);
+  });
+  modules = result;
+  return result;
+  }*/
+//</editor-fold>
+  public List<FiboModule> getAllModulesData(OWLOntology ontology) {
     if (modules != null) {
       return modules;
     }
-    Set<FiboModule> result = new LinkedHashSet<>();
+    List<FiboModule> result = new LinkedList<>();
     IRI moduleIri = IRI.create(MODULE_IRI);
     OWLClass clazz = ontology
         .classesInSignature()
@@ -183,48 +246,50 @@ public class FiboDataHandler {
 
     OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
 
-    //TODO: change this stupid filter to more pretty solution
-    //map individual, int is count of how much reference this have
-    //individuals with 0 reference is a domain
-    for (PropertyValue propertyValue : indi.getProperties().get(WeaselOwlType.INSTANCES.name())) {
-      OwlListElementIndividualProperty individProperty = (OwlListElementIndividualProperty) propertyValue;
+    Set<String> modulesIriSet = new HashSet<>();
 
-      FiboModule fiboModule = new FiboModule();
-      String elIri = (String) ((PairImpl) propertyValue.getValue()).getValueB();
-      fiboModule.setLabel(StringSplitter.getFragment(elIri));
-      fiboModule.setIri(elIri);
-
-      if (individProperty.getValue().getValueA().toString().contains("Domain")) {
-        result.add(fiboModule);
-      }
-    }
-    result.forEach((fiboModule) -> {
-      List<FiboModule> modulesPerDomain = new LinkedList<>();
-      String sIri = fiboModule.getIri();
-      Set<String> hasPartModules = getHasPartElements(IRI.create(sIri), ontology);
-      hasPartModules.stream().map((hasPartModule) -> {
-        FiboModule module = new FiboModule();
-        module.setIri(hasPartModule);
-        module.setLabel(StringSplitter.getFragment(hasPartModule));
-        List<FiboModule> ontologiesModule = new LinkedList<>();
-        Set<String> hasPartOntologies = getHasPartElements(IRI.create(hasPartModule), ontology);
-        hasPartOntologies.stream().map((hasPartOntology) -> {
-          FiboModule ontologyModule = new FiboModule();
-          ontologyModule.setIri(hasPartOntology);
-          ontologyModule.setLabel(StringSplitter.getFragment(hasPartOntology));
-          return ontologyModule;
-        }).forEachOrdered((ontologyModule) -> {
-          ontologiesModule.add(ontologyModule);
+    indi.getProperties().get(WeaselOwlType.INSTANCES.name()).stream()
+        .map((propertyValue) -> (OwlListElementIndividualProperty) propertyValue)
+        .map((individProperty) -> (String) individProperty.getValue().getValueB())
+        .forEachOrdered((elIri) -> {
+          modulesIriSet.add(elIri);
         });
-        module.setSubModule(ontologiesModule);
-        return module;
-      }).forEachOrdered((module) -> {
-        modulesPerDomain.add(module);
-      });
-      fiboModule.setSubModule(modulesPerDomain);
-    });
-    modules = result;
+
+    List<String> rootModulesIris = getRootModulesIris(modulesIriSet, ontology);
+
+    rootModulesIris.stream()
+        .map((rootModulesIri) -> {
+          FiboModule fm = new FiboModule();
+          fm.setIri(rootModulesIri);
+          fm.setLabel(StringSplitter.getFragment(rootModulesIri));
+          fm.setSubModule(getSubModules(rootModulesIri, ontology));
+          return fm;
+        }).forEachOrdered(result::add);
+    modules = result.stream()
+        .sorted((obj1, obj2) -> obj1.getLabel().compareTo(obj2.getLabel()))
+        .map(r -> {
+          r.sort();
+          return r;
+        }).collect(Collectors.toList());
+
     return result;
+  }
+
+  private List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
+    Map<String, Integer> referenceCount = new LinkedHashMap<>();
+    modulesIriSet.forEach((mIri) -> {
+      Set<String> hasPartModules = getHasPartElements(IRI.create(mIri), ontology);
+      if (referenceCount.get(mIri) == null) {
+        referenceCount.put(mIri, 0);
+      }
+      hasPartModules.forEach((partModule) -> {
+        Integer c = referenceCount.getOrDefault(partModule, 0);
+        c++;
+        referenceCount.put(partModule, c);
+      });
+    });
+    List<String> rootModulesIris = referenceCount.entrySet().stream().filter(r -> r.getValue() == 0).map(r -> r.getKey()).collect(Collectors.toList());
+    return rootModulesIris;
   }
 
   private void loadAllOntologyResources(OWLOntology ontology) {
@@ -271,18 +336,19 @@ public class FiboDataHandler {
   public Set<String> getHasPartElements(IRI iri, OWLOntology ontology) {
 
     OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
-    OWLNamedIndividual individual = ontology
+    Optional<OWLNamedIndividual> individual = ontology
         .individualsInSignature()
         .filter(c -> c.getIRI().equals(iri))
-        .findFirst()
-        .get();
-
+        .findFirst();
+    if (individual.isPresent() == false) {
+      return new HashSet<>(0);
+    }
     Iterator<OWLAnnotation> iteratorAnnotation = EntitySearcher
-        .getAnnotations(individual, ontology,
+        .getAnnotations(individual.get(), ontology,
             dataFactory.getOWLAnnotationProperty(IRI.create("http://purl.org/dc/terms/hasPart")))
         .iterator();
 
-    Set<String> result = new HashSet<>();
+    Set<String> result = new LinkedHashSet<>();
     while (iteratorAnnotation.hasNext()) {
       OWLAnnotation annotation = iteratorAnnotation.next();
       String s = annotation.annotationValue().toString();
@@ -306,6 +372,22 @@ public class FiboDataHandler {
     tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.INSTANCES);
     resourcesInstanceKey = tmp == null ? OntologyResourcesTypeDefaultKeys.INSTANCES : tmp;
 
+  }
+
+  private List<FiboModule> getSubModules(String moduleIri, OWLOntology ontology) {
+    List<FiboModule> result = new LinkedList<>();
+
+    Set<String> hasPartModules = getHasPartElements(IRI.create(moduleIri), ontology);
+
+    hasPartModules.stream().map((partModule) -> {
+      FiboModule fm = new FiboModule();
+      fm.setIri(partModule);
+      fm.setLabel(StringSplitter.getFragment(partModule));
+      fm.setSubModule(getSubModules(partModule, ontology));
+      return fm;
+    }).forEachOrdered(result::add);
+
+    return result;
   }
 
 }

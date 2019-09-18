@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.fibo.view.util.custom.jsp.tag;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -27,7 +28,7 @@ public class TreeRenderTag extends SimpleTagSupport {
   public void doTag()
       throws JspException, IOException {
 
-    renderTaxonomyElement(element);
+    renderTreeElement(element);
 
   }
 
@@ -60,20 +61,21 @@ public class TreeRenderTag extends SimpleTagSupport {
     out.println(toRender);
   }
 
-  private void renderTaxonomyElement(FiboModule property) throws IOException {
+  private void renderTreeElement(FiboModule property) throws IOException {
     String link = null;
     String val = null;
     link = property.getIri();
     val = property.getLabel();
     String result = wrapToLink(link, "(Show meta)");
     renderElement("<li>");
-    String text = property.getSubModule() != null ? wrapSpanCaret(val) : wrapSpanClean(val);
+    List<FiboModule> fmList = property.getSubModule();
+    String text = fmList != null && fmList.size() > 0 ? wrapSpanCaret(val) : wrapSpanClean(val);
     renderElement(text);
     renderElement(result);
-    if (property.getSubModule() != null) {
+    if (fmList != null && fmList.size() > 0) {
       renderElement("<ul class=\"nested\">");
-      for (FiboModule fiboModule : property.getSubModule()) {
-        renderTaxonomyElement(fiboModule);
+      for (FiboModule fiboModule : fmList) {
+        renderTreeElement(fiboModule);
       }
       renderElement("</ul>");
     }

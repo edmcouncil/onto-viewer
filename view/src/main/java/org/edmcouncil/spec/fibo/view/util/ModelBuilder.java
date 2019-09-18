@@ -2,9 +2,7 @@ package org.edmcouncil.spec.fibo.view.util;
 
 import java.util.Collection;
 import org.edmcouncil.spec.fibo.view.model.Query;
-import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
 import java.util.List;
-import java.util.Set;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 
 import org.springframework.ui.Model;
@@ -53,7 +51,7 @@ public class ModelBuilder {
     return this;
   }
 
-  public ModelBuilder modelTree(Set<FiboModule> modules) {
+  public ModelBuilder modelTree(List<FiboModule> modules) {
     model.addAttribute("modelTree", modules);
     return this;
   }

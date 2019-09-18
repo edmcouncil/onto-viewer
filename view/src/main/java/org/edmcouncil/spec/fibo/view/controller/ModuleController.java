@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.fibo.view.controller;
 
 import java.util.Collection;
+import java.util.List;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.ontology.WeaselOntologyManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Set;
-import org.edmcouncil.spec.fibo.view.service.SearchService;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class ModuleController {
   @GetMapping("/json")
   public ResponseEntity getAllModulesDataAsJson() {
     LOGGER.debug("[GET]: module/json");
-    Set<FiboModule> modules = ontologyManager.getAllModulesData();
+    List<FiboModule> modules = ontologyManager.getAllModulesData();
     return ResponseEntity.ok(modules);
   }
   
@@ -42,7 +42,7 @@ public class ModuleController {
       @RequestParam(value = "lvl1", required = false) String lvl1,
       @RequestParam(value = "lvl2", required = false) String lvl2) {
     LOGGER.debug("[GET]: module/");
-    Set<FiboModule> modules = ontologyManager.getAllModulesData();
+    List<FiboModule> modules = ontologyManager.getAllModulesData();
     ModelBuilder mb = new ModelBuilder(model);
 
     if (query != null) {

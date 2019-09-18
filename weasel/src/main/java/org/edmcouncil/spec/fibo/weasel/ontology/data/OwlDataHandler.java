@@ -474,7 +474,7 @@ public class OwlDataHandler {
 
   }
 
-  public Set<FiboModule> getAllModulesData(OWLOntology ontology) {
+  public List<FiboModule> getAllModulesData(OWLOntology ontology) {
     return fiboDataHandler.getAllModulesData(ontology);
   }
 

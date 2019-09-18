@@ -241,7 +241,7 @@ public class WeaselOntologyManager {
     });
   }
 
-  public Set<FiboModule> getAllModulesData(){
+  public List<FiboModule> getAllModulesData(){
     return dataHandler.getAllModulesData(ontology);
   }
 }
