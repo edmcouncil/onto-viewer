@@ -87,6 +87,7 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
     return configuration.containsKey(WeaselConfigKeys.ONTOLOGY_URL);
   }
 
+  
   public String getURLOntology() {
     Set<ConfigElement> elements = configuration.get(WeaselConfigKeys.ONTOLOGY_URL);
     for (ConfigElement element : elements) {
