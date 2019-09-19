@@ -9,6 +9,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
+import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
@@ -85,7 +86,10 @@ public class PropertyRenderTag extends SimpleTagSupport {
   }
 
   private void renderIriProperty(PropertyValue property) throws IOException {
-    String result = wrapIri((String) property.getValue());
+    OwlSimpleProperty owlSimpleProperty = (OwlSimpleProperty) property.getValue();
+        
+    String result = wrapIri(owlSimpleProperty.getIri(), owlSimpleProperty.getLabel());
+    
     renderProperty(result);
   }
 
