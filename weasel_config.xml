@@ -27,6 +27,7 @@
     <scopeIri>
       <uriNamespace>https://spec.edmcouncil.org/fibo/ontology</uriNamespace>
       <uriNamespace>https://www.omg.org/spec/</uriNamespace>
+      <uriNamespace>http://www.omg.org/techprocess</uriNamespace>
     </scopeIri>
        
   </filter>

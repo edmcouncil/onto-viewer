@@ -4,11 +4,15 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
+import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
 import org.semanticweb.owlapi.io.OWLObjectRenderer;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.IRI;
@@ -36,22 +40,36 @@ public class AnnotationsDataHandler {
   @Autowired
   private AppConfiguration appConfig;
 
+  public OwlAnnotationIri createAnnotationIri(String iri) {
+
+    String fragment = StringSplitter.getFragment(iri);
+    OwlAnnotationIri owlAnnotationIri = new OwlAnnotationIri();
+    OwlSimpleProperty osp = new OwlSimpleProperty();
+    osp.setLabel(fragment);
+    osp.setIri(iri);
+    owlAnnotationIri.setValue(osp);
+    owlAnnotationIri.setType(WeaselOwlType.IRI);
+    return owlAnnotationIri;
+
+  }
+
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
     Iterator<OWLAnnotationAssertionAxiom> annotationAssertionAxiom
-            = ontology.annotationAssertionAxioms(iri).iterator();
+        = ontology.annotationAssertionAxioms(iri).iterator();
     while (annotationAssertionAxiom.hasNext()) {
       OWLAnnotationAssertionAxiom next = annotationAssertionAxiom.next();
       String property = rendering.render(next.getProperty());
       String value = next.annotationValue().toString();
 
-      OwlAnnotationPropertyValue opv = new OwlAnnotationPropertyValue();
+      PropertyValue opv = new OwlAnnotationPropertyValue();
       WeaselOwlType extractAnnotationType = dataExtractor.extractAnnotationType(next);
       opv.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
-        value = next.annotationValue().toString();
+        opv = createAnnotationIri(value);
+
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
@@ -59,10 +77,13 @@ public class AnnotationsDataHandler {
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
           checkUriAsIri(opv, value);
+          opv.setValue(value);
+          if (opv.getType() == WeaselOwlType.IRI) {
+            opv = createAnnotationIri(value);
+          }
         }
       }
-      LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", value, property);
-      opv.setValue(value);
+      LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
 
       result.addProperty(property, opv);
     }
@@ -78,29 +99,36 @@ public class AnnotationsDataHandler {
       String property = rendering.render(next.getProperty());
       String value = next.annotationValue().toString();
 
-      OwlAnnotationPropertyValue opv = new OwlAnnotationPropertyValue();
+      PropertyValue opv = new OwlAnnotationPropertyValue();
       WeaselOwlType extractAnnotationType = dataExtractor.extractAnnotationType(next);
       opv.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
-        value = next.annotationValue().toString();
+
+        opv = createAnnotationIri(value);
+
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
           value = asLiteral.get().getLiteral();
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
+
+          opv.setValue(value);
           checkUriAsIri(opv, value);
+          if (opv.getType() == WeaselOwlType.IRI) {
+            opv = createAnnotationIri(value);
+          }
         }
       }
-      LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", value, property);
-      opv.setValue(value);
+      LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
+
       result.addProperty(property, opv);
     }
     return result;
   }
 
-  private void checkUriAsIri(OwlAnnotationPropertyValue opv, String value) {
+  private void checkUriAsIri(PropertyValue opv, String value) {
     //TODO: Change this to more pretty solution
     if (opv.getType() == WeaselOwlType.ANY_URI) {
       WeaselConfiguration weaselConfiguration = (WeaselConfiguration) appConfig.getWeaselConfig();
