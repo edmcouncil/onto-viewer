@@ -57,7 +57,23 @@
       <groupElement>moduleLevel3</groupElement>
       <groupElement>isDefinedBy</groupElement>
       <groupElement>comment</groupElement>
-    </group>				  
+    </group>
+
+    <group>
+      <groupName>Resources</groupName>
+      
+      <groupElement>classes external</groupElement>
+      <groupElement>classes internal</groupElement>
+		
+      <groupElement>data properties external</groupElement>
+      <groupElement>data properties internal</groupElement>
+		
+      <groupElement>instances external</groupElement>
+      <groupElement>instances external</groupElement>
+		
+      <groupElement>object properties external</groupElement>
+      <groupElement>object properties internal</groupElement>
+    </group>
                   
   </groups>
 	
