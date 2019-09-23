@@ -1,10 +1,7 @@
 package org.edmcouncil.spec.fibo.view.util;
 
-import java.util.Collection;
 import org.edmcouncil.spec.fibo.view.model.Query;
-import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetailsDetails;
 import java.util.List;
-import java.util.Set;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 
@@ -54,18 +51,8 @@ public class ModelBuilder {
     return this;
   }
 
-  public ModelBuilder modelTree(Set<FiboModule> modules) {
+  public ModelBuilder modelTree(List<FiboModule> modules) {
     model.addAttribute("modelTree", modules);
-    return this;
-  }
-
-  public ModelBuilder treeLvl1(String lvl) {
-    model.addAttribute("lvl1", lvl);
-    return this;
-  }
-
-  public ModelBuilder treeLvl2(String lvl) {
-    model.addAttribute("lvl2", lvl);
     return this;
   }
 

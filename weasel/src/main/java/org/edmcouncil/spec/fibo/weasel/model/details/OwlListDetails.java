@@ -6,24 +6,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
-import org.edmcouncil.spec.fibo.weasel.model.OwlTaxonomy;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
-import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class OwlListDetailsDetails extends OwlDetails{
+public class OwlListDetails extends OwlDetails {
 
   private OwlDetailsProperties<PropertyValue> properties;
 
-  public OwlListDetailsDetails() {
+  public OwlListDetails() {
     if (properties == null) {
       properties = new OwlDetailsProperties<>();
     }
   }
-
- 
 
   public Map<String, List<PropertyValue>> getProperties() {
     return properties.getProperties();
@@ -68,7 +64,7 @@ public class OwlListDetailsDetails extends OwlDetails{
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final OwlListDetailsDetails other = (OwlListDetailsDetails) obj;
+    final OwlListDetails other = (OwlListDetails) obj;
     if (!Objects.equals(this.properties, other.properties)) {
       return false;
     }

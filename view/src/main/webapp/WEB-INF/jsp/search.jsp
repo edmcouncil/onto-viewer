@@ -16,7 +16,7 @@
     <div class="container-fluid">
       <div class="row px-4 py-4">
 
-        <div class="col-md-12 px-2">
+        <div class="col-md-8 px-2">
 
           <div class="card">
             <div class="card-body">
@@ -35,6 +35,13 @@
                   Operation not supported...
                 </c:otherwise>
               </c:choose>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 px-2">
+          <div class="card">
+            <div class="card-body">
+              <jsp:directive.include file="page/elements/moduleTree.jsp" />
             </div>
           </div>
         </div>

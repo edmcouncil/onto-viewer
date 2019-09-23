@@ -40,19 +40,6 @@ public class AnnotationsDataHandler {
   @Autowired
   private AppConfiguration appConfig;
 
-  public OwlAnnotationIri createAnnotationIri(String iri) {
-
-    String fragment = StringSplitter.getFragment(iri);
-    OwlAnnotationIri owlAnnotationIri = new OwlAnnotationIri();
-    OwlSimpleProperty osp = new OwlSimpleProperty();
-    osp.setLabel(fragment);
-    osp.setIri(iri);
-    owlAnnotationIri.setValue(osp);
-    owlAnnotationIri.setType(WeaselOwlType.IRI);
-    return owlAnnotationIri;
-
-  }
-
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -68,7 +55,7 @@ public class AnnotationsDataHandler {
       opv.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
-        opv = createAnnotationIri(value);
+        opv = CustomDataFactory.createAnnotationIri(value);
 
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
@@ -79,7 +66,7 @@ public class AnnotationsDataHandler {
           checkUriAsIri(opv, value);
           opv.setValue(value);
           if (opv.getType() == WeaselOwlType.IRI) {
-            opv = createAnnotationIri(value);
+            opv = CustomDataFactory.createAnnotationIri(value);
           }
         }
       }
@@ -105,7 +92,7 @@ public class AnnotationsDataHandler {
 
       if (next.getValue().isIRI()) {
 
-        opv = createAnnotationIri(value);
+        opv = CustomDataFactory.createAnnotationIri(value);
 
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
@@ -117,7 +104,7 @@ public class AnnotationsDataHandler {
           opv.setValue(value);
           checkUriAsIri(opv, value);
           if (opv.getType() == WeaselOwlType.IRI) {
-            opv = createAnnotationIri(value);
+            opv = CustomDataFactory.createAnnotationIri(value);
           }
         }
       }

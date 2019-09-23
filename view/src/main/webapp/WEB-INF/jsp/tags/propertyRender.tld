@@ -56,4 +56,32 @@
     </attribute>
    
   </tag>
+  <tag>
+    <name>RenderTree</name>
+    <tag-class>org.edmcouncil.spec.fibo.view.util.custom.jsp.tag.TreeRenderTag</tag-class>
+    <body-content>scriptless</body-content>
+      
+    <attribute>
+      <name>element</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <fragment>true</fragment>
+      <type>org.edmcouncil.spec.fibo.weasel.model.FiboModule</type>
+    </attribute>
+    <attribute>
+      <name>elementWrapper</name>
+      <required>false</required>
+      <type>java.util.String</type>
+    </attribute>
+    <attribute>
+      <name>searchPath</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <fragment>true</fragment>
+      <type>java.util.String</type>
+    </attribute>
+   
+  </tag>
+  
+  
 </taglib>
