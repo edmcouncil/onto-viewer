@@ -21,7 +21,6 @@ public class OwlDetailsProperties<T> {
 
   private List taxonomy;
   private Map<String, List<T>> properties;
-  
 
   public OwlDetailsProperties() {
     properties = new HashMap<>();
@@ -96,6 +95,13 @@ public class OwlDetailsProperties<T> {
       return false;
     }
     return true;
+  }
+
+  public void sortPropertiesInAlphabeticalOrder() {
+    for (Map.Entry<String, List<T>> entry : properties.entrySet()) {
+      List<T> value = entry.getValue();
+      value.sort(WeaselComparators.getComparatorWithAlphabeticalOrder());
+    }
   }
 
   @Override

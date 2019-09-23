@@ -22,14 +22,7 @@
 
           <div class="card">
             <div class="card-body">
-              <ul id="myUL">
-                <c:forEach items="${modelTree}" var="domainElement">
-                  <li>
-                    <weasel:RenderTree element="${domainElement}" searchPath="*"/>
-                  </li>
-                </c:forEach>
-              </ul>
-
+              <jsp:directive.include file="page/elements/moduleTree.jsp" />
             </div>
           </div>
         </div>
@@ -44,20 +37,6 @@
         </div>
       </div>
     </div>
-
-    <script>
-      //move this script to separate file
-      var toggler = document.getElementsByClassName("caret");
-      var i;
-
-      for (i = 0; i < toggler.length; i++) {
-        toggler[i].addEventListener("click", function () {
-          this.parentElement.querySelector(".nested").classList.toggle("active");
-          this.classList.toggle("caret-down");
-        });
-      }
-    </script>
-
     <jsp:directive.include file="page/elements/footer.jsp" />
   </body>
 

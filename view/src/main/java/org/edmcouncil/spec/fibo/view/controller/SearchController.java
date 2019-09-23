@@ -4,8 +4,12 @@ import org.edmcouncil.spec.fibo.view.model.Query;
 import org.edmcouncil.spec.fibo.view.service.SearchService;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
+import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.ontology.WeaselOntologyManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -30,6 +35,8 @@ public class SearchController {
 
   @Autowired
   private SearchService searchService;
+  @Autowired
+  private WeaselOntologyManager ontologyManager;
 
   @PostMapping
   public ModelAndView redirectSearch(@Valid @ModelAttribute("queryValue") Query query) {
@@ -46,22 +53,21 @@ public class SearchController {
     Query q = new Query();
     q.setValue(query);
     ModelBuilder modelBuilder = new ModelBuilder(model);
-
+    List<FiboModule> modules = ontologyManager.getAllModulesData();
     searchService.search(query, modelBuilder);
+    modelBuilder.modelTree(modules);
 
     return "search";
   }
-  
-    @GetMapping("/json")
-  public ResponseEntity searchJson(@RequestParam("query") String query, Model model) {
 
-    LOGGER.info("[GET]: search ? query = {}", query);
-    Query q = new Query();
-    q.setValue(query);
+  @PostMapping("/json")
+  public <T extends OwlDetails> ResponseEntity<T> searchJson(@RequestBody String query, Model model) {
+
+    LOGGER.info("[GET]: search / json   RequestBody = {}", query);
     ModelBuilder modelBuilder = new ModelBuilder(model);
 
-    searchService.search(query, modelBuilder);
+    OwlDetails search = searchService.search(query, modelBuilder);
 
-    return ResponseEntity.ok(model);
+    return ResponseEntity.ok((T) search);
   }
 }

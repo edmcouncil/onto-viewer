@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
@@ -29,7 +30,7 @@ public class ModuleController {
   private WeaselOntologyManager ontologyManager;
 
   @GetMapping("/json")
-  public ResponseEntity getAllModulesDataAsJson() {
+  public ResponseEntity<List<FiboModule>> getAllModulesDataAsJson() {
     LOGGER.debug("[GET]: module/json");
     List<FiboModule> modules = ontologyManager.getAllModulesData();
     return ResponseEntity.ok(modules);
@@ -38,25 +39,18 @@ public class ModuleController {
   @GetMapping
   public String getModulesMeta(
       @RequestParam(value = "meta", required = false) String query,
-      Model model,
-      @RequestParam(value = "lvl1", required = false) String lvl1,
-      @RequestParam(value = "lvl2", required = false) String lvl2) {
+      Model model) {
     LOGGER.debug("[GET]: module/");
     List<FiboModule> modules = ontologyManager.getAllModulesData();
     ModelBuilder mb = new ModelBuilder(model);
 
     if (query != null) {
-      Collection details = ontologyManager.getDetailsByIri(query);
+      OwlDetails details = ontologyManager.getDetailsByIri(query);
       mb.ontoDetails(details).isGrouped(true);
     }
 
     mb.emptyQuery().modelTree(modules);
-    if(lvl1 != null){
-      mb.treeLvl1(lvl1);
-    }
-    if(lvl2 != null){
-      mb.treeLvl2(lvl2);
-    }
+
     model = mb.getModel();
 
     return "module";

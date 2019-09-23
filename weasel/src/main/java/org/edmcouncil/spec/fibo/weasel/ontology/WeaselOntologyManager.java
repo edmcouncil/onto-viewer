@@ -2,8 +2,10 @@ package org.edmcouncil.spec.fibo.weasel.ontology;
 
 import java.io.File;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
-import org.edmcouncil.spec.fibo.weasel.model.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -13,14 +15,20 @@ import java.util.Set;
 import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
-import org.edmcouncil.spec.fibo.weasel.model.OwlGroupedDetails;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataHandler;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -52,10 +60,21 @@ public class WeaselOntologyManager {
 
   @PostConstruct
   public void init() throws IOException {
+    WeaselConfiguration weaselConfiguration = (WeaselConfiguration) config.getWeaselConfig();
     try {
-      loadOntologyFromFile();
+      if (weaselConfiguration.isOntologyLocationSet()) {
+        if (weaselConfiguration.isOntologyLocationURL()) {
+          String ontoURL = weaselConfiguration.getURLOntology();
+          loadOntologyFromURL(ontoURL);
+        } else {
+          String ontoPath = weaselConfiguration.getPathOntology();
+          loadOntologyFromFile(ontoPath);
+        }
+      } else {
+        loadOntologyFromFile(null);
+      }
     } catch (OWLOntologyCreationException ex) {
-      LOGGER.error("[ERROR]: Error when creating ontology.");
+      LOGGER.error("[ERROR]: Error when creating ontology. Exception: {}", ex.getStackTrace(), ex.getMessage());
     }
   }
 
@@ -64,14 +83,29 @@ public class WeaselOntologyManager {
 
   }
 
-  private void loadOntologyFromFile() throws IOException, OWLOntologyCreationException {
+  /**
+   * This method is used to load ontology from file
+   * 
+   * @param ontoPath OntoPath is the access path from which the ontology is being loaded.
+   */
+  
+  private void loadOntologyFromFile(String ontoPath) throws IOException, OWLOntologyCreationException {
     FileSystemManager fsm = new FileSystemManager();
-    File inputOntologyFile = fsm.getPathToOntologyFile().toFile();
+    Path pathToOnto = null;
+    if (ontoPath == null) {
+      pathToOnto = fsm.getDefaultPathToOntologyFile();
+    } else {
+      pathToOnto = fsm.getPathToOntologyFile(ontoPath);
+
+    }
+    LOGGER.debug("Path to ontology : {}", pathToOnto.toString());
+    File inputOntologyFile = pathToOnto.toFile();
 
     OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+
     OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
 
-    IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutF/IBOProd/");
+    IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
 
     m.makeLoadImportRequest(new OWLImportsDeclarationImpl(m.getOntologyDocumentIRI(o)));
     Stream<OWLOntology> directImports = m.imports(o);
@@ -80,6 +114,41 @@ public class WeaselOntologyManager {
 
   }
 
+  /**
+   * This method is used to load ontology from URL
+   *
+   * @param ontoURL OntoUrl is the web address from which the ontology is being loaded.
+   * @return set of ontology
+   */
+  private Set<OWLOntology> loadOntologyFromURL(String ontoURL) throws IOException, OWLOntologyCreationException {
+
+    LOGGER.debug("URL to Ontology : {} ", ontoURL);
+    HttpGet httpGet = new HttpGet(ontoURL);
+    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+    CloseableHttpClient httpClient = HttpClients.createDefault();
+    HttpResponse response = httpClient.execute(httpGet);
+    Set<OWLOntology> result = new HashSet<>();
+    HttpEntity entity = response.getEntity();
+    if (entity != null) {
+      long len = entity.getContentLength();
+      InputStream inputStream = entity.getContent();
+      OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
+      IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
+      manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology)));
+      Stream<OWLOntology> directImports = manager.imports(newOntology);
+      newOntology = manager.createOntology(fiboIRI, directImports, false);
+      ontology = newOntology;
+    }
+    return result;
+  }
+
+  /**
+   * This method is used to open all Ontologies from directory
+   *
+   * @param ontologiesDir OntologiesDir is a loaded ontology file.
+   * @param manager Manager loading and acessing ontologies.
+   * @return set of ontology.
+   */
   private Set<OWLOntology> openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager) throws OWLOntologyCreationException {
     Set<OWLOntology> result = new HashSet<>();
     for (File file : ontologiesDir.listFiles()) {
@@ -112,104 +181,87 @@ public class WeaselOntologyManager {
     return ontology;
   }
 
-  public Collection getDetailsByIri(String iriString) {
+  public <T extends OwlDetails> T getDetailsByIri(String iriString) {
     IRI iri = IRI.create(iriString);
-    List<OwlDetails> result = new LinkedList<>();
+    OwlListDetails result = null;
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
     if (iriString.endsWith("/")) {
       LOGGER.debug("Handle ontology metadata. IRI: {}", iriString);
-      OwlDetails wd = dataHandler.handleOntologyMetadata(iri, ontology);
+      OwlListDetails wd = dataHandler.handleOntologyMetadata(iri, ontology);
 
-      result.add(wd);
+      result = wd;
     } else {
       if (ontology.containsClassInSignature(iri)) {
         LOGGER.debug("Handle class data.");
-        OwlDetails wd = dataHandler.handleParticularClass(iri, ontology);
-        if (!result.contains(wd)) {
-          result.add(wd);
-        }
-      }
-      if (ontology.containsDataPropertyInSignature(iri)) {
+        OwlListDetails wd = dataHandler.handleParticularClass(iri, ontology);
+        result = wd;
+      } else if (ontology.containsDataPropertyInSignature(iri)) {
         LOGGER.info("Handle data property.");
-        OwlDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
-        if (!result.contains(wd)) {
-          result.add(wd);
-        }
-      }
-      if (ontology.containsObjectPropertyInSignature(iri)) {
+        OwlListDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
+        result = wd;
+      } else if (ontology.containsObjectPropertyInSignature(iri)) {
         LOGGER.info("Handle object property.");
-        OwlDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
-        if (!result.contains(wd)) {
-          result.add(wd);
-        }
-      }
-      if (ontology.containsIndividualInSignature(iri)) {
+        OwlListDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
+        result = wd;
+      } else if (ontology.containsIndividualInSignature(iri)) {
         LOGGER.info("Handle individual data.");
-        OwlDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
-        if (!result.contains(wd)) {
-          result.add(wd);
-        }
+        OwlListDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
+        result = wd;
       }
     }
 
     WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
     if (weaselConfig.hasRenamedGroups()) {
-      for (OwlDetails owlDetails : result) {
-        OwlDetailsProperties<PropertyValue> prop = new OwlDetailsProperties<>();
-        for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
-          String key = entry.getKey();
-          String newName = weaselConfig.getNewName(key);
-          newName = newName == null ? key : newName;
-          for (PropertyValue propertyValue : entry.getValue()) {
-            prop.addProperty(newName, propertyValue);
-          }
+      OwlDetailsProperties<PropertyValue> prop = new OwlDetailsProperties<>();
+      for (Map.Entry<String, List<PropertyValue>> entry : result.getProperties().entrySet()) {
+        String key = entry.getKey();
+        String newName = weaselConfig.getNewName(key);
+        newName = newName == null ? key : newName;
+        for (PropertyValue propertyValue : entry.getValue()) {
+          prop.addProperty(newName, propertyValue);
         }
-        owlDetails.setProperties(prop);
       }
+      result.setProperties(prop);
     }
-    for (OwlDetails owlDetails : result) {
-      owlDetails.setIri(iriString);
-    }
+    result.setIri(iriString);
 
     if (!config.getWeaselConfig().isEmpty()) {
       WeaselConfiguration cfg = (WeaselConfiguration) config.getWeaselConfig();
       if (cfg.isGrouped()) {
-        List<OwlGroupedDetails> newResult = groupDetails(result, cfg);
-        return newResult;
+        OwlGroupedDetails newResult = groupDetails(result, cfg);
+        return (T) newResult;
       } else {
         sortResults(result);
       }
     }
-    return result;
+    return (T) result;
   }
 
-  private List<OwlGroupedDetails> groupDetails(List<OwlDetails> result, WeaselConfiguration cfg) {
-    List<OwlGroupedDetails> newResult = new LinkedList<>();
-    for (OwlDetails owlDetails : result) {
-      OwlGroupedDetails groupedDetails = new OwlGroupedDetails();
-      Set<ConfigElement> groups = cfg.getConfiguration().get(WeaselConfigKeys.GROUPS);
+  private OwlGroupedDetails groupDetails(OwlListDetails owlDetails, WeaselConfiguration cfg) {
+    OwlGroupedDetails newResult = null;
+    OwlGroupedDetails groupedDetails = new OwlGroupedDetails();
+    Set<ConfigElement> groups = cfg.getConfiguration().get(WeaselConfigKeys.GROUPS);
 
-      for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
-        String propertyKey = entry.getKey();
-        String propertyName = null;
-        if (cfg.hasRenamedGroups()) {
-          propertyName = cfg.getOldName(propertyKey);
-          propertyName = propertyName == null ? propertyKey : propertyName;
-        }
-        String groupName = null;
-        groupName = getGroupName(groups, propertyName);
-        groupName = groupName == null ? DEFAULT_GROUP_NAME : groupName;
-        for (PropertyValue property : entry.getValue()) {
-          groupedDetails.addProperty(groupName, propertyKey, property);
-        }
+    for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
+      String propertyKey = entry.getKey();
+      String propertyName = null;
+      if (cfg.hasRenamedGroups()) {
+        propertyName = cfg.getOldName(propertyKey);
+        propertyName = propertyName == null ? propertyKey : propertyName;
       }
-      groupedDetails.setTaxonomy(owlDetails.getTaxonomy());
-      groupedDetails.setLabel(owlDetails.getLabel());
-      groupedDetails.setIri(owlDetails.getIri());
-      groupedDetails.sortProperties(groups, cfg);
-
-      newResult.add(groupedDetails);
+      String groupName = null;
+      groupName = getGroupName(groups, propertyName);
+      groupName = groupName == null ? DEFAULT_GROUP_NAME : groupName;
+      for (PropertyValue property : entry.getValue()) {
+        groupedDetails.addProperty(groupName, propertyKey, property);
+      }
     }
+    groupedDetails.setTaxonomy(owlDetails.getTaxonomy());
+    groupedDetails.setLabel(owlDetails.getLabel());
+    groupedDetails.setIri(owlDetails.getIri());
+    groupedDetails.sortProperties(groups, cfg);
+
+    newResult = groupedDetails;
     return newResult;
   }
 
@@ -229,16 +281,14 @@ public class WeaselOntologyManager {
     return result;
   }
 
-  private void sortResults(List<OwlDetails> result) {
+  private void sortResults(OwlListDetails result) {
     Set set = (Set) config.getWeaselConfig()
         .getConfigVal(WeaselConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;
     }
     List prioritySortList = new LinkedList();
-    result.forEach((owlDetails) -> {
-      owlDetails.sortProperties(prioritySortList);
-    });
+    result.sortProperties(prioritySortList);
   }
 
   public List<FiboModule> getAllModulesData(){

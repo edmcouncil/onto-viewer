@@ -1,9 +1,11 @@
-
 package org.edmcouncil.spec.fibo.config.configuration.model;
 
 /**
- * @author Patrycja Miazek (patrycja.miazek@makolab.com) 
+ * Enum class is used to specify the specific type of group element. The field will be completed
+ * automatically by the application.
+ *
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public enum GroupType {
-DEFAULT, DIRECT_SUBCLASSES, INSTANCES, ANONYMOUS_ANCESTOR
+  DEFAULT, DIRECT_SUBCLASSES, INSTANCES, ANONYMOUS_ANCESTOR
 }

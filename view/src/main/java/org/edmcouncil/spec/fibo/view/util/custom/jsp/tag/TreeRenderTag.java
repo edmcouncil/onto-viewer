@@ -97,7 +97,8 @@ public class TreeRenderTag extends SimpleTagSupport {
 
   private String parseSearchPath(String link, String val) {
     String result;
-    result = String.format(URL_SEARCH_QUERY_PATTERN, searchPath, link, val);
+    String tmpSearchPath = searchPath.equals("*") ? "" : searchPath;
+    result = String.format(URL_SEARCH_QUERY_PATTERN, tmpSearchPath, link, val);
     return result;
   }
 

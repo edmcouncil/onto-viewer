@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,15 +11,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResources;
 import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResourcesTypeDefaultKeys;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
@@ -36,7 +34,6 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.search.EntitySearcher;
-import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +57,8 @@ public class FiboDataHandler {
   //TODO: move this to set to configuration 
   private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
 
-  private static final String RESOURCE_INTERNAL_POSTFIX = " internal";
-  private static final String RESOURCE_EXTERNAL_POSTFIX = " external";
+  private static final String RESOURCE_INTERNAL_PREFIX = "internal ";
+  private static final String RESOURCE_EXTERNAL_PREFIX = "external ";
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FiboDataHandler.class);
 
@@ -86,8 +83,8 @@ public class FiboDataHandler {
     OWLDataFactory df = OWLManager.getOWLDataFactory();
 
     Iterator<OWLAnnotation> iterator = EntitySearcher
-        .getAnnotations(entity, ontology, df.getRDFSIsDefinedBy())
-        .iterator();
+            .getAnnotations(entity, ontology, df.getRDFSIsDefinedBy())
+            .iterator();
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -113,7 +110,7 @@ public class FiboDataHandler {
       result.addProperty(ONTOLOGY_KEY, createProperty(onto, ontologyIriString));
 
       LOGGER.debug("[Fibo Data Handler] domainIRI: {};\n\tmoduleIRI: {};\n\t ontologyIRI: {};",
-          domainIriString, moduleIriString, ontologyIriString);
+              domainIriString, moduleIriString, ontologyIriString);
     }
 
     return result;
@@ -146,16 +143,16 @@ public class FiboDataHandler {
 
   private String prepareModuleIri(String fiboPath, String domain, String module) {
     String moduleIriString = fiboPath.concat(domain).concat(URL_DELIMITER)
-        .concat(module).concat(URL_DELIMITER)
-        .concat(METADATA_PREFIX).concat(domain).concat(module).concat(URL_DELIMITER)
-        .concat(module).concat(MODULE_POSTFIX);
+            .concat(module).concat(URL_DELIMITER)
+            .concat(METADATA_PREFIX).concat(domain).concat(module).concat(URL_DELIMITER)
+            .concat(module).concat(MODULE_POSTFIX);
     return moduleIriString;
   }
 
   private String prepareDomainIri(String fiboPath, String domain) {
     String domainIri = fiboPath.concat(domain).concat(URL_DELIMITER)
-        .concat(METADATA_PREFIX).concat(domain).concat(URL_DELIMITER)
-        .concat(domain).concat(DOMAIN_POSTFIX);
+            .concat(METADATA_PREFIX).concat(domain).concat(URL_DELIMITER)
+            .concat(domain).concat(DOMAIN_POSTFIX);
     return domainIri;
   }
 
@@ -171,72 +168,13 @@ public class FiboDataHandler {
             annotations.addProperty(entry.getKey(), propertyValue);
           }
         }
+
         break;
       }
     }
     return annotations;
   }
-//<editor-fold defaultstate="collapsed" desc="get all modules data backup (isDefineBy extraction)">
 
-  /*
-  public Set<FiboModule> getAllModulesData(OWLOntology ontology) {
-  if (modules != null) {
-  return modules;
-  }
-  Set<FiboModule> result = new LinkedHashSet<>();
-  IRI moduleIri = IRI.create(MODULE_IRI);
-  OWLClass clazz = ontology
-  .classesInSignature()
-  .filter(c -> c.getIRI().equals(moduleIri))
-  .findFirst()
-  .get();
-  
-  OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
-  
-  //TODO: change this stupid filter to more pretty solution
-  //map individual, int is count of how much reference this have
-  //individuals with 0 reference is a domain
-  for (PropertyValue propertyValue : indi.getProperties().get(WeaselOwlType.INSTANCES.name())) {
-  OwlListElementIndividualProperty individProperty = (OwlListElementIndividualProperty) propertyValue;
-  
-  FiboModule fiboModule = new FiboModule();
-  String elIri = (String) ((PairImpl) propertyValue.getValue()).getValueB();
-  fiboModule.setLabel(StringSplitter.getFragment(elIri));
-  fiboModule.setIri(elIri);
-  
-  if (individProperty.getValue().getValueA().toString().contains("Domain")) {
-  result.add(fiboModule);
-  }
-  }
-  result.forEach((fiboModule) -> {
-  List<FiboModule> modulesPerDomain = new LinkedList<>();
-  String sIri = fiboModule.getIri();
-  Set<String> hasPartModules = getHasPartElements(IRI.create(sIri), ontology);
-  hasPartModules.stream().map((hasPartModule) -> {
-  FiboModule module = new FiboModule();
-  module.setIri(hasPartModule);
-  module.setLabel(StringSplitter.getFragment(hasPartModule));
-  List<FiboModule> ontologiesModule = new LinkedList<>();
-  Set<String> hasPartOntologies = getHasPartElements(IRI.create(hasPartModule), ontology);
-  hasPartOntologies.stream().map((hasPartOntology) -> {
-  FiboModule ontologyModule = new FiboModule();
-  ontologyModule.setIri(hasPartOntology);
-  ontologyModule.setLabel(StringSplitter.getFragment(hasPartOntology));
-  return ontologyModule;
-  }).forEachOrdered((ontologyModule) -> {
-  ontologiesModule.add(ontologyModule);
-  });
-  module.setSubModule(ontologiesModule);
-  return module;
-  }).forEachOrdered((module) -> {
-  modulesPerDomain.add(module);
-  });
-  fiboModule.setSubModule(modulesPerDomain);
-  });
-  modules = result;
-  return result;
-  }*/
-//</editor-fold>
   public List<FiboModule> getAllModulesData(OWLOntology ontology) {
     if (modules != null) {
       return modules;
@@ -244,10 +182,10 @@ public class FiboDataHandler {
     List<FiboModule> result = new LinkedList<>();
     IRI moduleIri = IRI.create(MODULE_IRI);
     OWLClass clazz = ontology
-        .classesInSignature()
-        .filter(c -> c.getIRI().equals(moduleIri))
-        .findFirst()
-        .get();
+            .classesInSignature()
+            .filter(c -> c.getIRI().equals(moduleIri))
+            .findFirst()
+            .get();
 
     OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
 
@@ -318,11 +256,8 @@ public class FiboDataHandler {
     owlOntology.classesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          //String fragment =
-          OwlAnnotationPropertyValue propertyValue = new OwlAnnotationPropertyValue();
-          propertyValue.setValue(istring);
-          propertyValue.setType(WeaselOwlType.IRI);
-          return propertyValue;
+          OwlAnnotationIri pv = CustomDataFactory.createAnnotationIri(istring);
+          return pv;
         })
         .forEachOrdered(c -> ontoResources
         .addElement(generateResourceKey(resourcesClassKey, c, ontologyIri), c));
@@ -330,11 +265,8 @@ public class FiboDataHandler {
     owlOntology.dataPropertiesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          //String fragment =
-          OwlAnnotationPropertyValue propertyValue = new OwlAnnotationPropertyValue();
-          propertyValue.setValue(istring);
-          propertyValue.setType(WeaselOwlType.IRI);
-          return propertyValue;
+          OwlAnnotationIri pv = CustomDataFactory.createAnnotationIri(istring);
+          return pv;
         })
         .forEachOrdered(c -> ontoResources
         .addElement(generateResourceKey(resourcesDataPropertyKey, c, ontologyIri), c));
@@ -342,11 +274,8 @@ public class FiboDataHandler {
     owlOntology.objectPropertiesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          //String fragment =
-          OwlAnnotationPropertyValue propertyValue = new OwlAnnotationPropertyValue();
-          propertyValue.setValue(istring);
-          propertyValue.setType(WeaselOwlType.IRI);
-          return propertyValue;
+          OwlAnnotationIri pv = CustomDataFactory.createAnnotationIri(istring);
+          return pv;
         })
         .forEachOrdered(c -> ontoResources
         .addElement(generateResourceKey(resourcesObjectPropertyKey, c, ontologyIri), c));
@@ -354,11 +283,8 @@ public class FiboDataHandler {
     owlOntology.individualsInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          //String fragment =
-          OwlAnnotationPropertyValue propertyValue = new OwlAnnotationPropertyValue();
-          propertyValue.setValue(istring);
-          propertyValue.setType(WeaselOwlType.IRI);//resource
-          return propertyValue;
+          OwlAnnotationIri pv = CustomDataFactory.createAnnotationIri(istring);
+          return pv;
         })
         .forEachOrdered(c -> ontoResources
         .addElement(generateResourceKey(resourcesInstanceKey, c, ontologyIri), c));
@@ -432,12 +358,11 @@ public class FiboDataHandler {
     return result;
   }
 
-  private String generateResourceKey(String resourcesKey, OwlAnnotationPropertyValue c, IRI ontologyIri) {
+  private String generateResourceKey(String resourcesKey, OwlAnnotationIri c, IRI ontologyIri) {
+    String annotationIri = c.getValue().getIri();
 
-    String annotationIri = c.getValue();
-
-    return annotationIri.contains(ontologyIri) ? resourcesKey.concat(RESOURCE_INTERNAL_POSTFIX)
-        : resourcesKey.concat(RESOURCE_EXTERNAL_POSTFIX);
+    return annotationIri.contains(ontologyIri) ? RESOURCE_INTERNAL_PREFIX.concat(resourcesKey)
+        : RESOURCE_EXTERNAL_PREFIX.concat(resourcesKey);
   }
 
 }

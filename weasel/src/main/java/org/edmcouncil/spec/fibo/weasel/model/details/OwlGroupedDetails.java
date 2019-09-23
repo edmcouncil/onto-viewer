@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.model;
+package org.edmcouncil.spec.fibo.weasel.model.details;
 
 import java.util.List;
 import java.util.Map;
@@ -7,18 +7,15 @@ import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlGroupedDetailsProperties;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class OwlGroupedDetails {
+public class OwlGroupedDetails extends OwlDetails {
 
-  private String label;
-  private String iri;
   private OwlGroupedDetailsProperties<PropertyValue> properties;
-  private String type;
-  private OwlTaxonomy taxonomy;
 
   public OwlGroupedDetails() {
     if (properties == null) {
@@ -26,44 +23,12 @@ public class OwlGroupedDetails {
     }
   }
 
-  public String getLabel() {
-    return label;
-  }
-
-  public void setLabel(String label) {
-    this.label = label;
-  }
-
-  public String getIri() {
-    return iri;
-  }
-
-  public void setIri(String iri) {
-    this.iri = iri;
-  }
-
   public Map<String, Map<String, List<PropertyValue>>> getProperties() {
     return properties.getProperties();
   }
 
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
   public void addProperty(String groupKey, String propertyKey, PropertyValue property) {
     properties.addProperty(groupKey, propertyKey, property);
-  }
-
-  public void setTaxonomy(OwlTaxonomy tax) {
-    this.taxonomy = tax;
-  }
-
-  public OwlTaxonomy getTaxonomy() {
-    return this.taxonomy;
   }
 
   public void sortProperties(List<ConfigStringElement> priorityList) {
@@ -73,10 +38,8 @@ public class OwlGroupedDetails {
   @Override
   public int hashCode() {
     int hash = 7;
-    hash = 71 * hash + Objects.hashCode(this.label);
+    hash = 71 * hash * super.hashCode();
     hash = 71 * hash + Objects.hashCode(this.properties);
-    hash = 71 * hash + Objects.hashCode(this.type);
-    hash = 71 * hash + Objects.hashCode(this.taxonomy);
     return hash;
   }
 
@@ -92,18 +55,10 @@ public class OwlGroupedDetails {
       return false;
     }
     final OwlGroupedDetails other = (OwlGroupedDetails) obj;
-    if (!Objects.equals(this.label, other.label)) {
-      return false;
-    }
-    if (!Objects.equals(this.type, other.type)) {
-      return false;
-    }
     if (!Objects.equals(this.properties, other.properties)) {
       return false;
     }
-    if (!Objects.equals(this.taxonomy, other.taxonomy)) {
-      return false;
-    }
+
     return true;
   }
 
