@@ -69,6 +69,13 @@
       <type>org.edmcouncil.spec.fibo.weasel.model.FiboModule</type>
     </attribute>
     <attribute>
+      <name>elementLocation</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <fragment>true</fragment>
+      <type>java.util.List</type>
+    </attribute>
+    <attribute>
       <name>elementWrapper</name>
       <required>false</required>
       <type>java.util.String</type>

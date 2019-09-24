@@ -98,7 +98,7 @@ public class OwlDataHandler {
         OwlDetailsProperties<PropertyValue> inheritedAxioms = handleInheritedAxioms(ontology, clazz);
         //This code is only for fibo ontology, this line can be deleted for other ontologies.
         OwlDetailsProperties<PropertyValue> modules = fiboDataHandler.handleFiboModulesData(ontology, clazz);
-
+        
         subclasses = subclasses.stream().filter((pv) -> (!pv.getType().equals(WeaselOwlType.TAXONOMY))).collect(Collectors.toList());
         axioms.getProperties().put(AxiomType.SUBCLASS_OF.getName(), subclasses);
         OwlTaxonomyImpl tax = extractTaxonomy(taxElements, iri, ontology, WeaselOwlType.AXIOM_CLASS);
@@ -534,6 +534,11 @@ public class OwlDataHandler {
 
   public List<FiboModule> getAllModulesData(OWLOntology ontology) {
     return fiboDataHandler.getAllModulesData(ontology);
+  }
+
+  public List<String> getElementLocationInModules(String iriString, OWLOntology ontology) {
+    LOGGER.debug("[Data Handler] Handle location for element {}", iriString);
+    return fiboDataHandler.getElementLocationInModules(iriString, ontology);
   }
 
 }

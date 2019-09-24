@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,7 +20,6 @@ import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResources;
 import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResourcesTypeDefaultKeys;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
-import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
@@ -78,13 +78,14 @@ public class FiboDataHandler {
 
   private Map<String, OntologyResources> resources = null;
 
+  @Deprecated
   public OwlDetailsProperties<PropertyValue> handleFiboModulesData(OWLOntology ontology, OWLEntity entity) {
 
     OWLDataFactory df = OWLManager.getOWLDataFactory();
 
     Iterator<OWLAnnotation> iterator = EntitySearcher
-            .getAnnotations(entity, ontology, df.getRDFSIsDefinedBy())
-            .iterator();
+        .getAnnotations(entity, ontology, df.getRDFSIsDefinedBy())
+        .iterator();
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -109,8 +110,8 @@ public class FiboDataHandler {
       String ontologyIriString = isDefinedBy;
       result.addProperty(ONTOLOGY_KEY, createProperty(onto, ontologyIriString));
 
-      LOGGER.debug("[Fibo Data Handler] domainIRI: {};\n\tmoduleIRI: {};\n\t ontologyIRI: {};",
-              domainIriString, moduleIriString, ontologyIriString);
+      LOGGER.debug("[FIBO Data Handler] domainIRI: {};\n\tmoduleIRI: {};\n\t ontologyIRI: {};",
+          domainIriString, moduleIriString, ontologyIriString);
     }
 
     return result;
@@ -143,16 +144,16 @@ public class FiboDataHandler {
 
   private String prepareModuleIri(String fiboPath, String domain, String module) {
     String moduleIriString = fiboPath.concat(domain).concat(URL_DELIMITER)
-            .concat(module).concat(URL_DELIMITER)
-            .concat(METADATA_PREFIX).concat(domain).concat(module).concat(URL_DELIMITER)
-            .concat(module).concat(MODULE_POSTFIX);
+        .concat(module).concat(URL_DELIMITER)
+        .concat(METADATA_PREFIX).concat(domain).concat(module).concat(URL_DELIMITER)
+        .concat(module).concat(MODULE_POSTFIX);
     return moduleIriString;
   }
 
   private String prepareDomainIri(String fiboPath, String domain) {
     String domainIri = fiboPath.concat(domain).concat(URL_DELIMITER)
-            .concat(METADATA_PREFIX).concat(domain).concat(URL_DELIMITER)
-            .concat(domain).concat(DOMAIN_POSTFIX);
+        .concat(METADATA_PREFIX).concat(domain).concat(URL_DELIMITER)
+        .concat(domain).concat(DOMAIN_POSTFIX);
     return domainIri;
   }
 
@@ -182,10 +183,10 @@ public class FiboDataHandler {
     List<FiboModule> result = new LinkedList<>();
     IRI moduleIri = IRI.create(MODULE_IRI);
     OWLClass clazz = ontology
-            .classesInSignature()
-            .filter(c -> c.getIRI().equals(moduleIri))
-            .findFirst()
-            .get();
+        .classesInSignature()
+        .filter(c -> c.getIRI().equals(moduleIri))
+        .findFirst()
+        .get();
 
     OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
 
@@ -232,7 +233,9 @@ public class FiboDataHandler {
         referenceCount.put(partModule, c);
       });
     });
-    List<String> rootModulesIris = referenceCount.entrySet().stream().filter(r -> r.getValue() == 0).map(r -> r.getKey()).collect(Collectors.toList());
+    List<String> rootModulesIris = referenceCount.entrySet().stream()
+        .filter(r -> r.getValue() == 0).map(r -> r.getKey())
+        .collect(Collectors.toList());
     return rootModulesIris;
   }
 
@@ -363,6 +366,64 @@ public class FiboDataHandler {
 
     return annotationIri.contains(ontologyIri) ? RESOURCE_INTERNAL_PREFIX.concat(resourcesKey)
         : RESOURCE_EXTERNAL_PREFIX.concat(resourcesKey);
+  }
+
+  /**
+   *
+   * @param elementIri IRI element to which path we want to find
+   * @param ontology
+   * @return Returns the path to the module in which it is located, empty list if element not
+   * present in modules
+   */
+  public List<String> getElementLocationInModules(String elementIri, OWLOntology ontology) {
+    List<String> result = new LinkedList<>();
+    if (resources == null) {
+      loadAllOntologyResources(ontology);
+    }
+    String ontologyIri = null;
+    for (Map.Entry<String, OntologyResources> entry : resources.entrySet()) {
+      for (Map.Entry<String, List<PropertyValue>> entryResource : entry.getValue().getResources().entrySet()) {
+        for (PropertyValue propertyValue : entryResource.getValue()) {
+          OwlAnnotationIri annotation = (OwlAnnotationIri) propertyValue;
+          if (annotation.getValue().getIri().equals(elementIri)) {
+            if (elementIri.contains(entry.getKey())) {
+              ontologyIri = entry.getKey();
+              break;
+            }
+          }
+        }
+      }
+    }
+    LOGGER.debug("[FIBO Data Handler] Element found in ontology {}", ontologyIri);
+    if (ontologyIri != null) {
+      for (FiboModule module : modules) {
+        if (trackingThePath(module, ontologyIri, result)) {
+          LOGGER.debug("[FIBO Data Handler] Location Path {}", Arrays.toString(result.toArray()));
+          return result;
+        }
+      }
+    }
+    return result;
+  }
+
+  private Boolean trackingThePath(FiboModule node, String value, List<String> track) {
+
+    if (node == null) {
+      return false;
+    }
+
+    if (node.getIri().equals(value)) {
+      track.add(node.getIri());
+      return true;
+    }
+
+    for (FiboModule child : node.getSubModule()) {
+      if (trackingThePath(child, value, track)) {
+        track.add(0, node.getIri());
+        return true;
+      }
+    }
+    return false;
   }
 
 }

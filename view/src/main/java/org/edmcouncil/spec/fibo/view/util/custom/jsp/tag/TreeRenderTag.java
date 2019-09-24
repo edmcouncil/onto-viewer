@@ -18,11 +18,16 @@ public class TreeRenderTag extends SimpleTagSupport {
   private static final String URL_SEARCH_QUERY_PATTERN = "<a href=\"%s/search?query=%s\">%s</a>";
   private static final String WRAPPER_PATTERN = "<%1$s> %2$s </%1$s>";
   private static final String SPAN_WRAPPER_CARET_PATTERN = "<span class=\"caret\">%s</span>";
+  private static final String SPAN_WRAPPER_CARET_DOWN_PATTERN = "<span class=\"caret caret-down text-success\">%s</span>";
   private static final String SPAN_WRAPPER_CLEAN_PATTERN = "<span>%s</span>";
+  private static final String SPAN_WRAPPER_CLEAN_MATCH_PATTERN = "<span class=\"text-success\">%s</span>";
+  private static final String UL_NESTED = "<ul class=\"nested\">";
+  private static final String UL_NESTED_ACTIVE = "<ul class=\"nested active\">";
 
   private String elementWrapper;
   private String searchPath;
   private FiboModule element;
+  private List<String> elementLocation;
 
   @Override
   public void doTag()
@@ -56,6 +61,14 @@ public class TreeRenderTag extends SimpleTagSupport {
     this.element = element;
   }
 
+  public List<String> getElementLocation() {
+    return elementLocation;
+  }
+
+  public void setElementLocation(List<String> elementLocation) {
+    this.elementLocation = elementLocation;
+  }
+
   private void renderElement(String toRender) throws IOException {
     JspWriter out = getJspContext().getOut();
     out.println(toRender);
@@ -69,11 +82,30 @@ public class TreeRenderTag extends SimpleTagSupport {
     String result = wrapToLink(link, "(Show meta)");
     renderElement("<li>");
     List<FiboModule> fmList = property.getSubModule();
-    String text = fmList != null && fmList.size() > 0 ? wrapSpanCaret(val) : wrapSpanClean(val);
+    String text = null;
+    if (fmList != null && fmList.size() > 0) {
+      if (elementLocation != null && elementLocation.contains(link)) {
+        text = wrapSpanCaretDown(val);
+      } else {
+        text = wrapSpanCaret(val);
+      }
+    } else {
+      if (elementLocation != null && elementLocation.contains(link)) {
+        text = wrapSpanCleanMatch(val);
+      } else {
+        text = wrapSpanClean(val);
+      }
+
+    }
     renderElement(text);
     renderElement(result);
     if (fmList != null && fmList.size() > 0) {
-      renderElement("<ul class=\"nested\">");
+
+      if (elementLocation != null && elementLocation.contains(link)) {
+        renderElement(UL_NESTED_ACTIVE);
+      } else {
+        renderElement(UL_NESTED);
+      }
       for (FiboModule fiboModule : fmList) {
         renderTreeElement(fiboModule);
       }
@@ -118,8 +150,18 @@ public class TreeRenderTag extends SimpleTagSupport {
     return result;
   }
 
+  private String wrapSpanCaretDown(String result) {
+    result = String.format(SPAN_WRAPPER_CARET_DOWN_PATTERN, result);
+    return result;
+  }
+
   private String wrapSpanClean(String result) {
     result = String.format(SPAN_WRAPPER_CLEAN_PATTERN, result);
+    return result;
+  }
+
+  private String wrapSpanCleanMatch(String result) {
+    result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
     return result;
   }
 
