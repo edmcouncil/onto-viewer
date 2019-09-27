@@ -528,6 +528,7 @@ public class OwlDataHandler {
     }
     wd.setIri(iri.toString());
     wd.setLabel(StringSplitter.getFragment(iri));
+    wd.setLocationInModules(fiboDataHandler.getElementLocationInModules(iri.toString(), ontology));
     return wd;
 
   }

@@ -380,20 +380,10 @@ public class FiboDataHandler {
     if (resources == null) {
       loadAllOntologyResources(ontology);
     }
-    String ontologyIri = null;
-    for (Map.Entry<String, OntologyResources> entry : resources.entrySet()) {
-      for (Map.Entry<String, List<PropertyValue>> entryResource : entry.getValue().getResources().entrySet()) {
-        for (PropertyValue propertyValue : entryResource.getValue()) {
-          OwlAnnotationIri annotation = (OwlAnnotationIri) propertyValue;
-          if (annotation.getValue().getIri().equals(elementIri)) {
-            if (elementIri.contains(entry.getKey())) {
-              ontologyIri = entry.getKey();
-              break;
-            }
-          }
-        }
-      }
-    }
+    String ontologyIri = findElementInOntology(elementIri);
+
+    ontologyIri = ontologyIri == null ? elementIri : ontologyIri;
+
     LOGGER.debug("[FIBO Data Handler] Element found in ontology {}", ontologyIri);
     if (ontologyIri != null) {
       for (FiboModule module : modules) {
@@ -404,6 +394,31 @@ public class FiboDataHandler {
       }
     }
     return result;
+  }
+
+  /**
+   * @return ontology iri where the element is present
+   */
+  private String findElementInOntology(String elementIri) {
+
+    String ontologyIri = null;
+    for (Map.Entry<String, OntologyResources> entry : resources.entrySet()) {
+      for (Map.Entry<String, List<PropertyValue>> entryResource : entry.getValue().getResources().entrySet()) {
+        if (entryResource.getKey().contains(RESOURCE_INTERNAL_PREFIX)) {
+          for (PropertyValue propertyValue : entryResource.getValue()) {
+            OwlAnnotationIri annotation = (OwlAnnotationIri) propertyValue;
+            if (annotation.getValue().getIri().equals(elementIri)) {
+              if (elementIri.contains(entry.getKey())) {
+                ontologyIri = entry.getKey();
+                break;
+              }
+            }
+          }
+        }
+
+      }
+    }
+    return ontologyIri;
   }
 
   private Boolean trackingThePath(FiboModule node, String value, List<String> track) {
