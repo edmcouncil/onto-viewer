@@ -18,9 +18,9 @@ public class TreeRenderTag extends SimpleTagSupport {
   private static final String URL_SEARCH_QUERY_PATTERN = "<a href=\"%s/search?query=%s\">%s</a>";
   private static final String WRAPPER_PATTERN = "<%1$s> %2$s </%1$s>";
   private static final String SPAN_WRAPPER_CARET_PATTERN = "<span class=\"caret\">%s</span>";
-  private static final String SPAN_WRAPPER_CARET_DOWN_PATTERN = "<span class=\"caret caret-down text-success\">%s</span>";
+  private static final String SPAN_WRAPPER_CARET_DOWN_PATTERN = "<span class=\"caret caret-down font-weight-bold\">%s</span>";
   private static final String SPAN_WRAPPER_CLEAN_PATTERN = "<span>%s</span>";
-  private static final String SPAN_WRAPPER_CLEAN_MATCH_PATTERN = "<span class=\"text-success\">%s</span>";
+  private static final String SPAN_WRAPPER_CLEAN_MATCH_PATTERN = "<span class=\"font-weight-bold\">%s</span>";
   private static final String UL_NESTED = "<ul class=\"nested\">";
   private static final String UL_NESTED_ACTIVE = "<ul class=\"nested active\">";
 
@@ -79,7 +79,7 @@ public class TreeRenderTag extends SimpleTagSupport {
     String val = null;
     link = property.getIri();
     val = property.getLabel();
-    String result = wrapToLink(link, "(Show meta)");
+    String result = wrapToLink(link, "<i class='fas fa-file-export'></i>");//"(Show meta)");
     renderElement("<li>");
     List<FiboModule> fmList = property.getSubModule();
     String text = null;

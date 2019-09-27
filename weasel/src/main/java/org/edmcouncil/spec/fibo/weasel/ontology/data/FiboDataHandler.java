@@ -387,7 +387,7 @@ public class FiboDataHandler {
     LOGGER.debug("[FIBO Data Handler] Element found in ontology {}", ontologyIri);
     if (ontologyIri != null) {
       for (FiboModule module : modules) {
-        if (trackingThePath(module, ontologyIri, result)) {
+        if (trackingThePath(module, ontologyIri, result, elementIri)) {
           LOGGER.debug("[FIBO Data Handler] Location Path {}", Arrays.toString(result.toArray()));
           return result;
         }
@@ -421,19 +421,24 @@ public class FiboDataHandler {
     return ontologyIri;
   }
 
-  private Boolean trackingThePath(FiboModule node, String value, List<String> track) {
+  private Boolean trackingThePath(FiboModule node, String ontologyIri, List<String> track, String elementIri) {
 
     if (node == null) {
       return false;
     }
 
-    if (node.getIri().equals(value)) {
+    if (node.getIri().equals(elementIri)) {
+      track.add(node.getIri());
+      return true;
+    }
+    
+    if (node.getIri().equals(ontologyIri)) {
       track.add(node.getIri());
       return true;
     }
 
     for (FiboModule child : node.getSubModule()) {
-      if (trackingThePath(child, value, track)) {
+      if (trackingThePath(child, ontologyIri, track, elementIri)) {
         track.add(0, node.getIri());
         return true;
       }
