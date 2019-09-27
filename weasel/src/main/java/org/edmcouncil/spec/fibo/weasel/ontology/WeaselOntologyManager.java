@@ -6,7 +6,6 @@ import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,10 +84,9 @@ public class WeaselOntologyManager {
 
   /**
    * This method is used to load ontology from file
-   * 
+   *
    * @param ontoPath OntoPath is the access path from which the ontology is being loaded.
    */
-  
   private void loadOntologyFromFile(String ontoPath) throws IOException, OWLOntologyCreationException {
     FileSystemManager fsm = new FileSystemManager();
     Path pathToOnto = null;
@@ -133,7 +131,7 @@ public class WeaselOntologyManager {
       long len = entity.getContentLength();
       InputStream inputStream = entity.getContent();
       OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
-      IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
+      IRI fiboIRI = IRI.create(ontoURL);
       manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology)));
       Stream<OWLOntology> directImports = manager.imports(newOntology);
       newOntology = manager.createOntology(fiboIRI, directImports, false);
@@ -225,6 +223,10 @@ public class WeaselOntologyManager {
     }
     result.setIri(iriString);
 
+    //Path to element in modules
+    List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontology);
+    result.setLocationInModules(elementLocation);
+
     if (!config.getWeaselConfig().isEmpty()) {
       WeaselConfiguration cfg = (WeaselConfiguration) config.getWeaselConfig();
       if (cfg.isGrouped()) {
@@ -259,6 +261,7 @@ public class WeaselOntologyManager {
     groupedDetails.setTaxonomy(owlDetails.getTaxonomy());
     groupedDetails.setLabel(owlDetails.getLabel());
     groupedDetails.setIri(owlDetails.getIri());
+    groupedDetails.setLocationInModules(owlDetails.getLocationInModules());
     groupedDetails.sortProperties(groups, cfg);
 
     newResult = groupedDetails;
@@ -291,7 +294,7 @@ public class WeaselOntologyManager {
     result.sortProperties(prioritySortList);
   }
 
-  public List<FiboModule> getAllModulesData(){
+  public List<FiboModule> getAllModulesData() {
     return dataHandler.getAllModulesData(ontology);
   }
 }

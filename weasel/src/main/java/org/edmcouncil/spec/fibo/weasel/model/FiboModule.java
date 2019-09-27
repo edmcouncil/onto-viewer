@@ -41,7 +41,7 @@ public class FiboModule {
   public int compareTo(FiboModule o) {
     return this.label.compareTo(o.getLabel());
   }
-
+  
   public void sort() {
     if (this.subModule != null && this.subModule.size() > 0) {
       subModule = subModule.stream()

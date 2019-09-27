@@ -1,9 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<c:set var="locationInModules" value="${(empty clazz.locationInModules) ? null : clazz.locationInModules}" />
+
 <ul id="myUL">
   <c:forEach items="${modelTree}" var="domainElement">
     <li>
-    <weasel:RenderTree element="${domainElement}" searchPath="*"/>
+    <weasel:RenderTree element="${domainElement}" searchPath="*" elementLocation="${locationInModules}"/>
     </li>
   </c:forEach>
 </ul>

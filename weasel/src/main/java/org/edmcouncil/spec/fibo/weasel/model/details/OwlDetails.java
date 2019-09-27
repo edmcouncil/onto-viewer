@@ -1,9 +1,8 @@
 package org.edmcouncil.spec.fibo.weasel.model.details;
 
+import java.util.List;
 import java.util.Objects;
 import org.edmcouncil.spec.fibo.weasel.model.OwlTaxonomy;
-import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
-import org.edmcouncil.spec.fibo.weasel.model.property.OwlGroupedDetailsProperties;
 
 /**
  *
@@ -15,6 +14,7 @@ public class OwlDetails {
   private String iri;
   private String type;
   private OwlTaxonomy taxonomy;
+  private List<String> locationInModules;
 
   public String getLabel() {
     return label;
@@ -30,6 +30,14 @@ public class OwlDetails {
 
   public void setIri(String iri) {
     this.iri = iri;
+  }
+
+  public List<String> getLocationInModules() {
+    return locationInModules;
+  }
+
+  public void setLocationInModules(List<String> locationInModules) {
+    this.locationInModules = locationInModules;
   }
 
   public String getType() {
@@ -84,6 +92,5 @@ public class OwlDetails {
     }
     return true;
   }
-  
-  
+
 }
