@@ -1,7 +1,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var = "context" value = "*"/>
 
-  <c:set var = "clazz" value = "${details}"/>
   <div class="my-3 px-3">
 
     <div class="row">

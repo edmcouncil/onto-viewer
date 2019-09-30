@@ -12,9 +12,18 @@
     <jsp:directive.include file="page/elements/header.jsp" />
 
     <button onclick="topFunction()" id="goToTopBtn" title="Go to top">Top</button>
+    
+    <c:set var = "clazz" value = "${details}"/>
 
     <div class="container-fluid">
       <div class="row px-4 py-4">
+        <div class="col-md-4 px-2">
+          <div class="card">
+            <div class="card-body">
+              <jsp:directive.include file="page/elements/moduleTree.jsp" />
+            </div>
+          </div>
+        </div>
 
         <div class="col-md-8 px-2">
 
@@ -38,13 +47,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 px-2">
-          <div class="card">
-            <div class="card-body">
-              <jsp:directive.include file="page/elements/moduleTree.jsp" />
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
 
