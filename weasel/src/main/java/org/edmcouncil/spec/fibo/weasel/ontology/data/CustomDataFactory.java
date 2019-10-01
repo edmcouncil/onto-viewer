@@ -3,7 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data;
 import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
-import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
+import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 
 /**
  *
@@ -12,7 +12,7 @@ import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
 public class CustomDataFactory {
 
   public static OwlAnnotationIri createAnnotationIri(String iri) {
-    String fragment = StringSplitter.getFragment(iri);
+    String fragment = StringUtils.getFragment(iri);
     OwlAnnotationIri owlAnnotationIri = new OwlAnnotationIri();
     OwlSimpleProperty osp = new OwlSimpleProperty();
     osp.setLabel(fragment);

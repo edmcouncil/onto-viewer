@@ -8,18 +8,18 @@ import java.util.Map;
  */
 public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
 
-  private final Map<String, String> entityMaping;
+  private final Map<String, OwlAxiomPropertyEntity> entityMaping;
 
   public OwlAxiomPropertyValue() {
     super();
     entityMaping = new HashMap<>();
   }
 
-  public void addEntityValues(String key, String valIri) {
+  public void addEntityValues(String key, OwlAxiomPropertyEntity valIri) {
     entityMaping.put(key, valIri);
   }
 
-  public Map<String, String> getEntityMaping() {
+  public Map<String, OwlAxiomPropertyEntity> getEntityMaping() {
     return this.entityMaping;
   }
 

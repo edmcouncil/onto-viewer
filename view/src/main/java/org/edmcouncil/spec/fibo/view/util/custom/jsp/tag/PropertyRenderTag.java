@@ -10,6 +10,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
@@ -42,7 +43,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   @Override
   public void doTag()
-          throws JspException, IOException {
+      throws JspException, IOException {
 
     switch (property.getType()) {
       case STRING:
@@ -87,9 +88,9 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   private void renderIriProperty(PropertyValue property) throws IOException {
     OwlSimpleProperty owlSimpleProperty = (OwlSimpleProperty) property.getValue();
-        
+
     String result = wrapIri(owlSimpleProperty.getIri(), owlSimpleProperty.getLabel());
-    
+
     renderProperty(result);
   }
 
@@ -102,10 +103,20 @@ public class PropertyRenderTag extends SimpleTagSupport {
   private void renderAxiom(PropertyValue property) throws IOException {
     OwlAxiomPropertyValue axiomPropertyVal = (OwlAxiomPropertyValue) property;
     String result = axiomPropertyVal.getValue();
-    String[] list = result.split(" ");
-    String[] checkList = result.split(" ");
-    for (Map.Entry<String, String> entry : axiomPropertyVal.getEntityMaping().entrySet()) {
-      String replecment = parseIriWithoutWraping(entry.getValue(), entry.getKey());
+
+    for (Map.Entry<String, OwlAxiomPropertyEntity> entry : axiomPropertyVal.getEntityMaping().entrySet()) {
+      String key = entry.getKey();
+      if (!key.contains("arg")) {
+        continue;
+      }
+      String replecment = parseIriWithoutWraping(entry.getValue().getIri(), entry.getValue().getLabel());
+      result = result.replaceAll(key, replecment);
+    }
+
+    //String[] list = result.split(" ");
+    //String[] checkList = result.split(" ");
+    /*for (Map.Entry<String, OwlAxiomPropertyEntity> entry : axiomPropertyVal.getEntityMaping().entrySet()) {
+      String replecment = parseIriWithoutWraping(entry.getValue().getIri(), entry.getKey());
 
       for (int i = 0; i < checkList.length; i++) {
         String string = checkList[i];
@@ -115,7 +126,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
       }
       result = String.join(" ", list);
 
-    }
+    }*/
     if (elementWrapper != null && !elementWrapper.isEmpty()) {
       result = wrapElement(result);
     }
