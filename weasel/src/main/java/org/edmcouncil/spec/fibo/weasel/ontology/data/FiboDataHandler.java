@@ -23,7 +23,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
+import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -205,7 +205,7 @@ public class FiboDataHandler {
         .map((rootModulesIri) -> {
           FiboModule fm = new FiboModule();
           fm.setIri(rootModulesIri);
-          fm.setLabel(StringSplitter.getFragment(rootModulesIri));
+          fm.setLabel(StringUtils.getFragment(rootModulesIri));
           fm.setSubModule(getSubModules(rootModulesIri, ontology));
           return fm;
         }).forEachOrdered(result::add);
@@ -353,7 +353,7 @@ public class FiboDataHandler {
     hasPartModules.stream().map((partModule) -> {
       FiboModule fm = new FiboModule();
       fm.setIri(partModule);
-      fm.setLabel(StringSplitter.getFragment(partModule));
+      fm.setLabel(StringUtils.getFragment(partModule));
       fm.setSubModule(getSubModules(partModule, ontology));
       return fm;
     }).forEachOrdered(result::add);
@@ -379,6 +379,9 @@ public class FiboDataHandler {
     List<String> result = new LinkedList<>();
     if (resources == null) {
       loadAllOntologyResources(ontology);
+    }
+    if(modules == null){
+      getAllModulesData(ontology);
     }
     String ontologyIri = findElementInOntology(elementIri);
 

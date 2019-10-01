@@ -5,7 +5,7 @@ import org.semanticweb.owlapi.model.IRI;
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class StringSplitter {
+public class StringUtils {
 
   public static String getFragment(IRI iri) {
     String iriString = iri.toString();
@@ -18,9 +18,21 @@ public class StringSplitter {
     if (iri.endsWith("/")) {
       return lastElement;
     } else if (lastElement.contains("#")) {
-      return lastElement.substring(lastElement.indexOf("#")+1);
+      return lastElement.substring(lastElement.indexOf("#") + 1);
     } else {
       return lastElement;
     }
+  }
+
+  public static int countLetter(String string, char letter) {
+    int count = 0;
+
+    //Counts each character except space    
+    for (int i = 0; i < string.length(); i++) {
+      if (string.charAt(i) == letter) {
+        count++;
+      }
+    }
+    return count;
   }
 }

@@ -6,7 +6,7 @@ import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
+import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -36,7 +36,7 @@ public class IndividualDataHandler {
     NodeSet<OWLNamedIndividual> instances = reasoner.getInstances(clazz, true);
 
     for (OWLNamedIndividual namedIndividual : instances.entities().collect(Collectors.toSet())) {
-      String fragment = StringSplitter.getFragment(namedIndividual.getIRI());
+      String fragment = StringUtils.getFragment(namedIndividual.getIRI());
       OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
       s.setType(WeaselOwlType.INSTANCES);
       s.setValue(new PairImpl(fragment, namedIndividual.getIRI().toString()));
