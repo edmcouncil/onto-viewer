@@ -70,7 +70,7 @@ public class WeaselOntologyVisitors {
             GraphNode endNode = new GraphNode(vg.nextId());
             endNode.setIri(object);
             String label = StringUtils.getFragment(object);
-            endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + " Inst");
+            endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + "Instance");
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
