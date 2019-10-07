@@ -9,6 +9,10 @@ public class GraphRelation extends GraphElement{
   private GraphNode start;
   private GraphNode end;
 
+  public GraphRelation(int id) {
+    super(id);
+  }
+
   public GraphNode getStart() {
     return start;
   }
@@ -28,6 +32,12 @@ public class GraphRelation extends GraphElement{
   @Override
   public String toString() {
     return "{" + "start=" + start + ", end=" + end + " " + super.toString();
+  }
+  
+  @Override
+  public String toSimpleJson(){
+    String format = "{from: %s, to: %s, arrows:'to', label: '%s'}";
+    return String.format(format, start.getId(), end.getId(), super.getLabel());
   }
   
 }

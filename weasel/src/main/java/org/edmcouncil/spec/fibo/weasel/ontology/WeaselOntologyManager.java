@@ -263,6 +263,7 @@ public class WeaselOntologyManager {
     groupedDetails.setIri(owlDetails.getIri());
     groupedDetails.setLocationInModules(owlDetails.getLocationInModules());
     groupedDetails.sortProperties(groups, cfg);
+    groupedDetails.setJsGraphVars(owlDetails.getJsGraphVars());
 
     newResult = groupedDetails;
     return newResult;

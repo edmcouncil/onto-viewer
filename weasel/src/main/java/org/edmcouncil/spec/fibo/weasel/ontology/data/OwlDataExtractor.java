@@ -7,6 +7,7 @@ import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
+import org.semanticweb.owlapi.model.OWLRestriction;
 import org.springframework.stereotype.Component;
 
 /**
@@ -59,7 +60,7 @@ public class OwlDataExtractor {
     return uriString;
   }
 
-  public static String extrackAxiomPropertyIri(OWLObjectSomeValuesFrom someValuesFromAxiom) {
+  public static String extrackAxiomPropertyIri(OWLRestriction someValuesFromAxiom) {
     String propertyIri = null;
     for (OWLEntity oWLEntity : someValuesFromAxiom.getProperty().signature().collect(Collectors.toList())) {
       propertyIri = oWLEntity.toStringID();

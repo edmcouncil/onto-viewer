@@ -12,9 +12,15 @@ public class ViewerGraph {
   private Set<GraphNode> nodes;
   private Set<GraphRelation> relations;
   private GraphNode root;
+  private int lastId = 0;
 
   public Set<GraphNode> getNodes() {
     return nodes;
+  }
+
+  public int nextId() {
+    lastId++;
+    return lastId;
   }
 
   public void setNodes(Set<GraphNode> nodes) {
@@ -74,6 +80,37 @@ public class ViewerGraph {
       sb.append(root.toString());
     }
 
+    return sb.toString();
+  }
+
+  public String toJsVars() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("var nodes = new vis.DataSet([");
+    if (nodes != null) {
+      int size = nodes.size();
+      int i = 0;
+      for (GraphNode node : nodes) {
+        sb.append(node.toSimpleJson());
+        if (i < size) {
+          sb.append(", ");
+        }
+        i++;
+      }
+    }
+    sb.append("]);\n");
+    sb.append("var edges = new vis.DataSet([");
+    if (relations != null) {
+      int size = relations.size();
+      int i = 0;
+      for (GraphRelation rel : relations) {
+        sb.append(rel.toSimpleJson());
+        if (i < size) {
+          sb.append(", ");
+        }
+        i++;
+      }
+    }
+    sb.append("]);");
     return sb.toString();
   }
 

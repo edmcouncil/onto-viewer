@@ -12,7 +12,7 @@
     <jsp:directive.include file="page/elements/header.jsp" />
 
     <button onclick="topFunction()" id="goToTopBtn" title="Go to top">Top</button>
-    
+
     <c:set var = "clazz" value = "${details}"/>
 
     <div class="container-fluid">
@@ -45,7 +45,39 @@
                 </c:otherwise>
               </c:choose>
             </div>
+
+            <div id="ontograph"></div>
+            <script type="text/javascript">
+              ${clazz.jsGraphVars}
+              // create a network
+              var container = document.getElementById('ontograph');
+              var data = {
+                nodes: nodes,
+                edges: edges
+              };
+              var options = {
+                "edges": {
+                  "smooth": {
+                    "type": "cubicBezier",
+                    "forceDirection": "none",
+                    "roundness": 0.15
+                  }
+                },
+                "physics": {
+                  "forceAtlas2Based": {
+                    "gravitationalConstant": -89,
+                    "centralGravity": 0.005,
+                    "springLength": 140,
+                    "springConstant": 0.415
+                  },
+                  "minVelocity": 0.75,
+                  "solver": "forceAtlas2Based"
+                }
+              }
+              var network = new vis.Network(container, data, options);
+            </script>
           </div>
+
         </div>
 
       </div>

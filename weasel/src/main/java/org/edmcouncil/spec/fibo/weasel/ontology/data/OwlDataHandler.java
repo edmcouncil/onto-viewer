@@ -27,6 +27,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphKeys;
+import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
@@ -73,6 +74,8 @@ public class OwlDataHandler {
   private AnnotationsDataHandler annotationsDataHandler;
   @Autowired
   private IndividualDataHandler individualDataHandler;
+  @Autowired
+  private RestrictionGraphDataHandler graphDataHandler;
 
   public OwlListDetails handleParticularClass(IRI iri, OWLOntology ontology) {
     OwlListDetails resultDetails = new OwlListDetails();
@@ -100,6 +103,9 @@ public class OwlDataHandler {
         OwlDetailsProperties<PropertyValue> handleSubClassOf = handleParticularSubClassOf(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleParticularIndividual(ontology, clazz);
         OwlDetailsProperties<PropertyValue> inheritedAxioms = handleInheritedAxioms(ontology, clazz);
+        
+        ViewerGraph vg = graphDataHandler.handleGraph(clazz, ontology);
+        
         //This code is only for fibo ontology, this line can be deleted for other ontologies.
         //OwlDetailsProperties<PropertyValue> modules = fiboDataHandler.handleFiboModulesData(ontology, clazz);
 
@@ -117,6 +123,7 @@ public class OwlDataHandler {
         resultDetails.addAllProperties(handleSubClassOf);
         resultDetails.addAllProperties(individuals);
         resultDetails.addAllProperties(inheritedAxioms);
+        resultDetails.setJsGraphVars(vg.toJsVars());
         // resultDetails.addAllProperties(modules);
 
       }

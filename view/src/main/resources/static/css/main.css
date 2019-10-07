@@ -109,3 +109,7 @@ ul, #myUL {
 .active {
   display: block;
 }
+
+#ontograph {
+  height: 600px;
+}

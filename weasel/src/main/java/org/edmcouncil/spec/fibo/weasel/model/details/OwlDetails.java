@@ -15,6 +15,15 @@ public class OwlDetails {
   private String type;
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
+  private String jsGraphVars;
+
+  public String getJsGraphVars() {
+    return jsGraphVars;
+  }
+
+  public void setJsGraphVars(String jsGraphVars) {
+    this.jsGraphVars = jsGraphVars;
+  }
 
   public String getLabel() {
     return label;
