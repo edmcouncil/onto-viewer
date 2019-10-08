@@ -67,7 +67,7 @@
                   "forceAtlas2Based": {
                     "gravitationalConstant": -89,
                     "centralGravity": 0.005,
-                    "springLength": 140,
+                    "springLength": 200,
                     "springConstant": 0.415
                   },
                   "minVelocity": 0.75,

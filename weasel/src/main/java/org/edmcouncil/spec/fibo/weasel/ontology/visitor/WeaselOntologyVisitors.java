@@ -14,6 +14,7 @@ import org.semanticweb.owlapi.model.OWLDataSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLObjectCardinalityRestriction;
 import org.semanticweb.owlapi.model.OWLObjectExactCardinality;
+import org.semanticweb.owlapi.model.OWLObjectMinCardinality;
 import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectVisitorEx;
 import org.semanticweb.owlapi.model.OWLQuantifiedObjectRestriction;
@@ -59,8 +60,8 @@ public class WeaselOntologyVisitors {
         propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(someValuesFromAxiom);
         ClassExpressionType objectType = someValuesFromAxiom.getFiller().getClassExpressionType();
 
-        System.out.println("Object type: " + objectType.getName());
-
+        //System.out.println("Object type: " + objectType.getName());
+        //move switch to function, this is probably repeats
         switch (objectType) {
           case OWL_CLASS:
             OWLClassExpression expression = someValuesFromAxiom.getFiller().getObjectComplementOf();
@@ -83,6 +84,7 @@ public class WeaselOntologyVisitors {
             return null;
 
           case OBJECT_SOME_VALUES_FROM:
+          case OBJECT_EXACT_CARDINALITY:
             GraphNode blankNode = new GraphNode(vg.nextId());
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
             relSomeVal.setIri(propertyIri);
@@ -95,9 +97,9 @@ public class WeaselOntologyVisitors {
             vg.setRoot(blankNode);
             //someValuesFromAxiom.accept(superClassAxiom(vg, blankNode));
             return someValuesFromAxiom.getFiller();
-          //return someValuesFromAxiom;
 
         }
+
         //System.out.println("Object complement: " + someValuesFromAxiom.getFiller().getObjectComplementOf().toString());
 
         /* for (OWLEntity oWLEntity : someValuesFromAxiom.getFiller().) {
@@ -120,8 +122,9 @@ public class WeaselOntologyVisitors {
         String propertyIri = null;
         propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
+        OWLClassExpression result = null;
+        //System.out.println("Object type: " + objectType.getName());
 
-        System.out.println("Object type: " + objectType.getName());
         for (int i = 0; i < cardinality; i++) {
           switch (objectType) {
             case OWL_CLASS:
@@ -132,7 +135,8 @@ public class WeaselOntologyVisitors {
               GraphNode endNode = new GraphNode(vg.nextId());
               endNode.setIri(object);
               String label = StringUtils.getFragment(object);
-              endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + "Instance");
+              String labelPostfix = cardinality>1?"Instance"+i:"Instance";
+              endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);
 
               GraphRelation rel = new GraphRelation(vg.nextId());
               rel.setIri(propertyIri);
@@ -142,9 +146,11 @@ public class WeaselOntologyVisitors {
               vg.addNode(endNode);
               vg.addRelation(rel);
 
-              return null;
+              result = null;
+              break;
 
             case OBJECT_SOME_VALUES_FROM:
+            case OBJECT_EXACT_CARDINALITY:
               GraphNode blankNode = new GraphNode(vg.nextId());
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
@@ -155,16 +161,15 @@ public class WeaselOntologyVisitors {
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
               vg.setRoot(blankNode);
-              //someValuesFromAxiom.accept(superClassAxiom(vg, blankNode));
-              return axiom.getFiller();
-            //return someValuesFromAxiom;
+              result = axiom.getFiller();
+              break;
+              
+            default:
+              System.out.println("Unsupported switch case (ObjectType): " + objectType);
 
           }
-
         }
-
-        //printCardinalityRestriction(exactCardinalityAxiom);
-        return null;
+        return result;
       }
 
       @Override
@@ -209,13 +214,68 @@ public class WeaselOntologyVisitors {
         //loadGraph(root, someValuesFromAxiom, vg);
         return null;
       }
-      /*
-      @Override
-      public ViewerGraph visit(OWLObjectMinCardinality minCardinalityAxiom) {
-        printCardinalityRestriction(minCardinalityAxiom);
-        return vg;
-      }
 
+      @Override
+      public OWLClassExpression visit(OWLObjectMinCardinality axiom) {
+        int cardinality = axiom.getCardinality();
+        
+        if(cardinality==0){
+          return null;
+        }
+        
+         String propertyIri = null;
+        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
+        OWLClassExpression result = null;
+        //System.out.println("Object type: " + objectType.getName());
+
+        for (int i = 0; i < cardinality; i++) {
+          switch (objectType) {
+            case OWL_CLASS:
+              OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
+              String object = null;
+              object = extractStringObject(expression, object);
+
+              GraphNode endNode = new GraphNode(vg.nextId());
+              endNode.setIri(object);
+              String label = StringUtils.getFragment(object);
+              String labelPostfix = cardinality>1?"Instance-"+(i+1):"Instance";
+              endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);
+
+              GraphRelation rel = new GraphRelation(vg.nextId());
+              rel.setIri(propertyIri);
+              rel.setLabel(StringUtils.getFragment(propertyIri));
+              rel.setStart(node);
+              rel.setEnd(endNode);
+              vg.addNode(endNode);
+              vg.addRelation(rel);
+
+              result = null;
+              break;
+
+            case OBJECT_SOME_VALUES_FROM:
+            case OBJECT_EXACT_CARDINALITY:
+              GraphNode blankNode = new GraphNode(vg.nextId());
+              GraphRelation relSomeVal = new GraphRelation(vg.nextId());
+              relSomeVal.setIri(propertyIri);
+              relSomeVal.setLabel(StringUtils.getFragment(propertyIri));
+              relSomeVal.setStart(node);
+              relSomeVal.setEnd(blankNode);
+              vg.addNode(blankNode);
+              vg.addRelation(relSomeVal);
+              vg.setRoot(blankNode);
+              vg.setRoot(blankNode);
+              result = axiom.getFiller();
+              break;
+              
+            default:
+              System.out.println("Unsupported switch case (ObjectType): " + objectType);
+
+          }
+        }
+        return result;
+      }
+      /*
       @Override
       public ViewerGraph visit(OWLObjectMaxCardinality maxCardinalityAxiom) {
         printCardinalityRestriction(maxCardinalityAxiom);

@@ -131,7 +131,7 @@ public class RestrictionGraphDataHandler {
     }
     vg.setRoot(root);
 
-    System.out.println(vg.toJsVars());
+    //System.out.println(vg.toJsVars());
     return vg;
   }
 
