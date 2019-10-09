@@ -71,10 +71,19 @@
                     "springConstant": 0.415
                   },
                   "minVelocity": 0.75,
-                  "solver": "forceAtlas2Based"
+                  "solver": "forceAtlas2Based",
+                  "enabled": false
                 }
               }
               var network = new vis.Network(container, data, options);
+              var startHeight = 0;
+              if(nodes.length!==0){
+                startHeight = 500;
+              } 
+              var height = startHeight + 15 * nodes.length;
+              var container = document.getElementById('ontograph');
+              container.style.height = height + 'px';
+              network.redraw();
             </script>
           </div>
 

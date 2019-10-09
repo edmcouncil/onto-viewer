@@ -135,7 +135,7 @@ public class WeaselOntologyVisitors {
               GraphNode endNode = new GraphNode(vg.nextId());
               endNode.setIri(object);
               String label = StringUtils.getFragment(object);
-              String labelPostfix = cardinality>1?"Instance"+i:"Instance";
+              String labelPostfix = cardinality>1?"Instance-"+(i+1):"Instance";
               endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);
 
               GraphRelation rel = new GraphRelation(vg.nextId());
