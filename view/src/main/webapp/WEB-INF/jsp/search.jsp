@@ -71,8 +71,7 @@
                     "springConstant": 0.415
                   },
                   "minVelocity": 0.75,
-                  "solver": "forceAtlas2Based",
-                  "enabled": false
+                  "solver": "forceAtlas2Based"
                 }
               }
               var network = new vis.Network(container, data, options);
