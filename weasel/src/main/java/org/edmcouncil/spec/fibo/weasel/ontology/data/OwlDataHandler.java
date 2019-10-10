@@ -123,7 +123,7 @@ public class OwlDataHandler {
         resultDetails.addAllProperties(handleSubClassOf);
         resultDetails.addAllProperties(individuals);
         resultDetails.addAllProperties(inheritedAxioms);
-        resultDetails.setJsGraphVars(vg.toJsVars());
+        resultDetails.setGraph(vg);
         // resultDetails.addAllProperties(modules);
 
       }

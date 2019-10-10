@@ -3,6 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.model.details;
 import java.util.List;
 import java.util.Objects;
 import org.edmcouncil.spec.fibo.weasel.model.OwlTaxonomy;
+import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
 
 /**
  *
@@ -15,14 +16,14 @@ public class OwlDetails {
   private String type;
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
-  private String jsGraphVars;
+  private ViewerGraph graph;
 
-  public String getJsGraphVars() {
-    return jsGraphVars;
+  public ViewerGraph getGraph() {
+    return graph;
   }
 
-  public void setJsGraphVars(String jsGraphVars) {
-    this.jsGraphVars = jsGraphVars;
+  public void setGraph(ViewerGraph graph) {
+    this.graph = graph;
   }
 
   public String getLabel() {

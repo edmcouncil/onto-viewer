@@ -48,7 +48,7 @@
 
             <div id="ontograph"></div>
             <script type="text/javascript">
-              ${clazz.jsGraphVars}
+              ${clazz.graph.toJsVars()}
               // create a network
               var container = document.getElementById('ontograph');
               var data = {

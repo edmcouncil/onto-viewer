@@ -2,6 +2,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.visitor;
 
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
+import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphRelation;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataExtractor;
@@ -49,7 +50,7 @@ public class WeaselOntologyVisitors {
   }
   //https://stackoverflow.com/questions/47980787/getting-object-properties-and-classes
 
-  public static OWLObjectVisitorEx<OWLQuantifiedObjectRestriction> superClassAxiom(ViewerGraph vg, GraphNode node) {
+  public static OWLObjectVisitorEx<OWLQuantifiedObjectRestriction> superClassAxiom(ViewerGraph vg, GraphNode node, GraphNodeType type) {
 
     return new OWLObjectVisitorEx() {
 
@@ -72,6 +73,7 @@ public class WeaselOntologyVisitors {
             endNode.setIri(object);
             String label = StringUtils.getFragment(object);
             endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + "Instance");
+            endNode.setType(type);
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
@@ -86,6 +88,7 @@ public class WeaselOntologyVisitors {
           case OBJECT_SOME_VALUES_FROM:
           case OBJECT_EXACT_CARDINALITY:
             GraphNode blankNode = new GraphNode(vg.nextId());
+            blankNode.setType(type);
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
             relSomeVal.setIri(propertyIri);
             relSomeVal.setLabel(StringUtils.getFragment(propertyIri));

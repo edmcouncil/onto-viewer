@@ -2,11 +2,9 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
 import java.util.Iterator;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
-import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
+import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
-import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.visitor.WeaselOntologyVisitors;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
@@ -23,8 +21,6 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLQuantifiedObjectRestriction;
-import org.semanticweb.owlapi.model.OWLRestriction;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.reasoner.InferenceDepth;
 import org.semanticweb.owlapi.reasoner.Node;
@@ -86,14 +82,15 @@ public class RestrictionGraphDataHandler {
   private <T extends OWLAxiom> ViewerGraph handleGraph(
       Iterator<T> axiomsIterator,
       IRI elementIri) {
-    return handleGraph(axiomsIterator, elementIri, null, null);
+    return handleGraph(axiomsIterator, elementIri, null, null, GraphNodeType.INTERNAL);
   }
 
   private <T extends OWLAxiom> ViewerGraph handleGraph(
       Iterator<T> axiomsIterator,
       IRI elementIri,
       GraphNode root,
-      ViewerGraph vg) {
+      ViewerGraph vg, 
+      GraphNodeType type) {
 
     if (vg == null) {
       vg = new ViewerGraph();
@@ -102,6 +99,7 @@ public class RestrictionGraphDataHandler {
     if (root == null) {
       root = new GraphNode(vg.nextId());
       root.setIri(elementIri.toString());
+      root.setType(type);
       String label = StringUtils.getFragment(elementIri);
       root.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + "Instance");
       vg.addNode(root);
@@ -118,12 +116,12 @@ public class RestrictionGraphDataHandler {
         OWLSubClassOfAxiom axiomEl = axiom.accept(WeaselOntologyVisitors.getAxiomElement(elementIri));
 
         OWLClassExpression qrestriction = axiomEl.getSuperClass()
-            .accept(WeaselOntologyVisitors.superClassAxiom(vg, root));
+            .accept(WeaselOntologyVisitors.superClassAxiom(vg, root,type));
 
         while (qrestriction != null) {
           //axiomEl = qrestriction.accept(WeaselOntologyVisitors.getAxiomElement(elementIri));
           qrestriction = qrestriction
-              .accept(WeaselOntologyVisitors.superClassAxiom(vg, vg.getRoot()));
+              .accept(WeaselOntologyVisitors.superClassAxiom(vg, vg.getRoot(),type));
         }
 
         //extractor.extrackAxiomPropertyIri(axiomEl);
@@ -145,7 +143,7 @@ public class RestrictionGraphDataHandler {
     for (Node<OWLClass> node : rset) {
       for (OWLClass owlClass : node.entities().collect(Collectors.toSet())) {
         Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(owlClass).iterator();
-        handleGraph(axiomsIterator, owlClass.getIRI(), vg.getRoot(), vg);
+        handleGraph(axiomsIterator, owlClass.getIRI(), vg.getRoot(), vg, GraphNodeType.EXTERNAL);
       }
     }
     return vg;
