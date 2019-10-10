@@ -88,13 +88,15 @@ public class OwlDataExtractor {
     OWLClass owlEntity = factory.getOWLEntity(EntityType.CLASS, iri);
     for (OWLAnnotation annotation : EntitySearcher.getAnnotations(owlEntity, ontology, factory.getRDFSLabel()).collect(Collectors.toSet())) {
       OWLAnnotationValue owlav = owlEntity.getIRI();
-
       if (annotation.getValue().isLiteral()) {
         EntitySearcher.getAnnotations(owlEntity, ontology);
         //((OWLiteral)annotation.getValue());
         //owlav.asLiteral().toString();
-        owlav.annotationValue().asLiteral().toString();
-        factory.getRDFSLabel().typeIndex();
+
+       String o = owlav.annotationValue().asLiteral().toString(); 
+        //LOGGER.debug("iri : {}, label: {}", annotation.getValue(), annotation. );
+        //factory.getRDFSLabel().typeIndex();
+
 //        annotation.get
         // EntitySearcher.getAnnotations(iri, ontology);
       }
