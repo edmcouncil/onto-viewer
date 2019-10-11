@@ -71,6 +71,7 @@ public class WeaselOntologyVisitors {
 
             GraphNode endNode = new GraphNode(vg.nextId());
             endNode.setIri(object);
+            endNode.setType(type);
             String label = StringUtils.getFragment(object);
             endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + "Instance");
             endNode.setType(type);
@@ -137,8 +138,9 @@ public class WeaselOntologyVisitors {
 
               GraphNode endNode = new GraphNode(vg.nextId());
               endNode.setIri(object);
+              endNode.setType(type);
               String label = StringUtils.getFragment(object);
-              String labelPostfix = cardinality>1?"Instance-"+(i+1):"Instance";
+              String labelPostfix = cardinality > 1 ? "Instance-" + (i + 1) : "Instance";
               endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);
 
               GraphRelation rel = new GraphRelation(vg.nextId());
@@ -155,6 +157,7 @@ public class WeaselOntologyVisitors {
             case OBJECT_SOME_VALUES_FROM:
             case OBJECT_EXACT_CARDINALITY:
               GraphNode blankNode = new GraphNode(vg.nextId());
+              blankNode.setType(type);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
               relSomeVal.setLabel(StringUtils.getFragment(propertyIri));
@@ -166,7 +169,7 @@ public class WeaselOntologyVisitors {
               vg.setRoot(blankNode);
               result = axiom.getFiller();
               break;
-              
+
             default:
               System.out.println("Unsupported switch case (ObjectType): " + objectType);
 
@@ -192,6 +195,7 @@ public class WeaselOntologyVisitors {
 
             GraphNode endNode = new GraphNode(vg.nextId());
             endNode.setIri(object);
+            endNode.setType(type);
             String label = StringUtils.getFragment(object);
             endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1));
 
@@ -221,12 +225,12 @@ public class WeaselOntologyVisitors {
       @Override
       public OWLClassExpression visit(OWLObjectMinCardinality axiom) {
         int cardinality = axiom.getCardinality();
-        
-        if(cardinality==0){
+
+        if (cardinality == 0) {
           return null;
         }
-        
-         String propertyIri = null;
+
+        String propertyIri = null;
         propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
         OWLClassExpression result = null;
@@ -241,8 +245,9 @@ public class WeaselOntologyVisitors {
 
               GraphNode endNode = new GraphNode(vg.nextId());
               endNode.setIri(object);
+              endNode.setType(type);
               String label = StringUtils.getFragment(object);
-              String labelPostfix = cardinality>1?"Instance-"+(i+1):"Instance";
+              String labelPostfix = cardinality > 1 ? "Instance-" + (i + 1) : "Instance";
               endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);
 
               GraphRelation rel = new GraphRelation(vg.nextId());
@@ -259,6 +264,7 @@ public class WeaselOntologyVisitors {
             case OBJECT_SOME_VALUES_FROM:
             case OBJECT_EXACT_CARDINALITY:
               GraphNode blankNode = new GraphNode(vg.nextId());
+              blankNode.setType(type);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
               relSomeVal.setLabel(StringUtils.getFragment(propertyIri));
@@ -270,7 +276,7 @@ public class WeaselOntologyVisitors {
               vg.setRoot(blankNode);
               result = axiom.getFiller();
               break;
-              
+
             default:
               System.out.println("Unsupported switch case (ObjectType): " + objectType);
 

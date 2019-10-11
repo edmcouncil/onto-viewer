@@ -116,12 +116,12 @@ public class RestrictionGraphDataHandler {
         OWLSubClassOfAxiom axiomEl = axiom.accept(WeaselOntologyVisitors.getAxiomElement(elementIri));
 
         OWLClassExpression qrestriction = axiomEl.getSuperClass()
-            .accept(WeaselOntologyVisitors.superClassAxiom(vg, root,type));
+            .accept(WeaselOntologyVisitors.superClassAxiom(vg, root, type));
 
         while (qrestriction != null) {
           //axiomEl = qrestriction.accept(WeaselOntologyVisitors.getAxiomElement(elementIri));
           qrestriction = qrestriction
-              .accept(WeaselOntologyVisitors.superClassAxiom(vg, vg.getRoot(),type));
+              .accept(WeaselOntologyVisitors.superClassAxiom(vg, vg.getRoot(), type));
         }
 
         //extractor.extrackAxiomPropertyIri(axiomEl);
