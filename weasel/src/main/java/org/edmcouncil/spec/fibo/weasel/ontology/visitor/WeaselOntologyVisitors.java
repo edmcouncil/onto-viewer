@@ -140,7 +140,7 @@ public class WeaselOntologyVisitors {
               endNode.setIri(object);
               endNode.setType(type);
               String label = StringUtils.getFragment(object);
-              String labelPostfix = cardinality > 1 ? "Instance-" + (i + 1) : "Instance";
+              String labelPostfix = cardinality > 1 ? "-" + (i + 1) : "";
               endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);
 
               GraphRelation rel = new GraphRelation(vg.nextId());
@@ -226,9 +226,10 @@ public class WeaselOntologyVisitors {
       public OWLClassExpression visit(OWLObjectMinCardinality axiom) {
         int cardinality = axiom.getCardinality();
 
-        if (cardinality == 0) {
+       /* if (cardinality == 0) {
+          
           return null;
-        }
+        }*/
 
         String propertyIri = null;
         propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
@@ -246,8 +247,11 @@ public class WeaselOntologyVisitors {
               GraphNode endNode = new GraphNode(vg.nextId());
               endNode.setIri(object);
               endNode.setType(type);
+              if(cardinality==0){
+                endNode.setOptional(true);
+              }
               String label = StringUtils.getFragment(object);
-              String labelPostfix = cardinality > 1 ? "Instance-" + (i + 1) : "Instance";
+              String labelPostfix = cardinality > 1 ? "-" + (i + 1) : "";
               endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);
 
               GraphRelation rel = new GraphRelation(vg.nextId());
@@ -255,6 +259,7 @@ public class WeaselOntologyVisitors {
               rel.setLabel(StringUtils.getFragment(propertyIri));
               rel.setStart(node);
               rel.setEnd(endNode);
+              rel.setOptional(true);
               vg.addNode(endNode);
               vg.addRelation(rel);
 

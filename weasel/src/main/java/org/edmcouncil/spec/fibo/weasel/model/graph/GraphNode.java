@@ -47,9 +47,10 @@ public class GraphNode extends GraphElement {
   @Override
   public String toSimpleJson() {
     //TODO: String.format in this case
-    String shape = super.getLabel().isEmpty()?"": ", shape: 'box'";
-    String nodeType = (type==GraphNodeType.EXTERNAL?", color:'#C2FABC'":"");
-    String format = "{id: %s, label: '%s' " + shape +",font:{size:15}"+ nodeType +"}";
+    String shape = super.getLabel().isEmpty() ? "" : ", shape: 'box'";
+    String optional = this.optional ? ", shapeProperties:{borderDashes:true}" : "";
+    String nodeType = (type == GraphNodeType.INTERNAL ? ", color:'#C2FABC'" : "");
+    String format = "{id: %s, label: '%s' " + shape + ",font:{size:15}" + nodeType + optional + "}";
     return String.format(format, super.getId(), super.getLabel());
   }
 

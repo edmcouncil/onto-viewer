@@ -101,7 +101,7 @@ public class RestrictionGraphDataHandler {
       root.setIri(elementIri.toString());
       root.setType(type);
       String label = StringUtils.getFragment(elementIri);
-      root.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + "Instance");
+      root.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1));
       vg.addNode(root);
     }
 
