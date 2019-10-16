@@ -38,7 +38,7 @@ public class GraphRelation extends GraphElement {
   @Override
   public String toSimpleJson() {
     String optionalStyle = optional? ", dashes:true":"";
-    String format = "{from: %s, to: %s, arrows:'to', label: '%s' " + optionalStyle +"}";
+    String format = "{from: %s, to: %s, arrows:'to', label: '%s' " + optionalStyle +", color:{color:'black'}}";
     return String.format(format, start.getId(), end.getId(), super.getLabel());
   }
 

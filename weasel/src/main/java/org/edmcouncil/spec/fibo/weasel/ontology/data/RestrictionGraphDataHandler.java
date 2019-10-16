@@ -75,7 +75,7 @@ public class RestrictionGraphDataHandler {
     Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj).iterator();
 
     ViewerGraph vg = handleGraph(axiomsIterator, obj.getIRI());
-    vg = handleInheritedAxiomsGraph(obj, vg, ontology);
+    //vg = handleInheritedAxiomsGraph(obj, vg, ontology);
     return vg;
   }
 
