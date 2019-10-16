@@ -48,9 +48,14 @@ public class GraphNode extends GraphElement {
   public String toSimpleJson() {
     //TODO: String.format in this case
     String shape = super.getLabel().isEmpty() ? "" : ", shape: 'box'";
-    String optional = this.optional ? ", shapeProperties:{borderDashes:true}" : "";
-    String nodeType = (type == GraphNodeType.INTERNAL ? ", color:'#C2FABC'" : "");
-    String format = "{id: %s, label: '%s' " + shape + ",font:{size:15}" + nodeType + optional + "}";
+    String optionalVar = this.optional ? ", shapeProperties:{borderDashes:true}" : "";
+    String nodeStyle = "";
+    if (type == GraphNodeType.MAIN) {
+      nodeStyle = ", color: 'rgb(255,168,7)'";
+    } else if (type == GraphNodeType.INTERNAL) {
+      nodeStyle = ", color:'#C2FABC'";
+    }
+    String format = "{id: %s, label: '%s' " + shape + ",font:{size:15}" + nodeStyle + optionalVar + "}";
     return String.format(format, super.getId(), super.getLabel());
   }
 

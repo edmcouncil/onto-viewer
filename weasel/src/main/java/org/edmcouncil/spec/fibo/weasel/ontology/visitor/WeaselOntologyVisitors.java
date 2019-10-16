@@ -89,6 +89,7 @@ public class WeaselOntologyVisitors {
             rel.setLabel(StringUtils.getFragment(propertyIri));
             rel.setStart(node);
             rel.setEnd(endNode);
+            rel.setEndNodeType(type);
             vg.addNode(endNode);
             vg.addRelation(rel);
 
@@ -107,6 +108,7 @@ public class WeaselOntologyVisitors {
             relSomeVal.setLabel(StringUtils.getFragment(propertyIri));
             relSomeVal.setStart(node);
             relSomeVal.setEnd(blankNode);
+            relSomeVal.setEndNodeType(type);
             vg.addNode(blankNode);
             vg.addRelation(relSomeVal);
             vg.setRoot(blankNode);
@@ -161,6 +163,7 @@ public class WeaselOntologyVisitors {
               rel.setLabel(StringUtils.getFragment(propertyIri));
               rel.setStart(node);
               rel.setEnd(endNode);
+              rel.setEndNodeType(type);
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -180,6 +183,7 @@ public class WeaselOntologyVisitors {
               relSomeVal.setLabel(StringUtils.getFragment(propertyIri));
               relSomeVal.setStart(node);
               relSomeVal.setEnd(blankNode);
+              relSomeVal.setEndNodeType(type);
               vg.addNode(blankNode);
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
@@ -221,6 +225,7 @@ public class WeaselOntologyVisitors {
             rel.setLabel(StringUtils.getFragment(propertyIri));
             rel.setStart(node);
             rel.setEnd(endNode);
+            rel.setEndNodeType(type);
             vg.addNode(endNode);
             vg.addRelation(rel);
 
@@ -279,6 +284,7 @@ public class WeaselOntologyVisitors {
               rel.setStart(node);
               rel.setEnd(endNode);
               rel.setOptional(isOptional);
+              rel.setEndNodeType(type);
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -299,6 +305,7 @@ public class WeaselOntologyVisitors {
               relSomeVal.setStart(node);
               relSomeVal.setEnd(blankNode);
               relSomeVal.setOptional(isOptional);
+              relSomeVal.setEndNodeType(type);
               vg.addNode(blankNode);
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
@@ -354,6 +361,7 @@ public class WeaselOntologyVisitors {
               rel.setStart(node);
               rel.setEnd(endNode);
               rel.setOptional(isOptional);
+              rel.setEndNodeType(type);
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -374,6 +382,7 @@ public class WeaselOntologyVisitors {
               relSomeVal.setStart(node);
               relSomeVal.setEnd(blankNode);
               relSomeVal.setOptional(isOptional);
+              relSomeVal.setEndNodeType(type);
               vg.addNode(blankNode);
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
@@ -427,6 +436,7 @@ public class WeaselOntologyVisitors {
               rel.setStart(node);
               rel.setEnd(endNode);
               rel.setOptional(isOptional);
+              rel.setEndNodeType(type);
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -478,6 +488,7 @@ public class WeaselOntologyVisitors {
               rel.setStart(node);
               rel.setEnd(endNode);
               rel.setOptional(isOptional);
+              rel.setEndNodeType(type);
               vg.addNode(endNode);
               vg.addRelation(rel);
 

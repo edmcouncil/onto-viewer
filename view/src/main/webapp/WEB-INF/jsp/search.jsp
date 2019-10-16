@@ -46,14 +46,59 @@
               </c:choose>
             </div>
 
+            <div class="ml-2">
+              <label>
+                <input type="checkbox" name="edgesFilter" value="internal" checked="true">
+                internal
+              </label>
+              <label>
+                <input type="checkbox" name="edgesFilter" value="external" checked="true">
+                external
+              </label>
+            </div>
+            <div class="ml-2">
+              <label>
+                <input type="checkbox" name="edgesFilter" value="optional">
+                optional
+              </label>
+              <label>
+                <input type="checkbox" name="edgesFilter" value="non_optional" checked="true">
+                required
+              </label>
+            </div>
+
             <div id="ontograph"></div>
+
             <script type="text/javascript">
               ${clazz.graph.toJsVars()}
               // create a network
               var container = document.getElementById('ontograph');
+              const edgeFilters = document.getElementsByName('edgesFilter')
+
+              const edgesFilterValues = {
+                optional: false,
+                non_optional: true,
+                internal: true,
+                external: true
+              };
+
+              const edgesFilter = (edge) => {
+                return edgesFilterValues[edge.optional] && edgesFilterValues[edge.type];
+              };
+
+
+              edgeFilters.forEach(filter => filter.addEventListener('change', (e) => {
+                  const {value, checked} = e.target;
+                  edgesFilterValues[value] = checked;
+                  edgesView.refresh();
+
+                }));
+
+              const edgesView = new vis.DataView(edges, {filter: edgesFilter});
+
               var data = {
                 nodes: nodes,
-                edges: edges
+                edges: edgesView
               };
               var options = {
                 "edges": {
@@ -76,9 +121,9 @@
               }
               var network = new vis.Network(container, data, options);
               var startHeight = 0;
-              if(nodes.length!==0){
+              if (nodes.length !== 0) {
                 startHeight = 500;
-              } 
+              }
               var height = startHeight + 15 * nodes.length;
               var container = document.getElementById('ontograph');
               container.style.height = height + 'px';

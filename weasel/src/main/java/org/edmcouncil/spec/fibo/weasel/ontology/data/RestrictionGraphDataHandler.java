@@ -75,7 +75,7 @@ public class RestrictionGraphDataHandler {
     Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj).iterator();
 
     ViewerGraph vg = handleGraph(axiomsIterator, obj.getIRI());
-    //vg = handleInheritedAxiomsGraph(obj, vg, ontology);
+    vg = handleInheritedAxiomsGraph(obj, vg, ontology);
     return vg;
   }
 
@@ -99,7 +99,7 @@ public class RestrictionGraphDataHandler {
     if (root == null) {
       root = new GraphNode(vg.nextId());
       root.setIri(elementIri.toString());
-      root.setType(type);
+      root.setType(GraphNodeType.MAIN);
       String label = StringUtils.getFragment(elementIri);
       root.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1));
       vg.addNode(root);
