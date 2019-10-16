@@ -80,6 +80,7 @@ public class WeaselOntologyVisitors {
             endNode.setIri(object);
             endNode.setType(type);
             String label = StringUtils.getFragment(object);
+            label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
             endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1));
             endNode.setType(type);
 
@@ -151,6 +152,7 @@ public class WeaselOntologyVisitors {
               endNode.setIri(object);
               endNode.setType(type);
               String label = StringUtils.getFragment(object);
+              label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
               String labelPostfix = cardinality > 1 ? "-" + (i + 1) : "";
               endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);
 
@@ -210,6 +212,7 @@ public class WeaselOntologyVisitors {
             endNode.setIri(object);
             endNode.setType(type);
             String label = StringUtils.getFragment(object);
+            label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
             label = label.equals("Literal") ? label : label.substring(0, 1).toLowerCase() + label.substring(1);
             endNode.setLabel(label);
 
@@ -239,6 +242,7 @@ public class WeaselOntologyVisitors {
       @Override
       public OWLClassExpression visit(OWLObjectMinCardinality axiom) {
         int cardinality = axiom.getCardinality();
+        boolean isOptional = cardinality == 0;
         cardinality = cardinality == 0 ? 1 : cardinality;
         /* if (cardinality == 0) {
           
@@ -265,6 +269,7 @@ public class WeaselOntologyVisitors {
               }
               String label = StringUtils.getFragment(object);
               String labelPostfix = cardinality > 1 ? "-" + (i + 1) : "";
+              label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
               label = label.equals("Literal") ? label : label.substring(0, 1).toLowerCase() + label.substring(1);
               endNode.setLabel(label + labelPostfix);
 
@@ -273,7 +278,7 @@ public class WeaselOntologyVisitors {
               rel.setLabel(StringUtils.getFragment(propertyIri));
               rel.setStart(node);
               rel.setEnd(endNode);
-              rel.setOptional(true);
+              rel.setOptional(isOptional);
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -293,6 +298,7 @@ public class WeaselOntologyVisitors {
               relSomeVal.setLabel(StringUtils.getFragment(propertyIri));
               relSomeVal.setStart(node);
               relSomeVal.setEnd(blankNode);
+              relSomeVal.setOptional(isOptional);
               vg.addNode(blankNode);
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
@@ -311,6 +317,7 @@ public class WeaselOntologyVisitors {
       @Override
       public OWLClassExpression visit(OWLObjectMaxCardinality axiom) {
         int cardinality = axiom.getCardinality();
+        boolean isOptional = cardinality == 1;
         cardinality = cardinality == 0 ? 1 : cardinality;
         /* if (cardinality == 0) {
           
@@ -337,6 +344,7 @@ public class WeaselOntologyVisitors {
               }
               String label = StringUtils.getFragment(object);
               String labelPostfix = cardinality > 1 ? "-" + (i + 1) : "";
+              label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
               label = label.equals("Literal") ? label : label.substring(0, 1).toLowerCase() + label.substring(1);
               endNode.setLabel(label + labelPostfix);
 
@@ -345,7 +353,7 @@ public class WeaselOntologyVisitors {
               rel.setLabel(StringUtils.getFragment(propertyIri));
               rel.setStart(node);
               rel.setEnd(endNode);
-              rel.setOptional(true);
+              rel.setOptional(isOptional);
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -365,6 +373,7 @@ public class WeaselOntologyVisitors {
               relSomeVal.setLabel(StringUtils.getFragment(propertyIri));
               relSomeVal.setStart(node);
               relSomeVal.setEnd(blankNode);
+              relSomeVal.setOptional(isOptional);
               vg.addNode(blankNode);
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
@@ -383,6 +392,7 @@ public class WeaselOntologyVisitors {
       @Override
       public OWLClassExpression visit(OWLDataMaxCardinality axiom) {
         int cardinality = axiom.getCardinality();
+        boolean isOptional = cardinality == 1;
         cardinality = cardinality == 0 ? 1 : cardinality;
         /* if (cardinality == 0) {
           
@@ -407,6 +417,7 @@ public class WeaselOntologyVisitors {
               endNode.setType(type);
               String label = StringUtils.getFragment(object);
               String labelPostfix = cardinality > 1 ? "-" + (i + 1) : "";
+              label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
               label = label.equals("Literal") ? label : label.substring(0, 1).toLowerCase() + label.substring(1);
               endNode.setLabel(label + labelPostfix);
 
@@ -415,6 +426,7 @@ public class WeaselOntologyVisitors {
               rel.setLabel(StringUtils.getFragment(propertyIri));
               rel.setStart(node);
               rel.setEnd(endNode);
+              rel.setOptional(isOptional);
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -431,6 +443,7 @@ public class WeaselOntologyVisitors {
       @Override
       public OWLClassExpression visit(OWLDataMinCardinality axiom) {
         int cardinality = axiom.getCardinality();
+        boolean isOptional = cardinality == 0;
         cardinality = cardinality == 0 ? 1 : cardinality;
         /* if (cardinality == 0) {
           
@@ -455,6 +468,7 @@ public class WeaselOntologyVisitors {
               endNode.setType(type);
               String label = StringUtils.getFragment(object);
               String labelPostfix = cardinality > 1 ? "-" + (i + 1) : "";
+              label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
               label = label.equals("Literal") ? label : label.substring(0, 1).toLowerCase() + label.substring(1);
               endNode.setLabel(label + labelPostfix);
 
@@ -463,6 +477,7 @@ public class WeaselOntologyVisitors {
               rel.setLabel(StringUtils.getFragment(propertyIri));
               rel.setStart(node);
               rel.setEnd(endNode);
+              rel.setOptional(isOptional);
               vg.addNode(endNode);
               vg.addRelation(rel);
 
