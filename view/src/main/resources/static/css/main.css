@@ -69,7 +69,7 @@ em{
 }
 
 a em:hover{
-   color: #a03226;
+  color: #a03226;
 }
 
 ul, #myUL {
@@ -110,6 +110,24 @@ ul, #myUL {
   display: block;
 }
 
-/*#ontograph {
-  height: 600px;
-}*/
+.custom-menu {
+  display: none;
+  z-index: 1000;
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid #CCC;
+  white-space: nowrap;
+  font-family: sans-serif;
+  background: #FFF;
+  color: #333;
+  border-radius: 5px;
+}
+
+.custom-menu li {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.custom-menu li:hover {
+  background-color: #DEF;
+}

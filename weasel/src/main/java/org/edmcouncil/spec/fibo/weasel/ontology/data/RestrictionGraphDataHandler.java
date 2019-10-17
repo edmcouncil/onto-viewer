@@ -1,6 +1,9 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
@@ -89,7 +92,7 @@ public class RestrictionGraphDataHandler {
       Iterator<T> axiomsIterator,
       IRI elementIri,
       GraphNode root,
-      ViewerGraph vg, 
+      ViewerGraph vg,
       GraphNodeType type) {
 
     if (vg == null) {
@@ -115,22 +118,40 @@ public class RestrictionGraphDataHandler {
       if (isRestriction && axiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
         OWLSubClassOfAxiom axiomEl = axiom.accept(WeaselOntologyVisitors.getAxiomElement(elementIri));
 
-        OWLClassExpression qrestriction = axiomEl.getSuperClass()
+        Map<GraphNode, OWLClassExpression> qrestrictions = axiomEl.getSuperClass()
             .accept(WeaselOntologyVisitors.superClassAxiom(vg, root, type));
 
-        while (qrestriction != null) {
-          //axiomEl = qrestriction.accept(WeaselOntologyVisitors.getAxiomElement(elementIri));
-          qrestriction = qrestriction
-              .accept(WeaselOntologyVisitors.superClassAxiom(vg, vg.getRoot(), type));
+        if (qrestrictions != null && !qrestrictions.isEmpty()) {
+          for (Map.Entry<GraphNode, OWLClassExpression> entry : qrestrictions.entrySet()) {
+            handleRecursivelyRestrictions(entry.getValue(), vg, entry.getKey(), type);
+          }
         }
-
-        //extractor.extrackAxiomPropertyIri(axiomEl);
       }
     }
     vg.setRoot(root);
-
-    //System.out.println(vg.toJsVars());
     return vg;
+  }
+
+  private void handleRecursivelyRestrictions(
+      OWLClassExpression expression,
+      ViewerGraph vg,
+      GraphNode root,
+      GraphNodeType type) {
+
+    LOGGER.debug("[Expression] Process expression: {}", expression.toString());
+
+    if (expression == null) {
+      return;
+    }
+
+    Map<GraphNode, OWLClassExpression> expressionsMap = expression
+        .accept(WeaselOntologyVisitors.superClassAxiom(vg, root, type));
+
+    if (expressionsMap != null && !expressionsMap.isEmpty()) {
+      expressionsMap.entrySet().forEach((entry) -> {
+        handleRecursivelyRestrictions(entry.getValue(), vg, entry.getKey(), type);
+      });
+    }
   }
 
   private ViewerGraph handleInheritedAxiomsGraph(OWLClass clazz, ViewerGraph vg, OWLOntology ontology) {
