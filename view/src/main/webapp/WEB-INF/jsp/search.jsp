@@ -81,21 +81,15 @@
                 internal: true,
                 external: true
               };
-
               const edgesFilter = (edge) => {
                 return edgesFilterValues[edge.optional] && edgesFilterValues[edge.type];
               };
-
-
               edgeFilters.forEach(filter => filter.addEventListener('change', (e) => {
                   const {value, checked} = e.target;
                   edgesFilterValues[value] = checked;
                   edgesView.refresh();
-
                 }));
-
               const edgesView = new vis.DataView(edges, {filter: edgesFilter});
-
               var data = {
                 nodes: nodes,
                 edges: edgesView
@@ -110,7 +104,7 @@
                 },
                 "physics": {
                   "forceAtlas2Based": {
-                    "gravitationalConstant": -89,
+                    "gravitationalConstant": -95,
                     "centralGravity": 0.005,
                     "springLength": 200,
                     "springConstant": 0.415
@@ -118,7 +112,7 @@
                   "minVelocity": 0.75,
                   "solver": "forceAtlas2Based"
                 }
-              }
+              };
               var network = new vis.Network(container, data, options);
               var startHeight = 0;
               if (nodes.length !== 0) {
@@ -128,22 +122,37 @@
               var container = document.getElementById('ontograph');
               container.style.height = height + 'px';
               network.redraw();
-
               network.on("oncontext", function (params) {
                 params.event = "[original event]";
                 console.log('<h2>oncontext (right click) event:</h2>' + JSON.stringify(params, null, 4));
-                console.log('pointer', params.pointer);
-                // Avoid the real one
-                event.preventDefault();
+                var selectedNodes = params.nodes;
+                var selectedEdges = params.edges;
+                console.log(selectedNodes);
+                console.log(selectedEdges);
 
-                // Show contextmenu
+                if (selectedNodes[0] !== undefined) {
+                  var sNode = selectedNodes[0];
+                  console.log(sNode);
+                  nodes.forEach(function (entry) {
+                    if (entry.id === sNode) {
+                      localStorage.setItem("selectElementIri", entry.iri);
+                    }
+                  });
+                } else if (selectedEdges[0] !== undefined) {
+                  var sEgde = selectedEdges[0];
+                  console.log(sEgde);
+                  edgesView.forEach(function (entry) {
+                    if (entry.id === sEgde) {
+                      localStorage.setItem("selectElementIri", entry.iri);
+                    }
+                  });
+                }
+
+                event.preventDefault();
                 $(".custom-menu").finish().toggle(100).
-                        // In the right position (the mouse)
                         css({
-                          top: event.pageY -30 + "px",
-                          left: event.pageX -30 + "px"
-                          //top: event.pageY - 130 + "px",
-                          //left: params.pointer.DOM.x + "px"
+                          top: event.pageY - 20 + "px",
+                          left: event.pageX - 20 + "px"
                         });
               });
             </script>
@@ -153,29 +162,26 @@
 
       </div>
     </div>
-    <div class='custom-menu'>
-      <ul>
-        
-        <li data-action = "first">Show info</li>
-      </ul>
-    </div>
+
+    <ul class='custom-menu'>
+      <li data-action = "goto">Show info</li>
+    </ul>
     <script type="text/javascript">
-      $(".custom-menu").bind("mousedown", function (e) {
-        console.log("mouse down");
-        // If the clicked element is not the menu
-        if (!$(e.target).parents(".custom-menu").length > 0) {
-          // Hide it
-          $(".custom-menu").hide(100);
-        }
-      });
+
       $(".custom-menu").bind("mouseleave", function (e) {
         console.log("mouse leave");
         $(".custom-menu").hide(100);
-        // If the clicked element is not the menu
-        /*if (!$(e.target).parents(".custom-menu").length > 0) {
-         // Hide it
-         
-         }*/
+      });
+      $(".custom-menu li").click(function () {
+
+        switch ($(this).attr("data-action")) {
+
+          case "goto":
+            $iri = localStorage.getItem("selectElementIri");
+            window.location.href = "/search?query=" + $iri;
+            break;
+        }
+        $(".custom-menu").hide(100);
       });
     </script>
     <jsp:directive.include file="page/elements/footer.jsp" />

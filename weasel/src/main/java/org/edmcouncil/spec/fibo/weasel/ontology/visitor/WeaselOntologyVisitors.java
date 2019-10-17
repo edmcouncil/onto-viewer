@@ -78,13 +78,13 @@ public class WeaselOntologyVisitors {
         switch (objectType) {
           case OWL_CLASS:
             OWLClassExpression expression = someValuesFromAxiom.getFiller().getObjectComplementOf();
-            String object = null;
-            object = extractStringObject(expression, object);
+            String iri = null;
+            iri = extractStringObject(expression, iri);
 
             GraphNode endNode = new GraphNode(vg.nextId());
-            endNode.setIri(object);
+            endNode.setIri(iri);
             endNode.setType(type);
-            String label = StringUtils.getFragment(object);
+            String label = StringUtils.getFragment(iri);
             label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
             endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1));
             endNode.setType(type);
@@ -146,13 +146,13 @@ public class WeaselOntologyVisitors {
           switch (objectType) {
             case OWL_CLASS:
               OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
-              String object = null;
-              object = extractStringObject(expression, object);
+              String iri = null;
+              iri = extractStringObject(expression, iri);
 
               GraphNode endNode = new GraphNode(vg.nextId());
-              endNode.setIri(object);
+              endNode.setIri(iri);
               endNode.setType(type);
-              String label = StringUtils.getFragment(object);
+              String label = StringUtils.getFragment(iri);
               label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
               String labelPostfix = cardinality > 1 ? "-" + (i + 1) : "";
               endNode.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1) + labelPostfix);

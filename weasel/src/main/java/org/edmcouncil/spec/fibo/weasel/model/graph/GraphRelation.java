@@ -46,10 +46,12 @@ public class GraphRelation extends GraphElement {
 
   @Override
   public String toSimpleJson() {
+    String outIri = ", iri:'" + super.getIri() + "'";
     String optionalStyle = optional ? ", dashes:true" : "";
     String optionalVariable = ", optional:" + (isOptional() ? "'optional'" : "'non_optional'");
     String typeVariable = ", type:" + (endNodeType == GraphNodeType.INTERNAL ? "'internal'" : "'external'");
-    String format = "{from: %s, to: %s, arrows:'to', label: '%s' " + optionalStyle + ", color:{color:'black'}" + optionalVariable + typeVariable + "}";
+    String format = "{from: %s, to: %s, arrows:'to', label: '%s' " + optionalStyle + ", color:{color:'black'}"
+        + optionalVariable + typeVariable + outIri + "}";
     return String.format(format, start.getId(), end.getId(), super.getLabel());
   }
 
