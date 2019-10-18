@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data;
+package org.edmcouncil.spec.fibo.weasel.ontology.data.handler;
 
 import java.util.Iterator;
 import java.util.Optional;
@@ -12,6 +12,8 @@ import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
 import org.semanticweb.owlapi.io.OWLObjectRenderer;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;

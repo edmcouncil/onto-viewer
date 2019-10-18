@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data;
+package org.edmcouncil.spec.fibo.weasel.ontology.data.handler;
 
 import java.util.HashSet;
 import java.util.Iterator;

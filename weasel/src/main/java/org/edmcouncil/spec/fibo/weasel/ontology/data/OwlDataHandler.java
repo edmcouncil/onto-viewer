@@ -1,5 +1,9 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.IndividualDataHandler;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.FiboDataHandler;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.AnnotationsDataHandler;
 import java.util.ArrayList;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetailsDetails;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
@@ -31,6 +35,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualPr
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
 import org.edmcouncil.spec.fibo.weasel.ontology.visitor.WeaselOntologyVisitors;
 import org.edmcouncil.spec.fibo.weasel.utils.StringSplitter;
 import org.semanticweb.owlapi.model.AxiomType;
@@ -69,6 +74,8 @@ public class OwlDataHandler {
   private AnnotationsDataHandler annotationsDataHandler;
   @Autowired
   private IndividualDataHandler individualDataHandler;
+  @Autowired
+  private LabelExtractor labelExtractor;
 
   public OwlListDetailsDetails handleParticularClass(IRI iri, OWLOntology ontology) {
     OwlListDetailsDetails resultDetails = new OwlListDetailsDetails();
@@ -82,7 +89,9 @@ public class OwlDataHandler {
 
         handleParticularSubClassOf(ontology, clazz);
 
-        resultDetails.setLabel(StringSplitter.getFragment(clazz.getIRI()));
+        String label = labelExtractor.getLabelOrDefaultFragment(clazz, ontology);
+
+        resultDetails.setLabel(label);
 
         OwlDetailsProperties<PropertyValue> axioms = handleAxioms(clazz, ontology);
 
@@ -153,7 +162,7 @@ public class OwlDataHandler {
       OWLOntology ontology) {
 
     Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handleAxioms(axiomsIterator, obj.getIRI(), ontology);
   }
 
   private OwlDetailsProperties<PropertyValue> handleAxioms(
@@ -161,7 +170,7 @@ public class OwlDataHandler {
       OWLOntology ontology) {
 
     Iterator<OWLObjectPropertyAxiom> axiomsIterator = ontology.axioms(obj).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handleAxioms(axiomsIterator, obj.getIRI(), ontology);
   }
 
   private OwlDetailsProperties<PropertyValue> handleAxioms(
@@ -169,7 +178,7 @@ public class OwlDataHandler {
       OWLOntology ontology) {
 
     Iterator<OWLDataPropertyAxiom> axiomsIterator = ontology.axioms(obj).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handleAxioms(axiomsIterator, obj.getIRI(), ontology);
   }
 
   private OwlDetailsProperties<PropertyValue> handleAxioms(
@@ -177,7 +186,7 @@ public class OwlDataHandler {
       OWLOntology ontology) {
 
     Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handleAxioms(axiomsIterator, obj.getIRI(), ontology);
   }
 
   private OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, IRI objIri, OWLOntology ontology, WeaselOwlType type) {
@@ -191,11 +200,14 @@ public class OwlDataHandler {
           OWLEntity entity = createEntity(ontology, sci, type);
           LOGGER.trace("\t{} Sub Element Of {}", StringSplitter.getFragment(objIri),
               StringSplitter.getFragment(entity.getIRI()));
+          
           List<PropertyValue> subTax = getSubElements(entity, ontology, type);
+
+          String label = labelExtractor.getLabelOrDefaultFragment(objIri, ontology);
 
           OwlTaxonomyImpl subCLassTax = extractTaxonomy(subTax, entity.getIRI(), ontology, type);
 
-          OwlTaxonomyValue val1 = new OwlTaxonomyValue(WeaselOwlType.STRING, StringSplitter.getFragment(objIri));
+          OwlTaxonomyValue val1 = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
           OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
           OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(val1, val2);
 
@@ -212,7 +224,8 @@ public class OwlDataHandler {
     } else {
 
       LOGGER.trace("\t\tEnd leaf on {}", StringSplitter.getFragment(objIri));
-      OwlTaxonomyValue val1 = new OwlTaxonomyValue(WeaselOwlType.STRING, StringSplitter.getFragment(objIri));
+      String label = labelExtractor.getLabelOrDefaultFragment(objIri, ontology);
+      OwlTaxonomyValue val1 = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
       OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
       OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(val1, val2);
       List<OwlTaxonomyElementImpl> currentTax = new LinkedList<>();
@@ -249,7 +262,9 @@ public class OwlDataHandler {
   }
 
   private <T extends OWLAxiom> OwlDetailsProperties<PropertyValue> handleAxioms(
-      Iterator<T> axiomsIterator, IRI elementIri) {
+      Iterator<T> axiomsIterator,
+      IRI elementIri,
+      OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     String iriFragment = elementIri.getFragment();
     String splitFragment = StringSplitter.getFragment(elementIri);
@@ -279,6 +294,7 @@ public class OwlDataHandler {
         String eSignature = rendering.render(next);
         eSignature = fixRenderedIri && iriFragment.equals(eSignature) ? splitFragment : eSignature;
         String eIri = next.getIRI().toString();
+        labelExtractor.getLabelOrDefaultFragment(next.getIRI(), ontology);
         opv.addEntityValues(eSignature, eIri);
       }
       result.addProperty(key, opv);
