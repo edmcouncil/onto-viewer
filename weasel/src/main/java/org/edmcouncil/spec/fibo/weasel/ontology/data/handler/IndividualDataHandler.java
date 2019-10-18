@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data;
+package org.edmcouncil.spec.fibo.weasel.ontology.data.handler;
 
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;

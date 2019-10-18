@@ -1,9 +1,8 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data;
+package org.edmcouncil.spec.fibo.weasel.ontology.data.extractor;
 
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
-import org.semanticweb.owlapi.model.OWLAnnotationValue;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,8 +29,9 @@ public class OwlDataExtractor {
 
   /**
    * This method is used to extract annotation type for ontology.
+   *
    * @param next
-   * @return 
+   * @return
    */
   public WeaselOwlType extractAnnotationType(OWLAnnotation next) {
     if (next.getValue().isIRI()) {
@@ -51,8 +51,9 @@ public class OwlDataExtractor {
 
   public String extractAnyUriToString(String anyUri) {
     String uriString = anyUri.replaceFirst("\"", "");
-    uriString = uriString.substring(0, uriString.length()-13);
+    uriString = uriString.substring(0, uriString.length() - 13);
     return uriString;
-}
   }
 
+
+}
