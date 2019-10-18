@@ -114,4 +114,8 @@ public class ViewerGraph {
     return sb.toString();
   }
 
+  public boolean isEmpty() {
+    return nodes.isEmpty() && relations.isEmpty();
+  }
+
 }

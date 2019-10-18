@@ -45,27 +45,28 @@
                 </c:otherwise>
               </c:choose>
             </div>
-
-            <div class="ml-2">
-              <label>
-                <input type="checkbox" name="edgesFilter" value="internal" checked="true">
-                internal
-              </label>
-              <label>
-                <input type="checkbox" name="edgesFilter" value="external" checked="true">
-                external
-              </label>
-            </div>
-            <div class="ml-2">
-              <label>
-                <input type="checkbox" name="edgesFilter" value="optional" checked="true">
-                optional
-              </label>
-              <label>
-                <input type="checkbox" name="edgesFilter" value="non_optional" checked="true">
-                required
-              </label>
-            </div>
+            <c:if test="${not empty clazz.graph}">
+              <div class="ml-2">
+                <label>
+                  <input type="checkbox" name="edgesFilter" value="internal" checked="true">
+                  class specyfic
+                </label>
+                <label>
+                  <input type="checkbox" name="edgesFilter" value="external" checked="true">
+                  inherited
+                </label>
+              </div>
+              <div class="ml-2">
+                <label>
+                  <input type="checkbox" name="edgesFilter" value="optional" checked="true">
+                  optional
+                </label>
+                <label>
+                  <input type="checkbox" name="edgesFilter" value="non_optional" checked="true">
+                  required
+                </label>
+              </div>
+            </c:if>
 
             <div id="ontograph"></div>
 
@@ -73,7 +74,7 @@
               ${clazz.graph.toJsVars()}
               // create a network
               var container = document.getElementById('ontograph');
-              const edgeFilters = document.getElementsByName('edgesFilter')
+              const edgeFilters = document.getElementsByName('edgesFilter');
 
               const edgesFilterValues = {
                 optional: true,
@@ -84,6 +85,10 @@
               const edgesFilter = (edge) => {
                 return edgesFilterValues[edge.optional] && edgesFilterValues[edge.type];
               };
+              edgeFilters.forEach(filter => function (e) {
+                  filter.checked = "checked";
+                });
+
               edgeFilters.forEach(filter => filter.addEventListener('change', (e) => {
                   const {value, checked} = e.target;
                   edgesFilterValues[value] = checked;
@@ -120,9 +125,11 @@
               }
               var height = startHeight + 20 * nodes.length;
               var container = document.getElementById('ontograph');
+
               container.style.height = height + 'px';
               network.redraw();
-              network.on("oncontext", function (params) {
+
+              network.on("doubleClick", function (params) {
                 params.event = "[original event]";
                 console.log('<h2>oncontext (right click) event:</h2>' + JSON.stringify(params, null, 4));
                 var selectedNodes = params.nodes;
@@ -135,7 +142,8 @@
                   console.log(sNode);
                   nodes.forEach(function (entry) {
                     if (entry.id === sNode) {
-                      localStorage.setItem("selectElementIri", entry.iri);
+                      window.location.href = "/search?query=" + entry.iri;
+                      //localStorage.setItem("selectElementIri", );
                     }
                   });
                 } else if (selectedEdges[0] !== undefined) {
@@ -143,17 +151,17 @@
                   console.log(sEgde);
                   edgesView.forEach(function (entry) {
                     if (entry.id === sEgde) {
-                      localStorage.setItem("selectElementIri", entry.iri);
+                      window.location.href = "/search?query=" + entry.iri;
                     }
                   });
                 }
-
-                event.preventDefault();
-                $(".custom-menu").finish().toggle(100).
-                        css({
-                          top: event.pageY - 20 + "px",
-                          left: event.pageX - 20 + "px"
-                        });
+                //show menu on right click on graph
+                /*event.preventDefault();
+                 $(".custom-menu").finish().toggle(100).
+                 css({
+                 top: event.pageY - 20 + "px",
+                 left: event.pageX - 20 + "px"
+                 });*/
               });
             </script>
           </div>
@@ -162,28 +170,28 @@
 
       </div>
     </div>
-
-    <ul class='custom-menu'>
-      <li data-action = "goto">Show info</li>
-    </ul>
-    <script type="text/javascript">
-
-      $(".custom-menu").bind("mouseleave", function (e) {
-        console.log("mouse leave");
-        $(".custom-menu").hide(100);
-      });
-      $(".custom-menu li").click(function () {
-
-        switch ($(this).attr("data-action")) {
-
-          case "goto":
-            $iri = localStorage.getItem("selectElementIri");
-            window.location.href = "/search?query=" + $iri;
-            break;
-        }
-        $(".custom-menu").hide(100);
-      });
-    </script>
+    <!--
+        <ul class='custom-menu'>
+          <li data-action = "goto">Show info</li>
+        </ul>
+        <script type="text/javascript">
+    
+          $(".custom-menu").bind("mouseleave", function (e) {
+            console.log("mouse leave");
+            $(".custom-menu").hide(100);
+          });
+          $(".custom-menu li").click(function () {
+    
+            switch ($(this).attr("data-action")) {
+    
+              case "goto":
+                $iri = localStorage.getItem("selectElementIri");
+                window.location.href = "/search?query=" + $iri;
+                break;
+            }
+            $(".custom-menu").hide(100);
+          });
+        </script>-->
     <jsp:directive.include file="page/elements/footer.jsp" />
   </body>
 
