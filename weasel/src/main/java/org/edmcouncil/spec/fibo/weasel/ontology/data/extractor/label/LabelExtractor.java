@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
+import org.semanticweb.owlapi.model.EntityType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLEntity;
@@ -52,7 +53,8 @@ public class LabelExtractor {
   }
 
   public String getLabelOrDefaultFragment(IRI iri, OWLOntology ontology) {
-    OWLEntity entity = ontology.entitiesInSignature(iri).findFirst().orElse(null);
+    OWLEntity entity = ontology.entitiesInSignature(iri).findFirst().orElse(
+    ontology.getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
     return getLabelOrDefaultFragment(entity, ontology);
   }
 }
