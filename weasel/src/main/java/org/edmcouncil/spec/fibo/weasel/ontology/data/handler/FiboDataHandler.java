@@ -69,6 +69,8 @@ public class FiboDataHandler {
   private IndividualDataHandler individualDataHandler;
   @Autowired
   private AppConfiguration configuration;
+  @Autowired
+  private CustomDataFactory customDataFactory;
 
   private String resourcesClassKey;
   private String resourcesDataPropertyKey;
@@ -163,7 +165,7 @@ public class FiboDataHandler {
     OwlDetailsProperties<PropertyValue> annotations = null;
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
-        annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations());
+        annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations(), ontology);
         OntologyResources ors = getOntologyResources(iri.toString(), ontology);
         for (Map.Entry<String, List<PropertyValue>> entry : ors.getResources().entrySet()) {
           for (PropertyValue propertyValue : entry.getValue()) {
@@ -260,7 +262,7 @@ public class FiboDataHandler {
     owlOntology.classesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = CustomDataFactory.createAnnotationIri(istring);
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring, owlOntology);
           return pv;
         })
         .forEachOrdered(c -> ontoResources
@@ -269,7 +271,7 @@ public class FiboDataHandler {
     owlOntology.dataPropertiesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = CustomDataFactory.createAnnotationIri(istring);
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring, owlOntology);
           return pv;
         })
         .forEachOrdered(c -> ontoResources
@@ -278,7 +280,7 @@ public class FiboDataHandler {
     owlOntology.objectPropertiesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = CustomDataFactory.createAnnotationIri(istring);
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring, owlOntology);
           return pv;
         })
         .forEachOrdered(c -> ontoResources
@@ -287,7 +289,7 @@ public class FiboDataHandler {
     owlOntology.individualsInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = CustomDataFactory.createAnnotationIri(istring);
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring, owlOntology);
           return pv;
         })
         .forEachOrdered(c -> ontoResources
@@ -381,7 +383,7 @@ public class FiboDataHandler {
     if (resources == null) {
       loadAllOntologyResources(ontology);
     }
-    if(modules == null){
+    if (modules == null) {
       getAllModulesData(ontology);
     }
     String ontologyIri = findElementInOntology(elementIri);
@@ -435,7 +437,7 @@ public class FiboDataHandler {
       track.add(node.getIri());
       return true;
     }
-    
+
     if (node.getIri().equals(ontologyIri)) {
       track.add(node.getIri());
       return true;

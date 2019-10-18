@@ -76,8 +76,8 @@ public class OwlDataHandler {
   private AnnotationsDataHandler annotationsDataHandler;
   @Autowired
   private IndividualDataHandler individualDataHandler;
-      @Autowired
-    private LabelExtractor labelExtractor;
+  @Autowired
+  private LabelExtractor labelExtractor;
 
   public OwlListDetails handleParticularClass(IRI iri, OWLOntology ontology) {
     OwlListDetails resultDetails = new OwlListDetails();
@@ -292,7 +292,7 @@ public class OwlDataHandler {
         opv.setType(WeaselOwlType.TAXONOMY);
       }
       
-      processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, opv, value);
+      processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, opv, value, ontology);
            
       result.addProperty(key, opv);
     }
@@ -306,7 +306,8 @@ public class OwlDataHandler {
       String iriFragment,
       String splitFragment,
       OwlAxiomPropertyValue opv,
-      String renderedVal) {
+      String renderedVal,
+      OWLOntology ontology) {
     String argPattern = "/arg%s/";
     String[] splited = renderedVal.split(" ");
     String openingParenthesis = "(";
@@ -355,7 +356,8 @@ public class OwlDataHandler {
       String eIri = next.getIRI().toString();
       OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
       axiomPropertyEntity.setIri(eIri);
-      axiomPropertyEntity.setLabel(eSignature);
+      String label = labelExtractor.getLabelOrDefaultFragment(next.getIRI(), ontology);
+      axiomPropertyEntity.setLabel(label);
       opv.addEntityValues(key, axiomPropertyEntity);
 
     }

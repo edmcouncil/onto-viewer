@@ -16,6 +16,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.data.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
 import org.semanticweb.owlapi.io.OWLObjectRenderer;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.IRI;
@@ -39,7 +40,8 @@ public class AnnotationsDataHandler {
 
   @Autowired
   private OwlDataExtractor dataExtractor;
-
+  @Autowired
+  private CustomDataFactory customDataFactory;
   @Autowired
   private AppConfiguration appConfig;
 
@@ -58,7 +60,7 @@ public class AnnotationsDataHandler {
       opv.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
-        opv = CustomDataFactory.createAnnotationIri(value);
+        opv = customDataFactory.createAnnotationIri(value, ontology);
 
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
@@ -69,7 +71,7 @@ public class AnnotationsDataHandler {
           checkUriAsIri(opv, value);
           opv.setValue(value);
           if (opv.getType() == WeaselOwlType.IRI) {
-            opv = CustomDataFactory.createAnnotationIri(value);
+            opv = customDataFactory.createAnnotationIri(value, ontology);
           }
         }
       }
@@ -80,7 +82,7 @@ public class AnnotationsDataHandler {
     return result;
   }
 
-  public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations) {
+  public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
     Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
@@ -95,7 +97,7 @@ public class AnnotationsDataHandler {
 
       if (next.getValue().isIRI()) {
 
-        opv = CustomDataFactory.createAnnotationIri(value);
+        opv = customDataFactory.createAnnotationIri(value, ontology);
 
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
@@ -107,7 +109,7 @@ public class AnnotationsDataHandler {
           opv.setValue(value);
           checkUriAsIri(opv, value);
           if (opv.getType() == WeaselOwlType.IRI) {
-            opv = CustomDataFactory.createAnnotationIri(value);
+            opv = customDataFactory.createAnnotationIri(value, ontology);
           }
         }
       }

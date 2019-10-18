@@ -18,7 +18,7 @@
               <div class="row my-0 py-0">
                 <ol  class="breadcrumb my-0 py-0 col-12">
                   <c:forEach items="${taxonomyList}" var="taxEle">
-                    <li class="breadcrumb-item" aria-current="page"><weasel:RenderTaxonomyElement element="${taxEle}" searchPath="${context}"/></li>
+                    <li class="breadcrumb-item" aria-current="page"><b><weasel:RenderTaxonomyElement element="${taxEle}" searchPath="${context}"/></b></li>
                   </c:forEach>
                 </ol>
               </div>

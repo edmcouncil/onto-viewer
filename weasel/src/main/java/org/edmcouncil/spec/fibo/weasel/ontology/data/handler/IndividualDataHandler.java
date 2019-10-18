@@ -6,6 +6,7 @@ import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -14,6 +15,7 @@ import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,12 +24,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class IndividualDataHandler {
 
+  @Autowired
+  private LabelExtractor labelExtractor;
+
   /**
    * Handle all individual for OWLClass given on parameter.
    *
    * @param ontology
    * @param clazz
-   * @return 
+   * @return
    */
   public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
@@ -36,10 +41,10 @@ public class IndividualDataHandler {
     NodeSet<OWLNamedIndividual> instances = reasoner.getInstances(clazz, true);
 
     for (OWLNamedIndividual namedIndividual : instances.entities().collect(Collectors.toSet())) {
-      String fragment = StringUtils.getFragment(namedIndividual.getIRI());
       OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
       s.setType(WeaselOwlType.INSTANCES);
-      s.setValue(new PairImpl(fragment, namedIndividual.getIRI().toString()));
+      String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual, ontology);
+      s.setValue(new PairImpl(label, namedIndividual.getIRI().toString()));
       result.addProperty(WeaselOwlType.INSTANCES.name(), s);
       namedIndividual.getEntityType();
     }

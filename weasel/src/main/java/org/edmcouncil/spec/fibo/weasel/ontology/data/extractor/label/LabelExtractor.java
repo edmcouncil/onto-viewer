@@ -52,7 +52,7 @@ public class LabelExtractor {
   }
 
   public String getLabelOrDefaultFragment(IRI iri, OWLOntology ontology) {
-    OWLEntity entity = ontology.entitiesInSignature(iri).findFirst().get();
+    OWLEntity entity = ontology.entitiesInSignature(iri).findFirst().orElse(null);
     return getLabelOrDefaultFragment(entity, ontology);
   }
 }
