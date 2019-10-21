@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
@@ -42,7 +41,6 @@ import org.edmcouncil.spec.fibo.weasel.ontology.visitor.WeaselOntologyVisitors;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
-import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
@@ -91,11 +89,11 @@ public class OwlDataHandler {
         LOGGER.debug("[Data Handler] Find OWL class wih IRI: {}", iri.toString());
 
         handleParticularSubClassOf(ontology, clazz);
-        
+
         String label = labelExtractor.getLabelOrDefaultFragment(clazz, ontology);
 
         resultDetails.setLabel(label);
-        
+
         OwlDetailsProperties<PropertyValue> axioms = handleAxioms(clazz, ontology);
 
         List<PropertyValue> subclasses = axioms
@@ -142,7 +140,7 @@ public class OwlDataHandler {
       if (individual.getIRI().equals(iri)) {
         LOGGER.debug("[Data Handler] Find owl named individual wih iri: {}", iri.toString());
 
-        resultDetails.setLabel(StringUtils.getFragment(individual.getIRI()));
+        resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(individual.getIRI(), ontology));
 
         OwlDetailsProperties<PropertyValue> axioms = handleAxioms(individual, ontology);
 
@@ -291,9 +289,9 @@ public class OwlDataHandler {
         LOGGER.trace("[Data Handler] Find non restriction SubClassOf");
         opv.setType(WeaselOwlType.TAXONOMY);
       }
-      
+
       processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, opv, value, ontology);
-           
+
       result.addProperty(key, opv);
     }
     result.sortPropertiesInAlphabeticalOrder();
@@ -405,7 +403,7 @@ public class OwlDataHandler {
       if (dataProperty.getIRI().equals(iri)) {
         LOGGER.debug("[Data Handler] Find owl data property wih iri: {}", iri.toString());
 
-        resultDetails.setLabel(StringUtils.getFragment(dataProperty.getIRI()));
+        resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(dataProperty.getIRI(), ontology));
 
         OwlDetailsProperties<PropertyValue> axioms = handleAxioms(dataProperty, ontology);
 
@@ -435,7 +433,7 @@ public class OwlDataHandler {
       if (dataProperty.getIRI().equals(iri)) {
         LOGGER.debug("[Data Handler] Find owl object property wih iri: {}", iri.toString());
 
-        resultDetails.setLabel(StringUtils.getFragment(dataProperty.getIRI()));
+        resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(dataProperty.getIRI(), ontology));
 
         OwlDetailsProperties<PropertyValue> axioms = handleAxioms(dataProperty, ontology);
 
@@ -481,13 +479,13 @@ public class OwlDataHandler {
       OwlAxiomPropertyEntity entitySubClass = new OwlAxiomPropertyEntity();
       OwlAxiomPropertyEntity entitySuperClass = new OwlAxiomPropertyEntity();
       entitySubClass.setIri(subClazzIri.getIRIString());
-      entitySubClass.setLabel(StringUtils.getFragment(subClazzIri));
+      entitySubClass.setLabel(labelExtractor.getLabelOrDefaultFragment(subClazzIri, ontology));
       entitySuperClass.setIri(superClazzIri.getIRIString());
-      entitySuperClass.setLabel(StringUtils.getFragment(superClazzIri));
+      entitySuperClass.setLabel(labelExtractor.getLabelOrDefaultFragment(superClazzIri, ontology));
 
       pv.setType(WeaselOwlType.TAXONOMY);
-      pv.addEntityValues(StringUtils.getFragment(subClazzIri), entitySubClass);
-      pv.addEntityValues(StringUtils.getFragment(superClazzIri), entitySuperClass);
+      pv.addEntityValues(labelExtractor.getLabelOrDefaultFragment(subClazzIri, ontology), entitySubClass);
+      pv.addEntityValues(labelExtractor.getLabelOrDefaultFragment(superClazzIri, ontology), entitySuperClass);
       resultProperties.add(pv);
 
     }
@@ -516,9 +514,9 @@ public class OwlDataHandler {
             OwlAxiomPropertyEntity entitySubClass = new OwlAxiomPropertyEntity();
             OwlAxiomPropertyEntity entitySuperClass = new OwlAxiomPropertyEntity();
             entitySubClass.setIri(subClazzIri.getIRIString());
-            entitySubClass.setLabel(StringUtils.getFragment(subClazzIri));
+            entitySubClass.setLabel(labelExtractor.getLabelOrDefaultFragment(subClazzIri, ontology));
             entitySuperClass.setIri(superClazzIri.getIRIString());
-            entitySuperClass.setLabel(StringUtils.getFragment(superClazzIri));
+            entitySuperClass.setLabel(labelExtractor.getLabelOrDefaultFragment(superClazzIri, ontology));
 
             pv.setType(WeaselOwlType.TAXONOMY);
             pv.addEntityValues(StringUtils.getFragment(subClazzIri), entitySubClass);
@@ -546,10 +544,9 @@ public class OwlDataHandler {
     while (iterator.hasNext()) {
       OWLSubClassOfAxiom next = iterator.next();
       IRI iri = next.getSubClass().asOWLClass().getIRI();
-      String fragment = StringUtils.getFragment(iri);
       OwlDirectedSubClassesProperty r = new OwlDirectedSubClassesProperty();
       r.setType(WeaselOwlType.DIRECT_SUBCLASSES);
-      r.setValue(new PairImpl(fragment, iri.toString()));
+      r.setValue(new PairImpl(labelExtractor.getLabelOrDefaultFragment(iri, ontology), iri.toString()));
       result.addProperty(WeaselOwlType.DIRECT_SUBCLASSES.name(), r);
     }
     return result;
@@ -573,7 +570,8 @@ public class OwlDataHandler {
       //LOGGER.debug(namedIndividual.getIRI().toString());
       OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
       s.setType(WeaselOwlType.INSTANCES);
-      s.setValue(new PairImpl(fragment, namedIndividual.getIRI().toString()));
+      s.setValue(new PairImpl(labelExtractor
+          .getLabelOrDefaultFragment(namedIndividual.getIRI(), ontology), namedIndividual.getIRI().toString()));
       result.addProperty(WeaselOwlType.INSTANCES.name(), s);
       namedIndividual.getEntityType();
     }
@@ -620,7 +618,7 @@ public class OwlDataHandler {
       wd.addAllProperties(metadata);
     }
     wd.setIri(iri.toString());
-    wd.setLabel(StringUtils.getFragment(iri));
+    wd.setLabel(labelExtractor.getLabelOrDefaultFragment(iri, ontology));
     wd.setLocationInModules(fiboDataHandler.getElementLocationInModules(iri.toString(), ontology));
     return wd;
 
