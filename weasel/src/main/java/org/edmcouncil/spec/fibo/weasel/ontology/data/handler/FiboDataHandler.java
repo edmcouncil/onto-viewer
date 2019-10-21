@@ -301,6 +301,8 @@ public class FiboDataHandler {
         .forEachOrdered(c -> ontoResources
         .addElement(generateResourceKey(resourcesInstanceKey, c, ontologyIri), c));
     
+    ontoResources.sortInAlphabeticalOrder();
+    
     return ontoResources;
   }
   
