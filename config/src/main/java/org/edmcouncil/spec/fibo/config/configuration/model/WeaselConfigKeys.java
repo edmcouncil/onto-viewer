@@ -24,4 +24,10 @@ public class WeaselConfigKeys {
   public static final String ONTOLOGY_PATH = "ontologyPath";
   public static final String SCOPE_IRI = "scopeIri";
   public static final String URI_NAMESPACE = "uriNamespace";
+  public static final String DISPLAYED_LABELS = "displayedLabels";
+  public static final String GROUP_LABEL = "groupLabel";
+  public static final String LABEL_LANG = "labelLang";
+  public static final String FORCE_LABEL_LANG = "forceLabelLang";
+  public static final String MISSING_LANGUAGE_ACTION = "missingLanguageAction";
+  
 }

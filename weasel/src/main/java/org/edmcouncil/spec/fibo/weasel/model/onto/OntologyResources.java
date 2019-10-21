@@ -30,13 +30,11 @@ public class OntologyResources {
   }
 
   public void sortInAlphabeticalOrder() {
-    //Map<String, List<PropertyValue>> tmpResourcess = new HashMap<>();
-
     for (Map.Entry<String, List<PropertyValue>> entry : resources.entrySet()) {
       List<PropertyValue> list = entry.getValue();
       list.sort((o1, o2) -> {
-        return ((OwlAnnotationIri)o1).getValue().getLabel()
-            .compareToIgnoreCase(((OwlAnnotationIri)o2).getValue().getLabel());
+        return ((OwlAnnotationIri) o1).getValue().getLabel()
+            .compareToIgnoreCase(((OwlAnnotationIri) o2).getValue().getLabel());
       });
     }
 

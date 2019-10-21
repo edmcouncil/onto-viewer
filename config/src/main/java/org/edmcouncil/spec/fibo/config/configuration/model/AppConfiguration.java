@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.fibo.config.configuration.loader.ConfigLoader;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

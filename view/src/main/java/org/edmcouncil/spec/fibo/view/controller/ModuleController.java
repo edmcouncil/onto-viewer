@@ -3,7 +3,7 @@ package org.edmcouncil.spec.fibo.view.controller;
 import java.util.Collection;
 import java.util.List;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
-import org.edmcouncil.spec.fibo.weasel.ontology.WeaselOntologyManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,22 +25,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ModuleController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ModuleController.class);
-  
+
   @Autowired
-  private WeaselOntologyManager ontologyManager;
+  private DataManager ontologyManager;
 
   @GetMapping("/json")
   public ResponseEntity<List<FiboModule>> getAllModulesDataAsJson() {
-    LOGGER.debug("[GET]: module/json");
+    LOGGER.debug("[REQ] GET : module / json");
     List<FiboModule> modules = ontologyManager.getAllModulesData();
     return ResponseEntity.ok(modules);
   }
-  
+
   @GetMapping
   public String getModulesMeta(
       @RequestParam(value = "meta", required = false) String query,
       Model model) {
-    LOGGER.debug("[GET]: module/");
+    LOGGER.debug("[REQ] GET: module /");
     List<FiboModule> modules = ontologyManager.getAllModulesData();
     ModelBuilder mb = new ModelBuilder(model);
 

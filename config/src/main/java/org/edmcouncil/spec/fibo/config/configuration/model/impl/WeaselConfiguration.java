@@ -16,6 +16,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
 public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
 
   private Map<String, Set<ConfigElement>> configuration;
+  private static final String DEFAULT_LANG = "en";
 
   public WeaselConfiguration() {
     configuration = new HashMap<>();
@@ -87,7 +88,6 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
     return configuration.containsKey(WeaselConfigKeys.ONTOLOGY_URL);
   }
 
-  
   public String getURLOntology() {
     Set<ConfigElement> elements = configuration.get(WeaselConfigKeys.ONTOLOGY_URL);
     for (ConfigElement element : elements) {
@@ -119,6 +119,61 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
       }
     }
     return Boolean.FALSE;
+  }
+
+  public Boolean useLabels() {
+    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.DISPLAYED_LABELS, new HashSet<>());
+
+    for (ConfigElement value : values) {
+      ConfigBooleanElement cbe = (ConfigBooleanElement) value;
+      return cbe.getValue();
+    }
+
+    return Boolean.TRUE;
+  }
+
+  public Boolean isForceLabelLang() {
+    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.FORCE_LABEL_LANG, new HashSet<>());
+
+    for (ConfigElement value : values) {
+      ConfigBooleanElement cbe = (ConfigBooleanElement) value;
+      return cbe.getValue();
+    }
+
+    return Boolean.FALSE;
+  }
+
+  public ConfigGroupLabelPriorityElement.GroupLabelPriority getLabelPriority() {
+    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.GROUP_LABEL, new HashSet<>());
+
+    for (ConfigElement value : values) {
+      ConfigGroupLabelPriorityElement cpe = (ConfigGroupLabelPriorityElement) value;
+      return cpe.getValue();
+    }
+
+    return ConfigGroupLabelPriorityElement.GroupLabelPriority.FRAGMENT;
+  }
+
+  public String getLabelLang() {
+    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.LABEL_LANG, new HashSet<>());
+
+    for (ConfigElement value : values) {
+      ConfigStringElement cpe = (ConfigStringElement) value;
+      return cpe.toString();
+    }
+
+    return DEFAULT_LANG;
+  }
+
+  public ConfigMissingLanguageElement.MissingLanguageAction getMissingLanguageAction() {
+    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.MISSING_LANGUAGE_ACTION, new HashSet<>());
+
+    for (ConfigElement value : values) {
+      ConfigMissingLanguageElement cpe = (ConfigMissingLanguageElement) value;
+      return cpe.getValue();
+    }
+
+    return ConfigMissingLanguageElement.MissingLanguageAction.FIRST;
   }
 
 }

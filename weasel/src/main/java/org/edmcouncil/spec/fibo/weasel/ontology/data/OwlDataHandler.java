@@ -37,7 +37,7 @@ import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
-import org.edmcouncil.spec.fibo.weasel.ontology.visitor.WeaselOntologyVisitors;
+import org.edmcouncil.spec.fibo.weasel.ontology.visitor.OntologyVisitors;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -386,7 +386,7 @@ public class OwlDataHandler {
   }
 
   private static <T extends OWLAxiom> Boolean isRestriction(T axiom) {
-    Boolean isRestriction = axiom.accept(WeaselOntologyVisitors.isRestrictionVisitor);
+    Boolean isRestriction = axiom.accept(OntologyVisitors.isRestrictionVisitor);
     if (isRestriction == null) {
       isRestriction = Boolean.FALSE;
     }

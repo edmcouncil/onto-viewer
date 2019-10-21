@@ -1,10 +1,14 @@
 package org.edmcouncil.spec.fibo.config.configuration.loader.saxparser;
 
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElementType;
 import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
 import org.edmcouncil.spec.fibo.config.configuration.model.GroupType;
 import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigBooleanElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigMissingLanguageElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupLabelPriorityElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigRenameElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
@@ -41,6 +45,11 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case WeaselConfigKeys.RENAME_GROUPS:
       case WeaselConfigKeys.ONTOLOGY_URL:
       case WeaselConfigKeys.ONTOLOGY_PATH:
+      case WeaselConfigKeys.DISPLAYED_LABELS:
+      case WeaselConfigKeys.FORCE_LABEL_LANG:
+      case WeaselConfigKeys.LABEL_LANG:
+      case WeaselConfigKeys.GROUP_LABEL:
+      case WeaselConfigKeys.MISSING_LANGUAGE_ACTION:
         this.key = qName;
         break;
       case WeaselConfigKeys.GROUP:
@@ -60,6 +69,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case WeaselConfigKeys.PRIORITY_LIST_ELEMENT:
       case WeaselConfigKeys.IGNORED_ELEMENT:
       case WeaselConfigKeys.URI_NAMESPACE:
+      case WeaselConfigKeys.LABEL_LANG:
         if (!val.trim().isEmpty()) {
           ConfigElement configEl = new ConfigStringElement(val);
           config.addCongigElement(key, configEl);
@@ -93,6 +103,26 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case WeaselConfigKeys.ONTOLOGY_PATH:
         ConfigStringElement ontologyPath = new ConfigStringElement(val);
         config.addCongigElement(key, ontologyPath);
+        break;
+      case WeaselConfigKeys.DISPLAYED_LABELS:
+      case WeaselConfigKeys.FORCE_LABEL_LANG:
+        ConfigBooleanElement cbe = new ConfigBooleanElement();
+        cbe.setType(ConfigElementType.BOOLEAN);
+        cbe.setValue(Boolean.valueOf(val));
+        config.addCongigElement(key, cbe);
+        break;
+      case WeaselConfigKeys.GROUP_LABEL:
+        ConfigGroupLabelPriorityElement cpe = new ConfigGroupLabelPriorityElement();
+        cpe.setType(ConfigElementType.PRIORITY);
+        cpe.setValue(ConfigGroupLabelPriorityElement.GroupLabelPriority.valueOf(val));
+        config.addCongigElement(key, cpe);
+        break;
+
+      case WeaselConfigKeys.MISSING_LANGUAGE_ACTION:
+        ConfigMissingLanguageElement cmle = new ConfigMissingLanguageElement();
+        cmle.setType(ConfigElementType.MISSING_LANGUAGE_ACTION);
+        cmle.setValue(ConfigMissingLanguageElement.MissingLanguageAction.valueOf(val));
+        config.addCongigElement(key, cmle);
         break;
     }
   }

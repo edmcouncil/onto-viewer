@@ -44,6 +44,7 @@ public class AnnotationsDataHandler {
   private CustomDataFactory customDataFactory;
   @Autowired
   private AppConfiguration appConfig;
+  
 
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
@@ -52,6 +53,7 @@ public class AnnotationsDataHandler {
         = ontology.annotationAssertionAxioms(iri).iterator();
     while (annotationAssertionAxiom.hasNext()) {
       OWLAnnotationAssertionAxiom next = annotationAssertionAxiom.next();
+      IRI propertyiri = next.getProperty().getIRI();
       String property = rendering.render(next.getProperty());
       String value = next.annotationValue().toString();
 

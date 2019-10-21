@@ -8,7 +8,7 @@ import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class WeaselOntologyVisitors {
+public class OntologyVisitors {
 
   public static OWLObjectVisitorEx<Boolean> isRestrictionVisitor
       = new OWLObjectVisitorEx<Boolean>() {

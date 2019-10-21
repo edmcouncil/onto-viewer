@@ -46,137 +46,20 @@ import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
-public class WeaselOntologyManager {
+public class DataManager {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(WeaselOntologyManager.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DataManager.class);
   private static final String DEFAULT_GROUP_NAME = "other";
-  private OWLOntology ontology;
 
+  @Autowired
+  private OntologyManager ontologyManager;
   @Autowired
   private OwlDataHandler dataHandler;
   @Autowired
   private AppConfiguration config;
 
-  @PostConstruct
-  public void init() throws IOException {
-    WeaselConfiguration weaselConfiguration = (WeaselConfiguration) config.getWeaselConfig();
-    try {
-      if (weaselConfiguration.isOntologyLocationSet()) {
-        if (weaselConfiguration.isOntologyLocationURL()) {
-          String ontoURL = weaselConfiguration.getURLOntology();
-          loadOntologyFromURL(ontoURL);
-        } else {
-          String ontoPath = weaselConfiguration.getPathOntology();
-          loadOntologyFromFile(ontoPath);
-        }
-      } else {
-        loadOntologyFromFile(null);
-      }
-    } catch (OWLOntologyCreationException ex) {
-      LOGGER.error("[ERROR]: Error when creating ontology. Exception: {}", ex.getStackTrace(), ex.getMessage());
-    }
-  }
-
-  @PreDestroy
-  public void destroy() {
-
-  }
-
-  /**
-   * This method is used to load ontology from file
-   *
-   * @param ontoPath OntoPath is the access path from which the ontology is being loaded.
-   */
-  private void loadOntologyFromFile(String ontoPath) throws IOException, OWLOntologyCreationException {
-    FileSystemManager fsm = new FileSystemManager();
-    Path pathToOnto = null;
-    if (ontoPath == null) {
-      pathToOnto = fsm.getDefaultPathToOntologyFile();
-    } else {
-      pathToOnto = fsm.getPathToOntologyFile(ontoPath);
-
-    }
-    LOGGER.debug("Path to ontology : {}", pathToOnto.toString());
-    File inputOntologyFile = pathToOnto.toFile();
-
-    OWLOntologyManager m = OWLManager.createOWLOntologyManager();
-
-    OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
-
-    IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
-
-    m.makeLoadImportRequest(new OWLImportsDeclarationImpl(m.getOntologyDocumentIRI(o)));
-    Stream<OWLOntology> directImports = m.imports(o);
-    o = m.createOntology(fiboIRI, directImports, false);
-    ontology = o;
-
-  }
-
-  /**
-   * This method is used to load ontology from URL
-   *
-   * @param ontoURL OntoUrl is the web address from which the ontology is being loaded.
-   * @return set of ontology
-   */
-  private Set<OWLOntology> loadOntologyFromURL(String ontoURL) throws IOException, OWLOntologyCreationException {
-
-    LOGGER.debug("URL to Ontology : {} ", ontoURL);
-    HttpGet httpGet = new HttpGet(ontoURL);
-    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-    CloseableHttpClient httpClient = HttpClients.createDefault();
-    HttpResponse response = httpClient.execute(httpGet);
-    Set<OWLOntology> result = new HashSet<>();
-    HttpEntity entity = response.getEntity();
-    if (entity != null) {
-      long len = entity.getContentLength();
-      InputStream inputStream = entity.getContent();
-      OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
-      IRI fiboIRI = IRI.create(ontoURL);
-      manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology)));
-      Stream<OWLOntology> directImports = manager.imports(newOntology);
-      newOntology = manager.createOntology(fiboIRI, directImports, false);
-      ontology = newOntology;
-    }
-    return result;
-  }
-
-  /**
-   * This method is used to open all Ontologies from directory
-   *
-   * @param ontologiesDir OntologiesDir is a loaded ontology file.
-   * @param manager Manager loading and acessing ontologies.
-   * @return set of ontology.
-   */
-  private Set<OWLOntology> openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager) throws OWLOntologyCreationException {
-    Set<OWLOntology> result = new HashSet<>();
-    for (File file : ontologiesDir.listFiles()) {
-      LOGGER.debug("isFile : {}, name: {}", file.isFile(), file.getName());
-      if (file.isFile()) {
-        if (getFileExtension(file).equalsIgnoreCase("rdf") && !file.getName().contains("Metadata")) {
-
-          OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(file);
-          result.add(newOntology);
-        }
-      } else if (file.isDirectory()) {
-        Set<OWLOntology> tmp = openOntologiesFromDirectory(file, manager);
-        result.addAll(tmp);
-      }
-
-    }
-    return result;
-  }
-
-  private static String getFileExtension(File file) {
-    String fileName = file.getName();
-    if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
-      return fileName.substring(fileName.lastIndexOf(".") + 1);
-    } else {
-      return "";
-    }
-  }
-
   public OWLOntology getOntology() {
-    return ontology;
+    return ontologyManager.getOntology();
   }
 
   public <T extends OwlDetails> T getDetailsByIri(String iriString) {
@@ -185,25 +68,25 @@ public class WeaselOntologyManager {
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
     if (iriString.endsWith("/")) {
       LOGGER.debug("Handle ontology metadata. IRI: {}", iriString);
-      OwlListDetails wd = dataHandler.handleOntologyMetadata(iri, ontology);
+      OwlListDetails wd = dataHandler.handleOntologyMetadata(iri, ontologyManager.getOntology());
 
       result = wd;
     } else {
-      if (ontology.containsClassInSignature(iri)) {
+      if (ontologyManager.getOntology().containsClassInSignature(iri)) {
         LOGGER.debug("Handle class data.");
-        OwlListDetails wd = dataHandler.handleParticularClass(iri, ontology);
+        OwlListDetails wd = dataHandler.handleParticularClass(iri, ontologyManager.getOntology());
         result = wd;
-      } else if (ontology.containsDataPropertyInSignature(iri)) {
+      } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri)) {
         LOGGER.info("Handle data property.");
-        OwlListDetails wd = dataHandler.handleParticularDataProperty(iri, ontology);
+        OwlListDetails wd = dataHandler.handleParticularDataProperty(iri, ontologyManager.getOntology());
         result = wd;
-      } else if (ontology.containsObjectPropertyInSignature(iri)) {
+      } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri)) {
         LOGGER.info("Handle object property.");
-        OwlListDetails wd = dataHandler.handleParticularObjectProperty(iri, ontology);
+        OwlListDetails wd = dataHandler.handleParticularObjectProperty(iri, ontologyManager.getOntology());
         result = wd;
-      } else if (ontology.containsIndividualInSignature(iri)) {
+      } else if (ontologyManager.getOntology().containsIndividualInSignature(iri)) {
         LOGGER.info("Handle individual data.");
-        OwlListDetails wd = dataHandler.handleParticularIndividual(iri, ontology);
+        OwlListDetails wd = dataHandler.handleParticularIndividual(iri, ontologyManager.getOntology());
         result = wd;
       }
     }
@@ -224,7 +107,7 @@ public class WeaselOntologyManager {
     result.setIri(iriString);
 
     //Path to element in modules
-    List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontology);
+    List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontologyManager.getOntology());
     result.setLocationInModules(elementLocation);
 
     if (!config.getWeaselConfig().isEmpty()) {
@@ -295,6 +178,7 @@ public class WeaselOntologyManager {
   }
 
   public List<FiboModule> getAllModulesData() {
-    return dataHandler.getAllModulesData(ontology);
+
+    return dataHandler.getAllModulesData(ontologyManager.getOntology());
   }
 }

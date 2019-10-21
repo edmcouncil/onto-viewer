@@ -9,7 +9,7 @@ import java.util.Map;
 import javax.validation.Valid;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
-import org.edmcouncil.spec.fibo.weasel.ontology.WeaselOntologyManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class SearchController {
   @Autowired
   private SearchService searchService;
   @Autowired
-  private WeaselOntologyManager ontologyManager;
+  private DataManager dataManager;
 
   @PostMapping
   public ModelAndView redirectSearch(@Valid @ModelAttribute("queryValue") Query query) {
@@ -49,11 +49,11 @@ public class SearchController {
   @GetMapping
   public String search(@RequestParam("query") String query, Model model) {
 
-    LOGGER.info("[GET]: search ? query = {}", query);
+    LOGGER.info("[REQ] GET : search ? query = {{}}", query);
     Query q = new Query();
     q.setValue(query);
     ModelBuilder modelBuilder = new ModelBuilder(model);
-    List<FiboModule> modules = ontologyManager.getAllModulesData();
+    List<FiboModule> modules = dataManager.getAllModulesData();
     searchService.search(query, modelBuilder);
     modelBuilder.modelTree(modules);
 
@@ -63,7 +63,7 @@ public class SearchController {
   @PostMapping("/json")
   public <T extends OwlDetails> ResponseEntity<T> searchJson(@RequestBody String query, Model model) {
 
-    LOGGER.info("[GET]: search / json   RequestBody = {}", query);
+    LOGGER.info("[REQ] POST : search / json   RequestBody = {{}}", query);
     ModelBuilder modelBuilder = new ModelBuilder(model);
 
     OwlDetails search = searchService.search(query, modelBuilder);
