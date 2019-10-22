@@ -23,12 +23,12 @@ public class CustomDataFactory {
   @Autowired
   private LabelExtractor labelExtractor;
 
-  public OwlAnnotationIri createAnnotationIri(String iri, OWLOntology ontology) {
+  public OwlAnnotationIri createAnnotationIri(String iri) {
     LOGGER.debug("[Custom Data Factory] Create annotation for iri: {}", iri);
 
     OwlAnnotationIri owlAnnotationIri = new OwlAnnotationIri();
     OwlSimpleProperty osp = new OwlSimpleProperty();
-    osp.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(iri), ontology));
+    osp.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(iri)));
     osp.setIri(iri);
     owlAnnotationIri.setValue(osp);
     owlAnnotationIri.setType(WeaselOwlType.IRI);

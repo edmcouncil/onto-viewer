@@ -43,7 +43,7 @@ public class IndividualDataHandler {
     for (OWLNamedIndividual namedIndividual : instances.entities().collect(Collectors.toSet())) {
       OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
       s.setType(WeaselOwlType.INSTANCES);
-      String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual, ontology);
+      String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual);
       s.setValue(new PairImpl(label, namedIndividual.getIRI().toString()));
       result.addProperty(WeaselOwlType.INSTANCES.name(), s);
       namedIndividual.getEntityType();

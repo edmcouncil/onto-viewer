@@ -1,14 +1,13 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigMissingLanguageElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.EntityType;
@@ -32,16 +31,16 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 public class LabelExtractor {
 
   @Autowired
-  private AppConfiguration config;
-
+  private OntologyManager ontology;
   private static final Logger LOGGER = LoggerFactory.getLogger(LabelExtractor.class);
   private Boolean forceLabelLang;
   private String labelLang;
   private Boolean useLabels;
   private ConfigMissingLanguageElement.MissingLanguageAction missingLanguageAction;
+  
 
-  @PostConstruct
-  public void init() {
+  @Inject
+  public LabelExtractor(AppConfiguration config) {
     WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
     this.forceLabelLang = weaselConfig.isForceLabelLang();
     this.labelLang = weaselConfig.getLabelLang();
@@ -49,7 +48,7 @@ public class LabelExtractor {
     this.missingLanguageAction = weaselConfig.getMissingLanguageAction();
   }
 
-  public String getLabelOrDefaultFragment(OWLEntity entity, OWLOntology ontology) {
+  public String getLabelOrDefaultFragment(OWLEntity entity) {
     if (entity == null) {
       return null;
     }
@@ -57,7 +56,7 @@ public class LabelExtractor {
     OWLDataFactory factory = new OWLDataFactoryImpl();
     Map<String, String> labels = new HashMap<>();
     if (useLabels) {
-      EntitySearcher.getAnnotations(entity, ontology, factory.getRDFSLabel())
+      EntitySearcher.getAnnotations(entity, ontology.getOntology(), factory.getRDFSLabel())
               .collect(Collectors.toSet())
               .stream()
               .filter((annotation) -> (annotation.getValue().isLiteral()))
@@ -134,19 +133,19 @@ public class LabelExtractor {
     }
   }
 
-  public String getLabelOrDefaultFragment(IRI iri, OWLOntology ontology) {
-    OWLEntity entity = ontology.entitiesInSignature(iri).findFirst().orElse(
-            ontology.getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
+  public String getLabelOrDefaultFragment(IRI iri) {
+    OWLEntity entity = ontology.getOntology().entitiesInSignature(iri).findFirst().orElse(
+            ontology.getOntology().getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
     if (iri.toString().endsWith("/")) {
       //it's ontology, we have to get the label from another way
-      return getOntologyLabelOrDefaultFragment(iri, ontology);
+      return getOntologyLabelOrDefaultFragment(iri);
     }
-    return getLabelOrDefaultFragment(entity, ontology);
+    return getLabelOrDefaultFragment(entity);
   }
 
-  private String getOntologyLabelOrDefaultFragment(IRI iri, OWLOntology ontology) {
+  private String getOntologyLabelOrDefaultFragment(IRI iri) {
     Map<String, String> labels = new HashMap<>();
-    OWLOntologyManager manager = ontology.getOWLOntologyManager();
+    OWLOntologyManager manager = ontology.getOntology().getOWLOntologyManager();
     OWLDataFactory df = OWLManager.getOWLDataFactory();
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {

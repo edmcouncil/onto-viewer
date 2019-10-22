@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
@@ -25,11 +24,9 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
-import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -237,7 +234,7 @@ public class FiboDataHandler {
         .map((rootModulesIri) -> {
           FiboModule fm = new FiboModule();
           fm.setIri(rootModulesIri);
-          fm.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(rootModulesIri), ontology));
+          fm.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(rootModulesIri)));
           fm.setSubModule(getSubModules(rootModulesIri, ontology));
           return fm;
         }).forEachOrdered(result::add);
@@ -278,20 +275,20 @@ public class FiboDataHandler {
     completeKeysUsingTheConfiguration();
 
     manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
-      OntologyResources ontoResources = extractOntologyResources(owlOntology, ontology);
+      OntologyResources ontoResources = extractOntologyResources(owlOntology);
 
       allResources.put(owlOntology.getOntologyID().getOntologyIRI().get().toString(), ontoResources);
     });
     resources = allResources;
   }
 
-  private OntologyResources extractOntologyResources(OWLOntology selectedOntology, OWLOntology generalObtology) {
+  private OntologyResources extractOntologyResources(OWLOntology selectedOntology) {
     OntologyResources ontoResources = new OntologyResources();
     IRI ontologyIri = selectedOntology.getOntologyID().getOntologyIRI().get();
     selectedOntology.classesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring, generalObtology);
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
           return pv;
         })
         .forEachOrdered(c -> ontoResources
@@ -300,7 +297,7 @@ public class FiboDataHandler {
     selectedOntology.dataPropertiesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring, generalObtology);
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
           return pv;
         })
         .forEachOrdered(c -> ontoResources
@@ -309,7 +306,7 @@ public class FiboDataHandler {
     selectedOntology.objectPropertiesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring, generalObtology);
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
           return pv;
         })
         .forEachOrdered(c -> ontoResources
@@ -318,7 +315,7 @@ public class FiboDataHandler {
     selectedOntology.individualsInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring, generalObtology);
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
           return pv;
         })
         .forEachOrdered(c -> ontoResources
@@ -387,7 +384,7 @@ public class FiboDataHandler {
     hasPartModules.stream().map((partModule) -> {
       FiboModule fm = new FiboModule();
       fm.setIri(partModule);
-      fm.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(partModule), ontology));
+      fm.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(partModule)));
       fm.setSubModule(getSubModules(partModule, ontology));
       return fm;
     }).forEachOrdered(result::add);
