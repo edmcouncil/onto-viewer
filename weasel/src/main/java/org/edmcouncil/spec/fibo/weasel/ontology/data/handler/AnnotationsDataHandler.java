@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupLabelPriorityElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
@@ -11,6 +12,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
 import org.semanticweb.owlapi.io.OWLObjectRenderer;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.IRI;
@@ -38,9 +40,14 @@ public class AnnotationsDataHandler {
   private CustomDataFactory customDataFactory;
   @Autowired
   private AppConfiguration appConfig;
-  
+  @Autowired
+  private LabelExtractor labelExtractor;
 
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
+
+    WeaselConfiguration config = (WeaselConfiguration) appConfig.getWeaselConfig();
+    ConfigGroupLabelPriorityElement.GroupLabelPriority labelPriority = config.getGroupLabelPriority();
+
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
     Iterator<OWLAnnotationAssertionAxiom> annotationAssertionAxiom
@@ -48,7 +55,17 @@ public class AnnotationsDataHandler {
     while (annotationAssertionAxiom.hasNext()) {
       OWLAnnotationAssertionAxiom next = annotationAssertionAxiom.next();
       IRI propertyiri = next.getProperty().getIRI();
-      String property = rendering.render(next.getProperty());
+      //String property = rendering.render(next.getProperty());
+      String property = null;
+      switch (labelPriority) {
+        case FRAGMENT:
+          property = rendering.render(next.getProperty());
+          break;
+        case LABEL:
+          property = labelExtractor.getLabelOrDefaultFragment(propertyiri);
+          break;
+      }
+
       String value = next.annotationValue().toString();
 
       PropertyValue opv = new OwlAnnotationPropertyValue();

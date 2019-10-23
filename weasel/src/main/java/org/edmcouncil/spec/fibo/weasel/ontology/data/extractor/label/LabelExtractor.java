@@ -30,14 +30,14 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 @Component
 public class LabelExtractor {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(LabelExtractor.class);
+
   @Autowired
   private OntologyManager ontology;
-  private static final Logger LOGGER = LoggerFactory.getLogger(LabelExtractor.class);
   private Boolean forceLabelLang;
   private String labelLang;
   private Boolean useLabels;
   private ConfigMissingLanguageElement.MissingLanguageAction missingLanguageAction;
-  
 
   @Inject
   public LabelExtractor(AppConfiguration config) {
@@ -57,18 +57,18 @@ public class LabelExtractor {
     Map<String, String> labels = new HashMap<>();
     if (useLabels) {
       EntitySearcher.getAnnotations(entity, ontology.getOntology(), factory.getRDFSLabel())
-              .collect(Collectors.toSet())
-              .stream()
-              .filter((annotation) -> (annotation.getValue().isLiteral()))
-              .forEachOrdered((annotation) -> {
-                // TODO: get default lang from configuration, if language present we will check it
-                String label = annotation.annotationValue().asLiteral().get().getLiteral();
+          .collect(Collectors.toSet())
+          .stream()
+          .filter((annotation) -> (annotation.getValue().isLiteral()))
+          .forEachOrdered((annotation) -> {
+            // TODO: get default lang from configuration, if language present we will check it
+            String label = annotation.annotationValue().asLiteral().get().getLiteral();
 
-                String lang = annotation.annotationValue().asLiteral().get().getLang();
+            String lang = annotation.annotationValue().asLiteral().get().getLang();
 
-                labelProcessing(lang, labels, label, entity.getIRI());
+            labelProcessing(lang, labels, label, entity.getIRI());
 
-              });
+          });
     }
 
     if (labels.isEmpty()) {
@@ -77,30 +77,30 @@ public class LabelExtractor {
       return getTheRightLabel(labels, entity.getIRI());
     } else {
       return labels.entrySet()
-              .stream()
-              .findFirst()
-              .get().getKey();
+          .stream()
+          .findFirst()
+          .get().getKey();
     }
 
   }
 
   private String getTheRightLabel(Map<String, String> labels, IRI entityIri) {
     String lab = labels.entrySet()
-            .stream()
-            .filter(p -> p.getValue().equals(labelLang))
-            .map(m -> {
-              return m.getKey();
-            })
-            .findFirst()
-            .get();
+        .stream()
+        .filter(p -> p.getValue().equals(labelLang))
+        .map(m -> {
+          return m.getKey();
+        })
+        .findFirst()
+        .get();
     if (lab.isEmpty()) {
       LOGGER.debug("[Label Extractor]: Entity has more than one label but noone have a language");
 
       if (missingLanguageAction == ConfigMissingLanguageElement.MissingLanguageAction.FIRST) {
         String missingLab = labels.entrySet()
-                .stream()
-                .findFirst()
-                .get().getKey();
+            .stream()
+            .findFirst()
+            .get().getKey();
         LOGGER.debug("[Label Extractor]: Return an first element of label list: {}", missingLab);
 
       } else if (missingLanguageAction == ConfigMissingLanguageElement.MissingLanguageAction.FRAGMENT) {
@@ -118,24 +118,24 @@ public class LabelExtractor {
 
         labels.put(label, lang);
         LOGGER.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
-                label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
+            label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
 
       } else {
         LOGGER.debug("[Label Extractor]: REJECTED label: '{}' @ '{}' for element with IRI: '{}', "
-                + "Reason: Language is not present.",
-                label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
+            + "Reason: Language is not present.",
+            label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
       }
 
     } else {
       labels.put(label, lang);
       LOGGER.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
-              label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
+          label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
     }
   }
 
   public String getLabelOrDefaultFragment(IRI iri) {
     OWLEntity entity = ontology.getOntology().entitiesInSignature(iri).findFirst().orElse(
-            ontology.getOntology().getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
+        ontology.getOntology().getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
     if (iri.toString().endsWith("/")) {
       //it's ontology, we have to get the label from another way
       return getOntologyLabelOrDefaultFragment(iri);
@@ -164,9 +164,9 @@ public class LabelExtractor {
       return getTheRightLabel(labels, iri);
     } else {
       return labels.entrySet()
-              .stream()
-              .findFirst()
-              .get().getKey();
+          .stream()
+          .findFirst()
+          .get().getKey();
     }
   }
 }

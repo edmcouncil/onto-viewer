@@ -28,9 +28,9 @@
       <!-- When TRUE - (default) labels will be extracted and displayed, FALSE - displayed IRI fragment's -->
       <displayedLabels>TRUE</displayedLabels>
       
-      <!-- When FRAGMENT -  rename configuration is more important than labels at group element names, -->
-      <!-- LABEL - (default) labels is more important than other, if present label be put -->
-      <groupLabel>LOW</groupLabel>
+      <!-- When FRAGMENT (default) -  rename configuration is more important than labels at group element names, -->
+      <!-- LABEL - labels is more important than other, if present label be put -->
+      <groupLabel>FRAGMENT</groupLabel>
       
       <!-- When TRUE - only labels with given lang be displayed, if language is not present displayed is fragment, -->
       <!-- FALSE - (default) does not force labels to have a language -->

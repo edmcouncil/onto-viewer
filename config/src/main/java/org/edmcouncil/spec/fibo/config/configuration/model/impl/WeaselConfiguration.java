@@ -143,7 +143,7 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
     return Boolean.FALSE;
   }
 
-  public ConfigGroupLabelPriorityElement.GroupLabelPriority getLabelPriority() {
+  public ConfigGroupLabelPriorityElement.GroupLabelPriority getGroupLabelPriority() {
     Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.GROUP_LABEL, new HashSet<>());
 
     for (ConfigElement value : values) {
