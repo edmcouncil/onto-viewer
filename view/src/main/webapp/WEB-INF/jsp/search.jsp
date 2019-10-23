@@ -16,7 +16,7 @@
     <c:set var = "clazz" value = "${details}"/>
 
     <div class="container-fluid">
-      <div class="row px-4 py-4">
+      <div class="row px-3 py-3">
         <div class="col-md-3 px-2">
           <div class="card">
             <div class="card-body">
@@ -47,8 +47,8 @@
             </div>
 
             <c:if test="${not empty clazz.graph}">
-              <h5> <b class="mr-1 ml-4">Data model for ${clazz.label}</b></h5> <br />
-              <b class="mr-1 ml-4">connections: </b> <br />
+              <h5> <b class="mr-1 ml-4">Data model for "<i>${clazz.label}</i>"</b></h5> <br />
+              <b class="mr-1 ml-4">Connections: </b> <br />
               <div class="ml-4">
                 <label>
                   <input type="checkbox" name="edgesFilter" value="internal" checked="true">

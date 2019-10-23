@@ -31,7 +31,9 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 public class LabelExtractor {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LabelExtractor.class);
-  
+
+  private Map<IRI, String> previouslyUsedLabels = new HashMap<>();
+
   @Autowired
   private OntologyManager ontology;
   private Boolean forceLabelLang;
@@ -52,6 +54,11 @@ public class LabelExtractor {
     if (entity == null) {
       return null;
     }
+    if (previouslyUsedLabels.containsKey(entity.getIRI())) {
+      String label = previouslyUsedLabels.get(entity.getIRI());
+      LOGGER.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, entity.getIRI().toString());
+      return label;
+    }
 
     OWLDataFactory factory = new OWLDataFactoryImpl();
     Map<String, String> labels = new HashMap<>();
@@ -70,18 +77,19 @@ public class LabelExtractor {
 
           });
     }
-
+    String labelResult = null;
     if (labels.isEmpty()) {
-      return StringUtils.getFragment(entity.getIRI());
+      labelResult = StringUtils.getFragment(entity.getIRI());
     } else if (labels.size() > 1) {
-      return getTheRightLabel(labels, entity.getIRI());
+      labelResult = getTheRightLabel(labels, entity.getIRI());
     } else {
-      return labels.entrySet()
+      labelResult = labels.entrySet()
           .stream()
           .findFirst()
           .get().getKey();
     }
-
+    previouslyUsedLabels.put(entity.getIRI(), labelResult);
+    return labelResult;
   }
 
   private String getTheRightLabel(Map<String, String> labels, IRI entityIri) {
@@ -134,6 +142,13 @@ public class LabelExtractor {
   }
 
   public String getLabelOrDefaultFragment(IRI iri) {
+    
+    if (previouslyUsedLabels.containsKey(iri)) {
+      String label = previouslyUsedLabels.get(iri);
+      LOGGER.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, iri.toString());
+      return label;
+    }
+
     OWLEntity entity = ontology.getOntology().entitiesInSignature(iri).findFirst().orElse(
         ontology.getOntology().getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
     if (iri.toString().endsWith("/")) {
@@ -158,15 +173,17 @@ public class LabelExtractor {
         break;
       }
     }
+    String labelResult = null;
     if (labels.isEmpty()) {
-      return StringUtils.getFragment(iri);
+      labelResult = StringUtils.getFragment(iri);
     } else if (labels.size() > 1) {
-      return getTheRightLabel(labels, iri);
+      labelResult = getTheRightLabel(labels, iri);
     } else {
-      return labels.entrySet()
+      labelResult = labels.entrySet()
           .stream()
           .findFirst()
           .get().getKey();
     }
+    return labelResult;
   }
 }
