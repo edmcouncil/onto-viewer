@@ -31,7 +31,7 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 public class LabelExtractor {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LabelExtractor.class);
-
+  
   @Autowired
   private OntologyManager ontology;
   private Boolean forceLabelLang;

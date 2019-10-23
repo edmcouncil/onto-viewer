@@ -132,7 +132,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
     val = new String(ch, start, length);
   }
 
-  public Configuration getConfiguration() {
+  public WeaselConfiguration getConfiguration() {
     return this.config;
   }
 }

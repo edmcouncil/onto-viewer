@@ -12,9 +12,8 @@
   
   <filter><!--Here we place the definition of all filters used in the program-->
    
-    <!--Feature will be added if future-->
     <ignoreToDisplaying>
-      <ignore>http://www.some.iri#ignoreToDisplaying</ignore>
+      <ignore>SubObjectPropertyOf</ignore>
     </ignoreToDisplaying>
        
     <!--Feature will be added if future-->
@@ -30,7 +29,7 @@
       
       <!-- When FRAGMENT (default) -  rename configuration is more important than labels at group element names, -->
       <!-- LABEL - labels is more important than other, if present label be put -->
-      <groupLabel>FRAGMENT</groupLabel>
+      <groupLabel>LABEL</groupLabel>
       
       <!-- When TRUE - only labels with given lang be displayed, if language is not present displayed is fragment, -->
       <!-- FALSE - (default) does not force labels to have a language -->

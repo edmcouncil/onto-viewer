@@ -21,8 +21,8 @@ public class ConfigLoader {
   private static Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
   
 
-  public Configuration loadWeaselConfiguration(Path weaselConfigFile) {
-    Configuration configuration = new WeaselConfiguration();
+  public WeaselConfiguration loadWeaselConfiguration(Path weaselConfigFile) {
+    WeaselConfiguration configuration = new WeaselConfiguration();
     
     SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
     try {

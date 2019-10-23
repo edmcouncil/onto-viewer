@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.fibo.config.configuration.loader.ConfigLoader;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class AppConfiguration {
   private FileSystemManager fileSystemManager;
   private static final Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
 
-  private Configuration<Set<? extends Object>> weaselConfig;
+  private WeaselConfiguration weaselConfig;
 
   public AppConfiguration() {
   }
@@ -64,7 +65,7 @@ public class AppConfiguration {
 
   }
 
-  public Configuration getWeaselConfig() {
+  public WeaselConfiguration getWeaselConfig() {
     return weaselConfig;
   }
  

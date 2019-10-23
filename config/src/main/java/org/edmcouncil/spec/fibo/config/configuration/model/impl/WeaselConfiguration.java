@@ -3,6 +3,7 @@ package org.edmcouncil.spec.fibo.config.configuration.model.impl;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
@@ -174,6 +175,19 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
     }
 
     return ConfigMissingLanguageElement.MissingLanguageAction.FIRST;
+  }
+
+  public Set<String> getIgnoredElements() {
+
+    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.IGNORE_TO_DISPLAYING, new HashSet<>());
+    Set<String> result = new HashSet<>();
+    values.stream()
+        .map((value) -> (ConfigStringElement) value)
+        .forEachOrdered((cse) -> {
+          result.add(cse.toString());
+        });
+
+    return result;
   }
 
 }
