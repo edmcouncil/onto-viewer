@@ -12,11 +12,11 @@
 
     <c:if test="${not empty clazz.taxonomy}">
       <div class="row my-3">
-        <div class="col">
-          <nav aria-label="breadcrumb" class="">
+        <div class="col ml-0 pl-0">
+          <nav aria-label="breadcrumb" class="ml-0 pl-0">
             <c:forEach items="${clazz.taxonomy.value}" var="taxonomyList">
-              <div class="row my-0 py-0">
-                <ol  class="breadcrumb my-0 py-0 col-12">
+              <div class="row my-1 py-0">
+                <ol  class="breadcrumb my-0 py-0 col-12 bg-white">
                   <c:forEach items="${taxonomyList}" var="taxEle">
                     <li class="breadcrumb-item" aria-current="page"><b><weasel:RenderTaxonomyElement element="${taxEle}" searchPath="${context}"/></b></li>
                   </c:forEach>

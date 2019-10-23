@@ -17,7 +17,7 @@
 
     <div class="container-fluid">
       <div class="row px-4 py-4">
-        <div class="col-md-4 px-2">
+        <div class="col-md-3 px-2">
           <div class="card">
             <div class="card-body">
               <jsp:directive.include file="page/elements/moduleTree.jsp" />
@@ -25,7 +25,7 @@
           </div>
         </div>
 
-        <div class="col-md-8 px-2">
+        <div class="col-md-9 px-2">
 
           <div class="card">
             <div class="card-body">
@@ -45,8 +45,11 @@
                 </c:otherwise>
               </c:choose>
             </div>
+
             <c:if test="${not empty clazz.graph}">
-              <div class="ml-2">
+              <h5> <b class="mr-1 ml-4">Data model for ${clazz.label}</b></h5> <br />
+              <b class="mr-1 ml-4">connections: </b> <br />
+              <div class="ml-4">
                 <label>
                   <input type="checkbox" name="edgesFilter" value="internal" checked="true">
                   class specyfic
@@ -56,7 +59,7 @@
                   inherited
                 </label>
               </div>
-              <div class="ml-2">
+              <div class="ml-4">
                 <label>
                   <input type="checkbox" name="edgesFilter" value="optional" checked="true">
                   optional
@@ -191,7 +194,8 @@
             }
             $(".custom-menu").hide(100);
           });
-        </script>-->
+        </script>
+    -->
     <jsp:directive.include file="page/elements/footer.jsp" />
   </body>
 
