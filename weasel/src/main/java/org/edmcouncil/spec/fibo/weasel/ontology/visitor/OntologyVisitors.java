@@ -41,7 +41,7 @@ import org.springframework.stereotype.Component;
 public class OntologyVisitors {
 
   private static final Logger Logger = LoggerFactory.getLogger(OntologyVisitors.class);
-  private static final String DEFAULT_BLANK_NODE_LABEL = "Think";
+  private static final String DEFAULT_BLANK_NODE_LABEL = "Thing";
 
   @Autowired
   private LabelExtractor labelExtractor;

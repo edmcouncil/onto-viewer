@@ -5,7 +5,7 @@
   <!-- To load an ontology from a folder, enter the path address with application between <ontologyPath> tags or enter the file name  -->
   <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
   <ontology>
-    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q2/AboutFIBOProd.ttl</ontologyURL>
+    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl</ontologyURL>
     <!--<ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>-->
     <!-- <ontologyPath>AboutFIBOProd.rdf</ontologyPath>--> 
   </ontology>
@@ -21,6 +21,31 @@
     <ignoreToLinking>
       <ignore>http://www.some.iri#ignoreToLinking</ignore>
     </ignoreToLinking>
+      
+    <!-- This is configuration about labels and displaying values -->
+    <labelConfig>
+      
+      <!-- When TRUE - (default) labels will be extracted and displayed, FALSE - displayed IRI fragment's -->
+      <displayedLabels>TRUE</displayedLabels>
+      
+      <!-- When FRAGMENT -  rename configuration is more important than labels at group element names, -->
+      <!-- LABEL - (default) labels is more important than other, if present label be put -->
+      <groupLabel>LOW</groupLabel>
+      
+      <!-- When TRUE - only labels with given lang be displayed, if language is not present displayed is fragment, -->
+      <!-- FALSE - (default) does not force labels to have a language -->
+      <forceLabelLang>FALSE</forceLabelLang>
+      
+      <!-- When an item has more than one label, the one with the given language will be displayed (default is en) -->
+      <labelLang>en</labelLang>
+      
+      <!-- Define action when label is not forced and entity has more than one label but noone have a language  -->
+      <!-- FRAGMENT - assigns an IRI fragment to the label -->
+      <!-- FIRST - (default) assigns an first element of label list -->
+      <missingLanguageAction>FIRST</missingLanguageAction>
+      
+    </labelConfig>
+
        
     <!-- Here we define URIs to be treated as IRIs -->
     <!-- We are currently using the method contains(), please be careful when define URIs -->
@@ -29,7 +54,7 @@
       <uriNamespace>https://www.omg.org/spec/</uriNamespace>
       <uriNamespace>http://www.omg.org/techprocess</uriNamespace>
     </scopeIri>
-       
+    
   </filter>
 
   <priorityList>

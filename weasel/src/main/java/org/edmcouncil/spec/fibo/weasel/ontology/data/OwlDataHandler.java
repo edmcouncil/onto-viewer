@@ -292,12 +292,8 @@ public class OwlDataHandler {
       opv.setValue(value);
 
       opv.setType(WeaselOwlType.AXIOM);
-      LOGGER.trace("[Data Handler] Find Axiom \"{}\" with type \"{}\"", value, key);
-      /*<<<<<<< HEAD
-      Boolean isRestriction = isRestriction(axiom);
-=======*/
+      LOGGER.debug("[Data Handler] Find Axiom \"{}\" with type \"{}\"", value, key);
       Boolean isRestriction = owlUtils.isRestriction(axiom);
-//>>>>>>> fibo-51-create-a-graph-from-the-owl-restriction
 
       if (!isRestriction && axiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
         LOGGER.trace("[Data Handler] Find non restriction SubClassOf");
@@ -378,7 +374,9 @@ public class OwlDataHandler {
       opv.addEntityValues(key, axiomPropertyEntity);
 
     }
-    opv.setValue(String.join(" ", splited));
+    String value = String.join(" ", splited);
+    LOGGER.debug("[Data Handler] Prepared value for axiom : {}", value);
+    opv.setValue(value);
   }
 
   private String fixRenderedValue(String value, String iriFragment, String splitFragment, Boolean fixRenderedIri) {
