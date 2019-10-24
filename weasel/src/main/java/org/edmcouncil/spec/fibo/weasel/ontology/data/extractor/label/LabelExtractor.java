@@ -32,7 +32,7 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
 @Component
 public class LabelExtractor {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(LabelExtractor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(LabelExtractor.class);
 
   private Map<IRI, String> previouslyUsedLabels = new HashMap<>();
 
@@ -68,7 +68,7 @@ public class LabelExtractor {
     }
     if (previouslyUsedLabels.containsKey(entity.getIRI())) {
       String label = previouslyUsedLabels.get(entity.getIRI());
-      LOGGER.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, entity.getIRI().toString());
+      LOG.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, entity.getIRI().toString());
       return label;
     }
 
@@ -114,14 +114,14 @@ public class LabelExtractor {
         .findFirst()
         .get();
     if (lab.isEmpty()) {
-      LOGGER.debug("[Label Extractor]: Entity has more than one label but noone have a language");
+      LOG.debug("[Label Extractor]: Entity has more than one label but noone have a language");
 
       if (missingLanguageAction == MissingLanguageItem.Action.FIRST) {
         String missingLab = labels.entrySet()
             .stream()
             .findFirst()
             .get().getKey();
-        LOGGER.debug("[Label Extractor]: Return an first element of label list: {}", missingLab);
+        LOG.debug("[Label Extractor]: Return an first element of label list: {}", missingLab);
 
       } else if (missingLanguageAction == MissingLanguageItem.Action.FRAGMENT) {
 
@@ -137,18 +137,18 @@ public class LabelExtractor {
       if (lang.equals(labelLang)) {
 
         labels.put(label, lang);
-        LOGGER.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
+        LOG.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
             label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
 
       } else {
-        LOGGER.debug("[Label Extractor]: REJECTED label: '{}' @ '{}' for element with IRI: '{}', "
+        LOG.debug("[Label Extractor]: REJECTED label: '{}' @ '{}' for element with IRI: '{}', "
             + "Reason: Language is not present.",
             label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
       }
 
     } else {
       labels.put(label, lang);
-      LOGGER.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
+      LOG.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
           label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
     }
   }
@@ -157,7 +157,7 @@ public class LabelExtractor {
 
     if (previouslyUsedLabels.containsKey(iri)) {
       String label = previouslyUsedLabels.get(iri);
-      LOGGER.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, iri.toString());
+      LOG.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, iri.toString());
       return label;
     }
 

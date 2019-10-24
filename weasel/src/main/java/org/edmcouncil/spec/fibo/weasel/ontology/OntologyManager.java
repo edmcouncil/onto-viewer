@@ -35,7 +35,7 @@ import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
 @Component
 public class OntologyManager {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(OntologyManager.class);
+  private static final Logger LOG = LoggerFactory.getLogger(OntologyManager.class);
 
   private OWLOntology ontology;
 
@@ -58,7 +58,7 @@ public class OntologyManager {
         loadOntologyFromFile(null);
       }
     } catch (OWLOntologyCreationException ex) {
-      LOGGER.error("[ERROR]: Error when creating ontology. Exception: {}", ex.getStackTrace(), ex.getMessage());
+      LOG.error("[ERROR]: Error when creating ontology. Exception: {}", ex.getStackTrace(), ex.getMessage());
     }
   }
 
@@ -81,7 +81,7 @@ public class OntologyManager {
       pathToOnto = fsm.getPathToOntologyFile(ontoPath);
 
     }
-    LOGGER.debug("Path to ontology : {}", pathToOnto.toString());
+    LOG.debug("Path to ontology : {}", pathToOnto.toString());
     File inputOntologyFile = pathToOnto.toFile();
 
     OWLOntologyManager m = OWLManager.createOWLOntologyManager();
@@ -105,7 +105,7 @@ public class OntologyManager {
    */
   private Set<OWLOntology> loadOntologyFromURL(String ontoURL) throws IOException, OWLOntologyCreationException {
 
-    LOGGER.debug("URL to Ontology : {} ", ontoURL);
+    LOG.debug("URL to Ontology : {} ", ontoURL);
     HttpGet httpGet = new HttpGet(ontoURL);
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
     CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -135,7 +135,7 @@ public class OntologyManager {
   private Set<OWLOntology> openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager) throws OWLOntologyCreationException {
     Set<OWLOntology> result = new HashSet<>();
     for (File file : ontologiesDir.listFiles()) {
-      LOGGER.debug("isFile : {}, name: {}", file.isFile(), file.getName());
+      LOG.debug("isFile : {}, name: {}", file.isFile(), file.getName());
       if (file.isFile()) {
         if (getFileExtension(file).equalsIgnoreCase("rdf") && !file.getName().contains("Metadata")) {
 

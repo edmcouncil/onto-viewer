@@ -41,7 +41,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OntologyVisitors {
 
-  private static final Logger Logger = LoggerFactory.getLogger(OntologyVisitors.class);
+  private static final Logger LOG = LoggerFactory.getLogger(OntologyVisitors.class);
   private static final String DEFAULT_BLANK_NODE_LABEL = "Thing";
 
   @Autowired
@@ -135,7 +135,7 @@ public class OntologyVisitors {
 
       @Override
       public OWLRestriction doDefault(Object object) {
-        System.out.println("Unsupported axiom: " + object);
+        LOG.debug("Unsupported axiom: " + object);
         return null;
       }
 
@@ -197,7 +197,7 @@ public class OntologyVisitors {
               break;
 
             default:
-              System.out.println("Unsupported switch case (ObjectType): " + objectType);
+              LOG.debug("Unsupported switch case (ObjectType): " + objectType);
 
           }
         }
@@ -260,7 +260,7 @@ public class OntologyVisitors {
             break;
 
           default:
-            System.out.println("Unsupported switch case (ObjectType): " + objectType);
+            LOG.debug("Unsupported switch case (ObjectType): " + objectType);
         }
         return returnedVal;
       }
@@ -296,7 +296,7 @@ public class OntologyVisitors {
             return null;
 
           default:
-            System.out.println("Unsupported switch case (DataRangeType): " + objectType);
+            LOG.debug("Unsupported switch case (DataRangeType): {}", objectType);
         }
 
         return returnedVal;
@@ -366,7 +366,7 @@ public class OntologyVisitors {
               break;
 
             default:
-              System.out.println("Unsupported switch case (ObjectType): " + objectType);
+              LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
 
           }
         }
@@ -437,7 +437,7 @@ public class OntologyVisitors {
               break;
 
             default:
-              System.out.println("Unsupported switch case (ObjectType): " + objectType);
+              LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
 
           }
         }
@@ -459,9 +459,7 @@ public class OntologyVisitors {
 
           switch (objectType) {
             case DATATYPE:
-              //OWLClassExpression expression = axiom.getFiller().;
               String object = axiom.getFiller().toString();
-              //object = extractStringObject(expression, object);
 
               GraphNode endNode = new GraphNode(vg.nextId());
               endNode.setIri(object);
@@ -484,7 +482,7 @@ public class OntologyVisitors {
               return null;
 
             default:
-              System.out.println("Unsupported switch case (DataRangeType): " + objectType);
+              LOG.debug("Unsupported switch case (DataRangeType): {}", objectType);
           }
 
         }
@@ -506,9 +504,7 @@ public class OntologyVisitors {
 
           switch (objectType) {
             case DATATYPE:
-              //OWLClassExpression expression = axiom.getFiller().;
               String object = axiom.getFiller().toString();
-              //object = extractStringObject(expression, object);
 
               GraphNode endNode = new GraphNode(vg.nextId());
               endNode.setIri(object);
@@ -530,13 +526,12 @@ public class OntologyVisitors {
               return null;
 
             default:
-              System.out.println("Unsupported switch case (DataRangeType): " + objectType);
+              LOG.debug("Unsupported switch case (DataRangeType): {}", objectType);
           }
 
         }
         return returnedVal;
       }
-      // TODO: same for AllValuesFrom etc.
     };
   }
 

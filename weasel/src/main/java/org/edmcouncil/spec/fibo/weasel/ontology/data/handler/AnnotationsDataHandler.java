@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AnnotationsDataHandler {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationsDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
 
   @Autowired
@@ -88,7 +88,7 @@ public class AnnotationsDataHandler {
           }
         }
       }
-      LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
+      LOG.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
 
       result.addProperty(property, opv);
     }
@@ -127,7 +127,7 @@ public class AnnotationsDataHandler {
           }
         }
       }
-      LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
+      LOG.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
 
       result.addProperty(property, opv);
     }

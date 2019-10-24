@@ -18,13 +18,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomDataFactory {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(CustomDataFactory.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CustomDataFactory.class);
 
   @Autowired
   private LabelExtractor labelExtractor;
 
   public OwlAnnotationIri createAnnotationIri(String iri) {
-    LOGGER.debug("[Custom Data Factory] Create annotation for iri: {}", iri);
+    LOG.debug("[Custom Data Factory] Create annotation for iri: {}", iri);
 
     OwlAnnotationIri owlAnnotationIri = new OwlAnnotationIri();
     OwlSimpleProperty osp = new OwlSimpleProperty();

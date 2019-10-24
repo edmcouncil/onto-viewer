@@ -63,7 +63,7 @@ public class FiboDataHandler {
   private static final String RESOURCE_INTERNAL_PREFIX = "internal ";
   private static final String RESOURCE_EXTERNAL_PREFIX = "external ";
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(FiboDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FiboDataHandler.class);
 
   @Autowired
   private AnnotationsDataHandler annotationsDataHandler;
@@ -90,16 +90,16 @@ public class FiboDataHandler {
 
   @PostConstruct
   public void init() {
-    LOGGER.debug("[INIT FIBO Data Handler] Start initialize data handler");
+    LOG.debug("[INIT FIBO Data Handler] Start initialize data handler");
     OWLOntology onto = ontoManager.getOntology();
 
-    LOGGER.debug("[INIT FIBO Data Handler] Modules data ...");
+    LOG.debug("[INIT FIBO Data Handler] Modules data ...");
     getAllModulesData(onto);
 
-    LOGGER.debug("[INIT FIBO Data Handler] Ontology resourcess ...");
+    LOG.debug("[INIT FIBO Data Handler] Ontology resourcess ...");
     loadAllOntologyResources(onto);
 
-    LOGGER.debug("[INIT FIBO Data Handler] Finish initialize Handler");
+    LOG.debug("[INIT FIBO Data Handler] Finish initialize Handler");
 
   }
 
@@ -135,7 +135,7 @@ public class FiboDataHandler {
       String ontologyIriString = isDefinedBy;
       result.addProperty(ONTOLOGY_KEY, createProperty(onto, ontologyIriString));
 
-      LOGGER.debug("[FIBO Data Handler] domainIRI: {};\n\tmoduleIRI: {};\n\t ontologyIRI: {};",
+      LOG.debug("[FIBO Data Handler] domainIRI: {};\n\tmoduleIRI: {};\n\t ontologyIRI: {};",
           domainIriString, moduleIriString, ontologyIriString);
     }
 
@@ -418,11 +418,11 @@ public class FiboDataHandler {
 
     ontologyIri = ontologyIri == null ? elementIri : ontologyIri;
 
-    LOGGER.debug("[FIBO Data Handler] Element found in ontology {}", ontologyIri);
+    LOG.debug("[FIBO Data Handler] Element found in ontology {}", ontologyIri);
     if (ontologyIri != null) {
       for (FiboModule module : modules) {
         if (trackingThePath(module, ontologyIri, result, elementIri)) {
-          LOGGER.debug("[FIBO Data Handler] Location Path {}", Arrays.toString(result.toArray()));
+          LOG.debug("[FIBO Data Handler] Location Path {}", Arrays.toString(result.toArray()));
           return result;
         }
       }

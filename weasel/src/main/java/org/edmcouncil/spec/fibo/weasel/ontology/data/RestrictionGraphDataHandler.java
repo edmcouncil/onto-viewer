@@ -40,7 +40,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestrictionGraphDataHandler {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(RestrictionGraphDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RestrictionGraphDataHandler.class);
 
   @Autowired
   private LabelExtractor labelExtractor;
@@ -141,7 +141,7 @@ public class RestrictionGraphDataHandler {
       GraphNode root,
       GraphNodeType type) {
 
-    LOGGER.debug("[Expression] Process expression: {}", expression.toString());
+    LOG.debug("[Expression] Process expression: {}", expression.toString());
 
     if (expression == null) {
       return;

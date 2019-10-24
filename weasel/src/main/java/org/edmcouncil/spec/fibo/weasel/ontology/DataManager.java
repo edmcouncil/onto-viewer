@@ -30,7 +30,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
 @Component
 public class DataManager {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(DataManager.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DataManager.class);
   private static final String DEFAULT_GROUP_NAME = "other";
 
   @Autowired
@@ -49,25 +49,25 @@ public class DataManager {
     OwlListDetails result = null;
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
     if (iriString.endsWith("/")) {
-      LOGGER.debug("Handle ontology metadata. IRI: {}", iriString);
+      LOG.debug("Handle ontology metadata. IRI: {}", iriString);
       OwlListDetails wd = dataHandler.handleOntologyMetadata(iri, ontologyManager.getOntology());
 
       result = wd;
     } else {
       if (ontologyManager.getOntology().containsClassInSignature(iri)) {
-        LOGGER.debug("Handle class data.");
+        LOG.debug("Handle class data.");
         OwlListDetails wd = dataHandler.handleParticularClass(iri, ontologyManager.getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri)) {
-        LOGGER.info("Handle data property.");
+        LOG.info("Handle data property.");
         OwlListDetails wd = dataHandler.handleParticularDataProperty(iri, ontologyManager.getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri)) {
-        LOGGER.info("Handle object property.");
+        LOG.info("Handle object property.");
         OwlListDetails wd = dataHandler.handleParticularObjectProperty(iri, ontologyManager.getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsIndividualInSignature(iri)) {
-        LOGGER.info("Handle individual data.");
+        LOG.info("Handle individual data.");
         OwlListDetails wd = dataHandler.handleParticularIndividual(iri, ontologyManager.getOntology());
         result = wd;
       }

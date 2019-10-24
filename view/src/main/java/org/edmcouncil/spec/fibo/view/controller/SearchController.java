@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/search")
 public class SearchController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(SearchController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SearchController.class);
 
   @Autowired
   private SearchService searchService;
@@ -49,7 +49,7 @@ public class SearchController {
   @GetMapping
   public String search(@RequestParam("query") String query, Model model) {
 
-    LOGGER.info("[REQ] GET : search ? query = {{}}", query);
+    LOG.info("[REQ] GET : search ? query = {{}}", query);
     Query q = new Query();
     q.setValue(query);
     ModelBuilder modelBuilder = new ModelBuilder(model);
@@ -63,7 +63,7 @@ public class SearchController {
   @PostMapping("/json")
   public <T extends OwlDetails> ResponseEntity<T> searchJson(@RequestBody String query, Model model) {
 
-    LOGGER.info("[REQ] POST : search / json   RequestBody = {{}}", query);
+    LOG.info("[REQ] POST : search / json   RequestBody = {{}}", query);
     ModelBuilder modelBuilder = new ModelBuilder(model);
 
     OwlDetails search = searchService.search(query, modelBuilder);

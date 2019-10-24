@@ -68,7 +68,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OwlDataHandler {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(OwlDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(OwlDataHandler.class);
 
   private final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
   @Autowired
@@ -97,7 +97,7 @@ public class OwlDataHandler {
       OWLClass clazz = classesIterator.next();
 
       if (clazz.getIRI().equals(iri)) {
-        LOGGER.debug("[Data Handler] Find OWL class wih IRI: {}", iri.toString());
+        LOG.debug("[Data Handler] Find OWL class wih IRI: {}", iri.toString());
 
         //handleParticularSubClassOf(ontology, clazz);
 
@@ -152,7 +152,7 @@ public class OwlDataHandler {
       OWLNamedIndividual individual = individualIterator.next();
 
       if (individual.getIRI().equals(iri)) {
-        LOGGER.debug("[Data Handler] Find owl named individual wih iri: {}", iri.toString());
+        LOG.debug("[Data Handler] Find owl named individual wih iri: {}", iri.toString());
 
         resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(individual.getIRI()));
 
@@ -214,7 +214,7 @@ public class OwlDataHandler {
           IRI sci = extractSubElementIri(axiomProperty, objIri);
           OWLEntity entity = createEntity(ontology, sci, type);
 
-          LOGGER.trace("\t{} Sub Element Of {}", StringUtils.getFragment(objIri),
+          LOG.trace("\t{} Sub Element Of {}", StringUtils.getFragment(objIri),
               StringUtils.getFragment(entity.getIRI()));
           List<PropertyValue> subTax = getSubElements(entity, ontology, type);
 
@@ -238,7 +238,7 @@ public class OwlDataHandler {
 
     } else {
 
-      LOGGER.trace("\t\tEnd leaf on {}", StringUtils.getFragment(objIri));
+      LOG.trace("\t\tEnd leaf on {}", StringUtils.getFragment(objIri));
       String label = labelExtractor.getLabelOrDefaultFragment(objIri);
       OwlTaxonomyValue val1 = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
       OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
@@ -303,11 +303,11 @@ public class OwlDataHandler {
       opv.setValue(value);
 
       opv.setType(WeaselOwlType.AXIOM);
-      LOGGER.debug("[Data Handler] Find Axiom \"{}\" with type \"{}\"", value, key);
+      LOG.debug("[Data Handler] Find Axiom \"{}\" with type \"{}\"", value, key);
       Boolean isRestriction = owlUtils.isRestriction(axiom);
 
       if (!isRestriction && axiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
-        LOGGER.trace("[Data Handler] Find non restriction SubClassOf");
+        LOG.trace("[Data Handler] Find non restriction SubClassOf");
         opv.setType(WeaselOwlType.TAXONOMY);
       }
 
@@ -334,7 +334,7 @@ public class OwlDataHandler {
     String closingParenthesis = ")";
     Iterator<OWLEntity> iterator = axiom.signature().iterator();
 
-    LOGGER.trace("Rendered Val: {}", renderedVal);
+    LOG.trace("Rendered Val: {}", renderedVal);
 
     while (iterator.hasNext()) {
       OWLEntity next = iterator.next();
@@ -342,7 +342,7 @@ public class OwlDataHandler {
       eSignature = fixRenderedIri && iriFragment.equals(eSignature) ? splitFragment : eSignature;
       String key = null;
 
-      LOGGER.trace("OWL Entity: {}", next.toStringID());
+      LOG.trace("OWL Entity: {}", next.toStringID());
 
       for (int i = 0; i < splited.length; i++) {
         String string = splited[i];
@@ -386,7 +386,7 @@ public class OwlDataHandler {
 
     }
     String value = String.join(" ", splited);
-    LOGGER.debug("[Data Handler] Prepared value for axiom : {}", value);
+    LOG.debug("[Data Handler] Prepared value for axiom : {}", value);
     opv.setValue(value);
   }
 
@@ -421,7 +421,7 @@ public class OwlDataHandler {
       OWLDataProperty dataProperty = dataPropertyIt.next();
 
       if (dataProperty.getIRI().equals(iri)) {
-        LOGGER.debug("[Data Handler] Find owl data property wih iri: {}", iri.toString());
+        LOG.debug("[Data Handler] Find owl data property wih iri: {}", iri.toString());
 
         resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(dataProperty.getIRI()));
 
@@ -451,7 +451,7 @@ public class OwlDataHandler {
       OWLObjectProperty dataProperty = dataPropertyIt.next();
 
       if (dataProperty.getIRI().equals(iri)) {
-        LOGGER.debug("[Data Handler] Find owl object property wih iri: {}", iri.toString());
+        LOG.debug("[Data Handler] Find owl object property wih iri: {}", iri.toString());
 
         resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(dataProperty.getIRI()));
 
@@ -490,7 +490,7 @@ public class OwlDataHandler {
     List<PropertyValue> resultProperties = new LinkedList<>();
 
     for (OWLProperty owlProperty : propertyStream.collect(Collectors.toSet())) {
-      LOGGER.trace("{} Sub Property Of {}", StringUtils.getFragment(entity.getIRI()),
+      LOG.trace("{} Sub Property Of {}", StringUtils.getFragment(entity.getIRI()),
           StringUtils.getFragment(owlProperty.getIRI()));
       IRI subClazzIri = entity.getIRI();
       IRI superClazzIri = owlProperty.getIRI();
@@ -588,7 +588,7 @@ public class OwlDataHandler {
 
     for (OWLNamedIndividual namedIndividual : instances.entities().collect(Collectors.toSet())) {
       String fragment = StringUtils.getFragment(namedIndividual.getIRI());
-      //LOGGER.debug(namedIndividual.getIRI().toString());
+      //LOG.debug(namedIndividual.getIRI().toString());
       OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
       s.setType(WeaselOwlType.INSTANCES);
       s.setValue(new PairImpl(labelExtractor
@@ -650,7 +650,7 @@ public class OwlDataHandler {
   }
 
   public List<String> getElementLocationInModules(String iriString, OWLOntology ontology) {
-    LOGGER.debug("[Data Handler] Handle location for element {}", iriString);
+    LOG.debug("[Data Handler] Handle location for element {}", iriString);
     return fiboDataHandler.getElementLocationInModules(iriString, ontology);
   }
 

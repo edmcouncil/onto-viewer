@@ -26,7 +26,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultL
  */
 public class WeaselConfigurationHandler extends DefaultHandler {
 
-  private static Logger logger = LoggerFactory.getLogger(WeaselConfigurationHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(WeaselConfigurationHandler.class);
 
   private WeaselConfiguration config = new WeaselConfiguration();
   String key = null;

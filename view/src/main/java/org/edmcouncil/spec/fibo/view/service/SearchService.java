@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SearchService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(SearchService.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SearchService.class);
 
   @Autowired
   private DataManager ontologyManager;
