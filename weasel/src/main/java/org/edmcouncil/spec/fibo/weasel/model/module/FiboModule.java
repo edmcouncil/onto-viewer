@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.model;
+package org.edmcouncil.spec.fibo.weasel.model.module;
 
 import java.util.List;
 import java.util.stream.Collectors;

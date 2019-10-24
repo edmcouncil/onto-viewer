@@ -29,9 +29,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupLabelPriorityElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
-import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
+import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyEntity;
@@ -99,7 +99,7 @@ public class OwlDataHandler {
       if (clazz.getIRI().equals(iri)) {
         LOGGER.debug("[Data Handler] Find OWL class wih IRI: {}", iri.toString());
 
-        handleParticularSubClassOf(ontology, clazz);
+        //handleParticularSubClassOf(ontology, clazz);
 
         String label = labelExtractor.getLabelOrDefaultFragment(clazz);
 
@@ -114,7 +114,7 @@ public class OwlDataHandler {
             .stream()
             .filter((pv) -> (pv.getType().equals(WeaselOwlType.TAXONOMY)))
             .collect(Collectors.toList());
-        OwlDetailsProperties<PropertyValue> handleSubClassOf = handleParticularSubClassOf(ontology, clazz);
+        OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleParticularIndividual(ontology, clazz);
         OwlDetailsProperties<PropertyValue> inheritedAxioms = handleInheritedAxioms(ontology, clazz);
 
@@ -133,7 +133,7 @@ public class OwlDataHandler {
 
         resultDetails.addAllProperties(axioms);
         resultDetails.addAllProperties(annotations);
-        resultDetails.addAllProperties(handleSubClassOf);
+        resultDetails.addAllProperties(directSubclasses);
         resultDetails.addAllProperties(individuals);
         resultDetails.addAllProperties(inheritedAxioms);
         resultDetails.setGraph(vg);
@@ -556,7 +556,7 @@ public class OwlDataHandler {
    * @param clazz Clazz are all properties of Inherited Axioms.
    * @return properties of Inherited Axioms.
    */
-  public OwlDetailsProperties<PropertyValue> handleParticularSubClassOf(OWLOntology ontology, OWLClass clazz) {
+  public OwlDetailsProperties<PropertyValue> handleDirectSubclasses(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<PropertyValue>();
 
     Iterator<OWLSubClassOfAxiom> iterator = ontology.subClassAxiomsForSuperClass(clazz).iterator();
@@ -569,6 +569,7 @@ public class OwlDataHandler {
       r.setValue(new PairImpl(labelExtractor.getLabelOrDefaultFragment(iri), iri.toString()));
       result.addProperty(WeaselOwlType.DIRECT_SUBCLASSES.name(), r);
     }
+    result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
 
@@ -626,7 +627,7 @@ public class OwlDataHandler {
           }
         });
 
-    result.sortPropertiesInAlphabeticalOrder();
+    result.sortPropertiesInAlphabeticalOrder(); 
     return result;
   }
 

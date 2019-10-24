@@ -1,22 +1,22 @@
-package org.edmcouncil.spec.fibo.config.configuration.model.impl;
+package org.edmcouncil.spec.fibo.config.configuration.model.impl.element;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElementAbstract;
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElementType;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItemAbstract;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItemType;
 import org.edmcouncil.spec.fibo.config.configuration.model.GroupType;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
-public class ConfigGroupsElement extends ConfigElementAbstract {
+public class GroupsItem extends ConfigItemAbstract {
 
   private String name;
-  private Set<ConfigStringElement> elements;
+  private Set<StringItem> elements;
   private GroupType groupType;
   
-  public ConfigGroupsElement() {
+  public GroupsItem() {
     elements = new LinkedHashSet<>();
   }
 
@@ -28,20 +28,20 @@ public class ConfigGroupsElement extends ConfigElementAbstract {
     this.name = name;
   }
 
-  public Set<ConfigStringElement> getElements() {
+  public Set<StringItem> getElements() {
     return elements;
   }
 
-  public void setElements(Set<ConfigStringElement> elements) {
+  public void setElements(Set<StringItem> elements) {
     this.elements = elements;
   }
 
 
-  public ConfigGroupsElement(ConfigElementType type) {
+  public GroupsItem(ConfigItemType type) {
     super(type);
   }
 
-  public void addElement(ConfigStringElement el) {
+  public void addElement(StringItem el) {
     if (elements == null) {
       elements = new LinkedHashSet<>();
     }
@@ -52,14 +52,14 @@ public class ConfigGroupsElement extends ConfigElementAbstract {
     if (elements == null) {
       return false;
     }
-    //return elements.contains(new ConfigStringElement(val));
+    //return elements.contains(new StringItem(val));
     /*return elements.stream()
-        .map(ConfigStringElement::toString)
+        .map(StringItem::toString)
         .filter(val::equals)
         .findFirst()
         .isPresent();*/
 
-    for (ConfigStringElement element : elements) {
+    for (StringItem element : elements) {
       if (element.toString().equals(val)) {
         return true;
       }
@@ -78,7 +78,7 @@ public class ConfigGroupsElement extends ConfigElementAbstract {
 
   public void setGroupType(GroupType groupType) {
     this.groupType = groupType;
-    addElement(new ConfigStringElement(groupType.name()));
+    addElement(new StringItem(groupType.name()));
   }
 
 }

@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
-import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigKeys;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
-import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
+import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
@@ -22,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -107,7 +107,7 @@ public class DataManager {
   private OwlGroupedDetails groupDetails(OwlListDetails owlDetails, WeaselConfiguration cfg) {
     OwlGroupedDetails newResult = null;
     OwlGroupedDetails groupedDetails = new OwlGroupedDetails();
-    Set<ConfigElement> groups = cfg.getConfiguration().get(WeaselConfigKeys.GROUPS);
+    Set<ConfigItem> groups = cfg.getConfiguration().get(ConfigKeys.GROUPS);
 
     for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
       String propertyKey = entry.getKey();
@@ -134,13 +134,13 @@ public class DataManager {
     return newResult;
   }
 
-  private String getGroupName(Set<ConfigElement> groups, String propertyKey) {
+  private String getGroupName(Set<ConfigItem> groups, String propertyKey) {
     String result = null;
     if (propertyKey == null || propertyKey.isEmpty()) {
       return result;
     }
-    for (ConfigElement g : groups) {
-      ConfigGroupsElement group = (ConfigGroupsElement) g;
+    for (ConfigItem g : groups) {
+      GroupsItem group = (GroupsItem) g;
       if (group.getElements() != null && group.getElements().size() > 0) {
         if (group.contains(propertyKey)) {
           return group.getName();
@@ -152,7 +152,7 @@ public class DataManager {
 
   private void sortResults(OwlListDetails result) {
     Set set = (Set) config.getWeaselConfig()
-        .getConfigVal(WeaselConfigKeys.PRIORITY_LIST);
+        .getConfigVal(ConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;
     }

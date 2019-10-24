@@ -2,11 +2,13 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigMissingLanguageElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultLabelItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -39,7 +41,7 @@ public class LabelExtractor {
   private Boolean forceLabelLang;
   private String labelLang;
   private Boolean useLabels;
-  private ConfigMissingLanguageElement.MissingLanguageAction missingLanguageAction;
+  private MissingLanguageItem.Action missingLanguageAction;
 
   @Inject
   public LabelExtractor(AppConfiguration config) {
@@ -48,6 +50,16 @@ public class LabelExtractor {
     this.labelLang = weaselConfig.getLabelLang();
     this.useLabels = weaselConfig.useLabels();
     this.missingLanguageAction = weaselConfig.getMissingLanguageAction();
+
+    setDefaultLabels(weaselConfig.getDefaultLabels());
+    
+  }
+
+  private void setDefaultLabels(Set<DefaultLabelItem> defaultLabels) {
+    defaultLabels.forEach((defaultLabel) -> {
+      previouslyUsedLabels.put(IRI.create(defaultLabel.getIri()), defaultLabel.getLabel());
+    });
+
   }
 
   public String getLabelOrDefaultFragment(OWLEntity entity) {
@@ -68,7 +80,7 @@ public class LabelExtractor {
           .stream()
           .filter((annotation) -> (annotation.getValue().isLiteral()))
           .forEachOrdered((annotation) -> {
-            // TODO: get default lang from configuration, if language present we will check it
+            
             String label = annotation.annotationValue().asLiteral().get().getLiteral();
 
             String lang = annotation.annotationValue().asLiteral().get().getLang();
@@ -104,14 +116,14 @@ public class LabelExtractor {
     if (lab.isEmpty()) {
       LOGGER.debug("[Label Extractor]: Entity has more than one label but noone have a language");
 
-      if (missingLanguageAction == ConfigMissingLanguageElement.MissingLanguageAction.FIRST) {
+      if (missingLanguageAction == MissingLanguageItem.Action.FIRST) {
         String missingLab = labels.entrySet()
             .stream()
             .findFirst()
             .get().getKey();
         LOGGER.debug("[Label Extractor]: Return an first element of label list: {}", missingLab);
 
-      } else if (missingLanguageAction == ConfigMissingLanguageElement.MissingLanguageAction.FRAGMENT) {
+      } else if (missingLanguageAction == MissingLanguageItem.Action.FRAGMENT) {
 
         return StringUtils.getFragment(entityIri);
       }
@@ -142,7 +154,7 @@ public class LabelExtractor {
   }
 
   public String getLabelOrDefaultFragment(IRI iri) {
-    
+
     if (previouslyUsedLabels.containsKey(iri)) {
       String label = previouslyUsedLabels.get(iri);
       LOGGER.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, iri.toString());

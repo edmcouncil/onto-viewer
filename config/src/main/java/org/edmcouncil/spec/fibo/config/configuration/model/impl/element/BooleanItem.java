@@ -1,11 +1,11 @@
-package org.edmcouncil.spec.fibo.config.configuration.model.impl;
+package org.edmcouncil.spec.fibo.config.configuration.model.impl.element;
 
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElementAbstract;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItemAbstract;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class ConfigBooleanElement extends ConfigElementAbstract {
+public class BooleanItem extends ConfigItemAbstract {
 
   private Boolean value;
 

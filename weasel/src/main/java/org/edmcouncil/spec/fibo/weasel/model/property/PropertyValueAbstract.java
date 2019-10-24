@@ -33,7 +33,7 @@ public abstract class PropertyValueAbstract<T> implements PropertyValue<T> {
 
   @Override
   public String toString() {
-    return "PropertyValue<" + "type:" + type + ", value:" + value + '>';
+    return "PropertyValue<" + "value:" + value + "type:" + type + '>';
   }
   
   

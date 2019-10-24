@@ -1,22 +1,28 @@
 package org.edmcouncil.spec.fibo.config.configuration.model.impl;
 
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.RenameItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.BooleanItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
 import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
-import org.edmcouncil.spec.fibo.config.configuration.model.WeaselConfigKeys;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigKeys;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultLabelItem;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
-public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
+public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
 
-  private Map<String, Set<ConfigElement>> configuration;
+  private Map<String, Set<ConfigItem>> configuration;
   private static final String DEFAULT_LANG = "en";
 
   public WeaselConfiguration() {
@@ -24,16 +30,16 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
   }
 
   @Override
-  public Map<String, Set<ConfigElement>> getConfiguration() {
+  public Map<String, Set<ConfigItem>> getConfiguration() {
     return this.configuration;
   }
 
   @Override
-  public Set<ConfigElement> getConfigVal(String cfName) {
+  public Set<ConfigItem> getConfigVal(String cfName) {
     return configuration != null ? configuration.get(cfName) : null;
   }
 
-  public void addCongigElement(String key, ConfigElement val) {
+  public void addCongigElement(String key, ConfigItem val) {
     if (configuration == null) {
       configuration = new HashMap<>();
     }
@@ -50,13 +56,13 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
   }
 
   public boolean isGrouped() {
-    return !isEmpty() && configuration.get(WeaselConfigKeys.GROUPS) != null;
+    return !isEmpty() && configuration.get(ConfigKeys.GROUPS) != null;
   }
 
   public String getNewName(String oldName) {
-    Set<ConfigElement> renamedGroups = configuration.getOrDefault(WeaselConfigKeys.RENAME_GROUPS, new HashSet<>());
-    for (ConfigElement renamedG : renamedGroups) {
-      ConfigRenameElement rename = (ConfigRenameElement) renamedG;
+    Set<ConfigItem> renamedGroups = configuration.getOrDefault(ConfigKeys.RENAME_GROUPS, new HashSet<>());
+    for (ConfigItem renamedG : renamedGroups) {
+      RenameItem rename = (RenameItem) renamedG;
       if (rename.getOldName().equals(oldName)) {
         return rename.getNewName();
       }
@@ -66,13 +72,13 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
   }
 
   public boolean hasRenamedGroups() {
-    return configuration.get(WeaselConfigKeys.RENAME_GROUPS) != null;
+    return configuration.get(ConfigKeys.RENAME_GROUPS) != null;
   }
 
   public String getOldName(String newName) {
-    Set<ConfigElement> renamedGroups = configuration.getOrDefault(WeaselConfigKeys.RENAME_GROUPS, new HashSet<>());
-    for (ConfigElement renamedG : renamedGroups) {
-      ConfigRenameElement rename = (ConfigRenameElement) renamedG;
+    Set<ConfigItem> renamedGroups = configuration.getOrDefault(ConfigKeys.RENAME_GROUPS, new HashSet<>());
+    for (ConfigItem renamedG : renamedGroups) {
+      RenameItem rename = (RenameItem) renamedG;
       if (rename.getNewName().equals(newName)) {
         return rename.getOldName();
       }
@@ -81,25 +87,25 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
   }
 
   public boolean isOntologyLocationSet() {
-    return configuration.containsKey(WeaselConfigKeys.ONTOLOGY_URL)
-        || configuration.containsKey(WeaselConfigKeys.ONTOLOGY_PATH);
+    return configuration.containsKey(ConfigKeys.ONTOLOGY_URL)
+        || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH);
   }
 
   public boolean isOntologyLocationURL() {
-    return configuration.containsKey(WeaselConfigKeys.ONTOLOGY_URL);
+    return configuration.containsKey(ConfigKeys.ONTOLOGY_URL);
   }
 
   public String getURLOntology() {
-    Set<ConfigElement> elements = configuration.get(WeaselConfigKeys.ONTOLOGY_URL);
-    for (ConfigElement element : elements) {
+    Set<ConfigItem> elements = configuration.get(ConfigKeys.ONTOLOGY_URL);
+    for (ConfigItem element : elements) {
       return element.toString();
     }
     return null;
   }
 
   public String getPathOntology() {
-    Set<ConfigElement> elements = configuration.get(WeaselConfigKeys.ONTOLOGY_PATH);
-    for (ConfigElement element : elements) {
+    Set<ConfigItem> elements = configuration.get(ConfigKeys.ONTOLOGY_PATH);
+    for (ConfigItem element : elements) {
       return element.toString();
     }
     return null;
@@ -112,9 +118,9 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
    * @return True if it finds representation in the configuration, otherwise false.
    */
   public Boolean isUriIri(String uri) {
-    Set<ConfigElement> scopeIri = configuration.getOrDefault(WeaselConfigKeys.SCOPE_IRI, new HashSet<>());
-    for (ConfigElement configElement : scopeIri) {
-      ConfigStringElement element = (ConfigStringElement) configElement;
+    Set<ConfigItem> scopeIri = configuration.getOrDefault(ConfigKeys.SCOPE_IRI, new HashSet<>());
+    for (ConfigItem configElement : scopeIri) {
+      StringItem element = (StringItem) configElement;
       if (uri.contains(element.toString())) {
         return Boolean.TRUE;
       }
@@ -123,10 +129,10 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
   }
 
   public Boolean useLabels() {
-    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.DISPLAYED_LABELS, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DISPLAYED_LABELS, new HashSet<>());
 
-    for (ConfigElement value : values) {
-      ConfigBooleanElement cbe = (ConfigBooleanElement) value;
+    for (ConfigItem value : values) {
+      BooleanItem cbe = (BooleanItem) value;
       return cbe.getValue();
     }
 
@@ -134,57 +140,69 @@ public class WeaselConfiguration implements Configuration<Set<ConfigElement>> {
   }
 
   public Boolean isForceLabelLang() {
-    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.FORCE_LABEL_LANG, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.FORCE_LABEL_LANG, new HashSet<>());
 
-    for (ConfigElement value : values) {
-      ConfigBooleanElement cbe = (ConfigBooleanElement) value;
+    for (ConfigItem value : values) {
+      BooleanItem cbe = (BooleanItem) value;
       return cbe.getValue();
     }
 
     return Boolean.FALSE;
   }
 
-  public ConfigGroupLabelPriorityElement.GroupLabelPriority getGroupLabelPriority() {
-    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.GROUP_LABEL, new HashSet<>());
+  public GroupLabelPriorityItem.Priority getGroupLabelPriority() {
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.GROUP_LABEL, new HashSet<>());
 
-    for (ConfigElement value : values) {
-      ConfigGroupLabelPriorityElement cpe = (ConfigGroupLabelPriorityElement) value;
+    for (ConfigItem value : values) {
+      GroupLabelPriorityItem cpe = (GroupLabelPriorityItem) value;
       return cpe.getValue();
     }
 
-    return ConfigGroupLabelPriorityElement.GroupLabelPriority.FRAGMENT;
+    return GroupLabelPriorityItem.Priority.FRAGMENT;
   }
 
   public String getLabelLang() {
-    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.LABEL_LANG, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_LANG, new HashSet<>());
 
-    for (ConfigElement value : values) {
-      ConfigStringElement cpe = (ConfigStringElement) value;
+    for (ConfigItem value : values) {
+      StringItem cpe = (StringItem) value;
       return cpe.toString();
     }
 
     return DEFAULT_LANG;
   }
 
-  public ConfigMissingLanguageElement.MissingLanguageAction getMissingLanguageAction() {
-    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.MISSING_LANGUAGE_ACTION, new HashSet<>());
+  public MissingLanguageItem.Action getMissingLanguageAction() {
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.MISSING_LANGUAGE_ACTION, new HashSet<>());
 
-    for (ConfigElement value : values) {
-      ConfigMissingLanguageElement cpe = (ConfigMissingLanguageElement) value;
+    for (ConfigItem value : values) {
+      MissingLanguageItem cpe = (MissingLanguageItem) value;
       return cpe.getValue();
     }
 
-    return ConfigMissingLanguageElement.MissingLanguageAction.FIRST;
+    return MissingLanguageItem.Action.FIRST;
   }
 
   public Set<String> getIgnoredElements() {
 
-    Set<ConfigElement> values = configuration.getOrDefault(WeaselConfigKeys.IGNORE_TO_DISPLAYING, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.IGNORE_TO_DISPLAYING, new HashSet<>());
     Set<String> result = new HashSet<>();
     values.stream()
-        .map((value) -> (ConfigStringElement) value)
+        .map((value) -> (StringItem) value)
         .forEachOrdered((cse) -> {
           result.add(cse.toString());
+        });
+
+    return result;
+  }
+  public Set<DefaultLabelItem> getDefaultLabels() {
+
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DEFAULT_LABEL_LIST, new HashSet<>());
+    Set<DefaultLabelItem> result = new HashSet<>();
+    values.stream()
+        .map((value) -> (DefaultLabelItem) value)
+        .forEachOrdered((cse) -> {
+          result.add(cse);
         });
 
     return result;

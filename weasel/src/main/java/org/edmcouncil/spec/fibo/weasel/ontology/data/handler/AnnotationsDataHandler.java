@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupLabelPriorityElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
@@ -46,7 +46,7 @@ public class AnnotationsDataHandler {
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
 
     WeaselConfiguration config = (WeaselConfiguration) appConfig.getWeaselConfig();
-    ConfigGroupLabelPriorityElement.GroupLabelPriority labelPriority = config.getGroupLabelPriority();
+    GroupLabelPriorityItem.Priority labelPriority = config.getGroupLabelPriority();
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -92,6 +92,7 @@ public class AnnotationsDataHandler {
 
       result.addProperty(property, opv);
     }
+    result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
 

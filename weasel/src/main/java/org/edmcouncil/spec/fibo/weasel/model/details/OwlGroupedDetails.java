@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlGroupedDetailsProperties;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -31,7 +31,7 @@ public class OwlGroupedDetails extends OwlDetails {
     properties.addProperty(groupKey, propertyKey, property);
   }
 
-  public void sortProperties(List<ConfigStringElement> priorityList) {
+  public void sortProperties(List<StringItem> priorityList) {
     properties.sort(priorityList);
   }
 
@@ -62,12 +62,12 @@ public class OwlGroupedDetails extends OwlDetails {
     return true;
   }
 
-  public void sortProperties(Set<ConfigElement> groups) {
+  public void sortProperties(Set<ConfigItem> groups) {
     properties.sort(groups);
 
   }
 
-  public void sortProperties(Set<ConfigElement> groups, WeaselConfiguration cfg) {
+  public void sortProperties(Set<ConfigItem> groups, WeaselConfiguration cfg) {
     properties.sort(groups, cfg);
   }
 

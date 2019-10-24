@@ -2,7 +2,7 @@ package org.edmcouncil.spec.fibo.view.controller;
 
 import java.util.Collection;
 import java.util.List;
-import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
+import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

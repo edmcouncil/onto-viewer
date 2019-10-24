@@ -414,8 +414,7 @@ public class OntologyVisitors {
               endNode.setType(type);
               String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
               String labelPostfix = cardinality > 1 ? " (" + (i + 1) + ")" : "";
-              //label = label.equals("rdfs:Literal") || label.equals("Rdfs:Literal") ? "Literal" : label;
-              //label = label.equals("Literal") ? label : label.substring(0, 1).toLowerCase() + label.substring(1);
+              
               endNode.setLabel(label + labelPostfix);
 
               GraphRelation rel = new GraphRelation(vg.nextId());

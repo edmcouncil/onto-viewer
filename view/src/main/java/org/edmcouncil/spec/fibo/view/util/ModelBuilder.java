@@ -2,7 +2,7 @@ package org.edmcouncil.spec.fibo.view.util;
 
 import org.edmcouncil.spec.fibo.view.model.Query;
 import java.util.List;
-import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
+import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 
 import org.springframework.ui.Model;

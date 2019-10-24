@@ -4,7 +4,7 @@ package org.edmcouncil.spec.fibo.config.configuration.model;
  * @author Michał Daniel (michal.daniel@makolab.com)
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
-public class WeaselConfigKeys {
+public class ConfigKeys {
 
   public static final String PRIORITY_LIST = "priorityList";
   public static final String PRIORITY_LIST_ELEMENT = "priority";
@@ -29,5 +29,9 @@ public class WeaselConfigKeys {
   public static final String LABEL_LANG = "labelLang";
   public static final String FORCE_LABEL_LANG = "forceLabelLang";
   public static final String MISSING_LANGUAGE_ACTION = "missingLanguageAction";
+  public static final String DEFAULT_LABEL_LIST = "defaultLabelList";
+  public static final String DEFAULT_LABEL_DEF = "defaultLabelDef";
+  public static final String DEFAULT_LABEL_IRI = "defaultLabelIri";
+  public static final String DEFAULT_LABEL_VALUE = "defaultLabelValue";
   
 }

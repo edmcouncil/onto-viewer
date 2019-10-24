@@ -7,4 +7,9 @@ import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
  */
 public class OwlAnnotationIri extends PropertyValueAbstract<OwlSimpleProperty> {
 
+  @Override
+  public String toString() {
+    return super.getValue().getLabel();
+  }
+  
 }

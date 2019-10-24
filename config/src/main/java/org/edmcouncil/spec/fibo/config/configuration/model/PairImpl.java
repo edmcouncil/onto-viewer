@@ -1,15 +1,12 @@
 package org.edmcouncil.spec.fibo.config.configuration.model;
 
-import org.edmcouncil.spec.fibo.config.configuration.model.Pair;
-
-
 /**
- *
  * @author Michał Daniel (michal.daniel@makolab.com)
  *
  * @param <A>
  * @param <B>
  */
+@Deprecated
 public class PairImpl<A, B> implements Pair<A, B> {
 
   private A valA;
