@@ -62,4 +62,9 @@ public class DefaultLabelItem implements ConfigItem {
     return ConfigItemType.DEFAULT_LABEL;
   }
 
+  @Override
+  public String toString() {
+    return "DefaultLabelItem{" + "iri=" + iri + ", label=" + label + '}';
+  }
+
 }

@@ -54,10 +54,10 @@
     
   </labelConfig>
   
-  <!--Feature will be added if future-->
+  <!--Feature will be added if future
   <ignoreToLinking>
     <ignore>http://www.some.iri#ignoreToLinking</ignore>
-  </ignoreToLinking>
+  </ignoreToLinking>-->
 
   <!-- Here we define URIs to be treated as IRIs -->
   <!-- We are currently using the method contains(), please be careful when define URIs -->
