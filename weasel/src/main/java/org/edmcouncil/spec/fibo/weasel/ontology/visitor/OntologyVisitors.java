@@ -1,11 +1,7 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.visitor;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
@@ -13,7 +9,6 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.GraphRelation;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
-import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.DataRangeType;
 import org.semanticweb.owlapi.model.IRI;
@@ -275,18 +270,17 @@ public class OntologyVisitors {
 
         switch (objectType) {
           case DATATYPE:
-            String object = axiom.getFiller().toString();
+            IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
 
             GraphNode endNode = new GraphNode(vg.nextId());
-            endNode.setIri(object);
+            endNode.setIri(datatypeIri.toString());
             endNode.setType(type);
-            String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
-
+            String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
             endNode.setLabel(label);
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
-            rel.setLabel(StringUtils.getFragment(propertyIri));
+            rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
             rel.setStart(node);
             rel.setEnd(endNode);
             rel.setEndNodeType(type);
@@ -459,16 +453,15 @@ public class OntologyVisitors {
 
           switch (objectType) {
             case DATATYPE:
-              String object = axiom.getFiller().toString();
+              IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
 
               GraphNode endNode = new GraphNode(vg.nextId());
-              endNode.setIri(object);
+              endNode.setIri(datatypeIri.toString());
               endNode.setType(type);
-              String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
+              String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
               String labelPostfix = cardinality > 1 ? " (" + (i + 1) + ")" : "";
 
               endNode.setLabel(label + labelPostfix);
-
               GraphRelation rel = new GraphRelation(vg.nextId());
               rel.setIri(propertyIri);
               rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
@@ -504,12 +497,12 @@ public class OntologyVisitors {
 
           switch (objectType) {
             case DATATYPE:
-              String object = axiom.getFiller().toString();
+               IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
 
               GraphNode endNode = new GraphNode(vg.nextId());
-              endNode.setIri(object);
+              endNode.setIri(datatypeIri.toString());
               endNode.setType(type);
-              String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
+              String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
               String labelPostfix = cardinality > 1 ? " (" + (i + 1) + ")" : "";
               endNode.setLabel(label + labelPostfix);
 
