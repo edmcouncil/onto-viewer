@@ -5,7 +5,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 
 /**
@@ -33,7 +33,7 @@ public class OwlListDetails extends OwlDetails {
     properties.addProperty(key, property);
   }
 
-  public void sortProperties(List<ConfigStringElement> priorityList) {
+  public void sortProperties(List<StringItem> priorityList) {
     properties.sort(priorityList);
   }
 

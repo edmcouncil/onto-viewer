@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.weasel.comparator.WeaselComparators;
 
 /**
@@ -56,7 +56,7 @@ public class OwlDetailsProperties<T> {
     return properties;
   }
 
-  public void sort(List<ConfigStringElement> priotityList) {
+  public void sort(List<StringItem> priotityList) {
     Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(priotityList);
     SortedSet<String> keys = new TreeSet<>(comparator);
     keys.addAll(properties.keySet());

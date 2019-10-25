@@ -18,13 +18,13 @@ public class FileSystemManager {
   private static final String WEASEL_ONTOLOGY_FILE_NAME = "AboutFIBOProd.rdf";
   private static final String WEASEL_CONFIG_FILE_NAME = "weasel_config.xml";
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(FileSystemManager.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FileSystemManager.class);
 
   public Path getWeaselHomeDir() {
     Path userHomeDir;
     String userHomeProperty = System.getProperty("user.home");
     userHomeDir = Paths.get(userHomeProperty);
-    LOGGER.trace("User home dir is '{}'.", userHomeDir);
+    LOG.trace("User home dir is '{}'.", userHomeDir);
     return userHomeDir.resolve(WEASEL_HOME_DIR_NAME);
   }
 
