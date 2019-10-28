@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,12 +21,22 @@ public class FileSystemManager {
 
   private static final Logger LOG = LoggerFactory.getLogger(FileSystemManager.class);
 
+  @Value("${app.defaultHomePath}")
+  private String defaultPath;
+
   public Path getWeaselHomeDir() {
-    Path userHomeDir;
-    String userHomeProperty = System.getProperty("user.home");
-    userHomeDir = Paths.get(userHomeProperty);
-    LOG.trace("User home dir is '{}'.", userHomeDir);
-    return userHomeDir.resolve(WEASEL_HOME_DIR_NAME);
+    Path userHomeDir = null;
+    String userHomeProperty = null;
+    if (defaultPath.equals("user.home")) {
+      userHomeProperty = System.getProperty("user.home");
+      userHomeDir = Paths.get(userHomeProperty);
+      LOG.trace("User home dir is '{}'.", userHomeDir);
+      userHomeDir = userHomeDir.resolve(WEASEL_HOME_DIR_NAME);
+    } else {
+        userHomeDir = Paths.get(userHomeProperty);
+      LOG.trace("Application working dir is '{}'.", userHomeDir);
+    }
+    return userHomeDir;
   }
 
   private Path createDirIfNotExists(Path dirToCreate) throws IOException {
