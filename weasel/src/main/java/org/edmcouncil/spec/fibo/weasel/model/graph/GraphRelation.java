@@ -52,7 +52,9 @@ public class GraphRelation extends GraphElement {
     String typeVariable = ", type:" + (endNodeType == GraphNodeType.INTERNAL ? "'internal'" : "'external'");
     String format = "{from: %s, to: %s, arrows:'to', label: '%s' " + optionalStyle + ", color:{color:'black'}"
         + optionalVariable + typeVariable + outIri + "}";
-    return String.format(format, start.getId(), end.getId(), super.getLabel());
+    String jLabel = super.getLabel();
+    jLabel = jLabel.replaceAll("'", "\u0027");
+    return String.format(format, start.getId(), end.getId(), jLabel);
   }
 
   public void setOptional(boolean b) {
