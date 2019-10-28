@@ -1,18 +1,18 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data;
+package org.edmcouncil.spec.fibo.weasel.ontology.data.handler;
 
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
-import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
-import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
-import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.CustomDataFactory;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
 import org.semanticweb.owlapi.io.OWLObjectRenderer;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.IRI;
@@ -31,23 +31,41 @@ import org.springframework.stereotype.Component;
 @Component
 public class AnnotationsDataHandler {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationsDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
 
   @Autowired
   private OwlDataExtractor dataExtractor;
-
+  @Autowired
+  private CustomDataFactory customDataFactory;
   @Autowired
   private AppConfiguration appConfig;
+  @Autowired
+  private LabelExtractor labelExtractor;
 
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
+
+    WeaselConfiguration config = (WeaselConfiguration) appConfig.getWeaselConfig();
+    GroupLabelPriorityItem.Priority labelPriority = config.getGroupLabelPriority();
+
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
     Iterator<OWLAnnotationAssertionAxiom> annotationAssertionAxiom
         = ontology.annotationAssertionAxioms(iri).iterator();
     while (annotationAssertionAxiom.hasNext()) {
       OWLAnnotationAssertionAxiom next = annotationAssertionAxiom.next();
-      String property = rendering.render(next.getProperty());
+      IRI propertyiri = next.getProperty().getIRI();
+      //String property = rendering.render(next.getProperty());
+      String property = null;
+      switch (labelPriority) {
+        case FRAGMENT:
+          property = rendering.render(next.getProperty());
+          break;
+        case LABEL:
+          property = labelExtractor.getLabelOrDefaultFragment(propertyiri);
+          break;
+      }
+
       String value = next.annotationValue().toString();
 
       PropertyValue opv = new OwlAnnotationPropertyValue();
@@ -55,7 +73,7 @@ public class AnnotationsDataHandler {
       opv.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
-        opv = CustomDataFactory.createAnnotationIri(value);
+        opv = customDataFactory.createAnnotationIri(value);
 
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
@@ -66,18 +84,19 @@ public class AnnotationsDataHandler {
           checkUriAsIri(opv, value);
           opv.setValue(value);
           if (opv.getType() == WeaselOwlType.IRI) {
-            opv = CustomDataFactory.createAnnotationIri(value);
+            opv = customDataFactory.createAnnotationIri(value);
           }
         }
       }
-      LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
+      LOG.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
 
       result.addProperty(property, opv);
     }
+    result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
 
-  public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations) {
+  public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
     Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
@@ -92,7 +111,7 @@ public class AnnotationsDataHandler {
 
       if (next.getValue().isIRI()) {
 
-        opv = CustomDataFactory.createAnnotationIri(value);
+        opv = customDataFactory.createAnnotationIri(value);
 
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
@@ -104,11 +123,11 @@ public class AnnotationsDataHandler {
           opv.setValue(value);
           checkUriAsIri(opv, value);
           if (opv.getType() == WeaselOwlType.IRI) {
-            opv = CustomDataFactory.createAnnotationIri(value);
+            opv = customDataFactory.createAnnotationIri(value);
           }
         }
       }
-      LOGGER.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
+      LOG.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
 
       result.addProperty(property, opv);
     }

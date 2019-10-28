@@ -18,28 +18,30 @@ import org.xml.sax.SAXException;
  */
 public class ConfigLoader {
 
-  private static Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
+  
+  private static Logger LOG = LoggerFactory.getLogger(ConfigLoader.class);
+  
 
-
-  public Configuration loadWeaselConfiguration(Path weaselConfigFile) {
-    Configuration configuration = new WeaselConfiguration();
-
+  public WeaselConfiguration loadWeaselConfiguration(Path weaselConfigFile) {
+    WeaselConfiguration configuration = new WeaselConfiguration();
+    
     SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
     try {
         File configFile= weaselConfigFile.toFile();
         if(!configFile.exists()){
-        logger.debug("Configuration file not exist, use default empty configuration.");
-        return configuration;
-      }
-      SAXParser saxParser = saxParserFactory.newSAXParser();
-      WeaselConfigurationHandler handler = new WeaselConfigurationHandler();
-      saxParser.parse(configFile, handler);
 
-      configuration = handler.getConfiguration();
-
+          LOG.debug("Configuration file not exist, use default empty configuration.");
+          return configuration;
+        }
+        SAXParser saxParser = saxParserFactory.newSAXParser();
+        WeaselConfigurationHandler handler = new WeaselConfigurationHandler();
+        saxParser.parse(configFile, handler);
+        
+        configuration = handler.getConfiguration();
+       
         
     } catch (ParserConfigurationException | SAXException | IOException e) {
-      logger.error("Exception while loading configuration: {}", e.getMessage());
+        LOG.error("Exception while loading configuration: {}", e.getMessage());
     }
 
 

@@ -4,14 +4,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class WeaselComparators {
 
-  public static Comparator<String> getComparatorWithPriority(List<ConfigStringElement> prioritySortList) {
+  public static Comparator<String> getComparatorWithPriority(List<StringItem> prioritySortList) {
     return (String obj1, String obj2) -> {
 
       if (obj1 == obj2) {
@@ -26,12 +26,12 @@ public class WeaselComparators {
 
       Optional var1 = prioritySortList
               .stream()
-              .map(ConfigStringElement::toString)
+              .map(StringItem::toString)
               .filter(obj1::equals)
               .findFirst();
       Optional var2 = prioritySortList
               .stream()
-              .map(ConfigStringElement::toString)
+              .map(StringItem::toString)
               .filter(obj2::equals)
               .findFirst();
 

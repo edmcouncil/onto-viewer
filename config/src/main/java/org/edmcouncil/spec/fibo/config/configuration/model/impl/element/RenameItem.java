@@ -1,10 +1,10 @@
-package org.edmcouncil.spec.fibo.config.configuration.model.impl;
+package org.edmcouncil.spec.fibo.config.configuration.model.impl.element;
 
 /**
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 
-public class ConfigRenameElement extends ConfigPairElement {
+public class RenameItem extends PairItem {
 
   public String getOldName() {
     return super.getValueA();

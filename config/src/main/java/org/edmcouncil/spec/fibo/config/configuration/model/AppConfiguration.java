@@ -20,16 +20,16 @@ public class AppConfiguration {
 
   @Autowired
   private FileSystemManager fileSystemManager;
-  private static final Logger logger = LoggerFactory.getLogger(AppConfiguration.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AppConfiguration.class);
 
-  private Configuration<Set<? extends Object>> weaselConfig;
+  private WeaselConfiguration weaselConfig;
 
   public AppConfiguration() {
   }
 
   @PostConstruct
   public void init() {
-    logger.debug("Start loading configuration.");
+    LOG.debug("Start loading configuration.");
 
     ConfigLoader cl = new ConfigLoader();
     Path configFilePath = null;
@@ -38,34 +38,34 @@ public class AppConfiguration {
       configFilePath = fileSystemManager.getPathToWeaselConfigFile();
 
     } catch (IOException ex) {
-      logger.error("[ERROR] IOException while loading config file");
+      LOG.error("[ERROR] IOException while loading config file");
     }
 
     this.weaselConfig = cl.loadWeaselConfiguration(configFilePath);
 
     if (!weaselConfig.isEmpty()) {
-      logger.debug("Configuration: ");
+      LOG.debug("Configuration: ");
       weaselConfig.getConfiguration()
           .entrySet()
           .stream()
           .map((entry) -> {
-            logger.debug("\t{}", entry.getKey());
+            LOG.debug("\t{}", entry.getKey());
             return entry;
           }).forEachOrdered((entry) -> {
         entry.getValue()
             .stream()
             .map((object) -> object.toString())
             .forEachOrdered((s) -> {
-              logger.debug("\t\t{}", s);
+              LOG.debug("\t\t{}", s);
             });
       });
     } else {
-      logger.debug("Use default weasel configuration");
+      LOG.debug("Use default weasel configuration");
     }
 
   }
 
-  public Configuration getWeaselConfig() {
+  public WeaselConfiguration getWeaselConfig() {
     return weaselConfig;
   }
  

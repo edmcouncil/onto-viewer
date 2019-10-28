@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
-import org.edmcouncil.spec.fibo.weasel.model.FiboModule;
+import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 
 /**
  *

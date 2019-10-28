@@ -11,11 +11,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import org.edmcouncil.spec.fibo.config.configuration.model.ConfigElement;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigGroupsElement;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.ConfigStringElement;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupsItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.comparator.WeaselComparators;
+import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -59,7 +59,7 @@ public class OwlGroupedDetailsProperties<T> {
   }
 
   //TODO: Check where we used that and do something with this.. this is very ugly..
-  public void sort(List<ConfigStringElement> priotityList) {
+  public void sort(List<StringItem> priotityList) {
 
     /*Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(priotityList);
     SortedSet<String> keys = new TreeSet<>(comparator);
@@ -72,7 +72,7 @@ public class OwlGroupedDetailsProperties<T> {
     properties = result;*/
   }
   //TODO: The same as up
-   public void sort(Set<ConfigElement> groups) {
+   public void sort(Set<ConfigItem> groups) {
 
   }
 
@@ -107,14 +107,14 @@ public class OwlGroupedDetailsProperties<T> {
 
  
 
-  public void sort(Set<ConfigElement> groups, WeaselConfiguration cfg) {
+  public void sort(Set<ConfigItem> groups, WeaselConfiguration cfg) {
 
     Map<String, Map<String, List<T>>> sortedResults = new LinkedHashMap<>();
 
     Map<String, List<T>> others = properties.get("other");
 
-    for (ConfigElement g : groups) {
-      ConfigGroupsElement group = (ConfigGroupsElement) g;
+    for (ConfigItem g : groups) {
+      GroupsItem group = (GroupsItem) g;
       Map<String, List<T>> prop = properties.get(group.getName());
       if (prop == null) {
         continue;
@@ -122,14 +122,14 @@ public class OwlGroupedDetailsProperties<T> {
 
       Map<String, List<T>> newprop = new LinkedHashMap();
 
-      List<ConfigStringElement> priotityList = new LinkedList(group.getElements());
+      List<StringItem> priotityList = new LinkedList(group.getElements());
       if (cfg.hasRenamedGroups()) {
-      List<ConfigStringElement> priotityListRenamed = new LinkedList();
-        for (ConfigStringElement object : priotityList) {
+      List<StringItem> priotityListRenamed = new LinkedList();
+        for (StringItem object : priotityList) {
           String configElement = object.toString();
           String newName = cfg.getNewName(configElement);
           newName = newName == null ? configElement : newName;
-          priotityListRenamed.add(new ConfigStringElement(newName));
+          priotityListRenamed.add(new StringItem(newName));
         }
         priotityList = priotityListRenamed;
       }
