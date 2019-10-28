@@ -8,7 +8,7 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphRelation;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.DataRangeType;
 import org.semanticweb.owlapi.model.IRI;
@@ -40,7 +40,7 @@ public class OntologyVisitors {
   private static final String DEFAULT_BLANK_NODE_LABEL = "Thing";
 
   @Autowired
-  private LabelExtractor labelExtractor;
+  private LabelProvider labelExtractor;
 
   public final OWLObjectVisitorEx<Boolean> isRestrictionVisitor
       = new OWLObjectVisitorEx<Boolean>() {

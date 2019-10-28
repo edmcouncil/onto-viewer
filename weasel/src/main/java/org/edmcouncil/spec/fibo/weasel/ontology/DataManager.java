@@ -73,7 +73,7 @@ public class DataManager {
       }
     }
 
-    WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
+    WeaselConfiguration weaselConfig = config.getWeaselConfig();
     if (weaselConfig.hasRenamedGroups()) {
       OwlDetailsProperties<PropertyValue> prop = new OwlDetailsProperties<>();
       for (Map.Entry<String, List<PropertyValue>> entry : result.getProperties().entrySet()) {

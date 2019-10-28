@@ -29,8 +29,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
@@ -41,7 +39,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualPr
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.AxiomType;
@@ -80,7 +78,7 @@ public class OwlDataHandler {
   @Autowired
   private IndividualDataHandler individualDataHandler;
   @Autowired
-  private LabelExtractor labelExtractor;
+  private LabelProvider labelExtractor;
   @Autowired
   private RestrictionGraphDataHandler graphDataHandler;
   @Autowired

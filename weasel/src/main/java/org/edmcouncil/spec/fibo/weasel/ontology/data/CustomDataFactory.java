@@ -3,7 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data;
 import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ public class CustomDataFactory {
   private static final Logger LOG = LoggerFactory.getLogger(CustomDataFactory.class);
 
   @Autowired
-  private LabelExtractor labelExtractor;
+  private LabelProvider labelExtractor;
 
   public OwlAnnotationIri createAnnotationIri(String iri) {
     LOG.debug("[Custom Data Factory] Create annotation for iri: {}", iri);

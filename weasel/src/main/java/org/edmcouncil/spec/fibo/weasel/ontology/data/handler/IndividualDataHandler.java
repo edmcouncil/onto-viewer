@@ -6,7 +6,7 @@ import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 public class IndividualDataHandler {
 
   @Autowired
-  private LabelExtractor labelExtractor;
+  private LabelProvider labelExtractor;
 
   /**
    * Handle all individual for OWLClass given on parameter.

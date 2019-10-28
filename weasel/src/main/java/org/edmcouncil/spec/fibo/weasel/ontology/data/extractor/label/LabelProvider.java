@@ -30,9 +30,9 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Component
-public class LabelExtractor {
+public class LabelProvider {
 
-  private static final Logger LOG = LoggerFactory.getLogger(LabelExtractor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(LabelProvider.class);
 
   private Map<IRI, String> previouslyUsedLabels = new HashMap<>();
 
@@ -44,7 +44,7 @@ public class LabelExtractor {
   private MissingLanguageItem.Action missingLanguageAction;
 
   @Inject
-  public LabelExtractor(AppConfiguration config) {
+  public LabelProvider(AppConfiguration config) {
     WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
     this.forceLabelLang = weaselConfig.isForceLabelLang();
     this.labelLang = weaselConfig.getLabelLang();

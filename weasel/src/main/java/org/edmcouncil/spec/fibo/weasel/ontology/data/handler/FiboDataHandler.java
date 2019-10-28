@@ -26,7 +26,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.CustomDataFactory;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -74,7 +74,7 @@ public class FiboDataHandler {
   @Autowired
   private CustomDataFactory customDataFactory;
   @Autowired
-  private LabelExtractor labelExtractor;
+  private LabelProvider labelExtractor;
   @Autowired
   private OntologyManager ontoManager;
 

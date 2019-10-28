@@ -12,7 +12,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
 import org.semanticweb.owlapi.io.OWLObjectRenderer;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.IRI;
@@ -41,7 +41,7 @@ public class AnnotationsDataHandler {
   @Autowired
   private AppConfiguration appConfig;
   @Autowired
-  private LabelExtractor labelExtractor;
+  private LabelProvider labelExtractor;
 
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
 
@@ -88,7 +88,7 @@ public class AnnotationsDataHandler {
           }
         }
       }
-      LOG.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
+      LOG.info("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\" ", opv, propertyiri.toString());
 
       result.addProperty(property, opv);
     }
@@ -102,6 +102,7 @@ public class AnnotationsDataHandler {
     Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
     while (annotationIterator.hasNext()) {
       OWLAnnotation next = annotationIterator.next();
+      IRI propertyiri = next.getProperty().getIRI();
       String property = rendering.render(next.getProperty());
       String value = next.annotationValue().toString();
 

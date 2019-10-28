@@ -8,7 +8,6 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLab
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
@@ -68,7 +67,10 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
       }
     }
     return null;
-
+  }
+  
+  public void changeRenamedName(String iri){
+    
   }
 
   public boolean hasRenamedGroups() {
