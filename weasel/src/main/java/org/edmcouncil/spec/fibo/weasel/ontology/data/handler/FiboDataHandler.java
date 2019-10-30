@@ -19,7 +19,7 @@ import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResources;
-import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResourcesTypeDefaultKeys;
+import org.edmcouncil.spec.fibo.weasel.ontology.resources.ResourcesIriFactory;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
@@ -60,9 +60,6 @@ public class FiboDataHandler {
   //TODO: move this to set to configuration 
   private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
 
-  private static final String RESOURCE_INTERNAL_PREFIX = "internal ";
-  private static final String RESOURCE_EXTERNAL_PREFIX = "external ";
-
   private static final Logger LOG = LoggerFactory.getLogger(FiboDataHandler.class);
 
   @Autowired
@@ -78,15 +75,12 @@ public class FiboDataHandler {
   @Autowired
   private OntologyManager ontoManager;
 
-  private String resourcesClassKey;
-  private String resourcesDataPropertyKey;
-  private String resourcesObjectPropertyKey;
-  private String resourcesInstanceKey;
-
+  private String resourceInternal;
+  private String resourceExternal;
+  
   private List<FiboModule> modules;
 
   private Map<String, OntologyResources> resources = null;
-  
 
   @PostConstruct
   public void init() {
@@ -192,6 +186,7 @@ public class FiboDataHandler {
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
         annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations(), ontology);
+
         OntologyResources ors = getOntologyResources(iri.toString(), ontology);
         for (Map.Entry<String, List<PropertyValue>> entry : ors.getResources().entrySet()) {
           for (PropertyValue propertyValue : entry.getValue()) {
@@ -292,7 +287,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(generateResourceKey(resourcesClassKey, c, ontologyIri), c));
+        .addElement(selectResourceIri(c, ontologyIri, ResourcesIriFactory.Element.clazz), c));
 
     selectedOntology.dataPropertiesInSignature()
         .map(c -> {
@@ -301,7 +296,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(generateResourceKey(resourcesDataPropertyKey, c, ontologyIri), c));
+        .addElement(selectResourceIri(c, ontologyIri, ResourcesIriFactory.Element.dataProperty), c));
 
     selectedOntology.objectPropertiesInSignature()
         .map(c -> {
@@ -310,7 +305,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(generateResourceKey(resourcesObjectPropertyKey, c, ontologyIri), c));
+        .addElement(selectResourceIri(c, ontologyIri, ResourcesIriFactory.Element.objectProperty), c));
 
     selectedOntology.individualsInSignature()
         .map(c -> {
@@ -319,7 +314,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(generateResourceKey(resourcesInstanceKey, c, ontologyIri), c));
+        .addElement(selectResourceIri(c, ontologyIri, ResourcesIriFactory.Element.instance), c));
 
     ontoResources.sortInAlphabeticalOrder();
 
@@ -362,17 +357,16 @@ public class FiboDataHandler {
   private void completeKeysUsingTheConfiguration() {
 
     WeaselConfiguration weaselConfiguration = (WeaselConfiguration) configuration.getWeaselConfig();
-    String tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.CLASSES);
-    resourcesClassKey = tmp == null ? OntologyResourcesTypeDefaultKeys.CLASSES : tmp;
 
-    tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.DATA_PROPERTY);
-    resourcesDataPropertyKey = tmp == null ? OntologyResourcesTypeDefaultKeys.DATA_PROPERTY : tmp;
-
-    tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.OBJECT_PROPERTY);
-    resourcesObjectPropertyKey = tmp == null ? OntologyResourcesTypeDefaultKeys.OBJECT_PROPERTY : tmp;
-
-    tmp = weaselConfiguration.getNewName(OntologyResourcesTypeDefaultKeys.INSTANCES);
-    resourcesInstanceKey = tmp == null ? OntologyResourcesTypeDefaultKeys.INSTANCES : tmp;
+    resourceInternal = ResourcesIriFactory.createResourceIri(ResourcesIriFactory.Type.internal,
+        ResourcesIriFactory.Element.empty);
+    LOG.debug("Internal resource iri: {}", resourceInternal);
+    
+    resourceExternal = ResourcesIriFactory.createResourceIri(ResourcesIriFactory.Type.external,
+        ResourcesIriFactory.Element.empty);
+    LOG.debug("External resource iri: {}", resourceExternal);
+    
+    
 
   }
 
@@ -392,11 +386,12 @@ public class FiboDataHandler {
     return result;
   }
 
-  private String generateResourceKey(String resourcesKey, OwlAnnotationIri c, IRI ontologyIri) {
+  private String selectResourceIri(OwlAnnotationIri c, IRI ontologyIri, ResourcesIriFactory.Element element) {
     String annotationIri = c.getValue().getIri();
-
-    return annotationIri.contains(ontologyIri) ? RESOURCE_INTERNAL_PREFIX.concat(resourcesKey)
-        : RESOURCE_EXTERNAL_PREFIX.concat(resourcesKey);
+    
+    return annotationIri.contains(ontologyIri) ? 
+        ResourcesIriFactory.createResourceIri(ResourcesIriFactory.Type.internal, element)
+      : ResourcesIriFactory.createResourceIri(ResourcesIriFactory.Type.external, element);
   }
 
   /**
@@ -438,7 +433,7 @@ public class FiboDataHandler {
     String ontologyIri = null;
     for (Map.Entry<String, OntologyResources> entry : resources.entrySet()) {
       for (Map.Entry<String, List<PropertyValue>> entryResource : entry.getValue().getResources().entrySet()) {
-        if (entryResource.getKey().contains(RESOURCE_INTERNAL_PREFIX)) {
+        if (entryResource.getKey().contains(resourceInternal)) {
           for (PropertyValue propertyValue : entryResource.getValue()) {
             OwlAnnotationIri annotation = (OwlAnnotationIri) propertyValue;
             if (annotation.getValue().getIri().equals(elementIri)) {

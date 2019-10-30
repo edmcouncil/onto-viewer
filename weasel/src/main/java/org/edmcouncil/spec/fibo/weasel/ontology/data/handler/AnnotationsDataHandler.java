@@ -90,7 +90,8 @@ public class AnnotationsDataHandler {
       }
       LOG.info("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\" ", opv, propertyiri.toString());
 
-      result.addProperty(property, opv);
+      result.addProperty(propertyiri.toString(), opv);
+      //result.addProperty(property, opv);
     }
     result.sortPropertiesInAlphabeticalOrder();
     return result;
@@ -128,9 +129,10 @@ public class AnnotationsDataHandler {
           }
         }
       }
-      LOG.info("[Data Handler] Find annotation, value: \"{}\", property: \"{}\" ", opv, property);
+      LOG.info("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", opv, propertyiri.toString());
 
-      result.addProperty(property, opv);
+      result.addProperty(propertyiri.toString(), opv);
+      //result.addProperty(property, opv);
     }
     return result;
   }

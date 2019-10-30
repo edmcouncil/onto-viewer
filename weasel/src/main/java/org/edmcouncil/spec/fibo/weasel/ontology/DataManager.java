@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
+import org.edmcouncil.spec.fibo.weasel.changer.ChangerIriToLabel;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -93,9 +94,10 @@ public class DataManager {
     result.setLocationInModules(elementLocation);
 
     if (!config.getWeaselConfig().isEmpty()) {
-      WeaselConfiguration cfg = (WeaselConfiguration) config.getWeaselConfig();
+      WeaselConfiguration cfg = config.getWeaselConfig();
       if (cfg.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, cfg);
+        ChangerIriToLabel.changeIriKeysInGroupedDetails(newResult);
         return (T) newResult;
       } else {
         sortResults(result);

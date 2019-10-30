@@ -98,7 +98,6 @@ public class OwlDataHandler {
         LOG.debug("[Data Handler] Find OWL class wih IRI: {}", iri.toString());
 
         //handleParticularSubClassOf(ontology, clazz);
-
         String label = labelExtractor.getLabelOrDefaultFragment(clazz);
 
         resultDetails.setLabel(label);
@@ -292,7 +291,15 @@ public class OwlDataHandler {
       value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
 
       String key = axiom.getAxiomType().getName();
+      //Class aa = axiom.getAxiomType().getActualClass();
+      //LOG.debug("axiom type iri : {}", aa.toGenericString());
       
+      //Iterator<OWLEntity> it = axiom.signature().iterator();
+
+      /*while(it.hasNext()){
+       OWLEntity ent = it.next();
+       LOG.debug("axiom entity iri {}", ent.getIRI().getIRIString());
+     }*/
       if (ignoredToDisplay.contains(key)) {
         continue;
       }
@@ -625,7 +632,7 @@ public class OwlDataHandler {
           }
         });
 
-    result.sortPropertiesInAlphabeticalOrder(); 
+    result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
 

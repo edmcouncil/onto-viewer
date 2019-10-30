@@ -58,6 +58,7 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
     return !isEmpty() && configuration.get(ConfigKeys.GROUPS) != null;
   }
 
+  @Deprecated
   public String getNewName(String oldName) {
     Set<ConfigItem> renamedGroups = configuration.getOrDefault(ConfigKeys.RENAME_GROUPS, new HashSet<>());
     for (ConfigItem renamedG : renamedGroups) {
@@ -68,15 +69,13 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
     }
     return null;
   }
-  
-  public void changeRenamedName(String iri){
-    
-  }
 
+  @Deprecated
   public boolean hasRenamedGroups() {
     return configuration.get(ConfigKeys.RENAME_GROUPS) != null;
   }
 
+  @Deprecated
   public String getOldName(String newName) {
     Set<ConfigItem> renamedGroups = configuration.getOrDefault(ConfigKeys.RENAME_GROUPS, new HashSet<>());
     for (ConfigItem renamedG : renamedGroups) {
@@ -197,6 +196,7 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
 
     return result;
   }
+
   public Set<DefaultLabelItem> getDefaultLabels() {
 
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DEFAULT_LABEL_LIST, new HashSet<>());
