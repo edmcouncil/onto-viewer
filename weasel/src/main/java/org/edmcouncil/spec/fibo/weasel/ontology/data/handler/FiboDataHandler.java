@@ -19,14 +19,14 @@ import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResources;
-import org.edmcouncil.spec.fibo.weasel.ontology.resources.ResourcesIriFactory;
+import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIriFactory;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.CustomDataFactory;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -287,7 +287,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIri(c, ontologyIri, ResourcesIriFactory.Element.clazz), c));
+        .addElement(selectResourceIri(c, ontologyIri, ViewerIriFactory.Element.clazz), c));
 
     selectedOntology.dataPropertiesInSignature()
         .map(c -> {
@@ -296,7 +296,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIri(c, ontologyIri, ResourcesIriFactory.Element.dataProperty), c));
+        .addElement(selectResourceIri(c, ontologyIri, ViewerIriFactory.Element.dataProperty), c));
 
     selectedOntology.objectPropertiesInSignature()
         .map(c -> {
@@ -305,7 +305,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIri(c, ontologyIri, ResourcesIriFactory.Element.objectProperty), c));
+        .addElement(selectResourceIri(c, ontologyIri, ViewerIriFactory.Element.objectProperty), c));
 
     selectedOntology.individualsInSignature()
         .map(c -> {
@@ -314,7 +314,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIri(c, ontologyIri, ResourcesIriFactory.Element.instance), c));
+        .addElement(selectResourceIri(c, ontologyIri, ViewerIriFactory.Element.instance), c));
 
     ontoResources.sortInAlphabeticalOrder();
 
@@ -358,12 +358,12 @@ public class FiboDataHandler {
 
     WeaselConfiguration weaselConfiguration = (WeaselConfiguration) configuration.getWeaselConfig();
 
-    resourceInternal = ResourcesIriFactory.createResourceIri(ResourcesIriFactory.Type.internal,
-        ResourcesIriFactory.Element.empty);
+    resourceInternal = ViewerIriFactory.createIri(ViewerIriFactory.Type.internal,
+        ViewerIriFactory.Element.empty);
     LOG.debug("Internal resource iri: {}", resourceInternal);
     
-    resourceExternal = ResourcesIriFactory.createResourceIri(ResourcesIriFactory.Type.external,
-        ResourcesIriFactory.Element.empty);
+    resourceExternal = ViewerIriFactory.createIri(ViewerIriFactory.Type.external,
+        ViewerIriFactory.Element.empty);
     LOG.debug("External resource iri: {}", resourceExternal);
     
     
@@ -386,12 +386,12 @@ public class FiboDataHandler {
     return result;
   }
 
-  private String selectResourceIri(OwlAnnotationIri c, IRI ontologyIri, ResourcesIriFactory.Element element) {
+  private String selectResourceIri(OwlAnnotationIri c, IRI ontologyIri, ViewerIriFactory.Element element) {
     String annotationIri = c.getValue().getIri();
     
     return annotationIri.contains(ontologyIri) ? 
-        ResourcesIriFactory.createResourceIri(ResourcesIriFactory.Type.internal, element)
-      : ResourcesIriFactory.createResourceIri(ResourcesIriFactory.Type.external, element);
+        ViewerIriFactory.createIri(ViewerIriFactory.Type.internal, element)
+      : ViewerIriFactory.createIri(ViewerIriFactory.Type.external, element);
   }
 
   /**

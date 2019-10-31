@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label;
+package org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +10,8 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingL
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultLabelItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.vocabulary.DefaultAppLabels;
+import org.edmcouncil.spec.fibo.weasel.ontology.factory.DefaultLabelsFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.EntityType;
@@ -56,6 +58,12 @@ public class LabelProvider {
   }
 
   private void setDefaultLabels(Set<DefaultLabelItem> defaultLabels) {
+    DefaultAppLabels defAppLabels = DefaultLabelsFactory.createDefaultAppLabels();
+    
+    for (Map.Entry<IRI, String> entry : defAppLabels.getLabels().entrySet()) {
+      previouslyUsedLabels.put(entry.getKey(), entry.getValue());
+    }
+    
     defaultLabels.forEach((defaultLabel) -> {
       previouslyUsedLabels.put(IRI.create(defaultLabel.getIri()), defaultLabel.getLabel());
     });

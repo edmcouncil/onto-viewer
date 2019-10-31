@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.visitor.OntologyVisitors;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.semanticweb.owlapi.model.AxiomType;

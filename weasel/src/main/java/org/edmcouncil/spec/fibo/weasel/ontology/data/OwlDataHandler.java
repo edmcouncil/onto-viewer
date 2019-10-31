@@ -39,7 +39,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualPr
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.AxiomType;

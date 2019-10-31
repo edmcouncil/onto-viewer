@@ -8,7 +8,7 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphRelation;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.DataRangeType;
 import org.semanticweb.owlapi.model.IRI;

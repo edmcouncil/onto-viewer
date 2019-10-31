@@ -40,6 +40,8 @@ public class DataManager {
   private OwlDataHandler dataHandler;
   @Autowired
   private AppConfiguration config;
+  @Autowired
+  private ChangerIriToLabel changerIriToLabel;
 
   public OWLOntology getOntology() {
     return ontologyManager.getOntology();
@@ -75,7 +77,7 @@ public class DataManager {
     }
 
     WeaselConfiguration weaselConfig = config.getWeaselConfig();
-    if (weaselConfig.hasRenamedGroups()) {
+    /*if (weaselConfig.hasRenamedGroups()) {
       OwlDetailsProperties<PropertyValue> prop = new OwlDetailsProperties<>();
       for (Map.Entry<String, List<PropertyValue>> entry : result.getProperties().entrySet()) {
         String key = entry.getKey();
@@ -86,7 +88,7 @@ public class DataManager {
         }
       }
       result.setProperties(prop);
-    }
+    }*/
     result.setIri(iriString);
 
     //Path to element in modules
@@ -97,7 +99,7 @@ public class DataManager {
       WeaselConfiguration cfg = config.getWeaselConfig();
       if (cfg.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, cfg);
-        ChangerIriToLabel.changeIriKeysInGroupedDetails(newResult);
+        
         return (T) newResult;
       } else {
         sortResults(result);
@@ -129,6 +131,7 @@ public class DataManager {
     groupedDetails.setLabel(owlDetails.getLabel());
     groupedDetails.setIri(owlDetails.getIri());
     groupedDetails.setLocationInModules(owlDetails.getLocationInModules());
+    groupedDetails = changerIriToLabel.changeIriKeysInGroupedDetails(groupedDetails);
     groupedDetails.sortProperties(groups, cfg);
     groupedDetails.setGraph(owlDetails.getGraph());
 

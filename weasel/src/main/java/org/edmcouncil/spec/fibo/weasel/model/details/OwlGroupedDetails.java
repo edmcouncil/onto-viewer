@@ -26,6 +26,10 @@ public class OwlGroupedDetails extends OwlDetails {
   public Map<String, Map<String, List<PropertyValue>>> getProperties() {
     return properties.getProperties();
   }
+  
+  public void setProperties(OwlGroupedDetailsProperties<PropertyValue> prop){
+    this.properties = prop;
+  }
 
   public void addProperty(String groupKey, String propertyKey, PropertyValue property) {
     properties.addProperty(groupKey, propertyKey, property);

@@ -3,7 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data;
 import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label.LabelProvider;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;

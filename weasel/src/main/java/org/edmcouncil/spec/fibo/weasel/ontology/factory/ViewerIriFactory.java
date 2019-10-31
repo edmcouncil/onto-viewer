@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.resources;
+package org.edmcouncil.spec.fibo.weasel.ontology.factory;
 
 import org.semanticweb.owlapi.model.IRI;
 
@@ -6,7 +6,7 @@ import org.semanticweb.owlapi.model.IRI;
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class ResourcesIriFactory {
+public class ViewerIriFactory {
 
   private static final String IRI_FORMAT = "http://viewer.%s#%s";
 
@@ -18,7 +18,7 @@ public class ResourcesIriFactory {
     internal, external
   }
 
-  public static String createResourceIri(Type type, Element element) {
+  public static String createIri(Type type, Element element) {
     if(element == Element.empty){
       return String.format(IRI_FORMAT, type.name(), "");
     }
