@@ -13,7 +13,6 @@ import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
-import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataHandler;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -76,19 +75,6 @@ public class DataManager {
       }
     }
 
-    WeaselConfiguration weaselConfig = config.getWeaselConfig();
-    /*if (weaselConfig.hasRenamedGroups()) {
-      OwlDetailsProperties<PropertyValue> prop = new OwlDetailsProperties<>();
-      for (Map.Entry<String, List<PropertyValue>> entry : result.getProperties().entrySet()) {
-        String key = entry.getKey();
-        String newName = weaselConfig.getNewName(key);
-        newName = newName == null ? key : newName;
-        for (PropertyValue propertyValue : entry.getValue()) {
-          prop.addProperty(newName, propertyValue);
-        }
-      }
-      result.setProperties(prop);
-    }*/
     result.setIri(iriString);
 
     //Path to element in modules
@@ -115,13 +101,9 @@ public class DataManager {
 
     for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
       String propertyKey = entry.getKey();
-      String propertyName = null;
-      if (cfg.hasRenamedGroups()) {
-        propertyName = cfg.getOldName(propertyKey);
-        propertyName = propertyName == null ? propertyKey : propertyName;
-      }
+
       String groupName = null;
-      groupName = getGroupName(groups, propertyName);
+      groupName = getGroupName(groups, propertyKey);
       groupName = groupName == null ? DEFAULT_GROUP_NAME : groupName;
       for (PropertyValue property : entry.getValue()) {
         groupedDetails.addProperty(groupName, propertyKey, property);
@@ -166,7 +148,6 @@ public class DataManager {
   }
 
   public List<FiboModule> getAllModulesData() {
-
     return dataHandler.getAllModulesData(ontologyManager.getOntology());
   }
 }

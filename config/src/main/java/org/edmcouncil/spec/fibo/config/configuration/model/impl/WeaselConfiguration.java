@@ -58,35 +58,6 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
     return !isEmpty() && configuration.get(ConfigKeys.GROUPS) != null;
   }
 
-  @Deprecated
-  public String getNewName(String oldName) {
-    Set<ConfigItem> renamedGroups = configuration.getOrDefault(ConfigKeys.RENAME_GROUPS, new HashSet<>());
-    for (ConfigItem renamedG : renamedGroups) {
-      RenameItem rename = (RenameItem) renamedG;
-      if (rename.getOldName().equals(oldName)) {
-        return rename.getNewName();
-      }
-    }
-    return null;
-  }
-
-  @Deprecated
-  public boolean hasRenamedGroups() {
-    return configuration.get(ConfigKeys.RENAME_GROUPS) != null;
-  }
-
-  @Deprecated
-  public String getOldName(String newName) {
-    Set<ConfigItem> renamedGroups = configuration.getOrDefault(ConfigKeys.RENAME_GROUPS, new HashSet<>());
-    for (ConfigItem renamedG : renamedGroups) {
-      RenameItem rename = (RenameItem) renamedG;
-      if (rename.getNewName().equals(newName)) {
-        return rename.getOldName();
-      }
-    }
-    return null;
-  }
-
   public boolean isOntologyLocationSet() {
     return configuration.containsKey(ConfigKeys.ONTOLOGY_URL)
         || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH);
@@ -152,14 +123,14 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public GroupLabelPriorityItem.Priority getGroupLabelPriority() {
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.GROUP_LABEL, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_PRIORITY, new HashSet<>());
 
     for (ConfigItem value : values) {
       GroupLabelPriorityItem cpe = (GroupLabelPriorityItem) value;
       return cpe.getValue();
     }
 
-    return GroupLabelPriorityItem.Priority.FRAGMENT;
+    return GroupLabelPriorityItem.Priority.DEFINED;
   }
 
   public String getLabelLang() {
@@ -208,6 +179,16 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
         });
 
     return result;
+  }
+  
+  public GroupLabelPriorityItem.Priority getLabelPriority(){
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_PRIORITY, new HashSet<>());
+    
+    for (ConfigItem value : values) {
+      GroupLabelPriorityItem item = (GroupLabelPriorityItem) value;
+      return item.getValue();
+    }
+    return GroupLabelPriorityItem.Priority.DEFINED;
   }
 
 }

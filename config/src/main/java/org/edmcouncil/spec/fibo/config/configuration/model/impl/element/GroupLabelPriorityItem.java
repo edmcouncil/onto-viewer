@@ -24,7 +24,7 @@ public class GroupLabelPriorityItem extends ConfigItemAbstract {
   }
 
   public enum Priority {
-    FRAGMENT, LABEL
+    DEFINED, EXTRACTED
   }
 
 }

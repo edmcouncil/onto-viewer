@@ -25,7 +25,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlFiboModuleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.CustomDataFactory;
+import org.edmcouncil.spec.fibo.weasel.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
@@ -77,7 +77,7 @@ public class FiboDataHandler {
 
   private String resourceInternal;
   private String resourceExternal;
-  
+
   private List<FiboModule> modules;
 
   private Map<String, OntologyResources> resources = null;
@@ -287,7 +287,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIri(c, ontologyIri, ViewerIriFactory.Element.clazz), c));
+        .addElement(selectResourceIriString(c, ontologyIri, ViewerIriFactory.Element.clazz), c));
 
     selectedOntology.dataPropertiesInSignature()
         .map(c -> {
@@ -296,7 +296,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIri(c, ontologyIri, ViewerIriFactory.Element.dataProperty), c));
+        .addElement(selectResourceIriString(c, ontologyIri, ViewerIriFactory.Element.dataProperty), c));
 
     selectedOntology.objectPropertiesInSignature()
         .map(c -> {
@@ -305,7 +305,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIri(c, ontologyIri, ViewerIriFactory.Element.objectProperty), c));
+        .addElement(selectResourceIriString(c, ontologyIri, ViewerIriFactory.Element.objectProperty), c));
 
     selectedOntology.individualsInSignature()
         .map(c -> {
@@ -314,7 +314,7 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIri(c, ontologyIri, ViewerIriFactory.Element.instance), c));
+        .addElement(selectResourceIriString(c, ontologyIri, ViewerIriFactory.Element.instance), c));
 
     ontoResources.sortInAlphabeticalOrder();
 
@@ -359,14 +359,12 @@ public class FiboDataHandler {
     WeaselConfiguration weaselConfiguration = (WeaselConfiguration) configuration.getWeaselConfig();
 
     resourceInternal = ViewerIriFactory.createIri(ViewerIriFactory.Type.internal,
-        ViewerIriFactory.Element.empty);
+        ViewerIriFactory.Element.empty).toString();
     LOG.debug("Internal resource iri: {}", resourceInternal);
-    
+
     resourceExternal = ViewerIriFactory.createIri(ViewerIriFactory.Type.external,
-        ViewerIriFactory.Element.empty);
+        ViewerIriFactory.Element.empty).toString();
     LOG.debug("External resource iri: {}", resourceExternal);
-    
-    
 
   }
 
@@ -386,12 +384,19 @@ public class FiboDataHandler {
     return result;
   }
 
-  private String selectResourceIri(OwlAnnotationIri c, IRI ontologyIri, ViewerIriFactory.Element element) {
+   /**
+   *
+   * @param c Annotation iri
+   * @param ontologyIri IRI ontology used to compare with annotations IRI
+   * @param element Create IRI for this element
+   * @return IRI represented as String
+   */
+  private String selectResourceIriString(OwlAnnotationIri c, IRI ontologyIri, ViewerIriFactory.Element element) {
     String annotationIri = c.getValue().getIri();
-    
-    return annotationIri.contains(ontologyIri) ? 
-        ViewerIriFactory.createIri(ViewerIriFactory.Type.internal, element)
-      : ViewerIriFactory.createIri(ViewerIriFactory.Type.external, element);
+
+    return annotationIri.contains(ontologyIri)
+        ? ViewerIriFactory.createIri(ViewerIriFactory.Type.internal, element).toString()
+        : ViewerIriFactory.createIri(ViewerIriFactory.Type.external, element).toString();
   }
 
   /**

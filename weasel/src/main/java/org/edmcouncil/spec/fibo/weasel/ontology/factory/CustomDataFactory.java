@@ -1,11 +1,10 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data;
+package org.edmcouncil.spec.fibo.weasel.ontology.factory;
 
 import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,11 @@ public class CustomDataFactory {
   @Autowired
   private LabelProvider labelExtractor;
 
+  /**
+   * 
+   * @param iri IRI element for which we create annotationIRI
+   * @return AnnotationIri contains iri and label
+   */
   public OwlAnnotationIri createAnnotationIri(String iri) {
     LOG.debug("[Custom Data Factory] Create annotation for iri: {}", iri);
 

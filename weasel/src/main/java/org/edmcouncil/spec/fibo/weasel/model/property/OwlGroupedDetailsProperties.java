@@ -123,17 +123,6 @@ public class OwlGroupedDetailsProperties<T> {
       Map<String, List<T>> newprop = new LinkedHashMap();
 
       List<StringItem> priotityList = new LinkedList(group.getElements());
-      if (cfg.hasRenamedGroups()) {
-      List<StringItem> priotityListRenamed = new LinkedList();
-        for (StringItem object : priotityList) {
-          String configElement = object.toString();
-          String newName = cfg.getNewName(configElement);
-          newName = newName == null ? configElement : newName;
-          priotityListRenamed.add(new StringItem(newName));
-        }
-        priotityList = priotityListRenamed;
-      }
-
       Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(priotityList);
       SortedSet<String> keys = new TreeSet<>(comparator);
       keys.addAll(prop.keySet());
