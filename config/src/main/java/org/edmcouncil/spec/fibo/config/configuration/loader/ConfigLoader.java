@@ -17,6 +17,7 @@ import org.xml.sax.SAXException;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class ConfigLoader {
+
   
   private static Logger LOG = LoggerFactory.getLogger(ConfigLoader.class);
   
@@ -28,6 +29,7 @@ public class ConfigLoader {
     try {
         File configFile= weaselConfigFile.toFile();
         if(!configFile.exists()){
+
           LOG.debug("Configuration file not exist, use default empty configuration.");
           return configuration;
         }
@@ -41,7 +43,7 @@ public class ConfigLoader {
     } catch (ParserConfigurationException | SAXException | IOException e) {
         LOG.error("Exception while loading configuration: {}", e.getMessage());
     }
-      
+
 
     return configuration;
   }
