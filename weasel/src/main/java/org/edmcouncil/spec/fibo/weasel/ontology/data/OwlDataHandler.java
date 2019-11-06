@@ -146,7 +146,15 @@ public class OwlDataHandler {
     return taxElements;
   }
 
-  private void setResultValues(OwlListDetails resultDetails, OwlTaxonomyImpl tax, OwlDetailsProperties<PropertyValue> axioms, OwlDetailsProperties<PropertyValue> annotations, OwlDetailsProperties<PropertyValue> directSubclasses, OwlDetailsProperties<PropertyValue> individuals, OwlDetailsProperties<PropertyValue> inheritedAxioms, ViewerGraph vg, List<PropertyValue> subclasses) {
+  private void setResultValues(OwlListDetails resultDetails, 
+      OwlTaxonomyImpl tax, 
+      OwlDetailsProperties<PropertyValue> axioms, 
+      OwlDetailsProperties<PropertyValue> annotations, 
+      OwlDetailsProperties<PropertyValue> directSubclasses, 
+      OwlDetailsProperties<PropertyValue> individuals, 
+      OwlDetailsProperties<PropertyValue> inheritedAxioms, 
+      ViewerGraph vg, 
+      List<PropertyValue> subclasses) {
     axioms.getProperties().put(subClassOfIriString, subclasses);
     
     resultDetails.setTaxonomy(tax);
@@ -624,14 +632,15 @@ public class OwlDataHandler {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
     OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
-
+    String subClassOfKey = ViewerIriFactory.createIri(ViewerIriFactory.Type.axiom, "SubClassOf").toString();
     NodeSet<OWLClass> rset = reasoner.getSuperClasses(clazz, InferenceDepth.ALL);
     rset.entities().collect(Collectors.toSet())
         .stream()
         .map((c) -> handleAxioms(c, ontology))
         .forEachOrdered((handleAxioms) -> {
           for (Map.Entry<String, List<PropertyValue>> entry : handleAxioms.getProperties().entrySet()) {
-            if (entry.getKey().equals("SubClassOf")) {
+            
+            if (entry.getKey().equals(subClassOfKey)) {
               for (PropertyValue propertyValue : entry.getValue()) {
                 if (propertyValue.getType() != WeaselOwlType.TAXONOMY) {
                   String key = ViewerIriFactory.createIri(ViewerIriFactory.Type.function,
