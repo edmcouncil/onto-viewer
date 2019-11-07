@@ -2,6 +2,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
@@ -130,15 +131,14 @@ public class LabelProvider {
   }
 
   private String getTheRightLabel(Map<String, String> labels, IRI entityIri) {
-    String lab = labels.entrySet()
+    Optional<String> optionalLab = labels.entrySet()
         .stream()
         .filter(p -> p.getValue().equals(labelLang))
         .map(m -> {
           return m.getKey();
         })
-        .findFirst()
-        .get();
-    if (lab.isEmpty()) {
+        .findFirst();
+    if (!optionalLab.isPresent()) {
       LOG.debug("[Label Extractor]: Entity has more than one label but noone have a language");
 
       if (missingLanguageAction == MissingLanguageItem.Action.FIRST) {
@@ -147,6 +147,7 @@ public class LabelProvider {
             .findFirst()
             .get().getKey();
         LOG.debug("[Label Extractor]: Return an first element of label list: {}", missingLab);
+        return missingLab;
 
       } else if (missingLanguageAction == MissingLanguageItem.Action.FRAGMENT) {
 
@@ -154,7 +155,7 @@ public class LabelProvider {
       }
 
     }
-    return lab;
+    return optionalLab.get();
   }
 
   private void labelProcessing(String lang, Map<String, String> labels, String label, IRI entityIri) {

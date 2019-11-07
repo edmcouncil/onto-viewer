@@ -41,6 +41,8 @@ public class OntologyManager {
 
   @Autowired
   private AppConfiguration config;
+  @Autowired
+  private FileSystemManager fsm;
 
   @PostConstruct
   public void init() throws IOException {
@@ -73,7 +75,6 @@ public class OntologyManager {
    * @param ontoPath OntoPath is the access path from which the ontology is being loaded.
    */
   private void loadOntologyFromFile(String ontoPath) throws IOException, OWLOntologyCreationException {
-    FileSystemManager fsm = new FileSystemManager();
     Path pathToOnto = null;
     if (ontoPath == null) {
       pathToOnto = fsm.getDefaultPathToOntologyFile();

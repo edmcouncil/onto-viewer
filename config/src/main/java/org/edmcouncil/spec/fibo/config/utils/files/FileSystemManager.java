@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.edmcouncil.spec.fibo.config.configuration.properties.AppProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,26 +16,39 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileSystemManager {
 
-  private static final String WEASEL_HOME_DIR_NAME = ".weasel";
-  private static final String WEASEL_ONTOLOGY_FILE_NAME = "AboutFIBOProd.rdf";
-  private static final String WEASEL_CONFIG_FILE_NAME = "fibo_viewer_config.xml";
+  private static final String WEASEL_DEFAULT_HOME_DIR_NAME = ".weasel";
 
   private static final Logger LOG = LoggerFactory.getLogger(FileSystemManager.class);
 
-  @Value("${app.defaultHomePath}")
-  private String defaultPath;
+  private final String workingDir;
+  private final String viewerConfigFileName;
+  private final String defaultOntologyFileName;
 
-  public Path getWeaselHomeDir() {
+  @Autowired
+  public FileSystemManager(AppProperties appProperties) {
+    workingDir = appProperties.getDefaultHomePath();
+    viewerConfigFileName = appProperties.getViewerConfigFileName();
+    defaultOntologyFileName = appProperties.getDefaultOntologyFileName();
+  }
+
+  public Path getviewerHomeDir() {
     Path userHomeDir = null;
     String userHomeProperty = null;
-    if (defaultPath.equals("user.home")) {
-      userHomeProperty = System.getProperty("user.home");
-      userHomeDir = Paths.get(userHomeProperty);
-      LOG.trace("User home dir is '{}'.", userHomeDir);
-      userHomeDir = userHomeDir.resolve(WEASEL_HOME_DIR_NAME);
-    } else {
+    switch (workingDir) {
+      case "user.home":
+        userHomeProperty = System.getProperty("user.home");
         userHomeDir = Paths.get(userHomeProperty);
-      LOG.trace("Application working dir is '{}'.", userHomeDir);
+        LOG.trace("User home dir is '{}'.", userHomeDir);
+        userHomeDir = userHomeDir.resolve(WEASEL_DEFAULT_HOME_DIR_NAME);
+        break;
+      case "*":
+        userHomeDir = Paths.get("");
+        LOG.trace("User home dir is '{}'.", userHomeDir.toAbsolutePath());
+        break;
+      default:
+        userHomeDir = Paths.get(userHomeProperty);
+        LOG.trace("Application working dir is '{}'.", userHomeDir);
+        break;
     }
     return userHomeDir;
   }
@@ -56,13 +70,13 @@ public class FileSystemManager {
   }
 
   public Path getDefaultPathToOntologyFile() throws IOException {
-    Path homeDir = getWeaselHomeDir();
-    return createDirIfNotExists(homeDir).resolve(WEASEL_ONTOLOGY_FILE_NAME);
+    Path homeDir = getviewerHomeDir();
+    return createDirIfNotExists(homeDir).resolve(defaultOntologyFileName);
   }
 
   public Path getPathToWeaselConfigFile() throws IOException {
-    Path homeDir = getWeaselHomeDir();
-    return createDirIfNotExists(homeDir).resolve(WEASEL_CONFIG_FILE_NAME);
+    Path homeDir = getviewerHomeDir();
+    return createDirIfNotExists(homeDir).resolve(viewerConfigFileName);
   }
 
   public Path getPathToOntologyFile(String pathString) throws IOException {
@@ -71,7 +85,7 @@ public class FileSystemManager {
       return path;
 
     } else {
-      Path homeDir = getWeaselHomeDir();
+      Path homeDir = getviewerHomeDir();
       return createDirIfNotExists(homeDir).resolve(path);
     }
   }
