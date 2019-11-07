@@ -9,7 +9,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultLabelItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem.Priority;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority.Priority;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.vocabulary.DefaultAppLabels;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.DefaultLabelsFactory;
@@ -61,16 +61,17 @@ public class LabelProvider {
     loadDefaultLabels();
 
   }
-/**
- * Load default labels from configuration and default labels defined in application
- */
+
+  /**
+   * Load default labels from configuration and default labels defined in application
+   */
   private void loadDefaultLabels() {
     DefaultAppLabels defAppLabels = DefaultLabelsFactory.createDefaultAppLabels();
 
     for (Map.Entry<IRI, String> entry : defAppLabels.getLabels().entrySet()) {
       previouslyUsedLabels.put(entry.getKey(), entry.getValue());
     }
-    if (groupLabelPriority == Priority.DEFINED) {
+    if (useLabels && groupLabelPriority == Priority.USER_DEFINED) {
       defaultUserLabels.forEach((defaultLabel) -> {
         previouslyUsedLabels.put(IRI.create(defaultLabel.getIri()), defaultLabel.getLabel());
       });

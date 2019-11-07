@@ -4,7 +4,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.RenameIt
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -101,7 +101,7 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public Boolean useLabels() {
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DISPLAYED_LABELS, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DISPLAY_LABEL, new HashSet<>());
 
     for (ConfigItem value : values) {
       BooleanItem cbe = (BooleanItem) value;
@@ -122,15 +122,15 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
     return Boolean.FALSE;
   }
 
-  public GroupLabelPriorityItem.Priority getGroupLabelPriority() {
+  public LabelPriority.Priority getGroupLabelPriority() {
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_PRIORITY, new HashSet<>());
 
     for (ConfigItem value : values) {
-      GroupLabelPriorityItem cpe = (GroupLabelPriorityItem) value;
+      LabelPriority cpe = (LabelPriority) value;
       return cpe.getValue();
     }
 
-    return GroupLabelPriorityItem.Priority.DEFINED;
+    return LabelPriority.Priority.USER_DEFINED;
   }
 
   public String getLabelLang() {
@@ -170,7 +170,7 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
 
   public Set<DefaultLabelItem> getDefaultLabels() {
 
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DEFAULT_LABEL_LIST, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.USER_DEFAULT_NAME_LIST, new HashSet<>());
     Set<DefaultLabelItem> result = new HashSet<>();
     values.stream()
         .map((value) -> (DefaultLabelItem) value)
@@ -181,14 +181,14 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
     return result;
   }
   
-  public GroupLabelPriorityItem.Priority getLabelPriority(){
+  public LabelPriority.Priority getLabelPriority(){
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_PRIORITY, new HashSet<>());
     
     for (ConfigItem value : values) {
-      GroupLabelPriorityItem item = (GroupLabelPriorityItem) value;
+      LabelPriority item = (LabelPriority) value;
       return item.getValue();
     }
-    return GroupLabelPriorityItem.Priority.DEFINED;
+    return LabelPriority.Priority.USER_DEFINED;
   }
 
 }

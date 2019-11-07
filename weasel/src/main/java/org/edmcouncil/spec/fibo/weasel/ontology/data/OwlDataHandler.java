@@ -40,7 +40,7 @@ import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
-import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIriFactory;
+import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.AxiomType;
@@ -83,8 +83,8 @@ public class OwlDataHandler {
   @Autowired
   private AppConfiguration config;
 
-  private final String subClassOfIriString = ViewerIriFactory
-      .createIri(ViewerIriFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName()).toString();
+  private final String subClassOfIriString = ViewerIdentifierFactory
+      .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName()).toString();
 
   public OwlListDetails handleParticularClass(IRI iri, OWLOntology ontology) {
     OwlListDetails resultDetails = new OwlListDetails();
@@ -316,8 +316,7 @@ public class OwlDataHandler {
       value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
 
       String key = axiom.getAxiomType().getName();
-      IRI iriKey = ViewerIriFactory.createIri(ViewerIriFactory.Type.axiom, key);
-      key = iriKey.toString();
+      key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
       if (ignoredToDisplay.contains(key)) {
         continue;
       }
@@ -588,7 +587,7 @@ public class OwlDataHandler {
       OwlDirectedSubClassesProperty r = new OwlDirectedSubClassesProperty();
       r.setType(WeaselOwlType.DIRECT_SUBCLASSES);
       r.setValue(new PairImpl(labelExtractor.getLabelOrDefaultFragment(iri), iri.toString()));
-      String key = ViewerIriFactory.createIri(ViewerIriFactory.Type.function,
+      String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
           WeaselOwlType.DIRECT_SUBCLASSES.name().toLowerCase()).toString();
       result.addProperty(key, r);
     }
@@ -614,7 +613,7 @@ public class OwlDataHandler {
       s.setType(WeaselOwlType.INSTANCES);
       s.setValue(new PairImpl(labelExtractor
           .getLabelOrDefaultFragment(namedIndividual.getIRI()), namedIndividual.getIRI().toString()));
-      String key = ViewerIriFactory.createIri(ViewerIriFactory.Type.function,
+      String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
           WeaselOwlType.INSTANCES.name().toLowerCase()).toString();
       result.addProperty(key, s);
     }
@@ -632,7 +631,7 @@ public class OwlDataHandler {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
     OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
-    String subClassOfKey = ViewerIriFactory.createIri(ViewerIriFactory.Type.axiom, "SubClassOf").toString();
+    String subClassOfKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "SubClassOf").toString();
     NodeSet<OWLClass> rset = reasoner.getSuperClasses(clazz, InferenceDepth.ALL);
     rset.entities().collect(Collectors.toSet())
         .stream()
@@ -643,7 +642,7 @@ public class OwlDataHandler {
             if (entry.getKey().equals(subClassOfKey)) {
               for (PropertyValue propertyValue : entry.getValue()) {
                 if (propertyValue.getType() != WeaselOwlType.TAXONOMY) {
-                  String key = ViewerIriFactory.createIri(ViewerIriFactory.Type.function,
+                  String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
                       WeaselOwlType.ANONYMOUS_ANCESTOR.name().toLowerCase()).toString();
                   result.addProperty(key, propertyValue);
                 }

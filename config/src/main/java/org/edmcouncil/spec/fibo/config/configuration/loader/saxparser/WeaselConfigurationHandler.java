@@ -6,7 +6,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.RenameItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
@@ -45,19 +45,19 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case ConfigKeys.GROUPS:
       case ConfigKeys.ONTOLOGY_URL:
       case ConfigKeys.ONTOLOGY_PATH:
-      case ConfigKeys.DISPLAYED_LABELS:
+      case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
       case ConfigKeys.LABEL_LANG:
       case ConfigKeys.LABEL_PRIORITY:
       case ConfigKeys.MISSING_LANGUAGE_ACTION:
-      case ConfigKeys.DEFAULT_LABEL_LIST:
+      case ConfigKeys.USER_DEFAULT_NAME_LIST:
         this.key = qName;
         break;
       case ConfigKeys.GROUP:
         cge = new GroupsItem();
         cge.setGroupType(GroupType.DEFAULT);
         break;
-      case ConfigKeys.DEFAULT_LABEL_DEF:
+      case ConfigKeys.USER_DEFINED_NAME:
         dli = new DefaultLabelItem();
         break;
       
@@ -94,7 +94,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         StringItem ontologyPath = new StringItem(val);
         config.addCongigElement(key, ontologyPath);
         break;
-      case ConfigKeys.DISPLAYED_LABELS:
+      case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
         BooleanItem cbe = new BooleanItem();
         cbe.setType(ConfigItemType.BOOLEAN);
@@ -102,9 +102,9 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         config.addCongigElement(key, cbe);
         break;
       case ConfigKeys.LABEL_PRIORITY:
-        GroupLabelPriorityItem cpe = new GroupLabelPriorityItem();
+        LabelPriority cpe = new LabelPriority();
         cpe.setType(ConfigItemType.PRIORITY);
-        cpe.setValue(GroupLabelPriorityItem.Priority.valueOf(val));
+        cpe.setValue(LabelPriority.Priority.valueOf(val));
         config.addCongigElement(key, cpe);
         break;
       case ConfigKeys.MISSING_LANGUAGE_ACTION:
@@ -113,13 +113,13 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         cmle.setValue(MissingLanguageItem.Action.valueOf(val));
         config.addCongigElement(key, cmle);
         break;
-      case ConfigKeys.DEFAULT_LABEL_IRI:
+      case ConfigKeys.RESOURCE_IRI_TO_NAME:
         dli.setIri(val);
         break;
-      case ConfigKeys.DEFAULT_LABEL_VALUE:
+      case ConfigKeys.RESOURCE_IRI_NAME:
         dli.setLabel(val);
         break;
-      case ConfigKeys.DEFAULT_LABEL_DEF:
+      case ConfigKeys.USER_DEFINED_NAME:
         config.addCongigElement(key, dli);
     }
   }

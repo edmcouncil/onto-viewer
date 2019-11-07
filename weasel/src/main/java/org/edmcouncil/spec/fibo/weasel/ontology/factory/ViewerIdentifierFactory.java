@@ -6,9 +6,9 @@ import org.semanticweb.owlapi.model.IRI;
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class ViewerIriFactory {
+public class ViewerIdentifierFactory {
 
-  private static final String IRI_FORMAT = "http://viewer.%s#%s";
+  private static final String IRI_FORMAT = "@viewer.%s.%s";
 
   public enum Element {
     clazz, dataProperty, objectProperty, instance, empty
@@ -26,12 +26,12 @@ public class ViewerIriFactory {
    * @param element Specific element
    * @return IRI created using parameters
    */
-  public static IRI createIri(Type type, Element element) {
+  public static String createId(Type type, Element element) {
     if (element == Element.empty) {
-      return IRI.create(String.format(IRI_FORMAT, type.name(), ""));
+      return String.format(IRI_FORMAT, type.name(), "");
     }
 
-    return IRI.create(String.format(IRI_FORMAT, type.name(), element.name()));
+    return String.format(IRI_FORMAT, type.name(), element.name());
   }
 
    /**
@@ -42,11 +42,11 @@ public class ViewerIriFactory {
    * @param element Specific element
    * @return IRI created using parameters
    */
-  public static IRI createIri(Type type, String element) {
+  public static String createId(Type type, String element) {
     if (element == null || element.isEmpty()) {
-      return IRI.create(String.format(IRI_FORMAT, type.name(), ""));
+      return String.format(IRI_FORMAT, type.name(), "");
     }
 
-    return IRI.create(String.format(IRI_FORMAT, type.name(), element));
+    return String.format(IRI_FORMAT, type.name(), element);
   }
 }

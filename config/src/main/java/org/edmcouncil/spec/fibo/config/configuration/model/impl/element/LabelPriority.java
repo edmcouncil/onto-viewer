@@ -6,7 +6,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItemAbstract;
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class GroupLabelPriorityItem extends ConfigItemAbstract {
+public class LabelPriority extends ConfigItemAbstract {
 
   private Priority value;
 
@@ -24,7 +24,7 @@ public class GroupLabelPriorityItem extends ConfigItemAbstract {
   }
 
   public enum Priority {
-    DEFINED, EXTRACTED
+    USER_DEFINED, EXTRACTED
   }
 
 }
