@@ -117,7 +117,7 @@ public class OwlDataHandler {
         tax.sort();
 
         OwlDetailsProperties<PropertyValue> annotations
-            = handleAnnotations(clazz.getIRI(), ontology);
+            = handleAnnotations(clazz.getIRI(), ontology, resultDetails);
 
         setResultValues(resultDetails, tax, axioms, annotations, directSubclasses, individuals, inheritedAxioms, vg, subclasses);
 
@@ -182,7 +182,7 @@ public class OwlDataHandler {
         OwlDetailsProperties<PropertyValue> axioms = handleAxioms(individual, ontology);
 
         OwlDetailsProperties<PropertyValue> annotations
-            = handleAnnotations(individual.getIRI(), ontology);
+            = handleAnnotations(individual.getIRI(), ontology, resultDetails);
 
         resultDetails.addAllProperties(axioms);
         resultDetails.addAllProperties(annotations);
@@ -191,8 +191,8 @@ public class OwlDataHandler {
     return resultDetails;
   }
 
-  private OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
-    return annotationsDataHandler.handleAnnotations(iri, ontology);
+  private OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology, OwlListDetails details) {
+    return annotationsDataHandler.handleAnnotations(iri, ontology, details);
   }
 
   private OwlDetailsProperties<PropertyValue> handleAxioms(
@@ -452,7 +452,7 @@ public class OwlDataHandler {
         taxonomy.sort();
 
         OwlDetailsProperties<PropertyValue> annotations
-            = handleAnnotations(dataProperty.getIRI(), ontology);
+            = handleAnnotations(dataProperty.getIRI(), ontology, resultDetails);
 
         resultDetails.addAllProperties(axioms);
         resultDetails.addAllProperties(annotations);
@@ -482,7 +482,7 @@ public class OwlDataHandler {
         taxonomy.sort();
 
         OwlDetailsProperties<PropertyValue> annotations
-            = handleAnnotations(dataProperty.getIRI(), ontology);
+            = handleAnnotations(dataProperty.getIRI(), ontology, resultDetails);
 
         resultDetails.addAllProperties(axioms);
         resultDetails.addAllProperties(annotations);
@@ -657,8 +657,8 @@ public class OwlDataHandler {
 
   public OwlListDetails handleOntologyMetadata(IRI iri, OWLOntology ontology) {
 
-    OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontology);
     OwlListDetails wd = new OwlListDetails();
+    OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontology, wd);
     if (metadata != null && metadata.getProperties().keySet().size() > 0) {
       wd.addAllProperties(metadata);
     }

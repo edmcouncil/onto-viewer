@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
-## [0.9.0] - 2019-11-31
+## [0.1.0] - 2019-11-08
 ### Added
 - external properties file used for configuration
 - rest api

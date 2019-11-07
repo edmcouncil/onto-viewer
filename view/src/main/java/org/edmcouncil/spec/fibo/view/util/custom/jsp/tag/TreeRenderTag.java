@@ -78,23 +78,24 @@ public class TreeRenderTag extends SimpleTagSupport {
   private void renderTreeElement(FiboModule property) throws IOException {
     String link = null;
     String val = null;
+    String emptyDisplayedVal = "";
     link = property.getIri();
     val = property.getLabel();
-    String result = wrapToLink(link, "<i class='fas fa-file-export'></i>");//"(Show meta)");
+    String result = wrapToLink(link, val);//"<i class='fas fa-file-export'></i>");
     renderElement("<li>");
     List<FiboModule> fmList = property.getSubModule();
     String text = null;
     if (fmList != null && fmList.size() > 0) {
       if (elementLocation != null && elementLocation.contains(link)) {
-        text = wrapSpanCaretDown(val);
+        text = wrapSpanCaretDown(emptyDisplayedVal);
       } else {
-        text = wrapSpanCaret(val);
+        text = wrapSpanCaret(emptyDisplayedVal);
       }
     } else {
       if (elementLocation != null && elementLocation.contains(link)) {
-        text = wrapSpanCleanMatch(val);
+        text = wrapSpanCleanMatch(emptyDisplayedVal);
       } else {
-        text = wrapSpanClean(val);
+        text = wrapSpanClean(emptyDisplayedVal);
       }
 
     }

@@ -116,6 +116,7 @@ public class DataManager {
     groupedDetails = changerIriToLabel.changeIriKeysInGroupedDetails(groupedDetails);
     groupedDetails.sortProperties(groups, cfg);
     groupedDetails.setGraph(owlDetails.getGraph());
+    groupedDetails.setqName(owlDetails.getqName());
 
     newResult = groupedDetails;
     return newResult;

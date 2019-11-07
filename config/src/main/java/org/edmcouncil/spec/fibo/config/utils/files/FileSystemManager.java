@@ -17,7 +17,7 @@ public class FileSystemManager {
 
   private static final String WEASEL_HOME_DIR_NAME = ".weasel";
   private static final String WEASEL_ONTOLOGY_FILE_NAME = "AboutFIBOProd.rdf";
-  private static final String WEASEL_CONFIG_FILE_NAME = "weasel_config.xml";
+  private static final String WEASEL_CONFIG_FILE_NAME = "fibo_viewer_config.xml";
 
   private static final Logger LOG = LoggerFactory.getLogger(FileSystemManager.class);
 

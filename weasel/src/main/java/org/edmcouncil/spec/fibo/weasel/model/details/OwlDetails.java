@@ -14,6 +14,7 @@ public class OwlDetails {
   private String label;
   private String iri;
   private String type;
+  private String qName;
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
   private ViewerGraph graph;
@@ -32,6 +33,14 @@ public class OwlDetails {
 
   public void setLabel(String label) {
     this.label = label;
+  }
+
+  public String getqName() {
+    return qName;
+  }
+
+  public void setqName(String qName) {
+    this.qName = qName;
   }
 
   public String getIri() {
