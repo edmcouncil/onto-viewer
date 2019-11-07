@@ -1,13 +1,12 @@
 package org.edmcouncil.spec.fibo.config.configuration.loader.saxparser;
 
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItemType;
-import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
 import org.edmcouncil.spec.fibo.config.configuration.model.GroupType;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.RenameItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
@@ -44,25 +43,21 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case ConfigKeys.IGNORE_TO_LINKING:
       case ConfigKeys.SCOPE_IRI:
       case ConfigKeys.GROUPS:
-      case ConfigKeys.RENAME_GROUPS:
       case ConfigKeys.ONTOLOGY_URL:
       case ConfigKeys.ONTOLOGY_PATH:
-      case ConfigKeys.DISPLAYED_LABELS:
+      case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
       case ConfigKeys.LABEL_LANG:
-      case ConfigKeys.GROUP_LABEL:
+      case ConfigKeys.LABEL_PRIORITY:
       case ConfigKeys.MISSING_LANGUAGE_ACTION:
-      case ConfigKeys.DEFAULT_LABEL_LIST:
+      case ConfigKeys.USER_DEFAULT_NAME_LIST:
         this.key = qName;
         break;
       case ConfigKeys.GROUP:
         cge = new GroupsItem();
         cge.setGroupType(GroupType.DEFAULT);
         break;
-      case ConfigKeys.RENAME:
-        cre = new RenameItem();
-        break;
-      case ConfigKeys.DEFAULT_LABEL_DEF:
+      case ConfigKeys.USER_DEFINED_NAME:
         dli = new DefaultLabelItem();
         break;
       
@@ -88,20 +83,8 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case ConfigKeys.GROUP_NAME:
         cge.setName(val);
         break;
-      case ConfigKeys.GROUP_ELEMENT:
+      case ConfigKeys.GROUP_ITEM:
         cge.addElement(new StringItem(val));
-        break;
-      case ConfigKeys.GROUP_TYPE:
-        cge.setGroupType(GroupType.valueOf(val));
-        break;
-      case ConfigKeys.OLD_NAME:
-        cre.setOldName(val);
-        break;
-      case ConfigKeys.NEW_NAME:
-        cre.setNewName(val);
-        break;
-      case ConfigKeys.RENAME:
-        config.addCongigElement(key, cre);
         break;
       case ConfigKeys.ONTOLOGY_URL:
         StringItem ontologyURL = new StringItem(val);
@@ -111,33 +94,32 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         StringItem ontologyPath = new StringItem(val);
         config.addCongigElement(key, ontologyPath);
         break;
-      case ConfigKeys.DISPLAYED_LABELS:
+      case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
         BooleanItem cbe = new BooleanItem();
         cbe.setType(ConfigItemType.BOOLEAN);
         cbe.setValue(Boolean.valueOf(val));
         config.addCongigElement(key, cbe);
         break;
-      case ConfigKeys.GROUP_LABEL:
-        GroupLabelPriorityItem cpe = new GroupLabelPriorityItem();
+      case ConfigKeys.LABEL_PRIORITY:
+        LabelPriority cpe = new LabelPriority();
         cpe.setType(ConfigItemType.PRIORITY);
-        cpe.setValue(GroupLabelPriorityItem.Priority.valueOf(val));
+        cpe.setValue(LabelPriority.Priority.valueOf(val));
         config.addCongigElement(key, cpe);
         break;
-
       case ConfigKeys.MISSING_LANGUAGE_ACTION:
         MissingLanguageItem cmle = new MissingLanguageItem();
         cmle.setType(ConfigItemType.MISSING_LANGUAGE_ACTION);
         cmle.setValue(MissingLanguageItem.Action.valueOf(val));
         config.addCongigElement(key, cmle);
         break;
-      case ConfigKeys.DEFAULT_LABEL_IRI:
+      case ConfigKeys.RESOURCE_IRI_TO_NAME:
         dli.setIri(val);
         break;
-      case ConfigKeys.DEFAULT_LABEL_VALUE:
+      case ConfigKeys.RESOURCE_IRI_NAME:
         dli.setLabel(val);
         break;
-      case ConfigKeys.DEFAULT_LABEL_DEF:
+      case ConfigKeys.USER_DEFINED_NAME:
         config.addCongigElement(key, dli);
     }
   }

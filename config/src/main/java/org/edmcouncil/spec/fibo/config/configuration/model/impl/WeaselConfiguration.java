@@ -4,11 +4,10 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.RenameIt
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupLabelPriorityItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
@@ -59,33 +58,6 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
     return !isEmpty() && configuration.get(ConfigKeys.GROUPS) != null;
   }
 
-  public String getNewName(String oldName) {
-    Set<ConfigItem> renamedGroups = configuration.getOrDefault(ConfigKeys.RENAME_GROUPS, new HashSet<>());
-    for (ConfigItem renamedG : renamedGroups) {
-      RenameItem rename = (RenameItem) renamedG;
-      if (rename.getOldName().equals(oldName)) {
-        return rename.getNewName();
-      }
-    }
-    return null;
-
-  }
-
-  public boolean hasRenamedGroups() {
-    return configuration.get(ConfigKeys.RENAME_GROUPS) != null;
-  }
-
-  public String getOldName(String newName) {
-    Set<ConfigItem> renamedGroups = configuration.getOrDefault(ConfigKeys.RENAME_GROUPS, new HashSet<>());
-    for (ConfigItem renamedG : renamedGroups) {
-      RenameItem rename = (RenameItem) renamedG;
-      if (rename.getNewName().equals(newName)) {
-        return rename.getOldName();
-      }
-    }
-    return null;
-  }
-
   public boolean isOntologyLocationSet() {
     return configuration.containsKey(ConfigKeys.ONTOLOGY_URL)
         || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH);
@@ -129,7 +101,7 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public Boolean useLabels() {
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DISPLAYED_LABELS, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DISPLAY_LABEL, new HashSet<>());
 
     for (ConfigItem value : values) {
       BooleanItem cbe = (BooleanItem) value;
@@ -150,15 +122,15 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
     return Boolean.FALSE;
   }
 
-  public GroupLabelPriorityItem.Priority getGroupLabelPriority() {
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.GROUP_LABEL, new HashSet<>());
+  public LabelPriority.Priority getGroupLabelPriority() {
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_PRIORITY, new HashSet<>());
 
     for (ConfigItem value : values) {
-      GroupLabelPriorityItem cpe = (GroupLabelPriorityItem) value;
+      LabelPriority cpe = (LabelPriority) value;
       return cpe.getValue();
     }
 
-    return GroupLabelPriorityItem.Priority.FRAGMENT;
+    return LabelPriority.Priority.USER_DEFINED;
   }
 
   public String getLabelLang() {
@@ -195,9 +167,10 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
 
     return result;
   }
+
   public Set<DefaultLabelItem> getDefaultLabels() {
 
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.DEFAULT_LABEL_LIST, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.USER_DEFAULT_NAME_LIST, new HashSet<>());
     Set<DefaultLabelItem> result = new HashSet<>();
     values.stream()
         .map((value) -> (DefaultLabelItem) value)
@@ -206,6 +179,16 @@ public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
         });
 
     return result;
+  }
+  
+  public LabelPriority.Priority getLabelPriority(){
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_PRIORITY, new HashSet<>());
+    
+    for (ConfigItem value : values) {
+      LabelPriority item = (LabelPriority) value;
+      return item.getValue();
+    }
+    return LabelPriority.Priority.USER_DEFINED;
   }
 
 }

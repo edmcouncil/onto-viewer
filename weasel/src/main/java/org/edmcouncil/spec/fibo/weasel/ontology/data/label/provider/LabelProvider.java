@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.label;
+package org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,10 @@ import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultLabelItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority.Priority;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.vocabulary.DefaultAppLabels;
+import org.edmcouncil.spec.fibo.weasel.ontology.factory.DefaultLabelsFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.EntityType;
@@ -30,36 +33,49 @@ import uk.ac.manchester.cs.owl.owlapi.OWLDataFactoryImpl;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Component
-public class LabelExtractor {
+public class LabelProvider {
 
-  private static final Logger LOG = LoggerFactory.getLogger(LabelExtractor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(LabelProvider.class);
 
   private Map<IRI, String> previouslyUsedLabels = new HashMap<>();
 
   @Autowired
   private OntologyManager ontology;
-  private Boolean forceLabelLang;
-  private String labelLang;
-  private Boolean useLabels;
-  private MissingLanguageItem.Action missingLanguageAction;
+  private final Boolean forceLabelLang;
+  private final String labelLang;
+  private final Boolean useLabels;
+  private final MissingLanguageItem.Action missingLanguageAction;
+  private final Priority groupLabelPriority;
+  private final Set<DefaultLabelItem> defaultUserLabels;
 
   @Inject
-  public LabelExtractor(AppConfiguration config) {
+  public LabelProvider(AppConfiguration config) {
     WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
     this.forceLabelLang = weaselConfig.isForceLabelLang();
     this.labelLang = weaselConfig.getLabelLang();
     this.useLabels = weaselConfig.useLabels();
     this.missingLanguageAction = weaselConfig.getMissingLanguageAction();
+    this.groupLabelPriority = weaselConfig.getGroupLabelPriority();
+    this.defaultUserLabels = weaselConfig.getDefaultLabels();
 
-    setDefaultLabels(weaselConfig.getDefaultLabels());
-    
+    loadDefaultLabels();
+
   }
 
-  private void setDefaultLabels(Set<DefaultLabelItem> defaultLabels) {
-    defaultLabels.forEach((defaultLabel) -> {
-      previouslyUsedLabels.put(IRI.create(defaultLabel.getIri()), defaultLabel.getLabel());
-    });
+  /**
+   * Load default labels from configuration and default labels defined in application
+   */
+  private void loadDefaultLabels() {
+    DefaultAppLabels defAppLabels = DefaultLabelsFactory.createDefaultAppLabels();
 
+    for (Map.Entry<IRI, String> entry : defAppLabels.getLabels().entrySet()) {
+      previouslyUsedLabels.put(entry.getKey(), entry.getValue());
+    }
+    if (useLabels && groupLabelPriority == Priority.USER_DEFINED) {
+      defaultUserLabels.forEach((defaultLabel) -> {
+        previouslyUsedLabels.put(IRI.create(defaultLabel.getIri()), defaultLabel.getLabel());
+      });
+    }
   }
 
   public String getLabelOrDefaultFragment(OWLEntity entity) {
@@ -80,7 +96,7 @@ public class LabelExtractor {
           .stream()
           .filter((annotation) -> (annotation.getValue().isLiteral()))
           .forEachOrdered((annotation) -> {
-            
+
             String label = annotation.annotationValue().asLiteral().get().getLiteral();
 
             String lang = annotation.annotationValue().asLiteral().get().getLang();
@@ -91,7 +107,16 @@ public class LabelExtractor {
     }
     String labelResult = null;
     if (labels.isEmpty()) {
-      labelResult = StringUtils.getFragment(entity.getIRI());
+      if (groupLabelPriority == Priority.EXTRACTED) {
+        for (DefaultLabelItem defaultUserLabel : defaultUserLabels) {
+          if (defaultUserLabel.getIri().equals(entity.getIRI().toString())) {
+            labelResult = defaultUserLabel.getLabel();
+            break;
+          }
+        }
+      } else {
+        labelResult = StringUtils.getFragment(entity.getIRI());
+      }
     } else if (labels.size() > 1) {
       labelResult = getTheRightLabel(labels, entity.getIRI());
     } else {
