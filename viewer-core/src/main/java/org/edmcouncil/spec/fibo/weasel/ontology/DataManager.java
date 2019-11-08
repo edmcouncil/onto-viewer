@@ -113,11 +113,16 @@ public class DataManager {
     groupedDetails.setLabel(owlDetails.getLabel());
     groupedDetails.setIri(owlDetails.getIri());
     groupedDetails.setLocationInModules(owlDetails.getLocationInModules());
-    groupedDetails = changerIriToLabel.changeIriKeysInGroupedDetails(groupedDetails);
-    groupedDetails.sortProperties(groups, cfg);
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
+    groupedDetails.sortProperties(groups, cfg);
+    //first must be sorted next we need to change keys
+    groupedDetails = changerIriToLabel.changeIriKeysInGroupedDetails(groupedDetails);
 
+    for (Map.Entry<String, Map<String, List<PropertyValue>>> entry : groupedDetails.getProperties().entrySet()) {
+      LOG.debug(entry.toString());
+    }
+    
     newResult = groupedDetails;
     return newResult;
   }

@@ -11,9 +11,9 @@
   </parent>
 	
   <groupId>org.edbcouncil.spec.fibo</groupId>
-  <artifactId>view</artifactId>
+  <artifactId>web-app</artifactId>
   <version>v0.1.0-SNAPSHOT</version>
-  <name>Fibo-Viewer</name>
+  <name>Fibo-Web-App</name>
   <description>Description needs to be completed</description>
   <packaging>war</packaging>
 
@@ -27,12 +27,12 @@
   <dependencies>
     <dependency>
       <groupId>org.edmcouncil.spec</groupId>
-      <artifactId>config</artifactId>
+      <artifactId>config-loader</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.edmcouncil.spec</groupId>
-      <artifactId>weasel</artifactId>
+      <artifactId>viewer-core</artifactId>
       <version>${project.version}</version>
     </dependency>
     

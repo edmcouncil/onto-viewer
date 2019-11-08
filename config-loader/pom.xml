@@ -6,9 +6,9 @@
     <artifactId>fibo</artifactId>
     <version>v0.1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>config</artifactId>
+  <artifactId>config-loader</artifactId>
   <packaging>jar</packaging>
-  <name>Fibo-Config</name>
+  <name>Fibo-Config-Loader</name>
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>

@@ -26,12 +26,12 @@ public class OwlGroupedDetailsProperties<T> {
   private Map<String, Map<String, List<T>>> properties;
 
   public OwlGroupedDetailsProperties() {
-    properties = new HashMap<>();
+    properties = new LinkedHashMap<>();
   }
 
   public void addProperty(String groupKey, String propertyKey, T property) {
     if (this.properties == null) {
-      this.properties = new HashMap<>();
+      this.properties = new LinkedHashMap<>();
     }
 
     Map<String, List<T>> group = properties.getOrDefault(groupKey, new LinkedHashMap<>());

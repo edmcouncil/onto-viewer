@@ -9,12 +9,12 @@
     <artifactId>fibo</artifactId>
     <version>v0.1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>weasel</artifactId>
+  <artifactId>viewer-core</artifactId>
   <version>v0.1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Fibo-Weasel</name>
-  <description>Weasel for DGFISMA project</description>
+  <name>Fibo-Viewer-Core</name>
+  <description>Viewer-Core for DGFISMA project</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,7 +26,7 @@
   <dependencies>
     <dependency>
       <groupId>org.edmcouncil.spec</groupId>
-      <artifactId>config</artifactId>
+      <artifactId>config-loader</artifactId>
       <version>${project.version}</version>
     </dependency>
     
