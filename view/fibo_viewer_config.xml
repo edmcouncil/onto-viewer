@@ -5,9 +5,9 @@
   <!-- To load an ontology from a folder, enter the path address with application between <ontologyPath> tags or enter the file name  -->
   <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
   <ontology>
-    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl</ontologyURL>
+    <!--<ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl</ontologyURL>--> 
     <!-- <ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>-->
-    <!--<ontologyPath>AboutFIBODev.ttl</ontologyPath>--> 
+    <ontologyPath>AboutFIBODev.ttl</ontologyPath>
   </ontology>
   
   <ignoreToDisplaying>
@@ -224,7 +224,19 @@
       <groupItem>http://purl.org/dc/terms/hasPart</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn</groupItem>
     </group>
-
+    
+    <group>
+      <groupName>This ontology contains</groupName>
+      <groupItem>@viewer.internal.clazz</groupItem>
+      <groupItem>@viewer.external.clazz</groupItem>
+      <groupItem>@viewer.internal.objectProperty</groupItem>      
+      <groupItem>@viewer.external.objectProperty</groupItem>    
+      <groupItem>@viewer.internal.dataProperty</groupItem>
+      <groupItem>@viewer.external.dataProperty</groupItem>    
+      <groupItem>@viewer.internal.instance</groupItem>
+      <groupItem>@viewer.external.instance</groupItem>		
+    </group>
+ 
     <group>
       <groupName>Meta-information</groupName>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel</groupItem>
@@ -244,23 +256,7 @@
       <groupItem>http://www.w3.org/2000/01/rdf-schema#seeAlso</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#historyNote</groupItem> 
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/relatedSpecification</groupItem>                  
-    </group>
-    
-    <group>
-      <groupName>Resources</groupName>
-      
-      <groupItem>@viewer.external.clazz</groupItem>
-      <groupItem>@viewer.internal.clazz</groupItem>
-		
-      <groupItem>@viewer.external.dataProperty</groupItem>
-      <groupItem>@viewer.internal.dataProperty</groupItem>
-		
-      <groupItem>@viewer.external.instance</groupItem>
-      <groupItem>@viewer.internal.instance</groupItem>
-		
-      <groupItem>@viewer.external.objectProperty</groupItem>
-      <groupItem>@viewer.internal.objectProperty</groupItem>
-    </group>
+    </group>    
   </groups>
     
 </properties>
