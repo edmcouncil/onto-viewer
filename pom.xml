@@ -27,8 +27,8 @@
   </properties>
 
   <modules>
-    <module>view</module>
-    <module>config</module>
-    <module>weasel</module>
+    <module>web-app</module>
+    <module>viewer-core</module>
+    <module>config-loader</module>
   </modules>
 </project>
