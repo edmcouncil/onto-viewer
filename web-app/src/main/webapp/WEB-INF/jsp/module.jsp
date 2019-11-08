@@ -20,15 +20,15 @@
 
         <div class="col-md-6 px-2">
 
-          <div class="card">
-            <div class="card-body">
+          <div class="mt-5 ml-2">
+            <div class="">
               <jsp:directive.include file="page/elements/moduleTree.jsp" />
             </div>
           </div>
         </div>
         <div class="col-md-6 px-2">
-          <div class="card">
-            <div class="card-body">
+          <div class="mt-5 ml-2">
+            <div class="">
               <c:if test="${grouped_details}">
                 <jsp:directive.include file="page/elements/viewGrouped.jsp" />
               </c:if>

@@ -34,8 +34,8 @@
         </nav>
       </div>
     </div>
+    <div class="border-bottom col-12 mt-1 mb-2 ml-0 mr-0"></div>       
   </c:if>
-  <div class="border-bottom col-12 mt-1 mb-2 ml-0 mr-0"></div>
   <c:forEach var="prop" items="${clazz.properties}">
     <div class="row">
       <h5><b class="col-12 px-0">${prop.key} </b></h5>
