@@ -11,6 +11,8 @@
 .header {
   width: 100%;
   background-color: #303030;
+  background-image: url("https://spec.edmcouncil.org/fibo/htmlpages/master/latest/img/baner2.c4220057.png");
+  background-size: cover;
   color: white;
 }
 
@@ -130,4 +132,11 @@ ul, #myUL {
 
 .custom-menu li:hover {
   background-color: #DEF;
+}
+
+h5{
+  color: #e78747 !important;
+}
+h3>b{
+  color: #e78747 !important;
 }

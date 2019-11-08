@@ -4,7 +4,7 @@
 <div class="my-3 px-3">
 
   <div class="row">
-    <h3><b class="custom-link text-primary">${clazz.label}</b></h3>
+    <h3><b class="">${clazz.label}</b></h3>
   </div>
   <div class="row">
     <h6><span class="text-secondary">${clazz.iri}</span></h6>
@@ -12,10 +12,11 @@
   <c:if test="${not empty clazz.qName}">
     <div class="row">
       <h6>
-        <span class="text-dark">${clazz.qName}</span>
+        <span class="text-secondary">${clazz.qName}</span>
       </h6>
     </div>
   </c:if>
+  <div class="border-bottom col-12 mt-1 mb-2 ml-0 mr-0"></div>
 
   <c:if test="${not empty clazz.taxonomy}">
     <div class="row my-3">

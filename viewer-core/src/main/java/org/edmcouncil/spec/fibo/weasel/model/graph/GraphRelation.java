@@ -46,15 +46,27 @@ public class GraphRelation extends GraphElement {
 
   @Override
   public String toSimpleJson() {
-    String outIri = ", iri:'" + super.getIri() + "'";
+    String iriDto = super.getIri();
+    iriDto = iriDto == null || iriDto.isEmpty() ? "http://www.w3.org/2002/07/owl#Thing" : iriDto;
+    String outIri = ", iri:'" + iriDto.replaceAll("#", "%23") + "'";
     String optionalStyle = optional ? ", dashes:true" : "";
     String optionalVariable = ", optional:" + (isOptional() ? "'optional'" : "'non_optional'");
     String typeVariable = ", type:" + (endNodeType == GraphNodeType.INTERNAL ? "'internal'" : "'external'");
-    String format = "{from: %s, to: %s, arrows:'to', label: '%s' " + optionalStyle + ", color:{color:'black'}"
-        + optionalVariable + typeVariable + outIri + "}";
     String jLabel = super.getLabel();
     jLabel = jLabel.replaceAll("'", "\u0027");
-    return String.format(format, start.getId(), end.getId(), jLabel);
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("{from: ").append(start.getId()).append(", arrows:'to', ")
+        .append("to:").append(end.getId())
+        .append(", label: '").append(jLabel).append("'")
+        .append(", color:{color:'black'}")
+        .append(optionalStyle)
+        .append(optionalVariable)
+        .append(typeVariable)
+        .append(outIri)
+        .append("}");
+
+    return sb.toString();
   }
 
   public void setOptional(boolean b) {

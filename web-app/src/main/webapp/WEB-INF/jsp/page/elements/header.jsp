@@ -5,7 +5,7 @@
         <h3 class="font-weight-bold">
           <a href="${pageContext.request.contextPath}/index" class="custom-header-text">FIBO Viewer</a>
         </h3>
-        <h5 class="ml-3 mt-2"> <span class="text-white">v0.1.0</span> </h5>
+        <h5 class="ml-3 mt-2"> <span class="text-white">v0.1.0 beta</span> </h5>
       </div>
     </div>
     <div class="col-6">
@@ -17,7 +17,7 @@
               <form:input path="value" placeholder="Search" id="search-query" aria-label="Search"
                           class="form-control" type="text"/>
               <span class="input-group-btn">
-                <button class="btn btn-outline-primary" type="submit">
+                <button class="btn btn-primary" type="submit">
                   <span class="fas fa-search"></span>
                 </button>
               </span>
