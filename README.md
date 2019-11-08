@@ -87,8 +87,7 @@ FIBO can also be loaded from URL. E.g.
 If neither URL nor path is provided, FIBO Viewer will look for the "AboutFIBOProd" file in the default folder.
 
 ### FIBO Development and FIBO Product
-> <img src="https://spec.edmcouncil.org/fibo/htmlpages/master/latest/img/FIBO
-> _logo.11aeaf9b.jpg" width="300" align="right"/>
+> <img src="https://spec.edmcouncil.org/fibo/htmlpages/master/latest/img/FIBO_logo.11aeaf9b.jpg" width="300" align="right"/>
 > 
 > Note that FIBO Development is published in real time as changes are 
 > incorporated by the FIBO Community Group and consists of draft as well 
