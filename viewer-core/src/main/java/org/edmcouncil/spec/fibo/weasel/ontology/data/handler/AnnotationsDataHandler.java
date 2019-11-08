@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
@@ -155,7 +155,7 @@ public class AnnotationsDataHandler {
   private void checkUriAsIri(PropertyValue opv, String value) {
     //TODO: Change this to more pretty solution
     if (opv.getType() == WeaselOwlType.ANY_URI) {
-      WeaselConfiguration weaselConfiguration = (WeaselConfiguration) appConfig.getWeaselConfig();
+      ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) appConfig.getWeaselConfig();
       if (weaselConfiguration.isUriIri(value)) {
         opv.setType(WeaselOwlType.IRI);
       }

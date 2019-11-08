@@ -19,12 +19,12 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultL
  * @author Michał Daniel (michal.daniel@makolab.com)
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
-public class WeaselConfiguration implements Configuration<Set<ConfigItem>> {
+public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   private Map<String, Set<ConfigItem>> configuration;
   private static final String DEFAULT_LANG = "en";
 
-  public WeaselConfiguration() {
+  public ViewerCoreConfiguration() {
     configuration = new HashMap<>();
   }
 

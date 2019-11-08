@@ -9,7 +9,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingL
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.RenameItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -27,7 +27,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(WeaselConfigurationHandler.class);
 
-  private WeaselConfiguration config = new WeaselConfiguration();
+  private ViewerCoreConfiguration config = new ViewerCoreConfiguration();
   String key = null;
   String val = null;
 
@@ -129,7 +129,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
     val = new String(ch, start, length);
   }
 
-  public WeaselConfiguration getConfiguration() {
+  public ViewerCoreConfiguration getConfiguration() {
     return this.config;
   }
 }

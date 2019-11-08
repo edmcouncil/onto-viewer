@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlGroupedDetailsProperties;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
@@ -71,7 +71,7 @@ public class OwlGroupedDetails extends OwlDetails {
 
   }
 
-  public void sortProperties(Set<ConfigItem> groups, WeaselConfiguration cfg) {
+  public void sortProperties(Set<ConfigItem> groups, ViewerCoreConfiguration cfg) {
     properties.sort(groups, cfg);
   }
 
