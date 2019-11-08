@@ -87,32 +87,22 @@ FIBO can also be loaded from URL. E.g.
 If neither URL nor path is provided, FIBO Viewer will look for the "AboutFIBOProd" file in the default folder.
 
 ### FIBO Development and FIBO Product
-> <img 
-> src="https://spec.edmcouncil.org/fibo/htmlpages/master/latest/img/FIBO
+> <img src="https://spec.edmcouncil.org/fibo/htmlpages/master/latest/img/FIBO
 > _logo.11aeaf9b.jpg" width="300" align="right"/>
 > 
 > Note that FIBO Development is published in real time as changes are 
 > incorporated by the FIBO Community Group and consists of draft as well 
 > vetted content. The latest version is always avaliable at
 > 
-> * 
-> [https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBODev.
-> ttl](https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBO
-> Dev.ttl)
+> * [https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBODev.ttl](https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBODev.ttl)
 > 
 > FIBO Production is published at the end of each calendar quarter and has been vetted by SMEs and passed standard industry hygiene tests for OWL. To access the latest FIBO Production use the following URL:
 > 
-> * 
-> [https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBOProd
-> .ttl](https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIB
-> OProd.ttl)
+> * [https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBOProd.ttl](https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBOProd.ttl)
 > 
 > and to read FIBO from a give quarter use the following URL:
 > 
-> * 
-> [https://spec.edmcouncil.org/fibo/ontology/master/QUATER_REFERENCE/Abo
-> utFIBOProd.ttl](https://spec.edmcouncil.org/fibo/ontology/master/2019Q
-> 3/AboutFIBOProd.ttl)
+> * [https://spec.edmcouncil.org/fibo/ontology/master/QUATER_REFERENCE/AboutFIBOProd.ttl](https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl)
 > 
 > An example of QUATER_REFERENCE may be "2019Q3".
 
