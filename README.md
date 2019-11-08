@@ -52,7 +52,8 @@ This module contains methods responsible for extracting ontological components o
 * FIBO individuals are handled by OWLReasonerFactory. 
 
 
-## Fibo-Config-Loader module (config-loader folder) This module is responsible for loading configuration for FIBO Viewer. 
+## Fibo-Config-Loader module (config-loader folder) 
+This module is responsible for loading configuration for FIBO Viewer. 
 
 
 ## Fibo-Web-App module (web-app folder)
