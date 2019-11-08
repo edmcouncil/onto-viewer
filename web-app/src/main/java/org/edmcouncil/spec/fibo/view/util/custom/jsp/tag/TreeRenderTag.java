@@ -88,12 +88,14 @@ public class TreeRenderTag extends SimpleTagSupport {
     if (fmList != null && fmList.size() > 0) {
       if (elementLocation != null && elementLocation.contains(link)) {
         text = wrapSpanCaretDown(emptyDisplayedVal);
+        result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
       } else {
         text = wrapSpanCaret(emptyDisplayedVal);
       }
     } else {
       if (elementLocation != null && elementLocation.contains(link)) {
         text = wrapSpanCleanMatch(emptyDisplayedVal);
+         result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
       } else {
         text = wrapSpanClean(emptyDisplayedVal);
       }
