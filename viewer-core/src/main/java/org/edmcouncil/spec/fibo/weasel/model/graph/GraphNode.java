@@ -47,7 +47,9 @@ public class GraphNode extends GraphElement {
   @Override
   public String toSimpleJson() {
     //TODO: String.format in this case
-    String outIri = ", iri:\"" + super.getIri() + "\"";
+    String iriDto = super.getIri();
+    iriDto = iriDto == null || iriDto.isEmpty() ? "http://www.w3.org/2002/07/owl#Thing" : iriDto;
+    String outIri = ", iri:\"" + iriDto.replaceAll("#", "%23") + "\"";
     String shape = super.getLabel().isEmpty() ? "" : ", shape: 'box'";
     String optionalVar = this.optional ? ", shapeProperties:{borderDashes:true}" : "";
     String nodeStyle = "";
@@ -58,9 +60,18 @@ public class GraphNode extends GraphElement {
     }
     String jLabel = super.getLabel();
     jLabel = jLabel.replaceAll("'", "\u0027");
-    String format = "{id: %s, label: \"%s\" " + shape + ",font:{size:15}" + nodeStyle
-            + optionalVar + outIri + "}";
-    return String.format(format, super.getId(), jLabel);
+    StringBuilder sb = new StringBuilder();
+    sb.append("{id: ").append(super.getId())
+        .append(", label: \"").append(jLabel).append("\"")
+        .append(",font:{size:15}")
+        .append(shape)
+        .append(nodeStyle)
+        .append(optionalVar)
+        .append(outIri)
+        .append("}");
+        
+    
+    return sb.toString();
   }
 
 }

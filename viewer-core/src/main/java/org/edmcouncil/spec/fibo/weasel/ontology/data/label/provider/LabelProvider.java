@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultLabelItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority.Priority;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
@@ -51,7 +51,7 @@ public class LabelProvider {
 
   @Inject
   public LabelProvider(AppConfiguration config) {
-    WeaselConfiguration weaselConfig = (WeaselConfiguration) config.getWeaselConfig();
+    ViewerCoreConfiguration weaselConfig = (ViewerCoreConfiguration) config.getWeaselConfig();
     this.forceLabelLang = weaselConfig.isForceLabelLang();
     this.labelLang = weaselConfig.getLabelLang();
     this.useLabels = weaselConfig.useLabels();

@@ -13,7 +13,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.weasel.comparator.WeaselComparators;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
 
@@ -107,7 +107,7 @@ public class OwlGroupedDetailsProperties<T> {
 
  
 
-  public void sort(Set<ConfigItem> groups, WeaselConfiguration cfg) {
+  public void sort(Set<ConfigItem> groups, ViewerCoreConfiguration cfg) {
 
     Map<String, Map<String, List<T>>> sortedResults = new LinkedHashMap<>();
 

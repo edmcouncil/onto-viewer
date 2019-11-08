@@ -8,7 +8,7 @@ import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupsItem;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
@@ -74,7 +74,9 @@ public class DataManager {
         result = wd;
       }
     }
-
+    if (result == null) {
+      throw new NoSuchFieldError("Result is a null, no value present. Element IRI: " + iriString);
+    }
     result.setIri(iriString);
 
     //Path to element in modules
@@ -82,10 +84,10 @@ public class DataManager {
     result.setLocationInModules(elementLocation);
 
     if (!config.getWeaselConfig().isEmpty()) {
-      WeaselConfiguration cfg = config.getWeaselConfig();
+      ViewerCoreConfiguration cfg = config.getWeaselConfig();
       if (cfg.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, cfg);
-        
+
         return (T) newResult;
       } else {
         sortResults(result);
@@ -94,7 +96,7 @@ public class DataManager {
     return (T) result;
   }
 
-  private OwlGroupedDetails groupDetails(OwlListDetails owlDetails, WeaselConfiguration cfg) {
+  private OwlGroupedDetails groupDetails(OwlListDetails owlDetails, ViewerCoreConfiguration cfg) {
     OwlGroupedDetails newResult = null;
     OwlGroupedDetails groupedDetails = new OwlGroupedDetails();
     Set<ConfigItem> groups = cfg.getConfiguration().get(ConfigKeys.GROUPS);
@@ -122,7 +124,7 @@ public class DataManager {
     for (Map.Entry<String, Map<String, List<PropertyValue>>> entry : groupedDetails.getProperties().entrySet()) {
       LOG.debug(entry.toString());
     }
-    
+
     newResult = groupedDetails;
     return newResult;
   }

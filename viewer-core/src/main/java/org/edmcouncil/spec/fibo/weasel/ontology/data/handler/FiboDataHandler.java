@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
@@ -358,7 +358,7 @@ public class FiboDataHandler {
 
   private void completeKeysUsingTheConfiguration() {
 
-    WeaselConfiguration weaselConfiguration = (WeaselConfiguration) configuration.getWeaselConfig();
+    ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) configuration.getWeaselConfig();
 
     resourceInternal = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal,
         ViewerIdentifierFactory.Element.empty).toString();

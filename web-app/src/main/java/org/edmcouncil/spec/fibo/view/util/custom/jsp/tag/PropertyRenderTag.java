@@ -174,7 +174,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
     String result;
     String tmpSearchPath = searchPath.equals("*") ? "" : searchPath;
     result = String.format(URL_SEARCH_QUERY_PATTERN, tmpSearchPath, link, val);
-    return result;
+    return result.replaceAll("#", "%23");
   }
 
   private String parseLink(String val) {
@@ -184,7 +184,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
   private String parseLink(String link, String val) {
     String result;
     result = String.format(URL_PATTERN, link, val);
-    return result;
+    return result.replaceAll("#", "%23");
   }
 
   private String parseAnyUri(OwlAnnotationPropertyValue val) {

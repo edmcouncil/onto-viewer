@@ -17,18 +17,18 @@
 
     <div class="container-fluid">
       <div class="row px-3 py-3">
-        <div class="col-md-3 px-2">
-          <div class="card">
-            <div class="card-body">
+        <div class="col-md-3 px-2" style="height: 100%">
+          <div class="mt-5 ml-2">
+            <div class="" style="height: 100%">
               <jsp:directive.include file="page/elements/moduleTree.jsp" />
             </div>
           </div>
         </div>
 
-        <div class="col-md-9 px-2">
+        <div class="col-md-9 px-2" style="height: 100%">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="height: 100%">
               <c:choose>
                 <c:when test="${details_display}">
                   <c:choose>

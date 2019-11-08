@@ -8,7 +8,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.edmcouncil.spec.fibo.config.configuration.loader.saxparser.WeaselConfigurationHandler;
 import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -22,8 +22,8 @@ public class ConfigLoader {
   private static Logger LOG = LoggerFactory.getLogger(ConfigLoader.class);
   
 
-  public WeaselConfiguration loadWeaselConfiguration(Path weaselConfigFile) {
-    WeaselConfiguration configuration = new WeaselConfiguration();
+  public ViewerCoreConfiguration loadWeaselConfiguration(Path weaselConfigFile) {
+    ViewerCoreConfiguration configuration = new ViewerCoreConfiguration();
     
     SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
     try {
