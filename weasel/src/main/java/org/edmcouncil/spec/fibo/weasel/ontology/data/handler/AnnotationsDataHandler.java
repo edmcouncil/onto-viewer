@@ -5,17 +5,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
-import org.semanticweb.owlapi.io.OWLObjectRenderer;
-import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
@@ -33,7 +30,9 @@ import org.springframework.stereotype.Component;
 public class AnnotationsDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
-
+  private static final IRI COMMENT_IRI = IRI.create("http://www.w3.org/2000/01/rdf-schema#comment");
+  private final String FIBO_QNAME = "QName:";
+  
   @Autowired
   private OwlDataExtractor dataExtractor;
   @Autowired
@@ -44,9 +43,9 @@ public class AnnotationsDataHandler {
   /**
    * @param iri IRI element with annotations to capture
    * @param ontology Loaded ontology
-   * @return 
+   * @return
    */
-  public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology) {
+  public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology, OwlListDetails details) {
 
     Set<String> ignoredToDisplay = appConfig.getWeaselConfig().getIgnoredElements();
 
@@ -73,8 +72,15 @@ public class AnnotationsDataHandler {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
           value = asLiteral.get().getLiteral();
+          
+          if (propertyiri.equals(COMMENT_IRI) && value.contains(FIBO_QNAME)) {
+            details.setqName(value);
+            continue;
+          }
+          
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
+          
           checkUriAsIri(opv, value);
           opv.setValue(value);
           if (opv.getType() == WeaselOwlType.IRI) {
@@ -90,13 +96,15 @@ public class AnnotationsDataHandler {
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
-/**
- *
+
+  /**
+   *
    * @param annotations Stream of OWL abbotations
    * @param ontology Loaded ontology
+   * @param details qName is added to this object if found
    * @return Processed annotations
- */
-  public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology) {
+   */
+  public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology, OwlListDetails details) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     Set<String> ignoredToDisplay = appConfig.getWeaselConfig().getIgnoredElements();
     Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
@@ -122,9 +130,13 @@ public class AnnotationsDataHandler {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
           value = asLiteral.get().getLiteral();
+          if (propertyiri.equals(COMMENT_IRI) && value.contains(FIBO_QNAME)) {
+            details.setqName(value);
+            continue;
+          }
+          
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
-
           opv.setValue(value);
           checkUriAsIri(opv, value);
           if (opv.getType() == WeaselOwlType.IRI) {

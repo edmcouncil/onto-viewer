@@ -1,9 +1,12 @@
 <header class="col-12 py-4 px-4 header">
   <div class="row">
     <div class="col-6">
-      <h3 class="font-weight-bold">
-        <a href="${pageContext.request.contextPath}/index" class="custom-header-text">FIBO Viewer</a>
-      </h3>
+      <div class="row">
+        <h3 class="font-weight-bold">
+          <a href="${pageContext.request.contextPath}/index" class="custom-header-text">FIBO Viewer</a>
+        </h3>
+        <h5 class="ml-3 mt-2"> <span class="text-white">v0.1.0</span> </h5>
+      </div>
     </div>
     <div class="col-6">
       <div class="row">

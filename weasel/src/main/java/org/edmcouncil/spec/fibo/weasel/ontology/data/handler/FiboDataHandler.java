@@ -18,6 +18,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.WeaselConfigurat
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
+import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
 import org.edmcouncil.spec.fibo.weasel.model.onto.OntologyResources;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
@@ -180,12 +181,12 @@ public class FiboDataHandler {
     return domainIri;
   }
 
-  public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OWLOntology ontology) {
+  public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OWLOntology ontology, OwlListDetails details) {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
-        annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations(), ontology);
+        annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations(), ontology, details);
 
         OntologyResources ors = getOntologyResources(iri.toString(), ontology);
         for (Map.Entry<String, List<PropertyValue>> entry : ors.getResources().entrySet()) {
@@ -384,7 +385,7 @@ public class FiboDataHandler {
     return result;
   }
 
-   /**
+  /**
    *
    * @param c Annotation iri
    * @param ontologyIri IRI ontology used to compare with annotations IRI
