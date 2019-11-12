@@ -154,7 +154,11 @@
         <resourceIriToName>http://purl.org/dc/terms/contributor</resourceIriToName>
         <resourceIriName>contributor</resourceIriName>
       </userDefinedName>
-      
+
+      <userDefinedName>
+        <resourceIriToName>http://www.w3.org/2004/02/skos/core#definition</resourceIriToName>
+        <resourceIriName>definiens</resourceIriName>
+      </userDefinedName>      
   
     </userDefaultNameList>
     
