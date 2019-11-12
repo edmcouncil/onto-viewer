@@ -91,24 +91,31 @@ public class OntologyManager {
 
     OWLOntologyManager m = OWLManager.createOWLOntologyManager();
 
+    //OWLImportsDeclaration importDeclaration = m.getOWLDataFactory()
+    //  .getOWLImportsDeclaration(IRI.create(OWL_ONTOLOGY));
+    //m.makeLoadImportRequest(importDeclaration);
     LOG.debug("load ontology from document");
     OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
-    
-    //OWLImportsDeclaration importDeclaration = m.getOWLDataFactory()
-     //   .getOWLImportsDeclaration(IRI.create(OWL_ONTOLOGY));
 
     //m.applyChange(new AddImport(o, importDeclaration));
-
-    IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
+    //IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
+    IRI fiboIRI = IRI.create("");
     LOG.debug("load import request");
+
+    //m.load
     m.makeLoadImportRequest(new OWLImportsDeclarationImpl(m.getOntologyDocumentIRI(o)));
-    LOG.debug("direct imports");
-    Stream<OWLOntology> directImports = m.imports(o);
-    Set<OWLOntology> ontologiesTmp = directImports.collect(Collectors.toSet());
-    ontologiesTmp.addAll(getDefaultOntologies());
-    directImports = ontologiesTmp.stream();
+    //m.
+
+    LOG.debug("imports");
+    Stream<OWLOntology> imports = m.imports(o);
+//    Set<OWLOntology> ontologiesTmp = imports.collect(Collectors.toSet());
+//    LOG.debug("OntologiesTmp size a: {}", ontologiesTmp.size());
+//    ontologiesTmp.addAll(getDefaultOntologies());
+//    LOG.debug("OntologiesTmp size b: {}", ontologiesTmp.size());
+    //directImports = ontologiesTmp.stream();
     LOG.debug("create ontology");
-    o = m.createOntology(fiboIRI, directImports, false);
+    o = m.createOntology(fiboIRI, imports, false);
+    //o.
     return o;
 
   }
@@ -129,18 +136,24 @@ public class OntologyManager {
     HttpEntity entity = response.getEntity();
     if (entity != null) {
       InputStream inputStream = entity.getContent();
-      OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
       OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
           .getOWLImportsDeclaration(IRI.create(OWL_ONTOLOGY));
+
+      manager.makeLoadImportRequest(importDeclaration);
+
+      OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
 
       manager.applyChange(new AddImport(newOntology, importDeclaration));
       IRI fiboIRI = IRI.create(ontoURL);
       OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
       manager.makeLoadImportRequest(declaration);
       Stream<OWLOntology> directImports = manager.imports(newOntology);
-      Set<OWLOntology> ontologiesTmp = directImports.collect(Collectors.toSet());
-      ontologiesTmp.addAll(getDefaultOntologies());
-      directImports = ontologiesTmp.stream();
+      //Set<OWLOntology> ontologiesTmp = directImports.collect(Collectors.toSet());
+      //LOG.debug("OntologiesTmp size a: {}", ontologiesTmp.size());
+      //ontologiesTmp.addAll(getDefaultOntologies());
+      //LOG.debug("OntologiesTmp size b: {}", ontologiesTmp.size());
+      //directImports = ontologiesTmp.stream();
+      LOG.debug("create ontology");
       newOntology = manager.createOntology(fiboIRI, directImports, false);
       return newOntology;
     }

@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+-
+
+### Changed
+-
+
+### Removed
+- 
+
 
 ## [0.1.0] - 2019-11-08
 ### Added
@@ -18,8 +27,4 @@ All notable changes to this project will be documented in this file.
 - ignore some items to display defined in configuration file
 
 
-### Changed
--
 
-### Removed
-- 

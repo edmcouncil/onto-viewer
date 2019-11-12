@@ -5,9 +5,9 @@
   <!-- To load an ontology from a folder, enter the path address with application between <ontologyPath> tags or enter the file name  -->
   <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
   <ontology>
-    <!--<ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl</ontologyURL>
-    <ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>-->
-    <ontologyPath>AboutFIBODev.ttl</ontologyPath>
+    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl</ontologyURL>
+    <!--<ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>
+    <ontologyPath>AboutFIBODev.ttl</ontologyPath>-->
   </ontology>
   
   <ignoreToDisplaying>
@@ -101,6 +101,11 @@
       </userDefinedName>
       
       <userDefinedName>
+        <resourceIriToName>@viewer.axiom.DataPropertyDomain</resourceIriToName>
+        <resourceIriName>Data property domain</resourceIriName>
+      </userDefinedName>
+      
+      <userDefinedName>
         <resourceIriToName>@viewer.axiom.SubObjectPropertyOf</resourceIriToName>
         <resourceIriName>SubObject property</resourceIriName>
       </userDefinedName>
@@ -183,7 +188,7 @@
   <groups>
     <!--The order of elements in groups will be their priority-->
     <group>
-      <groupName>Natural Language characteristic</groupName>
+      <groupName>Natural language characteristic</groupName>
       <groupItem>http://www.w3.org/2000/01/rdf-schema#label</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</groupItem>
@@ -219,6 +224,7 @@
       <groupItem>@viewer.axiom.SubAnnotationPropertyOf</groupItem>
       <groupItem>@viewer.axiom.EquivalentObjectProperties</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyDomain</groupItem>
+      <groupItem>@viewer.axiom.DataPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyRange</groupItem>
       <groupItem>@viewer.axiom.InverseObjectProperties</groupItem>
       <groupItem>http://purl.org/dc/terms/hasPart</groupItem>
