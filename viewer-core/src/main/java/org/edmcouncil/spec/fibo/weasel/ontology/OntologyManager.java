@@ -94,19 +94,19 @@ public class OntologyManager {
     //OWLImportsDeclaration importDeclaration = m.getOWLDataFactory()
     //  .getOWLImportsDeclaration(IRI.create(OWL_ONTOLOGY));
     //m.makeLoadImportRequest(importDeclaration);
-    LOG.debug("load ontology from document");
+    LOG.debug("Load ontology from document");
     OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
-
+    makeDefaultsOntologiesImport(m, o);
     //m.applyChange(new AddImport(o, importDeclaration));
     //IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
     IRI fiboIRI = IRI.create("");
-    LOG.debug("load import request");
+    LOG.debug("Load import request");
 
     //m.load
     m.makeLoadImportRequest(new OWLImportsDeclarationImpl(m.getOntologyDocumentIRI(o)));
     //m.
 
-    LOG.debug("imports");
+    LOG.debug("Make imports");
     Stream<OWLOntology> imports = m.imports(o);
 //    Set<OWLOntology> ontologiesTmp = imports.collect(Collectors.toSet());
 //    LOG.debug("OntologiesTmp size a: {}", ontologiesTmp.size());
@@ -136,25 +136,26 @@ public class OntologyManager {
     HttpEntity entity = response.getEntity();
     if (entity != null) {
       InputStream inputStream = entity.getContent();
-      OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
-          .getOWLImportsDeclaration(IRI.create(OWL_ONTOLOGY));
 
-      manager.makeLoadImportRequest(importDeclaration);
-
+      //manager.makeLoadImportRequest(importDeclaration);
       OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
 
-      manager.applyChange(new AddImport(newOntology, importDeclaration));
-      IRI fiboIRI = IRI.create(ontoURL);
+      //IRI fiboIRI = IRI.create(ontoURL);
+      IRI fiboIRI = IRI.create("");
       OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
       manager.makeLoadImportRequest(declaration);
-      Stream<OWLOntology> directImports = manager.imports(newOntology);
-      //Set<OWLOntology> ontologiesTmp = directImports.collect(Collectors.toSet());
+      makeDefaultsOntologiesImport(manager, newOntology);
+      Stream<OWLOntology> imports = manager.imports(newOntology);
+
+      //Set<OWLOntology> ontologiesTmp = imports.collect(Collectors.toSet());
       //LOG.debug("OntologiesTmp size a: {}", ontologiesTmp.size());
-      //ontologiesTmp.addAll(getDefaultOntologies());
+      //ontologiesTmp.addAll(getDefaultOntologies(manager));
       //LOG.debug("OntologiesTmp size b: {}", ontologiesTmp.size());
-      //directImports = ontologiesTmp.stream();
-      LOG.debug("create ontology");
-      newOntology = manager.createOntology(fiboIRI, directImports, false);
+      //imports = ontologiesTmp.stream();
+      LOG.debug("Create Ontology from ontology list");
+      OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+
+      newOntology = m.createOntology(fiboIRI, imports, false);
       return newOntology;
     }
     return null;
@@ -172,7 +173,7 @@ public class OntologyManager {
     for (File file : ontologiesDir.listFiles()) {
       LOG.debug("isFile : {}, name: {}", file.isFile(), file.getName());
       if (file.isFile()) {
-        if (getFileExtension(file).equalsIgnoreCase("rdf") && !file.getName().contains("Metadata")) {
+        if (!getFileExtension(file).equalsIgnoreCase("xml")) {
 
           OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(file);
           result.add(newOntology);
@@ -199,14 +200,13 @@ public class OntologyManager {
     return ontology;
   }
 
-  private Set<OWLOntology> getDefaultOntologies() throws IOException, OWLOntologyCreationException {
+  private Set<OWLOntology> getDefaultOntologies(OWLOntologyManager manager) throws IOException, OWLOntologyCreationException {
     String ontoURL = OWL_ONTOLOGY;
 
     Set<OWLOntology> defaultOntologies = new HashSet();
 
     LOG.debug("URL to Ontology : {} ", ontoURL);
     HttpGet httpGet = new HttpGet(ontoURL);
-    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
     CloseableHttpClient httpClient = HttpClients.createDefault();
     HttpResponse response = httpClient.execute(httpGet);
     HttpEntity entity = response.getEntity();
@@ -219,9 +219,26 @@ public class OntologyManager {
       directImports = directImports.collect(Collectors.toSet()).stream();
       newOntology = manager.createOntology(fiboIRI, directImports, false);
       defaultOntologies.add(newOntology);
+      LOG.debug("Loaded Ontology size = {}", newOntology.signature().count());
     }
-    LOG.debug("Loaded Default ontology size = {}", defaultOntologies.size());
+    LOG.debug("Loaded Default ontology set size = {}", defaultOntologies.size());
     return defaultOntologies;
+  }
+
+  private void makeDefaultsOntologiesImport(OWLOntologyManager manager, OWLOntology ontology) {
+    String[] ontologies = new String[]{"https://www.w3.org/2002/07/owl.rdf",
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "http://www.w3.org/2000/01/rdf-schema#",
+      "http://purl.org/dc/elements/1.1/",
+      "http://www.w3.org/2004/02/skos/core#"};
+
+    for (String oo : ontologies) {
+      OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+          .getOWLImportsDeclaration(IRI.create(oo));
+      manager.applyChange(new AddImport(ontology, importDeclaration));
+      manager.makeLoadImportRequest(importDeclaration);
+    }
+
   }
 
 }

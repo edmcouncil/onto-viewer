@@ -359,11 +359,6 @@
 <http://www.edmcouncil.org/fibo/AboutFIBODev>
 	a owl:Ontology ;
 	owl:imports
-        <http://www.w3.org/2002/07/owl#>,
-        <http://www.w3.org/1999/02/22-rdf-syntax-ns#>,
-        <http://www.w3.org/2000/01/rdf-schema#>,
-        <http://purl.org/dc/elements/1.1/>,
-        <http://www.w3.org/2004/02/skos/core#>,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-Europe/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-EuropeAndNorthAmerica/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-NorthAmerica/> ,

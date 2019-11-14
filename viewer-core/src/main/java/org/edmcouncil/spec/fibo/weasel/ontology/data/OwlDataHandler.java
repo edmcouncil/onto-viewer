@@ -106,7 +106,7 @@ public class OwlDataHandler {
         List<PropertyValue> taxElements = extracttTaxonomyElements(subclasses);
 
         OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(ontology, clazz);
-        OwlDetailsProperties<PropertyValue> individuals = handleParticularIndividual(ontology, clazz);
+        OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, clazz);
         OwlDetailsProperties<PropertyValue> inheritedAxioms = handleInheritedAxioms(ontology, clazz);
 
         ViewerGraph vg = graphDataHandler.handleGraph(clazz, ontology);
@@ -588,7 +588,7 @@ public class OwlDataHandler {
       r.setType(WeaselOwlType.DIRECT_SUBCLASSES);
       r.setValue(new PairImpl(labelExtractor.getLabelOrDefaultFragment(iri), iri.toString()));
       String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
-          WeaselOwlType.DIRECT_SUBCLASSES.name().toLowerCase()).toString();
+          WeaselOwlType.DIRECT_SUBCLASSES.name().toLowerCase());
       result.addProperty(key, r);
     }
     result.sortPropertiesInAlphabeticalOrder();
@@ -602,7 +602,7 @@ public class OwlDataHandler {
    * @param clazz Clazz are all properties of Inherited Axioms.
    * @return properties of Inherited Axioms.
    */
-  private OwlDetailsProperties<PropertyValue> handleParticularIndividual(OWLOntology ontology, OWLClass clazz) {
+  private OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
     OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
@@ -614,7 +614,7 @@ public class OwlDataHandler {
       s.setValue(new PairImpl(labelExtractor
           .getLabelOrDefaultFragment(namedIndividual.getIRI()), namedIndividual.getIRI().toString()));
       String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
-          WeaselOwlType.INSTANCES.name().toLowerCase()).toString();
+          WeaselOwlType.INSTANCES.name().toLowerCase());
       result.addProperty(key, s);
     }
     return result;
@@ -631,7 +631,7 @@ public class OwlDataHandler {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
     OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
-    String subClassOfKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "SubClassOf").toString();
+    String subClassOfKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "SubClassOf");
     NodeSet<OWLClass> rset = reasoner.getSuperClasses(clazz, InferenceDepth.ALL);
     rset.entities().collect(Collectors.toSet())
         .stream()
@@ -643,7 +643,7 @@ public class OwlDataHandler {
               for (PropertyValue propertyValue : entry.getValue()) {
                 if (propertyValue.getType() != WeaselOwlType.TAXONOMY) {
                   String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
-                      WeaselOwlType.ANONYMOUS_ANCESTOR.name().toLowerCase()).toString();
+                      WeaselOwlType.ANONYMOUS_ANCESTOR.name().toLowerCase());
                   result.addProperty(key, propertyValue);
                 }
               }
