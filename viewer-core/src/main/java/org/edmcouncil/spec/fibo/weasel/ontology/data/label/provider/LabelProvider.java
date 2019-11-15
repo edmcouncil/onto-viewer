@@ -201,14 +201,17 @@ public class LabelProvider {
     OWLOntologyManager manager = ontology.getOntology().getOWLOntologyManager();
     OWLDataFactory df = OWLManager.getOWLDataFactory();
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
-      if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
-        onto.annotations(df.getRDFSLabel()).collect(Collectors.toSet()).forEach((annotation) -> {
-          String label = annotation.annotationValue().asLiteral().get().getLiteral();
+      Optional<IRI> opt = onto.getOntologyID().getOntologyIRI();
+      if (opt.isPresent()) {
+        if (opt.get().equals(iri)) {
+          onto.annotations(df.getRDFSLabel()).collect(Collectors.toSet()).forEach((annotation) -> {
+            String label = annotation.annotationValue().asLiteral().get().getLiteral();
 
-          String lang = annotation.annotationValue().asLiteral().get().getLang();
-          labelProcessing(lang, labels, label, iri);
-        });
-        break;
+            String lang = annotation.annotationValue().asLiteral().get().getLang();
+            labelProcessing(lang, labels, label, iri);
+          });
+          break;
+        }
       }
     }
     String labelResult = null;

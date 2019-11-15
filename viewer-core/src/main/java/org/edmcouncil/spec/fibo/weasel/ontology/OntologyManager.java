@@ -96,10 +96,10 @@ public class OntologyManager {
     //m.makeLoadImportRequest(importDeclaration);
     LOG.debug("Load ontology from document");
     OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
-    makeDefaultsOntologiesImport(m, o);
+    //makeDefaultsOntologiesImport(m, o);
     //m.applyChange(new AddImport(o, importDeclaration));
-    //IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontologyAboutFIBOProd/");
-    IRI fiboIRI = IRI.create("");
+    IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
+    //IRI fiboIRI = IRI.create("");
     LOG.debug("Load import request");
 
     //m.load
@@ -140,11 +140,11 @@ public class OntologyManager {
       //manager.makeLoadImportRequest(importDeclaration);
       OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
 
-      //IRI fiboIRI = IRI.create(ontoURL);
-      IRI fiboIRI = IRI.create("");
+      IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
+      //IRI fiboIRI = IRI.create("*");
+      makeDefaultsOntologiesImport(manager, newOntology);
       OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
       manager.makeLoadImportRequest(declaration);
-      makeDefaultsOntologiesImport(manager, newOntology);
       Stream<OWLOntology> imports = manager.imports(newOntology);
 
       //Set<OWLOntology> ontologiesTmp = imports.collect(Collectors.toSet());
@@ -153,9 +153,9 @@ public class OntologyManager {
       //LOG.debug("OntologiesTmp size b: {}", ontologiesTmp.size());
       //imports = ontologiesTmp.stream();
       LOG.debug("Create Ontology from ontology list");
-      OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+      //OWLOntologyManager m = OWLManager.createOWLOntologyManager();
 
-      newOntology = m.createOntology(fiboIRI, imports, false);
+      newOntology = manager.createOntology(fiboIRI, imports, false);
       return newOntology;
     }
     return null;
@@ -230,7 +230,7 @@ public class OntologyManager {
       "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
       "http://www.w3.org/2000/01/rdf-schema#",
       "http://purl.org/dc/elements/1.1/",
-      "http://www.w3.org/2004/02/skos/core#"};
+      "https://www.w3.org/2009/08/skos-reference/skos.rdf"};
 
     for (String oo : ontologies) {
       OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()

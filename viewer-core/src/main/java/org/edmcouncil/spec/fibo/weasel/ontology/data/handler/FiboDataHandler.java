@@ -273,15 +273,30 @@ public class FiboDataHandler {
 
     manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
       OntologyResources ontoResources = extractOntologyResources(owlOntology);
-
-      allResources.put(owlOntology.getOntologyID().getOntologyIRI().get().toString(), ontoResources);
+      if (ontoResources != null) {
+        allResources.put(owlOntology.getOntologyID().getOntologyIRI().get().toString(), ontoResources);
+      }
     });
     resources = allResources;
   }
 
   private OntologyResources extractOntologyResources(OWLOntology selectedOntology) {
     OntologyResources ontoResources = new OntologyResources();
-    IRI ontologyIri = selectedOntology.getOntologyID().getOntologyIRI().get();
+    Optional<IRI> opt = selectedOntology.getOntologyID().getOntologyIRI();
+    IRI ontologyIri;
+    if (opt.isPresent()) {
+      ontologyIri = opt.get();
+    } else {
+      opt = selectedOntology.getOntologyID().getDefaultDocumentIRI();
+      if (opt.isPresent()) {
+        ontologyIri = opt.get();
+        LOG.debug("IRI for this ontology doesn't exist, use Default Document IRI {}", ontologyIri.toString());
+      } else {
+        LOG.debug("Ontology doesn't have any iri to present... Ontology ID: {}", selectedOntology.getOntologyID().toString());
+        return null;
+      }
+
+    }
     selectedOntology.classesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
@@ -289,7 +304,8 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.clazz), c));
+        .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.clazz), c)
+        );
 
     selectedOntology.dataPropertiesInSignature()
         .map(c -> {
