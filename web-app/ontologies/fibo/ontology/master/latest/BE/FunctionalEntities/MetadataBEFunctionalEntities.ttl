@@ -1,0 +1,55 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/MetadataBEFunctionalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/MetadataBEFunctionalEntities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-mod: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/MetadataBEFunctionalEntities/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/MetadataBEFunctionalEntities/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Business Entities (BE) Functional Entities Module" ;
+	rdfs:comment "QName: fibo-be-fct-mod:" ;
+	dct:abstract "The functional entities module includes ontologies describing entities that are defined according to their function, as opposed to their form, such as businesses, service providers, and publishers." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-be-fct-mod" ;
+	sm:filename "MetadataBEFunctionalEntities.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/MetadataBEFunctionalEntities/> ;
+	.
+
+fibo-be-fct-mod:FunctionalEntitiesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Functional Entities" ;
+	rdfs:comment "QName: fibo-be-fct-mod:FunctionalEntitiesModule" ;
+	dct:abstract "The functional entities module includes ontologies describing entities that are defined according to their function, as opposed to their form, such as businesses, service providers, and publishers." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Business Entities (BE) Functional Entities Module" ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-be-fct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/MetadataBEFunctionalEntities/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

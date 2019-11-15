@@ -1,0 +1,106 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCenters/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-all: <https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-dae-gty: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/> .
+@prefix fibo-fbc-fct-bc: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/> .
+@prefix fibo-fbc-fct-breg: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fct-ireg: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/> .
+@prefix fibo-fbc-fct-mkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-fct-rga: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-caa: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC/>
+	a owl:Ontology ;
+	rdfs:label "Financial Business and Commerce Domain" ;
+	rdfs:comment "QName: fibo-fbc-all:" ;
+	dct:abstract "The financial business and commerce domain covers business concepts that are common to common to a number of finance areas, such as loans, securities, and corporate actions, including products and services, financial intermediaries, registrars and regulators, and financial instruments and products." ;
+	dct:issued "2019-09-30T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Financial Business and Commerce (FBC) Domain" ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Bloomberg LP" ,
+		"Citigroup" ,
+		"Credit Suisse" ,
+		"Deutsche Bank" ,
+		"Exprentis" ,
+		"NoMagic" ,
+		"Nordea Bank AB" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Pinnacle Bank (Morgan Hill, California)" ,
+		"Quarule" ,
+		"State Street Bank and Trust" ,
+		"Statistics Canada" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo"
+		;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fbc-all" ;
+	sm:filename "AllFBC.rdf" ;
+	sm:keyword
+		"financial instruments" ,
+		"financial products" ,
+		"financial services, service providers, and accounts" ,
+		"markets" ,
+		"registration authorities" ,
+		"regulatory agencies"
+		;
+	sm:moduleAbbreviation "fibo-fbc" ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCenters/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC/> ;
+	fibo-fnd-utl-av:explanatoryNote "The 'all' ontology for FBC is provided for convenience for FIBO users.  This ontology does not add new assertions, but imports most of the Production (Released) ontologies that comprise the FIBO Foundations (FND), Business Entities (BE) and Financial Business and Commerce (FBC) Version 2.0 domains, excluding individuals for governments and jurisdictions, financial services and regulatory organizations and related registries, as well as the LCC region-specific ontologies." ;
+	.
+

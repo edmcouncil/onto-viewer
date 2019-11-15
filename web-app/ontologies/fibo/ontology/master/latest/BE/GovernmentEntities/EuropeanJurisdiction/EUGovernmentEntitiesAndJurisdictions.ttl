@@ -1,0 +1,197 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-ge-euj: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/> .
+@prefix fibo-be-ge-ge: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-3166-1: <https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/>
+	a owl:Ontology ;
+	rdfs:label "European Government Entities and Jurisdictions Ontology" ;
+	rdfs:comment "QName: fibo-be-ge-euj:" ;
+	dct:abstract "This ontology provides the set of basic European Union specific government level entities and jurisdictions for use in other FIBO ontologies." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2018 EDM Council, Inc." ,
+		"Copyright (c) 2016-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-be-ge-euj" ;
+	sm:filename "EUGovernmentEntitiesAndJurisdictions.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-be-ge-euj:EuropeanUnionEntity
+	a
+		owl:NamedIndividual ,
+		fibo-be-ge-ge:SupranationalEntity
+		;
+	rdfs:label "European Union entity" ;
+	rdfs:comment "QName: fibo-be-ge-euj:EuropeanUnionEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/> ;
+	rdfs:seeAlso <http://europa.eu/about-eu/basic-information/about/index_en.htm> ;
+	skos:definition "individual representing the federated sovereignty and polity that is the European Union" ;
+	fibo-be-ge-ge:hasSharedSovereigntyOver
+		lcc-3166-1:Austria ,
+		lcc-3166-1:Belgium ,
+		lcc-3166-1:Bulgaria ,
+		lcc-3166-1:Croatia ,
+		lcc-3166-1:Cyprus ,
+		lcc-3166-1:CzechRepublic ,
+		lcc-3166-1:Denmark ,
+		lcc-3166-1:Estonia ,
+		lcc-3166-1:Finland ,
+		lcc-3166-1:France ,
+		lcc-3166-1:Germany ,
+		lcc-3166-1:Greece ,
+		lcc-3166-1:Hungary ,
+		lcc-3166-1:Ireland ,
+		lcc-3166-1:Italy ,
+		lcc-3166-1:Latvia ,
+		lcc-3166-1:Lithuania ,
+		lcc-3166-1:Luxembourg ,
+		lcc-3166-1:Malta ,
+		lcc-3166-1:Netherlands ,
+		lcc-3166-1:Poland ,
+		lcc-3166-1:Portugal ,
+		lcc-3166-1:Romania ,
+		lcc-3166-1:Slovakia ,
+		lcc-3166-1:Slovenia ,
+		lcc-3166-1:Spain ,
+		lcc-3166-1:Sweden ,
+		lcc-3166-1:UnitedKingdom
+		;
+	fibo-be-ge-ge:isRepresentedBy fibo-be-ge-euj:GovernmentOfTheEuropeanUnion ;
+	.
+
+fibo-be-ge-euj:EuropeanUnionJurisdiction
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-law-jur:Jurisdiction
+		;
+	rdfs:label "European Union jurisdiction" ;
+	rdfs:comment "QName: fibo-be-ge-euj:EuropeanUnionJurisdiction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/> ;
+	skos:definition "individual representing the overall jurisdiction for the European Union, namely, that of the Court of Justice of the EU and Court of Auditors of the EU" ;
+	fibo-be-ge-ge:isJurisdictionOf fibo-be-ge-euj:GovernmentOfTheEuropeanUnion ;
+	fibo-fnd-law-jur:hasReach
+		lcc-3166-1:Austria ,
+		lcc-3166-1:Belgium ,
+		lcc-3166-1:Bulgaria ,
+		lcc-3166-1:Croatia ,
+		lcc-3166-1:Cyprus ,
+		lcc-3166-1:CzechRepublic ,
+		lcc-3166-1:Denmark ,
+		lcc-3166-1:Estonia ,
+		lcc-3166-1:Finland ,
+		lcc-3166-1:France ,
+		lcc-3166-1:Germany ,
+		lcc-3166-1:Greece ,
+		lcc-3166-1:Hungary ,
+		lcc-3166-1:Ireland ,
+		lcc-3166-1:Italy ,
+		lcc-3166-1:Latvia ,
+		lcc-3166-1:Lithuania ,
+		lcc-3166-1:Luxembourg ,
+		lcc-3166-1:Malta ,
+		lcc-3166-1:Netherlands ,
+		lcc-3166-1:Poland ,
+		lcc-3166-1:Portugal ,
+		lcc-3166-1:Romania ,
+		lcc-3166-1:Slovakia ,
+		lcc-3166-1:Slovenia ,
+		lcc-3166-1:Spain ,
+		lcc-3166-1:Sweden ,
+		lcc-3166-1:UnitedKingdom
+		;
+	fibo-fnd-utl-av:adaptedFrom "http://europa.eu/about-eu/institutions-bodies/index_en.htm"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-euj:GovernmentOfTheEuropeanUnion
+	a
+		owl:NamedIndividual ,
+		fibo-be-ge-ge:Government
+		;
+	rdfs:label "Government of the European Union" ;
+	rdfs:comment "QName: fibo-be-ge-euj:GovernmentOfTheEuropeanUnion" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/> ;
+	skos:definition "individual representing the parliament, council, and other institutions that comprise the government of the European Union" ;
+	fibo-be-ge-ge:hasJurisdiction fibo-be-ge-euj:EuropeanUnionJurisdiction ;
+	fibo-fnd-rel-rel:governs
+		lcc-3166-1:Austria ,
+		lcc-3166-1:Belgium ,
+		lcc-3166-1:Bulgaria ,
+		lcc-3166-1:Croatia ,
+		lcc-3166-1:Cyprus ,
+		lcc-3166-1:CzechRepublic ,
+		lcc-3166-1:Denmark ,
+		lcc-3166-1:Estonia ,
+		lcc-3166-1:Finland ,
+		lcc-3166-1:France ,
+		lcc-3166-1:Germany ,
+		lcc-3166-1:Greece ,
+		lcc-3166-1:Hungary ,
+		lcc-3166-1:Ireland ,
+		lcc-3166-1:Italy ,
+		lcc-3166-1:Latvia ,
+		lcc-3166-1:Lithuania ,
+		lcc-3166-1:Luxembourg ,
+		lcc-3166-1:Malta ,
+		lcc-3166-1:Netherlands ,
+		lcc-3166-1:Poland ,
+		lcc-3166-1:Portugal ,
+		lcc-3166-1:Romania ,
+		lcc-3166-1:Slovakia ,
+		lcc-3166-1:Slovenia ,
+		lcc-3166-1:Spain ,
+		lcc-3166-1:Sweden ,
+		lcc-3166-1:UnitedKingdom
+		;
+	fibo-fnd-utl-av:adaptedFrom "http://europa.eu/about-eu/institutions-bodies/index_en.htm"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote """In the EU's unique institutional set-up:
+- the EU's broad priorities are set by the European Council, which brings together national and EU-level leaders directly  elected MEPs represent European citizens in the European Parliament
+- the interests of the EU as a whole are promoted by the European Commission, whose members are appointed by national governments
+- governments defend their own country's national interests in the Council of the European Union.""" ;
+	.
+

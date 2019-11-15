@@ -1,0 +1,530 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-inf-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-inf-tem: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-org-org: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/>
+	a owl:Ontology ;
+	rdfs:label "Documentation"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Conceptual ontology covering the concept of document as a kind of written information along with various kinds of document as referred to elsewhere in FIBO. 
+		This is intended as to the main Documents ontology in Arrangements but at present these have not been integrated as those documents concepts were introduced independently and have yet to be reviewed and de-duplicated. This also applies to the concepts of Report versus ReportDocument and others.""" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-inf-doc:Certificate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:WrittenInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:issuedBy ;
+			owl:someValuesFrom fibo-be-le-cb:Corporation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:issuedTo ;
+			owl:someValuesFrom fibo-be-le-cb:Corporation ;
+		]
+		;
+	rdfs:label "certificate"@en ;
+	rdfs:comment "QName: NONE:Certificate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "Some formal written document prepared by some party which is typically regarded as an authority in the subject matter, setting out some formal position in respect of some other party, which may be used by that party as a point of reference about that subject matter to the world at large."@en ;
+	.
+
+fibo-fnd-inf-doc:ControlDocument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:Information ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:identifiedAs ;
+			owl:someValuesFrom fibo-fnd-inf-doc:Document ;
+		]
+		;
+	rdfs:label "control document"@en ;
+	rdfs:comment "QName: NONE:ControlDocument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A formal document which controls some activity or process. The actual document which takes on the role of Control Document for a given activity or process is identified as a property of this Control Document."@en ;
+	.
+
+fibo-fnd-inf-doc:Declaration
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-doc:WrittenCommunication ;
+	rdfs:label "declaration"@en ;
+	rdfs:comment "QName: NONE:Declaration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "Some formal communication in which some party makes a statement to the reader or the world at large about some fact or occurrence."@en ;
+	.
+
+fibo-fnd-inf-doc:Document
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:WrittenInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:hasStatus ;
+			owl:someValuesFrom fibo-fnd-inf-doc:DocumentStatus ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasPart ;
+			owl:someValuesFrom fibo-fnd-inf-inf:WrittenInformation ;
+		]
+		;
+	rdfs:label "document"@en ;
+	rdfs:comment "QName: NONE:Document" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "An information deliverable created in the course of some business process, and with some lifecycle independent of its use to communicate the information therein."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Documents are usually in sections and contain a multiplicity of information, generally on a given subject and for a given audience. In particular, documents generally have parts. This term is defined so that parts of documents may be defined. This is a difficult concept to define, but there is some value in distinguishing information of this sort, from memoranda, reports and the like. This is particularly for the identification of things such as contracts, prospectuses and the like, as distinct from the elements of information which may make up their parts, and allowing for the possibility of these having different status at different times and so on (Draft document versus Formal Document). However, certain of those others (e.g. Report) may also be considered documents in some cases."@en ;
+	.
+
+fibo-fnd-inf-doc:DocumentInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:Information ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:about ;
+			owl:someValuesFrom fibo-fnd-inf-doc:FormalControlledDocument ;
+		]
+		;
+	rdfs:label "document information"@en ;
+	rdfs:comment "QName: NONE:DocumentInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "Information about a document which is not in the document."@en ;
+	.
+
+fibo-fnd-inf-doc:DocumentStatus
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:Status ;
+	rdfs:label "document status"@en ;
+	rdfs:comment "QName: NONE:DocumentStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "Type or status of a document, specifically Draft or final. Not the same as versioning of a revision-controlled formal document."@en ;
+	.
+
+fibo-fnd-inf-doc:DraftContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-doc:DraftDocument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:comesIntoEffectAs ;
+			owl:someValuesFrom fibo-fnd-agr-ctr:WrittenContract ;
+		]
+		;
+	rdfs:label "draft contract"@en ;
+	rdfs:comment "QName: NONE:DraftContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A document which, once agreed to be such by some parties, may become a contract between those parties. Term origin:SR Modeling"@en ;
+	.
+
+fibo-fnd-inf-doc:DraftDocument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-doc:Document ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:becomesFormalizedAs ;
+			owl:someValuesFrom fibo-fnd-inf-doc:FormalDocument ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:hsaPart ;
+			owl:someValuesFrom fibo-fnd-inf-doc:DraftDocumentPart ;
+		]
+		;
+	rdfs:label "draft document"@en ;
+	rdfs:comment "QName: NONE:DraftDocument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A document which is self identified as being a draft for a later formal iteration of this same document as a formal document, formal contract or other formal document."@en ;
+	.
+
+fibo-fnd-inf-doc:DraftDocumentPart
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:WrittenInformation ;
+	rdfs:label "draft document part"@en ;
+	rdfs:comment "QName: NONE:DraftDocumentPart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A section or component of a document that is in draft; this is later to to be a part of a formal document. Ahead of formal release of that document this part may be originated, reviewed or managed as a separate information deliverable."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is a Part in the sense that it is or may form part of something; it is not defined as "a part of something" (i.e. this is like a wheel, whereas "a part of something" is like a nearside front wheel). Therefore removed the "is a" relationship to "Part", which only defines parts in the latter sense. For clarity, it may be desirable to add a new concept "Part of a Document" as a child of "Part". To be considered after mereology upper model is finalized (MGB, 3 June 2011).'@en ;
+	.
+
+fibo-fnd-inf-doc:Form
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:WrittenInformation ;
+	rdfs:label "form"@en ;
+	rdfs:comment "QName: NONE:Form" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "Written information entered into a physical document or a computer application containing information entered by a person."@en ;
+	.
+
+fibo-fnd-inf-doc:FormalControlledDocument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-doc:FormalDocument ;
+	rdfs:label "formal controlled document"@en ;
+	rdfs:comment "QName: NONE:FormalControlledDocument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A formal document which has applied to it some degree of formal control including version management, as defined within some pre-defined document control process."@en ;
+	fibo-fnd-utl-av:explanatoryNote "As a minimum this would have a version identifier, and some identification of the document in all its versions, as distinct from the specific version in hand. Additional controls as mandated in the applicable document control process would usually include author identification formal status, audience, information on allowable circulation of the ducument and so on."@en ;
+	.
+
+fibo-fnd-inf-doc:FormalDocument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-doc:Document ;
+	rdfs:label "formal document"@en ;
+	rdfs:comment "QName: NONE:FormalDocument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A document which has some self-identified and defined formal status, usually but not necessarily within some pre-defined business process for document formalization."@en ;
+	.
+
+fibo-fnd-inf-doc:FormalStatement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-doc:WrittenCommunication ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:formalStatementBy ;
+			owl:someValuesFrom fibo-fnd-org-fm:FormalOrganization ;
+		]
+		;
+	rdfs:label "formal statement"@en ;
+	rdfs:comment "QName: NONE:FormalStatement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "Some formal written communication, setting out the position of some party or parties about some matter."@en ;
+	.
+
+fibo-fnd-inf-doc:InsurancePolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-doc:FormalDocument ;
+	rdfs:label "insurance policy"@en ;
+	rdfs:comment "QName: NONE:InsurancePolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition 'Some policy by which some party (directly or more usually through an intermediary who writes this policy) agrees to cover some risk as identified in this policy, on behalf of the holder of the policy. further Notes: Added specifically to cover financial instruments modeling of insurance backed Guaranty. This term would belong within a separate section of specialist insurance terms if there were such a section. Later notes: also relevant to Mortgage Indemnity Guaranty, taken out by Lender before pooling a mortgage into a security. This may even be what was intended by "Insurance Backed Guaranty" in the original FIBIM terms. To be determined at further review.'@en ;
+	.
+
+fibo-fnd-inf-doc:Memorandum
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-doc:WrittenCommunication ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:from ;
+			owl:someValuesFrom fibo-fnd-org-org:Organization ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:to ;
+			owl:someValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		]
+		;
+	rdfs:label "memorandum"@en ;
+	rdfs:comment "QName: NONE:Memorandum" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A semi-formal communication from one party to one or more other parties, communicating some information to them and identifying the fact that this has been communicated."@en ;
+	fibo-fnd-utl-av:explanatoryNote "As well as the usual context of a memorandum (which is captured in the above definition), this is also used specificalyl for offering memorandums for securities issues. This is the main reason this term is included at present. Term origin:SR Modeling"@en ;
+	.
+
+fibo-fnd-inf-doc:Notice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-doc:WrittenCommunication ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:onThePartOf ;
+			owl:someValuesFrom fibo-fnd-org-fm:FormalOrganization ;
+		]
+		;
+	rdfs:label "notice"@en ;
+	rdfs:comment "QName: NONE:Notice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition
+		"Some formal communication in which some party makes a statement to the reader or the world at large about some fact or occurrence."@en ,
+		"Some formal written communication from some party to another party or parties or to the world at large, notifying them about some fact or occurrence."@en ,
+		"Some formal written communication, notifying some party or parties about some fact or occurrence."@en ,
+		"Some formal written communication, setting out the position of some party or parties about some matter."@en ,
+		"Some formal written document prepared by some party which is typically regarded as an authority in the subject matter, setting out some formal position in respect of some other party, which may be used by that party as a point of reference about that subject matter to the world at large."@en
+		;
+	.
+
+fibo-fnd-inf-doc:Prospectus
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-doc:FormalDocument ;
+	rdfs:label "prospectus"@en ;
+	rdfs:comment "QName: NONE:Prospectus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A document which at one and the same time describes some future potential investment and sets out the legal terms which will form part of the contract which embodies that investment, should the recipient choose to invest as described in the prospectus. Term origin:SR Modeling"@en ;
+	.
+
+fibo-fnd-inf-doc:ReportDocument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-doc:Document ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-doc:reportAuthorBusinessOrganization ;
+			owl:someValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		]
+		;
+	rdfs:label "report document"@en ;
+	rdfs:comment "QName: NONE:ReportDocument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	.
+
+fibo-fnd-inf-doc:TermsSheet
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:WrittenInformation ;
+	rdfs:label "terms sheet"@en ;
+	rdfs:comment "QName: NONE:TermsSheet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "A set of written terms setting out legal or contractual rights, obligations and the like, but not (or not yet) forming part of a set of Contractual Terms."@en ;
+	fibo-fnd-utl-av:explanatoryNote "A typical case would be a termsheet in a prospectus, informing potential investors in something, what terms they will expect when the prospectus becomes a formal contract. Term origin:MBS PoC Reviews"@en ;
+	.
+
+fibo-fnd-inf-doc:WrittenCommunication
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:WrittenInformation ;
+	rdfs:label "written communication"@en ;
+	rdfs:comment "QName: NONE:WrittenCommunication" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	skos:definition "Some formal written communication from some party to another party or parties or to the world at large, notifying them about some fact or occurrence."@en ;
+	.
+
+fibo-fnd-inf-doc:about
+	a owl:ObjectProperty ;
+	rdfs:label "about"@en ;
+	rdfs:comment "QName: NONE:about" ;
+	rdfs:domain fibo-fnd-inf-doc:DocumentInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:FormalControlledDocument ;
+	.
+
+fibo-fnd-inf-doc:authorOf
+	a owl:ObjectProperty ;
+	rdfs:label "author of"@en ;
+	rdfs:comment "QName: NONE:authorOf" ;
+	rdfs:domain fibo-fnd-org-fm:FormalOrganization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:FormalControlledDocument ;
+	.
+
+fibo-fnd-inf-doc:becomesFormalizedAs
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-doc:documentBecomesDocument ;
+	rdfs:label "becomes formalized as"@en ;
+	rdfs:comment "QName: NONE:becomesFormalizedAs" ;
+	rdfs:domain fibo-fnd-inf-doc:DraftDocument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:FormalDocument ;
+	.
+
+fibo-fnd-inf-doc:comesIntoEffectAs
+	a owl:ObjectProperty ;
+	rdfs:label "comes into effect as"@en ;
+	rdfs:comment "QName: NONE:comesIntoEffectAs" ;
+	rdfs:domain fibo-fnd-inf-doc:DraftContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-agr-ctr:WrittenContract ;
+	skos:definition "Signing and bringing into effect of the Draft Contract to become a formal, written Contract."@en ;
+	.
+
+fibo-fnd-inf-doc:controlDate
+	a owl:ObjectProperty ;
+	rdfs:label "control date"@en ;
+	rdfs:comment "QName: NONE:controlDate" ;
+	rdfs:domain fibo-fnd-inf-doc:ControlDocument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The date at which the controlling aspect of the document takes effect, for example the valid date for a permit, the sign-off date for a written document that is required to proceed with a process or activity."@en ;
+	.
+
+fibo-fnd-inf-doc:documentBecomesDocument
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:informationFlow ;
+	rdfs:label "document becomes document"@en ;
+	rdfs:comment "QName: NONE:documentBecomesDocument" ;
+	rdfs:domain fibo-fnd-inf-doc:Document ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:Document ;
+	skos:definition "A document may in the course of its life become another document, for example a draft becoming a later draft or becoming a formal document, or a new revision of a formally revision controlled document."@en ;
+	.
+
+fibo-fnd-inf-doc:formalStatementBy
+	a owl:ObjectProperty ;
+	rdfs:label "formal statement by"@en ;
+	rdfs:comment "QName: NONE:formalStatementBy" ;
+	rdfs:domain fibo-fnd-inf-doc:FormalStatement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-org-fm:FormalOrganization ;
+	.
+
+fibo-fnd-inf-doc:from
+	a owl:ObjectProperty ;
+	rdfs:label "from"@en ;
+	rdfs:comment "QName: NONE:from" ;
+	rdfs:domain fibo-fnd-inf-doc:Memorandum ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-org-org:Organization ;
+	owl:inverseOf fibo-fnd-inf-doc:writes ;
+	.
+
+fibo-fnd-inf-doc:hasStatus
+	a owl:ObjectProperty ;
+	rdfs:label "has status"@en ;
+	rdfs:comment "QName: NONE:hasStatus" ;
+	rdfs:domain fibo-fnd-inf-doc:Document ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:DocumentStatus ;
+	.
+
+fibo-fnd-inf-doc:hsaPart
+	a owl:ObjectProperty ;
+	rdfs:label "hsa part"@en ;
+	rdfs:comment "QName: NONE:hsaPart" ;
+	rdfs:domain fibo-fnd-inf-doc:DraftDocument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:DraftDocumentPart ;
+	.
+
+fibo-fnd-inf-doc:identifiedAs
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasIdentity ;
+	rdfs:label "identified as"@en ;
+	rdfs:comment "QName: NONE:identifiedAs" ;
+	rdfs:domain fibo-fnd-inf-doc:ControlDocument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:Document ;
+	.
+
+fibo-fnd-inf-doc:issuedBy
+	a owl:ObjectProperty ;
+	rdfs:label "issued by"@en ;
+	rdfs:comment "QName: NONE:issuedBy" ;
+	rdfs:domain fibo-fnd-inf-doc:Certificate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-be-le-cb:Corporation ;
+	.
+
+fibo-fnd-inf-doc:issuedTo
+	a owl:ObjectProperty ;
+	rdfs:label "issued to"@en ;
+	rdfs:comment "QName: NONE:issuedTo" ;
+	rdfs:domain fibo-fnd-inf-doc:Certificate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-be-le-cb:Corporation ;
+	.
+
+fibo-fnd-inf-doc:issuerOf
+	a owl:ObjectProperty ;
+	rdfs:label "issuer of"@en ;
+	rdfs:comment "QName: NONE:issuerOf" ;
+	rdfs:domain fibo-fnd-org-fm:FormalOrganization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:FormalControlledDocument ;
+	.
+
+fibo-fnd-inf-doc:onThePartOf
+	a owl:ObjectProperty ;
+	rdfs:label "on the part of"@en ;
+	rdfs:comment "QName: NONE:onThePartOf" ;
+	rdfs:domain fibo-fnd-inf-doc:Notice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-org-fm:FormalOrganization ;
+	skos:definition "The legal entity by whom or on whose behalf the Notice is written."@en ;
+	.
+
+fibo-fnd-inf-doc:reportAuthorBusinessOrganization
+	a owl:ObjectProperty ;
+	rdfs:label "report author business organization"@en ;
+	rdfs:comment "QName: NONE:reportAuthorBusinessOrganization" ;
+	rdfs:domain fibo-fnd-inf-doc:ReportDocument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-aap-agt:AutonomousAgent ;
+	.
+
+fibo-fnd-inf-doc:title
+	a owl:DatatypeProperty ;
+	rdfs:label "title"@en ;
+	rdfs:comment "QName: NONE:title" ;
+	rdfs:domain fibo-fnd-inf-doc:FormalDocument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The formal title of the Document."@en ;
+	.
+
+fibo-fnd-inf-doc:to
+	a owl:ObjectProperty ;
+	rdfs:label "to"@en ;
+	rdfs:comment "QName: NONE:to" ;
+	rdfs:domain fibo-fnd-inf-doc:Memorandum ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-aap-agt:AutonomousAgent ;
+	.
+
+fibo-fnd-inf-doc:version
+	a owl:DatatypeProperty ;
+	rdfs:label "version"@en ;
+	rdfs:comment "QName: NONE:version" ;
+	rdfs:domain fibo-fnd-inf-doc:FormalControlledDocument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The formal Revision of the document, as recorded on the document and on any relevant Revision Management System."@en ;
+	.
+
+fibo-fnd-inf-doc:writes
+	a owl:ObjectProperty ;
+	rdfs:label "writes"@en ;
+	rdfs:comment "QName: NONE:writes" ;
+	rdfs:domain fibo-fnd-org-org:Organization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ;
+	rdfs:range fibo-fnd-inf-doc:Memorandum ;
+	.
+
+fibo-fnd-org-org:Organization
+	a owl:Class ;
+	.
+

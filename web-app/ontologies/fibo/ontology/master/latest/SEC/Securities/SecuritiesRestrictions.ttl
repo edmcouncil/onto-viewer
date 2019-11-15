@@ -1,0 +1,328 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesRestrictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/OwnershipParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesRestrictions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-oac-opty: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/OwnershipParties/> .
+@prefix fibo-fbc-fct-rga: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-aap-ppl: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-cor: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-sec-lst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> .
+@prefix fibo-sec-sec-rst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/>
+	a owl:Ontology ;
+	rdfs:label "Securities Restrictions Ontology" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:" ;
+	dct:abstract "This ontology defines the concepts related to restrictions on finanicial instruments, securities and listings." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-sec-sec-rst" ;
+	sm:filename "SecuritiesRestrictions.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/OwnershipParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:changeNote "The https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions.rdf version of the ontology was modified to simplify the hierarchy with respect to regulatory requirements and eliminate deprecated elements." ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fi-fi:FinancialInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:onClass fibo-sec-sec-rst:ContractualRestriction ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-rst:hasRestriction ;
+			owl:onClass fibo-sec-sec-rst:SecuritiesRestriction ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	fibo-fnd-utl-av:explanatoryNote "extends the definition of a financial instrument to identify any relevant restrictions or registration requirements" ;
+	.
+
+fibo-sec-sec-lst:SecurityListing
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-sec-sec-rst:hasRestriction ;
+		owl:onClass fibo-sec-sec-rst:SecuritiesRestriction ;
+		owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+	] ;
+	fibo-fnd-utl-av:explanatoryNote "extends the definition of a security listing to identify any relevant restrictions" ;
+	.
+
+fibo-sec-sec-rst:BlueSkyLaw
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-rst:SecuritiesRegulation ;
+	rdfs:label "Blue-Sky law" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:BlueSkyLaw" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "a kind of securities regulation passed by various states, designed to protect investors against securities fraud by requiring sellers of new issues to register their offerings and provide financial details" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	fibo-fnd-utl-av:explanatoryNote "This allows investors to base their judgments on trustworthy data." ;
+	.
+
+fibo-sec-sec-rst:ContractualRestriction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualCommitment ,
+		fibo-sec-sec-rst:SecuritiesRestriction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isMandatedBy ;
+			owl:allValuesFrom fibo-fnd-agr-ctr:Contract ;
+		]
+		;
+	rdfs:label "contractual restriction" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:ContractualRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "contract terms setting out restrictions on either the holder or the issuer of the security, as specified in the terms of the instrument itself" ;
+	.
+
+fibo-sec-sec-rst:IndividualInvestor
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-oac-opty:Investor ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:allValuesFrom fibo-fnd-aap-ppl:Person ;
+		]
+		;
+	rdfs:label "individual investor" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:IndividualInvestor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "an investor that is a person, rather than an organization, who may or may not be considered a qualified investor from a legal perspective" ;
+	.
+
+fibo-sec-sec-rst:InstitutionalInvestor
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-oac-opty:Investor ;
+	rdfs:label "institutional investor" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:InstitutionalInvestor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "an organization that trades large volumes of securities" ;
+	skos:example "Example institutional investors include banks, insurance companies, mutual funds, pension funds, and other similar large funds." ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	fibo-fnd-utl-av:explanatoryNote "Typically more than 70 percent of the daily trading on the New York Stock Exchange is conducted on behalf of institutional investors." ;
+	.
+
+fibo-sec-sec-rst:InvestorsDomicileRestriction
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-rst:LegalHoldingRestriction ;
+	rdfs:label "investors' domicile restriction" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:InvestorsDomicileRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "a legal holding restriction that specifies where holders of a security may be domiciled" ;
+	skos:editorialNote "Needs review and provenance" ;
+	.
+
+fibo-sec-sec-rst:LegalHoldingRestriction
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-rst:SecuritiesRestriction ;
+	rdfs:label "legal holding restriction" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:LegalHoldingRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "a security restriction applicable to holding the security" ;
+	.
+
+fibo-sec-sec-rst:QualifiedInvestorRestriction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-rst:LegalHoldingRestriction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-rst:hasHoldingPeriod ;
+			owl:allValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		]
+		;
+	rdfs:label "qualified investor restriction" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:QualifiedInvestorRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "a legal holding restriction specifying that only qualified investors may hold the security, optionally for a defined holding period (if this is not defined then the period is indefinite)" ;
+	skos:editorialNote "Needs review and provenance" ;
+	fibo-fnd-utl-av:explanatoryNote "If a holding period is not defined, then the period for which the restriction applies is indefinite." ;
+	.
+
+fibo-sec-sec-rst:RegulationS
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-rst:InvestorsDomicileRestriction ,
+		fibo-sec-sec-rst:QualifiedInvestorRestriction ,
+		fibo-sec-sec-rst:SecuritiesRegulation
+		;
+	rdfs:label "Regulation S" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:RegulationS" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "a securities regulation defining an exemption through which corporations can issue unregistered securities to qualified foreign investors and foreign institutions" ;
+	skos:editorialNote "Needs review and provenance" ;
+	.
+
+fibo-sec-sec-rst:Restriction144A
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-rst:LegalHoldingRestriction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-rst:hasHoldingPeriod ;
+			owl:allValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		]
+		;
+	rdfs:label "Restriction 144A" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:Restriction144A" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "a Securities & Exchange Commission rule modifying a two-year holding period requirement on privately placed securities to permit qualified institutional buyers to trade these positions among themselves" ;
+	skos:editorialNote "Needs review and provenance" ;
+	.
+
+fibo-sec-sec-rst:SecuritiesRegulation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:Regulation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:allValuesFrom fibo-sec-sec-rst:SecuritiesRestriction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:StatuteLaw ;
+		]
+		;
+	rdfs:label "securities regulation" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:SecuritiesRegulation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "a regulation codified in law specific to securities and investments" ;
+	.
+
+fibo-sec-sec-rst:SecuritiesRestriction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:LegalObligation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:allValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fi-fi:FinancialInstrument
+					fibo-sec-sec-lst:SecurityListing
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isMandatedBy ;
+			owl:allValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-law-jur:StatuteLaw
+					fibo-sec-sec-rst:SecuritiesRegulation
+					fibo-fnd-agr-ctr:Contract
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "securities restriction" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:SecuritiesRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "legal obligation that is applicable to a financial instrument or security listing as mandated in a law or by contract" ;
+	.
+
+fibo-sec-sec-rst:TradingRestriction
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-rst:SecuritiesRestriction ;
+	rdfs:label "trading restriction" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:TradingRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	skos:definition "a restriction that limits trading in some manner, typically summarized on term sheets or in other documentation, including but not limited to restrictions on day trading" ;
+	.
+
+fibo-sec-sec-rst:hasHoldingPeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDatePeriod ;
+	rdfs:label "has holding period" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:hasHoldingPeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	skos:definition "identifies a holding period applicable to some financial asset" ;
+	.
+
+fibo-sec-sec-rst:hasRestriction
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has restriction" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:hasRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	rdfs:range fibo-sec-sec-rst:SecuritiesRestriction ;
+	skos:definition "identifies a restriction applicable to a given financial instrument or listing" ;
+	.
+
+fibo-sec-sec-rst:isNotClearedIn
+	a owl:ObjectProperty ;
+	rdfs:label "is not cleared in" ;
+	rdfs:comment "QName: fibo-sec-sec-rst:isNotClearedIn" ;
+	rdfs:domain fibo-sec-sec-rst:BlueSkyLaw ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> ;
+	rdfs:range lcc-cr:GeographicRegion ;
+	skos:definition "identifies a country subdivision, such as a US state or territory, where an issue is NOT cleared under Blue Sky Restrictions" ;
+	skos:editorialNote "This requires review -- shouldn't this be a ternary relation between the regulation, the security and the location?" ;
+	.
+

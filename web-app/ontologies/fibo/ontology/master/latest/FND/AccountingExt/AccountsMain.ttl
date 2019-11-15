@@ -1,0 +1,905 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-accx-bal: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-txn-ecr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/>
+	a owl:Ontology ;
+	rdfs:label "AccountsMain"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Extensive conceptual model of concepts in accounting, including ledger accounts and cashflow constructs. 
+		Concepts in this model and the accompanying Balance Sheet Balances ontology are conceptually grounded, and as such are intended to be deprecated in favor of similar or equivalent terms elsewhere in the Release ontologies over time.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-accx-acc:AbstractCashflowConstruct
+	a owl:Class ;
+	rdfs:label "abstract cashflow construct"@en ;
+	rdfs:comment "QName: NONE:AbstractCashflowConstruct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	owl:disjointWith fibo-fnd-accx-acc:RelativeCashflow ;
+	.
+
+fibo-fnd-accx-acc:Account
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:accountHasProvider ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountProvider ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:hasBalance ;
+			owl:someValuesFrom fibo-fnd-accx-bal:Balance ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:hasHolder ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountHolder ;
+		]
+		;
+	rdfs:label "account"@en ;
+	rdfs:comment "QName: NONE:Account" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Business relationship between two entities; one entity is the account owner, the other entity is the account servicer."@en ;
+	skos:editorialNote "Review session notes: A container that contains assets and/or commitments?"@en ;
+	.
+
+fibo-fnd-accx-acc:AccountHolder
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:label "account holder"@en ;
+	rdfs:comment "QName: NONE:AccountHolder" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:AccountPayable
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:LedgerAccount ;
+	rdfs:label "account payable"@en ;
+	rdfs:comment "QName: NONE:AccountPayable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:AccountProvider
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:label "account provider"@en ;
+	rdfs:comment "QName: NONE:AccountProvider" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:AccountReceivable
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:LedgerAccount ;
+	rdfs:label "account receivable"@en ;
+	rdfs:comment "QName: NONE:AccountReceivable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:AccountServicing
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:hasPartyAccountHolder ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountHolder ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:hasPartyAccountProvider ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountProvider ;
+		]
+		;
+	rdfs:label "account servicing"@en ;
+	rdfs:comment "QName: NONE:AccountServicing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:AccountingParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:label "accounting party"@en ;
+	rdfs:comment "QName: NONE:AccountingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "The Party from the perspective of which these accounts are prepared. This is the to whom the balances apply. There would be corresponding accounts (supplier, customer) for counterparties with whom the Accounting Party does business."@en ;
+	.
+
+fibo-fnd-accx-acc:AccruedLiability
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Liability ;
+	rdfs:label "accrued liability"@en ;
+	rdfs:comment "QName: NONE:AccruedLiability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Liability which has been incurred by the entity and is yet to be paid off."@en ;
+	.
+
+fibo-fnd-accx-acc:Appreciation
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-accx-acc:increaseIn ;
+		owl:someValuesFrom fibo-fnd-accx-acc:EconomicValue ;
+	] ;
+	rdfs:label "appreciation"@en ;
+	rdfs:comment "QName: NONE:Appreciation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	owl:disjointWith fibo-fnd-accx-acc:Depreciation ;
+	.
+
+fibo-fnd-accx-acc:Cash
+	a owl:Class ;
+	rdfs:label "cash"@en ;
+	rdfs:comment "QName: NONE:Cash" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-accx-acc:CashCurrency
+			fibo-fnd-accx-acc:Coinage
+		) ;
+	] ;
+	skos:definition "Something that is widely accepted in payment for goods and services and in settling debts."@en ;
+	.
+
+fibo-fnd-accx-acc:CashCurrency
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:PromissoryNote ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+			owl:someValuesFrom fibo-fnd-accx-acc:CashIssuer ;
+		]
+		;
+	rdfs:label "cash currency"@en ;
+	rdfs:comment "QName: NONE:CashCurrency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Money in the form of promissory notes issued by some central bank."@en ;
+	.
+
+fibo-fnd-accx-acc:CashIssuer
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-accx-acc:hasIssuerIdentity ;
+		owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/CentralBank> ;
+	] ;
+	rdfs:label "cash issuer"@en ;
+	rdfs:comment "QName: NONE:CashIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "The issuer and underwriter of cash. This takes the form of some Central Bank."@en ;
+	.
+
+fibo-fnd-accx-acc:Coinage
+	a owl:Class ;
+	rdfs:label "coinage"@en ;
+	rdfs:comment "QName: NONE:Coinage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Money in the form of coins minted by some authorized mint."@en ;
+	.
+
+fibo-fnd-accx-acc:DatedBalance
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-bal:Balance ,
+		fibo-fnd-math-math:TimedParameter
+		;
+	rdfs:label "dated balance"@en ;
+	rdfs:comment "QName: NONE:DatedBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "A balance at a point in time in the past, present or future."@en ;
+	.
+
+fibo-fnd-accx-acc:Depreciation
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-accx-acc:decreaseIn ;
+		owl:someValuesFrom fibo-fnd-accx-acc:EconomicValue ;
+	] ;
+	rdfs:label "depreciation"@en ;
+	rdfs:comment "QName: NONE:Depreciation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:DirectExpense
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Expenditure ;
+	rdfs:label "direct expense"@en ;
+	rdfs:comment "QName: NONE:DirectExpense" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Cost of Sales"@en ;
+	.
+
+fibo-fnd-accx-acc:Distribution
+	a owl:Class ;
+	rdfs:label "distribution"@en ;
+	rdfs:comment "QName: NONE:Distribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:Draft
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:WrittenContract ;
+	rdfs:label "draft"@en ;
+	rdfs:comment "QName: NONE:Draft" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "A draft is a legally binding order by one party (the drawer) to a second party (the drawee) to make payment to a third party (the payee). A simple example is a bank check -which is simply an order directing a bank to pay a third party. The three parties don't have to be distinct. For example, someone might write himself a check as a simple means of transferring funds from one bank account to another. In this case, the drawer and payee are the same person. When a draft guarantees payment for goods in international trade, it is called a bill of exchange. A draft can require immediate payment by the second party to the third upon presentation of the draft. This is called a sight draft. Checks are sight drafts. In trade, drafts often are for deferred payment. An importer might write a draft promising payment to an exporter for delivery of goods with payment to occur 60 days after the goods are delivered. Such drafts are called time drafts. They are said to mature on the payment date. In this example, the importer is both the drawer and the drawee. Definition source: riskglossary.com"@en ;
+	.
+
+fibo-fnd-accx-acc:EconomicValue
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-accx-acc:isValueOf ;
+		owl:someValuesFrom fibo-fnd-oac-own:Asset ;
+	] ;
+	rdfs:label "economic value"@en ;
+	rdfs:comment "QName: NONE:EconomicValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:Expenditure
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:RelativeCashflow ;
+	rdfs:label "expenditure"@en ;
+	rdfs:comment "QName: NONE:Expenditure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:Fee
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Liability ;
+	rdfs:label "fee"@en ;
+	rdfs:comment "QName: NONE:Fee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:GrossIncome
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Income ;
+	rdfs:label "gross income"@en ;
+	rdfs:comment "QName: NONE:GrossIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:GrossSalesIncome
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:GrossIncome ;
+	rdfs:label "gross sales income"@en ;
+	rdfs:comment "QName: NONE:GrossSalesIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:Income
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:RelativeCashflow ;
+	rdfs:label "income"@en ;
+	rdfs:comment "QName: NONE:Income" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:IncomeFromOperations
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:NetIncome ;
+	rdfs:label "income from operations"@en ;
+	rdfs:comment "QName: NONE:IncomeFromOperations" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Gross Profit"@en ;
+	.
+
+fibo-fnd-accx-acc:InvestmentPortfolio
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:Account ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:strategy ;
+			owl:someValuesFrom fibo-fnd-accx-acc:InvestmentStrategy ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-fnd-oac-own:Asset ;
+		]
+		;
+	rdfs:label "investment portfolio"@en ;
+	rdfs:comment "QName: NONE:InvestmentPortfolio" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "An account containing a number of financial instruments along with cash positions in one or more currencies."@en ;
+	.
+
+fibo-fnd-accx-acc:InvestmentStrategy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-gao-obj:BusinessStrategy ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-gao-obj:isDesignedToAchieve ;
+			owl:someValuesFrom fibo-fnd-gao-obj:InvestmentObjective ;
+		]
+		;
+	rdfs:label "investment strategy"@en ;
+	rdfs:comment "QName: NONE:InvestmentStrategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "A plan, method, or series of maneuvers or stratagems for obtaining a specific investment goal."@en ;
+	.
+
+fibo-fnd-accx-acc:LedgerAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:Account ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:hasBalance ;
+			owl:someValuesFrom fibo-fnd-accx-acc:LedgerBalance ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:preparedFor ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountingParty ;
+		]
+		;
+	rdfs:label "ledger account"@en ;
+	rdfs:comment "QName: NONE:LedgerAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:LedgerBalance
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-bal:Balance ;
+	rdfs:label "ledger balance"@en ;
+	rdfs:comment "QName: NONE:LedgerBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:Liability
+	a owl:Class ;
+	rdfs:label "liability"@en ;
+	rdfs:comment "QName: NONE:Liability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:LongTermDebt
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/Debt> ;
+	rdfs:label "long term debt"@en ;
+	rdfs:comment "QName: NONE:LongTermDebt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:MasterCreditFacility
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Collection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditFacilities/CreditFacility> ;
+		]
+		;
+	rdfs:label "master credit facility"@en ;
+	rdfs:comment "QName: NONE:MasterCreditFacility" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "A pool of credit facilities is combined into a Master Credit Facility for more efficient management of credit."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This cannot be sold as a pool based security. The credit facilities are pooled, or brought together, purely for management purposes. Given that the semantics of Pool is that a pool is brought together to achieve some business goal, as distinct to being brought together for management purposes, this term does not follow the archetype of Pool although it is similar in many respects."@en ;
+	.
+
+fibo-fnd-accx-acc:NetBalanceSheetIncome
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:NetIncome ;
+	rdfs:label "net balance sheet income"@en ;
+	rdfs:comment "QName: NONE:NetBalanceSheetIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:NetIncome
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Income ;
+	rdfs:label "net income"@en ;
+	rdfs:comment "QName: NONE:NetIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:NetSalesIncome
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:NetIncome ;
+	rdfs:label "net sales income"@en ;
+	rdfs:comment "QName: NONE:NetSalesIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Profit"@en ;
+	.
+
+fibo-fnd-accx-acc:NostroAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:NostroOrVostro ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:hasPartyBalance ;
+			owl:someValuesFrom fibo-fnd-accx-bal:NostroBalance ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:isViewOn ;
+			owl:someValuesFrom fibo-fnd-accx-acc:Account ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:nostroAccountHasPerspective ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountHolder ;
+		]
+		;
+	rdfs:label "nostro account"@en ;
+	rdfs:comment "QName: NONE:NostroAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	owl:disjointWith fibo-fnd-accx-acc:VostroAccount ;
+	.
+
+fibo-fnd-accx-acc:NostroOrVostro
+	a owl:Class ;
+	rdfs:label "nostro or vostro"@en ;
+	rdfs:comment "QName: NONE:NostroOrVostro" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:OperatingExpense
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Expenditure ;
+	rdfs:label "operating expense"@en ;
+	rdfs:comment "QName: NONE:OperatingExpense" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Operating Overheads"@en ;
+	.
+
+fibo-fnd-accx-acc:OtherIncome
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:GrossIncome ;
+	rdfs:label "other income"@en ;
+	rdfs:comment "QName: NONE:OtherIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:PaymentProcess
+	a owl:Class ;
+	rdfs:label "payment process"@en ;
+	rdfs:comment "QName: NONE:PaymentProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:Price
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:isOf ;
+			owl:someValuesFrom fibo-fnd-txn-ecr:EconomicResource ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:purportsToReflect ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-accx-acc:ValueInExchange
+					fibo-fnd-accx-acc:ValueInUse
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:reflects ;
+			owl:someValuesFrom fibo-fnd-accx-acc:EconomicValue ;
+		]
+		;
+	rdfs:label "price"@en ;
+	rdfs:comment "QName: NONE:Price" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Some monetary value ascribed to something, as being a measure of its value or perceived value."@en ;
+	fibo-fnd-utl-av:explanatoryNote "At this point in the model we do not distinguish between valuations (as for insurance purposes) and prices as quoted in market data price feeds and the like. These are pinned down at the point where different kinds of price are defined such as quote prices, trade prices and so on. At this highest level, price is essentially synonymous with valuation."@en ;
+	.
+
+fibo-fnd-accx-acc:PriceSpecification
+	a owl:Class ;
+	rdfs:label "price specification"@en ;
+	rdfs:comment "QName: NONE:PriceSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "The specification of a price, that is some formal and actionable definition of the value in exchange of some item."@en ;
+	.
+
+fibo-fnd-accx-acc:RelativeCashflow
+	a owl:Class ;
+	rdfs:label "relative cashflow"@en ;
+	rdfs:comment "QName: NONE:RelativeCashflow" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "A cash flow as seen from the perspective of a given balance sheet or by a given entity, that is a flow of funds into or or out of that balance sheet or on the part of that entity."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is a relative entity - the cash flow from a given perspective ("flow") being towards or away from some independent entity. This is not to be confused with a Cashflow Commitment, that is a concrete, independent description of a flow of funds as committed by some party. The latter is for example a feature of swaps and other derivatives, and in principle many or all instruments can be described as or reduced to (from one business perspective) some "Cashflow" in the sense of Cashflow Commitment.'@en ;
+	.
+
+fibo-fnd-accx-acc:RetainedIncome
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Income ;
+	rdfs:label "retained income"@en ;
+	rdfs:comment "QName: NONE:RetainedIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:ShortTermDebt
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/Debt> ;
+	rdfs:label "short term debt"@en ;
+	rdfs:comment "QName: NONE:ShortTermDebt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:StockInTrade
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-oac-own:Asset ;
+	rdfs:label "stock in trade"@en ;
+	rdfs:comment "QName: NONE:StockInTrade" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:TaxExpense
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Expenditure ;
+	rdfs:label "tax expense"@en ;
+	rdfs:comment "QName: NONE:TaxExpense" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:TotalAssets
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-bal:BalanceSheetTotal ;
+	rdfs:label "total assets"@en ;
+	rdfs:comment "QName: NONE:TotalAssets" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:TotalLiabilities
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-bal:BalanceSheetTotal ;
+	rdfs:label "total liabilities"@en ;
+	rdfs:comment "QName: NONE:TotalLiabilities" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:TotalOwnersEquity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-bal:BalanceSheetTotal ;
+	rdfs:label "total owners equity"@en ;
+	rdfs:comment "QName: NONE:TotalOwnersEquity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:ValueInExchange
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:EconomicValue ;
+	rdfs:label "value in exchange"@en ;
+	rdfs:comment "QName: NONE:ValueInExchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	owl:disjointWith fibo-fnd-accx-acc:ValueInUse ;
+	.
+
+fibo-fnd-accx-acc:ValueInUse
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:EconomicValue ;
+	rdfs:label "value in use"@en ;
+	rdfs:comment "QName: NONE:ValueInUse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:VostroAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:NostroOrVostro ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:hasPartyBalance ;
+			owl:someValuesFrom fibo-fnd-accx-bal:VostroBalance ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:isViewOn ;
+			owl:someValuesFrom fibo-fnd-accx-acc:Account ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:vostroAccountHasPerspective ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountProvider ;
+		]
+		;
+	rdfs:label "vostro account"@en ;
+	rdfs:comment "QName: NONE:VostroAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	skos:definition "Your account with us."@en ;
+	.
+
+fibo-fnd-accx-acc:accountHasProvider
+	a owl:ObjectProperty ;
+	rdfs:label "account has provider"@en ;
+	rdfs:comment "QName: NONE:accountHasProvider" ;
+	rdfs:domain fibo-fnd-accx-acc:Account ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:AccountProvider ;
+	.
+
+fibo-fnd-accx-acc:balance
+	a owl:DatatypeProperty ;
+	rdfs:label "balance"@en ;
+	rdfs:comment "QName: NONE:balance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:decreaseIn
+	a owl:ObjectProperty ;
+	rdfs:label "decrease in"@en ;
+	rdfs:comment "QName: NONE:decreaseIn" ;
+	rdfs:domain fibo-fnd-accx-acc:Depreciation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:EconomicValue ;
+	.
+
+fibo-fnd-accx-acc:denomination
+	a owl:ObjectProperty ;
+	rdfs:label "denomination"@en ;
+	rdfs:comment "QName: NONE:denomination" ;
+	rdfs:domain
+		fibo-fnd-accx-acc:CashCurrency ,
+		fibo-fnd-accx-acc:Coinage
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "The currency in which the money is denominated."@en ;
+	.
+
+fibo-fnd-accx-acc:hasBalance
+	a owl:ObjectProperty ;
+	rdfs:label "has balance"@en ;
+	rdfs:comment "QName: NONE:hasBalance" ;
+	rdfs:domain fibo-fnd-accx-acc:Account ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-bal:Balance ;
+	.
+
+fibo-fnd-accx-acc:hasHolder
+	a owl:ObjectProperty ;
+	rdfs:label "has holder"@en ;
+	rdfs:comment "QName: NONE:hasHolder" ;
+	rdfs:domain fibo-fnd-accx-acc:Account ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:AccountHolder ;
+	.
+
+fibo-fnd-accx-acc:hasIssuerIdentity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasIdentity ;
+	rdfs:label "has issuer identity"@en ;
+	rdfs:comment "QName: NONE:hasIssuerIdentity" ;
+	rdfs:domain fibo-fnd-accx-acc:CashIssuer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/CentralBank> ;
+	skos:definition "The identity of the party which is the issuer of cash as promissory notes is a Central Bank."@en ;
+	.
+
+fibo-fnd-accx-acc:hasPartyAccountHolder
+	a owl:ObjectProperty ;
+	rdfs:label "has party account holder"@en ;
+	rdfs:comment "QName: NONE:hasPartyAccountHolder" ;
+	rdfs:domain fibo-fnd-accx-acc:AccountServicing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:AccountHolder ;
+	.
+
+fibo-fnd-accx-acc:hasPartyAccountProvider
+	a owl:ObjectProperty ;
+	rdfs:label "has party account provider"@en ;
+	rdfs:comment "QName: NONE:hasPartyAccountProvider" ;
+	rdfs:domain fibo-fnd-accx-acc:AccountServicing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:AccountProvider ;
+	.
+
+fibo-fnd-accx-acc:hasPartyBalance
+	a owl:ObjectProperty ;
+	rdfs:label "has party balance"@en ;
+	rdfs:comment "QName: NONE:hasPartyBalance" ;
+	rdfs:domain fibo-fnd-accx-acc:NostroOrVostro ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-bal:Balance ;
+	.
+
+fibo-fnd-accx-acc:increaseIn
+	a owl:ObjectProperty ;
+	rdfs:label "increase in"@en ;
+	rdfs:comment "QName: NONE:increaseIn" ;
+	rdfs:domain fibo-fnd-accx-acc:Appreciation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:EconomicValue ;
+	.
+
+fibo-fnd-accx-acc:isMeasuredAs
+	a owl:ObjectProperty ;
+	rdfs:label "is measured as" ;
+	rdfs:comment "QName: NONE:isMeasuredAs" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:isOf
+	a owl:ObjectProperty ;
+	rdfs:label "is of"@en ;
+	rdfs:comment "QName: NONE:isOf" ;
+	rdfs:domain fibo-fnd-accx-acc:Price ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-txn-ecr:EconomicResource ;
+	.
+
+fibo-fnd-accx-acc:isQuantityOf.1
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-ecr:takesMaterialForm ;
+	rdfs:label "is quantity of"@en ;
+	rdfs:comment "QName: NONE:isQuantityOf.1" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:Cash ;
+	.
+
+fibo-fnd-accx-acc:isValueOf
+	a owl:ObjectProperty ;
+	rdfs:label "is value of"@en ;
+	rdfs:comment "QName: NONE:isValueOf" ;
+	rdfs:domain fibo-fnd-accx-acc:EconomicValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-oac-own:Asset ;
+	.
+
+fibo-fnd-accx-acc:isViewOn
+	a owl:ObjectProperty ;
+	rdfs:label "is view on"@en ;
+	rdfs:comment "QName: NONE:isViewOn" ;
+	rdfs:domain fibo-fnd-accx-acc:NostroOrVostro ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:Account ;
+	.
+
+fibo-fnd-accx-acc:nostroAccountHasPerspective
+	a owl:ObjectProperty ;
+	rdfs:label "nostro account has perspective"@en ;
+	rdfs:comment "QName: NONE:nostroAccountHasPerspective" ;
+	rdfs:domain fibo-fnd-accx-acc:NostroAccount ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:AccountHolder ;
+	.
+
+fibo-fnd-accx-acc:preparedFor
+	a owl:ObjectProperty ;
+	rdfs:label "prepared for"@en ;
+	rdfs:comment "QName: NONE:preparedFor" ;
+	rdfs:domain fibo-fnd-accx-acc:LedgerAccount ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:AccountingParty ;
+	.
+
+fibo-fnd-accx-acc:purportsToReflect
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-accx-acc:reflects ;
+	rdfs:label "purports to reflect"@en ;
+	rdfs:comment "QName: NONE:purportsToReflect" ;
+	rdfs:domain fibo-fnd-accx-acc:Price ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-accx-acc:ValueInExchange
+			fibo-fnd-accx-acc:ValueInUse
+		) ;
+	] ;
+	.
+
+fibo-fnd-accx-acc:reflects
+	a owl:ObjectProperty ;
+	rdfs:label "reflects value"@en ;
+	rdfs:comment "QName: NONE:reflects" ;
+	rdfs:domain fibo-fnd-accx-acc:Price ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:EconomicValue ;
+	.
+
+fibo-fnd-accx-acc:strategy
+	a owl:ObjectProperty ;
+	rdfs:label "strategy"@en ;
+	rdfs:comment "QName: NONE:strategy" ;
+	rdfs:domain fibo-fnd-accx-acc:InvestmentPortfolio ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:InvestmentStrategy ;
+	.
+
+fibo-fnd-accx-acc:takesForm
+	a owl:ObjectProperty ;
+	rdfs:label "takes form" ;
+	rdfs:comment "QName: NONE:takesForm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	.
+
+fibo-fnd-accx-acc:takesFormOf
+	a owl:ObjectProperty ;
+	rdfs:label "takes form of"@en ;
+	rdfs:comment "QName: NONE:takesFormOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-oac-own:Asset ;
+	.
+
+fibo-fnd-accx-acc:value
+	a owl:ObjectProperty ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:value" ;
+	rdfs:domain fibo-fnd-accx-acc:DatedBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-md-temx-tem:DatedMonetaryAmount ;
+	.
+
+fibo-fnd-accx-acc:vostroAccountHasPerspective
+	a owl:ObjectProperty ;
+	rdfs:label "vostro account has perspective"@en ;
+	rdfs:comment "QName: NONE:vostroAccountHasPerspective" ;
+	rdfs:domain fibo-fnd-accx-acc:VostroAccount ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> ;
+	rdfs:range fibo-fnd-accx-acc:AccountProvider ;
+	.
+

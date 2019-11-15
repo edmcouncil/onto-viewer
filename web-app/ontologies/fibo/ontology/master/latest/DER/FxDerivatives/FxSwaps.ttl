@@ -1,0 +1,104 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxForwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSpots/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSwaps/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-fx-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> .
+@prefix fibo-der-fx-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> .
+@prefix fibo-der-fx-sp: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> .
+@prefix fibo-der-fx-sw: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/>
+	a owl:Ontology ;
+	rdfs:label "FxSwaps"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Swap contracts in which one leg is based on the forward value of some currency exchange rate. These are defined in relation to the foreign exchange forward outright contract." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxForwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSpots/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSwaps/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-fx-sw:FxForwardForwardSwap
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-fx-ctr:OTCFxProduct ;
+	rdfs:label "fx forward forward swap"@en ;
+	rdfs:comment "QName: NONE:FxForwardForwardSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/> ;
+	.
+
+fibo-der-fx-sw:FxSwap
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-fx-ctr:OTCFxProduct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-sw:hasCorrespondingForward ;
+			owl:someValuesFrom fibo-der-fx-fwd:FxForwardTransaction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-sw:hasCorrespondingSpot ;
+			owl:someValuesFrom fibo-der-fx-sp:FxSpotTransaction ;
+		]
+		;
+	rdfs:label "fx swap"@en ;
+	rdfs:comment "QName: NONE:FxSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/> ;
+	.
+
+fibo-der-fx-sw:FxSwapContract
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/Swap> ,
+		fibo-der-fx-ctr:ForeignExchangeDerivativeContract
+		;
+	rdfs:label "fx swap contract"@en ;
+	rdfs:comment "QName: NONE:FxSwapContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/> ;
+	.
+
+fibo-der-fx-sw:embodies
+	a owl:ObjectProperty ;
+	rdfs:label "embodies"@en ;
+	rdfs:comment "QName: NONE:embodies" ;
+	rdfs:domain fibo-der-fx-sw:FxForwardForwardSwap ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/> ;
+	rdfs:range fibo-der-fx-fwd:FxForwardTransaction ;
+	.
+
+fibo-der-fx-sw:hasCorrespondingForward
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-fx-sp:hasCorrespondingTransaction ;
+	rdfs:label "has corresponding forward"@en ;
+	rdfs:comment "QName: NONE:hasCorrespondingForward" ;
+	rdfs:domain fibo-der-fx-sw:FxSwap ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/> ;
+	rdfs:range fibo-der-fx-fwd:FxForwardTransaction ;
+	.
+
+fibo-der-fx-sw:hasCorrespondingSpot
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-fx-sp:hasCorrespondingTransaction ;
+	rdfs:label "has corresponding spot"@en ;
+	rdfs:comment "QName: NONE:hasCorrespondingSpot" ;
+	rdfs:domain fibo-der-fx-sw:FxSwap ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/> ;
+	rdfs:range fibo-der-fx-sp:FxSpotTransaction ;
+	.
+

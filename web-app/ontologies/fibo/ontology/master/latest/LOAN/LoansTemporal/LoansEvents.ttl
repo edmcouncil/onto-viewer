@@ -1,0 +1,568 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanCollateralTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansLTV/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansEvents/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-law-cor: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-loan-col: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> .
+@prefix fibo-loan-loan-pty: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansParties/> .
+@prefix fibo-loan-tem-col: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanCollateralTemporal/> .
+@prefix fibo-loan-tem-ev: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> .
+@prefix fibo-loan-tem-ltv: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/>
+	a owl:Ontology ;
+	rdfs:label "LoansEvents"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology defines a wide range of events relating to loans. These include legal proceedings, prepayments, events affecting the collateral such as valuation, purchase and sale and details of many of these concepts. 
+		Note that most of this material was derived from an earlier activity with IBM Research, and are substantively based on a logical data model from that exercise.""" ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:copyright """Copyright (c) 2015-2018 EDM Council, Inc.
+Copyright (c) 2015-2018 Object Management Group, Inc.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanCollateralTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansLTV/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansEvents/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-fnd-pas-psch:Payment
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-ev:ValueChangingActivity ;
+	.
+
+fibo-loan-tem-ev:CountyCourt
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-cor:CourtOfLaw ;
+	rdfs:label "county court"@en ;
+	rdfs:comment "QName: NONE:CountyCourt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:CountyCourtJudgment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-ev:LegalProceeding ,
+		fibo-loan-tem-ev:ValueChangingActivity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:deliveredBy ;
+			owl:someValuesFrom fibo-loan-tem-ev:CountyCourt ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:isAgainst ;
+			owl:someValuesFrom fibo-be-le-lp:LegalPerson ;
+		]
+		;
+	rdfs:label "county court judgment"@en ;
+	rdfs:comment "QName: NONE:CountyCourtJudgment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "Satisfaction code associated with a county court judgement can have values satisfied/unsatisfied. This is a value changing event."@en ;
+	.
+
+fibo-loan-tem-ev:DateOfPurchase
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:ExplicitDate ;
+	rdfs:label "date of purchase"@en ;
+	rdfs:comment "QName: NONE:DateOfPurchase" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:DefaultProceedingTypeSelection
+	a owl:Class ;
+	rdfs:label "default proceeding type selection"@en ;
+	rdfs:comment "QName: NONE:DefaultProceedingTypeSelection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "(1) Default amount (2) Property Sale (3) Loss amount (4) Recoveries (5) Professional Negligence"@en ;
+	.
+
+fibo-loan-tem-ev:InformativeEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-oc:OccurrenceKind ;
+	rdfs:label "informative event"@en ;
+	rdfs:comment "QName: NONE:InformativeEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "An event which reflects some change in information about something."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is not an event which has any impact on any economic facts. Example: A change of name of a corporation is an informative event. Court proceedings that impose restricitons on paying any further advance on a loan is an informative event."@en ;
+	.
+
+fibo-loan-tem-ev:LegalProceeding
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:isAgainst ;
+			owl:someValuesFrom fibo-be-le-lp:LegalPerson ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:takesPlaceUnder ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		]
+		;
+	rdfs:label "legal proceeding"@en ;
+	rdfs:comment "QName: NONE:LegalProceeding" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:LoanDefaultProceeding
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-ev:LegalProceeding ,
+		fibo-loan-tem-ev:ValueChangingActivity
+		;
+	rdfs:label "loan default proceeding"@en ;
+	rdfs:comment "QName: NONE:LoanDefaultProceeding" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "[no definition] Further Review This is typically part of mortgagte servicing. THere would typically be a whole department dealing with this. Dealing with default, helping borrowers make payment Collections Default admin Foreclosure Reselling All dealt with by several sub departments. This requires subject matter experts in this area. 1. scoping Identify default as a possible state. This hands off to other business processes. Once you get into the default scenario we are talking about a proces that is going to fall into place over a period of time. The bank works out what to do with the default scenario, e.g. whether it restructures, forecloses, seeks restitution from the security (collateral). It does nto help us to understand the structure of the loan, rather tha consequences of the loan. If we were to further explore the default detail we would bring in other SMEs. And we would have to model a process flow. 1.1 impact on the pool of an MBS Loan Default Proceeding (special ase of legal thing) is an aspect of Default Management / Administratoin. there is also the State of the Loan. Sale / something / fulfilment / fiunduing / approved = servicing mode. Something happens (non payment) =&gt; Default Grace Period followed by negotiation. Some threshold whereby after a given amount of delinquency it needs to go into some other process moving towards foreclosure. Do State Diagram. Stages of loan."@en ;
+	.
+
+fibo-loan-tem-ev:MortgageLending
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-ev:PropertyRelatedActivity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:determines ;
+			owl:someValuesFrom fibo-loan-tem-ltv:OriginalLTV ;
+		]
+		;
+	rdfs:label "mortgage lending"@en ;
+	rdfs:comment "QName: NONE:MortgageLending" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:NonPayment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-ev:ValueChangingActivity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:isNot ;
+			owl:someValuesFrom fibo-fnd-pas-psch:Payment ;
+		]
+		;
+	rdfs:label "non payment"@en ;
+	rdfs:comment "QName: NONE:NonPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	owl:disjointWith fibo-fnd-pas-psch:Payment ;
+	.
+
+fibo-loan-tem-ev:NonValueChangingActivity
+	a owl:Class ;
+	rdfs:label "non value changing activity"@en ;
+	rdfs:comment "QName: NONE:NonValueChangingActivity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	owl:disjointWith fibo-loan-tem-ev:ValueChangingActivity ;
+	.
+
+fibo-loan-tem-ev:Prepayment
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-psch:Payment ;
+	rdfs:label "prepayment"@en ;
+	rdfs:comment "QName: NONE:Prepayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:PropertyBuyer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:Buyer ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:isBuyer ;
+			owl:someValuesFrom fibo-loan-tem-ev:PropertyPurchaseAndSale ;
+		]
+		;
+	rdfs:label "property buyer"@en ;
+	rdfs:comment "QName: NONE:PropertyBuyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:PropertyCollateralValuation
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-col:isOf ;
+			owl:allValuesFrom fibo-loan-loan-col:LoanPropertyCollateral ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-loan-loan-pty:AVMProvider ;
+		]
+		;
+	rdfs:label "property collateral valuation"@en ;
+	rdfs:comment "QName: NONE:PropertyCollateralValuation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "A valuation of the collateral Real Property to support the Property collateral Arrangement"@en ;
+	skos:editorialNote "Review archetype in light of non typical relationships. Valuation has some formal, financial and legal standing over and above being an Activity. Hence parties etc. also then relate to the valuation aactivity (see adjacent)."@en ;
+	.
+
+fibo-loan-tem-ev:PropertyLendersValuationTypeSelection
+	a owl:Class ;
+	rdfs:label "property lenders valuation type selection"@en ;
+	rdfs:comment "QName: NONE:PropertyLendersValuationTypeSelection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:PropertyPurchaseAndSale
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-ev:PropertyRelatedActivity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDate ;
+			owl:someValuesFrom fibo-loan-tem-ev:DateOfPurchase ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:resultsIn ;
+			owl:someValuesFrom fibo-loan-tem-ev:PurchasePrice ;
+		]
+		;
+	rdfs:label "property purchase and sale"@en ;
+	rdfs:comment "QName: NONE:PropertyPurchaseAndSale" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "The sale and purchase of real estate."@en ;
+	.
+
+fibo-loan-tem-ev:PropertyRelatedActivity
+	a owl:Class ;
+	rdfs:label "property related activity"@en ;
+	rdfs:comment "QName: NONE:PropertyRelatedActivity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "not sure if this is useful as a common class. Used for grouping of new activity terms around mortgage lending and propery purchase for now"@en ;
+	.
+
+fibo-loan-tem-ev:PropertyValuation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-ev:PropertyRelatedActivity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ev:resultsIn.1 ;
+			owl:someValuesFrom fibo-loan-tem-ev:PropertyValuationHistoricalInformation ;
+		]
+		;
+	rdfs:label "property valuation"@en ;
+	rdfs:comment "QName: NONE:PropertyValuation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "The activity whereby some real estats is valued by some agent, for some purpose (for example, for the purpose of granting or denoying a loan)."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'The activity of valuation of the propetry, which is carried out prior to setting up the loan, gives rise to "Property Valuation" information which is retained through the life of the loan.'@en ;
+	.
+
+fibo-loan-tem-ev:PropertyValuationHistoricalInformation
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-loan-tem-col:isOf ;
+		owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+	] ;
+	rdfs:label "property valuation historical information"@en ;
+	rdfs:comment "QName: NONE:PropertyValuationHistoricalInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "Valuation of the property at some point in time."@en ;
+	.
+
+fibo-loan-tem-ev:PropertyValuer
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-loan-tem-ev:carriesOut ;
+		owl:someValuesFrom fibo-loan-tem-ev:PropertyValuation ;
+	] ;
+	rdfs:label "property valuer"@en ;
+	rdfs:comment "QName: NONE:PropertyValuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "The party which carries out the valluation of the property for the purpose of a mortgage loan. Further notes: Also: See Event State Analysis at Fannie Mae, for core processes, as partof the enterprise data architecture transformation, e.g. ESA for single family and multi family loans."@en ;
+	.
+
+fibo-loan-tem-ev:PurchasePrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-cur:MonetaryPrice ;
+	rdfs:label "purchase price"@en ;
+	rdfs:comment "QName: NONE:PurchasePrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:ValueChangingActivity
+	a owl:Class ;
+	rdfs:label "value changing activity"@en ;
+	rdfs:comment "QName: NONE:ValueChangingActivity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	skos:definition "Some event or activity which changes the value of something. Examples: A value changing event can be for instance (in securities), a declaration of a dividend. This is an event which changes the value of something. CAE that are in FIBIM are value changing events. Changes to principal on any loan is a value changing event."@en ;
+	.
+
+fibo-loan-tem-ev:borrowerCCJudgementDate
+	a owl:ObjectProperty ;
+	rdfs:label "borrower c c judgement date"@en ;
+	rdfs:comment "QName: NONE:borrowerCCJudgementDate" ;
+	rdfs:domain fibo-loan-tem-ev:CountyCourtJudgment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Undefined PoC SDM Notes: Date this CCJ or equivalent was registered against the associated borrower regardless of satisfied or not"@en ;
+	.
+
+fibo-loan-tem-ev:borrowerCCJudgementSatisfaction
+	a owl:DatatypeProperty ;
+	rdfs:label "borrower c c judgement satisfaction"@en ;
+	rdfs:comment "QName: NONE:borrowerCCJudgementSatisfaction" ;
+	rdfs:domain fibo-loan-tem-ev:CountyCourtJudgment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Undefined PoC SDM Notes: Satisfaction codes: 1 = this borrower County Court judgment was satisfied at time of underwriting; 2 = this borrower County Court judgment was unsatisfied at time of underwriting; Required that number of satisfied and unsatisfied CCJ's for a borrower can be determined from this data."@en ;
+	.
+
+fibo-loan-tem-ev:borrowerCCJudgementValueAmount
+	a owl:ObjectProperty ;
+	rdfs:label "borrower c c judgement value amount"@en ;
+	rdfs:comment "QName: NONE:borrowerCCJudgementValueAmount" ;
+	rdfs:domain fibo-loan-tem-ev:CountyCourtJudgment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Undefined PoC SDM Notes: Total value of CCJs or equivalent recorded against the primary borrower that were satisfied / unsatsified (at time of underwriting ) is computed by selecting the satisfaction code value of interest and aggregating against all borrower CC Judgements &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-ev:carriesOut
+	a owl:ObjectProperty ;
+	rdfs:label "carries out"@en ;
+	rdfs:comment "QName: NONE:carriesOut" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyValuer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-loan-tem-ev:PropertyValuation ;
+	.
+
+fibo-loan-tem-ev:courtName
+	a owl:DatatypeProperty ;
+	rdfs:label "court name"@en ;
+	rdfs:comment "QName: NONE:courtName" ;
+	rdfs:domain fibo-loan-tem-ev:CountyCourt ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The formal name of the court."@en ;
+	.
+
+fibo-loan-tem-ev:deliveredBy
+	a owl:ObjectProperty ;
+	rdfs:label "delivered by"@en ;
+	rdfs:comment "QName: NONE:deliveredBy" ;
+	rdfs:domain fibo-loan-tem-ev:CountyCourtJudgment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-loan-tem-ev:CountyCourt ;
+	.
+
+fibo-loan-tem-ev:determines
+	a owl:ObjectProperty ;
+	rdfs:label "determines"@en ;
+	rdfs:comment "QName: NONE:determines" ;
+	rdfs:domain fibo-loan-tem-ev:MortgageLending ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-loan-tem-ltv:OriginalLTV ;
+	.
+
+fibo-loan-tem-ev:isAgainst
+	a owl:ObjectProperty ;
+	rdfs:label "is against"@en ;
+	rdfs:comment "QName: NONE:isAgainst" ;
+	rdfs:domain fibo-loan-tem-ev:LegalProceeding ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-be-le-lp:LegalPerson ;
+	.
+
+fibo-loan-tem-ev:isBuyer
+	a owl:ObjectProperty ;
+	rdfs:label "is buyer"@en ;
+	rdfs:comment "QName: NONE:isBuyer" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyBuyer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-loan-tem-ev:PropertyPurchaseAndSale ;
+	.
+
+fibo-loan-tem-ev:isNot
+	a owl:ObjectProperty ;
+	rdfs:label "is not"@en ;
+	rdfs:comment "QName: NONE:isNot" ;
+	rdfs:domain fibo-loan-tem-ev:NonPayment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-pas-psch:Payment ;
+	.
+
+fibo-loan-tem-ev:isStatusOf
+	a owl:ObjectProperty ;
+	rdfs:label "is status of" ;
+	rdfs:comment "QName: NONE:isStatusOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	.
+
+fibo-loan-tem-ev:loanDefaultProceedingAmount
+	a owl:ObjectProperty ;
+	rdfs:label "loan default proceeding amount"@en ;
+	rdfs:comment "QName: NONE:loanDefaultProceedingAmount" ;
+	rdfs:domain fibo-loan-tem-ev:LoanDefaultProceeding ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Undefined PoC SDM Notes: Default or Foreclosure amount - Total default amount before the application of sale proceeds and recoveries.&nbsp; (AO 146, RR 135) Loan Default Proceeding_cd= (1) Default amount </p> <p> Sale price - Price achieved on sale of property ( AO 147, RR 137 )&nbsp; Loan Default Proceeding_cd= (2) Property Sale </p> <p> Loss on Sale&nbsp;&nbsp; Total loss net of fees, accrued interest etc. after application of sale proceeds (excluding prepayment charge if subordinate to principal recoveries). Show any gain on sale as a negative number (AO 148, RR 138 )&nbsp; Loan Default Proceeding_cd = (3) Loss amount </p> <p> Cumulative Reocveries - ony relevant for cases with losses&nbsp; ( AO 149, RR 139 )&nbsp; Loan Default Proceeding_cd =&nbsp; (4) Recoveries </p> <p> Professional Negligence Recoveries - Any amounts received in settlement or as a result of professional negligence claims against surveyors, solicitors etc. net of any fees / costs ( AO 150, RR 140 )&nbsp; Loan Default Proceeding_cd = (5) Professional Negligence </p><br />"@en ;
+	.
+
+fibo-loan-tem-ev:loanDefaultProceedingType
+	a owl:ObjectProperty ;
+	rdfs:label "loan default proceeding type"@en ;
+	rdfs:comment "QName: NONE:loanDefaultProceedingType" ;
+	rdfs:domain fibo-loan-tem-ev:LoanDefaultProceeding ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-loan-tem-ev:DefaultProceedingTypeSelection ;
+	skos:definition "The type of default proceeding."@en ;
+	.
+
+fibo-loan-tem-ev:propertyAVMConfidenceInterval_cd
+	a owl:DatatypeProperty ;
+	rdfs:label "property a v m confidence interval_cd"@en ;
+	rdfs:comment "QName: NONE:propertyAVMConfidenceInterval_cd" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyCollateralValuation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range xsd:string ;
+	skos:definition "&lt;p&gt; Confidence Interval for original AVM valuation -Confidence interval for original valuation if valuation method is AVM (RR 107 ) &lt;/p&gt; &lt;p&gt; Confidence interval for current AVM valuation - List the AVM supplier's confidence value for the most recent valuation ( RR 113) &lt;/p&gt; &lt;p&gt; Property AVM confidence interval cd ( AO 126 - 127) values to be defined &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-ev:propertyLTV_rt
+	a owl:DatatypeProperty ;
+	rdfs:label "property l t v_rt"@en ;
+	rdfs:comment "QName: NONE:propertyLTV_rt" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyCollateralValuation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "&lt;p&gt; OriginalLTV-Originator’soriginalunderwrittenLoanToValueratio(LTV).For2ndlienloansthisshouldbethe&lt;br /&gt; combinedortotalLTV. ( RR 103 ) &lt;/p&gt; &lt;p&gt; Originator’s current Loan to Value ratio (LTV). For 2nd lien loans this should be the combined or total LTV (RR 109 ) &lt;/p&gt; &lt;p&gt; Both supported as dated instances of a property Collateral valuation avoiding dirty data -Dt from ( AO 124, 125) &lt;/p&gt;&lt;br /&gt;"@en ;
+	.
+
+fibo-loan-tem-ev:propertyLendersValuationType
+	a owl:ObjectProperty ;
+	rdfs:label "property lenders valuation type"@en ;
+	rdfs:comment "QName: NONE:propertyLendersValuationType" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyCollateralValuation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-loan-tem-ev:PropertyLendersValuationTypeSelection ;
+	skos:definition "The type of valuation performed at origination."@en ;
+	.
+
+fibo-loan-tem-ev:propertyLendersValuation_at
+	a owl:DatatypeProperty ;
+	rdfs:label "property lenders valuation_at"@en ;
+	rdfs:comment "QName: NONE:propertyLendersValuation_at" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyCollateralValuation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range xsd:string ;
+	skos:definition "&lt;p&gt; Original Valuation amount - Property value as of date of latest loan advance prior to a securitisation. Valuation amounts should be in the same currency as the loan (field 114) &lt;/p&gt; &lt;p&gt; Current Valuation Amount - Most recent valuation amount (if e.g. at repossession there were multiple valuations, this should reflect the lowest). If no update, leave blank. Valuation amounts should be in the same currency as the loan (field 114) &lt;/p&gt; &lt;p&gt; Property value at time of lastest loan advance - Property value at the time of the last advance. Valuation amounts should be in the same currency as the loan (field 114) &lt;/p&gt; &lt;p&gt; (AO 119 - 121 ) &lt;/p&gt;&lt;br /&gt;"@en ;
+	.
+
+fibo-loan-tem-ev:propertyLendersValuation_dt
+	a owl:ObjectProperty ;
+	rdfs:label "property lenders valuation_dt"@en ;
+	rdfs:comment "QName: NONE:propertyLendersValuation_dt" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyCollateralValuation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "&lt;p&gt; Original valuation date - Date of latest property valuation at time of latest loan advance prior to a securitisation (RR 106) &lt;/p&gt; &lt;p&gt; Current valuation date - The date of most recent valuation ( (RR 112 ) &lt;/p&gt; &lt;p&gt; (AO 124-125) &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-ev:purchaseDate
+	a owl:ObjectProperty ;
+	rdfs:label "purchase date"@en ;
+	rdfs:comment "QName: NONE:purchaseDate" ;
+	rdfs:domain fibo-loan-tem-ev:PurchasePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-loan-tem-ev:resultsIn
+	a owl:ObjectProperty ;
+	rdfs:label "results in"@en ;
+	rdfs:comment "QName: NONE:resultsIn" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyPurchaseAndSale ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-loan-tem-ev:PurchasePrice ;
+	.
+
+fibo-loan-tem-ev:resultsIn.1
+	a owl:ObjectProperty ;
+	rdfs:label "results in"@en ;
+	rdfs:comment "QName: NONE:resultsIn.1" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyValuation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-loan-tem-ev:PropertyValuationHistoricalInformation ;
+	.
+
+fibo-loan-tem-ev:takesPlaceUnder
+	a owl:ObjectProperty ;
+	rdfs:label "takes place under"@en ;
+	rdfs:comment "QName: NONE:takesPlaceUnder" ;
+	rdfs:domain fibo-loan-tem-ev:LegalProceeding ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	.
+
+fibo-loan-tem-ev:valuationDate
+	a owl:ObjectProperty ;
+	rdfs:label "valuation date"@en ;
+	rdfs:comment "QName: NONE:valuationDate" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyValuationHistoricalInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-loan-tem-ev:value
+	a owl:ObjectProperty ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:value" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyValuationHistoricalInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	.
+

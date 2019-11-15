@@ -1,0 +1,176 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/QuantifiedResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arrxx-ins: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> .
+@prefix fibo-fnd-txn-qr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/QuantifiedResources/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/>
+	a owl:Ontology ;
+	rdfs:label "ToolsAndInstruments"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology defines what it means for something to be a tool or an instrument, which I both cases is something defined in terms of its usage to some end. This is the deeper conceptual basis for concepts like capital (money with a purpose; a tool) or financial instruments in the most literal sense of that word (some contract used to achieve some investment objective). 
+		This ontology is intended to be entirely conceptual, providing the disambiguation between concepts that are often conflated in natural language, and as such would almost certainly never be included in an application ontology.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/QuantifiedResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-arrxx-ins:FinancialInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-ins:Instrument ;
+	rdfs:label "financial instrument"@en ;
+	rdfs:comment "QName: NONE:FinancialInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition 'Some financial contract or agreement, described in the context of its use in furthering some investment purpose. Explanatory Note: This is specific to its usage. The term "Financial Instrument" is frequently applied to the contract (as a thing), which might be put to such purpose, rather than to the instrument as it is used as an instrument, which is what is defined by this concept.'@en ;
+	.
+
+fibo-fnd-arrxx-ins:Instrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-ins:PurposiveThing ;
+	rdfs:label "instrument"@en ;
+	rdfs:comment "QName: NONE:Instrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition "Something which is used to further some purpose or to measure some variable in furtherance of some purpose. Explanatory Note: This may include more abstract or even relative or mediating things such as contracts, put to some purpose. For example, financial instruments. It also include physical measurement instruments (flow meters etc.) in industrial plant."@en ;
+	.
+
+fibo-fnd-arrxx-ins:MeasurementInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-ins:Instrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arrxx-ins:hasPurpose ;
+			owl:someValuesFrom fibo-fnd-arrxx-ins:MeasurementPurpose ;
+		]
+		;
+	rdfs:label "measurement instrument"@en ;
+	rdfs:comment "QName: NONE:MeasurementInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition "An instrument whose purpose is to measure some variable, for example in some physical process."@en ;
+	.
+
+fibo-fnd-arrxx-ins:MeasurementPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-ins:Purpose ;
+	rdfs:label "measurement purpose"@en ;
+	rdfs:comment "QName: NONE:MeasurementPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition "The purpose of measuring things."@en ;
+	.
+
+fibo-fnd-arrxx-ins:Purpose
+	a owl:Class ;
+	rdfs:label "purpose"@en ;
+	rdfs:comment "QName: NONE:Purpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition "The context in which some thing is, may be or is planned to be put to some use by someone."@en ;
+	.
+
+fibo-fnd-arrxx-ins:PurposiveAmount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-ins:PurposiveThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arrxx-ins:hasPurpose ;
+			owl:someValuesFrom fibo-fnd-arrxx-ins:Purpose ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arrxx-ins:isApplicationOf ;
+			owl:someValuesFrom fibo-fnd-txn-qr:QuantifiedResource ;
+		]
+		;
+	rdfs:label "purposive amount"@en ;
+	rdfs:comment "QName: NONE:PurposiveAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition "An amount of something defined in terms of its usefulness for some purpose. Scope Note: Includes investment capital (an amount of capital intended or used for investment), and amounts of raw material used or to be used in e.g. manufacture of something."@en ;
+	.
+
+fibo-fnd-arrxx-ins:PurposiveThing
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arrxx-ins:hasPurpose ;
+			owl:someValuesFrom fibo-fnd-arrxx-ins:Purpose ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arrxx-ins:isApplicationOf ;
+			owl:someValuesFrom owl:Thing ;
+		]
+		;
+	rdfs:label "purposive thing"@en ;
+	rdfs:comment "QName: NONE:PurposiveThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition "Something described in terms of its purpose or potential purpose. Editorial Note: That which fulfils this role is generally taken to be some kind of Independent Thing However it is conceivable that the existence of some relative thing, for example an asset, may itself be put to a purpose over and above the role or context already defined for it, and wholly dependent on it being that relative thing and not siply a thing in itself. therefore the identity relationship is modeled with a range of Thing, but is modeled as a separate relationship to that of Relative Thing in order to make this conclusion explicit. This relationship need not be used in operational application ontologies as it adds no new logical assertion."@en ;
+	.
+
+fibo-fnd-arrxx-ins:RawMaterial
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-ins:PurposiveAmount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arrxx-ins:rawMaterialIsApplicationOf ;
+			owl:someValuesFrom fibo-fnd-txn-qr:QuantifiedRawMaterial ;
+		]
+		;
+	rdfs:label "raw material"@en ;
+	rdfs:comment "QName: NONE:RawMaterial" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition "An amount of some material intended to be used for some purpose e.g. in manufacture, refinery. Scope Note: This is out of scope for financial services applications (unless it is needed for various loan purposes). This may be implemented in manufacturing models to define various manufacturing and refinement purposes, but at this level it is more general than any one of those."@en ;
+	.
+
+fibo-fnd-arrxx-ins:Tool
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-ins:PurposiveThing ;
+	rdfs:label "tool"@en ;
+	rdfs:comment "QName: NONE:Tool" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	skos:definition "Some physical object which is put to some purpose."@en ;
+	.
+
+fibo-fnd-arrxx-ins:hasPurpose
+	a owl:ObjectProperty ;
+	rdfs:label "has purpose"@en ;
+	rdfs:comment "QName: NONE:hasPurpose" ;
+	rdfs:domain fibo-fnd-arrxx-ins:PurposiveThing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	rdfs:range fibo-fnd-arrxx-ins:Purpose ;
+	skos:definition "The purpose for which the Purposive Thing is defined; the reason some thing, with some (usually independent) form, is defined as a Purposive Thing. The actual or intended usage to which the thing is put or may be put."@en ;
+	.
+
+fibo-fnd-arrxx-ins:isApplicationOf
+	a owl:ObjectProperty ;
+	rdfs:label "is application of"@en ;
+	rdfs:comment "QName: NONE:isApplicationOf" ;
+	rdfs:domain fibo-fnd-arrxx-ins:PurposiveThing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	rdfs:range owl:Thing ;
+	skos:definition 'The actual form of the Purposive Thing; the thing which is defined according to its purpose and is employed for that purpose. Editorial Note: This would usually be some Independent Thing. However it is conceivable that the existence of some relative thing, For example an asset, may itself be put to a purpose over and above the role or context already defined for it, and wholly dependent on it being that relative thing and not simply a thing in itself. Therefore this identity relationship has a range of Thing, but is modeled as a sub property of "identity" to make this conclusion explicit. This relationship need not be used in operational application ontologies as it adds no new logical assertion.'@en ;
+	.
+
+fibo-fnd-arrxx-ins:rawMaterialIsApplicationOf
+	a owl:ObjectProperty ;
+	rdfs:label "raw material is application of"@en ;
+	rdfs:comment "QName: NONE:rawMaterialIsApplicationOf" ;
+	rdfs:domain fibo-fnd-arrxx-ins:RawMaterial ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> ;
+	rdfs:range fibo-fnd-txn-qr:QuantifiedRawMaterial ;
+	skos:definition "The amount of material which is identified for the purpose, identified as a kind of economic resource."@en ;
+	.
+

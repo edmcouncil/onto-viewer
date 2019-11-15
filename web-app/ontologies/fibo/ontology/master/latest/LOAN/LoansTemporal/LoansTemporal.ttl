@@ -1,0 +1,205 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-loan-tem-tem: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/>
+	a owl:Ontology ;
+	rdfs:label "LoansTemporal"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Loan concepts with a date or time component. For example, amounts outstanding, loan balances and interest rates at a given point in time." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansTemporal/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+xsd:string
+	a rdfs:Datatype ;
+	.
+
+fibo-loan-loan-loan:LoanDrawdown
+	a owl:Class ;
+	.
+
+fibo-loan-tem-tem:LoanBalance
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:DatedBalance ;
+	rdfs:label "loan balance"@en ;
+	rdfs:comment "QName: NONE:LoanBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	skos:definition "The outstanding balance on a loan at a particular point in time."@en ;
+	skos:editorialNote 'This is the latest outstanding principal balance as at the date for which this is indicated. This also has a present value and a time series of possible past values. The time at which the amount is indicated forms part of the concept "Dated monetary Amount" PoC SDM Term Notes: Balance includes amount outstanding and fees In particular may record the balance outstanding at the time this loan was incorporated into some loan pool So each loan may have a number of balances associated with it recorded at different times. The loan may have been moved into and out of one or more pools. Some of the recorded ballences may be associated with the exact time and balance while this loan enters or exists a particulat pool. Other loan balances may be at different times not associated with a pool entry or exit event. Conesnsus:Review'@en ;
+	.
+
+fibo-loan-tem-tem:LoanBalanceDetermination
+	a owl:Class ;
+	rdfs:label "loan balance determination"@en ;
+	rdfs:comment "QName: NONE:LoanBalanceDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	.
+
+fibo-loan-tem-tem:LoanBalanceRecord
+	a owl:Class ;
+	rdfs:label "loan balance record"@en ;
+	rdfs:comment "QName: NONE:LoanBalanceRecord" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	.
+
+fibo-loan-tem-tem:LoanDeterminer
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-loan-tem-tem:determines ;
+		owl:someValuesFrom fibo-loan-tem-tem:LoanRateDetermination ;
+	] ;
+	rdfs:label "loan determiner"@en ;
+	rdfs:comment "QName: NONE:LoanDeterminer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	.
+
+fibo-loan-tem-tem:LoanInterestRate
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-loan-tem-tem:isAbout ;
+		owl:someValuesFrom fibo-loan-loan-loan:LoanDrawdown ;
+	] ;
+	rdfs:label "loan interest rate"@en ;
+	rdfs:comment "QName: NONE:LoanInterestRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	skos:definition 'This is also a timed variable with a present value and a time series of past values. What is it? A record of the rates that may have been charged in a variable rate loan. Therefore, this variable is the "Interest Rate" of the loan. It is a "Dated Parameter" - dates are taken care of in the upper mode of Variable Parameters.'@en ;
+	.
+
+fibo-loan-tem-tem:LoanRateDetermination
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-loan-tem-tem:givesRiseTo ;
+		owl:someValuesFrom fibo-loan-tem-tem:LoanInterestRate ;
+	] ;
+	rdfs:label "loan rate determination"@en ;
+	rdfs:comment "QName: NONE:LoanRateDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	.
+
+fibo-loan-tem-tem:determines
+	a owl:ObjectProperty ;
+	rdfs:label "determines"@en ;
+	rdfs:comment "QName: NONE:determines" ;
+	rdfs:domain fibo-loan-tem-tem:LoanDeterminer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-loan-tem-tem:LoanRateDetermination ;
+	.
+
+fibo-loan-tem-tem:givesRiseTo
+	a owl:ObjectProperty ;
+	rdfs:label "gives rise to"@en ;
+	rdfs:comment "QName: NONE:givesRiseTo" ;
+	rdfs:domain fibo-loan-tem-tem:LoanRateDetermination ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-loan-tem-tem:LoanInterestRate ;
+	.
+
+fibo-loan-tem-tem:hasBalance
+	a owl:ObjectProperty ;
+	rdfs:label "has balance"@en ;
+	rdfs:comment "QName: NONE:hasBalance" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-loan-tem-tem:LoanBalance ;
+	.
+
+fibo-loan-tem-tem:hasRateRecord
+	a owl:ObjectProperty ;
+	rdfs:label "has rate record"@en ;
+	rdfs:comment "QName: NONE:hasRateRecord" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-loan-tem-tem:LoanInterestRate ;
+	.
+
+fibo-loan-tem-tem:isAbout
+	a owl:ObjectProperty ;
+	rdfs:label "is about"@en ;
+	rdfs:comment "QName: NONE:isAbout" ;
+	rdfs:domain fibo-loan-tem-tem:LoanInterestRate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-loan-loan-loan:LoanDrawdown ;
+	owl:inverseOf fibo-loan-tem-tem:hasRateRecord ;
+	.
+
+fibo-loan-tem-tem:loanBalance
+	a owl:ObjectProperty ;
+	rdfs:label "loan balance"@en ;
+	rdfs:comment "QName: NONE:loanBalance" ;
+	rdfs:domain fibo-loan-tem-tem:LoanBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Current Balance of the loan at the stated date."@en ;
+	.
+
+fibo-loan-tem-tem:loanBalanceAsAt
+	a owl:ObjectProperty ;
+	rdfs:label "loan balance as at"@en ;
+	rdfs:comment "QName: NONE:loanBalanceAsAt" ;
+	rdfs:domain fibo-loan-tem-tem:LoanBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Date for which current loan balance is defined. Term reduntant since Dated Monetary Amount is a dated value and so has a date."@en ;
+	.
+
+fibo-loan-tem-tem:loanInterestMarginRate
+	a owl:ObjectProperty ;
+	rdfs:label "loan interest margin rate"@en ;
+	rdfs:comment "QName: NONE:loanInterestMarginRate" ;
+	rdfs:domain fibo-loan-tem-tem:LoanInterestRate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Remove it. But add a fact about time history of amounts on those loans where the interest amount can be change by the lender. Undefined PoC SDM Notes: Currentinterestratemargin(forfixedrateloansthisisthesameasthecurrentinterestrate,forfloatingrateloans&lt;br /&gt; thisisthemarginover(orunderifinputasanegative)theindexrate. &lt;/p&gt; &lt;p&gt; allows derivation of (93) Date interest rate next changes (e.g. discount margin changes, fixed period ends, loan re-fixed etc. this is not the next LIBOR reset date) &lt;/p&gt; &lt;p&gt; using : (Loan Rate.)Loan Interest Margin_rt where (loan Rate.)LoanRate_dt &gt; today AND &lt; any other date in the set &lt;/p&gt; &lt;p&gt; allows derivation of (94) The margin for the loan at the final step date &lt;/p&gt; &lt;p&gt; using: (Loan Rate.)Loan Interest Margin_rt where where (Loan Rate.)LoanRate_dt &gt; any other date in the set &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-tem:loanInterestRate
+	a owl:ObjectProperty ;
+	rdfs:label "loan interest rate"@en ;
+	rdfs:comment "QName: NONE:loanInterestRate" ;
+	rdfs:domain fibo-loan-tem-tem:LoanInterestRate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Undefined PoC SDM Notes: Requirement to derive&nbsp; (85) Current interest rate (%) is satisfied by: ( Loan Rate.) Loan Intrest_rt where ; (Loan Rate. )LoanRate_dt >= today AND > any other date in the set Requirement to derive (92) &nbsp;Next Interest Rate satisfied by: ( Loan Rate.) Loan Intrest_rt where&nbsp; (Loan Rate. )LoanRate_dt ; > today AND < any other date in the set"@en ;
+	.
+
+fibo-loan-tem-tem:poolMembershipSelection
+	a owl:DatatypeProperty ;
+	rdfs:label "pool membership selection"@en ;
+	rdfs:comment "QName: NONE:poolMembershipSelection" ;
+	rdfs:domain fibo-loan-tem-tem:LoanBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition 'Member loan Balance code indicates whether this is a "plain" balance (1) with no pool membership change associated with it NOTE: THis is an unreviewed and unchanged Data Model term. or alternatively whether it is a balanceassociated with this mortgage (2) entering or (3) leaving the mortgage pool, or whether (4) this is a balance of a mortgage not associated with any pool Will not be in Semantic Model. Would be separate classes with a time line component.'@en ;
+	.
+

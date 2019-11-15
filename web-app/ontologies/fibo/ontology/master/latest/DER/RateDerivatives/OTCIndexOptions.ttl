@@ -1,0 +1,40 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/OTCIndexOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/OTCIndexOptions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-rat-indo: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/OTCIndexOptions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/OTCIndexOptions/>
+	a owl:Ontology ;
+	rdfs:label "OTCIndexOptions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Options whose underlying is an index. IF exercised, settlement is via cash payment." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/OTCIndexOptions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-rat-indo:OTCIndexOption
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OTCOptionContract ;
+	rdfs:label "o t c index option"@en ;
+	rdfs:comment "QName: NONE:OTCIndexOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/OTCIndexOptions/> ;
+	skos:definition "An option whose underlying security is an index. If exercised, settlement is made by cash payment, since physical delivery is not possible."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Investors trading index options are essentially betting on the overall movement of the stock market as represented by a basket of stocks."@en ;
+	.
+

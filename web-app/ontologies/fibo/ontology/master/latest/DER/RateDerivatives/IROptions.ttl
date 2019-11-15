@@ -1,0 +1,225 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/IROptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/IROptions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-rat-iro: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-ln-ln: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/>
+	a owl:Ontology ;
+	rdfs:label "IROptions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Options on interest rates. Incudes cap and floor determinations. Also includes the notion of an option strip, which is where each time the option expires it is carried forward to another similar or identical option contract." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/IROptions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-rat-iro:CapDetermination
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-rat-iro:CapOrFloorDetermination ;
+	rdfs:label "cap determination"@en ;
+	rdfs:comment "QName: NONE:CapDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	skos:definition 'The Strike rate is to be subtracted from the Observable rate on the reset date, to determine the settlement amount. This is incorrect. Cap applies to borrower. the Cap is the max amount I will pay to borrow. I take a capped rate. I am the buyer of the option. The market rate this time is higher than the capped rate. You as the seller of the option will pay me thedifference bwteen the capped rate and the market reate. If the market rate is lower than the capped rate no one pays anything because I will not exercise my right to that capped rate. So no money changes hands at settlement. Then: capped Loan: What I would be paying would be interest at the market rate if the market rate is lower, but if the market rate is higher then I would pay interest at the capped rate. This is the difference between a cap as a loan or as a cash settled thing. These represent different kinds of contract: Non loan one: Cap talks of settlement being difference between the market rate and the strike rate. This is cash settled. Name: "Cap" Loan one: Cap talks about a maximum interest rate payable by the holder, so the holder pays an amount each time, up to a maximum which is the Cap rate. Name: "Capped Loan" What manner of thin is this? A loan. Its ancestors are not OTC derivatives contracts thet are Loan.'@en ;
+	.
+
+fibo-der-rat-iro:CapLoan
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-ln-ln:LoanContract ;
+	rdfs:label "cap loan"@en ;
+	rdfs:comment "QName: NONE:CapLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	.
+
+fibo-der-rat-iro:CapOrFloorDetermination
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "cap or floor determination"@en ;
+	rdfs:comment "QName: NONE:CapOrFloorDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	skos:definition "Whether a given thing is treated as a Cap (something goes no higher than this amount) or as a Floor (something goes no lower than this)."@en ;
+	.
+
+fibo-der-rat-iro:FloorDetermination
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-rat-iro:CapOrFloorDetermination ;
+	rdfs:label "floor determination"@en ;
+	rdfs:comment "QName: NONE:FloorDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	skos:definition "The Observable rate is to be subtracted from the Strike rate on the reset date, to determine the settlement amount. Floor: I am an investor and I am specifying the minimum return I will get for that investment."@en ;
+	.
+
+fibo-der-rat-iro:FloorLoan
+	a owl:Class ;
+	rdfs:label "floor loan"@en ;
+	rdfs:comment "QName: NONE:FloorLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	.
+
+fibo-der-rat-iro:InterestRateOptionStrikeTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionExerciseTimeTermsSet ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:includesSpecificationTerm ;
+			owl:someValuesFrom fibo-der-der-opt:PercentageStrikePriceSpecification ;
+		]
+		;
+	rdfs:label "interest rate option strike terms set"@en ;
+	rdfs:comment "QName: NONE:InterestRateOptionStrikeTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	skos:definition "Terms for the exercise of the Interest Rate Option."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Also terms for the exercise of each Caplet or Floorlet in an Option Strip. These are defined in terms fo a percentage rate which is the Strike rate."@en ;
+	.
+
+fibo-der-rat-iro:OTCInterestRateCapOptionContract
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-rat-iro:OptionStripContract ;
+	rdfs:label "o t c interest rate cap option contract"@en ;
+	rdfs:comment "QName: NONE:OTCInterestRateCapOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	owl:disjointWith fibo-der-rat-iro:OTCInterestRateFloorOptionContract ;
+	skos:definition "A strip of options in which interest payable in each period is either the Observable (Underlying) rate or the Strike rate, at the holder's discretion, and in which the Strike rate represents a rate above which the holder can elect not to pay."@en ;
+	skos:editorialNote "Definition and editorial note against the property 'strike effect' for this class (property is now a restriction): The Strike rate is to be subtracted from the Observable rate on the reset date, to determine the settlement amount. REVIEW SESSION NOTES: This is incorrect. Cap applies to borrower. the Cap is the max amount I will pay to borrow. I take a capped rate. I am the buyer of the option. The market rate this time is higher than the capped rate. You as the seller of the option will pay me thedifference bwteen the capped rate and the market reate. If the market rate is lower than the capped rate no one pays anything because I will not exercise my right to that capped rate. So no money changes hands at settlement. Then: capped Loan: What I would be paying would be interest at the market rate if the market rate is lower, but if the market rate is higher then I would pay interest at the capped rate. This is the difference between a cap as a loan or as a cash settled thing. These represent different kinds of contract: Non loan one: Cap talks of settlement being difference between the market rate and the strike rate. This is cash settled. Name: \"Cap\" Loan one: Cap talks about a maximum interest rate payable by the holder, so the holder pays an amount each time, up to a maximum which is the Cap rate. Name: \"Capped Loan\" What manner of thin is this? A loan. Its ancestors are not OTC derivatives contracts thet are Loan."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The interest in each period is effectively capped by the Strike rate. That is, the rate of interest may not go above the Strike rate because the Holder is expected to exercise the option to take the Strike as the rate of interest instead."@en ;
+	.
+
+fibo-der-rat-iro:OTCInterestRateFloorOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rat-iro:OptionStripContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-rat-iro:hasStrikeEffect ;
+			owl:allValuesFrom fibo-der-rat-iro:FloorDetermination ;
+		]
+		;
+	rdfs:label "o t c interest rate floor option contract"@en ;
+	rdfs:comment "QName: NONE:OTCInterestRateFloorOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	skos:editorialNote "Definition and editorial note against the property 'strike effect' for this class (property is now a restriction): The Observable rate is to be subtracted from the Strike rate on the reset date, to determine the settlement amount. Floor: I am an investor and I am specifying the minimum return I will get for that investment."@en ;
+	.
+
+fibo-der-rat-iro:OTCInterestRateOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OTCOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasStrikeTerms ;
+			owl:someValuesFrom fibo-der-rat-iro:InterestRateOptionStrikeTermsSet ;
+		]
+		;
+	rdfs:label "o t c interest rate option"@en ;
+	rdfs:comment "QName: NONE:OTCInterestRateOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	skos:definition "An option that tracks the cap and floor of an underlying interest rate."@en ;
+	skos:editorialNote "No reason not to be a Cap or a floor. For example a Bond Option which also controls interest rate but it not referred to as an interest rate option (see Bond Options section). Also some IR Futures options (exchange traded) that are not. Also Swaption is a single option on a swap. Origin: SME Review comment during exchange traded options reviews: There are instruments that track the cap and floor of an underlying LIBOR, TIBOR rate. These are options. Term Origin; SME Review"@en ;
+	.
+
+fibo-der-rat-iro:OptionStripContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-rat-iro:hasResetSchedule ;
+			owl:someValuesFrom fibo-der-rat-iro:OptionStripResetSchedule ;
+		]
+		;
+	rdfs:label "option strip contract"@en ;
+	rdfs:comment "QName: NONE:OptionStripContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	skos:definition "A strip or sequential set of options with periodic reset dates, such that each period between resets behaves like an individual option (known as a Caplet or Floorlet)."@en ;
+	skos:editorialNote "The defining fact is that it is a set of sequential options. So in principal this is a strip of any kind of option. Can you strip forwards? In principal, but usually you would have a Commodity Swap which would be a strip of Forwards. Other strips? Don't always buy a string of caplets and floorlets but buy an individual cap or floor. for IR Options These are always Caps or Floors, that is the option settlement takes the form of the difference between the Strike rate and the designated underlying (observable) rate on the stated dates. Review notes: caps and floors are always strips, but there are strips for other assets as well. SO: There are strips besides Options; There are Option Strips besides IR (Cap and Floor) ones. See eg. in France where you may have a strip of options where the strike is set at each rollover. Details to come by email. In this case it would be an asset option, specifically Equity."@en ;
+	.
+
+fibo-der-rat-iro:OptionStripResetSchedule
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:Schedule ;
+	rdfs:label "option strip reset schedule"@en ;
+	rdfs:comment "QName: NONE:OptionStripResetSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	skos:definition "Schedule of dates on which the Option Strip rate is determined and reset."@en ;
+	.
+
+fibo-der-rat-iro:exerciseDateOffset
+	a owl:ObjectProperty ;
+	rdfs:label "exercise date offset"@en ;
+	rdfs:comment "QName: NONE:exerciseDateOffset" ;
+	rdfs:domain fibo-der-rat-iro:OptionStripContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "The period in days between the Reset Date and the date on which the Option may be exercised."@en ;
+	.
+
+fibo-der-rat-iro:hasResetSchedule
+	a owl:ObjectProperty ;
+	rdfs:label "has reset schedule"@en ;
+	rdfs:comment "QName: NONE:hasResetSchedule" ;
+	rdfs:domain fibo-der-rat-iro:OptionStripContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	rdfs:range fibo-der-rat-iro:OptionStripResetSchedule ;
+	.
+
+fibo-der-rat-iro:hasStrikeEffect
+	a owl:ObjectProperty ;
+	rdfs:label "has strike effect"@en ;
+	rdfs:comment "QName: NONE:hasStrikeEffect" ;
+	rdfs:domain fibo-der-rat-iro:OptionStripContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	rdfs:range fibo-der-rat-iro:CapOrFloorDetermination ;
+	skos:definition "Whether the Strike rate is to be subtracted from the Observable rate on the reset date, or whether the Observable rate is to be subtracted from the Strike rate, to determine the settlement amount."@en ;
+	.
+
+fibo-der-rat-iro:interestAccrualDateOffset
+	a owl:ObjectProperty ;
+	rdfs:label "interest accrual date offset"@en ;
+	rdfs:comment "QName: NONE:interestAccrualDateOffset" ;
+	rdfs:domain fibo-der-rat-iro:OptionStripContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "The period in days between each Reset Date and the commencement of accrual of interest for the next period."@en ;
+	.
+
+fibo-der-rat-iro:settlementDateOffset
+	a owl:ObjectProperty ;
+	rdfs:label "settlement date offset"@en ;
+	rdfs:comment "QName: NONE:settlementDateOffset" ;
+	rdfs:domain fibo-der-rat-iro:OptionStripContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "The period in days between each Reset Date and the corresponding Settlement Date."@en ;
+	.
+

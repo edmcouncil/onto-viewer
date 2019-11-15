@@ -1,0 +1,558 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-txn-ecr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-md-dbtx-py: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> .
+@prefix fibo-md-temx-ins: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/>
+	a owl:Ontology ;
+	rdfs:label "TemporalConcepts"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This is the core ontology for temporally sensitive terms and provides the basic definitions that are extended in other ontologies specific to securities, types of security and so on. These concepts include basic prices, yields, volatilities, spreads and so on, as well as times percentages and amounts.
+		Note that this is a highly conceptual foundational ontology of these concepts, as it distinguishes between for example the notions of price and the ways these are specified. These concepts should be reviewed to make reference to the newer Values ontology and may be further simplified for application ontologies.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-temx-tem:CurrentMonetaryAmount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:CurrentValue ,
+		fibo-md-temx-tem:TimedMonetaryAmount
+		;
+	rdfs:label "current monetary amount"@en ;
+	rdfs:comment "QName: NONE:CurrentMonetaryAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "Monetary amount at the present time."@en ;
+	.
+
+fibo-md-temx-tem:CurveConvexity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:TimedParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-ind-ind-ind:MarketSpread ;
+		]
+		;
+	rdfs:label "curve convexity"@en ;
+	rdfs:comment "QName: NONE:CurveConvexity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The convexity of the curve between any two time-variant parameters."@en ;
+	.
+
+fibo-md-temx-tem:DatedDurationSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:TimedDurationSpecification ;
+	rdfs:label "dated duration specification"@en ;
+	rdfs:comment "QName: NONE:DatedDurationSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:DatedMonetaryAmount
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:TimedMonetaryAmount ;
+	rdfs:label "dated monetary amount"@en ;
+	rdfs:comment "QName: NONE:DatedMonetaryAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:DatedPastValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:PastValue ;
+	rdfs:label "dated past value"@en ;
+	rdfs:comment "QName: NONE:DatedPastValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "A value at a given time and date. The value of a dated parameter, at a stated point in the past, present or future."@en ;
+	.
+
+fibo-md-temx-tem:DatedPercentage
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:TimedPercentage ;
+	rdfs:label "dated percentage"@en ;
+	rdfs:comment "QName: NONE:DatedPercentage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:DebtMarginSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtPriceSpread ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-tem:refersTo ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtSecurityBidPrice ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-tem:refersTo.1 ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtSecurityOfferPrice ;
+		]
+		;
+	rdfs:label "debt margin spread"@en ;
+	rdfs:comment "QName: NONE:DebtMarginSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The spread between a Bid Price and an Offer Price."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the spread between the two prices, in whichever way those are specified. So for example a margin spread may be the margin between two prices each specified as a yield spread or in percentage terms."@en ;
+	.
+
+fibo-md-temx-tem:EndOfDayPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:SecurityPrice ;
+	rdfs:label "end of day price"@en ;
+	rdfs:comment "QName: NONE:EndOfDayPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:IntraDayPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:SecurityPrice ;
+	rdfs:label "intra day price"@en ;
+	rdfs:comment "QName: NONE:IntraDayPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:PriceBarterSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:PriceExchangeSpecification ;
+	rdfs:label "price barter specification"@en ;
+	rdfs:comment "QName: NONE:PriceBarterSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of the price of some item in terms of the number of some other (non currency) items of value that may exchanged for some quantity of the item so prices."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Note that in this case it is not necessarily the case that the item so priced is priced against one unit of that item; rather, the barter specification would most generally be a specification of the exchange of a number of the priced items for a number of the other item."@en ;
+	.
+
+fibo-md-temx-tem:PriceExchangeSpecification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:PriceSpecification ,
+		fibo-fnd-math-math:TimedParameter ,
+		fibo-fnd-utl-alx:RatioValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-tem:denominatorRefersTo ;
+			owl:someValuesFrom fibo-fnd-txn-ecr:EconomicResource ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-tem:numeratorRefersTo ;
+			owl:someValuesFrom fibo-fnd-txn-ecr:EconomicResource ;
+		]
+		;
+	rdfs:label "price exchange specification"@en ;
+	rdfs:comment "QName: NONE:PriceExchangeSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of a price in terms of the exchange of some quantity of some item of value in return for some quantity of the item so priced. That is, a simple price or exchange ratio which specifies the amount of an asset that will be exchanged for another asset;"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Prices that fall into this category include: 1. Exchange Rates the amount of one currency that can be exchanged for a unit of another currency 2. Commodity Price the amount of a specific Commodity that can be exchanged for a unit of a currency 3. Security price per Hundred where - albeit not explicit - the numerator asset is today’s Currency and the denominator Asset is future Currency (face Value). Notes Origin: NAB"@en ;
+	.
+
+fibo-md-temx-tem:PriceInterpolationSpecification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-tem:PriceParameterSpecification ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:interpolatedBetween ;
+			owl:onClass fibo-md-temx-ins:TradedSecurityPublishedPrice ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "price interpolation specification"@en ;
+	rdfs:comment "QName: NONE:PriceInterpolationSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "A price which is an interpolation between two publicly available prices fo rths instrument."@en ;
+	skos:editorialNote "Establish at review whether these are always interpolations between two prices of the instrument itself, or for example an interpolation between a price of the instrument and the price of something comparable. If the latter exists, then there are two kinds of interpolation specifications for price. The term currently modeled is the interpolation between two prices of the instrument so priced."@en ;
+	.
+
+fibo-md-temx-tem:PriceModelSpecification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-tem:PriceParameterSpecification ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-tem:uses ;
+			owl:someValuesFrom fibo-md-temx-tem:PricingModel ;
+		]
+		;
+	rdfs:label "price model specification"@en ;
+	rdfs:comment "QName: NONE:PriceModelSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of a price using a model."@en ;
+	.
+
+fibo-md-temx-tem:PriceParameterSpecification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:PriceSpecification ,
+		fibo-fnd-math-math:FormulaArgument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-tem:specifiesUseOf ;
+			owl:someValuesFrom fibo-fnd-math-math:TimedParameter ;
+		]
+		;
+	rdfs:label "price parameter specification"@en ;
+	rdfs:comment "QName: NONE:PriceParameterSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of a price as a quote of the primary parameter passed into an algorithm used to calculate the Present Value of the relevant Asset."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Two significant examples of this pricing method are 1. Yields a yield is expressed as the annualized interest Rate that an investor requires for an investment. In the case of a loan the terms are set up so that the interest rate (coupon) equals that required yield and therefore the present value is equal to the loan principal. For a security, however the coupon rate is already determined so the required yield is applied to the projected cash flows in order to calculate a present value ( the price an investor is prepared to pay for the specified cash flows) Typically the required yield for a debt security is the yield to maturity 2. Volatilities in reality a volatility (used to calculate the fair value of an option) is a measure of the variability of the price of the transaction over which the beneficiary of the option has control. This is the primary parameter passed into an option valuation (eg Black-Scholes, Binomial) Notes Origin: NAB"@en ;
+	.
+
+fibo-md-temx-tem:PriceRateSpreadSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:PriceSpreadSpecification ;
+	rdfs:label "price rate spread specification"@en ;
+	rdfs:comment "QName: NONE:PriceRateSpreadSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of a price in terms of the difference between that price as a percentage, and some publicly available rate at that same point in time, such as the interest rate on a Treasury Note or an inter-bank rate (IBOR)."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the different between two rates."@en ;
+	.
+
+fibo-md-temx-tem:PriceRatioSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:PriceExchangeSpecification ;
+	rdfs:label "price ratio specification"@en ;
+	rdfs:comment "QName: NONE:PriceRatioSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of a price in terms of some ratio to the face value of the item, expressed as a percentage. Security price per Hundred."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the default in debt pricing: debt instruments are commonly priced in percentage terms, the price being the percentage of the face value of the security. Debt prices that are specified and distributed in other ways, can be calculated back to this specification. Effectively the numerator asset is today’s Currency and the denominator Asset is future Currency (face Value)."@en ;
+	.
+
+fibo-md-temx-tem:PriceSpreadSpecification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-tem:PriceParameterSpecification ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-tem:specifiesUseOf ;
+			owl:someValuesFrom fibo-ind-ind-ind:MarketSpread ;
+		]
+		;
+	rdfs:label "price spread specification"@en ;
+	rdfs:comment "QName: NONE:PriceSpreadSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of a price in terms of the difference between that price and some other paramater at that same point in time."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is a class of price specifications which are specifications by way of spread, including spread between two yields, spread between two prices. The latter is relevant in Fx and Commodities for example."@en ;
+	.
+
+fibo-md-temx-tem:PriceValue
+	a owl:Class ;
+	rdfs:label "price value"@en ;
+	rdfs:comment "QName: NONE:PriceValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "Value given to a price. FIBIM"@en ;
+	.
+
+fibo-md-temx-tem:PriceVolatilitySpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:PriceParameterSpecification ;
+	rdfs:label "price volatility specification"@en ;
+	rdfs:comment "QName: NONE:PriceVolatilitySpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of an option price in terms of its volatility, that being a measure of the variability of the price of the transaction over which the beneficiary of the option has control."@en ;
+	fibo-fnd-utl-av:explanatoryNote "In reality a volatility (used to calculate the fair value of an option) is a measure of the variability of the price of the transaction over which the beneficiary of the option has control. This is the primary parameter passed into an option valuation (eg Black-Scholes, Binomial) Notes origin:NAB"@en ;
+	.
+
+fibo-md-temx-tem:PriceYieldSpreadSpecification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-tem:PriceSpreadSpecification ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:determinedRelativeTo ;
+			owl:someValuesFrom fibo-ind-ind-ind:MarketRate ;
+		]
+		;
+	rdfs:label "price yield spread specification"@en ;
+	rdfs:comment "QName: NONE:PriceYieldSpreadSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of a price in terms of the difference between the yield that an investor requires for an investment and the published yield on some reference instrument at that same point in time, such as a Treasury Note."@en ;
+	fibo-fnd-utl-av:explanatoryNote "In Debt pricing, Spreads are used because it's easier to quote things in a stable way, and it reflects the relative value of the thing. This is a spread of yields between the instrument so priced and the reference instrument. This spread is the mechanism by which the price is determined in yield terms, as the annualised interest rate that a investor requires for an investment. A yield is expressed as the annualised interest Rate that a investor requires for an investment. In the case of a loan the terms are set up so that the interest rate (coupon) equals that required yield and therefore the present value is equal to the loan principal. For a security, however the coupon rate is already determined so the required yield is applied to the projected cash flows in order to calculate a present value ( the price an investor is prepared to pay for the specified cash flows) Typically the required yield for a debt security is the yield to maturity. Note that this may be a discount or premium. Using the Spread lets you calculat e a yield from another observed yield as follows: Yield 1 = risk free yield Spread is to Yield 2 which is the instrument you are pricing. Earlier notes from Strucured finance review of prices quoted in relative terms: The price quoted in reference to an index e.g. LIBOR+50bp i.e. the yield. (the rate which is currently LIBOR)+50 is the price, and 50bp is the spread. e.g. Price:101% Yield = Benchmark + spread Price of 101% can be expressed as LIBOR+50 or Treasury+20 so these are separate ways of expressing the same thing. The one thing which is the price is expressed in these different ways. note also that unlike equities there's not a range of different price results from this. Spread = analytic. Bond has Price + yield. then compared to today's 90 day treasury value it's Spread is X, compared with (1 month) LIBOR its spread is Y and so on. Notes origin:NAB and SMER"@en ;
+	.
+
+fibo-md-temx-tem:PricingModel
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalModel ;
+	rdfs:label "pricing model"@en ;
+	rdfs:comment "QName: NONE:PricingModel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The model used in the Price Model Specification."@en ;
+	skos:scopeNote "It is beyond the capacity of the Semantic Model to model the method itself in detail. Key facts about this method may be modeled."@en ;
+	.
+
+fibo-md-temx-tem:StatusCodeValue
+	a owl:Class ;
+	rdfs:label "status code value"@en ;
+	rdfs:comment "QName: NONE:StatusCodeValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The value of the status of something that is set in terms of a list of selectable values taken from a list, which may take different values from that list at different times."@en ;
+	.
+
+fibo-md-temx-tem:TimedDurationSpecification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:Duration ,
+		fibo-fnd-math-math:TimedValue
+		;
+	rdfs:label "timed duration specification"@en ;
+	rdfs:comment "QName: NONE:TimedDurationSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "A period of time, determined at some point in time."@en ;
+	.
+
+fibo-md-temx-tem:TimedMonetaryAmount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:MonetaryAmount ,
+		fibo-fnd-math-math:TimedValue
+		;
+	rdfs:label "timed monetary amount"@en ;
+	rdfs:comment "QName: NONE:TimedMonetaryAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:TimedPercentage
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:TimedValue ;
+	rdfs:label "timed percentage"@en ;
+	rdfs:comment "QName: NONE:TimedPercentage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:UnitPriceMonetarySpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:PriceExchangeSpecification ;
+	rdfs:label "unit price monetary specification"@en ;
+	rdfs:comment "QName: NONE:UnitPriceMonetarySpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	skos:definition "The specification of a price in terms of some monetary amount, that is a number and a currency unit, in exchange for one unit if the item so priced."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is the most common kind of price specification, and specifies that a given thing costs a given number of Dollars or other currency units for one of the item or for some other well defined denimination of the unit (e.g. price per hundred). This is also the Fx rate for one unit of a given currency, being effectively the "price" of that currency in the specified currency.'@en ;
+	.
+
+fibo-md-temx-tem:amount
+	a owl:DatatypeProperty ;
+	rdfs:label "amount"@en ;
+	rdfs:comment "QName: NONE:amount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:currency
+	a owl:ObjectProperty ;
+	rdfs:label "currency"@en ;
+	rdfs:comment "QName: NONE:currency" ;
+	rdfs:domain fibo-md-temx-tem:TimedMonetaryAmount ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	.
+
+fibo-md-temx-tem:denominator
+	a owl:ObjectProperty ;
+	rdfs:label "denominator"@en ;
+	rdfs:comment "QName: NONE:denominator" ;
+	rdfs:domain fibo-md-temx-tem:PriceRatioSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	.
+
+fibo-md-temx-tem:denominator.1
+	a owl:DatatypeProperty ;
+	rdfs:label "denominator"@en ;
+	rdfs:comment "QName: NONE:denominator.1" ;
+	rdfs:domain fibo-md-temx-tem:UnitPriceMonetarySpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range xsd:integer ;
+	.
+
+fibo-md-temx-tem:denominatorRefersTo
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:isParameterOfReferenceEntity ;
+	rdfs:label "denominator refers to"@en ;
+	rdfs:comment "QName: NONE:denominatorRefersTo" ;
+	rdfs:domain fibo-md-temx-tem:PriceExchangeSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-fnd-txn-ecr:EconomicResource ;
+	.
+
+fibo-md-temx-tem:isBetween
+	a owl:ObjectProperty ;
+	rdfs:label "is between"@en ;
+	rdfs:comment "QName: NONE:isBetween" ;
+	rdfs:domain fibo-md-temx-ins:YieldSpread ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-md-temx-ins:Yield ;
+	.
+
+fibo-md-temx-tem:modelDescription
+	a owl:DatatypeProperty ;
+	rdfs:label "model description"@en ;
+	rdfs:comment "QName: NONE:modelDescription" ;
+	rdfs:domain fibo-md-temx-tem:PricingModel ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range xsd:string ;
+	skos:definition "A textual description and narrative of the model."@en ;
+	.
+
+fibo-md-temx-tem:numerator
+	a owl:ObjectProperty ;
+	rdfs:label "numerator"@en ;
+	rdfs:comment "QName: NONE:numerator" ;
+	rdfs:domain fibo-md-temx-tem:PriceRatioSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The value of the Price, stated as a percentage, at a given point in time."@en ;
+	.
+
+fibo-md-temx-tem:numeratorQuantity.1
+	a owl:ObjectProperty ;
+	rdfs:label "numerator quantity"@en ;
+	rdfs:comment "QName: NONE:numeratorQuantity.1" ;
+	rdfs:domain fibo-md-temx-tem:UnitPriceMonetarySpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-md-temx-tem:TimedMonetaryAmount ;
+	skos:definition "The value of the price, stated as a monetary amount at a given point in time."@en ;
+	.
+
+fibo-md-temx-tem:numeratorRefersTo
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:isParameterOfReferenceEntity ;
+	rdfs:label "numerator refers to"@en ;
+	rdfs:comment "QName: NONE:numeratorRefersTo" ;
+	rdfs:domain fibo-md-temx-tem:PriceExchangeSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-fnd-txn-ecr:EconomicResource ;
+	.
+
+fibo-md-temx-tem:referencesYieldOf
+	a owl:ObjectProperty ;
+	rdfs:label "references yield of" ;
+	rdfs:comment "QName: NONE:referencesYieldOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	.
+
+fibo-md-temx-tem:refersTo
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-md-dbtx-py:isSpreadBetween ;
+	rdfs:label "refers to"@en ;
+	rdfs:comment "QName: NONE:refersTo" ;
+	rdfs:domain fibo-md-temx-tem:DebtMarginSpread ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-md-dbtx-py:DebtSecurityBidPrice ;
+	.
+
+fibo-md-temx-tem:refersTo.1
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-md-dbtx-py:isSpreadBetween ;
+	rdfs:label "refers to"@en ;
+	rdfs:comment "QName: NONE:refersTo.1" ;
+	rdfs:domain fibo-md-temx-tem:DebtMarginSpread ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-md-dbtx-py:DebtSecurityOfferPrice ;
+	.
+
+fibo-md-temx-tem:specifiesUseOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:hasOperand ;
+	rdfs:label "specifies use of"@en ;
+	rdfs:comment "QName: NONE:specifiesUseOf" ;
+	rdfs:domain fibo-md-temx-tem:PriceParameterSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-fnd-math-math:TimedParameter ;
+	.
+
+fibo-md-temx-tem:uses
+	a owl:ObjectProperty ;
+	rdfs:label "uses"@en ;
+	rdfs:comment "QName: NONE:uses" ;
+	rdfs:domain fibo-md-temx-tem:PriceModelSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-md-temx-tem:PricingModel ;
+	.
+
+fibo-md-temx-tem:value
+	a owl:ObjectProperty ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:value" ;
+	rdfs:domain fibo-md-temx-tem:PriceSpreadSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The value of the Spread, expressed in percentage terms, at a given point in time."@en ;
+	.
+
+fibo-md-temx-tem:value.1
+	a owl:ObjectProperty ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:value.1" ;
+	rdfs:domain fibo-md-temx-tem:PriceVolatilitySpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The value of the volatillity, expressed as a percentage, at a given point in time."@en ;
+	.
+
+fibo-md-temx-tem:value.2
+	a owl:DatatypeProperty ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:value.2" ;
+	rdfs:domain fibo-md-temx-tem:TimedMonetaryAmount ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range xsd:decimal ;
+	.
+
+fibo-md-temx-tem:value.3
+	a owl:ObjectProperty ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:value.3" ;
+	rdfs:domain fibo-md-temx-tem:TimedPercentage ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	.
+
+fibo-md-temx-tem:valueTime
+	a owl:ObjectProperty ;
+	rdfs:label "value time"@en ;
+	rdfs:comment "QName: NONE:valueTime" ;
+	rdfs:domain fibo-md-temx-tem:DatedPastValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+

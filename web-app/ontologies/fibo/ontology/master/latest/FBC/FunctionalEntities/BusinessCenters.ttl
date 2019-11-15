@@ -1,0 +1,127 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCenters/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCenters/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+# imports: https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCenters/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fct-bc: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/> .
+@prefix fibo-fnd-arr-cd: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix lcc-lr: <https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/>
+	a owl:Ontology ;
+	rdfs:label "Business Centers Ontology" ;
+	rdfs:comment "QName: fibo-fbc-fct-bc:" ;
+	dct:abstract "This ontology refines the notion of a business center for reference in defining markets and exchanges, clearing houses, and other functional entities as appropriate.  The ontology covers the concept of an FpML business center (excluding those that are business day adjustments), with a focus on a physical place where business is transacted, where relevant." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/FND/> ,
+		<https://www.omg.org/spec/LCC/>
+		;
+	sm:fileAbbreviation "fibo-fbc-fct-bc" ;
+	sm:filename "BusinessCenters.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCenters/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> ,
+		<https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCenters/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fct-bc:BusinessCenterCode
+	a owl:Class ;
+	rdfs:subClassOf
+		lcc-cr:GeographicRegionIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty lcc-lr:denotes ;
+			owl:someValuesFrom fibo-fnd-plc-cty:BusinessCenter ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty lcc-lr:identifies ;
+			owl:someValuesFrom fibo-fnd-plc-cty:BusinessCenter ;
+		]
+		;
+	rdfs:label "business center code" ;
+	rdfs:comment "QName: fibo-fbc-fct-bc:BusinessCenterCode" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/> ;
+	skos:definition "a code used to denote a municipality or business center" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.fpml.org/coding-scheme/business-center"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-bc:BusinessCenterCodeScheme
+	a owl:Class ;
+	rdfs:subClassOf lcc-lr:CodeSet ;
+	rdfs:label "business center code set" ;
+	rdfs:comment "QName: fibo-fbc-fct-bc:BusinessCenterCodeScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/> ;
+	skos:definition "the coding scheme used to define a set of codes for municipalities or business centers" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.fpml.org/coding-scheme/business-center"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-bc:BusinessDayAdjustmentCode
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cd:CodeElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty lcc-lr:denotes ;
+			owl:someValuesFrom fibo-fnd-dt-bd:BusinessDayAdjustment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty lcc-lr:identifies ;
+			owl:someValuesFrom fibo-fnd-dt-bd:BusinessDayAdjustment ;
+		]
+		;
+	rdfs:label "business day adjustment code" ;
+	rdfs:comment "QName: fibo-fbc-fct-bc:BusinessDayAdjustmentCode" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/> ;
+	skos:definition "a code used to denote convention for specifying what happens when a date falls on a day that is weekend or holiday in some municipality or business center" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.fpml.org/coding-scheme/business-center"^^xsd:anyURI ;
+	.
+
+fibo-fnd-plc-cty:BusinessCenter
+	a owl:Class ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.fpml.org/coding-scheme/business-center"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Note that business centers, as defined in FpML, are intended for use in specifying the business calendar used by that municipality, or by certain organizations located in that municipality." ;
+	.
+
+fibo-fnd-plc-cty:Municipality
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty lcc-lr:hasEnglishName ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty lcc-cr:isPartOf ;
+			owl:someValuesFrom lcc-cr:GeopoliticalEntity ;
+		]
+		;
+	.
+

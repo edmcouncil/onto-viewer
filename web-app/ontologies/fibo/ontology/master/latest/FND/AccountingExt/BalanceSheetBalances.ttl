@@ -1,0 +1,310 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-accx-assx: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/> .
+@prefix fibo-fnd-accx-bal: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/>
+	a owl:Ontology ;
+	rdfs:label "BalanceSheetBalances"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Conceptual model of kinds of balance and other balance sheet features. This ontology has been extracted from the Accounts Main ontology and is intended to work alongside that." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-accx-bal:AccountPayableBalance
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:LedgerBalance ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-bal:isBalanceOf ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountPayable ;
+		]
+		;
+	rdfs:label "account payable balance"@en ;
+	rdfs:comment "QName: NONE:AccountPayableBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	skos:definition "Balance of accounts receivable"@en ;
+	.
+
+fibo-fnd-accx-bal:AccountReceivableBalance
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:LedgerBalance ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-bal:isBalanceOf ;
+			owl:someValuesFrom fibo-fnd-accx-acc:AccountReceivable ;
+		]
+		;
+	rdfs:label "account receivable balance"@en ;
+	rdfs:comment "QName: NONE:AccountReceivableBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	owl:disjointWith
+		fibo-fnd-accx-bal:CashBalance ,
+		fibo-fnd-accx-bal:StockBalance
+		;
+	skos:definition "Balance of accounts receivable"@en ;
+	.
+
+fibo-fnd-accx-bal:Balance
+	a owl:Class ;
+	rdfs:label "balance"@en ;
+	rdfs:comment "QName: NONE:Balance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	.
+
+fibo-fnd-accx-bal:BalanceSheetAssetBalance
+	a owl:Class ;
+	rdfs:label "balance sheet asset balance"@en ;
+	rdfs:comment "QName: NONE:BalanceSheetAssetBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	owl:disjointWith
+		fibo-fnd-acc-aeq:OwnersEquity ,
+		fibo-fnd-accx-bal:BalanceSheetLiabilityBalance
+		;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-accx-bal:AccountReceivableBalance
+			fibo-fnd-accx-bal:CashBalance
+			fibo-fnd-accx-bal:StockBalance
+		) ;
+	] ;
+	skos:definition "A balance sheet entry representing some asset of the entity."@en ;
+	.
+
+fibo-fnd-accx-bal:BalanceSheetBalance
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-bal:BalanceSheetFeature ;
+	rdfs:label "balance sheet balance"@en ;
+	rdfs:comment "QName: NONE:BalanceSheetBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	.
+
+fibo-fnd-accx-bal:BalanceSheetEntry
+	a owl:Class ;
+	rdfs:label "balance sheet entry"@en ;
+	rdfs:comment "QName: NONE:BalanceSheetEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-accx-bal:BalanceSheetAssetBalance
+			fibo-fnd-accx-bal:BalanceSheetLiabilityBalance
+			fibo-fnd-acc-aeq:OwnersEquity
+		) ;
+	] ;
+	skos:definition "Some entry on the balance sheet of some business entity."@en ;
+	.
+
+fibo-fnd-accx-bal:BalanceSheetFeature
+	a owl:Class ;
+	rdfs:label "balance sheet feature"@en ;
+	rdfs:comment "QName: NONE:BalanceSheetFeature" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	.
+
+fibo-fnd-accx-bal:BalanceSheetLiabilityBalance
+	a owl:Class ;
+	rdfs:label "balance sheet liability balance"@en ;
+	rdfs:comment "QName: NONE:BalanceSheetLiabilityBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	owl:disjointWith fibo-fnd-acc-aeq:OwnersEquity ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-accx-acc:AccruedLiability
+			fibo-fnd-accx-bal:AccountPayableBalance
+		) ;
+	] ;
+	skos:definition "A balance sheet entry representing some asset of the entity."@en ;
+	.
+
+fibo-fnd-accx-bal:BalanceSheetTotal
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-bal:BalanceSheetFeature ;
+	rdfs:label "balance sheet total"@en ;
+	rdfs:comment "QName: NONE:BalanceSheetTotal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	.
+
+fibo-fnd-accx-bal:CashBalance
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:LedgerBalance ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-bal:representsAmountOf ;
+			owl:someValuesFrom fibo-fnd-accx-acc:CashCurrency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-bal:representsMonetaryAmount ;
+			owl:someValuesFrom fibo-fnd-acc-cur:AmountOfMoney ;
+		]
+		;
+	rdfs:label "cash balance"@en ;
+	rdfs:comment "QName: NONE:CashBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	owl:disjointWith fibo-fnd-accx-bal:StockBalance ;
+	skos:definition "A balance of cash. This is identified as an amount of cash which is denominated with a currency."@en ;
+	.
+
+fibo-fnd-accx-bal:IssuedCapital
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-aeq:PaidInCapital ;
+	rdfs:label "issued capital" ;
+	rdfs:comment "QName: NONE:IssuedCapital" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	skos:definition "externally-held equity that may be transferred from one party to another" ;
+	.
+
+fibo-fnd-accx-bal:NostroBalance
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-bal:Balance ;
+	rdfs:label "nostro balance"@en ;
+	rdfs:comment "QName: NONE:NostroBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	owl:disjointWith fibo-fnd-accx-bal:VostroBalance ;
+	.
+
+fibo-fnd-accx-bal:StockAmount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-qt-qtu:QuantityValue ;
+	rdfs:label "stock amount"@en ;
+	rdfs:comment "QName: NONE:StockAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	.
+
+fibo-fnd-accx-bal:StockBalance
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-assx:PhysicalAsset ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-bal:isQuantityOf ;
+			owl:someValuesFrom fibo-fnd-accx-acc:StockInTrade ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-bal:represents ;
+			owl:someValuesFrom fibo-fnd-accx-bal:StockAmount ;
+		]
+		;
+	rdfs:label "stock balance"@en ;
+	rdfs:comment "QName: NONE:StockBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	skos:definition "Balance of stock in trade."@en ;
+	.
+
+fibo-fnd-accx-bal:VostroBalance
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-bal:Balance ;
+	rdfs:label "vostro balance"@en ;
+	rdfs:comment "QName: NONE:VostroBalance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	.
+
+fibo-fnd-accx-bal:appliesTo
+	a owl:ObjectProperty ;
+	rdfs:label "applies to"@en ;
+	rdfs:comment "QName: NONE:appliesTo" ;
+	rdfs:domain fibo-fnd-accx-bal:BalanceSheetEntry ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/Interval> ;
+	.
+
+fibo-fnd-accx-bal:balance
+	a owl:DatatypeProperty ;
+	rdfs:label "balance"@en ;
+	rdfs:comment "QName: NONE:balance" ;
+	rdfs:domain fibo-fnd-accx-bal:BalanceSheetBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	rdfs:range xsd:decimal ;
+	.
+
+fibo-fnd-accx-bal:isBalanceOf
+	a owl:ObjectProperty ;
+	rdfs:label "is balance of"@en ;
+	rdfs:comment "QName: NONE:isBalanceOf" ;
+	rdfs:domain fibo-fnd-accx-bal:Balance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	rdfs:range fibo-fnd-accx-acc:Account ;
+	.
+
+fibo-fnd-accx-bal:isFor
+	a owl:ObjectProperty ;
+	rdfs:label "is for"@en ;
+	rdfs:comment "QName: NONE:isFor" ;
+	rdfs:domain fibo-fnd-accx-bal:BalanceSheetEntry ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	rdfs:range fibo-fnd-org-fm:FormalOrganization ;
+	.
+
+fibo-fnd-accx-bal:isQuantityOf
+	a owl:ObjectProperty ;
+	rdfs:label "is quantity of"@en ;
+	rdfs:comment "QName: NONE:isQuantityOf" ;
+	rdfs:domain fibo-fnd-accx-bal:StockBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	rdfs:range fibo-fnd-accx-acc:StockInTrade ;
+	.
+
+fibo-fnd-accx-bal:represents
+	a owl:ObjectProperty ;
+	rdfs:label "represents"@en ;
+	rdfs:comment "QName: NONE:represents" ;
+	rdfs:domain fibo-fnd-accx-bal:StockBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	rdfs:range fibo-fnd-accx-bal:StockAmount ;
+	.
+
+fibo-fnd-accx-bal:representsAmountOf
+	a owl:ObjectProperty ;
+	rdfs:label "represents amount of"@en ;
+	rdfs:comment "QName: NONE:representsAmountOf" ;
+	rdfs:domain fibo-fnd-accx-bal:CashBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	rdfs:range fibo-fnd-accx-acc:CashCurrency ;
+	.
+
+fibo-fnd-accx-bal:representsMonetaryAmount
+	a owl:ObjectProperty ;
+	rdfs:label "represents monetary amount"@en ;
+	rdfs:comment "QName: NONE:representsMonetaryAmount" ;
+	rdfs:domain fibo-fnd-accx-bal:CashBalance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> ;
+	rdfs:range fibo-fnd-acc-cur:AmountOfMoney ;
+	.
+

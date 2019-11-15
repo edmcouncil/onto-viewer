@@ -1,0 +1,54 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/MetadataFBCFinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/MetadataFBCFinancialInstruments/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fi-mod: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/MetadataFBCFinancialInstruments/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/MetadataFBCFinancialInstruments/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Financial Business and Commerce(FBC) Financial Instruments Module" ;
+	rdfs:comment "QName: fibo-fbc-fi-mod:" ;
+	dct:abstract "The financial instruments module includes ontologies defining general purpose financial instruments, i.e., agreements, contracts, notes, equities, options, debt instruments, and so forth, some of which may be negotiable." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fbc-fi-mod" ;
+	sm:filename "MetadataFBCFinancialInstruments.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/MetadataFBCFinancialInstruments/> ;
+	.
+
+fibo-fbc-fi-mod:FinancialInstrumentsModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "FIBO FBC Financial Instruments Module" ;
+	rdfs:comment "QName: fibo-fbc-fi-mod:FinancialInstrumentsModule" ;
+	dct:abstract "The financial instruments module includes ontologies defining general purpose financial instruments, i.e., agreements, contracts, notes, equities, options, debt instruments, and so forth, some of which may be negotiable." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "FIBO-FBC-FI" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/MetadataFBCFinancialInstruments/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

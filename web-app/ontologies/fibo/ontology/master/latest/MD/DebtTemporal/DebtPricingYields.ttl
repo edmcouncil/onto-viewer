@@ -1,0 +1,1745 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/FinancialContextAndProcess/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtRedemptionAmounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-bp-prc-fcp: <https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/> .
+@prefix fibo-fbc-dae-crt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-inf-tem: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-md-dbtx-aly: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> .
+@prefix fibo-md-dbtx-int: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> .
+@prefix fibo-md-dbtx-py: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> .
+@prefix fibo-md-dbtx-red: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtRedemptionAmounts/> .
+@prefix fibo-md-temx-ins: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix fibo-sec-dbt-ab-abs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/> .
+@prefix fibo-sec-dbt-ab-mbs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/> .
+@prefix fibo-sec-dbt-bnd: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/> .
+@prefix fibo-sec-dbt-dbti: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/>
+	a owl:Ontology ;
+	rdfs:label "DebtPricingYields"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Debt pricing and yields are intimately related, and this ontology sets out the basic concepts of debt price, including different ways in which debt and bod prices are described and calculated, as well as a range of different kinds of yield (simple yield, Wall Street Yield, Japanese Yield and so on). The pricing terms are supported by a range of trading and exchange related concepts that are used to differentiate different kinds of debt price, for example last, high and low exchange prices.
+		Note that there seems to be some cross-over between terms in this ontology and in the Debt Analytics ontology, for example Macaulay's Duration is here while modified duration is in the other ontology, and similarly some yield terms are in that other ontology. This was originally one single ontology, and these two ontologies should be used together.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/FinancialContextAndProcess/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtRedemptionAmounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-dbtx-py:AbsolatePrepaymentRateFormula
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Formula ;
+	rdfs:label "absolate prepayment rate formula"@en ;
+	rdfs:comment "QName: NONE:AbsolatePrepaymentRateFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "ABS is defined by the following formula where SMM refers to Single Monthly Mortality, which measures the percentage of dollars prepaid in a given month expressed as a percentage of the scheduled loan balance. ABS = (100 * SMM)/100 + (SMM X (Age- 1)"@en ;
+	.
+
+fibo-md-dbtx-py:AbsolutePrepaymentRate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:LoanPoolAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:determinedBy ;
+			owl:someValuesFrom fibo-md-dbtx-py:AbsolatePrepaymentRateFormula ;
+		]
+		;
+	rdfs:label "absolute prepayment rate"@en ;
+	rdfs:comment "QName: NONE:AbsolutePrepaymentRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The absolute prepayment rate (for ABS) is the standard measure of prepayment rates in the auto-loan sector. ABS measures the monthly rate of loan prepayments as a percentage of the original pool balance. ABS is defined by the following formula where SMM refers to Single Monthly Mortality, which measures the percentage of dollars prepaid in a given month expressed as a percentage of the scheduled loan balance. ABS = (100 * SMM)/100 + (SMM X (Age- 1)"@en ;
+	fibo-fnd-utl-av:explanatoryNote "The ABS measurement differs from conditional prepayment rate (CPR) used in the mortgage industry, which measures prepayment as an annualized percentage of the current pool balance."@en ;
+	.
+
+fibo-md-dbtx-py:AccruedInterestAmount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-dbt:Interest ;
+	rdfs:label "accrued interest amount"@en ;
+	rdfs:comment "QName: NONE:AccruedInterestAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The interest accrued on the bond or debt instrument at the time that the price is quoted. If this is a dirty price, this is the amount of accrued interest that is included in the price. This is therefore passed on to the purchaser of the bond or debt instrument."@en ;
+	.
+
+fibo-md-dbtx-py:AlgoDebtCreditSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Difference ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:someValuesFrom fibo-fbc-dae-crt:InvestmentCreditRating ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-md-dbtx-py:IssuerCreditRating ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fbc-fi-fi:hasTimeToMaturity ;
+				owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+			] ;
+		]
+		;
+	rdfs:label "algo debt credit spread"@en ;
+	rdfs:comment "QName: NONE:AlgoDebtCreditSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The Spread between the Debt Instrument Maturity and the Credit Rating of the Issuer."@en ;
+	skos:editorialNote "This does not match the Wikipedia definition for Credit Spread, as defined for Bonds. Is this another, different term or a misunderstanding? Note that the units for this defined item would be nonsencical (the difference between a credit rating and a maturity)."@en ;
+	.
+
+fibo-md-dbtx-py:BondEquivalentYield
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:RelativelyDefinedDebtInstrumentYield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:determinedUsing ;
+			owl:someValuesFrom fibo-md-dbtx-aly:EquivalentYieldCalculationMethod ;
+		]
+		;
+	rdfs:label "bond equivalent yield"@en ;
+	rdfs:comment "QName: NONE:BondEquivalentYield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "Yield determined on an equivalent basis to the yield of another bond. This is used to be able to realistically compare prices between debt instruments across different markets."@en ;
+	fibo-fnd-utl-av:explanatoryNote "For example when comparing Treasury with Corp it's called a Corp Bond Equivalent Yield; when comparing other kinds of yields this would be labelled differently. Treasury bills typically in discount rates - that's one of the ways you would compare TB or MM or RePo to BEQ - by changing the day count. Detailed implementation of this: This term refers to the type of bond that it is equivalent to, that is the type of bond whose yield is normally determined according to the yield calculation method that is used in determining this Bond Equivalent Yield figure. The type of bond in this instance is defined in relation to the market on which that bond trades, for example the US Corporate Bond Market."@en ;
+	.
+
+fibo-md-dbtx-py:BondExchangeClosingPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:ExchangeTradedBondPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:hasClosingPriceDeterminationMethod ;
+			owl:someValuesFrom fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+		]
+		;
+	rdfs:label "bond exchange closing price"@en ;
+	rdfs:comment "QName: NONE:BondExchangeClosingPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The price at close of trading on a given trading day on an exchange."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The type of price which is quoted will be determined by the exchange. Last Price is recognised as the last trade on that exchange, not a last quote price. (fact about closing Price) MDDL definition:The final price as of market close."@en ;
+	.
+
+fibo-md-dbtx-py:BondExchangeHighPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:ExchangeTradedBondPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasApplicablePeriod ;
+			owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:priceDeterminationMethod ;
+			owl:someValuesFrom xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:priceIsTraded ;
+			owl:someValuesFrom xsd:boolean ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:takesAccountOfQuoteSize ;
+			owl:someValuesFrom xsd:integer ;
+		]
+		;
+	rdfs:label "bond exchange high price"@en ;
+	rdfs:comment "QName: NONE:BondExchangeHighPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The highest valuation over the period specified."@en ;
+	skos:editorialNote "This can be regarded as a derived price. See also note in LowPrice Difference: different rules used. May be mased on trade OR quote price Analytic or Price?? this is a derived type but with a much simpler rule."@en ;
+	.
+
+fibo-md-dbtx-py:BondExchangeLastPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:ExchangeTradedBondPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:priceIsTraded ;
+			owl:someValuesFrom xsd:boolean ;
+		]
+		;
+	rdfs:label "bond exchange last price"@en ;
+	rdfs:comment "QName: NONE:BondExchangeLastPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The last (or most recent) valuation."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is an actual trade price not a derived price"@en ;
+	.
+
+fibo-md-dbtx-py:BondExchangeLowPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:ExchangeTradedBondPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasApplicablePeriod ;
+			owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:priceDeterminationMethod ;
+			owl:someValuesFrom xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:priceIsTraded ;
+			owl:someValuesFrom xsd:boolean ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:takesAccountOfQuoteSize ;
+			owl:someValuesFrom xsd:integer ;
+		]
+		;
+	rdfs:label "bond exchange low price"@en ;
+	rdfs:comment "QName: NONE:BondExchangeLowPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The lowest valuation over the period specified. Possibly but not necessarily based on a trade. Determined by the trading venue as to whether it's based on a trade or an offer. this can be regarded as a derived price. Price is based on a riule whil will cause one to pick a certain price type."@en ;
+	.
+
+fibo-md-dbtx-py:BondExchangeOpeningPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:ExchangeTradedBondPrice ;
+	rdfs:label "bond exchange opening price"@en ;
+	rdfs:comment "QName: NONE:BondExchangeOpeningPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The value at the beginning of trading or opening of the market."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Exchange published price. Sometimes opening price is implied, sometimes it's published."@en ;
+	.
+
+fibo-md-dbtx-py:BondMarket
+	a owl:Class ;
+	rdfs:label "bond market"@en ;
+	rdfs:comment "QName: NONE:BondMarket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:BondMidPrice
+	a owl:Class ;
+	rdfs:label "bond mid price"@en ;
+	rdfs:comment "QName: NONE:BondMidPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:BondTradingContext
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-prc-fcp:SecondaryMarketTradingContext ;
+	rdfs:label "bond trading context"@en ;
+	rdfs:comment "QName: NONE:BondTradingContext" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:BulletRedemptionPayment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-red:BondRedemptionPayment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-red:hasTerms ;
+			owl:someValuesFrom fibo-sec-dbt-bnd:BulletPrincipalRepaymentTerms ;
+		]
+		;
+	rdfs:label "bullet redemption payment"@en ;
+	rdfs:comment "QName: NONE:BulletRedemptionPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:CashStructuredFinanceInstrumentPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtSecurityPrice ;
+	rdfs:label "cash structured finance instrument price"@en ;
+	rdfs:comment "QName: NONE:CashStructuredFinanceInstrumentPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "When the price is above a certain level (70), you get a quote in reference to an index e.g. LIBOR+50bp i.e. the yield. When you get below a certain price you get a quote such as 65c to a dollar. Percentage? not seen. Would be a whole number, interpreted as c/$"@en ;
+	fibo-fnd-utl-av:explanatoryNote "This might be a Price, a Spread or a Yield, i.e. \"here's the price., the current Yield is this, and here's the Spread\"."@en ;
+	.
+
+fibo-md-dbtx-py:CleanPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtSecurityPrice ;
+	rdfs:label "clean price"@en ;
+	rdfs:comment "QName: NONE:CleanPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	owl:disjointWith fibo-md-dbtx-py:DirtyPrice ;
+	skos:definition "A bond or debt instrument price that does not include accrued interest."@en ;
+	.
+
+fibo-md-dbtx-py:CurrentYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:YieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasParameter ;
+			owl:someValuesFrom fibo-md-dbtx-py:CleanPrice ;
+		]
+		;
+	rdfs:label "current yield calculation method"@en ;
+	rdfs:comment "QName: NONE:CurrentYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The ratio of the interest payment amount to the clean price."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is a kind of yield that applies to debt instruments only as it relates to the clean price. It differs from the simple yield in that simple yield relates to the actual price paid for the bond, which on will differ from the clean price by the amount of accrued interest."@en ;
+	.
+
+fibo-md-dbtx-py:DebtIndependentlyEvaluatedPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtPublishedPointInTimePrice ,
+		fibo-md-dbtx-py:DerivedPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:evaluatedBy ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtPriceIndependentEvaluator ;
+		]
+		;
+	rdfs:label "debt independently evaluated price"@en ;
+	rdfs:comment "QName: NONE:DebtIndependentlyEvaluatedPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition '"Evaluated Price" is the price you get from the vendors.'@en ;
+	skos:editorialNote "This may not always be the same. Mostly in the US, now also moving into Europe and Asia. See e.g. MiFID. Vendor gives you Spread and Price: Early Price (right at the close of the market) plus a Final Price an hour or so later. Matrix pricing: pure calculation. throws the spread in and calculates the price, rather than surveying the market. Based on some formula, not on research of traders. notes from SMER 18 Nov Pricing Recipe - the prices that are input to that derived price. Notes from SMER 25 Nov If the instrument has not been trading, then there would normally need to be prices for valuing these, so you would go to an independent provider. You would also identify who you sourced it from. You would not put your own numbers in as this would not be impartial. Also since only the very liquid securities are those that trade, a lot of bonds in a Pf are not regularly traded and so there is not a market price, so you use a yield curve and interpolate on this to come up with an estimate of fair value. This also involves modeling what you anticipate the Cr spreads on those bonds would be."@en ;
+	.
+
+fibo-md-dbtx-py:DebtInstrumentYield
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:Yield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:calculationFollowing ;
+			owl:someValuesFrom fibo-md-dbtx-py:YieldCalculationMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasOutlookPeriod ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-md-dbtx-aly:LifeAnalytic
+					[
+						a owl:Restriction ;
+						owl:onProperty fibo-fbc-fi-fi:hasTimeToMaturity ;
+						owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+					]
+					fibo-sec-dbt-dbti:PrescriptiveEvent
+					fibo-sec-dbt-dbti:RedemptionEvent
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:derivedFromOutlay ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtSecurityPrice ;
+		]
+		;
+	rdfs:label "debt instrument yield"@en ;
+	rdfs:comment "QName: NONE:DebtInstrumentYield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The return on the debt instrument at the stated price."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Yield has a relationship to the price."@en ;
+	.
+
+fibo-md-dbtx-py:DebtPriceIndependentEvaluator
+	a owl:Class ;
+	rdfs:label "debt price independent evaluator"@en ;
+	rdfs:comment "QName: NONE:DebtPriceIndependentEvaluator" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:DebtPriceSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:MarketSpread ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:usedToDetermine ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtSecurityPrice ;
+		]
+		;
+	rdfs:label "debt price spread"@en ;
+	rdfs:comment "QName: NONE:DebtPriceSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The difference between the [what?] of a security and the fair price value of a different security which is used as a point of reference. The spread is used to determine the price of the instrument. (draft definition)"@en ;
+	skos:editorialNote "This was \"Spread\" in the Debt pricing reviews, however that word has at least 2 other uses (spread between equity bid and offer prices; spread for derivatives). Detailed notes from Debt Pricing Review session 5 Aug: Identify what the spread is in relation to e.g. LIBOR. ALSO If fixed of floating. So if it's a FRN, For a fixed rate bond, it's priced off the on-the-run, e.g. a 30 year bond is priced as a spread wrt a 30 year treasury bond. So e..g spread would be something like 10bp+the value of the 30 year on the run Treasury. On the Run: definition needed. Also class of Thing and where this should go."@en ;
+	.
+
+fibo-md-dbtx-py:DebtPublishedPointInTimePrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtSecurityPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:usedToDetermine ;
+			owl:someValuesFrom fibo-md-dbtx-py:LocallyDerivedPrice ;
+		]
+		;
+	rdfs:label "debt published point in time price"@en ;
+	rdfs:comment "QName: NONE:DebtPublishedPointInTimePrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A debt price, usually in the form of a spread, published by a data provider at some point in time such as the end of the trading day."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The vendor will survey the banks and calculate the spread and publish as a spread. Price as a percentage is determined internally by the investment organization, based on that published spread. In terms of what sort of spread this is, this is information about the market and can be in any of those formats whereby price is specified (see Price Specification terms). Could have spread to price or spread to yield. Valuations are done at the end of the day but equivalent figures can be provided for other times."@en ;
+	.
+
+fibo-md-dbtx-py:DebtSecuritiesMarketMaker
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-md-dbtx-py:determinesMarketPriceForDebt ;
+		owl:someValuesFrom fibo-md-dbtx-py:OTCBondMarketPrice ;
+	] ;
+	rdfs:label "debt securities market maker"@en ;
+	rdfs:comment "QName: NONE:DebtSecuritiesMarketMaker" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "An actor which has the role of Market Maker in a given market."@en ;
+	.
+
+fibo-md-dbtx-py:DebtSecurityBidPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtSecurityPrice ;
+	rdfs:label "debt security bid price"@en ;
+	rdfs:comment "QName: NONE:DebtSecurityBidPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A price quoted for purchase of a quantity of a debt security in the marketplace. This may be either the OTC market or a securities exchange or a composite market consisting of several exchanges or trading facilities."@en ;
+	.
+
+fibo-md-dbtx-py:DebtSecurityOfferPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtSecurityPrice ;
+	rdfs:label "debt security offer price"@en ;
+	rdfs:comment "QName: NONE:DebtSecurityOfferPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A price quoted for sale of a quantity of a debt security in the marketplace. This may be either the OTC market or a securities exchange or a composite market consisting of several exchanges or trading facilities."@en ;
+	.
+
+fibo-md-dbtx-py:DebtSecurityPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:QuotedPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fi-fi:DebtInstrument
+					fibo-fbc-fi-fi:Security
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "debt security price"@en ;
+	rdfs:comment "QName: NONE:DebtSecurityPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "price of a debt instrument at a specific point in time"@en ;
+	.
+
+fibo-md-dbtx-py:DebtYieldToAverageLife
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtInstrumentYield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasOutlookPeriod ;
+			owl:someValuesFrom fibo-md-dbtx-aly:AverageLife ;
+		]
+		;
+	rdfs:label "debt yield to average life"@en ;
+	rdfs:comment "QName: NONE:DebtYieldToAverageLife" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The yield achieved by substituting a bond's average life for the issue's final maturity date."@en ;
+	skos:editorialNote "Assume from this that there is also a Yield to Equivalent Life. Some sources have these as the same term, whereas we have separated them."@en ;
+	.
+
+fibo-md-dbtx-py:DebtYieldToEquivalentLife
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtInstrumentYield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasOutlookPeriod ;
+			owl:someValuesFrom fibo-md-dbtx-aly:EquivalentLifeAnalytic ;
+		]
+		;
+	rdfs:label "debt yield to equivalent life"@en ;
+	rdfs:comment "QName: NONE:DebtYieldToEquivalentLife" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The yield achieved by substituting a bond's equivalent life for the issue's final maturity date."@en ;
+	skos:editorialNote "Some sources have Average Life and Equivalent Life as the same term, whereas we have separated them."@en ;
+	.
+
+fibo-md-dbtx-py:DebtYieldToMaturity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtInstrumentYield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasOutlookPeriod ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fbc-fi-fi:hasTimeToMaturity ;
+				owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+			] ;
+		]
+		;
+	rdfs:label "debt yield to maturity"@en ;
+	rdfs:comment "QName: NONE:DebtYieldToMaturity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The internal rate of return an investor would achieve if he or she purchased that bond at its current dirty price, and held it to maturity, assuming all coupon and principal payments are received as scheduled."@en ;
+	.
+
+fibo-md-dbtx-py:DebtYieldToNextCall
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtInstrumentYield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasOutlookPeriod ;
+			owl:someValuesFrom fibo-md-dbtx-py:NextCall ;
+		]
+		;
+	rdfs:label "debt yield to next call"@en ;
+	rdfs:comment "QName: NONE:DebtYieldToNextCall" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The yield of a bond to the next possible call date."@en ;
+	.
+
+fibo-md-dbtx-py:DebtYieldToWorst
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtInstrumentYield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasOutlookPeriod ;
+			owl:someValuesFrom fibo-md-dbtx-py:WorstCall ;
+		]
+		;
+	rdfs:label "debt yield to worst"@en ;
+	rdfs:comment "QName: NONE:DebtYieldToWorst" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "Yield to the worst case of when the instrument might be called."@en ;
+	.
+
+fibo-md-dbtx-py:DefaultRate
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:LoanPoolAnalytic ;
+	rdfs:label "default rate"@en ;
+	rdfs:comment "QName: NONE:DefaultRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The rate at which holders of loans in the pool default on those loans."@en ;
+	.
+
+fibo-md-dbtx-py:DerivedPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtSecurityPrice ;
+	rdfs:label "derived price"@en ;
+	rdfs:comment "QName: NONE:DerivedPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "Any price which is derived from some other source or calculation rather than being the price at which something actually traded or was quoted."@en ;
+	fibo-fnd-utl-av:explanatoryNote "There are evaluated prices in which an independent source evaluates a price they have derived, and there are prices which are derived within a firm, from supplied, published end of day price spreads or other market data."@en ;
+	.
+
+fibo-md-dbtx-py:DirtyPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtSecurityPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:dirtyPriceIncludes ;
+			owl:someValuesFrom fibo-md-dbtx-py:AccruedInterestAmount ;
+		]
+		;
+	rdfs:label "dirty price"@en ;
+	rdfs:comment "QName: NONE:DirtyPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:DiscountedInstrumentYield
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtInstrumentYield ;
+	rdfs:label "discounted instrument yield"@en ;
+	rdfs:comment "QName: NONE:DiscountedInstrumentYield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "Yield quoted for a discount instrument. This is the ratio of the discount to the face value, divided by the period to maturity as a fraction of a year."@en ;
+	fibo-fnd-utl-av:usageNote "Applies to Debt only."@en ;
+	.
+
+fibo-md-dbtx-py:EffectiveYield
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtInstrumentYield ;
+	rdfs:label "effective yield"@en ;
+	rdfs:comment "QName: NONE:EffectiveYield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:editorialNote "The difference between this and Native yield is as per note: Native yield relates to price quotation context; Effective Yild is in relation to portfolio analytics. Recall: every analytic formula relates to the set of cash flows, so there are assumptions underlying each of these, For example the assumption that Y is constant, which it isn't (because there is a curve, which may be convex not linear (is that right?). So you can compare rate or return between what I see and what the market has out there. In the US market: a Y which is calculated using Monto Carlo method simulation. relationship facts to add: Relation to method / formula (e.g. Monte Carlo), and the method used to determine the actual figure for the MC method. eff Y for single instrument: E Y for bonds without calls and stuff. Variation in this: whether we look at a whole set of bonds YTM quoted by Bmb would be the YTM quoted according to whatever the market is - = the NAtive Yield. SO: Publicly quoted more: choose another adjective."@en ;
+	.
+
+fibo-md-dbtx-py:ExchangeTradedBondPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtSecurityPrice ,
+		fibo-md-temx-ins:ExchangeTradedSecurityPrice
+		;
+	rdfs:label "exchange traded bond price"@en ;
+	rdfs:comment "QName: NONE:ExchangeTradedBondPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	owl:disjointWith fibo-md-dbtx-py:OTCBondMarketPrice ;
+	.
+
+fibo-md-dbtx-py:InterpolatedPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DerivedPrice ;
+	rdfs:label "interpolated price"@en ;
+	rdfs:comment "QName: NONE:InterpolatedPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A price determined by interpolation between available price figures, using some algorithm or curve."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Uses an algorithm to interpolate a price from two observed prices. Examples include price derived by interpolation between prices e.g. between Bid and Offer (among others). also includes Yield Curves and implied forward curves. That is, interpolation may either be linear (straight line interpolation between two values) or may be expressed as a non linear curve such as a yield curve or an implied forward curve."@en ;
+	.
+
+fibo-md-dbtx-py:IssuerCreditRating
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:InvestmentCreditRating ;
+	rdfs:label "issuer credit rating"@en ;
+	rdfs:comment "QName: NONE:IssuerCreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:JapaneseCompoundYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:YieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasRoundingDirection ;
+			owl:someValuesFrom fibo-fnd-math-math:Down ;
+		]
+		;
+	rdfs:label "japanese compound yield calculation method"@en ;
+	rdfs:comment "QName: NONE:JapaneseCompoundYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "No definition in selection list."@en ;
+	.
+
+fibo-md-dbtx-py:JapaneseSimpleYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:YieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasRoundingDirection ;
+			owl:someValuesFrom fibo-fnd-math-math:Down ;
+		]
+		;
+	rdfs:label "japanese simple yield calculation method"@en ;
+	rdfs:comment "QName: NONE:JapaneseSimpleYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "No definition.Term put here from memory. 02 Dec changed from Japanese Yield to Japanese Simple Yield. note hat Japanese Compound yield also here (from FIBIM or anothe rlist, added 25 nov with the rest)."@en ;
+	.
+
+fibo-md-dbtx-py:LoanAge
+	a owl:Class ;
+	rdfs:label "loan age"@en ;
+	rdfs:comment "QName: NONE:LoanAge" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The age of the loan."@en ;
+	.
+
+fibo-md-dbtx-py:LoanPoolAnalytic
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:DebtPoolAnalyticalParameter ;
+	rdfs:label "loan pool analytic"@en ;
+	rdfs:comment "QName: NONE:LoanPoolAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A measure of some aspect of a pool of loans."@en ;
+	.
+
+fibo-md-dbtx-py:LoanPoolPrepaymentModel
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-tem:AnalyticsCalculationModel ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-md-dbtx-py:LoanPrepaymentFormula ;
+		]
+		;
+	rdfs:label "loan pool prepayment model"@en ;
+	rdfs:comment "QName: NONE:LoanPoolPrepaymentModel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "Model of the prepayments of loans in a pool of individual loans, such as a mortgage pool or loan pool."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This model captures the parameters that may influence the prepayment of loans or mortgages and relates these mathematically."@en ;
+	.
+
+fibo-md-dbtx-py:LoanPrepaymentFormula
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Formula ;
+	rdfs:label "loan prepayment formula"@en ;
+	rdfs:comment "QName: NONE:LoanPrepaymentFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The formula which embodies the model for loan pool prepayment speed."@en ;
+	skos:editorialNote "From SMER sessions: This is a model. Includes other factors such as homogeniety. To model this more completely we need to identify the parameters that go in to this formula. Among these is the above homogeneity measure - need to know how that is measured and in what terms it is expressed, e.g. as a percentage, with reference to some mean or standard deviation and so on. Also some of the parameters used in this model would presumably make reference to standard mathematical model constructs such as normal distribution, variaous deviation measures, Chi squared and so on. These are not presently in the semantics model, but can be modeled semantically if required. This would not however be a mathematical model - we only need to identify these and show meaningful relationships (not mathematical relationships) between them."@en ;
+	.
+
+fibo-md-dbtx-py:LocallyDerivedPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DerivedPrice ;
+	rdfs:label "locally derived price"@en ;
+	rdfs:comment "QName: NONE:LocallyDerivedPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A price derived locally from information supplied by a market data vendor such as an end of day spread."@en ;
+	.
+
+fibo-md-dbtx-py:MBSFactor
+	a owl:Class ;
+	rdfs:label "m b s factor"@en ;
+	rdfs:comment "QName: NONE:MBSFactor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:MacCaulaysDurationAnalytic
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:DurationAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:someValuesFrom fibo-md-temx-ins:InstrumentInternalRateOfReturn ;
+		]
+		;
+	rdfs:label "MacCaulays Duration Analytic"@en ;
+	rdfs:comment "QName: NONE:MacCaulaysDurationAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:NativeYield
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:RelativelyDefinedDebtInstrumentYield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:determinedUsing ;
+			owl:someValuesFrom fibo-md-dbtx-py:NativeYieldCalculationMethod ;
+		]
+		;
+	rdfs:label "native yield"@en ;
+	rdfs:comment "QName: NONE:NativeYield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The yield of the security as determined using the Yield Calculation Method that is the default for the market that the security is traded in."@en ;
+	fibo-fnd-utl-av:explanatoryNote "conventional yield for that security type and geo location, ie. would be in relation too"@en ;
+	.
+
+fibo-md-dbtx-py:NativeYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:RelativeYieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:isDefaultMethodFor ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:TradableDebtInstrument ;
+		]
+		;
+	rdfs:label "native yield calculation method"@en ;
+	rdfs:comment "QName: NONE:NativeYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The convention used in the marketplace for that security."@en ;
+	.
+
+fibo-md-dbtx-py:NextCall
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:CallEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDate ;
+			owl:someValuesFrom fibo-md-dbtx-py:NextCallDate ;
+		]
+		;
+	rdfs:label "next call"@en ;
+	rdfs:comment "QName: NONE:NextCall" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The next call of the issue, as at the current time."@en ;
+	.
+
+fibo-md-dbtx-py:NextCallDate
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:Date ;
+	rdfs:label "next call date"@en ;
+	rdfs:comment "QName: NONE:NextCallDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The next date on which the issue can be called, from the present date."@en ;
+	.
+
+fibo-md-dbtx-py:NextPut
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:PutEvent ;
+	rdfs:label "next put"@en ;
+	rdfs:comment "QName: NONE:NextPut" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The next available put date for the issue, as at the current time."@en ;
+	.
+
+fibo-md-dbtx-py:OTCBondMarketPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtSecurityPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:oTCBondMarketPriceHasPricingSource ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtSecuritiesMarketMaker ;
+		]
+		;
+	rdfs:label "o t c bond market price"@en ;
+	rdfs:comment "QName: NONE:OTCBondMarketPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The price determined for the marketplace for a bond which is traded over the counter."@en ;
+	skos:editorialNote "Review comment: Must include Attribution. This is in the model in the form of tha Market Maker (an actor in the activity of secondary market trading for OTC-traded debt)."@en ;
+	.
+
+fibo-md-dbtx-py:OptonAdjustedYield
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtInstrumentYield ;
+	rdfs:label "opton adjusted yield"@en ;
+	rdfs:comment "QName: NONE:OptonAdjustedYield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "NB specified as a spread. synonym: OAS Based on different Int Rate paths. There are different OAS models just like there are different Yield methods. Also would make reference to the Yield Curve - but these are parameters that go into that model. Limit this model at the point where it distinguishes the difference between things - we are not in a position to mathematically model the things themselves, just capture the basic facts."@en ;
+	.
+
+fibo-md-dbtx-py:Outlay
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:Expenditure ;
+	rdfs:label "outlay"@en ;
+	rdfs:comment "QName: NONE:Outlay" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "Cash spent on something."@en ;
+	.
+
+fibo-md-dbtx-py:PublishedEndOfDayPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtPublishedPointInTimePrice ;
+	rdfs:label "published end of day price"@en ;
+	rdfs:comment "QName: NONE:PublishedEndOfDayPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A price published by a market data vendor at the end of the trading day."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This may be specified in terms of a spread (end of day spread) or in some other form. EoD spread could be nominal or end of day adjusted."@en ;
+	.
+
+fibo-md-dbtx-py:PublishedPriceAsRateSpread
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtPublishedPointInTimePrice ;
+	rdfs:label "published price as rate spread"@en ;
+	rdfs:comment "QName: NONE:PublishedPriceAsRateSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A debt instrument price quoted or defined in terms of a spread of that instrument's price with reference to some reference rate. The reference rate may be either a market interest rate such as an IBOR or the rate of interest on some reference instrument."@en ;
+	.
+
+fibo-md-dbtx-py:PublishedPriceAsTreasuryRateSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:PublishedPriceAsRateSpread ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:relativeTo ;
+			owl:someValuesFrom fibo-md-dbtx-int:TreasuryBillReferenceRate ;
+		]
+		;
+	rdfs:label "published price as treasury rate spread"@en ;
+	rdfs:comment "QName: NONE:PublishedPriceAsTreasuryRateSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:ReferenceDebtInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:ParametricReferenceEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasReferenceRate ;
+			owl:someValuesFrom fibo-md-dbtx-int:DebtInstrumentReferenceRate ;
+		]
+		;
+	rdfs:label "reference debt instrument"@en ;
+	rdfs:comment "QName: NONE:ReferenceDebtInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A debt instrument in the role of a reference instrument. Some property of the instrument is used in calculations, for example the interest or the yield of the instrument."@en ;
+	.
+
+fibo-md-dbtx-py:ReferenceSovereignBill
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:ReferenceDebtInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasReferenceRate ;
+			owl:someValuesFrom fibo-md-dbtx-int:TreasuryBillReferenceRate ;
+		]
+		;
+	rdfs:label "reference sovereign bill"@en ;
+	rdfs:comment "QName: NONE:ReferenceSovereignBill" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "A Treasury Note or other sovereign debt the interest of which is used as a reference rate."@en ;
+	.
+
+fibo-md-dbtx-py:RelativeYieldCalculationMethod
+	a owl:Class ;
+	rdfs:label "relative yield calculation method"@en ;
+	rdfs:comment "QName: NONE:RelativeYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:RelativelyDefinedDebtInstrumentYield
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtInstrumentYield ;
+	rdfs:label "relatively defined debt instrument yield"@en ;
+	rdfs:comment "QName: NONE:RelativelyDefinedDebtInstrumentYield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:RussianYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:YieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasFormula ;
+			owl:someValuesFrom fibo-md-dbtx-py:RussianYieldFormula ;
+		]
+		;
+	rdfs:label "russian yield calculation method"@en ;
+	rdfs:comment "QName: NONE:RussianYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition 'The method used in determining Yield in the Russian markets. This is based on an effective yield with fundamentally different math. To give an example of the use of a different "yield type", we have Russia, which trades based on an effective yield. The price-yield math is fundamentally different. Notes Origin:Fidessa Uses a trade space and effective yield formula. MAy have same day types but different math.'@en ;
+	.
+
+fibo-md-dbtx-py:RussianYieldFormula
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:YieldCalculationFormula ;
+	rdfs:label "russian yield formula"@en ;
+	rdfs:comment "QName: NONE:RussianYieldFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "This is based on a different Effective Yield than on another market."@en ;
+	.
+
+fibo-md-dbtx-py:SecondaryMarketBondDealing
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:SecuritiesTrading ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-prc-fcp:context ;
+			owl:someValuesFrom fibo-bp-prc-fcp:SecondaryMarketTradingContext ;
+		]
+		;
+	rdfs:label "secondary market bond dealing"@en ;
+	rdfs:comment "QName: NONE:SecondaryMarketBondDealing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:SecuritiesTrading
+	a owl:Class ;
+	rdfs:label "securities trading"@en ;
+	rdfs:comment "QName: NONE:SecuritiesTrading" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:SimpleYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:YieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:usesPrice ;
+			owl:someValuesFrom fibo-md-dbtx-py:DirtyPrice ;
+		]
+		;
+	rdfs:label "simple yield calculation method"@en ;
+	rdfs:comment "QName: NONE:SimpleYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The annual rate of return expressed as a percentage. This is the return divided by the outlay and multiplied by 100 to express the figure as a percentage."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is yield in its simplest sense, expressed as a percentage of return to outlay. As such, this is the same way that yield is determined for any investments, not just financial instruments or debt investments."@en ;
+	.
+
+fibo-md-dbtx-py:SpanishYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:YieldCalculationMethod ;
+	rdfs:label "spanish yield calculation method"@en ;
+	rdfs:comment "QName: NONE:SpanishYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The method used in determining annual yield in Spanish corporate bonds."@en ;
+	.
+
+fibo-md-dbtx-py:USCorporateBondYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:YieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasFormula ;
+			owl:someValuesFrom fibo-md-dbtx-aly:ICMAYieldFormula ;
+		]
+		;
+	rdfs:label "u s corporate bond yield calculation method"@en ;
+	rdfs:comment "QName: NONE:USCorporateBondYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "This has 30/360 and semi-annual compounding."@en ;
+	.
+
+fibo-md-dbtx-py:USTreasuryYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:YieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasFormula ;
+			owl:someValuesFrom fibo-md-dbtx-aly:ICMAYieldFormula ;
+		]
+		;
+	rdfs:label "u s treasury yield calculation method"@en ;
+	rdfs:comment "QName: NONE:USTreasuryYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:WallStreetYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:YieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasFormula ;
+			owl:someValuesFrom fibo-md-dbtx-aly:ICMAYieldFormula ;
+		]
+		;
+	rdfs:label "wall street yield calculation method"@en ;
+	rdfs:comment "QName: NONE:WallStreetYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "No definition.Term put here from memory."@en ;
+	.
+
+fibo-md-dbtx-py:WeightedAverageCoupon
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:InstrumentAggregateLoanAnalytic ;
+	rdfs:label "weighted average coupon"@en ;
+	rdfs:comment "QName: NONE:WeightedAverageCoupon" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The weighted-average gross interest rates of the pool of mortgages that underlie a mortgage-backed security (MBS) at the time the securities were issued. A mortgage-backed security's current WAC can differ from its original WAC as the underlying mortgages pay down at different speeds. In the weighted-average calculation, the principal balance of each underlying mortgage is used as the weighting factor"@en ;
+	skos:editorialNote "Provided by the Issuer (loan servicer?) along with the WALA etc. If you know the underlying loans you can calculate this yourself. For ABS you don't know this so you have to get this information from the loan servicer. Investopedia explains Weighted Average Coupon - WAC For example, suppose a MBS is composed of two different pools of mortgages: $6 million worth of mortgages that yield 7.5% and a pool of $4 million mortgages that yield 5%. The WAC would be 6.5%. The WAC on a mortgage-backed security is an important piece of information used by analysts to estimate the pre-pay characteristics of that security. It is an important relative value tool in MBS portfolio management and analysis."@en ;
+	.
+
+fibo-md-dbtx-py:WeightedAverageTimeToReceiptOfCashflows
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:AnalyticalInformation ;
+	rdfs:label "weighted average time to receipt of cashflows"@en ;
+	rdfs:comment "QName: NONE:WeightedAverageTimeToReceiptOfCashflows" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The weighted average time to the receipt of cashflows for an instrument."@en ;
+	skos:editorialNote "A formal definition is needed for this. The name is almost self defining, but only to those who already know what this means. In particular we should define how the weighted average is weighted, and what this means, along with a formula for calculating this at the most generic level (cashflow, time, without assumptions about particular types of instrument)."@en ;
+	.
+
+fibo-md-dbtx-py:WorstCall
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:CallEvent ;
+	rdfs:label "worst call"@en ;
+	rdfs:comment "QName: NONE:WorstCall" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "call event representing the worst case with respect to when the instrument might be called"@en ;
+	skos:editorialNote
+		"Note that the actual date associated with an occurrence of a worst call event might be calculated or explicit."@en ,
+		"We should refine what we mean by worst here - soonest, or most distant?"@en
+		;
+	.
+
+fibo-md-dbtx-py:YieldCalculationFormula
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Formula ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hasSubject ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtInstrumentYield ;
+		]
+		;
+	rdfs:label "yield calculation formula"@en ;
+	rdfs:comment "QName: NONE:YieldCalculationFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The formula used in determining the Yield."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'The subject of this Formula is the Yield. The formula has an expression which can be defined either in tectual terms or by further local extension of the term "Formula Expression" to define the parameters used.'@en ;
+	.
+
+fibo-md-dbtx-py:YieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-meth:Method ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasCompoundingFrequency ;
+			owl:allValuesFrom fibo-fnd-dt-fd:RecurrenceInterval ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasParameter ;
+			owl:allValuesFrom fibo-fnd-math-math:TimedParameter ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasFormula ;
+			owl:someValuesFrom fibo-md-dbtx-py:YieldCalculationFormula ;
+		]
+		;
+	rdfs:label "yield calculation method"@en ;
+	rdfs:comment "QName: NONE:YieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	skos:definition "The method by which the yield is calculated. This includes a formula for calculation and a specific day count convention and compounding. You would apply this calculation method on top of the underlying terms and conditions, do for example the holiday calenders and so on, are used in these formulae. For final cash flow: Japanese yield will round down accrued interest. Add: The actual underlying math. Wall Street uses the same ICMA formula."@en ;
+	skos:editorialNote "Initial reviewer notes 18 Nov: this uses the combination of the day count and the compounding gives you the name of the yield calculation method. Names are associated with algorithms. What yield you use to determining the present value. These are typically defined in a prospectus (for exchange traded) or Info Memorandum if it's traded in an OTC market. where it also defines the method itself. Action: look at some prospecti or get this from a vendor. Additional features 25 nov: Question - maybe Holiday calendar? Also date roll rules and roll back rules. These all apply. YC feeds in to Yield itself."@en ;
+	.
+
+fibo-md-dbtx-py:YieldToNextPut
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:DebtInstrumentYield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:hasOutlookPeriod ;
+			owl:someValuesFrom fibo-md-dbtx-py:NextPut ;
+		]
+		;
+	rdfs:label "yield to next put"@en ;
+	rdfs:comment "QName: NONE:YieldToNextPut" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:absolutePrepaymentRateHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "absolute prepayment rate has value"@en ;
+	rdfs:comment "QName: NONE:absolutePrepaymentRateHasValue" ;
+	rdfs:domain fibo-md-dbtx-py:AbsolutePrepaymentRate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The value of the rate itself, at a given point in time, expressed as a percentage."@en ;
+	.
+
+fibo-md-dbtx-py:accruedInterestAmountHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "accrued interest amount has value"@en ;
+	rdfs:comment "QName: NONE:accruedInterestAmountHasValue" ;
+	rdfs:domain fibo-md-dbtx-py:AccruedInterestAmount ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The amount of accrued interest, at a point in time, expressed as a percentage/"@en ;
+	.
+
+fibo-md-dbtx-py:amount
+	a owl:DatatypeProperty ;
+	rdfs:label "amount"@en ;
+	rdfs:comment "QName: NONE:amount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:basedUpon
+	a owl:ObjectProperty ;
+	rdfs:label "based upon" ;
+	rdfs:comment "QName: NONE:basedUpon" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:calculationFollowing
+	a owl:ObjectProperty ;
+	rdfs:label "calculation following"@en ;
+	rdfs:comment "QName: NONE:calculationFollowing" ;
+	rdfs:domain fibo-md-dbtx-py:DebtInstrumentYield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:YieldCalculationMethod ;
+	.
+
+fibo-md-dbtx-py:closingPriceValue
+	a owl:ObjectProperty ;
+	rdfs:label "closing price value"@en ;
+	rdfs:comment "QName: NONE:closingPriceValue" ;
+	rdfs:domain fibo-md-dbtx-py:BondExchangeClosingPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The value of the price at closing, as a monetary amount (amount and currency)."@en ;
+	.
+
+fibo-md-dbtx-py:dayCountBasis
+	a owl:ObjectProperty ;
+	rdfs:label "day count basis"@en ;
+	rdfs:comment "QName: NONE:dayCountBasis" ;
+	rdfs:domain fibo-md-dbtx-py:YieldCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-fbc-dae-dbt:DayCountConvention ;
+	skos:definition "The convention used to calculate the number of days in an interest payment period."@en ;
+	.
+
+fibo-md-dbtx-py:daysAccrued
+	a owl:DatatypeProperty ;
+	rdfs:label "days accrued"@en ;
+	rdfs:comment "QName: NONE:daysAccrued" ;
+	rdfs:domain fibo-md-dbtx-py:DirtyPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of days that interest has accrued, as reflected in the price."@en ;
+	.
+
+fibo-md-dbtx-py:defaultRateValue
+	a owl:ObjectProperty ;
+	rdfs:label "default rate value"@en ;
+	rdfs:comment "QName: NONE:defaultRateValue" ;
+	rdfs:domain fibo-md-dbtx-py:DefaultRate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	.
+
+fibo-md-dbtx-py:determinedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-tem:derivedFrom ;
+	rdfs:label "determined by"@en ;
+	rdfs:comment "QName: NONE:determinedBy" ;
+	rdfs:domain fibo-md-dbtx-py:AbsolutePrepaymentRate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:AbsolatePrepaymentRateFormula ;
+	.
+
+fibo-md-dbtx-py:determinedRelativeTo
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-md-temx-tem:isBetween ;
+	rdfs:label "determined relative to"@en ;
+	rdfs:comment "QName: NONE:determinedRelativeTo" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-ind-ind-ind:MarketRate ;
+	.
+
+fibo-md-dbtx-py:determinedUsing
+	a owl:ObjectProperty ;
+	rdfs:label "determined using"@en ;
+	rdfs:comment "QName: NONE:determinedUsing" ;
+	rdfs:domain fibo-md-dbtx-py:RelativelyDefinedDebtInstrumentYield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:RelativeYieldCalculationMethod ;
+	.
+
+fibo-md-dbtx-py:determinesMarketPriceForDebt
+	a owl:ObjectProperty ;
+	rdfs:label "determines market price for debt"@en ;
+	rdfs:comment "QName: NONE:determinesMarketPriceForDebt" ;
+	rdfs:domain fibo-md-dbtx-py:DebtSecuritiesMarketMaker ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:OTCBondMarketPrice ;
+	owl:inverseOf fibo-md-dbtx-py:oTCBondMarketPriceHasPricingSource ;
+	.
+
+fibo-md-dbtx-py:dirtyPriceIncludes
+	a owl:ObjectProperty ;
+	rdfs:label "dirty price includes"@en ;
+	rdfs:comment "QName: NONE:dirtyPriceIncludes" ;
+	rdfs:domain fibo-md-dbtx-py:DirtyPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:AccruedInterestAmount ;
+	.
+
+fibo-md-dbtx-py:evaluatedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-be-fct-pub:hasPublisher ;
+	rdfs:label "evaluated by"@en ;
+	rdfs:comment "QName: NONE:evaluatedBy" ;
+	rdfs:domain fibo-md-dbtx-py:DebtIndependentlyEvaluatedPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:DebtPriceIndependentEvaluator ;
+	.
+
+fibo-md-dbtx-py:exchangeTradedBondPriceHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "exchange traded bond price has value"@en ;
+	rdfs:comment "QName: NONE:exchangeTradedBondPriceHasValue" ;
+	rdfs:domain fibo-md-dbtx-py:ExchangeTradedBondPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The percentage value of the price at a given point in time"@en ;
+	.
+
+fibo-md-dbtx-py:expressedAs
+	a owl:DatatypeProperty ;
+	rdfs:label "expressed as"@en ;
+	rdfs:comment "QName: NONE:expressedAs" ;
+	rdfs:domain fibo-md-dbtx-py:AbsolatePrepaymentRateFormula ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:string ;
+	skos:definition "ABS = (100 * SMM)/100 + (SMM X (Age- 1)"@en ;
+	.
+
+fibo-md-dbtx-py:expressedInRelationTo
+	a owl:ObjectProperty ;
+	rdfs:label "expressed in relation to" ;
+	rdfs:comment "QName: NONE:expressedInRelationTo" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:expression
+	a owl:DatatypeProperty ;
+	rdfs:label "expression"@en ;
+	rdfs:comment "QName: NONE:expression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:hasApplicablePeriod
+	a owl:ObjectProperty ;
+	rdfs:label "has applicable period"@en ;
+	rdfs:comment "QName: NONE:hasApplicablePeriod" ;
+	rdfs:domain fibo-md-dbtx-py:ExchangeTradedBondPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	.
+
+fibo-md-dbtx-py:hasDefaultRate
+	a owl:ObjectProperty ;
+	rdfs:label "has default rate"@en ;
+	rdfs:comment "QName: NONE:hasDefaultRate" ;
+	rdfs:domain fibo-sec-dbt-ab-abs:LoanPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:DefaultRate ;
+	.
+
+fibo-md-dbtx-py:hasDurationValue
+	a owl:ObjectProperty ;
+	rdfs:label "has duration value"@en ;
+	rdfs:comment "QName: NONE:hasDurationValue" ;
+	rdfs:domain fibo-md-dbtx-py:WeightedAverageTimeToReceiptOfCashflows ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:DatedDurationSpecification ;
+	.
+
+fibo-md-dbtx-py:hasInterestRate
+	a owl:ObjectProperty ;
+	rdfs:label "has interest rate"@en ;
+	rdfs:comment "QName: NONE:hasInterestRate" ;
+	rdfs:domain fibo-sec-dbt-dbti:TradableDebtInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-int:DebtSecurityInterestAmount ;
+	.
+
+fibo-md-dbtx-py:hasOutlookPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "has outlook period"@en ;
+	rdfs:comment "QName: NONE:hasOutlookPeriod" ;
+	rdfs:domain fibo-md-dbtx-py:DebtInstrumentYield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-md-dbtx-aly:LifeAnalytic
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fbc-fi-fi:hasTimeToMaturity ;
+				owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+			]
+			fibo-sec-dbt-dbti:PrescriptiveEvent
+			fibo-sec-dbt-dbti:RedemptionEvent
+		) ;
+	] ;
+	.
+
+fibo-md-dbtx-py:hasParameter
+	a owl:ObjectProperty ;
+	rdfs:label "has parameter"@en ;
+	rdfs:comment "QName: NONE:hasParameter" ;
+	rdfs:domain fibo-md-dbtx-py:YieldCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-fnd-math-math:TimedParameter ;
+	.
+
+fibo-md-dbtx-py:hasReferenceRate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:takesReferenceParameter ;
+	rdfs:label "has reference rate"@en ;
+	rdfs:comment "QName: NONE:hasReferenceRate" ;
+	rdfs:domain fibo-md-dbtx-py:ReferenceDebtInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-int:DebtInstrumentReferenceRate ;
+	.
+
+fibo-md-dbtx-py:hasRoundingDirection
+	a owl:ObjectProperty ;
+	rdfs:label "has rounding direction"@en ;
+	rdfs:comment "QName: NONE:hasRoundingDirection" ;
+	rdfs:domain fibo-md-dbtx-py:YieldCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-fnd-math-math:Direction ;
+	skos:definition "Whether the accrued interest is rounded up or down in this method."@en ;
+	.
+
+fibo-md-dbtx-py:hasWac
+	a owl:ObjectProperty ;
+	rdfs:label "has wac"@en ;
+	rdfs:comment "QName: NONE:hasWac" ;
+	rdfs:domain fibo-sec-dbt-ab-mbs:MortgageBackedSecurityInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:WeightedAverageCoupon ;
+	.
+
+fibo-md-dbtx-py:hasYield
+	a owl:ObjectProperty ;
+	rdfs:label "has yield"@en ;
+	rdfs:comment "QName: NONE:hasYield" ;
+	rdfs:domain fibo-sec-dbt-dbti:TradableDebtInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:DebtInstrumentYield ;
+	.
+
+fibo-md-dbtx-py:interpolatedBetween
+	a owl:ObjectProperty ;
+	rdfs:label "interpolated between" ;
+	rdfs:comment "QName: NONE:interpolatedBetween" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:isCompounded
+	a owl:DatatypeProperty ;
+	rdfs:label "is compounded"@en ;
+	rdfs:comment "QName: NONE:isCompounded" ;
+	rdfs:domain fibo-md-dbtx-py:DebtInstrumentYield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Definition needed Moved from Yield - assume this can only be about debt instrument or loan / debt yields i..e where the income relates to interest payments. ."@en ;
+	.
+
+fibo-md-dbtx-py:isDefaultMethodFor
+	a owl:ObjectProperty ;
+	rdfs:label "is default method for"@en ;
+	rdfs:comment "QName: NONE:isDefaultMethodFor" ;
+	rdfs:domain fibo-md-dbtx-py:NativeYieldCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-sec-dbt-dbti:TradableDebtInstrument ;
+	.
+
+fibo-md-dbtx-py:isSpreadBetween
+	a owl:ObjectProperty ;
+	rdfs:label "is spread between"@en ;
+	rdfs:comment "QName: NONE:isSpreadBetween" ;
+	rdfs:domain fibo-md-dbtx-py:DebtPriceSpread ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:DebtSecurityPrice ;
+	.
+
+fibo-md-dbtx-py:macCaulaysDurationHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "mac caulays duration has value"@en ;
+	rdfs:comment "QName: NONE:macCaulaysDurationHasValue" ;
+	rdfs:domain fibo-md-dbtx-py:MacCaulaysDurationAnalytic ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:TimedDurationSpecification ;
+	skos:definition "The MacCaulays Duration in Years."@en ;
+	.
+
+fibo-md-dbtx-py:macCaulaysDuratonValue
+	a owl:DatatypeProperty ;
+	rdfs:label "mac caulays duraton value"@en ;
+	rdfs:comment "QName: NONE:macCaulaysDuratonValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:oTCBondMarketPriceHasPricingSource
+	a owl:ObjectProperty ;
+	rdfs:label "o t c bond market price has pricing source"@en ;
+	rdfs:comment "QName: NONE:oTCBondMarketPriceHasPricingSource" ;
+	rdfs:domain fibo-md-dbtx-py:OTCBondMarketPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:DebtSecuritiesMarketMaker ;
+	.
+
+fibo-md-dbtx-py:openingPriceMethod
+	a owl:DatatypeProperty ;
+	rdfs:label "opening price method"@en ;
+	rdfs:comment "QName: NONE:openingPriceMethod" ;
+	rdfs:domain fibo-md-dbtx-py:BondExchangeOpeningPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The method by which the Opening Price is determined for that exchange."@en ;
+	.
+
+fibo-md-dbtx-py:otcBondMarketPriceHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "otc bond market price has value"@en ;
+	rdfs:comment "QName: NONE:otcBondMarketPriceHasValue" ;
+	rdfs:domain fibo-md-dbtx-py:OTCBondMarketPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	.
+
+fibo-md-dbtx-py:pointInTimePriceHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "point in time price has value"@en ;
+	rdfs:comment "QName: NONE:pointInTimePriceHasValue" ;
+	rdfs:domain fibo-md-dbtx-py:DebtPublishedPointInTimePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-fnd-utl-val:BasisPointsValue ;
+	skos:definition "Is normally be expressed in basis points, although the meaning of BP implies a percentage value. Change this to BP."@en ;
+	.
+
+fibo-md-dbtx-py:priceDeterminationConventionNotes
+	a owl:DatatypeProperty ;
+	rdfs:label "price determination convention notes"@en ;
+	rdfs:comment "QName: NONE:priceDeterminationConventionNotes" ;
+	rdfs:domain fibo-md-dbtx-py:BondExchangeClosingPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Further free text notes on the way in which the closing price is determined."@en ;
+	.
+
+fibo-md-dbtx-py:priceDeterminationMethod
+	a owl:DatatypeProperty ;
+	rdfs:label "price determination method"@en ;
+	rdfs:comment "QName: NONE:priceDeterminationMethod" ;
+	rdfs:domain fibo-md-dbtx-py:ExchangeTradedBondPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:string ;
+	skos:definition
+		"The method by which the High Price is determined on that exchange."@en ,
+		"The method by which the High or Low Price is determined on that exchange."@en
+		;
+	.
+
+fibo-md-dbtx-py:priceIsTraded
+	a owl:DatatypeProperty ;
+	rdfs:label "price is traded"@en ;
+	rdfs:comment "QName: NONE:priceIsTraded" ;
+	rdfs:domain fibo-md-dbtx-py:ExchangeTradedBondPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "The highest valuation over the period specified. Notes from Equity review, may apply to Debt also: this can be regarded as a derived price. See also note in LowPrice Difference: different rules used. May be based on trade OR quote price Analytic or Price?? this is a derived type but with a much simpler rule."@en ;
+	.
+
+fibo-md-dbtx-py:priceQuotedExDividend
+	a owl:DatatypeProperty ;
+	rdfs:label "price quoted ex dividend"@en ;
+	rdfs:comment "QName: NONE:priceQuotedExDividend" ;
+	rdfs:domain fibo-md-dbtx-py:DebtInstrumentYield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether or not the yield is based on a price which is quoted ex-dividend. When a bond is said to trade ex-dividend it means that there is a period of time prior to each coupon payment during which a bond purchaser does not receive custody of the next coupon. That payment is made to the previous bond holder and accrued interest is therefore negative during the ex-dividend period."@en ;
+	.
+
+fibo-md-dbtx-py:priceValue
+	a owl:ObjectProperty ;
+	rdfs:label "price value"@en ;
+	rdfs:comment "QName: NONE:priceValue" ;
+	rdfs:domain fibo-md-dbtx-py:DebtSecurityPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The price of the debt instrument expressed as a percentage of the par value of the instrument."@en ;
+	.
+
+fibo-md-dbtx-py:quoteSize
+	a owl:DatatypeProperty ;
+	rdfs:label "quote size"@en ;
+	rdfs:comment "QName: NONE:quoteSize" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-md-dbtx-py:quotedExDividend
+	a owl:DatatypeProperty ;
+	rdfs:label "quoted ex dividend"@en ;
+	rdfs:comment "QName: NONE:quotedExDividend" ;
+	rdfs:domain fibo-md-dbtx-py:DebtSecurityPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether or not the price is quoted ex-dividend. When a bond is said to trade ex-dividend it means that there is a period of time prior to each coupon payment during which a bond purchaser does not receive custody of the next coupon. That payment is made to the previous bond holder and accrued interest is therefore negative during the ex-dividend period."@en ;
+	.
+
+fibo-md-dbtx-py:relativeTo
+	a owl:ObjectProperty ;
+	rdfs:label "relative to"@en ;
+	rdfs:comment "QName: NONE:relativeTo" ;
+	rdfs:domain fibo-md-temx-ins:CreditSpread ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-md-dbtx-int:DebtInstrumentReferenceRate
+			<https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/ReferenceInterestRate>
+		) ;
+	] ;
+	.
+
+fibo-md-dbtx-py:roundingConvention
+	a owl:DatatypeProperty ;
+	rdfs:label "rounding convention"@en ;
+	rdfs:comment "QName: NONE:roundingConvention" ;
+	rdfs:domain fibo-md-dbtx-py:YieldCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The rounding convention used in the calculation method."@en ;
+	.
+
+fibo-md-dbtx-py:takesAccountOfQuoteSize
+	a owl:DatatypeProperty ;
+	rdfs:label "takes account of quote size"@en ;
+	rdfs:comment "QName: NONE:takesAccountOfQuoteSize" ;
+	rdfs:domain fibo-md-dbtx-py:ExchangeTradedBondPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range xsd:integer ;
+	skos:definition
+		"High or Low Price takes into account size of quote."@en ,
+		"Low Price takes into account size of quote."@en
+		;
+	.
+
+fibo-md-dbtx-py:tradingDate
+	a owl:ObjectProperty ;
+	rdfs:label "trading date"@en ;
+	rdfs:comment "QName: NONE:tradingDate" ;
+	rdfs:domain fibo-md-dbtx-py:BondExchangeClosingPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The trading date for which this information is applicable."@en ;
+	.
+
+fibo-md-dbtx-py:usedToDetermine
+	a owl:ObjectProperty ;
+	rdfs:label "used to determine"@en ;
+	rdfs:comment "QName: NONE:usedToDetermine" ;
+	rdfs:domain fibo-md-dbtx-py:DebtPriceSpread ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:DebtSecurityPrice ;
+	.
+
+fibo-md-dbtx-py:usesPrice
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-md-dbtx-py:hasParameter ;
+	rdfs:label "uses price"@en ;
+	rdfs:comment "QName: NONE:usesPrice" ;
+	rdfs:domain fibo-md-dbtx-py:SimpleYieldCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-dbtx-py:DirtyPrice ;
+	.
+
+fibo-md-dbtx-py:valuationDateAndTime
+	a owl:ObjectProperty ;
+	rdfs:label "valuation date and time"@en ;
+	rdfs:comment "QName: NONE:valuationDateAndTime" ;
+	rdfs:domain fibo-md-dbtx-py:BondExchangeLastPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "The date and time at which the Last Price was determined i.e. the time time and date of the offer or trade that the price relates to."@en ;
+	.
+
+fibo-md-dbtx-py:wACHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "w a c has value"@en ;
+	rdfs:comment "QName: NONE:wACHasValue" ;
+	rdfs:domain fibo-md-dbtx-py:WeightedAverageCoupon ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The value of the Weighted Average Coupon at some point in the past or at the present time."@en ;
+	.
+
+fibo-md-dbtx-py:wACValue
+	a owl:DatatypeProperty ;
+	rdfs:label "w a c value"@en ;
+	rdfs:comment "QName: NONE:wACValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ;
+	.
+
+fibo-sec-dbt-ab-abs:LoanPool
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-md-dbtx-py:hasDefaultRate ;
+		owl:someValuesFrom fibo-md-dbtx-py:DefaultRate ;
+	] ;
+	.
+
+fibo-sec-dbt-ab-mbs:MortgageBackedSecurityInstrument
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-md-dbtx-py:hasWac ;
+		owl:someValuesFrom fibo-md-dbtx-py:WeightedAverageCoupon ;
+	] ;
+	.
+
+fibo-sec-dbt-dbti:TradableDebtInstrument
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-md-dbtx-py:hasYield ;
+		owl:someValuesFrom fibo-md-dbtx-py:DebtInstrumentYield ;
+	] ;
+	.
+

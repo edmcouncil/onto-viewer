@@ -1,0 +1,111 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/BondOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/BondOptions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-ass: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> .
+@prefix fibo-der-ass-bo: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-fnd-txn-sec: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SecuritiesTransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/>
+	a owl:Ontology ;
+	rdfs:label "BondOptions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Option instruments with an underlying bond asset." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/BondOptions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-ass-bo:BondOptionUnderlyingTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionalUnderlyingTransaction ,
+		fibo-fnd-txn-sec:FinancialSecuritiesSecondaryMarketTransaction
+		;
+	rdfs:label "bond option underlying transaction"@en ;
+	rdfs:comment "QName: NONE:BondOptionUnderlyingTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/> ;
+	skos:definition "A transaction which is defined in a bond option contract and which may or may not take place, at the discretion of the holder of the option. If it does take place, this will be a transaction for the purchase or sale of the deliverable underlying (in this case a bond) as defined in the option contract."@en ;
+	.
+
+fibo-der-ass-bo:BondUnderlying
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-ass:DebtObservable ;
+	rdfs:label "bond underlying"@en ;
+	rdfs:comment "QName: NONE:BondUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/> ;
+	.
+
+fibo-der-ass-bo:OTCBondOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-ass:DebtDerivativeContract ,
+		fibo-der-der-opt:OTCOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-bo:definesOptionalBondOptionUnderlyingTransaction ;
+			owl:someValuesFrom fibo-der-ass-bo:BondOptionUnderlyingTransaction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-bo:oTCBondOptionHasUnderlying ;
+			owl:someValuesFrom fibo-der-ass-bo:BondUnderlying ;
+		]
+		;
+	rdfs:label "o t c bond option"@en ;
+	rdfs:comment "QName: NONE:OTCBondOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/> ;
+	skos:definition "Definition needed."@en ;
+	skos:editorialNote "FpML Definition (unusable): A component describing a Bond Option product."@en ;
+	.
+
+fibo-der-ass-bo:definesOptionalBondOptionUnderlyingTransaction
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-der-opt:definesOptional ;
+	rdfs:label "defines optional bond option underlying transaction"@en ;
+	rdfs:comment "QName: NONE:definesOptionalBondOptionUnderlyingTransaction" ;
+	rdfs:domain fibo-der-ass-bo:OTCBondOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/> ;
+	rdfs:range fibo-der-ass-bo:BondOptionUnderlyingTransaction ;
+	.
+
+fibo-der-ass-bo:oTCBondOptionHasUnderlying
+	a owl:ObjectProperty ;
+	rdfs:label "o t c bond option has underlying"@en ;
+	rdfs:comment "QName: NONE:oTCBondOptionHasUnderlying" ;
+	rdfs:domain fibo-der-ass-bo:OTCBondOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/> ;
+	rdfs:range fibo-der-ass-bo:BondUnderlying ;
+	.
+
+fibo-der-ass-bo:underlyingBondPrice
+	a owl:ObjectProperty ;
+	rdfs:label "underlying bond price"@en ;
+	rdfs:comment "QName: NONE:underlyingBondPrice" ;
+	rdfs:domain fibo-der-ass-bo:BondOptionUnderlyingTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The price at which the bond is bought and sold in the underlying transaction."@en ;
+	.
+

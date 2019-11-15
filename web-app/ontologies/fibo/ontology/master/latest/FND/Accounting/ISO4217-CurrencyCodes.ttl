@@ -1,0 +1,6264 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/ISO4217-CurrencyCodes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/ISO4217-CurrencyCodes/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-4217: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-arr-cd: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-3166-1: <https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix lcc-lr: <https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/>
+	a owl:Ontology ;
+	rdfs:label "ISO 4217-1 Currency Codes Ontology" ;
+	rdfs:comment "QName: fibo-fnd-acc-4217:" ;
+	dct:abstract "This ontology represents the subset of the ISO 4217 standard that include the actual currency codes." ;
+	dct:date "2018-08-29" ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage
+		"http://www.omg.org/spec/ODM/"^^xsd:anyURI ,
+		"http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI
+		;
+	sm:contributor "Thematix Partners LLC" ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"^^xsd:anyURI
+		;
+	sm:directSource
+		"ISO 4217:2015 - Codes for the representation of currencies and funds" ,
+		"Revised ISO 4217 Codes List, as maintained by the SNV, available at http://www.currency-iso.org/en/home.html"
+		;
+	sm:fileAbbreviation "fibo-fnd-acc-4217" ;
+	sm:filename "ISO4217-CurrencyCodes.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/ version of this ontology was modified to replace Swaziland with Eswatini, which was revised by the LCC 1.1 RTF to reflect the change to the country name per the U.N." ,
+		"This version is now generated from the ISO XML file as published on 2018-08-29"
+		;
+	fibo-fnd-utl-av:explanatoryNote "This release includes all codes included in the ISO 4217 published code set." ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-acc-4217:ADBUnitofAccount
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccount
+		;
+	rdfs:label "ADB Unit of Account" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ADBUnitofAccount" ,
+		"the ADB Unit of Account"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "965" ;
+	fibo-fnd-aap-agt:hasName "ADB Unit of Account" ;
+	.
+
+fibo-fnd-acc-4217:AED
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "AED" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AED" ,
+		"the currency identifier for UAE Dirham"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "AED" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:UAEDirham ;
+	lcc-lr:identifies fibo-fnd-acc-4217:UAEDirham ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:AFN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "AFN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AFN" ,
+		"the currency identifier for Afghani"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "AFN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Afghani ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Afghani ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ALL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ALL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ALL" ,
+		"the currency identifier for Lek"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ALL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Lek ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Lek ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:AMD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "AMD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AMD" ,
+		"the currency identifier for Armenian Dram"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "AMD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ArmenianDram ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ArmenianDram ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ANG
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ANG" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ANG" ,
+		"the currency identifier for Netherlands Antillean Guilder"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ANG" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:NetherlandsAntilleanGuilder ;
+	lcc-lr:identifies fibo-fnd-acc-4217:NetherlandsAntilleanGuilder ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:AOA
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "AOA" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AOA" ,
+		"the currency identifier for Kwanza"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "AOA" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Kwanza ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Kwanza ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ARS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ARS" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ARS" ,
+		"the currency identifier for Argentine Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ARS" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ArgentinePeso ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ArgentinePeso ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:AUD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "AUD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AUD" ,
+		"the currency identifier for Australian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "AUD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:AustralianDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:AustralianDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:AWG
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "AWG" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AWG" ,
+		"the currency identifier for Aruban Florin"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "AWG" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ArubanFlorin ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ArubanFlorin ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:AZN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "AZN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AZN" ,
+		"the currency identifier for Azerbaijan Manat"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "AZN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:AzerbaijanManat ;
+	lcc-lr:identifies fibo-fnd-acc-4217:AzerbaijanManat ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Afghani
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Afghani" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Afghani" ,
+		"the currency Afghani"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "971" ;
+	fibo-fnd-aap-agt:hasName "Afghani" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Afghanistan ;
+	.
+
+fibo-fnd-acc-4217:AlgerianDinar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Algerian Dinar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AlgerianDinar" ,
+		"the currency Algerian Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "012" ;
+	fibo-fnd-aap-agt:hasName "Algerian Dinar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Algeria ;
+	.
+
+fibo-fnd-acc-4217:ArgentinePeso
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Argentine Peso" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ArgentinePeso" ,
+		"the currency Argentine Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "032" ;
+	fibo-fnd-aap-agt:hasName "Argentine Peso" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Argentina ;
+	.
+
+fibo-fnd-acc-4217:ArmenianDram
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Armenian Dram" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ArmenianDram" ,
+		"the currency Armenian Dram"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "051" ;
+	fibo-fnd-aap-agt:hasName "Armenian Dram" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Armenia ;
+	.
+
+fibo-fnd-acc-4217:ArubanFlorin
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Aruban Florin" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ArubanFlorin" ,
+		"the currency Aruban Florin"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "533" ;
+	fibo-fnd-aap-agt:hasName "Aruban Florin" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Aruba ;
+	.
+
+fibo-fnd-acc-4217:AustralianDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Australian Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AustralianDollar" ,
+		"the currency Australian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "036" ;
+	fibo-fnd-aap-agt:hasName "Australian Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Australia ,
+		lcc-3166-1:ChristmasIsland ,
+		lcc-3166-1:CocosKeelingIslands ,
+		lcc-3166-1:HeardIslandAndMcDonaldIslands ,
+		lcc-3166-1:Kiribati ,
+		lcc-3166-1:Nauru ,
+		lcc-3166-1:NorfolkIsland ,
+		lcc-3166-1:Tuvalu
+		;
+	.
+
+fibo-fnd-acc-4217:AzerbaijanManat
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Azerbaijan Manat" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:AzerbaijanManat" ,
+		"the currency Azerbaijan Manat"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "944" ;
+	fibo-fnd-aap-agt:hasName "Azerbaijan Manat" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Azerbaijan ;
+	.
+
+fibo-fnd-acc-4217:BAM
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BAM" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BAM" ,
+		"the currency identifier for Convertible Mark"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BAM" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ConvertibleMark ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ConvertibleMark ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BBD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BBD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BBD" ,
+		"the currency identifier for Barbados Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BBD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BarbadosDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BarbadosDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BDT
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BDT" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BDT" ,
+		"the currency identifier for Taka"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BDT" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Taka ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Taka ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BGN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BGN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BGN" ,
+		"the currency identifier for Bulgarian Lev"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BGN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BulgarianLev ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BulgarianLev ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BHD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BHD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BHD" ,
+		"the currency identifier for Bahraini Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BHD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BahrainiDinar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BahrainiDinar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BIF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BIF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BIF" ,
+		"the currency identifier for Burundi Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BIF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BurundiFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BurundiFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BMD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BMD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BMD" ,
+		"the currency identifier for Bermudian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BMD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BermudianDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BermudianDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BND
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BND" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BND" ,
+		"the currency identifier for Brunei Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BND" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BruneiDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BruneiDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BOB
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BOB" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BOB" ,
+		"the currency identifier for Boliviano"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BOB" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Boliviano ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Boliviano ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BOV
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "BOV" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BOV" ,
+		"the funds identifier for Mvdol"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BOV" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Mvdol ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Mvdol ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BRL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BRL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BRL" ,
+		"the currency identifier for Brazilian Real"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BRL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BrazilianReal ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BrazilianReal ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BSD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BSD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BSD" ,
+		"the currency identifier for Bahamian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BSD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BahamianDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BahamianDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BTN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BTN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BTN" ,
+		"the currency identifier for Ngultrum"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BTN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Ngultrum ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Ngultrum ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BWP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BWP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BWP" ,
+		"the currency identifier for Pula"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BWP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Pula ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Pula ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BYN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BYN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BYN" ,
+		"the currency identifier for Belarusian Ruble"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BYN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BelarusianRuble ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BelarusianRuble ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BZD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "BZD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BZD" ,
+		"the currency identifier for Belize Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "BZD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BelizeDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BelizeDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:BahamianDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Bahamian Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BahamianDollar" ,
+		"the currency Bahamian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "044" ;
+	fibo-fnd-aap-agt:hasName "Bahamian Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Bahamas ;
+	.
+
+fibo-fnd-acc-4217:BahrainiDinar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Bahraini Dinar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BahrainiDinar" ,
+		"the currency Bahraini Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "3" ;
+	fibo-fnd-acc-cur:hasNumericCode "048" ;
+	fibo-fnd-aap-agt:hasName "Bahraini Dinar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Bahrain ;
+	.
+
+fibo-fnd-acc-4217:Baht
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Baht" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Baht" ,
+		"the currency Baht"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "764" ;
+	fibo-fnd-aap-agt:hasName "Baht" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Thailand ;
+	.
+
+fibo-fnd-acc-4217:Balboa
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Balboa" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Balboa" ,
+		"the currency Balboa"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "590" ;
+	fibo-fnd-aap-agt:hasName "Balboa" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Panama ;
+	.
+
+fibo-fnd-acc-4217:BarbadosDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Barbados Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BarbadosDollar" ,
+		"the currency Barbados Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "052" ;
+	fibo-fnd-aap-agt:hasName "Barbados Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Barbados ;
+	.
+
+fibo-fnd-acc-4217:BelarusianRuble
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Belarusian Ruble" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BelarusianRuble" ,
+		"the currency Belarusian Ruble"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "933" ;
+	fibo-fnd-aap-agt:hasName "Belarusian Ruble" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Belarus ;
+	.
+
+fibo-fnd-acc-4217:BelizeDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Belize Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BelizeDollar" ,
+		"the currency Belize Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "084" ;
+	fibo-fnd-aap-agt:hasName "Belize Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Belize ;
+	.
+
+fibo-fnd-acc-4217:BermudianDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Bermudian Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BermudianDollar" ,
+		"the currency Bermudian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "060" ;
+	fibo-fnd-aap-agt:hasName "Bermudian Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Bermuda ;
+	.
+
+fibo-fnd-acc-4217:Boliviano
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Boliviano" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Boliviano" ,
+		"the currency Boliviano"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "068" ;
+	fibo-fnd-aap-agt:hasName "Boliviano" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Bolivia ;
+	.
+
+fibo-fnd-acc-4217:BolívarSoberano
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Bolívar Soberano" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BolívarSoberano" ,
+		"the currency Bolívar Soberano"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "928" ;
+	fibo-fnd-aap-agt:hasName "Bolívar Soberano" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Venezuela ;
+	.
+
+fibo-fnd-acc-4217:BondMarketsUnitEuropeanCompositeUnit_EURCO
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccount
+		;
+	rdfs:label "Bond Markets Unit European Composite Unit (EURCO)" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BondMarketsUnitEuropeanCompositeUnit_EURCO" ,
+		"the Bond Markets Unit European Composite Unit (EURCO)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "955" ;
+	fibo-fnd-aap-agt:hasName "Bond Markets Unit European Composite Unit (EURCO)" ;
+	.
+
+fibo-fnd-acc-4217:BondMarketsUnitEuropeanMonetaryUnit_EMU-6
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccount
+		;
+	rdfs:label "Bond Markets Unit European Monetary Unit (E.M.U.-6)" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BondMarketsUnitEuropeanMonetaryUnit_EMU-6" ,
+		"the Bond Markets Unit European Monetary Unit (E.M.U.-6)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "956" ;
+	fibo-fnd-aap-agt:hasName "Bond Markets Unit European Monetary Unit (E.M.U.-6)" ;
+	.
+
+fibo-fnd-acc-4217:BondMarketsUnitEuropeanUnitofAccount17_EUA-17
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccount
+		;
+	rdfs:label "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BondMarketsUnitEuropeanUnitofAccount17_EUA-17" ,
+		"the Bond Markets Unit European Unit of Account 17 (E.U.A.-17)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "958" ;
+	fibo-fnd-aap-agt:hasName "Bond Markets Unit European Unit of Account 17 (E.U.A.-17)" ;
+	.
+
+fibo-fnd-acc-4217:BondMarketsUnitEuropeanUnitofAccount9_EUA-9
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccount
+		;
+	rdfs:label "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BondMarketsUnitEuropeanUnitofAccount9_EUA-9" ,
+		"the Bond Markets Unit European Unit of Account 9 (E.U.A.-9)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "957" ;
+	fibo-fnd-aap-agt:hasName "Bond Markets Unit European Unit of Account 9 (E.U.A.-9)" ;
+	.
+
+fibo-fnd-acc-4217:BrazilianReal
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Brazilian Real" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BrazilianReal" ,
+		"the currency Brazilian Real"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "986" ;
+	fibo-fnd-aap-agt:hasName "Brazilian Real" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Brazil ;
+	.
+
+fibo-fnd-acc-4217:BruneiDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Brunei Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BruneiDollar" ,
+		"the currency Brunei Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "096" ;
+	fibo-fnd-aap-agt:hasName "Brunei Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:BruneiDarussalam ;
+	.
+
+fibo-fnd-acc-4217:BulgarianLev
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Bulgarian Lev" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BulgarianLev" ,
+		"the currency Bulgarian Lev"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "975" ;
+	fibo-fnd-aap-agt:hasName "Bulgarian Lev" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Bulgaria ;
+	.
+
+fibo-fnd-acc-4217:BurundiFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Burundi Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:BurundiFranc" ,
+		"the currency Burundi Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "108" ;
+	fibo-fnd-aap-agt:hasName "Burundi Franc" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Burundi ;
+	.
+
+fibo-fnd-acc-4217:CAD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CAD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CAD" ,
+		"the currency identifier for Canadian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CAD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CanadianDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CanadianDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CDF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CDF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CDF" ,
+		"the currency identifier for Congolese Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CDF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CongoleseFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CongoleseFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CFAFrancBCEAO
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "CFA Franc BCEAO" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CFAFrancBCEAO" ,
+		"the currency CFA Franc BCEAO"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "952" ;
+	fibo-fnd-aap-agt:hasName "CFA Franc BCEAO" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Benin ,
+		lcc-3166-1:BurkinaFaso ,
+		lcc-3166-1:CoteDIvoire ,
+		lcc-3166-1:Guinea-Bissau ,
+		lcc-3166-1:Mali ,
+		lcc-3166-1:Niger ,
+		lcc-3166-1:Senegal ,
+		lcc-3166-1:Togo
+		;
+	.
+
+fibo-fnd-acc-4217:CFAFrancBEAC
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "CFA Franc BEAC" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CFAFrancBEAC" ,
+		"the currency CFA Franc BEAC"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "950" ;
+	fibo-fnd-aap-agt:hasName "CFA Franc BEAC" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Cameroon ,
+		lcc-3166-1:CentralAfricanRepublic ,
+		lcc-3166-1:Chad ,
+		lcc-3166-1:Congo ,
+		lcc-3166-1:EquatorialGuinea ,
+		lcc-3166-1:Gabon
+		;
+	.
+
+fibo-fnd-acc-4217:CFPFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "CFP Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CFPFranc" ,
+		"the currency CFP Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "953" ;
+	fibo-fnd-aap-agt:hasName "CFP Franc" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:FrenchPolynesia ,
+		lcc-3166-1:NewCaledonia ,
+		lcc-3166-1:WallisAndFutuna
+		;
+	.
+
+fibo-fnd-acc-4217:CHE
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "CHE" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CHE" ,
+		"the funds identifier for WIR Euro"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CHE" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:WIREuro ;
+	lcc-lr:identifies fibo-fnd-acc-4217:WIREuro ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CHF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CHF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CHF" ,
+		"the currency identifier for Swiss Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CHF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SwissFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SwissFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CHW
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "CHW" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CHW" ,
+		"the funds identifier for WIR Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CHW" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:WIRFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:WIRFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CLF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "CLF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CLF" ,
+		"the funds identifier for Unidad de Fomento"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CLF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:UnidaddeFomento ;
+	lcc-lr:identifies fibo-fnd-acc-4217:UnidaddeFomento ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CLP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CLP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CLP" ,
+		"the currency identifier for Chilean Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CLP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ChileanPeso ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ChileanPeso ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CNY
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CNY" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CNY" ,
+		"the currency identifier for Yuan Renminbi"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CNY" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:YuanRenminbi ;
+	lcc-lr:identifies fibo-fnd-acc-4217:YuanRenminbi ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:COP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "COP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:COP" ,
+		"the currency identifier for Colombian Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "COP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ColombianPeso ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ColombianPeso ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:COU
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "COU" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:COU" ,
+		"the funds identifier for Unidad de Valor Real"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "COU" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:UnidaddeValorReal ;
+	lcc-lr:identifies fibo-fnd-acc-4217:UnidaddeValorReal ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CRC
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CRC" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CRC" ,
+		"the currency identifier for Costa Rican Colon"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CRC" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CostaRicanColon ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CostaRicanColon ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CUC
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CUC" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CUC" ,
+		"the currency identifier for Peso Convertible"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CUC" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:PesoConvertible ;
+	lcc-lr:identifies fibo-fnd-acc-4217:PesoConvertible ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CUP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CUP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CUP" ,
+		"the currency identifier for Cuban Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CUP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CubanPeso ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CubanPeso ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CVE
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CVE" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CVE" ,
+		"the currency identifier for Cabo Verde Escudo"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CVE" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CaboVerdeEscudo ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CaboVerdeEscudo ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CZK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "CZK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CZK" ,
+		"the currency identifier for Czech Koruna"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "CZK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CzechKoruna ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CzechKoruna ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:CaboVerdeEscudo
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Cabo Verde Escudo" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CaboVerdeEscudo" ,
+		"the currency Cabo Verde Escudo"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "132" ;
+	fibo-fnd-aap-agt:hasName "Cabo Verde Escudo" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:CaboVerde ;
+	.
+
+fibo-fnd-acc-4217:CanadianDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Canadian Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CanadianDollar" ,
+		"the currency Canadian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "124" ;
+	fibo-fnd-aap-agt:hasName "Canadian Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Canada ;
+	.
+
+fibo-fnd-acc-4217:CaymanIslandsDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Cayman Islands Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CaymanIslandsDollar" ,
+		"the currency Cayman Islands Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "136" ;
+	fibo-fnd-aap-agt:hasName "Cayman Islands Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:CaymanIslands ;
+	.
+
+fibo-fnd-acc-4217:ChileanPeso
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Chilean Peso" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ChileanPeso" ,
+		"the currency Chilean Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "152" ;
+	fibo-fnd-aap-agt:hasName "Chilean Peso" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Chile ;
+	.
+
+fibo-fnd-acc-4217:ColombianPeso
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Colombian Peso" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ColombianPeso" ,
+		"the currency Colombian Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "170" ;
+	fibo-fnd-aap-agt:hasName "Colombian Peso" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Colombia ;
+	.
+
+fibo-fnd-acc-4217:ComorianFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Comorian Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ComorianFranc" ,
+		"the currency Comorian Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "174" ;
+	fibo-fnd-aap-agt:hasName "Comorian Franc" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Comoros ;
+	.
+
+fibo-fnd-acc-4217:CongoleseFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Congolese Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CongoleseFranc" ,
+		"the currency Congolese Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "976" ;
+	fibo-fnd-aap-agt:hasName "Congolese Franc" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:CongoDemocraticRepublicOf ;
+	.
+
+fibo-fnd-acc-4217:ConvertibleMark
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Convertible Mark" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ConvertibleMark" ,
+		"the currency Convertible Mark"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "977" ;
+	fibo-fnd-aap-agt:hasName "Convertible Mark" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:BosniaAndHerzegovina ;
+	.
+
+fibo-fnd-acc-4217:CordobaOro
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Cordoba Oro" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CordobaOro" ,
+		"the currency Cordoba Oro"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "558" ;
+	fibo-fnd-aap-agt:hasName "Cordoba Oro" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Nicaragua ;
+	.
+
+fibo-fnd-acc-4217:CostaRicanColon
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Costa Rican Colon" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CostaRicanColon" ,
+		"the currency Costa Rican Colon"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "188" ;
+	fibo-fnd-aap-agt:hasName "Costa Rican Colon" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:CostaRica ;
+	.
+
+fibo-fnd-acc-4217:CubanPeso
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Cuban Peso" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CubanPeso" ,
+		"the currency Cuban Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "192" ;
+	fibo-fnd-aap-agt:hasName "Cuban Peso" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Cuba ;
+	.
+
+fibo-fnd-acc-4217:CzechKoruna
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Czech Koruna" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:CzechKoruna" ,
+		"the currency Czech Koruna"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "203" ;
+	fibo-fnd-aap-agt:hasName "Czech Koruna" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Czechia ;
+	.
+
+fibo-fnd-acc-4217:DJF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "DJF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:DJF" ,
+		"the currency identifier for Djibouti Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "DJF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:DjiboutiFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:DjiboutiFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:DKK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "DKK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:DKK" ,
+		"the currency identifier for Danish Krone"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "DKK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:DanishKrone ;
+	lcc-lr:identifies fibo-fnd-acc-4217:DanishKrone ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:DOP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "DOP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:DOP" ,
+		"the currency identifier for Dominican Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "DOP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:DominicanPeso ;
+	lcc-lr:identifies fibo-fnd-acc-4217:DominicanPeso ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:DZD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "DZD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:DZD" ,
+		"the currency identifier for Algerian Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "DZD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:AlgerianDinar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:AlgerianDinar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Dalasi
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Dalasi" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Dalasi" ,
+		"the currency Dalasi"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "270" ;
+	fibo-fnd-aap-agt:hasName "Dalasi" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Gambia ;
+	.
+
+fibo-fnd-acc-4217:DanishKrone
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Danish Krone" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:DanishKrone" ,
+		"the currency Danish Krone"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "208" ;
+	fibo-fnd-aap-agt:hasName "Danish Krone" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Denmark ,
+		lcc-3166-1:FaroeIslands ,
+		lcc-3166-1:Greenland
+		;
+	.
+
+fibo-fnd-acc-4217:Denar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Denar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Denar" ,
+		"the currency Denar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "807" ;
+	fibo-fnd-aap-agt:hasName "Denar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Macedonia ;
+	.
+
+fibo-fnd-acc-4217:DjiboutiFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Djibouti Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:DjiboutiFranc" ,
+		"the currency Djibouti Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "262" ;
+	fibo-fnd-aap-agt:hasName "Djibouti Franc" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Djibouti ;
+	.
+
+fibo-fnd-acc-4217:Dobra
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Dobra" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Dobra" ,
+		"the currency Dobra"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "930" ;
+	fibo-fnd-aap-agt:hasName "Dobra" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:SaoTomeAndPrincipe ;
+	.
+
+fibo-fnd-acc-4217:DominicanPeso
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Dominican Peso" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:DominicanPeso" ,
+		"the currency Dominican Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "214" ;
+	fibo-fnd-aap-agt:hasName "Dominican Peso" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:DominicanRepublic ;
+	.
+
+fibo-fnd-acc-4217:Dong
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Dong" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Dong" ,
+		"the currency Dong"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "704" ;
+	fibo-fnd-aap-agt:hasName "Dong" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:VietNam ;
+	.
+
+fibo-fnd-acc-4217:EGP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "EGP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:EGP" ,
+		"the currency identifier for Egyptian Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "EGP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:EgyptianPound ;
+	lcc-lr:identifies fibo-fnd-acc-4217:EgyptianPound ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ERN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ERN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ERN" ,
+		"the currency identifier for Nakfa"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ERN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Nakfa ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Nakfa ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ETB
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ETB" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ETB" ,
+		"the currency identifier for Ethiopian Birr"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ETB" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:EthiopianBirr ;
+	lcc-lr:identifies fibo-fnd-acc-4217:EthiopianBirr ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:EUR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "EUR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:EUR" ,
+		"the currency identifier for Euro"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "EUR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Euro ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Euro ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:EastCaribbeanDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "East Caribbean Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:EastCaribbeanDollar" ,
+		"the currency East Caribbean Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "951" ;
+	fibo-fnd-aap-agt:hasName "East Caribbean Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Anguilla ,
+		lcc-3166-1:AntiguaAndBarbuda ,
+		lcc-3166-1:Dominica ,
+		lcc-3166-1:Grenada ,
+		lcc-3166-1:Montserrat ,
+		lcc-3166-1:SaintKittsAndNevis ,
+		lcc-3166-1:SaintLucia ,
+		lcc-3166-1:SaintVincentAndTheGrenadines
+		;
+	.
+
+fibo-fnd-acc-4217:EgyptianPound
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Egyptian Pound" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:EgyptianPound" ,
+		"the currency Egyptian Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "818" ;
+	fibo-fnd-aap-agt:hasName "Egyptian Pound" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Egypt ;
+	.
+
+fibo-fnd-acc-4217:ElSalvadorColon
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "El Salvador Colon" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ElSalvadorColon" ,
+		"the currency El Salvador Colon"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "222" ;
+	fibo-fnd-aap-agt:hasName "El Salvador Colon" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:ElSalvador ;
+	.
+
+fibo-fnd-acc-4217:EthiopianBirr
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Ethiopian Birr" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:EthiopianBirr" ,
+		"the currency Ethiopian Birr"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "230" ;
+	fibo-fnd-aap-agt:hasName "Ethiopian Birr" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Ethiopia ;
+	.
+
+fibo-fnd-acc-4217:Euro
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Euro" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Euro" ,
+		"the currency Euro"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "978" ;
+	fibo-fnd-aap-agt:hasName "Euro" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:AlandIslands ,
+		lcc-3166-1:Andorra ,
+		lcc-3166-1:Austria ,
+		lcc-3166-1:Belgium ,
+		lcc-3166-1:Cyprus ,
+		lcc-3166-1:Estonia ,
+		lcc-3166-1:Finland ,
+		lcc-3166-1:France ,
+		lcc-3166-1:FrenchGuiana ,
+		lcc-3166-1:FrenchSouthernTerritories ,
+		lcc-3166-1:Germany ,
+		lcc-3166-1:Greece ,
+		lcc-3166-1:Guadeloupe ,
+		lcc-3166-1:HolySee ,
+		lcc-3166-1:Ireland ,
+		lcc-3166-1:Italy ,
+		lcc-3166-1:Latvia ,
+		lcc-3166-1:Lithuania ,
+		lcc-3166-1:Luxembourg ,
+		lcc-3166-1:Malta ,
+		lcc-3166-1:Martinique ,
+		lcc-3166-1:Mayotte ,
+		lcc-3166-1:Monaco ,
+		lcc-3166-1:Montenegro ,
+		lcc-3166-1:Netherlands ,
+		lcc-3166-1:Portugal ,
+		lcc-3166-1:Reunion ,
+		lcc-3166-1:SaintBarthelemy ,
+		lcc-3166-1:SaintMartin ,
+		lcc-3166-1:SaintPierreAndMiquelon ,
+		lcc-3166-1:SanMarino ,
+		lcc-3166-1:Slovakia ,
+		lcc-3166-1:Slovenia ,
+		lcc-3166-1:Spain
+		;
+	.
+
+fibo-fnd-acc-4217:FJD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "FJD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:FJD" ,
+		"the currency identifier for Fiji Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "FJD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:FijiDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:FijiDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:FKP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "FKP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:FKP" ,
+		"the currency identifier for Falkland Islands Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "FKP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:FalklandIslandsPound ;
+	lcc-lr:identifies fibo-fnd-acc-4217:FalklandIslandsPound ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:FalklandIslandsPound
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Falkland Islands Pound" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:FalklandIslandsPound" ,
+		"the currency Falkland Islands Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "238" ;
+	fibo-fnd-aap-agt:hasName "Falkland Islands Pound" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:FalklandIslands ;
+	.
+
+fibo-fnd-acc-4217:FijiDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Fiji Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:FijiDollar" ,
+		"the currency Fiji Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "242" ;
+	fibo-fnd-aap-agt:hasName "Fiji Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Fiji ;
+	.
+
+fibo-fnd-acc-4217:Forint
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Forint" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Forint" ,
+		"the currency Forint"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "348" ;
+	fibo-fnd-aap-agt:hasName "Forint" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Hungary ;
+	.
+
+fibo-fnd-acc-4217:GBP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "GBP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GBP" ,
+		"the currency identifier for Pound Sterling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "GBP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:PoundSterling ;
+	lcc-lr:identifies fibo-fnd-acc-4217:PoundSterling ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:GEL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "GEL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GEL" ,
+		"the currency identifier for Lari"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "GEL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Lari ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Lari ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:GHS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "GHS" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GHS" ,
+		"the currency identifier for Ghana Cedi"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "GHS" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:GhanaCedi ;
+	lcc-lr:identifies fibo-fnd-acc-4217:GhanaCedi ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:GIP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "GIP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GIP" ,
+		"the currency identifier for Gibraltar Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "GIP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:GibraltarPound ;
+	lcc-lr:identifies fibo-fnd-acc-4217:GibraltarPound ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:GMD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "GMD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GMD" ,
+		"the currency identifier for Dalasi"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "GMD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Dalasi ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Dalasi ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:GNF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "GNF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GNF" ,
+		"the currency identifier for Guinean Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "GNF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:GuineanFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:GuineanFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:GTQ
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "GTQ" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GTQ" ,
+		"the currency identifier for Quetzal"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "GTQ" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Quetzal ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Quetzal ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:GYD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "GYD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GYD" ,
+		"the currency identifier for Guyana Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "GYD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:GuyanaDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:GuyanaDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:GhanaCedi
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Ghana Cedi" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GhanaCedi" ,
+		"the currency Ghana Cedi"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "936" ;
+	fibo-fnd-aap-agt:hasName "Ghana Cedi" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Ghana ;
+	.
+
+fibo-fnd-acc-4217:GibraltarPound
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Gibraltar Pound" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GibraltarPound" ,
+		"the currency Gibraltar Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "292" ;
+	fibo-fnd-aap-agt:hasName "Gibraltar Pound" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Gibraltar ;
+	.
+
+fibo-fnd-acc-4217:Gold
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-pas-pas:PreciousMetal
+		;
+	rdfs:label "Gold" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Gold" ,
+		"one troy ounce of the precious metal Gold"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "959" ;
+	fibo-fnd-aap-agt:hasName "Gold" ;
+	.
+
+fibo-fnd-acc-4217:Gourde
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Gourde" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Gourde" ,
+		"the currency Gourde"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "332" ;
+	fibo-fnd-aap-agt:hasName "Gourde" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Haiti ;
+	.
+
+fibo-fnd-acc-4217:Guarani
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Guarani" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Guarani" ,
+		"the currency Guarani"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "600" ;
+	fibo-fnd-aap-agt:hasName "Guarani" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Paraguay ;
+	.
+
+fibo-fnd-acc-4217:GuineanFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Guinean Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GuineanFranc" ,
+		"the currency Guinean Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "324" ;
+	fibo-fnd-aap-agt:hasName "Guinean Franc" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Guinea ;
+	.
+
+fibo-fnd-acc-4217:GuyanaDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Guyana Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:GuyanaDollar" ,
+		"the currency Guyana Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "328" ;
+	fibo-fnd-aap-agt:hasName "Guyana Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Guyana ;
+	.
+
+fibo-fnd-acc-4217:HKD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "HKD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:HKD" ,
+		"the currency identifier for Hong Kong Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "HKD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:HongKongDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:HongKongDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:HNL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "HNL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:HNL" ,
+		"the currency identifier for Lempira"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "HNL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Lempira ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Lempira ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:HRK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "HRK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:HRK" ,
+		"the currency identifier for Kuna"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "HRK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Kuna ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Kuna ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:HTG
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "HTG" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:HTG" ,
+		"the currency identifier for Gourde"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "HTG" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Gourde ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Gourde ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:HUF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "HUF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:HUF" ,
+		"the currency identifier for Forint"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "HUF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Forint ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Forint ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:HongKongDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Hong Kong Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:HongKongDollar" ,
+		"the currency Hong Kong Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "344" ;
+	fibo-fnd-aap-agt:hasName "Hong Kong Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:HongKong ;
+	.
+
+fibo-fnd-acc-4217:Hryvnia
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Hryvnia" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Hryvnia" ,
+		"the currency Hryvnia"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "980" ;
+	fibo-fnd-aap-agt:hasName "Hryvnia" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Ukraine ;
+	.
+
+fibo-fnd-acc-4217:IDR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "IDR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:IDR" ,
+		"the currency identifier for Rupiah"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "IDR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Rupiah ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Rupiah ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ILS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ILS" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ILS" ,
+		"the currency identifier for New Israeli Sheqel"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ILS" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:NewIsraeliSheqel ;
+	lcc-lr:identifies fibo-fnd-acc-4217:NewIsraeliSheqel ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:INR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "INR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:INR" ,
+		"the currency identifier for Indian Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "INR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:IndianRupee ;
+	lcc-lr:identifies fibo-fnd-acc-4217:IndianRupee ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:IQD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "IQD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:IQD" ,
+		"the currency identifier for Iraqi Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "IQD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:IraqiDinar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:IraqiDinar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:IRR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "IRR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:IRR" ,
+		"the currency identifier for Iranian Rial"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "IRR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:IranianRial ;
+	lcc-lr:identifies fibo-fnd-acc-4217:IranianRial ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ISK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ISK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ISK" ,
+		"the currency identifier for Iceland Krona"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ISK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:IcelandKrona ;
+	lcc-lr:identifies fibo-fnd-acc-4217:IcelandKrona ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ISO4217-CodeSet
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-arr-cd:CodeSet ,
+		fibo-fnd-arr-id:IdentificationScheme
+		;
+	rdfs:label "ISO 4217 code set" ;
+	rdfs:comment "QName: fibo-fnd-acc-4217:ISO4217-CodeSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	skos:definition "the set of currency identifiers that comprise the ISO 4217 specification" ;
+	.
+
+fibo-fnd-acc-4217:IcelandKrona
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Iceland Krona" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:IcelandKrona" ,
+		"the currency Iceland Krona"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "352" ;
+	fibo-fnd-aap-agt:hasName "Iceland Krona" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Iceland ;
+	.
+
+fibo-fnd-acc-4217:IndianRupee
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Indian Rupee" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:IndianRupee" ,
+		"the currency Indian Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "356" ;
+	fibo-fnd-aap-agt:hasName "Indian Rupee" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Bhutan ,
+		lcc-3166-1:India
+		;
+	.
+
+fibo-fnd-acc-4217:IranianRial
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Iranian Rial" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:IranianRial" ,
+		"the currency Iranian Rial"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "364" ;
+	fibo-fnd-aap-agt:hasName "Iranian Rial" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Iran ;
+	.
+
+fibo-fnd-acc-4217:IraqiDinar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Iraqi Dinar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:IraqiDinar" ,
+		"the currency Iraqi Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "3" ;
+	fibo-fnd-acc-cur:hasNumericCode "368" ;
+	fibo-fnd-aap-agt:hasName "Iraqi Dinar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Iraq ;
+	.
+
+fibo-fnd-acc-4217:JMD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "JMD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:JMD" ,
+		"the currency identifier for Jamaican Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "JMD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:JamaicanDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:JamaicanDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:JOD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "JOD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:JOD" ,
+		"the currency identifier for Jordanian Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "JOD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:JordanianDinar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:JordanianDinar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:JPY
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "JPY" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:JPY" ,
+		"the currency identifier for Yen"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "JPY" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Yen ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Yen ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:JamaicanDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Jamaican Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:JamaicanDollar" ,
+		"the currency Jamaican Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "388" ;
+	fibo-fnd-aap-agt:hasName "Jamaican Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Jamaica ;
+	.
+
+fibo-fnd-acc-4217:JordanianDinar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Jordanian Dinar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:JordanianDinar" ,
+		"the currency Jordanian Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "3" ;
+	fibo-fnd-acc-cur:hasNumericCode "400" ;
+	fibo-fnd-aap-agt:hasName "Jordanian Dinar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Jordan ;
+	.
+
+fibo-fnd-acc-4217:KES
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KES" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KES" ,
+		"the currency identifier for Kenyan Shilling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KES" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:KenyanShilling ;
+	lcc-lr:identifies fibo-fnd-acc-4217:KenyanShilling ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KGS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KGS" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KGS" ,
+		"the currency identifier for Som"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KGS" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Som ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Som ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KHR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KHR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KHR" ,
+		"the currency identifier for Riel"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KHR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Riel ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Riel ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KMF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KMF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KMF" ,
+		"the currency identifier for Comorian Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KMF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ComorianFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ComorianFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KPW
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KPW" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KPW" ,
+		"the currency identifier for North Korean Won"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KPW" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:NorthKoreanWon ;
+	lcc-lr:identifies fibo-fnd-acc-4217:NorthKoreanWon ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KRW
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KRW" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KRW" ,
+		"the currency identifier for Won"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KRW" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Won ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Won ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KWD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KWD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KWD" ,
+		"the currency identifier for Kuwaiti Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KWD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:KuwaitiDinar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:KuwaitiDinar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KYD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KYD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KYD" ,
+		"the currency identifier for Cayman Islands Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KYD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CaymanIslandsDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CaymanIslandsDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KZT
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "KZT" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KZT" ,
+		"the currency identifier for Tenge"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "KZT" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Tenge ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Tenge ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:KenyanShilling
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Kenyan Shilling" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KenyanShilling" ,
+		"the currency Kenyan Shilling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "404" ;
+	fibo-fnd-aap-agt:hasName "Kenyan Shilling" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Kenya ;
+	.
+
+fibo-fnd-acc-4217:Kina
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Kina" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Kina" ,
+		"the currency Kina"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "598" ;
+	fibo-fnd-aap-agt:hasName "Kina" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:PapuaNewGuinea ;
+	.
+
+fibo-fnd-acc-4217:Kuna
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Kuna" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Kuna" ,
+		"the currency Kuna"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "191" ;
+	fibo-fnd-aap-agt:hasName "Kuna" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Croatia ;
+	.
+
+fibo-fnd-acc-4217:KuwaitiDinar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Kuwaiti Dinar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:KuwaitiDinar" ,
+		"the currency Kuwaiti Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "3" ;
+	fibo-fnd-acc-cur:hasNumericCode "414" ;
+	fibo-fnd-aap-agt:hasName "Kuwaiti Dinar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Kuwait ;
+	.
+
+fibo-fnd-acc-4217:Kwanza
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Kwanza" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Kwanza" ,
+		"the currency Kwanza"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "973" ;
+	fibo-fnd-aap-agt:hasName "Kwanza" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Angola ;
+	.
+
+fibo-fnd-acc-4217:Kyat
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Kyat" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Kyat" ,
+		"the currency Kyat"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "104" ;
+	fibo-fnd-aap-agt:hasName "Kyat" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Myanmar ;
+	.
+
+fibo-fnd-acc-4217:LAK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "LAK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LAK" ,
+		"the currency identifier for Lao Kip"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "LAK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:LaoKip ;
+	lcc-lr:identifies fibo-fnd-acc-4217:LaoKip ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:LBP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "LBP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LBP" ,
+		"the currency identifier for Lebanese Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "LBP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:LebanesePound ;
+	lcc-lr:identifies fibo-fnd-acc-4217:LebanesePound ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:LKR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "LKR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LKR" ,
+		"the currency identifier for Sri Lanka Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "LKR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SriLankaRupee ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SriLankaRupee ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:LRD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "LRD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LRD" ,
+		"the currency identifier for Liberian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "LRD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:LiberianDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:LiberianDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:LSL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "LSL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LSL" ,
+		"the currency identifier for Loti"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "LSL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Loti ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Loti ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:LYD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "LYD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LYD" ,
+		"the currency identifier for Libyan Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "LYD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:LibyanDinar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:LibyanDinar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:LaoKip
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Lao Kip" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LaoKip" ,
+		"the currency Lao Kip"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "418" ;
+	fibo-fnd-aap-agt:hasName "Lao Kip" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:LaoPeoplesDemocraticRepublic ;
+	.
+
+fibo-fnd-acc-4217:Lari
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Lari" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Lari" ,
+		"the currency Lari"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "981" ;
+	fibo-fnd-aap-agt:hasName "Lari" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Georgia ;
+	.
+
+fibo-fnd-acc-4217:LebanesePound
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Lebanese Pound" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LebanesePound" ,
+		"the currency Lebanese Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "422" ;
+	fibo-fnd-aap-agt:hasName "Lebanese Pound" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Lebanon ;
+	.
+
+fibo-fnd-acc-4217:Lek
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Lek" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Lek" ,
+		"the currency Lek"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "008" ;
+	fibo-fnd-aap-agt:hasName "Lek" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Albania ;
+	.
+
+fibo-fnd-acc-4217:Lempira
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Lempira" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Lempira" ,
+		"the currency Lempira"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "340" ;
+	fibo-fnd-aap-agt:hasName "Lempira" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Honduras ;
+	.
+
+fibo-fnd-acc-4217:Leone
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Leone" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Leone" ,
+		"the currency Leone"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "694" ;
+	fibo-fnd-aap-agt:hasName "Leone" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:SierraLeone ;
+	.
+
+fibo-fnd-acc-4217:LiberianDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Liberian Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LiberianDollar" ,
+		"the currency Liberian Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "430" ;
+	fibo-fnd-aap-agt:hasName "Liberian Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Liberia ;
+	.
+
+fibo-fnd-acc-4217:LibyanDinar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Libyan Dinar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:LibyanDinar" ,
+		"the currency Libyan Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "3" ;
+	fibo-fnd-acc-cur:hasNumericCode "434" ;
+	fibo-fnd-aap-agt:hasName "Libyan Dinar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Libya ;
+	.
+
+fibo-fnd-acc-4217:Lilangeni
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Lilangeni" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Lilangeni" ,
+		"the currency Lilangeni"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "748" ;
+	fibo-fnd-aap-agt:hasName "Lilangeni" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Eswatini ;
+	.
+
+fibo-fnd-acc-4217:Loti
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Loti" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Loti" ,
+		"the currency Loti"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "426" ;
+	fibo-fnd-aap-agt:hasName "Loti" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Lesotho ;
+	.
+
+fibo-fnd-acc-4217:MAD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MAD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MAD" ,
+		"the currency identifier for Moroccan Dirham"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MAD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MoroccanDirham ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MoroccanDirham ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MDL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MDL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MDL" ,
+		"the currency identifier for Moldovan Leu"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MDL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MoldovanLeu ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MoldovanLeu ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MGA
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MGA" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MGA" ,
+		"the currency identifier for Malagasy Ariary"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MGA" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MalagasyAriary ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MalagasyAriary ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MKD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MKD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MKD" ,
+		"the currency identifier for Denar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MKD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Denar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Denar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MMK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MMK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MMK" ,
+		"the currency identifier for Kyat"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MMK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Kyat ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Kyat ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MNT
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MNT" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MNT" ,
+		"the currency identifier for Tugrik"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MNT" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Tugrik ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Tugrik ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MOP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MOP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MOP" ,
+		"the currency identifier for Pataca"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MOP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Pataca ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Pataca ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MRU
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MRU" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MRU" ,
+		"the currency identifier for Ouguiya"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MRU" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Ouguiya ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Ouguiya ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MUR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MUR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MUR" ,
+		"the currency identifier for Mauritius Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MUR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MauritiusRupee ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MauritiusRupee ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MVR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MVR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MVR" ,
+		"the currency identifier for Rufiyaa"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MVR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Rufiyaa ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Rufiyaa ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MWK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MWK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MWK" ,
+		"the currency identifier for Malawi Kwacha"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MWK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MalawiKwacha ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MalawiKwacha ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MXN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MXN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MXN" ,
+		"the currency identifier for Mexican Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MXN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MexicanPeso ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MexicanPeso ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MXV
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "MXV" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MXV" ,
+		"the funds identifier for Mexican Unidad de Inversion (UDI)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MXV" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MexicanUnidaddeInversion_UDI ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MexicanUnidaddeInversion_UDI ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MYR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MYR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MYR" ,
+		"the currency identifier for Malaysian Ringgit"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MYR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MalaysianRinggit ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MalaysianRinggit ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MZN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "MZN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MZN" ,
+		"the currency identifier for Mozambique Metical"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "MZN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:MozambiqueMetical ;
+	lcc-lr:identifies fibo-fnd-acc-4217:MozambiqueMetical ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:MalagasyAriary
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Malagasy Ariary" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MalagasyAriary" ,
+		"the currency Malagasy Ariary"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "969" ;
+	fibo-fnd-aap-agt:hasName "Malagasy Ariary" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Madagascar ;
+	.
+
+fibo-fnd-acc-4217:MalawiKwacha
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Malawi Kwacha" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MalawiKwacha" ,
+		"the currency Malawi Kwacha"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "454" ;
+	fibo-fnd-aap-agt:hasName "Malawi Kwacha" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Malawi ;
+	.
+
+fibo-fnd-acc-4217:MalaysianRinggit
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Malaysian Ringgit" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MalaysianRinggit" ,
+		"the currency Malaysian Ringgit"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "458" ;
+	fibo-fnd-aap-agt:hasName "Malaysian Ringgit" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Malaysia ;
+	.
+
+fibo-fnd-acc-4217:MauritiusRupee
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Mauritius Rupee" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MauritiusRupee" ,
+		"the currency Mauritius Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "480" ;
+	fibo-fnd-aap-agt:hasName "Mauritius Rupee" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Mauritius ;
+	.
+
+fibo-fnd-acc-4217:MexicanPeso
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Mexican Peso" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MexicanPeso" ,
+		"the currency Mexican Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "484" ;
+	fibo-fnd-aap-agt:hasName "Mexican Peso" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Mexico ;
+	.
+
+fibo-fnd-acc-4217:MexicanUnidaddeInversion_UDI
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "Mexican Unidad de Inversion (UDI)" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MexicanUnidaddeInversion_UDI" ,
+		"the funds Mexican Unidad de Inversion (UDI)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:MexicanPeso ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "979" ;
+	fibo-fnd-aap-agt:hasName "Mexican Unidad de Inversion (UDI)" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Mexico ;
+	fibo-fnd-utl-av:explanatoryNote "The UDI is an inflation adjusted mechanism set by the Central Bank of Mexico according to the variation in the Mexican Consumer Price Index. The value of the UDI is expressed in terms of Mexican Pesos per UDI. It is used to denominate mortgage loans, some bank deposits with maturities of 3 month or more and Government bonds (UDIBONOS)." ;
+	.
+
+fibo-fnd-acc-4217:MoldovanLeu
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Moldovan Leu" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MoldovanLeu" ,
+		"the currency Moldovan Leu"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "498" ;
+	fibo-fnd-aap-agt:hasName "Moldovan Leu" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Moldova ;
+	.
+
+fibo-fnd-acc-4217:MoroccanDirham
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Moroccan Dirham" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MoroccanDirham" ,
+		"the currency Moroccan Dirham"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "504" ;
+	fibo-fnd-aap-agt:hasName "Moroccan Dirham" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Morocco ,
+		lcc-3166-1:WesternSahara
+		;
+	.
+
+fibo-fnd-acc-4217:MozambiqueMetical
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Mozambique Metical" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:MozambiqueMetical" ,
+		"the currency Mozambique Metical"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "943" ;
+	fibo-fnd-aap-agt:hasName "Mozambique Metical" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Mozambique ;
+	.
+
+fibo-fnd-acc-4217:Mvdol
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "Mvdol" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Mvdol" ,
+		"the funds Mvdol"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:Boliviano ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "984" ;
+	fibo-fnd-aap-agt:hasName "Mvdol" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Bolivia ;
+	fibo-fnd-utl-av:explanatoryNote "For indexation purposes and denomination of certain financial instruments (e.g. treasury bills). The Mvdol is set daily by the Central Bank of Bolivia based on the official USD/BOB rate." ;
+	.
+
+fibo-fnd-acc-4217:NAD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "NAD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NAD" ,
+		"the currency identifier for Namibia Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "NAD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:NamibiaDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:NamibiaDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:NGN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "NGN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NGN" ,
+		"the currency identifier for Naira"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "NGN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Naira ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Naira ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:NIO
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "NIO" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NIO" ,
+		"the currency identifier for Cordoba Oro"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "NIO" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CordobaOro ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CordobaOro ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:NOK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "NOK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NOK" ,
+		"the currency identifier for Norwegian Krone"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "NOK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:NorwegianKrone ;
+	lcc-lr:identifies fibo-fnd-acc-4217:NorwegianKrone ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:NPR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "NPR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NPR" ,
+		"the currency identifier for Nepalese Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "NPR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:NepaleseRupee ;
+	lcc-lr:identifies fibo-fnd-acc-4217:NepaleseRupee ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:NZD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "NZD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NZD" ,
+		"the currency identifier for New Zealand Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "NZD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:NewZealandDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:NewZealandDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Naira
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Naira" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Naira" ,
+		"the currency Naira"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "566" ;
+	fibo-fnd-aap-agt:hasName "Naira" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Nigeria ;
+	.
+
+fibo-fnd-acc-4217:Nakfa
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Nakfa" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Nakfa" ,
+		"the currency Nakfa"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "232" ;
+	fibo-fnd-aap-agt:hasName "Nakfa" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Eritrea ;
+	.
+
+fibo-fnd-acc-4217:NamibiaDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Namibia Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NamibiaDollar" ,
+		"the currency Namibia Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "516" ;
+	fibo-fnd-aap-agt:hasName "Namibia Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Namibia ;
+	.
+
+fibo-fnd-acc-4217:NepaleseRupee
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Nepalese Rupee" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NepaleseRupee" ,
+		"the currency Nepalese Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "524" ;
+	fibo-fnd-aap-agt:hasName "Nepalese Rupee" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Nepal ;
+	.
+
+fibo-fnd-acc-4217:NetherlandsAntilleanGuilder
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Netherlands Antillean Guilder" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NetherlandsAntilleanGuilder" ,
+		"the currency Netherlands Antillean Guilder"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "532" ;
+	fibo-fnd-aap-agt:hasName "Netherlands Antillean Guilder" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Curacao ,
+		lcc-3166-1:SintMaarten
+		;
+	.
+
+fibo-fnd-acc-4217:NewIsraeliSheqel
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "New Israeli Sheqel" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NewIsraeliSheqel" ,
+		"the currency New Israeli Sheqel"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "376" ;
+	fibo-fnd-aap-agt:hasName "New Israeli Sheqel" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Israel ;
+	.
+
+fibo-fnd-acc-4217:NewTaiwanDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "New Taiwan Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NewTaiwanDollar" ,
+		"the currency New Taiwan Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "901" ;
+	fibo-fnd-aap-agt:hasName "New Taiwan Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Taiwan ;
+	.
+
+fibo-fnd-acc-4217:NewZealandDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "New Zealand Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NewZealandDollar" ,
+		"the currency New Zealand Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "554" ;
+	fibo-fnd-aap-agt:hasName "New Zealand Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:CookIslands ,
+		lcc-3166-1:NewZealand ,
+		lcc-3166-1:Niue ,
+		lcc-3166-1:Pitcairn ,
+		lcc-3166-1:Tokelau
+		;
+	.
+
+fibo-fnd-acc-4217:Ngultrum
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Ngultrum" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Ngultrum" ,
+		"the currency Ngultrum"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "064" ;
+	fibo-fnd-aap-agt:hasName "Ngultrum" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Bhutan ;
+	.
+
+fibo-fnd-acc-4217:NorthKoreanWon
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "North Korean Won" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NorthKoreanWon" ,
+		"the currency North Korean Won"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "408" ;
+	fibo-fnd-aap-agt:hasName "North Korean Won" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:KoreaDemocraticPeoplesRepublicOf ;
+	.
+
+fibo-fnd-acc-4217:NorwegianKrone
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Norwegian Krone" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:NorwegianKrone" ,
+		"the currency Norwegian Krone"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "578" ;
+	fibo-fnd-aap-agt:hasName "Norwegian Krone" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:BouvetIsland ,
+		lcc-3166-1:Norway ,
+		lcc-3166-1:SvalbardAndJanMayen
+		;
+	.
+
+fibo-fnd-acc-4217:OMR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "OMR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:OMR" ,
+		"the currency identifier for Rial Omani"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "OMR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:RialOmani ;
+	lcc-lr:identifies fibo-fnd-acc-4217:RialOmani ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Ouguiya
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Ouguiya" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Ouguiya" ,
+		"the currency Ouguiya"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "929" ;
+	fibo-fnd-aap-agt:hasName "Ouguiya" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Mauritania ;
+	.
+
+fibo-fnd-acc-4217:PAB
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "PAB" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PAB" ,
+		"the currency identifier for Balboa"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "PAB" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Balboa ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Balboa ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:PEN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "PEN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PEN" ,
+		"the currency identifier for Sol"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "PEN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Sol ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Sol ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:PGK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "PGK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PGK" ,
+		"the currency identifier for Kina"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "PGK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Kina ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Kina ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:PHP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "PHP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PHP" ,
+		"the currency identifier for Philippine Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "PHP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:PhilippinePeso ;
+	lcc-lr:identifies fibo-fnd-acc-4217:PhilippinePeso ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:PKR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "PKR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PKR" ,
+		"the currency identifier for Pakistan Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "PKR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:PakistanRupee ;
+	lcc-lr:identifies fibo-fnd-acc-4217:PakistanRupee ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:PLN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "PLN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PLN" ,
+		"the currency identifier for Zloty"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "PLN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Zloty ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Zloty ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:PYG
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "PYG" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PYG" ,
+		"the currency identifier for Guarani"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "PYG" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Guarani ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Guarani ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Paanga
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Pa'anga" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Paanga" ,
+		"the currency Pa'anga"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "776" ;
+	fibo-fnd-aap-agt:hasName "Pa'anga" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Tonga ;
+	.
+
+fibo-fnd-acc-4217:PakistanRupee
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Pakistan Rupee" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PakistanRupee" ,
+		"the currency Pakistan Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "586" ;
+	fibo-fnd-aap-agt:hasName "Pakistan Rupee" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Pakistan ;
+	.
+
+fibo-fnd-acc-4217:Palladium
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-pas-pas:PreciousMetal
+		;
+	rdfs:label "Palladium" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Palladium" ,
+		"one troy ounce of the precious metal Palladium"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "964" ;
+	fibo-fnd-aap-agt:hasName "Palladium" ;
+	.
+
+fibo-fnd-acc-4217:Pataca
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Pataca" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Pataca" ,
+		"the currency Pataca"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "446" ;
+	fibo-fnd-aap-agt:hasName "Pataca" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Macao ;
+	.
+
+fibo-fnd-acc-4217:PesoConvertible
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Peso Convertible" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PesoConvertible" ,
+		"the currency Peso Convertible"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "931" ;
+	fibo-fnd-aap-agt:hasName "Peso Convertible" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Cuba ;
+	.
+
+fibo-fnd-acc-4217:PesoUruguayo
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Peso Uruguayo" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PesoUruguayo" ,
+		"the currency Peso Uruguayo"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "858" ;
+	fibo-fnd-aap-agt:hasName "Peso Uruguayo" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Uruguay ;
+	.
+
+fibo-fnd-acc-4217:PhilippinePeso
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Philippine Peso" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PhilippinePeso" ,
+		"the currency Philippine Peso"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "608" ;
+	fibo-fnd-aap-agt:hasName "Philippine Peso" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Philippines ;
+	.
+
+fibo-fnd-acc-4217:Platinum
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-pas-pas:PreciousMetal
+		;
+	rdfs:label "Platinum" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Platinum" ,
+		"one troy ounce of the precious metal Platinum"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "962" ;
+	fibo-fnd-aap-agt:hasName "Platinum" ;
+	.
+
+fibo-fnd-acc-4217:PoundSterling
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Pound Sterling" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:PoundSterling" ,
+		"the currency Pound Sterling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "826" ;
+	fibo-fnd-aap-agt:hasName "Pound Sterling" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Guernsey ,
+		lcc-3166-1:IsleOfMan ,
+		lcc-3166-1:Jersey ,
+		lcc-3166-1:UnitedKingdomOfGreatBritainAndNorthernIreland
+		;
+	.
+
+fibo-fnd-acc-4217:Pula
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Pula" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Pula" ,
+		"the currency Pula"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "072" ;
+	fibo-fnd-aap-agt:hasName "Pula" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Botswana ;
+	.
+
+fibo-fnd-acc-4217:QAR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "QAR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:QAR" ,
+		"the currency identifier for Qatari Rial"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "QAR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:QatariRial ;
+	lcc-lr:identifies fibo-fnd-acc-4217:QatariRial ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:QatariRial
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Qatari Rial" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:QatariRial" ,
+		"the currency Qatari Rial"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "634" ;
+	fibo-fnd-aap-agt:hasName "Qatari Rial" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Qatar ;
+	.
+
+fibo-fnd-acc-4217:Quetzal
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Quetzal" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Quetzal" ,
+		"the currency Quetzal"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "320" ;
+	fibo-fnd-aap-agt:hasName "Quetzal" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Guatemala ;
+	.
+
+fibo-fnd-acc-4217:RON
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "RON" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:RON" ,
+		"the currency identifier for Romanian Leu"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "RON" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:RomanianLeu ;
+	lcc-lr:identifies fibo-fnd-acc-4217:RomanianLeu ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:RSD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "RSD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:RSD" ,
+		"the currency identifier for Serbian Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "RSD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SerbianDinar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SerbianDinar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:RUB
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "RUB" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:RUB" ,
+		"the currency identifier for Russian Ruble"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "RUB" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:RussianRuble ;
+	lcc-lr:identifies fibo-fnd-acc-4217:RussianRuble ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:RWF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "RWF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:RWF" ,
+		"the currency identifier for Rwanda Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "RWF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:RwandaFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:RwandaFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Rand
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Rand" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Rand" ,
+		"the currency Rand"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "710" ;
+	fibo-fnd-aap-agt:hasName "Rand" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Lesotho ,
+		lcc-3166-1:Namibia ,
+		lcc-3166-1:SouthAfrica
+		;
+	.
+
+fibo-fnd-acc-4217:RialOmani
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Rial Omani" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:RialOmani" ,
+		"the currency Rial Omani"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "3" ;
+	fibo-fnd-acc-cur:hasNumericCode "512" ;
+	fibo-fnd-aap-agt:hasName "Rial Omani" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Oman ;
+	.
+
+fibo-fnd-acc-4217:Riel
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Riel" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Riel" ,
+		"the currency Riel"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "116" ;
+	fibo-fnd-aap-agt:hasName "Riel" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Cambodia ;
+	.
+
+fibo-fnd-acc-4217:RomanianLeu
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Romanian Leu" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:RomanianLeu" ,
+		"the currency Romanian Leu"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "946" ;
+	fibo-fnd-aap-agt:hasName "Romanian Leu" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Romania ;
+	.
+
+fibo-fnd-acc-4217:Rufiyaa
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Rufiyaa" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Rufiyaa" ,
+		"the currency Rufiyaa"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "462" ;
+	fibo-fnd-aap-agt:hasName "Rufiyaa" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Maldives ;
+	.
+
+fibo-fnd-acc-4217:Rupiah
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Rupiah" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Rupiah" ,
+		"the currency Rupiah"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "360" ;
+	fibo-fnd-aap-agt:hasName "Rupiah" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Indonesia ;
+	.
+
+fibo-fnd-acc-4217:RussianRuble
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Russian Ruble" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:RussianRuble" ,
+		"the currency Russian Ruble"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "643" ;
+	fibo-fnd-aap-agt:hasName "Russian Ruble" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:RussianFederation ;
+	.
+
+fibo-fnd-acc-4217:RwandaFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Rwanda Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:RwandaFranc" ,
+		"the currency Rwanda Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "646" ;
+	fibo-fnd-aap-agt:hasName "Rwanda Franc" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Rwanda ;
+	.
+
+fibo-fnd-acc-4217:SAR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SAR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SAR" ,
+		"the currency identifier for Saudi Riyal"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SAR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SaudiRiyal ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SaudiRiyal ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SBD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SBD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SBD" ,
+		"the currency identifier for Solomon Islands Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SBD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SolomonIslandsDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SolomonIslandsDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SCR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SCR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SCR" ,
+		"the currency identifier for Seychelles Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SCR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SeychellesRupee ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SeychellesRupee ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SDG
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SDG" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SDG" ,
+		"the currency identifier for Sudanese Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SDG" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SudanesePound ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SudanesePound ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SDR_SpecialDrawingRight
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccount
+		;
+	rdfs:label "SDR (Special Drawing Right)" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SDR_SpecialDrawingRight" ,
+		"the IMF's SDR (Special Drawing Right)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "960" ;
+	fibo-fnd-aap-agt:hasName "SDR (Special Drawing Right)" ;
+	.
+
+fibo-fnd-acc-4217:SEK
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SEK" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SEK" ,
+		"the currency identifier for Swedish Krona"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SEK" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SwedishKrona ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SwedishKrona ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SGD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SGD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SGD" ,
+		"the currency identifier for Singapore Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SGD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SingaporeDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SingaporeDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SHP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SHP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SHP" ,
+		"the currency identifier for Saint Helena Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SHP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SaintHelenaPound ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SaintHelenaPound ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SLL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SLL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SLL" ,
+		"the currency identifier for Leone"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SLL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Leone ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Leone ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SOS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SOS" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SOS" ,
+		"the currency identifier for Somali Shilling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SOS" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SomaliShilling ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SomaliShilling ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SRD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SRD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SRD" ,
+		"the currency identifier for Surinam Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SRD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SurinamDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SurinamDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SSP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SSP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SSP" ,
+		"the currency identifier for South Sudanese Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SSP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SouthSudanesePound ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SouthSudanesePound ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:STN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "STN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:STN" ,
+		"the currency identifier for Dobra"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "STN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Dobra ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Dobra ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SVC
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SVC" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SVC" ,
+		"the currency identifier for El Salvador Colon"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SVC" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ElSalvadorColon ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ElSalvadorColon ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SYP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SYP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SYP" ,
+		"the currency identifier for Syrian Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SYP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SyrianPound ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SyrianPound ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SZL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "SZL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SZL" ,
+		"the currency identifier for Lilangeni"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "SZL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Lilangeni ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Lilangeni ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:SaintHelenaPound
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Saint Helena Pound" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SaintHelenaPound" ,
+		"the currency Saint Helena Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "654" ;
+	fibo-fnd-aap-agt:hasName "Saint Helena Pound" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:SaintHelena ;
+	.
+
+fibo-fnd-acc-4217:SaudiRiyal
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Saudi Riyal" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SaudiRiyal" ,
+		"the currency Saudi Riyal"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "682" ;
+	fibo-fnd-aap-agt:hasName "Saudi Riyal" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:SaudiArabia ;
+	.
+
+fibo-fnd-acc-4217:SerbianDinar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Serbian Dinar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SerbianDinar" ,
+		"the currency Serbian Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "941" ;
+	fibo-fnd-aap-agt:hasName "Serbian Dinar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Serbia ;
+	.
+
+fibo-fnd-acc-4217:SeychellesRupee
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Seychelles Rupee" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SeychellesRupee" ,
+		"the currency Seychelles Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "690" ;
+	fibo-fnd-aap-agt:hasName "Seychelles Rupee" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Seychelles ;
+	.
+
+fibo-fnd-acc-4217:Silver
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-pas-pas:PreciousMetal
+		;
+	rdfs:label "Silver" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Silver" ,
+		"one troy ounce of the precious metal Silver"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "961" ;
+	fibo-fnd-aap-agt:hasName "Silver" ;
+	.
+
+fibo-fnd-acc-4217:SingaporeDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Singapore Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SingaporeDollar" ,
+		"the currency Singapore Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "702" ;
+	fibo-fnd-aap-agt:hasName "Singapore Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Singapore ;
+	.
+
+fibo-fnd-acc-4217:Sol
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Sol" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Sol" ,
+		"the currency Sol"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "604" ;
+	fibo-fnd-aap-agt:hasName "Sol" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Peru ;
+	.
+
+fibo-fnd-acc-4217:SolomonIslandsDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Solomon Islands Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SolomonIslandsDollar" ,
+		"the currency Solomon Islands Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "090" ;
+	fibo-fnd-aap-agt:hasName "Solomon Islands Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:SolomonIslands ;
+	.
+
+fibo-fnd-acc-4217:Som
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Som" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Som" ,
+		"the currency Som"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "417" ;
+	fibo-fnd-aap-agt:hasName "Som" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Kyrgyzstan ;
+	.
+
+fibo-fnd-acc-4217:SomaliShilling
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Somali Shilling" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SomaliShilling" ,
+		"the currency Somali Shilling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "706" ;
+	fibo-fnd-aap-agt:hasName "Somali Shilling" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Somalia ;
+	.
+
+fibo-fnd-acc-4217:Somoni
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Somoni" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Somoni" ,
+		"the currency Somoni"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "972" ;
+	fibo-fnd-aap-agt:hasName "Somoni" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Tajikistan ;
+	.
+
+fibo-fnd-acc-4217:SouthSudanesePound
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "South Sudanese Pound" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SouthSudanesePound" ,
+		"the currency South Sudanese Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "728" ;
+	fibo-fnd-aap-agt:hasName "South Sudanese Pound" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:SouthSudan ;
+	.
+
+fibo-fnd-acc-4217:SriLankaRupee
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Sri Lanka Rupee" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SriLankaRupee" ,
+		"the currency Sri Lanka Rupee"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "144" ;
+	fibo-fnd-aap-agt:hasName "Sri Lanka Rupee" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:SriLanka ;
+	.
+
+fibo-fnd-acc-4217:Sucre
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Sucre" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Sucre" ,
+		"the currency Sucre"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasNumericCode "994" ;
+	fibo-fnd-aap-agt:hasName "Sucre" ;
+	.
+
+fibo-fnd-acc-4217:SudanesePound
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Sudanese Pound" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SudanesePound" ,
+		"the currency Sudanese Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "938" ;
+	fibo-fnd-aap-agt:hasName "Sudanese Pound" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Sudan ;
+	.
+
+fibo-fnd-acc-4217:SurinamDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Surinam Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SurinamDollar" ,
+		"the currency Surinam Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "968" ;
+	fibo-fnd-aap-agt:hasName "Surinam Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Suriname ;
+	.
+
+fibo-fnd-acc-4217:SwedishKrona
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Swedish Krona" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SwedishKrona" ,
+		"the currency Swedish Krona"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "752" ;
+	fibo-fnd-aap-agt:hasName "Swedish Krona" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Sweden ;
+	.
+
+fibo-fnd-acc-4217:SwissFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Swiss Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SwissFranc" ,
+		"the currency Swiss Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "756" ;
+	fibo-fnd-aap-agt:hasName "Swiss Franc" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:Liechtenstein ,
+		lcc-3166-1:Switzerland
+		;
+	.
+
+fibo-fnd-acc-4217:SyrianPound
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Syrian Pound" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:SyrianPound" ,
+		"the currency Syrian Pound"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "760" ;
+	fibo-fnd-aap-agt:hasName "Syrian Pound" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:SyrianArabRepublic ;
+	.
+
+fibo-fnd-acc-4217:THB
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "THB" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:THB" ,
+		"the currency identifier for Baht"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "THB" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Baht ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Baht ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:TJS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "TJS" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TJS" ,
+		"the currency identifier for Somoni"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "TJS" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Somoni ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Somoni ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:TMT
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "TMT" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TMT" ,
+		"the currency identifier for Turkmenistan New Manat"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "TMT" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:TurkmenistanNewManat ;
+	lcc-lr:identifies fibo-fnd-acc-4217:TurkmenistanNewManat ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:TND
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "TND" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TND" ,
+		"the currency identifier for Tunisian Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "TND" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:TunisianDinar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:TunisianDinar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:TOP
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "TOP" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TOP" ,
+		"the currency identifier for Pa'anga"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "TOP" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Paanga ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Paanga ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:TRY
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "TRY" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TRY" ,
+		"the currency identifier for Turkish Lira"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "TRY" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:TurkishLira ;
+	lcc-lr:identifies fibo-fnd-acc-4217:TurkishLira ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:TTD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "TTD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TTD" ,
+		"the currency identifier for Trinidad and Tobago Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "TTD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:TrinidadandTobagoDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:TrinidadandTobagoDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:TWD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "TWD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TWD" ,
+		"the currency identifier for New Taiwan Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "TWD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:NewTaiwanDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:NewTaiwanDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:TZS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "TZS" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TZS" ,
+		"the currency identifier for Tanzanian Shilling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "TZS" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:TanzanianShilling ;
+	lcc-lr:identifies fibo-fnd-acc-4217:TanzanianShilling ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Taka
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Taka" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Taka" ,
+		"the currency Taka"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "050" ;
+	fibo-fnd-aap-agt:hasName "Taka" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Bangladesh ;
+	.
+
+fibo-fnd-acc-4217:Tala
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Tala" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Tala" ,
+		"the currency Tala"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "882" ;
+	fibo-fnd-aap-agt:hasName "Tala" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Samoa ;
+	.
+
+fibo-fnd-acc-4217:TanzanianShilling
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Tanzanian Shilling" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TanzanianShilling" ,
+		"the currency Tanzanian Shilling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "834" ;
+	fibo-fnd-aap-agt:hasName "Tanzanian Shilling" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Tanzania ;
+	.
+
+fibo-fnd-acc-4217:Tenge
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Tenge" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Tenge" ,
+		"the currency Tenge"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "398" ;
+	fibo-fnd-aap-agt:hasName "Tenge" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Kazakhstan ;
+	.
+
+fibo-fnd-acc-4217:TrinidadandTobagoDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Trinidad and Tobago Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TrinidadandTobagoDollar" ,
+		"the currency Trinidad and Tobago Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "780" ;
+	fibo-fnd-aap-agt:hasName "Trinidad and Tobago Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:TrinidadAndTobago ;
+	.
+
+fibo-fnd-acc-4217:Tugrik
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Tugrik" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Tugrik" ,
+		"the currency Tugrik"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "496" ;
+	fibo-fnd-aap-agt:hasName "Tugrik" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Mongolia ;
+	.
+
+fibo-fnd-acc-4217:TunisianDinar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Tunisian Dinar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TunisianDinar" ,
+		"the currency Tunisian Dinar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "3" ;
+	fibo-fnd-acc-cur:hasNumericCode "788" ;
+	fibo-fnd-aap-agt:hasName "Tunisian Dinar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Tunisia ;
+	.
+
+fibo-fnd-acc-4217:TurkishLira
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Turkish Lira" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TurkishLira" ,
+		"the currency Turkish Lira"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "949" ;
+	fibo-fnd-aap-agt:hasName "Turkish Lira" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Turkey ;
+	.
+
+fibo-fnd-acc-4217:TurkmenistanNewManat
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Turkmenistan New Manat" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:TurkmenistanNewManat" ,
+		"the currency Turkmenistan New Manat"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "934" ;
+	fibo-fnd-aap-agt:hasName "Turkmenistan New Manat" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Turkmenistan ;
+	.
+
+fibo-fnd-acc-4217:UAEDirham
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "UAE Dirham" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UAEDirham" ,
+		"the currency UAE Dirham"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "784" ;
+	fibo-fnd-aap-agt:hasName "UAE Dirham" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:UnitedArabEmirates ;
+	.
+
+fibo-fnd-acc-4217:UAH
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "UAH" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UAH" ,
+		"the currency identifier for Hryvnia"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "UAH" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Hryvnia ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Hryvnia ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:UGX
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "UGX" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UGX" ,
+		"the currency identifier for Uganda Shilling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "UGX" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:UgandaShilling ;
+	lcc-lr:identifies fibo-fnd-acc-4217:UgandaShilling ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:USD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "USD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:USD" ,
+		"the currency identifier for US Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "USD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:USDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:USDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:USDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "US Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:USDollar" ,
+		"the currency US Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "840" ;
+	fibo-fnd-aap-agt:hasName "US Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy
+		lcc-3166-1:AmericanSamoa ,
+		lcc-3166-1:Bonaire ,
+		lcc-3166-1:BritishIndianOceanTerritory ,
+		lcc-3166-1:Ecuador ,
+		lcc-3166-1:ElSalvador ,
+		lcc-3166-1:Guam ,
+		lcc-3166-1:Haiti ,
+		lcc-3166-1:MarshallIslands ,
+		lcc-3166-1:Micronesia ,
+		lcc-3166-1:NorthernMarianaIslands ,
+		lcc-3166-1:Palau ,
+		lcc-3166-1:Panama ,
+		lcc-3166-1:PuertoRico ,
+		lcc-3166-1:Timor-Leste ,
+		lcc-3166-1:TurksAndCaicosIslands ,
+		lcc-3166-1:UnitedStatesMinorOutlyingIslands ,
+		lcc-3166-1:UnitedStatesOfAmerica ,
+		lcc-3166-1:VirginIslandsBritish
+		;
+	.
+
+fibo-fnd-acc-4217:USDollar_Nextday
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "US Dollar (Next day)" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:USDollar_Nextday" ,
+		"the funds US Dollar (Next day)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:USDollar ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "997" ;
+	fibo-fnd-aap-agt:hasName "US Dollar (Next day)" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:UnitedStatesOfAmerica ;
+	fibo-fnd-utl-av:explanatoryNote '"Next day" funds are immediately available for transfer in like funds, and, subject to settlement, available the next business day for same day funds transfer or withdrawal in cash.' ;
+	.
+
+fibo-fnd-acc-4217:USN
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "USN" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:USN" ,
+		"the funds identifier for US Dollar (Next day)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "USN" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:USDollar_Nextday ;
+	lcc-lr:identifies fibo-fnd-acc-4217:USDollar_Nextday ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:UYI
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "UYI" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UYI" ,
+		"the funds identifier for Uruguay Peso en Unidades Indexadas (UI)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "UYI" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:UruguayPesoenUnidadesIndexadas_UI ;
+	lcc-lr:identifies fibo-fnd-acc-4217:UruguayPesoenUnidadesIndexadas_UI ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:UYU
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "UYU" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UYU" ,
+		"the currency identifier for Peso Uruguayo"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "UYU" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:PesoUruguayo ;
+	lcc-lr:identifies fibo-fnd-acc-4217:PesoUruguayo ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:UYW
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:FundsIdentifier
+		;
+	rdfs:label "UYW" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UYW" ,
+		"the funds identifier for Unidad Previsional"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "UYW" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:UnidadPrevisional ;
+	lcc-lr:identifies fibo-fnd-acc-4217:UnidadPrevisional ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:UZS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "UZS" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UZS" ,
+		"the currency identifier for Uzbekistan Sum"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "UZS" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:UzbekistanSum ;
+	lcc-lr:identifies fibo-fnd-acc-4217:UzbekistanSum ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:UgandaShilling
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Uganda Shilling" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UgandaShilling" ,
+		"the currency Uganda Shilling"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "800" ;
+	fibo-fnd-aap-agt:hasName "Uganda Shilling" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Uganda ;
+	.
+
+fibo-fnd-acc-4217:UnidadPrevisional
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "Unidad Previsional" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UnidadPrevisional" ,
+		"the funds Unidad Previsional"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:PesoUruguayo ;
+	fibo-fnd-acc-cur:hasMinorUnit "4" ;
+	fibo-fnd-acc-cur:hasNumericCode "927" ;
+	fibo-fnd-aap-agt:hasName "Unidad Previsional" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Uruguay ;
+	fibo-fnd-utl-av:explanatoryNote "The Unidad Previsional (UP) is a daily accounting unit that tracks changes to the nominal wage index. The value of UP is expressed in terms of Uruguayan Pesos per UP, with the initial value of one peso (UYU 1.00) on 04/30/2018. The institution responsible for the calculation and publication is the Instituto Nacional de Estadística (National Bureau of Statistics) according to Law 19,608." ;
+	.
+
+fibo-fnd-acc-4217:UnidaddeFomento
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "Unidad de Fomento" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UnidaddeFomento" ,
+		"the funds Unidad de Fomento"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:ChileanPeso ;
+	fibo-fnd-acc-cur:hasMinorUnit "4" ;
+	fibo-fnd-acc-cur:hasNumericCode "990" ;
+	fibo-fnd-aap-agt:hasName "Unidad de Fomento" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Chile ;
+	fibo-fnd-utl-av:explanatoryNote "The CLF is a daily economically-financial unit calculated by the Central Bank of Chile according to inflation (as measured by the Chilean Consumer Price Index of the previous month). The value of the CLF is expressed in terms of Chilean Pesos per CLF. The use of CLF has been widely extended to all types of bank loans, financial investments (time deposits, mortgages and other public or private indexed instruments), contracts and fees in some cases." ;
+	.
+
+fibo-fnd-acc-4217:UnidaddeValorReal
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "Unidad de Valor Real" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UnidaddeValorReal" ,
+		"the funds Unidad de Valor Real"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:ColombianPeso ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "970" ;
+	fibo-fnd-aap-agt:hasName "Unidad de Valor Real" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Colombia ;
+	fibo-fnd-utl-av:explanatoryNote "The UVR is a daily account unit set by the Central Bank of Colombia according to the variation in the Consumer Price Index of Colombia. The value of UVR is expressed in terms of Colombian Pesos per UVR. It is used to denominate and update mortgage loans and some public debt bonds." ;
+	.
+
+fibo-fnd-acc-4217:UruguayPesoenUnidadesIndexadas_UI
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "Uruguay Peso en Unidades Indexadas (UI)" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UruguayPesoenUnidadesIndexadas_UI" ,
+		"the funds Uruguay Peso en Unidades Indexadas (UI)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:PesoUruguayo ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "940" ;
+	fibo-fnd-aap-agt:hasName "Uruguay Peso en Unidades Indexadas (UI)" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Uruguay ;
+	fibo-fnd-utl-av:explanatoryNote "The UYI (URUIURUI) is used for issuance of debt instruments by the Uruguayan government in the international global bond market.  It is calculated based on an established methodology using underlying inflationary statistics in the Uruguayan market. (Introduced in 2002)." ;
+	.
+
+fibo-fnd-acc-4217:UzbekistanSum
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Uzbekistan Sum" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:UzbekistanSum" ,
+		"the currency Uzbekistan Sum"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "860" ;
+	fibo-fnd-aap-agt:hasName "Uzbekistan Sum" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Uzbekistan ;
+	.
+
+fibo-fnd-acc-4217:VES
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "VES" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:VES" ,
+		"the currency identifier for Bolívar Soberano"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "VES" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BolívarSoberano ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BolívarSoberano ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:VND
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "VND" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:VND" ,
+		"the currency identifier for Dong"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "VND" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Dong ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Dong ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:VUV
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "VUV" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:VUV" ,
+		"the currency identifier for Vatu"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "VUV" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Vatu ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Vatu ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Vatu
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Vatu" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Vatu" ,
+		"the currency Vatu"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "548" ;
+	fibo-fnd-aap-agt:hasName "Vatu" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Vanuatu ;
+	.
+
+fibo-fnd-acc-4217:WIREuro
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "WIR Euro" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:WIREuro" ,
+		"the funds WIR Euro"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:Euro ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "947" ;
+	fibo-fnd-aap-agt:hasName "WIR Euro" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Switzerland ;
+	fibo-fnd-utl-av:explanatoryNote "WIR Euro - WIR Bank for use with the EFTPOS system with their own WIR-card and the Electronic Banking Services" ;
+	.
+
+fibo-fnd-acc-4217:WIRFranc
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Funds
+		;
+	rdfs:label "WIR Franc" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:WIRFranc" ,
+		"the funds WIR Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasCurrency fibo-fnd-acc-4217:SwissFranc ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "948" ;
+	fibo-fnd-aap-agt:hasName "WIR Franc" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Switzerland ;
+	fibo-fnd-utl-av:explanatoryNote "WIR Franc - WIR Bank for use with the EFTPOS system with their own WIR-card and the Electronic Banking Services." ;
+	.
+
+fibo-fnd-acc-4217:WST
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "WST" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:WST" ,
+		"the currency identifier for Tala"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "WST" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Tala ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Tala ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:Won
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Won" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Won" ,
+		"the currency Won"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "410" ;
+	fibo-fnd-aap-agt:hasName "Won" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:KoreaRepublicOf ;
+	.
+
+fibo-fnd-acc-4217:XAF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "XAF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XAF" ,
+		"the currency identifier for CFA Franc BEAC"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XAF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CFAFrancBEAC ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CFAFrancBEAC ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XAG
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-pas-pas:PreciousMetalIdentifier
+		;
+	rdfs:label "XAG" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XAG" ,
+		"one troy ounce of the precious metal identifier for Silver"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XAG" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Silver ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Silver ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XAU
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-pas-pas:PreciousMetalIdentifier
+		;
+	rdfs:label "XAU" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XAU" ,
+		"one troy ounce of the precious metal identifier for Gold"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XAU" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Gold ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Gold ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XBA
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccountIdentifier
+		;
+	rdfs:label "XBA" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XBA" ,
+		"the identifier for Bond Markets Unit European Composite Unit (EURCO)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XBA" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BondMarketsUnitEuropeanCompositeUnit_EURCO ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BondMarketsUnitEuropeanCompositeUnit_EURCO ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XBB
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccountIdentifier
+		;
+	rdfs:label "XBB" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XBB" ,
+		"the identifier for Bond Markets Unit European Monetary Unit (E.M.U.-6)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XBB" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BondMarketsUnitEuropeanMonetaryUnit_EMU-6 ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BondMarketsUnitEuropeanMonetaryUnit_EMU-6 ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XBC
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccountIdentifier
+		;
+	rdfs:label "XBC" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XBC" ,
+		"the identifier for Bond Markets Unit European Unit of Account 9 (E.U.A.-9)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XBC" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BondMarketsUnitEuropeanUnitofAccount9_EUA-9 ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BondMarketsUnitEuropeanUnitofAccount9_EUA-9 ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XBD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccountIdentifier
+		;
+	rdfs:label "XBD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XBD" ,
+		"the identifier for Bond Markets Unit European Unit of Account 17 (E.U.A.-17)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XBD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:BondMarketsUnitEuropeanUnitofAccount17_EUA-17 ;
+	lcc-lr:identifies fibo-fnd-acc-4217:BondMarketsUnitEuropeanUnitofAccount17_EUA-17 ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XCD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "XCD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XCD" ,
+		"the currency identifier for East Caribbean Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XCD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:EastCaribbeanDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:EastCaribbeanDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XDR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccountIdentifier
+		;
+	rdfs:label "XDR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XDR" ,
+		"the IMF's identifier for SDR (Special Drawing Right)"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XDR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:SDR_SpecialDrawingRight ;
+	lcc-lr:identifies fibo-fnd-acc-4217:SDR_SpecialDrawingRight ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XOF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "XOF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XOF" ,
+		"the currency identifier for CFA Franc BCEAO"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XOF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CFAFrancBCEAO ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CFAFrancBCEAO ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XPD
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-pas-pas:PreciousMetalIdentifier
+		;
+	rdfs:label "XPD" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XPD" ,
+		"one troy ounce of the precious metal identifier for Palladium"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XPD" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Palladium ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Palladium ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XPF
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "XPF" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XPF" ,
+		"the currency identifier for CFP Franc"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XPF" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:CFPFranc ;
+	lcc-lr:identifies fibo-fnd-acc-4217:CFPFranc ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XPT
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-pas-pas:PreciousMetalIdentifier
+		;
+	rdfs:label "XPT" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XPT" ,
+		"one troy ounce of the precious metal identifier for Platinum"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XPT" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Platinum ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Platinum ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XSU
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "XSU" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XSU" ,
+		"the currency identifier for Sucre"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XSU" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Sucre ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Sucre ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XTS
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "XTS" ;
+	rdfs:comment
+		"Codes specifically reserved for testing purposes" ,
+		"QName: fibo-fnd-acc-4217:XTS"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XTS" ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XUA
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:UnitOfAccountIdentifier
+		;
+	rdfs:label "XUA" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XUA" ,
+		"the identifier for ADB Unit of Account"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XUA" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ADBUnitofAccount ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ADBUnitofAccount ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:XXX
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "XXX" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:XXX" ,
+		"The codes assigned for transactions where no currency is involved"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "XXX" ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:YER
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "YER" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:YER" ,
+		"the currency identifier for Yemeni Rial"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "YER" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:YemeniRial ;
+	lcc-lr:identifies fibo-fnd-acc-4217:YemeniRial ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:YemeniRial
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Yemeni Rial" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:YemeniRial" ,
+		"the currency Yemeni Rial"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "886" ;
+	fibo-fnd-aap-agt:hasName "Yemeni Rial" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Yemen ;
+	.
+
+fibo-fnd-acc-4217:Yen
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Yen" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Yen" ,
+		"the currency Yen"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "0" ;
+	fibo-fnd-acc-cur:hasNumericCode "392" ;
+	fibo-fnd-aap-agt:hasName "Yen" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Japan ;
+	.
+
+fibo-fnd-acc-4217:YuanRenminbi
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Yuan Renminbi" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:YuanRenminbi" ,
+		"the currency Yuan Renminbi"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "156" ;
+	fibo-fnd-aap-agt:hasName "Yuan Renminbi" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:China ;
+	.
+
+fibo-fnd-acc-4217:ZAR
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ZAR" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ZAR" ,
+		"the currency identifier for Rand"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ZAR" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:Rand ;
+	lcc-lr:identifies fibo-fnd-acc-4217:Rand ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ZMW
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ZMW" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ZMW" ,
+		"the currency identifier for Zambian Kwacha"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ZMW" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ZambianKwacha ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ZambianKwacha ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ZWL
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:CurrencyIdentifier
+		;
+	rdfs:label "ZWL" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ZWL" ,
+		"the currency identifier for Zimbabwe Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-rel-rel:hasTag "ZWL" ;
+	lcc-lr:denotes fibo-fnd-acc-4217:ZimbabweDollar ;
+	lcc-lr:identifies fibo-fnd-acc-4217:ZimbabweDollar ;
+	lcc-lr:isMemberOf fibo-fnd-acc-4217:ISO4217-CodeSet ;
+	.
+
+fibo-fnd-acc-4217:ZambianKwacha
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Zambian Kwacha" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ZambianKwacha" ,
+		"the currency Zambian Kwacha"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "967" ;
+	fibo-fnd-aap-agt:hasName "Zambian Kwacha" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Zambia ;
+	.
+
+fibo-fnd-acc-4217:ZimbabweDollar
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Zimbabwe Dollar" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:ZimbabweDollar" ,
+		"the currency Zimbabwe Dollar"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "932" ;
+	fibo-fnd-aap-agt:hasName "Zimbabwe Dollar" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Zimbabwe ;
+	.
+
+fibo-fnd-acc-4217:Zloty
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-acc-cur:Currency
+		;
+	rdfs:label "Zloty" ;
+	rdfs:comment
+		"QName: fibo-fnd-acc-4217:Zloty" ,
+		"the currency Zloty"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/> ;
+	fibo-fnd-acc-cur:hasMinorUnit "2" ;
+	fibo-fnd-acc-cur:hasNumericCode "985" ;
+	fibo-fnd-aap-agt:hasName "Zloty" ;
+	fibo-fnd-rel-rel:isUsedBy lcc-3166-1:Poland ;
+	.
+

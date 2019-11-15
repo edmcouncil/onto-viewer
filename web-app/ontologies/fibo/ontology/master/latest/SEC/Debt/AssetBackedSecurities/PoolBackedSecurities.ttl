@@ -1,0 +1,389 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CBOs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CDOs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Pools/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-bp-iss-trm: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceProcessTerms/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-dbtx-aly: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> .
+@prefix fibo-md-dbtx-py: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> .
+@prefix fibo-sec-dbt-ab-mbs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/> .
+@prefix fibo-sec-dbt-ab-pbs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> .
+@prefix fibo-sec-dbt-ab-syn: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> .
+@prefix fibo-sec-dbt-bnd: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/> .
+@prefix fibo-sec-dbt-dbti: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> .
+@prefix fibo-sec-sec-iss: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/>
+	a owl:Ontology ;
+	rdfs:label "PoolBackedSecurities"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Concepts common to asset backed and mortgage backed securities, including pools, instruments, prospectuses and deals common concepts. 
+		Note that in common industry parlance, the term 'asset backed security' is used to refer to securities which specifically do not have a mortgage loan pool as their underlying asset. For this reason, this ontology provides a common parent to both asset backed and mortgage backed securities, which is effectively an asset backed security in the broader sense. This has been labeled as 'pool backed security instrument' as there is no common industry name for this common parent class, other than 'asset backed security'.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CBOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CDOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Pools/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-sec-dbt-ab-pbs:CashStructuredFinanceInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-pbs:StructuredFinanceInstrument ,
+		fibo-sec-dbt-bnd:Bond ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:isTrancheOf ;
+			owl:someValuesFrom fibo-sec-dbt-ab-pbs:SecuritizedDebtPool ;
+		]
+		;
+	rdfs:label "cash structured finance instrument"@en ;
+	rdfs:comment "QName: NONE:CashStructuredFinanceInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	owl:disjointWith fibo-sec-dbt-ab-syn:SyntheticStructuredFinanceInstrument ;
+	skos:definition "A structured finance instrument with a real asset underlying."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:CashStructuredFinanceInstrumentPool
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-pbs:StructuredFinanceInstrumentPool ;
+	rdfs:label "cash structured finance instrument pool"@en ;
+	rdfs:comment "QName: NONE:CashStructuredFinanceInstrumentPool" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "A pool investment consisting of a collection of cash structured finance instruments."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:CollateralizedDebt
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:PubliclyIssuedDebt ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:isCollateralizedBy ;
+			owl:someValuesFrom fibo-fnd-acc-aeq:FinancialAsset ;
+		]
+		;
+	rdfs:label "collateralized debt"@en ;
+	rdfs:comment "QName: NONE:CollateralizedDebt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "Debt issued under some Security, with some Collateral."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:CollateralizedObligationDeal
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:DebtOffering ;
+	rdfs:label "collateralized obligation deal"@en ;
+	rdfs:comment "QName: NONE:CollateralizedObligationDeal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	owl:disjointWith fibo-sec-dbt-ab-pbs:PoolBackedSecuritiesDeal ;
+	.
+
+fibo-sec-dbt-ab-pbs:CollateralizedObligationInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-pbs:StructuredFinanceInstrument ;
+	rdfs:label "collateralized obligation instrument"@en ;
+	rdfs:comment "QName: NONE:CollateralizedObligationInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "Pending further investigation. At present: CDO = issued against pool of securities MBS = issued against pool of individual debts (base loans) Action: identify if this is the case. Option 1: Model as it was; Option 2: Add a level of detail in between, whereby there is a pool of pools or some other such thing Option 3: this is a terminological thing only in that CDOs are never referred to as a parent of CMO for purely teerminological reasons as per ABS v MBS in which case we would add in a terminological layer."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:PoolBackedDealProspectus
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-iss:Prospectus ;
+	rdfs:label "pool backed deal prospectus"@en ;
+	rdfs:comment "QName: NONE:PoolBackedDealProspectus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "Prospectus describing the terms of the issue and each of the instruments included in the pool backed security issue. Term origin:SMER"@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:PoolBackedSecuritiesDeal
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:DebtOffering ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:hasIssuer ;
+			owl:someValuesFrom fibo-sec-dbt-ab-pbs:PoolBackedSecurityIssuer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:hasUnderlying ;
+			owl:someValuesFrom fibo-sec-dbt-ab-mbs:IssuedAndSecuritizedPoolOfIndividualDebts ;
+		]
+		;
+	rdfs:label "pool backed securities deal"@en ;
+	rdfs:comment "QName: NONE:PoolBackedSecuritiesDeal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "The issue of a series of Pool Backed Security certificates. These are (at least in this context) securities issued backed by a pool of individual loans, mortgages or other individual loan products."@en ;
+	skos:editorialNote 'This term makes the distinction, perhaps artificial, between deals backed by pools of individual debt (this term), and deals backed by pools of securities (collateralized deals). This structure of relations between kinds of deals may prove to be a little artificial, but it reflects the structure of relations between kinds of securities, arrived at in earlier SME reviews. That is, Pool Backed Security (which breaks down into ABS and MBS) has a pool of individual loan products (a sub type of which is mortgage loans). The terms reflect the fact that in common parlance the term "ABS" is taken to mean something which is explicitly NOT a MBS but can be any other type of loan or credit based security, hence the creation of the non standard term "Pool Backed Security". The naming of deals simply attempts to reflect that. Terms to be included in Deal (per PoC conversations): Underwriters Issuer Deal Number Series number Deal Value Different collateral pools that support the deal. Review existing terms and make sure all covered.'@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:PoolBackedSecurityInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-pbs:CashStructuredFinanceInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/definesTermsFor> ;
+			owl:someValuesFrom fibo-sec-dbt-ab-pbs:CollateralizedDebt ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:isTrancheOf ;
+			owl:someValuesFrom fibo-sec-dbt-ab-pbs:PoolOfIndividualDebts ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:issuedBy ;
+			owl:someValuesFrom fibo-sec-dbt-ab-pbs:PoolBackedSecurityIssuer ;
+		]
+		;
+	rdfs:label "pool backed security instrument"@en ;
+	rdfs:comment "QName: NONE:PoolBackedSecurityInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "A type of bond or note which derives its cashflow from some underlying pool of debt in which loans or mortgage advanced to borrowers are pooled together for the purposes of creating this type of security. Further notes: This is distinguished from CDO instruments which have an underlying pool of debt securities, as distinct from an underlying pool of loan products such as mortgages, credit cards or loans."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:PoolBackedSecurityIssuer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Issuer ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-be-le-cb:Corporation ;
+		]
+		;
+	rdfs:label "pool backed security issuer"@en ;
+	rdfs:comment "QName: NONE:PoolBackedSecurityIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "The issuer of a Pool Backed Security. This may be an Asset Backed Security, Mortgage Backed Security or CDO."@en ;
+	fibo-fnd-utl-av:explanatoryNote "this is not always and necesarily a special Purpose Vehicle, since many mortage backed securities are issued by Agencies set up for the purpose but not really referred to as SPVs (e.g. Fannie Mae), or issued by mortgage-issuing banks (non Agency)."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:PoolOfIndividualDebts
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:hasAnalytic ;
+			owl:someValuesFrom fibo-md-dbtx-py:LoanPoolAnalytic ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:backs ;
+			owl:someValuesFrom fibo-sec-dbt-ab-pbs:PoolBackedSecurityInstrument ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:developsInto ;
+			owl:someValuesFrom fibo-sec-dbt-ab-pbs:PoolOfIndividualDebts ;
+		]
+		;
+	rdfs:label "pool of individual debts"@en ;
+	rdfs:comment "QName: NONE:PoolOfIndividualDebts" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	.
+
+fibo-sec-dbt-ab-pbs:SecuritizedDebtPool
+	a owl:Class ;
+	rdfs:label "securitized debt pool"@en ;
+	rdfs:comment "QName: NONE:SecuritizedDebtPool" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	.
+
+fibo-sec-dbt-ab-pbs:StructuredFinanceInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:TradableDebtInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:hasUnderlying.1 ;
+			owl:someValuesFrom fibo-fnd-oac-own:Asset ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:mayBe ;
+			owl:someValuesFrom fibo-sec-dbt-bnd:AmortizingBond ;
+		]
+		;
+	rdfs:label "structured finance instrument"@en ;
+	rdfs:comment "QName: NONE:StructuredFinanceInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "A security that has periodic principal payments with the amount of principal that is paid being dictated by a published factor."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This may be either an invented product (synthetic) or based on a real underlying asset pool. Either way, the underlying is defined by the issuing bank or investment company. These are traded. This is based on tranches of underlying asset pools. These are defined by the issuing bank or investment company."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:StructuredFinanceInstrumentPool
+	a owl:Class ;
+	rdfs:label "structured finance instrument pool"@en ;
+	rdfs:comment "QName: NONE:StructuredFinanceInstrumentPool" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	skos:definition "A pool investment consisting of a collection of structured finance instruments."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:backs
+	a owl:ObjectProperty ;
+	rdfs:label "backs"@en ;
+	rdfs:comment "QName: NONE:backs" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:SecuritizedDebtPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-sec-dbt-ab-pbs:CashStructuredFinanceInstrument ;
+	owl:inverseOf fibo-sec-dbt-ab-pbs:isTrancheOf ;
+	.
+
+fibo-sec-dbt-ab-pbs:dealAmount
+	a owl:ObjectProperty ;
+	rdfs:label "deal amount"@en ;
+	rdfs:comment "QName: NONE:dealAmount" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:PoolBackedSecuritiesDeal ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The amount of the overall deal."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:developsInto
+	a owl:ObjectProperty ;
+	rdfs:label "develops into"@en ;
+	rdfs:comment "QName: NONE:developsInto" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:PoolOfIndividualDebts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-sec-dbt-ab-pbs:PoolOfIndividualDebts ;
+	.
+
+fibo-sec-dbt-ab-pbs:hasIssuer
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-sec-dbt-ab-pbs:issuedBy ;
+	rdfs:label "has issuer"@en ;
+	rdfs:comment "QName: NONE:hasIssuer" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:PoolBackedSecuritiesDeal ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-sec-dbt-ab-pbs:PoolBackedSecurityIssuer ;
+	.
+
+fibo-sec-dbt-ab-pbs:hasTrancheType
+	a owl:ObjectProperty ;
+	rdfs:label "has tranche type"@en ;
+	rdfs:comment "QName: NONE:hasTrancheType" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:StructuredFinanceInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-sec-dbt-ab-mbs:TrancheType ;
+	.
+
+fibo-sec-dbt-ab-pbs:hasUnderlying
+	a owl:ObjectProperty ;
+	rdfs:label "has underlying"@en ;
+	rdfs:comment "QName: NONE:hasUnderlying" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:PoolBackedSecuritiesDeal ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-sec-dbt-ab-mbs:IssuedAndSecuritizedPoolOfIndividualDebts ;
+	.
+
+fibo-sec-dbt-ab-pbs:hasUnderlying.1
+	a owl:ObjectProperty ;
+	rdfs:label "has underlying"@en ;
+	rdfs:comment "QName: NONE:hasUnderlying.1" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:StructuredFinanceInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-fnd-oac-own:Asset ;
+	.
+
+fibo-sec-dbt-ab-pbs:isTrancheOf
+	a owl:ObjectProperty ;
+	rdfs:label "is tranche of"@en ;
+	rdfs:comment "QName: NONE:isTrancheOf" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:CashStructuredFinanceInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-sec-dbt-ab-pbs:SecuritizedDebtPool ;
+	skos:definition "The asset pool which is the underlying of a traditional or cash structured finance instrument. This is a real pool of real assets, as distinct from synthetic pools."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:issuedBy
+	a owl:ObjectProperty ;
+	rdfs:label "issued by"@en ;
+	rdfs:comment "QName: NONE:issuedBy" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:PoolBackedSecurityInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-sec-dbt-ab-pbs:PoolBackedSecurityIssuer ;
+	.
+
+fibo-sec-dbt-ab-pbs:lifecycleState
+	a owl:ObjectProperty ;
+	rdfs:label "lifecycle state"@en ;
+	rdfs:comment "QName: NONE:lifecycleState" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:PoolOfIndividualDebts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/PrivateLabelMBSIssuance/PoolLifecycleStateSelection> ;
+	skos:definition "The state of the pool in terms of the lifecycle of that pool from not yet issued, through the issuance process, to securitized pool."@en ;
+	.
+
+fibo-sec-dbt-ab-pbs:mayBe
+	a owl:ObjectProperty ;
+	rdfs:label "may be"@en ;
+	rdfs:comment "QName: NONE:mayBe" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:StructuredFinanceInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range fibo-sec-dbt-bnd:AmortizingBond ;
+	.
+
+fibo-sec-dbt-ab-pbs:passThrough
+	a owl:DatatypeProperty ;
+	rdfs:label "pass through"@en ;
+	rdfs:comment "QName: NONE:passThrough" ;
+	rdfs:domain fibo-sec-dbt-ab-pbs:CashStructuredFinanceInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the cash flows from the underlying asset pool are passed through to the investor by way of redemption payments."@en ;
+	.
+

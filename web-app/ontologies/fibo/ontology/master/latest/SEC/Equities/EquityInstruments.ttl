@@ -1,0 +1,725 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/CorporateOwnership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/OwnershipParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Partnerships/Partnerships/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesRestrictions/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-oac-cown: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/CorporateOwnership/> .
+@prefix fibo-be-ptr-ptr: <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-eq-eq: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> .
+@prefix fibo-sec-sec-iss: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/> .
+@prefix fibo-sec-sec-lst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> .
+@prefix fibo-sec-sec-rst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/>
+	a owl:Ontology ;
+	rdfs:label "Equity Instruments Ontology"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:" ;
+	dct:abstract "Core terms are those fundamental to all equity instruments. This ontology also distinguishes between privately held and publicly traded equity instruments, and defines a number of related concepts, such as voting rights." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-sec-eq-eq" ;
+	sm:filename "EquityInstruments.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/CorporateOwnership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/OwnershipParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Partnerships/Partnerships/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesRestrictions/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments.rdf version of this ontology was revised to refine the relationship between a listed share and exchange-specific share, update definitions to remove leading articles." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments.rdf version of this ontology was revised to replace 'publicly-traded share' with 'exchange-specific share', which is the more commonly used designation and corresponds better with the intended semantics of this concept, to merge in concepts that were formerly in a separate ShareTerms ontology, and eliminate deprecated elements."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-sec-eq-eq:CommonShare
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-eq-eq:Share ,
+		fibo-sec-sec-lst:RegisteredSecurity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:pays ;
+			owl:onClass fibo-sec-eq-eq:OrdinaryDividend ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "common share"@en-US ;
+	rdfs:comment "QName: fibo-sec-eq-eq:CommonShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	owl:disjointWith fibo-sec-eq-eq:PreferredShare ;
+	skos:definition "share that signifies a unit of ownership in a corporation and represents a claim on part of the corporation's assets and earnings" ;
+	fibo-fnd-utl-av:explanatoryNote "In the event that the corporation is liquidated, claims of secured and unsecured creditors and owners of bonds and preferred shares take precedence over claims of common share holders." ;
+	fibo-fnd-utl-av:synonym "ordinary share"@en-GB ;
+	.
+
+fibo-sec-eq-eq:ConvertiblePreferredShare
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-eq-eq:PreferredShare ,
+		fibo-sec-sec-iss:ConvertibleSecurity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-sec-eq-eq:EquityConversionTerms ;
+		]
+		;
+	rdfs:label "convertible preferred share" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:ConvertiblePreferredShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "a preferred share that is convertible into another security" ;
+	.
+
+fibo-sec-eq-eq:CumulativePreferredShare
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:PreferredShare ;
+	rdfs:label "cumulative preferred share" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:CumulativePreferredShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "preferred share whose dividends, if not paid due to insufficient earnings or other reasons, accumulate until paid out" ;
+	fibo-fnd-utl-av:explanatoryNote "These dividends have precedence over ordinary dividends which cannot be paid until any cumulative dividend obligations have been paid." ;
+	.
+
+fibo-sec-eq-eq:Custodian
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:FinancialInstitution ,
+		fibo-fbc-pas-fpas:ThirdPartyAgent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:holds ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "custodian" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:Custodian" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "bank or other financial institution that keeps custody of stock certificates and other assets of a mutual fund, individual, or corporate client"@en ;
+	.
+
+fibo-sec-eq-eq:DistributionByCashPayment
+	a
+		owl:NamedIndividual ,
+		fibo-sec-eq-eq:DividendDistributionMethod
+		;
+	rdfs:label "distribution by payment" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:DistributionByCashPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "distribution method involving payment of cash to the shareholder" ;
+	.
+
+fibo-sec-eq-eq:DistributionByReinvestment
+	a
+		owl:NamedIndividual ,
+		fibo-sec-eq-eq:DividendDistributionMethod
+		;
+	rdfs:label "distribution by reinvestment" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:DistributionByReinvestment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "a distribution method involving automatic reinvestment of shareholders' dividends in additional, potentially fractional, shares in the same equity or fund" ;
+	.
+
+fibo-sec-eq-eq:Dividend
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-agr:Commitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-psch:hasPaymentAmount ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:hasDistributionMethod ;
+			owl:onClass fibo-sec-eq-eq:DividendDistributionMethod ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasSchedule ;
+			owl:onClass fibo-sec-eq-eq:DividendOrShareCouponSchedule ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "dividend" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:Dividend" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "commitment to distribute a portion of earnings to shareholders, prorated by class of security, to be paid in the form of money, shares, scrip, or on rare occasion, property" ;
+	fibo-fnd-utl-av:explanatoryNote "The amount and timing of payment is set by the board of directors, typically quarterly." ;
+	.
+
+fibo-sec-eq-eq:DividendDistributionMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-bd:Convention ;
+	rdfs:label "dividend distribution method" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:DividendDistributionMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "convention by which dividends are distributed, i.e., by payment of a monetary amount or by reinvestment, as specified by the board of directors at the time a decision to issue a dividend is made" ;
+	.
+
+fibo-sec-eq-eq:DividendOrShareCouponSchedule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:RegularSchedule ,
+		fibo-fnd-pas-psch:PaymentSchedule
+		;
+	rdfs:label "dividend or share coupon schedule" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:DividendOrShareCouponSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "payment schedule indicating the dates on which dividends or share coupon payments are due to be paid" ;
+	.
+
+fibo-sec-eq-eq:EquityConversionTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-iss:ConversionTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:specifiesConversionDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-iss:specifiesConversionInto ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "equity conversion terms" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:EquityConversionTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "conversion terms specifying the details regarding conversion of shares into other securities" ;
+	.
+
+fibo-sec-eq-eq:EquityPosition
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:Position ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-oac-own:hasOwningParty ;
+			owl:onClass fibo-be-oac-cown:Shareholder ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isHeldBy ;
+			owl:onClass [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-be-oac-cown:Shareholder
+					fibo-sec-eq-eq:Custodian
+				) ;
+			] ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:indicatesNumberOfShares ;
+			owl:onDataRange xsd:decimal ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-oac-own:hasOwnedThing ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+				owl:someValuesFrom fibo-sec-eq-eq:Share ;
+			] ;
+		]
+		;
+	rdfs:label "equity position"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:EquityPosition" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "position in an equity instrument"@en ;
+	.
+
+fibo-sec-eq-eq:ExchangeSpecificShare
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-eq-eq:Share ,
+		fibo-sec-sec-lst:ExchangeTradedSecurity
+		;
+	rdfs:label "exchange-specific share"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:ExchangeSpecificShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:seeAlso <https://www.investopedia.com/terms/l/listedsecurity.asp> ;
+	skos:definition "listed share that is traded on a specific platform or venue"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Listing requirements vary by exchange and include minimum stockholder's equity, a minimum share price and a minimum number of shareholders. Exchanges have listing requirements to ensure that only high quality securities are traded on them and to uphold the exchange's reputation among investors."@en ;
+	.
+
+fibo-sec-eq-eq:ExtraordinaryVotingRight
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:VotingRight ;
+	rdfs:label "extraordinary voting right" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:ExtraordinaryVotingRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "right to vote at extraordinary meetings, as opposed to being able to vote strictly at annual general meetings" ;
+	.
+
+fibo-sec-eq-eq:LimitedPartnershipUnit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-eq-eq:Share ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:definesTermsFor ;
+			owl:someValuesFrom fibo-sec-eq-eq:LimitedPartnershipUnitRestriction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasCounterparty ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-be-ptr-ptr:GeneralPartner
+					fibo-be-ptr-ptr:LimitedPartner
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "limited partnership unit"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:LimitedPartnershipUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "share in a limited partnership"@en ;
+	.
+
+fibo-sec-eq-eq:LimitedPartnershipUnitRestriction
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-rst:ContractualRestriction ;
+	rdfs:label "limited partnership unit restriction"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:LimitedPartnershipUnitRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "restriction on ownership or transfer of the units"@en ;
+	.
+
+fibo-sec-eq-eq:NonCumulativePreferredShare
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:PreferredShare ;
+	rdfs:label "non-cumulative preferred share" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:NonCumulativePreferredShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	owl:disjointWith fibo-sec-eq-eq:CumulativePreferredShare ;
+	skos:definition "preferred share whose dividend payments are not carried forward" ;
+	.
+
+fibo-sec-eq-eq:NonParticipatingPreferredShare
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:PreferredShare ;
+	rdfs:label "non-participating preferred share" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:NonParticipatingPreferredShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	owl:disjointWith fibo-sec-eq-eq:ParticipatingPreferredShare ;
+	skos:definition "preferred share that is not a participating preferred share" ;
+	.
+
+fibo-sec-eq-eq:OrdinaryDividend
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:Dividend ;
+	rdfs:label "ordinary dividend" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:OrdinaryDividend" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "dividend that is taxed as ordinary income on receipt by a shareholder" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"Most dividends are considered ordinary, unless they are specifically designated as qualified dividends." ,
+		"Note that the terms related to ordinary dividend payment are typically specified in the context of a board resolution rather than contractually."
+		;
+	.
+
+fibo-sec-eq-eq:OrdinaryVotingRight
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:VotingRight ;
+	rdfs:label "ordinary voting right" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:OrdinaryVotingRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "voting right conferred on holders of common shares, as defined by the issuer" ;
+	.
+
+fibo-sec-eq-eq:ParticipatingPreferredShare
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-eq-eq:PreferredShare ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:pays ;
+			owl:onClass fibo-sec-eq-eq:OrdinaryDividend ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "participating preferred share" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:ParticipatingPreferredShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "preferred share that, in addition to paying a stipulated dividend, gives the holder the right to participate with common share holders in additional distributions of earnings under specified conditions" ;
+	fibo-fnd-utl-av:explanatoryNote "Participating preferred shares are rare, typically only issued when needed to attract investors." ;
+	.
+
+fibo-sec-eq-eq:PrecedenceRight
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ContractualRight ;
+	rdfs:label "precedence right" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:PrecedenceRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "rights of various parties in respect of the assets of some entity in the event of that entity being wound up" ;
+	fibo-fnd-utl-av:explanatoryNote "Some of these rights are enshrined in law. A special case of these is shareholder rights which are defined, for different classes of equity, by the Company Articles of Association or equivalent Documentation. These are the rights defined in the Equity Priority Terms Set." ;
+	.
+
+fibo-sec-eq-eq:PreferredShare
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-eq-eq:Share ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:onClass fibo-sec-eq-eq:ExtraordinaryVotingRight ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:hasCoupon ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-sec-eq-eq:OrdinaryDividend
+					fibo-sec-eq-eq:PreferredShareCoupon
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:isSeniorTo ;
+			owl:someValuesFrom fibo-sec-eq-eq:CommonShare ;
+		]
+		;
+	rdfs:label "preferred share" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:PreferredShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "share that pays dividends at a specified rate and has preference over common shares in the payment of dividends and liquidation of corporate assets" ;
+	fibo-fnd-utl-av:synonym "preference share" ;
+	.
+
+fibo-sec-eq-eq:PreferredShareCoupon
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-agr:Commitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-psch:hasPaymentAmount ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:hasDividendRate ;
+			owl:onClass fibo-fnd-acc-cur:PercentageMonetaryAmount ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:hasGracePeriod ;
+			owl:onClass fibo-fnd-dt-fd:Duration ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:hasDistributionMethod ;
+			owl:onClass fibo-sec-eq-eq:DividendDistributionMethod ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasSchedule ;
+			owl:onClass fibo-sec-eq-eq:DividendOrShareCouponSchedule ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "preferred share coupon" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:PreferredShareCoupon" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "commitment to distribute a portion of earnings to shareholders, similar to a dividend but often with a fixed payment amount and schedule" ;
+	.
+
+fibo-sec-eq-eq:PrivatelyHeldShare
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:Share ;
+	rdfs:label "privately held share"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:PrivatelyHeldShare" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	owl:disjointWith fibo-sec-eq-eq:ExchangeSpecificShare ;
+	skos:definition "share in a security that signifies ownership in an entity that is not publicly traded"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Privately owned companies include family-owned businesses, sole proprietorships and the vast majority of small and medium-sized businesses. These companies are often too small for an initial public offering (IPO) due, for example to a small market capitalization and/or low trading volume, and fulfill their financing requirements in other ways, including through smaller offerings." ;
+	.
+
+fibo-sec-eq-eq:QualifiedDividend
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:Dividend ;
+	rdfs:label "qualified dividend" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:QualifiedDividend" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "dividend that falls under capital gains tax rates that are lower than the income tax rates on unqualified, or ordinary, dividends" ;
+	.
+
+fibo-sec-eq-eq:RestrictedVotingRight
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-eq-eq:VotingRight ;
+	rdfs:label "restricted voting right" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:RestrictedVotingRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "voting right that has certain limitations associated with it" ;
+	.
+
+fibo-sec-eq-eq:Share
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:EquityInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:someValuesFrom fibo-sec-eq-eq:VotingRight ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:confersOwnershipOf ;
+			owl:someValuesFrom fibo-fnd-acc-aeq:ShareholdersEquity ;
+		]
+		;
+	rdfs:label "share"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:Share" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "financial instrument that signifies a unit of equity ownership in a corporation, or a unit of ownership in a mutual fund, or interest in a general or limited partnership, or a unit of ownership in a structured product, such as a real estate investment trust"@en ;
+	.
+
+fibo-sec-eq-eq:VotingRight
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:ContractualRight ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:hasVotingRestriction ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-eq:confersNumberOfVotesPerShare ;
+			owl:onDataRange xsd:decimal ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom fibo-fnd-agr-ctr:WrittenContract ;
+		]
+		;
+	rdfs:label "voting right" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:VotingRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "contractual right that specifies shareholder voting entitlements, such as to elect directors, elect outside auditors, and vote on matters of corporate policy" ;
+	fibo-fnd-utl-av:explanatoryNote "Voting may involve decisions on issuing securities, initiating stock splits, and making substantial changes in the corporation's operations.  Note that a given share may not have voting rights, in which case the number of votes per share would be zero." ;
+	.
+
+fibo-sec-eq-eq:confersNumberOfVotesPerShare
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasAmount ;
+	rdfs:label "number of votes per share"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:confersNumberOfVotesPerShare" ;
+	rdfs:domain fibo-sec-eq-eq:VotingRight ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "confers some number of votes per share on the holder, which may be zero, one, or more"@en ;
+	.
+
+fibo-sec-eq-eq:confersOwnershipOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:confers ;
+	rdfs:label "confers ownership of" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:confersOwnershipOf" ;
+	rdfs:domain fibo-fnd-agr-ctr:Contract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	skos:definition "grants or bestows ownership via contract"@en ;
+	.
+
+fibo-sec-eq-eq:hasCoupon
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has coupon" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:hasCoupon" ;
+	rdfs:domain fibo-sec-eq-eq:PreferredShare ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-eq-eq:OrdinaryDividend
+			fibo-sec-eq-eq:PreferredShareCoupon
+		) ;
+	] ;
+	skos:definition "relates a preferred share to a dividend or coupon that applies to the share" ;
+	.
+
+fibo-sec-eq-eq:hasDistributionMethod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has distribution method" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:hasDistributionMethod" ;
+	rdfs:domain fibo-sec-eq-eq:Dividend ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range fibo-sec-eq-eq:DividendDistributionMethod ;
+	skos:definition "indicates the method by which dividend or coupon payments are to be distributed" ;
+	.
+
+fibo-sec-eq-eq:hasDividendRate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has dividend rate" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:hasDividendRate" ;
+	rdfs:domain fibo-sec-eq-eq:PreferredShareCoupon ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range fibo-fnd-acc-cur:PercentageMonetaryAmount ;
+	skos:definition "indicates a pre-arranged dividend rate" ;
+	.
+
+fibo-sec-eq-eq:hasFloatingSupply
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasAmount ;
+	rdfs:label "has floating supply"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:hasFloatingSupply" ;
+	rdfs:domain fibo-sec-eq-eq:ExchangeSpecificShare ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range xsd:nonNegativeInteger ;
+	skos:definition "indicates the number of shares outstanding and available for trading publicly"@en ;
+	fibo-fnd-utl-av:explanatoryNote "A relatively small float results in higher volatility, as a large purchase or sell order will have significant influence on the value of the stock."@en ;
+	fibo-fnd-utl-av:synonym "has float"@en ;
+	.
+
+fibo-sec-eq-eq:hasGracePeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDuration ;
+	rdfs:label "has grace period" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:hasGracePeriod" ;
+	rdfs:domain fibo-sec-eq-eq:PreferredShareCoupon ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "indicates a period of time after a coupon payment becomes due, before the issuer is subject to penalties" ;
+	.
+
+fibo-sec-eq-eq:hasVotingRestriction
+	a owl:DatatypeProperty ;
+	rdfs:label "has voting restriction"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:hasVotingRestriction" ;
+	rdfs:domain fibo-sec-eq-eq:VotingRight ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range xsd:string ;
+	skos:definition "specifies restrictions on voting rights, if any" ;
+	.
+
+fibo-sec-eq-eq:indicatesNumberOfShares
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasAmount ;
+	rdfs:label "indicates number of shares"@en ;
+	rdfs:comment "QName: fibo-sec-eq-eq:indicatesNumberOfShares" ;
+	rdfs:domain fibo-sec-eq-eq:EquityPosition ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "indicates the number of shares associated with the position"@en ;
+	.
+
+fibo-sec-eq-eq:isSeniorTo
+	a owl:ObjectProperty ;
+	rdfs:label "is senior to" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:isSeniorTo" ;
+	rdfs:domain fibo-sec-eq-eq:Share ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	skos:definition "indicates that a given share (share class) has higher seniority than the related share, meaning that it gives the holder a higher claim on the assets of the issuer" ;
+	.
+
+fibo-sec-eq-eq:pays
+	a owl:ObjectProperty ;
+	rdfs:label "pays" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:pays" ;
+	rdfs:domain fibo-sec-eq-eq:Share ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range fibo-sec-eq-eq:Dividend ;
+	skos:definition "relates a share to a dividend that it may pay to shareholders" ;
+	.
+
+fibo-sec-eq-eq:specifiesConversionDate
+	a owl:ObjectProperty ;
+	rdfs:label "specifies conversion date" ;
+	rdfs:comment "QName: fibo-sec-eq-eq:specifiesConversionDate" ;
+	rdfs:domain fibo-sec-eq-eq:EquityConversionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "indicates the date on which, or after which, conversion may occur" ;
+	.
+

@@ -1,0 +1,243 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/CAGovernmentEntitiesAndJurisdictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-be-ge-caj: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/NorthAmericanJurisdiction/CAGovernmentEntitiesAndJurisdictions/> .
+@prefix fibo-be-ge-ge: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ei-caei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ei-pub: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/> .
+@prefix lcc-3166-1: <https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/>
+	a owl:Ontology ;
+	rdfs:label "Canadian Economic Indicators Ontology" ;
+	rdfs:comment "QName: fibo-ind-ei-caei:" ;
+	dct:abstract "This ontology provides specific parameters which make up the various types of market economic indicators applicable to the Canadian economy." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2018 EDM Council, Inc." ,
+		"Copyright (c) 2016-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-ind-ei-caei" ;
+	sm:filename "CAEconomicIndicators.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/CAGovernmentEntitiesAndJurisdictions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators.rdf version of this ontology was added to the IND specification per the issue resolutions identified in the FIBO IND 1.0 FTF 3 report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators.rdf version of this ontology was revised per the FIBO 2.0 RFC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators.rdf version of this ontology was revised to reflect the new hasCoverageArea property in FND."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-ind-ei-caei:CanadianConsumerPriceIndex
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-ei:ConsumerPriceIndex ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:hasPublisher ;
+			owl:hasValue fibo-ind-ei-caei:CanadianStatisticsPublisher ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:isPublishedBy ;
+			owl:hasValue fibo-ind-ei-caei:StatisticsCanada ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:onClass fibo-ind-ei-caei:CanadianHouseholdsConsumersUniverse ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-ind-ei-caei:CanadianHouseholdsConsumersUniverse ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-ind-ei-ei:FixedBasket ;
+		]
+		;
+	rdfs:label "Canadian consumer price index" ;
+	rdfs:comment "QName: fibo-ind-ei-caei:CanadianConsumerPriceIndex" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:definition "an economic indicator representing a measure of changes over time in the prices of a fixed basket of consumer goods and services that Canadian private households consume" ;
+	fibo-fnd-utl-av:abbreviation "CPI" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.statcan.gc.ca/eng/start"^^xsd:anyURI ,
+		"http://www5.statcan.gc.ca/olc-cel/olc.action?ObjId=62-553-X&ObjType=2&lang=en&limit=0"^^xsd:anyURI
+		;
+	.
+
+fibo-ind-ei-caei:CanadianHouseholdsConsumersUniverse
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-ei:CivilianNonInstitutionalPopulation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasContext ;
+			owl:someValuesFrom fibo-ind-ei-ei:Household ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:playsRole ;
+				owl:someValuesFrom fibo-ind-ei-ei:UltimateConsumer ;
+			] ;
+		]
+		;
+	rdfs:label "Canadian households consumers universe" ;
+	rdfs:comment "QName: fibo-ind-ei-caei:CanadianHouseholdsConsumersUniverse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:definition "a statistical universe consisting of all private households in Canada, with the exception of soldiers on military bases, people living on First Nations reserves, institutionalized persons, and households living in the rural areas of the three northern territories" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.statcan.gc.ca/pub/62-553-x/62-553-x2015001-eng.pdf" ;
+	.
+
+fibo-ind-ei-caei:CanadianProducerPriceIndex
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-ei:ProducerPriceIndex ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:hasPublisher ;
+			owl:hasValue fibo-ind-ei-caei:CanadianStatisticsPublisher ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:isPublishedBy ;
+			owl:hasValue fibo-ind-ei-caei:StatisticsCanada ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-ind-ei-caei:IndustrialProductsSector
+					fibo-ind-ei-caei:NewHousingSector
+					fibo-ind-ei-caei:RawMaterialsSector
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "Canadian producer price index" ;
+	rdfs:comment "QName: fibo-ind-ei-caei:CanadianProducerPriceIndex" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:definition "an economic indicator representing a measure of the change over time in the prices of a fixed-basket of domestic producer goods and services" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www23.statcan.gc.ca/imdb-bmdi/pub/indexth-eng.htm"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Note that Canada does not produce a high level, cross industry PPI per se. Canadian PPIs are published by industry sector. Three of the most important are captured in the union defined herein, which may be expanded over time to integrate others, as needed."^^xsd:anyURI ;
+	.
+
+fibo-ind-ei-caei:CanadianStatisticsPublisher
+	a
+		owl:NamedIndividual ,
+		fibo-ind-ei-pub:StatisticalInformationPublisher
+		;
+	rdfs:label "Canadian statistics publisher" ;
+	rdfs:comment "QName: fibo-ind-ei-caei:CanadianStatisticsPublisher" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:definition "individual representing the functional entity that is the primary publisher of statistical information for the Canadian Government" ;
+	fibo-fnd-rel-rel:hasIdentity fibo-ind-ei-caei:StatisticsCanada ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.statcan.gc.ca/eng/about/mandate/"^^xsd:anyURI ;
+	.
+
+fibo-ind-ei-caei:IndustrialProductsSector
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:IndustrySectorClassifier ;
+	rdfs:label "industrial products sector" ;
+	rdfs:comment "QName: fibo-ind-ei-caei:IndustrialProductsSector" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:definition "a classifier for a sector of the economy used for price indices focused on major commodities sold by manufacturers in Canada" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2318"^^xsd:anyURI ;
+	.
+
+fibo-ind-ei-caei:NewHousingSector
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:IndustrySectorClassifier ;
+	rdfs:label "new housing sector" ;
+	rdfs:comment "QName: fibo-ind-ei-caei:NewHousingSector" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:definition "a classifier for a sector of the economy used for price indices focused on contractors' selling prices of new residential houses, where detailed specifications pertaining to each house remain the same between two consecutive periods" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2310"^^xsd:anyURI ;
+	.
+
+fibo-ind-ei-caei:RawMaterialsSector
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:IndustrySectorClassifier ;
+	rdfs:label "raw materials sector" ;
+	rdfs:comment "QName: fibo-ind-ei-caei:RawMaterialsSector" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:definition "a classifier used for price indices related to raw materials purchased by industries in Canada for further processing" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=2306"^^xsd:anyURI ;
+	.
+
+fibo-ind-ei-caei:StatisticsCanada
+	a
+		owl:NamedIndividual ,
+		fibo-be-ge-ge:GovernmentAgency
+		;
+	rdfs:label
+		"Statistics Canada"@en ,
+		"Statistique Canada"@fr
+		;
+	rdfs:comment "QName: fibo-ind-ei-caei:StatisticsCanada" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/> ;
+	skos:definition "individual representing Statistics Canada, a government agency mandated to collect, compile, analyse, abstract and publish statistical information relating to the commercial, industrial, financial, social, economic and general activities and condition of the people of Canada" ;
+	fibo-fnd-plc-cty:hasCoverageArea lcc-3166-1:Canada ;
+	fibo-fnd-rel-rel:isPartOf fibo-be-ge-caj:GovernmentOfCanada ;
+	fibo-fnd-utl-av:abbreviation "StatCan" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.statcan.gc.ca/eng/about/mandate"^^xsd:anyURI ;
+	.
+

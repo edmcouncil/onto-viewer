@@ -1,0 +1,52 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Partnerships/MetadataBEPartnerships/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Partnerships/MetadataBEPartnerships/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-ptr-mod: <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/MetadataBEPartnerships/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/MetadataBEPartnerships/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Business Entities (BE) Partnerships Module" ;
+	rdfs:comment "QName: fibo-be-ptr-mod:" ;
+	dct:abstract "The partnerships module contains ontologies that define concepts relating to types of partnerships, including incorporated and non-incorporated organizations. Partnerships are defined without reference to jurisdiction-specific legal forms. The abstractions distinguish between types of partnerships and related formation characteristics, as well as kinds of partners and types of partnership equity." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-be-ptr-mod" ;
+	sm:filename "MetadataBEPartnerships.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Partnerships/MetadataBEPartnerships/> ;
+	.
+
+fibo-be-ptr-mod:PartnershipsModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Partnerships" ;
+	rdfs:comment "QName: fibo-be-ptr-mod:PartnershipsModule" ;
+	dct:abstract "The partnerships module contains ontologies that define concepts relating to types of partnerships, including incorporated and non-incorporated organizations. Partnerships are defined without reference to jurisdiction-specific legal forms. The abstractions distinguish between types of partnerships and related formation characteristics, as well as kinds of partners and types of partnership equity." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Business Entities (BE) Partnerships Module" ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-be-ptr" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/MetadataBEPartnerships/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

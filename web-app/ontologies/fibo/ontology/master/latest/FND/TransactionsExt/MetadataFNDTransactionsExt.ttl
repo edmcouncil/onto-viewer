@@ -1,0 +1,58 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-txn-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MetadataFNDTransactionsExt/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MetadataFNDTransactionsExt/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) TransactionsExt Module" ;
+	rdfs:comment "QName: fibo-fnd-txn-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Transactions Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-fnd-txn-mod" ;
+	sm:filename "MetadataFNDTransactionsExt.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/> ;
+	.
+
+fibo-fnd-txn-mod:TransactionsExtModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Transactions" ;
+	rdfs:comment "QName: fibo-fnd-txn-mod:TransactionsExtModule" ;
+	dct:abstract "This module contains ontologies of Transaction concepts based on the Resource, Events Agents (REA) ontology for transactions." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/QuantifiedResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SecuritiesTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Transactions Module" ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-fnd-txn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MetadataFNDTransactionsExt/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	skos:editorialNote "The content in this module is original conceptual content and does not extend any other module. Some of the concepts represented conceptually in this module have been replaced by partial representations of some transaction concepts in the Products and Services module, sometimes using different labels for similar or equivalent concepts. Much of the content in this module will still be referred to in other FIBO domains, and care is needed in determining whether to replace these references to something in Products and Services versus when to bring forward more of the content in this module." ;
+	.
+

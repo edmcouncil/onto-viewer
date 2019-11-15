@@ -1,0 +1,212 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Control/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Control/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-oac-ctl: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/>
+	a owl:Ontology ;
+	rdfs:label "Control Ontology" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:" ;
+	dct:abstract "This ontology defines high-level, control-related concepts for use in other FIBO ontology elements.  The ontology covers basic concepts around control, along with a distinction between de jure and de facto control, the former being derived with reference to terms in the LegalCapacity ontology." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2018 EDM Council, Inc." ,
+		"Copyright (c) 2013-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-oac-ctl" ;
+	sm:filename "Control.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Control/> ;
+	skos:changeNote
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/OwnershipAndControl/Control.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations.""" ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control.rdf version of the ontology was was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-oac-ctl:Control
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-bd:holdsDuring ;
+			owl:allValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-oac-ctl:hasPartyInControl ;
+			owl:someValuesFrom fibo-fnd-pty-pty:PartyInRole ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-oac-ctl:isInControlOfThing ;
+			owl:someValuesFrom fibo-fnd-pty-rl:ThingInRole ;
+		]
+		;
+	rdfs:label "control" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:Control" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	skos:definition "the possession by a party, direct or indirect, of the power to direct or cause the direction of the management and policies of a thing, whether through the ownership of voting shares, by contract, or otherwise" ;
+	.
+
+fibo-fnd-oac-ctl:ControlledThing
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-rl:ThingInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:isControlledBy ;
+				owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+			] ;
+		]
+		;
+	rdfs:label "controlled thing" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:ControlledThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	skos:definition "thing over which some party exercises some form of control in some context" ;
+	.
+
+fibo-fnd-oac-ctl:ControllingCapacity
+	a owl:Class ;
+	rdfs:label "controlling capacity" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:ControllingCapacity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	skos:definition "the possession, direct or indirect, of the power to direct or cause the direction of the thing which is controlled" ;
+	.
+
+fibo-fnd-oac-ctl:ControllingParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:controls ;
+				owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+			] ;
+		]
+		;
+	rdfs:label "controlling party" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:ControllingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	skos:definition "Party which exercises some form of control in some context." ;
+	skos:editorialNote "At this level of abstraction it is not defined whether the control is some degree of controlling interest, or some level of actual control (asserted or calculated) in some entity." ;
+	.
+
+fibo-fnd-oac-ctl:DeFactoControl
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-oac-ctl:ControllingCapacity ;
+	rdfs:label "de facto control" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:DeFactoControl" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	owl:disjointWith fibo-fnd-oac-ctl:DeJureControl ;
+	skos:definition "control that is understood, due to condition or situation treated as standard or official, even if not explicitly stated (or actually standardized)" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investorwords.com/1349/de_facto.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:usageNote "Use this element for relationships where there is asserted to be control but the type of control isI either unknown or immaterial. This includes where the existence of real control of some thing or some company is inferred by running inferencing on some set of de jure controlling interests, and also where control is baldly asserted and there is nothing known about how or why such control comes about." ;
+	.
+
+fibo-fnd-oac-ctl:DeJureControl
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:LegalConstruct ,
+		fibo-fnd-oac-ctl:ControllingCapacity
+		;
+	rdfs:label "de jure control" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:DeJureControl" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	skos:definition "control that is formalized in law, or codified in some legal instrument" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/de-jure.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:usageNote "Use this class of thing for all types of controlling interest, such as share ownership, holding of general partner equity, or being the beneficiary of any side contract in which control is ceded, as well as types of control more generally in which there is some instrument or means of control. This class defines control as a kind of legal capacity, conferred on something by something via some formal means i.e. some instrument of control. When asserting that there is some de jure controlling interest (for example in some company by some other company) we do not at the same time assert the conclusions that would be drawn as a result of observing those controlling interests - that is covered under de facto control." ;
+	.
+
+fibo-fnd-oac-ctl:hasPartyInControl
+	a owl:ObjectProperty ;
+	rdfs:label "control by party" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:hasPartyInControl" ;
+	rdfs:domain fibo-fnd-oac-ctl:Control ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	rdfs:range fibo-fnd-oac-ctl:ControllingParty ;
+	skos:definition "indicates the party in a control relationship where a party controls a thing" ;
+	.
+
+fibo-fnd-oac-ctl:isControlledThingInRole
+	a owl:ObjectProperty ;
+	rdfs:label "is a controlled thing in role" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:isControlledThingInRole" ;
+	rdfs:domain fibo-fnd-oac-ctl:ControlledThing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	rdfs:range fibo-fnd-oac-ctl:Control ;
+	owl:inverseOf fibo-fnd-oac-ctl:isInControlOfThing ;
+	skos:definition "indicates the context of control in which the thing plays the role of being controlled" ;
+	.
+
+fibo-fnd-oac-ctl:isControllingPartyInRole
+	a owl:ObjectProperty ;
+	rdfs:label "is a controlling party in role" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:isControllingPartyInRole" ;
+	rdfs:domain fibo-fnd-oac-ctl:ControllingParty ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	rdfs:range fibo-fnd-oac-ctl:Control ;
+	owl:inverseOf fibo-fnd-oac-ctl:hasPartyInControl ;
+	skos:definition "indicates the context of control in which the party plays the role of controlling some thing" ;
+	.
+
+fibo-fnd-oac-ctl:isInControlOfThing
+	a owl:ObjectProperty ;
+	rdfs:label "is in control of thing" ;
+	rdfs:comment "QName: fibo-fnd-oac-ctl:isInControlOfThing" ;
+	rdfs:domain fibo-fnd-oac-ctl:Control ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/> ;
+	rdfs:range fibo-fnd-oac-ctl:ControlledThing ;
+	skos:definition "Indicates the thing in a control relationship where a party controls a thing" ;
+	.
+

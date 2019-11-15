@@ -1,0 +1,492 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Partnerships/Partnerships/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/ControlParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/OwnershipParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Partnerships/Partnerships/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-be-le-fbo: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-be-oac-cpty: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/ControlParties/> .
+@prefix fibo-be-oac-opty: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/OwnershipParties/> .
+@prefix fibo-be-ptr-ptr: <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/>
+	a owl:Ontology ;
+	rdfs:label "Partnerships Ontology" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:" ;
+	dct:abstract "This ontology defines partnerships and related concepts. The concepts distinguish general from limited partners, as well as the types of equity that they hold. Included are abstract definitions of partnership types based on whether they have general, limited or both kinds of partners. Both legally incorporated and non incorporated forms of partnerships are covered." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/ControlParties/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/OwnershipParties/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-be-ptr-ptr" ;
+	sm:filename "Partnerships.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/ControlParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/OwnershipParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Partnerships/Partnerships/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships.rdf version of this ontology was modified per the FIBO 2.0 RFC to reference shareholders' equity vs. stockholders' equity and correct a number of restrictions." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships.rdf version of this ontology was modified per the issue resolutions identified in the FIBO BE 1.0 FTF report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships.rdf version of this ontology was modified to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships.rdf version of this ontology was modified to reflect the move of hasObjective to FND to enable higher level reuse." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships.rdf version of this ontology was modified to simplify / merge the legal person and formal organization class hierarchies."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-be-ptr-ptr:CorporateLimitedPartner
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ptr-ptr:LimitedPartner ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-cb:Corporation ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "corporate limited partner" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:CorporateLimitedPartner" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "A limited partner in a partnership, who is and may only be a Corporate Legal Person (i.e., not a natural person)" ;
+	.
+
+fibo-be-ptr-ptr:EquityApportionmentTermsSet
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractualCommitment ;
+	rdfs:label "equity apportionment terms set" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:EquityApportionmentTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "contract terms defining the apportionment of equity for some formal business organization." ;
+	.
+
+fibo-be-ptr-ptr:GeneralPartner
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-oac-cpty:DeJureControllingInterestParty ,
+		fibo-be-ptr-ptr:Partner ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegallyCompetentNaturalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-oac-opty:holdsEquityIn ;
+			owl:someValuesFrom fibo-be-ptr-ptr:GeneralPartnerEquity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-law-lcap:hasCapacity ;
+				owl:allValuesFrom fibo-fnd-law-lcap:LiabilityCapacity ;
+			] ;
+		]
+		;
+	rdfs:label "general partner" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:GeneralPartner" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partner in a partnership, who holds some part of the general partner equity and typically is jointly and severally liable with the other partners for the liabilities incurred by that partnership" ;
+	.
+
+fibo-be-ptr-ptr:GeneralPartnerEquity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-oac-opty:ControllingEquity ,
+		fibo-be-ptr-ptr:PartnershipEquity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:allValuesFrom fibo-be-oac-cpty:ConstitutionalDeJureControl ;
+		]
+		;
+	rdfs:label "general partner equity" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:GeneralPartnerEquity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "Equity in a partnership held by general partners; this is typically accompanied by full liability capability on the part of the holders of the equity." ;
+	skos:editorialNote "For a typical, non incorporated partnership, this is the only equity in the entity. Other typically incorporated partnerships may have additional limited equity in addition to or instead of this." ;
+	.
+
+fibo-be-ptr-ptr:LiabilityApportionmentTermsSet
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractualCommitment ;
+	rdfs:label "liability apportionment terms set" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:LiabilityApportionmentTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "terms defining the apportionment of liabilities accrued by some formal business organization." ;
+	.
+
+fibo-be-ptr-ptr:LimitedPartner
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ptr-ptr:Partner ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-oac-opty:holdsEquityIn ;
+			owl:someValuesFrom fibo-be-ptr-ptr:LimitedPartnerEquity ;
+		]
+		;
+	rdfs:label "limited partner" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:LimitedPartner" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partner whose liabilities are limited to the extent of their equity holding or guarantees" ;
+	.
+
+fibo-be-ptr-ptr:LimitedPartnerEquity
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-ptr-ptr:PartnershipEquity ;
+	rdfs:label "limited partner equity" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:LimitedPartnerEquity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "equity in a partnership held by limited partners; this is not accompanied by any liability capability on the part of the holders of this equity." ;
+	.
+
+fibo-be-ptr-ptr:NaturalPersonLimitedPartner
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ptr-ptr:LimitedPartner ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegallyCompetentNaturalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "natural person limited partner" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:NaturalPersonLimitedPartner" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a limited partner in a partnership who is a natural person" ;
+	.
+
+fibo-be-ptr-ptr:NonIncorporatedPartnership
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-ptr-ptr:PartnershipWithGeneralPartners ;
+	rdfs:label "non-incorporated partnership" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:NonIncorporatedPartnership" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partnership in which the partners are jointly and severally liable for liabilities incurred by the entity" ;
+	.
+
+fibo-be-ptr-ptr:Partner
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-oac-opty:ConstitutionalOwner ,
+		fibo-fnd-pty-pty:OrganizationMember ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:isMemberOf ;
+				owl:allValuesFrom fibo-be-ptr-ptr:Partnership ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:onClass fibo-be-ptr-ptr:PartnershipAgreement ;
+				owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			] ;
+		]
+		;
+	rdfs:label "partner" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:Partner" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a member of a partnership" ;
+	skos:scopeNote "This term is not referred to directly in specific kinds of partnership. Nearly all partnerships have General Partners, while forms of (mostly legally incorporated) partnerships have in addition Limited Partners. This term is the common ancestor of both." ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.investorwords.com/3608/partner.html"^^xsd:anyURI ;
+	.
+
+fibo-be-ptr-ptr:Partnership
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-lp:LegalEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-gao-obj:hasObjective ;
+			owl:onClass fibo-be-le-lp:ProfitObjective ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:onClass [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:playsRole ;
+				owl:someValuesFrom fibo-be-ptr-ptr:Partner ;
+			] ;
+			owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-le-fbo:hasEquity ;
+			owl:someValuesFrom fibo-be-ptr-ptr:PartnershipEquity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-be-ptr-ptr:PartnershipAgreement ;
+		]
+		;
+	rdfs:label "partnership" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:Partnership" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "venture in which two or more legal entities carry out some business activities under a common identity" ;
+	skos:editorialNote "If the partnership doesn't limit the liability of the partners then the party to the contract is a natural person. If it does, then it's an artificial legal person (Body Corporate) - see Legally Incorporated Partnerships. Scope Note: This term of Partnership in the most general sense is ancestral to both of those." ;
+	.
+
+fibo-be-ptr-ptr:PartnershipAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-fbo:OrganizationCoveringAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-be-ptr-ptr:EquityApportionmentTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-be-ptr-ptr:LiabilityApportionmentTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-be-ptr-ptr:Partner ;
+		]
+		;
+	rdfs:label "partnership agreement" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a document setting up a partnership, giving the details of the business and the amount each partner is contributing to it." ;
+	fibo-fnd-utl-av:synonym "articles of partnership" ;
+	.
+
+fibo-be-ptr-ptr:PartnershipEquity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-aeq:OwnersEquity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-aeq:representsAnInterestIn ;
+			owl:someValuesFrom fibo-be-ptr-ptr:Partnership ;
+		]
+		;
+	rdfs:label "partnership equity" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipEquity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "equity in some partnership" ;
+	.
+
+fibo-be-ptr-ptr:PartnershipIncorporatedByEquity
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-ptr-ptr:PartnershipWithLimitedPartners ;
+	rdfs:label "partnership incorporated by equity" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipIncorporatedByEquity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partnership incorporated via the issuance of equity, with limited partners (i.e., partners whose liability is limited) that are necessarily not natural persons (i.e., cannot be individuals)" ;
+	.
+
+fibo-be-ptr-ptr:PartnershipIncorporatedThroughAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-cb:BodyIncorporatedThroughAgreement ,
+		fibo-be-ptr-ptr:Partnership
+		;
+	rdfs:label "partnership incorporated through agreement" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipIncorporatedThroughAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partnership which has legal personhood, but for which there is not some issuance of limited partner equity" ;
+	skos:editorialNote "An LLP (in the UK) is an example of this - in this case, the LLP document is the legal document which effectively constitutes the partnership" ;
+	.
+
+fibo-be-ptr-ptr:PartnershipWithCorporateLimitedPartners
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ptr-ptr:PartnershipWithLimitedPartners ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:playsRole ;
+				owl:someValuesFrom fibo-be-ptr-ptr:CorporateLimitedPartner ;
+			] ;
+		]
+		;
+	rdfs:label "partnership with corporate limited partners" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipWithCorporateLimitedPartners" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	owl:disjointWith fibo-be-ptr-ptr:PartnershipWithNaturalPersonLimitedPartners ;
+	skos:definition "A partnership with limited partners (partners whose liability is limited) and where those partners are necessarily non natural persons (i.e. cannot be individuals)." ;
+	.
+
+fibo-be-ptr-ptr:PartnershipWithGeneralAndLimitedPartners
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ptr-ptr:PartnershipWithGeneralPartners ,
+		fibo-be-ptr-ptr:PartnershipWithLimitedPartners
+		;
+	rdfs:label "partnership with general and limited partners" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipWithGeneralAndLimitedPartners" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	owl:disjointWith fibo-be-ptr-ptr:PartnershipWithOnlyLimitedPartners ;
+	skos:definition "a partnership having both limited partners and general partners" ;
+	.
+
+fibo-be-ptr-ptr:PartnershipWithGeneralPartners
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ptr-ptr:Partnership ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:onClass [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:playsRole ;
+				owl:someValuesFrom fibo-be-ptr-ptr:GeneralPartner ;
+			] ;
+			owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "partnership with general partners" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipWithGeneralPartners" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partnership that has two or more general partners" ;
+	skos:editorialNote "The partnership may or may not also have limited partners. In a typical non-incorporated partnership, it does not. General partners of a partnership must be natural persons." ;
+	.
+
+fibo-be-ptr-ptr:PartnershipWithGeneralPartnersWithLimitedLiability
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-ptr-ptr:PartnershipWithGeneralPartners ;
+	rdfs:label "partnership with general partners with limited liability" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipWithGeneralPartnersWithLimitedLiability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partnership that has general partners, whose general partners have limited liability" ;
+	skos:scopeNote "This is therefore necessarily a legal person (no-one else has liability); example in some US states is a limited liability limited partnership." ;
+	.
+
+fibo-be-ptr-ptr:PartnershipWithLimitedPartners
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ptr-ptr:Partnership ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:playsRole ;
+				owl:someValuesFrom fibo-be-ptr-ptr:LimitedPartner ;
+			] ;
+		]
+		;
+	rdfs:label "partnership with limited partners" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipWithLimitedPartners" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partnership having limited partners, that is partners whose liabilities are limited to the extent of their equity or guarantees" ;
+	skos:editorialNote "Possibly but not necessarily a Legal Person. If there are only Limited Partners then this is of necessity a Legal Person (no-one else has liability in this structure)." ;
+	.
+
+fibo-be-ptr-ptr:PartnershipWithNaturalPersonLimitedPartners
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ptr-ptr:PartnershipWithLimitedPartners ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:playsRole ;
+				owl:someValuesFrom fibo-be-ptr-ptr:NaturalPersonLimitedPartner ;
+			] ;
+		]
+		;
+	rdfs:label "partnership with natural person limited partners" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipWithNaturalPersonLimitedPartners" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partnership with limited partners (partners whose liability is limited) and where those partners are necessarily natural persons (i.e. cannot be corporates)" ;
+	skos:scopeNote "Example in US, a Limited Liability Partnership" ;
+	.
+
+fibo-be-ptr-ptr:PartnershipWithOnlyLimitedPartners
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-ptr-ptr:PartnershipWithLimitedPartners ;
+	rdfs:label "partnership with only limited partners" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:PartnershipWithOnlyLimitedPartners" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	skos:definition "a partnership having limited partners but no general partners" ;
+	.
+
+fibo-be-ptr-ptr:dateTradingFrom
+	a owl:DatatypeProperty ;
+	rdfs:label "date trading from" ;
+	rdfs:comment "QName: fibo-be-ptr-ptr:dateTradingFrom" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/> ;
+	rdfs:range xsd:dateTime ;
+	skos:definition "date on which the partnership started trading" ;
+	.
+

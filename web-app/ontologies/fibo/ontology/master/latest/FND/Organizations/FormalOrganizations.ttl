@@ -1,0 +1,115 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-org-org: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/>
+	a owl:Ontology ;
+	rdfs:label "Formal Organizations Ontology" ;
+	rdfs:comment "QName: fibo-fnd-org-fm:" ;
+	dct:abstract "This ontology defines the high level concept of formal organization for use in other FIBO ontology elements.  It is purposefully underspecified to facilitate mapping to other formal organization ontologies, such as the emerging W3C formal organization ontology, or others defined for specific business and financial services standards. The concepts in this ontology extend those in the Organizations ontology." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2018 EDM Council, Inc." ,
+		"Copyright (c) 2013-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-org-fm" ;
+	sm:filename "FormalOrganizations.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20130801/Organizations/FormalOrganizations.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in http://www.omg.org/spec/EDMC-FIBO/FND/1.0/AboutFND-1.0/. It was further revised in the FTF in advance of the Long Beach meeting, resulting in http://www.omg.org/spec/EDMC-FIBO/FND/20141101/Organizations/FormalOrganizations/." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20141101/Organizations/FormalOrganizations.rdf version of this ontology was modified per the FIBO 2.0 RFC to integrate concepts from LCC." ,
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/Organizations/FormalOrganizations.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations."""
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-org-fm:FormalOrganization
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-org-org:Organization ;
+	rdfs:label "formal organization" ;
+	rdfs:comment "QName: fibo-fnd-org-fm:FormalOrganization" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> ;
+	owl:disjointWith fibo-fnd-org-fm:InformalOrganization ;
+	skos:definition "An Organization that is recognized in some legal jurisdiction, with associated rights and responsibilities. Examples include a Corporation, Charity, Government or Church." ;
+	skos:editorialNote "W3C Definition - An Organization which is recognized in the world at large, in particular in legal jurisdictions, with associated rights and responsibilities. Examples include a Corporation, Charity, Government or Church." ;
+	fibo-fnd-utl-av:adaptedFrom "W3C Organization Ontology" ;
+	.
+
+fibo-fnd-org-fm:Group
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Collection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:allValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		]
+		;
+	rdfs:label "group" ;
+	rdfs:comment "QName: fibo-fnd-org-fm:Group" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> ;
+	skos:definition "a collection of autonomous entities" ;
+	.
+
+fibo-fnd-org-fm:InformalOrganization
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-org-org:Organization ;
+	rdfs:label "informal organization" ;
+	rdfs:comment "QName: fibo-fnd-org-fm:InformalOrganization" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> ;
+	skos:definition "An organization which is not formally constituted in some way." ;
+	.
+
+fibo-fnd-org-fm:isDomiciledIn
+	a owl:ObjectProperty ;
+	rdfs:label "is domiciled in" ;
+	rdfs:comment "QName: fibo-fnd-org-fm:isDomiciledIn" ;
+	rdfs:domain fibo-fnd-org-fm:FormalOrganization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> ;
+	rdfs:range lcc-cr:Country ;
+	skos:definition "the country in which the formal organization is officially domiciled" ;
+	fibo-fnd-utl-av:explanatoryNote "This would normally be the country corresponding to the jurisdiction in which the formal organization is constituted or incorporated. For some primarily federal countries, the domicile is the country that makes up the federation while the jurisdiction under which the entity is registered (if it is a registered entity) would be that of some state in that federation." ;
+	.
+

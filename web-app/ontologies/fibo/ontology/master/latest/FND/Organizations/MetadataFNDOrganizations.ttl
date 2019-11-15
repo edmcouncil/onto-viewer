@@ -1,0 +1,56 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-org-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/MetadataFNDOrganizations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/MetadataFNDOrganizations/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) Organizations Module" ;
+	rdfs:comment "QName: fibo-fnd-org-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Organizations Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fnd-org-mod" ;
+	sm:filename "MetadataFNDOrganizations.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/> ;
+	.
+
+fibo-fnd-org-mod:OrganizationsModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Organizations" ;
+	rdfs:comment "QName: fibo-fnd-org-mod:OrganizationsModule" ;
+	dct:abstract "This module includes several ontologies defining organizations, features of an organization and different types of organization. These include formal versus informal organizations, legitimate and illicit organizations and so on.  They are purposefully underspecified to facilitate mapping to specific organization ontologies, such as the emerging W3C organization and formal organization ontologies, organization from a BMM or BPMN perspective, organization from a records management (RMS) perspective, and so forth." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/LegitimateOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Organizations Module" ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-fnd-org" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/MetadataFNDOrganizations/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

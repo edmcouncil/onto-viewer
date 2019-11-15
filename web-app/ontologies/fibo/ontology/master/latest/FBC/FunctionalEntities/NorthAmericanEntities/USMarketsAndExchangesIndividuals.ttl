@@ -1,0 +1,866 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/Corporations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/ControlParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/CorporateControl/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/PrivateLimitedCompanies/PrivateLimitedCompanies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCentersIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/MarketsIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntitiesIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USRegulatoryAgencies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/
+# imports: https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-corp-corp: <https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/Corporations/> .
+@prefix fibo-be-ge-usj: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-be-le-fbo: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix fibo-be-oac-cctl: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/CorporateControl/> .
+@prefix fibo-be-oac-cpty: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/ControlParties/> .
+@prefix fibo-be-plc-plc: <https://spec.edmcouncil.org/fibo/ontology/BE/PrivateLimitedCompanies/PrivateLimitedCompanies/> .
+@prefix fibo-fbc-fct-bci: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCentersIndividuals/> .
+@prefix fibo-fbc-fct-breg: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fct-ireg: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/> .
+@prefix fibo-fbc-fct-mkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> .
+@prefix fibo-fbc-fct-mkti: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/MarketsIndividuals/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-fct-usfsind: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntitiesIndividuals/> .
+@prefix fibo-fbc-fct-usjrga: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USRegulatoryAgencies/> .
+@prefix fibo-fbc-fct-usmkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-3166-1: <https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> .
+@prefix lcc-3166-2-us: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix lcc-lr: <https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/>
+	a owl:Ontology ;
+	rdfs:label "US Markets and Exchanges Individuals" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:" ;
+	dct:abstract "This ontology includes extended individuals (examples that are more complete) for a sampling of markets operating in the US corresponding to the ISO 10383 Codes for exchanges and market identification (MIC)." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fbc-fct-usmkt" ;
+	sm:filename "USMarketsAndExchangesIndividuals.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/Corporations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/ControlParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/CorporateControl/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/PrivateLimitedCompanies/PrivateLimitedCompanies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCentersIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/MarketsIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntitiesIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USRegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/> ,
+		<https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:changeNote "The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/ version of this ontology was modified to support revisions of the MIC codes as of 11 January 2019, including the new URI strategy, and to move the registry definitions to a new international financial organizations ontology." ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fct-usmkt:CBOEGlobalMarkets
+	a
+		owl:NamedIndividual ,
+		fibo-be-oac-cpty:DeJureControllingInterestParty ,
+		fibo-be-oac-cpty:EntityControllingParty ,
+		fibo-fbc-fct-fse:HoldingCompany ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	rdfs:label "CBOE Global Markets" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:CBOEGlobalMarkets" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the CBOE Global Markets functional entity, which is one of the world's largest exchange holding companies, offering cutting-edge trading and investment solutions to investors around the world. Cboe offers trading across a diverse range of products in multiple asset classes and geographies, including options, futures, U.S. and European equities, exchange-traded products (ETPs), global foreign exchange (FX), and multi-asset volatility products. Our trading venues include the largest options exchange in the U.S. and the largest stock exchange by value traded in Europe. In addition, the company is the second-largest stock exchange operator in the U.S. and a leading market globally for ETP trading." ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:CBOEGlobalMarketsInc-US-DE ;
+	.
+
+fibo-fbc-fct-usmkt:CBOEGlobalMarketsBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "CBOE Global Markets, Inc. business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:CBOEGlobalMarketsBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the Delaware Division of Corporations business entity identifier for CBOE Global Markets, Inc." ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:CBOEGlobalMarketsInc-US-DE ;
+	fibo-fnd-rel-rel:hasTag "4205301" ;
+	.
+
+fibo-fbc-fct-usmkt:CBOEGlobalMarketsDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "CBOE Global Markets date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:CBOEGlobalMarketsDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that CBOE Global Markets was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2006-08-15" ;
+	.
+
+fibo-fbc-fct-usmkt:CBOEGlobalMarketsHeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-fbo:RegisteredAddress
+		;
+	rdfs:label "CBOE Global Markets headquarters address" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:CBOEGlobalMarketsHeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the headquarters address for CBOE Global Markets, Inc." ;
+	fibo-fbc-fct-breg:hasAddressLine1 "400 South LaSalle Street" ;
+	fibo-fbc-fct-breg:hasCity "Chicago" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-breg:hasPostalCode "60605" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:Illinois ;
+	.
+
+fibo-fbc-fct-usmkt:CBOEGlobalMarketsInc-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-cb:StockCorporation
+		;
+	rdfs:label "CBOE Global Markets, Inc. US-DE" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:CBOEGlobalMarketsInc-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	rdfs:seeAlso <http://www.bloomberg.com/> ;
+	skos:definition "the CBOE Global Markets, Inc. legal entity that is a Delaware corporation" ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:CBOEGlobalMarketsHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:CBOEGlobalMarketsDateEstablished ;
+	fibo-fbc-pas-fpas:hasLegalAgent fibo-fbc-fct-usjrga:CorporationTrustCompany ;
+	fibo-fnd-rel-rel:hasLegalName "CBOE Global Markets, Inc." ;
+	.
+
+fibo-fbc-fct-usmkt:ChicagoBoardOptionsExchange
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-mkt:OperatingLevelMarket ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	owl:sameAs fibo-fbc-fct-mkti:Exchange-XCBO ;
+	rdfs:label "Chicago Board Options Exchange" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:ChicagoBoardOptionsExchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the Chicago Board Options Exchange functional entity founded in 1973 that is the world's largest options market with contracts focusing on individual equities, indexes, and interest rates" ;
+	fibo-fbc-fct-breg:hasWebsite "https://www.cboe.com/"^^xsd:anyURI ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:ChicagoBoardOptionsExchangeDateEstablished ;
+	fibo-fbc-fct-mkt:hasExchangeAcronym "CBOE" ;
+	fibo-fbc-fct-mkt:hasExchangeName "Chicago Board Options Exchange" ;
+	fibo-fbc-fct-mkt:operatesInCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-mkt:operatesInMunicipality fibo-fbc-fct-bci:Chicago ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:CBOEGlobalMarketsInc-US-DE ;
+	.
+
+fibo-fbc-fct-usmkt:ChicagoBoardOptionsExchangeDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "Chicago Board Options Exchange date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:ChicagoBoardOptionsExchangeDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that the Chicago Board Options Exchange was established" ;
+	fibo-fnd-dt-fd:hasDateValue "1973-04-26" ;
+	.
+
+fibo-fbc-fct-usmkt:ChicagoBoardOptionsExchangeMarketIdentifierCodeRegistryEntry
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-ireg:MarketIdentifierCodeRegistryEntry
+		;
+	rdfs:label "Chicago Board Options Exchange market identifier code registry entry" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:ChicagoBoardOptionsExchangeMarketIdentifierCodeRegistryEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the market identifier code registry entry for the Chicago Board Options Exchange" ;
+	fibo-fbc-fct-breg:hasInitialRegistrationDate "JULY 2008" ;
+	fibo-fbc-fct-breg:hasRegistrationStatusRevisionDate "JULY 2008" ;
+	fibo-fbc-fct-mkt:hasMarketIdentifierCodeStatus fibo-fbc-fct-mkt:ActiveMICStatus ;
+	fibo-fnd-rel-rel:comprises fibo-fbc-fct-mkti:MIC-XCBO ;
+	fibo-fnd-rel-rel:isIncludedIn fibo-fbc-fct-ireg:MarketIdentifierCodeRegistry ;
+	.
+
+fibo-fbc-fct-usmkt:IntercontinentalExchangeHoldings
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-fse:HoldingCompany ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	rdfs:label "Intercontinental Exchange Holdings" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:IntercontinentalExchangeHoldings" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	rdfs:seeAlso <http://www.theice.com/> ;
+	skos:definition "individual representing the Intercontinental Exchange Holdings functional entity, which owns exchanges for financial and commodity markets, and operates 23 regulated exchanges and marketplaces" ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usfsind:IntercontinentalExchangeInc-US-DE ;
+	fibo-fnd-utl-av:abbreviation "ICE" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEAmericanOptions
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-mkt:MarketSegmentLevelMarket ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	owl:sameAs fibo-fbc-fct-mkti:Exchange-AMXO ;
+	rdfs:label "NYSE American Options" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEAmericanOptions" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE (New York Stock Exchange) American Options functional entity that operates an options trading platform under the name AMEX options exchange which facilitates trading of the options on domestic stocks; American depository receipts; broad-based, industry sector, and international indexes; exchange traded funds; HOLDRS; LEAPS; and equity and index FLEX options" ;
+	fibo-fbc-fct-breg:hasPriorLegalName
+		"American Stock Exchange" ,
+		"NYSE Amex Options"
+		;
+	fibo-fbc-fct-breg:hasWebsite "https://www.nyse.com/markets/american-options"^^xsd:anyURI ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NYSEAmericanOptionsDateEstablished ;
+	fibo-fbc-fct-mkt:hasExchangeAcronym "NYSE" ;
+	fibo-fbc-fct-mkt:hasExchangeName "NYSE American Options" ;
+	fibo-fbc-fct-mkt:operatesInCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-mkt:operatesInMunicipality fibo-fbc-fct-bci:New_York ;
+	fibo-fnd-arr-arr:isConstituentOf fibo-fbc-fct-usmkt:NewYorkStockExchange ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:NYSEAmericanOptionsLLC-US-DE ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEAmericanOptionsBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "NYSE American Options, LLC business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEAmericanOptionsBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the Delaware Division of Corporations business entity identifier for NYSE American Options LLC" ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:NYSEAmericanOptionsLLC-US-DE ;
+	fibo-fnd-rel-rel:hasTag "4982468" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEAmericanOptionsDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "NYSE American Options LLC date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEAmericanOptionsDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that NYSE American Options LLC was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2011-05-13" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEAmericanOptionsLLC-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-plc-plc:PrivateCompanyWithLimitedLiability
+		;
+	rdfs:label "NYSE American Options LLC US-DE" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEAmericanOptionsLLC-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE American Options LLC legal entity that is a Delaware limited liability company" ;
+	fibo-be-oac-cctl:hasDomesticUltimateParent fibo-fbc-fct-usfsind:IntercontinentalExchange ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:NewYorkStockExchangeHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NYSEAmericanOptionsDateEstablished ;
+	fibo-fbc-pas-fpas:hasLegalAgent fibo-fbc-fct-usmkt:UnitedAgentGroup-Delaware ;
+	fibo-fnd-rel-rel:hasLegalName "NYSE American Options LLC" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEAmericanOptionsMarketIdentifierCodeRegistryEntry
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-ireg:MarketIdentifierCodeRegistryEntry
+		;
+	rdfs:label "NYSE American Options market identifier code registry entry" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEAmericanOptionsMarketIdentifierCodeRegistryEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the market identifier code registry entry for the NYSE American Options exchange" ;
+	fibo-fbc-fct-breg:hasInitialRegistrationDate "NOVEMBER 2008" ;
+	fibo-fbc-fct-breg:hasRegistrationStatusRevisionDate "NOVEMBER 2008" ;
+	fibo-fbc-fct-mkt:hasMarketIdentifierCodeStatus fibo-fbc-fct-mkt:ActiveMICStatus ;
+	fibo-fnd-rel-rel:comprises fibo-fbc-fct-mkti:MIC-AMXO ;
+	fibo-fnd-rel-rel:isIncludedIn fibo-fbc-fct-ireg:MarketIdentifierCodeRegistry ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArca
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-mkt:MarketSegmentLevelMarket ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	owl:sameAs fibo-fbc-fct-mkti:Exchange-ARCX ;
+	rdfs:label "NYSE Arca" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArca" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Arca functional entity that is an electronic stock market, supporting trading of equity securities and options products listed in the United States, including trading exchange-traded funds (ETFs) and exchange-listed securities" ;
+	fibo-fbc-fct-breg:hasPriorLegalName "The Archipelago Exchange" ;
+	fibo-fbc-fct-breg:hasWebsite "https://www.nyse.com/"^^xsd:anyURI ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NYSEArcaDateEstablished ;
+	fibo-fbc-fct-mkt:hasExchangeAcronym "NYSE" ;
+	fibo-fbc-fct-mkt:hasExchangeName "NYSE Arca" ;
+	fibo-fbc-fct-mkt:operatesInCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-mkt:operatesInMunicipality fibo-fbc-fct-bci:Chicago ;
+	fibo-fnd-arr-arr:isConstituentOf fibo-fbc-fct-usmkt:NewYorkStockExchange ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:NYSEArcaInc-US-DE ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "NYSE Arca, Inc. business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the Delaware Division of Corporations business entity identifier for NYSE Arca, Inc." ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:NYSEArcaInc-US-DE ;
+	fibo-fnd-rel-rel:hasTag "787634" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "NYSE Arca date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that NYSE Arca was established" ;
+	fibo-fnd-dt-fd:hasDateValue "1882" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaHoldings
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-fse:HoldingCompany ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	rdfs:label "NYSE Arca Holdings" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaHoldings" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Group functional entity that operates three listings exchanges, NYSE, NYSE American and NYSE Arca, each of which has a unique market model designed for corporate and ETF issuers, as well as NYSE National, which is a trading venue but not a listings market" ;
+	fibo-fbc-fct-breg:hasWebsite "https://www.nyse.com/"^^xsd:anyURI ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:NYSEArcaHoldingsInc-US-DE ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaHoldingsBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "NYSE Arca Holdings, Inc. business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaHoldingsBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the Delaware Division of Corporations business entity identifier for NYSE Arca Holdings, Inc." ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:NYSEArcaHoldingsInc-US-DE ;
+	fibo-fnd-rel-rel:hasTag "3703898" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaHoldingsInc-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-cb:StockCorporation
+		;
+	rdfs:label "NYSE Arca Holdings, Inc. US-DE" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaHoldingsInc-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Arca Holdings, Inc. legal entity that is a Delaware corporation" ;
+	fibo-be-oac-cpty:hasMajorityControllingParty fibo-fbc-fct-usmkt:NYSEGroup ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:NYSEArcaIncHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NYSEArcaHoldingsIncDateEstablished ;
+	fibo-fbc-pas-fpas:hasLegalAgent fibo-fbc-fct-usjrga:CorporationTrustCompany ;
+	fibo-fnd-rel-rel:hasLegalName "NYSE Arca Holdings, Inc." ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaHoldingsIncDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "NYSE Arca Holdings, Inc. date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaHoldingsIncDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that NYSE Arca Holdings, Inc. was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2003-09-15" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaInc-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-cb:StockCorporation
+		;
+	rdfs:label "NYSE Arca, Inc. US-DE" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaInc-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Arca, Inc. legal entity that is a Delaware corporation" ;
+	fibo-be-oac-cpty:hasMajorityControllingParty fibo-fbc-fct-usmkt:NYSEArcaHoldings ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:NYSEArcaIncHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NYSEArcaIncDateEstablished ;
+	fibo-fbc-pas-fpas:hasLegalAgent fibo-fbc-fct-usmkt:UnitedAgentGroup-Delaware ;
+	fibo-fnd-rel-rel:hasLegalName "NYSE Arca, Inc." ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaIncDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "NYSE Arca, Inc. date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaIncDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that NYSE Arca, Inc. was established" ;
+	fibo-fnd-dt-fd:hasDateValue "1972-12-21" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaIncHeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-fbo:RegisteredAddress
+		;
+	rdfs:label "NYSE Arca, Inc. headquarters address" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaIncHeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the headquarters address for NYSE Arca, Inc." ;
+	fibo-fbc-fct-breg:hasAddressLine1 "100 South Wacker Drive" ;
+	fibo-fbc-fct-breg:hasAddressLine2 "Suite 1800" ;
+	fibo-fbc-fct-breg:hasCity "Chicago" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-breg:hasPostalCode "60606" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:Illinois ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEArcaMarketIdentifierCodeRegistryEntry
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-ireg:MarketIdentifierCodeRegistryEntry
+		;
+	rdfs:label "NYSE Arca market identifier code registry entry" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEArcaMarketIdentifierCodeRegistryEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the market identifier code registry entry for the NYSE Arca exchange" ;
+	fibo-fbc-fct-breg:hasInitialRegistrationDate "SEPTEMBER 2006" ;
+	fibo-fbc-fct-breg:hasRegistrationStatusRevisionDate "SEPTEMBER 2006" ;
+	fibo-fbc-fct-mkt:hasMarketIdentifierCodeStatus fibo-fbc-fct-mkt:ActiveMICStatus ;
+	fibo-fnd-rel-rel:comprises fibo-fbc-fct-mkti:MIC-ARCX ;
+	fibo-fnd-rel-rel:isIncludedIn fibo-fbc-fct-ireg:MarketIdentifierCodeRegistry ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEDark
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-mkt:MarketSegmentLevelMarket
+		;
+	owl:sameAs fibo-fbc-fct-mkti:Exchange-NYSD ;
+	rdfs:label "NYSE Dark" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEDark" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Dark functional entity that represents a segment of the NYSE involved in trading of dark pools" ;
+	fibo-fbc-fct-breg:hasWebsite "https://www.nyse.com/"^^xsd:anyURI ;
+	fibo-fbc-fct-mkt:hasExchangeAcronym "NYSEDARK" ;
+	fibo-fbc-fct-mkt:hasExchangeName "NYSE Dark" ;
+	fibo-fbc-fct-mkt:operatesInCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-mkt:operatesInMunicipality fibo-fbc-fct-bci:New_York ;
+	fibo-fnd-arr-arr:isConstituentOf fibo-fbc-fct-usmkt:NewYorkStockExchange ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEDarkMarketIdentifierCodeRegistryEntry
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-ireg:MarketIdentifierCodeRegistryEntry
+		;
+	rdfs:label "NYSE Dark market identifier code registry entry" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEDarkMarketIdentifierCodeRegistryEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the market identifier code registry entry for the NYSE Dark" ;
+	fibo-fbc-fct-breg:hasInitialRegistrationDate "MAY 2011" ;
+	fibo-fbc-fct-breg:hasRegistrationStatusRevisionDate "MAY 2011" ;
+	fibo-fbc-fct-mkt:hasMarketIdentifierCodeStatus fibo-fbc-fct-mkt:ActiveMICStatus ;
+	fibo-fnd-rel-rel:comprises fibo-fbc-fct-mkti:MIC-NYSD ;
+	fibo-fnd-rel-rel:isIncludedIn fibo-fbc-fct-ireg:MarketIdentifierCodeRegistry ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEGroup
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-fse:HoldingCompany ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	rdfs:label "NYSE Group" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEGroup" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Group functional entity that operates three listings exchanges, NYSE, NYSE American and NYSE Arca, each of which has a unique market model designed for corporate and ETF issuers, as well as NYSE National, which is a trading venue but not a listings market" ;
+	fibo-fbc-fct-breg:hasWebsite "https://www.nyse.com/"^^xsd:anyURI ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:NYSEGroupInc-US-DE ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEGroupBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "NYSE Group, Inc. business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEGroupBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the Delaware Division of Corporations business entity identifier for NYSE Group, Inc." ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:NYSEGroupInc-US-DE ;
+	fibo-fnd-rel-rel:hasTag "4160866" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEGroupDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "NYSE Group, Inc. date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEGroupDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that NYSE Group, Inc. was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2006-05-19" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEGroupInc-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-cb:StockCorporation
+		;
+	rdfs:label "NYSE Group, Inc. US-DE" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEGroupInc-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Group, Inc. legal entity that is a Delaware corporation" ;
+	fibo-be-oac-cpty:hasMajorityControllingParty fibo-fbc-fct-usmkt:NYSEHoldings ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:NewYorkStockExchangeHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NYSEGroupDateEstablished ;
+	fibo-fbc-pas-fpas:hasLegalAgent fibo-fbc-fct-usmkt:UnitedAgentGroup-Delaware ;
+	fibo-fnd-rel-rel:hasLegalName "NYSE Group, Inc." ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEHoldings
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-fse:HoldingCompany ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	rdfs:label "NYSE Holdings" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEHoldings" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Holdings functional entity that through its subsidiaries, operates stock exchanges, including the New York Stock Exchange (NYSE), NYSE Arca, Inc., and NYSE MKT LLC in the United States; and European based exchanges comprising Euronext N.V. - the London, Paris, Amsterdam, Brussels, and Lisbon stock exchanges, as well as the NYSE Liffe derivatives markets in London, Paris, Amsterdam, Brussels, and Lisbon" ;
+	fibo-fbc-fct-breg:hasWebsite "https://www.nyse.com/"^^xsd:anyURI ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:NYSEHoldingsLLC-US-DE ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEHoldingsBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "NYSE Holdings LLC business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEHoldingsBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the Delaware Division of Corporations business entity identifier for NYSE Holdings LLC" ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:NYSEHoldingsLLC-US-DE ;
+	fibo-fnd-rel-rel:hasTag "5257784" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEHoldingsDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "NYSE Holdings LLC date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEHoldingsDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that NYSE Holdings LLC was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2012-12-12" ;
+	.
+
+fibo-fbc-fct-usmkt:NYSEHoldingsLLC-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-plc-plc:PrivateCompanyWithLimitedLiability
+		;
+	rdfs:label "NYSE Holdings LLC US-DE" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NYSEHoldingsLLC-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the NYSE Holdings LLC legal entity that is a Delaware limited liability company" ;
+	fibo-be-oac-cctl:hasDomesticUltimateParent fibo-fbc-fct-usfsind:IntercontinentalExchange ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:NewYorkStockExchangeHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NYSEHoldingsDateEstablished ;
+	fibo-fbc-pas-fpas:hasLegalAgent fibo-fbc-fct-usmkt:UnitedAgentGroup-Delaware ;
+	fibo-fnd-rel-rel:hasLegalName "NYSE Group, Inc." ;
+	.
+
+fibo-fbc-fct-usmkt:NewYorkStockExchange
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-mkt:OperatingLevelMarket ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider
+		;
+	owl:sameAs fibo-fbc-fct-mkti:Exchange-XNYS ;
+	rdfs:label "New York Stock Exchange" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NewYorkStockExchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the New York Stock Exchange functional entity founded in 1792 that operates as a market place for trading of common stock and other securities" ;
+	fibo-fbc-fct-breg:hasWebsite "https://www.nyse.com/"^^xsd:anyURI ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NewYorkStockExchangeDateEstablished ;
+	fibo-fbc-fct-mkt:hasExchangeAcronym "NYSE" ;
+	fibo-fbc-fct-mkt:hasExchangeName "New York Stock Exchange" ;
+	fibo-fbc-fct-mkt:operatesInCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-mkt:operatesInMunicipality fibo-fbc-fct-bci:New_York ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:NewYorkStockExchangeLLC-US-NY ;
+	fibo-fnd-utl-av:explanatoryNote "The New York Stock Exchange is a leading global cash equity exchange. It is the leading equity exchange for initial public offerings, or IPOs, globally, and enables companies seeking to raise capital to become publicly listed through the IPO process upon meeting exchange listing standards. In addition to common stocks, preferred stocks and warrants, the NYSE lists structured products, such as capital securities and mandatory convertible securities. In addition, NYSE operates NYSE Bonds, an electronic trading platform with transparent pricing for debt securities, including corporate bonds." ;
+	.
+
+fibo-fbc-fct-usmkt:NewYorkStockExchangeDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "New York Stock Exchange date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NewYorkStockExchangeDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that the New York Stock Exchange was founded" ;
+	fibo-fnd-dt-fd:hasDateValue "1792-05-17" ;
+	.
+
+fibo-fbc-fct-usmkt:NewYorkStockExchangeHeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-fbo:RegisteredAddress
+		;
+	rdfs:label "New York Stock Exchange headquarters address" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NewYorkStockExchangeHeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the headquarters address for New York Stock Exchange" ;
+	fibo-fbc-fct-breg:hasAddressLine1 "11 Wall Street" ;
+	fibo-fbc-fct-breg:hasCity "New York" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-breg:hasPostalCode "10005" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:NewYork ;
+	.
+
+fibo-fbc-fct-usmkt:NewYorkStockExchangeLLC-US-NY
+	a
+		owl:NamedIndividual ,
+		fibo-be-plc-plc:PrivateCompanyWithLimitedLiability
+		;
+	rdfs:label "New York Stock Exchange LLC US-NY" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NewYorkStockExchangeLLC-US-NY" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the New York Stock Exchange LLC legal entity that is a New York domestic limited liability company" ;
+	fibo-be-oac-cpty:hasMajorityControllingParty fibo-fbc-fct-usmkt:NYSEGroup ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:NewYorkStockExchangeHeadquartersAddress ;
+	fibo-fbc-fct-breg:hasPriorLegalName "New York Stock Exchange Inc." ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-fbc-fct-usmkt:NewYorkStockExchangeLLCDateEstablished ;
+	fibo-fbc-pas-fpas:hasLegalAgent fibo-fbc-fct-usmkt:UnitedAgentGroup-NewYork ;
+	fibo-fnd-rel-rel:hasLegalName "New York Stock Exchange LLC" ;
+	.
+
+fibo-fbc-fct-usmkt:NewYorkStockExchangeLLCBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "New York Stock Exchange LLC business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NewYorkStockExchangeLLCBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the New York Department of State Division of Corporations business entity identifier for New York Stock Exchange LLC" ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:NewYorkBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:NewYorkStockExchangeLLC-US-NY ;
+	fibo-fnd-rel-rel:hasTag "3230916" ;
+	.
+
+fibo-fbc-fct-usmkt:NewYorkStockExchangeLLCDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "New York Stock Exchange LLC date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NewYorkStockExchangeLLCDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the date that the New York Stock Exchange LLC was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2005-07-14" ;
+	.
+
+fibo-fbc-fct-usmkt:NewYorkStockExchangeMarketIdentifierCodeRegistryEntry
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-ireg:MarketIdentifierCodeRegistryEntry
+		;
+	rdfs:label "New York Stock Exchange market identifier code registry entry" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:NewYorkStockExchangeMarketIdentifierCodeRegistryEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the market identifier code registry entry for the New York Stock Exchange" ;
+	fibo-fbc-fct-breg:hasInitialRegistrationDate "BEFORE JUNE 2005" ;
+	fibo-fbc-fct-breg:hasRegistrationStatusRevisionDate "BEFORE JUNE 2005" ;
+	fibo-fbc-fct-mkt:hasMarketIdentifierCodeStatus fibo-fbc-fct-mkt:ActiveMICStatus ;
+	fibo-fnd-rel-rel:comprises fibo-fbc-fct-mkti:MIC-XNYS ;
+	fibo-fnd-rel-rel:isIncludedIn fibo-fbc-fct-ireg:MarketIdentifierCodeRegistry ;
+	.
+
+fibo-fbc-fct-usmkt:UnitedAgentGroup-Delaware
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-pas-fpas:AgentForServiceOfProcess ,
+		fibo-fbc-pas-fpas:ThirdPartyAgent
+		;
+	rdfs:label "United Agent Group - Delaware" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:UnitedAgentGroup-Delaware" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the registration and legal agency role of the Delaware-based, United Agent Group subsidiary of Corporate Creations Network, Inc., which has operating units throughout the US" ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE ;
+	.
+
+fibo-fbc-fct-usmkt:UnitedAgentGroup-NewYork
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-pas-fpas:AgentForServiceOfProcess ,
+		fibo-fbc-pas-fpas:ThirdPartyAgent
+		;
+	rdfs:label "United Agent Group - New York" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:UnitedAgentGroup-NewYork" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the registration and legal agency role of the New York-based, United Agent Group subsidiary of Corporate Creations Network, Inc., which has operating units throughout the US" ;
+	fibo-fnd-rel-rel:hasIdentity fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY ;
+	.
+
+fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-cb:Corporation
+		;
+	rdfs:label "United Agent Group Inc. US-DE" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the United Agent Group Inc. legal entity, registered in Delaware, that provides registered agent and incorporation services" ;
+	fibo-be-le-cb:isIncorporatedIn fibo-be-ge-usj:StateOfDelawareJurisdiction ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE-HeadquartersAddress ;
+	fibo-fnd-rel-rel:hasLegalName "United Agent Group Inc." ;
+	.
+
+fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE-BusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "United Agent Group Inc. US-DE business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE-BusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the Delaware Department of Corporations business entity identifier for the United Agent Group Inc." ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE ;
+	fibo-fnd-rel-rel:hasTag "5991300" ;
+	.
+
+fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE-HeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-breg:RegistrationAddress
+		;
+	rdfs:label "United Agent Group Inc. US-DE headquarters address" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-DE-HeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the headquarters address for the United Agent Group Inc. US-DE" ;
+	fibo-fbc-fct-breg:hasAddressLine1 "3411 Silverside Road" ;
+	fibo-fbc-fct-breg:hasAddressLine2 "Tatnall Building STE 104" ;
+	fibo-fbc-fct-breg:hasCity "Wilmington" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStatesOfAmerica ;
+	fibo-fbc-fct-breg:hasPostalCode "19810" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:Delaware ;
+	.
+
+fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-cb:Corporation
+		;
+	rdfs:label "United Agent Group Inc. US-NY" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the United Agent Group Inc. legal entity, registered in New York, that provides registered agent and incorporation services" ;
+	fibo-be-le-cb:isIncorporatedIn fibo-be-ge-usj:StateOfNewYorkJurisdiction ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY-HeadquartersAddress ;
+	fibo-fnd-rel-rel:hasLegalName "United Agent Group Inc." ;
+	.
+
+fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY-BusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "United Agent Group Inc. US-NY business entity identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY-BusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the New York Department of State Division of Corporations business entity identifier for the United Agent Group Inc." ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:NewYorkBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY ;
+	fibo-fnd-rel-rel:hasTag "4914572" ;
+	.
+
+fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY-HeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-breg:RegistrationAddress
+		;
+	rdfs:label "United Agent Group Inc. US-NY headquarters address" ;
+	rdfs:comment "QName: fibo-fbc-fct-usmkt:UnitedAgentGroupInc-US-NY-HeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ;
+	skos:definition "the headquarters address for the United Agent Group Inc. US-NY" ;
+	fibo-fbc-fct-breg:hasAddressLine1 "15 North Mill Street" ;
+	fibo-fbc-fct-breg:hasCity "Nyack" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStatesOfAmerica ;
+	fibo-fbc-fct-breg:hasPostalCode "10960" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:NewYork ;
+	.
+

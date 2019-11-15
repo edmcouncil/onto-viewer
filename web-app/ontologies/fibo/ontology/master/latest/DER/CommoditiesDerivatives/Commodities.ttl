@@ -1,0 +1,181 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/Commodities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/Commodities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-com-com: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/>
+	a owl:Ontology ;
+	rdfs:label "Commodities"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Commodities, classified into different types including bullion, agricultural products and energy commodities." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/Commodities/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-com-com:AgriculturalProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:NegotiableCommodity ;
+	rdfs:label "agricultural product"@en ;
+	rdfs:comment "QName: NONE:AgriculturalProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "A commodity which is some agrigultural product, including grain, fruit and meat."@en ;
+	skos:editorialNote "This term was produced to group known commodity types but it is not known if this grouping is made in practice or if grain, meat products etc. are defined separately, and it is not clear if this is the preferred term for this. However since other derivatives types are so groups, it makes sense to do so here."@en ;
+	.
+
+fibo-der-com-com:BaseMetal
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:NegotiableCommodity ;
+	rdfs:label "base metal"@en ;
+	rdfs:comment "QName: NONE:BaseMetal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	owl:disjointWith fibo-fnd-pas-pas:PreciousMetal ;
+	skos:definition "any metal that is not defined as precious"@en ;
+	.
+
+fibo-der-com-com:Bullion
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:PreciousMetal ;
+	rdfs:label "bullion"@en ;
+	rdfs:comment "QName: NONE:Bullion" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "precious metal that is officially recognized as being at least 99.5 percent pure and is in the form of bars or ingots"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Includes (exhaustively?): Gold Silver Platinum"@en ;
+	.
+
+fibo-der-com-com:ElectricityCommodity
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:EnergyCommodity ;
+	rdfs:label "electricity commodity"@en ;
+	rdfs:comment "QName: NONE:ElectricityCommodity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "Electricity as a commodity."@en ;
+	.
+
+fibo-der-com-com:EnergyCommodity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:NegotiableCommodity ;
+	rdfs:label "energy commodity"@en ;
+	rdfs:comment "QName: NONE:EnergyCommodity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "A commodity which relates to the provision or distribution of energy."@en ;
+	skos:editorialNote "Further review and refinement required. For example there is a distinction between power and energy (measured according to the basic physics of those commodities, i.e. Watts and Watt Hours)."@en ;
+	.
+
+fibo-der-com-com:EnergyTransmissionRights
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:EnergyCommodity ;
+	rdfs:label "energy transmission rights"@en ;
+	rdfs:comment "QName: NONE:EnergyTransmissionRights" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "Rights to the transmission of power across an electricity distribution network."@en ;
+	.
+
+fibo-der-com-com:GasCommodity
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:EnergyCommodity ;
+	rdfs:label "gas commodity"@en ;
+	rdfs:comment "QName: NONE:GasCommodity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "Combustible hydrocarbon in gasous phase."@en ;
+	skos:editorialNote "Need a precise definition e.g. which gas (ethane, methane) is commonly used and transmitted. Vocabulary note: This is not the American English word Gas, which refers to liquid motor spirit. Review whether we have the right word for US English usage here."@en ;
+	.
+
+fibo-der-com-com:GrainCommodity
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:AgriculturalProduct ;
+	rdfs:label "grain commodity"@en ;
+	rdfs:comment "QName: NONE:GrainCommodity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "A commodity which is a kind of grain, such as wheat."@en ;
+	.
+
+fibo-der-com-com:ImperialWeightMeasurementUnit
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:UnitOfMass ;
+	rdfs:label "imperial weight measurement unit"@en ;
+	rdfs:comment "QName: NONE:ImperialWeightMeasurementUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	.
+
+fibo-der-com-com:MeatCommodity
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:AgriculturalProduct ;
+	rdfs:label "meat commodity"@en ;
+	rdfs:comment "QName: NONE:MeatCommodity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "A commodity which is a kind of meat, such as pork bellies."@en ;
+	.
+
+fibo-der-com-com:MetricWeightMeasurementUnit
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:UnitOfMass ;
+	rdfs:label "metric weight measurement unit"@en ;
+	rdfs:comment "QName: NONE:MetricWeightMeasurementUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	.
+
+fibo-der-com-com:OilCommodity
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:EnergyCommodity ;
+	rdfs:label "oil commodity"@en ;
+	rdfs:comment "QName: NONE:OilCommodity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "Oil as a commodity."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This has detailed grades and is measured in barrels."@en ;
+	.
+
+fibo-der-com-com:OilGrade
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "oil grade"@en ;
+	rdfs:comment "QName: NONE:OilGrade" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	skos:definition "The grade of oil which is defined as this oil commodity."@en ;
+	.
+
+fibo-der-com-com:TroyOunces
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-com:ImperialWeightMeasurementUnit ;
+	rdfs:label "troy ounces"@en ;
+	rdfs:comment "QName: NONE:TroyOunces" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	.
+
+fibo-der-com-com:UnitOfMass
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-qt-qtu:MeasurementUnit ;
+	rdfs:label "unit of mass"@en ;
+	rdfs:comment "QName: NONE:UnitOfMass" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	.
+
+fibo-der-com-com:hasGrade
+	a owl:ObjectProperty ;
+	rdfs:label "has grade"@en ;
+	rdfs:comment "QName: NONE:hasGrade" ;
+	rdfs:domain fibo-der-com-com:OilCommodity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/> ;
+	rdfs:range fibo-der-com-com:OilGrade ;
+	skos:definition "The grade of oil e.g. Brent Crude."@en ;
+	.
+

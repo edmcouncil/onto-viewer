@@ -1,0 +1,989 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/>
+	a owl:Ontology ;
+	rdfs:label "Analytics Ontology" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:" ;
+	dct:abstract "This ontology provides mathematical abstractions for use in other ontologies, including for example the basic components of formulae, parameters and values." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-utl-alx" ;
+	sm:filename "Analytics.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics.rdf version of this ontology was modified per the FIBO 2.0 RFC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics.rdf version of this ontology was modified to address issue FIBOFND11-20, which added the definition of Calculation and corrected a reasoning issue related to the use of a custom datatype." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics.rdf version of this ontology was modified to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics.rdf version of this ontology was modified to use the CombinedDateTime datatype for greater flexibility in analytics and integrate the generic statistical measures and measurements from the economic indicators ontology to FND to facilitate broader use." ,
+		"This ontology was added to Foundations in advance of the June 2014 Boston meeting in support of the IND RFC."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-qt-qtu:Quantity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Measure ;
+	.
+
+fibo-fnd-qt-qtu:Rate
+	a owl:Class ;
+	owl:equivalentClass fibo-fnd-utl-alx:Ratio ;
+	.
+
+fibo-fnd-utl-alx:AnnualizedStandardDeviation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:StandardDeviation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasReferencePeriod ;
+			owl:onClass fibo-fnd-dt-fd:ExplicitRecurrenceInterval ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "annualized standard deviation" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:AnnualizedStandardDeviation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "standard deviation for some measure over a specific reference period" ;
+	fibo-fnd-utl-av:explanatoryNote "Standard deviation applied to the annual rate of return of an investment provides insights on the historical volatility of that investment. The greater the standard deviation of the price of a security, the greater the volatility.  Multiplying monthly standard deviation by the square root of twelve (12) is an industry standard method of approximating annualized standard deviations of monthly returns." ;
+	.
+
+fibo-fnd-utl-alx:ArithmeticMean
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Mean ;
+	rdfs:label "arithmetic mean" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:ArithmeticMean" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "sum of a collection of numbers divided by the number of numbers in the collection" ;
+	fibo-fnd-utl-av:explanatoryNote "While the arithmetic mean is often used to report central tendencies, it is not a robust statistic, meaning that it is greatly influenced by outliers (values that are very much larger or smaller than most of the values). Notably, for skewed distributions, such as the distribution of income for which a few people's incomes are substantially greater than most people's, the arithmetic mean may not accord with one's notion of 'middle', and robust statistics, such as the median, may be a better description of central tendency." ;
+	.
+
+fibo-fnd-utl-alx:Aspect
+	a owl:Class ;
+	rdfs:label "aspect" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Aspect" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "charateristic or feature that can be used to dimensionalize, filter, or subset something" ;
+	.
+
+fibo-fnd-utl-alx:AverageAbsoluteDeviation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Dispersion ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-utl-alx:Mean
+					fibo-fnd-utl-alx:Median
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "average absolute deviation" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:AverageAbsoluteDeviation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "average of the absolute deviations from a central point" ;
+	fibo-fnd-utl-av:explanatoryNote "The central point can be the mean, median, mode, or the result of another measure of central tendency. Absolute deviation is the distance between each value in the data set and that data set's mean or median." ;
+	fibo-fnd-utl-av:synonym "mean absolute deviation" ;
+	.
+
+fibo-fnd-utl-alx:CalculationFormula
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Formula ;
+	rdfs:label "calculation formula" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:CalculationFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "mathematical formula that transforms one or more inputs into an amount or number of something" ;
+	.
+
+fibo-fnd-utl-alx:Constant
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-rel-rel:Reference ;
+	rdfs:label "constant" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Constant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "symbol that represents a value that does not change (i.e., is fixed) with respect to a formula or expression" ;
+	.
+
+fibo-fnd-utl-alx:Difference
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Expression ,
+		fibo-fnd-utl-alx:StatisticalMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasMinuend ;
+			owl:cardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasSubtrahend ;
+			owl:cardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "difference" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Difference" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "quantity by which amounts differ; the remainder left after subtraction of one value from another" ;
+	.
+
+fibo-fnd-utl-alx:Dispersion
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Expression ,
+		fibo-fnd-utl-alx:StatisticalMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasCollectionSize ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-fnd-utl-alx:FinitePopulation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasObservedValue ;
+			owl:someValuesFrom fibo-fnd-arr-arr:StructuredCollection ;
+		]
+		;
+	rdfs:label "dispersion" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Dispersion" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "degree of scatter or variability shown by observations" ;
+	skos:example "Common examples of measures of statistical dispersion are the variance, standard deviation, and interquartile range.  The collection size argument, above, represents the number of elements in the set, if known. The collection of values under consideration is represented as a structured collection in FIBO, typically a sample set derived from a finite population." ;
+	fibo-fnd-utl-av:adaptedFrom "http://stats.oecd.org/glossary/detail.asp?ID=3637"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote
+		"A measure of statistical dispersion is a nonnegative real number that is zero if all the data are the same and increases as the data become more diverse." ,
+		"It is usually measured as an average deviation about some central value (e.g. mean deviation, standard deviation) or by an order statistic (e.g. quartile deviation, range) but may also be a mean of deviations of values among themselves (e.g. Gini's mean difference and also standard deviation)."
+		;
+	.
+
+fibo-fnd-utl-alx:Expression
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-rel-rel:Reference ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:onClass fibo-fnd-utl-alx:Constant ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:onClass fibo-fnd-utl-alx:Variable ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "expression" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Expression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "finite combination of symbols that are well-formed according to applicable rules" ;
+	.
+
+fibo-fnd-utl-alx:FinitePopulation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-arr:Collection ;
+	rdfs:label "finite population" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:FinitePopulation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "population for which it is possible to count its units" ;
+	fibo-fnd-utl-av:adaptedFrom "http://stats.oecd.org/glossary/detail.asp?ID=3649"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "In statistics, a population is a set of similar items or events of interest for some question or experiment. In other words, a population is the complete group of units to which survey results are to apply. (These units may be persons, animals, objects, businesses, trips, etc.). See http://www.statcan.gc.ca/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#p." ;
+	.
+
+fibo-fnd-utl-alx:Formula
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-rel-rel:Reference ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasExpression ;
+			owl:someValuesFrom fibo-fnd-utl-alx:Expression ;
+		]
+		;
+	rdfs:label "formula" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Formula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "general fact or rule expressed in letters and symbols; may consist of one or more expressions" ;
+	.
+
+fibo-fnd-utl-alx:GeometricMean
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Mean ;
+	rdfs:label "geometric mean" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:GeometricMean" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "mean that indicates the central tendency or typical value of a set of numbers by using the product of their values (as opposed to the arithmetic mean which uses their sum)" ;
+	fibo-fnd-utl-av:explanatoryNote "The geometric mean is defined as the nth root of the product of n numbers. A geometric mean is often used when comparing different items - finding a single 'figure of merit' for these items - when each item has multiple properties that have different numeric ranges. For example, the geometric mean can give a meaningful 'average' to compare two companies which are each rated at 0 to 5 for their environmental sustainability, and are rated at 0 to 100 for their financial viability. If an arithmetic mean were used instead of a geometric mean, the financial viability is given more weight because its numeric range is larger - so a small percentage change in the financial rating (e.g. going from 80 to 90) makes a much larger difference in the arithmetic mean than a large percentage change in environmental sustainability (e.g. going from 2 to 5)." ;
+	.
+
+fibo-fnd-utl-alx:Mean
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Expression ,
+		fibo-fnd-utl-alx:StatisticalMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasObservedValue ;
+			owl:someValuesFrom fibo-fnd-arr-arr:StructuredCollection ;
+		]
+		;
+	rdfs:label "mean" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Mean" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "most common measure of central tendency; the average of a set of numbers" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.statcan.gc.ca/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#m"^^xsd:anyURI ,
+		"https://stats.oecd.org/glossary/detail.asp?ID=3762"^^xsd:anyURI ,
+		"https://www.census.gov/glossary/#term_Mean"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "When unqualified, the mean usually refers to the expectation of a variate, or to the arithmetic mean of a sample used as an estimate of the expectation." ;
+	fibo-fnd-utl-av:symbol "μ" ;
+	fibo-fnd-utl-av:synonym
+		"expected value" ,
+		"first (raw) moment"
+		;
+	.
+
+fibo-fnd-utl-alx:Measure
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-rel-rel:Reference ;
+	rdfs:label "measure" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Measure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "amount or degree of something; the dimensions, capacity, or amount of something ascertained by measuring" ;
+	fibo-fnd-utl-av:adaptedFrom "https://stats.oecd.org/glossary/detail.asp?ID=7062"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Measure refers to the phenomenon or phenomena to be measured in a data set. In a data set, the instance of a measure is often called an observation." ;
+	.
+
+fibo-fnd-utl-alx:Median
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Expression ,
+		fibo-fnd-utl-alx:StatisticalMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasObservedValue ;
+			owl:someValuesFrom fibo-fnd-arr-arr:StructuredCollection ;
+		]
+		;
+	rdfs:label "median" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Median" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "value of the variate dividing the total frequency of a data sample, population, or probability distribution, into two halves" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"https://stats.oecd.org/glossary/detail.asp?ID=3717"^^xsd:anyURI ,
+		"https://www.census.gov/glossary/#term_Median"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote
+		"The basic advantage of the median in describing data compared to the mean is that it is not skewed by extremely large or small values, and may provide a better idea of a 'typical' value." ,
+		"This measure represents the middle value (if n is odd) or the average of the two middle values (if n is even) in an ordered list of data values. The median divides the total frequency distribution into two equal parts: one-half of the cases fall below the median and one-half of the cases exceed the median."
+		;
+	.
+
+fibo-fnd-utl-alx:MedianAbsoluteDeviation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Dispersion ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-fnd-utl-alx:Median ;
+		]
+		;
+	rdfs:label "median absolute deviation" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:MedianAbsoluteDeviation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "median of the absolute deviations of observations from the average which may be the arithmetic mean, the median or the mode" ;
+	.
+
+fibo-fnd-utl-alx:NumericIndex
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Expression ,
+		fibo-fnd-utl-alx:ScopedMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-doc:hasReportingPeriod ;
+			owl:onClass fibo-fnd-dt-fd:ExplicitDatePeriod ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasBasePeriod ;
+			owl:onClass fibo-fnd-dt-fd:ExplicitDatePeriod ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "numeric index" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:NumericIndex" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "change in some aggregate relative to the value of the aggregate at a reference period" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.statcan.gc.ca/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#i"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "a mathematical device or number which is used to express the observation (e.g., price level, volume of trade, relative amount etc.) of a given period, in comparison with that of a base period" ;
+	.
+
+fibo-fnd-utl-alx:Percentage
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:RatioValue ;
+	rdfs:label "percentage" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Percentage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "ratio value expressed as a fraction of 100, i.e., in which the denominator is fixed rather than variable and equal to 100" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"The percent value is computed by multiplying the numeric value of the ratio by 100." ,
+		"While many percentage values are between 0 and 100, there is no mathematical restriction and percentages may take on other values (positive or negative), particularly in the case of comparisons (percent change)."
+		;
+	.
+
+fibo-fnd-utl-alx:QualifiedMeasure
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:StatisticalMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:isCalculatedViaMethodology ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+			owl:onDataRange [
+				a owl:Class ;
+				owl:unionOf (
+					xsd:string
+					xsd:anyURI
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "qualified measure" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:QualifiedMeasure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "statistical measure that is constrained by features, quantity kinds or units that refine how it is calculated" ;
+	.
+
+fibo-fnd-utl-alx:Ratio
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Expression ,
+		fibo-fnd-utl-alx:StatisticalMeasure
+		;
+	rdfs:label "ratio" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Ratio" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "proportional relationship between two different numbers or quantities, or in mathematics a quotient of two numbers or expressions, arrived at by dividing one by the other" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.statcan.gc.ca/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#p."^^xsd:anyURI ,
+		"https://stats.oecd.org/glossary/detail.asp?ID=6688"^^xsd:anyURI
+		;
+	.
+
+fibo-fnd-utl-alx:RatioValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-qt-qtu:QuantityValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:onClass fibo-fnd-utl-alx:Variable ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "ratio value" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:RatioValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "proportional relationship specifically between two different quantity values that gives rise to a datum of a specific quantity type" ;
+	.
+
+fibo-fnd-utl-alx:SamplingVariance
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Variance ;
+	rdfs:label "sampling variance" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:SamplingVariance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "measure of the extent to which the estimate of a characteristic from different possible samples of the same size and the same design differ from one another" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.statcan.gc.ca/pub/12-587-x/12-587-x2003001-eng.pdf"^^xsd:anyURI ,
+		"https://stats.oecd.org/glossary/detail.asp?ID=3834"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "The word 'sampling' can usually be omitted, as being defined by the context or otherwise understood. The sampling variance of a statistic is the square of its standard error." ;
+	.
+
+fibo-fnd-utl-alx:ScopedMeasure
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:QualifiedMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasPeriodicity ;
+			owl:allValuesFrom fibo-fnd-dt-fd:RecurrenceInterval ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:onClass fibo-fnd-utl-alx:FinitePopulation ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-plc-cty:hasCoverageArea ;
+			owl:onClass fibo-fnd-utl-alx:StatisticalArea ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "scoped measure" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:ScopedMeasure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "qualified measure that is constrained by filters on the statistical population to which it applies" ;
+	.
+
+fibo-fnd-utl-alx:StandardDeviation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Dispersion ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-utl-alx:Mean
+					fibo-fnd-utl-alx:Variance
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "standard deviation" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:StandardDeviation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "square root of variance, standard deviation measures the spread or dispersion around the mean of a data set" ;
+	fibo-fnd-utl-av:abbreviation "SD" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.statcan.gc.ca/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#s"^^xsd:anyURI ,
+		"https://stats.oecd.org/glossary/detail.asp?ID=3845"^^xsd:anyURI ,
+		"https://www.census.gov/glossary/#term_Standarddeviation"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote
+		"The most widely used measure of dispersion of a frequency distribution introduced by K. Pearson (1893). It is equal to the positive square root of the variance. The standard deviation should not be confused with the root mean square deviation." ,
+		"While standard deviation is the most widely-used measure of spread, using squared deviations, it may not be the most robust."
+		;
+	fibo-fnd-utl-av:symbol "σ" ;
+	.
+
+fibo-fnd-utl-alx:StatisticalArea
+	a owl:Class ;
+	rdfs:subClassOf
+		lcc-cr:GeographicRegion ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:someValuesFrom fibo-fnd-utl-alx:StatisticalAreaIdentifier ;
+		]
+		;
+	rdfs:label "statistical area" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:StatisticalArea" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "physical location that is defined per some program for designating geographic regions for the purposes of tabulating and presenting statistical data" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"U.S. Bureau of Labor Statistics and Statistics Canada reference definitions - https://wiki.edmcouncil.org/display/IND/Statistics+Canada+Census+Information" ,
+		"U.S. Bureau of Labor Statistics and Statistics Canada reference definitions - https://wiki.edmcouncil.org/pages/viewpage.action?pageId=6358041" ,
+		<http://www.census.gov/prod/cen2010/doc/gqsf.pdf>
+		;
+	.
+
+fibo-fnd-utl-alx:StatisticalAreaIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fnd-utl-alx:StatisticalArea ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "statistical area identifier" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:StatisticalAreaIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "identifier for a physical location that is defined per a nationally consistent program for designating geographic regions for the purposes of tabulating and presenting statistical data" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"U.S. Bureau of Labor Statistics and Statistics Canada reference definitions - https://wiki.edmcouncil.org/display/IND/Statistics+Canada+Census+Information" ,
+		"U.S. Bureau of Labor Statistics and Statistics Canada reference definitions - https://wiki.edmcouncil.org/pages/viewpage.action?pageId=6358041" ,
+		<http://www.census.gov/prod/cen2010/doc/gqsf.pdf>
+		;
+	.
+
+fibo-fnd-utl-alx:StatisticalMeasure
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Measure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isCharacterizedBy ;
+			owl:onClass fibo-fnd-utl-alx:Aspect ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:isEstimate ;
+			owl:onDataRange xsd:boolean ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "statistical measure" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:StatisticalMeasure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "summary (means, mode, total, index, etc.) of the individual quantitative variable values for the statistical units in a specific group (study domain)" ;
+	fibo-fnd-utl-av:adaptedFrom "http://stats.oecd.org/glossary/detail.asp?ID=5068"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Statistical measures may consist of several orthogonal characteristics, including (a) whether they reflect an estimate or variable, (b) the datatype, or from a FIBO perspective, nature of the measure (e.g., index, total, ratio, percent, percent change, mean, others), (c) the population (or the universe that applies to the highest level if defined in general) to which the measure applies, and (d) any relevant aspects used to subset or stratify a measure, (i.e., make them apply to a smaller universe)." ;
+	.
+
+fibo-fnd-utl-alx:StatisticalPopulation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:FinitePopulation ,
+		fibo-fnd-utl-alx:StatisticalUniverse ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasPopulationSize ;
+			owl:allValuesFrom xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isCharacterizedBy ;
+			owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isCharacterizedBy ;
+			owl:someValuesFrom fibo-fnd-utl-alx:StatisticalArea ;
+		]
+		;
+	rdfs:label "statistical population" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:StatisticalPopulation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "statistical universe filtered by time and region" ;
+	fibo-fnd-utl-av:adaptedFrom <http://stats.oecd.org/glossary/detail.asp?ID=2079> ;
+	fibo-fnd-utl-av:explanatoryNote "A common aim of statistical analysis is to produce information about some chosen population. In statistical inference, a subset of the population (a statistical sample) is chosen to represent the population in a statistical analysis. If a sample is chosen properly, characteristics of the entire population that the sample is drawn from can be estimated from corresponding characteristics of the sample." ;
+	.
+
+fibo-fnd-utl-alx:StatisticalProgram
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasReferencePeriod ;
+			owl:allValuesFrom fibo-fnd-dt-bd:BusinessRecurrenceInterval ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-doc:hasReportingPeriod ;
+			owl:allValuesFrom fibo-fnd-dt-fd:ExplicitDatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasReleaseDate ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasReleaseDateTime ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+			owl:onDataRange fibo-fnd-dt-fd:CombinedDateTime ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-plc-cty:hasCoverageArea ;
+			owl:someValuesFrom fibo-fnd-utl-alx:StatisticalArea ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-fnd-utl-alx:StatisticalUniverse ;
+		]
+		;
+	rdfs:label "statistical program" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:StatisticalProgram" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "program that presents a detailed investigation and analysis of a subject or situation involving one or more studies or surveys" ;
+	.
+
+fibo-fnd-utl-alx:StatisticalUniverse
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Collection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasUniverseSize ;
+			owl:allValuesFrom xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasContext ;
+			owl:someValuesFrom fibo-fnd-utl-alx:StatisticalProgram ;
+		]
+		;
+	rdfs:label "statistical universe" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:StatisticalUniverse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "collection representing the total membership, or 'universe', of people, resources, products, services, events, or entities of interest for some question, experiment, survey or statistical program" ;
+	skos:example "A statistical universe can be a group of actually existing objects (e.g. the set of all stars within the Milky Way galaxy) or a hypothetical and potentially infinite group of objects conceived as a generalization from experience (e.g. the set of all possible hands in a game of poker)." ;
+	fibo-fnd-utl-av:adaptedFrom <http://stats.oecd.org/glossary/detail.asp?ID=2087> ;
+	.
+
+fibo-fnd-utl-alx:Total
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Expression ,
+		fibo-fnd-utl-alx:StatisticalMeasure
+		;
+	rdfs:label "total" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Total" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "sum of the values for some characteristic of all units" ;
+	fibo-fnd-utl-av:adaptedFrom "https://wiki.edmcouncil.org/display/IND/Specifying+Statistical+Quantities"^^xsd:anyURI ;
+	.
+
+fibo-fnd-utl-alx:Variable
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-rel-rel:Reference ;
+	rdfs:label "variable" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Variable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "symbol that represents a parameter in a formula or expression" ;
+	.
+
+fibo-fnd-utl-alx:Variance
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Dispersion ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-fnd-utl-alx:Mean ;
+		]
+		;
+	rdfs:label "variance" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:Variance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "measure of spread, calculated as the average squared deviation of each number from the mean of a data set" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.statcan.gc.ca/edu/power-pouvoir/glossary-glossaire/5214842-eng.htm#v"^^xsd:anyURI ;
+	fibo-fnd-utl-av:symbol
+		"μ2" ,
+		"σ2"
+		;
+	fibo-fnd-utl-av:synonym "second moment" ;
+	.
+
+fibo-fnd-utl-alx:actualExpression
+	a owl:AnnotationProperty ;
+	rdfs:label "actual expression" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:actualExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range xsd:string ;
+	skos:definition "specifies the calculation or expression used to determine the value of something" ;
+	fibo-fnd-utl-av:explanatoryNote "In cases where some expression can only be calculated in SPARQL or via rules, this property is useful for stating what that calculation should be using the input arguments to the expression." ;
+	.
+
+fibo-fnd-utl-alx:evaluates
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:represents ;
+	rdfs:label "evaluates" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:evaluates" ;
+	rdfs:domain fibo-fnd-utl-alx:Expression ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-rel-rel:Reference ;
+	skos:definition "calculates a quantity value based on some mathematical formula" ;
+	.
+
+fibo-fnd-utl-alx:hasApplicableDatePeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDatePeriod ;
+	rdfs:label "has applicable date period" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasApplicableDatePeriod" ;
+	rdfs:domain fibo-fnd-utl-alx:StatisticalMeasure ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	skos:definition "indicates the date period for which the statistical measure is applicable" ;
+	.
+
+fibo-fnd-utl-alx:hasArgument
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has argument" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasArgument" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-utl-alx:Variable ;
+	skos:definition "indicates a specific input to a function, formula or expression, also known as an independent variable" ;
+	fibo-fnd-utl-av:synonym "has independent variable" ;
+	.
+
+fibo-fnd-utl-alx:hasBasePeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDatePeriod ;
+	rdfs:label "has base period" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasBasePeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDatePeriod ;
+	skos:definition "specifies the base period (typically a prior period) against which a numberic index for a more recent reporting period is compared" ;
+	.
+
+fibo-fnd-utl-alx:hasExpression
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has expression" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasExpression" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-utl-alx:Expression ;
+	skos:definition "specifies a mathematical or other formal expression, which may be part of a formula" ;
+	.
+
+fibo-fnd-utl-alx:hasFormula
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has formula" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-utl-alx:Formula ;
+	skos:definition "specifies a concise way of expressing information symbolically, as in a mathematical or chemical formula" ;
+	.
+
+fibo-fnd-utl-alx:hasMeasurementDateTime
+	a owl:DatatypeProperty ;
+	rdfs:label "has measurement date time" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasMeasurementDateTime" ;
+	rdfs:domain fibo-fnd-utl-alx:Measure ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-dt-fd:CombinedDateTime ;
+	skos:definition "indicates the date and time that the measurement was taken" ;
+	.
+
+fibo-fnd-utl-alx:hasMeasurementPeriodInMonths
+	a owl:DatatypeProperty ;
+	rdfs:label "has measurement period in months" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasMeasurementPeriodInMonths" ;
+	rdfs:domain fibo-fnd-utl-alx:Measure ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "indicates the coverage period for which the measure is applicable expressed in months" ;
+	.
+
+fibo-fnd-utl-alx:hasMinuend
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-utl-alx:hasArgument ;
+	rdfs:label "has minuend" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasMinuend" ;
+	rdfs:domain fibo-fnd-utl-alx:Difference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "specifies the quantity value from which something is subtracted; the value that is diminished" ;
+	.
+
+fibo-fnd-utl-alx:hasNumberOfEntries
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasCount ;
+	rdfs:label "has number of entries" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasNumberOfEntries" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range xsd:nonNegativeInteger ;
+	skos:definition "indicates the number of elements in some document, table, or other resource (e.g., in a report, table)" ;
+	.
+
+fibo-fnd-utl-alx:hasObservedValue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-utl-alx:hasArgument ;
+	rdfs:label "has observed value" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasObservedValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-arr-arr:StructuredCollection ;
+	skos:definition "specifies a collection of values over which some analysis is performed" ;
+	fibo-fnd-utl-av:explanatoryNote "For certain calculations, such as certain measures of dispersion, date value pairs are expected as input, in other words, a dated structured collection." ;
+	.
+
+fibo-fnd-utl-alx:hasOperand
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has operand" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasOperand" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-rel-rel:Referent ;
+	skos:definition "indicates the operand of a mathematical argument, parameter or other similar concept" ;
+	.
+
+fibo-fnd-utl-alx:hasPeriodicity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasRecurrenceInterval ;
+	rdfs:label "has periodicity" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasPeriodicity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "specifies a recurrence interval (monthly, quarterly, annual) that a statistical measure reflects" ;
+	.
+
+fibo-fnd-utl-alx:hasPopulationSize
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-arr-arr:hasCollectionSize ;
+	rdfs:label "has population size" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasPopulationSize" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range xsd:nonNegativeInteger ;
+	skos:definition "indicates the number of elements in a given population" ;
+	.
+
+fibo-fnd-utl-alx:hasReferencePeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasRecurrenceInterval ;
+	rdfs:label "has reference period" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasReferencePeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "specifies a reference (baseline) recurrence interval for which a given economic indicator applies" ;
+	.
+
+fibo-fnd-utl-alx:hasReleaseDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has release date" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasReleaseDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "specifies the release date for a given economic indicator" ;
+	.
+
+fibo-fnd-utl-alx:hasReleaseDateTime
+	a owl:DatatypeProperty ;
+	rdfs:label "has release date and time" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasReleaseDateTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-dt-fd:CombinedDateTime ;
+	skos:definition "specifies a release date and possibly a time for a given indicator or report" ;
+	.
+
+fibo-fnd-utl-alx:hasSubtrahend
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-utl-alx:hasArgument ;
+	rdfs:label "has subtrahend" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasSubtrahend" ;
+	rdfs:domain fibo-fnd-utl-alx:Difference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "specifies the quantity value that is subtracted from something" ;
+	.
+
+fibo-fnd-utl-alx:hasUniverseSize
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-arr-arr:hasCollectionSize ;
+	rdfs:label "has universe size" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:hasUniverseSize" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range xsd:nonNegativeInteger ;
+	skos:definition "indicates the number of elements in a given universe" ;
+	.
+
+fibo-fnd-utl-alx:isCalculatedViaMethodology
+	a owl:DatatypeProperty ;
+	rdfs:label "is calculated via methodology" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:isCalculatedViaMethodology" ;
+	rdfs:domain fibo-fnd-utl-alx:StatisticalMeasure ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "high-level description of the approach taken to obtain the result" ;
+	.
+
+fibo-fnd-utl-alx:isEstimate
+	a owl:DatatypeProperty ;
+	rdfs:label "is estimate" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:isEstimate" ;
+	rdfs:domain fibo-fnd-utl-alx:StatisticalMeasure ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the measure reflects an estimate (approximation) or not" ;
+	.
+
+fibo-fnd-utl-alx:isEvaluatedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasRepresentation ;
+	rdfs:label "is evaluated by" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:isEvaluatedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	rdfs:range fibo-fnd-utl-alx:Expression ;
+	skos:definition "links a quantity value to the expression that generated it" ;
+	.
+
+fibo-fnd-utl-alx:isMeasureOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:appliesTo ;
+	rdfs:label "is a measure of" ;
+	rdfs:comment "QName: fibo-fnd-utl-alx:isMeasureOf" ;
+	rdfs:domain fibo-fnd-utl-alx:Measure ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ;
+	skos:definition "indicates the concept being measured" ;
+	.
+

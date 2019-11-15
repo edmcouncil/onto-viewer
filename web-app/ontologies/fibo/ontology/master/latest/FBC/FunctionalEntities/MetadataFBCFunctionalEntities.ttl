@@ -1,0 +1,71 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/MetadataFBCFunctionalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/MetadataFBCFunctionalEntities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fct-mod: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/MetadataFBCFunctionalEntities/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/MetadataFBCFunctionalEntities/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Financial Business and Commerce(FBC) Functional Entities Module" ;
+	rdfs:comment "QName: fibo-fbc-fct-mod:" ;
+	dct:abstract "The functional entities module includes ontologies that define business entities according to their function as opposed to their form. They include service providers such as financial institutions (e.g., banks, investment companies, and insurance companies), government regulatory and registration agencies, as well as entities described in terms of their function in some process, such as clearing houses." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fbc-fct-mod" ;
+	sm:filename "MetadataFBCFunctionalEntities.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/MetadataFBCFunctionalEntities/> ;
+	.
+
+fibo-fbc-fct-mod:FunctionalEntitiesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "FIBO FBC Functional Entities Module" ;
+	rdfs:comment "QName: fibo-fbc-fct-mod:FunctionalEntitiesModule" ;
+	dct:abstract "The functional entities module includes ontologies that define business entities according to their function as opposed to their form. They include service providers such as financial institutions (e.g., banks, investment companies, and insurance companies), government regulatory and registration agencies, as well as entities described in terms of their function in some process, such as clearing houses." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCentersIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/EuropeanEntities/EUFinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/EuropeanEntities/EURegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/EuropeanEntities/EuropeanFinancialServicesEntitiesIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/MarketsIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/CAFinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/CARegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USExampleIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntitiesIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USRegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "FIBO-FBC-FCT" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/MetadataFBCFunctionalEntities/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

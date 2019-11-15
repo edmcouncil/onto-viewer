@@ -1,0 +1,87 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/MetadataLOAN/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/MetadataLOANLoanContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/MetadataLOANLoanExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/MetadataLOANLoanTypes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/MetadataLOANLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/MetadataLOANLoansTemporal/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/MetadataLOAN/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-loan-ln-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/MetadataLOANLoanContracts/> .
+@prefix fibo-loan-lnx-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanExt/MetadataLOANLoanExt/> .
+@prefix fibo-loan-loan-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/MetadataLOANLoans/> .
+@prefix fibo-loan-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/MetadataLOAN/> .
+@prefix fibo-loan-tem-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/MetadataLOANLoansTemporal/> .
+@prefix fibo-loan-typ-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MetadataLOANLoanTypes/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/MetadataLOAN/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Loans (LOAN) Domain" ;
+	rdfs:comment "QName: fibo-loan-mod:" ;
+	dct:abstract "The metadata for Loans ontology describes the LOAN domain." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-loan-mod" ;
+	sm:filename "MetadataLOAN.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/MetadataLOANLoanContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/MetadataLOANLoanExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/MetadataLOANLoanTypes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/MetadataLOANLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/MetadataLOANLoansTemporal/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/LOAN/MetadataLOAN/> ;
+	.
+
+fibo-loan-mod:LOANDomain
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Loans" ;
+	rdfs:comment "QName: fibo-loan-mod:LOANDomain" ;
+	dct:abstract "The FIBO Loan domain provides a model of concepts that are common to loan contracts in various market categories including but not limited to commercial, small business, automobile, education and mortgage. High-level concepts relevant to loan contracts include the obligations of parties playing different roles, credit and risk, security agreements as well as additional detail for HMDA-specific loans.  Details defining debt instruments in general are covered in a separate debt module in the Securities domain." ;
+	dct:creator "https://spec.edmcouncil.org/fibo/fct/Loans"^^xsd:anyURI ;
+	dct:hasPart
+		fibo-loan-ln-mod:LoanContractsModule ,
+		fibo-loan-lnx-mod:LoanExtensionsModule ,
+		fibo-loan-typ-mod:LoanTypesModule ,
+		fibo-loan-loan-mod:LoansModule ,
+		fibo-loan-tem-mod:LoansTemporalModule
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Loans (LOAN) Domain" ;
+	sm:contributor
+		"Office of Financial Research" ,
+		"Semantic Arts" ,
+		"Wells Fargo"
+		;
+	sm:copyright "Copyright (c) 2013-2018 EDM Council, Inc." ;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/MetadataBE/BEDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/BP/MetadataBP/BPDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/MetadataFBC/FBCDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/FNDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/IND/MetadataIND/INDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/MetadataMD/MDDomain>
+		;
+	sm:keyword
+		"financial instruments" ,
+		"loan contracts" ,
+		"mortgage"
+		;
+	sm:moduleAbbreviation "fibo-loan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/MetadataLOAN/> ;
+	rdfs:seeAlso "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	.
+

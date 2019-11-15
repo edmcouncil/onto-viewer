@@ -1,0 +1,366 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-fbo: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-org-org: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/> .
+@prefix fibo-fnd-plc-adr: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/>
+	a owl:Ontology ;
+	rdfs:label "Formal Business Organizations Ontology" ;
+	rdfs:comment "QName: fibo-be-le-fbo:" ;
+	dct:abstract "This ontology defines formal business organizations and related concepts. The ontology covers parts of organizations, membership, classification, address relations and other properties which are applicable to formal business organizations generally. The concept of a formal business organization forms the basis for articulation of types of organization, both incorporated and non-incorporated, in other FIBO-BE ontologies." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-be-le-fbo" ;
+	sm:filename "FormalBusinessOrganizations.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations.rdf version of this ontology was modified as a part of a simplification strategy for the organizational class hierarchy." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations.rdf version of this ontology was modified per the FIBO 2.0 RFC to address minor bug fixes." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations.rdf version of this ontology was modified per the issue resolutions identified in the FIBO BE 1.0 FTF report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations.rdf version of this ontology was modified to reflect the move of hasObjective to FND to enable higher level reuse." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations.rdf version of this ontology was revised to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations.rdf version of this ontology was revised to replace hasDefinition with isDefinedIn to clarify intent."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-be-le-fbo:Branch
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-fbo:OrganizationalSubUnit ;
+	rdfs:label "branch" ;
+	rdfs:comment "QName: fibo-be-le-fbo:Branch" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "a part of a business organization or company, identified as a branch" ;
+	skos:editorialNote "This is not a separate legal entity in its own right, but a functional part of the entity." ;
+	.
+
+fibo-be-le-fbo:Division
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-fbo:OrganizationalSubUnit ;
+	rdfs:label "division" ;
+	rdfs:comment "QName: fibo-be-le-fbo:Division" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "a part of a company, such as a line of business, that may have separate accounting or reporting requirements" ;
+	.
+
+fibo-be-le-fbo:JointVenture
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-lp:LegalEntity ;
+	rdfs:label "joint venture" ;
+	rdfs:comment "QName: fibo-be-le-fbo:JointVenture" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "a legal entity that is a formal venture between two or more business entities" ;
+	skos:editorialNote "Detailed properties still to be modeled. This will be similar to Partnership in that it will have two or more venture partners (need to determine best label for these), and some formal standing. Also to research: whether JVs are only instituted via mutual share ownership and therefore may only be between limited companies (or may only be a limited company but may have other types of legal person and/or legal entity as venture partners)." ;
+	.
+
+fibo-be-le-fbo:NonGovernmentalOrganization
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-fbo:NotForProfitOrganization ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-gao-obj:hasObjective ;
+			owl:someValuesFrom fibo-be-le-lp:PublicPurpose ;
+		]
+		;
+	rdfs:label "non-governmental organization" ;
+	rdfs:comment "QName: fibo-be-le-fbo:NonGovernmentalOrganization" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "a not for profit organization that is a citizen-based group that functions independently of government" ;
+	fibo-fnd-utl-av:abbreviation "NGO" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.investopedia.com/ask/answers/13/what-is-non-government-organization.asp"^^xsd:anyURI ,
+		"https://en.wikipedia.org/wiki/Non-governmental_organization"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote
+		"NGOs are neither a part of a government nor a conventional for-profit business.  Usually set up by ordinary citizens, NGOs may be funded by governments, foundations, businesses, or private persons." ,
+		"NGOs, sometimes called civil societies, are organized on community, national and international levels to serve specific social or political purposes, and are cooperative, rather than commercial, in nature." ,
+		"Some NGOs avoid formal funding altogether and are run primarily by volunteers. NGOs are highly diverse groups of organizations engaged in a wide range of activities, and take different forms in different parts of the world. Some may have charitable status, while others may be registered for tax exemption based on recognition of social purposes. Others may be fronts for political, religious, or other interests."
+		;
+	.
+
+fibo-be-le-fbo:NotForProfitOrganization
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-org-fm:FormalOrganization ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-gao-obj:hasObjective ;
+			owl:someValuesFrom fibo-be-le-lp:NotForProfitObjective ;
+		]
+		;
+	rdfs:label "not for profit organization" ;
+	rdfs:comment "QName: fibo-be-le-fbo:NotForProfitOrganization" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	owl:disjointWith [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-gao-obj:hasObjective ;
+		owl:someValuesFrom fibo-be-le-lp:ProfitObjective ;
+	] ;
+	skos:definition "an organization that uses its surplus revenues to further achieve its purpose or mission, rather than distributing its surplus income to the organization's owners (directors, investors, or equivalents) as profit or dividends" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ,
+		"https://en.wikipedia.org/wiki/Nonprofit_organization"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote
+		"In the US, a nonprofit organization is an association that explicitly is not required to pay taxes on its income.  Such organizations are qualified for this exemption due to their socially desirable objective (e.g. hospitals, charitable organizations, etc., or because they meet some set of requirements as determined by the US Internal Revenue Service." ,
+		"The nonprofit landscape is highly varied, although many people have come to associate NPOs with charitable organizations. Although charities do comprise an often high profile or visible aspect of the sector, there are many other types of nonprofits. Overall, they tend to be either member-serving or community-serving. Member-serving organizations include mutual societies, cooperatives, trade unions, credit unions, industry associations, sports clubs, retired serviceman's clubs and other organizations that benefit a particular group of people - the members of the organization. Typically, community-serving organizations are focused on providing services to the community in general, either globally or locally: organizations delivering human services programs or projects, aid and development programs, medical research, education and health services, and so on."
+		;
+	fibo-fnd-utl-av:synonym "non-profit organization" ;
+	.
+
+fibo-be-le-fbo:OrganizationCoveringAgreement
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:WrittenContract ;
+	rdfs:label "organization covering agreement" ;
+	rdfs:comment "QName: fibo-be-le-fbo:OrganizationCoveringAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "A formal agreement between the principals in a formal organization which covers the relationship between the principals, and between the principals and the entity." ;
+	skos:editorialNote "Also covers the aims and purposes of the Entity." ;
+	.
+
+fibo-be-le-fbo:OrganizationIdentificationScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:IdentificationScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:allValuesFrom fibo-be-le-fbo:OrganizationIdentifier ;
+		]
+		;
+	rdfs:label "organization identification scheme" ;
+	rdfs:comment "QName: fibo-be-le-fbo:OrganizationIdentificationScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "an identification scheme dedicated to the unique identification of organizations" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.iso.org/obp/ui/#iso:std:iso-iec:6523:-1:ed-1:v1:en"^^xsd:anyURI ;
+	.
+
+fibo-be-le-fbo:OrganizationIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:onClass fibo-be-le-fbo:OrganizationIdentificationScheme ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fnd-org-org:Organization ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "organization identifier" ;
+	rdfs:comment "QName: fibo-be-le-fbo:OrganizationIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "an identifier assigned to an organization within an organization identification scheme, and unique within that scheme" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.iso.org/obp/ui/#iso:std:iso-iec:6523:-1:ed-1:v1:en"^^xsd:anyURI ;
+	.
+
+fibo-be-le-fbo:OrganizationPartIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-be-le-fbo:OrganizationalSubUnit ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "organization part identifier" ;
+	rdfs:comment "QName: fibo-be-le-fbo:OrganizationPartIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "an identifier allocated to a particular organizational sub-unit" ;
+	fibo-fnd-utl-av:abbreviation "OPI" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.iso.org/obp/ui/#iso:std:iso-iec:6523:-1:ed-1:v1:en"^^xsd:anyURI ;
+	fibo-fnd-utl-av:synonym "organization sub-unit identifier" ;
+	.
+
+fibo-be-le-fbo:OrganizationalSubUnit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-org-fm:FormalOrganization ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isPartOf ;
+			owl:allValuesFrom fibo-fnd-org-org:Organization ;
+		]
+		;
+	rdfs:label "organizational sub-unit" ;
+	rdfs:comment "QName: fibo-be-le-fbo:OrganizationalSubUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "any department, service, or other entity within a larger formal organization that only has full recognition within the context of that formal organization, but requires identification for some purpose" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.iso.org/obp/ui/#iso:std:iso-iec:6523:-1:ed-1:v1:en"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "In other words, it is not a legal entity in its own right." ;
+	fibo-fnd-utl-av:synonym "organization part" ;
+	.
+
+fibo-be-le-fbo:RegisteredAddress
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plc-adr:PhysicalAddress ;
+	rdfs:label "registered address" ;
+	rdfs:comment "QName: fibo-be-le-fbo:RegisteredAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	skos:definition "a physical address used by an entity for registration purposes and where legal papers may be served" ;
+	fibo-fnd-utl-av:synonym "legal address" ;
+	.
+
+fibo-be-le-fbo:hasEquity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has equity" ;
+	rdfs:comment "QName: fibo-be-le-fbo:hasEquity" ;
+	rdfs:domain fibo-be-le-lp:LegalEntity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	rdfs:range fibo-fnd-acc-aeq:OwnersEquity ;
+	skos:definition "indicates owners' equity associated with the entity" ;
+	.
+
+fibo-be-le-fbo:hasOperatingAddress
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-plc-adr:hasAddress ;
+	rdfs:label "has operating address" ;
+	rdfs:comment "QName: fibo-be-le-fbo:hasOperatingAddress" ;
+	rdfs:domain fibo-fnd-org-org:Organization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	rdfs:range fibo-fnd-plc-adr:PhysicalAddress ;
+	skos:definition "address at which the organization carries out its operations" ;
+	.
+
+fibo-be-le-fbo:hasPrimaryAddress
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-plc-adr:hasAddress ;
+	rdfs:label "has primary address" ;
+	rdfs:comment "QName: fibo-be-le-fbo:hasPrimaryAddress" ;
+	rdfs:domain fibo-fnd-org-org:Organization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	rdfs:range fibo-fnd-plc-adr:PhysicalAddress ;
+	skos:definition "the main address at which communications to the organization may be addressed in some geographic region" ;
+	.
+
+fibo-be-le-fbo:hasRegisteredAddress
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-plc-adr:hasAddress ;
+	rdfs:label "has registered address" ;
+	rdfs:comment "QName: fibo-be-le-fbo:hasRegisteredAddress" ;
+	rdfs:domain fibo-fnd-org-org:Organization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	rdfs:range fibo-be-le-fbo:RegisteredAddress ;
+	skos:definition "an address at which an organization is registered and at which legal papers may be served on it" ;
+	.
+
+fibo-be-le-fbo:hasSignatory
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasPartyInRole ;
+	rdfs:label "has signatory" ;
+	rdfs:comment "QName: fibo-be-le-fbo:hasSignatory" ;
+	rdfs:domain fibo-fnd-org-org:Organization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	rdfs:range fibo-be-le-lp:Signatory ;
+	skos:definition "has a party which is authorized to sign contracts on behalf of the entity" ;
+	.
+
+fibo-be-le-fbo:hasSubUnit
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasPart ;
+	rdfs:label "has sub-unit" ;
+	rdfs:comment "QName: fibo-be-le-fbo:hasSubUnit" ;
+	rdfs:domain fibo-fnd-org-org:Organization ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	rdfs:range fibo-be-le-fbo:OrganizationalSubUnit ;
+	owl:inverseOf fibo-be-le-fbo:isSubUnitOf ;
+	skos:definition "relates a formally constituted organization to a sub-unit of that organization" ;
+	.
+
+fibo-be-le-fbo:isSubUnitOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isPartOf ;
+	rdfs:label "is sub-unit of" ;
+	rdfs:comment "QName: fibo-be-le-fbo:isSubUnitOf" ;
+	rdfs:domain fibo-be-le-fbo:OrganizationalSubUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ;
+	rdfs:range fibo-fnd-org-org:Organization ;
+	skos:definition "relates a sub-unit of an organization to the larger entity, which may or may not be co-located with that entity" ;
+	.
+
+fibo-be-le-lp:LegalEntity
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:onClass fibo-be-le-fbo:OrganizationCoveringAgreement ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:onClass fibo-fnd-arr-cls:IndustrySectorClassifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	.
+

@@ -1,0 +1,124 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ContractsForDifference/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ContractsForDifference/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-drc-cfd: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ContractsForDifference/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ContractsForDifference/>
+	a owl:Ontology ;
+	rdfs:label "ContractsForDifference"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "A contract which pays out based on the difference between the current market value and the value that the participant contracted for when the contract was initiated. Generally defined in terms of a currency asset, with the result that participants buy or sell control of that asset. These are usually carried forward on an ongoing basis rather than settled at a point in time." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ContractsForDifference/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-drc-cfd:ContractForDifference
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		fibo-fbc-fi-fi:DerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-doc:hasExpirationDate ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-cfd:confersControlOf ;
+			owl:someValuesFrom fibo-fnd-oac-own:Asset ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasCounterparty ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-drc-bsc:DerivativeContractParty
+					fibo-fnd-agr-ctr:ContractCounterparty
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasPrincipalParty ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-drc-bsc:DerivativeContractParty
+					fibo-fbc-fi-fi:Issuer
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "contract for difference"@en ;
+	rdfs:comment "QName: NONE:ContractForDifference" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ContractsForDifference/> ;
+	skos:definition "Cash settled contract where you buy or sell control of a particular asset such as USD. Further notes: You don't expect to deliver it, instead, at the end of the stated period you will take the current market value of the asset and pay the difference between the current market value and the value that you contracted for. Review session notes: Q: What are they? A: Cash settled contract where you buy or sell control of a particular asset such as USD. You don't expect to deliver it, instead, at the end of th estated period you will take the current market value of the asset and pay the difference between the current market value and the value that you contracted for. Just the same as a non deliverable forward. Differences: CFD are more a retail based product, they don't speciy a delivery date, they roll on a daily basis, the holder pays a margin but they don't determine the date where you have to settle. They rollover each day, but each day the holder has to provide a margin (and fees). Can roll along as long as you like, squaring up the current value and roll on for next day. No option to gake any value out of it. You can choose to terminate it, at which point youclear it at its current market value on that day and don't roll it over for the next. Developed to allow peopl ewho don't have the ability to hold the cash, to run a balance in a foreign ccy. What sort of assets? 1. Currency 2. No others known. Logically possible. Can be equity or anything. Q: What sort of facts apply: Delivery dates Quantities For non uniform assets: grades or qualities of those assets (e.g. oil0 Counterparties Earlier notes: Notes taken during Traded options SME Review: Traded in Australia and LSE. Presently these are predominantly OTC."@en ;
+	fibo-fnd-utl-av:abbreviation "CFD"@en ;
+	fibo-fnd-utl-av:synonym "forward contract for difference"@en ;
+	.
+
+fibo-der-drc-cfd:confersControlOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-drc-bsc:hasUnderlier ;
+	rdfs:label "confers control of"@en ;
+	rdfs:comment "QName: NONE:confersControlOf" ;
+	rdfs:domain fibo-der-drc-cfd:ContractForDifference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ContractsForDifference/> ;
+	rdfs:range fibo-fnd-oac-own:Asset ;
+	.
+
+fibo-der-drc-cfd:rollingFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "rolling frequency"@en ;
+	rdfs:comment "QName: NONE:rollingFrequency" ;
+	rdfs:domain fibo-der-drc-cfd:ContractForDifference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ContractsForDifference/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "In principle they can be rolled on any agreed basis. Usually no firm idea on when the parties want to settle, will hold untilo they feel like terminating, nbut there's no reason why this might not be made weekly or monthly."@en ;
+	.
+
+fibo-der-drc-cfd:terminationProvision
+	a owl:DatatypeProperty ;
+	rdfs:label "termination provision"@en ;
+	rdfs:comment "QName: NONE:terminationProvision" ;
+	rdfs:domain fibo-der-drc-cfd:ContractForDifference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ContractsForDifference/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Possibles: Rolled daily Expires on some day If something new happens - provisions for the kinds of event that can lead to termination (as per most type of contract generally)."@en ;
+	.
+

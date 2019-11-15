@@ -1,0 +1,105 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionsExtended/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionsExtended/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-txn-ecr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-txn-txnx: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/>
+	a owl:Ontology ;
+	rdfs:label "TransactionsExtended"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology provides further extensions to the REA-derived transaction concepts in this module. These include master agreements and covered transactions." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionsExtended/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-txnx:ContractualRelationship
+	a owl:Class ;
+	rdfs:label "contractual relationship"@en ;
+	rdfs:comment "QName: NONE:ContractualRelationship" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/> ;
+	skos:definition "A relationship in which two or more parties have some contractual obligations or extend some rights under a contract, to one another."@en ;
+	.
+
+fibo-fnd-txn-txnx:ContractuallyDefinedBenefit
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-ecr:EconomicResource ;
+	rdfs:label "contractually defined benefit"@en ;
+	rdfs:comment "QName: NONE:ContractuallyDefinedBenefit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/> ;
+	skos:definition "Some benefit from one party to the other party, defined in contractual terms."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This could for example be a contractual promise of future cash flows such as dividends on a specific instrument."@en ;
+	.
+
+fibo-fnd-txn-txnx:CoveredTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:ContractualTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-fnd-txn-txnx:MasterAgreement ;
+		]
+		;
+	rdfs:label "covered transaction"@en ;
+	rdfs:comment "QName: NONE:CoveredTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/> ;
+	skos:definition "A transaction covered by some Master Agreement."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The Master Agreement sets out the terms and conditions under which these transactions are to take place between the parties. These are Over the Counter transactions, including OTC Derivatives."@en ;
+	.
+
+fibo-fnd-txn-txnx:MasterAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:WrittenContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom fibo-fnd-txn-txnx:ContractualRelationship ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:mandates ;
+			owl:someValuesFrom fibo-fnd-txn-txnx:MasterAgreementObligation ;
+		]
+		;
+	rdfs:label "master agreement"@en ;
+	rdfs:comment "QName: NONE:MasterAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/> ;
+	skos:definition "A legal contract which is deemed to apply to a number of future activities between the parties thereto and having force over future agreements or contracts to be brought into effect between those parties."@en ;
+	.
+
+fibo-fnd-txn-txnx:MasterAgreementObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ContractualObligation ;
+	rdfs:label "master agreement obligation"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/> ;
+	skos:definition "obligation set out in some master agreement"@en ;
+	.
+

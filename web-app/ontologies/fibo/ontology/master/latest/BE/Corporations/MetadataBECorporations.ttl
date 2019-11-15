@@ -1,0 +1,52 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/MetadataBECorporations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/MetadataBECorporations/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-corp-mod: <https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/MetadataBECorporations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/MetadataBECorporations/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Business Entities (BE) Corporations Module" ;
+	rdfs:comment "QName: fibo-be-corp-mod:" ;
+	dct:abstract "The corporations module includes ontologies describing the essential features of companies incorporated through the issuance of shares." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-be-corp-mod" ;
+	sm:filename "MetadataBECorporations.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/MetadataBECorporations/> ;
+	.
+
+fibo-be-corp-mod:CorporationsModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Corporations" ;
+	rdfs:comment "QName: fibo-be-corp-mod:CorporationsModule" ;
+	dct:abstract "The corporations module includes ontologies describing the essential features of companies incorporated through the issuance of shares." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/Corporations/> ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Business Entities (BE) Corporations Module" ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-be-corp" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/MetadataBECorporations/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

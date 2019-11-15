@@ -1,0 +1,188 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ReturnSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ReturnSwaps/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-ass: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> .
+@prefix fibo-der-der-rsw: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-drc-swp: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/>
+	a owl:Ontology ;
+	rdfs:label "ReturnSwaps"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Swap transactions and their corresponding contract, in which one leg provides a return on some asset. There are different kinds of asset return stream including simple and total returns. These terms are common to the different kinds of asset return swap (equity asset return swaps and bond swaps)." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ReturnSwaps/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-der-rsw:AssetDerivativeContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-ass-ass:AssetUnderlier ;
+		]
+		;
+	rdfs:label "asset derivative contract"@en ;
+	rdfs:comment "QName: NONE:AssetDerivativeContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	.
+
+fibo-der-der-rsw:AssetReturnCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:DerivativeTransactionTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-rsw:definedAs ;
+			owl:someValuesFrom fibo-der-der-rsw:AssetReturnStream ;
+		]
+		;
+	rdfs:label "asset return commitment"@en ;
+	rdfs:comment "QName: NONE:AssetReturnCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	.
+
+fibo-der-der-rsw:AssetReturnStream
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:SwapLeg ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-rsw:hasReferenceAsset ;
+			owl:someValuesFrom fibo-der-ass-ass:AssetUnderlier ;
+		]
+		;
+	rdfs:label "asset return stream"@en ;
+	rdfs:comment "QName: NONE:AssetReturnStream" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	skos:definition "A leg in which the returns on an asset are paid."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This does not refer to the return to the holder, but to the return on an underlying asset. This may be just the dividend / interest amounts on the underlying, or it may also include the increase / decrease in value of the underlying (Total Return). 10 Mar: Not used for Interest Rate Swaps. Return Leg is the non cash leg of a swap that has a cash leg. This leg type has nothing to do with Statistical leg types. A return for one negotiator is payment for the other. FpML: Return amounts of the return type swap."@en ;
+	.
+
+fibo-der-der-rsw:ReturnLeg
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:SwapLeg ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:embodies ;
+			owl:someValuesFrom fibo-der-der-rsw:AssetReturnCommitment ;
+		]
+		;
+	rdfs:label "return leg"@en ;
+	rdfs:comment "QName: NONE:ReturnLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	.
+
+fibo-der-der-rsw:ReturnSwapContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-rsw:AssetDerivativeContract ,
+		fibo-der-drc-swp:Swap
+		;
+	rdfs:label "return swap contract"@en ;
+	rdfs:comment "QName: NONE:ReturnSwapContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	.
+
+fibo-der-der-rsw:ReturnSwapTransaction
+	a owl:Class ;
+	rdfs:label "return swap transaction"@en ;
+	rdfs:comment "QName: NONE:ReturnSwapTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	skos:definition "The transaction of a total Return Swap. This is the transaction in which the return on some asset is exchanged for some agreed payment or series of payments."@en ;
+	skos:editorialNote "17 March review session notes: This is about the return you get not about what kinds of legs it has. Talk about return as a payoff. Then kinds of return are kinds of payoff e.g. total return. Return of a portfiolo, a single asset, or an index as per other note."@en ;
+	.
+
+fibo-der-der-rsw:SimpleReturnStream
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-rsw:AssetReturnStream ;
+	rdfs:label "simple return stream"@en ;
+	rdfs:comment "QName: NONE:SimpleReturnStream" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	skos:definition "A leg defining the returns on an underlying instrument, namely the interest payments on a debt instrument or the dividends on an equity."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Does not include the appreciation on the price of the asset."@en ;
+	.
+
+fibo-der-der-rsw:TotalReturnSwapContract
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-rsw:ReturnSwapContract ;
+	rdfs:label "total return swap contract"@en ;
+	rdfs:comment "QName: NONE:TotalReturnSwapContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	.
+
+fibo-der-der-rsw:definedAs
+	a owl:ObjectProperty ;
+	rdfs:label "defined as"@en ;
+	rdfs:comment "QName: NONE:definedAs" ;
+	rdfs:domain fibo-der-der-rsw:AssetReturnCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	rdfs:range fibo-der-der-rsw:AssetReturnStream ;
+	.
+
+fibo-der-der-rsw:hasFundingLeg
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-drc-swp:hasLeg ;
+	rdfs:label "has funding leg"@en ;
+	rdfs:comment "QName: NONE:hasFundingLeg" ;
+	rdfs:domain fibo-der-der-rsw:ReturnSwapTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	.
+
+fibo-der-der-rsw:hasReferenceAsset
+	a owl:ObjectProperty ;
+	rdfs:label "has reference asset"@en ;
+	rdfs:comment "QName: NONE:hasReferenceAsset" ;
+	rdfs:domain fibo-der-der-rsw:AssetReturnStream ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	rdfs:range fibo-der-ass-ass:AssetUnderlier ;
+	.
+
+fibo-der-der-rsw:hasReturnLeg
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-drc-swp:hasLeg ;
+	rdfs:label "has return leg"@en ;
+	rdfs:comment "QName: NONE:hasReturnLeg" ;
+	rdfs:domain fibo-der-der-rsw:ReturnSwapTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	rdfs:range fibo-der-der-rsw:ReturnLeg ;
+	.
+
+fibo-der-der-rsw:rateOfReturn
+	a owl:DatatypeProperty ;
+	rdfs:label "rate of return"@en ;
+	rdfs:comment "QName: NONE:rateOfReturn" ;
+	rdfs:domain fibo-der-der-rsw:AssetReturnStream ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ;
+	skos:definition "The terms of the initial price of the return type swap and of the subsequent valuations of the underlyer."@en ;
+	.
+

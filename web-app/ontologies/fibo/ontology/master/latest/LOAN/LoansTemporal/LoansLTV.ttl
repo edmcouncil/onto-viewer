@@ -1,0 +1,73 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansLTV/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansLTV/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-tem-ltv: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/>
+	a owl:Ontology ;
+	rdfs:label "LoansLTV"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology defines the concept of a loan to value (LTV) ratio, including both the original LTV at application and the same concept as a variable over time." ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansLTV/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-tem-ltv:CurrentLTV
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-ltv:LoanToValueRatio ;
+	rdfs:label "current l t v"@en ;
+	rdfs:comment "QName: NONE:CurrentLTV" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> ;
+	.
+
+fibo-loan-tem-ltv:LoanToValueRatio
+	a owl:Class ;
+	rdfs:label "loan to value ratio"@en ;
+	rdfs:comment "QName: NONE:LoanToValueRatio" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> ;
+	.
+
+fibo-loan-tem-ltv:OriginalLTV
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-ltv:LoanToValueRatio ;
+	rdfs:label "original l t v"@en ;
+	rdfs:comment "QName: NONE:OriginalLTV" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> ;
+	.
+
+fibo-loan-tem-ltv:informationDate
+	a owl:DatatypeProperty ;
+	rdfs:label "information date"@en ;
+	rdfs:comment "QName: NONE:informationDate" ;
+	rdfs:domain fibo-loan-tem-ltv:CurrentLTV ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> ;
+	skos:definition "The date at which this valuation was carried out."@en ;
+	.
+
+fibo-loan-tem-ltv:valuationDate
+	a owl:DatatypeProperty ;
+	rdfs:label "valuation date"@en ;
+	rdfs:comment "QName: NONE:valuationDate" ;
+	rdfs:domain fibo-loan-tem-ltv:OriginalLTV ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> ;
+	skos:definition "The date the valuation was carried out. This is the date the valuaton was carried out as part of the original mortgage valuation."@en ;
+	.
+
+fibo-loan-tem-ltv:value
+	a owl:DatatypeProperty ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:value" ;
+	rdfs:domain fibo-loan-tem-ltv:LoanToValueRatio ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> ;
+	rdfs:range xsd:decimal ;
+	.
+

@@ -1,0 +1,84 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/OptionContractsOnFutures/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/Futures/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/OptionContractsOnFutures/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-cof: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/OptionContractsOnFutures/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-etd-fut: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/Futures/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/OptionContractsOnFutures/>
+	a owl:Ontology ;
+	rdfs:label "OptionContractsOnFutures"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Over the counter option contracts giving the holder to purchase or sell a given futures contract at the allowed times." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/Futures/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/OptionContractsOnFutures/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-der-cof:FuturesContractUnderlying
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/Underlier> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-cof:identity ;
+			owl:someValuesFrom fibo-der-etd-fut:FutureInstrument ;
+		]
+		;
+	rdfs:label "futures contract underlying"@en ;
+	rdfs:comment "QName: NONE:FuturesContractUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/OptionContractsOnFutures/> ;
+	skos:definition "An underlying which is a futures contract."@en ;
+	fibo-fnd-utl-av:explanatoryNote "(not an underlying OF a future instrument)"@en ;
+	.
+
+fibo-der-der-cof:OTCContractOnFuture
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OTCOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-cof:hasUnderlying ;
+			owl:someValuesFrom fibo-der-der-cof:FuturesContractUnderlying ;
+		]
+		;
+	rdfs:label "o t c contract on future"@en ;
+	rdfs:comment "QName: NONE:OTCContractOnFuture" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/OptionContractsOnFutures/> ;
+	skos:definition "An option contract with an underlying futures contract."@en ;
+	.
+
+fibo-der-der-cof:hasUnderlying
+	a owl:ObjectProperty ;
+	rdfs:label "has underlying"@en ;
+	rdfs:comment "QName: NONE:hasUnderlying" ;
+	rdfs:domain fibo-der-der-cof:OTCContractOnFuture ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/OptionContractsOnFutures/> ;
+	rdfs:range fibo-der-der-cof:FuturesContractUnderlying ;
+	.
+
+fibo-der-der-cof:identity
+	a owl:ObjectProperty ;
+	rdfs:label "identity"@en ;
+	rdfs:comment "QName: NONE:identity" ;
+	rdfs:domain fibo-der-der-cof:FuturesContractUnderlying ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/OptionContractsOnFutures/> ;
+	rdfs:range fibo-der-etd-fut:FutureInstrument ;
+	.
+

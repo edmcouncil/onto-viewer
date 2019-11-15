@@ -1,0 +1,46 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/UnsecuredLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/UnsecuredLoans/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-loan-typ-uns: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/UnsecuredLoans/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/UnsecuredLoans/>
+	a owl:Ontology ;
+	rdfs:label "UnsecuredLoans"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology is a companion to the Secured Loans ontology, and defines loans for which there is no security, either as guaranty or as collateral. 
+		Note that for most applications this ontology would not be needed. It is provided in order to provide a conceptually complete account of the kinds of loans there might be. While most people would not lend on this basis, the concept still exists.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/UnsecuredLoans/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-typ-uns:UnsecuredLoan
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:label "unsecured loan"@en ;
+	rdfs:comment "QName: NONE:UnsecuredLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/UnsecuredLoans/> ;
+	.
+
+fibo-loan-typ-uns:secured
+	a owl:DatatypeProperty ;
+	rdfs:label "secured"@en ;
+	rdfs:comment "QName: NONE:secured" ;
+	rdfs:domain fibo-loan-typ-uns:UnsecuredLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/UnsecuredLoans/> ;
+	rdfs:range xsd:boolean ;
+	.
+

@@ -1,0 +1,122 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-lr: <https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/>
+	a owl:Ontology ;
+	rdfs:label "Agents Ontology" ;
+	rdfs:comment "QName: fibo-fnd-aap-agt:" ;
+	dct:abstract 'This ontology defines the concept of autonomous agent for use in other FIBO ontology elements. As defined here, autonomous agent corresponds to what is often referred to as "agent" in software and other systems. It is defined as any entity which is able to act on its own part, and embraces all such things, including people, animals, software agents organizations and all forms of legal persons, although not all of these concepts are elaborated in FIBO as not all are relevant to financial services.' ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-aap-agt" ;
+	sm:filename "Agents.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents.rdf version of this ontology was modified to loosen the range restriction on hasName to rdfs:Literal, facilitating multi-lingual name representation." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents.rdf version of this ontology was modified to support the FIBO 2.0 RFC, primarily with respect to equivalence relationships to LCC." ,
+		"""The https://spec.edmcouncil.org/fibo/ontology/Foundations/20130601/AgentsAndPeople/Agents.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIs (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations."""
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-aap-agt:AutomatedSystem
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-aap-agt:AutonomousAgent ;
+	rdfs:label "automated system" ;
+	rdfs:comment "QName: fibo-fnd-aap-agt:AutomatedSystem" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> ;
+	skos:definition "a system that reduces or eliminates the need for human involvement in order to complete a task." ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.reference.com/technology/automated-system-c85583d0f17a632" ;
+	.
+
+fibo-fnd-aap-agt:AutonomousAgent
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-aap-agt:hasName ;
+		owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+	] ;
+	rdfs:label "autonomous agent" ;
+	rdfs:comment "QName: fibo-fnd-aap-agt:AutonomousAgent" ;
+	sm:directSource "http://www.omg.org/techprocess/meetings/schedule/AMP.html"^^xsd:anyURI ;
+	sm:relatedSpecification "http://www.omg.org/spec/SoaML/"^^xsd:anyURI ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> ;
+	rdfs:seeAlso
+		"http://www.jamesodell.com/WhatIsAnAgent.pdf"^^xsd:anyURI ,
+		"http://www.jamesodell.com/WhyShouldWeCareAboutAgents.pdf"^^xsd:anyURI
+		;
+	skos:definition "An agent is an autonomous individual that can adapt to and interact with its environment." ;
+	fibo-fnd-utl-av:explanatoryNote
+		"""Agents, then, can be software agents, hardware agents, firmware agents, robotic agents, human agents, and so on.  While software developers naturally think of IT systems as being constructed of only software agents, a combination of agent mechanisms might in fact be used from shop-floor manufacturing to warfare systems.  The definition incorporated herein must be sufficiently general to account for these and other uses, such as for describing people and organizations who participate in broader processes and systems, for FIBO, other OMG standards and usage, and in general.
+
+Whether or not you restrict your view of agents to the software variety, most agree that agents deployed for IT systems are not useful without the following three important properties:
+
+(1) Autonomous - an agent is capable of acting without direct external intervention.  Agents have some degree of control over their internal state and can act based on their own experiences. They can also possess their own set of internal responsibilities and processing that enable them to act without any external choreography.  When an agent acts on behalf of (or as a proxy for) some person or thing, its autonomy is expected to embody the goals and policies of the entity that it represents.
+
+(2) Interactive - an agent communicates with the environment and other agents. Agents are interactive entities because they are capable of exchanging rich forms of messages with other entities in their environment.  These messages can support requests for services and other kinds of resources, as well as event detection and notification.  They can be synchronous or asynchronous in nature.  The interaction can also be conversational in nature, such as negotiating contracts, marketplace-style bidding, or simply making a query.
+
+(3) Adaptive - an agent is capable of responding to other agents and/or its environment. Agents can react to messages and events and then respond appropriately.  Agents can be designed to make difficult decisions and even modify their behavior based on their experiences.  They can learn and evolve.""" ,
+		"Note that this does not necessarily imply that an agent is free to act as it sees fit, without constraint. Rather, an autonomous thing in the sense meant here is something which may or may not be subject to controls and constraints but is self-actualizing in its behavior in response to any such constraints. Autonomous things may include human beings, organizations, software agents, robots and animals."
+		;
+	.
+
+fibo-fnd-aap-agt:hasName
+	a owl:DatatypeProperty ;
+	rdfs:label "has name" ;
+	rdfs:comment "QName: fibo-fnd-aap-agt:hasName" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> ;
+	owl:equivalentProperty lcc-lr:hasName ;
+	skos:definition "associates a name, reference name, or appellation with an individual concept" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 639-3 Codes for the representation of names of languages - Part 3: Alpha-3 code for comprehensive coverage of languages, First edition, 2007-02-01" ;
+	.
+
+fibo-fnd-aap-agt:identifies
+	a owl:ObjectProperty ;
+	rdfs:label "identifies" ;
+	rdfs:comment "QName: fibo-fnd-aap-agt:identifies" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> ;
+	owl:equivalentProperty lcc-lr:identifies ;
+	skos:definition "is the relationship between something and that which provides a unique reference for it" ;
+	.
+
+fibo-fnd-aap-agt:isIdentifiedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is identified by" ;
+	rdfs:comment "QName: fibo-fnd-aap-agt:isIdentifiedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> ;
+	owl:equivalentProperty lcc-lr:isIdentifiedBy ;
+	owl:inverseOf fibo-fnd-aap-agt:identifies ;
+	skos:definition "provides a unique identifier for something" ;
+	.
+

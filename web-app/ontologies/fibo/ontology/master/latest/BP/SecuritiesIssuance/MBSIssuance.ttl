@@ -1,0 +1,56 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/MBSIssuance/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/DebtIssuance/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceDocuments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/MBSIssuance/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-bp-iss-dbti: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/DebtIssuance/> .
+@prefix fibo-bp-iss-doc: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceDocuments/> .
+@prefix fibo-bp-iss-mbs: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MBSIssuance/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MBSIssuance/>
+	a owl:Ontology ;
+	rdfs:label "MBSIssuance" ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Ontology of the overall process of issuing mortgage backed securities. These are the process elements that are common to different kinds of MBS issuance (agency and private label)." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/DebtIssuance/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceDocuments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/MBSIssuance/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-bp-iss-mbs:MBSSecuritizationProcess
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-dbti:PoolBackedSecuritySecuritizationProcess ;
+	rdfs:label "m b s securitization process" ;
+	rdfs:comment "QName: NONE:MBSSecuritizationProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MBSIssuance/> ;
+	.
+
+fibo-bp-iss-mbs:ProspectusPart
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-doc:ProvisionalTermsDescription ;
+	rdfs:label "prospectus part" ;
+	rdfs:comment "QName: NONE:ProspectusPart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MBSIssuance/> ;
+	skos:definition "A part or section of a prospectus for a securities issue." ;
+	fibo-fnd-utl-av:explanatoryNote "This may for example be a termsheet, information about tranche breakdown and so on. These are defined as separate information entities in as far as each of these has some specific individual relationship to some other information deliverable, such as a draft of each part which is defined in separate process activities but becomes part of the whole prospectus. Term origin:MBS PoC Reviews" ;
+	.
+
+fibo-bp-iss-mbs:includesDetailsAbout
+	a owl:ObjectProperty ;
+	rdfs:label "includes details about" ;
+	rdfs:comment "QName: NONE:includesDetailsAbout" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MBSIssuance/> ;
+	.
+

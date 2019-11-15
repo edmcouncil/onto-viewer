@@ -1,0 +1,172 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-txn-ecr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> .
+@prefix fibo-fnd-txn-mkt: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-txn-sup: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/>
+	a owl:Ontology ;
+	rdfs:label "MarketTransactions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Defines the concepts for market transactions in general, on any kind of marketplace. 
+		This ontology is not used directly in FIBO content but provides the conceptual underpinnings for securities market transactions.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-mkt:MarketTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:EconomicTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-mkt:consideration ;
+			owl:someValuesFrom fibo-fnd-txn-ecr:EconomicResource ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-mkt:counterparty ;
+			owl:someValuesFrom fibo-fnd-txn-mkt:TransactionCounterparty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-mkt:paymentTerms ;
+			owl:someValuesFrom fibo-fnd-txn-mkt:MarketTransactionPaymentTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-mkt:principal ;
+			owl:someValuesFrom fibo-fnd-txn-mkt:TransactionPrincipal ;
+		]
+		;
+	rdfs:label "market transaction"@en ;
+	rdfs:comment "QName: NONE:MarketTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	skos:definition "Any transaction which defines a supply of some negotiable item in return for some Consideration. The Market Transaction has a Principal and a Counterparty, i.e. it is not symmetrical."@en ;
+	.
+
+fibo-fnd-txn-mkt:MarketTransactionInvoicingTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-rea:EconomicContractTermsSet ;
+	rdfs:label "market transaction invoicing terms"@en ;
+	rdfs:comment "QName: NONE:MarketTransactionInvoicingTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	.
+
+fibo-fnd-txn-mkt:MarketTransactionPaymentTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:EconomicContractTermsSet ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-mkt:governs ;
+			owl:someValuesFrom fibo-fnd-accx-acc:PaymentProcess ;
+		]
+		;
+	rdfs:label "market transaction payment terms"@en ;
+	rdfs:comment "QName: NONE:MarketTransactionPaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	.
+
+fibo-fnd-txn-mkt:TransactionCounterparty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-rea:TransactionParty ;
+	rdfs:label "transaction counterparty"@en ;
+	rdfs:comment "QName: NONE:TransactionCounterparty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	.
+
+fibo-fnd-txn-mkt:TransactionPrincipal
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:TransactionParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:transactsWith ;
+			owl:someValuesFrom fibo-fnd-txn-mkt:TransactionCounterparty ;
+		]
+		;
+	rdfs:label "transaction principal"@en ;
+	rdfs:comment "QName: NONE:TransactionPrincipal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	.
+
+fibo-fnd-txn-mkt:consideration
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:subject ;
+	rdfs:label "consideration"@en ;
+	rdfs:comment "QName: NONE:consideration" ;
+	rdfs:domain fibo-fnd-txn-mkt:MarketTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	rdfs:range fibo-fnd-txn-ecr:EconomicResource ;
+	.
+
+fibo-fnd-txn-mkt:counterparty
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:hasTransactionParty ;
+	rdfs:label "counterparty"@en ;
+	rdfs:comment "QName: NONE:counterparty" ;
+	rdfs:domain fibo-fnd-txn-mkt:MarketTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	rdfs:range fibo-fnd-txn-mkt:TransactionCounterparty ;
+	.
+
+fibo-fnd-txn-mkt:customerTransactsWithVendor
+	a owl:ObjectProperty ;
+	rdfs:label "customer transacts with vendor"@en ;
+	rdfs:comment "QName: NONE:customerTransactsWithVendor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	rdfs:range fibo-fnd-txn-sup:Vendor ;
+	.
+
+fibo-fnd-txn-mkt:governs
+	a owl:ObjectProperty ;
+	rdfs:label "governs"@en ;
+	rdfs:comment "QName: NONE:governs" ;
+	rdfs:domain fibo-fnd-txn-mkt:MarketTransactionPaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	rdfs:range fibo-fnd-accx-acc:PaymentProcess ;
+	.
+
+fibo-fnd-txn-mkt:paymentTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:transactedUnder ;
+	rdfs:label "payment terms"@en ;
+	rdfs:comment "QName: NONE:paymentTerms" ;
+	rdfs:domain fibo-fnd-txn-mkt:MarketTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	rdfs:range fibo-fnd-txn-mkt:MarketTransactionPaymentTerms ;
+	.
+
+fibo-fnd-txn-mkt:principal
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:hasTransactionParty ;
+	rdfs:label "principal"@en ;
+	rdfs:comment "QName: NONE:principal" ;
+	rdfs:domain fibo-fnd-txn-mkt:MarketTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> ;
+	rdfs:range fibo-fnd-txn-mkt:TransactionPrincipal ;
+	.
+

@@ -1,0 +1,171 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-rtd-rtd: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-ind-ir-ir: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/> .
+@prefix fibo-sec-sec-bsk: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/>
+	a owl:Ontology ;
+	rdfs:label "Rate Derivatives Ontology" ;
+	rdfs:comment "QName: fibo-der-rtd-rtd:" ;
+	dct:abstract "This ontology defines concepts that are common to derivatives based on variation in some defined variable, such as an economic rate, an interest rate or an index value." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage <http://www.w3.org/standards/techs/owl#w3c_all> ;
+	sm:copyright
+		"Copyright (c) 2016-2018 EDM Council, Inc." ,
+		"Copyright (c) 2016-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/IND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/>
+		;
+	sm:fileAbbreviation "fibo-der-rtd-rtd" ;
+	sm:filename "RateDerivatives.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-der-rtd-rtd:EconomicRateBasedDerivativeInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-rtd:RateBasedDerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-rtd-rtd:EconomicRateObservable ;
+		]
+		;
+	rdfs:label "economic rate-based derivative instrument" ;
+	rdfs:comment "QName: fibo-der-rtd-rtd:EconomicRateBasedDerivativeInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> ;
+	skos:definition "a rate-based derivative whose underlier is an economic indicator" ;
+	.
+
+fibo-der-rtd-rtd:EconomicRateObservable
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-rtd:RateBasedObservable ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-ind-ei-ei:EconomicIndicator ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "economic rate observable"@en ;
+	rdfs:comment "QName: fibo-der-rtd-rtd:EconomicRateObservable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> ;
+	skos:definition "a rate-based observable that is specifically an economic indicator" ;
+	.
+
+fibo-der-rtd-rtd:InterestRateDerivativeInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-rtd:RateBasedDerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-rtd-rtd:InterestRateObservable ;
+		]
+		;
+	rdfs:label "interest rate derivative instrument" ;
+	rdfs:comment "QName: fibo-der-rtd-rtd:InterestRateDerivativeInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> ;
+	skos:definition "a rate-based derivative whose underlier is an interest rate" ;
+	.
+
+fibo-der-rtd-rtd:InterestRateObservable
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-rtd:RateBasedObservable ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-ind-ir-ir:ReferenceInterestRate ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "interest rate observable" ;
+	rdfs:comment "QName: fibo-der-rtd-rtd:InterestRateObservable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> ;
+	skos:definition "a rate-based observable that is specifically an interest rate" ;
+	.
+
+fibo-der-rtd-rtd:RateBasedDerivativeInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-rtd-rtd:RateBasedObservable ;
+		]
+		;
+	rdfs:label "rate-based derivative instrument" ;
+	rdfs:comment "QName: fibo-der-rtd-rtd:RateBasedDerivativeInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> ;
+	skos:definition "a derivative instrument whose underlier is a non-physical observable rate" ;
+	.
+
+fibo-der-rtd-rtd:RateBasedObservable
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:NonPhysicalUnderlier ,
+		fibo-der-drc-bsc:ObservableValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-sec-sec-bsk:BasketOfIndices
+					fibo-ind-ind-ind:MarketRate
+					fibo-ind-ei-ei:EconomicIndicator
+				) ;
+			] ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "rate-based observable" ;
+	rdfs:comment "QName: fibo-der-rtd-rtd:RateBasedObservable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> ;
+	skos:definition "a non-physical observable value, such as an interest rate, market rate, economic indicator, statistical measure calculated over some collection of indices, or some other rate that is readily observable in the world" ;
+	.
+

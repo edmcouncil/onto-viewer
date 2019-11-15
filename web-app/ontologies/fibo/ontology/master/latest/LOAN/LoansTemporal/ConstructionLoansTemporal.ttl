@@ -1,0 +1,52 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/ConstructionLoansTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansStatus/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/ConstructionLoansTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-tem-cl: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/ConstructionLoansTemporal/> .
+@prefix fibo-loan-tem-sta: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansStatus/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/ConstructionLoansTemporal/>
+	a owl:Ontology ;
+	rdfs:label "ConstructionLoansTemporal"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Temporally sensitive concepts relating to construction loans. 
+		At present this ontology simply defines the basic concept of a snapshot in time for a construction loan. Additional details will need to be added.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansStatus/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/ConstructionLoansTemporal/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-tem-cl:ConstructionLoanSnapshot
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-sta:LoanSnapshotOrStatus ;
+	rdfs:label "construction loan snapshot"@en ;
+	rdfs:comment "QName: NONE:ConstructionLoanSnapshot" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/ConstructionLoansTemporal/> ;
+	skos:definition "Information at a point in time, specific to a Construction Loan."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This covers the "Loan advance to date" amount, which will have a current value on any given day and which will vary over time, as milestones are passed and additional advances drawn down.'@en ;
+	.
+
+fibo-loan-tem-cl:loanAdvanceToDate
+	a owl:ObjectProperty ;
+	rdfs:label "loan advance to date"@en ;
+	rdfs:comment "QName: NONE:loanAdvanceToDate" ;
+	rdfs:domain fibo-loan-tem-cl:ConstructionLoanSnapshot ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/ConstructionLoansTemporal/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The amount of principal advanced to date."@en ;
+	.
+

@@ -1,0 +1,180 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-NorthAmerica/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/CAGovernmentEntitiesAndJurisdictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-AG/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-AS/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BB/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BQ/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BS/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BZ/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CA/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CR/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CU/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-DM/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-DO/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GD/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GL/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GP/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GT/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-HN/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-HT/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-KN/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-KY/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-LC/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MF/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MP/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MX/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-NI/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-PA/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-PM/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-SV/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-TC/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-TT/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-UM/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VC/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VG/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VI/
+# imports: https://www.omg.org/spec/LCC/Countries/UN-M49-RegionCodes/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-NorthAmerica/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-ge-caj: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/NorthAmericanJurisdiction/CAGovernmentEntitiesAndJurisdictions/> .
+@prefix fibo-be-ge-usj: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/> .
+@prefix fibo-bena-all: <https://spec.edmcouncil.org/fibo/ontology/BE/AllBE-NorthAmerica/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-3166-2: <https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/> .
+@prefix lcc-3166-2-ag: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-AG/> .
+@prefix lcc-3166-2-as: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-AS/> .
+@prefix lcc-3166-2-bb: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BB/> .
+@prefix lcc-3166-2-bq: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BQ/> .
+@prefix lcc-3166-2-bs: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BS/> .
+@prefix lcc-3166-2-bz: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BZ/> .
+@prefix lcc-3166-2-ca: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CA/> .
+@prefix lcc-3166-2-cr: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CR/> .
+@prefix lcc-3166-2-cu: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CU/> .
+@prefix lcc-3166-2-dm: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-DM/> .
+@prefix lcc-3166-2-do: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-DO/> .
+@prefix lcc-3166-2-gd: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GD/> .
+@prefix lcc-3166-2-gl: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GL/> .
+@prefix lcc-3166-2-gp: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GP/> .
+@prefix lcc-3166-2-gt: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GT/> .
+@prefix lcc-3166-2-hn: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-HN/> .
+@prefix lcc-3166-2-ht: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-HT/> .
+@prefix lcc-3166-2-jm: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-JM/> .
+@prefix lcc-3166-2-kn: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-KN/> .
+@prefix lcc-3166-2-ky: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-KY/> .
+@prefix lcc-3166-2-lc: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-LC/> .
+@prefix lcc-3166-2-mf: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MF/> .
+@prefix lcc-3166-2-mp: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MP/> .
+@prefix lcc-3166-2-mx: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MX/> .
+@prefix lcc-3166-2-ni: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-NI/> .
+@prefix lcc-3166-2-pa: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-PA/> .
+@prefix lcc-3166-2-pm: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-PM/> .
+@prefix lcc-3166-2-sv: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-SV/> .
+@prefix lcc-3166-2-tc: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-TC/> .
+@prefix lcc-3166-2-tt: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-TT/> .
+@prefix lcc-3166-2-um: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-UM/> .
+@prefix lcc-3166-2-us: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/> .
+@prefix lcc-3166-2-vc: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VC/> .
+@prefix lcc-3166-2-vg: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VG/> .
+@prefix lcc-3166-2-vi: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VI/> .
+@prefix lcc-m49: <https://www.omg.org/spec/LCC/Countries/UN-M49-RegionCodes/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/AllBE-NorthAmerica/>
+	a owl:Ontology ;
+	rdfs:label "Business Entities Domain, North American Extension" ;
+	rdfs:comment "QName: fibo-bena-all:" ;
+	dct:abstract """This ontology provides metadata about the FIBO Business Entities (BE) Domain, which covers defines business concepts that are used for data governance, interoperability, and in regulatory reporting about business entities.
+
+The business scope of the BE ontologies covers a range of business and legal entities that are considered by financial industry firms, regulators and other industry participants to be of relevance in the financial services domain, including:
+ - Legal entities generally
+ - Corporate structure, ownership and control, including primary executive roles for businesses,
+ - Functional entities such as governments and government entities, non-governmental organizations, international organizations, not-for-profit organization, etc.
+ - Concepts specific to corporations, partnerships, private limited companies, sole proprietorships, and trusts.""" ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Business Entities (BE) Domain, North American Extension" ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Nordea Bank AB" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Pinnacle Bank (Morgan Hill, California)" ,
+		"State Street Bank and Trust" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo" ,
+		"Working Ontologist"
+		;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-bena-all" ;
+	sm:filename "AllBE-NorthAmerica.rdf" ;
+	sm:keyword
+		"LEI" ,
+		"business entities" ,
+		"legal entities"
+		;
+	sm:moduleAbbreviation "fibo-be" ;
+	rdfs:seeAlso "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/CAGovernmentEntitiesAndJurisdictions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-AG/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-AS/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BB/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BQ/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BS/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-BZ/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CA/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CR/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CU/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-DM/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-DO/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GD/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GL/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GP/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GT/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-HN/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-HT/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-KN/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-KY/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-LC/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MF/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MP/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-MX/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-NI/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-PA/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-PM/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-SV/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-TC/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-TT/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-UM/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VC/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VG/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-VI/> ,
+		<https://www.omg.org/spec/LCC/Countries/UN-M49-RegionCodes/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-NorthAmerica/> ;
+	fibo-fnd-utl-av:explanatoryNote "The 'all' ontology for BE (North American Extension) is provided for convenience for FIBO users.  This ontology does not add new assertions, but imports most of the Production (Released) ontologies that comprise the FIBO Business Entities (BE) domain, including all of FND but excluding individuals for European governments and jurisdictions, and the related LCC region-specific ontologies. Note that the U.N. M49 Codes do not distinguish North and South America, and thus this ontology defines North America as the landmass north of the Panama-Colombia border (Northern America and Central America from an M49 code perspective), and the islands of the Caribbean (also identified as the Caribbean in the M49 subregion codes).  North American government entities and jurisdictions are provided only for a fraction of these countries and regions in FIBO 2.0, with the anticipation that additional entities will be added over time." ;
+	.
+

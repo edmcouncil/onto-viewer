@@ -1,0 +1,47 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/MetadataFNDMathExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/MetadataFNDMathExt/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-math-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/MetadataFNDMathExt/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/MetadataFNDMathExt/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) MathExt Module" ;
+	rdfs:comment "QName: fibo-fnd-math-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Math Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-fnd-math-mod" ;
+	sm:filename "MetadataFNDMathExt.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/MetadataFNDMathExt/> ;
+	.
+
+fibo-fnd-math-mod:MathExtModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Mathematics" ;
+	rdfs:comment "QName: fibo-fnd-math-mod:MathExtModule" ;
+	dct:abstract "This module contains conceptual ontologies of mathematical concepts including parameters, values, formulae and their parts, and other mathematically primitive concepts." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Mathematics Module" ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-fnd-math" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/MetadataFNDMathExt/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	skos:editorialNote "The concepts in this module are intended to be replaced by concepts in the Analytics ontology in the Utilities module. This material may currently be referenced in Provisional or Extension modules elsewhere. Where possible these references will be replaced by references to substantive content in the Analytics ontology. Where the appropriate concept does not exist, the relevant concepts (classes or properties) may be added to that ontology." ;
+	.
+

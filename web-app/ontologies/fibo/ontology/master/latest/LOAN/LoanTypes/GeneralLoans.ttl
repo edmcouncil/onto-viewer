@@ -1,0 +1,124 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/GeneralLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/GeneralLoans/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-loan-ln-ln: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-loan-typ-gen: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/>
+	a owl:Ontology ;
+	rdfs:label "GeneralLoans"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology is for different kinds of general loan such as motor loans and marine finance.
+		Other types of general loan such as those for motorhomes or other specified purposes would also go in this ontology, which is not complete.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/GeneralLoans/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-typ-gen:AutoLoan
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:label "auto loan"@en ;
+	rdfs:comment "QName: NONE:AutoLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ;
+	skos:definition "A loan specifically for the purpose of automobile purchase."@en ;
+	.
+
+fibo-loan-typ-gen:AutoLoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-ln-ln:LoanContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:setsOutTermsFor ;
+			owl:someValuesFrom fibo-loan-typ-gen:AutoLoan ;
+		]
+		;
+	rdfs:label "auto loan contract"@en ;
+	rdfs:comment "QName: NONE:AutoLoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ;
+	.
+
+fibo-loan-typ-gen:MarineFinance
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:label "marine finance"@en ;
+	rdfs:comment "QName: NONE:MarineFinance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ;
+	skos:definition "A loan for the purchase of a boat or other vessel."@en ;
+	.
+
+fibo-loan-typ-gen:MarineFinanceContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-ln-ln:LoanContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:setsOutTermsFor ;
+			owl:someValuesFrom fibo-loan-typ-gen:MarineFinance ;
+		]
+		;
+	rdfs:label "marine finance contract"@en ;
+	rdfs:comment "QName: NONE:MarineFinanceContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ;
+	skos:definition "Contract embodying the terms under which a loan is advanced for marine finance."@en ;
+	.
+
+fibo-loan-typ-gen:boatHeldAsChattel
+	a owl:DatatypeProperty ;
+	rdfs:label "boat held as chattel"@en ;
+	rdfs:comment "QName: NONE:boatHeldAsChattel" ;
+	rdfs:domain fibo-loan-typ-gen:MarineFinance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the vessel is to be held in ownership as a form of chattel by the lender during the period of the loan."@en ;
+	.
+
+fibo-loan-typ-gen:mooredAt
+	a owl:DatatypeProperty ;
+	rdfs:label "moored at"@en ;
+	rdfs:comment "QName: NONE:mooredAt" ;
+	rdfs:domain fibo-loan-typ-gen:MarineFinance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Textual description (name etc.) of where the vessel is to be moored if it has a permanent mooring place."@en ;
+	.
+
+fibo-loan-typ-gen:percentageAdvanced
+	a owl:ObjectProperty ;
+	rdfs:label "percentage advanced"@en ;
+	rdfs:comment "QName: NONE:percentageAdvanced" ;
+	rdfs:domain fibo-loan-typ-gen:MarineFinance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The percentage of the purchase price advanced as the loan."@en ;
+	.
+
+fibo-loan-typ-gen:residential
+	a owl:DatatypeProperty ;
+	rdfs:label "residential"@en ;
+	rdfs:comment "QName: NONE:residential" ;
+	rdfs:domain fibo-loan-typ-gen:MarineFinance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the boat is intended to be used and is legally able to be used as a place of residence."@en ;
+	.
+

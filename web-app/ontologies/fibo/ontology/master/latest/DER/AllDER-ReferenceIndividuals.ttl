@@ -1,0 +1,73 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AllDER-ReferenceIndividuals/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AllDER/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/SwapsIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/AllSEC-ReferenceIndividuals/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AllDER-ReferenceIndividuals/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-swpind: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> .
+@prefix fibo-derri-all: <https://spec.edmcouncil.org/fibo/ontology/DER/AllDER-ReferenceIndividuals/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/AllDER-ReferenceIndividuals/>
+	a owl:Ontology ;
+	rdfs:label "Derivatives Domain, with Reference Individuals" ;
+	rdfs:comment "QName: fibo-derri-all:" ;
+	dct:abstract "The Derivatives (DER) Domain covers many of the concepts that are common to derivative instruments, including but not limited to options, futures, forwards, swaps, and a wide range of other derivatives. This ontology provides metadata about the Derivatives Domain and its contents." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Derivatives (DER) Domain, with Reference Individuals" ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Bloomberg LP" ,
+		"Citigroup" ,
+		"Commodities Futures Trading Commission (CFTC)" ,
+		"Deutsche Bank" ,
+		"Nordea Bank AB" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Quarule" ,
+		"State Street Bank and Trust" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo" ,
+		"Working Ontologist"
+		;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/SEC/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-derri-all" ;
+	sm:filename "AllDER-ReferenceIndividuals.rdf" ;
+	sm:keyword
+		"derivative instruments" ,
+		"options, futures, rights instruments, swaps"
+		;
+	sm:moduleAbbreviation "fibo-der" ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AllDER/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/SwapsIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/AllSEC-ReferenceIndividuals/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AllDER-ReferenceIndividuals/> ;
+	fibo-fnd-utl-av:explanatoryNote "The 'all' ontology for DER is provided for convenience for FIBO users.  This ontology does not add new assertions, but imports all of the Production (Released) ontologies that comprise the FIBO Foundations (FND), Business Entities (BE), Financial Business and Commerce (FBC), Indices and Indicators (IND), Securities (SEC), and Derivatives (DER) domains, including all individuals." ;
+	.
+

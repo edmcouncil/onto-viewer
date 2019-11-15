@@ -1,0 +1,461 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/SwapsIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/Corporations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/CorporateControl/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/PrivateLimitedCompanies/PrivateLimitedCompanies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntitiesIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USRegulatoryAgencies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CA/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/
+# imports: https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/
+# imports: https://www.omg.org/spec/LCC/Languages/ISO639-2-LanguageCodes/
+# imports: https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/SwapsIndividuals/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-corp-corp: <https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/Corporations/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-be-le-fbo: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix fibo-be-le-lei: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities/> .
+@prefix fibo-be-oac-cctl: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/CorporateControl/> .
+@prefix fibo-be-plc-plc: <https://spec.edmcouncil.org/fibo/ontology/BE/PrivateLimitedCompanies/PrivateLimitedCompanies/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-drc-swp: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> .
+@prefix fibo-der-drc-swpind: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> .
+@prefix fibo-fbc-fct-breg: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-fct-usfsind: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntitiesIndividuals/> .
+@prefix fibo-fbc-fct-usjrga: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USRegulatoryAgencies/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-3166-1: <https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> .
+@prefix lcc-3166-2: <https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/> .
+@prefix lcc-3166-2-us: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/> .
+@prefix lcc-639-1: <https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/> .
+@prefix lcc-639-2: <https://www.omg.org/spec/LCC/Languages/ISO639-2-LanguageCodes/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix lcc-lr: <https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/>
+	a owl:Ontology ;
+	rdfs:label "Swaps Individuals Ontology" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:" ;
+	dct:abstract "This ontology defines indiividuals that represent swaps repositories and intermediaries, including and related schemes, registries, and authorities." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/SEC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-der-drc-swpind" ;
+	sm:filename "SwapsIndividuals.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/Corporations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/CorporateControl/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/PrivateLimitedCompanies/PrivateLimitedCompanies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntitiesIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USRegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-CA/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-US/> ,
+		<https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/> ,
+		<https://www.omg.org/spec/LCC/Languages/ISO639-2-LanguageCodes/> ,
+		<https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/SwapsIndividuals/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-der-drc-swpind:BSDRBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "BSDR LLC business entity identifier" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:BSDRBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the Delaware Division of Corporations business entity identifier for BSDR LLC" ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usjrga:DelawareCorporationsRegulator ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-der-drc-swpind:BSDRLLC-US-DE ;
+	fibo-fnd-rel-rel:hasTag "5202500" ;
+	.
+
+fibo-der-drc-swpind:BSDRDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "BSDR date established" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:BSDRDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the date that BSDR LLC was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2012-08-22" ;
+	.
+
+fibo-der-drc-swpind:BSDRHeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-fbo:RegisteredAddress ,
+		fibo-fbc-fct-breg:RegistrationAddress
+		;
+	rdfs:label "BSDR LLC headquarters address" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:BSDRHeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the headquarters address for BSDR LLC" ;
+	fibo-fbc-fct-breg:hasAddressLine1 "731 Lexington Avenue" ;
+	fibo-fbc-fct-breg:hasCity "New York" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-breg:hasPostalCode "10022" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:NewYork ;
+	.
+
+fibo-der-drc-swpind:BSDRLLC-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-plc-plc:PrivateCompanyWithLimitedLiability
+		;
+	rdfs:label "BSDR LLC US-DE" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:BSDRLLC-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	rdfs:seeAlso <http://www.bloombergsdr.com/> ;
+	skos:definition "individual representing the BSDR LLC legal entity that is a Delaware Limited Liability Company" ;
+	fibo-be-oac-cctl:hasDomesticUltimateParent fibo-fbc-fct-usfsind:BloombergLP ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-der-drc-swpind:BSDRHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-der-drc-swpind:BSDRDateEstablished ;
+	fibo-fnd-aap-agt:isIdentifiedBy fibo-der-drc-swpind:BSDRBusinessEntityIdentifier ;
+	fibo-fnd-rel-rel:hasLegalName "BSDR LLC" ;
+	.
+
+fibo-der-drc-swpind:BloombergSDR
+	a
+		owl:NamedIndividual ,
+		fibo-der-drc-swp:SwapDataRepository
+		;
+	rdfs:label "Bloomberg SDR" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:BloombergSDR" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the BSDR swap data repository" ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usjrga:CommoditiesFuturesAndDerivativesRegulator ;
+	fibo-fnd-rel-rel:hasIdentity fibo-der-drc-swpind:BSDRLLC-US-DE ;
+	fibo-fnd-utl-av:abbreviation "BSDR" ;
+	.
+
+fibo-der-drc-swpind:ChicagoMercantileExchange
+	a
+		owl:NamedIndividual ,
+		fibo-der-drc-bsc:DesignatedContractMarket ,
+		fibo-der-drc-swp:SwapDataRepository ,
+		fibo-fbc-fct-fse:SelfRegulatingOrganization
+		;
+	rdfs:label "Chicago Mercantile Exchange" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ChicagoMercantileExchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the Chicago Mercantile Exchange, established in 1848 as the world's first futures exchange based in Chicago" ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usjrga:CommoditiesFuturesAndDerivativesRegulator ;
+	fibo-fnd-rel-rel:hasIdentity fibo-der-drc-swpind:ChicagoMercantileExchangeInc-US-DE ;
+	fibo-fnd-utl-av:abbreviation "CME" ;
+	.
+
+fibo-der-drc-swpind:ChicagoMercantileExchangeBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "Chicago Mercantile Exchange (CME) business entity identifier" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ChicagoMercantileExchangeBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the Delaware Division of Corporations business entity identifier for Chicago Mercantile Exchange, Inc." ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usjrga:DelawareCorporationsRegulator ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-der-drc-swpind:ChicagoMercantileExchangeInc-US-DE ;
+	fibo-fnd-rel-rel:hasTag "3151025" ;
+	.
+
+fibo-der-drc-swpind:ChicagoMercantileExchangeDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "Chicago Mercantile Exchange (CME) date established" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ChicagoMercantileExchangeDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the date that Chicago Mercantile Exchange (CME) was established as a Delaware Corporation" ;
+	fibo-fnd-dt-fd:hasDateValue "1999-12-30" ;
+	.
+
+fibo-der-drc-swpind:ChicagoMercantileExchangeHeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-fbo:RegisteredAddress ,
+		fibo-fbc-fct-breg:RegistrationAddress
+		;
+	rdfs:label "Chicago Mercantile Exchange (CME) headquarters address" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ChicagoMercantileExchangeHeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the headquarters address for Chicago Mercantile Exchange (CME)" ;
+	fibo-fbc-fct-breg:hasAddressLine1 "20 South Wacker Drive" ;
+	fibo-fbc-fct-breg:hasCity "Chicago" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-breg:hasPostalCode "60606" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:Illinois ;
+	.
+
+fibo-der-drc-swpind:ChicagoMercantileExchangeInc-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-cb:StockCorporation
+		;
+	rdfs:label "Chicago Mercantile Exchange, Inc. US-DE" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ChicagoMercantileExchangeInc-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	rdfs:seeAlso <http://www.cmegroup.com/company/cme.html> ;
+	skos:definition "individual representing the Chicago Mercantile Exchange legal entity that is a Delaware Corporation" ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-der-drc-swpind:ChicagoMercantileExchangeHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-der-drc-swpind:ChicagoMercantileExchangeDateEstablished ;
+	fibo-fnd-aap-agt:isIdentifiedBy fibo-der-drc-swpind:ChicagoMercantileExchangeBusinessEntityIdentifier ;
+	fibo-fnd-rel-rel:hasLegalName "Chicago Mercantile Exchange, Inc." ;
+	.
+
+fibo-der-drc-swpind:DTCCDataRepository
+	a
+		owl:NamedIndividual ,
+		fibo-der-drc-swp:SwapDataRepository
+		;
+	rdfs:label "DTCC Data Repository" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:DTCCDataRepository" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the DTCC Data Repository" ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usjrga:CommoditiesFuturesAndDerivativesRegulator ;
+	fibo-fnd-rel-rel:hasIdentity fibo-der-drc-swpind:DTCCDataRepositoryLLC-US-NY ;
+	fibo-fnd-utl-av:abbreviation "DDR" ;
+	.
+
+fibo-der-drc-swpind:DTCCDataRepositoryBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "business entity identifier for DTCC Data Repository (U.S) LLC" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:DTCCDataRepositoryBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the New York State Division of Corporations business entity identifier for DTCC Data Repository (U.S.) LLC" ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usjrga:NewYorkCorporationsRegulator ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:NewYorkBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-der-drc-swpind:DTCCDataRepositoryLLC-US-NY ;
+	fibo-fnd-rel-rel:hasTag "4156912" ;
+	.
+
+fibo-der-drc-swpind:DTCCDataRepositoryDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "DTCC Data Repository (U.S) LLC date established" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:DTCCDataRepositoryDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the date that DTCC Data Repository (U.S) LLC was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2011-10-24" ;
+	.
+
+fibo-der-drc-swpind:DTCCDataRepositoryHeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-fbo:RegisteredAddress ,
+		fibo-fbc-fct-breg:RegistrationAddress
+		;
+	rdfs:label "DTCC Data Repository (U.S) LLC headquarters address" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:DTCCDataRepositoryHeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the headquarters address for DTCC Data Repository (U.S) LLC" ;
+	fibo-fbc-fct-breg:hasAddressLine1 "55 Water Street" ;
+	fibo-fbc-fct-breg:hasCity "New York" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-breg:hasPostalCode "10041" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:NewYork ;
+	.
+
+fibo-der-drc-swpind:DTCCDataRepositoryLLC-US-NY
+	a
+		owl:NamedIndividual ,
+		fibo-be-plc-plc:PrivateCompanyWithLimitedLiability
+		;
+	rdfs:label "DTCC Data Repository (U.S) LLC US-NY" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:DTCCDataRepositoryLLC-US-NY" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	rdfs:seeAlso <http://www.dtcc.com/about/businesses-and-subsidiaries/ddr-us> ;
+	skos:definition "individual representing the DTCC Data Repository (U.S) LLC legal entity that is a New York Limited Liability Company" ;
+	fibo-be-oac-cctl:hasDomesticUltimateParent fibo-fbc-fct-usfsind:DepositoryTrustAndClearingCorporation ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-der-drc-swpind:DTCCDataRepositoryHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-der-drc-swpind:DTCCDataRepositoryDateEstablished ;
+	fibo-fnd-aap-agt:isIdentifiedBy fibo-der-drc-swpind:DTCCDataRepositoryBusinessEntityIdentifier ;
+	fibo-fnd-rel-rel:hasLegalName "DTCC Data Repository (U.S) LLC" ;
+	.
+
+fibo-der-drc-swpind:ICETradeVault
+	a
+		owl:NamedIndividual ,
+		fibo-der-drc-swp:SwapDataRepository
+		;
+	rdfs:label "ICE Trade Vault" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ICETradeVault" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the ICE Trade Vault" ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usjrga:CommoditiesFuturesAndDerivativesRegulator ;
+	fibo-fnd-rel-rel:hasIdentity fibo-der-drc-swpind:ICETradeVaultLLC-US-DE ;
+	.
+
+fibo-der-drc-swpind:ICETradeVaultLLC-US-DE
+	a
+		owl:NamedIndividual ,
+		fibo-be-plc-plc:PrivateCompanyWithLimitedLiability
+		;
+	rdfs:label "ICE Trade Vault, LLC US-DE" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ICETradeVaultLLC-US-DE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	rdfs:seeAlso <https://www.icetradevault.com/> ;
+	skos:definition "individual representing the ICE Trade Vault, LLC legal entity that is a Delaware Limited Liability Company" ;
+	fibo-be-oac-cctl:hasDomesticUltimateParent fibo-fbc-fct-usfsind:IntercontinentalExchange ;
+	fibo-fbc-fct-breg:hasHeadquartersAddress fibo-der-drc-swpind:ICETradeVaultLLCHeadquartersAddress ;
+	fibo-fbc-fct-fse:hasDateEstablished fibo-der-drc-swpind:ICETradeVaultLLCDateEstablished ;
+	fibo-fnd-aap-agt:isIdentifiedBy fibo-der-drc-swpind:ICETradeVaultLLCBusinessEntityIdentifier ;
+	fibo-fnd-rel-rel:hasLegalName "ICE Trade Vault, LLC" ;
+	.
+
+fibo-der-drc-swpind:ICETradeVaultLLCBusinessEntityIdentifier
+	a
+		owl:NamedIndividual ,
+		fibo-be-corp-corp:RegistrationIdentifier
+		;
+	rdfs:label "business entity identifier for ICE Trade Vault, LLC" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ICETradeVaultLLCBusinessEntityIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the Delaware Division of Corporations business entity identifier for ICE Trade Vault, LLC" ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usjrga:DelawareCorporationsRegulator ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usjrga:DelawareBusinessEntitiesRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-der-drc-swpind:ICETradeVaultLLC-US-DE ;
+	fibo-fnd-rel-rel:hasTag "4960384" ;
+	.
+
+fibo-der-drc-swpind:ICETradeVaultLLCDateEstablished
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:Date
+		;
+	rdfs:label "ICE Trade Vault, LLC date established" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ICETradeVaultLLCDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the date that ICE Trade Vault, LLC was established" ;
+	fibo-fnd-dt-fd:hasDateValue "2011-03-28" ;
+	.
+
+fibo-der-drc-swpind:ICETradeVaultLLCHeadquartersAddress
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-fbo:RegisteredAddress ,
+		fibo-fbc-fct-breg:RegistrationAddress
+		;
+	rdfs:label "ICE Trade Vault, LLC headquarters address" ;
+	rdfs:comment "QName: fibo-der-drc-swpind:ICETradeVaultLLCHeadquartersAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ;
+	skos:definition "individual representing the headquarters address for ICE Trade Vault, LLC" ;
+	fibo-fbc-fct-breg:hasAddressLine1 "5660 New Northside Drive" ;
+	fibo-fbc-fct-breg:hasCity "Atlanta" ;
+	fibo-fbc-fct-breg:hasCountry lcc-3166-1:UnitedStates ;
+	fibo-fbc-fct-breg:hasPostalCode "30328" ;
+	fibo-fbc-fct-breg:hasSubdivision lcc-3166-2-us:Georgia ;
+	.
+
+<https://www.gleif.org/lei/5493006SPIZKPPCPBB70>
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-lei:LegalEntityIdentifier
+		;
+	rdfs:label "BSDR LLC legal entity identifier" ;
+	skos:definition "individual representing the legal entity identifier for BSDR LLC" ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usfsind:GlobalMarketsEntityIdentifierRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-der-drc-swpind:BSDRLLC-US-DE ;
+	fibo-fnd-rel-rel:hasTag "5493006SPIZKPPCPBB70" ;
+	.
+
+<https://www.gleif.org/lei/549300H9ZM7RDBM87W85>
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-lei:LegalEntityIdentifier
+		;
+	rdfs:label "DTCC Data Repository (U.S) LLC legal entity identifier" ;
+	skos:definition "individual representing the legal entity identifier for DTCC Data Repository (U.S) LLC" ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usfsind:GlobalMarketsEntityIdentifierRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-der-drc-swpind:DTCCDataRepositoryLLC-US-NY ;
+	fibo-fnd-rel-rel:hasTag "549300H9ZM7RDBM87W85" ;
+	.
+
+<https://www.gleif.org/lei/549300KE78SX8RVDNO58>
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-lei:LegalEntityIdentifier
+		;
+	rdfs:label "ICE Trade Vault, LLC legal entity identifier" ;
+	skos:definition "individual representing the legal entity identifier for ICE Trade Vault, LLC" ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usfsind:GlobalMarketsEntityIdentifierRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-der-drc-swpind:ICETradeVaultLLC-US-DE ;
+	fibo-fnd-rel-rel:hasTag "549300KE78SX8RVDNO58" ;
+	.
+
+<https://www.gleif.org/lei/SNZ2OJLFK8MNNCLQOF39>
+	a
+		owl:NamedIndividual ,
+		fibo-be-le-lei:LegalEntityIdentifier
+		;
+	rdfs:label "Chicago Mercantile Exchange, Inc. legal entity identifier" ;
+	skos:definition "individual representing the legal entity identifier for Chicago Mercantile Exchange, Inc." ;
+	fibo-fbc-fct-ra:isRegisteredIn fibo-fbc-fct-usfsind:GlobalMarketsEntityIdentifierRegistry ;
+	fibo-fnd-aap-agt:identifies fibo-der-drc-swpind:ChicagoMercantileExchangeInc-US-DE ;
+	fibo-fnd-rel-rel:hasTag "SNZ2OJLFK8MNNCLQOF39" ;
+	.
+

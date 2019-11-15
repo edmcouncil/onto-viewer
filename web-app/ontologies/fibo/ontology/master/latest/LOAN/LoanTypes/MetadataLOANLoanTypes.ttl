@@ -1,0 +1,53 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/MetadataLOANLoanTypes/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/MetadataLOANLoanTypes/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-loan-typ-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MetadataLOANLoanTypes/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MetadataLOANLoanTypes/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Loans (LOAN) LoanTypes Module" ;
+	rdfs:comment "QName: fibo-loan-typ-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the LOAN Loan Types Module." ;
+	dct:issued "2018-06-30T18:00:00"^^xsd:dateTime ;
+	dct:license sm:MITLicense ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-loan-typ-mod" ;
+	sm:filename "MetadataLOANLoanTypes.rdf" ;
+	owl:imports <http://www.omg.org/techprocess/ab/SpecificationMetadata/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/LOAN/LoanTypes/MetadataLOANLoanTypes/> ;
+	.
+
+fibo-loan-typ-mod:LoanTypesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Loan Types" ;
+	rdfs:comment "QName: fibo-loan-typ-mod:LoanTypesModule" ;
+	dct:abstract "This module contains ontologies of concepts descriptive of a range of types of loans, including secured and unsecured, corporate and personal, loans differentiated by purpose and their differentiating characteristics." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CommercialLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/PersonalLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/StudentLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/UnsecuredLoans/>
+		;
+	dct:title "FIBO Loans - Loan Types Module" ;
+	sm:moduleAbbreviation "fibo-loan-typ" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MetadataLOANLoanTypes/> ;
+	.
+

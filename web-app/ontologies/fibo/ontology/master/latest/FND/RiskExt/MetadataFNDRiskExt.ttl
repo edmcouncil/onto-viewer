@@ -1,0 +1,47 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-risk-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/MetadataFNDRiskExt/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/MetadataFNDRiskExt/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) RiskExt Module" ;
+	rdfs:comment "QName: fibo-fnd-risk-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Risk Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-fnd-risk-mod" ;
+	sm:filename "MetadataFNDRiskExt.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/> ;
+	.
+
+fibo-fnd-risk-mod:RiskExtModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Risk" ;
+	rdfs:comment "QName: fibo-fnd-risk-mod:RiskExtModule" ;
+	dct:abstract "This module contains an ontology of risk concepts including the popular basic risk equation of 'Risk equals probability x impact of some event' along with extensions of these primitive risk concepts in the financial risk space, such as credit risk." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Risk Module" ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-fnd-risk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/MetadataFNDRiskExt/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	skos:editorialNote "The content in this module is original conceptual content and does not extend any other module. There is currently no other module elsewhere in FIBO which replaces this material." ;
+	.
+

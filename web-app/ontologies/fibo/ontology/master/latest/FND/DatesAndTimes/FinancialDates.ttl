@@ -1,0 +1,1050 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-plc-loc: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/>
+	a owl:Ontology ;
+	rdfs:label "Financial Dates Ontology" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:" ;
+	dct:abstract "This ontology provides definitions of date and schedule concepts for use in other FIBO ontologies." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2019 EDM Council, Inc." ,
+		"Copyright (c) 2014-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-dt-fd" ;
+	sm:filename "FinancialDates.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/ version of this ontology was revised by the FIBO 2.0 RFC in order to introduce the definition of a time instant, to eliminate a reasoning issue with relative dates, and remove a circular dependency inadvertently incorporated in the ontology with a FIBO FND 1.2 modification." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/ version of this ontology was revised by the FIBO FND 1.2 RTF in order to introduce the definition of a time interval, which is a location, to ground some of the concepts such as a date period, and duration as well as to support the definition of business recurrence intervals for use in parametric schedules for securities." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/ version of this ontology was revised to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/ version of this ontology was revised to introduce a composite date datatype to allow for cases whereby the representation of a date for certain purposes, such as GLEIF LEI data, is inconsistent, and to facilitate mapping FIBO to multiple data sources in user environments." ,
+		"""This ontology was added to Foundations in advance of the December 2014 Long Beach meeting in support of the SEC specification.  It is also needed to provide temporal relationships for Ownership and Control.
+
+These three ontologies are designed for use together:
+
+   * FinancialDates  -- financial Dates and Schedules
+   * BusinessDates -- business day adjustments
+   * Occurrences    -- occurrences (events) and kinds of occurrences
+
+They are modularized this way to minimize the ontological committments that are imposed upon ontologies that rely upon them.  Ontologies can import FinancialDates alone, or FinancialDates + BusinessDates, or FinancialDates + Occurrences, or all three together."""
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-arr-arr:hasObservedDateTime
+	a owl:DatatypeProperty ;
+	rdfs:range fibo-fnd-dt-fd:CombinedDateTime ;
+	.
+
+fibo-fnd-dt-fd:AdHocSchedule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:Schedule ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-fnd-dt-fd:AdHocScheduleEntry ;
+		]
+		;
+	rdfs:label "ad hoc schedule" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:AdHocSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a schedule that consists of (comprises) AdHocScheduleEntries, each of which specifies a date" ;
+	fibo-fnd-utl-av:usageNote "Other ontologies can extend AdHocSchedule and/or AdHocScheduleEntry as needed to relate the date to something. In particular, the Occurrences ontology extends AdHocScheduleEntry to associate an OccurrenceKind with each entry. The intended meaning is that an Occurrence of the OccurrenceKind happens on the corresponding Date." ;
+	.
+
+fibo-fnd-dt-fd:AdHocScheduleEntry
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-dt-fd:hasDate ;
+		owl:onClass fibo-fnd-dt-fd:Date ;
+		owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+	] ;
+	rdfs:label "ad hoc schedule entry" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:AdHocScheduleEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "an entry, including a date, among multiple ad hoc schedule entries that jointly make up an AdHocSchedule" ;
+	fibo-fnd-utl-av:usageNote
+		"Other ontologies can extend AdHocScheduleEntry as needed. In particular, the Occurrences ontology extends AdHocScheduleEntry to consist of occurrences (events) of a given OccurrenceKind. The meaning is that an ad hoc schedule entry comprises a date and an event which is scheduled to occur on that date; in other words Occurrence of the OccurrenceKind should happen on the Date of the OccurrenceKind. Either reified dates or data values for dates can be used, as appropriate." ,
+		"""The Date of an AdHocScheduleEntry can be an ExplicitDate or any kind of CalculatedDate, such as:
+
+* An OccurrenceBasedDate -- a Date that itself is defined by an Occurrence (see the Occurrences ontology)
+* A RelativeDate - a Date relative to another Date, such as T+3
+* A SpecifiedDate - a Date that is defined by an arbitrary rule"""
+		;
+	.
+
+fibo-fnd-dt-fd:CalculatedDate
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:Date ;
+	rdfs:label "calculated date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:CalculatedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	owl:disjointWith fibo-fnd-dt-fd:ExplicitDate ;
+	skos:definition "a date that is or will be calculated in some way" ;
+	fibo-fnd-utl-av:explanatoryNote "The hasDateValue property of a CalculatedDate is not set until the Date is calculated.  Since the calculation may depend upon future events that may or may not ever happen, the hasDateValue property may never be set." ;
+	.
+
+fibo-fnd-dt-fd:CalendarMonth
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:CalendarPeriod
+		;
+	rdfs:label "calendar month" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:CalendarMonth" ;
+	sm:normativeReference "ISO 8601, clause 2.2.11" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval resulting from the division of a calendar year in 12 time intervals, each with a specific name and containing a specific number of calendar days" ;
+	.
+
+fibo-fnd-dt-fd:CalendarPeriod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:TimeInterval ;
+	rdfs:label "calendar period" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:CalendarPeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "an enumeration that indicates whether a CalendarSpecifiedDate is figured with respect to a calendar week, a calendar month, a calendar quarter, or a calendar year" ;
+	skos:editorialNote """The terms 'calendar xxx' are intended to reinforce that these are periods on a calendar, not durations. 
+
+For example, a calendar year always starts on a January 1 and ends on a December 31. The term 'calendar year' does not mean the same thing as  a duration (an amount of time) of 1 year, nor can a calendar year start on any arbitrary day of a year.  For example, a calendar year never starts on September 1.
+
+Similar points apply to other kinds of calendar periods, such as calendar week, calendar month, and calendar quarter.""" ;
+	.
+
+fibo-fnd-dt-fd:CalendarQuarter
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:CalendarPeriod
+		;
+	rdfs:label "calendar quarter" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:CalendarQuarter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval of 3 months, starting on January 1, April 1, July 1, or October 1" ;
+	.
+
+fibo-fnd-dt-fd:CalendarSpecifiedInterval
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:RecurrenceInterval ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasCalendarPeriod ;
+			owl:onClass fibo-fnd-dt-fd:CalendarPeriod ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasTimeDirection ;
+			owl:onClass fibo-fnd-dt-fd:TimeDirection ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasOrdinalNumber ;
+			owl:onDataRange xsd:integer ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "calendar specified interval" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:CalendarSpecifiedInterval" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	owl:disjointWith fibo-fnd-dt-fd:ExplicitRecurrenceInterval ;
+	skos:definition """a RecurrenceInterval that is specified as the nth day of some CalendarPeriod (such as a calendar month), and a TimeDirection (forward from the beginning of the month, or backwards from the end).
+
+The nth day is an ordinal number, not a cardinal number. '1' means the first day of the calendar period.""" ;
+	skos:example
+		"The 15th day of each calendar month." ,
+		"The last day of each quarter, specified as RelativeDay 1, and TimeDirection set to FromEnd."
+		;
+	.
+
+fibo-fnd-dt-fd:CalendarWeek
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:CalendarPeriod
+		;
+	rdfs:label "calendar week" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:CalendarWeek" ;
+	sm:normativeReference "ISO 8601, clause 2.2.8" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval of seven calendar days starting on a Monday" ;
+	.
+
+fibo-fnd-dt-fd:CalendarYear
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:CalendarPeriod
+		;
+	rdfs:label "calendar year" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:CalendarYear" ;
+	sm:normativeReference "ISO 8601 clause 2.2.13" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "cyclic time interval in a calendar which is required for one revolution of the Earth around the Sun and approximated to an integral number of calendar days; a year in the Gregorian calendar" ;
+	.
+
+fibo-fnd-dt-fd:CombinedDateTime
+	a rdfs:Datatype ;
+	rdfs:label "combined date time" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:CombinedDateTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	owl:equivalentClass [
+		a rdfs:Datatype ;
+		owl:unionOf (
+			xsd:string
+			xsd:dateTime
+			xsd:dateTimeStamp
+		) ;
+	] ;
+	skos:definition "datatype that maps to several base types for dates and times, providing representation options where needed" ;
+	skos:scopeNote "There are many cases where the representation of a date may or may not include a time, and where the underlying data representation varies.  This composite datatype should only be used in cases where a standard representation using one of the options in the union for date or date and time value specification does not work." ;
+	fibo-fnd-utl-av:usageNote "Valid values must use the ISO 8601 representation for a date, or the corresponding XML Schema Datatypes representation for a date and time, or date and time including the time zone." ;
+	.
+
+fibo-fnd-dt-fd:Date
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:TimeInstant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDateValue ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:string ;
+		]
+		;
+	rdfs:label "date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Date" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a calendar day on some calendar" ;
+	fibo-fnd-utl-av:usageNote "A Date may or may not have a value, and may be explicit or calculated. A Date that has a value is one that is either explicitly set as a literal when it is created, or is some form of CalculatedDate.  In an instance of Date, the existence of the 'hasDateValue' property both indicates that the Date is known, and gives the value of the Date. A Date that does not have a value is one that is some form of CalculatedDate, in which the actual date has not (yet) been established." ;
+	.
+
+fibo-fnd-dt-fd:DatePeriod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:TimeInterval ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasEndDate ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasStartDate ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDuration ;
+			owl:onClass fibo-fnd-dt-fd:Duration ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "date period" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:DatePeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a time span over one or more calendar days, defined by at least two of three properties: (1) a start date, (2) an end date, and (3) a date period (duration); if more than one of these properties is missing, the DatePeriod is invalid" ;
+	fibo-fnd-utl-av:usageNote "A DatePeriod is unknown if either the startDate or the endDate has no value. If a DatePeriod is unknown, then the duration should either be omitted or unknown (have no value)." ;
+	.
+
+fibo-fnd-dt-fd:DateTime
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:TimeInstant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDateTimeValue ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:dateTime ;
+		]
+		;
+	rdfs:label "date time" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:DateTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a combination of a date and a time, without a time zone" ;
+	fibo-fnd-utl-av:usageNote
+		"'hasDateTimeValue' is omitted if the DateTime is not (yet) known." ,
+		"Use DateTime for the combination of a Date and a time, without a time zone. Use DateTimeStamp for the combination of a Date and a time and a time zone."
+		;
+	.
+
+fibo-fnd-dt-fd:DateTimeStamp
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:TimeInstant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDateTimeStampValue ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:dateTimeStamp ;
+		]
+		;
+	rdfs:label "date time stamp" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:DateTimeStamp" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a combination of a date, a time, and a time zone" ;
+	fibo-fnd-utl-av:synonym "time stamp" ;
+	fibo-fnd-utl-av:usageNote
+		"'hasDateTimeStampValue' is omitted if the DateTimeStamp is not (yet) established." ,
+		"Use DateTimeStamp when the time stamp includes a time zone field. Use DateTime for the combination of a Date and a time, without a time zone."
+		;
+	.
+
+fibo-fnd-dt-fd:Duration
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:TimeInterval ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDurationValue ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:string ;
+		]
+		;
+	rdfs:label "duration" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Duration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "an interval of time of some specific length" ;
+	fibo-fnd-utl-av:usageNote "The 'hasDurationValue' property is absent if the duration is not (yet) known." ;
+	.
+
+fibo-fnd-dt-fd:ExplicitDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:Date ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDateValue ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "explicit date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:ExplicitDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a date in which the 'hasDateValue' property is required" ;
+	.
+
+fibo-fnd-dt-fd:ExplicitDatePeriod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:DatePeriod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasEndDate ;
+			owl:onClass fibo-fnd-dt-fd:ExplicitDate ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasStartDate ;
+			owl:onClass fibo-fnd-dt-fd:ExplicitDate ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDuration ;
+			owl:onClass fibo-fnd-dt-fd:ExplicitDuration ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "explicit date period" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:ExplicitDatePeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a date period for which the start date, end date, and duration are all explicit" ;
+	fibo-fnd-utl-av:usageNote "As with DatePeriod, any one of {start date, end date, duration} may be omitted because the missing property can be inferred from the other two." ;
+	.
+
+fibo-fnd-dt-fd:ExplicitDuration
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:Duration ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDurationValue ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "explicit duration" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:ExplicitDuration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a duration for which the 'hasDurationValue' property must be set" ;
+	fibo-fnd-utl-av:explanatoryNote "This class is used when a duration is guaranteed to be known when it is created." ;
+	.
+
+fibo-fnd-dt-fd:ExplicitRecurrenceInterval
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:RecurrenceInterval ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDurationValue ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "explicit recurrence interval" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:ExplicitRecurrenceInterval" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a recurrence interval defined via an explicit duration" ;
+	.
+
+fibo-fnd-dt-fd:Friday
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeInterval
+		;
+	rdfs:label "Friday" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Friday" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval that has duration 1 day and that meets a Saturday" ;
+	.
+
+fibo-fnd-dt-fd:FromEnd
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeDirection
+		;
+	rdfs:label "from the end" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:FromEnd" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "The CalendarSpecifiedDate is the nth date from the end of a calendar period." ;
+	skos:example "Two days before the end of a calendar month." ;
+	.
+
+fibo-fnd-dt-fd:FromStart
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeDirection
+		;
+	rdfs:label "from the start" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:FromStart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "The CalendarSpecifiedDate is the nth day from the beginning of a calendar period." ;
+	skos:example "The first day of a calendar quarter. (The offsetDay is zero.)" ;
+	.
+
+fibo-fnd-dt-fd:Monday
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeInterval
+		;
+	rdfs:label "Monday" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Monday" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval that has duration 1 day and that meets a Tuesday" ;
+	.
+
+fibo-fnd-dt-fd:RecurrenceInterval
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:TimeInterval ;
+	rdfs:label "recurrence interval" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:RecurrenceInterval" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a time interval that is consistent between elements of a regular schedule" ;
+	fibo-fnd-utl-av:synonym "frequency" ;
+	.
+
+fibo-fnd-dt-fd:RegularSchedule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:Schedule ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasFinalStub ;
+			owl:onClass fibo-fnd-dt-fd:ScheduleStub ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasInitialStub ;
+			owl:onClass fibo-fnd-dt-fd:ScheduleStub ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasCount ;
+			owl:someValuesFrom xsd:positiveInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasRecurrenceInterval ;
+			owl:someValuesFrom fibo-fnd-dt-fd:RecurrenceInterval ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasRecurrenceStartDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		]
+		;
+	rdfs:label "regular schedule" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:RegularSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a schedule whose time intervals recur regularly" ;
+	skos:editorialNote "The BusinessDates ontology extends 'RegularSchedule' with an optional BusinessDayAdjustment that specifies what should happen if a scheduled date falls on a weekend or a holiday." ;
+	skos:example
+		"""A 30 year mortgage is payable monthly on the 10th of the month, starting July 2015. The mortgage is issued on June 15, 2015 so the first payment is for the period June 15-June 30, and the last payment is for June 1-14 2045.
+
+The payment schedule is a RegularSchedule with these properties:
+
+* comprises: regular payment OccurrenceKind (with payment details)  (see the 'comprises' property of the Occurrences ontology)
+* hasInitialStub: June 15-30, 2015 for initial payment
+* hasFinalStub: June 1-14, 2045 for final payment
+* hasCount: 358
+* hasOverallPeriod starting Date: June 15, 2015 with a duration of 30 years
+* hasRecurrenceInterval: specifies 10th day of each calendar month
+* hasRecurrenceStartDate: July 1, 2015""" ,
+		"""A corporate bond pays interest for 10 years starting on the first day of 2015.  Interest payments are due 15 days after the expiration of each 6 month period: on July 15 and January 16.
+
+The payment schedule is a RegularSchedule, with these properties:
+
+* comprises: identifies the interest payment details
+* overall DatePeriod starting date is '2015-01-01', ending date is '2025-01-15', and duration is 'P10Y15D'
+* hasCount is 20 (2 payments per year for 10 years)
+* hasRecurrenceInterval is 'P6M'
+* hasRecurrenceStartDate is '2015-01-15'"""
+		;
+	fibo-fnd-utl-av:explanatoryNote """A RegularSchedule is a Schedule defined as a set of Dates that start on a recurrence start date and repeat after each recurrence interval.  The size of this set is defined by a count.
+
+The 'initial ScheduleStub' associated with a RegularSchedule identifies any special treatment applied before the recurrence start date.  Similarly, a 'final ScheduleStub' identifies any special handling at the end of the recurrences.  For example, a mortgage loan that is due each calendar month may have an initial payment due before the first calendar month, or a final payment due after the last monthly payment.""" ;
+	fibo-fnd-utl-av:usageNote
+		"""Other ontologies can extend RegularSchedule as needed.
+
+In particular, the Occurrences ontology extends RegularSchedule to 'comprise' an 'OccurrenceKind'.  The intended meaning is that a regular schedule comprises a number of scheduled dates and an event which is scheduled to occur on each of those dates, in other words an Occurrence of the OccurrenceKind should happen on each Date defined by the RegularSchedule.""" ,
+		"""The recurrence start date can be an ExplicitDate or any kind of CalculatedDate.  Hence, the starting date could be relative to another Date (e.g. T+3) or triggered by the Occurrence of an OccurrenceKind, etc.
+
+The recurrence start date can also be relative to the starting Date of the overall DatePeriod of the Schedule."""
+		;
+	.
+
+fibo-fnd-dt-fd:RelativeDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:CalculatedDate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:isRelativeTo ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasRelativeDuration ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "relative date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:RelativeDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	owl:disjointWith fibo-fnd-dt-fd:SpecifiedDate ;
+	skos:definition "a calculated date that is some duration before or after another date" ;
+	skos:example "A settlement date, defined as T+3: three days after the trade date.  The 'hasRelativeDuration' property is set to '3D'." ;
+	fibo-fnd-utl-av:explanatoryNote "When the 'hasRelativeDuration' property is negative, the RelativeDate is before the 'isRelativeTo' Date; otherwise the RelativeDate is after the 'isRelativeTo' Date." ;
+	.
+
+fibo-fnd-dt-fd:Saturday
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeInterval
+		;
+	rdfs:label "Saturday" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Saturday" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval that has duration 1 day and that meets a Sunday" ;
+	fibo-fnd-utl-av:explanatoryNote "One Saturday is the time interval that has duration 1 day and that starts Gregorian year 2000. This requirement anchors the repeating sequence of days of week to specific Gregorian days. It requires that January 1, 2000 is a Saturday. It follows that January 2, 2000 must be the Sunday that it meets, and so on." ;
+	.
+
+fibo-fnd-dt-fd:Schedule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Collection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasOverallPeriod ;
+			owl:onClass fibo-fnd-dt-fd:DatePeriod ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "schedule" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Schedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a collection of events or things that will be done and the dates and/or times when they will be done" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.merriam-webster.com/dictionary/schedule"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "The overall period covers the entire DatePeriod of the Schedule, from the earliest Date to the final Date of the Schedule. Schedules may be ad hoc, essentially a list of dates and events without any consistency in the durations between events, regular, in which case there is a consistently recurring interval between events, or a combination of the two." ;
+	.
+
+fibo-fnd-dt-fd:ScheduleStub
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Collection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDatePeriod ;
+			owl:onClass fibo-fnd-dt-fd:DatePeriod ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "schedule stub" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:ScheduleStub" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a date period before the start of the recurring part of a schedule or after the end of the recurring part, which may be associated with a specific occurrence kind" ;
+	skos:editorialNote "The Occurrences ontology extends ScheduleStub to 'comprise' an OccurrenceKind. The meaning is that a schedule stub comprises a date period and an event which is scheduled to occur during that date period; in other words that an Occurrence of the OccurrenceKind should happen during the DatePeriod of the ScheduleStub." ;
+	skos:example "A 30 year mortgage calls for monthly payments on the first day of each month, according to a RegularSchedule.  If the mortgage does not start on the first day of a calendar month, then an initial ScheduleStub specifies the payment due for the DatePeriod up to the first day of the next calendar month.  Similarly, a final ScheduleStub specifies the last payment due for the DatePeriod after the end of the last full calendar month." ;
+	.
+
+fibo-fnd-dt-fd:SpecifiedDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:CalculatedDate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDateSpecification ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "specified date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:SpecifiedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "a calculated date that is defined by a rule, which is captured as a string by the 'hasDateSpecification' property" ;
+	.
+
+fibo-fnd-dt-fd:Sunday
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeInterval
+		;
+	rdfs:label "Sunday" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Sunday" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval that has duration 1 day and that meets a Monday" ;
+	.
+
+fibo-fnd-dt-fd:Thursday
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeInterval
+		;
+	rdfs:label "Thursday" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Thursday" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval that has duration 1 day and that meets a Friday" ;
+	.
+
+fibo-fnd-dt-fd:TimeDirection
+	a owl:Class ;
+	rdfs:label "time direction" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:TimeDirection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "an enumeration that indicates whether a calendar specified date is figured from the start or the end of a calendar period" ;
+	.
+
+fibo-fnd-dt-fd:TimeInstant
+	a owl:Class ;
+	rdfs:label "time instant" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:TimeInstant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:seeAlso <http://www.w3.org/2006/time#Instant> ;
+	skos:definition "a temporal entity that is a member of a time scale, with no extent or duration" ;
+	skos:example "The Battle of Hastings was on '14 October 1066'. (This gives the Julian date of the battle at a granularity of 'day'. If desired, the battle could be given more precisely as a time period within that calendar day.)" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.omg.org/spec/DTV/"^^xsd:anyURI ,
+		"https://www.w3.org/TR/owl-time/#time:Instant"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote
+		"For scales that have a granularity specified in days, a date is a time point; for scales down to the seconds, the equivalent of an xsd:dateTime or xsd:dateTimeStamp is a time point." ,
+		"The duration of each time interval that is an instance of the time point is the granularity of the time scale of the time point."
+		;
+	fibo-fnd-utl-av:synonym
+		"instant in time" ,
+		"time point"
+		;
+	.
+
+fibo-fnd-dt-fd:TimeInterval
+	a owl:Class ;
+	rdfs:label "time interval" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:TimeInterval" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:seeAlso <http://www.w3.org/2006/time#Interval> ;
+	skos:definition "a segment of the time axis, a location in time, with an extent or duration" ;
+	skos:example
+		"the day whose Gregorian calendar date is September 11, 2001" ,
+		"the lifetime of Henry V"
+		;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.omg.org/spec/DTV/"^^xsd:anyURI ,
+		"https://www.w3.org/TR/owl-time/#time:Interval"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote
+		"Every time interval has a beginning, an end, and a duration, even if not known. Every time interval is 'finite', a bounded segment of the time axis. The beginning or end of a time interval may be defined by reference to events that occur for a time interval that is not known." ,
+		"Time intervals may be indefinite, meaning that their beginning is primordiality or their end is perpetuity, or both (eternity). This vocabulary assumes that indefinite time intervals exist and have some duration, but their duration is unknown."
+		;
+	.
+
+fibo-fnd-dt-fd:Tuesday
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeInterval
+		;
+	rdfs:label "Tuesday" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Tuesday" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval that has duration 1 day and that meets a Wednesday" ;
+	.
+
+fibo-fnd-dt-fd:Wednesday
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-fd:TimeInterval
+		;
+	rdfs:label "Wednesday" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:Wednesday" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "time interval that has duration 1 day and that meets a Thursday" ;
+	.
+
+fibo-fnd-dt-fd:hasAsOfDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has as of date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasAsOfDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "relates something to the date on which it is accurate or valid (e.g. a credit report has an asOfDate that means the date when the information was drawn)" ;
+	fibo-fnd-utl-av:explanatoryNote "It is different from the creation date and need not be the last date of the DatePeriod covered." ;
+	.
+
+fibo-fnd-dt-fd:hasCalendarPeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has calendar period" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasCalendarPeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:CalendarPeriod ;
+	skos:definition "identifies a calendar period used in computing a CalendarSpecifiedDate, such as a calendar week, calendar month, calendar quarter, or calendar year" ;
+	.
+
+fibo-fnd-dt-fd:hasCount
+	a owl:DatatypeProperty ;
+	rdfs:label "has count" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasCount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:positiveInteger ;
+	skos:definition "indicates the number of things in a collection, such as the number of entries in a RegularSchedule" ;
+	.
+
+fibo-fnd-dt-fd:hasDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "identifies a specific date" ;
+	.
+
+fibo-fnd-dt-fd:hasDatePeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has date period" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDatePeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	skos:definition "identifies a specific period of time, including a start date, end date and or duration" ;
+	.
+
+fibo-fnd-dt-fd:hasDateReceived
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has date received" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDateReceived" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "relates something to the date when it was received, e.g., a loan application request" ;
+	.
+
+fibo-fnd-dt-fd:hasDateSpecification
+	a owl:DatatypeProperty ;
+	rdfs:label "has date specification" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDateSpecification" ;
+	rdfs:domain fibo-fnd-dt-fd:SpecifiedDate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:string ;
+	skos:definition "A rule that specifies how a SpecifiedDate is computed." ;
+	skos:editorialNote "The rule is modeled as a simple String because OWL2 provides no way to model the semantics of such a rule." ;
+	.
+
+fibo-fnd-dt-fd:hasDateTime
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has date time" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDateTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "identifies a specific date and time of day, excluding the time zone" ;
+	.
+
+fibo-fnd-dt-fd:hasDateTimeStamp
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has date time stamp" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDateTimeStamp" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTimeStamp ;
+	skos:definition "identifies a specific date and time of day, including the time zone" ;
+	.
+
+fibo-fnd-dt-fd:hasDateTimeStampValue
+	a owl:DatatypeProperty ;
+	rdfs:label "has date time stamp value" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDateTimeStampValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:dateTimeStamp ;
+	skos:definition "specifies an actual literal (explicit) date and time, including the time zone" ;
+	.
+
+fibo-fnd-dt-fd:hasDateTimeValue
+	a owl:DatatypeProperty ;
+	rdfs:label "has date time value" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDateTimeValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:dateTime ;
+	skos:definition "specifies an actual literal (explicit) date and time" ;
+	.
+
+fibo-fnd-dt-fd:hasDateValue
+	a owl:DatatypeProperty ;
+	rdfs:label "has date value" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDateValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:string ;
+	skos:definition "specifies an actual literal (explicit) date captured in the format specified for xsd:date (i.e., ISO 8601 format), WITHOUT the time or timezone information; the semantics are identical to those of xsd:date" ;
+	skos:example "2002-10-10 means October 10, 2002" ;
+	fibo-fnd-utl-av:usageNote "For consistency with FPML (reference FPML Coding Schemes 30 June 2014, Version 1.56, section 2.1.1), the year MUST be specified as 4 digits, and the month and day MUST be specified as 2 digits with a leading zero if needed. Times and timezones should NOT be specified." ;
+	.
+
+fibo-fnd-dt-fd:hasDuration
+	a
+		owl:ObjectProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has duration" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDuration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "the duration of a date period or similar concept, such as the tenor of a contract" ;
+	fibo-fnd-utl-av:usageNote "This duration may be omitted or unknown if either the start or end Date of the DatePeriod is a CalculatedDate or an ExplicitDate." ;
+	.
+
+fibo-fnd-dt-fd:hasDurationValue
+	a owl:DatatypeProperty ;
+	rdfs:label "has duration value" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasDurationValue" ;
+	rdfs:domain fibo-fnd-dt-fd:Duration ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:string ;
+	skos:definition "specifies a literal (explicit) duration (amount of time) captured in the format specified for xsd:duration (i.e., ISO 8601 format); the semantics are identical to those of xsd:duration" ;
+	skos:example
+		"-P3D means negative 3 days duration. This is used with OffsetDates to specify 3 days before (prior) to some other Date." ,
+		"P1Y means 1 year" ,
+		"P1Y2M3DT4H5M6S means 1 year, 2 months, 3 days, 4 hours, 5 minutes, 6 seconds" ,
+		"P2M means 2 months" ,
+		"P3D means 3 days" ,
+		"PT4H means 4 hours" ,
+		"PT5M means 5 minutes" ,
+		"PT6S means 6 seconds"
+		;
+	fibo-fnd-utl-av:usageNote "Negative durations are used to indicate relative dates that are before (rather than after) some other Date." ;
+	.
+
+fibo-fnd-dt-fd:hasEndDate
+	a
+		owl:ObjectProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has end date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasEndDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "the ending date of some Schedule or DatePeriod" ;
+	.
+
+fibo-fnd-dt-fd:hasExplicitDate
+	a
+		owl:ObjectProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has explicit date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasExplicitDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDate ;
+	skos:definition "indicates a stated date, as opposed to calculated or unknown date, associated with something" ;
+	.
+
+fibo-fnd-dt-fd:hasFinalStub
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasStub ;
+	rdfs:label "has final stub" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasFinalStub" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "identifies any special period at the end of a regular schedule" ;
+	.
+
+fibo-fnd-dt-fd:hasInitialStub
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasStub ;
+	rdfs:label "has initial stub" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasInitialStub" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "identifies any special period at the start of a regular schedule" ;
+	.
+
+fibo-fnd-dt-fd:hasOrdinalNumber
+	a owl:DatatypeProperty ;
+	rdfs:label "has ordinal number" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasOrdinalNumber" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "An ordinal number meaning 1st, 2nd, 3rd, etc." ;
+	fibo-fnd-utl-av:explanatoryNote "Negative ordinal numbers mean 1st before, 2nd before, etc." ;
+	.
+
+fibo-fnd-dt-fd:hasOverallPeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDatePeriod ;
+	rdfs:label "has overall period" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasOverallPeriod" ;
+	rdfs:domain fibo-fnd-dt-fd:Schedule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "identifies a DatePeriod that includes all the Dates of a Schedule, including any ScheduleStubs" ;
+	.
+
+fibo-fnd-dt-fd:hasRecurrenceInterval
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has recurrence interval" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasRecurrenceInterval" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "indicates the frequency with which some event or publication occurs" ;
+	.
+
+fibo-fnd-dt-fd:hasRecurrenceStartDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasStartDate ;
+	rdfs:label "has recurrence start date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasRecurrenceStartDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "the starting Date of the first recurrence of a RegularSchedule" ;
+	.
+
+fibo-fnd-dt-fd:hasRelativeDuration
+	a owl:DatatypeProperty ;
+	rdfs:label "has relative duration" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasRelativeDuration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:string ;
+	skos:definition "a duration between two explicit dates" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"A relative duration may be negative." ,
+		"Note that this property is distinct from hasDurationValue, as a relative duration may resolve to a relative date or date time (both of which are time points) rather than an interval, which would result in a logical inconsistency if its parent property is hasDurationValue."
+		;
+	.
+
+fibo-fnd-dt-fd:hasSchedule
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has schedule" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:Schedule ;
+	skos:definition "indicates a schedule for something" ;
+	.
+
+fibo-fnd-dt-fd:hasStartDate
+	a
+		owl:ObjectProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has start date" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasStartDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	skos:definition "the starting Date of something" ;
+	.
+
+fibo-fnd-dt-fd:hasStub
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has stub" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasStub" ;
+	rdfs:domain fibo-fnd-dt-fd:RegularSchedule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:ScheduleStub ;
+	skos:definition "links an abbreviated period at the start or end of some schedule to the overall schedule" ;
+	.
+
+fibo-fnd-dt-fd:hasTimeDirection
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has time direction" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasTimeDirection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:TimeDirection ;
+	skos:definition "A TimeDirection indicates whether a CalendarSpecifiedDate is figured from the beginning or end of a calendar period." ;
+	.
+
+fibo-fnd-dt-fd:hasTimeValue
+	a owl:DatatypeProperty ;
+	rdfs:label "has time value" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:hasTimeValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range xsd:string ;
+	skos:definition "specifies an actual literal (explicit) time, captured in the format specified for xsd:time (i.e., ISO 8601 format), WITHOUT the date or timezone information; the semantics are identical to those of xsd:time, which is not available for use in OWL" ;
+	.
+
+fibo-fnd-dt-fd:isRelativeTo
+	a owl:ObjectProperty ;
+	rdfs:label "is relative to" ;
+	rdfs:comment "QName: fibo-fnd-dt-fd:isRelativeTo" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "identifies a RelativeDate or RelativeDatePeriod defined relative to this Date" ;
+	.
+

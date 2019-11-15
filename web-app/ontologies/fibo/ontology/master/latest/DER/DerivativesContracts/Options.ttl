@@ -1,0 +1,1816 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/ExerciseConventions/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-ass: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> .
+@prefix fibo-der-der-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-etd-eto: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-txn-ev: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-txn-sec: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SecuritiesTransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-sec-dbt-ex: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/ExerciseConventions/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/>
+	a owl:Ontology ;
+	rdfs:label "Options"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Concepts common to all option contracts and their corresponding transactions. An option gives one party (the holder) the right to purchase or sell the underlying commodity at a given time or times in the future (as determined by the exercise convention), if they choose to do so. Includes option features, these being definitions of how the option comes into or ceases being in force when a given event occurs along with a range of other variations." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/ExerciseConventions/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-der-opt:AbsolutePriceStrikeSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:StrikePriceSpecification ;
+	rdfs:label "absolute price strike specification"@en ;
+	rdfs:comment "QName: NONE:AbsolutePriceStrikeSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:PercentageStrikePriceSpecification ;
+	skos:definition "Expression of the strike price as an absolute monetary price at which the option is to be struck."@en ;
+	.
+
+fibo-der-der-opt:AsianExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionWriterCommitment ,
+		fibo-sec-dbt-ex:EuropeanExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ex:hasExerciseWindow ;
+			owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		]
+		;
+	rdfs:label "asian exercise terms"@en ;
+	rdfs:comment "QName: NONE:AsianExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Commitment to pay out on an option on the basis of a rolling average strike, which the other party may or may not choose to exercise against."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Definition of Asian Exercise Convention: Exercise convention whereby exercise tracks an underlying on a defined time period, anchored to a given time. The Asian Exercise Convention takes the European Date Exercise Convention but commits to a strike which is determined according to an average (or rolling average) value."@en ;
+	.
+
+fibo-der-der-opt:AssetMaximumOrMinimumPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:ConditionalPayoutCommitment ;
+	rdfs:label "asset maximum or minimum payout commitment"@en ;
+	rdfs:comment "QName: NONE:AssetMaximumOrMinimumPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "A commitment to pay out on the maximum or minimum of a set of assets. Further Notes Maximum of n Assets This rainbow is similar to the best of n assets plus cash we referred to in part a, with the exception that no cash payoff is possible and there is a strike price for this type of option. The payoff of a call and put are given as: Rainbow-Call = max[0, max(S1, S2) - X] Rainbow-Put = max[0, X - max(S1, S2)] Minimum of n Assets The counterpart to a maximum of n assets, this rainbow pays out the value of the underperformer of the n assets. The payoff for minimum of 2 asset rainbow calls and puts are given as: Rainbow-Call = max[0, mainS1, S2) - X] Rainbow-Put = max[0, X - min(S1, S2)]"@en ;
+	.
+
+fibo-der-der-opt:AssetOrNothingPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:BinaryPayoutCommitment ;
+	rdfs:label "asset or nothing payout commitment"@en ;
+	rdfs:comment "QName: NONE:AssetOrNothingPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:CashOrNothingPayoutCommitment ;
+	.
+
+fibo-der-der-opt:BestOfAssetsPlusCashPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:ConditionalPayoutCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-der-opt:PayoffAssetsList ;
+		]
+		;
+	rdfs:label "best of assets plus cash payout commitment"@en ;
+	rdfs:comment "QName: NONE:BestOfAssetsPlusCashPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "A commitment to pay out on the best of a number of assets, plus cash."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This type of rainbow effectively has n + 1 payoff possibilities. If we consider a 2 asset "best of plus cash", the payoff at expiry is a choice between Asset 1, Asset 2, or the predetermined cash amount. There is no strike price and the payoff is given as: Rainbow = max(S1, S2, Cash;T)'@en ;
+	.
+
+fibo-der-der-opt:BetterOrWorseOfAssetsPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:ConditionalPayoutCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:references ;
+			owl:someValuesFrom fibo-der-der-opt:PayoffAssetsList ;
+		]
+		;
+	rdfs:label "better or worse of assets payout commitment"@en ;
+	rdfs:comment "QName: NONE:BetterOrWorseOfAssetsPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "A commitment to pay out on the best or worst of a number of assets."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Better of n Assets This type of rainbow is similar to the best of n assets plus cash but with the exception that there is no possible cash payoff, and X is set to 0. With this in mind, a better of 2 assets rainbow is essentially a two-asset call option, with a payoff being: Rainbow = max[0, max(S1, S2)] Worse of n Assets Essentially the opposite to the better of n assets, with the payoff being on the asset with the lower value. We can give the payoff for this option on 2 assets as: Rainbow = max[0, min(S1, S2)]"@en ;
+	.
+
+fibo-der-der-opt:BinaryPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPayoutCommitment ;
+	rdfs:label "binary payout commitment"@en ;
+	rdfs:comment "QName: NONE:BinaryPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:ConditionalPayoutCommitment ;
+	.
+
+fibo-der-der-opt:CalculatedPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPayoutCommitment ;
+	rdfs:label "calculated payout commitment"@en ;
+	rdfs:comment "QName: NONE:CalculatedPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith
+		fibo-der-der-opt:ConditionalPayoutCommitment ,
+		fibo-der-der-opt:LinearPayoutCommitment
+		;
+	.
+
+fibo-der-der-opt:CallOptionBuyer
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionBuyer ;
+	rdfs:label "call option buyer"@en ;
+	rdfs:comment "QName: NONE:CallOptionBuyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The Party which is the buyer of the Call Option. This party has the option but not the obligation to transact as the Buyer of the Option Underlying."@en ;
+	.
+
+fibo-der-der-opt:CallOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Option ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasBuyer ;
+			owl:someValuesFrom fibo-der-der-opt:CallOptionBuyer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasOptionType ;
+			owl:someValuesFrom fibo-der-der-opt:CallOptionType ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasSeller ;
+			owl:someValuesFrom fibo-der-der-opt:CallOptionWritingParty ;
+		]
+		;
+	rdfs:label "call option contract"@en ;
+	rdfs:comment "QName: NONE:CallOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith
+		fibo-der-der-opt:ChooserOptionContract ,
+		fibo-der-der-opt:PutOptionContract
+		;
+	skos:definition "Contracts between a buyer and a seller giving the buyer (holder) the right, but not the obligation, to buy the assets specified at a fixed price or formula, on or before a specified date. The seller of the call option assumes the obligation of delivering the assets specified should the buyer exercise his option."@en ;
+	skos:editorialNote 'ISO FIBIM has same (ISO CFI-derived) written definition for the "Call" selection entry in the selection list "OptionTypeCode". Additional modeling Dec 2010: this is now deprecated for the former OTC Call Option. Combine the definition and consnsus from here, and the Simple Fact, befpre de;eting. the formerly OTC term has the required relationship facts.'@en ;
+	.
+
+fibo-der-der-opt:CallOptionType
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionType ;
+	rdfs:label "call option type"@en ;
+	rdfs:comment "QName: NONE:CallOptionType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:CallOptionWritingParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionWritingParty ;
+	rdfs:label "call option writing party"@en ;
+	rdfs:comment "QName: NONE:CallOptionWritingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The Party which is the writer of the Call Option. This party has the obligation to transact as the Seller of the Option Underlying."@en ;
+	.
+
+fibo-der-der-opt:CashOrNothingPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:BinaryPayoutCommitment ;
+	rdfs:label "cash or nothing payout commitment"@en ;
+	rdfs:comment "QName: NONE:CashOrNothingPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "A commitment to pay out on a binary option, as cash or nothing."@en ;
+	.
+
+fibo-der-der-opt:ChooserOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Option ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:definesOptional ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-der-opt:OptionCallTransaction
+					fibo-der-der-opt:OptionPutTransaction
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasOptionTypeElectionDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		]
+		;
+	rdfs:label "chooser option contract"@en ;
+	rdfs:comment "QName: NONE:ChooserOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:PutOptionContract ;
+	.
+
+fibo-der-der-opt:ConditionalPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPayoutCommitment ;
+	rdfs:label "conditional payout commitment"@en ;
+	rdfs:comment "QName: NONE:ConditionalPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:LinearPayoutCommitment ;
+	.
+
+fibo-der-der-opt:DefinedConditionsPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPayoutCommitment ;
+	rdfs:label "defined conditions payout commitment"@en ;
+	rdfs:comment "QName: NONE:DefinedConditionsPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "A commitment which is only made when certain defined conditions are met. Further notes: Like all contractual commitments, the details of the commitment (and in this case, the conditions) are defined in the corresponding Contractual Terms. These set out what the commitment is and what the conditions are under which it is to be met. Term introduced in order to support digital and other exotic options. Note this is similar to but distinct from commitments where the specific nature of the commitment (typically a cashflow) is defined by resolving some mathematical formula i.e. where the commitment to do something is not conditional but the precise monetary amounts (payment, settlement) are."@en ;
+	.
+
+fibo-der-der-opt:EarlyExerciseCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionWriterCommitment ;
+	rdfs:label "early exercise commitment"@en ;
+	rdfs:comment "QName: NONE:EarlyExerciseCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The commitment to exercise the option ahead of the expiry date under given conditions as laid out in the Barrier Feature terms of the Option contract."@en ;
+	.
+
+fibo-der-der-opt:FixedLookbackStrikeFormula
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:StrikeFormula ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasExpression ;
+			owl:someValuesFrom fibo-der-der-opt:FixedLookbackStrikeFormulaExpression ;
+		]
+		;
+	rdfs:label "fixed lookback strike formula"@en ;
+	rdfs:comment "QName: NONE:FixedLookbackStrikeFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:FixedLookbackStrikeFormulaExpression
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:LookbackFormulaExpression ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:subtracts ;
+			owl:someValuesFrom fibo-der-der-opt:ObservableBestValue ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:subtractsFrom ;
+			owl:someValuesFrom fibo-der-der-opt:FixedStrikeAmount ;
+		]
+		;
+	rdfs:label "fixed lookback strike formula expression"@en ;
+	rdfs:comment "QName: NONE:FixedLookbackStrikeFormulaExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:FixedLookbackStrikeTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:LookbackStrikeTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasFormula ;
+			owl:someValuesFrom fibo-der-der-opt:FixedLookbackStrikeFormula ;
+		]
+		;
+	rdfs:label "fixed lookback strike terms"@en ;
+	rdfs:comment "QName: NONE:FixedLookbackStrikeTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:FloatingLookbackStrikeTerms ;
+	skos:definition "Strike terms which reflect the difference between a running maximum value of the observable during the lookback period, and the pre-agreed strike. The agreed settlement is based on the difference between these. Further Notes This is only settled in cash and the strike is predetermined at payoff and the payoff is the max diff between the optimal price and the strike price."@en ;
+	.
+
+fibo-der-der-opt:FixedStrikeAmount
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-bsc:ObservableValue ;
+	rdfs:label "fixed strike amount"@en ;
+	rdfs:comment "QName: NONE:FixedStrikeAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:FixedStrikeTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionStrikeTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:includesSpecificationTerm ;
+			owl:someValuesFrom fibo-der-der-opt:StrikePriceSpecification ;
+		]
+		;
+	rdfs:label "fixed strike terms"@en ;
+	rdfs:comment "QName: NONE:FixedStrikeTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:ResetableStrikeTerms ;
+	skos:definition "Contractual terms setting out a fixed, pre-agreed price or level at which the option is to be struck."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is similar to the FpML term for Strike, but there are two other types of Strike specification - look back and reset. FpML strike: 'Defines whether it is a price or level at which the option has been, or will be, struck.'"@en ;
+	.
+
+fibo-der-der-opt:FloatingLookbackFormulaExpression
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:LookbackFormulaExpression ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:subtracts.1 ;
+			owl:someValuesFrom fibo-der-der-opt:ObservableBestValue ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:subtractsFrom.1 ;
+			owl:someValuesFrom fibo-der-der-opt:ObservableFinalValue ;
+		]
+		;
+	rdfs:label "floating lookback formula expression"@en ;
+	rdfs:comment "QName: NONE:FloatingLookbackFormulaExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:FloatingLookbackStrikeFormula
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:StrikeFormula ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasExpression.1 ;
+			owl:someValuesFrom fibo-der-der-opt:FloatingLookbackFormulaExpression ;
+		]
+		;
+	rdfs:label "floating lookback strike formula"@en ;
+	rdfs:comment "QName: NONE:FloatingLookbackStrikeFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:FloatingLookbackStrikeSchedule
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:Schedule ;
+	rdfs:label "floating lookback strike schedule"@en ;
+	rdfs:comment "QName: NONE:FloatingLookbackStrikeSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:FloatingLookbackStrikeTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:LookbackStrikeTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasFormula.1 ;
+			owl:someValuesFrom fibo-der-der-opt:FloatingLookbackStrikeFormula ;
+		]
+		;
+	rdfs:label "floating lookback strike terms"@en ;
+	rdfs:comment "QName: NONE:FloatingLookbackStrikeTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:KnockIn
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionFeature ;
+	rdfs:label "knock in"@en ;
+	rdfs:comment "QName: NONE:KnockIn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "An option which comes into existence if the knock-in event happens. It works exactly the reverse of a knock-out. In a knock-in, an option comes into existence if a certain level is hit."@en ;
+	.
+
+fibo-der-der-opt:KnockOut
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionFeature ;
+	rdfs:label "knock out"@en ;
+	rdfs:comment "QName: NONE:KnockOut" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "An option which ceases to exist if the knock-out event occurs. A knock out happens when a particular level is hit (like the Swiss franc touching the level of 1.10 against the dollar), when the option ceases to exist."@en ;
+	.
+
+fibo-der-der-opt:LinearPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPayoutCommitment ;
+	rdfs:label "linear payout commitment"@en ;
+	rdfs:comment "QName: NONE:LinearPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The commitment to pay out on a straight vanilla option."@en ;
+	.
+
+fibo-der-der-opt:LinearPayoutTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionPayoutTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:setsOut ;
+			owl:someValuesFrom fibo-der-der-opt:LinearPayoutCommitment ;
+		]
+		;
+	rdfs:label "linear payout terms"@en ;
+	rdfs:comment "QName: NONE:LinearPayoutTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Terms governing the payment commitment on a vanilla option."@en ;
+	.
+
+fibo-der-der-opt:LookbackFormulaExpression
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:FormulaExpression ;
+	rdfs:label "lookback formula expression"@en ;
+	rdfs:comment "QName: NONE:LookbackFormulaExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "An expression of a lookback formula"@en ;
+	.
+
+fibo-der-der-opt:LookbackObservableValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:PastValue ;
+	rdfs:label "lookback observable value"@en ;
+	rdfs:comment "QName: NONE:LookbackObservableValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:LookbackObservableValueAtMaturity
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:LookbackObservableValue ;
+	rdfs:label "lookback observable value at maturity"@en ;
+	rdfs:comment "QName: NONE:LookbackObservableValueAtMaturity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:LookbackObservableValueDuringLookbackPeriod
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:LookbackObservableValue ;
+	rdfs:label "lookback observable value during lookback period"@en ;
+	rdfs:comment "QName: NONE:LookbackObservableValueDuringLookbackPeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:LookbackStrikeObservable
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:ObservableUnderlier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-fnd-math-math:TimedParameter ;
+		]
+		;
+	rdfs:label "lookback strike observable"@en ;
+	rdfs:comment "QName: NONE:LookbackStrikeObservable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The agreed parameter which is used in the formula for fixed OR floating lookback."@en ;
+	.
+
+fibo-der-der-opt:LookbackStrikeTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionStrikeTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasSchedule ;
+			owl:someValuesFrom fibo-der-der-opt:FloatingLookbackStrikeSchedule ;
+		]
+		;
+	rdfs:label "lookback strike terms"@en ;
+	rdfs:comment "QName: NONE:LookbackStrikeTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Strike terms in which the value of some observed variable (the underlying) is looked back at during some period, typically a period ending in the maturity of the Option, and the payoff is determined by comparing the agreed strike with the value of this variable."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The payoff may either be the difference between a fixed, pre-agreed Strike Price and the observable, or the difference between the best or worst valuable of the observable and the value of that same observable at maturity of the contract (these are the Fixed and Floating lookback terms respectively). This (per review at Nordea) is not mutually exclusive with the terms for Fixed Strike and Resettable Strike, that is, either of those kinds of strike terms may apply, and Lookback strike terms may also apply."@en ;
+	.
+
+fibo-der-der-opt:OTCOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		fibo-fbc-fi-fi:Option
+		;
+	rdfs:label "o t c option contract"@en ;
+	rdfs:comment "QName: NONE:OTCOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-etd-eto:ExchangeTradedOptionContract ;
+	skos:definition "Exotic options traded on the over-the-counter market, where participants can choose the characteristics of the options traded."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The flexibility of these options is attractive to many. With OTC options, both hedgers and speculators can benefit from avoiding the restrictions that normal standardized exchanges place on options. The flexibility allows participants to achieve their desired position more precisely and cost effectively. Review note (13 Jan 2010 or earlier): optional delivery dates where there's a right to change e.g. extend or shorten the delivery period. Part of the terms. For instance time options."@en ;
+	.
+
+fibo-der-der-opt:ObservableBestValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:ObservableValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:isOf ;
+			owl:someValuesFrom fibo-der-der-opt:LookbackStrikeObservable ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-der-der-opt:LookbackObservableValueDuringLookbackPeriod ;
+		]
+		;
+	rdfs:label "observable best value"@en ;
+	rdfs:comment "QName: NONE:ObservableBestValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:ObservableFinalValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:ObservableValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-der-der-opt:LookbackObservableValueAtMaturity ;
+		]
+		;
+	rdfs:label "observable final value"@en ;
+	rdfs:comment "QName: NONE:ObservableFinalValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:ObservableUnderlier
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-bsc:Underlier ;
+	rdfs:label "observable underlier"@en ;
+	rdfs:comment "QName: NONE:ObservableUnderlier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "An underlying observable which is in numeric form and does not represent a deliverable asset."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Derivatives which are based on an observable underlying are settled in some way other than by delivery of the underlying, since the underlying is not in the nature of something that can be delivered."@en ;
+	.
+
+fibo-der-der-opt:OptionBarrierFeatureEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasDirection ;
+			owl:someValuesFrom fibo-der-der-opt:UpOrDown ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/MarketRate> ;
+		]
+		;
+	rdfs:label "option barrier feature event"@en ;
+	rdfs:comment "QName: NONE:OptionBarrierFeatureEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "An event which defines when an option feature comes into effect."@en ;
+	.
+
+fibo-der-der-opt:OptionBarrierFeatureTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionExerciseTimeTermsSet ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:setsOut.1 ;
+			owl:someValuesFrom fibo-der-der-opt:EarlyExerciseCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-der-opt:OptionBarrierFeatureEvent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-der-opt:OptionFeature ;
+		]
+		;
+	rdfs:label "option barrier feature terms"@en ;
+	rdfs:comment "QName: NONE:OptionBarrierFeatureTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Formal terms setting out when and under what circumstances the option contract is deemed to be in force. This takes the form of an event and the relationship between the event and the applicability of the option."@en ;
+	skos:editorialNote 'After some research it was determined that the nature of the thing normally called "Feature" in an option is a contractual term defining when and under what circumstances the option itself is deemed be in force. In other words this is a set of contractual terms. Option features in this sense are "Knock In" or "Knock Out", each relating to a market event (usually a price reaching a given level). A third feature, "Knock In Knock Out" is really two of these and is represented as such in the Option terms i.e. there may be two of this Option Feature Terms term. The term "Barrier Option" applies to both of these, i.e. Knock In and Knock Out are types of Barrier Option. An option contract may or may not have a barrier option. If it does not, none of this applies. Others: knock in a knock out, knock in a digitale, if it exceeds one barrier you get a call; for another you get a put, and so on.'@en ;
+	.
+
+fibo-der-der-opt:OptionBinaryPayoutTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionPayoutTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:setsOut ;
+			owl:someValuesFrom fibo-der-der-opt:BinaryPayoutCommitment ;
+		]
+		;
+	rdfs:label "option binary payout terms"@en ;
+	rdfs:comment "QName: NONE:OptionBinaryPayoutTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Terms governing a binary payout commitment."@en ;
+	.
+
+fibo-der-der-opt:OptionBuyer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionParty ,
+		fibo-fnd-agr-ctr:ContractCounterparty
+		;
+	rdfs:label "option buyer"@en ;
+	rdfs:comment "QName: NONE:OptionBuyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:OptionWritingParty ;
+	.
+
+fibo-der-der-opt:OptionBuyerCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:ContractualEconomicCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:madeBy ;
+			owl:someValuesFrom fibo-der-der-opt:OptionUnderlyingBuyer ;
+		]
+		;
+	rdfs:label "option buyer commitment"@en ;
+	rdfs:comment "QName: NONE:OptionBuyerCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Commitments, if any, on the part of the holder (buyer) of the Option."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Obligations incude: Obligation to inform the seller by a certain time if the holder wishes to exercise. Once the instrument is exercised there are separate obligations in settlement as part of that transactions; that is not covered here. If you want to exercise you have to do it in a certain way - review whether any of this is contractually defined as obligations on the part of the holder."@en ;
+	.
+
+fibo-der-der-opt:OptionCallTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionalUnderlyingTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:makes ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/SettlementTerms> ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:receives ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+		]
+		;
+	rdfs:label "option call transaction"@en ;
+	rdfs:comment "QName: NONE:OptionCallTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	owl:disjointWith fibo-der-der-opt:OptionPutTransaction ;
+	skos:definition "A transaction which is defined in an options contract and which may or may not take place, at the discretion of the holder of the option. If it does take place, this will be a transaction for the purchase of the underlying or some cash equivalent thereof, as defined in the option contract."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Purchase is by the option beneficiary (holder)."@en ;
+	.
+
+fibo-der-der-opt:OptionConditionalPayoutTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionPayoutTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:setsOut ;
+			owl:someValuesFrom fibo-der-der-opt:ConditionalPayoutCommitment ;
+		]
+		;
+	rdfs:label "option conditional payout terms"@en ;
+	rdfs:comment "QName: NONE:OptionConditionalPayoutTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Terms governing a conditional payment commitment on an option."@en ;
+	.
+
+fibo-der-der-opt:OptionExerciseTimeTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-sec-dbt-ex:ExerciseTerms ;
+		]
+		;
+	rdfs:label "option exercise time terms"@en ;
+	rdfs:comment "QName: NONE:OptionExerciseTimeTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionFeature
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "option feature"@en ;
+	rdfs:comment "QName: NONE:OptionFeature" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Types of feature for an option. This itemizes whether the option comes into force (Knock In) or ceases being in force (Knock Out) when the stated event occurs."@en ;
+	.
+
+fibo-der-der-opt:OptionParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-bsc:DerivativeContractParty ;
+	rdfs:label "option party"@en ;
+	rdfs:comment "QName: NONE:OptionParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionPayoutCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionWriterCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:enteredIntoBy ;
+			owl:someValuesFrom fibo-der-der-opt:OptionWritingParty ;
+		]
+		;
+	rdfs:label "option payout commitment"@en ;
+	rdfs:comment "QName: NONE:OptionPayoutCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Commitment by the issuer to pay out on an option should the holder choose to exercise this."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This commitment is set out in formal Exercise Terms."@en ;
+	.
+
+fibo-der-der-opt:OptionPayoutTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:ParametricCashflowTerms ,
+		fibo-der-der-opt:OptionTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:setsOut ;
+			owl:someValuesFrom fibo-der-der-opt:OptionPayoutCommitment ;
+		]
+		;
+	rdfs:label "option payout terms"@en ;
+	rdfs:comment "QName: NONE:OptionPayoutTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Terms governing the payout on an option. These formally define the commitment(s) entered into by the writing party to the option."@en ;
+	.
+
+fibo-der-der-opt:OptionPremium
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:expressedAs ;
+			owl:someValuesFrom fibo-der-der-opt:OptionPremiumExpression ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasPayer ;
+			owl:someValuesFrom fibo-der-der-opt:PremiumPayer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasPaymentDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasReceiver ;
+			owl:someValuesFrom fibo-der-der-opt:PremiumReceiver ;
+		]
+		;
+	rdfs:label "option premium"@en ;
+	rdfs:comment "QName: NONE:OptionPremium" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The amount paid for an option."@en ;
+	skos:editorialNote "Review notes (Equity Options): This is just the price. not specific to Equities Options. See Pricing for Exchange Traded Derivatives where we already have similar terms. In forward Fx, premium relates to whether or not the price of the forward is greater or less than the price of the PSpo. In Bonds, whether or not the capital price is more or less than face value (see Bonds Proicing model). In THIS context: the money you pay for the option. FpML: A type used to describe the amount paid for an equity option."@en ;
+	.
+
+fibo-der-der-opt:OptionPremiumExpression
+	a owl:Class ;
+	rdfs:label "option premium expression"@en ;
+	rdfs:comment "QName: NONE:OptionPremiumExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The formal expression of the Option Premium."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is a choice between expressing amount of premium paid as either price per option, or percentage of notional amount. FpML: 'Choice between expressing amount of premium paid as either price per option, or percentage of notional amount.'"@en ;
+	.
+
+fibo-der-der-opt:OptionPremiumFixed
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPremiumVariability ;
+	rdfs:label "option premium fixed"@en ;
+	rdfs:comment "QName: NONE:OptionPremiumFixed" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionPremiumPaymentArrangement
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "option premium payment arrangement"@en ;
+	rdfs:comment "QName: NONE:OptionPremiumPaymentArrangement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Premium Type for Forward Start Equity Options."@en ;
+	skos:editorialNote """This was originally a selectable list called option premium type selection (option premium type in data models). Note against that element is given below, based on which this has been implemented as two sets of classes (both characterized as kinds of method). 
+
+Earlier SME Review note:
+Further notes: REVIEW THIS - there appear to be two separate semantics in this list; are they mutually exclusive? Answers: You can pay the premium up front or in arrears (pre v pos tpaid) or you can pay it at any agreed time (indeed the time is already defined as terms see Payment Date), so this simply reflects that. Then there are other types of \"Participating OptionS\" where the anmount you pay depends on something else - so you don't pay the Premium up front. If it ends up outt of the money then you don't have to pay as much. So this is \"Variable\" premium. The alternative to this is \"Fixed\". If it's prepaid it's firxed If it's post paid it can bt variable or fixed. SO these are two facts. FpML: Premium Type for Forward Start Equity Option"""@en ;
+	.
+
+fibo-der-der-opt:OptionPremiumPreOrPostType
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPremiumPaymentArrangement ;
+	rdfs:label "option premium pre or post type"@en ;
+	rdfs:comment "QName: NONE:OptionPremiumPreOrPostType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionPremiumVariability
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPremiumPaymentArrangement ;
+	rdfs:label "option premium variability"@en ;
+	rdfs:comment "QName: NONE:OptionPremiumVariability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionPremiumVariable
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPremiumVariability ;
+	rdfs:label "option premium variable"@en ;
+	rdfs:comment "QName: NONE:OptionPremiumVariable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionPutTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionalUnderlyingTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:makes.1 ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:receives.1 ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/SettlementTerms> ;
+		]
+		;
+	rdfs:label "option put transaction"@en ;
+	rdfs:comment "QName: NONE:OptionPutTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionStrikeResetSchedule
+	a owl:Class ;
+	rdfs:label "option strike reset schedule"@en ;
+	rdfs:comment "QName: NONE:OptionStrikeResetSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionStrikeTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionTerms ;
+	rdfs:label "option strike terms"@en ;
+	rdfs:comment "QName: NONE:OptionStrikeTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Contractual terms setting out the price or level at which the option is to be struck. FpML strike: 'Defines whether it is a price or level at which the option has been, or will be, struck.'"@en ;
+	.
+
+fibo-der-der-opt:OptionTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-rea:EconomicContractTermsSet ;
+	rdfs:label "option contract terms"@en ;
+	rdfs:comment "QName: NONE:OptionTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionTransactionParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionParty ,
+		fibo-fnd-txn-rea:TransactionParty
+		;
+	rdfs:label "option transaction party"@en ;
+	rdfs:comment "QName: NONE:OptionTransactionParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The party to an Option transaction."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is identified as also being a party to the contract that underlies that transaction. Definition OriginLSR Draft"@en ;
+	.
+
+fibo-der-der-opt:OptionType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "option type"@en ;
+	rdfs:comment "QName: NONE:OptionType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionTypeSelection
+	a owl:Class ;
+	rdfs:label "OptionTypeSelection"@en ;
+	rdfs:comment "QName: NONE:OptionTypeSelection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Whether it is a call option (right to purchase a specific underlying asset) or a put option (right to sell a specific underlying asset)."@en ;
+	.
+
+fibo-der-der-opt:OptionUnderlyingBuyer
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionTransactionParty ;
+	rdfs:label "option underlying buyer"@en ;
+	rdfs:comment "QName: NONE:OptionUnderlyingBuyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The buyer of the underlying in an Option Transaction."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the party which buys the underlying in the event that the transaction goes ahead."@en ;
+	.
+
+fibo-der-der-opt:OptionUnderlyingSeller
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionTransactionParty ;
+	rdfs:label "option underlying seller"@en ;
+	rdfs:comment "QName: NONE:OptionUnderlyingSeller" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionValuationTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasValuationDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		]
+		;
+	rdfs:label "option valuation terms"@en ;
+	rdfs:comment "QName: NONE:OptionValuationTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:OptionWriterCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-rea:ContractualEconomicCommitment ;
+	rdfs:label "option writer commitment"@en ;
+	rdfs:comment "QName: NONE:OptionWriterCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Commitment on the part of the writer (issuing party) of the Option."@en ;
+	.
+
+fibo-der-der-opt:OptionWritingParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionParty ,
+		fibo-fnd-agr-ctr:ContractPrincipal
+		;
+	rdfs:label "option writing party"@en ;
+	rdfs:comment "QName: NONE:OptionWritingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The writing party of an OTC Option, i.e. the seller of a contract. This is the party that grants the rights defined by this instrument and in return receives a payment for it."@en ;
+	fibo-fnd-utl-av:explanatoryNote "See 2000 ISDA definitions Article 11.1 (a). In the case of an option, these rights are the rights to buy or sell the instrument at the stated terms. FpML: 'A reference to the party that sells (\"writes\") this instrument, i.e. that grants the rights defined by this instrument and in return receives a payment for it. See 2000 ISDA definitions Article 11.1 (a). In the case of FRAs this is the floating rate payer.' Seller; Also known as Short Side."@en ;
+	.
+
+fibo-der-der-opt:OptionalUnderlyingTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-fwd:ForwardTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:hasTransactionParty ;
+			owl:someValuesFrom fibo-der-der-opt:OptionTransactionParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-sec:embodies ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Option ;
+		]
+		;
+	rdfs:label "optional underlying transaction"@en ;
+	rdfs:comment "QName: NONE:OptionalUnderlyingTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "A transaction which is defined in an options contract and which may or may not take place, at the discretion of the holder of the option. If it does take place, this will be a transaction for the purchase or sale of the deliverable underlying as defined in the option contract, or some cash equivalent thereof. Further notes: This is not any different from any other kind of derivatives transaction. The Transaction is still defined as the purchase and sale of the underlying even if it is cash settled. It is defined as the swap of the fixed price for the current market price. Would define a reference price for the current market price if it's not a physical settlement. Would for example define the use of a calculation agent. Scenarios: 1. Agree to cash settle even though the underlying is a deliverable 2. Agree to settle cash because it's difficult to get hold of the underlying 3. The underlying is by its nature not deliverable 4. Fx where the deliverable is a currency to cash delivery is synonymous with delivery of the underlying asset, so the underlying observable and the underlying deliverable are the same actual thing. How this is modeled: Cash \"Settlement\" (means cash delivery) is where you take cash instad of delivery of the underlying deliverable. Whatever is going to be delivered there is going to be a reverse transaction at the going market rate. That also covers the use of an index or basket as the underlying. Examples of this: IR Swap - not an Option."@en ;
+	.
+
+fibo-der-der-opt:PayoffAssetsList
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-ass:AssetUnderlier ;
+	rdfs:label "payoff assets list"@en ;
+	rdfs:comment "QName: NONE:PayoffAssetsList" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The list of n assets which are used to determine a best or worst value in determining conditinal payoff commitments."@en ;
+	.
+
+fibo-der-der-opt:PayoffCommitmentReferenceAsset
+	a owl:Class ;
+	rdfs:label "payoff commitment reference asset"@en ;
+	rdfs:comment "QName: NONE:PayoffCommitmentReferenceAsset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:PercentageStrikePriceSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:StrikePriceSpecification ;
+	rdfs:label "percentage strike price specification"@en ;
+	rdfs:comment "QName: NONE:PercentageStrikePriceSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:PostpaidPremiumType
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPremiumPreOrPostType ;
+	rdfs:label "postpaid premium type"@en ;
+	rdfs:comment "QName: NONE:PostpaidPremiumType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:PremiumPayer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:isUsually ;
+			owl:someValuesFrom fibo-der-der-opt:OptionBuyer ;
+		]
+		;
+	rdfs:label "premium payer"@en ;
+	rdfs:comment "QName: NONE:PremiumPayer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The party responsible for making the payment of an Equity Option Premium."@en ;
+	skos:editorialNote "Review 17 Feb: Not clear whether this can ever go the other way. Is it possible to create an option where you pay as well as delive rthe option? See for example Zero Cost Options. It may be that this is in FpML simply because the original model wanted ot be explicit a bout who paid what, just to avoid any confusion perhaps. Legally: you are buying the rights and obligations in the Option... FpML: 'A reference to the party responsible for making the payments defined by this structure.'"@en ;
+	.
+
+fibo-der-der-opt:PremiumPercentageOfNotionalExpression
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPremiumExpression ;
+	rdfs:label "premium percentage of notional expression"@en ;
+	rdfs:comment "QName: NONE:PremiumPercentageOfNotionalExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The expression of the premium as a percentage of the notional value of the transaction."@en ;
+	fibo-fnd-utl-av:explanatoryNote "A percentage of 5% would be expressed as 5%. Note that FpML recasts the percentage as a fractional amount. FpML: 'The amount of premium to be paid expressed as a percentage of the notional value of the transaction. A percentage of 5% would be expressed as 0.05.' note that in OTC markets the options are traded on volatility which ultimately calculkates to a premium. This allows for prices to be made generically."@en ;
+	.
+
+fibo-der-der-opt:PremiumPricePerOptionExpression
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPremiumExpression ;
+	rdfs:label "premium price per option expression"@en ;
+	rdfs:comment "QName: NONE:PremiumPricePerOptionExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The expression of the premium as a function of the number of options."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Specifically this is expressed as a monetary amount, where that monetary amount is the amount per option. FpML: 'The amount of premium to be paid expressed as a function of the number of options.'"@en ;
+	.
+
+fibo-der-der-opt:PremiumReceiver
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionParty ;
+	rdfs:label "premium receiver"@en ;
+	rdfs:comment "QName: NONE:PremiumReceiver" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The party that receives the payments of an Equity Option Premium. FpML: 'A reference to the party that receives the payments corresponding to this structure.'"@en ;
+	.
+
+fibo-der-der-opt:PrepaidPremiumType
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionPremiumPreOrPostType ;
+	rdfs:label "prepaid premium type"@en ;
+	rdfs:comment "QName: NONE:PrepaidPremiumType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:PutOptionBuyer
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionBuyer ;
+	rdfs:label "put option buyer"@en ;
+	rdfs:comment "QName: NONE:PutOptionBuyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The Party which is the buyer of the Put Option. This party has the option but not the obligation to transact as the Seller of the Option Underlying."@en ;
+	.
+
+fibo-der-der-opt:PutOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Option ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasBuyer ;
+			owl:someValuesFrom fibo-der-der-opt:PutOptionBuyer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasOptionType ;
+			owl:someValuesFrom fibo-der-der-opt:PutOptionType ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasSeller ;
+			owl:someValuesFrom fibo-der-der-opt:PutOptionWritingParty ;
+		]
+		;
+	rdfs:label "put option contract"@en ;
+	rdfs:comment "QName: NONE:PutOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:PutOptionType
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionType ;
+	rdfs:label "put option type"@en ;
+	rdfs:comment "QName: NONE:PutOptionType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:PutOptionWritingParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionWritingParty ;
+	rdfs:label "put option writing party"@en ;
+	rdfs:comment "QName: NONE:PutOptionWritingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The Party which is the writer of the Put Option. This party has the obligation to transact as the Buyer of the Option Underlying."@en ;
+	.
+
+fibo-der-der-opt:ResetableStrikeTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionStrikeTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasResetSchedule ;
+			owl:someValuesFrom fibo-der-der-opt:OptionStrikeResetSchedule ;
+		]
+		;
+	rdfs:label "resetable strike terms"@en ;
+	rdfs:comment "QName: NONE:ResetableStrikeTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:SecuritiesTransactionOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:ContractualOption ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:accruesTo ;
+			owl:someValuesFrom fibo-der-der-opt:OptionBuyer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:isRightTo ;
+			owl:someValuesFrom fibo-der-der-opt:OptionalUnderlyingTransaction ;
+		]
+		;
+	rdfs:label "securities transaction option"@en ;
+	rdfs:comment "QName: NONE:SecuritiesTransactionOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The option itself, that is the right but not the obligation to proceed with a transaction at some time in the future under terms defined in the option contract. This option is held and exercised by the party to the contract which is defined as the option holder or option buyer."@en ;
+	.
+
+fibo-der-der-opt:StrikeFormula
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-bsc:CashflowFormula ;
+	rdfs:label "strike formula"@en ;
+	rdfs:comment "QName: NONE:StrikeFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:StrikePriceSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:PriceSpecification ;
+	rdfs:label "strike price specification"@en ;
+	rdfs:comment "QName: NONE:StrikePriceSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The strike price for the option is the agreed price for the transaction if this takes place. Applies to all options types. Action: Make sure that's there for all Options types."@en ;
+	.
+
+fibo-der-der-opt:UnderlyingOnOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:Underlier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					<https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/Basket>
+					fibo-fbc-fi-fi:FinancialInstrument
+					<https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/MarketRate>
+					fibo-fnd-pas-pas:NegotiableCommodity
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "underlying on option"@en ;
+	rdfs:comment "QName: NONE:UnderlyingOnOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "The instrument or parameter, or combinations thereof, that are used as the basis for the Option Instrument."@en ;
+	.
+
+fibo-der-der-opt:UpOrDown
+	a owl:Class ;
+	rdfs:label "up or down"@en ;
+	rdfs:comment "QName: NONE:UpOrDown" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	.
+
+fibo-der-der-opt:VariablePremiumDeterminationFormula
+	a owl:Class ;
+	rdfs:label "variable premium determination formula"@en ;
+	rdfs:comment "QName: NONE:VariablePremiumDeterminationFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	skos:definition "Formula for agreed determination of the variable premium."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This can be defined just as text. One could extend this but there is not need to at this point."@en ;
+	.
+
+fibo-der-der-opt:accruesTo
+	a owl:ObjectProperty ;
+	rdfs:label "accrues to"@en ;
+	rdfs:comment "QName: NONE:accruesTo" ;
+	rdfs:domain fibo-der-der-opt:SecuritiesTransactionOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionBuyer ;
+	.
+
+fibo-der-der-opt:definesOptional
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-sec:governs ;
+	rdfs:label "defines optional"@en ;
+	rdfs:comment "QName: NONE:definesOptional" ;
+	rdfs:domain fibo-fbc-fi-fi:Option ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionalUnderlyingTransaction ;
+	.
+
+fibo-der-der-opt:effectiveDate
+	a owl:ObjectProperty ;
+	rdfs:label "effective date"@en ;
+	rdfs:comment "QName: NONE:effectiveDate" ;
+	rdfs:domain fibo-der-der-opt:OTCOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The effective date for the option, that is the date from which the derivative contract is valid,"@en ;
+	.
+
+fibo-der-der-opt:enteredIntoBy
+	a owl:ObjectProperty ;
+	rdfs:label "entered into by"@en ;
+	rdfs:comment "QName: NONE:enteredIntoBy" ;
+	rdfs:domain fibo-der-der-opt:OptionPayoutCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionWritingParty ;
+	.
+
+fibo-der-der-opt:expressedAs
+	a owl:ObjectProperty ;
+	rdfs:label "expressed as"@en ;
+	rdfs:comment "QName: NONE:expressedAs" ;
+	rdfs:domain fibo-der-der-opt:OptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionPremiumExpression ;
+	.
+
+fibo-der-der-opt:fixedStrikeAmount
+	a owl:DatatypeProperty ;
+	rdfs:label "fixed strike amount"@en ;
+	rdfs:comment "QName: NONE:fixedStrikeAmount" ;
+	rdfs:domain fibo-der-der-opt:FixedStrikeAmount ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range xsd:decimal ;
+	.
+
+fibo-der-der-opt:hasBuyer
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasCounterparty ;
+	rdfs:label "has buyer"@en ;
+	rdfs:comment "QName: NONE:hasBuyer" ;
+	rdfs:domain fibo-fbc-fi-fi:Option ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionBuyer ;
+	.
+
+fibo-der-der-opt:hasDirection
+	a owl:ObjectProperty ;
+	rdfs:label "has direction"@en ;
+	rdfs:comment "QName: NONE:hasDirection" ;
+	rdfs:domain fibo-der-der-opt:OptionBarrierFeatureEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:UpOrDown ;
+	.
+
+fibo-der-der-opt:hasExpression
+	a owl:ObjectProperty ;
+	rdfs:label "has expression"@en ;
+	rdfs:comment "QName: NONE:hasExpression" ;
+	rdfs:domain fibo-der-der-opt:FixedLookbackStrikeFormula ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:FixedLookbackStrikeFormulaExpression ;
+	.
+
+fibo-der-der-opt:hasExpression.1
+	a owl:ObjectProperty ;
+	rdfs:label "has expression"@en ;
+	rdfs:comment "QName: NONE:hasExpression.1" ;
+	rdfs:domain fibo-der-der-opt:FloatingLookbackStrikeFormula ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:FloatingLookbackFormulaExpression ;
+	.
+
+fibo-der-der-opt:hasFeature
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has feature"@en ;
+	rdfs:comment "QName: NONE:hasFeature" ;
+	rdfs:domain fibo-fbc-fi-fi:Option ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionBarrierFeatureTerms ;
+	.
+
+fibo-der-der-opt:hasFormula
+	a owl:ObjectProperty ;
+	rdfs:label "has formula"@en ;
+	rdfs:comment "QName: NONE:hasFormula" ;
+	rdfs:domain fibo-der-der-opt:FixedLookbackStrikeTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:FixedLookbackStrikeFormula ;
+	.
+
+fibo-der-der-opt:hasFormula.1
+	a owl:ObjectProperty ;
+	rdfs:label "has formula"@en ;
+	rdfs:comment "QName: NONE:hasFormula.1" ;
+	rdfs:domain fibo-der-der-opt:FloatingLookbackStrikeTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:FloatingLookbackStrikeFormula ;
+	.
+
+fibo-der-der-opt:hasOptionType
+	a owl:ObjectProperty ;
+	rdfs:label "has option type"@en ;
+	rdfs:comment "QName: NONE:hasOptionType" ;
+	rdfs:domain fibo-fbc-fi-fi:Option ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionType ;
+	skos:definition "Whether it is a call option (right to purchase a specific underlying asset) or a put option (right to sell a specific underlying asset)"@en ;
+	.
+
+fibo-der-der-opt:hasOptionTypeElectionDate
+	a owl:ObjectProperty ;
+	rdfs:label "has option type election date"@en ;
+	rdfs:comment "QName: NONE:hasOptionTypeElectionDate" ;
+	rdfs:domain fibo-der-der-opt:ChooserOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The date on which the holder of the Chooser option contract determines a choice of either a Call or a Put,"@en ;
+	fibo-fnd-utl-av:explanatoryNote "FpML: 'Date where the holder of a Chooser option contract determines a choice of either a Call or a Put'"@en ;
+	.
+
+fibo-der-der-opt:hasPayer
+	a owl:ObjectProperty ;
+	rdfs:label "has payer"@en ;
+	rdfs:comment "QName: NONE:hasPayer" ;
+	rdfs:domain fibo-der-der-opt:OptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:PremiumPayer ;
+	.
+
+fibo-der-der-opt:hasPaymentDate
+	a owl:ObjectProperty ;
+	rdfs:label "has payment date"@en ;
+	rdfs:comment "QName: NONE:hasPaymentDate" ;
+	rdfs:domain fibo-der-der-opt:OptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The payment date for the Option Premium."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This can be expressed as either an adjustable or relative date. FpML: 'The payment date, which can be expressed as either an adjustable or relative date.'"@en ;
+	.
+
+fibo-der-der-opt:hasPremium
+	a owl:ObjectProperty ;
+	rdfs:label "has premium"@en ;
+	rdfs:comment "QName: NONE:hasPremium" ;
+	rdfs:domain fibo-fbc-fi-fi:Option ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionPremium ;
+	.
+
+fibo-der-der-opt:hasPremiumType
+	a owl:ObjectProperty ;
+	rdfs:label "has premium type"@en ;
+	rdfs:comment "QName: NONE:hasPremiumType" ;
+	rdfs:domain fibo-der-der-opt:OptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionPremiumPaymentArrangement ;
+	skos:definition "The type of premium payment. FpML: 'Premium type for a forward starting equity option.'"@en ;
+	.
+
+fibo-der-der-opt:hasReceiver
+	a owl:ObjectProperty ;
+	rdfs:label "has receiver"@en ;
+	rdfs:comment "QName: NONE:hasReceiver" ;
+	rdfs:domain fibo-der-der-opt:OptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:PremiumReceiver ;
+	.
+
+fibo-der-der-opt:hasResetSchedule
+	a owl:ObjectProperty ;
+	rdfs:label "has reset schedule"@en ;
+	rdfs:comment "QName: NONE:hasResetSchedule" ;
+	rdfs:domain fibo-der-der-opt:ResetableStrikeTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionStrikeResetSchedule ;
+	.
+
+fibo-der-der-opt:hasSchedule
+	a owl:ObjectProperty ;
+	rdfs:label "has schedule"@en ;
+	rdfs:comment "QName: NONE:hasSchedule" ;
+	rdfs:domain fibo-der-der-opt:LookbackStrikeTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:FloatingLookbackStrikeSchedule ;
+	.
+
+fibo-der-der-opt:hasSeller
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasPrincipalParty ;
+	rdfs:label "has seller"@en ;
+	rdfs:comment "QName: NONE:hasSeller" ;
+	rdfs:domain fibo-fbc-fi-fi:Option ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionWritingParty ;
+	.
+
+fibo-der-der-opt:hasStrikeTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has strike terms"@en ;
+	rdfs:comment "QName: NONE:hasStrikeTerms" ;
+	rdfs:domain fibo-fbc-fi-fi:Option ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionStrikeTerms ;
+	.
+
+fibo-der-der-opt:hasValuationDate
+	a owl:ObjectProperty ;
+	rdfs:label "has valuation date"@en ;
+	rdfs:comment "QName: NONE:hasValuationDate" ;
+	rdfs:domain fibo-der-der-opt:OptionValuationTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-der-der-opt:hasValuationTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has valuation terms"@en ;
+	rdfs:comment "QName: NONE:hasValuationTerms" ;
+	rdfs:domain fibo-fbc-fi-fi:Option ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionValuationTerms ;
+	.
+
+fibo-der-der-opt:includesSpecificationTerm
+	a owl:ObjectProperty ;
+	rdfs:label "includes specification term"@en ;
+	rdfs:comment "QName: NONE:includesSpecificationTerm" ;
+	rdfs:domain fibo-der-der-opt:FixedStrikeTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:StrikePriceSpecification ;
+	.
+
+fibo-der-der-opt:isOf
+	a owl:ObjectProperty ;
+	rdfs:label "is of"@en ;
+	rdfs:comment "QName: NONE:isOf" ;
+	rdfs:domain fibo-der-der-opt:ObservableBestValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:LookbackStrikeObservable ;
+	.
+
+fibo-der-der-opt:isRightTo
+	a owl:ObjectProperty ;
+	rdfs:label "is right to"@en ;
+	rdfs:comment "QName: NONE:isRightTo" ;
+	rdfs:domain fibo-der-der-opt:SecuritiesTransactionOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionalUnderlyingTransaction ;
+	.
+
+fibo-der-der-opt:isUsually
+	a owl:ObjectProperty ;
+	rdfs:label "is usually"@en ;
+	rdfs:comment "QName: NONE:isUsually" ;
+	rdfs:domain fibo-der-der-opt:PremiumPayer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionBuyer ;
+	.
+
+fibo-der-der-opt:lookbackPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "lookback period"@en ;
+	rdfs:comment "QName: NONE:lookbackPeriod" ;
+	rdfs:domain fibo-der-der-opt:LookbackStrikeTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	skos:definition "The period in which the strike"@en ;
+	.
+
+fibo-der-der-opt:makes
+	a owl:ObjectProperty ;
+	rdfs:label "makes"@en ;
+	rdfs:comment "QName: NONE:makes" ;
+	rdfs:domain fibo-der-der-opt:OptionCallTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/SettlementTerms> ;
+	.
+
+fibo-der-der-opt:makes.1
+	a owl:ObjectProperty ;
+	rdfs:label "makes"@en ;
+	rdfs:comment "QName: NONE:makes.1" ;
+	rdfs:domain fibo-der-der-opt:OptionPutTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+	.
+
+fibo-der-der-opt:numberOfOptions
+	a owl:DatatypeProperty ;
+	rdfs:label "number of options"@en ;
+	rdfs:comment "QName: NONE:numberOfOptions" ;
+	rdfs:domain fibo-der-der-opt:OTCOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The price per asset, index or basket observed on the trade or effective date. FpML: 'The price per asset, index or basket observed on the trade or effective date.'"@en ;
+	.
+
+fibo-der-der-opt:paymentAmount
+	a owl:ObjectProperty ;
+	rdfs:label "payment amount"@en ;
+	rdfs:comment "QName: NONE:paymentAmount" ;
+	rdfs:domain fibo-der-der-opt:OptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The monetary amount paid as the Premium."@en ;
+	.
+
+fibo-der-der-opt:percentageOfNotional
+	a owl:ObjectProperty ;
+	rdfs:label "percentage of notional"@en ;
+	rdfs:comment "QName: NONE:percentageOfNotional" ;
+	rdfs:domain fibo-der-der-opt:PremiumPercentageOfNotionalExpression ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The amount of premium to be paid expressed as a percentage of the notional value of the transaction."@en ;
+	.
+
+fibo-der-der-opt:pricePerOption
+	a owl:ObjectProperty ;
+	rdfs:label "price per option"@en ;
+	rdfs:comment "QName: NONE:pricePerOption" ;
+	rdfs:domain fibo-der-der-opt:PremiumPricePerOptionExpression ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The amount of premium to be paid expressed as a monetary amount to be paid per option."@en ;
+	.
+
+fibo-der-der-opt:receives
+	a owl:ObjectProperty ;
+	rdfs:label "receives"@en ;
+	rdfs:comment "QName: NONE:receives" ;
+	rdfs:domain fibo-der-der-opt:OptionCallTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+	.
+
+fibo-der-der-opt:receives.1
+	a owl:ObjectProperty ;
+	rdfs:label "receives"@en ;
+	rdfs:comment "QName: NONE:receives.1" ;
+	rdfs:domain fibo-der-der-opt:OptionPutTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/SettlementTerms> ;
+	.
+
+fibo-der-der-opt:references
+	a owl:ObjectProperty ;
+	rdfs:label "references"@en ;
+	rdfs:comment "QName: NONE:references" ;
+	rdfs:domain fibo-der-der-opt:BetterOrWorseOfAssetsPayoutCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:PayoffAssetsList ;
+	.
+
+fibo-der-der-opt:setsOut
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:setsOutContractualEconomicCommitment ;
+	rdfs:label "sets out"@en ;
+	rdfs:comment "QName: NONE:setsOut" ;
+	rdfs:domain fibo-der-der-opt:OptionPayoutTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:OptionPayoutCommitment ;
+	.
+
+fibo-der-der-opt:setsOut.1
+	a owl:ObjectProperty ;
+	rdfs:label "sets out"@en ;
+	rdfs:comment "QName: NONE:setsOut.1" ;
+	rdfs:domain fibo-der-der-opt:OptionBarrierFeatureTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:EarlyExerciseCommitment ;
+	.
+
+fibo-der-der-opt:strikeCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "strike currency"@en ;
+	rdfs:comment "QName: NONE:strikeCurrency" ;
+	rdfs:domain fibo-der-der-opt:OptionStrikeTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "The currency in which the option strike is specified or denominated."@en ;
+	.
+
+fibo-der-der-opt:strikeDeterminationDate
+	a owl:ObjectProperty ;
+	rdfs:label "strike determination date"@en ;
+	rdfs:comment "QName: NONE:strikeDeterminationDate" ;
+	rdfs:domain fibo-der-der-opt:FixedStrikeTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The date on which the strike is determined,"@en ;
+	.
+
+fibo-der-der-opt:strikePriceAbsoluteAmount
+	a owl:ObjectProperty ;
+	rdfs:label "strike price absolute amount"@en ;
+	rdfs:comment "QName: NONE:strikePriceAbsoluteAmount" ;
+	rdfs:domain fibo-der-der-opt:AbsolutePriceStrikeSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The absolute monetary price at which the option has been struck."@en ;
+	.
+
+fibo-der-der-opt:strikePricePercentage
+	a owl:ObjectProperty ;
+	rdfs:label "strike price percentage"@en ;
+	rdfs:comment "QName: NONE:strikePricePercentage" ;
+	rdfs:domain fibo-der-der-opt:PercentageStrikePriceSpecification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The price or level expressed as a percentage of the forward starting spot price."@en ;
+	.
+
+fibo-der-der-opt:subtracts
+	a owl:ObjectProperty ;
+	rdfs:label "subtracts"@en ;
+	rdfs:comment "QName: NONE:subtracts" ;
+	rdfs:domain fibo-der-der-opt:FixedLookbackStrikeFormulaExpression ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:ObservableBestValue ;
+	.
+
+fibo-der-der-opt:subtracts.1
+	a owl:ObjectProperty ;
+	rdfs:label "subtracts"@en ;
+	rdfs:comment "QName: NONE:subtracts.1" ;
+	rdfs:domain fibo-der-der-opt:FloatingLookbackFormulaExpression ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:ObservableBestValue ;
+	.
+
+fibo-der-der-opt:subtractsFrom
+	a owl:ObjectProperty ;
+	rdfs:label "subtracts from"@en ;
+	rdfs:comment "QName: NONE:subtractsFrom" ;
+	rdfs:domain fibo-der-der-opt:FixedLookbackStrikeFormulaExpression ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:FixedStrikeAmount ;
+	.
+
+fibo-der-der-opt:subtractsFrom.1
+	a owl:ObjectProperty ;
+	rdfs:label "subtracts from"@en ;
+	rdfs:comment "QName: NONE:subtractsFrom.1" ;
+	rdfs:domain fibo-der-der-opt:FloatingLookbackFormulaExpression ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range fibo-der-der-opt:ObservableFinalValue ;
+	.
+
+fibo-der-der-opt:threshold
+	a owl:DatatypeProperty ;
+	rdfs:label "threshold"@en ;
+	rdfs:comment "QName: NONE:threshold" ;
+	rdfs:domain fibo-der-der-opt:OptionBarrierFeatureEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The price or other variable (as a number) which has to be met for the event to be deemed to have occurred."@en ;
+	.
+
+fibo-fbc-fi-fi:Option
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-sec:SecuritiesTransactionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasFeature ;
+			owl:onClass fibo-der-der-opt:OptionBarrierFeatureTerms ;
+			owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-der-opt:UnderlyingOnOption ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:definesOptional ;
+			owl:someValuesFrom fibo-der-der-opt:OptionalUnderlyingTransaction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasBuyer ;
+			owl:someValuesFrom fibo-der-der-opt:OptionBuyer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasPremium ;
+			owl:someValuesFrom fibo-der-der-opt:OptionPremium ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasSeller ;
+			owl:someValuesFrom fibo-der-der-opt:OptionWritingParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasStrikeTerms ;
+			owl:someValuesFrom fibo-der-der-opt:OptionStrikeTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasValuationTerms ;
+			owl:someValuesFrom fibo-der-der-opt:OptionValuationTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:someValuesFrom fibo-der-der-opt:SecuritiesTransactionOption ;
+		]
+		;
+	rdfs:label "option contract"@en ;
+	skos:definition "A financial derivative which represents a contract sold by one party (option writer) to another party (option holder). The contract offers the buyer the right, but not the obligation, to buy (call) or sell (put) a security or other financial asset at an agreed-upon price (the strike price) during a certain period of time or on a specific date (exercise date)."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Options may be created Over the Counter, or through an Exchange (in which case the Option Holder may transfer the Option to another party)."@en ;
+	.
+

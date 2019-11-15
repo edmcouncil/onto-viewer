@@ -1,0 +1,130 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/
+# imports: https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GB/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-ge-ge: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> .
+@prefix fibo-be-ge-ukj: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/> .
+@prefix fibo-be-le-lei: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-3166-1: <https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> .
+@prefix lcc-3166-2: <https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/> .
+@prefix lcc-3166-2-gb: <https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GB/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/>
+	a owl:Ontology ;
+	rdfs:label "Government Entities and Jurisdictions for the United Kingdom of Great Britain and Northern Ireland Ontology" ;
+	rdfs:comment "QName: fibo-be-ge-ukj:" ;
+	dct:abstract "This ontology provides government entities and jurisdictions for the United Kingdom of Great Britain and Northern Ireland use in other FIBO ontologies." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2018 EDM Council, Inc." ,
+		"Copyright (c) 2016-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-be-ge-ukj" ;
+	sm:filename "UKGovernmentEntitiesAndJurisdictions.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-2-SubdivisionCodes/> ,
+		<https://www.omg.org/spec/LCC/Countries/Regions/ISO3166-2-SubdivisionCodes-GB/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/> ;
+	skos:scopeNote "The initial version of this ontology reflects the national level only, and does not include the corresponding entities for England, Wales, Scotland, Northern Ireland, or any of the islands and other territories that comprise the United Kingdom." ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-be-ge-ukj:GovernmentOfTheUnitedKingdom
+	a
+		owl:NamedIndividual ,
+		fibo-be-ge-ge:NationalGovernment
+		;
+	rdfs:label "Government of the United Kingdom of Great Britain and Northern Ireland" ;
+	rdfs:comment "QName: fibo-be-ge-ukj:GovernmentOfTheUnitedKingdom" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/> ;
+	rdfs:seeAlso
+		<http://www.parliament.uk/about/how/role/parliament-government/> ,
+		<https://en.wikipedia.org/wiki/Government_of_the_United_Kingdom> ,
+		<https://www.gov.uk/>
+		;
+	skos:definition "individual representing the constitutional monarchy that is the government of the United Kingdom, including the monarch, who is the head of state and sovereign, prime minister, who is the head of government, and cabinet, parliament (House of Lords and House of Commons), and other agencies and institutions that comprise the government" ;
+	fibo-be-ge-ge:hasJurisdiction fibo-be-ge-ukj:UnitedKingdomJurisdiction ;
+	fibo-fnd-rel-rel:governs lcc-3166-1:UnitedKingdom ;
+	fibo-fnd-utl-av:synonym "British government" ;
+	.
+
+fibo-be-ge-ukj:UnitedKingdomEntity
+	a
+		owl:NamedIndividual ,
+		fibo-be-ge-ge:SovereignState
+		;
+	rdfs:label "United Kingdom entity" ;
+	rdfs:comment "QName: fibo-be-ge-ukj:UnitedKingdomEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/> ;
+	rdfs:seeAlso
+		<https://en.wikipedia.org/wiki/Government_of_the_United_Kingdom> ,
+		<https://www.gov.uk/>
+		;
+	skos:definition "individual representing the federated sovereignty and polity that is the United Kingdom of Great Britain and Northern Ireland" ;
+	fibo-be-ge-ge:hasSharedSovereigntyOver lcc-3166-1:UnitedKingdom ;
+	fibo-be-ge-ge:isRepresentedBy fibo-be-ge-ukj:GovernmentOfTheUnitedKingdom ;
+	.
+
+fibo-be-ge-ukj:UnitedKingdomJurisdiction
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-law-jur:Jurisdiction
+		;
+	rdfs:label "jurisdiction of the United Kingdom of Great Britain and Northern Ireland" ;
+	rdfs:comment "QName: fibo-be-ge-ukj:UnitedKingdomJurisdiction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/> ;
+	rdfs:seeAlso
+		<https://en.wikipedia.org/wiki/Courts_of_the_United_Kingdom> ,
+		<https://en.wikipedia.org/wiki/Judiciaries_of_the_United_Kingdom> ,
+		<https://www.supremecourt.uk/>
+		;
+	skos:definition "individual representing the jurisdiction of the Supreme Court of the United Kingdom, the tribunal system, including the Asylum and Immigration Tribunal and the Special Immigration Appeals Commission, Employment tribunals and the Employment Appeal Tribunal" ;
+	skos:scopeNote "Note that the Courts of the United Kingdom are separated into three separate jurisdictions, the Courts of England and Wales, Courts of Scotland and the Courts of Northern Ireland, as the United Kingdom does not have a single unified judicial system, aside from the courts specifically identified in the definition of this individual." ;
+	fibo-be-ge-ge:isJurisdictionOf fibo-be-ge-ukj:GovernmentOfTheUnitedKingdom ;
+	fibo-fnd-law-jur:hasReach lcc-3166-1:UnitedKingdom ;
+	.
+

@@ -1,0 +1,57 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/MetadataFNDParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/MetadataFNDParties/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-pty-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/MetadataFNDParties/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Parties/MetadataFNDParties/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) Parties Module" ;
+	rdfs:comment "QName: fibo-fnd-pty-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Parties Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fnd-pty-mod" ;
+	sm:filename "MetadataFNDParties.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/MetadataFNDParties/> ;
+	.
+
+fibo-fnd-pty-mod:PartiesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Parties" ;
+	rdfs:comment "QName: fibo-fnd-pty-mod:PartiesModule" ;
+	dct:abstract """This module includes ontologies defining concepts that are highly contextual in nature, such as the meaning of a party in a role, an agent playing a role, and so on. Also covers independent roles themselves. 
+
+The definitions for agents and parties in roles provide general, reusable patterns for talking about agents performing roles in specific contexts. For example the same person in the context of aviation could be a pilot, and in the context of family could be a mother.  These pattern will be refined in other FIBO ontologies to define concepts such as issuer, counterparty, underwriter, etc.""" ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Parties Module" ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-fnd-pty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/MetadataFNDParties/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

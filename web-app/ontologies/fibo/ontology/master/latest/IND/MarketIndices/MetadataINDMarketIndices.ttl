@@ -1,0 +1,54 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/MetadataINDMarketIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/MetadataINDMarketIndices/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-mkt-mod: <https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/MetadataINDMarketIndices/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/MetadataINDMarketIndices/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Indices and Indicators (IND) Market Indices Module" ;
+	rdfs:comment "QName: fibo-ind-mkt-mod:" ;
+	dct:abstract "The market indices module includes ontologies defining a variety of reference indices such as credit and equity indicies. Examples include the Dow Jones Industrial Average (DJIA), Standard and Poors (S&P) 500, exchange-specific indices, and the like." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-ind-mkt-mod" ;
+	sm:filename "MetadataINDMarketIndices.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/MetadataINDMarketIndices/> ;
+	.
+
+fibo-ind-mkt-mod:MarketIndicesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Market Indices" ;
+	rdfs:comment "QName: fibo-ind-mkt-mod:MarketIndicesModule" ;
+	dct:abstract "The market indices module includes ontologies defining a variety of reference indices such as credit and equity indicies. Examples include the Dow Jones Industrial Average (DJIA), Standard and Poors (S&P) 500, exchange-specific indices, and the like." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/> ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Bank of New York Mellon" ,
+		"Office of Financial Research (OFR), U.S. Department of the Treasury" ,
+		"Pinnacle Bank (Morgan Hill, California)" ,
+		"State Street Bank and Trust" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC"
+		;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "FIBO-IND-MKT" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/MetadataINDMarketIndices/> ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	.
+

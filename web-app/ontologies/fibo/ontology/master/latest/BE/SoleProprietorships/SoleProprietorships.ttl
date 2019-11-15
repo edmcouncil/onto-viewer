@@ -1,0 +1,124 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/SoleProprietorships/SoleProprietorships/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/OwnershipAndControl/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/SoleProprietorships/SoleProprietorships/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-be-sps-sps: <https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/SoleProprietorships/> .
+@prefix fibo-fnd-aap-ppl: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-oac-oac: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/OwnershipAndControl/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/SoleProprietorships/>
+	a owl:Ontology ;
+	rdfs:label "Sole Proprietorships Ontology" ;
+	rdfs:comment "QName: fibo-be-sps-sps:" ;
+	dct:abstract "This ontology defines the fundamental concepts for representing sole proprietorships -- i.e., organizations that are owned by an individual that is responsible for the liabilities of the organization." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2018 EDM Council, Inc." ,
+		"Copyright (c) 2016-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-be-sps-sps" ;
+	sm:filename "SoleProprietorships.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/OwnershipAndControl/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/SoleProprietorships/SoleProprietorships/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/SoleProprietorships.rdf version of this ontology was modified per the FIBO 2.0 RFC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/SoleProprietorships.rdf version of this ontology was modified to use natural person rather than legally capable person."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-be-sps-sps:SoleProprietor
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-oac-own:Owner ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegallyCompetentNaturalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-oac-oac:ownsAndControls ;
+				owl:someValuesFrom fibo-be-sps-sps:SoleProprietorship ;
+			] ;
+		]
+		;
+	rdfs:label "sole proprietor" ;
+	rdfs:comment "QName: fibo-be-sps-sps:SoleProprietor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/SoleProprietorships/> ;
+	skos:definition "a party that owns a business, has the rights to all profits from that business and is considered a single entity (unincorporated) together with that business for tax and liability purposes" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	fibo-fnd-utl-av:explanatoryNote "A sole proprietor has unlimited liability with respect to any business debts." ;
+	fibo-fnd-utl-av:synonym
+		"sole owner" ,
+		"sole trader"
+		;
+	.
+
+fibo-be-sps-sps:SoleProprietorship
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-lp:BusinessEntity ,
+		fibo-fnd-org-fm:FormalOrganization ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-oac-oac:isOwnedAndControlledBy ;
+			owl:onClass fibo-be-le-lp:LegallyCompetentNaturalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-lcap:hasCapacity ;
+			owl:someValuesFrom fibo-fnd-law-lcap:LiabilityCapacity ;
+		]
+		;
+	rdfs:label "sole proprietorship" ;
+	rdfs:comment "QName: fibo-be-sps-sps:SoleProprietorship" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/SoleProprietorships/> ;
+	skos:definition "an unincorporated business owned by a single person" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	.
+

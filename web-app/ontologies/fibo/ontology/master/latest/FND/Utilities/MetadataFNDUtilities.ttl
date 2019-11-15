@@ -1,0 +1,59 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/MetadataFNDUtilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/MetadataFNDUtilities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/MetadataFNDUtilities/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/MetadataFNDUtilities/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) Utilities Module" ;
+	rdfs:comment "QName: fibo-fnd-utl-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Utilities Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fnd-utl-mod" ;
+	sm:filename "MetadataFNDUtilities.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/MetadataFNDUtilities/> ;
+	.
+
+fibo-fnd-utl-mod:UtilitiesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Utilities" ;
+	rdfs:comment "QName: fibo-fnd-utl-mod:UtilitiesModule" ;
+	dct:abstract "Ontologies which provide annotations and business facing datatypes to be used in other ontologies. These ontologies are not expected to be used directly by business stakeholders and are for the definition of material which is used by semantic modelers in Foundations and in other FIBO ontologies." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title
+		"FIBO FND Utilities Module" ,
+		"Financial Industry Business Ontology (FIBO) Foundations (FND) Utilities Module"
+		;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-fnd-utl" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/MetadataFNDUtilities/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

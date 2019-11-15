@@ -1,0 +1,77 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditySpots/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Spots/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditySpots/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-com-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/> .
+@prefix fibo-der-com-sp: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySpots/> .
+@prefix fibo-der-der-sp: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySpots/>
+	a owl:Ontology ;
+	rdfs:label "CommoditySpots"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Spot transactions on commodities, along with their corresponding or implied contracts. These are not a derivative but rather define the basic kind of spot transaction for the commodities themselves in the spot market." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Spots/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditySpots/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-com-sp:CommoditiesSpotContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-com-ctr:CommodityDerivativeContract ,
+		fibo-der-der-sp:SpotContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-com-sp:transacts ;
+			owl:someValuesFrom fibo-fnd-pas-pas:NegotiableCommodity ;
+		]
+		;
+	rdfs:label "commodities spot contract"@en ;
+	rdfs:comment "QName: NONE:CommoditiesSpotContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySpots/> ;
+	skos:definition "The contract defined for or implied in a Commodities spot transaction."@en ;
+	.
+
+fibo-der-com-sp:CommoditiesSpotTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-sp:SpotTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-sp:hasImpliedContract ;
+			owl:someValuesFrom fibo-der-com-sp:CommoditiesSpotContract ;
+		]
+		;
+	rdfs:label "commodities spot transaction"@en ;
+	rdfs:comment "QName: NONE:CommoditiesSpotTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySpots/> ;
+	.
+
+fibo-der-com-sp:transacts
+	a owl:ObjectProperty ;
+	rdfs:label "transacts"@en ;
+	rdfs:comment "QName: NONE:transacts" ;
+	rdfs:domain fibo-der-com-sp:CommoditiesSpotContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySpots/> ;
+	rdfs:range fibo-fnd-pas-pas:NegotiableCommodity ;
+	.
+

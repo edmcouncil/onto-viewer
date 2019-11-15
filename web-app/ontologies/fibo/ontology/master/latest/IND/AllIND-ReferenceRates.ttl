@@ -1,0 +1,76 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/AllIND-ReferenceRates/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-EuropeAndNorthAmerica/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/AllIND-NorthAmerica/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/CommonInterestRates/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/AllIND-ReferenceRates/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ir-cm: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/CommonInterestRates/> .
+@prefix fibo-indrr-all: <https://spec.edmcouncil.org/fibo/ontology/IND/AllIND-ReferenceRates/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/AllIND-ReferenceRates/>
+	a owl:Ontology ;
+	rdfs:label "Indices and Indicators Domain, Reference Rates" ;
+	rdfs:comment "QName: fibo-indrr-all:" ;
+	dct:abstract "The FIBO Indices and Indicators (IND) Domain covers market indices and reference rates including economic indicators, foreign exchange, interest rates, and other benchmarks.  The ontologies cover quoted interest rates, economic measures such as employment rates, and quoted indices required to support baskets of securities, including specific kinds of securities in share indices or bond indices, as well as credit indices." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Indices and Indicators (IND) Domain, Reference Rates" ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:contributor
+		"88 Solutions" ,
+		"Adaptive, Inc." ,
+		"Bloomberg LP" ,
+		"Bureau of Economic Analysis (BEA, US Department of Commerce)" ,
+		"Bureau of Labor Statistics (BLS, US Department of Commerce)" ,
+		"Census Bureau (US Department of Commerce)" ,
+		"Citigroup" ,
+		"Federal Reserve Bank of Kansas City" ,
+		"HP Enterprise / Mphasis" ,
+		"No Magic" ,
+		"Nordea Bank AB" ,
+		"Pinnacle Bank (Morgan Hill, California)" ,
+		"State Street Bank and Trust" ,
+		"Statistics Canada" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC"
+		;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-indrr-all" ;
+	sm:filename "AllIND-ReferenceRates.rdf" ;
+	sm:keyword
+		"economic indicator" ,
+		"foreign exchange" ,
+		"interest rate" ,
+		"market index"
+		;
+	sm:moduleAbbreviation "fibo-ind" ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-EuropeAndNorthAmerica/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/AllIND-NorthAmerica/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/CommonInterestRates/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/AllIND-ReferenceRates/> ;
+	fibo-fnd-utl-av:explanatoryNote "The 'all' ontology for IND with Reference Rates is provided for convenience for FIBO users.  It imports all of the Production (Released) ontologies that comprise the FIBO Foundations (FND), Business Entities (BE), Financial Business and Commerce (FBC), and Indices and Indicators (IND) 2.0 domains, including all individuals, with additional FpML reference rates by currency." ;
+	.
+

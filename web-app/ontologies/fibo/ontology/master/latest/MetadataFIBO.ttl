@@ -1,0 +1,107 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MetadataFIBO/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/MetadataBE/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/MetadataBP/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/MetadataCAE/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/MetadataCIV/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/MetadataDER/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/MetadataFBC/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MetadataIND/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/MetadataLOAN/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/MetadataMD/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/MetadataSEC/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MetadataFIBO/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-mod: <https://spec.edmcouncil.org/fibo/ontology/BE/MetadataBE/> .
+@prefix fibo-bp-mod: <https://spec.edmcouncil.org/fibo/ontology/BP/MetadataBP/> .
+@prefix fibo-cae-mod: <https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/> .
+@prefix fibo-civ-mod: <https://spec.edmcouncil.org/fibo/ontology/CIV/MetadataCIV/> .
+@prefix fibo-der-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/MetadataDER/> .
+@prefix fibo-fbc-mod: <https://spec.edmcouncil.org/fibo/ontology/FBC/MetadataFBC/> .
+@prefix fibo-fnd-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/> .
+@prefix fibo-ind-mod: <https://spec.edmcouncil.org/fibo/ontology/IND/MetadataIND/> .
+@prefix fibo-loan-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/MetadataLOAN/> .
+@prefix fibo-md-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/MetadataMD/> .
+@prefix fibo-sec-mod: <https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/> .
+@prefix fibo-spec: <https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Specification" ;
+	rdfs:comment "QName: fibo-spec:" ;
+	dct:abstract "This is the metadata ontology used to describe the FIBO Specification." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-spec" ;
+	sm:filename "MetadataFIBO.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/MetadataBE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/MetadataBP/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/MetadataCAE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/MetadataCIV/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/MetadataDER/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/MetadataFBC/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MetadataIND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/MetadataLOAN/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/MetadataMD/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/MetadataSEC/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/20180801/MetadataFIBO/> ;
+	.
+
+fibo-spec:FIBOSpecification
+	a
+		owl:NamedIndividual ,
+		sm:Specification
+		;
+	rdfs:label "Financial Industry Business Ontology" ;
+	rdfs:comment "QName: fibo-spec:FIBOSpecification" ;
+	dct:abstract """The Financial Industry Business Ontology (FIBO) is a collaborative effort among industry practitioners, semantic technology experts and information scientists to standardize the language used to precisely define the terms, conditions, and characteristics of financial instruments; the legal and relationship structure of business entities; the content and time dimensions of market data; and the legal obligations and process aspects of corporate actions.  The definitions and relationships that comprise the FIBO specification have been modularized into a number of domains, which in turn include a number of modules, each of which is further modularized into one or more constituent ontologies. 
+
+The FIBO ontologies are available as OWL 2 ontologies from the EDM Council site, and as UML models that are compliant with the Semantics for Information Modeling and Federation (SMIF) draft specification, and are linked at https://spec.edmcouncil.org/fibo/ontology/ .""" ;
+	dct:hasPart
+		fibo-be-mod:BEDomain ,
+		fibo-bp-mod:BPDomain ,
+		fibo-cae-mod:CAEDomain ,
+		fibo-civ-mod:CIVDomain ,
+		fibo-der-mod:DERDomain ,
+		fibo-fbc-mod:FBCDomain ,
+		fibo-fnd-mod:FNDDomain ,
+		fibo-ind-mod:INDDomain ,
+		fibo-loan-mod:LOANDomain ,
+		fibo-md-mod:MDDomain ,
+		fibo-sec-mod:SECDomain
+		;
+	dct:issued "2018-06-30T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO)" ;
+	sm:copyright "Copyright (c) 2013-2018 EDM Council, Inc." ;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:keyword
+		"FIBO" ,
+		"Financial Industry Business Ontology"
+		;
+	sm:specificationAbbreviation "FIBO" ;
+	sm:specificationURL "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	sm:technologyArea "formal semantics" ;
+	sm:topicArea "finance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/> ;
+	rdfs:seeAlso "http://www.edmcouncil.org/"^^xsd:anyURI ;
+	.
+

@@ -1,0 +1,2689 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Communications/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoanGeneric/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-lei: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-dae-gty: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-caa: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-acc-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/Valuation/> .
+@prefix fibo-fnd-agr-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-arr-com: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-arr-rep: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-org-org: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-plc-adr: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> .
+@prefix fibo-fnd-plc-loc: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-loan-ln-ln: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> .
+@prefix fibo-loan-lnx-lgn: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanExt/LoanGeneric/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/>
+	a owl:Ontology ;
+	rdfs:label "Loan Core Ontology" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:" ;
+	dct:abstract "This ontology defines the fundamental concepts for loans, with  emphasis on mortgages.  The loan contract is the core concept. It includes includes the primary obligations to fund the loan and to pay it back according to payment schedules. The contract is also connected to various parties including borrower, lender, and originator.  Kinds of loans covered in this ontology include open and closed end, secured and mortgages.  Another major thread of the loan core ontology is credit risk assessment, which includes property appraisals, security agreements, pre-approvals, credit scores and credit reports." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:copyright """Copyright (c) 2016-2018 EDM Council, Inc.
+Copyright (c) 2016-2018 Object Management Group, Inc.""" ;
+	sm:fileAbbreviation "fibo-loan-ln-ln" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Communications/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoanGeneric/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/> ;
+	owl:versionInfo "Created with e6Tools Graphical OWL Editor from D:\\SEMANTIC-ARTS\\NAS\\ClientsAndPartners\\EDM Council\\fibo ontologies\\LoanOntology\\loans.vsdx Page:loanCore" ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-fnd-plc-loc:RealEstate
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-val:hasEstimatedValue ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-plc-adr:hasAddress ;
+			owl:onClass fibo-fnd-plc-adr:PhysicalAddress ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:onClass fibo-loan-ln-ln:RealPropertyAppraisal ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:ConstructionType ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:DwellingCapacity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:ManufacturedHomeLegalClassification ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasNumberOfAffordableDwellingUnits ;
+			owl:someValuesFrom xsd:positiveInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasNumberOfDwellingUnits ;
+			owl:someValuesFrom xsd:positiveInteger ;
+		]
+		;
+	.
+
+fibo-loan-ln-ln:AllBorrowersMonthlyIncome
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:MonetaryAmount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:isBasedOn ;
+			owl:someValuesFrom fibo-loan-ln-ln:BorrowerMonthlyIncome ;
+		]
+		;
+	rdfs:label "all borrowers monthly income" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:AllBorrowersMonthlyIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "total monthly qualifying income for all borrowers on the loan" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:usageNote "This should be computed from the income of the individual borrowers." ;
+	.
+
+fibo-loan-ln-ln:AmortizationSchedule
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:Schedule ;
+	rdfs:label "amortization schedule" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:AmortizationSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a schedule which specifies changes in the scheduled balance of loan principal over time" ;
+	skos:editorialNote "If needed, we can extend this to include the idea of an AmortizationScheduledPayment which includes interest and principal and many of which comprise an AmortizationSchedule" ;
+	fibo-fnd-utl-av:explanatoryNote "For simplicity, this definition assums that 'month n' ' on an AmortizationSchedule corresoponds to a CalculatedDate." ;
+	.
+
+fibo-loan-ln-ln:AmortizationType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "a category indicating how the loan amortizes" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:AmortizationType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:AutomatedUnderwritingSystem
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-aap-agt:AutomatedSystem ;
+	rdfs:label "automated underwriting system" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:AutomatedUnderwritingSystem" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a software sytstem that produces loan underwriting decisions" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/a/automated_underwriting.asp" ;
+	.
+
+fibo-loan-ln-ln:BorrowerMonthlyIncome
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:MonetaryAmount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:Borrower ;
+		]
+		;
+	rdfs:label "borrower monthly income" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:BorrowerMonthlyIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "total monthly qualifying income of the potential borrower" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:CashOutStatus
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "cash out status" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CashOutStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating the extent to which funds are released to the borrower on a new loan origination that is  refinancing an existing loan" ;
+	fibo-fnd-utl-av:explanatoryNote "This is subject to lender and/or investor policy(s)." ;
+	.
+
+fibo-loan-ln-ln:ClosedEndLoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DebtInstrument ,
+		fibo-loan-ln-ln:LoanContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasNoteAmount ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		]
+		;
+	rdfs:label "closed end loan contract" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:ClosedEndLoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a loan contract that has an amount borrowed for a fixed amount of time, and is not considered open ended" ;
+	fibo-fnd-utl-av:adaptedFrom "2015 Revised HMDA regulation" ;
+	.
+
+fibo-loan-ln-ln:CombinedLTVRatioPercent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Percentage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasRateValue ;
+			owl:allValuesFrom xsd:decimal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:hasQuantityKind ;
+			owl:allValuesFrom fibo-fnd-acc-cur:MonetaryMeasure ;
+		]
+		;
+	rdfs:label "combined loan to value ratio percent" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CombinedLTVRatioPercent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the ratio of the total amount of debt that is secured by the property to the value of the property relied on." ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:CommitmentToFund
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-ln-ln:CommitmentToPay ;
+	rdfs:label "commitment to fund" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CommitmentToFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a commitment that obliges the lender to provide funds pursuant to a loan contract" ;
+	.
+
+fibo-loan-ln-ln:CommitmentToPay
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-psch:PaymentObligation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:onClass fibo-loan-lnx-lgn:LineItem ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fnd-pas-psch:Payee ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fnd-pas-psch:Payer ;
+		]
+		;
+	rdfs:label "commitment to pay" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CommitmentToPay" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a commitment obliging one party to make a payment to another party (e.g. to fund a loan, make payments, pay origination fees)" ;
+	skos:editorialNote "Future consideration: perhaps add payment methods, and timing constraints." ;
+	.
+
+fibo-loan-ln-ln:CommitmentToRepay
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-ln-ln:CommitmentToPay ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:someValuesFrom fibo-loan-lnx-lgn:PaymentHistory ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:someValuesFrom fibo-loan-lnx-lgn:PaymentSchedule ;
+		]
+		;
+	rdfs:label "commitment to repay" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CommitmentToRepay" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a commitment obliging the borrower to repay funds that have been loaned, in a manner pursuant to a loan contract" ;
+	.
+
+fibo-loan-ln-ln:CommitmentToReport
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-agr:Commitment ;
+	rdfs:label "commitment to report" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CommitmentToReport" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a commitment obliging a party to deliver a report" ;
+	.
+
+fibo-loan-ln-ln:ConstructionType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "construction type" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:ConstructionType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a particular kind of construction" ;
+	.
+
+fibo-loan-ln-ln:CreditEvaluationProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-lnx-lgn:InformationProduct ;
+	rdfs:label "credit evaluation product" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditEvaluationProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a particular kind of credit evaluation" ;
+	.
+
+fibo-loan-ln-ln:CreditInquiry
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Class ;
+			owl:intersectionOf (
+				fibo-fnd-arr-com:Request
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+					owl:someValuesFrom fibo-loan-ln-ln:CreditInquiryType ;
+				]
+			) ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isSentFrom ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isSentTo ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/playsRole> ;
+				owl:someValuesFrom fibo-loan-ln-ln:CreditRepository ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasPartyBeingChecked ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		]
+		;
+	rdfs:label "credit inquiry" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditInquiry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a request from a lender to a credit repository to obtain information regarding a prospective borrower's creditworthiness" ;
+	.
+
+fibo-loan-ln-ln:CreditInquiryType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "credit inquiry type" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditInquiryType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating whether a credit inquiry is a result of a borrower's direct authorization or by some indirect means" ;
+	.
+
+fibo-loan-ln-ln:CreditMessage
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-fnd-utl-val:TextValue
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+				owl:someValuesFrom fibo-loan-ln-ln:CreditMessageType ;
+			]
+		) ;
+	] ;
+	rdfs:label "credit message" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a textual annotation on a credit report to notify a reviewer of special or exceptional information" ;
+	.
+
+fibo-loan-ln-ln:CreditMessageType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "credit message type" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditMessageType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a particular kind of credit message" ;
+	.
+
+fibo-loan-ln-ln:CreditReport
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-rep:Report ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-loan-ln-ln:CreditInquiry ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-loan-ln-ln:CreditScore ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-loan-ln-ln:CreditTradeLine ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-loan-ln-ln:PublicRecord ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-pas-caa:realizes ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditReportProduct ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:someValuesFrom fibo-fnd-arr-id:Identifier ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-doc:hasDataSource ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/playsRole> ;
+				owl:someValuesFrom fibo-loan-ln-ln:CreditRepository ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasAsOfDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditMessage ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditReportCategory ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProducedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditReportingAgency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasCoveragePeriod ;
+			owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasPartyBeingChecked ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		]
+		;
+	rdfs:label "credit report" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditReport" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a report describing the creditworthiness and related credit attributes of a borrower." ;
+	fibo-fnd-utl-av:explanatoryNote "This is typically provided by a credit reporting agency but could be produced by an internal proprietary model as well." ;
+	.
+
+fibo-loan-ln-ln:CreditReportCategory
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "credit report category" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditReportCategory" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a particular kind of credit report, often available from multiple vendors" ;
+	.
+
+fibo-loan-ln-ln:CreditReportProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-ln-ln:CreditEvaluationProduct ;
+	rdfs:label "credit report product" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditReportProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a specifically branded credit report offered in the market place" ;
+	.
+
+fibo-loan-ln-ln:CreditReportRequest
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-com:Request ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isRequestFor ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditReportProduct ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isSentFrom ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isSentTo ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					[
+						a owl:Restriction ;
+						owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/playsRole> ;
+						owl:someValuesFrom fibo-loan-ln-ln:CreditReportingAgency ;
+					]
+					[
+						a owl:Restriction ;
+						owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/playsRole> ;
+						owl:someValuesFrom fibo-loan-ln-ln:CreditRepository ;
+					]
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasPartyBeingChecked ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		]
+		;
+	rdfs:label "credit report request" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditReportRequest" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the act of requesting a credit report from a credit report provider" ;
+	.
+
+fibo-loan-ln-ln:CreditReportResponse
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-oc:Occurrence ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isResponseTo ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditReportRequest ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isSentFrom ;
+			owl:someValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isSentTo ;
+			owl:someValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		]
+		;
+	rdfs:label "credit report response" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditReportResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the act of responding to a credit report request" ;
+	.
+
+fibo-loan-ln-ln:CreditReportingAgency
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialServiceProvider ;
+	rdfs:label "credit reporting agency (i)" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditReportingAgency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "an organization that provides credit reports" ;
+	.
+
+fibo-loan-ln-ln:CreditRepository
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialServiceProvider ;
+	rdfs:label "credit repository (i)" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditRepository" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a credit reporting agency that is a clearinghouse for information on the credit rating of individuals or firms" ;
+	fibo-fnd-utl-av:adaptedFrom "myFICO glossary of credit terms" ;
+	.
+
+fibo-loan-ln-ln:CreditRiskAssessment
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:isBasedOn ;
+			owl:onClass fibo-loan-ln-ln:AutomatedUnderwritingSystem ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasInput ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditReport ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasInput ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditScore ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasInput ;
+			owl:someValuesFrom fibo-loan-ln-ln:PreApprovalContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasInput ;
+			owl:someValuesFrom fibo-loan-ln-ln:PreApprovalRequest ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasOutput ;
+			owl:someValuesFrom fibo-loan-ln-ln:UnderwritingDecision ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:UnderwritingAutomation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:usesFactor ;
+			owl:someValuesFrom fibo-loan-ln-ln:AllBorrowersMonthlyIncome ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:usesFactor ;
+			owl:someValuesFrom fibo-loan-ln-ln:BorrowerMonthlyIncome ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:usesFactor ;
+			owl:someValuesFrom fibo-loan-ln-ln:CombinedLTVRatioPercent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:usesFactor ;
+			owl:someValuesFrom fibo-loan-ln-ln:TotalDebtExpenseRatio ;
+		]
+		;
+	rdfs:label "credit risk assessment" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditRiskAssessment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a risk assessment that focuses on determining the likelihood of a potential borrower repaying a loan" ;
+	fibo-fnd-utl-av:usageNote "If the risk assessment is based on one of the automated underwriting sytems, then the underwriting automation category is 'automated'. This dependency could be automated (as it were)." ;
+	.
+
+fibo-loan-ln-ln:CreditScore
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:onClass fibo-loan-ln-ln:CreditScoreFactor ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:isDerivedFrom ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditScoreModel ;
+		]
+		;
+	rdfs:label "credit score" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditScore" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-loan-ln-ln:CreditScoreCategory
+			fibo-loan-ln-ln:CreditScoreNumber
+		) ;
+	] ;
+	skos:definition "a quantitative measure or category that results from a credit evaluation model" ;
+	.
+
+fibo-loan-ln-ln:CreditScoreCategory
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:Classifier ,
+		fibo-fnd-utl-alx:Measure
+		;
+	rdfs:label "credit score category" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditScoreCategory" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	owl:disjointWith fibo-loan-ln-ln:CreditScoreNumber ;
+	skos:definition "a credit score that is a qualitative measure" ;
+	.
+
+fibo-loan-ln-ln:CreditScoreFactor
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-fnd-utl-alx:Measure
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-dt-oc:isInputTo ;
+				owl:someValuesFrom fibo-loan-ln-ln:CreditScoreModel ;
+			]
+		) ;
+	] ;
+	rdfs:label "credit score factor" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditScoreFactor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "something that is taken into account when determining a CreditScore" ;
+	.
+
+fibo-loan-ln-ln:CreditScoreModel
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-aap-agt:hasName ;
+		owl:someValuesFrom xsd:string ;
+	] ;
+	rdfs:label "credit score model" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditScoreModel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-fnd-utl-alx:CalculationFormula
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+				owl:someValuesFrom fibo-loan-ln-ln:CreditScoreModelType ;
+			]
+		) ;
+	] ;
+	skos:definition "an algorithm for computing the credit score of e.g. a credit applicant" ;
+	fibo-fnd-utl-av:usageNote "Use dct:hasVersion to specify a version for the credit score model." ;
+	.
+
+fibo-loan-ln-ln:CreditScoreModelType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "credit score model type" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditScoreModelType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a type corresonding to a family of credit scoring algorithms sharing common characteristics" ;
+	.
+
+fibo-loan-ln-ln:CreditScoreNumber
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Measure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:hasNumericValue ;
+			owl:someValuesFrom xsd:decimal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:isDerivedFrom ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditScoreModel ;
+		]
+		;
+	rdfs:label "credit score number" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditScoreNumber" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a credit score that is a quantitative measure" ;
+	.
+
+fibo-loan-ln-ln:CreditTradeLine
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:isDerivedFrom ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:intersectionOf (
+					fibo-fnd-arr-doc:Record
+					[
+						a owl:Restriction ;
+						owl:onProperty fibo-fnd-rel-rel:isIncludedIn ;
+						owl:someValuesFrom fibo-fbc-pas-caa:Account ;
+					]
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIncludedIn ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditReport ;
+		]
+		;
+	rdfs:label "credit trade line" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:CreditTradeLine" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "an information product derived from the transaction history of a credit account" ;
+	.
+
+fibo-loan-ln-ln:DwellingCapacity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "dwelling capacity" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:DwellingCapacity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating how many dwellings some property has" ;
+	.
+
+fibo-loan-ln-ln:Ethnicity
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty skos:broaderTransitive ;
+			owl:someValuesFrom fibo-loan-ln-ln:Ethnicity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:classifies ;
+			owl:someValuesFrom fibo-be-le-lp:LegallyCompetentNaturalPerson ;
+		]
+		;
+	rdfs:label "ethnicity" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:Ethnicity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category based on a cultural factors, including nationality, regional culture, ancestry, and language" ;
+	.
+
+fibo-loan-ln-ln:HowSubmitted
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "how submitted" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:HowSubmitted" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating whether the applicant or borrower submitted the application for the covered loan directly to the reporting financial institution" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:LenderLienPosition
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "lender lien position" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:LenderLienPosition" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating whether the lender has the primary lien position" ;
+	.
+
+fibo-loan-ln-ln:LoanApplication
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-com:Application ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:isInitiallyPayable ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:boolean ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-loan-ln-ln:AllBorrowersMonthlyIncome ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-loan-ln-ln:BorrowerMonthlyIncome ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-loan-ln-ln:CombinedLTVRatioPercent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-loan-ln-ln:TotalDebtExpenseRatio ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:isPreApprovalRequested ;
+			owl:someValuesFrom xsd:boolean ;
+		]
+		;
+	rdfs:label "loan application" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:LoanApplication" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a request by a potential borrower to a potential lender to borrow money containing information used to decide whether to grant the loan" ;
+	.
+
+fibo-loan-ln-ln:LoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-dbt:CreditAgreement ,
+		fibo-fnd-agr-ctr:MutualContractualAgreement ,
+		fibo-fnd-agr-ctr:WrittenContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:onClass fibo-fbc-dae-gty:Guaranty ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasInterestRate ;
+			owl:onClass fibo-fnd-acc-cur:InterestRate ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:onClass fibo-loan-ln-ln:CommitmentToPay ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:onClass fibo-loan-ln-ln:CommitmentToRepay ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-loan-ln-ln:SecurityAgreement ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:onClass fibo-loan-ln-ln:UniversalLoanIdentifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:isInitiallyPayable ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:boolean ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasBorrower ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:Borrower ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasLender ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:Lender ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:hasDurationToMaturity ;
+			owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-pas-caa:realizes ;
+			owl:someValuesFrom fibo-loan-ln-ln:LoanOffer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasMonetaryAmount ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:someValuesFrom fibo-loan-ln-ln:CommitmentToFund ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:someValuesFrom fibo-loan-ln-ln:CreditRiskAssessment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:LenderLienPosition ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:LoanMarketCategory ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasBalloonPayment ;
+			owl:someValuesFrom xsd:boolean ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasFirstRateChangeTerm ;
+			owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasNegativeAmortization ;
+			owl:someValuesFrom xsd:boolean ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasOriginatorCompany ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:intersectionOf (
+					fibo-fnd-org-fm:FormalOrganization
+					[
+						a owl:Restriction ;
+						owl:onProperty fibo-fnd-rel-rel:has ;
+						owl:someValuesFrom fibo-loan-ln-ln:NMLSR_ID ;
+					]
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasOriginatorPerson ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:intersectionOf (
+					fibo-be-le-lp:LegallyCompetentNaturalPerson
+					[
+						a owl:Restriction ;
+						owl:onProperty fibo-fnd-rel-rel:has ;
+						owl:someValuesFrom fibo-loan-ln-ln:NMLSR_ID ;
+					]
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasPrePaymentPenaltyTerm ;
+			owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasTotalClosingCosts ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasTotalPointsAndFees ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:isInterestOnly ;
+			owl:someValuesFrom xsd:boolean ;
+		]
+		;
+	rdfs:label "loan contract" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:LoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "an agreement whereby one party extends money or credit to another party with the agreement that the borrowed money will be repaid according to specific terms" ;
+	fibo-fnd-utl-av:adaptedFrom "http://financial-dictionary.thefreedictionary.com/Loan" ;
+	fibo-fnd-utl-av:explanatoryNote "Not all loan contracts are debt instruments, the latter requires that the debt obligations are transferable. See: http://www.investopedia.com/terms/d/debtinstrument.asp" ;
+	fibo-fnd-utl-av:usageNote "There are many terms of a loan contract. They are shown here connected directly to the contract, which is true in the world. For modeling convenience, you have the option to group the terms together into containers that the LoanContract points to. The terms are then connected to the containers instead of to the contract.   For example, an instance of the class 'interest payment terms' could be used to contain all the interest rate terms for a given loan contract." ;
+	.
+
+fibo-loan-ln-ln:LoanMarketCategory
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:IndustrySectorClassifier ;
+	rdfs:label "loan market category" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:LoanMarketCategory" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating the market domain in which the loan product is offered" ;
+	.
+
+fibo-loan-ln-ln:LoanOffer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:Offering ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:onClass fibo-loan-lnx-lgn:LineItem ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-loan-ln-ln:LoanProduct ;
+		]
+		;
+	rdfs:label "loan offer" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:LoanOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a generic loan product offered to the public, or a specific offer tailored to particular circumstances aimed at one potential borrower" ;
+	.
+
+fibo-loan-ln-ln:LoanProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialProduct ;
+	rdfs:label "loan product" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:LoanProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a type of loan that a borrower may acquire from a lending institution with specific characteristics and terms" ;
+	skos:editorialNote "Future consideration: perhaps flesh this out more and align with schema.org." ;
+	.
+
+fibo-loan-ln-ln:ManufacturedHomeLegalClassification
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "manufactured home legal classification" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:ManufacturedHomeLegalClassification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating whether the covered loan is secured by a manufactured home only or with land as well" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:MortgageLoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-ln-ln:ClosedEndLoanContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:assumes ;
+			owl:onClass fibo-loan-ln-ln:MortgageLoanContract ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasClosingDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		]
+		;
+	rdfs:label "mortgage loan contract" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:MortgageLoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-loan-ln-ln:LoanContract
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:comprises ;
+				owl:someValuesFrom [
+					a owl:Class ;
+					owl:intersectionOf (
+						fibo-loan-ln-ln:SecurityAgreement
+						[
+							a owl:Restriction ;
+							owl:onProperty fibo-fnd-rel-rel:has ;
+							owl:someValuesFrom [
+								a owl:Class ;
+								owl:intersectionOf (
+									fibo-fbc-dae-dbt:Collateral
+									[
+										a owl:Restriction ;
+										owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+										owl:someValuesFrom fibo-fnd-plc-loc:RealEstate ;
+									]
+								) ;
+							] ;
+						]
+					) ;
+				] ;
+			]
+		) ;
+	] ;
+	skos:definition "a loan contract that is secured by real property" ;
+	fibo-fnd-utl-av:adaptedFrom "the Cambridge Business English Dictionary" ;
+	.
+
+fibo-loan-ln-ln:MortgageLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "mortgage loan purpose" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:MortgageLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the purpose for which mortgage loan proceeds will be used, such as real property purchase, dwelling construction, or loan refinancing" ;
+	.
+
+fibo-loan-ln-ln:NMLSR_ID
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/LicenseIdentifier> ;
+	rdfs:label "Nationwide Mortgage Licensing System and Registry Identifier" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:NMLSR_ID" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the number permanently assigned by the Nationwide Mortgage Licensing System and Registry (NMLS) for each company, branch, and individual that maintains a single account on NMLS." ;
+	fibo-fnd-utl-av:abbreviation "NMLSR ID" ;
+	fibo-fnd-utl-av:adaptedFrom "http://mortgage.nationwidelicensingsystem.org/about/Pages/NMLSID.aspx" ;
+	.
+
+fibo-loan-ln-ln:OpenEndLoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-ln-ln:LoanContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasCreditLimit ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "open end loan contract" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:OpenEndLoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a loan contract for a line of credit where a borrower may take money and pay it back up to an agreed limit, and interest is charged only on the amount that remains, which may be paid off at any time within the period of the line." ;
+	fibo-fnd-utl-av:adaptedFrom "Cambridge Business English Dictionary." ;
+	fibo-fnd-utl-av:explanatoryNote
+		"In summary, open ended means not having fixed maturity date and scheduled repayments." ,
+		"There is a credit limit most of the time. The exception is reverse mortgage with tenure payment."
+		;
+	.
+
+fibo-loan-ln-ln:OwnershipInterestType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "ownership interest type" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:OwnershipInterestType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating the nature of the applicant's or borrower's ownership or leasehold interest in the land where the manufactured home is located." ;
+	skos:editorialNote "It would be possible to create a subclas of this for other called something like CustomOwnershipType if it was necessary to keep the standard options separate." ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:usageNote "The 'other' category with a custom description can be handled by creating another instance of this class." ;
+	.
+
+fibo-loan-ln-ln:PreApprovalContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:WrittenContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasInterestRate ;
+			owl:someValuesFrom fibo-fnd-acc-cur:InterestRate ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasApprovedAmount ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		]
+		;
+	rdfs:label "pre approval contract" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:PreApprovalContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a written commitment to lend when specified conditions are met, e.g. finding suitable property, and unchanged creditworthiness" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:explanatoryNote
+		"A commitment from a lender to a borrower to extend a home purchase loan up to a certain amount, and subject to certain non-credit related conditions.  This commitment is entered into after a comprehensive analysis of the credit worthiness of the borrower is carried out." ,
+		"NOTE: this may also include limits on the region where to purchase."
+		;
+	.
+
+fibo-loan-ln-ln:PreApprovalRequest
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-com:Request ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasBorrower ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:Borrower ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasRequestedAmount ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		]
+		;
+	rdfs:label "pre-approval request" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:PreApprovalRequest" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a request from a potential borrower that a lender commit to pre-approving the borrower for a loan of up to a specified amount of money" ;
+	fibo-fnd-utl-av:explanatoryNote "This may also inlcude limits on the region where to purchase." ;
+	.
+
+fibo-loan-ln-ln:PropertyInspection
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-oc:Occurrence ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:isInspectionOf ;
+			owl:onClass fibo-fnd-plc-loc:RealEstate ;
+			owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-lnx-lgn:isPerformedBy ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		]
+		;
+	rdfs:label "property inspection" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:PropertyInspection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the act of analyzing one or more aspects of a real property for independent assessment of status or deficiency" ;
+	fibo-fnd-utl-av:explanatoryNote "This is independent and separate from conducting an appraisal. Examples are termite inspections, construction inspections, etc." ;
+	.
+
+fibo-loan-ln-ln:PropertyUsage
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "property usage" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:PropertyUsage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating the manner in which the borrower intends to utilize the property" ;
+	.
+
+fibo-loan-ln-ln:PublicRecord
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-doc:Record ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:onClass fibo-fbc-pas-caa:Account ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:isEvidencedBy ;
+			owl:onClass fibo-fnd-arr-doc:LegalDocument ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:PublicRecordCategory ;
+		]
+		;
+	rdfs:label "public record" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:PublicRecord" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a record about an action involving a party that is publicly available from court or other government agencies" ;
+	skos:editorialNote "This assumes that the domain of the property refersTo has been removed.  At one point it was such that the PublicRecord is incorrectly infered  into the class Reference. Similar issue with isEvidencedBy whose domain and range need to be expanded to include this usage in preference to creating a new property." ;
+	fibo-fnd-utl-av:explanatoryNote "This can include court actions such as bankruptcy and foreclosure, as well as liens and other events that have been recorded." ;
+	.
+
+fibo-loan-ln-ln:PublicRecordCategory
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "public record category" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:PublicRecordCategory" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a particular classification of public record, e.g. tax lien, wage garnishment, foreclosure" ;
+	.
+
+fibo-loan-ln-ln:Race
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty skos:broaderTransitive ;
+			owl:someValuesFrom fibo-loan-ln-ln:Race ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:classifies ;
+			owl:someValuesFrom fibo-be-le-lp:LegallyCompetentNaturalPerson ;
+		]
+		;
+	rdfs:label "race" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:Race" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category based on a person's physical characteristics, such as bone structure and skin, hair, or eye color" ;
+	.
+
+fibo-loan-ln-ln:RealPropertyAppraisal
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-val:Valuation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasInput ;
+			owl:onClass fibo-loan-ln-ln:PropertyInspection ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-val:hasAppraiser ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasAppraisalManagementCompany ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasAppraisedValue ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasSeniorAppraiser ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		]
+		;
+	rdfs:label "real property appraisal" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:RealPropertyAppraisal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "an act of real estate valuation that determines the amount of money a real estate property is worth." ;
+	skos:editorialNote "Future consideration: add information about variability analysis and maybe the algorithm used." ;
+	fibo-fnd-utl-av:explanatoryNote "The valuation uses one or more methodologies and is conducted by an appraiser or technology with a logical model that performs the same function." ;
+	fibo-fnd-utl-av:usageNote """Ensure that the appraiser parties have NMLS Identifier and contact preferences, e.g. phone number and address.
+
+As needed, use the worksFor property to connect appraisers to the appraisal management company.""" ;
+	.
+
+fibo-loan-ln-ln:ReverseMortgageLoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-ln-ln:MortgageLoanContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-ln-ln:hasCreditLimit ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		]
+		;
+	rdfs:label "reverse mortgage loan contract" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:ReverseMortgageLoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a mortgage contract that pays out money to the borrower against a set principal limit that is based on the value of existing equity in the underlying collateral." ;
+	fibo-fnd-utl-av:explanatoryNote
+		"A reverse mortgage and an open end loan both have a credit limit." ,
+		"The interest is added to the principal balance."
+		;
+	.
+
+fibo-loan-ln-ln:SecuredLoanContract
+	a owl:Class ;
+	rdfs:label "secured loan contract" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:SecuredLoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-loan-ln-ln:LoanContract
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:hasPart ;
+				owl:someValuesFrom fibo-loan-ln-ln:SecurityAgreement ;
+			]
+		) ;
+	] ;
+	skos:definition "a loan contract that is secured by some collateral" ;
+	.
+
+fibo-loan-ln-ln:SecurityAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:LenderLienPosition ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isPartOf ;
+			owl:someValuesFrom fibo-loan-ln-ln:LoanContract ;
+		]
+		;
+	rdfs:label "security agreement" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:SecurityAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-fnd-agr-ctr:WrittenContract
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:has ;
+				owl:someValuesFrom [
+					a owl:Class ;
+					owl:intersectionOf (
+						fibo-fbc-dae-dbt:Collateral
+						[
+							a owl:Restriction ;
+							owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+							owl:someValuesFrom fibo-loan-ln-ln:OwnershipInterestType ;
+						]
+						[
+							a owl:Restriction ;
+							owl:onProperty fibo-fnd-acc-val:hasEstimatedValue ;
+							owl:someValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+						]
+					) ;
+				] ;
+			]
+		) ;
+	] ;
+	skos:definition "an agreement between two trading parties that contains information about their relative duties and rights regarding the disposition of a specified asset that has been used as collateral" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 20022" ;
+	.
+
+fibo-loan-ln-ln:TotalDebtExpenseRatio
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Percentage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasRateValue ;
+			owl:allValuesFrom xsd:decimal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:hasQuantityKind ;
+			owl:allValuesFrom fibo-fnd-acc-cur:MonetaryMeasure ;
+		]
+		;
+	rdfs:label "total debt expense ratio" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:TotalDebtExpenseRatio" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a portion of 100 that represents the ratio of all monthly debt payments of all the borrowers, including proposed housing expenses, to the  income of the borrowers as relied upon to make a credit decision" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:explanatoryNote "This is not connected to an individual borrower because it is computed from data from multiple borrowers." ;
+	fibo-fnd-utl-av:synonym "back end ratio" ;
+	.
+
+fibo-loan-ln-ln:UnderwritingAutomation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "underwriting automation" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:UnderwritingAutomation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating whether a loan was underwritten manually or using an automated underwriting system" ;
+	.
+
+fibo-loan-ln-ln:UnderwritingDecision
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "underwriting decision" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:UnderwritingDecision" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a loan approval recommendation determined either manually or by an automated underwriting system" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:UniversalLoanIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:FinancialInstrumentIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-be-le-lei:LegalEntityIdentifier ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-loan-ln-ln:LoanContract ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "universal loan identifier" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:UniversalLoanIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a unique identifier given to unequivocally identify a specific mortgage loan." ;
+	fibo-fnd-utl-av:explanatoryNote "In the US, the structure of this identifier is defined in the 2015 revision to the Home Mortgage Disclosure Act." ;
+	.
+
+fibo-loan-ln-ln:_AmortizationType_adjustableRate
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AmortizationType
+		;
+	rdfs:label "adjustable rate" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AmortizationType_adjustableRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a loan that allows the lender to periodically adjust the interest rate in accordance with a specified index" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:_AmortizationType_fixedRate
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AmortizationType
+		;
+	rdfs:label "fixed rate" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AmortizationType_fixedRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a loan in which the interest rate and payments remain the same for the life of the loan" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:_AmortizationType_graduatedPayment
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AmortizationType
+		;
+	rdfs:label "graduated payment" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AmortizationType_graduatedPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a flexible payment loan where the payments increase for a specified period of time and then level off" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:explanatoryNote "Usually involves negative amortization." ;
+	.
+
+fibo-loan-ln-ln:_AmortizationType_graduatedPaymentAdjustable
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AmortizationType
+		;
+	rdfs:label "graduated payment adjustable" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AmortizationType_graduatedPaymentAdjustable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a loan for which there are periodic payments/rate changes with additional specified principal and interest changes as documented in the Security Instruments." ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:_AmortizationType_growingEquity
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AmortizationType
+		;
+	rdfs:label "growing equity" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AmortizationType_growingEquity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "A graduated payment loan in which increases in a borrowers loan payments are used to accelerate reduction of principal on the mortgage" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:explanatoryNote "Due to increased payment, the borrower acquires equity more rapidly and retires the debt earlier." ;
+	.
+
+fibo-loan-ln-ln:_AmortizationType_rateImprovement
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AmortizationType
+		;
+	rdfs:label "rate improvement" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AmortizationType_rateImprovement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a type of flexible loan where the interest rate may decrease based on payment history." ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:_AmortizationType_step
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AmortizationType
+		;
+	rdfs:label "step" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AmortizationType_step" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a loan with fixed periodic payment/rate changes without subsidy or negative amortization." ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:_AutomatedUnderwritingSystem_DesktopUnderwriter
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AutomatedUnderwritingSystem
+		;
+	rdfs:label "Desktop Underwriter" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AutomatedUnderwritingSystem_DesktopUnderwriter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "an automated underwriting software system produced by Fannie Mae" ;
+	.
+
+fibo-loan-ln-ln:_AutomatedUnderwritingSystem_FHAScorecard
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AutomatedUnderwritingSystem
+		;
+	rdfs:label "FHA Scorecard" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AutomatedUnderwritingSystem_FHAScorecard" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "an automated underwriting software system produced by Federal Housing Administration (FHA)" ;
+	.
+
+fibo-loan-ln-ln:_AutomatedUnderwritingSystem_GuaranteedUnderwritingSystem
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AutomatedUnderwritingSystem
+		;
+	rdfs:label "Guaranteed Underwriting System" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AutomatedUnderwritingSystem_GuaranteedUnderwritingSystem" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "an automated underwriting software system used by the USDA rural development loan program" ;
+	fibo-fnd-utl-av:synonym "GUS" ;
+	.
+
+fibo-loan-ln-ln:_AutomatedUnderwritingSystem_LoanProspector
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:AutomatedUnderwritingSystem
+		;
+	rdfs:label "Loan Prospector" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_AutomatedUnderwritingSystem_LoanProspector" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "an automated underwriting software system produced by Freddie Mac" ;
+	.
+
+fibo-loan-ln-ln:_CashOutStatus_CashOut
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:CashOutStatus
+		;
+	rdfs:label "cashout" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_CashOutStatus_CashOut" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the mortgage is refinanced for more than is owed and the borrower pockets the difference." ;
+	.
+
+fibo-loan-ln-ln:_CashOutStatus_LimitedCashOut
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:CashOutStatus
+		;
+	rdfs:label "limited cashout" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_CashOutStatus_LimitedCashOut" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a cashout mortgage where the amount is limited by the lenger. 80% loan to value ratio is a common limit." ;
+	.
+
+fibo-loan-ln-ln:_CashOutStatus_NoCashOut
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:CashOutStatus
+		;
+	rdfs:label "no cashout" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_CashOutStatus_NoCashOut" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The mortgage is refinanced for less than or equal to what is owed." ;
+	.
+
+fibo-loan-ln-ln:_ChargeCategory_appraisalFee
+	a
+		owl:NamedIndividual ,
+		fibo-loan-lnx-lgn:ChargeCategory
+		;
+	rdfs:label "appraisal fee" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ChargeCategory_appraisalFee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a charge for an appraisal" ;
+	.
+
+fibo-loan-ln-ln:_ChargeCategory_discountPoints
+	a
+		owl:NamedIndividual ,
+		fibo-loan-lnx-lgn:ChargeCategory
+		;
+	rdfs:label "discount points" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ChargeCategory_discountPoints" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a charge for lowering your interest rate" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.consumerfinance.gov/askcfpb/136/what-are-discount-points-and-lender-credits-and-how-do-they-work.html" ;
+	.
+
+fibo-loan-ln-ln:_ChargeCategory_lenderCredits
+	a
+		owl:NamedIndividual ,
+		fibo-loan-lnx-lgn:ChargeCategory
+		;
+	rdfs:label "lender credits" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ChargeCategory_lenderCredits" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a credit whereby the lender reduces closing costs in exchange for a higher interest rate." ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.consumerfinance.gov/askcfpb/136/what-are-discount-points-and-lender-credits-and-how-do-they-work.html" ;
+	fibo-fnd-utl-av:usageNote "This needs to be treated as a negative charge." ;
+	.
+
+fibo-loan-ln-ln:_ChargeCategory_originationFee
+	a
+		owl:NamedIndividual ,
+		fibo-loan-lnx-lgn:ChargeCategory
+		;
+	rdfs:label "origination fee" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ChargeCategory_originationFee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a charge for an origination" ;
+	.
+
+fibo-loan-ln-ln:_ChargeCategory_principal
+	a
+		owl:NamedIndividual ,
+		fibo-loan-lnx-lgn:ChargeCategory
+		;
+	rdfs:label "principal" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ChargeCategory_principal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the principal of the loan that is owed" ;
+	.
+
+fibo-loan-ln-ln:_ConstructionType_manufactured
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:ConstructionType
+		;
+	rdfs:label "manufactured" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ConstructionType_manufactured" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a factory-built dwelling built in compliance with the Federal Manufactured Home Construction and Safety Standards in effect at the time the home was manufactured as evidenced by the HUD label" ;
+	.
+
+fibo-loan-ln-ln:_ConstructionType_mobileHome
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:ConstructionType
+		;
+	rdfs:label "mobile home" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ConstructionType_mobileHome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a dwelling unit constructed on a base frame which features wheels and axles to be used in transporting home from place to place" ;
+	fibo-fnd-utl-av:explanatoryNote "It does not meet HUD code." ;
+	.
+
+fibo-loan-ln-ln:_ConstructionType_modular
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:ConstructionType
+		;
+	rdfs:label "mosular" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ConstructionType_modular" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a factory-built dwelling not on a permanent chassis" ;
+	.
+
+fibo-loan-ln-ln:_ConstructionType_onFrameModular
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:ConstructionType
+		;
+	rdfs:label "on frame modular" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ConstructionType_onFrameModular" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a factory built dwelling on a permanent chassis which does not have a HUD label" ;
+	.
+
+fibo-loan-ln-ln:_ConstructionType_siteBuilt
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:ConstructionType
+		;
+	rdfs:label "site built" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ConstructionType_siteBuilt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "describes construction process, indicating that most elements are created at the homes permanent site. May include some prefabricated components" ;
+	.
+
+fibo-loan-ln-ln:_CreditInquiryType_hard
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:CreditInquiryType
+		;
+	rdfs:label "hard" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_CreditInquiryType_hard" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_CreditInquiryType_soft
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:CreditInquiryType
+		;
+	rdfs:label "soft" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_CreditInquiryType_soft" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_CreditMessage_alert
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:CreditMessageType
+		;
+	rdfs:label "alert" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_CreditMessage_alert" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_CreditMessage_freeze
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:CreditMessageType
+		;
+	rdfs:label "freeze" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_CreditMessage_freeze" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_DenialReason_creditApplicationIncomplete
+	a owl:NamedIndividual ;
+	rdfs:label "credit application incomplete" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DenialReason_creditApplicationIncomplete" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The application was denied because the credit application was not complete." ;
+	.
+
+fibo-loan-ln-ln:_DenialReason_insufficientCash
+	a owl:NamedIndividual ;
+	rdfs:label "insufficient cash" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DenialReason_insufficientCash" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The application was denied due to insufficient down payment, or cash available to pay closing costs." ;
+	.
+
+fibo-loan-ln-ln:_DenialReason_insufficientCollateralValue
+	a owl:NamedIndividual ;
+	rdfs:label "insufficient collateral value" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DenialReason_insufficientCollateralValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The application was denied because the value or type of collateral was not sufficient." ;
+	.
+
+fibo-loan-ln-ln:_DenialReason_insufficientCreditHistory
+	a owl:NamedIndividual ;
+	rdfs:label "insufficient credit history" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DenialReason_insufficientCreditHistory" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The application was denied because the credit history was too limited, unacceptable, or not at sufficient standing." ;
+	.
+
+fibo-loan-ln-ln:_DenialReason_insufficientEmploymentHistory
+	a owl:NamedIndividual ;
+	rdfs:label "insufficient employment history" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DenialReason_insufficientEmploymentHistory" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The application was denied because the employment is irregular, unknown, or not sufficient." ;
+	.
+
+fibo-loan-ln-ln:_DenialReason_insufficientIncome
+	a owl:NamedIndividual ;
+	rdfs:label "insufficient income" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DenialReason_insufficientIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The application was denied because the debt to income ratio is too high." ;
+	.
+
+fibo-loan-ln-ln:_DenialReason_mortgageInsuranceDenied
+	a owl:NamedIndividual ;
+	rdfs:label "mortgage insurance denied" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DenialReason_mortgageInsuranceDenied" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The application was denied because necessary mortgage insurance was denied." ;
+	.
+
+fibo-loan-ln-ln:_DenialReason_unverifiableInformation
+	a owl:NamedIndividual ;
+	rdfs:label "unverifiable information" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DenialReason_unverifiableInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "The application was denied because qualification information such as income, employment, credit, or residence) was not verifiable." ;
+	.
+
+fibo-loan-ln-ln:_DwellingCapacity_multiFamily
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:DwellingCapacity
+		;
+	rdfs:label "multi family" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DwellingCapacity_multiFamily" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "5 or more units" ;
+	.
+
+fibo-loan-ln-ln:_DwellingCapacity_singleFamily
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:DwellingCapacity
+		;
+	rdfs:label "single family" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_DwellingCapacity_singleFamily" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "1-4 units" ;
+	.
+
+fibo-loan-ln-ln:_LienPosition_primary
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LenderLienPosition
+		;
+	rdfs:label "primary" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LienPosition_primary" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_LienPosition_subordinate
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LenderLienPosition
+		;
+	rdfs:label "subordinate" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LienPosition_subordinate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_LoanMarketCategory_Automobile
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LoanMarketCategory
+		;
+	rdfs:label "auto loan" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LoanMarketCategory_Automobile" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_LoanMarketCategory_Commercial
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LoanMarketCategory
+		;
+	rdfs:label "commercial loan" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LoanMarketCategory_Commercial" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_LoanMarketCategory_Construction
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LoanMarketCategory
+		;
+	rdfs:label "construction loan" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LoanMarketCategory_Construction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_LoanMarketCategory_Education
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LoanMarketCategory
+		;
+	rdfs:label "education loan" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LoanMarketCategory_Education" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_LoanMarketCategory_Mortgage
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LoanMarketCategory
+		;
+	rdfs:label "mortgage loan" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LoanMarketCategory_Mortgage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_LoanMarketCategory_Personal
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LoanMarketCategory
+		;
+	rdfs:label "personal loan" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LoanMarketCategory_Personal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_LoanMarketCategory_SmallBusiness
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:LoanMarketCategory
+		;
+	rdfs:label "small business loan" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_LoanMarketCategory_SmallBusiness" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	fibo-fnd-utl-av:explanatoryNote "This is related to the mortgage loan purpose: 'business or commercial'." ;
+	.
+
+fibo-loan-ln-ln:_ManufacturedHomeLegalClassification_personalProperty
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:ManufacturedHomeLegalClassification
+		;
+	rdfs:label "personal property" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ManufacturedHomeLegalClassification_personalProperty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the covered loan is secured by a manufactured home but not land" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:_ManufacturedHomeLegalClassification_realProperty
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:ManufacturedHomeLegalClassification
+		;
+	rdfs:label "real property" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_ManufacturedHomeLegalClassification_realProperty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "the covered loan is secured by a manufactured home and land" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:_MortgageLoanPurpose_BusinessOrCommercial
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:MortgageLoanPurpose
+		;
+	rdfs:label "business or commercial" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_MortgageLoanPurpose_BusinessOrCommercial" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_MortgageLoanPurpose_DwellingConstruction
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:MortgageLoanPurpose
+		;
+	rdfs:label "dwelling construction" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_MortgageLoanPurpose_DwellingConstruction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_MortgageLoanPurpose_HomeImprovement
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:MortgageLoanPurpose
+		;
+	rdfs:label "home improvement" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_MortgageLoanPurpose_HomeImprovement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_MortgageLoanPurpose_LoanRefinancing
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:MortgageLoanPurpose
+		;
+	rdfs:label "refinance" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_MortgageLoanPurpose_LoanRefinancing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_MortgageLoanPurpose_MortgageModification
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:MortgageLoanPurpose
+		;
+	rdfs:label "mortgage modification" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_MortgageLoanPurpose_MortgageModification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_MortgageLoanPurpose_RealPropertyPurchase
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:MortgageLoanPurpose
+		;
+	rdfs:label "real property purchase" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_MortgageLoanPurpose_RealPropertyPurchase" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_OwnershipInterestType_feeSimple
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:OwnershipInterestType
+		;
+	rdfs:label "" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_OwnershipInterestType_feeSimple" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating the highest type of ownership that a real property holder can have; it inclues the right to sell, leave to beneficiaries, make changes etc." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/r/real-property.asp#ixzz4k7GyyR3w" ;
+	.
+
+fibo-loan-ln-ln:_OwnershipInterestType_fractional
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:OwnershipInterestType
+		;
+	rdfs:label "fractional" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_OwnershipInterestType_fractional" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a category indicating that several parties can share in, and mitigate the risk of, ownership of a high-value tangible asset" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Fractional_ownership" ;
+	.
+
+fibo-loan-ln-ln:_PropertyUsage_investment
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:PropertyUsage
+		;
+	rdfs:label "investment" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PropertyUsage_investment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a home owned for the purpose of generating income" ;
+	.
+
+fibo-loan-ln-ln:_PropertyUsage_primaryResidence
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:PropertyUsage
+		;
+	rdfs:label "primary residence" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PropertyUsage_primaryResidence" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "residence that the owner physically occupies and uses as his or her principal residence" ;
+	.
+
+fibo-loan-ln-ln:_PropertyUsage_secondHome
+	a
+		owl:NamedIndividual ,
+		owl:Thing ,
+		fibo-loan-ln-ln:PropertyUsage
+		;
+	rdfs:label "second home" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PropertyUsage_secondHome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "a property occupied by the owner for a portion of the year that is not the primary residence" ;
+	.
+
+fibo-loan-ln-ln:_PublicRecordCategory_bankruptcy
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:PublicRecordCategory
+		;
+	rdfs:label "bankruptcy loan" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PublicRecordCategory_bankruptcy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_PublicRecordCategory_civilOrJudgement
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:PublicRecordCategory
+		;
+	rdfs:label "covil or judgement" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PublicRecordCategory_civilOrJudgement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_PublicRecordCategory_foreclosure
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:PublicRecordCategory
+		;
+	rdfs:label "foreclosure" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PublicRecordCategory_foreclosure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_PublicRecordCategory_garnishment
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:PublicRecordCategory
+		;
+	rdfs:label "garnishment" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PublicRecordCategory_garnishment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_PublicRecordCategory_lien
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:PublicRecordCategory
+		;
+	rdfs:label "lien" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PublicRecordCategory_lien" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_PublicRecordCategory_marital
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:PublicRecordCategory
+		;
+	rdfs:label "marital" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PublicRecordCategory_marital" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_PublicRecordCategory_personalProperty
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:PublicRecordCategory
+		;
+	rdfs:label "personal property" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PublicRecordCategory_personalProperty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_PublicRecordCategory_realEstate
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:PublicRecordCategory
+		;
+	rdfs:label "real estate" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_PublicRecordCategory_realEstate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_UnderwritingAutomation_automatic
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:UnderwritingAutomation
+		;
+	rdfs:label "manual" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_UnderwritingAutomation_automatic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "Underwriting was performed using an automated underwriting system." ;
+	.
+
+fibo-loan-ln-ln:_UnderwritingAutomation_manual
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:UnderwritingAutomation
+		;
+	rdfs:label "manual" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_UnderwritingAutomation_manual" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "Underwriting was performed manually" ;
+	.
+
+fibo-loan-ln-ln:_UnderwritingDecision_approve
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:UnderwritingDecision
+		;
+	rdfs:label "approve" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_UnderwritingDecision_approve" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_UnderwritingDecision_deny
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:UnderwritingDecision
+		;
+	rdfs:label "deny" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_UnderwritingDecision_deny" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_UnderwritingDecision_eligible
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:UnderwritingDecision
+		;
+	rdfs:label "eligible" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_UnderwritingDecision_eligible" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_UnderwritingDecision_ineligible
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:UnderwritingDecision
+		;
+	rdfs:label "ineligible" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_UnderwritingDecision_ineligible" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_UnderwritingDecision_refer
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:UnderwritingDecision
+		;
+	rdfs:label "refer" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_UnderwritingDecision_refer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:_UnderwritingDecision_unableToDetermine
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:UnderwritingDecision
+		;
+	rdfs:label "unable to determine" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:_UnderwritingDecision_unableToDetermine" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	.
+
+fibo-loan-ln-ln:assumes
+	a owl:ObjectProperty ;
+	rdfs:label "assumes" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:assumes" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates a new mortgage loan contract to a previous one made to a different borrower for the same property. The new contract is created via a legally binding process where the new borrower assumes the terms of the previous loan contract" ;
+	.
+
+fibo-loan-ln-ln:hasAppraisalManagementCompany
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasParty ;
+	rdfs:label "has appraisal management company" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasAppraisalManagementCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates something to an independent entity through which mortgage lenders order residential real estate valuation services for properties on which they are considering extending loans to homebuyers, as required by US law" ;
+	skos:editorialNote "Broaden to beyond US only." ;
+	fibo-fnd-utl-av:definitionOrigin "Investopedia" ;
+	.
+
+fibo-loan-ln-ln:hasAppraisedValue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasNotionalAmount ;
+	rdfs:label "has appraised value" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasAppraisedValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates to a monetary amount that is the product of a valuation event" ;
+	skos:editorialNote "This should be a subproperty of the property that ties a Valuation to a MonetaryAmount." ;
+	.
+
+fibo-loan-ln-ln:hasApprovedAmount
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasMonetaryAmount ;
+	rdfs:label "has approved amount" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasApprovedAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates, e.g. a loan,  to the amount of funds approved" ;
+	.
+
+fibo-loan-ln-ln:hasBalloonPayment
+	a owl:DatatypeProperty ;
+	rdfs:label "has balloon payment"@en ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasBalloonPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "whether the contractual terms include or would have included a balloon payment as defined in Regulation Z, 12 CFR 1026.18(s)(5)(i)."@en ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:hasClosingDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasEffectiveDate ;
+	rdfs:label "has closing date" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasClosingDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates, e.g. a loan contract to the date on which the contract is consummated, officially creating the obligations therein" ;
+	.
+
+fibo-loan-ln-ln:hasCoveragePeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDatePeriod ;
+	rdfs:label "has coverage period" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasCoveragePeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	skos:definition "relates something (e.g. a credit report or insurance policy) to the specific time period that it covers" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/t/termlife.asp" ;
+	.
+
+fibo-loan-ln-ln:hasCreditLimit
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasMonetaryAmount ;
+	rdfs:label "hasCreditLimit" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasCreditLimit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates to the maximum amount of funds that may be borrowed from an account (e.g. for line of credit)" ;
+	.
+
+fibo-loan-ln-ln:hasCreditReportingAgency
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasParty ;
+	rdfs:label "has credit repoprting agency" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasCreditReportingAgency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates something to a party which is prodiving credit report(s) e.g. needed to assess the risk of a loan" ;
+	.
+
+fibo-loan-ln-ln:hasFirstRateChangeTerm
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDuration ;
+	rdfs:label "has first rate change term" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasFirstRateChangeTerm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates a loan contract to a period of time in months after origination during which the interest rate cannot change." ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:usageNote "This does not apply if the loan has fixed rate." ;
+	.
+
+fibo-loan-ln-ln:hasNegativeAmortization
+	a owl:DatatypeProperty ;
+	rdfs:label "has negative amortization"@en ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasNegativeAmortization" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "whether the contractual terms include or would have included a contractual term that would cause the covered loan to be a negative amortization loan as defined in Regulation Z, 12 CFR 1026.18(s)(7)(v)."@en ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:hasNoteAmount
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasMonetaryAmount ;
+	rdfs:label "has note amount" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasNoteAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates something to an amount to be paid as specified on an executed promissory note" ;
+	.
+
+fibo-loan-ln-ln:hasNumberOfAffordableDwellingUnits
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-loan-ln-ln:hasNumberOfDwellingUnits ;
+	rdfs:label "has number of affordable dwelling units" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasNumberOfAffordableDwellingUnits" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates real estate to the number of dwelling units it contains that are income-restricted under Federal, State, or local affordable housing programs." ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:hasNumberOfDwellingUnits
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasCount ;
+	rdfs:label "has number of dwelling units" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasNumberOfDwellingUnits" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates real estate to the number of dwelling units it contains" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:hasOriginatorCompany
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasParty ;
+	rdfs:label "has originator company" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasOriginatorCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	rdfs:range fibo-fnd-org-org:Organization ;
+	skos:definition "relates something, typically  a loan contract, to the  company affilliated with the person originating the loan" ;
+	.
+
+fibo-loan-ln-ln:hasOriginatorPerson
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasParty ;
+	rdfs:label "has originator person" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasOriginatorPerson" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	rdfs:range fibo-be-le-lp:LegallyCompetentNaturalPerson ;
+	skos:definition "relates something, typically  a loan contract, to a person that initially originates or creates it" ;
+	.
+
+fibo-loan-ln-ln:hasPartyBeingChecked
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasParty ;
+	rdfs:label "has party being checked" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasPartyBeingChecked" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "is a party for which a credit report is being or has been requested" ;
+	.
+
+fibo-loan-ln-ln:hasPrePaymentPenaltyTerm
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDuration ;
+	rdfs:label "has prepayment penalty term" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasPrePaymentPenaltyTerm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates a loan contract to a period of time in months after which there is no prepayment penalty." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/p/prepaymentpenalty.asp" ;
+	fibo-fnd-utl-av:usageNote "A value of zero means no prepayment penalty; thi s avoids need for a separate boolean property about whether there is a prepayment penalty." ;
+	.
+
+fibo-loan-ln-ln:hasRequestedAmount
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasMonetaryAmount ;
+	rdfs:label "has requested amount" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasRequestedAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates e.g. a request for a loan  to the amount of funds requested (e.g. regarding a loan)" ;
+	.
+
+fibo-loan-ln-ln:hasSeniorAppraiser
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasParty ;
+	rdfs:label "has senior appraiser" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasSeniorAppraiser" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates e.g. an appraisal to the appraiser with seniority or supervisory responsibilities" ;
+	.
+
+fibo-loan-ln-ln:hasTotalClosingCosts
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-loan-lnx-lgn:hasCost ;
+	rdfs:label "has total closing costs" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasTotalClosingCosts" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates to he amount of total loan costs, as disclosed pursuant to Regulation Z, 12 CFR 1026.38(f)(4)." ;
+	fibo-fnd-utl-av:adaptedFrom "2015 Revised HMDA regulation" ;
+	.
+
+fibo-loan-ln-ln:hasTotalPointsAndFees
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-loan-lnx-lgn:hasCost ;
+	rdfs:label "has total points and fees" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:hasTotalPointsAndFees" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates to the total amount of points and fees, expressed in dollars, calculated in accordance with Regulation Z, Truth in Lending." ;
+	fibo-fnd-utl-av:adaptedFrom "2015 Revised HMDA regulation" ;
+	.
+
+fibo-loan-ln-ln:isInitiallyPayable
+	a owl:DatatypeProperty ;
+	rdfs:label "is initially payable"@en ;
+	rdfs:comment "QName: fibo-loan-ln-ln:isInitiallyPayable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "whether the obligation arising from the covered loan was, or in the case of an application, would have been initially payable to the financial institution."@en ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:usageNote
+		"This property can be used on either a contract or an application." ,
+		"This property is not applicable for a purchased loan."
+		;
+	.
+
+fibo-loan-ln-ln:isInspectionOf
+	a owl:ObjectProperty ;
+	rdfs:label "is inspection of" ;
+	rdfs:comment "QName: fibo-loan-ln-ln:isInspectionOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates an inspection to the thing being inspected" ;
+	.
+
+fibo-loan-ln-ln:isInterestOnly
+	a owl:DatatypeProperty ;
+	rdfs:label "is interest only"@en ;
+	rdfs:comment "QName: fibo-loan-ln-ln:isInterestOnly" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "whether the contractual terms include or would have included interest only payments as defined in Regulation Z, 12 CFR 1026.18(s)(7)(iv)."@en ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	.
+
+fibo-loan-ln-ln:isPreApprovalRequested
+	a owl:DatatypeProperty ;
+	rdfs:label "is pre-approval requested"@en ;
+	rdfs:comment "QName: fibo-loan-ln-ln:isPreApprovalRequested" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "whether a pre-approval has been requested, in conjunction with a loan application"@en ;
+	.
+
+fibo-loan-ln-ln:usesFactor
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fbc-dae-dbt:isBasedOn ;
+	rdfs:label "uses factor"@en ;
+	rdfs:comment "QName: fibo-loan-ln-ln:usesFactor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ;
+	skos:definition "relates e.g. a risk assessment to something used as a factor to make the assessment."@en ;
+	fibo-fnd-utl-av:explanatoryNote "There is intentionally no range for this property, so as not to limit what can be used as a factore. Often it will be a measure such as borrower monthly income. Thus, having a class called Factor seems unhelpful." ;
+	.
+

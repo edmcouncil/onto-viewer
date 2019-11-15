@@ -1,0 +1,53 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/MetadataLOANLoansTemporal/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/MetadataLOANLoansTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-loan-tem-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/MetadataLOANLoansTemporal/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/MetadataLOANLoansTemporal/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Loans (LOAN) LoansTemporal Module" ;
+	rdfs:comment "QName: fibo-loan-tem-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the LOAN Loans Temporal Module." ;
+	dct:issued "2018-06-30T18:00:00"^^xsd:dateTime ;
+	dct:license sm:MITLicense ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-loan-tem-mod" ;
+	sm:filename "MetadataLOANLoansTemporal.rdf" ;
+	owl:imports <http://www.omg.org/techprocess/ab/SpecificationMetadata/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/LOAN/LoansTemporal/MetadataLOANLoansTemporal/> ;
+	.
+
+fibo-loan-tem-mod:LoansTemporalModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Loans Temporal" ;
+	rdfs:comment "QName: fibo-loan-tem-mod:LoansTemporalModule" ;
+	dct:abstract "This module contains ontologies of temporal concepts related to all loan types. These are terms that explicitly vary over time such as loan to value ratios." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/ConstructionLoansTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanApplicationsTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanCollateralTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansLTV/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansStatus/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/>
+		;
+	dct:title "FIBO Loans - Loans Temporal Terms Module" ;
+	sm:moduleAbbreviation "fibo-loan-tem" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/MetadataLOANLoansTemporal/> ;
+	.
+

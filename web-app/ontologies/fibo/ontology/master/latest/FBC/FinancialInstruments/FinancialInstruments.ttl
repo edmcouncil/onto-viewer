@@ -1,0 +1,536 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fbc-fct-breg: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/> .
+@prefix fibo-fbc-fct-mkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-plc-adr: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/>
+	a owl:Ontology ;
+	rdfs:label "Financial Instruments Ontology" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:" ;
+	dct:abstract "This ontology defines the fundamental concepts relevant to financial instruments in general, with the intent of providing the high-level hooks for build-out in more detail in the relevant domain areas.  These include, but are not limited to, equities, options, debt instruments, and so forth, some of which may be negotiable." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fbc-fi-fi" ;
+	sm:filename "FinancialInstruments.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/ version of this ontology was modified as a part of organizational hierarchy simplification, to add maturity-related properties, and to add exempt security." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/ version of this ontology was modified for the FIBO 2.0 RFC, including minor bug fixes." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/ version of this ontology was modified to correct the label on packaged financial product." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/ version of this ontology was modified to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/ version of this ontology was modified to reflect issue resolutions detailed in the FIBO FBC 1.0 FTF report."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fi-fi:CashInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:label "cash instrument" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:CashInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a financial instrument whose value is determined by the market and that is readily transferable (highly liquid)" ;
+	skos:scopeNote "Cash instruments can be classified into two subgroups, as securities and other cash instruments such as loans and deposits." ;
+	fibo-fnd-utl-av:adaptedFrom
+		"EDM Council" ,
+		"http://definitions.uslegal.com/"^^xsd:anyURI
+		;
+	.
+
+fibo-fbc-fi-fi:CommodityInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:label "commodity instrument" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:CommodityInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a financial instrument representing an ownership interest in a raw material or primary agricultural product" ;
+	fibo-fnd-utl-av:adaptedFrom "Citigroup Inc. (EDM Council modified)" ;
+	.
+
+fibo-fbc-fi-fi:CurrencyInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:label "currency instrument" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:CurrencyInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a financial instrument used for the purposes of currency trading" ;
+	skos:example "Example currencies include UK pounds, US dollars, Euro.  An example currency instrument is spot currency instrument." ;
+	skos:scopeNote "Each instance of a currency instrument has a one to one relationship with its associated currency." ;
+	fibo-fnd-utl-av:adaptedFrom "Parameswaran, Sunil. Fundamentals of Financial Instruments: An Introduction to Stocks, Bonds, Foreign Exchange, and Derivatives. John Wiley and Sons (Asia) Pte. Lte., Singapore, 2011." ;
+	.
+
+fibo-fbc-fi-fi:DebtInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:label "debt instrument" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:DebtInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a financial instrument enables the issuing party to raise funds by accepting the obligation to repay a lender by a particular time in accordance with the terms of a contract" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Bloomberg, LP (EDM Council modified)" ,
+		"ISO 10962, Securities and related financial instruments - Classification of Financial Instruments (CFI code), Second edition, 2001-05-01."
+		;
+	.
+
+fibo-fbc-fi-fi:DerivativeInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:label "derivative instrument" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:DerivativeInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	owl:disjointWith fibo-fbc-fi-fi:CashInstrument ;
+	skos:definition "a financial instrument that confers on its holders certain rights or obligations, whose value is derived from one or more underlying assets" ;
+	skos:example "The three major categories of derivatives are (1) forward and future contracts, (2) options contracts, and (3) swaps. The most common underlying assets include stocks, bonds, commodities, currencies, interest rates and market indexes." ;
+	skos:scopeNote "Derivatives can be characterized by whether they are exchange-traded or traded over-the-counter (OTC)." ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Parameswaran, Sunil. Fundamentals of Financial Instruments: An Introduction to Stocks, Bonds, Foreign Exchange, and Derivatives. John Wiley and Sons (Asia) Pte. Lte., Singapore, 2011." ,
+		"http://www.investopedia.com/"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "Derivative contracts owe their availability to the existence of markets for an underlying asset or a portfolio of assets on which such agreements are written. The derivative itself is merely a contract between two or more parties. Its value is determined by fluctuations in the underlying asset. Most derivatives are characterized by high leverage." ;
+	fibo-fnd-utl-av:synonym "derivative contract" ;
+	.
+
+fibo-fbc-fi-fi:Entitlement
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:DerivativeInstrument ;
+	rdfs:label "entitlement" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:Entitlement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a financial instrument that provides the holder the privilege to subscribe to or to receive specific assets on terms specified" ;
+	fibo-fnd-utl-av:definitionOrigin "ISO 10962, Securities and related financial instruments - Classification of Financial Instruments (CFI code), Second edition, 2001-05-01." ;
+	fibo-fnd-utl-av:synonym "right" ;
+	.
+
+fibo-fbc-fi-fi:EquityInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:Security ;
+	rdfs:label "equity instrument" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:EquityInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a financial instrument representing an ownership interest in an entity or pool of assets" ;
+	fibo-fnd-utl-av:definitionOrigin "ISO 10962, Securities and related financial instruments - Classification of Financial Instruments (CFI code), Second edition, 2001-05-01." ;
+	.
+
+fibo-fbc-fi-fi:ExemptSecurity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:Security ;
+	rdfs:label "exempt security" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:ExemptSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "security that is exempt from certain regulatory rules" ;
+	skos:example "Some exemptions from the registration requirement include: private offerings to a limited number of persons or institutions; offerings of limited size; intrastate offerings; and securities of municipal, state, and federal governments." ;
+	fibo-fnd-utl-av:adaptedFrom "Securities Act of 1933" ;
+	fibo-fnd-utl-av:explanatoryNote "Generally, securities must be filed with the appropriate regulatory agencies in the jurisdiction in which they are sold. The registration forms companies file provide essential facts while minimizing the burden and expense of complying with the law. Not all securities must be registered, however. By exempting many small offerings from the registration process, regulators seek to foster capital formation by lowering the cost of offering securities to the public." ;
+	.
+
+fibo-fbc-fi-fi:FinancialInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:WrittenContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:onClass fibo-fbc-fi-fi:FinancialInstrumentIdentifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:isLegallyRecordedIn ;
+			owl:onClass fibo-fnd-law-jur:Jurisdiction ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:isNegotiable ;
+			owl:onDataRange xsd:boolean ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Issuer ;
+		]
+		;
+	rdfs:label "financial instrument" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:FinancialInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a written contract that gives rise to both a financial asset of one entity and a financial liability or equity instrument of another entity" ;
+	skos:example "Examples of financial instruments include: cash, evidence of an ownership interest in an entity, or a contractual right to receive (or deliver) cash, or another financial instrument." ;
+	fibo-fnd-utl-av:adaptedFrom "http://ec.europa.eu/internal_market/accounting/docs/consolidated/ias32_en.pdf"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A financial instrument can be thought of as a template that defines an arrangement structure that remains to be fleshed out with terms and parameters in order to establish a specific instance of the contract." ;
+	.
+
+fibo-fbc-fi-fi:FinancialInstrumentIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+		]
+		;
+	rdfs:label "financial instrument identifier" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:FinancialInstrumentIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "an identifier for a financial instrument" ;
+	skos:scopeNote "Identifiers for financial instruments may include an ISIN, Sedol, CUSIP, BBGID, FIGI, or other identifier issued approximately when the instrument itself is issued, and based on the kind of instrument and jurisdiction in which it is issued." ;
+	fibo-fnd-utl-av:adaptedFrom "OMG Financial Instrument Global Identifier (FIGI) Specification, available at http://www.omg.org/spec/FIGI/." ;
+	.
+
+fibo-fbc-fi-fi:Future
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:DerivativeInstrument ;
+	rdfs:label "future" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:Future" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a contract that obligates the buyer to receive and the seller to deliver, in the future, the assets specified at an agreed price" ;
+	fibo-fnd-utl-av:definitionOrigin "ISO 10962, Securities and related financial instruments - Classification of Financial Instruments (CFI code), Second edition, 2001-05-01." ;
+	.
+
+fibo-fbc-fi-fi:Issuer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractOriginator ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+			] ;
+		]
+		;
+	rdfs:label "issuer" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:Issuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "any party who issues (or proposes to issue, in a formal filing) any financial instrument, where a party can be a natural person, company, government, or political subdivision, agency, or instrumentality of a government" ;
+	fibo-fnd-utl-av:adaptedFrom "Securities Exchange Act of 1934, as amended 12 August 2012" ;
+	fibo-fnd-utl-av:explanatoryNote "With respect to certificates of deposit for securities, voting-trust certificates, or collateral- trust certificates, or with respect to certificates of interest or shares in an unincorporated investment trust not having a board of directors or of the fixed, restricted management, or unit type, the term issuer means the person or persons performing the acts and assuming the duties of depositor or manager pursuant to the provisions of the trust or other agreement or instrument under which such securities are issued; and except that with respect to equipment-trust certificates or like securities, the term issuer means the person by whom the equipment or property is, or is to be, used." ;
+	.
+
+fibo-fbc-fi-fi:NegotiableSecurity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Security ,
+		fibo-fnd-agr-ctr:TransferableContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:isNegotiable ;
+			owl:hasValue "true"^^xsd:boolean ;
+		]
+		;
+	rdfs:label "negotiable security" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:NegotiableSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a security that can be transferred or delivered to another party" ;
+	.
+
+fibo-fbc-fi-fi:NonNegotiableSecurity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:Security ;
+	rdfs:label "non-negotiable security" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:NonNegotiableSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	owl:disjointWith fibo-fbc-fi-fi:NegotiableSecurity ;
+	skos:definition "a security that is not transferable to another party" ;
+	fibo-fnd-utl-av:explanatoryNote "Certain securities that can be redeemed by the issuer may not be 'negotiable', such as savings bonds and certificates of deposit." ;
+	.
+
+fibo-fbc-fi-fi:Option
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:DerivativeInstrument ;
+	rdfs:label "option" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:Option" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a contract that grants to the holder either the privilege to purchase or the privilege to sell the assets specified at a predetermined price or formula at or within a time in the future" ;
+	fibo-fnd-utl-av:definitionOrigin "ISO 10962, Securities and related financial instruments - Classification of Financial Instruments (CFI code), Second edition, 2001-05-01." ;
+	.
+
+fibo-fbc-fi-fi:PackagedFinancialProduct
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:FinancialProduct ,
+		fibo-fnd-pas-pas:ContractualProduct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIncludedIn ;
+			owl:onClass fibo-fbc-pas-fpas:FinancialProductCatalog ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-pas-fpas:FinancialProduct
+					fibo-fbc-fi-fi:FinancialInstrument
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "packaged financial product" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:PackagedFinancialProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a financial product that acts as a container, or wrapper, for one or more financial instruments, including other financial products" ;
+	skos:scopeNote "Packaged products are typically included in an institution's approved product catalog, i.e., pre-approved by compliance organizations for sale to clients. Not all institutions maintain such a catalog, with internal identifiers for such products, but many do.  Such core products may have as attributes: Type (product and possibly asset class), product identifier, status and approval date, product family approval (as appropriate), and so forth." ;
+	fibo-fnd-utl-av:adaptedFrom "Nordea Bank" ;
+	fibo-fnd-utl-av:explanatoryNote "Certain properties of the instruments, such as their term, interest rate, eligibility of the client, etc., may be set as a part of the product specification.  Some of these are intrinsic but variable properties of the instrument, for example the exact interest rate, whereas others are extrinsic, such as client eligibility.  Products have prices, which may build in various fees, that are components of the cost of carry on a trader's books." ;
+	.
+
+fibo-fbc-fi-fi:SecuritiesTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:Trade ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+		]
+		;
+	rdfs:label "securities transaction" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:SecuritiesTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a trade that represents the execution of an order to buy or sell a security" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	.
+
+fibo-fbc-fi-fi:SecuritiesTransactionIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:someValuesFrom fibo-fbc-fi-fi:SecuritiesTransaction ;
+		]
+		;
+	rdfs:label "securities transaction identifier" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:SecuritiesTransactionIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "an identifier for a securities transaction" ;
+	.
+
+fibo-fbc-fi-fi:Security
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:FinancialInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:isLegallyRecordedIn ;
+			owl:onClass fibo-fnd-law-jur:Jurisdiction ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "security" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:Security" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a financial instrument that can be bought or sold" ;
+	fibo-fnd-utl-av:adaptedFrom "Securities Exchange Act of 1934, as amended 12 August 2012" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"A security can be any note, stock, treasury stock, security future, security-based swap, bond, debenture,certificate of interest or participation in any profit-sharing agreement or in any oil, gas, or other mineral royalty or lease, any collateral-trust certificate, preorganization certificate or subscription, transferable share, investment contract, voting-trust certificate, certificate of deposit for a security, any put, call, straddle, option, or privilege on any security, certificate of deposit, or group or index of securities (including any interest therein or based on the value thereof), or any put, call, straddle, option, or privilege entered into on a national securities exchange relating to foreign currency, or in general, any instrument commonly known as a security, or any certificate of interest or participation in, temporary or interim certificate for, receipt for, or warrant or right to subscribe to or purchase, any of the foregoing; but shall not include currency or any note, draft, bill of exchange, or bankers' acceptance which has a maturity at the time of issuance of not exceeding nine months, exclusive of days of grace, or any renewal thereof the maturity of which is likewise limited." ,
+		"In the U.S., the Supreme Court has adopted a flexible and liberal approach in determining what constitutes a security. In its famous decision of SEC v. W.J. Howey Co., 328 U.S. 293, 90 L.Ed. 1244, 66 S.Ct. 1100 (1946), the Court held that land sales contracts for citrus groves in Florida, coupled with warranty deeds for the land and a contract to service the land, were 'investment contracts' and thus securities. The Court stated that [a]n investment contract for purposes of the Securities Act means a contract, transaction or scheme whereby a person invests his money in a common enterprise and is led to expect profits solely from the efforts of the promoter or a third party. 66 S.Ct. at 1103. According to the Court, it is immaterial whether the shares in the enterprise are evidenced by formal certificates or by nominal interests in the physical assets employed in the enterprise. 66 S.Ct. at 1104." ,
+		"Some securities may be traded over the counter, or through an exchange, or via some other trading venue such as an electronic trading platform." ,
+		"Whether a contract or other economic right is a security essentially depends on whether the holder of the contract is acting as an investor who seeks financial benefits based on the work of a promoter or a third party."
+		;
+	.
+
+fibo-fbc-fi-fi:StandardizedTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractualCommitment ;
+	rdfs:label "standardized terms" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:StandardizedTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	skos:definition "a set of standardized terms, published by some body, and capable of being incorporated into a contract by agreement" ;
+	skos:editorialNote "The things that are standardized: The strike price Contract size Expiry Date These three are standardized regardless of what exchange they are on. Each exchange has a standard for these specific terms, for contracts that are traded on that exchange. Expiry: there is a standard date that the exchange will have, for example in the US it is the Saturday following the third Friday of every month. So there is a set expiration date for all exchange traded optons Strike: there are set increments for strike for exchange traded options. Contract sizes are also stipulated, for example in the US these are standardized by the OPRA Convention (Options Pricing Reporting Authority). Ajay: Exchange traded is tri party contract with central counterparty for the setelemtn fo the options. Market place (usually electronic), hence standard to process data. Not necessarily a legal difference? So for instance you would not be able to trade different lot sizes. So they enter in the contract which is guaranteed by the exchange. Members of the exchange trade with each other. The Exchange then being a third party. OTC: Bilateral Exchange traded: Still bilateral, using standardized terms. Lookalikes: for examples, where there are usually ones with monthly margin calls (exchange traded), there are 'lookalike' ones which look like an ET but are traded outside the market. Common in commodities market. What else can be standardised? What must be standardidsed? Date Convention: Standardized by juridction US: All single-Equity Options are American; all European exercise for Indices. This is not a convention for say London, where various conventions may exist on different contracts." ;
+	.
+
+fibo-fbc-fi-fi:hasDurationToMaturity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fbc-fi-fi:hasTerm ;
+	rdfs:label "has duration to maturity" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:hasDurationToMaturity" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fbc-pas-fpas:Offering
+			fibo-fbc-fi-fi:FinancialInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDuration ;
+	skos:definition "indicates the lifespan of an instrument or offering, from the date of issuance to the scheduled maturity date" ;
+	.
+
+fibo-fbc-fi-fi:hasPrincipalExecutiveOfficeAddress
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-plc-adr:hasAddress ;
+	rdfs:label "has principal executive office address" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:hasPrincipalExecutiveOfficeAddress" ;
+	rdfs:domain fibo-be-le-lp:LegalPerson ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range fibo-fbc-fct-breg:RegistrationAddress ;
+	skos:definition "relates an organization, specifically the issuer of a financial instrument, to its principal executive address, as required for issuance of that instrument" ;
+	.
+
+fibo-fbc-fi-fi:hasScheduledMaturityDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasEndDate ;
+	rdfs:label "has scheduled maturity date" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:hasScheduledMaturityDate" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fbc-pas-fpas:Offering
+			fibo-fbc-fi-fi:FinancialInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDate ;
+	skos:definition "indicates the date on which the principal amount of an instrument is due to be repaid to the investor and interest payments stop and/or the date on which the instrument may be redeemed" ;
+	.
+
+fibo-fbc-fi-fi:hasTerm
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDuration ;
+	rdfs:label "has term"@en ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:hasTerm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "indicates a fixed or limited period for which something, e.g., an investment, lasts or is intended to last"@en ;
+	.
+
+fibo-fbc-fi-fi:hasTimeToMaturity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDuration ;
+	rdfs:label "has time to maturity" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:hasTimeToMaturity" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fbc-pas-fpas:Offering
+			fibo-fbc-fi-fi:FinancialInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDuration ;
+	skos:definition "indicates the interval between the present date and the scheduled maturity date of an instrument or offering" ;
+	.
+
+fibo-fbc-fi-fi:hasValueExpressedIn
+	a owl:ObjectProperty ;
+	rdfs:label "has value expressed in" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:hasValueExpressedIn" ;
+	rdfs:domain fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "relates an instrument to the currency its value is typically expressed in" ;
+	fibo-fnd-utl-av:explanatoryNote "This should be the same currency that was declared at the time of issuance." ;
+	.
+
+fibo-fbc-fi-fi:isLegallyRecordedIn
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasGoverningJurisdiction ;
+	rdfs:label "is legally recorded in" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:isLegallyRecordedIn" ;
+	rdfs:domain fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	skos:definition "jurisdiction (country, county, state, province, city) in which the financial instrument is legally recorded for regulatory and/or tax purposes" ;
+	.
+
+fibo-fbc-fi-fi:isNegotiable
+	a owl:DatatypeProperty ;
+	rdfs:label "is negotiable" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:isNegotiable" ;
+	rdfs:domain fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "specifies whether a particular financial instrument is or is not negotiable" ;
+	.
+
+fibo-fbc-fi-fi:mayBeTradedIn
+	a owl:ObjectProperty ;
+	rdfs:label "may be traded in" ;
+	rdfs:comment "QName: fibo-fbc-fi-fi:mayBeTradedIn" ;
+	rdfs:domain fibo-fbc-fi-fi:Security ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> ;
+	rdfs:range fibo-fbc-fct-mkt:Exchange ;
+	skos:definition "optionally identifies one or more markets in which the security may be traded" ;
+	.
+

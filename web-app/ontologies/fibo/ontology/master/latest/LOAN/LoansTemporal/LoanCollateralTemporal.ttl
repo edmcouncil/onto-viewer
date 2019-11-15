@@ -1,0 +1,81 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanCollateralTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansAppraisal/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanCollateralTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-loan-col: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> .
+@prefix fibo-loan-loan-pty: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansParties/> .
+@prefix fibo-loan-tem-apr: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> .
+@prefix fibo-loan-tem-col: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanCollateralTemporal/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanCollateralTemporal/>
+	a owl:Ontology ;
+	rdfs:label "LoanCollateralTemporal"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology covers date-sensitive facts about the collateral provided for a collateralized loan, including security collateral." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansAppraisal/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanCollateralTemporal/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-tem-col:CollateralDatedFacts
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-col:SecurityInterestDatedFacts ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-col:isAboutLoanCollateral ;
+			owl:someValuesFrom fibo-loan-loan-col:LoanCollateral ;
+		]
+		;
+	rdfs:label "collateral dated facts"@en ;
+	rdfs:comment "QName: NONE:CollateralDatedFacts" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanCollateralTemporal/> ;
+	skos:definition "What information is kept about different kinds of asset? Example: HJouse: Building structure, the land (these are non date facts), quality of the title. If car, information, identify (registration, VIN etc.); insurance and so on. Insurance is a dated fact. If a car is collateral., you would collect updated information on an ongoing basis. this happens though registering an interest in the vehicle. Insurance companies undertake not to cancel insutrance without notifying lender if there is a lein. so they regfister an interest in a motor vehicle. so some of this event driven, some is dated, some is static. Also: Flood plain risk, flood insurance on the asset."@en ;
+	.
+
+fibo-loan-tem-col:SecurityInterestDatedFacts
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-loan-tem-apr:appraisedBy ;
+		owl:someValuesFrom fibo-loan-loan-pty:LoanServicer.1 ;
+	] ;
+	rdfs:label "security interest dated facts"@en ;
+	rdfs:comment "QName: NONE:SecurityInterestDatedFacts" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanCollateralTemporal/> ;
+	.
+
+fibo-loan-tem-col:isAboutLoanCollateral
+	a owl:ObjectProperty ;
+	rdfs:label "is about loan collateral"@en ;
+	rdfs:comment "QName: NONE:isAboutLoanCollateral" ;
+	rdfs:domain fibo-loan-tem-col:CollateralDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanCollateralTemporal/> ;
+	rdfs:range fibo-loan-loan-col:LoanCollateral ;
+	.
+
+fibo-loan-tem-col:isOf
+	a owl:ObjectProperty ;
+	rdfs:label "is of"@en ;
+	rdfs:comment "QName: NONE:isOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanCollateralTemporal/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+	.
+

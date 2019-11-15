@@ -1,0 +1,87 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/AllIND/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/ForeignExchange/ForeignExchange/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/AllIND/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-all: <https://spec.edmcouncil.org/fibo/ontology/IND/AllIND/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ei-pub: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/> .
+@prefix fibo-ind-fx-fx: <https://spec.edmcouncil.org/fibo/ontology/IND/ForeignExchange/ForeignExchange/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-ind-ir-ir: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/> .
+@prefix fibo-ind-ir-pub: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/AllIND/>
+	a owl:Ontology ;
+	rdfs:label "Indices and Indicators Domain" ;
+	rdfs:comment "QName: fibo-ind-all:" ;
+	dct:abstract "The FIBO Indices and Indicators (IND) Domain covers market indices and reference rates including economic indicators, foreign exchange, interest rates, and other benchmarks.  The ontologies cover quoted interest rates, economic measures such as employment rates, and quoted indices required to support baskets of securities, including specific kinds of securities in share indices or bond indices, as well as credit indices." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Indices and Indicators (IND) Domain" ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:contributor
+		"88 Solutions" ,
+		"Adaptive, Inc." ,
+		"Bloomberg LP" ,
+		"Bureau of Economic Analysis (BEA, US Department of Commerce)" ,
+		"Bureau of Labor Statistics (BLS, US Department of Commerce)" ,
+		"Census Bureau (US Department of Commerce)" ,
+		"Citigroup" ,
+		"Federal Reserve Bank of Kansas City" ,
+		"HP Enterprise / Mphasis" ,
+		"No Magic" ,
+		"Nordea Bank AB" ,
+		"Pinnacle Bank (Morgan Hill, California)" ,
+		"State Street Bank and Trust" ,
+		"Statistics Canada" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC"
+		;
+	sm:copyright
+		"Copyright (c) 2014-2018 EDM Council, Inc." ,
+		"Copyright (c) 2014-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-ind-all" ;
+	sm:filename "AllIND.rdf" ;
+	sm:keyword
+		"economic indicator" ,
+		"foreign exchange" ,
+		"interest rate" ,
+		"market index"
+		;
+	sm:moduleAbbreviation "fibo-ind" ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/ForeignExchange/ForeignExchange/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/AllIND/> ;
+	fibo-fnd-utl-av:explanatoryNote "The 'all' ontology for IND is provided for convenience for FIBO users.  It imports most of the Production (Released) ontologies that comprise the FIBO Foundations (FND), Business Entities (BE), Financial Business and Commerce (FBC), and Indices and Indicators (IND) 2.0 domains, excluding individuals for governments and jurisdictions, financial services, regulatory organizations and related registries, and reference individuals, as well as the LCC region-specific ontologies." ;
+	.
+

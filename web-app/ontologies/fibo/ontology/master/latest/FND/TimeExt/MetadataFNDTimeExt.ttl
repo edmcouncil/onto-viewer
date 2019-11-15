@@ -1,0 +1,48 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/MetadataFNDTimeExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/MetadataFNDTimeExt/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-tim-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/MetadataFNDTimeExt/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/MetadataFNDTimeExt/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) TimeExt Module" ;
+	rdfs:comment "QName: fibo-fnd-tim-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Time Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-fnd-tim-mod" ;
+	sm:filename "MetadataFNDTimeExt.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/MetadataFNDTimeExt/> ;
+	.
+
+fibo-fnd-tim-mod:TimeExtModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Time" ;
+	rdfs:comment "QName: fibo-fnd-tim-mod:TimeExtModule" ;
+	dct:abstract "This module contains a legacy ontology of Time concepts which will be deprecated in favor of those in the Dates and Times module." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Time Module" ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-fnd-tim" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/MetadataFNDTimeExt/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	skos:editorialNote """The content in this module is original conceptual content and does not extend any other module. However it is all intended to be replaced by content in the Dates and Times module. Where concepts are referred to that are not yet reflected in Dates and Times these are to be brought forward based on what is in this module, but keeping in mind the different way that temporal matter is modeled in Dates and Times, including the replacement of Occurrent and its sub types with Occurrence and OccurrenceKind. 
+Note that care should be taken, in FIBO domains such as Derivatives and Securities, with classes that are a conflation of prescriptive and descriptive events, with their different date and time requirements.""" ;
+	.
+

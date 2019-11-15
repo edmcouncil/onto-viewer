@@ -1,0 +1,58 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/MetadataDERAssetDerivatives/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/MetadataDERAssetDerivatives/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/MetadataDERAssetDerivatives/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/MetadataDERAssetDerivatives/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Derivatives (DER) Asset Derivatives Module" ;
+	rdfs:comment "QName: fibo-der-ass-mod:" ;
+	dct:abstract "The asset derivatives module covers derivatives that have underlying securities, including those based on market indices or baskets securities." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-der-ass-mod" ;
+	sm:filename "MetadataDERAssetDerivatives.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/MetadataDERAssetDerivatives/> ;
+	.
+
+fibo-der-ass-mod:AssetDerivativesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Asset Derivatives" ;
+	rdfs:comment "QName: fibo-der-ass-mod:AssetDerivativesModule" ;
+	dct:abstract "The asset derivatives module covers derivatives that have underlying securities, including those based on market indices or baskets securities." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondReturnSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquitySwaps/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Derivatives (DER) Asset Derivatives Module" ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-der-ass" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/MetadataDERAssetDerivatives/> ;
+	rdfs:seeAlso "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	.
+

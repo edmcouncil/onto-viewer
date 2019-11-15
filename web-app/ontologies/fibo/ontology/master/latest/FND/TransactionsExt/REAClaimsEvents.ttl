@@ -1,0 +1,155 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REAClaimsEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionsExtended/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REAClaimsEvents/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-txn-cle: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> .
+@prefix fibo-fnd-txn-ev: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-txn-txnx: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/>
+	a owl:Ontology ;
+	rdfs:label "REAClaimsEvents"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology provides a conceptual view of the REA notion of Claims along with a treatment of commitments according to their aspects of commitments and obligations and the extension of REA claims to debt and equity as concepts." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionsExtended/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REAClaimsEvents/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-cle:AccountingReportingParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-cle:AspectViewingParty ;
+	rdfs:label "accounting reporting party"@en ;
+	rdfs:comment "QName: NONE:AccountingReportingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	skos:definition "The party, from the perspective of which economic facts are defined."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These include the definitions of rights versus obligations, and the Claim as imbalance between those."@en ;
+	.
+
+fibo-fnd-txn-cle:AspectViewingParty
+	a owl:Class ;
+	rdfs:label "aspect viewing party"@en ;
+	rdfs:comment "QName: NONE:AspectViewingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	skos:definition "The party from the perspective of which the aspect is defined."@en ;
+	.
+
+fibo-fnd-txn-cle:CashflowCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-txnx:ContractuallyDefinedBenefit ;
+	rdfs:label "cashflow commitment"@en ;
+	rdfs:comment "QName: NONE:CashflowCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	skos:definition "A legal or contractual commitment to some cash flows in the future."@en ;
+	.
+
+fibo-fnd-txn-cle:ContractualTransactionObligation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:ContractualObligation ,
+		fibo-fnd-txn-cle:REATransactionObligation
+		;
+	rdfs:label "contractual transaction obligation"@en ;
+	rdfs:comment "QName: NONE:ContractualTransactionObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	skos:definition "An obligation which is one perspective on a commitment which is both a contractual commitment and a transaction-related economic commitment."@en ;
+	skos:editorialNote "REA supports the definition of transactions both within and between distinct legal entities or persons. This element forms part of the definition of REA transaction concepts which are between entities."@en ;
+	.
+
+fibo-fnd-txn-cle:DebtClaim
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-rea:REAClaim ;
+	rdfs:label "debt claim"@en ;
+	rdfs:comment "QName: NONE:DebtClaim" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	.
+
+fibo-fnd-txn-cle:EquityClaim
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-rea:REAClaim ;
+	rdfs:label "equity claim"@en ;
+	rdfs:comment "QName: NONE:EquityClaim" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	skos:definition "Needs to be unpicked Equity represents ownership in some venture. You own a piece of the assets of the venture, which gives you a claim on those assets. there is parallel to the discharging of obligations and rights in a transaction, in there here, the obligation/right continues to exist until or unless the venture is wound up."@en ;
+	.
+
+fibo-fnd-txn-cle:REATransactionObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ContingentObligation ;
+	rdfs:label "r e a transaction obligation"@en ;
+	rdfs:comment "QName: NONE:REATransactionObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	.
+
+fibo-fnd-txn-cle:REATransactionRight
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ContingentRight ;
+	rdfs:label "r e a transaction right"@en ;
+	rdfs:comment "QName: NONE:REATransactionRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	.
+
+fibo-fnd-txn-cle:asReportedBy
+	a owl:ObjectProperty ;
+	rdfs:label "as reported by"@en ;
+	rdfs:comment "QName: NONE:asReportedBy" ;
+	rdfs:domain fibo-fnd-law-lcap:Claim ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	rdfs:range fibo-fnd-txn-cle:AccountingReportingParty ;
+	.
+
+fibo-fnd-txn-cle:asSeenBy
+	a owl:ObjectProperty ;
+	rdfs:label "as seen by" ;
+	rdfs:comment "QName: NONE:asSeenBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	.
+
+fibo-fnd-txn-cle:definedOnThePartOf
+	a owl:ObjectProperty ;
+	rdfs:label "defined on the part of"@en ;
+	rdfs:comment "QName: NONE:definedOnThePartOf" ;
+	rdfs:domain fibo-fnd-txn-rea:REAClaim ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	rdfs:range fibo-fnd-txn-cle:AccountingReportingParty ;
+	.
+
+fibo-fnd-txn-cle:hasEnd
+	a owl:ObjectProperty ;
+	rdfs:label "has end"@en ;
+	rdfs:comment "QName: NONE:hasEnd" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	rdfs:range fibo-fnd-txn-ev:DischargingEvent ;
+	.
+
+fibo-fnd-txn-cle:hasStart
+	a owl:ObjectProperty ;
+	rdfs:label "has start"@en ;
+	rdfs:comment "QName: NONE:hasStart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> ;
+	rdfs:range fibo-fnd-txn-ev:TransactionUndertaking ;
+	.
+
+fibo-fnd-txn-rea:REAClaim
+	a owl:Class ;
+	.
+

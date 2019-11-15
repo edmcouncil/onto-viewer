@@ -1,0 +1,42 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/MetadataMDEquityTemporal/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/MetadataMDEquityTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-md-eqx-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/MetadataMDEquityTemporal/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/MetadataMDEquityTemporal/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Market Data (MD) EquityTemporal Module" ;
+	rdfs:comment "QName: fibo-md-eqx-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the MD Equity Temporal Module." ;
+	dct:issued "2018-06-30T18:00:00"^^xsd:dateTime ;
+	dct:license sm:MITLicense ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-md-eqx-mod" ;
+	sm:filename "MetadataMDEquityTemporal.rdf" ;
+	owl:imports <http://www.omg.org/techprocess/ab/SpecificationMetadata/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/MD/EquityTemporal/MetadataMDEquityTemporal/> ;
+	.
+
+fibo-md-eqx-mod:EquityTemporalModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Equity Temporal" ;
+	rdfs:comment "QName: fibo-md-eqx-mod:EquityTemporalModule" ;
+	dct:abstract "This module contains ontologies of temporally variable concepts relating to equity instruments. These are concepts for variables that have past, presented and projected future values, such as pricing, including the most common types of exchange quoted share prices." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	dct:title "FIBO Market Data - Equity Temporal Terms Module" ;
+	sm:moduleAbbreviation "fibo-md-eqx" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/MetadataMDEquityTemporal/> ;
+	.
+

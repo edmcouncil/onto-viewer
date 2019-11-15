@@ -1,0 +1,1021 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-dae-gty: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ir-ir: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/> .
+@prefix fibo-sec-dbt-dbti: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> .
+@prefix fibo-sec-sec-iss: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/>
+	a owl:Ontology ;
+	rdfs:label "Debt Instruments Ontology" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:" ;
+	dct:abstract "This ontology defines concepts that are specific to debt instruments (tradable and non-tradable)." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage <http://www.w3.org/standards/techs/owl#w3c_all> ;
+	sm:copyright
+		"Copyright (c) 2016-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-sec-dbt-dbti" ;
+	sm:filename "DebtInstruments.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments.rdf version of this ontology was modified to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments.rdf version of this ontology was modified to reflect use of actualExpression as an annotation rather than datatype property, to deprecate maturity-related properties which have been moved to financial instruments more generally, and to simplify restrictions on tradable debt instrument." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments.rdf version of this ontology was modified to support integration of the bonds ontology."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fi-fi:DebtInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasCallFeature ;
+			owl:onClass fibo-sec-dbt-dbti:CallFeature ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-pas-fpas:hasOffering ;
+			owl:onClass fibo-sec-dbt-dbti:DebtOffering ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasPutFeature ;
+			owl:onClass fibo-sec-dbt-dbti:PutFeature ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:hasTimeToMaturity ;
+			owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasInterestPaymentTerms ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:InterestPaymentTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRedemptionProvision ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:RedemptionProvision ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRepaymentTerms ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:PrincipalRepaymentTerms ;
+		]
+		;
+	.
+
+fibo-sec-dbt-dbti:AtADiscount
+	a
+		owl:NamedIndividual ,
+		fibo-sec-dbt-dbti:RelativePrice
+		;
+	rdfs:label "at a discount" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:AtADiscount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a selling price that is less than the face or nominal value" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ,
+		"http://www.investopedia.com/terms/a/at-a-discount.asp"
+		;
+	fibo-fnd-utl-av:synonym "below par" ;
+	.
+
+fibo-sec-dbt-dbti:AtAPremium
+	a
+		owl:NamedIndividual ,
+		fibo-sec-dbt-dbti:RelativePrice
+		;
+	rdfs:label "at a premium" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:AtAPremium" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a selling price significantly above the stated face or redemption value due to high demand or timing of redemption" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ,
+		"http://www.investopedia.com/terms/a/at-a-premium.asp"
+		;
+	fibo-fnd-utl-av:synonym
+		"above par" ,
+		"premium"
+		;
+	.
+
+fibo-sec-dbt-dbti:CallEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:RedemptionEvent ;
+	rdfs:label "call event" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:CallEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "an event associated with the call schedule for a debt instrument" ;
+	.
+
+fibo-sec-dbt-dbti:CallFeature
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:TradableDebtInstrumentRedemptionProvision ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasNotificationProvision ;
+			owl:onClass fibo-sec-dbt-dbti:CallNotificationProvision ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:CallSchedule ;
+		]
+		;
+	rdfs:label "call feature" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:CallFeature" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a redemption provision defining the rights of the issuer to buy back a security at a call price after a call protection period" ;
+	fibo-fnd-utl-av:adaptedFrom "EDM Council / Quarule" ;
+	fibo-fnd-utl-av:explanatoryNote "Most corporate and municipal bonds have ten-year call features (termed call protection by holders); government securities typically have none." ;
+	fibo-fnd-utl-av:synonym "call provision" ;
+	.
+
+fibo-sec-dbt-dbti:CallNotificationProvision
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:NotificationProvision ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDatePeriod ;
+			owl:allValuesFrom fibo-sec-dbt-dbti:CallWindow ;
+		]
+		;
+	rdfs:label "call notification provision" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:CallNotificationProvision" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a provision of a call feature defining notification requirements" ;
+	.
+
+fibo-sec-dbt-dbti:CallPremium
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-cur:MonetaryPrice ;
+	rdfs:label "call premium" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:CallPremium" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "the price over par paid by an issuer to redeem securities when exercising a call provision" ;
+	fibo-fnd-utl-av:adaptedFrom "EDM Council / Quarule" ;
+	.
+
+fibo-sec-dbt-dbti:CallPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-cur:MonetaryPrice ;
+	rdfs:label "call price" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:CallPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "price at which an asset is redeemed in the event of a call" ;
+	fibo-fnd-utl-alx:actualExpression "par value + call premium" ;
+	fibo-fnd-utl-av:adaptedFrom "EDM Council / Quarule" ;
+	fibo-fnd-utl-av:synonym "redemption price" ;
+	.
+
+fibo-sec-dbt-dbti:CallSchedule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:Schedule ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:CallEvent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-sec-dbt-dbti:CallPremium
+					fibo-sec-dbt-dbti:CallPrice
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "call schedule" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:CallSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a schedule of call prices and when they are in effect" ;
+	fibo-fnd-utl-av:adaptedFrom "EDM Council / Quarule" ;
+	.
+
+fibo-sec-dbt-dbti:CallWindow
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:DatePeriod ;
+	rdfs:label "call window" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:CallWindow" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "an explicit period of time prior to a call date during which an issuer or agent must give notice to holders" ;
+	.
+
+fibo-sec-dbt-dbti:DebtOffering
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-iss:SecuritiesOffering ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-fbc-fi-fi:DebtInstrument ;
+		]
+		;
+	rdfs:label "debt offering" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:DebtOffering" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "an offering of one or more debt instruments for sale" ;
+	.
+
+fibo-sec-dbt-dbti:FixedIncomeSecurity
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:TradableDebtInstrument ;
+	rdfs:label "fixed income security" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:FixedIncomeSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a tradeable debt instrument that provides a return in the form of fixed periodic interest payments and the eventual return of principal at maturity" ;
+	fibo-fnd-utl-av:explanatoryNote "Unlike variable-income securities, where payments change based on some underlying measure, such as short-term interest rates, the payments of a fixed-income security are known in advance." ;
+	.
+
+fibo-sec-dbt-dbti:FullyIndexedInterestRate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-dbt:FloatingInterestRate ,
+		fibo-fnd-utl-alx:Expression ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:onClass fibo-ind-ir-ir:BaseRate ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:Margin ;
+		]
+		;
+	rdfs:label "fully-indexed interest rate" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:FullyIndexedInterestRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a variable interest rate that is calculated by adding a margin to a specified index rate" ;
+	fibo-fnd-utl-av:explanatoryNote "Fully indexed interest rates are used for variable rate credit products. The interest rate on a variable (adjustable) rate mortgage corresponds to a specific benchmark (often the prime rate, but sometimes LIBOR, the one-year constant-maturity Treasury, or other benchmarks) plus a spread (also called the margin. The margin on a fully indexed interest rate product is determined by the underwriter and based on the borrower's credit quality." ;
+	.
+
+fibo-sec-dbt-dbti:InterestOnlyStrip
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:Strip ;
+	rdfs:label "interest-only strip"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:InterestOnlyStrip" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a strip that represents the non-principal portion of the monthly payments on the underlying debt instrument, such as a bond"@en ;
+	skos:example "An interest-only strip can be reintegrated into other synthetic or engineered products. For example, interest-only strips can be pooled to create or make up a portion of a larger collateralized mortgage obligation (CMO), asset-backed security (ABS) or collateralized debt obligation (CDO) structure." ;
+	fibo-fnd-utl-av:explanatoryNote "An interest-only strip holder is interested in rising rates and no prepayment, as prepayment would cause them forfeit future interest payments and receive nothing from the return of the principal." ;
+	fibo-fnd-utl-av:synonym "IO strip"@en ;
+	.
+
+fibo-sec-dbt-dbti:IssuedDebt
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-dbt:Debt ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:allValuesFrom fibo-fbc-fi-fi:DebtInstrument ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasDebtAmount ;
+			owl:allValuesFrom fibo-fnd-acc-cur:MonetaryAmount ;
+		]
+		;
+	rdfs:label "issued debt" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:IssuedDebt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "debt that is set out by the borrower in some form of financial security in which the lender is the holder or counterparty of that security" ;
+	.
+
+fibo-sec-dbt-dbti:MakeWholeFeature
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:CallFeature ;
+	rdfs:label "make whole feature" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:MakeWholeFeature" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a call provision allowing the issuer to pay off remaining debt early" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/m/make-wholecall.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "The issuer typically has to make a lump sum payment to the investor derived from a formula based on the net present value (NPV) of future interest or coupon payments that will not be paid incrementally because of the call combined with the principal payment the investor would have received at maturity." ;
+	fibo-fnd-utl-av:synonym "make whole provision" ;
+	.
+
+fibo-sec-dbt-dbti:Margin
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Variable ;
+	rdfs:label "margin" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:Margin" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a variable that is added to a specified index rate to determine the fully indexed interest rate charged to a borrower on a credit balance" ;
+	fibo-fnd-utl-av:synonym "spread" ;
+	.
+
+fibo-sec-dbt-dbti:NonTradableDebtInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DebtInstrument ,
+		fibo-fnd-agr-ctr:MutualContractualAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRedemptionProvision ;
+			owl:onClass fibo-sec-dbt-dbti:NonTradableDebtRedemptionProvision ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRelativePriceAtIssue ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:RelativePrice ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRelativePriceAtRedemption ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:RelativePrice ;
+		]
+		;
+	rdfs:label "non-tradable debt instrument" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:NonTradableDebtInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	owl:disjointWith fibo-sec-dbt-dbti:TradableDebtInstrument ;
+	skos:definition "a debt instrument that may not be bought or sold" ;
+	skos:example "Low-risk instruments such as savings bonds are examples of nonnegotiable debt instruments." ;
+	fibo-fnd-utl-av:adaptedFrom "Non-Tradeable. (n.d.) Farlex Financial Dictionary. (2009). Retrieved December 16 2016 from http://financial-dictionary.thefreedictionary.com/Non-Tradeable" ;
+	fibo-fnd-utl-av:explanatoryNote "Generally, a nonnegotiable instrument may be redeemed by the issuer, but this is often subject to some limitations." ;
+	.
+
+fibo-sec-dbt-dbti:NonTradableDebtRedemptionProvision
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-dbt:RedemptionProvision ;
+	rdfs:label "non-tradable debt redemption terms" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:NonTradableDebtRedemptionProvision" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "terms for repayment of principal on debt instruments that are not traded securities, such as over the counter, bilateral paper" ;
+	.
+
+fibo-sec-dbt-dbti:NotificationProvision
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:TradableDebtInstrumentRedemptionProvision ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDatePeriod ;
+			owl:allValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		]
+		;
+	rdfs:label "notification provision" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:NotificationProvision" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a provision of a redemption feature defining notification requirements" ;
+	.
+
+fibo-sec-dbt-dbti:ParValue
+	a
+		owl:NamedIndividual ,
+		fibo-sec-dbt-dbti:RelativePrice
+		;
+	rdfs:label "par value" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:ParValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "the stated value of a negotiable instrument, stock, or bond, as compared with the value that instrument might receive when sold" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ,
+		"http://www.investopedia.com/terms/p/par.asp"
+		;
+	fibo-fnd-utl-av:synonym
+		"face value" ,
+		"nominal value" ,
+		"par"
+		;
+	.
+
+fibo-sec-dbt-dbti:PrescriptiveEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-oc:OccurrenceKind ;
+	rdfs:label "prescriptive event" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PrescriptiveEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "an event related to the imposition or enforcement of a rule, method, formula, etc." ;
+	.
+
+fibo-sec-dbt-dbti:PrincipalOnlyStrip
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:Strip ;
+	rdfs:label "principal-only strip"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PrincipalOnlyStrip" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	owl:disjointWith fibo-sec-dbt-dbti:InterestOnlyStrip ;
+	skos:definition "a strip that represents the principal portion of the monthly payments on the underlying debt instrument, such as a bond"@en ;
+	.
+
+fibo-sec-dbt-dbti:PubliclyIssuedDebt
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:IssuedDebt ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:allValuesFrom fibo-sec-dbt-dbti:TradableDebtInstrument ;
+		]
+		;
+	rdfs:label "publicly issued debt" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PubliclyIssuedDebt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "an issued debt in the form of a tradable debt instrument (security)" ;
+	.
+
+fibo-sec-dbt-dbti:PutEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:RedemptionEvent ;
+	rdfs:label "put event" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PutEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "an event associated with the put schedule for a debt instrument, i.e., an event involving the 'put', or surrender of the instrument by the holder" ;
+	.
+
+fibo-sec-dbt-dbti:PutFeature
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:TradableDebtInstrumentRedemptionProvision ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasNotificationProvision ;
+			owl:onClass fibo-sec-dbt-dbti:PutNotificationProvision ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:PutSchedule ;
+		]
+		;
+	rdfs:label "put feature" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PutFeature" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a redemption provision giving the holder the right, but not the obligation, to sell a specified amount of the debt instrument (i.e., redeem it), prior to maturity" ;
+	skos:editorialNote 'FIBIM has term "Putable Date" which (by implication, and comparing with definition for "Next Call Date") is presumably a single calendar date in the future, at a given point in time. That does not cover the definition of formal terms defining when and how the issue may be put, which is what is modeled here.' ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	fibo-fnd-utl-av:synonym "put provision" ;
+	.
+
+fibo-sec-dbt-dbti:PutNotificationProvision
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:NotificationProvision ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDatePeriod ;
+			owl:allValuesFrom fibo-sec-dbt-dbti:PutWindow ;
+		]
+		;
+	rdfs:label "put notification provision" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PutNotificationProvision" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a provision of a put feature defining notification requirements" ;
+	.
+
+fibo-sec-dbt-dbti:PutPremium
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-cur:MonetaryPrice ;
+	rdfs:label "put premium" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PutPremium" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "an amount over par that a debt instrument holder must pay to sell the security early" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ,
+		"http://www.investopedia.com/terms/p/put.asp"
+		;
+	.
+
+fibo-sec-dbt-dbti:PutPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-cur:MonetaryPrice ;
+	rdfs:label "put price" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PutPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "price at which a debt instrument with a put feature may be sold by the holder" ;
+	skos:editorialNote "needs review - should the expression be exercise value vs. par value?" ;
+	fibo-fnd-utl-alx:actualExpression "par value + put premium" ;
+	.
+
+fibo-sec-dbt-dbti:PutSchedule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:Schedule ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:PutEvent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-sec-dbt-dbti:PutPremium
+					fibo-sec-dbt-dbti:PutPrice
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "put schedule" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PutSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a schedule that defines the events associated with the put feature of a debt instrument, i.e, the dates on which the debt instrument may be sold at what price by the holder" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ,
+		"http://www.investopedia.com/terms/p/put.asp"
+		;
+	.
+
+fibo-sec-dbt-dbti:PutWindow
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:DatePeriod ;
+	rdfs:label "put window" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:PutWindow" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "an explicit period of time prior to a put date during which holder or agent must give notice to an issuer" ;
+	.
+
+fibo-sec-dbt-dbti:RedemptionEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:PrescriptiveEvent ;
+	rdfs:label "redemption event" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:RedemptionEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a prescriptive event involving the return of an investor's principal in a fixed-income security, such as a preferred stock or bond, or the sale of units in a mutual fund" ;
+	.
+
+fibo-sec-dbt-dbti:RelativePrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-cur:MonetaryPrice ;
+	rdfs:label "relative price" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:RelativePrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a relative price with respect to either a stated or market value for a debt instrument at some point in time, defined as par, premium, or discount" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.investopedia.com/terms/m/market-price.asp" ,
+		"http://www.investopedia.com/terms/p/par.asp"
+		;
+	.
+
+fibo-sec-dbt-dbti:Strip
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:FixedIncomeSecurity ;
+	rdfs:label "strip"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:Strip" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a tradeable debt instrument created either through the process of removing coupons from a bond and then selling the separate parts as a zero coupon bond and an interest paying coupon bond or through taking the opposite position from some variant in the options market"@en ;
+	fibo-fnd-utl-av:explanatoryNote "STRIPS is an acronym for Separate Trading of Registered Interest and Principal of Securities, which has come to be used as a term in its own right."@en ;
+	fibo-fnd-utl-av:synonym "Separate Trading of Registered Interest and Principal of Securities"@en ;
+	.
+
+fibo-sec-dbt-dbti:TradableDebtInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DebtInstrument ,
+		fibo-fbc-fi-fi:Security ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:mayBeSubordinatedTo ;
+			owl:onClass fibo-sec-dbt-dbti:TradableDebtInstrument ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-gty:hasGuarantor ;
+			owl:onClass fibo-fbc-dae-gty:Guarantor ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "tradable debt instrument" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:TradableDebtInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "a debt instrument that is also a security, i.e., that can be bought and sold by the holder" ;
+	fibo-fnd-utl-av:explanatoryNote "Details from Ecofin: A [debt] instrument can be traded, if its features depend only on one borrower. If the instrument has no bilateral or multilateral obligations, the investor can easily transfer it to another investor without asking the borrower (except the terms prohibit this explicitly). This is simplified with securitised instruments, where the debt is already split into handy denominations which trade easily (e.g. in round thousands or millions as with bonds, commercial paper, etc.). But in principle it works also with interbank loans and similar instruments. FIBIM Definition: Financial instruments evidencing moneys owed by the issuer to the holder on terms as specified." ;
+	.
+
+fibo-sec-dbt-dbti:TradableDebtInstrumentRedemptionProvision
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-dbt:RedemptionProvision ;
+	rdfs:label "tradable debt instrument redemption provision" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:TradableDebtInstrumentRedemptionProvision" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "terms for the redemption of the debt represented by a debt security" ;
+	fibo-fnd-utl-av:explanatoryNote "Debt represented by a tradable debt security may be paid as a one off payment at maturity, by paying down principal amounts periodically, or by a call of the issue by the issuer. Debt that is defined by a convertible bond are redeemed by conversion into an equity security issued by the same company. More notes from the EDMC SME Review: Distinction between call and amortizing is whether you pay off everybody at the same time or via a lottery. SF can be either. either amortize the payment of a SF or pay it off by a lottery. The terms of the instrument determine that. Mandatory - all in the schedule. Mandatory to the bond issuer. Issuer has to pay off a certain amount at a certain time - this is in the Schedule. Callable - nothing mandatory." ;
+	.
+
+fibo-sec-dbt-dbti:VariableIncomeSecurity
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:TradableDebtInstrument ;
+	rdfs:label "variable income security" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:VariableIncomeSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	skos:definition "tradeable debt instrument that provide their owners with a rate of return that is dynamic and determined by market forces" ;
+	fibo-fnd-utl-av:explanatoryNote "Variable-income securities provide investors with both greater risks as well as rewards." ;
+	.
+
+fibo-sec-dbt-dbti:allowsAutoReinvestment
+	a owl:DatatypeProperty ;
+	rdfs:label "allows auto-reinvestment" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:allowsAutoReinvestment" ;
+	rdfs:domain fibo-fbc-dae-dbt:InterestPaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the security allows automatically re-investing the interest on that security towards purchasing additional shares or units of the same security" ;
+	.
+
+fibo-sec-dbt-dbti:allowsPaymentInKind
+	a owl:DatatypeProperty ;
+	rdfs:label "allows payment in kind" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:allowsPaymentInKind" ;
+	rdfs:domain fibo-fbc-dae-dbt:RedemptionProvision ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the principal may be repaid in kind (i.e., replaced with another instrument) rather than in cash" ;
+	.
+
+fibo-sec-dbt-dbti:hasCallFeature
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-sec-dbt-dbti:hasRepaymentTerms ;
+	rdfs:label "has call feature" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasCallFeature" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-sec-dbt-dbti:CallFeature ;
+	skos:definition "indicates the specific terms related to any inherent call feature as specified in the offering/instrument" ;
+	.
+
+fibo-sec-dbt-dbti:hasDatedDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasExplicitDate ;
+	rdfs:label "has dated date" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasDatedDate" ;
+	rdfs:domain fibo-fbc-dae-dbt:InterestPaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDate ;
+	skos:definition "specifies the date on which interest begins to accrue on a fixed-income security" ;
+	fibo-fnd-utl-av:explanatoryNote "Investors who purchase a fixed-income security between interest payment dates must also pay the seller or issuer any interest that has accrued from the dated date to the purchase date, or settlement date, in addition to the face value."@en ;
+	.
+
+fibo-sec-dbt-dbti:hasDefaultLotSize
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-qt-qtu:hasNumericValue ;
+	rdfs:label "has default lot size" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasDefaultLotSize" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "indicates the default number of units of the security that may be held at any one time" ;
+	fibo-fnd-utl-av:explanatoryNote "This is the minimum denomination required for transfer or change of ownership of a tradable debt security." ;
+	.
+
+fibo-sec-dbt-dbti:hasEstateOrDeathPutFeature
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-sec-dbt-dbti:hasRedemptionProvision ;
+	rdfs:label "has estate or death put feature" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasEstateOrDeathPutFeature" ;
+	rdfs:domain fibo-sec-dbt-dbti:PutFeature ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates that a security is subject to redemption upon the passing of the holder" ;
+	.
+
+fibo-sec-dbt-dbti:hasInterestPaymentTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has interest payment terms" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasInterestPaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-fbc-dae-dbt:InterestPaymentTerms ;
+	skos:definition "indicates the specific terms related to interest payments on the principal as specified in the instrument or a related contract document" ;
+	.
+
+fibo-sec-dbt-dbti:hasMaturityDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasEndDate ;
+	rdfs:label "has maturity date" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasMaturityDate" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDate ;
+	skos:definition "indicates the date on which the principal amount of a note, draft, acceptance bond or other debt instrument is due to be repaid to the investor and interest payments stop" ;
+	.
+
+fibo-sec-dbt-dbti:hasNotificationProvision
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has notification provision" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasNotificationProvision" ;
+	rdfs:domain fibo-sec-dbt-dbti:TradableDebtInstrumentRedemptionProvision ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-sec-dbt-dbti:NotificationProvision ;
+	skos:definition "relates the redemption provision of a debt instrument to a notification provision (e.g., call or put notification)" ;
+	.
+
+fibo-sec-dbt-dbti:hasPoolNumber
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-qt-qtu:hasNumericValue ;
+	rdfs:label "has pool number" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasPoolNumber" ;
+	rdfs:domain fibo-sec-dbt-dbti:PubliclyIssuedDebt ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "indicates the pool number of the debt" ;
+	.
+
+fibo-sec-dbt-dbti:hasPriceAndYieldDayCountConvention
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-bd:hasBusinessRecurrenceIntervalConvention ;
+	rdfs:label "has price and yield day count convention" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasPriceAndYieldDayCountConvention" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-fbc-dae-dbt:DayCountConvention ;
+	skos:definition "indicates the convention used to determine the number of days in a month and days in a year that are counted when performing calculations for yield and price figures" ;
+	.
+
+fibo-sec-dbt-dbti:hasPutFeature
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-sec-dbt-dbti:hasRepaymentTerms ;
+	rdfs:label "has put feature" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasPutFeature" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-sec-dbt-dbti:PutFeature ;
+	skos:definition "indicates the specific terms related to any inherent put feature as specified in the offering/instrument" ;
+	.
+
+fibo-sec-dbt-dbti:hasRedemptionProvision
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has redemption terms" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasRedemptionProvision" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-fbc-dae-dbt:RedemptionProvision ;
+	skos:definition "indicates the specific terms related to redemption as specified in the instrument or a related contract document" ;
+	.
+
+fibo-sec-dbt-dbti:hasRelativePriceAtIssue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasPrice ;
+	rdfs:label "has relative price at issue" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasRelativePriceAtIssue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-sec-dbt-dbti:RelativePrice ;
+	skos:definition "indicates a relative price with respect to the face value at which an instrument is issued, namely par, premium or discount" ;
+	.
+
+fibo-sec-dbt-dbti:hasRelativePriceAtMaturity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasPrice ;
+	rdfs:label "has relative price at maturity" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasRelativePriceAtMaturity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-sec-dbt-dbti:RelativePrice ;
+	skos:definition "indicates a relative price with respect to the face value at the time an instrument matures, namely par, discount or premium" ;
+	.
+
+fibo-sec-dbt-dbti:hasRelativePriceAtRedemption
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasPrice ;
+	rdfs:label "has relative price at redemption" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasRelativePriceAtRedemption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-sec-dbt-dbti:RelativePrice ;
+	skos:definition "indicates a relative price with respect to the face value at the time an instrument is redeemed, namely par, discount or premium" ;
+	.
+
+fibo-sec-dbt-dbti:hasRepaymentTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has repayment terms" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasRepaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-fbc-dae-dbt:PrincipalRepaymentTerms ;
+	skos:definition "indicates the specific terms related to repayment of principal as specified in the instrument or a related contract document" ;
+	.
+
+fibo-sec-dbt-dbti:hasRightToRetain
+	a owl:DatatypeProperty ;
+	rdfs:label "right to retain" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:hasRightToRetain" ;
+	rdfs:domain fibo-sec-dbt-dbti:PutFeature ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the holder has an option to retain the security in the event of an issuer exercising the put feature" ;
+	.
+
+fibo-sec-dbt-dbti:isCallable
+	a owl:DatatypeProperty ;
+	rdfs:label "is callable" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:isCallable" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the issuer (writer) of the debt contract (the debtor) can call the debt prior to maturity" ;
+	.
+
+fibo-sec-dbt-dbti:isExchangeable
+	a owl:DatatypeProperty ;
+	rdfs:label "is exchangeable" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:isExchangeable" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the security can be exchanged for another security at the issuers discretion" ;
+	.
+
+fibo-sec-dbt-dbti:isExtendableByHolder
+	a owl:DatatypeProperty ;
+	rdfs:label "is extendable by holder" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:isExtendableByHolder" ;
+	rdfs:domain fibo-sec-dbt-dbti:TradableDebtInstrumentRedemptionProvision ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the expiration date or maturity date can be extended by the holder" ;
+	.
+
+fibo-sec-dbt-dbti:isExtendableByIssuer
+	a owl:DatatypeProperty ;
+	rdfs:label "is extendable by issuer" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:isExtendableByIssuer" ;
+	rdfs:domain fibo-sec-dbt-dbti:TradableDebtInstrumentRedemptionProvision ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the issuer has the option to extend the debt rather than refinancing" ;
+	fibo-fnd-utl-av:explanatoryNote "If not, the issuer may only refinance the debt by calling the issue and creating a new issue." ;
+	.
+
+fibo-sec-dbt-dbti:isPutable
+	a owl:DatatypeProperty ;
+	rdfs:label "is putable" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:isPutable" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the holder has the right to ask for redemption of the security prior to final maturity" ;
+	.
+
+fibo-sec-dbt-dbti:isStrippable
+	a owl:DatatypeProperty ;
+	rdfs:label "is strippable" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:isStrippable" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether or not the instrument can be stripped, so that interest and principal may be traded separately" ;
+	.
+
+fibo-sec-dbt-dbti:isSubordinated
+	a owl:DatatypeProperty ;
+	rdfs:label "is subordinated" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:isSubordinated" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-sec-dbt-dbti:DebtOffering
+			fibo-fbc-fi-fi:DebtInstrument
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the security is a subordinated security, meaning that the security has a lower priority than another security so that when the assets are liquidated this one is not first in line" ;
+	.
+
+fibo-sec-dbt-dbti:mayBeSubordinatedTo
+	a owl:ObjectProperty ;
+	rdfs:label "may be subordinated to" ;
+	rdfs:comment "QName: fibo-sec-dbt-dbti:mayBeSubordinatedTo" ;
+	rdfs:domain fibo-sec-dbt-dbti:TradableDebtInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> ;
+	rdfs:range fibo-sec-dbt-dbti:TradableDebtInstrument ;
+	skos:definition "indicates the target security (i.e., the one in the range) has a higher priority than the security in question" ;
+	.
+
+[]
+	a owl:AllDifferent ;
+	owl:distinctMembers (
+		fibo-sec-dbt-dbti:AtADiscount
+		fibo-sec-dbt-dbti:AtAPremium
+		fibo-sec-dbt-dbti:ParValue
+	) ;
+	.
+

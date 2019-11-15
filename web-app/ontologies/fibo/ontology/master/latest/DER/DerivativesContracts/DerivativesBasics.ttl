@@ -1,0 +1,488 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fct-mkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-sec-sec-bsk: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/>
+	a owl:Ontology ;
+	rdfs:label "Derivatives Basics Ontology" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:" ;
+	dct:abstract "This ontology defines basic terminology common to derivative and over-the-counter (OTC) contracts." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage <http://www.w3.org/standards/techs/owl#w3c_all> ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/BE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/IND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/>
+		;
+	sm:fileAbbreviation "fibo-der-drc-bsc" ;
+	sm:filename "DerivativesBasics.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-der-drc-bsc:CashflowExpression
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Expression ;
+	rdfs:label "cashflow expression" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:CashflowExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "an expression that specifies a calculation of a cash flow as a component of a cashflow formula" ;
+	.
+
+fibo-der-drc-bsc:CashflowFormula
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Formula ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasExpression ;
+			owl:someValuesFrom fibo-der-drc-bsc:CashflowExpression ;
+		]
+		;
+	rdfs:label "cashflow formula" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:CashflowFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "a formula for determining cashflows for a derivative instrument" ;
+	.
+
+fibo-der-drc-bsc:CashflowTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:DerivativeTransactionTerms ,
+		fibo-fbc-dae-dbt:DebtTerms
+		;
+	rdfs:label "cashflow terms" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:CashflowTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "terms setting out a cashflow structure of payments committed to by one party to a contract" ;
+	skos:editorialNote "Swap cashflows are known as Swapstreams and are the terms for payment to and from either party. These are defined in swap transaction messages and represent the terms of the contract implied by that transaction. Options (Nordea reviews): Cashflows are defined as Payouts. This is not the same as a model of a cashflow which is a consequence of applying some legal term for payment of interest or principal, but is a commitment expressed in purely cashflow terms. Review this though. Payout terms include: Values - values can only go up or down; Static values are defined for limits and the like. i.e. Constraints (and direction) - this covers caps and floors - these are read upward or downward Conditionality Formula relations (Input and Output): - these are values - these may have a cap or a floor on them also - these also may have Multiplication - there is also fixed margin - may have addition or substraction between these Linearity in covered in the above Timing / expiry Observaton (not terms): Probability Sensitivity" ;
+	.
+
+fibo-der-drc-bsc:DeliverCash
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:DeliveryTerms ,
+		fibo-fnd-pas-psch:PaymentObligation
+		;
+	rdfs:label "deliver cash" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:DeliverCash" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "commitment to deliver cash at the earliest available date as per settlement convention" ;
+	fibo-fnd-utl-av:explanatoryNote "This is the same date as a settlement date when the corresponding cash is made available in the other currency, in settlement for this amount." ;
+	.
+
+fibo-der-drc-bsc:DeliveryTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:DerivativeTransactionTerms ,
+		fibo-fbc-pas-fpas:SettlementTerms
+		;
+	rdfs:label "delivery terms" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:DeliveryTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "settlement terms specifying what (cash, an asset, etc.) is to be delivered when, to whom, under what conditions at the time of settlement" ;
+	.
+
+fibo-der-drc-bsc:DerivativeContractParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-fbc-fi-fi:DerivativeInstrument ;
+			] ;
+		]
+		;
+	rdfs:label "derivative contract party" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:DerivativeContractParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "a party to a derivative instrument" ;
+	.
+
+fibo-der-drc-bsc:DerivativeTransactionTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractualCommitment ;
+	rdfs:label "derivative transaction terms" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:DerivativeTransactionTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "the contract terms for a derivative transaction, covering payment or delivery by either party to the other" ;
+	.
+
+fibo-der-drc-bsc:DerivativesClearingOrganization
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:ClearingHouse ;
+	rdfs:label "derivatives clearing organization" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:DerivativesClearingOrganization" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "an entity that enables each party to an agreement, contract, or transaction to substitute, through novation or otherwise, the credit of the DCO for the credit of the parties; arranges or provides, on a multilateral basis, for the settlement or netting of obligations; or otherwise provides clearing services or arrangements that mutualize or transfer credit risk among participants" ;
+	fibo-fnd-utl-av:abbreviation "DCO" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.cftc.gov/IndustryOversight/ClearingOrganizations/index.htm"^^xsd:anyURI ;
+	.
+
+fibo-der-drc-bsc:DesignatedContractMarket
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-mkt:Exchange ;
+	rdfs:label "designated contract market" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:DesignatedContractMarket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "an exchange, trading system, or platform that enables listing for trading futures or option contracts based on any underlying commodity, index or instrument" ;
+	fibo-fnd-utl-av:abbreviation "DCM" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.cftc.gov/IndustryOversight/TradingOrganizations/DCMs/index.htm"^^xsd:anyURI ;
+	.
+
+fibo-der-drc-bsc:IntroducingBroker
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:NonDepositoryInstitution ,
+		fibo-fbc-pas-fpas:Broker
+		;
+	rdfs:label "introducing broker" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:IntroducingBroker" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "an entity that solicits or accepts orders for futures or options contracts traded on or subject to the rules of an exchange; and does not accept any money, securities, or property (or extend credit in lieu thereof) to margin, guarantee, or secure any trades or contracts that result or may result" ;
+	fibo-fnd-utl-av:abbreviation "IB" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.cftc.gov/IndustryOversight/Intermediaries/index.htm"^^xsd:anyURI ;
+	.
+
+fibo-der-drc-bsc:NonPhysicalUnderlier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:Underlier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-pas-pas:Commodity
+					fibo-fbc-pas-fpas:Basket
+					fibo-ind-ind-ind:MarketRate
+					fibo-ind-ei-ei:EconomicIndicator
+					fibo-der-drc-bsc:ObservableValue
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "non-physical underlier" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:NonPhysicalUnderlier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "an underlier that does not represent a deliverable asset" ;
+	fibo-fnd-utl-av:synonym "observable underlier" ;
+	.
+
+fibo-der-drc-bsc:OTCContractSettlementTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:SettlementTerms ;
+	rdfs:label "over-the-counter (OTC) settlement terms" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:OTCContractSettlementTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "settlement terms specific to an over-the-counter agreement" ;
+	.
+
+fibo-der-drc-bsc:OTCDerivativeContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		fibo-fbc-fi-fi:DerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom fibo-der-drc-bsc:OTCDerivativeTransaction ;
+		]
+		;
+	rdfs:label "over-the-counter (OTC) derivative contract" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:OTCDerivativeContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "an over-the-counter agreement that is also a derivative instrument" ;
+	fibo-fnd-utl-av:explanatoryNote "Not all derivatives are sold over-the-counter, and not all OTC agreements are derivatives." ;
+	.
+
+fibo-der-drc-bsc:OTCDerivativeTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:embodies ;
+			owl:someValuesFrom fibo-der-drc-bsc:OTCDerivativeContract ;
+		]
+		;
+	rdfs:label "OTC derivative transaction" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:OTCDerivativeTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "a derivative transaction that is struck over the counter between two parties" ;
+	skos:editorialNote "eliminated a parent of CoveredTransaction for the sake of expediency" ;
+	fibo-fnd-utl-av:explanatoryNote "This is both a derivative transaction and a covered transaction, that is, the OTC transaction is covered under some previously agreed Master Agreement between the two parties." ;
+	.
+
+fibo-der-drc-bsc:OTCInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:FinancialInstrument ,
+		fibo-fnd-agr-ctr:MutualContractualAgreement
+		;
+	rdfs:label "over-the-counter (OTC) instrument" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:OTCInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "a financial instrument and bilateral contract that is not listed or traded on an organized exchange" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	.
+
+fibo-der-drc-bsc:OTCProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialProduct ;
+	rdfs:label "OTC product" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:OTCProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "an over-the-counter derivative, made up of one or more transactions, with a corresponding contract or contracts" ;
+	.
+
+fibo-der-drc-bsc:OTCTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:SecuritiesTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-der-drc-bsc:OTCInstrument ;
+		]
+		;
+	rdfs:label "over-the-counter (OTC) transaction" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:OTCTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "an over-the-counter transaction to exchange an instrument for some consideration" ;
+	skos:editorialNote
+		"Removed inheritance relationship with Transactions/TransactionsExtended/CoveredTransaction for the sake of expediency." ,
+		"This represents a covered transaction, that is, the OTC transaction is transacted under some previously agreed master agreement between the parties."
+		;
+	.
+
+fibo-der-drc-bsc:OTCTransactionConfirmation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:WrittenContract ,
+		fibo-fnd-pas-pas:TransactionConfirmation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:allValuesFrom fibo-der-drc-bsc:OTCTransaction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractParty ;
+			owl:someValuesFrom fibo-der-drc-bsc:OTCTransactionParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:supersedes ;
+			owl:someValuesFrom fibo-der-drc-bsc:OTCInstrument ;
+		]
+		;
+	rdfs:label "over-the-counter (OTC) transaction confirmation" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:OTCTransactionConfirmation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "a formal confirmation document that codifies the terms and conditions of the transaction between the parties" ;
+	skos:editorialNote "This effectively supersedes the (implied) contract that is brought into being by the transaction. It makes reference to the terms and conditions under which the transaction is deemed to have been conducted. The confirmation references the master agreement under which the transaction has been conducted along with any ISDA standard terms referenced (if applicable), and adds terms and conditions specific to the transaction.  The confirmation generally supersedes all terms in the ISDA standard definitions and the master agreement in the event of any inconsistency between them." ;
+	.
+
+fibo-der-drc-bsc:OTCTransactionParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-der-drc-bsc:OTCInstrument ;
+			] ;
+		]
+		;
+	rdfs:label "over-the-counter (OTC) transaction party" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:OTCTransactionParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "a party to an over-the-counter agreement" ;
+	.
+
+fibo-der-drc-bsc:ObservableValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:MonetaryAmount ,
+		fibo-fnd-qt-qtu:QuantityValue
+		;
+	rdfs:label "observable value" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:ObservableValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	rdfs:seeAlso <https://en.wikipedia.org/wiki/Fair_value> ;
+	skos:definition "a value for something that can be observed in the marketplace" ;
+	fibo-fnd-utl-av:explanatoryNote "Derivatives, such as certain exotics, can be based on values ascribed to virtually anything, including weather.  Typically, however, an observable value refers to something that can be readily observed in the marketplace, such as a quoted rate (e.g., interest rate, exchange rate), index value, commodity price, stock price, economic indicator, or something similar as of some point in time." ;
+	.
+
+fibo-der-drc-bsc:ParametricCashflowTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:CashflowTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasFormula ;
+			owl:someValuesFrom fibo-der-drc-bsc:CashflowFormula ;
+		]
+		;
+	rdfs:label "parametric cashflow terms" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:ParametricCashflowTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "terms for a set of cashflows defined according to a mathematical formula" ;
+	.
+
+fibo-der-drc-bsc:Underlier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-rl:ThingInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fi-fi:FinancialInstrument
+					fibo-sec-sec-bsk:BasketOfSecurities
+					fibo-der-drc-bsc:NonPhysicalUnderlier
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "underlier" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:Underlier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	skos:definition "the financial instrument(s), index or parameter, or combination thereof, that form the basis for the derivative instrument" ;
+	skos:editorialNote "The underlier breaks down into two separate meanings: The item which determines the value of the contract (the observable), and the item that is deliverable upon expiry or exercise of the contract (if there is one). These are usually the same item but in some cases such as index derivatives the exercise takes a different form. Action: Add 'Observable' as a distinct term. Then use Deliverable. Is Underlier the union? In a Call Option the Underlier is the Deliverable and is referred to as the Underlier. With an Fx Call Option, the deliverable is the cash value which you are exchanging for the amount in another currency (so this is no difference as cash is instrument). Then take IR Swap where 3mo LIBOR Rate is the Observable, but the delivery is Cash. Then one would refer to the LIBOR as the Observable. Delivers an amount based on the observable, and the delivered cash is the Deliverable. So what we refer to as Underlier may be the Observable or the Deliverable e.g. Call option on IBM the deliverable is the IBM Stock whereas a Swap leg depending on LIBOR, the Deliverable is Cash but the 'Underlier' is the Observable. Would be nore accurate not to refer to the Observable not as an Underlier. Therefore there would be nothing referred to as the 'Underlier' as such. However, all derivatives have Underlier. Take an IR Cap, would not not refer to it as having an Underlier - the notion of Underlier becomes fuzzier when you get to higher order derivatives. LIBOR on a list of dates is an 'Observable' but is several amounts." ;
+	.
+
+fibo-der-drc-bsc:hasUnderlier
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has underlier" ;
+	rdfs:comment "QName: fibo-der-drc-bsc:hasUnderlier" ;
+	rdfs:domain fibo-fbc-fi-fi:DerivativeInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ;
+	rdfs:range fibo-der-drc-bsc:Underlier ;
+	skos:definition "relates a derivative to an asset, such as one or more financial instrument(s), index or parameter, or combination thereof on which the contract is based" ;
+	.
+
+fibo-fbc-fi-fi:DerivativeInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-drc-bsc:Underlier ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-der-drc-bsc:DerivativeTransactionTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-fbc-pas-fpas:SettlementTerms ;
+		]
+		;
+	.
+

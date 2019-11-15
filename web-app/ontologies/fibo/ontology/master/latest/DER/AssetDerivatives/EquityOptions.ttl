@@ -1,0 +1,449 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/EquityOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetBaskets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/EquityOptions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-ass: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> .
+@prefix fibo-der-ass-bas: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> .
+@prefix fibo-der-ass-eqo: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-etd-eto: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/>
+	a owl:Ontology ;
+	rdfs:label "EquityOptions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Options based on underlying equity instruments, baskets or indices. Additional terms specific to OTC equity options." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetBaskets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/EquityOptions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-ass-eqo:BasketOptionStrikeTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-eqo:EquityOptionExerciseTermsSet ;
+	rdfs:label "basket option strike terms"@en ;
+	rdfs:comment "QName: NONE:BasketOptionStrikeTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "Formal terms for the exercise of an Equity Basket Option. Further Notes Review 10 Feb: Strike price for Basket depends what is in the basket Single names: can come up with a value for the basket as a whole. Basket of Indices - would be different. Each constituent is an index. Basket that mixes single name as well as indices."@en ;
+	.
+
+fibo-der-ass-eqo:EquityBasketOptionOTCContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-eqo:EquityOptionOTCContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:hasAnnex ;
+			owl:someValuesFrom fibo-der-ass-bas:EquityBasketOptionAnnex ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:underlying ;
+			owl:someValuesFrom fibo-der-ass-bas:EquityBasketObservable ;
+		]
+		;
+	rdfs:label "equity basket option o t c contract"@en ;
+	rdfs:comment "QName: NONE:EquityBasketOptionOTCContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	.
+
+fibo-der-ass-eqo:EquityIndexOptionOTCContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-eqo:EquityOptionOTCContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:underlying ;
+			owl:someValuesFrom fibo-der-ass-ass:EquityIndexObservable ;
+		]
+		;
+	rdfs:label "equity index option o t c contract"@en ;
+	rdfs:comment "QName: NONE:EquityIndexOptionOTCContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "An option in which the underlyer is an equity index."@en ;
+	skos:editorialNote "Created to capture terms specific to index options. Note however that in FpML, there are no additional and different terms for basket options, so it maybe assumed that terms such as contract multiplier, which are defined for index options, are also applicable to basket options (a basket being a locally defined collection of securities which is otherwise similar to a published index of shares). Outcome of above question: see notes from 03 Feb review. The Basket Option must have an Annex which details the basket constituents. Also we are to add Contract types here for Basket Option contract and Custom Index Option."@en ;
+	.
+
+fibo-der-ass-eqo:EquityIndexOptionStrikeTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-eqo:EquityOptionExerciseTermsSet ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:includesSpecification ;
+			owl:someValuesFrom fibo-der-der-opt:PercentageStrikePriceSpecification ;
+		]
+		;
+	rdfs:label "equity index option strike terms set"@en ;
+	rdfs:comment "QName: NONE:EquityIndexOptionStrikeTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "The strike price in respect of an index option transaction, is the level of the relevant index specified or otherwise determined in the transaction; This can be expressed either as a percentage of notional amount or as an absolute value."@en ;
+	skos:editorialNote "Adapted out of FpML equityStike (see original definition below); it is not clear whether the final provision in that definition (that the price can be expressed either as a percentage of notional or an absolute value) is intended to refer to index strike as well as single share option strike. REVIEW FpML equityStrike (complex type): A type for defining the strike price for an equity option. The strike price is either: (i) in respect of an index option transaction, the level of the relevant index specified or otherwise determined in the transaction; or (ii) in respect of a share option transaction, the price per share specified or otherwise determined in the transaction. This can be expressed either as a percentage of notional amount or as an absolute value."@en ;
+	.
+
+fibo-der-ass-eqo:EquityOTCBasketOptionTransaction
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-eqo:EquityOTCOptionTransaction ;
+	rdfs:label "equity o t c basket option transaction"@en ;
+	rdfs:comment "QName: NONE:EquityOTCBasketOptionTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	.
+
+fibo-der-ass-eqo:EquityOTCOptionTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCDerivativeTransaction ,
+		fibo-der-der-opt:OptionalUnderlyingTransaction
+		;
+	rdfs:label "equity o t c option transaction"@en ;
+	rdfs:comment "QName: NONE:EquityOTCOptionTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "A transaction which is defined in an equity options contract and which may or may not take place, at the discretion of the holder of the option. If it does take place, this will be a transaction for the purchase or sale of the equity underlying or some cash equivalent thereof, as defined in the option contract."@en ;
+	.
+
+fibo-der-ass-eqo:EquityOptionCallTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-eqo:EquityOTCOptionTransaction ,
+		fibo-der-der-opt:OptionCallTransaction
+		;
+	rdfs:label "equity option call transaction"@en ;
+	rdfs:comment "QName: NONE:EquityOptionCallTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "A transaction which is defined in an equity options contract and which may or may not take place, at the discretion of the holder of the option. If it does take place, this will be a transaction for the purchase of the equity underlying or some cash equivalent thereof, as defined in the option contract."@en ;
+	.
+
+fibo-der-ass-eqo:EquityOptionEntitlement
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ContractualRight ;
+	rdfs:label "equity option entitlement"@en ;
+	rdfs:comment "QName: NONE:EquityOptionEntitlement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "The entitlements to the holder, comprised in an option contract or transaction supplement. FpML: 'The number of shares per option comprised in the option transaction supplement.' In FpML this is an either / or: Either a whole number representing the number of shares per option, or a multiplier to be applied to an index underlyer (and, presumably, a basket underlyer)"@en ;
+	.
+
+fibo-der-ass-eqo:EquityOptionExerciseTermsSet
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionExerciseTimeTermsSet ;
+	rdfs:label "equity option exercise terms set"@en ;
+	rdfs:comment "QName: NONE:EquityOptionExerciseTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "Contractual terms setting out the price or level at which the Equity option is to be struck."@en ;
+	fibo-fnd-utl-av:explanatoryNote "FpML equityStrike (complex type): A type for defining the strike price for an equity option. The strike price is either: (i) in respect of an index option transaction, the level of the relevant index specified or otherwise determined in the transaction; or (ii) in respect of a share option transaction, the price per share specified or otherwise determined in the transaction. This can be expressed either as a percentage of notional amount or as an absolute value."@en ;
+	.
+
+fibo-der-ass-eqo:EquityOptionOTCContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-ass:EquityDerivativeContract ,
+		fibo-der-der-opt:OTCOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:maySpecify ;
+			owl:onClass fibo-der-etd-eto:ExchangeTradedOptionContract ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:hasLocalJurisdiction ;
+			owl:onClass fibo-fnd-law-jur:Jurisdiction ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:hasRelevantJurisdiction ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:underlying ;
+			owl:someValuesFrom fibo-der-ass-ass:EquityObservable ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:definesOptional ;
+			owl:someValuesFrom fibo-der-ass-eqo:EquityOTCOptionTransaction ;
+		]
+		;
+	rdfs:label "equity option o t c contract"@en ;
+	rdfs:comment "QName: NONE:EquityOptionOTCContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "Definition needed"@en ;
+	skos:editorialNote "FpMl definition (unusable): A component describing an Equity Option product."@en ;
+	.
+
+fibo-der-ass-eqo:EquityOptionPutTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-eqo:EquityOTCOptionTransaction ,
+		fibo-der-der-opt:OptionPutTransaction
+		;
+	rdfs:label "equity option put transaction"@en ;
+	rdfs:comment "QName: NONE:EquityOptionPutTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "A transaction which is defined in an equity options contract and which may or may not take place, at the discretion of the holder of the option. If it does take place, this will be a transaction for the sale of the equity underlying or some cash equivalent thereof, as defined in the option contract."@en ;
+	.
+
+fibo-der-ass-eqo:IndexOrBasketOptionEntitlement
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-eqo:EquityOptionEntitlement ;
+	rdfs:label "index or basket option entitlement"@en ;
+	rdfs:comment "QName: NONE:IndexOrBasketOptionEntitlement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "The entitlements to the holder of a basket or index option, comprised in an option contract or transaction supplement."@en ;
+	.
+
+fibo-der-ass-eqo:ShareOptionEntitlement
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-eqo:EquityOptionEntitlement ;
+	rdfs:label "share option entitlement"@en ;
+	rdfs:comment "QName: NONE:ShareOptionEntitlement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "The entitlements to the holder of a single share option, comprised in an option contract or transaction supplement."@en ;
+	.
+
+fibo-der-ass-eqo:ShareOptionOTCContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-eqo:EquityOptionOTCContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:underlying ;
+			owl:someValuesFrom fibo-der-ass-ass:SingleShareObservable ;
+		]
+		;
+	rdfs:label "share option o t c contract"@en ;
+	rdfs:comment "QName: NONE:ShareOptionOTCContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "An option in which the underlyer is a single publicly issued and traded share."@en ;
+	.
+
+fibo-der-ass-eqo:ShareOptionStrikeTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-eqo:EquityOptionExerciseTermsSet ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqo:includesSpecification.1 ;
+			owl:someValuesFrom fibo-der-der-opt:AbsolutePriceStrikeSpecification ;
+		]
+		;
+	rdfs:label "share option strike terms set"@en ;
+	rdfs:comment "QName: NONE:ShareOptionStrikeTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "The strike price is the price per share specified or otherwise determined in the transaction. This can be expressed either as a percentage of notional amount or as an absolute value. FpML equityStrike (complex type): A type for defining the strike price for an equity option. The strike price is either: (i) in respect of an index option transaction, the level of the relevant index specified or otherwise determined in the transaction; or (ii) in respect of a share option transaction, the price per share specified or otherwise determined in the transaction. This can be expressed either as a percentage of notional amount or as an absolute value."@en ;
+	.
+
+fibo-der-ass-eqo:contractMultiplier
+	a owl:DatatypeProperty ;
+	rdfs:label "contract multiplier"@en ;
+	rdfs:comment "QName: NONE:contractMultiplier" ;
+	rdfs:domain fibo-der-ass-eqo:EquityIndexOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The contract multiplier associated with the index option."@en ;
+	.
+
+fibo-der-ass-eqo:exchangeLookalike
+	a owl:DatatypeProperty ;
+	rdfs:label "exchange lookalike"@en ;
+	rdfs:comment "QName: NONE:exchangeLookalike" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the corresponding transaction is to be treated as an 'exchange look-alike'. If Yes, then the relevant share adjustments will follow that for a corresponding designated contract listed on the related exchange"@en ;
+	.
+
+fibo-der-ass-eqo:extraordinaryEventsTreatment
+	a owl:DatatypeProperty ;
+	rdfs:label "extraordinary events treatment"@en ;
+	rdfs:comment "QName: NONE:extraordinaryEventsTreatment" ;
+	rdfs:domain fibo-der-ass-eqo:ShareOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	skos:definition "Events affecting the issuer of those shares that may require the terms of the transaction to be adjusted."@en ;
+	.
+
+fibo-der-ass-eqo:hasAnnex
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has annex"@en ;
+	rdfs:comment "QName: NONE:hasAnnex" ;
+	rdfs:domain fibo-der-ass-eqo:EquityBasketOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range fibo-der-ass-bas:EquityBasketOptionAnnex ;
+	.
+
+fibo-der-ass-eqo:hasLocalJurisdiction
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasGoverningJurisdiction ;
+	rdfs:label "has local jurisdiction"@en ;
+	rdfs:comment "QName: NONE:hasLocalJurisdiction" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	.
+
+fibo-der-ass-eqo:hasRelevantJurisdiction
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasGoverningJurisdiction ;
+	rdfs:label "has relevant jurisdiction"@en ;
+	rdfs:comment "QName: NONE:hasRelevantJurisdiction" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	.
+
+fibo-der-ass-eqo:includesSpecification
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-der-opt:includesSpecificationTerm ;
+	rdfs:label "includes specification"@en ;
+	rdfs:comment "QName: NONE:includesSpecification" ;
+	rdfs:domain fibo-der-ass-eqo:EquityIndexOptionStrikeTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range fibo-der-der-opt:PercentageStrikePriceSpecification ;
+	.
+
+fibo-der-ass-eqo:includesSpecification.1
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-der-opt:includesSpecificationTerm ;
+	rdfs:label "includes specification"@en ;
+	rdfs:comment "QName: NONE:includesSpecification.1" ;
+	rdfs:domain fibo-der-ass-eqo:ShareOptionStrikeTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range fibo-der-der-opt:AbsolutePriceStrikeSpecification ;
+	.
+
+fibo-der-ass-eqo:maySpecify
+	a owl:ObjectProperty ;
+	rdfs:label "may specify"@en ;
+	rdfs:comment "QName: NONE:maySpecify" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range fibo-der-etd-eto:ExchangeTradedOptionContract ;
+	.
+
+fibo-der-ass-eqo:multiplier
+	a owl:DatatypeProperty ;
+	rdfs:label "multiplier"@en ;
+	rdfs:comment "QName: NONE:multiplier" ;
+	rdfs:domain fibo-der-ass-eqo:IndexOrBasketOptionEntitlement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The contract multiplier associated with an index or basket option."@en ;
+	.
+
+fibo-der-ass-eqo:nearestIndexProvision
+	a owl:DatatypeProperty ;
+	rdfs:label "nearest index provision"@en ;
+	rdfs:comment "QName: NONE:nearestIndexProvision" ;
+	rdfs:domain fibo-der-ass-eqo:EquityBasketOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "For an index option transaction, whether the Nearest Index Contract provision is applicable."@en ;
+	.
+
+fibo-der-ass-eqo:notionalAmount
+	a owl:ObjectProperty ;
+	rdfs:label "notional amount"@en ;
+	rdfs:comment "QName: NONE:notionalAmount" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "'The notional amount.' Further notes: Presumably all options have a notional amount. This is defined here for Eqiuty Option. FpML: 'The notional amount.'"@en ;
+	.
+
+fibo-der-ass-eqo:novationAllowable
+	a owl:DatatypeProperty ;
+	rdfs:label "novation allowable"@en ;
+	rdfs:comment "QName: NONE:novationAllowable" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-der-ass-eqo:novationRequired
+	a owl:DatatypeProperty ;
+	rdfs:label "novation required"@en ;
+	rdfs:comment "QName: NONE:novationRequired" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-der-ass-eqo:numberOfOptions
+	a owl:DatatypeProperty ;
+	rdfs:label "number of options"@en ;
+	rdfs:comment "QName: NONE:numberOfOptions" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The price per equity security, index or basket observed on the trade or effective date. FpML: 'The price per asset, index or basket observed on the trade or effective date.'"@en ;
+	.
+
+fibo-der-ass-eqo:numberOfShares
+	a owl:DatatypeProperty ;
+	rdfs:label "number of shares"@en ;
+	rdfs:comment "QName: NONE:numberOfShares" ;
+	rdfs:domain fibo-der-ass-eqo:ShareOptionEntitlement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The number of shares per option comprised in the option. FpML: 'The number of shares per option comprised in the option transaction supplement.'"@en ;
+	.
+
+fibo-der-ass-eqo:sharesPerOption
+	a owl:DatatypeProperty ;
+	rdfs:label "shares per option"@en ;
+	rdfs:comment "QName: NONE:sharesPerOption" ;
+	rdfs:domain fibo-der-ass-eqo:ShareOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of shares per option defined for the option contract."@en ;
+	.
+
+fibo-der-ass-eqo:underlying
+	a owl:ObjectProperty ;
+	rdfs:label "underlying"@en ;
+	rdfs:comment "QName: NONE:underlying" ;
+	rdfs:domain fibo-der-ass-eqo:EquityOptionOTCContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/> ;
+	rdfs:range fibo-der-ass-ass:EquityObservable ;
+	.
+

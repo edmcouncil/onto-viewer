@@ -1,0 +1,58 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/MetadataCIV/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/MetadataCIVFunds/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/MetadataCIV/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-civ-fnd-mod: <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/MetadataCIVFunds/> .
+@prefix fibo-civ-mod: <https://spec.edmcouncil.org/fibo/ontology/CIV/MetadataCIV/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/CIV/MetadataCIV/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Collective Investment Vehicles (CIV) Domain" ;
+	rdfs:comment "QName: fibo-civ-mod:" ;
+	dct:abstract "The metadata for CIV ontology describes the CIV domain." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-civ-mod" ;
+	sm:filename "MetadataCIV.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/MetadataCIVFunds/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/CIV/MetadataCIV/> ;
+	.
+
+fibo-civ-mod:CIVDomain
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Collective Investment Vehicles" ;
+	rdfs:comment "QName: fibo-civ-mod:CIVDomain" ;
+	dct:abstract "The Collective Investment Vehicles (CIV) domain contains ontologies that define terms for investment funds, covering the basic definition of a fund, the various fund related parties, portfolio characteristics and tradable units in those funds." ;
+	dct:creator "https://spec.edmcouncil.org/fibo/fct/Foundations"^^xsd:anyURI ;
+	dct:hasPart fibo-civ-fnd-mod:FundsModule ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Collective Investment Vehicles (CIV) Domain" ;
+	sm:copyright "Copyright (c) 2013-2018 EDM Council, Inc." ;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/MetadataBE/BEDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/MetadataFBC/FBCDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/FNDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/SECDomain>
+		;
+	sm:keyword "foundational vocabulary" ;
+	sm:moduleAbbreviation "fibo-civ" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/MetadataCIV/> ;
+	skos:editorialNote "This material is based largely on concepts from the European Funds and Asset Management Association (EFAMA) and will require future refactoring to accommodate other types of funds including hedge funds, funds arrangements in other jurisdictions and other variants. Part of that work would include subdividing this content into separate modules, particularly for concepts common to all or most funds." ;
+	.
+

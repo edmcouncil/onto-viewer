@@ -1,0 +1,200 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecurityAssets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/OwnershipParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecurityAssets/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-oac-opty: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/OwnershipParties/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-sec-ast: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/>
+	a owl:Ontology ;
+	rdfs:label "Security Assets Ontology" ;
+	rdfs:comment "QName: fibo-sec-sec-ast:" ;
+	dct:abstract "This ontology defines basic concepts such as portfolio, security holding and holder, and extends the notion of a financial asset to include an acquisition price." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-sec-sec-ast" ;
+	sm:filename "SecurityAssets.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/OwnershipParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecurityAssets/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-acc-aeq:FinancialAsset
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-sec-sec-ast:hasAcquisitionPrice ;
+		owl:allValuesFrom fibo-fnd-acc-cur:Price ;
+	] ;
+	.
+
+fibo-sec-sec-ast:Portfolio
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Collection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isHeldBy ;
+			owl:allValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-be-oac-opty:Investor
+					fibo-fbc-pas-fpas:FinancialServiceProvider
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-sec-sec-ast:PortfolioHolding ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-be-oac-opty:Investor
+					fibo-fbc-pas-fpas:FinancialServiceProvider
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "portfolio" ;
+	rdfs:comment "QName: fibo-sec-sec-ast:Portfolio" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/> ;
+	skos:definition "a collection of investments (financial assets) such as stocks, bonds and cash equivalents, as well as mutual funds" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/p/portfolio.asp"^^xsd:anyURI ;
+	.
+
+fibo-sec-sec-ast:PortfolioHolding
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-aeq:FinancialAsset ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isHeldBy ;
+			owl:allValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-be-oac-opty:Investor
+					fibo-fbc-pas-fpas:FinancialServiceProvider
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isPartOf ;
+			owl:someValuesFrom fibo-sec-sec-ast:Portfolio ;
+		]
+		;
+	rdfs:label "portfolio holding" ;
+	rdfs:comment "QName: fibo-sec-sec-ast:PortfolioHolding" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/> ;
+	skos:definition "the contents of holding of one or more portfolios of investments held by an individual investor or entity" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/h/holdings.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote """Portfolio holdings may cover a variety of investment products, including stocks, bonds and mutual funds to options, futures and exchange-traded funds, and relatively esoteric instruments such as private equity and hedge funds. 
+
+The number and nature of holdings contribute to the degree of diversification of a portfolio.  A mix of stocks across different sectors, bonds of different maturities, and other investments would suggest a well-diversified portfolio, while concentrated holdings in a handful of stocks within a single sector indicates a portfolio with limited diversification.""" ;
+	.
+
+fibo-sec-sec-ast:SecurityHolder
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:TransferableContractHolder ,
+		[
+			a owl:Class ;
+			owl:unionOf (
+				fibo-be-oac-opty:Investor
+				fibo-fbc-pas-fpas:FinancialServiceProvider
+			) ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:holds ;
+			owl:someValuesFrom fibo-sec-sec-ast:SecurityHolding ;
+		]
+		;
+	rdfs:label "security holder" ;
+	rdfs:comment "QName: fibo-sec-sec-ast:SecurityHolder" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/> ;
+	skos:definition "a party that holds a transferable contract (security), and has the rights defined in that contract" ;
+	fibo-fnd-utl-av:explanatoryNote "The holder is anonymous to the issuer and may transfer their holding in the open marketplace without reference to the issuer (subject to any holding restrictions set out for the security either in the security contractual terms or in the laws of the applicable jurisdiction)." ;
+	fibo-fnd-utl-av:synonym "bearer" ;
+	.
+
+fibo-sec-sec-ast:SecurityHolding
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-ast:PortfolioHolding ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:allValuesFrom fibo-fbc-fi-fi:Security ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isHeldBy ;
+			owl:allValuesFrom fibo-sec-sec-ast:SecurityHolder ;
+		]
+		;
+	rdfs:label "security holding" ;
+	rdfs:comment "QName: fibo-sec-sec-ast:SecurityHolding" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/> ;
+	skos:definition "a (tradable) security held in a portfolio" ;
+	.
+
+fibo-sec-sec-ast:hasAcquisitionPrice
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasPrice ;
+	rdfs:label "has aquisition price" ;
+	rdfs:comment "QName: fibo-sec-sec-ast:hasAcquisitionPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/> ;
+	rdfs:range fibo-fnd-acc-cur:Price ;
+	skos:definition "has a value as of the date of acquisition, expressed as an amount of money or goods" ;
+	.
+

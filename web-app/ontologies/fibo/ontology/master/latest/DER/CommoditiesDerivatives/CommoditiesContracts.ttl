@@ -1,0 +1,67 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-com-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/>
+	a owl:Ontology ;
+	rdfs:label "CommoditiesContracts"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Core concepts for commodities based derivatives contracts and their underliers." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-com-ctr:CommodityDerivativeContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/hasUnderlier> ;
+			owl:someValuesFrom fibo-der-com-ctr:CommodityUnderlying ;
+		]
+		;
+	rdfs:label "commodity derivative contract" ;
+	rdfs:comment "QName: NONE:CommodityDerivativeContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/> ;
+	.
+
+fibo-der-com-ctr:CommodityUnderlying
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/Underlier> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-fnd-pas-pas:NegotiableCommodity ;
+		]
+		;
+	rdfs:label "commodity underlying" ;
+	rdfs:comment "QName: NONE:CommodityUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/> ;
+	skos:definition "The underlying of a Commodity Derivative, that is the commodity itself which underlies the contract."@en ;
+	.
+

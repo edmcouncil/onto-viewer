@@ -1,0 +1,636 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Facilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-cd: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-plc-fac: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Facilities/> .
+@prefix fibo-fnd-plc-loc: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/>
+	a owl:Ontology ;
+	rdfs:label "Products and Services Ontology" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:" ;
+	dct:abstract "This ontology defines fundamental concepts for buyers, sellers, clients, customers, products, goods and services for use in other FIBO ontologies." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Facilities/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-pas-pas" ;
+	sm:filename "ProductsAndServices.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Facilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices.rdf version of this ontology was modified for the FIBO 2.0 RFC to add NegotiableCommodity and Consumer." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.1 RTF report to replace MoneyAmount with AmountOfMoney." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices.rdf version of this ontology was modified to include classes to support automated inclusion of all ISO 4217 codes published as of 2018-06-04." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices.rdf version of this ontology was modified to move (deprecate) the properties produces and isProducedBy to Relations for more general usability." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices.rdf version of this ontology was revised to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices.rdf version of this ontology was revised to leverage the new party identifier."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-pas-pas:Buyer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:buys ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Product ;
+		]
+		;
+	rdfs:label "buyer" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Buyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a party that acquires, or agrees to acquire, ownership (in case of goods), or benefit or usage (in case of services), in exchange for money or other consideration under a contract of sale" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/buyer.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A buyer may or may not be an end user of the product, good, or service." ;
+	fibo-fnd-utl-av:synonym
+		"buyer" ,
+		"purchaser"
+		;
+	.
+
+fibo-fnd-pas-pas:Client
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-fnd-pas-pas:ServiceAgreement ;
+			] ;
+		]
+		;
+	rdfs:label "client" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Client" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a party that purchases professional services from, or has a formal relationship to purchase services from another party" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	.
+
+fibo-fnd-pas-pas:ClientIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRoleIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fnd-pas-pas:Client ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "client identifier" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:ClientIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "an identifier for a client" ;
+	.
+
+fibo-fnd-pas-pas:Commodity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:Good ;
+	rdfs:label "commodity" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Commodity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a basic good used in commerce that is interchangeable with other commodities of the same type" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/c/commodity.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Commodities are most often used as inputs in the production of other goods or services. The quality of a given commodity may differ slightly, but it is essentially uniform across producers." ;
+	.
+
+fibo-fnd-pas-pas:Consumer
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:label "consumer" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Consumer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a party that utilizes economic goods or services" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.businessdictionary.com/definition/consumer.html"^^xsd:anyURI ,
+		"https://www.merriam-webster.com/dictionary/consumes"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "The general notion of a consumer includes an end user, and is not limited to a purchaser, in the distribution chain of a good or service" ;
+	.
+
+fibo-fnd-pas-pas:ContractualProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:Product ;
+	rdfs:label "contractual product" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:ContractualProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a product that is realized as a contract" ;
+	fibo-fnd-utl-av:explanatoryNote "This represents the case where the product itself is a contract, such as a life insurance policy or financial instrument, rather than a product or service whose terms of use, license to use, or terms of service are specified in a product." ;
+	.
+
+fibo-fnd-pas-pas:ContractualTemplateProduct
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:ContractualProduct ,
+		fibo-fnd-pas-pas:OffTheShelfProduct
+		;
+	rdfs:label "contractual template product" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:ContractualTemplateProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a contractual product that is finalized through specification of values for parameters defined in a template" ;
+	.
+
+fibo-fnd-pas-pas:CustomProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:Product ;
+	rdfs:label "custom product" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:CustomProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	owl:disjointWith fibo-fnd-pas-pas:OffTheShelfProduct ;
+	skos:definition "a product that is made to an individual's order, commissioned to a customer's specifications, or designed to order" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.merriam-webster.com/dictionary/custom-made"^^xsd:anyURI ;
+	fibo-fnd-utl-av:synonym
+		"bespoke product" ,
+		"custom-made product" ,
+		"made to order product"
+		;
+	.
+
+fibo-fnd-pas-pas:Customer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:Buyer ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:buysFrom ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Supplier ;
+		]
+		;
+	rdfs:label "customer" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Customer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a buyer that receives or consumes products (goods or services) and has the ability to choose between different products and suppliers" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/customer.html"^^xsd:anyURI ;
+	.
+
+fibo-fnd-pas-pas:CustomerIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRoleIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fnd-pas-pas:Customer ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "customer identifier" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:CustomerIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "an identifier for a customer" ;
+	.
+
+fibo-fnd-pas-pas:Good
+	a owl:Class ;
+	rdfs:label "good" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Good" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	owl:disjointWith
+		fibo-fnd-acc-cur:AmountOfMoney ,
+		fibo-fnd-plc-loc:RealEstate
+		;
+	skos:definition "any tangible thing that is not money or real estate" ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.businessdictionary.com/definition/good.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "An inherently useful and relatively scarce tangible item produced from agricultural, construction, manufacturing, or mining activities. According to the UN Convention On Contract For The International Sale Of Goods, the term 'good' does not include (1) items bought for personal use, (2) items bought at an auction or foreclosure sale, (3) aircraft or oceangoing vessels." ;
+	.
+
+fibo-fnd-pas-pas:NegotiableCommodity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:Commodity ;
+	rdfs:label "negotiable commodity" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:NegotiableCommodity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a commodity that can be bought or sold in some marketplace" ;
+	.
+
+fibo-fnd-pas-pas:OffTheShelfProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:Product ;
+	rdfs:label "off-the-shelf product" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:OffTheShelfProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a product that is readily available from merchandise in stock, or can be quickly and easily configured to order, not specially designed or custom-made" ;
+	fibo-fnd-utl-av:abbreviation "COTS product" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.merriam-webster.com/dictionary/off-the-shelf"^^xsd:anyURI ;
+	fibo-fnd-utl-av:synonym
+		"commercial off-the-shelf product" ,
+		"commercially available off-the-shelf product"
+		;
+	.
+
+fibo-fnd-pas-pas:PreciousMetal
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:NegotiableCommodity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasNumericCode ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:hasName ;
+			owl:someValuesFrom xsd:string ;
+		]
+		;
+	rdfs:label "precious metal" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:PreciousMetal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a metal that is considered to be rare and/or have a high economic value" ;
+	.
+
+fibo-fnd-pas-pas:PreciousMetalIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cd:CodeElement ,
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasTag ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:someValuesFrom fibo-fnd-pas-pas:PreciousMetal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:denotes ;
+			owl:someValuesFrom fibo-fnd-pas-pas:PreciousMetal ;
+		]
+		;
+	rdfs:label "precious metal identifier" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:PreciousMetalIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "the trigraph representing the precious metal" ;
+	.
+
+fibo-fnd-pas-pas:Producer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:produces ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Product ;
+		]
+		;
+	rdfs:label "producer" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Producer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "the manufacturer of a product, also called maker" ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.investorwords.com/3872/producer.html"^^xsd:anyURI ;
+	.
+
+fibo-fnd-pas-pas:Product
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Class ;
+			owl:unionOf (
+				fibo-fnd-pas-pas:Good
+				fibo-fnd-pas-pas:Service
+			) ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProducedBy ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Producer ;
+		]
+		;
+	rdfs:label "product" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Product" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "A commercially distributed good that is (1) tangible property, (2) the output or result of a fabrication, manufacturing, or production process, or (3) something that passes through a distribution channel before being consumed or used." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/product.html"^^xsd:anyURI ;
+	.
+
+fibo-fnd-pas-pas:ProductIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fnd-pas-pas:Product ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "product identifier" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:ProductIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "an identifier for a product" ;
+	.
+
+fibo-fnd-pas-pas:Seller
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:sells ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Product ;
+		]
+		;
+	rdfs:label "seller" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Seller" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a party that makes, offers or contracts to make a sale to an actual or potential buyer" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/seller.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:synonym "vendor" ;
+	.
+
+fibo-fnd-pas-pas:Service
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:isProvisionedBy ;
+			owl:allValuesFrom fibo-fnd-pas-pas:ServiceProvider ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:allValuesFrom fibo-fnd-pas-pas:ServiceProvider ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:provides ;
+			owl:someValuesFrom fibo-fnd-plc-fac:Capability ;
+		]
+		;
+	rdfs:label "service" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Service" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a type of economic activity that is intangible, is not stored and does not result in ownership; a service is consumed at the point of sale" ;
+	skos:example "Services include intangible products, such as accounting, banking, cleaning, consultancy, education, insurance, expertise, medical treatment, or transportation services." ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.businessdictionary.com/definition/services.html"^^xsd:anyURI ,
+		"http://www.investorwords.com/6664/service.html"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "Sometimes services are difficult to identify because they are closely associated with a good; such as the combination of a diagnosis with the administration of a medicine. No transfer of possession or ownership takes place when services are sold, and they (1) cannot be stored or transported, (2) are instantly perishable, and (3) come into existence at the time they are bought and consumed." ;
+	.
+
+fibo-fnd-pas-pas:ServiceAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:MutualContractualAgreement ,
+		fibo-fnd-agr-ctr:WrittenContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractParty ;
+			owl:onClass fibo-fnd-pas-pas:ServiceProvider ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Service ;
+		]
+		;
+	rdfs:label "service agreement" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:ServiceAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a written contract between a client and service provider whereby the service provider supplies some service in the form of time, effort, and/or expertise in exchange for compensation" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/service-contract.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:synonym "service contract" ;
+	.
+
+fibo-fnd-pas-pas:ServiceProvider
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-rl:ThingInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:provisions ;
+			owl:onClass fibo-fnd-plc-fac:Facility ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:provisions ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Service ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:provides ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Service ;
+		]
+		;
+	rdfs:label "service provider" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:ServiceProvider" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a party that provides and typically provisions professional services, such as consulting, financial, legal, real estate, education, communications, storage, or processing services, to other parties, typically defined in a service agreement" ;
+	fibo-fnd-utl-av:adaptedFrom "http://en.wikipedia.org/wiki/Service_provider"^^xsd:anyURI ;
+	.
+
+fibo-fnd-pas-pas:Supplier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:supplies ;
+			owl:someValuesFrom fibo-fnd-pas-pas:Product ;
+		]
+		;
+	rdfs:label "supplier" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:Supplier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "a party that supplies goods or services" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/supplier.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A supplier may be distinguished from a contractor or subcontractor, who commonly adds specialized input to deliverables." ;
+	.
+
+fibo-fnd-pas-pas:TransactionConfirmation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-doc:LegalDocument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:isEvidenceFor ;
+			owl:onClass fibo-fnd-pas-pas:TransactionEvent ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "transaction confirmation" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:TransactionConfirmation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "written communication from a seller or service provider reciting the relevant details of a transaction" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Banking Terms, Sixth Edition, 2012" ;
+	.
+
+fibo-fnd-pas-pas:TransactionEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-oc:OccurrenceKind ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:isEvidencedBy ;
+			owl:onClass fibo-fnd-pas-pas:TransactionConfirmation ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "transaction event" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:TransactionEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "any sale, assignment, lease, license, loan, advance, contribution, or other transfer of any interest in or right to use any property (tangible or intangible) or money, however that transaction is effected, and regardless of whether the terms of the transaction are formally documented" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	.
+
+fibo-fnd-pas-pas:buys
+	a owl:ObjectProperty ;
+	rdfs:label "buys" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:buys" ;
+	rdfs:domain fibo-fnd-pas-pas:Buyer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	rdfs:range fibo-fnd-pas-pas:Product ;
+	skos:definition "links a party in the role of purchaser to something that they have purchased or plan to purchase" ;
+	.
+
+fibo-fnd-pas-pas:buysFrom
+	a owl:ObjectProperty ;
+	rdfs:label "buys from" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:buysFrom" ;
+	rdfs:domain fibo-fnd-pas-pas:Buyer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	rdfs:range fibo-fnd-pas-pas:Seller ;
+	skos:definition "links a party in the role of purchaser to a party from which they have made or are planning to make a purchase" ;
+	.
+
+fibo-fnd-pas-pas:isProvisionedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isProvidedBy ;
+	rdfs:label "is provisioned by" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:isProvisionedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	rdfs:range fibo-fnd-pas-pas:ServiceProvider ;
+	owl:inverseOf fibo-fnd-pas-pas:provisions ;
+	skos:definition "identifies the service provider that provisions the service or facility" ;
+	.
+
+fibo-fnd-pas-pas:isSuppliedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isProvidedBy ;
+	rdfs:label "is supplied by" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:isSuppliedBy" ;
+	rdfs:domain fibo-fnd-pas-pas:Product ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	rdfs:range fibo-fnd-pas-pas:Supplier ;
+	owl:inverseOf fibo-fnd-pas-pas:supplies ;
+	skos:definition "identifies the party (supplier, vendor, distributor, etc.) that makes a product available" ;
+	.
+
+fibo-fnd-pas-pas:provisions
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:provides ;
+	rdfs:label "provisions" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:provisions" ;
+	rdfs:domain fibo-fnd-pas-pas:ServiceProvider ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	skos:definition "customizes, provides, or outfits something required for use in delivering a service" ;
+	.
+
+fibo-fnd-pas-pas:sells
+	a owl:ObjectProperty ;
+	rdfs:label "sells" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:sells" ;
+	rdfs:domain fibo-fnd-pas-pas:Seller ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	rdfs:range fibo-fnd-pas-pas:Product ;
+	skos:definition "links a party in the role of broker, dealer, vendor, or merchandiser to something that they make available for sale" ;
+	.
+
+fibo-fnd-pas-pas:sellsTo
+	a owl:ObjectProperty ;
+	rdfs:label "sells to" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:sellsTo" ;
+	rdfs:domain fibo-fnd-pas-pas:Seller ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	rdfs:range fibo-fnd-pas-pas:Buyer ;
+	owl:inverseOf fibo-fnd-pas-pas:buysFrom ;
+	skos:definition "links a party in the role of broker, dealer, vendor, or merchandiser to a purchaser or potential purchasing party" ;
+	.
+
+fibo-fnd-pas-pas:supplies
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:provides ;
+	rdfs:label "supplies" ;
+	rdfs:comment "QName: fibo-fnd-pas-pas:supplies" ;
+	rdfs:domain fibo-fnd-pas-pas:Supplier ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> ;
+	rdfs:range fibo-fnd-pas-pas:Product ;
+	skos:definition "links a party in the role of outfitter, provisioner, distributor, etc. to something that they provide" ;
+	.
+

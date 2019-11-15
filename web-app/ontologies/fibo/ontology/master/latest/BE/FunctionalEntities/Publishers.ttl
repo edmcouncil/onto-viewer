@@ -1,0 +1,138 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-fct: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/>
+	a owl:Ontology ;
+	rdfs:label "Publishers Ontology" ;
+	rdfs:comment "QName: fibo-be-fct-pub:" ;
+	dct:abstract "This ontology defines the fundamental concepts for publishers of information, including entities whose primary function is to publish, and entities (whether or not they are publishers in that sense) which are in the role of the publisher of some information. This ontology also includes the published information itself, i.e. the publication." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2018 EDM Council, Inc." ,
+		"Copyright (c) 2013-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-be-fct-pub" ;
+	sm:filename "Publishers.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers.rdf version of this ontology was modified per the FIBO 2.0 RFC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers.rdf version of this ontology was modified per the issue resolutions identified in the FIBO BE 1.0 FTF report."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-be-fct-pub:Publication
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-doc:Document ;
+	rdfs:label "publication" ;
+	rdfs:comment "QName: fibo-be-fct-pub:Publication" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> ;
+	skos:definition "anything made public by print (such as a newspaper, magazine, pamphlet, letter, telegram, via computer modem or program, or in a poster, brochure or pamphlet), orally, or by broadcast (radio, television)" ;
+	fibo-fnd-utl-av:adaptedFrom "http://legal-dictionary.thefreedictionary.com/Publication"^^xsd:anyURI ;
+	.
+
+fibo-be-fct-pub:Publisher
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-fnd-pty-pty:IndependentParty ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "publisher" ;
+	rdfs:comment "QName: fibo-be-fct-pub:Publisher" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> ;
+	skos:definition "a party responsible for the printing or distribution of digital or printed information" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/publisher.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Typically this role is filled by some entity whose function is that of a publishing house (sometimes also referred to as a publisher, in that different sense). Publishers may also include banks, government agencies and the like." ;
+	.
+
+fibo-be-fct-pub:PublishingHouse
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-fct:FunctionalBusinessEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-fnd-org-fm:FormalOrganization ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "publishing house" ;
+	rdfs:comment "QName: fibo-be-fct-pub:PublishingHouse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> ;
+	skos:definition "some organization whose principal role is to publish information" ;
+	skos:scopeNote "Publishing house in the sense intended here includes any organization whose role is to make information publicly available whether by disemminating it directly or indirectly and regardless of the type of information. These include organizations whose primary function is that of a market data vendor." ;
+	.
+
+fibo-be-fct-pub:hasPublisher
+	a owl:ObjectProperty ;
+	rdfs:label "has publisher" ;
+	rdfs:comment "QName: fibo-be-fct-pub:hasPublisher" ;
+	rdfs:domain fibo-be-fct-pub:Publication ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> ;
+	rdfs:range fibo-be-fct-pub:Publisher ;
+	owl:inverseOf fibo-be-fct-pub:publishes ;
+	skos:definition "some person or organization whose role it has been to publish this information" ;
+	.
+
+fibo-be-fct-pub:isPublishedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is published by" ;
+	rdfs:comment "QName: fibo-be-fct-pub:isPublishedBy" ;
+	rdfs:domain fibo-be-fct-pub:Publication ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> ;
+	rdfs:range fibo-fnd-pty-pty:IndependentParty ;
+	skos:definition "identifies the independent party (i.e., the individual or organization) that disseminates the material" ;
+	.
+
+fibo-be-fct-pub:publishes
+	a owl:ObjectProperty ;
+	rdfs:label "publishes" ;
+	rdfs:comment "QName: fibo-be-fct-pub:publishes" ;
+	rdfs:domain fibo-be-fct-pub:Publisher ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> ;
+	rdfs:range fibo-be-fct-pub:Publication ;
+	skos:definition "prepares and issues material for public consumption" ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.thefreedictionary.com/publish"^^xsd:anyURI ;
+	.
+

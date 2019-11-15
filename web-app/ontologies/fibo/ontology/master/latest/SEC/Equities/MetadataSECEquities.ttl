@@ -1,0 +1,66 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/MetadataSECEquities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/MetadataSECEquities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-eq-mod: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/MetadataSECEquities/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/MetadataSECEquities/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Securities (SEC), Equities Module" ;
+	rdfs:comment "QName: fibo-sec-eq-mod:" ;
+	dct:abstract "The SEC Equities Module covers concepts that are common to equities, including share-specific terminology and shareholder rights, for stocks and partnership equity, as well as depository receipts. This ontology provides metadata about the Equities module and its contents." ;
+	dct:issued "2019-08-23T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-sec-eq-mod" ;
+	sm:filename "MetadataSECEquities.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/MetadataSECEquities/> ;
+	.
+
+fibo-sec-eq-mod:EquitiesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "FIBO SEC Equities Module" ;
+	rdfs:comment "QName: fibo-sec-eq-mod:EquitiesModule" ;
+	dct:abstract "This module defines concepts common to equities, including share-specific terminology and shareholder rights, for stocks and partnership equity, as well as depository receipts." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"BNY Mellon" ,
+		"Bloomberg LP" ,
+		"Exprentis" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Quarule" ,
+		"State Street Bank and Trust" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo"
+		;
+	sm:copyright
+		"Copyright (c) 2018-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "FIBO-SEC-EQ" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/MetadataSECEquities/> ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	.
+

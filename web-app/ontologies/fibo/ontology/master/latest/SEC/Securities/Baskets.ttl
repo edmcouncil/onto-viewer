@@ -1,0 +1,152 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-sec-sec-bsk: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/>
+	a owl:Ontology ;
+	rdfs:label "Baskets Ontology" ;
+	rdfs:comment "QName: fibo-sec-sec-bsk:" ;
+	dct:abstract "This ontology defines the concept of a tradable container of securities, indices, and/or market rates, and identifies the elements that can be constituents of a such a basket." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-sec-sec-bsk" ;
+	sm:filename "Baskets.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-sec-sec-bsk:BasketOfIndices
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:Basket ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-sec-sec-bsk:BasketOfIndicesConstituent ;
+		]
+		;
+	rdfs:label "market basket" ;
+	rdfs:comment "QName: fibo-sec-sec-bsk:BasketOfIndices" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> ;
+	skos:definition "a basket made up of market indices" ;
+	skos:example "For example, certain equities derivatives have an underlying basket which is a basket of more than one index, not a basket of securities." ;
+	.
+
+fibo-sec-sec-bsk:BasketOfIndicesConstituent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:BasketConstituent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:allValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-ind-ei-ei:EconomicIndicator
+					fibo-ind-ind-ind:MarketRate
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "basket Of indices constituent" ;
+	rdfs:comment "QName: fibo-sec-sec-bsk:BasketOfIndicesConstituent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> ;
+	skos:definition "a single constituent of a basket of indices" ;
+	fibo-fnd-utl-av:explanatoryNote "This is a published index, defined as a part of the basket. Further notes: Not to be confused with the constituent of an index of securities." ;
+	.
+
+fibo-sec-sec-bsk:BasketOfSecurities
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:Basket ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-sec-sec-bsk:SecuritiesBasketConstituent ;
+		]
+		;
+	rdfs:label "basket of securities" ;
+	rdfs:comment "QName: fibo-sec-sec-bsk:BasketOfSecurities" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> ;
+	skos:definition "a basket of traded securities" ;
+	skos:editorialNote "This does not include baskets of indices, which are modeled separately. also does not include basket of baskets. Also need to break down by Country, by Region (e.g. non Japan Asia sub-indices). See MSCI World Index." ;
+	.
+
+fibo-sec-sec-bsk:MixedBasket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:Basket ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-sec-sec-bsk:BasketOfIndicesConstituent
+					fibo-sec-sec-bsk:SecuritiesBasketConstituent
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "mixed basket" ;
+	rdfs:comment "QName: fibo-sec-sec-bsk:MixedBasket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> ;
+	skos:definition "a basket that has a mix of constituents, including securities and indices" ;
+	.
+
+fibo-sec-sec-bsk:SecuritiesBasketConstituent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:BasketConstituent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:allValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "securities basket constituent" ;
+	rdfs:comment "QName: fibo-sec-sec-bsk:SecuritiesBasketConstituent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> ;
+	skos:definition "a security identified as a component of a basket of securities" ;
+	.
+

@@ -1,0 +1,162 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Spots/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/Settlement/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Spots/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-der-sp: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> .
+@prefix fibo-fbc-fi-stl: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-txn-sup: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/>
+	a owl:Ontology ;
+	rdfs:label "Spots"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Spot transactions, along with their corresponding or implied contracts. These are not a derivative but rather define simple transactions that are immediately settled by both sides, for a given kind of asset or commodity. These are the concepts common to other variants of spot such as commodities spots." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/Settlement/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Spots/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-der-sp:SpotCashSettlementTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:SettlementTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasPayer ;
+			owl:someValuesFrom fibo-der-der-sp:SpotPayer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasReceiver ;
+			owl:someValuesFrom fibo-der-der-sp:SpotReceiver ;
+		]
+		;
+	rdfs:label "spot cash settlement terms"@en ;
+	rdfs:comment "QName: NONE:SpotCashSettlementTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	.
+
+fibo-der-der-sp:SpotContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:EconomicContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-der-der-sp:SpotCashSettlementTerms ;
+		]
+		;
+	rdfs:label "spot contract"@en ;
+	rdfs:comment "QName: NONE:SpotContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	skos:definition "A contract relating to a transaction which is for immediate settlement. Further notes: A spot transaction simply means a transaction in which some goods or currency are exchanged for some other goods or currency, with no future delivery provision. A Spot contract is the usually unwritten contract which by definition underlies that kind of transaction. Spot means for immediate settlement. Immediate here means the minimum number of days that are possible. This includes general retail transactions as well as the specialixed types of spot transactiojn foud in the financial services and treasury trading contexts, such as Fx Spots (a sub type of this) and commodity spot transactions. However the settlement date is still some time in the future. Also given different time zones, the settlement would be at some time in the future anyway Formerly a financial e.g. currency Spot would have been 2 (working) days settlement for example. Canadian v USD would be 1 day. Follows a settlement convention from the relevant market. Action: Add reference to Settlement Convention for the given market."@en ;
+	.
+
+fibo-der-der-sp:SpotPayer
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-psch:Payer ;
+	rdfs:label "spot payer"@en ;
+	rdfs:comment "QName: NONE:SpotPayer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	.
+
+fibo-der-der-sp:SpotReceiver
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-psch:Payee ;
+	rdfs:label "spot receiver"@en ;
+	rdfs:comment "QName: NONE:SpotReceiver" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	.
+
+fibo-der-der-sp:SpotTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:ContractualTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-sp:hasImpliedContract ;
+			owl:someValuesFrom fibo-der-der-sp:SpotContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:subject ;
+			owl:someValuesFrom fibo-fnd-txn-sup:NegotiableCash ;
+		]
+		;
+	rdfs:label "spot transaction"@en ;
+	rdfs:comment "QName: NONE:SpotTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	.
+
+fibo-der-der-sp:hasImpliedContract
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:transactionEmbodiesEconomicAgreement ;
+	rdfs:label "has implied contract"@en ;
+	rdfs:comment "QName: NONE:hasImpliedContract" ;
+	rdfs:domain fibo-der-der-sp:SpotTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	rdfs:range fibo-der-der-sp:SpotContract ;
+	.
+
+fibo-der-der-sp:paymentType
+	a owl:DatatypeProperty ;
+	rdfs:label "payment type"@en ;
+	rdfs:comment "QName: NONE:paymentType" ;
+	rdfs:domain fibo-der-der-sp:SpotCashSettlementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	rdfs:range xsd:string ;
+	skos:definition "FpML = paymentType 'A classification of the type of fee or additional payment, e.g. brokerage, upfront fee etc. FpML does not define domain values for this element.'"@en ;
+	.
+
+fibo-der-der-sp:settlementAmount
+	a owl:ObjectProperty ;
+	rdfs:label "settlement amount"@en ;
+	rdfs:comment "QName: NONE:settlementAmount" ;
+	rdfs:domain fibo-der-der-sp:SpotCashSettlementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	.
+
+fibo-der-der-sp:settlementInformation
+	a owl:DatatypeProperty ;
+	rdfs:label "settlement information"@en ;
+	rdfs:comment "QName: NONE:settlementInformation" ;
+	rdfs:domain fibo-der-der-sp:SpotCashSettlementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ;
+	rdfs:range xsd:string ;
+	skos:definition "FpML settlementInformation (in payment) 'The information required to settle a currency payment that results from a trade.'"@en ;
+	.
+

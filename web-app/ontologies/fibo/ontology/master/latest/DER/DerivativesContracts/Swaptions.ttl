@@ -1,0 +1,164 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaptions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-spn: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/>
+	a owl:Ontology ;
+	rdfs:label "Swaptions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Contracts and their corresponding transactions, structured like a swap except that one of the legs is optional on the part of the leg payer rather than being an unconditional commitment to make that payment. The optional leg is therefore structure very like an option contract. Unlike an option, the other side is not a one-off fee to enter into the contract but a commitment to make a pre-defined series of payments." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaptions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-der-spn:LegalSwapOption
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ContractualOption ;
+	rdfs:label "legal swap option"@en ;
+	rdfs:comment "QName: NONE:LegalSwapOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	skos:definition "The option, that is the right but not the obligation, to enter into a Swap transaction at some time in the future under terms defined in the Swaption contract."@en ;
+	.
+
+fibo-der-der-spn:SwaptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/DerivativeInstrument> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-spn:hasExerciseProcedure ;
+			owl:someValuesFrom fibo-der-der-spn:SwaptionExerciseProcedrure ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-spn:hasPremium ;
+			owl:someValuesFrom fibo-der-der-spn:SwaptionPremium ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:someValuesFrom fibo-der-der-spn:LegalSwapOption ;
+		]
+		;
+	rdfs:label "swaption contract"@en ;
+	rdfs:comment "QName: NONE:SwaptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	skos:definition "Option taken on interest rate swaps. These are FX interest rate option."@en ;
+	skos:editorialNote "This definition is specific to IR Swaps. Are there other sorts? Can we have a more general definition? FpML: A swaption product definition."@en ;
+	.
+
+fibo-der-der-spn:SwaptionExerciseProcedrure
+	a owl:Class ;
+	rdfs:label "swaption exercise procedrure"@en ;
+	rdfs:comment "QName: NONE:SwaptionExerciseProcedrure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	skos:definition "Procedure for the exercise of the Swaption."@en ;
+	fibo-fnd-utl-av:explanatoryNote "FpML: 'A set of parameters defining procedures associated with the exercise.'"@en ;
+	.
+
+fibo-der-der-spn:SwaptionPremium
+	a owl:Class ;
+	rdfs:label "swaption premium"@en ;
+	rdfs:comment "QName: NONE:SwaptionPremium" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	.
+
+fibo-der-der-spn:SwaptionTransaction
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-der-der-spn:embodies ;
+		owl:someValuesFrom fibo-der-der-spn:SwaptionContract ;
+	] ;
+	rdfs:label "swaption transaction"@en ;
+	rdfs:comment "QName: NONE:SwaptionTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	.
+
+fibo-der-der-spn:embodies
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:transactionEmbodiesEconomicAgreement ;
+	rdfs:label "embodies"@en ;
+	rdfs:comment "QName: NONE:embodies" ;
+	rdfs:domain fibo-der-der-spn:SwaptionTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	rdfs:range fibo-der-der-spn:SwaptionContract ;
+	.
+
+fibo-der-der-spn:hasExerciseProcedure
+	a owl:ObjectProperty ;
+	rdfs:label "has exercise procedure"@en ;
+	rdfs:comment "QName: NONE:hasExerciseProcedure" ;
+	rdfs:domain fibo-der-der-spn:SwaptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	rdfs:range fibo-der-der-spn:SwaptionExerciseProcedrure ;
+	.
+
+fibo-der-der-spn:hasPremium
+	a owl:ObjectProperty ;
+	rdfs:label "has premium"@en ;
+	rdfs:comment "QName: NONE:hasPremium" ;
+	rdfs:domain fibo-der-der-spn:SwaptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	rdfs:range fibo-der-der-spn:SwaptionPremium ;
+	.
+
+fibo-der-der-spn:isRightTo
+	a owl:ObjectProperty ;
+	rdfs:label "is right to"@en ;
+	rdfs:comment "QName: NONE:isRightTo" ;
+	rdfs:domain fibo-der-der-spn:LegalSwapOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	.
+
+fibo-der-der-spn:paymentDate
+	a owl:ObjectProperty ;
+	rdfs:label "payment date"@en ;
+	rdfs:comment "QName: NONE:paymentDate" ;
+	rdfs:domain fibo-der-der-spn:SwaptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-der-der-spn:premiumAmount
+	a owl:ObjectProperty ;
+	rdfs:label "premium amount"@en ;
+	rdfs:comment "QName: NONE:premiumAmount" ;
+	rdfs:domain fibo-der-der-spn:SwaptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	.
+

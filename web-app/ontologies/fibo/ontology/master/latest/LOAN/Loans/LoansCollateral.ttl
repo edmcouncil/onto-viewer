@@ -1,0 +1,223 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/MortgageLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/SecuredLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansEvents/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-assx: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-loan-loan-col: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> .
+@prefix fibo-loan-loan-pty: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansParties/> .
+@prefix fibo-loan-tem-ev: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/> .
+@prefix fibo-loan-typ-mtg: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/> .
+@prefix fibo-loan-typ-sec: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/>
+	a owl:Ontology ;
+	rdfs:label "LoansCollateral"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology describes the concept of loan collateral and loan property collateral in the context of collateralized securitized loans." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:copyright """Copyright (c) 2015-2018 EDM Council, Inc.
+Copyright (c) 2015-2018 Object Management Group, Inc.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/MortgageLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/SecuredLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansEvents/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate>
+	a owl:Class ;
+	.
+
+fibo-loan-loan-col:LoanCollateral
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-dbt:Collateral ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:isCollateralizationOf ;
+			owl:someValuesFrom fibo-loan-typ-sec:CollateralizedSecuredLoan ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-col:pledgedBy ;
+			owl:someValuesFrom fibo-loan-loan-pty:CollateralProvider ;
+		]
+		;
+	rdfs:label "loan collateral"@en ;
+	rdfs:comment "QName: NONE:LoanCollateral" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	skos:definition "Assets pledged to a lender until a loan is repaid. Further notes: This provides one means by which some extension of finance (such as a loan, debt or equity issue) is under-written. PoC equivalent term definition and note: Collateral is property collateral or additional collateral associated with a loan or mortgage loan (PoC data note) There are foreign key attributes of collateral coupling it to collateral provider and to loan."@en ;
+	.
+
+fibo-loan-loan-col:LoanCollateralAgreement
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:WrittenContract ;
+	rdfs:label "loan collateral agreement"@en ;
+	rdfs:comment "QName: NONE:LoanCollateralAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	skos:definition "Contract in which the borrower of a collateralized securied loan agrees the terms on which the collateral is made available to the Lender."@en ;
+	.
+
+fibo-loan-loan-col:LoanPropertyCollateral
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-loan-col:LoanCollateral ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:isCollateralizedBy ;
+			owl:someValuesFrom fibo-fnd-accx-assx:PropertyAsset ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-mtg:isLienOn ;
+			owl:someValuesFrom fibo-loan-typ-mtg:MortgageLoan ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-col:lien ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+		]
+		;
+	rdfs:label "loan property collateral"@en ;
+	rdfs:comment "QName: NONE:LoanPropertyCollateral" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	skos:definition "Property Assets pledged to a lender until a loan is repaid. Further notes: This provides one means by which some extension of finance (such as a loan, debt or equity issue) is under-written."@en ;
+	.
+
+fibo-loan-loan-col:collateralType
+	a owl:DatatypeProperty ;
+	rdfs:label "collateral type"@en ;
+	rdfs:comment "QName: NONE:collateralType" ;
+	rdfs:domain fibo-loan-loan-col:LoanCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	skos:definition "Type of additional collateral."@en ;
+	.
+
+fibo-loan-loan-col:collateralValue
+	a owl:ObjectProperty ;
+	rdfs:label "collateral value"@en ;
+	rdfs:comment "QName: NONE:collateralValue" ;
+	rdfs:domain fibo-loan-loan-col:LoanCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Additional Collateral value - Value of additional collateral"@en ;
+	.
+
+fibo-loan-loan-col:hasValuation
+	a owl:ObjectProperty ;
+	rdfs:label "has valuation"@en ;
+	rdfs:comment "QName: NONE:hasValuation" ;
+	rdfs:domain fibo-loan-loan-col:LoanPropertyCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	rdfs:range fibo-loan-tem-ev:PropertyCollateralValuation ;
+	owl:inverseOf fibo-loan-loan-col:isOf ;
+	.
+
+fibo-loan-loan-col:isLien
+	a owl:ObjectProperty ;
+	rdfs:label "is lien"@en ;
+	rdfs:comment "QName: NONE:isLien" ;
+	rdfs:domain <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	rdfs:range fibo-loan-loan-col:LoanPropertyCollateral ;
+	.
+
+fibo-loan-loan-col:isOf
+	a owl:ObjectProperty ;
+	rdfs:label "is of"@en ;
+	rdfs:comment "QName: NONE:isOf" ;
+	rdfs:domain fibo-loan-tem-ev:PropertyCollateralValuation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	rdfs:range fibo-loan-loan-col:LoanPropertyCollateral ;
+	.
+
+fibo-loan-loan-col:lien
+	a owl:ObjectProperty ;
+	rdfs:label "represents lien on"@en ;
+	rdfs:comment "QName: NONE:lien" ;
+	rdfs:domain fibo-loan-loan-col:LoanPropertyCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+	.
+
+fibo-loan-loan-col:pledgedBy
+	a owl:ObjectProperty ;
+	rdfs:label "pledged by"@en ;
+	rdfs:comment "QName: NONE:pledgedBy" ;
+	rdfs:domain fibo-loan-loan-col:LoanCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	rdfs:range fibo-loan-loan-pty:CollateralProvider ;
+	.
+
+fibo-loan-loan-col:propertyCollateralDSCRate
+	a owl:ObjectProperty ;
+	rdfs:label "property collateral d s c rate"@en ;
+	rdfs:comment "QName: NONE:propertyCollateralDSCRate" ;
+	rdfs:domain fibo-loan-loan-col:LoanPropertyCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Debt Service Coverage Rate (DSC)"@en ;
+	.
+
+fibo-loan-loan-col:propertyCollateralLienSeniority
+	a owl:DatatypeProperty ;
+	rdfs:label "property collateral lien seniority"@en ;
+	rdfs:comment "QName: NONE:propertyCollateralLienSeniority" ;
+	rdfs:domain fibo-loan-loan-col:LoanPropertyCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	skos:definition "Seniority on liquidation of property."@en ;
+	.
+
+fibo-loan-loan-col:propertyCollateralTransferable
+	a owl:DatatypeProperty ;
+	rdfs:label "property collateral transferable"@en ;
+	rdfs:comment "QName: NONE:propertyCollateralTransferable" ;
+	rdfs:domain fibo-loan-loan-col:LoanPropertyCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Is property Transferability limited? For Spanish VPO loans, whether the property transferability is limited."@en ;
+	.
+
+fibo-loan-loan-col:propertyCollateralVPODeclassificationDate
+	a owl:DatatypeProperty ;
+	rdfs:label "property collateral v p o declassification date"@en ;
+	rdfs:comment "QName: NONE:propertyCollateralVPODeclassificationDate" ;
+	rdfs:domain fibo-loan-loan-col:LoanPropertyCollateral ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> ;
+	skos:definition "Time Until Declassification - For Spanish VPO loans, time (in months) until property will be declassified as VPO property Further notes: PoC SDM Data note: Converted to date for declassification to avoid dirty data (AO )"@en ;
+	.
+

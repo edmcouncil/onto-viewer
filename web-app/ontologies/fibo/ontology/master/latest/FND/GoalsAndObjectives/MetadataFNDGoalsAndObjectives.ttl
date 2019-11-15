@@ -1,0 +1,55 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-gao-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) Goals and Objectives Module" ;
+	rdfs:comment "QName: fibo-fnd-gao-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Goals and Objectives Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fnd-gao-mod" ;
+	sm:filename "MetadataFNDGoalsAndObjectives.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/> ;
+	.
+
+fibo-fnd-gao-mod:GoalsAndObjectivesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Goals and Objectives" ;
+	rdfs:comment "QName: fibo-fnd-gao-mod:GoalsAndObjectivesModule" ;
+	dct:abstract "This module includes ontologies for goals and objectives which may be pursued by people or organizations. Goals form the basis for the definition of an organization, and objectives and related concepts are required for describing business plans." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Goals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Goals and Objectives Module" ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-fnd-gao" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

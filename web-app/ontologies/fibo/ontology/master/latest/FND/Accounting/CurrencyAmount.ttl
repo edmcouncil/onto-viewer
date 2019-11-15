@@ -1,0 +1,581 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-cd: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/>
+	a owl:Ontology ;
+	rdfs:label "Currency Amount Ontology" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:" ;
+	dct:abstract """This ontology defines currency and monetary amount related concepts for use in defining other FIBO ontology elements. There are two distinct kinds of concepts that correspond to money and amounts: a concrete, actual amount of money, and the monetary measure of something denominated in some currency. These are dimensionally the same but whereas 'money amount' is defined as an amount of money, 'monetary amount' is an abstract monetary measure.
+
+The definition of currency provided herein is compliant with the definitions given in ISO 4217.  ISO 4217 provides universally applicable coded representations of names of currencies and funds, used internationally for financial transaction support.  The ontology has been partitioned into 2 parts: (1) the essential concept system describing the standard (this module), and (2) ISO4217-1-CurrencyCodes, which contains all of the individuals specified in ISO 4217.""" ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI
+		;
+	sm:directSource
+		"ISO 4217 Codes for the representation of currencies and funds, Eighth edition, 2015-08-01" ,
+		"ISO 4217 Codes for the representation of currencies and funds, Seventh edition, 2008-07-15" ,
+		"ISO 4217 Currency and funds code list, 2018-06-04"
+		;
+	sm:fileAbbreviation "fibo-fnd-acc-cur" ;
+	sm:filename "CurrencyAmount.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ;
+	skos:changeNote
+		"The FIBO FND 1.0 (https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount.rdf) version of this ontology was modified per the additions introduced in the FIBO FBC RFC and related issue resolutions identified in the FIBO FND 1.1 RTF report and https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.1/, including adding support for ISO 4217 currency codes." ,
+		"The FIBO FND 1.1 (https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount.rdf) version of this ontology was modified per FIBO 2.0 RFC, including the addition of a new hasMonetaryAmount property as a superproperty of others required by various FIBO domain teams and integration with LCC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount.rdf version of this ontology was modified to include several classes to support automated inclusion of all ISO 4217 codes published as of 2018-06-04, and to revise definitions per the eighth edition of the specification." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/ version of this ontology was modified to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/ version of this ontology was modified to use the generic statistical measures and measurements now in FND."
+		;
+	skos:editorialNote "(1) The present version of the ontology covers the English sections of the ISO 4217 standard only, and (2) UTF-8 character encodings are employed in names in the currency codes ontology to support the broadest number of tools." ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-acc-cur:AmountOfMoney
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-qt-qtu:QuantityValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasBaseMoneyUnit ;
+			owl:allValuesFrom fibo-fnd-acc-cur:Currency ;
+		]
+		;
+	rdfs:label "amount of money" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:AmountOfMoney" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "a sum of money" ;
+	skos:editorialNote "This is an actual sum of money, not the measure of a sum of money in monetary units, although it has the same basic properties (decimal number with a currenct unit)." ;
+	fibo-fnd-utl-av:synonym "cash" ;
+	.
+
+fibo-fnd-acc-cur:CalculatedPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:MonetaryPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasFormula ;
+			owl:onClass fibo-fnd-utl-alx:CalculationFormula ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "calculated price" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:CalculatedPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "a monetary price determined by a formula" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/price.html"^^xsd:anyURI ;
+	.
+
+fibo-fnd-acc-cur:Currency
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasMinorUnit ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasNumericCode ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:hasName ;
+			owl:someValuesFrom xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isUsedBy ;
+			owl:someValuesFrom lcc-cr:GeopoliticalEntity ;
+		]
+		;
+	rdfs:label "currency" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:Currency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "medium of exchange value, defined by reference to the geographical location of the monetary authorities responsible for it" ;
+	fibo-fnd-utl-av:definitionOrigin "Codes for the representation of currencies and funds, ISO 4217, Eighth edition, 2015-08-01, section 3.2" ;
+	.
+
+fibo-fnd-acc-cur:CurrencyBasket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:StructuredCollection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		]
+		;
+	rdfs:label "currency basket" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:CurrencyBasket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "a selected group of currencies, in which the weighted average is used as a measure of the value or the amount of an obligation" ;
+	skos:note "A currency basket functions as a benchmark for regional currency movements; its composition and weighting depends on its purpose." ;
+	fibo-fnd-utl-av:definitionOrigin "Codes for the representation of currencies and funds, ISO 4217, Eighth edition, 2015-08-01, section 3.2" ;
+	.
+
+fibo-fnd-acc-cur:CurrencyIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cd:CodeElement ,
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasTag ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:denotes ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		]
+		;
+	rdfs:label "currency identifier" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:CurrencyIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "the trigraph representing the currency" ;
+	fibo-fnd-utl-av:explanatoryNote """The first (left-most) two characters of the currency identifier provide a code unique to the currency authority to which it is assigned. Wherever practicable, it is derived from the geographical location of the currency authority, as described in ISO 3166.
+
+The third (right-most) character of the identifier (alphabetic code) is an indicator, preferably mnemonic, derived from the name of the major currency unit or fund.
+
+Where the currency is not associated with a single geographical entity as described in ISO 3166-1, a specially allocated identifier (alpha-2 code) will be used to describe the currency authority. This code will be allocated by the Maintenance Agency from within the user-assigned range of codes XA to XZ specified in 8.1.3 of ISO 3166-1:1997. The character following X will be a mnemonic, where possible, derived from the name of the geographical area concerned.""" ;
+	.
+
+fibo-fnd-acc-cur:ExchangeRate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:RatioValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:hasQuantityKind ;
+			owl:allValuesFrom fibo-fnd-acc-cur:MonetaryMeasure ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasBaseCurrency ;
+			owl:onClass fibo-fnd-acc-cur:Currency ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasDealtCurrency ;
+			owl:onClass fibo-fnd-acc-cur:Currency ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasRateValue ;
+			owl:onDataRange xsd:decimal ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "exchange rate" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:ExchangeRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "a rate at which one currency can be exchanged for another" ;
+	skos:example "The exchange rate between the U.S. dollar and British pound is distinct from the exchange rate between the U.S. dollar and the euro." ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014." ;
+	.
+
+fibo-fnd-acc-cur:Funds
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:Currency ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasCurrency ;
+			owl:onClass fibo-fnd-acc-cur:Currency ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "funds" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:Funds" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "an artificial currency used as calculation basis for another currency (or currencies) and/or for accounting purposes" ;
+	fibo-fnd-utl-av:definitionOrigin "Codes for the representation of currencies and funds, ISO 4217, Eighth edition, 2015-08-01, section 3.3" ;
+	.
+
+fibo-fnd-acc-cur:FundsIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cd:CodeElement ,
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasTag ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Funds ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:denotes ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Funds ;
+		]
+		;
+	rdfs:label "funds identifier" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:FundsIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "the trigraph representing the funds" ;
+	.
+
+fibo-fnd-acc-cur:InterestRate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Percentage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:hasQuantityKind ;
+			owl:allValuesFrom fibo-fnd-acc-cur:MonetaryMeasure ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasRateValue ;
+			owl:onDataRange xsd:decimal ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "interest rate" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:InterestRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "an amount charged, expressed as a percentage of principal, by a lender to a borrower for the use of assets" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014." ;
+	fibo-fnd-utl-av:explanatoryNote "Interest rates are typically noted on an annual basis, known as the annual percentage rate (APR). The assets borrowed could include cash, consumer goods, and large assets such as a vehicle or building. The rate is derived by dividing the amount of interest by the amount of principal borrowed. Interest rates are quoted on bills, notes, bonds, credit cards, and many kinds of consumer and business loans." ;
+	.
+
+fibo-fnd-acc-cur:MonetaryAmount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-qt-qtu:QuantityValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasCurrency ;
+			owl:onClass fibo-fnd-acc-cur:Currency ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasAmount ;
+			owl:onDataRange xsd:decimal ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "monetary amount" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:MonetaryAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "the measure which is an amount of money specified in monetary units" ;
+	.
+
+fibo-fnd-acc-cur:MonetaryMeasure
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Measure ;
+	rdfs:label "monetary measure" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:MonetaryMeasure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "some measure of some sum of money" ;
+	skos:editorialNote "This may be a measure expressed in terms of decimal plus currency, or it may be a measure expressed in terms of a percentage amount with reference to some other monetary amount or to some Money Amount (actual amount of money)." ;
+	.
+
+fibo-fnd-acc-cur:MonetaryPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:MonetaryAmount ,
+		fibo-fnd-acc-cur:Price
+		;
+	rdfs:label "monetary price" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:MonetaryPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "a price that that is expressed as a monetary amount" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.businessdictionary.com/definition/price.html"^^xsd:anyURI ,
+		"http://www.oxforddictionaries.com/definition/english/price"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "As the consideration given in exchange for transfer of ownership, price forms the essential basis of commercial transactions. It may be fixed by a contract, left to be determined by an agreed upon formula at a future date, or discovered or negotiated during the course of dealings between the parties involved. In commerce, price is determined by what (1) a buyer is willing to pay, (2) a seller is willing to accept, and (3) the competition is allowing to be charged." ;
+	.
+
+fibo-fnd-acc-cur:PercentageMonetaryAmount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Percentage ;
+	rdfs:label "percentage monetary amount" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:PercentageMonetaryAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "a measure of some amount of money expressed as a percentage of some other amount, some notional amount or some concrete money amount" ;
+	.
+
+fibo-fnd-acc-cur:Price
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-qt-qtu:QuantityValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:hasQuantityKind ;
+			owl:allValuesFrom fibo-fnd-acc-cur:MonetaryMeasure ;
+		]
+		;
+	rdfs:label "price" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:Price" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "an amount of money, goods, or services requested, expected, required, or given in exchange for something else" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.businessdictionary.com/definition/price.html"^^xsd:anyURI ,
+		"http://www.oxforddictionaries.com/definition/english/price"^^xsd:anyURI
+		;
+	.
+
+fibo-fnd-acc-cur:UnitOfAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:MonetaryMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasNumericCode ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:hasName ;
+			owl:someValuesFrom xsd:string ;
+		]
+		;
+	rdfs:label "unit of account" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:UnitOfAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "a nominal monetary unit of measure used to represent the real value (or cost) of any economic item; i.e. goods, services, assets, liabilities, income, expenses" ;
+	.
+
+fibo-fnd-acc-cur:UnitOfAccountIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cd:CodeElement ,
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasTag ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:someValuesFrom fibo-fnd-acc-cur:UnitOfAccount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:denotes ;
+			owl:someValuesFrom fibo-fnd-acc-cur:UnitOfAccount ;
+		]
+		;
+	rdfs:label "unit of account identifier" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:UnitOfAccountIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	skos:definition "the trigraph representing the unit of account" ;
+	.
+
+fibo-fnd-acc-cur:hasAmount
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-qt-qtu:hasNumericValue ;
+	rdfs:label "has amount" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "a total number or quantity" ;
+	.
+
+fibo-fnd-acc-cur:hasBaseCurrency
+	a
+		owl:ObjectProperty ,
+		owl:InverseFunctionalProperty
+		;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasCurrency ;
+	rdfs:label "has base currency" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasBaseCurrency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "a predicate indicating the base currency in an exchange rate; one unit of this currency represents R units of the dealt currency, where R is the exchange rate value" ;
+	.
+
+fibo-fnd-acc-cur:hasBaseMoneyUnit
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-qt-qtu:hasMeasurementUnit ;
+	rdfs:label "has base money unit" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasBaseMoneyUnit" ;
+	rdfs:domain fibo-fnd-acc-cur:AmountOfMoney ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "the currency in which the money amount is denominated" ;
+	.
+
+fibo-fnd-acc-cur:hasCurrency
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-qt-qtu:hasMeasurementUnit ;
+	rdfs:label "has currency" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasCurrency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "a medium of exchange value in which something, such as a monetary amount is defined" ;
+	.
+
+fibo-fnd-acc-cur:hasDealtCurrency
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasCurrency ;
+	rdfs:label "has dealt currency" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasDealtCurrency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "a predicate indicating the dealt currency in an exchange rate; R units of this currency represent one unit of the base currency" ;
+	.
+
+fibo-fnd-acc-cur:hasFundsType
+	a owl:DatatypeProperty ;
+	rdfs:label "has funds type" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasFundsType" ;
+	rdfs:domain fibo-fnd-acc-cur:Funds ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range xsd:string ;
+	skos:definition "indicates the type of funds, such as next day for US funds" ;
+	.
+
+fibo-fnd-acc-cur:hasMinorUnit
+	a owl:DatatypeProperty ;
+	rdfs:label "has minor unit" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasMinorUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range xsd:string ;
+	skos:definition "relates a code for the minor unit of currency to the currency or fund" ;
+	skos:scopeNote """Requirements sometimes arise for values to be expressed in terms of minor units of currency. When this occurs, it is necessary to know the decimal relationship that exists between the currency concerned and its minor unit. 
+- 0 means that there is no minor unit for the currency; 
+- 1, 2, and 3 signify a ratio of 10 to 1, 100 to 1 and 1000 to 1 respectively.""" ;
+	.
+
+fibo-fnd-acc-cur:hasMonetaryAmount
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has monetary amount" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasMonetaryAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "relates something to a monetary amount (e.g. credit limit, notional amount)" ;
+	fibo-fnd-utl-av:explanatoryNote "This could be a loan amount, or a limit for a credit line." ;
+	.
+
+fibo-fnd-acc-cur:hasNotionalAmount
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasMonetaryAmount ;
+	rdfs:label "has notional amount" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasNotionalAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "has a notional value expressed as some monetary amount, that is a number and a currency in which that number is denominated" ;
+	skos:editorialNote "The domain for this property should be interpreted as being an abstraction which covers various forms of commitment, which may set out the existence of some notional amount of money, specified via this property.  This is left unspecified for now, so that the property can also be defined directly as being a property of some contractual term which describes that commitment." ;
+	.
+
+fibo-fnd-acc-cur:hasNumericCode
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasTag ;
+	rdfs:label "has numeric code" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasNumericCode" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range xsd:string ;
+	skos:definition "relates a numeric code to the currency or fund" ;
+	skos:scopeNote "The numeric currency code is derived, where possible, from the United Nations Standard Country or Area Code. Additional codes to meet special requirements (as described in 5.1.3) and in respect of funds will be allocated as necessary from within the user-assigned range of codes 950 to 998. Funds codes are allocated in descending order commencing at 998." ;
+	.
+
+fibo-fnd-acc-cur:hasPrice
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has price" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range fibo-fnd-acc-cur:Price ;
+	skos:definition "indicates the value of something expressed as an amount of money or goods" ;
+	.
+
+fibo-fnd-acc-cur:hasRateValue
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-qt-qtu:hasNumericValue ;
+	rdfs:label "has rate value" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:hasRateValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "has a value for a rate expressed as a number (may be a percentage or raw number)" ;
+	.
+
+fibo-fnd-acc-cur:isTenderIn
+	a owl:ObjectProperty ;
+	rdfs:label "is tender in" ;
+	rdfs:comment "QName: fibo-fnd-acc-cur:isTenderIn" ;
+	rdfs:domain fibo-fnd-acc-cur:Currency ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	skos:definition "a jurisdiction in which the currency is exchangeable for goods and services" ;
+	fibo-fnd-utl-av:explanatoryNote "Commonly referred to also as legal tender, however this definition does not hold literally in some countries e.g. Scotland." ;
+	.
+

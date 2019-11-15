@@ -1,0 +1,312 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-risk-risk: <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/>
+	a owl:Ontology ;
+	rdfs:label "Risk"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Risk is defined here as the product of the probability of some event and the impact of that event on some goal. Categories of risk are defined in terms of the different kinds of goal that the event would impact, to distinguish between operational and various forms of financial risk. Other categorizations are also possible based on probabilities or on differences in the kinds of events themselves. 
+		Note that a risk event is generally an event that does not happen, so it will be beneficial in future work to make use of the extended sub-partitions of Occurrent to provide a clearer segregation across the model between actual events and mostly avoided or hypothetical events.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-risk-risk:Consequence
+	a owl:Class ;
+	rdfs:label "consequence"@en ;
+	rdfs:comment "QName: NONE:Consequence" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:CreditRisk
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:FinancialRisk ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impact ;
+			owl:someValuesFrom fibo-fnd-risk-risk:LossGivenDefault ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:probability ;
+			owl:someValuesFrom fibo-fnd-risk-risk:ProbabilityOfDefault ;
+		]
+		;
+	rdfs:label "credit risk"@en ;
+	rdfs:comment "QName: NONE:CreditRisk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:FinancialRisk
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:Risk ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impact.1 ;
+			owl:someValuesFrom fibo-fnd-risk-risk:FinancialRiskConsequence ;
+		]
+		;
+	rdfs:label "financial risk"@en ;
+	rdfs:comment "QName: NONE:FinancialRisk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:FinancialRiskConsequence
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:Impact ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impactsUpon ;
+			owl:someValuesFrom fibo-fnd-gao-obj:InvestmentObjective ;
+		]
+		;
+	rdfs:label "financial risk consequence"@en ;
+	rdfs:comment "QName: NONE:FinancialRiskConsequence" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:FinancialTransactionRisk
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:FinancialRisk ,
+		fibo-fnd-risk-risk:OperationalRisk ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impact.2 ;
+			owl:someValuesFrom fibo-fnd-risk-risk:TransactionFailure ;
+		]
+		;
+	rdfs:label "financial transaction risk"@en ;
+	rdfs:comment "QName: NONE:FinancialTransactionRisk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:Impact
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:Consequence ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impactsUpon ;
+			owl:someValuesFrom fibo-fnd-gao-obj:BusinessObjective ;
+		]
+		;
+	rdfs:label "impact"@en ;
+	rdfs:comment "QName: NONE:Impact" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:LossGivenDefault
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-risk-risk:Impact ;
+	rdfs:label "loss given default"@en ;
+	rdfs:comment "QName: NONE:LossGivenDefault" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	skos:definition "The loss given some default."@en ;
+	.
+
+fibo-fnd-risk-risk:OperationalRisk
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:Risk ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impact.1 ;
+			owl:someValuesFrom fibo-fnd-risk-risk:OperationalRiskConsequence ;
+		]
+		;
+	rdfs:label "operational risk"@en ;
+	rdfs:comment "QName: NONE:OperationalRisk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:OperationalRiskConsequence
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:Impact ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impactsUpon ;
+			owl:someValuesFrom fibo-fnd-gao-obj:BusinessObjective ;
+		]
+		;
+	rdfs:label "operational risk consequence"@en ;
+	rdfs:comment "QName: NONE:OperationalRiskConsequence" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:PerceptionOfRisk
+	a owl:Class ;
+	rdfs:label "perception of risk"@en ;
+	rdfs:comment "QName: NONE:PerceptionOfRisk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:ProbabilityOfDefault
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:Probability ;
+	rdfs:label "probability of default"@en ;
+	rdfs:comment "QName: NONE:ProbabilityOfDefault" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	skos:definition "The probability of some default on some obligation."@en ;
+	.
+
+fibo-fnd-risk-risk:ProjectRisk
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:Risk ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impact.1 ;
+			owl:someValuesFrom fibo-fnd-risk-risk:ProjectRiskConsequence ;
+		]
+		;
+	rdfs:label "project risk"@en ;
+	rdfs:comment "QName: NONE:ProjectRisk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:ProjectRiskConsequence
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-risk-risk:Impact ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impactsUpon ;
+			owl:someValuesFrom fibo-fnd-gao-obj:Objective ;
+		]
+		;
+	rdfs:label "project risk consequence"@en ;
+	rdfs:comment "QName: NONE:ProjectRiskConsequence" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:Risk
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:impact.1 ;
+			owl:someValuesFrom fibo-fnd-risk-risk:Impact ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:isRiskOf ;
+			owl:someValuesFrom fibo-fnd-risk-risk:RiskStateTransition ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-risk-risk:probability ;
+			owl:someValuesFrom fibo-fnd-math-math:Probability ;
+		]
+		;
+	rdfs:label "risk"@en ;
+	rdfs:comment "QName: NONE:Risk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:RiskStateTransition
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-risk-risk:eventHasConsequence ;
+		owl:someValuesFrom fibo-fnd-risk-risk:Consequence ;
+	] ;
+	rdfs:label "risk state transition"@en ;
+	rdfs:comment "QName: NONE:RiskStateTransition" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:TransactionFailure
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-risk-risk:OperationalRiskConsequence ;
+	rdfs:label "transaction failure"@en ;
+	rdfs:comment "QName: NONE:TransactionFailure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	.
+
+fibo-fnd-risk-risk:eventHasConsequence
+	a owl:ObjectProperty ;
+	rdfs:label "event has consequence"@en ;
+	rdfs:comment "QName: NONE:eventHasConsequence" ;
+	rdfs:domain fibo-fnd-risk-risk:RiskStateTransition ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	rdfs:range fibo-fnd-risk-risk:Consequence ;
+	.
+
+fibo-fnd-risk-risk:impact
+	a owl:ObjectProperty ;
+	rdfs:label "impact"@en ;
+	rdfs:comment "QName: NONE:impact" ;
+	rdfs:domain fibo-fnd-risk-risk:CreditRisk ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	rdfs:range fibo-fnd-risk-risk:LossGivenDefault ;
+	.
+
+fibo-fnd-risk-risk:impact.1
+	a owl:ObjectProperty ;
+	rdfs:label "impact"@en ;
+	rdfs:comment "QName: NONE:impact.1" ;
+	rdfs:domain fibo-fnd-risk-risk:Risk ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	rdfs:range fibo-fnd-risk-risk:Impact ;
+	.
+
+fibo-fnd-risk-risk:impact.2
+	a owl:ObjectProperty ;
+	rdfs:label "impact"@en ;
+	rdfs:comment "QName: NONE:impact.2" ;
+	rdfs:domain fibo-fnd-risk-risk:FinancialTransactionRisk ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	rdfs:range fibo-fnd-risk-risk:TransactionFailure ;
+	.
+
+fibo-fnd-risk-risk:impactsUpon
+	a owl:ObjectProperty ;
+	rdfs:label "impacts upon"@en ;
+	rdfs:comment "QName: NONE:impactsUpon" ;
+	rdfs:domain fibo-fnd-risk-risk:Impact ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	rdfs:range fibo-fnd-gao-obj:BusinessObjective ;
+	.
+
+fibo-fnd-risk-risk:isRiskOf
+	a owl:ObjectProperty ;
+	rdfs:label "is risk of"@en ;
+	rdfs:comment "QName: NONE:isRiskOf" ;
+	rdfs:domain fibo-fnd-risk-risk:Risk ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	rdfs:range fibo-fnd-risk-risk:RiskStateTransition ;
+	.
+
+fibo-fnd-risk-risk:probability
+	a owl:ObjectProperty ;
+	rdfs:label "probability"@en ;
+	rdfs:comment "QName: NONE:probability" ;
+	rdfs:domain fibo-fnd-risk-risk:Risk ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/Risk/> ;
+	rdfs:range fibo-fnd-math-math:Probability ;
+	.
+

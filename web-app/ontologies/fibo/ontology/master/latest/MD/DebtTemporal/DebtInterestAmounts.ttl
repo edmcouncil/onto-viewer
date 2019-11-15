@@ -1,0 +1,104 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-md-dbtx-int: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> .
+@prefix fibo-md-temx-ins: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/>
+	a owl:Ontology ;
+	rdfs:label "DebtInterestAmounts"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology defines debt interest amounts as they occur at a point in time, including variants for floating rate note and index linked coupons, reference rates and inflation bond factors. 
+		Note that this includes reference rates such as the Federal Funds rate that are referred to in many bonds. The Fed Finds rate and others have subsequently been added to the Indices and Indicators domain, so references to the terms here should be deprecated in favor of those where they exist.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-dbtx-int:DebtInstrumentReferenceRate
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/MarketRate> ;
+	rdfs:label "debt instrument reference rate"@en ;
+	rdfs:comment "QName: NONE:DebtInstrumentReferenceRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> ;
+	skos:definition "The interest rate of some debt instrument which is referred to in calculations of some sort."@en ;
+	fibo-fnd-utl-av:explanatoryNote "For example a US Treasury Bill interest Rate, used in quoting prices by way of spreads against this instrument. Also potentially an instrument the interest rate of which is used as the Base in a Floating Rate Note or other variable debt coupon formula."@en ;
+	.
+
+fibo-md-dbtx-int:DebtSecurityInterestAmount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:TimedParameter ;
+	rdfs:label "debt security interest amount"@en ;
+	rdfs:comment "QName: NONE:DebtSecurityInterestAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> ;
+	skos:definition "The amount of interest paid out on a debt security at a given point in time."@en ;
+	.
+
+fibo-md-dbtx-int:TreasuryBillInterestRateValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:TimedValue ;
+	rdfs:label "treasury bill interest rate value"@en ;
+	rdfs:comment "QName: NONE:TreasuryBillInterestRateValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> ;
+	skos:definition "The value of a government short term debt security, or treasury bill, at a given point in time."@en ;
+	.
+
+fibo-md-dbtx-int:TreasuryBillReferenceRate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-int:DebtInstrumentReferenceRate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-int:hasInterestRateValue ;
+			owl:someValuesFrom fibo-md-dbtx-int:TreasuryBillInterestRateValue ;
+		]
+		;
+	rdfs:label "treasury bill reference rate"@en ;
+	rdfs:comment "QName: NONE:TreasuryBillReferenceRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> ;
+	skos:definition "The parameter which is the interest rate payable by the T Bill at any point in time. This therefore takes a value at any given time and has historical values in the past."@en ;
+	.
+
+fibo-md-dbtx-int:hasInterestRateValue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:takesValuesOverTime ;
+	rdfs:label "has interest rate value"@en ;
+	rdfs:comment "QName: NONE:hasInterestRateValue" ;
+	rdfs:domain fibo-md-dbtx-int:TreasuryBillReferenceRate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> ;
+	rdfs:range fibo-md-dbtx-int:TreasuryBillInterestRateValue ;
+	.
+
+fibo-md-dbtx-int:interestRate
+	a owl:ObjectProperty ;
+	rdfs:label "interest rate"@en ;
+	rdfs:comment "QName: NONE:interestRate" ;
+	rdfs:domain fibo-md-dbtx-int:TreasuryBillInterestRateValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The rate of interest payable by the Treasury Bill at a stated time."@en ;
+	.
+

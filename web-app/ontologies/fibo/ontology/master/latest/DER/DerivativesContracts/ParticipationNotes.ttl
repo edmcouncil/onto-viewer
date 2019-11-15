@@ -1,0 +1,53 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ParticipationNotes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ParticipationNotes/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-drc-pn: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ParticipationNotes/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-dbti: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ParticipationNotes/>
+	a owl:Ontology ;
+	rdfs:label "ParticipationNotes"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Participation notes, in the sense modeled here, are debt instruments issued in some jurisdiction, to give eligible investors the ability to participate in the returns of a debt instrument issued in another jurisdiction, to which they would not have access for regulatory or other reasons. 
+		Note that this is not the same thing as a Loan Participation Note.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ParticipationNotes/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-drc-pn:ParticipationNote
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DerivativeInstrument ,
+		fibo-sec-dbt-dbti:TradableDebtInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:TradableDebtInstrument ;
+		]
+		;
+	rdfs:label "participation note"@en ;
+	rdfs:comment "QName: NONE:ParticipationNote" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ParticipationNotes/> ;
+	skos:definition "a tradable debt instrument issued by an entity for sale in a jurisdiction other than the one in which the entity is registered, and based on the holding by that entity of underlying securities issued in the jurisdiction in which that entity is registered"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Typically P-Notes are SPVs that are created to allow participation from outside that market. The SPV purchases a security on shore and issues a note that represents that security to offshore investors. Similar to an ADR but is always a debt security. All underlying securities come from another market from the one where the PN is issued."@en ;
+	.
+

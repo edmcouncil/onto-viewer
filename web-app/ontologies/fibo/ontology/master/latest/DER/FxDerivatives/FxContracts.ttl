@@ -1,0 +1,77 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/ForeignExchange/ForeignExchange/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-fx-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/>
+	a owl:Ontology ;
+	rdfs:label "FxContracts"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Concepts common to foreign exchange derivatives (spots, forwards, options and swaps)." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/ForeignExchange/ForeignExchange/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-fx-ctr:ExchangeRateUnderlying
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-der-fx-ctr:identity ;
+		owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/IND/ForeignExchange/ForeignExchange/QuotedExchangeRate> ;
+	] ;
+	rdfs:label "exchange rate underlying"@en ;
+	rdfs:comment "QName: NONE:ExchangeRateUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> ;
+	.
+
+fibo-der-fx-ctr:ForeignExchangeDerivativeContract
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/DerivativeInstrument> ;
+	rdfs:label "foreign exchange derivative contract"@en ;
+	rdfs:comment "QName: NONE:ForeignExchangeDerivativeContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> ;
+	.
+
+fibo-der-fx-ctr:OTCFxProduct
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-bsc:OTCProduct ;
+	rdfs:label "o t c fx product"@en ;
+	rdfs:comment "QName: NONE:OTCFxProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> ;
+	skos:definition "An OTC Product for foreign exchange, whereby two or more currencies are transacted."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Includes Fx spots, forwards, swaps and the like."@en ;
+	.
+
+fibo-der-fx-ctr:identity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasIdentity ;
+	rdfs:label "underlying identity"@en ;
+	rdfs:comment "QName: NONE:identity" ;
+	rdfs:domain fibo-der-fx-ctr:ExchangeRateUnderlying ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/IND/ForeignExchange/ForeignExchange/QuotedExchangeRate> ;
+	.
+

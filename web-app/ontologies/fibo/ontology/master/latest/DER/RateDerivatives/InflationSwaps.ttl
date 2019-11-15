@@ -1,0 +1,156 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/InflationSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/IRSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/InflationSwaps/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-drc-swp: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> .
+@prefix fibo-der-rtd-irswp: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> .
+@prefix fibo-der-rtd-isw: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> .
+@prefix fibo-der-rtd-rtd: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-bnd: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/>
+	a owl:Ontology ;
+	rdfs:label "InflationSwaps"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Swap contracts in which one leg is or represents an inflation index and the other is based on some interest rate, usually or always fixed. There is also sometimes a fall back bond that is referred to in certain circumstances." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/IRSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/InflationSwaps/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-rtd-isw:InflationIndexFallBackBond
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:ParametricReferenceEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-sec-dbt-bnd:InflationBond ;
+		]
+		;
+	rdfs:label "inflation index fall back bond"@en ;
+	rdfs:comment "QName: NONE:InflationIndexFallBackBond" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ;
+	skos:definition "A fallback bond as defined in the 2006 ISDA Inflation Derivatives Definitions, sections 1.3 and 1.8."@en ;
+	skos:editorialNote "From FpML definition of \"Fallback Bond applicable\" related term: 'The applicability of a fallback bond as defined in the 2006 ISDA Inflation Derivatives Definitions, sections 1.3 and 1.8. Omission of this element implies a value of true.'"@en ;
+	.
+
+fibo-der-rtd-isw:InflationIndexUnderlying
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-rtd:EconomicRateObservable ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-rtd-isw:specifies ;
+			owl:onClass fibo-der-rtd-isw:InflationIndexFallBackBond ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "inflation index underlying"@en ;
+	rdfs:comment "QName: NONE:InflationIndexUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ;
+	.
+
+fibo-der-rtd-isw:InflationLeg
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-swp:SwapLeg ;
+	rdfs:label "inflation leg"@en ;
+	rdfs:comment "QName: NONE:InflationLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ;
+	.
+
+fibo-der-rtd-isw:InflationSwapContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:Swap ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-rtd-isw:InflationIndexUnderlying ;
+		]
+		;
+	rdfs:label "inflation swap contract"@en ;
+	rdfs:comment "QName: NONE:InflationSwapContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ;
+	skos:definition "Draft definition: This is a swap instrument which makes reference to an inflation index."@en ;
+	fibo-fnd-utl-av:explanatoryNote "It is also possible to make reference to an individual bond interest rate under some circumstances or instances. Not a specific schema in FpML. FpML details on fall-back bond (in definition for a yes/no field defining the presence of such a thing): 'The applicability of a fallback bond as defined in the 2006 ISDA Inflation Derivatives Definitions, sections 1.3 and 1.8. Omission of this element imples a value of true.'"@en ;
+	.
+
+fibo-der-rtd-isw:InflationSwapTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:hasLeg ;
+			owl:someValuesFrom fibo-der-rtd-irswp:FixedInterestRateLeg ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:hasLeg ;
+			owl:someValuesFrom fibo-der-rtd-isw:InflationLeg ;
+		]
+		;
+	rdfs:label "inflation swap transaction"@en ;
+	rdfs:comment "QName: NONE:InflationSwapTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ;
+	skos:definition "A transaction in which one leg is based on an inflation rate and the other leg is based on an interest rate (usually or always fixed interest)."@en ;
+	.
+
+fibo-der-rtd-isw:fallbackBondApplicable
+	a owl:DatatypeProperty ;
+	rdfs:label "fallback bond applicable"@en ;
+	rdfs:comment "QName: NONE:fallbackBondApplicable" ;
+	rdfs:domain fibo-der-rtd-isw:InflationSwapContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "The applicability of a fallback bond as defined in the 2006 ISDA Inflation Derivatives Definitions, sections 1.3 and 1.8. Yes implies a value of true."@en ;
+	.
+
+fibo-der-rtd-isw:lag
+	a owl:ObjectProperty ;
+	rdfs:label "lag"@en ;
+	rdfs:comment "QName: NONE:lag" ;
+	rdfs:domain fibo-der-rtd-isw:InflationIndexUnderlying ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "Details needed. Inserted per telecon (Derivatives PoC) from Andrew Jacobs. Identify the corresponding term in FpML and use that here."@en ;
+	.
+
+fibo-der-rtd-isw:specifies
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies" ;
+	rdfs:domain fibo-der-rtd-isw:InflationIndexUnderlying ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ;
+	rdfs:range fibo-der-rtd-isw:InflationIndexFallBackBond ;
+	.
+

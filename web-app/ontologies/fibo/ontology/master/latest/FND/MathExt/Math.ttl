@@ -1,0 +1,818 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-tim-tim: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/>
+	a owl:Ontology ;
+	rdfs:label "Math"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This is the main mathematical conceptual ontology covering all the mathematical concepts needed to support descriptions of things elsewhere in the model and the high-level abstractions that frame these concepts. These include parameters and values, past present and future values; differences, curves and surfaces and other analytical primitives, formulae and their component parts and so on.
+		Much of this material is to be deprecated in favor of simpler concepts in the published Release ontologies, which will be distributed in various parts of FIBO. These include parameters and their values (to be deprecated in favor of new material in the Values ontology). Some of the concepts in this ontology will need to be reviewed and brought forward to support market data and financial analytics concepts.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-math-math:Comparison
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:MathematicalQuantity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:isBetween ;
+			owl:onClass fibo-fnd-math-math:NumericalParameter ;
+			owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "comparison"@en ;
+	rdfs:comment "QName: NONE:Comparison" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "A comparison among numerical parameters."@en ;
+	.
+
+fibo-fnd-math-math:Constant
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:NumericalParameter ;
+	rdfs:label "constant"@en ;
+	rdfs:comment "QName: NONE:Constant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:ContractuallyDefinedNumericalParameter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:NumericalParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hasTerms ;
+			owl:someValuesFrom fibo-fnd-agr-ctr:ContractualDefinition ;
+		]
+		;
+	rdfs:label "contractually defined numerical parameter"@en ;
+	rdfs:comment "QName: NONE:ContractuallyDefinedNumericalParameter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:CurrentValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:TimedValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:tense ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Present ;
+		]
+		;
+	rdfs:label "current value"@en ;
+	rdfs:comment "QName: NONE:CurrentValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	owl:disjointWith
+		fibo-fnd-math-math:PastValue ,
+		fibo-fnd-math-math:ProjectedValue
+		;
+	skos:definition "The value at the current point in time."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This immediately becomes a past value."@en ;
+	.
+
+fibo-fnd-math-math:Difference
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:Comparison ;
+	rdfs:label "difference"@en ;
+	rdfs:comment "QName: NONE:Difference" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "The difference between two numerical parameters."@en ;
+	.
+
+fibo-fnd-math-math:Direction
+	a owl:Class ;
+	rdfs:label "Direction"@en ;
+	rdfs:comment "QName: NONE:Direction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:Down
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:Direction ;
+	rdfs:label "down"@en ;
+	rdfs:comment "QName: NONE:Down" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:Formula
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:MathematicalExpression ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hasExpression ;
+			owl:someValuesFrom fibo-fnd-math-math:FormulaExpression ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hasSubject ;
+			owl:someValuesFrom fibo-fnd-math-math:FormulaSubject ;
+		]
+		;
+	rdfs:label "formula"@en ;
+	rdfs:comment "QName: NONE:Formula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:FormulaArgument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:MathematicalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:constant.1 ;
+			owl:allValuesFrom xsd:decimal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hasOperand ;
+			owl:someValuesFrom fibo-fnd-math-math:NumericalParameter ;
+		]
+		;
+	rdfs:label "formula argument"@en ;
+	rdfs:comment "QName: NONE:FormulaArgument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "The Right Hand Side of the Formula."@en ;
+	fibo-fnd-utl-av:usageNote 'This is modeled as one or more numerical parameters, and one or more constants. The constants are the simple fact "Constant" while the parameters are the target of the relationship fact "Operand". Note that it is not possible to model the argument mathematically. This model simply identifies what are the operands and constants that make up the argument, or right hand side, of the formula. Note also that any formula can be expressed with different parameters on the left and right hand sides; this model identifies and lists the elements on the right hand side of the formula when a given "Formulka Subject" makes up the left hand side of the formula, that is, semantically the formula relates a particular variable to a number of other variables and constants in an expression, and is not set up to be able to identify equivalent formule in which a different subject is the left hand side of that formula. If useful, an equivalence relationship could be defined between two such formula semantics. That is, the same formula may not have the same meaning and vice versa.'@en ;
+	.
+
+fibo-fnd-math-math:FormulaExpression
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:FormulaPart ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hasArgument ;
+			owl:someValuesFrom fibo-fnd-math-math:FormulaArgument ;
+		]
+		;
+	rdfs:label "formula expression"@en ;
+	rdfs:comment "QName: NONE:FormulaExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "How the Formula is expressed i.e. the Right Hand Side of the Formula."@en ;
+	fibo-fnd-utl-av:usageNote 'This is alternative to and in addition to the textual expression of the Formula in the "Expression" Simple Fact for Formula. This is so that if appropriate and relevant, the formula can be described semantically in terms of its component parts. Where this would not add to the model, use the textual simple fact "Expression" instead.'@en ;
+	.
+
+fibo-fnd-math-math:FormulaPart
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalThing ;
+	rdfs:label "formula part"@en ;
+	rdfs:comment "QName: NONE:FormulaPart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:FormulaSubject
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:FormulaPart ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:subjectTakesForm ;
+			owl:someValuesFrom fibo-fnd-math-math:FormulaArgument ;
+		]
+		;
+	rdfs:label "formula subject"@en ;
+	rdfs:comment "QName: NONE:FormulaSubject" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "The Left Hand Side of the Formula, giving what is being expressed in terms of the Right Hand Side."@en ;
+	.
+
+fibo-fnd-math-math:InternalValueDetermination
+	a owl:Class ;
+	rdfs:label "internal value determination"@en ;
+	rdfs:comment "QName: NONE:InternalValueDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:MathematicalCurve
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalSurface ;
+	rdfs:label "mathematical curve"@en ;
+	rdfs:comment "QName: NONE:MathematicalCurve" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:MathematicalExpression
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalThing ;
+	rdfs:label "mathematical expression"@en ;
+	rdfs:comment "QName: NONE:MathematicalExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "Some expression of some mathematical quantity or quantities."@en ;
+	.
+
+fibo-fnd-math-math:MathematicalModel
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalExpression ;
+	rdfs:label "mathematical model"@en ;
+	rdfs:comment "QName: NONE:MathematicalModel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "A model for determining one or more parameters or the behaviour of parameters with respect to one another."@en ;
+	.
+
+fibo-fnd-math-math:MathematicalQuantity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:ParametricThing ;
+	rdfs:label "mathematical quantity"@en ;
+	rdfs:comment "QName: NONE:MathematicalQuantity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "Some mathematical quantity which is to be expressed in some way. This is not itself an expression."@en ;
+	.
+
+fibo-fnd-math-math:MathematicalSurface
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalModel ;
+	rdfs:label "mathematical surface"@en ;
+	rdfs:comment "QName: NONE:MathematicalSurface" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:MathematicalThing
+	a owl:Class ;
+	rdfs:label "mathematical thing"@en ;
+	rdfs:comment "QName: NONE:MathematicalThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "A Mathematical Thing is something in the universe of mathematics. That is, something that is a parameter (mathematical quantity) or something that is used to express that parameter, such as a value or components of a formula."@en ;
+	.
+
+fibo-fnd-math-math:MeasuredThing
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-math-math:hasNumericallyMeasurableProperty ;
+		owl:someValuesFrom fibo-fnd-math-math:TimedParameter ;
+	] ;
+	rdfs:label "measured thing"@en ;
+	rdfs:comment "QName: NONE:MeasuredThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "Any Independent Thing. This is included as a separate term only so that we can refer to the trivial fact that all Independent Things have any number of properties, without cluttering the Independent Thing itself. This is for the modeling of reference entities. Note that the measurable quantity should be replaced with the actual parent property in all cases. DO NOT USE THIS TERM ELSEWHERE"@en ;
+	.
+
+fibo-fnd-math-math:NumericalParameter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:MathematicalQuantity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:takesValue ;
+			owl:someValuesFrom fibo-fnd-math-math:Value ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/appliesTo> ;
+			owl:someValuesFrom owl:Thing ;
+		]
+		;
+	rdfs:label "numerical parameter"@en ;
+	rdfs:comment "QName: NONE:NumericalParameter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "Anything which is defined as a parameter of something, and takes a numerical value."@en ;
+	.
+
+fibo-fnd-math-math:NumericalVariable
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:NumericalParameter ;
+	rdfs:label "numerical variable"@en ;
+	rdfs:comment "QName: NONE:NumericalVariable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "Some numerical variable."@en ;
+	skos:editorialNote "Not used to date. Use Dated Parameter instead in most cases. Use this when it is necessary to identify a variable but not that it's the variable value of something."@en ;
+	.
+
+fibo-fnd-math-math:Operator
+	a owl:Class ;
+	rdfs:label "operator"@en ;
+	rdfs:comment "QName: NONE:Operator" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:ParametricReferenceEntity
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-math-math:takesReferenceParameter ;
+		owl:someValuesFrom fibo-fnd-math-math:TimedParameter ;
+	] ;
+	rdfs:label "parametric reference entity"@en ;
+	rdfs:comment "QName: NONE:ParametricReferenceEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "An entity, the value of some property of which is used in calculations for some purpose."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The identity of this entity can be any Independent Thing, provided that that thing has some property which is numerical in nature and can be identified as the property used for reference in the context of this Reference Entity. For example, a Treasury Bill, the interest rate of which is the reference rate. This model does not have the means to formally identify which property of the Reference Entity is used for reference. Instead, the modeler should as a matter of convention provide a reference relationship which inherits its meaning both from the property relationship of the Independent Thing and the identify relationship of the Reference Entity. Future: On OWL2 this arrangement should be reviewed, and a transitive relationship used as appropriate."@en ;
+	.
+
+fibo-fnd-math-math:ParametricThing
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalThing ;
+	rdfs:label "parametric thing"@en ;
+	rdfs:comment "QName: NONE:ParametricThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:PastValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:TimedValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:tense ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Past ;
+		]
+		;
+	rdfs:label "past value"@en ;
+	rdfs:comment "QName: NONE:PastValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	owl:disjointWith fibo-fnd-math-math:ProjectedValue ;
+	skos:definition "The value is determined at some point in the past."@en ;
+	.
+
+fibo-fnd-math-math:Probability
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:NumericalParameter ;
+	rdfs:label "probability"@en ;
+	rdfs:comment "QName: NONE:Probability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:ProbabilityDistribution
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalModel ;
+	rdfs:label "probability distribution"@en ;
+	rdfs:comment "QName: NONE:ProbabilityDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:ProjectedValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:Value ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:projectedValueDeterminedBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-math-math:InternalValueDetermination
+					fibo-fnd-math-math:PublishedFutureValue
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:tense ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Future ;
+		]
+		;
+	rdfs:label "projected value"@en ;
+	rdfs:comment "QName: NONE:ProjectedValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "The value is some projected future value."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Note that the future is not known, so in fact future tense refers to some project value. The value should therefore be accompanied by terms defining how and by what means it is being predicted."@en ;
+	.
+
+fibo-fnd-math-math:PublishedFutureValue
+	a owl:Class ;
+	rdfs:label "published future value"@en ;
+	rdfs:comment "QName: NONE:PublishedFutureValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "A value defined in advance in a schedule, as part of the bond terms in the prospectus. an example of this is a stepped coupon in a bond."@en ;
+	.
+
+fibo-fnd-math-math:Rate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:NumericalParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:isOver ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalUnit ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:isRateOf ;
+			owl:someValuesFrom fibo-fnd-math-math:Value ;
+		]
+		;
+	rdfs:label "rate"@en ;
+	rdfs:comment "QName: NONE:Rate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "The rate of change of some measurable parameter over some period of time."@en ;
+	.
+
+fibo-fnd-math-math:Relation
+	a owl:Class ;
+	rdfs:label "relation"@en ;
+	rdfs:comment "QName: NONE:Relation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:TimeBasedPlot
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:Comparison ;
+	rdfs:label "time based plot"@en ;
+	rdfs:comment "QName: NONE:TimeBasedPlot" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "A comparison among several parameters, one of which is time."@en ;
+	.
+
+fibo-fnd-math-math:TimedBasedSurface
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalSurface ;
+	rdfs:label "timed based surface"@en ;
+	rdfs:comment "QName: NONE:TimedBasedSurface" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "A three way relationship between three variable parameters."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is analogous to a curve, but whereas a curve plots a relationship between two parameters in a two dimensional plane, a surface is the relationship between three parameters in a three-dimensional space. In the context of credit risk, there is a 3D relation of Rating, Term and Credit Spread, defining a 3D surface."@en ;
+	.
+
+fibo-fnd-math-math:TimedParameter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:NumericalParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hadValue ;
+			owl:someValuesFrom fibo-fnd-math-math:PastValue ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hasProjectedValue ;
+			owl:someValuesFrom fibo-fnd-math-math:ProjectedValue ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:hasValue ;
+			owl:someValuesFrom fibo-fnd-math-math:CurrentValue ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:takesValuesOverTime ;
+			owl:someValuesFrom fibo-fnd-math-math:TimedValue ;
+		]
+		;
+	rdfs:label "timed parameter"@en ;
+	rdfs:comment "QName: NONE:TimedParameter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "A numerical parameter which may be expected to vary over time, and will therefore have values for different times past, persent and future."@en ;
+	.
+
+fibo-fnd-math-math:TimedValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:Value ;
+	rdfs:label "timed value"@en ;
+	rdfs:comment "QName: NONE:TimedValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "The value of a dated parameter, at a stated point in the past, present or future."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'A value can be, by definition, either a value in the present or a value in the past. There can also be a value which is predicted for some time in the future, predicted either now or in the past. These are modeled separately. By definition then all values are exclusively either past, present or future. All parameters which take a value, take that value in the past and the present or have it predeicted for a date and time in the future. Therefore all terms which are a kind of "Value" by being descended from this class of Thing, are also capable of being past, present or future, i.e. the concepts of Past Value and Current Value are also applicable to those.'@en ;
+	.
+
+fibo-fnd-math-math:Up
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:Direction ;
+	rdfs:label "up"@en ;
+	rdfs:comment "QName: NONE:Up" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	.
+
+fibo-fnd-math-math:Value
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:MathematicalExpression ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-math-math:denomination ;
+			owl:someValuesFrom fibo-fnd-qt-qtu:MeasurementUnit ;
+		]
+		;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:Value" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	skos:definition "Any value, stated as a number."@en ;
+	.
+
+fibo-fnd-math-math:constant.1
+	a owl:DatatypeProperty ;
+	rdfs:label "constant"@en ;
+	rdfs:comment "QName: NONE:constant.1" ;
+	rdfs:domain fibo-fnd-math-math:FormulaArgument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "A Constant used in the formula argument."@en ;
+	.
+
+fibo-fnd-math-math:denomination
+	a owl:ObjectProperty ;
+	rdfs:label "denomination"@en ;
+	rdfs:comment "QName: NONE:denomination" ;
+	rdfs:domain fibo-fnd-math-math:Value ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-qt-qtu:MeasurementUnit ;
+	.
+
+fibo-fnd-math-math:expressedNumericallyAs
+	a owl:DatatypeProperty ;
+	rdfs:label "expressed numerically as"@en ;
+	rdfs:comment "QName: NONE:expressedNumericallyAs" ;
+	rdfs:domain fibo-fnd-math-math:Constant ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range xsd:decimal ;
+	.
+
+fibo-fnd-math-math:hadValue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:takesValuesOverTime ;
+	rdfs:label "had value"@en ;
+	rdfs:comment "QName: NONE:hadValue" ;
+	rdfs:domain fibo-fnd-math-math:TimedParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:PastValue ;
+	.
+
+fibo-fnd-math-math:hasArgument
+	a owl:ObjectProperty ;
+	rdfs:label "has argument"@en ;
+	rdfs:comment "QName: NONE:hasArgument" ;
+	rdfs:domain fibo-fnd-math-math:FormulaExpression ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:FormulaArgument ;
+	.
+
+fibo-fnd-math-math:hasExpression
+	a owl:ObjectProperty ;
+	rdfs:label "has expression"@en ;
+	rdfs:comment "QName: NONE:hasExpression" ;
+	rdfs:domain fibo-fnd-math-math:Formula ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:FormulaExpression ;
+	.
+
+fibo-fnd-math-math:hasNumericallyMeasurableProperty
+	a owl:ObjectProperty ;
+	rdfs:label "has numerically measurable property"@en ;
+	rdfs:comment "QName: NONE:hasNumericallyMeasurableProperty" ;
+	rdfs:domain fibo-fnd-math-math:MeasuredThing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:TimedParameter ;
+	.
+
+fibo-fnd-math-math:hasOperand
+	a owl:ObjectProperty ;
+	rdfs:label "has operand"@en ;
+	rdfs:comment "QName: NONE:hasOperand" ;
+	rdfs:domain fibo-fnd-math-math:FormulaArgument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:NumericalParameter ;
+	.
+
+fibo-fnd-math-math:hasOperator
+	a owl:ObjectProperty ;
+	rdfs:label "has operator"@en ;
+	rdfs:comment "QName: NONE:hasOperator" ;
+	rdfs:domain fibo-fnd-math-math:FormulaArgument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:Operator ;
+	.
+
+fibo-fnd-math-math:hasProjectedValue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:takesValuesOverTime ;
+	rdfs:label "has projected value"@en ;
+	rdfs:comment "QName: NONE:hasProjectedValue" ;
+	rdfs:domain fibo-fnd-math-math:TimedParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:ProjectedValue ;
+	.
+
+fibo-fnd-math-math:hasSubject
+	a owl:ObjectProperty ;
+	rdfs:label "has subject"@en ;
+	rdfs:comment "QName: NONE:hasSubject" ;
+	rdfs:domain fibo-fnd-math-math:Formula ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:FormulaSubject ;
+	.
+
+fibo-fnd-math-math:hasTerms
+	a owl:ObjectProperty ;
+	rdfs:label "has terms"@en ;
+	rdfs:comment "QName: NONE:hasTerms" ;
+	rdfs:domain fibo-fnd-math-math:ContractuallyDefinedNumericalParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-agr-ctr:ContractualDefinition ;
+	.
+
+fibo-fnd-math-math:hasTextualExpression
+	a owl:DatatypeProperty ;
+	rdfs:label "has textual expression"@en ;
+	rdfs:comment "QName: NONE:hasTextualExpression" ;
+	rdfs:domain fibo-fnd-math-math:Formula ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The expression of the Formula in text. The arguments and parameters are also linked separately - there is no formal connection between the components of the Formula as modelled here and the textual expresion of it - these can either or both be expressed depending on the business information available."@en ;
+	.
+
+fibo-fnd-math-math:hasValue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:takesValuesOverTime ;
+	rdfs:label "has value"@en ;
+	rdfs:comment "QName: NONE:hasValue" ;
+	rdfs:domain fibo-fnd-math-math:TimedParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:CurrentValue ;
+	.
+
+fibo-fnd-math-math:isBetween
+	a owl:ObjectProperty ;
+	rdfs:label "is between"@en ;
+	rdfs:comment "QName: NONE:isBetween" ;
+	rdfs:domain fibo-fnd-math-math:Comparison ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:NumericalParameter ;
+	.
+
+fibo-fnd-math-math:isOver
+	a owl:ObjectProperty ;
+	rdfs:label "is over"@en ;
+	rdfs:comment "QName: NONE:isOver" ;
+	rdfs:domain fibo-fnd-math-math:Rate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-tim-tim:TemporalUnit ;
+	.
+
+fibo-fnd-math-math:isParameterOf
+	a owl:ObjectProperty ;
+	rdfs:label "is parameter of"@en ;
+	rdfs:comment "QName: NONE:isParameterOf" ;
+	rdfs:domain fibo-fnd-math-math:TimedParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:MeasuredThing ;
+	.
+
+fibo-fnd-math-math:isParameterOfReferenceEntity
+	a owl:ObjectProperty ;
+	rdfs:label "is parameter of reference entity"@en ;
+	rdfs:comment "QName: NONE:isParameterOfReferenceEntity" ;
+	rdfs:domain fibo-fnd-math-math:TimedParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:ParametricReferenceEntity ;
+	.
+
+fibo-fnd-math-math:isRateOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:takesValue ;
+	rdfs:label "is rate of"@en ;
+	rdfs:comment "QName: NONE:isRateOf" ;
+	rdfs:domain fibo-fnd-math-math:Rate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:Value ;
+	.
+
+fibo-fnd-math-math:percentageProbability
+	a owl:ObjectProperty ;
+	rdfs:label "percentage probability"@en ;
+	rdfs:comment "QName: NONE:percentageProbability" ;
+	rdfs:domain fibo-fnd-math-math:Probability ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	.
+
+fibo-fnd-math-math:plottedBetween
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:isBetween ;
+	rdfs:label "plotted between"@en ;
+	rdfs:comment "QName: NONE:plottedBetween" ;
+	rdfs:domain fibo-fnd-math-math:TimeBasedPlot ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:TimedParameter ;
+	.
+
+fibo-fnd-math-math:projectedDate
+	a owl:ObjectProperty ;
+	rdfs:label "projected date"@en ;
+	rdfs:comment "QName: NONE:projectedDate" ;
+	rdfs:domain fibo-fnd-math-math:ProjectedValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The calendar date on which the value is project to apply."@en ;
+	.
+
+fibo-fnd-math-math:projectedValueDeterminedBy
+	a owl:ObjectProperty ;
+	rdfs:label "projected value determined by"@en ;
+	rdfs:comment "QName: NONE:projectedValueDeterminedBy" ;
+	rdfs:domain fibo-fnd-math-math:ProjectedValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-math-math:InternalValueDetermination
+			fibo-fnd-math-math:PublishedFutureValue
+		) ;
+	] ;
+	.
+
+fibo-fnd-math-math:relation
+	a owl:ObjectProperty ;
+	rdfs:label "relation"@en ;
+	rdfs:comment "QName: NONE:relation" ;
+	rdfs:domain fibo-fnd-math-math:Formula ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:Relation ;
+	skos:definition 'The Relation at the center of the Formula, usually "Equals".'@en ;
+	.
+
+fibo-fnd-math-math:subjectTakesForm
+	a owl:ObjectProperty ;
+	rdfs:label "subject takes form"@en ;
+	rdfs:comment "QName: NONE:subjectTakesForm" ;
+	rdfs:domain fibo-fnd-math-math:FormulaSubject ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:FormulaArgument ;
+	.
+
+fibo-fnd-math-math:takesReferenceParameter
+	a owl:ObjectProperty ;
+	rdfs:label "takes reference parameter"@en ;
+	rdfs:comment "QName: NONE:takesReferenceParameter" ;
+	rdfs:domain fibo-fnd-math-math:ParametricReferenceEntity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:TimedParameter ;
+	.
+
+fibo-fnd-math-math:takesValue
+	a owl:ObjectProperty ;
+	rdfs:label "takes value"@en ;
+	rdfs:comment "QName: NONE:takesValue" ;
+	rdfs:domain fibo-fnd-math-math:NumericalParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:Value ;
+	.
+
+fibo-fnd-math-math:takesValuesOverTime
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-math-math:takesValue ;
+	rdfs:label "takes values over time"@en ;
+	rdfs:comment "QName: NONE:takesValuesOverTime" ;
+	rdfs:domain fibo-fnd-math-math:TimedParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-math-math:TimedValue ;
+	.
+
+fibo-fnd-math-math:tense
+	a owl:ObjectProperty ;
+	rdfs:label "tense"@en ;
+	rdfs:comment "QName: NONE:tense" ;
+	rdfs:domain fibo-fnd-math-math:TimedValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-tim-tim:Tense ;
+	skos:definition "Whether the value is in the past, present or future tense. Note that different qualifying terms are required for each of these, so the specific sub-type should be referred to in all cases."@en ;
+	.
+
+fibo-fnd-math-math:valueExpressedAs
+	a owl:DatatypeProperty ;
+	rdfs:label "value expressed as"@en ;
+	rdfs:comment "QName: NONE:valueExpressedAs" ;
+	rdfs:domain fibo-fnd-math-math:Value ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The numerical value of the Parameter."@en ;
+	.
+
+fibo-fnd-math-math:valueTime
+	a owl:ObjectProperty ;
+	rdfs:label "value time"@en ;
+	rdfs:comment "QName: NONE:valueTime" ;
+	rdfs:domain fibo-fnd-math-math:PastValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	.
+

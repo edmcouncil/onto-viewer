@@ -1,0 +1,226 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-inf-tem: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-tim-tim: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/>
+	a owl:Ontology ;
+	rdfs:label "TemporalInfo"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Conceptual representations of information constructs that a temporal aspect. These include ratings and statuses as well as analytical concepts that are extended in the market data domain. 
+		Note that some of these concepts may subsequently have been introduced into the Release published ontologies, particularly the codes and schemes relating to statuses (trading status etc.) and credit ratings, under the Arrangements module.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-inf-tem:AnalyticalInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:Information ,
+		fibo-fnd-math-math:TimedParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-tem:analyzes ;
+			owl:someValuesFrom fibo-fnd-math-math:TimedParameter ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-tem:derivedFrom ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-inf-tem:AnalyticsCalculationModel
+					fibo-fnd-utl-alx:Formula
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-tem:makesReferenceTo ;
+			owl:someValuesFrom fibo-fnd-math-math:TimedParameter ;
+		]
+		;
+	rdfs:label "analytical information"@en ;
+	rdfs:comment "QName: NONE:AnalyticalInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	skos:definition "Information about some item at some time past, present or future. This takes the form of some measure about the thing being analyzed; the measure will have some values at different times as shown in the Math grammar for dated parameters."@en ;
+	.
+
+fibo-fnd-inf-tem:AnalyticsCalculationModel
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:MathematicalModel ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-tem:includes ;
+			owl:someValuesFrom fibo-fnd-math-math:Formula ;
+		]
+		;
+	rdfs:label "analytics calculation model"@en ;
+	rdfs:comment "QName: NONE:AnalyticsCalculationModel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	skos:definition "A model used for formal calculation of parameters."@en ;
+	skos:editorialNote "This may be the status of some independent thing but may also reflect the status of something defined in terms of its role within the process or activity in question or in relation to some other related context (a relative thing), or the status of some agreement or other thing which itself forms the context for other things (some mediating thing)"@en ;
+	fibo-fnd-utl-av:explanatoryNote "An example would be the sort of mathematical model used to derive certain financial securities analytics."@en ;
+	.
+
+fibo-fnd-inf-tem:HistoricalInformation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:Information ;
+	rdfs:label "historical information"@en ;
+	rdfs:comment "QName: NONE:HistoricalInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	.
+
+fibo-fnd-inf-tem:IndependentThing
+	a owl:Class ;
+	rdfs:label "independent thing"@en ;
+	rdfs:comment "QName: NONE:IndependentThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	.
+
+fibo-fnd-inf-tem:Phase
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:TimeSensitiveInformation ;
+	rdfs:label "phase"@en ;
+	rdfs:comment "QName: NONE:Phase" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	.
+
+fibo-fnd-inf-tem:Status
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-tem:TimeSensitiveInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-tem:isOf ;
+			owl:someValuesFrom owl:Thing ;
+		]
+		;
+	rdfs:label "status"@en ;
+	rdfs:comment "QName: NONE:Status" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	skos:definition "The standing of some thing within some lifecycle or process."@en ;
+	.
+
+fibo-fnd-inf-tem:TimeSensitiveInformation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:Information ;
+	rdfs:label "time sensitive information"@en ;
+	rdfs:comment "QName: NONE:TimeSensitiveInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	.
+
+fibo-fnd-inf-tem:analyzes
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:isAbout ;
+	rdfs:label "analyzes"@en ;
+	rdfs:comment "QName: NONE:analyzes" ;
+	rdfs:domain fibo-fnd-inf-tem:AnalyticalInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	rdfs:range fibo-fnd-math-math:TimedParameter ;
+	.
+
+fibo-fnd-inf-tem:derivedFrom
+	a owl:ObjectProperty ;
+	rdfs:label "derived from"@en ;
+	rdfs:comment "QName: NONE:derivedFrom" ;
+	rdfs:domain fibo-fnd-inf-tem:AnalyticalInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-inf-tem:AnalyticsCalculationModel
+			fibo-fnd-utl-alx:Formula
+		) ;
+	] ;
+	.
+
+fibo-fnd-inf-tem:hasStatus
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:details ;
+	rdfs:label "has status"@en ;
+	rdfs:comment "QName: NONE:hasStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	rdfs:range fibo-fnd-inf-tem:Status ;
+	owl:inverseOf fibo-fnd-inf-tem:isOf ;
+	skos:definition "has some indication of the standing of the thing within some lifecycle or process."@en ;
+	skos:editorialNote "This may be the status of some independent thing but may also reflect the status of something defined in terms of its role within the process or activity in question or in relation to some other related context (a relative thing), or the status of some agreement or other thing which itself forms the context for other things (some mediating thing)"@en ;
+	.
+
+fibo-fnd-inf-tem:hasTense
+	a owl:ObjectProperty ;
+	rdfs:label "has tense"@en ;
+	rdfs:comment "QName: NONE:hasTense" ;
+	rdfs:domain fibo-fnd-inf-tem:TimeSensitiveInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	rdfs:range fibo-fnd-tim-tim:Tense ;
+	.
+
+fibo-fnd-inf-tem:includes
+	a owl:ObjectProperty ;
+	rdfs:label "includes"@en ;
+	rdfs:comment "QName: NONE:includes" ;
+	rdfs:domain fibo-fnd-inf-tem:AnalyticsCalculationModel ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	rdfs:range fibo-fnd-math-math:Formula ;
+	.
+
+fibo-fnd-inf-tem:isOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:isAbout ;
+	rdfs:label "is of"@en ;
+	rdfs:comment "QName: NONE:isOf" ;
+	rdfs:domain fibo-fnd-inf-tem:Status ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	rdfs:range owl:Thing ;
+	skos:definition "that of which the status represents some standing within some lifecycle or process which varies over time."@en ;
+	.
+
+fibo-fnd-inf-tem:makesReferenceTo
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:derivedFrom ;
+	rdfs:label "makes reference to"@en ;
+	rdfs:comment "QName: NONE:makesReferenceTo" ;
+	rdfs:domain fibo-fnd-inf-tem:AnalyticalInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	rdfs:range fibo-fnd-math-math:TimedParameter ;
+	.
+
+fibo-fnd-inf-tem:statusHasTense
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-tem:hasTense ;
+	rdfs:label "status has tense"@en ;
+	rdfs:comment "QName: NONE:statusHasTense" ;
+	rdfs:domain fibo-fnd-inf-tem:Status ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> ;
+	rdfs:range fibo-fnd-tim-tim:Tense ;
+	.
+
+fibo-fnd-utl-alx:Formula
+	a owl:Class ;
+	.
+

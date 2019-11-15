@@ -1,0 +1,491 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanBorrowersTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoansGeneral/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CommercialLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/PersonalLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanApplicationsTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanPhases/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansAppraisal/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanBorrowersTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-crt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> .
+@prefix fibo-fnd-aap-ppl: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-lnx-gen: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanExt/LoansGeneral/> .
+@prefix fibo-loan-loan-pty: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansParties/> .
+@prefix fibo-loan-tem-app: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanApplicationsTemporal/> .
+@prefix fibo-loan-tem-apr: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> .
+@prefix fibo-loan-tem-bor: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> .
+@prefix fibo-loan-tem-ph: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> .
+@prefix fibo-loan-typ-com: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CommercialLoans/> .
+@prefix fibo-loan-typ-per: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/PersonalLoans/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/>
+	a owl:Ontology ;
+	rdfs:label "LoanBorrowersTemporal"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology provides temporally sensitive concepts elating to loan borrowers themselves, including such concepts for different kinds of borrower (corporate and personal). These include things like credit statuses, payment history, and facts about the borrower at assessment and at other times." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoansGeneral/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CommercialLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/PersonalLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanApplicationsTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanPhases/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansAppraisal/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-tem-bor:ArrearsPaymentHistory
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-bor:BorrowerOngoingDatedFacts ;
+	rdfs:label "arrears payment history"@en ;
+	rdfs:comment "QName: NONE:ArrearsPaymentHistory" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	skos:definition "Historical information about payment of arrears by the entity."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Note that refers to all arrears payments generally for the person / organization, not just to arrears on a specific loan. when referred to in assessment for a given loan, this would refer to arrears on other loans in the past. Note that there is some possible interest in whether these arrears are in the past 6 months or more than 6 months ago. This may be an articifial or context-specific cut-off."@en ;
+	.
+
+fibo-loan-tem-bor:BorrowerOngoingDatedFacts
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-bor:appraisedBy.1 ;
+			owl:someValuesFrom fibo-loan-loan-pty:LoanServicer.1 ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-bor:isAbout ;
+			owl:someValuesFrom fibo-loan-tem-ph:DisbursedLoan ;
+		]
+		;
+	rdfs:label "borrower ongoing dated facts"@en ;
+	rdfs:comment "QName: NONE:BorrowerOngoingDatedFacts" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	skos:definition "Ongoing information about the borrower."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Includes credit rating information. Ongoing assessment reports both good and bad credit rating information. In the US, by regulation, lender is required to respot person's payment history on a monthly basis. This is the basis on which peope's score is changed. So the lender's reporting to the credit bureau may affect that person's credit rating. this may give rise to credit disputes. Also there is a scenario where the borrower may contact the lender and ask for some change. For student loans, they can apply for a deferment payment based on change in circumstances e.g. if losing job, or becoming disabled, then there are specific programs which they can apply for. can defer paymen for a time, and if proven eligible (e.g. also if in military, being deployed), then if they subbut the relevant document, they approve and change their repayment term, perhaps temporarily and then revert to the previously agreed terms. This results from the borrower contacting the lender."@en ;
+	.
+
+fibo-loan-tem-bor:CorporateDatedFacts
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-bor:BorrowerOngoingDatedFacts ;
+	rdfs:label "corporate dated facts"@en ;
+	rdfs:comment "QName: NONE:CorporateDatedFacts" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	.
+
+fibo-loan-tem-bor:CorporateLoanBorrowerAssessmentInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-app:LoanApplicationBorrowerAssessmentInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-bor:isAbout.2 ;
+			owl:someValuesFrom fibo-loan-typ-com:CorporateBorrower ;
+		]
+		;
+	rdfs:label "corporate loan borrower assessment information"@en ;
+	rdfs:comment "QName: NONE:CorporateLoanBorrowerAssessmentInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	.
+
+fibo-loan-tem-bor:DelinquencyBorrowerFacts
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-bor:BorrowerOngoingDatedFacts ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-bor:isAbout ;
+			owl:someValuesFrom fibo-loan-tem-ph:DelinquentLoan ;
+		]
+		;
+	rdfs:label "delinquency borrower facts"@en ;
+	rdfs:comment "QName: NONE:DelinquencyBorrowerFacts" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	skos:definition "Facts about the borroewr in the event of some delinquency."@en ;
+	.
+
+fibo-loan-tem-bor:EmploymentStatus
+	a owl:Class ;
+	rdfs:label "employment status"@en ;
+	rdfs:comment "QName: NONE:EmploymentStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	skos:definition "Possible employment statuses for adult human beings."@en ;
+	.
+
+fibo-loan-tem-bor:IndividualPersonCreditRating
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:IndividualCreditRating ;
+	rdfs:label "individual person credit rating"@en ;
+	rdfs:comment "QName: NONE:IndividualPersonCreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	skos:definition "was Borrower Credit Rating"@en ;
+	.
+
+fibo-loan-tem-bor:PersonalAssessmentFactsAtApproval
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-bor:PersonalDatedFacts ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-lnx-gen:domiciled ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		]
+		;
+	rdfs:label "personal assessment facts at approval"@en ;
+	rdfs:comment "QName: NONE:PersonalAssessmentFactsAtApproval" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	skos:definition "Pertinent economic facts about an individual person at the time a given loan was approved."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These are the same dated economic facts that may be assessed about a person at any time, but with the time of assessment being the time that the loan in quesiton was approved. This term therefore also has a relationship to the loan and the assessment activity for that loan."@en ;
+	.
+
+fibo-loan-tem-bor:PersonalDatedFacts
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:Information ,
+		fibo-loan-tem-bor:BorrowerOngoingDatedFacts ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-bor:includes ;
+			owl:someValuesFrom fibo-loan-tem-bor:ArrearsPaymentHistory ;
+		]
+		;
+	rdfs:label "personal dated facts"@en ;
+	rdfs:comment "QName: NONE:PersonalDatedFacts" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	skos:definition "Facts about a natural person. These are facts that are true as at a given time."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These are assessed by the servicer on a regular basis. For example monthly. the Loan servicer assesses information about the borrower once a month or... If payment is once a month, then once a month you make the payment, the information goes to the Servicer (whether or not thi is the originating bank). They keep a running total. they decrement the principal and so on. So this is monthly because the payments are monthly. They have the reports of the monies received and so on. All this is provided to the Conservatorships (where this happens) ,and are kept as individual records there AND are aggregated for accounting and risk management purposes. For securities, need to go down to the quality level of the individual loans when they put then in the pools. Further to this: this is for dynamic MBS / ABS securities (dynmaic versus static loan pools and securities based on these). If it's fixed and is in place and being serviced, there is no way to change the terms of the security. If it defaults, then the original contract is defective. with dynmaci, similar to managed CDO in that the content of the pool can be changed. Earlier note Fannie Mae: the initial assessment of the borrower in terms of Credit worthiness and financial status. taken by the broker organization. the financial status of the borrower, as well as down payment, credit rating etc. is taken into account by \"Pre-approval\". Preappoval means the broker is submitting the loan to Fannie Mae with the idea that it would meet the criteria to be purchasable by Fannie Mae. When all this is verified these are sent to Fannie Mae and then we have \"agreements\" or \"commitments\" that are in the pipeline - in the process of being processed or closed, then there are x many fixed, variable and so on. Then Fannie Mae will estimate how many loans it will be purchasing by aggregating all those. Meanwhile: Loan servicing - if this identified late payments or missed payments, then there may be another assessment of the borrower's credit worthiness. If going into foreclosure, would be another assessment. Once the loans are purchased, the concerns are simply calculating LTV (on property side, for a mortgage), which changes with payment and market value. Gets aggregated for various kinds of risk assessment and exposure assessment. The reporting by the servicer is monthly regardless of the payment frequency of the loan. Corporate versus Personal: Are the same kinds of facts assessed? Is the assessment still monthly? Agency (conservatorship): as above, once the loan is in a pool, the servicer reports to them. ALSO: If the loan is transferred from one pool etc. to another. Meanwhile: Borrower may be any Legal Entity, even for agency loans. they capture the party role, the relationship between the party and a security, and the relationship between a party and a pool of loans. Allows for a range of kinds of party. See tables of info on loan pools. 35 logical tables about the loan itself. Borrower (in old common data model in Fannie) for Borrower, has credit, per loan the mortgage insurer, the originator of the loan (bank, underwriter, brokerage etc.), the appraiser (of the property i.e. real estate, for mortgage), and for Loan borrower, the Borrower Type Code, whether ever bankrupt, amount of doan payment, borrower details, depth (Borrower v Borrower Liabilities); business expenses, Review notes: Identify the things about corporations that extend to persons and vice versa. Also static versus dated terms e.g. birth date v date of incorporation."@en ;
+	.
+
+fibo-loan-tem-bor:PersonalLoanBorrowerAssessmentInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-app:LoanApplicationBorrowerAssessmentInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-bor:isAbout.2 ;
+			owl:someValuesFrom fibo-loan-typ-per:PersonalLoanBorrower ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-apr:obtainedFrom ;
+			owl:someValuesFrom fibo-fnd-aap-ppl:Person ;
+		]
+		;
+	rdfs:label "personal loan borrower assessment information"@en ;
+	rdfs:comment "QName: NONE:PersonalLoanBorrowerAssessmentInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	.
+
+fibo-loan-tem-bor:PersonalMortgageLoanBorrowerAssessmentInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-bor:PersonalLoanBorrowerAssessmentInformation ,
+		fibo-loan-tem-apr:MortgageLoanBorrowerAssessmentInformation
+		;
+	rdfs:label "personal mortgage loan borrower assessment information"@en ;
+	rdfs:comment "QName: NONE:PersonalMortgageLoanBorrowerAssessmentInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	.
+
+fibo-loan-tem-bor:annualProfitAndLoss
+	a owl:ObjectProperty ;
+	rdfs:label "annual profit and loss"@en ;
+	rdfs:comment "QName: NONE:annualProfitAndLoss" ;
+	rdfs:domain fibo-loan-tem-bor:CorporateDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Primary borrower underwritten gross income (not rent), as per most recent Profit and Loss posting."@en ;
+	.
+
+fibo-loan-tem-bor:appraisedBy
+	a owl:ObjectProperty ;
+	rdfs:label "appraised by" ;
+	rdfs:comment "QName: NONE:appraisedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	.
+
+fibo-loan-tem-bor:appraisedBy.1
+	a owl:ObjectProperty ;
+	rdfs:label "appraised by"@en ;
+	rdfs:comment "QName: NONE:appraisedBy.1" ;
+	rdfs:domain fibo-loan-tem-bor:BorrowerOngoingDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-loan-loan-pty:LoanServicer.1 ;
+	.
+
+fibo-loan-tem-bor:assessmentDate
+	a owl:ObjectProperty ;
+	rdfs:label "assessment date"@en ;
+	rdfs:comment "QName: NONE:assessmentDate" ;
+	rdfs:domain fibo-loan-tem-bor:BorrowerOngoingDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Date at which Borrower income, credit quality, verification, first time status etc were last assessed."@en ;
+	.
+
+fibo-loan-tem-bor:borrowerRatingArrearsSelection
+	a owl:DatatypeProperty ;
+	rdfs:label "borrower rating arrears selection"@en ;
+	rdfs:comment "QName: NONE:borrowerRatingArrearsSelection" ;
+	rdfs:domain fibo-loan-tem-bor:IndividualPersonCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Undefined PoC SDM Notes: BKR 1 - 10 Arrears code &lt;/p&gt; &lt;p&gt; ArrearscodeaccordingtothecodingofBureauKredietRegistratie(Hollandonly) &lt;/p&gt; &lt;p&gt; ( AO 34, RR 30 ) &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-bor:borrowerRatingCreditAmount
+	a owl:ObjectProperty ;
+	rdfs:label "borrower rating credit amount"@en ;
+	rdfs:comment "QName: NONE:borrowerRatingCreditAmount" ;
+	rdfs:domain fibo-loan-tem-bor:IndividualPersonCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Undefined PoC SDM Notes: Credit agency rating of Amount&nbsp;of&nbsp;the&nbsp;credit&nbsp;(Holland&nbsp;only) </p> <p> (AO 35 , RR 31 ) </p>"@en ;
+	.
+
+fibo-loan-tem-bor:borrowerRatingCreditSelection
+	a owl:DatatypeProperty ;
+	rdfs:label "borrower rating credit selection"@en ;
+	rdfs:comment "QName: NONE:borrowerRatingCreditSelection" ;
+	rdfs:domain fibo-loan-tem-bor:IndividualPersonCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Undefined PoC SDM Notes: BKR 1-10 Credit type &lt;/p&gt; &lt;p&gt; CredittypeaccordingtothecodingofBureauKredietRegistratie(Hollandonly) &lt;/p&gt; &lt;p&gt; (AO 33 - Agency Rating code , RR 29 ) &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-bor:borrowerRatingCuredDate
+	a owl:ObjectProperty ;
+	rdfs:label "borrower rating cured date"@en ;
+	rdfs:comment "QName: NONE:borrowerRatingCuredDate" ;
+	rdfs:domain fibo-loan-tem-bor:IndividualPersonCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Undefined PoC SDM Notes: Is the coding with BKR cured? (Holland only) </p> <p> If the coding is cured, number of months since it is cured (Holland only) </p> <p> Represented as a non dirty date if cured </p><br /> <p> ( AO 36-37, RR 32- 33 )&nbsp; year month date </p>"@en ;
+	.
+
+fibo-loan-tem-bor:borrowerRatingDate
+	a owl:ObjectProperty ;
+	rdfs:label "borrower rating date"@en ;
+	rdfs:comment "QName: NONE:borrowerRatingDate" ;
+	rdfs:domain fibo-loan-tem-bor:IndividualPersonCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Undefined PoC SDM Notes: The&nbsp;date&nbsp;of&nbsp;the&nbsp;bureau&nbsp;score&nbsp;for&nbsp;this&nbsp;borrower </p> <p> (AO 40. RR 36 ) </p>"@en ;
+	.
+
+fibo-loan-tem-bor:borrowerRatingScoreSelection
+	a owl:DatatypeProperty ;
+	rdfs:label "borrower rating score selection"@en ;
+	rdfs:comment "QName: NONE:borrowerRatingScoreSelection" ;
+	rdfs:domain fibo-loan-tem-bor:IndividualPersonCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Undefined PoC SDM Notes: Bureau Score Value - Borrower's Score. &lt;/p&gt; &lt;p&gt; &gt;0 Regular Score&lt;br /&gt; -999 CAIS for mortgage not available&lt;br /&gt; -998 Notice of Correction or Notice of Dispute&lt;br /&gt; 0 Bankruptcy Restriction Order or Bankruptcy Restriction Undertaking &lt;/p&gt; &lt;p&gt; (AO 41, RR 37 ) &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-bor:borrowerRatingScoreTypeSelection
+	a owl:DatatypeProperty ;
+	rdfs:label "borrower rating score type selection"@en ;
+	rdfs:comment "QName: NONE:borrowerRatingScoreTypeSelection" ;
+	rdfs:domain fibo-loan-tem-bor:IndividualPersonCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Undefined PoC SDM Notes: This is partially expressed by party id of the issuing agency &lt;/p&gt; &lt;p&gt; But some of these scores are also methods ( internal / Other ) &lt;/p&gt; &lt;p&gt; Who has provided the score. For continental Europe give name of provider. &lt;/p&gt; &lt;p&gt; Callcredit (1)&lt;br /&gt; Experian (2)&lt;br /&gt; Equifax (3)&lt;br /&gt; Schufa (4)&lt;br /&gt; BKR (5)&lt;br /&gt; Internal Score (6)&lt;br /&gt; Other (7) &lt;/p&gt; &lt;p&gt; ( AO 38 - originally Party id , RR 34 )&lt;br /&gt; No data (ND) &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-bor:borrowerRatingTypeSelection
+	a owl:DatatypeProperty ;
+	rdfs:label "borrower rating type selection"@en ;
+	rdfs:comment "QName: NONE:borrowerRatingTypeSelection" ;
+	rdfs:domain fibo-loan-tem-bor:IndividualPersonCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Undefined PoC SDM Notes: Bureau Score Type - Type of scorecard provided. &lt;/p&gt; &lt;p&gt; Generation 8 B&amp;F AAM - DCM (Experian) (1)&lt;br /&gt; Generation 8 B&amp;F CRS - DCM (Experian) (2)&lt;br /&gt; Generation 7 Mortgage PD Score - DCM (Experian) (3)&lt;br /&gt; FSC109 - Risk Navigator (Equifax) (4)&lt;br /&gt; RNILF02 - Risk Navigator (Equifax) (5)&lt;br /&gt; RNISF02 - Risk Navigator (Equifax) (6)&lt;br /&gt; Internal Scorecard (7)&lt;br /&gt; Other (provide details) (8)&lt;br /&gt; No data (ND) &lt;/p&gt; &lt;p&gt; ( AO 39, RR 35 ) &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-bor:dateOfIncorporation
+	a owl:ObjectProperty ;
+	rdfs:label "date of incorporation"@en ;
+	rdfs:comment "QName: NONE:dateOfIncorporation" ;
+	rdfs:domain fibo-loan-tem-bor:CorporateLoanBorrowerAssessmentInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The date of incorporation of the Corporation."@en ;
+	.
+
+fibo-loan-tem-bor:grossIncome
+	a owl:ObjectProperty ;
+	rdfs:label "gross income"@en ;
+	rdfs:comment "QName: NONE:grossIncome" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Primary borrower underwritten personal gross income (not rent)"@en ;
+	.
+
+fibo-loan-tem-bor:history1-6MArrearsPayments
+	a owl:DatatypeProperty ;
+	rdfs:label "history 1-6 m arrears payments"@en ;
+	rdfs:comment "QName: NONE:history1-6MArrearsPayments" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition "History - use timed status values and timed status information entity which has present and past values."@en ;
+	.
+
+fibo-loan-tem-bor:history6PlusMArrearsPayments
+	a owl:DatatypeProperty ;
+	rdfs:label "history 6 plus m arrears payments"@en ;
+	rdfs:comment "QName: NONE:history6PlusMArrearsPayments" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition "As above History of payments missed on previous mortgage(s) with months &gt; 6M in arrears &lt;/p&gt; &lt;p&gt; RR has count of payments missed - but the form here with associated dates will mean that entered data remains valid over time dirty data &lt;/p&gt; &lt;p&gt; History of (non) payments6+ months in arrears on preceding mortgages &lt;/p&gt; &lt;p&gt; Data form is a list with dates and indicated event ( OK / arrears 6+ Mo ) &lt;/p&gt; &lt;p&gt; (AO 24, RR 40 ) &lt;/p&gt;"@en ;
+	.
+
+fibo-loan-tem-bor:includes
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasPart ;
+	rdfs:label "includes"@en ;
+	rdfs:comment "QName: NONE:includes" ;
+	rdfs:domain fibo-loan-tem-bor:BorrowerOngoingDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-loan-tem-bor:BorrowerOngoingDatedFacts ;
+	.
+
+fibo-loan-tem-bor:incomeVerificationMethod
+	a owl:ObjectProperty ;
+	rdfs:label "income verification method"@en ;
+	rdfs:comment "QName: NONE:incomeVerificationMethod" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalLoanBorrowerAssessmentInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-loan-lnx-gen:IncomeVerificationMethodSelection ;
+	skos:definition "Income verification method for borrowers income."@en ;
+	.
+
+fibo-loan-tem-bor:isAbout
+	a owl:ObjectProperty ;
+	rdfs:label "is about"@en ;
+	rdfs:comment "QName: NONE:isAbout" ;
+	rdfs:domain fibo-loan-tem-bor:BorrowerOngoingDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-loan-tem-ph:DisbursedLoan ;
+	.
+
+fibo-loan-tem-bor:isAbout.1
+	a owl:ObjectProperty ;
+	rdfs:label "is about" ;
+	rdfs:comment "QName: NONE:isAbout.1" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	.
+
+fibo-loan-tem-bor:isAbout.2
+	a owl:ObjectProperty ;
+	rdfs:label "is about borrower"@en ;
+	rdfs:comment "QName: NONE:isAbout.2" ;
+	rdfs:domain fibo-loan-tem-app:LoanApplicationBorrowerAssessmentInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-loan-loan-pty:LoanBorrower ;
+	.
+
+fibo-loan-tem-bor:paymentsMissedInPastSixMonths
+	a owl:DatatypeProperty ;
+	rdfs:label "payments missed in past six months"@en ;
+	rdfs:comment "QName: NONE:paymentsMissedInPastSixMonths" ;
+	rdfs:domain fibo-loan-tem-bor:ArrearsPaymentHistory ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "History of payments missed on previous mortgage in the prior 0-6 months (information as at underwriting)."@en ;
+	.
+
+fibo-loan-tem-bor:recordsEmploymentStatusAs
+	a owl:ObjectProperty ;
+	rdfs:label "records employment status as"@en ;
+	rdfs:comment "QName: NONE:recordsEmploymentStatusAs" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalLoanBorrowerAssessmentInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-loan-tem-bor:EmploymentStatus ;
+	skos:definition "The employment status of the person applying for the loan, e.g. employed, self-employed, unemployed."@en ;
+	.
+
+fibo-loan-tem-bor:referenceContactInformation
+	a owl:DatatypeProperty ;
+	rdfs:label "reference contact information"@en ;
+	rdfs:comment "QName: NONE:referenceContactInformation" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalLoanBorrowerAssessmentInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:string ;
+	skos:definition "contact information on file for the references taken up on the potential borrower(s)."@en ;
+	.
+
+fibo-loan-tem-bor:relatesEmploymentStatus
+	a owl:ObjectProperty ;
+	rdfs:label "relates employment status"@en ;
+	rdfs:comment "QName: NONE:relatesEmploymentStatus" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-loan-tem-bor:EmploymentStatus ;
+	skos:definition "Employment Status; Employment status of (the primary) applicant."@en ;
+	.
+
+fibo-loan-tem-bor:repossessionHistory
+	a owl:DatatypeProperty ;
+	rdfs:label "repossession history"@en ;
+	rdfs:comment "QName: NONE:repossessionHistory" ;
+	rdfs:domain fibo-loan-tem-bor:BorrowerOngoingDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "If yes: Will be more facts to be determined."@en ;
+	.
+
+fibo-loan-tem-bor:repossessionHistory.1
+	a owl:DatatypeProperty ;
+	rdfs:label "repossession history"@en ;
+	rdfs:comment "QName: NONE:repossessionHistory.1" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalDatedFacts ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether there is a history of prior repossessions resulting from the borrower defaulting on a previous mortgage loan."@en ;
+	.
+
+fibo-loan-tem-bor:residencyPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "residency period"@en ;
+	rdfs:comment "QName: NONE:residencyPeriod" ;
+	rdfs:domain fibo-loan-tem-bor:PersonalLoanBorrowerAssessmentInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "Period in which borrower is resident of the country - where the loan property is located."@en ;
+	.
+

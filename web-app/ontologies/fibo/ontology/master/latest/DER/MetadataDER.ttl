@@ -1,0 +1,110 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/MetadataDER/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/MetadataDERAssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/MetadataDERCommoditiesDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CreditDerivatives/MetadataDERCreditDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/MetadataDERDerivativesContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/MetadataDERExchangeTradedDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/MetadataDERFxDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/MetadataDERRateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/MetadataDER/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/MetadataDERAssetDerivatives/> .
+@prefix fibo-der-com-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/MetadataDERCommoditiesDerivatives/> .
+@prefix fibo-der-cr-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/CreditDerivatives/MetadataDERCreditDerivatives/> .
+@prefix fibo-der-drc-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/MetadataDERDerivativesContracts/> .
+@prefix fibo-der-etd-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/MetadataDERExchangeTradedDerivatives/> .
+@prefix fibo-der-fx-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/MetadataDERFxDerivatives/> .
+@prefix fibo-der-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/MetadataDER/> .
+@prefix fibo-der-rat-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/MetadataDERRateDerivatives/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/MetadataDER/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Derivatives (DER) Domain" ;
+	rdfs:comment "QName: fibo-der-mod:" ;
+	dct:abstract "The Derivatives (DER) Domain covers many of the concepts that are common to derivative instruments, including but not limited to options, futures, forwards, swaps, and a wide range of other derivatives. This ontology provides metadata about the Derivatives Domain and its contents." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-der-mod" ;
+	sm:filename "MetadataDER.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/MetadataDERAssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/MetadataDERCommoditiesDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CreditDerivatives/MetadataDERCreditDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/MetadataDERDerivativesContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/MetadataDERExchangeTradedDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/MetadataDERFxDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/MetadataDERRateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/MetadataDER/> ;
+	.
+
+fibo-der-mod:DERDomain
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Derivatives" ;
+	rdfs:comment "QName: fibo-der-mod:DERDomain" ;
+	dct:abstract "The Derivatives (DER) Domain covers many of the concepts that are common to derivative instruments, including but not limited to options, futures, forwards, swaps, and a wide range of other derivatives." ;
+	dct:creator "https://wiki.edmcouncil.org/display/DER/FIBO+-+FCT+-+Derivatives+Home"^^xsd:anyURI ;
+	dct:hasPart
+		fibo-der-ass-mod:AssetDerivativesModule ,
+		fibo-der-com-mod:CommoditiesDerivativesModule ,
+		fibo-der-cr-mod:CreditDerivativesModule ,
+		fibo-der-drc-mod:DerivativesContractsModule ,
+		fibo-der-etd-mod:ExchangeTradedDerivativesModule ,
+		fibo-der-fx-mod:FxDerivativesModule ,
+		fibo-der-rat-mod:RateDerivativesModule
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Derivatives (DER) Domain" ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Bloomberg LP" ,
+		"Citigroup" ,
+		"Commodities Futures Trading Commission (CFTC)" ,
+		"Deutsche Bank" ,
+		"Nordea Bank AB" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Quarule" ,
+		"State Street Bank and Trust" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo" ,
+		"Working Ontologist"
+		;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/SEC/"^^xsd:anyURI
+		;
+	sm:keyword "derivative instruments" ;
+	sm:moduleAbbreviation "fibo-der" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/MetadataDER/> ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	.
+

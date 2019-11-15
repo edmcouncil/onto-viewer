@@ -1,0 +1,61 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommodityOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommodityOptions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-com-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/> .
+@prefix fibo-der-com-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityOptions/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityOptions/>
+	a owl:Ontology ;
+	rdfs:label "CommodityOptions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Over the counter options contracts with a commodity underlier, along with the corresponding transactions." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommodityOptions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-com-opt:CommodityOTCOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-com-ctr:CommodityDerivativeContract ,
+		fibo-der-der-opt:OTCOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:definesOptional ;
+			owl:someValuesFrom fibo-der-com-opt:CommodityOTCOptionTransaction ;
+		]
+		;
+	rdfs:label "commodity o t c option contract"@en ;
+	rdfs:comment "QName: NONE:CommodityOTCOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityOptions/> ;
+	skos:definition "Definition needed."@en ;
+	skos:editorialNote "FpML Definition (unusable): Defines a commodity option product."@en ;
+	.
+
+fibo-der-com-opt:CommodityOTCOptionTransaction
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionalUnderlyingTransaction ;
+	rdfs:label "commodity o t c option transaction"@en ;
+	rdfs:comment "QName: NONE:CommodityOTCOptionTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityOptions/> ;
+	.
+

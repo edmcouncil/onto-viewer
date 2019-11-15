@@ -1,0 +1,127 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/>
+	a owl:Ontology ;
+	rdfs:label "Classification Schemes Ontology" ;
+	rdfs:comment "QName: fibo-fnd-arr-cls:" ;
+	dct:abstract "This ontology defines abstract concepts for representation of classification schemes that themselves are intended to permit the classification of arbitrary concepts into hierarchies (or partial orders) for use in other FIBO ontology elements." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2019 EDM Council, Inc." ,
+		"Copyright (c) 2014-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-arr-cls" ;
+	sm:filename "ClassificationSchemes.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes.rdf version of this ontology was introduced as a part of the initial FIBO FBC RFC and revised due to changes introduced in the FIBO 2.0 RFC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes.rdf version of this ontology was revised to replace hasDefinition with isDefinedIn to clarify intent."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-arr-cls:ClassificationScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Scheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:someValuesFrom fibo-fnd-arr-cls:Classifier ;
+		]
+		;
+	rdfs:label "classification scheme" ;
+	rdfs:comment "QName: fibo-fnd-arr-cls:ClassificationScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> ;
+	skos:definition "a system for allocating classifiers (elements in a classification scheme) to objects, similar to identifiers in some cases; such classification schemes are intended to permit the classification of arbitrary objects into hierarchies (or partial orders)" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	fibo-fnd-utl-av:explanatoryNote "A classification scheme may be a taxonomy, a network, an ontology, or any other terminological system. The classification may also be just a list of controlled vocabulary of property words (or terms). The list might be taken from the 'leaf level' of a taxonomy." ;
+	.
+
+fibo-fnd-arr-cls:Classifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-rel-rel:Reference ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:onClass fibo-fnd-arr-cls:ClassificationScheme ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:classifies ;
+			owl:someValuesFrom owl:Thing ;
+		]
+		;
+	rdfs:label "classifier" ;
+	rdfs:comment "QName: fibo-fnd-arr-cls:Classifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> ;
+	skos:definition "a standardized classification or delineation for something, per some scheme for such delineation, within a specified context" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+
+fibo-fnd-arr-cls:IndustrySectorClassificationScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:ClassificationScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:someValuesFrom fibo-fnd-arr-cls:IndustrySectorClassifier ;
+		]
+		;
+	rdfs:label "industry sector classification scheme" ;
+	rdfs:comment "QName: fibo-fnd-arr-cls:IndustrySectorClassificationScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> ;
+	rdfs:seeAlso <http://www.investopedia.com/terms/g/gics.asp> ;
+	skos:definition "a system for allocating classifiers to organizations by industry sector" ;
+	skos:example "Examples include the North American Industry Classification System (NAICS) and Standardized Industry Classification (SIC) in the U.S. and Canada, and the NACE (Nomenclature Générale des Activités Économiques dans les Communautés Européennes) in the EU, developed by governments to classify industries.  They also include commercial classification schemes, such as the Global Industry Standard Classification (GICS) developed jointly by Morgan Stanley Capital International (MSCI) and Standard and Poor's, and competing schemes including the Industry Classification Benchmark (ICB) system, maintained by Dow Jones and London's FTSE Group, among others." ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, 2012" ;
+	.
+
+fibo-fnd-arr-cls:IndustrySectorClassifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:Classifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:onClass fibo-fnd-arr-cls:IndustrySectorClassificationScheme ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "industry sector classifier" ;
+	rdfs:comment "QName: fibo-fnd-arr-cls:IndustrySectorClassifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> ;
+	skos:definition "a standardized classification or delineation for an organization, or possibly for a security representing an interest in a given organization, per some scheme for such delineation, by industry" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, 2012" ;
+	.
+

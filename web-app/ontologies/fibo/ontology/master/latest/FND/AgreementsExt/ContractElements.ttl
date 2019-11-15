@@ -1,0 +1,244 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/ContractElements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/ContractElements/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-agrx-ele: <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/>
+	a owl:Ontology ;
+	rdfs:label "ContractElements"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Concepts related to the detailed physical elements of contracts (clauses, sections and so on) as distinct from the subject matter of those parts. This ontology can be used when there is a need to talk about parts of a contract as distinct from the commitments and other subject matter that these represent or describe. 
+		This is not an extension to an existing ontology but an additional scope of contract related subject matter.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/ContractElements/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-agr-ctr:ContractualCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agrx-ele:definedInClause ;
+			owl:someValuesFrom fibo-fnd-agrx-ele:ContractClause ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agrx-ele:definedInSection ;
+			owl:someValuesFrom fibo-fnd-agrx-ele:ContractSection ;
+		]
+		;
+	.
+
+fibo-fnd-agrx-ele:ContractClause
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agrx-ele:ContractPart ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agrx-ele:clauseContainsTerm ;
+			owl:someValuesFrom fibo-fnd-agrx-ele:ContractTerm ;
+		]
+		;
+	rdfs:label "contract clause"@en ;
+	rdfs:comment "QName: NONE:ContractClause" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "A set of contractual terms, grouped according to subject, intent or the type of rights and / or obligations to which it refers."@en ;
+	.
+
+fibo-fnd-agrx-ele:ContractPart
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualElement ,
+		fibo-fnd-inf-inf:WrittenInformation
+		;
+	rdfs:label "contract part"@en ;
+	rdfs:comment "QName: NONE:ContractPart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "A formal part of a contract such as a clause or term."@en ;
+	.
+
+fibo-fnd-agrx-ele:ContractPreamble
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agrx-ele:ContractPart ;
+	rdfs:label "contract preamble"@en ;
+	rdfs:comment "QName: NONE:ContractPreamble" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "The part of a contract which defines the parties and gives sufficient information for them to be unambiguously identified, along with other pertinent information such as the subject of the contract."@en ;
+	.
+
+fibo-fnd-agrx-ele:ContractSection
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agrx-ele:ContractPart ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agrx-ele:sectionContainsClause ;
+			owl:someValuesFrom fibo-fnd-agrx-ele:ContractClause ;
+		]
+		;
+	rdfs:label "contract section"@en ;
+	rdfs:comment "QName: NONE:ContractSection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "A formally identified Section of a Contract, comtaining terms dealing with a specific type of subject matter."@en ;
+	.
+
+fibo-fnd-agrx-ele:ContractTerm
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractualElement ;
+	rdfs:label "contract term"@en ;
+	rdfs:comment "QName: NONE:ContractTerm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "An individual term in a Contract. Forms part of a set of Contractual Terms. Also exists within a Clause of a Contract A Clause exists within a Section of a Contract"@en ;
+	.
+
+fibo-fnd-agrx-ele:DRIP
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:MutualContractualAgreement ;
+	rdfs:label "d r i p"@en ;
+	rdfs:comment "QName: NONE:DRIP" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "A kind of financial contract."@en ;
+	skos:editorialNote "This term is awaitilng further analysis and will then be moved to the appropriate financial instrument section."@en ;
+	.
+
+fibo-fnd-agrx-ele:RepresentationsSection
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agrx-ele:ContractPart ;
+	rdfs:label "representations section"@en ;
+	rdfs:comment "QName: NONE:RepresentationsSection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "Section containing statements held out by one party to the other as being true and correct at the time of the Agreement. A representation, as contained in this section of a contract, is a statement by one other party asserting that some given state of the world exists."@en ;
+	skos:editorialNote "Things still to tease out: there is a difference at law between a warranty and a representation. There are differences between the implications if one or other proves to be untrue: one will render the contract void; the other renders only specific elements of the contract void or makes some difference between those elements. A warranty is likely a stronger assertion thatn a representation (has greater impact)."@en ;
+	.
+
+fibo-fnd-agrx-ele:TerminationProvisions
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractualElement ;
+	rdfs:label "termination provisions"@en ;
+	rdfs:comment "QName: NONE:TerminationProvisions" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "Formal terms setting out how the written contract may be terminated and what happens when it is."@en ;
+	.
+
+fibo-fnd-agrx-ele:WarrantiesSection
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agrx-ele:ContractPart ;
+	rdfs:label "warranties section"@en ;
+	rdfs:comment "QName: NONE:WarrantiesSection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "Section defining what is warranted by either party to the other. A warranty, as contained in this section of a contract, is a statement by one other party asserting that some given state of the world exists."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the contract section which formalizes these aspects of the Agreement between the parties."@en ;
+	.
+
+fibo-fnd-agrx-ele:clauseContainsTerm
+	a owl:ObjectProperty ;
+	rdfs:label "clause contains term"@en ;
+	rdfs:comment "QName: NONE:clauseContainsTerm" ;
+	rdfs:domain fibo-fnd-agrx-ele:ContractClause ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	rdfs:range fibo-fnd-agrx-ele:ContractTerm ;
+	skos:definition "An individual term contained within the clause."@en ;
+	.
+
+fibo-fnd-agrx-ele:definedInClause
+	a owl:ObjectProperty ;
+	rdfs:label "defined in clause"@en ;
+	rdfs:comment "QName: NONE:definedInClause" ;
+	rdfs:domain fibo-fnd-agr-ctr:ContractualCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	rdfs:range fibo-fnd-agrx-ele:ContractClause ;
+	skos:definition "The individual clause of the contract in which the set of terms is defined, if applicable."@en ;
+	.
+
+fibo-fnd-agrx-ele:definedInSection
+	a owl:ObjectProperty ;
+	rdfs:label "defined in section"@en ;
+	rdfs:comment "QName: NONE:definedInSection" ;
+	rdfs:domain fibo-fnd-agr-ctr:ContractualCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	rdfs:range fibo-fnd-agrx-ele:ContractSection ;
+	skos:definition "The section of the contract in which the contract terms set is defined."@en ;
+	.
+
+fibo-fnd-agrx-ele:definesPrincipals
+	a owl:ObjectProperty ;
+	rdfs:label "defines principals"@en ;
+	rdfs:comment "QName: NONE:definesPrincipals" ;
+	rdfs:domain fibo-fnd-agrx-ele:ContractPreamble ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	skos:definition "The identification of parties to the contract as embodied in the preamble."@en ;
+	.
+
+fibo-fnd-agrx-ele:hasProvisions
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has provisions"@en ;
+	rdfs:comment "QName: NONE:hasProvisions" ;
+	rdfs:domain fibo-fnd-agr-ctr:WrittenContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	rdfs:range fibo-fnd-agrx-ele:TerminationProvisions ;
+	skos:definition "Termination provisions as contained in the Contract. These set out the conditions under which the contract may be terminated and the rights and obligations of each party in the event of such termination."@en ;
+	.
+
+fibo-fnd-agrx-ele:identifiesCounterparty
+	a owl:ObjectProperty ;
+	rdfs:label "identifies counterparty"@en ;
+	rdfs:comment "QName: NONE:identifiesCounterparty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	rdfs:range fibo-fnd-agr-ctr:ContractCounterparty ;
+	skos:definition "The counterparty to the contract, identified in the contract principals identification."@en ;
+	.
+
+fibo-fnd-agrx-ele:identifiesPrincipal
+	a owl:ObjectProperty ;
+	rdfs:label "identifies principal"@en ;
+	rdfs:comment "QName: NONE:identifiesPrincipal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	rdfs:range fibo-fnd-agr-ctr:ContractPrincipal ;
+	skos:definition "The principal to the contract, identified in the contract principals identification."@en ;
+	.
+
+fibo-fnd-agrx-ele:identifiesThirdParty
+	a owl:ObjectProperty ;
+	rdfs:label "identifies third party"@en ;
+	rdfs:comment "QName: NONE:identifiesThirdParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	rdfs:range fibo-fnd-agr-ctr:ContractThirdParty ;
+	skos:definition "A third party identified in the third party identification."@en ;
+	.
+
+fibo-fnd-agrx-ele:sectionContainsClause
+	a owl:ObjectProperty ;
+	rdfs:label "section contains clause"@en ;
+	rdfs:comment "QName: NONE:sectionContainsClause" ;
+	rdfs:domain fibo-fnd-agrx-ele:ContractSection ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	rdfs:range fibo-fnd-agrx-ele:ContractClause ;
+	skos:definition "A clause contained in the contract section."@en ;
+	.
+

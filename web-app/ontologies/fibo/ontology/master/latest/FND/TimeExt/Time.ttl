@@ -1,0 +1,1409 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-tim-tim: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/>
+	a owl:Ontology ;
+	rdfs:label "Time"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology sets out a complete range of concepts about time. The core of the ontology is based on the core concepts of instant and interval in the W3C Time ontology, while the scope and extent of the concepts are based on those concepts reflected in the FpML standard for time, calendar and schedule terms. This is a conceptual ontology and as such it makes a clear distinction between kinds of time and kinds of measurement or statement about time in calendars or data. 
+		The Release ontology FinancialDates provides a more pragmatic and data friendly reflection of most of the concepts included in this Time ontology, for example by focusing on calendar and data statements about time as distinct from time itself. Properties that refer to concepts in this ontology are to be moved over to the corresponding concepts in that ontology, adding further concepts from this one where necessary. On completion of that work, this ontology may be deprecated. In the meantime parts of it may be deprecated when they are no longer referred to or were never referred to.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-tim-tim:AgencyDeterminedDate
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DeterminedDate ;
+	rdfs:label "agency determined date"@en ;
+	rdfs:comment "QName: NONE:AgencyDeterminedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A date which is or which is to be determined by some external agency."@en ;
+	.
+
+fibo-fnd-tim-tim:CalculatedDate
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DeterminedDate ;
+	rdfs:label "calculated date"@en ;
+	rdfs:comment "QName: NONE:CalculatedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A Date which is calculated according to some defined formula or calculation method. The results of such calculation are not known in the present, e.g. one or more parameters for the calculation are not yet known."@en ;
+	.
+
+fibo-fnd-tim-tim:CalculatedDateOffset
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:CalculatedTimeOffset ;
+	rdfs:label "calculated date offset"@en ;
+	rdfs:comment "QName: NONE:CalculatedDateOffset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:CalculatedTimeOffset
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:DeterminedTemporalThing ,
+		fibo-fnd-tim-tim:TimeOffset ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:determination ;
+			owl:someValuesFrom fibo-fnd-tim-tim:DurationDetermination ;
+		]
+		;
+	rdfs:label "calculated time offset"@en ;
+	rdfs:comment "QName: NONE:CalculatedTimeOffset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:CalendarDay
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:CalendarTemporalUnit ;
+	rdfs:label "calendar day"@en ;
+	rdfs:comment "QName: NONE:CalendarDay" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "the period from one midnight to the following midnight."@en ;
+	fibo-fnd-utl-av:termOrigin "http://www.dictionary.com/browse/calendar-day"@en ;
+	.
+
+fibo-fnd-tim-tim:CalendarDayType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DayType ;
+	rdfs:label "calendar day type"@en ;
+	rdfs:comment "QName: NONE:CalendarDayType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "When calculating the number of days between two dates the count includes all calendar days."@en ;
+	.
+
+fibo-fnd-tim-tim:CalendarTemporalUnit
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalUnit ;
+	rdfs:label "calendar temporal unit"@en ;
+	rdfs:comment "QName: NONE:CalendarTemporalUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A Temporal Unit (measure of time) which is to be found in a regular calendar, i.e. a day, month etc., as distinct from units with additional parameters such as business days."@en ;
+	skos:editorialNote 'This is similar to the FpML enumeration "PeriodEnum", with the exception that this does not include "Term" since that is not a calendar unit and is only meaningful in relation to the specific instrument.'@en ;
+	.
+
+fibo-fnd-tim-tim:CommodityBusinessDayType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DayType ;
+	rdfs:label "commodity business day type"@en ;
+	rdfs:comment "QName: NONE:CommodityBusinessDayType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "When calculating the number of days between two dates the count includes only commodity business days."@en ;
+	.
+
+fibo-fnd-tim-tim:ContractualDateSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateSpecification ;
+	rdfs:label "contractual date specification"@en ;
+	rdfs:comment "QName: NONE:ContractualDateSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The specification of a date in a contract."@en ;
+	.
+
+fibo-fnd-tim-tim:ContractuallyDeterminedDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:DeterminedDate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:contractuallyDeterminedWithReferenceTo ;
+			owl:someValuesFrom fibo-fnd-tim-tim:DateDeterminationTermsSet ;
+		]
+		;
+	rdfs:label "contractually determined date"@en ;
+	rdfs:comment "QName: NONE:ContractuallyDeterminedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:ContractuallySpecifiedDate
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:SpecifiedDate ;
+	rdfs:label "contractually specified date"@en ;
+	rdfs:comment "QName: NONE:ContractuallySpecifiedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:ConventionDeterminedDate
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DeterminedDate ;
+	rdfs:label "convention determined date"@en ;
+	rdfs:comment "QName: NONE:ConventionDeterminedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A Date which is or is to be determined according to some established or published convention for date determination."@en ;
+	.
+
+fibo-fnd-tim-tim:Date
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:Instant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:occursOnDate ;
+			owl:allValuesFrom fibo-fnd-dt-fd:Date ;
+		]
+		;
+	rdfs:label "date"@en ;
+	rdfs:comment "QName: NONE:Date" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	owl:disjointWith fibo-fnd-tim-tim:DatePeriod ;
+	.
+
+fibo-fnd-tim-tim:DateCalculation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateDetermination ;
+	rdfs:label "date calculation"@en ;
+	rdfs:comment "QName: NONE:DateCalculation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DateDescription
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateTimeDescription ;
+	rdfs:label "date description"@en ;
+	rdfs:comment "QName: NONE:DateDescription" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DateDetermination
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:InstantDetermination ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:reference.1 ;
+			owl:someValuesFrom fibo-fnd-tim-tim:DateDeterminationReferenceRule ;
+		]
+		;
+	rdfs:label "date determination"@en ;
+	rdfs:comment "QName: NONE:DateDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The determination or adjustment of some date according to some rule."@en ;
+	.
+
+fibo-fnd-tim-tim:DateDeterminationAgency
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateDetermination ;
+	rdfs:label "date determination agency"@en ;
+	rdfs:comment "QName: NONE:DateDeterminationAgency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DateDeterminationConvention
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateDetermination ;
+	rdfs:label "date determination convention"@en ;
+	rdfs:comment "QName: NONE:DateDeterminationConvention" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DateDeterminationReferenceRule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-meth:Rule ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:modifiedBy ;
+			owl:onClass fibo-fnd-tim-tim:DateDeterminationReferenceRule ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:modifiedBy ;
+			owl:someValuesFrom fibo-fnd-tim-tim:DateDeterminationReferenceRule ;
+		]
+		;
+	rdfs:label "date determination reference rule"@en ;
+	rdfs:comment "QName: NONE:DateDeterminationReferenceRule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A rule for determining a date or for making adjustments from a date determined by some means, to return another date, for example adjusting from a non working to a working date."@en ;
+	skos:editorialNote "These kinds of rules are referred to in two separate FpML enumerations, the \"BusinessDayConventionEnum\" for determining when a returned date is rolled to a suitable business day, and one for scheduled event dates (called, confusingly \"Roll\" dates) as defined in \"RollConventionEnum\". One such rule appears in both. Also included in this set of rules is the optional rule for further modifying the date returned by a date roll rule. In FpML description for \"BusinessDayConventionEnum\": \"The convention for adjusting any relevant date if it would otherwise fall on a day that is not a valid business day. Note that FRN is included here as a type of business day convention although it does not strictly fall within ISDA's definition of a Business Day Convention and does not conform to the simple definition given above.\" These rules (with the possible exception of \"FRN\") are applied to dates returned by some date specification or parametric schedule specification or some other such rule, and detail treatment of those returned dates in the event of them being for example a working day, being in the wrong month or year and so on. The Date Roll Rule operates on the date returned by the date specification or parametric schedule, and return a further date. If the Date Roll Rule is used alone, that is the final date to be returned from the entire specification or parametric schedule, as the date on which the scheduled event is to take place. In the case of the Modify Convention Roll Rule, this rule is applied to the date returned by the Date Roll Rule, and returns a date which is itself the event date for the scheduled event."@en ;
+	.
+
+fibo-fnd-tim-tim:DateDeterminationTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:setsOut ;
+			owl:someValuesFrom fibo-fnd-tim-tim:ContractualDateSpecification ;
+		]
+		;
+	rdfs:label "date determination terms set"@en ;
+	rdfs:comment "QName: NONE:DateDeterminationTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "Terms setting out how to determine dates in the future."@en ;
+	.
+
+fibo-fnd-tim-tim:DateDeterminingAgent
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-tim-tim:determines ;
+		owl:someValuesFrom fibo-fnd-tim-tim:AgencyDeterminedDate ;
+	] ;
+	rdfs:label "date determining agent"@en ;
+	rdfs:comment "QName: NONE:DateDeterminingAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The agent which determines or is to determine the Determined Date."@en ;
+	.
+
+fibo-fnd-tim-tim:DatePeriod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:Interval ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasBeginning ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasEnd ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:length ;
+			owl:someValuesFrom fibo-fnd-tim-tim:KnownDateDuration ;
+		]
+		;
+	rdfs:label "date period"@en ;
+	rdfs:comment "QName: NONE:DatePeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DateRollRule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-meth:Rule ,
+		fibo-fnd-tim-tim:DateDeterminationReferenceRule
+		;
+	rdfs:label "date roll rule"@en ;
+	rdfs:comment "QName: NONE:DateRollRule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A rule to apply when a date returned by some date specification or parametric schedule specification results in a non working day."@en ;
+	skos:editorialNote 'Covers the FpML business day roll enumeration terms "FOLLOWING and "PRECEDING". "MODFOLLOWING and "MODPRECEDING" consist of this rule applied along with the accompanying "Modify Convention Roll Rule". These are two separate rules but the FpML enum schema conbines them.'@en ;
+	.
+
+fibo-fnd-tim-tim:DateRollRuleDirection
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "DateRollRuleDirection"@en ;
+	rdfs:comment "QName: NONE:DateRollRuleDirection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The selection of possible directions in which to roll dates in a Date Roll Rule or in a Modify Convention Roll Rule."@en ;
+	.
+
+fibo-fnd-tim-tim:DateSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:InstantSpecification ;
+	rdfs:label "date specification"@en ;
+	rdfs:comment "QName: NONE:DateSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The specification of a Specified Date."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the parametric description of the date in the form of some description or algorithm which will return the date, or some list of dates."@en ;
+	.
+
+fibo-fnd-tim-tim:DateTerminationTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateDetermination ;
+	rdfs:label "date termination terms"@en ;
+	rdfs:comment "QName: NONE:DateTerminationTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DateTimeDescription
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalEntityDescription ;
+	rdfs:label "date time description"@en ;
+	rdfs:comment "QName: NONE:DateTimeDescription" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DayMonthValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:TimePointValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-val:hasDataValue ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "day month value"@en ;
+	rdfs:comment "QName: NONE:DayMonthValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "a single value representing a day of a month in any given year"@en ;
+	.
+
+fibo-fnd-tim-tim:DayType
+	a owl:Class ;
+	rdfs:label "day type"@en ;
+	rdfs:comment "QName: NONE:DayType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The type of day specified when stating some duration as a number of days between two dates."@en ;
+	fibo-fnd-utl-av:termOrigin "FpML DayTypeEnum"@en ;
+	.
+
+fibo-fnd-tim-tim:DeterminedDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:Date ,
+		fibo-fnd-tim-tim:DeterminedTemporalThing
+		;
+	rdfs:label "determined date"@en ;
+	rdfs:comment "QName: NONE:DeterminedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "Date determined by some means or method at some time in the future, such as by applying roll rules to a business calendar."@en ;
+	.
+
+fibo-fnd-tim-tim:DeterminedTemporalEntity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:DeterminedTemporalThing ,
+		fibo-fnd-tim-tim:TemporalEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:determination ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalEntityDetermination ;
+		]
+		;
+	rdfs:label "determined temporal entity"@en ;
+	rdfs:comment "QName: NONE:DeterminedTemporalEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DeterminedTemporalThing
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:TemporalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:determination ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalThingDeterminationMethod ;
+		]
+		;
+	rdfs:label "determined temporal thing"@en ;
+	rdfs:comment "QName: NONE:DeterminedTemporalThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:Duration
+	a owl:Class ;
+	rdfs:label "duration"@en ;
+	rdfs:comment "QName: NONE:Duration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A length of time, whether known or unknown"@en ;
+	.
+
+fibo-fnd-tim-tim:DurationDescription
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:TemporalMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:denominatedIn ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalUnit ;
+		]
+		;
+	rdfs:label "duration description"@en ;
+	rdfs:comment "QName: NONE:DurationDescription" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The description of a Duration in terms of numbers of days, hours, years etc."@en ;
+	.
+
+fibo-fnd-tim-tim:DurationDescriptionInCalendarDays
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:DurationDescriptionInCalendarTemporalUnit ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasCalendarDenomination ;
+			owl:someValuesFrom fibo-fnd-tim-tim:CalendarDay ;
+		]
+		;
+	rdfs:label "duration description in calendar days"@en ;
+	rdfs:comment "QName: NONE:DurationDescriptionInCalendarDays" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DurationDescriptionInCalendarTemporalUnit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:DurationDescription ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasCalendarDenomination ;
+			owl:someValuesFrom fibo-fnd-tim-tim:CalendarTemporalUnit ;
+		]
+		;
+	rdfs:label "duration description in calendar temporal unit"@en ;
+	rdfs:comment "QName: NONE:DurationDescriptionInCalendarTemporalUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "Duration Description for Durations that are denominated in Days, Months and Years only (these may be calendar days or business days)."@en ;
+	.
+
+fibo-fnd-tim-tim:DurationDetermination
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalMeasureDetermination ;
+	rdfs:label "duration determination"@en ;
+	rdfs:comment "QName: NONE:DurationDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:DurationDeterminationInDays
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DurationDetermination ;
+	rdfs:label "duration determination in days"@en ;
+	rdfs:comment "QName: NONE:DurationDeterminationInDays" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:FRNDateRule
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateDeterminationReferenceRule ;
+	rdfs:label "f r n date rule"@en ;
+	rdfs:comment "QName: NONE:FRNDateRule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The rule applied to FRN instruments as defined in the ISDA definitions of 2000, Section 4.11, as defined in those rules for either or both of 'FRN Convention' and 'Eurodollar Convention'."@en ;
+	skos:editorialNote "FpML definition: \"Per 2000 ISDA Definitions, Section 4.11, FRN Convention, Eurodollar Convention.\" The above definition is from FpML and does not give the meaning or nature of this rule. FpML notes that this is not strictly a Date Roll Rule (but it may be selected in place of one). On inspection of the ISDA 2000 definition text, this may be because the FRN rule contains within it a specification of the Modified Following date roll rule (Date following rule modified by Modification rule). This rule appears in FpML both in the BusinessDayConventionEnum and the RollConventionEnum (for date roll rules and for scheduled event dates respectively). From FpML definition for BusinessDayConventionEnum: \"... Note that FRN is included here as a type of business day convention although it does not strictly fall within ISDA's definition of a Business Day Convention and does not conform to the simple definition given above.\" Note that this FRN rule is also included in the FpML enumeration for \"RollConventionEnum\". This is the enumeration of possible Calculation Period End Dates and uses the word \"Roll\" in a completely different sense (the date that the application of some calculation to some amount is rolled over from one rate to the next). Full definition from ISDA 2000 Section 4.11: Section 4.11. FRN Convention; Eurodollar Convention. \"FRN Convention\" or \"Eurodollar Convention\" means, in respect of either Payment Dates or Period End Dates for a Swap Transaction and a party, that the Payment Dates or Period End Dates of that party will be each day during the Term of the Swap Transaction that numerically corresponds to the preceding applicable Payment Date or Period End Date, as the case may be, of that party in the calendar month that is the specified number of months after the month in which the preceding applicable Payment Date or Period End Date occurred (or, in the case of the first applicable Payment Date or the Period End Date, the day that numerically corresponds to the Effective Date in the calendar month that is the specified number of months after the month in which the Effective Date occurred), except that (a) if there is not any such numerically corresponding day in the calendar month in which a Payment Date or Period End Date, as the case may be, of that party should occur, then the Payment Date or Period End Date will be the last day that is a Business Day in that month, (b) if a Payment Date or Period End Date, as the case may be, of the party would otherwise fall on a day that is not a Business Day, then the Payment Date or Period End Date will be the first following day that is a Business Day unless that day falls in the next calendar month, in which case the Payment Date or Period End Date will be the first preceding day that is a Business Day and (c) if the preceding applicable Payment Date or Period End Date, as the case may be, of that party occurred on the last day in a calendar month that was a Business Day, then all subsequent applicable Payment Dates or Period End Dates, as the case may be, of that party prior to the Termination Date will be the last day that is a Business Day in the month that is the specified number of months after the month in which the preceding applicable Payment Date or Period End Date occurred."@en ;
+	.
+
+fibo-fnd-tim-tim:Future
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:Tense ;
+	rdfs:label "future"@en ;
+	rdfs:comment "QName: NONE:Future" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:Instant
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalEntity ;
+	rdfs:label "instant"@en ;
+	rdfs:comment "QName: NONE:Instant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	owl:disjointWith fibo-fnd-tim-tim:Interval ;
+	.
+
+fibo-fnd-tim-tim:InstantDetermination
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalEntityDetermination ;
+	rdfs:label "instant determination"@en ;
+	rdfs:comment "QName: NONE:InstantDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "The determination or adjustment of some instant according to some rule."@en ;
+	.
+
+fibo-fnd-tim-tim:InstantSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalEntitySpecification ;
+	rdfs:label "instant specification"@en ;
+	rdfs:comment "QName: NONE:InstantSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:Interval
+	a owl:Class ;
+	rdfs:label "interval"@en ;
+	rdfs:comment "QName: NONE:Interval" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:KnownCalendarDuration
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:KnownDuration ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:describedInCalendarTermsBy ;
+			owl:someValuesFrom fibo-fnd-tim-tim:DurationDescriptionInCalendarTemporalUnit ;
+		]
+		;
+	rdfs:label "known calendar duration"@en ;
+	rdfs:comment "QName: NONE:KnownCalendarDuration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A duration defined as a known number of calendar days."@en ;
+	.
+
+fibo-fnd-tim-tim:KnownDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:Date ,
+		fibo-fnd-tim-tim:KnownTemporalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:occursOnDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		]
+		;
+	rdfs:label "known date"@en ;
+	rdfs:comment "QName: NONE:KnownDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A date which is explicitly known i.e. a calendar date."@en ;
+	.
+
+fibo-fnd-tim-tim:KnownDateDuration
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:KnownCalendarDuration ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:describedInCalendarTermsBy ;
+			owl:someValuesFrom fibo-fnd-tim-tim:DurationDescriptionInCalendarDays ;
+		]
+		;
+	rdfs:label "known date duration"@en ;
+	rdfs:comment "QName: NONE:KnownDateDuration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:KnownDateOffset
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:KnownTimeOffset ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:length.1 ;
+			owl:someValuesFrom fibo-fnd-tim-tim:KnownCalendarDuration ;
+		]
+		;
+	rdfs:label "known date offset"@en ;
+	rdfs:comment "QName: NONE:KnownDateOffset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:KnownDuration
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:Duration ,
+		fibo-fnd-tim-tim:KnownTemporalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:describedBy ;
+			owl:someValuesFrom fibo-fnd-tim-tim:DurationDescription ;
+		]
+		;
+	rdfs:label "known duration"@en ;
+	rdfs:comment "QName: NONE:KnownDuration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition 'The specification of a period of time. This is denominated in time units but is not a Date Time and so is not defined using "Time" or "Date". Instead it uses Temporal Units'@en ;
+	.
+
+fibo-fnd-tim-tim:KnownTemporalEntity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:KnownTemporalThing ,
+		fibo-fnd-tim-tim:TemporalEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:describedBy ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalEntityDescription ;
+		]
+		;
+	rdfs:label "known temporal entity"@en ;
+	rdfs:comment "QName: NONE:KnownTemporalEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:KnownTemporalThing
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:TemporalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:describedBy ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalMeasure ;
+		]
+		;
+	rdfs:label "known temporal thing"@en ;
+	rdfs:comment "QName: NONE:KnownTemporalThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:KnownTimeOffset
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:KnownTemporalThing ,
+		fibo-fnd-tim-tim:TimeOffset ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:length.1 ;
+			owl:someValuesFrom fibo-fnd-tim-tim:KnownDuration ;
+		]
+		;
+	rdfs:label "known time offset"@en ;
+	rdfs:comment "QName: NONE:KnownTimeOffset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:ModifyConventionRollRule
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateDeterminationReferenceRule ;
+	rdfs:label "modify convention roll rule"@en ;
+	rdfs:comment "QName: NONE:ModifyConventionRollRule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A rule to apply when the Date Rool Rule results in a specified date falling on a working date in the month or year following the date which was returned before the Date Roll Rule was applied."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is used for month end roll and year end roll rule. In FpML this rule equates to the "MOD" aspect of the enumeration entries "MODFOLLOWING and MODPRECEDING.'@en ;
+	.
+
+fibo-fnd-tim-tim:Month
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:CalendarTemporalUnit ;
+	rdfs:label "month"@en ;
+	rdfs:comment "QName: NONE:Month" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A Julian calendar month"@en ;
+	.
+
+fibo-fnd-tim-tim:Past
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:Tense ;
+	rdfs:label "past"@en ;
+	rdfs:comment "QName: NONE:Past" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:PeriodicDateSeries
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:PeriodicTimeSeries ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasBeginning ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasPeriodDuration ;
+			owl:someValuesFrom fibo-fnd-tim-tim:KnownCalendarDuration ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasSeriesEnd ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Date ;
+		]
+		;
+	rdfs:label "periodic date series"@en ;
+	rdfs:comment "QName: NONE:PeriodicDateSeries" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A series of dates at regular intervals."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'The series is specified using the parameters modeled here: Start of the whole regular periodic series (and therefore of the first regular period); The length of each repeating period The end of the entire series. Alternatively, one such period may be defined with a start and end date, and no frequency be specified. Alternatively, rather than a "Start" and "End" of each period, since these are essentially the same repeating date definition, this can be specified with reference to some published set of dates, or some convention. For monthly schedules it can be specified as a day of the month; for weekly, a day of the week and so on.'@en ;
+	.
+
+fibo-fnd-tim-tim:PeriodicTimeSeries
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:TemporalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:length ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Duration ;
+		]
+		;
+	rdfs:label "periodic time series"@en ;
+	rdfs:comment "QName: NONE:PeriodicTimeSeries" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:Present
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:Tense ;
+	rdfs:label "present"@en ;
+	rdfs:comment "QName: NONE:Present" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:RelativeDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:RelativeTime ,
+		fibo-fnd-tim-tim:SpecifiedDate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:relativeTo ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Date ;
+		]
+		;
+	rdfs:label "relative date"@en ;
+	rdfs:comment "QName: NONE:RelativeDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A date defined in relation to some other date."@en ;
+	.
+
+fibo-fnd-tim-tim:RelativeDatePeriod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:DatePeriod ,
+		fibo-fnd-tim-tim:RelativeTime ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:relativeTo ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Date ;
+		]
+		;
+	rdfs:label "relative date period"@en ;
+	rdfs:comment "QName: NONE:RelativeDatePeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:RelativeTime
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:TemporalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:relativeTo ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Instant ;
+		]
+		;
+	rdfs:label "relative time"@en ;
+	rdfs:comment "QName: NONE:RelativeTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "Time defined in relation to some other time."@en ;
+	.
+
+fibo-fnd-tim-tim:RollBack
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateRollRuleDirection ;
+	rdfs:label "roll back"@en ;
+	rdfs:comment "QName: NONE:RollBack" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:RollForward
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DateRollRuleDirection ;
+	rdfs:label "roll forward"@en ;
+	rdfs:comment "QName: NONE:RollForward" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:ScheduledTradingDayType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:DayType ;
+	rdfs:label "scheduled trading day type"@en ;
+	rdfs:comment "QName: NONE:ScheduledTradingDayType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "When calculating the number of days between two dates the count includes only scheduled trading days."@en ;
+	.
+
+fibo-fnd-tim-tim:SpecifiedDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:Date ,
+		fibo-fnd-tim-tim:SpecifiedTemporalThing
+		;
+	rdfs:label "specified date"@en ;
+	rdfs:comment "QName: NONE:SpecifiedDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A date which is unknown in terms of not having a specific calendar date attached to it, but known in the sense of being specified unambiguously by some specification."@en ;
+	.
+
+fibo-fnd-tim-tim:SpecifiedTemporalEntity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:SpecifiedTemporalThing ,
+		fibo-fnd-tim-tim:TemporalEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:specification ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalEntitySpecification ;
+		]
+		;
+	rdfs:label "specified temporal entity"@en ;
+	rdfs:comment "QName: NONE:SpecifiedTemporalEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:SpecifiedTemporalThing
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:TemporalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:specification ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalThingSpecification ;
+		]
+		;
+	rdfs:label "specified temporal thing"@en ;
+	rdfs:comment "QName: NONE:SpecifiedTemporalThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TemporalEntity
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasBeginning ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Instant ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:hasEnd ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Instant ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:temporalDefinition ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalEntityDefinition ;
+		]
+		;
+	rdfs:label "temporal entity"@en ;
+	rdfs:comment "QName: NONE:TemporalEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TemporalEntityDefinition
+	a owl:Class ;
+	rdfs:label "temporal entity definition"@en ;
+	rdfs:comment "QName: NONE:TemporalEntityDefinition" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-tim-tim:TemporalEntityDescription
+			fibo-fnd-tim-tim:TemporalEntityDetermination
+			fibo-fnd-tim-tim:TemporalEntitySpecification
+		) ;
+	] ;
+	skos:definition "How a temporal entity is defined. This may be in terms of a simple definition (like a date), a specification that unambiguously specifies the temporal entity, or a method for determing a date, instant or interval such that it is not known now but can be determined at some future time. The different ways that an instant or interrval can be determined, are themselves different kinds of Thing (Measures, Specifications or Methods) and therefore this class of Thing is a union of those possible ways of specifiying a temporal entity, and not a kind of Thing in its own right."@en ;
+	.
+
+fibo-fnd-tim-tim:TemporalEntityDescription
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalMeasure ;
+	rdfs:label "temporal entity description"@en ;
+	rdfs:comment "QName: NONE:TemporalEntityDescription" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A direct description of some temporal entity, for example a date or date time. These are defined as simple types of thing (such as date), without recourse to some specification external to or additional to the provision of simple types."@en ;
+	.
+
+fibo-fnd-tim-tim:TemporalEntityDetermination
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalThingDeterminationMethod ;
+	rdfs:label "temporal entity determination"@en ;
+	rdfs:comment "QName: NONE:TemporalEntityDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A Temporal Entity determination sets out how some Temporal Entity, currently unknown, is to be determined. For example, how a payment date or other event is to be determined at some point in the future, based on information prevailing at that future time."@en ;
+	.
+
+fibo-fnd-tim-tim:TemporalEntitySpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalThingSpecification ;
+	rdfs:label "temporal entity specification"@en ;
+	rdfs:comment "QName: NONE:TemporalEntitySpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A Temporal Entity Specification specifies how some Temporal Entity (instant or intervl, e.g. Day or Period) actually is, other than by direct description."@en ;
+	.
+
+fibo-fnd-tim-tim:TemporalMeasure
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-qt-qtu:QuantityValue ;
+	rdfs:label "temporal measure"@en ;
+	rdfs:comment "QName: NONE:TemporalMeasure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A measure of description of time"@en ;
+	.
+
+fibo-fnd-tim-tim:TemporalMeasureDefinition
+	a owl:Class ;
+	rdfs:label "temporal measure definition"@en ;
+	rdfs:comment "QName: NONE:TemporalMeasureDefinition" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-tim-tim:TemporalMeasure
+			fibo-fnd-tim-tim:TemporalMeasureDetermination
+		) ;
+	] ;
+	.
+
+fibo-fnd-tim-tim:TemporalMeasureDetermination
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalThingDeterminationMethod ;
+	rdfs:label "temporal measure determination"@en ;
+	rdfs:comment "QName: NONE:TemporalMeasureDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TemporalThing
+	a owl:Class ;
+	rdfs:subClassOf
+		owl:Thing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:temporalDefinition ;
+			owl:someValuesFrom fibo-fnd-tim-tim:TemporalThingExpression ;
+		]
+		;
+	rdfs:label "temporal thing"@en ;
+	rdfs:comment "QName: NONE:TemporalThing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TemporalThingDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "temporal thing determination method"@en ;
+	rdfs:comment "QName: NONE:TemporalThingDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TemporalThingExpression
+	a owl:Class ;
+	rdfs:label "temporal thing expression"@en ;
+	rdfs:comment "QName: NONE:TemporalThingExpression" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-tim-tim:TemporalEntityDefinition
+			fibo-fnd-tim-tim:TemporalMeasureDefinition
+		) ;
+	] ;
+	.
+
+fibo-fnd-tim-tim:TemporalThingSpecification
+	a owl:Class ;
+	rdfs:label "temporal thing specification"@en ;
+	rdfs:comment "QName: NONE:TemporalThingSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TemporalUnit
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-qt-qtu:MeasurementUnit ;
+	rdfs:label "temporal unit"@en ;
+	rdfs:comment "QName: NONE:TemporalUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "Units in which Time and Date are measured, for example in defining Durations"@en ;
+	.
+
+fibo-fnd-tim-tim:TemporalValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-val:SingleValue ;
+	rdfs:label "temporal value"@en ;
+	rdfs:comment "QName: NONE:TemporalValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "a single value representing some kind of time, including multiply occurring time values"@en ;
+	.
+
+fibo-fnd-tim-tim:Tense
+	a owl:Class ;
+	rdfs:label "Tense"@en ;
+	rdfs:comment "QName: NONE:Tense" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TimeOfDay
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:RelativeTime ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:relativeTo ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Date ;
+		]
+		;
+	rdfs:label "time of day"@en ;
+	rdfs:comment "QName: NONE:TimeOfDay" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TimeOffset
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:TemporalThing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:length ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Duration ;
+		]
+		;
+	rdfs:label "time offset"@en ;
+	rdfs:comment "QName: NONE:TimeOffset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:TimePointValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalValue ;
+	rdfs:label "time point value"@en ;
+	rdfs:comment "QName: NONE:TimePointValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "a single value representing a point in time, including multiply occurring points in time such as a day of a month"@en ;
+	.
+
+fibo-fnd-tim-tim:Week
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:CalendarTemporalUnit ;
+	rdfs:label "week"@en ;
+	rdfs:comment "QName: NONE:Week" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:WeekDaySelection
+	a owl:Class ;
+	rdfs:label "WeekDaySelection"@en ;
+	rdfs:comment "QName: NONE:WeekDaySelection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:Weekday
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:TemporalUnit ;
+	rdfs:label "weekday"@en ;
+	rdfs:comment "QName: NONE:Weekday" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A day during the week, as a temporal unit."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'this means that if a duration (for example) is cited as being x number of weekdays, these are the days Monday through Friday (irrespective of holidays). So a Thursday plus 3 days is Tuesday. This is included in the model in case this is needed as a unit but as at June 2011 has not been referenced in any models. Note that ISDA FpML parametric schedules have a scheduled event definition which may be any of the 7 days of the week - that is a different term "Day Of The Week". That is not a temporal unit but a sort of day.'@en ;
+	.
+
+fibo-fnd-tim-tim:Year
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-tim-tim:CalendarTemporalUnit ;
+	rdfs:label "year"@en ;
+	rdfs:comment "QName: NONE:Year" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	skos:definition "A Gregorian calendar year"@en ;
+	.
+
+fibo-fnd-tim-tim:YearBasedDurationDescription
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-tim-tim:DurationDescriptionInCalendarTemporalUnit ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-tim-tim:describedWithReferenceTo ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Year ;
+		]
+		;
+	rdfs:label "year based duration description"@en ;
+	rdfs:comment "QName: NONE:YearBasedDurationDescription" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	.
+
+fibo-fnd-tim-tim:contractuallyDeterminedWithReferenceTo
+	a owl:ObjectProperty ;
+	rdfs:label "contractually determined with reference to"@en ;
+	rdfs:comment "QName: NONE:contractuallyDeterminedWithReferenceTo" ;
+	rdfs:domain fibo-fnd-tim-tim:ContractuallyDeterminedDate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:DateDeterminationTermsSet ;
+	.
+
+fibo-fnd-tim-tim:date
+	a owl:ObjectProperty ;
+	rdfs:label "date"@en ;
+	rdfs:comment "QName: NONE:date" ;
+	rdfs:domain fibo-fnd-tim-tim:DateDescription ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:Date ;
+	.
+
+fibo-fnd-tim-tim:dateAndTime
+	a owl:ObjectProperty ;
+	rdfs:label "date and time"@en ;
+	rdfs:comment "QName: NONE:dateAndTime" ;
+	rdfs:domain fibo-fnd-tim-tim:DateTimeDescription ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	.
+
+fibo-fnd-tim-tim:dateOffset
+	a owl:DatatypeProperty ;
+	rdfs:label "date offset"@en ;
+	rdfs:comment "QName: NONE:dateOffset" ;
+	rdfs:domain fibo-fnd-tim-tim:RelativeDate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The offset applied to the date referred to, to define this date."@en ;
+	.
+
+fibo-fnd-tim-tim:dateOffsetDayType
+	a owl:ObjectProperty ;
+	rdfs:label "date offset day type"@en ;
+	rdfs:comment "QName: NONE:dateOffsetDayType" ;
+	rdfs:domain fibo-fnd-tim-tim:RelativeDate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:DayType ;
+	.
+
+fibo-fnd-tim-tim:denominatedIn
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-qt-qtu:hasMeasurementUnit ;
+	rdfs:label "denominated in"@en ;
+	rdfs:comment "QName: NONE:denominatedIn" ;
+	rdfs:domain fibo-fnd-tim-tim:DurationDescription ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:TemporalUnit ;
+	.
+
+fibo-fnd-tim-tim:describedBy
+	a owl:ObjectProperty ;
+	rdfs:label "described by"@en ;
+	rdfs:comment "QName: NONE:describedBy" ;
+	rdfs:domain fibo-fnd-tim-tim:KnownTemporalThing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:TemporalMeasure ;
+	.
+
+fibo-fnd-tim-tim:describedInCalendarTermsBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-tim-tim:describedBy ;
+	rdfs:label "described in calendar terms by"@en ;
+	rdfs:comment "QName: NONE:describedInCalendarTermsBy" ;
+	rdfs:domain fibo-fnd-tim-tim:KnownCalendarDuration ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:DurationDescriptionInCalendarTemporalUnit ;
+	.
+
+fibo-fnd-tim-tim:describedWithReferenceTo
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-tim-tim:hasCalendarDenomination ;
+	rdfs:label "described with reference to"@en ;
+	rdfs:comment "QName: NONE:describedWithReferenceTo" ;
+	rdfs:domain fibo-fnd-tim-tim:YearBasedDurationDescription ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:Year ;
+	.
+
+fibo-fnd-tim-tim:description
+	a owl:DatatypeProperty ;
+	rdfs:label "description"@en ;
+	rdfs:comment "QName: NONE:description" ;
+	rdfs:domain fibo-fnd-tim-tim:FRNDateRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Textual description of the FRN Date Rule."@en ;
+	.
+
+fibo-fnd-tim-tim:determination
+	a owl:ObjectProperty ;
+	rdfs:label "determination"@en ;
+	rdfs:comment "QName: NONE:determination" ;
+	rdfs:domain fibo-fnd-tim-tim:DeterminedTemporalThing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:TemporalThingDeterminationMethod ;
+	.
+
+fibo-fnd-tim-tim:determines
+	a owl:ObjectProperty ;
+	rdfs:label "determines"@en ;
+	rdfs:comment "QName: NONE:determines" ;
+	rdfs:domain fibo-fnd-tim-tim:DateDeterminingAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:AgencyDeterminedDate ;
+	.
+
+fibo-fnd-tim-tim:hasBeginning
+	a owl:ObjectProperty ;
+	rdfs:label "has beginning"@en ;
+	rdfs:comment "QName: NONE:hasBeginning" ;
+	rdfs:domain fibo-fnd-tim-tim:TemporalEntity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:Instant ;
+	.
+
+fibo-fnd-tim-tim:hasCalendarDenomination
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-tim-tim:denominatedIn ;
+	rdfs:label "has calendar denomination"@en ;
+	rdfs:comment "QName: NONE:hasCalendarDenomination" ;
+	rdfs:domain fibo-fnd-tim-tim:DurationDescriptionInCalendarTemporalUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:CalendarTemporalUnit ;
+	.
+
+fibo-fnd-tim-tim:hasEnd
+	a owl:ObjectProperty ;
+	rdfs:label "has end"@en ;
+	rdfs:comment "QName: NONE:hasEnd" ;
+	rdfs:domain fibo-fnd-tim-tim:TemporalEntity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:Instant ;
+	.
+
+fibo-fnd-tim-tim:hasPeriodDuration
+	a owl:ObjectProperty ;
+	rdfs:label "has period duration"@en ;
+	rdfs:comment "QName: NONE:hasPeriodDuration" ;
+	rdfs:domain fibo-fnd-tim-tim:PeriodicDateSeries ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:KnownCalendarDuration ;
+	.
+
+fibo-fnd-tim-tim:hasSeriesEnd
+	a owl:ObjectProperty ;
+	rdfs:label "has series end"@en ;
+	rdfs:comment "QName: NONE:hasSeriesEnd" ;
+	rdfs:domain fibo-fnd-tim-tim:PeriodicDateSeries ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:Date ;
+	.
+
+fibo-fnd-tim-tim:length
+	a owl:ObjectProperty ;
+	rdfs:label "length"@en ;
+	rdfs:comment "QName: NONE:length" ;
+	rdfs:domain fibo-fnd-tim-tim:Interval ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:Duration ;
+	.
+
+fibo-fnd-tim-tim:length.1
+	a owl:ObjectProperty ;
+	rdfs:label "length"@en ;
+	rdfs:comment "QName: NONE:length.1" ;
+	rdfs:domain fibo-fnd-tim-tim:KnownTimeOffset ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:KnownDuration ;
+	.
+
+fibo-fnd-tim-tim:modified
+	a owl:DatatypeProperty ;
+	rdfs:label "modified"@en ;
+	rdfs:comment "QName: NONE:modified" ;
+	rdfs:domain fibo-fnd-tim-tim:DateRollRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the Date Roll Rule includes a Modify Convention Roll Rule, defining treatment of non business days which result from the application of this rule to the date returned by the date specification or parametric schedule."@en ;
+	.
+
+fibo-fnd-tim-tim:modifiedBy
+	a owl:ObjectProperty ;
+	rdfs:label "modified by"@en ;
+	rdfs:comment "QName: NONE:modifiedBy" ;
+	rdfs:domain fibo-fnd-tim-tim:DateDeterminationReferenceRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:DateDeterminationReferenceRule ;
+	skos:definition "This is the top Relationship Fact in this hierarchy."@en ;
+	.
+
+fibo-fnd-tim-tim:multiplier.2
+	a owl:DatatypeProperty ;
+	rdfs:label "multiplier"@en ;
+	rdfs:comment "QName: NONE:multiplier.2" ;
+	rdfs:domain fibo-fnd-tim-tim:DurationDescription ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The number of units as specified, that the duration consists of."@en ;
+	.
+
+fibo-fnd-tim-tim:numberOfDays
+	a owl:DatatypeProperty ;
+	rdfs:label "number of days"@en ;
+	rdfs:comment "QName: NONE:numberOfDays" ;
+	rdfs:domain fibo-fnd-tim-tim:DurationDescriptionInCalendarDays ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of days in the period, expressed as a whole number."@en ;
+	.
+
+fibo-fnd-tim-tim:occursOnDate
+	a owl:ObjectProperty ;
+	rdfs:label "occursOnDate"@en ;
+	rdfs:comment "QName: NONE:occursOnDate" ;
+	rdfs:domain fibo-fnd-tim-tim:Date ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-fnd-tim-tim:reference
+	a owl:DatatypeProperty ;
+	rdfs:label "reference"@en ;
+	rdfs:comment "QName: NONE:reference" ;
+	rdfs:domain fibo-fnd-tim-tim:FRNDateRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Textual reference to the document and section that contains the rule."@en ;
+	.
+
+fibo-fnd-tim-tim:reference.1
+	a owl:ObjectProperty ;
+	rdfs:label "reference"@en ;
+	rdfs:comment "QName: NONE:reference.1" ;
+	rdfs:domain fibo-fnd-tim-tim:DateDetermination ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:DateDeterminationReferenceRule ;
+	.
+
+fibo-fnd-tim-tim:relativeTo
+	a owl:ObjectProperty ;
+	rdfs:label "relative to"@en ;
+	rdfs:comment "QName: NONE:relativeTo" ;
+	rdfs:domain fibo-fnd-tim-tim:RelativeTime ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:Instant ;
+	.
+
+fibo-fnd-tim-tim:ruleDirection
+	a owl:ObjectProperty ;
+	rdfs:label "rule direction"@en ;
+	rdfs:comment "QName: NONE:ruleDirection" ;
+	rdfs:domain fibo-fnd-tim-tim:ModifyConventionRollRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:DateRollRuleDirection ;
+	skos:definition "The direction in which the rule is to be applied to the date returned by the Date Roll Rule."@en ;
+	.
+
+fibo-fnd-tim-tim:setsOut
+	a owl:ObjectProperty ;
+	rdfs:label "sets out"@en ;
+	rdfs:comment "QName: NONE:setsOut" ;
+	rdfs:domain fibo-fnd-tim-tim:DateDeterminationTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:ContractualDateSpecification ;
+	.
+
+fibo-fnd-tim-tim:specification
+	a owl:ObjectProperty ;
+	rdfs:label "specification"@en ;
+	rdfs:comment "QName: NONE:specification" ;
+	rdfs:domain fibo-fnd-tim-tim:SpecifiedTemporalThing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:TemporalThingSpecification ;
+	.
+
+fibo-fnd-tim-tim:temporalDefinition
+	a owl:ObjectProperty ;
+	rdfs:label "temporal definition"@en ;
+	rdfs:comment "QName: NONE:temporalDefinition" ;
+	rdfs:domain fibo-fnd-tim-tim:TemporalThing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> ;
+	rdfs:range fibo-fnd-tim-tim:TemporalThingExpression ;
+	.
+

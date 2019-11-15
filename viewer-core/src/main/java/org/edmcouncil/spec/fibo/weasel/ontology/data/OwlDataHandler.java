@@ -84,13 +84,14 @@ public class OwlDataHandler {
   private AppConfiguration config;
 
   private final String subClassOfIriString = ViewerIdentifierFactory
-      .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName()).toString();
+      .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
 
   public OwlListDetails handleParticularClass(IRI iri, OWLOntology ontology) {
     OwlListDetails resultDetails = new OwlListDetails();
 
     Iterator<OWLClass> classesIterator = ontology.classesInSignature().iterator();
-
+    //'Nothing' has all restrictions, we don't want to display that.
+    boolean skipNothingData = !iri.equals(IRI.create("http://www.w3.org/2002/07/owl#Nothing"));
     while (classesIterator.hasNext()) {
       OWLClass clazz = classesIterator.next();
 
@@ -107,9 +108,13 @@ public class OwlDataHandler {
 
         OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, clazz);
-        OwlDetailsProperties<PropertyValue> inheritedAxioms = handleInheritedAxioms(ontology, clazz);
 
-        ViewerGraph vg = graphDataHandler.handleGraph(clazz, ontology);
+        OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
+        ViewerGraph vg = null;
+        if (skipNothingData) {
+          inheritedAxioms = handleInheritedAxioms(ontology, clazz);
+          vg = graphDataHandler.handleGraph(clazz, ontology);
+        }
 
         subclasses = filterSubclasses(subclasses);
 
@@ -146,17 +151,17 @@ public class OwlDataHandler {
     return taxElements;
   }
 
-  private void setResultValues(OwlListDetails resultDetails, 
-      OwlTaxonomyImpl tax, 
-      OwlDetailsProperties<PropertyValue> axioms, 
-      OwlDetailsProperties<PropertyValue> annotations, 
-      OwlDetailsProperties<PropertyValue> directSubclasses, 
-      OwlDetailsProperties<PropertyValue> individuals, 
-      OwlDetailsProperties<PropertyValue> inheritedAxioms, 
-      ViewerGraph vg, 
+  private void setResultValues(OwlListDetails resultDetails,
+      OwlTaxonomyImpl tax,
+      OwlDetailsProperties<PropertyValue> axioms,
+      OwlDetailsProperties<PropertyValue> annotations,
+      OwlDetailsProperties<PropertyValue> directSubclasses,
+      OwlDetailsProperties<PropertyValue> individuals,
+      OwlDetailsProperties<PropertyValue> inheritedAxioms,
+      ViewerGraph vg,
       List<PropertyValue> subclasses) {
     axioms.getProperties().put(subClassOfIriString, subclasses);
-    
+
     resultDetails.setTaxonomy(tax);
     resultDetails.addAllProperties(axioms);
     resultDetails.addAllProperties(annotations);
@@ -638,7 +643,7 @@ public class OwlDataHandler {
         .map((c) -> handleAxioms(c, ontology))
         .forEachOrdered((handleAxioms) -> {
           for (Map.Entry<String, List<PropertyValue>> entry : handleAxioms.getProperties().entrySet()) {
-            
+
             if (entry.getKey().equals(subClassOfKey)) {
               for (PropertyValue propertyValue : entry.getValue()) {
                 if (propertyValue.getType() != WeaselOwlType.TAXONOMY) {

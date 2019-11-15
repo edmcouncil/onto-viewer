@@ -1,0 +1,143 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/LoanProducts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/MortgageLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansRegulatory/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/LoanProducts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-ln-ln: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> .
+@prefix fibo-loan-loan-col: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-loan-loan-reg: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansRegulatory/> .
+@prefix fibo-loan-typ-mtg: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/> .
+@prefix fibo-loan-typ-prod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/>
+	a owl:Ontology ;
+	rdfs:label "LoanProducts"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology describes loan and mortgage loan products. A product as defined here is something marketed and offered for sale, in this case a loan, such that when a customer takes on the product, they become signatories to a corresponding loan contract. A loan product in this sense is a contractual , off-the-shelf product with terms corresponding to those in the actual contract when it is signed.
+		Note that considerable work has been done on products to support a separate loan product concept in the HMDA-derived Loan Contracts module, so this work now needs integrating with that or deprecating""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/MortgageLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansRegulatory/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/LoanProducts/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-ln-ln:LoanProduct
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/FinancialProduct> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/isEmbodiedIn> ;
+			owl:someValuesFrom fibo-loan-ln-ln:LoanContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-prod:hasPreconditions ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditFacilities/LoanPrecedentConditions> ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-prod:isTemplateFor ;
+			owl:someValuesFrom fibo-loan-ln-ln:LoanContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-prod:specifies ;
+			owl:someValuesFrom fibo-loan-loan-col:LoanCollateral ;
+		]
+		;
+	.
+
+fibo-loan-typ-prod:LoanProductDisclosureRight
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-reg:ProductDisclosureRight ;
+	rdfs:label "loan product disclosure right"@en ;
+	rdfs:comment "QName: NONE:LoanProductDisclosureRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/> ;
+	skos:definition "Right to fair representation of the facts about Loan products before entrering into agreements for same."@en ;
+	.
+
+fibo-loan-typ-prod:MortgageProduct
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-ln-ln:LoanProduct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/isEmbodiedIn> ;
+			owl:someValuesFrom fibo-loan-ln-ln:MortgageLoanContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-prod:isTemplateFor ;
+			owl:someValuesFrom fibo-loan-ln-ln:MortgageLoanContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-prod:specifies ;
+			owl:someValuesFrom fibo-loan-loan-col:LoanPropertyCollateral ;
+		]
+		;
+	rdfs:label "mortgage product"@en ;
+	rdfs:comment "QName: NONE:MortgageProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/> ;
+	.
+
+fibo-loan-typ-prod:hasPreconditions
+	a owl:ObjectProperty ;
+	rdfs:label "has preconditions"@en ;
+	rdfs:comment "QName: NONE:hasPreconditions" ;
+	rdfs:domain fibo-loan-ln-ln:LoanProduct ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditFacilities/LoanPrecedentConditions> ;
+	.
+
+fibo-loan-typ-prod:isAbout
+	a owl:ObjectProperty ;
+	rdfs:label "is about" ;
+	rdfs:comment "QName: NONE:isAbout" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/> ;
+	.
+
+fibo-loan-typ-prod:isTemplateFor
+	a owl:ObjectProperty ;
+	rdfs:label "is template for"@en ;
+	rdfs:comment "QName: NONE:isTemplateFor" ;
+	rdfs:domain <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/Product> ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/> ;
+	rdfs:range fibo-fnd-agr-ctr:Contract ;
+	.
+
+fibo-loan-typ-prod:specifies
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies" ;
+	rdfs:domain fibo-loan-ln-ln:LoanProduct ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/> ;
+	rdfs:range fibo-loan-loan-col:LoanCollateral ;
+	.
+

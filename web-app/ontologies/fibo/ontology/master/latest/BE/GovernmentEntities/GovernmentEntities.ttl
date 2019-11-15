@@ -1,0 +1,726 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/Executives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-fct: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/> .
+@prefix fibo-be-ge-ge: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-be-oac-exec: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/Executives/> .
+@prefix fibo-fnd-aap-ppl: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-law-cor: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/>
+	a owl:Ontology ;
+	rdfs:label "Government Entities Ontology" ;
+	rdfs:comment "QName: fibo-be-ge-ge:" ;
+	dct:abstract "This ontology defines the fundamental concepts for representing polities and government entities and their relations." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2019 EDM Council, Inc." ,
+		"Copyright (c) 2016-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/Executives/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-be-ge-ge" ;
+	sm:filename "GovernmentEntities.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/Executives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/BE/20160801/GovernmentEntities/GovernmentEntities.rdf version of this ontology was added to Business Entities, per the issue resolutions identified in the FIBO BE 1.1 RTF report." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/BE/20160801/GovernmentEntities/GovernmentEntities.rdf version of this ontology was modified per the issue resolutions identified in the FIBO BE 1.2 RTF report." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/BE/20170201/GovernmentEntities/GovernmentEntities.rdf version of this ontology was modified per the FIBO 2.0 RFC to integrate LCC." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/BE/20180201/GovernmentEntities/GovernmentEntities.rdf version of this ontology was modified to to rationalize natural person and legally capable person in a new concept, competent natural person, simplify / merge the legal person and formal organization class hierarchies, and revise certain definitions, such as for supranational entity, to correspond to ISO definitions." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/BE/20181201/GovernmentEntities/GovernmentEntities.rdf version of this ontology was modified to reflect the move of hasObjective to FND to enable higher level reuse and eliminate a reasoning error."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-be-ge-ge:BranchOfGovernment
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-ge-ge:GovernmentBody ;
+	rdfs:label "branch of government" ;
+	rdfs:comment "QName: fibo-be-ge-ge:BranchOfGovernment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a division of the government of a state, with separate and independent powers and areas of responsibility so that the powers of one branch are not in conflict with the powers associated with the other branches" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"https://en.wikipedia.org/wiki/Separation_of_powers"^^xsd:anyURI ,
+		"https://www.usa.gov/branches-of-government"^^xsd:anyURI
+		;
+	.
+
+fibo-be-ge-ge:ExecutiveBranch
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-ge-ge:BranchOfGovernment ;
+	rdfs:label "executive branch" ;
+	rdfs:comment "QName: fibo-be-ge-ge:ExecutiveBranch" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "the branch of government that has its authority and responsibility for the daily administration of the state" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"https://en.wikipedia.org/wiki/Executive_(government)"^^xsd:anyURI ,
+		"https://www.usa.gov/branches-of-government"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "The executive branch executes, or enforces the law." ;
+	.
+
+fibo-be-ge-ge:FederalGovernment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:NationalGovernment ,
+		[
+			a owl:Class ;
+			owl:intersectionOf (
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-fnd-rel-rel:governs ;
+					owl:onClass fibo-fnd-plc-cty:FederalCapitalArea ;
+					owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+				]
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-fnd-rel-rel:governs ;
+					owl:onClass fibo-fnd-plc-cty:FederalState ;
+					owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+				]
+			) ;
+		]
+		;
+	rdfs:label "federal government" ;
+	rdfs:comment "QName: fibo-be-ge-ge:FederalGovernment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a union of states under a central government distinct from the individual governments of the separate states" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Federation"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A federation is a political entity characterized by a union of partially self-governing states or regions under a central (federal) government. In a federation, the self-governing status of the component states, as well as the division of power between them and the central government, are typically constitutionally entrenched and may not be altered by a unilateral decision of either party, the states or the federal political body." ;
+	.
+
+fibo-be-ge-ge:FederatedSovereignty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:SovereignState ,
+		[
+			a owl:Class ;
+			owl:intersectionOf (
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-be-ge-ge:isRepresentedBy ;
+					owl:onClass fibo-be-ge-ge:RegionalGovernment ;
+					owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+				]
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-be-ge-ge:isRepresentedBy ;
+					owl:onClass fibo-be-ge-ge:FederalGovernment ;
+					owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+				]
+			) ;
+		] ,
+		[
+			a owl:Class ;
+			owl:intersectionOf (
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-be-ge-ge:hasFullSovereigntyOver ;
+					owl:someValuesFrom lcc-cr:Country ;
+				]
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-be-ge-ge:hasSharedSovereigntyOver ;
+					owl:onClass fibo-fnd-plc-cty:FederalState ;
+					owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+				]
+			) ;
+		]
+		;
+	rdfs:label "federated sovereignty" ;
+	rdfs:comment "QName: fibo-be-ge-ge:FederatedSovereignty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a political entity characterized by a union of partially self-governing states or regions under a central (federal) government" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Federation"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Federal entity in the sense of a legal entity, that is, what it is that incurs debt for a federal government, i.e. the Federal entity in the sense of the legal entity, as distinct from the Federal government. It is identified as a legal entity because it is able to incur debt in its own right." ;
+	.
+
+fibo-be-ge-ge:Government
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-fct:FunctionalEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom lcc-cr:GeopoliticalEntity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasPart ;
+			owl:someValuesFrom fibo-be-ge-ge:BranchOfGovernment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasPart ;
+			owl:someValuesFrom fibo-be-ge-ge:GovernmentAgency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasPart ;
+			owl:someValuesFrom fibo-be-ge-ge:GovernmentDepartment ;
+		]
+		;
+	rdfs:label "government" ;
+	rdfs:comment "QName: fibo-be-ge-ge:Government" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	owl:disjointWith fibo-be-ge-ge:Instrumentality ;
+	skos:definition "the system by which a state or community is controlled" ;
+	fibo-fnd-utl-av:explanatoryNote "In the Commonwealth of Nations, the word government is also used more narrowly to refer to the collective group of people that exercises executive authority in a state. This usage is analogous to what is called an 'administration' in American English. Furthermore, especially in American English, the concepts of the state and the government may be used synonymously to refer to the person or group of people exercising authority over a politically organized territory." ;
+	.
+
+fibo-be-ge-ge:GovernmentAgency
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:GovernmentBody ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:someValuesFrom fibo-be-ge-ge:GovernmentAppointee ;
+		]
+		;
+	rdfs:label "government agency" ;
+	rdfs:comment "QName: fibo-be-ge-ge:GovernmentAgency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	owl:disjointWith fibo-be-ge-ge:GovernmentDepartment ;
+	skos:definition "a permanent or semi-permanent organization, often an appointed commission, in the machinery of government that is responsible for the oversight and administration of specific functions" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Government_agency"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "There is a notable variety of agency types. Although usage differs, a government agency is normally distinct both from a department or ministry, and other types of public body established by government. The functions of an agency are normally executive in character, since different types of organizations (such as commissions) are most often constituted in an advisory role; this distinction is often blurred in practice however." ;
+	.
+
+fibo-be-ge-ge:GovernmentAppointee
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:GovernmentOfficial ,
+		fibo-be-oac-exec:Executive ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:isAppointedBy ;
+				owl:someValuesFrom fibo-be-ge-ge:GovernmentBody ;
+			] ;
+		]
+		;
+	rdfs:label "government appointee" ;
+	rdfs:comment "QName: fibo-be-ge-ge:GovernmentAppointee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "an individual appointed by government decree to lead, or participate in some capacity in a government body" ;
+	.
+
+fibo-be-ge-ge:GovernmentBody
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-org-fm:FormalOrganization ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-gao-obj:hasObjective ;
+			owl:someValuesFrom fibo-be-le-lp:PublicPurpose ;
+		]
+		;
+	rdfs:label "government body" ;
+	rdfs:comment "QName: fibo-be-ge-ge:GovernmentBody" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a formal organization that is an agency, instrumentality, or other body of supranational, national, federal, state, or local government, including certain multijurisdictional agencies and departments that carry out the business of government" ;
+	fibo-fnd-utl-av:adaptedFrom "http://definitions.uslegal.com/g/government-entity/"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Identifying government bodies is a pre-requisite for identifying government officials.  This information is needed to help ensure compliance with applicable laws relating to bribery or corruption, including the U.S. Foreign Corrupt Practices Act (FCPA), the UK Bribery Act 2010 (UKBA), the U.S. Bank Bribery Act (Bribery Act), and other anti-bribery and corruption laws in the jurisdictions where financial institutions conduct business." ;
+	.
+
+fibo-be-ge-ge:GovernmentDepartment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:GovernmentBody ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:someValuesFrom fibo-be-ge-ge:GovernmentMinister ;
+		]
+		;
+	rdfs:label "government department" ;
+	rdfs:comment "QName: fibo-be-ge-ge:GovernmentDepartment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a specialized organization responsible for a sector of government public administration" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Ministry"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:GovernmentMinister
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:GovernmentOfficial ,
+		fibo-be-oac-exec:Executive
+		;
+	rdfs:label "government minister" ;
+	rdfs:comment "QName: fibo-be-ge-ge:GovernmentMinister" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "government official that is an executive, who is either appointed or elected to a high office in the government" ;
+	skos:example "Minister of Finance, Secretary of State, Attorney General of California" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.thefreedictionary.com/government+minister"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:GovernmentOfficial
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-oac-exec:ResponsibleParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegallyCompetentNaturalPerson ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:isMemberOf ;
+				owl:allValuesFrom fibo-be-ge-ge:GovernmentBody ;
+			] ;
+		]
+		;
+	rdfs:label "government official" ;
+	rdfs:comment "QName: fibo-be-ge-ge:GovernmentOfficial" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a person elected or appointed to administer some aspect of a government" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.thefreedictionary.com/government+officials"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:Instrumentality
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:GovernmentBody ,
+		fibo-be-le-lp:LegalEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:isInstrumentOf ;
+			owl:someValuesFrom fibo-be-ge-ge:Government ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isMandatedBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:StatuteLaw ;
+		]
+		;
+	rdfs:label "instrumentality" ;
+	rdfs:comment "QName: fibo-be-ge-ge:Instrumentality" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "an organization that serves a public purpose and is closely tied to a government, but is not a government agency" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/i/instrumentality.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Many instrumentalities are private companies, and some are chartered directly by state or federal government. Instrumentalities are subject to a unique set of laws that shape their activities." ;
+	.
+
+fibo-be-ge-ge:Judiciary
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:BranchOfGovernment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasPart ;
+			owl:someValuesFrom fibo-fnd-law-cor:CourtOfLaw ;
+		]
+		;
+	rdfs:label "judiciary" ;
+	rdfs:comment "QName: fibo-be-ge-ge:Judiciary" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a branch of government that comprises the system of courts that interprets and applies the law in the name of the supranational, national, federal, or regional government, depending on its jurisdiction" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Judiciary"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "The judiciary also provides a mechanism for the resolution of disputes. Under the doctrine of the separation of powers, the judiciary generally does not make law (that is, in a plenary fashion, which is the responsibility of the legislature) or enforce law (which is the responsibility of the executive), but rather interprets law and applies it to the facts of each case." ;
+	.
+
+fibo-be-ge-ge:Legislature
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-ge-ge:BranchOfGovernment ;
+	rdfs:label "legislature" ;
+	rdfs:comment "QName: fibo-be-ge-ge:Legislature" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "the law-making body of a political unit, usually a national government, that has power to enact, amend, and repeal public policy" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Legislature"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Laws enacted by legislatures are known as legislation. Legislatures observe and steer governing actions and usually have exclusive authority to amend the budget or budgets involved in the process." ;
+	.
+
+fibo-be-ge-ge:MunicipalEntity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Polity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:hasSovereigntyOver ;
+			owl:someValuesFrom fibo-fnd-plc-cty:Municipality ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:isRepresentedBy ;
+			owl:someValuesFrom fibo-be-ge-ge:MunicipalGovernment ;
+		]
+		;
+	rdfs:label "municipal entity" ;
+	rdfs:comment "QName: fibo-be-ge-ge:MunicipalEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a polity that typically represents a city, township, or other administrative subdivision having corporate status and powers of self-government or jurisdiction" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Municipality"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Municipal entity in the sense of a legal entity, that is, what it is that incurs debt for a municipality, as distinct from the Municipal government. A municipal entity has a Government which sets laws applicable within the geographical area corresponding to its jurisdiction." ;
+	fibo-fnd-utl-av:synonym "municipality" ;
+	.
+
+fibo-be-ge-ge:MunicipalGovernment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Government ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom fibo-fnd-plc-cty:Municipality ;
+		]
+		;
+	rdfs:label "municipal government" ;
+	rdfs:comment "QName: fibo-be-ge-ge:MunicipalGovernment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "the government of a municipality" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.thefreedictionary.com/municipal+government"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:NationalGovernment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Government ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom lcc-cr:Country ;
+		]
+		;
+	rdfs:label "national government" ;
+	rdfs:comment "QName: fibo-be-ge-ge:NationalGovernment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a government and the politicians that that run a country as a whole (as opposed to local government)" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://dictionary.reference.com/browse/national+government"^^xsd:anyURI ,
+		"http://www.collinsdictionary.com/dictionary/english/national-government"^^xsd:anyURI
+		;
+	.
+
+fibo-be-ge-ge:Polity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:GovernmentBody ,
+		fibo-be-le-lp:LegalPerson ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:hasSovereigntyOver ;
+			owl:someValuesFrom lcc-cr:GeopoliticalEntity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:isRepresentedBy ;
+			owl:someValuesFrom fibo-be-ge-ge:Government ;
+		]
+		;
+	rdfs:label "polity" ;
+	rdfs:comment "QName: fibo-be-ge-ge:Polity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a legal person that is a supranational entity, crown, state, or subordinate civil authority, such as a province, prefecture, county, municipality, city, or district representing the people of that entity" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Polity"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:RegionalGovernment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Government ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom lcc-cr:GeopoliticalEntity ;
+		]
+		;
+	rdfs:label "regional government" ;
+	rdfs:comment "QName: fibo-be-ge-ge:RegionalGovernment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "an administrative body for a small geographic area, such as a county, smaller town, or other similar community" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/local-government.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A local government will typically only have control over their specific geographical region, and cannot pass or enforce laws that will affect a wider area. Local governments can elect officials, enact taxes, and do many other things that a national government would do, just on a smaller scale." ;
+	fibo-fnd-utl-av:synonym "local government" ;
+	.
+
+fibo-be-ge-ge:RegionalSovereignty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Polity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:isRepresentedBy ;
+			owl:onClass fibo-be-ge-ge:RegionalGovernment ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:hasSharedSovereigntyOver ;
+			owl:someValuesFrom lcc-cr:GeopoliticalEntity ;
+		]
+		;
+	rdfs:label "regional sovereignty" ;
+	rdfs:comment "QName: fibo-be-ge-ge:RegionalSovereignty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "the legal person that corresponds to an administrative division, administrative unit, administrative entity or country subdivision (or, sometimes, geopolitical division or subnational entity), that has the capacity to incur debt, issue contracts, and enter into relations with other similar entities" ;
+	skos:example "A country may be divided into provinces, which, in turn, are divided into counties, which, in turn, may be divided in whole or in part into municipalities; and so on." ;
+	fibo-fnd-utl-av:adaptedFrom "http://en.wikipedia.org/wiki/Administrative_division"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:SovereignState
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Polity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:hasFullSovereigntyOver ;
+			owl:someValuesFrom lcc-cr:Country ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:isRepresentedBy ;
+			owl:someValuesFrom fibo-be-ge-ge:NationalGovernment ;
+		]
+		;
+	rdfs:label "sovereign state" ;
+	rdfs:comment "QName: fibo-be-ge-ge:SovereignState" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a nonphysical juridical entity that is represented by one centralized government that has sovereignty over a geographic area" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/sovereign-authority.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A legal entity that is represented by one centralized government, has a permanent population, defined territory, and the capacity to enter into relations with other sovereign states." ;
+	.
+
+fibo-be-ge-ge:SupranationalEntity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Polity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:hasSharedSovereigntyOver ;
+			owl:onClass lcc-cr:Country ;
+			owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:isRepresentedBy ;
+			owl:someValuesFrom fibo-be-ge-ge:GovernmentBody ;
+		]
+		;
+	rdfs:label "supranational entity" ;
+	rdfs:comment "QName: fibo-be-ge-ge:SupranationalEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a governmental or non-governmental entity that is established by international law or treaty or incorporated at an international level" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"ISO 20275:2017, Financial services - Entity legal forms (ELF), First Edition, July 2017." ,
+		"Kiljunen, Kimmo (2004). The European Constitution in the Making. Centre for European Policy Studies. pp. 21-26. ISBN 978-92-9079-493-6"
+		;
+	fibo-fnd-utl-av:explanatoryNote "A supranational union is a supranational polity which lies somewhere between a confederation that is an association of states and a federation that is a state.  Unlike states in a federal super-state, member states retain ultimate sovereignty, although some sovereignty is shared with, or ceded to, the supranational body." ;
+	.
+
+fibo-be-ge-ge:TribalArea
+	a owl:Class ;
+	rdfs:subClassOf lcc-cr:GeopoliticalEntity ;
+	rdfs:label "tribal area" ;
+	rdfs:comment "QName: fibo-be-ge-ge:TribalArea" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a designation for an area of land managed by a group of indigenous people (tribe) rather than by the sovereign state or regional governmental entity in which the tribal area is geographically located" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/Indian_reservation"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:TribalEntity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Polity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:hasPartialSovereigntyOver ;
+			owl:someValuesFrom fibo-be-ge-ge:TribalArea ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-ge-ge:isRepresentedBy ;
+			owl:someValuesFrom fibo-be-ge-ge:TribalGovernment ;
+		]
+		;
+	rdfs:label "tribal entity" ;
+	rdfs:comment "QName: fibo-be-ge-ge:TribalEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a legal entity that represents fundamental unit of sovereign tribal (indigenous) government" ;
+	fibo-fnd-utl-av:adaptedFrom "https://en.wikipedia.org/wiki/List_of_federally_recognized_tribes_by_state"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Any indigenous group or community which is recognized as having rights and obligations independent of the central government." ;
+	.
+
+fibo-be-ge-ge:TribalGovernment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-ge-ge:Government ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom fibo-be-ge-ge:TribalArea ;
+		]
+		;
+	rdfs:label "tribal government" ;
+	rdfs:comment "QName: fibo-be-ge-ge:TribalGovernment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "a government representing a group of indigenous people that has legal authority to govern those people, including authority to legislate the existance of tribal entities" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/local-government.html"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:hasFullSovereigntyOver
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-be-ge-ge:hasSovereigntyOver ;
+	rdfs:label "has full sovereignty over" ;
+	rdfs:comment "QName: fibo-be-ge-ge:hasFullSovereigntyOver" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "relates a polity to a geopolitical entity where the polity has absolute, supreme and ultimate dominion and authority of a political state subject to no higher power, expressed within its territory in full self-government and in complete freedom from any outside influence" ;
+	.
+
+fibo-be-ge-ge:hasJurisdiction
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:governs ;
+	rdfs:label "has jurisdiction" ;
+	rdfs:comment "QName: fibo-be-ge-ge:hasJurisdiction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	skos:definition "relates a polity or government entity to one or more jurisdictions, over which it has some level of legal authority" ;
+	.
+
+fibo-be-ge-ge:hasPartialSovereigntyOver
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-be-ge-ge:hasSovereigntyOver ;
+	rdfs:label "has partial sovereignty over" ;
+	rdfs:comment "QName: fibo-be-ge-ge:hasPartialSovereigntyOver" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "relates a polity to a geopolitical entity where the polity exercises partial dominion and authority of a political state" ;
+	.
+
+fibo-be-ge-ge:hasSharedSovereigntyOver
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-be-ge-ge:hasSovereigntyOver ;
+	rdfs:label "has shared sovereignty over" ;
+	rdfs:comment "QName: fibo-be-ge-ge:hasSharedSovereigntyOver" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "relates a polity to a geopolitical entity where the polity exercises shared dominion and authority of a political state" ;
+	.
+
+fibo-be-ge-ge:hasSovereigntyOver
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has sovereignty over" ;
+	rdfs:comment "QName: fibo-be-ge-ge:hasSovereigntyOver" ;
+	rdfs:domain fibo-be-ge-ge:Polity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	rdfs:range lcc-cr:GeopoliticalEntity ;
+	skos:definition "relates a polity to a geopolitical entity where the polity exercises dominion and authority of a political state" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/sovereignty.html"^^xsd:anyURI ;
+	.
+
+fibo-be-ge-ge:isElectedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is elected by" ;
+	rdfs:comment "QName: fibo-be-ge-ge:isElectedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	owl:inverseOf fibo-be-oac-exec:elects ;
+	skos:definition "identifies an official or government chosen to hold office by voting" ;
+	.
+
+fibo-be-ge-ge:isInstrumentOf
+	a owl:ObjectProperty ;
+	rdfs:label "is an instrument of" ;
+	rdfs:comment "QName: fibo-be-ge-ge:isInstrumentOf" ;
+	rdfs:domain fibo-be-ge-ge:Instrumentality ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	rdfs:range fibo-be-ge-ge:Government ;
+	skos:definition "relates an instrumentality of some government to the government that it supports" ;
+	.
+
+fibo-be-ge-ge:isJurisdictionOf
+	a owl:ObjectProperty ;
+	rdfs:label "is jurisdiction of" ;
+	rdfs:comment "QName: fibo-be-ge-ge:isJurisdictionOf" ;
+	rdfs:domain fibo-fnd-law-jur:Jurisdiction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	owl:inverseOf fibo-be-ge-ge:hasJurisdiction ;
+	skos:definition "relates a jurisdiction to a polity or other government entity or court that has some level of legal authority over it" ;
+	.
+
+fibo-be-ge-ge:isRepresentedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is represented by" ;
+	rdfs:comment "QName: fibo-be-ge-ge:isRepresentedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> ;
+	skos:definition "relates a system of governance to its chosen representatives" ;
+	fibo-fnd-utl-av:adaptedFrom "http://dictionary.reference.com/browse/representative"^^xsd:anyURI ;
+	.
+
+fibo-fnd-aap-ppl:IdentityDocument
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+		owl:onClass fibo-be-ge-ge:Government ;
+		owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	] ;
+	.
+
+fibo-fnd-aap-ppl:NationalIdentificationNumber
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+		owl:onClass fibo-be-ge-ge:Government ;
+		owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	] ;
+	.
+

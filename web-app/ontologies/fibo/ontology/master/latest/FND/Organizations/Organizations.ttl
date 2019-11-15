@@ -1,0 +1,98 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Goals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-gao-gl: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Goals/> .
+@prefix fibo-fnd-org-org: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/> .
+@prefix fibo-fnd-plc-adr: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/>
+	a owl:Ontology ;
+	rdfs:label "Organizations Ontology" ;
+	rdfs:comment "QName: fibo-fnd-org-org:" ;
+	dct:abstract "This ontology defines high-level concepts for organizations and related terms, for use in other FIBO ontology elements.  It is purposefully underspecified to facilitate mapping to specific organization ontologies, such as the emerging W3C organization ontology, organization from a BMM or BPMN perspective, organization from a records management (RMS) perspective, and so forth." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2018 EDM Council, Inc." ,
+		"Copyright (c) 2013-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Goals/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-org-org" ;
+	sm:filename "Organizations.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Goals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20160201/Organizations/Organizations.rdf version of this ontology was modified per the FIBO 2.0 RFC, to revise the definition of Organization per ISO 6523." ,
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/Organizations/Organizations.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations.""" ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.1 RTF report, to revise a restriction on Organization to reference PhysicalAddress (vs. PostalAddress)."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-org-org:Organization
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-aap-agt:AutonomousAgent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:allValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasPart ;
+			owl:allValuesFrom fibo-fnd-org-org:Organization ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-plc-adr:hasAddress ;
+			owl:onClass fibo-fnd-plc-adr:PhysicalAddress ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:has ;
+			owl:someValuesFrom fibo-fnd-gao-gl:Goal ;
+		]
+		;
+	rdfs:label "organization"@en ;
+	rdfs:comment "QName: fibo-fnd-org-org:Organization" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/> ;
+	skos:definition "a unique framework of authority within which a person or persons act, or are designated to act, towards some purpose, such as to meet a need or pursue collective goals on a continuing basis" ;
+	skos:example "This may be a business entity or a government, international or not-for-profit, or other unincorporated social organization." ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.iso.org/obp/ui/#iso:std:iso-iec:6523:-1:ed-1:v1:en" ;
+	.
+

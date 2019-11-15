@@ -1,0 +1,316 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/FundsTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/CIV/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/FundsTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-civ-fnd-civ: <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-tim-tim: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-civx-fun: <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/>
+	a owl:Ontology ;
+	rdfs:label "FundsTemporal"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Terms which have a time component (either real time, intra-day or dated terms). These include Net Present Value (NPV) and related analytics." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/CIV/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/FundsTemporal/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+xsd:dateTime
+	a rdfs:Datatype ;
+	.
+
+xsd:string
+	a rdfs:Datatype ;
+	.
+
+fibo-civ-fnd-civ:Fund
+	a owl:Class ;
+	.
+
+fibo-civ-fnd-civ:FundInvestor
+	a owl:Class ;
+	.
+
+fibo-civ-fnd-civ:FundPortfolio
+	a owl:Class ;
+	.
+
+fibo-civ-fnd-civ:FundUnit
+	a owl:Class ;
+	.
+
+fibo-md-civx-fun:AccruedFees
+	a owl:Class ;
+	rdfs:label "accrued fees"@en ;
+	rdfs:comment "QName: NONE:AccruedFees" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:AccruedIncome
+	a owl:Class ;
+	rdfs:label "accrued income"@en ;
+	rdfs:comment "QName: NONE:AccruedIncome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:AccruedTaxes
+	a owl:Class ;
+	rdfs:label "accrued taxes"@en ;
+	rdfs:comment "QName: NONE:AccruedTaxes" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:BidPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-civx-fun:FundPrice ;
+	rdfs:label "bid price"@en ;
+	rdfs:comment "QName: NONE:BidPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	owl:disjointWith fibo-md-civx-fun:mutuallyExclusive ;
+	.
+
+fibo-md-civx-fun:FeePayable
+	a owl:Class ;
+	rdfs:label "fee payable"@en ;
+	rdfs:comment "QName: NONE:FeePayable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:FundPrice
+	a owl:Class ;
+	rdfs:label "fund price"@en ;
+	rdfs:comment "QName: NONE:FundPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:FundUnitPerformance
+	a owl:Class ;
+	rdfs:label "fund unit performance"@en ;
+	rdfs:comment "QName: NONE:FundUnitPerformance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:FundsTax
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-md-civx-fun:appliesTo ;
+		owl:someValuesFrom fibo-civ-fnd-civ:FundInvestor ;
+	] ;
+	rdfs:label "funds tax"@en ;
+	rdfs:comment "QName: NONE:FundsTax" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:NetAssetValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-civx-fun:FundPrice ;
+	rdfs:label "net asset value"@en ;
+	rdfs:comment "QName: NONE:NetAssetValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:RedemptionPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-civx-fun:FundPrice ;
+	rdfs:label "redemption price"@en ;
+	rdfs:comment "QName: NONE:RedemptionPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:SigmaValueOfHoldings
+	a owl:Class ;
+	rdfs:label "sigma value of holdings"@en ;
+	rdfs:comment "QName: NONE:SigmaValueOfHoldings" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:Swing
+	a owl:Class ;
+	rdfs:label "swing"@en ;
+	rdfs:comment "QName: NONE:Swing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:SwingPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-civx-fun:FundPrice ;
+	rdfs:label "swing price"@en ;
+	rdfs:comment "QName: NONE:SwingPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:appliesTo
+	a owl:ObjectProperty ;
+	rdfs:label "applies to"@en ;
+	rdfs:comment "QName: NONE:appliesTo" ;
+	rdfs:domain fibo-md-civx-fun:FundsTax ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-civ-fnd-civ:FundInvestor ;
+	owl:inverseOf fibo-md-civx-fun:incursTax ;
+	.
+
+fibo-md-civx-fun:declarationTime
+	a owl:DatatypeProperty ;
+	rdfs:label "declaration time"@en ;
+	rdfs:comment "QName: NONE:declarationTime" ;
+	rdfs:domain fibo-md-civx-fun:NetAssetValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range xsd:dateTime ;
+	skos:definition "Time of the net asset value publication. Further Notes REVIEW: time of day, year or what?"@en ;
+	.
+
+fibo-md-civx-fun:determinationDate
+	a owl:ObjectProperty ;
+	rdfs:label "determination date"@en ;
+	rdfs:comment "QName: NONE:determinationDate" ;
+	rdfs:domain fibo-md-civx-fun:FundPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The date when the price is determined. and time."@en ;
+	.
+
+fibo-md-civx-fun:determinationDate.1
+	a owl:ObjectProperty ;
+	rdfs:label "determination date"@en ;
+	rdfs:comment "QName: NONE:determinationDate.1" ;
+	rdfs:domain fibo-md-civx-fun:FundUnitPerformance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-md-civx-fun:determinationPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "determination period"@en ;
+	rdfs:comment "QName: NONE:determinationPeriod" ;
+	rdfs:domain fibo-md-civx-fun:FundUnitPerformance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-fnd-tim-tim:DatePeriod ;
+	skos:definition "THe period for which the performance is determined"@en ;
+	.
+
+fibo-md-civx-fun:determines
+	a owl:ObjectProperty ;
+	rdfs:label "determines"@en ;
+	rdfs:comment "QName: NONE:determines" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FeePayable ;
+	.
+
+fibo-md-civx-fun:hasPerformance
+	a owl:ObjectProperty ;
+	rdfs:label "has performance"@en ;
+	rdfs:comment "QName: NONE:hasPerformance" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FundUnitPerformance ;
+	.
+
+fibo-md-civx-fun:hasPrice
+	a owl:ObjectProperty ;
+	rdfs:label "has price"@en ;
+	rdfs:comment "QName: NONE:hasPrice" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FundPrice ;
+	.
+
+fibo-md-civx-fun:incurs
+	a owl:ObjectProperty ;
+	rdfs:label "incurs"@en ;
+	rdfs:comment "QName: NONE:incurs" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolio ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FundsTax ;
+	.
+
+fibo-md-civx-fun:incursFees
+	a owl:ObjectProperty ;
+	rdfs:label "incurs fees"@en ;
+	rdfs:comment "QName: NONE:incursFees" ;
+	rdfs:domain fibo-civ-fnd-civ:FundInvestor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FeePayable ;
+	.
+
+fibo-md-civx-fun:incursFees.1
+	a owl:ObjectProperty ;
+	rdfs:label "incurs fees"@en ;
+	rdfs:comment "QName: NONE:incursFees.1" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FeePayable ;
+	.
+
+fibo-md-civx-fun:incursTax
+	a owl:ObjectProperty ;
+	rdfs:label "incurs tax"@en ;
+	rdfs:comment "QName: NONE:incursTax" ;
+	rdfs:domain fibo-civ-fnd-civ:FundInvestor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FundsTax ;
+	.
+
+fibo-md-civx-fun:incursTax.1
+	a owl:ObjectProperty ;
+	rdfs:label "incurs tax"@en ;
+	rdfs:comment "QName: NONE:incursTax.1" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FundsTax ;
+	.
+
+fibo-md-civx-fun:incursTransactionFee
+	a owl:ObjectProperty ;
+	rdfs:label "incurs transaction fee"@en ;
+	rdfs:comment "QName: NONE:incursTransactionFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolio ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range fibo-md-civx-fun:FeePayable ;
+	.
+
+fibo-md-civx-fun:mutuallyExclusive
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-civx-fun:FundPrice ;
+	rdfs:label "offer price"@en ;
+	rdfs:comment "QName: NONE:mutuallyExclusive" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	.
+
+fibo-md-civx-fun:netOrGrossOfFees
+	a owl:DatatypeProperty ;
+	rdfs:label "net or gross of fees"@en ;
+	rdfs:comment "QName: NONE:netOrGrossOfFees" ;
+	rdfs:domain fibo-md-civx-fun:FundUnitPerformance ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range xsd:string ;
+	.
+
+fibo-md-civx-fun:valuationTime
+	a owl:DatatypeProperty ;
+	rdfs:label "valuation time"@en ;
+	rdfs:comment "QName: NONE:valuationTime" ;
+	rdfs:domain fibo-md-civx-fun:NetAssetValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/> ;
+	rdfs:range xsd:dateTime ;
+	skos:definition "Time of the price valuation for the investment fund/fund class."@en ;
+	.
+

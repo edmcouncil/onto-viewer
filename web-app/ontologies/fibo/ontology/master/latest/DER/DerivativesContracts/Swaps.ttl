@@ -1,0 +1,474 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-drc-swp: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fct-mkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/>
+	a owl:Ontology ;
+	rdfs:label "Swaps Ontology" ;
+	rdfs:comment "QName: fibo-der-drc-swp:" ;
+	dct:abstract "This ontology defines concepts specific to swap contracts, including relevant trading organizations, data repositories, and intermediaries." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage <http://www.w3.org/standards/techs/owl#w3c_all> ;
+	sm:copyright
+		"Copyright (c) 2016-2019 EDM Council, Inc." ,
+		"Copyright (c) 2016-2019 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-der-drc-swp" ;
+	sm:filename "Swaps.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/> ;
+	skos:changeNote "The https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/ version of this ontology was modified to refine the concept of a unique swap identifier (USI)." ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-der-drc-swp:BasisSwap
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-swp:Swap ;
+	rdfs:label "basis swap" ;
+	rdfs:comment "QName: fibo-der-drc-swp:BasisSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a swap in which payment streams are referenced to different bases" ;
+	fibo-fnd-utl-av:explanatoryNote "A basis swap can have two legs of the same tenor but different indices, e.g., 3 month LIBOR vs. 3 month TIBOR. The difference in this case is not driven by different interest rate periods but from different markets, i.e., the difference in efficiency between the two markets. The objective is to hedge against basis risk which is the difference in price between two markets. See also forward swap, as a means for controlling interest rate." ;
+	.
+
+fibo-der-drc-swp:FixedPaymentLeg
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:SwapLeg ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:hasPaymentSchedule ;
+			owl:allValuesFrom fibo-fnd-pas-psch:PaymentSchedule ;
+		]
+		;
+	rdfs:label "fixed payment leg" ;
+	rdfs:comment "QName: fibo-der-drc-swp:FixedPaymentLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "the terms for the fixed payment leg of a swap such as a dividend swap, or for any swap that has a fixed leg, including, for example, a single stock swap" ;
+	fibo-fnd-utl-av:synonym "fixed payment stream terms" ;
+	.
+
+fibo-der-drc-swp:MajorSwapParticipant
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:NonDepositoryInstitution ;
+	rdfs:label "major swap participant" ;
+	rdfs:comment "QName: fibo-der-drc-swp:MajorSwapParticipant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a financial service provider that maintains a substantial position in swaps for any of the major swap categories, excluding positions held for hedging or mitigating commercial risk and positions maintained by an employee benefit plan for the primary purpose of hedging or mitigating any risk directly associated with the operation of the plan" ;
+	fibo-fnd-utl-av:abbreviation "MSP" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.cftc.gov/IndustryOversight/Intermediaries/index.htm"^^xsd:anyURI ;
+	.
+
+fibo-der-drc-swp:Swap
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:mayBeTradedIn ;
+			owl:onClass fibo-der-drc-swp:SwapExecutionFacility ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:onClass fibo-der-drc-swp:UniqueSwapIdentifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:exchanges ;
+			owl:onClass fibo-der-drc-swp:SwapLeg ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractParty ;
+			owl:onClass fibo-der-drc-swp:SwapParty ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-der-drc-swp:SwapTerms ;
+		]
+		;
+	rdfs:label "swap" ;
+	rdfs:comment "QName: fibo-der-drc-swp:Swap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a derivative instrument that facilitates the exchange of financial instruments among the parties; the instruments can be almost anything, but most swaps involve cash flows (streams of payments or other commitments over time) based on a notional principal amount that both parties agree to" ;
+	skos:editorialNote "The most common type is an interest rate swap, in which one party agrees to pay a fixed interest rate in return for receiving a adjustable rate from another party. Review session notes: 10 Mar Helpful to split these according to the assets that are swapped. So for instance there are equity swaps, commodity swaps where you swap different assets. These are not mutually exclusive to labels about Fund Leg, and so on, that are different ways that people trading in those assets distinguish between those legs. For example in IR, we talk Fixed, Floating. capital Index Swap, where the return on oen leg is indexed to an inflation index but it's still an IR swap where the payment relates to an inflation index. So keeping the 2 legs in some sort of notion balance - example index annuity swap, capital index swap and so on. These terms refer to the behavior of the underlying swap rather than an arbitrary classification of what leg is what. Different structures of swap is less relevant. 17 March: Remember: the contract does not necessarily have 2 legs, but it usually would. The structure is in the transactions, i.e., the commitments embodied in the terms for the two sides of those transactions, the legs which are simply the embodiment of those commitments, and so on. Then the details structure is in the leg definitions. Note also that different kinds of leg can have various structures regardless of how or why they are used in a contract." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/s/swap.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Usually, the principal does not change hands. Each cash flow comprises one leg of the swap. One cash flow is generally fixed, while the other is variable, that is, based on a a benchmark interest rate, floating currency exchange rate or index price." ;
+	.
+
+fibo-der-drc-swp:SwapConfirmation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:SwapLifecycleEvent ,
+		fibo-fnd-agr-ctr:WrittenContract ,
+		fibo-fnd-pas-pas:TransactionConfirmation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:supersedes ;
+			owl:allValuesFrom fibo-der-drc-swp:SwapConfirmation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractParty ;
+			owl:someValuesFrom fibo-der-drc-swp:SwapParty ;
+		]
+		;
+	rdfs:label "swap confirmation" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapConfirmation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a formal confirmation that codifies the terms and conditions specific to a lifecycle event with respect to the overall transaction between the parties" ;
+	.
+
+fibo-der-drc-swp:SwapDataRepository
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialServiceProvider ;
+	rdfs:label "swap data repository" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapDataRepository" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a financial service provider that provides a central facility for swap data reporting and recordkeeping" ;
+	fibo-fnd-utl-av:abbreviation "SDR" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.cftc.gov/IndustryOversight/DataRepositories/index.htm"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Swap data repositories ('SDRs') are new entities created by the Dodd-Frank Wall Street Reform and Consumer Protection Act ('Dodd-Frank Act') in order to provide a central facility for swap data reporting and recordkeeping. Under the Dodd- Frank Act, all swaps, whether cleared or uncleared, are required to be reported to registered SDRs. The Dodd-Frank Act added new Section 21 to the Commodity Exchange Act ('CEA'), governing registration and regulation of SDRs and establishing registration requirements and core duties and responsibilities for SDRs." ;
+	.
+
+fibo-der-drc-swp:SwapDealer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:NonDepositoryInstitution ,
+		fibo-fbc-pas-fpas:Dealer
+		;
+	rdfs:label "swap dealer" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapDealer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a financial service provider that holds itself out as a dealer in swaps; makes a market in swaps; regularly enters into swaps with counterparties as an ordinary course of business for its own account; or engages in any activity causing the person to be commonly known in the trade as a dealer or market maker in swaps" ;
+	fibo-fnd-utl-av:abbreviation "SD" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.cftc.gov/IndustryOversight/Intermediaries/index.htm"^^xsd:anyURI ;
+	.
+
+fibo-der-drc-swp:SwapExecutionFacility
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-mkt:Exchange ;
+	rdfs:label "swap execution facility" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapExecutionFacility" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "an exchange, trading system, or platform that enables many participants to execute or trade swaps" ;
+	fibo-fnd-utl-av:abbreviation "SEF" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/s/swap-execution-facility-sef.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A swap execution facility would allow for greater transparency and would be a significant shift in the way derivative trading is made. The Dodd-Frank Act lays the foundation for this change of derivative execution." ;
+	.
+
+fibo-der-drc-swp:SwapLeg
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:CashflowTerms ,
+		fibo-der-drc-swp:SwapTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-doc:hasTerminationDate ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:hasPayingParty ;
+			owl:onClass fibo-der-drc-swp:SwapPayingParty ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:hasReceivingParty ;
+			owl:onClass fibo-der-drc-swp:SwapReceivingParty ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasNotionalAmount ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasEffectiveDate ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "swap leg" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "terms defining and commitment to fulfill the future payment or cashflow requirements (e.g., interest payments, coupon payments, etc.) for one leg of a swap transaction" ;
+	skos:editorialNote "For some swaps this may be a commitment to net up the difference between a strike and an outcome, rather than to make a series of cashflows over time. For credit default swaps there are conditional commitments, contingent on the occurrence of a credit event." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/i/interestrateswap.asp" ;
+	fibo-fnd-utl-av:synonym "swap stream terms" ;
+	.
+
+fibo-der-drc-swp:SwapLifecycleEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:TransactionEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:onClass fibo-der-drc-swp:SwapLifecycleEventIdentifier ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:hasSwapIdentifier ;
+			owl:onClass fibo-der-drc-swp:UniqueSwapIdentifier ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-der-drc-swp:SwapParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-der-drc-swp:Swap ;
+		]
+		;
+	rdfs:label "swap lifecycle event" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapLifecycleEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "an event that occurs during the lifecycle of a swap, where the overall set of events includes those specific to the issuer, front office, middle office, and/or back office processes" ;
+	.
+
+fibo-der-drc-swp:SwapLifecycleEventIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-der-drc-swp:SwapLifecycleEvent ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "swap lifecycle event identifier" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapLifecycleEventIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "an identifier that uniquely identifies a specific event in the lifecycle of a swap" ;
+	.
+
+fibo-der-drc-swp:SwapParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:DerivativeContractParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-der-drc-swp:Swap ;
+			] ;
+		]
+		;
+	rdfs:label "swap party" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a party to a swap and therefore a legal party to the contract that embodies that transaction" ;
+	.
+
+fibo-der-drc-swp:SwapPayingParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:SwapParty ,
+		fibo-fbc-dae-dbt:Debtor ,
+		fibo-fnd-pas-psch:Payer
+		;
+	rdfs:label "swap paying party" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapPayingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a swap party responsible for making payments for a given leg of the transaction as defined in the contract" ;
+	.
+
+fibo-der-drc-swp:SwapReceivingParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:SwapParty ,
+		fibo-fbc-dae-dbt:Creditor ,
+		fibo-fnd-pas-psch:Payee
+		;
+	rdfs:label "swap receiving party" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapReceivingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a swap party that receives payments for a given leg of the transaction as defined in the contract" ;
+	.
+
+fibo-der-drc-swp:SwapStreamEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:SwapLifecycleEvent ,
+		fibo-fnd-pas-psch:PaymentEvent
+		;
+	rdfs:label "swap stream event" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapStreamEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a payment event (e.g., interest payment, coupon payment, etc.) against one leg of a swap stream" ;
+	.
+
+fibo-der-drc-swp:SwapTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-bsc:DerivativeTransactionTerms ;
+	rdfs:label "swap terms" ;
+	rdfs:comment "QName: fibo-der-drc-swp:SwapTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "the legal contractual terms of a swap transaction" ;
+	.
+
+fibo-der-drc-swp:UniqueSwapIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:FinancialInstrumentIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-der-drc-swp:Swap ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "unique swap identifier" ;
+	rdfs:comment "QName: fibo-der-drc-swp:UniqueSwapIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "a unique swap identifier (USI) is an identifier for a swap transaction, that is the CFTC term or Unique Transaction Identifier (UTI) which is the term used more globally is an identifier on the transaction level that stays unique throughout the life of a trade" ;
+	fibo-fnd-utl-av:abbreviation "USI" ;
+	fibo-fnd-utl-av:adaptedFrom "CFTC Data Management Branch 'Unique Swap Identifier (USI) Data Standard', October 1, 2012, usidatastandards100112.pdf" ;
+	.
+
+fibo-der-drc-swp:exchanges
+	a
+		owl:ObjectProperty ,
+		owl:SymmetricProperty
+		;
+	rdfs:label "exchanges" ;
+	rdfs:comment "QName: fibo-der-drc-swp:exchanges" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	skos:definition "gives or takes one thing in return for another" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.merriam-webster.com/dictionary/exchange"^^xsd:anyURI ;
+	.
+
+fibo-der-drc-swp:hasLeg
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has leg" ;
+	rdfs:comment "QName: fibo-der-drc-swp:hasLeg" ;
+	rdfs:domain fibo-der-drc-swp:Swap ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	rdfs:range fibo-der-drc-swp:SwapLeg ;
+	skos:definition "relates a swap to the legs (swap streams) that comprise the swap" ;
+	fibo-fnd-utl-av:synonym "has swap stream" ;
+	.
+
+fibo-der-drc-swp:hasPayingParty
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasPartyInRole ;
+	rdfs:label "has paying party" ;
+	rdfs:comment "QName: fibo-der-drc-swp:hasPayingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	rdfs:range fibo-der-drc-swp:SwapPayingParty ;
+	skos:definition "defines the payer party for a funding leg of a swap" ;
+	.
+
+fibo-der-drc-swp:hasPaymentSchedule
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasSchedule ;
+	rdfs:label "has payment schedule" ;
+	rdfs:comment "QName: fibo-der-drc-swp:hasPaymentSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	rdfs:range fibo-fnd-pas-psch:PaymentSchedule ;
+	skos:definition "defines a schedule of payments for a funding leg of a swap" ;
+	skos:editorialNote "Payments may be fixed or variable. These are now defined separately for each type of cashflow stream (swap stream) and independently of the function of the leg (payments, return etc.). The schedule may be expressed in one of two ways: as an explicit schedule of dates or as a formula for determining payment dates in advance (taking into account for example roll rules for non working days)." ;
+	.
+
+fibo-der-drc-swp:hasReceivingParty
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasPartyInRole ;
+	rdfs:label "has receiving party" ;
+	rdfs:comment "QName: fibo-der-drc-swp:hasReceivingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	rdfs:range fibo-der-drc-swp:SwapReceivingParty ;
+	skos:definition "defines the recipient for a funding leg of a swap" ;
+	.
+
+fibo-der-drc-swp:hasSwapIdentifier
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has swap identifier" ;
+	rdfs:comment "QName: fibo-der-drc-swp:hasSwapIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ;
+	rdfs:range fibo-fbc-fi-fi:FinancialInstrumentIdentifier ;
+	skos:definition "relates a swap lifecycle event to the identifier for the swap" ;
+	.
+

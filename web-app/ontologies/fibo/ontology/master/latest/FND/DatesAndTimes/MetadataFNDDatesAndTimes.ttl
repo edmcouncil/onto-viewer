@@ -1,0 +1,56 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-dt-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/MetadataFNDDatesAndTimes/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/MetadataFNDDatesAndTimes/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) Dates and Times Module" ;
+	rdfs:comment "QName: fibo-fnd-dt-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Dates and Times Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fnd-dt-mod" ;
+	sm:filename "MetadataFNDDatesAndTimes.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/> ;
+	.
+
+fibo-fnd-dt-mod:DatesAndTimesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Dates and Times" ;
+	rdfs:comment "QName: fibo-fnd-dt-mod:DatesAndTimesModule" ;
+	dct:abstract "This module includes ontologies describing date and time concepts which are of specific reference in financial services.  These cover foundational date and time concepts in a form usable for financial subject matter ontologies, including occurrences and conventions for business days and the like.  The business day convention concepts are to be further extended in specialized ontologies for securities and derivatives, building on the ontologies in this module." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Dates and Times Module" ;
+	sm:copyright
+		"Copyright (c) 2017-2018 EDM Council, Inc." ,
+		"Copyright (c) 2017-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-fnd-dt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/MetadataFNDDatesAndTimes/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

@@ -1,0 +1,85 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/MetadataDERDerivativesContracts/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/MetadataDERDerivativesContracts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/MetadataDERDerivativesContracts/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/MetadataDERDerivativesContracts/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Derivatives (DER) Derivatives Contracts Module" ;
+	rdfs:comment "QName: fibo-der-drc-mod:" ;
+	dct:abstract "The derivatives contracts module includes the contractual components common to all derivatives or to entire classes of derivatives." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-der-drc-mod" ;
+	sm:filename "MetadataDERDerivativesContracts.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/MetadataDERDerivativesContracts/> ;
+	.
+
+fibo-der-drc-mod:DerivativesContractsModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Derivatives Contracts" ;
+	rdfs:comment "QName: fibo-der-drc-mod:DerivativesContractsModule" ;
+	dct:abstract "The derivatives contracts module includes the contractual components common to all derivatives or to entire classes of derivatives." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ContractsForDifference/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/OptionContractsOnFutures/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ParticipationNotes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Derivatives (DER) Derivatives Contracts Module" ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Bloomberg LP" ,
+		"Citigroup" ,
+		"Commodities Futures Trading Commission (CFTC)" ,
+		"Deutsche Bank" ,
+		"Nordea Bank AB" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Quarule" ,
+		"State Street Bank and Trust" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo" ,
+		"Working Ontologist"
+		;
+	sm:copyright
+		"Copyright (c) 2018-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-der-drc" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/MetadataDERDerivativesContracts/> ;
+	rdfs:seeAlso "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	.
+

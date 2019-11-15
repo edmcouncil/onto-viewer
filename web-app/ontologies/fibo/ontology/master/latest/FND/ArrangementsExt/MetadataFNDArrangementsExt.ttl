@@ -1,0 +1,50 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arrxx-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MetadataFNDArrangementsExt/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MetadataFNDArrangementsExt/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) ArrangementsExt Module" ;
+	rdfs:comment "QName: fibo-fnd-arrxx-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Arrangements Extensions Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-fnd-arrxx-mod" ;
+	sm:filename "MetadataFNDArrangementsExt.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/> ;
+	.
+
+fibo-fnd-arrxx-mod:ArrangementsExtModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Arrangements Extensions" ;
+	rdfs:comment "QName: fibo-fnd-arrxx-mod:ArrangementsExtModule" ;
+	dct:abstract "This module contains ontologies that are extensions to content in the Arrangements module, specifically related to their implementation through methods and tools." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Arrangements Extensions Module" ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-fnd-arrxx" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MetadataFNDArrangementsExt/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	skos:editorialNote "This module contains additional material for the main Arrangements module. Some of this may currently be referenced from Provisional or Informative modules elsewhere. Where possible these will be replaced by references into the main module, possibly by moving original material from this into the main one." ;
+	.
+

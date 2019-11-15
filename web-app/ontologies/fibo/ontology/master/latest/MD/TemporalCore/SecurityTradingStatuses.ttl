@@ -1,0 +1,263 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityTradingStatuses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityTradingStatuses/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-inf-tem: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> .
+@prefix fibo-fnd-tim-tim: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix fibo-md-temx-trs: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/>
+	a owl:Ontology ;
+	rdfs:label "SecurityTradingStatuses"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology defines the various kinds of trading status that a security may be in at any given point in time. These includes such terms as active and halted, inactive and so on, along with their qualifying terms." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityTradingStatuses/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-temx-trs:Active
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-trs:SecurityTradingStatus ;
+	rdfs:label "active"@en ;
+	rdfs:comment "QName: NONE:Active" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	owl:disjointWith fibo-md-temx-trs:Inactive ;
+	skos:definition "Security is actively traded"@en ;
+	.
+
+fibo-md-temx-trs:ActivelyTrading
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-trs:ExchangeSecurityTradingStatus ;
+	rdfs:label "actively trading"@en ;
+	rdfs:comment "QName: NONE:ActivelyTrading" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	owl:disjointWith fibo-md-temx-trs:TradingHalted ;
+	skos:definition "Security is actively traded on the exchange or trading facility"@en ;
+	.
+
+fibo-md-temx-trs:CurrentStatus
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-tem:Status ,
+		fibo-md-temx-tem:StatusCodeValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-tem:statusHasTense ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Present ;
+		]
+		;
+	rdfs:label "current status"@en ;
+	rdfs:comment "QName: NONE:CurrentStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	owl:disjointWith fibo-md-temx-trs:PastStatus ;
+	skos:definition "The status at the present time."@en ;
+	.
+
+fibo-md-temx-trs:ExchangeSecurityTradingStatus
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:Status ;
+	rdfs:label "exchange security trading status"@en ;
+	rdfs:comment "QName: NONE:ExchangeSecurityTradingStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	skos:definition "The trading status of a security on a given trading exchange."@en ;
+	.
+
+fibo-md-temx-trs:Inactive
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-trs:SecurityTradingStatus ;
+	rdfs:label "inactive"@en ;
+	rdfs:comment "QName: NONE:Inactive" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	.
+
+fibo-md-temx-trs:Issued
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-trs:SecurityLifecycleStatus ;
+	rdfs:label "issued"@en ;
+	rdfs:comment "QName: NONE:Issued" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	skos:definition "The security has been issued into the secondary market."@en ;
+	.
+
+fibo-md-temx-trs:PastStatus
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-tem:Status ,
+		fibo-md-temx-tem:StatusCodeValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-tem:statusHasTense ;
+			owl:someValuesFrom fibo-fnd-tim-tim:Past ;
+		]
+		;
+	rdfs:label "past status"@en ;
+	rdfs:comment "QName: NONE:PastStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	.
+
+fibo-md-temx-trs:SecurityLifecycleStatus
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:Status ;
+	rdfs:label "security lifecycle status"@en ;
+	rdfs:comment "QName: NONE:SecurityLifecycleStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	skos:definition "The status of a security within its lifecycle."@en ;
+	.
+
+fibo-md-temx-trs:SecurityTradingStatus
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:Status ;
+	rdfs:label "security trading status"@en ;
+	rdfs:comment "QName: NONE:SecurityTradingStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	skos:definition "The status of the security in terms of whether it is trading or not, and any special considerations relating to trading."@en ;
+	skos:editorialNote "Exchange Traded Security trading status is now a separate term, covering trading suspension on an exchange, so that does not form part of this term."@en ;
+	.
+
+fibo-md-temx-trs:TradingHalted
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-trs:ExchangeSecurityTradingStatus ;
+	rdfs:label "trading halted"@en ;
+	rdfs:comment "QName: NONE:TradingHalted" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	.
+
+fibo-md-temx-trs:WhenDistributed
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-trs:SecurityLifecycleStatus ;
+	rdfs:label "when distributed"@en ;
+	rdfs:comment "QName: NONE:WhenDistributed" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	skos:definition "Used to refer to a security that trades after the date of issue but before the time at which the certificates are delivered"@en ;
+	.
+
+fibo-md-temx-trs:WhenIssued
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-trs:SecurityLifecycleStatus ;
+	rdfs:label "when issued"@en ;
+	rdfs:comment "QName: NONE:WhenIssued" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	skos:definition "When Issued or Gray Market trading is when a security is traded ahead of the date at which it is to be issued."@en ;
+	.
+
+fibo-md-temx-trs:Worthless
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-tem:Status ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-trs:describes ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		]
+		;
+	rdfs:label "worthless"@en ;
+	rdfs:comment "QName: NONE:Worthless" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	skos:definition "Announcement by the regulator that the security has become worthless."@en ;
+	fibo-fnd-utl-av:explanatoryNote "e.g. bankruptcy hearings - might result in this being said."@en ;
+	.
+
+fibo-md-temx-trs:delisted
+	a owl:DatatypeProperty ;
+	rdfs:label "delisted"@en ;
+	rdfs:comment "QName: NONE:delisted" ;
+	rdfs:domain fibo-md-temx-trs:ExchangeSecurityTradingStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the security is currently delisted on that exchange or trading facility."@en ;
+	.
+
+fibo-md-temx-trs:describes
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-tem:isOf ;
+	rdfs:label "describes"@en ;
+	rdfs:comment "QName: NONE:describes" ;
+	rdfs:domain fibo-md-temx-trs:Worthless ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	.
+
+fibo-md-temx-trs:hasStatus
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-tem:hasStatus ;
+	rdfs:label "has listing status"@en ;
+	rdfs:comment "QName: NONE:hasStatus" ;
+	rdfs:domain <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/SecurityListing> ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	rdfs:range fibo-md-temx-trs:ExchangeSecurityTradingStatus ;
+	skos:definition "The trading status of this listing i.e. this security on this exchange."@en ;
+	.
+
+fibo-md-temx-trs:hasTradingStatus
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-tem:hasStatus ;
+	rdfs:label "has trading status"@en ;
+	rdfs:comment "QName: NONE:hasTradingStatus" ;
+	rdfs:domain <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	rdfs:range fibo-md-temx-trs:SecurityTradingStatus ;
+	.
+
+fibo-md-temx-trs:status
+	a owl:ObjectProperty ;
+	rdfs:label "status"@en ;
+	rdfs:comment "QName: NONE:status" ;
+	rdfs:domain fibo-md-temx-trs:SecurityLifecycleStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	rdfs:range fibo-md-temx-trs:SecurityLifecycleStatus ;
+	.
+
+fibo-md-temx-trs:statusDate
+	a owl:ObjectProperty ;
+	rdfs:label "status date"@en ;
+	rdfs:comment "QName: NONE:statusDate" ;
+	rdfs:domain fibo-md-temx-trs:PastStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Date at which the status of the security is taken."@en ;
+	.
+
+fibo-md-temx-trs:tense.1
+	a owl:DatatypeProperty ;
+	rdfs:label "tense"@en ;
+	rdfs:comment "QName: NONE:tense.1" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	.
+
+fibo-md-temx-trs:worthless
+	a owl:DatatypeProperty ;
+	rdfs:label "worthless"@en ;
+	rdfs:comment "QName: NONE:worthless" ;
+	rdfs:domain fibo-md-temx-trs:Worthless ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/SecurityListing>
+	a owl:Class ;
+	.
+

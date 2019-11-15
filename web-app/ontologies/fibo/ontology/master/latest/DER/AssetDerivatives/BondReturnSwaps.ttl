@@ -1,0 +1,55 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/BondReturnSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ReturnSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/BondReturnSwaps/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-ass: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> .
+@prefix fibo-der-ass-brs: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondReturnSwaps/> .
+@prefix fibo-der-der-rsw: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondReturnSwaps/>
+	a owl:Ontology ;
+	rdfs:label "BondReturnSwaps"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Swaps which give a return on one leg based on the interest rate returns on a debt instrument." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ReturnSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/BondReturnSwaps/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-ass-brs:DebtAssetInterestReturnStream
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-rsw:SimpleReturnStream ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-rsw:hasReferenceAsset ;
+			owl:someValuesFrom fibo-der-ass-ass:DebtObservable ;
+		]
+		;
+	rdfs:label "debt asset interest return stream"@en ;
+	rdfs:comment "QName: NONE:DebtAssetInterestReturnStream" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondReturnSwaps/> ;
+	skos:definition "A leg which embodies the interest payments on a debt instrument which is the reference asset for a Swap."@en ;
+	.
+
+fibo-der-ass-brs:DebtSecurityDelivery
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-ass:UnderlyingSecurityDelivery ;
+	rdfs:label "debt security delivery"@en ;
+	rdfs:comment "QName: NONE:DebtSecurityDelivery" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondReturnSwaps/> ;
+	.
+

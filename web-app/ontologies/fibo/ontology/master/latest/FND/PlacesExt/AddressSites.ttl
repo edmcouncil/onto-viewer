@@ -1,0 +1,71 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/AddressSites/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Facilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/AddressSites/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-plc-fac: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Facilities/> .
+@prefix fibo-fnd-plcx-sit: <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/AddressSites/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/AddressSites/>
+	a owl:Ontology ;
+	rdfs:label "AddressSites"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Defines the concepts of different kinds of address delineated according to their function, for example delivery address, headquarters address. 
+		The published Release ontologies use a simpler pattern in which the role or nature of the address is conveyed in the relationships only. This conceptual ontology is provided for those uses where things need to be said about these kinds of address, for example in regulations about reporing or company registration.""" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Facilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/AddressSites/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-plcx-sit:BusinessSite
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plc-fac:PhysicalSite ;
+	rdfs:label "business site"@en ;
+	rdfs:comment "QName: NONE:BusinessSite" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/AddressSites/> ;
+	skos:definition "An address from which a business entity carries out its business, such as a shop or offices. This is the address which is generally shown on advertising by that company."@en ;
+	skos:editorialNote 'Term agreed in reviews but written definition not re-reviewed. Defined as a relative thing called "Business Address Relation" in Proof of Concept works. Renamed to Business Site in line with W3C Site semantics .'@en ;
+	.
+
+fibo-fnd-plcx-sit:OperatingBusinessAddressRelation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plcx-sit:BusinessSite ;
+	rdfs:label "operating business address relation"@en ;
+	rdfs:comment "QName: NONE:OperatingBusinessAddressRelation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/AddressSites/> ;
+	.
+
+fibo-fnd-plcx-sit:PrimaryBusinessAddressRelation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plcx-sit:BusinessSite ;
+	rdfs:label "primary business address relation"@en ;
+	rdfs:comment "QName: NONE:PrimaryBusinessAddressRelation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/AddressSites/> ;
+	.
+
+fibo-fnd-plcx-sit:RegisteredAddressSite
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plc-fac:PhysicalSite ;
+	rdfs:label "registered address site"@en ;
+	rdfs:comment "QName: NONE:RegisteredAddressSite" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/AddressSites/> ;
+	skos:definition "An official Registered Address of a company, as registered with the appropriate Companies Registry for the jurisdiction in which the company is registered, and at which legal proceedings may be served upon the entity."@en ;
+	fibo-fnd-utl-av:explanatoryNote "It is usually a requirement to display this on stationery and other correspondence. This is defined as the address at which legal papers may be served upon the entity. In many jurisdictions this therefore cannot be a Post Box number or Poste Restante, however some jurisdictions (e.g. South Africa) do allow this."@en ;
+	.
+

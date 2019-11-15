@@ -1,0 +1,221 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-law-cor: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/>
+	a owl:Ontology ;
+	rdfs:label "Jurisdiction Ontology" ;
+	rdfs:comment "QName: fibo-fnd-law-jur:" ;
+	dct:abstract "This ontology defines high level concepts relating to jurisdictions for use in other FIBO ontology elements. This includes a general definition of jurisdiction along with some basic types of jurisdiction, along with the factors which distinguish one type of jurisdiction from another. This ontology also defines basic types of legal system, and extends the basic concept of law which is in the LegalCore ontology.." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2018 EDM Council, Inc." ,
+		"Copyright (c) 2013-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-law-jur" ;
+	sm:filename "Jurisdiction.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20130801/Law/Jurisdiction.rdf version of the ontology was was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in http://www.omg.org/spec/EDMC-FIBO/FND/1.0/AboutFND-1.0/." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20141101/Law/Jurisdiction.rdf version of the ontology was was modified per the FIBO 2.0 RFC to integrate LCC." ,
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/Law/Jurisdiction.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations
+   (6) to revise definitions using more formal sources."""
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-law-jur:CivilLawJurisdiction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-jur:Jurisdiction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:CivilLawSystem ;
+		]
+		;
+	rdfs:label "civil law jurisdiction"@en ;
+	rdfs:comment "QName: fibo-fnd-law-jur:CivilLawJurisdiction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	skos:definition "a civil law jurisdiction" ;
+	.
+
+fibo-fnd-law-jur:CivilLawSystem
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-jur:LegalSystem ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-jur:appliesIn ;
+			owl:someValuesFrom fibo-fnd-law-jur:CivilLawJurisdiction ;
+		]
+		;
+	rdfs:label "civil law system" ;
+	rdfs:comment "QName: fibo-fnd-law-jur:CivilLawSystem" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	skos:definition "a legal system originating in Europe, intellectualized within the framework of late Roman law, and whose most prevalent feature is that its core principles are codified into a referable system which serves as the primary source of law" ;
+	fibo-fnd-utl-av:definitionOrigin "http://en.wikipedia.org/wiki/Civil_law_(legal_system)"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "This can be contrasted with common law systems whose intellectual framework comes from judge-made decisional law which gives precedential authority to prior court decisions on the principle that it is unfair to treat similar facts differently on different occasions (doctrine of judicial precedent)." ;
+	.
+
+fibo-fnd-law-jur:CommonLawJurisdiction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-jur:Jurisdiction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:CommonLawSystem ;
+		]
+		;
+	rdfs:label "common law jurisdiction" ;
+	rdfs:comment "QName: fibo-fnd-law-jur:CommonLawJurisdiction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	skos:definition "a jurisdiction based on common law" ;
+	.
+
+fibo-fnd-law-jur:CommonLawSystem
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-jur:LegalSystem ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-jur:appliesIn ;
+			owl:someValuesFrom fibo-fnd-law-jur:CommonLawJurisdiction ;
+		]
+		;
+	rdfs:label "common law system" ;
+	rdfs:comment "QName: fibo-fnd-law-jur:CommonLawSystem" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	skos:definition "common law, also known as case law or precedent, is law developed by judges through decisions of courts and similar tribunals" ;
+	fibo-fnd-utl-av:definitionOrigin "http://en.wikipedia.org/wiki/Common_law"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote
+		"A jurisdiction which is based in Common Law will also have alongside a legislature that passes statutes." ,
+		"""By contrast, civil law (codified/continental law) is set on statutes adopted through the legislative/parliamentary process and/or regulations issued by the executive branch on base of the parliamentary statutes.
+
+A common law system is a legal system that gives great potential precedential weight to common law, on the principle that it is unfair to treat similar facts differently on different occasions. The body of precedent is called common law and it binds future decisions. In cases where the parties disagree on what the law is, a common law court looks to past precedential decisions of relevant courts. If a similar dispute has been resolved in the past, the court is bound to follow the reasoning used in the prior decision (this principle is known as stare decisis). If, however, the court finds that the current dispute is fundamentally distinct from all previous cases (called a matter of first impression), judges have the authority and duty to make law by creating precedent. Thereafter, the new decision becomes precedent, and will bind future courts."""
+		;
+	.
+
+fibo-fnd-law-jur:Jurisdiction
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-jur:hasReach ;
+			owl:someValuesFrom lcc-cr:GeographicRegion ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:LegalSystem ;
+		]
+		;
+	rdfs:label "jurisdiction"@en ;
+	rdfs:comment "QName: fibo-fnd-law-jur:Jurisdiction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	skos:definition "the limits or territory within which authority may be exercised; the power, right, or authority to interpret and apply the law" ;
+	fibo-fnd-utl-av:definitionOrigin "Merriam-Webster Online Dictionary" ;
+	.
+
+fibo-fnd-law-jur:LegalSystem
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-jur:appliesIn ;
+			owl:allValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-fnd-law-cor:GovernmentalConstitution ;
+		]
+		;
+	rdfs:label "legal system"@en ;
+	rdfs:comment "QName: fibo-fnd-law-jur:LegalSystem" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	skos:definition "Legal regimen of a country consisting of (1) a written or oral constitution, (2) primary legislation (statutes) enacted by the legislative body established by the constitution, (3) subsidiary legislation (bylaws) made by person or bodies authorized by the primary legislation to do so, (4) customs applied by the courts on the basis of traditional practices, and (5) principles or practices of civil, common, Roman, or other code of law." ;
+	skos:editorialNote "This is a Mediating Thing, that is some context in which things have their meaning and existence - in this case, laws and the interpretation thereof by courts." ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.businessdictionary.com/definition/legal-system.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "The contemporary legal systems of the world are generally based on one of three basic systems: civil law, common law, and religious law, or combinations of these. However, the legal system of each country is shaped by its unique history and so incorporates individual variations." ;
+	.
+
+fibo-fnd-law-jur:StatuteLaw
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-cor:Law ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-cor:isInForceIn ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		]
+		;
+	rdfs:label "statute law"@en ;
+	rdfs:comment "QName: fibo-fnd-law-jur:StatuteLaw" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	skos:altLabel "statutory law" ;
+	skos:definition "written law (as opposed to oral or customary law) set down by a legislature or by a legislator (in the case of an absolute monarchy)" ;
+	fibo-fnd-utl-av:definitionOrigin "http://en.wikipedia.org/wiki/Statute_law"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Statutes may originate with national, state legislatures or local municipalities. Statutory laws are subordinate to the higher constitutional laws of the land." ;
+	.
+
+fibo-fnd-law-jur:appliesIn
+	a owl:ObjectProperty ;
+	rdfs:label "applies in" ;
+	rdfs:comment "QName: fibo-fnd-law-jur:appliesIn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	skos:definition "indicates the jurisdiction in which a law, regulation, or legal system applies" ;
+	.
+
+fibo-fnd-law-jur:hasReach
+	a owl:ObjectProperty ;
+	rdfs:label "has reach" ;
+	rdfs:comment "QName: fibo-fnd-law-jur:hasReach" ;
+	rdfs:domain fibo-fnd-law-jur:Jurisdiction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> ;
+	rdfs:range lcc-cr:GeographicRegion ;
+	skos:definition "indicates the geopolitical unit (country, federal province or municipality) or geophysical extent in which the jurisdiction has effect" ;
+	.
+

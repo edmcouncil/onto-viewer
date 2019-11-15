@@ -1,0 +1,189 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-rep: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/>
+	a owl:Ontology ;
+	rdfs:label "Reporting Ontology" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:" ;
+	dct:abstract "This ontology defines the notion of a Report and related party concepts." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-arr-rep" ;
+	sm:filename "Reporting.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting.rdf version of this ontology was modified to eliminate references to deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting.rdf version of this ontology was modified to incorporate evaluates and isEvaluatedBy."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-arr-rep:Report
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-doc:Document ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rep:isSubmittedBy ;
+			owl:onClass fibo-fnd-arr-rep:Submitter ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-doc:hasReportingPeriod ;
+			owl:onClass fibo-fnd-dt-fd:DatePeriod ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rep:isSubmittedTo ;
+			owl:onClass fibo-fnd-pty-pty:PartyInRole ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-doc:hasDateOfIssuance ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rep:isReportedTo ;
+			owl:someValuesFrom fibo-fnd-pty-pty:PartyInRole ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fnd-arr-rep:ReportingParty ;
+		]
+		;
+	rdfs:label "report" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:Report" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> ;
+	skos:definition "a document organized in a narrative, graphic, or tabular form, prepared on ad hoc, periodic, recurring, regular, or as required basis" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/report.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Reports may refer to specific periods, events, occurrences, or subjects, and may be communicated or presented in oral, electronic, or written form." ;
+	.
+
+fibo-fnd-arr-rep:ReportingParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:provides ;
+			owl:someValuesFrom fibo-fnd-arr-rep:Report ;
+		]
+		;
+	rdfs:label "reporting party" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:ReportingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> ;
+	skos:definition "a party providing a report, typically in response to some contractual, legal, regulatory or other business requirement" ;
+	.
+
+fibo-fnd-arr-rep:Submitter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rep:submits ;
+			owl:someValuesFrom fibo-fnd-arr-rep:Report ;
+		]
+		;
+	rdfs:label "submitter" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:Submitter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> ;
+	skos:definition "a party presenting something, such as a regulatory report" ;
+	.
+
+fibo-fnd-arr-rep:isReportedTo
+	a owl:ObjectProperty ;
+	rdfs:label "is reported to" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:isReportedTo" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> ;
+	rdfs:range fibo-fnd-pty-pty:PartyInRole ;
+	skos:definition "indicates the party to which something is reported" ;
+	.
+
+fibo-fnd-arr-rep:isSubmittedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isProvidedBy ;
+	rdfs:label "is submitted by" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:isSubmittedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> ;
+	rdfs:range fibo-fnd-arr-rep:Submitter ;
+	owl:inverseOf fibo-fnd-arr-rep:submits ;
+	skos:definition "indicates the party that submits something" ;
+	.
+
+fibo-fnd-arr-rep:isSubmittedTo
+	a owl:ObjectProperty ;
+	rdfs:label "is submitted to" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:isSubmittedTo" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> ;
+	rdfs:range fibo-fnd-pty-pty:PartyInRole ;
+	skos:definition "indicates the party to which something is submitted" ;
+	.
+
+fibo-fnd-arr-rep:reportsOn
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-arr-doc:isAbout ;
+	rdfs:label "reports on" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:reportsOn" ;
+	rdfs:domain fibo-fnd-arr-rep:Report ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> ;
+	skos:definition "indicates a subject matter, observation(s), assessment(s), focus or other topic of a report" ;
+	.
+
+fibo-fnd-arr-rep:submits
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:provides ;
+	rdfs:label "submits" ;
+	rdfs:comment "QName: fibo-fnd-arr-rep:submits" ;
+	rdfs:domain fibo-fnd-arr-rep:Submitter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> ;
+	skos:definition "presents something (a proposal, application, report, or other document) for consideration or review" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.merriam-webster.com/dictionary/submit"^^xsd:anyURI ;
+	.
+

@@ -1,0 +1,72 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-EuropeAndNorthAmerica/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-Europe/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-NorthAmerica/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-EuropeAndNorthAmerica/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbceuna-all: <https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC-EuropeAndNorthAmerica/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC-EuropeAndNorthAmerica/>
+	a owl:Ontology ;
+	rdfs:label "Financial Business and Commerce (FBC) Domain, European and North American Extension" ;
+	rdfs:comment "QName: fibo-fbceuna-all:" ;
+	dct:abstract "The financial business and commerce domain covers business concepts that are common to common to a number of finance areas, such as loans, securities, and corporate actions, including products and services, financial intermediaries, registrars and regulators, and financial instruments and products." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Financial Business and Commerce (FBC) Domain, European and North American Extensions" ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Bloomberg LP" ,
+		"Citigroup" ,
+		"Credit Suisse" ,
+		"Deutsche Bank" ,
+		"Exprentis" ,
+		"NoMagic" ,
+		"Nordea Bank AB" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Pinnacle Bank (Morgan Hill, California)" ,
+		"Quarule" ,
+		"State Street Bank and Trust" ,
+		"Statistics Canada" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo"
+		;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fbceuna-all" ;
+	sm:filename "AllFBC-EuropeAndNorthAmerica.rdf" ;
+	sm:keyword
+		"financial instruments" ,
+		"financial products" ,
+		"financial services, service providers, and accounts" ,
+		"markets" ,
+		"registration authorities" ,
+		"regulatory agencies"
+		;
+	sm:moduleAbbreviation "fibo-fbc" ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-Europe/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-NorthAmerica/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-EuropeAndNorthAmerica/> ;
+	fibo-fnd-utl-av:explanatoryNote "The 'all' ontology for the European and North American Extension of FBC is provided for convenience for FIBO users.  This ontology does not add new assertions, but imports most of the Production (Released) ontologies that comprise the FIBO Foundations (FND), Business Entities (BE) and Financial Business and Commerce (FBC) Version 2.0 domains, including all of FND as well as individuals for European and North American governments and jurisdictions, financial services and regulatory organizations and related registries, as well as the related LCC region-specific ontologies." ;
+	.
+

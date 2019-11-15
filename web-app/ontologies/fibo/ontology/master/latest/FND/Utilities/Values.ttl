@@ -1,0 +1,150 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/>
+	a owl:Ontology ;
+	rdfs:label "Values Ontology"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract '''The Values ontology introduces a set of foundational classes that represent "values" as OWL classes where a value is an immutable piece of information without a specific lifetime or identity independent of the properties that have a value as their subject.  Subtypes of Value are intended to include semantic, business relevant classes that are not i
+	ndependent, mediating or relative things. 
+While Values as defined here, in some cases, seem to replicate XSD data types they are intended to use, extend and build-on XSD data types for "business meaningful values". 
+Business meaningful values (which we will call "Business Semantic Values") are things like amount, name, postal address, mass, duration, currency and metrics - concepts that make sense in the business domain and are the types of properties of business entities, but not they are not business entities in themselves.  These values are the type (range) of properties that represent the qualities and characteristics of the entities in our business domain such as people, places, transactions and financial instruments. In contrast to semantic values, primitive datatypes, such as "Real", "Integer" or "String", frequently have no business meaning on their own.
+As the intent of the Value classes is to capture business meaning, the Value classes are not intended to be used directly in domain models. Subclasses of Value classes that capture business semantics are intended for use in domain models. In other languages, such as UML, this intent to only use subclasses is known as an "Abstract" class.''' ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2015-2018 EDM Council, Inc." ;
+	rdfs:seeAlso "https://www.iso.org/standard/39479.html"^^xsd:anyURI ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-fnd-utl-val:BasisPointsValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-val:NumericRatioValue ;
+	rdfs:label "basis points value"@en ;
+	rdfs:comment "QName: NONE:BasisPointsValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "one hundredth of one percentage point" ;
+	.
+
+fibo-fnd-utl-val:FloatingPointValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-val:NumericValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-val:hasDataValue ;
+			owl:onDataRange xsd:double ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "floating point value" ;
+	rdfs:comment "QName: NONE:FloatingPointValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "A floating point representation of a number. Note that this class is not intended to be used directly (in these cases use xsd:double) but is intended to be subclassed with values with business semantic intent." ;
+	.
+
+fibo-fnd-utl-val:IntegerValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-val:NumericValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-val:hasDataValue ;
+			owl:onDataRange xsd:integer ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "integer value"@en ;
+	rdfs:comment "QName: NONE:IntegerValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "An integer value is a numeric value with that represents an Integer using an xsd:integer. Note that this class is not intended to be used directly (in these cases use xsd:integer) but is intended to be subclassed with values with business semantic intent."@en ;
+	.
+
+fibo-fnd-utl-val:NumericRatioValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-val:NumericValue ;
+	rdfs:label "numeric ratio value"@en ;
+	rdfs:comment "QName: NONE:NumericRatioValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "A numeric value representing a ratio between two other numeric values." ;
+	.
+
+fibo-fnd-utl-val:NumericValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-val:SingleValue ;
+	rdfs:label "numeric value"@en ;
+	rdfs:comment "QName: NONE:NumericValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "A numeric value is a single value intended to represent any number without restriction as to precision, scale or representation. The number or expression is contained in the hasDataValue property."@en ;
+	.
+
+fibo-fnd-utl-val:PercentageValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-val:NumericRatioValue ;
+	rdfs:label "percentage value"@en ;
+	rdfs:comment "QName: NONE:PercentageValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "A percentage value is a numeric value representing a rate, number, or amount in each hundred."@en ;
+	.
+
+fibo-fnd-utl-val:SingleValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-val:Value ;
+	rdfs:label "single value"@en ;
+	rdfs:comment "QName: NONE:SingleValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "A single value is a Value with exactly one distinguished 'hasDataValue' property that represents the primary data element of that value. Other properties of a SingleValue may be defined to qualify hasDataValue, such as a unit, namespace or defining authority."@en ;
+	.
+
+fibo-fnd-utl-val:TextValue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-val:SingleValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-val:hasDataValue ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "text value" ;
+	rdfs:comment "QName: NONE:TextValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "A text value is a single value representing textural information represented as an xsd:string. Note that this class is not intended to be used directly (in these cases use xsd:string) but is intended to be subclassed with values with business semantic intent."@en ;
+	.
+
+fibo-fnd-utl-val:Value
+	a owl:Class ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:Value" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition '''A Value is an immutable piece of information without a specific lifetime or identity independent of the properties that have such a value as their subject.  Subtypes of Value are intended to include semantic, business relevant types that are not independent, mediating or relative things. Value is not intended to be used directly (a concept known as "abstract" in other languages such as UML), but is intended to have subclasses that are used in domain models.
+All explicit triples which have a value instance as their subject (with the exception of annotations) are defined as part of the identity of the value instance. The set of such properties should be treated as immutable (not changed once the value is defined). All instances of Value with the same set of properties may be treated as equivalent. Note that while the above is not directly expressible in OWL, the above constraints and semantics of values are asserted by this specification.'''@en ;
+	fibo-fnd-utl-av:adaptedFrom "[ISO11404] The identification of members of a datatype family, subtypes of a datatype, and the resulting datatypes of datatype generators may require the syntactic designation of specific values of a datatype."@en ;
+	.
+
+fibo-fnd-utl-val:hasDataValue
+	a
+		owl:DatatypeProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:label "has data value"@en ;
+	rdfs:comment "QName: NONE:hasDataValue" ;
+	rdfs:domain fibo-fnd-utl-val:SingleValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> ;
+	skos:definition "hasDataValue is a datatype property of a single value that represents the primary primitive data of that single value. The range of hasDataValue is unrestricted as it is intended to be restricted in subtypes of SingleValue for a particular purpose with a particular data type."@en ;
+	.
+

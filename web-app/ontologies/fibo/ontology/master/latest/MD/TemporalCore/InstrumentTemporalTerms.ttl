@@ -1,0 +1,446 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-inf-tem: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-tim-tim: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-ind-ir-ir: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/> .
+@prefix fibo-ind-ir-pub: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> .
+@prefix fibo-md-dbtx-int: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> .
+@prefix fibo-md-dbtx-py: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> .
+@prefix fibo-md-temx-ins: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/>
+	a owl:Ontology ;
+	rdfs:label "InstrumentTemporalTerms"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology defines common concepts for instrument temporal terms, such as prices, yields, spreads, volatility and the like. These are the concepts as they apply to all classes of instrument.
+		The detailed terms in equity and debt pricing and analytics among others, are defined with reference to these basic concepts.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-temx-ins:ClosingPriceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:PriceDeterminationMethod ;
+	rdfs:label "closing price determination method"@en ;
+	rdfs:comment "QName: NONE:ClosingPriceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "The way in which a price is determined, usually by an exchange or trading venue, for example when publishing a closing price."@en ;
+	.
+
+fibo-md-temx-ins:CreditSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:YieldSpread ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-md-dbtx-int:DebtInstrumentReferenceRate
+					fibo-ind-ir-ir:ReferenceInterestRate
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-tem:referencesYieldOf ;
+			owl:someValuesFrom fibo-md-dbtx-py:ReferenceDebtInstrument ;
+		]
+		;
+	rdfs:label "credit spread"@en ;
+	rdfs:comment "QName: NONE:CreditSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "In finance, a credit spread is the yield spread, or difference in yield between different securities, due to different credit quality. The credit spread reflects the additional net yield an investor can earn from a security with more credit risk relative to one with less credit risk. The credit spread of a particular security is often quoted in relation to the yield on a credit risk-free benchmark security or reference rate. Further Notes There are several measures of credit spread, including Z-spread and option-adjusted spread. Old definition (Algo) The spread between the credit rating of something and its maturity. THis is now defined as a different term pending further review with Algorithmics. Update from SMER. difference between risk free price (price of govt bond) and the price of this security. (matches Wikipedia definition above) i.e. price of this credit versus the price of a (near) risk free credit. The latter is a reference security with low risk such as a Treasury Bond. Is this between prices or between yields? can be expressed as either wrt price or yield, and this is detemined by context for different markets. Try and get a list. This is more generic - the meaning is not that it is speciufically wrt yield as such. Debt Price Spread is in context of price, whereas this is more generic."@en ;
+	.
+
+fibo-md-temx-ins:DerivativeSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:MarketSpread ,
+		fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter
+		;
+	rdfs:label "derivative spread"@en ;
+	rdfs:comment "QName: NONE:DerivativeSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	.
+
+fibo-md-temx-ins:ExchangeTradedSecurityPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:TradedSecurityPublishedPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:hasClosingPriceDeterminationMethod ;
+			owl:someValuesFrom fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:quotedOn ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/MultilateralTradingFacility>
+					<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/SecuritiesExchange>
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "exchange traded security price"@en ;
+	rdfs:comment "QName: NONE:ExchangeTradedSecurityPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	.
+
+fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-tem:AnalyticalInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:providesAnalysisAbout ;
+			owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+		]
+		;
+	rdfs:label "financial instrument analytical parameter"@en ;
+	rdfs:comment "QName: NONE:FinancialInstrumentAnalyticalParameter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "Some measure of a financial instrument, that may be referred to in analysing or understanding that instrument for investment or risk management purposes."@en ;
+	.
+
+fibo-md-temx-ins:FinancialMarketInformation
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-fct-pub:Publication ;
+	rdfs:label "financial market information"@en ;
+	rdfs:comment "QName: NONE:FinancialMarketInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "Information about the financial markets, that is published by some publisher or data vendor."@en ;
+	.
+
+fibo-md-temx-ins:InstrumentInternalRateOfReturn
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:InternalRateOfReturn ;
+	rdfs:label "instrument internal rate of return"@en ;
+	rdfs:comment "QName: NONE:InstrumentInternalRateOfReturn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "The discount rate that results in a Net Present Value of zero for a series of future cash flows for the holder of the financial instrument."@en ;
+	skos:editorialNote "notes @SMER on 18 November ISS is the interest rate used to calculate the NPV from a given Face Value. Yield &amp; Face =&gt; NPV NPV &amp; Yield =&gt; IRR is the rate used to calculate that NPV. This makes specific reinvestment assumptions."@en ;
+	.
+
+fibo-md-temx-ins:InternalRateOfReturn
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:AnalyticalInformation ;
+	rdfs:label "internal rate of return"@en ;
+	rdfs:comment "QName: NONE:InternalRateOfReturn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "The discount rate that results in a Net Present Value of zero for a series of future cash flows."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is not a figure given out as market data but is at the center of many definitions of financial debt instrument analytics. This is the inverse of Net Present Value (NPV). NPV is expressed in monetary units while IRR is expressed in percentage."@en ;
+	.
+
+fibo-md-temx-ins:Kassa
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+	rdfs:label "kassa"@en ;
+	rdfs:comment "QName: NONE:Kassa" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "Official declared price."@en ;
+	.
+
+fibo-md-temx-ins:Listino
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+	rdfs:label "listino"@en ;
+	rdfs:comment "QName: NONE:Listino" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "only associated with a closing price"@en ;
+	.
+
+fibo-md-temx-ins:MarketData
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:FinancialMarketInformation ;
+	rdfs:label "market data"@en ;
+	rdfs:comment "QName: NONE:MarketData" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "Data about financial instruments, that is published and may be used to support decision making or processing of financial instruments. Definition source: own definition."@en ;
+	.
+
+fibo-md-temx-ins:MeanPriceDetermination
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+	rdfs:label "mean price determination"@en ;
+	rdfs:comment "QName: NONE:MeanPriceDetermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "Exchange closing price may take an average (mean) price."@en ;
+	.
+
+fibo-md-temx-ins:ReferenceFactor
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:TimedParameter ;
+	rdfs:label "reference factor"@en ;
+	rdfs:comment "QName: NONE:ReferenceFactor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "Some factor which is referred to in calculations and which is itself calculated in order to perform those calculations."@en ;
+	fibo-fnd-utl-av:explanatoryNote "An example of this would be the factor for an Inflation Bond, which may be used to determine interest payments, principal repayments or both, using formulae which refer to that factor."@en ;
+	.
+
+fibo-md-temx-ins:Riferimento
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+	rdfs:label "riferimento"@en ;
+	rdfs:comment "QName: NONE:Riferimento" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "Meaning not known"@en ;
+	.
+
+fibo-md-temx-ins:SecurityPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-cur:MonetaryPrice ;
+	rdfs:label "security price"@en ;
+	rdfs:comment "QName: NONE:SecurityPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	.
+
+fibo-md-temx-ins:StockVolatillity
+	a owl:Class ;
+	rdfs:subClassOf fibo-ind-ind-ind:Volatility ;
+	rdfs:label "stock volatillity"@en ;
+	rdfs:comment "QName: NONE:StockVolatillity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "A measure of stock price fluctuation. Mathematically the volatility is the annualized standard deviation of a stock's daily price changes."@en ;
+	.
+
+fibo-md-temx-ins:TradedSecurityPublishedPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-ind-ind-ind:QuotedPrice ;
+	rdfs:label "traded security published price"@en ;
+	rdfs:comment "QName: NONE:TradedSecurityPublishedPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "The price of a tradable security."@en ;
+	.
+
+fibo-md-temx-ins:Ufficiale
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+	rdfs:label "ufficiale"@en ;
+	rdfs:comment "QName: NONE:Ufficiale" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "Meaning not known - Official price"@en ;
+	.
+
+fibo-md-temx-ins:Yield
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:TimedParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:basedUpon ;
+			owl:someValuesFrom fibo-fnd-accx-acc:Income ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-py:expressedInRelationTo ;
+			owl:someValuesFrom fibo-fnd-tim-tim:KnownDuration ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:derivedFromOutlay ;
+			owl:someValuesFrom fibo-md-dbtx-py:Outlay ;
+		]
+		;
+	rdfs:label "yield"@en ;
+	rdfs:comment "QName: NONE:Yield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "The yield of a financial instrument based on its current price is the return to the investor expressed as an annual percentage."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Yields come in various types with various qiualifying terms. A Yield must be based on a price, and must be in reference to some event or duration of time. It has a calculation method, and may have other qualifying terms such as for compounded yield. Most data models have these in a single selectable list, covering the different semantics above. Yield calculation methods remain as a selection list."@en ;
+	.
+
+fibo-md-temx-ins:YieldSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:MarketSpread ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:onClass fibo-md-temx-ins:Yield ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "yield spread" ;
+	rdfs:comment "QName: NONE:YieldSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	skos:definition "the spread between the yields of two items"@en ;
+	.
+
+fibo-md-temx-ins:derivedFrom
+	a owl:ObjectProperty ;
+	rdfs:label "derived from" ;
+	rdfs:comment "QName: NONE:derivedFrom" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	.
+
+fibo-md-temx-ins:derivedFromOutlay
+	a owl:ObjectProperty ;
+	rdfs:label "derived from outlay"@en ;
+	rdfs:comment "QName: NONE:derivedFromOutlay" ;
+	rdfs:domain fibo-md-temx-ins:Yield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-md-dbtx-py:Outlay ;
+	.
+
+fibo-md-temx-ins:hasAnalyticsDetails
+	a owl:ObjectProperty ;
+	rdfs:label "has analytics details"@en ;
+	rdfs:comment "QName: NONE:hasAnalyticsDetails" ;
+	rdfs:domain fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter ;
+	.
+
+fibo-md-temx-ins:hasClosingPriceDeterminationMethod
+	a owl:ObjectProperty ;
+	rdfs:label "has closing price determination method"@en ;
+	rdfs:comment "QName: NONE:hasClosingPriceDeterminationMethod" ;
+	rdfs:domain fibo-md-temx-ins:ExchangeTradedSecurityPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+	skos:definition "The method by which the closing price is defined."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This method itself changes quite frequently i.e. the exchange may change the way it computes closing prices."@en ;
+	.
+
+fibo-md-temx-ins:hasRateOfReturn
+	a owl:ObjectProperty ;
+	rdfs:label "has rate of return"@en ;
+	rdfs:comment "QName: NONE:hasRateOfReturn" ;
+	rdfs:domain fibo-fbc-fi-fi:FinancialInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-md-temx-ins:InstrumentInternalRateOfReturn ;
+	.
+
+fibo-md-temx-ins:hasSpread
+	a owl:ObjectProperty ;
+	rdfs:label "has spread"@en ;
+	rdfs:comment "QName: NONE:hasSpread" ;
+	rdfs:domain <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/TradableDebtInstrument> ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-md-temx-ins:CreditSpread ;
+	.
+
+fibo-md-temx-ins:irrHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "irr has value"@en ;
+	rdfs:comment "QName: NONE:irrHasValue" ;
+	rdfs:domain fibo-md-temx-ins:InternalRateOfReturn ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The value of the IRR at a given point in time, expressed as a percentage."@en ;
+	.
+
+fibo-md-temx-ins:providesAnalysisAbout
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:isAbout ;
+	rdfs:label "provides analysis about"@en ;
+	rdfs:comment "QName: NONE:providesAnalysisAbout" ;
+	rdfs:domain fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-fbc-fi-fi:FinancialInstrument ;
+	owl:inverseOf fibo-md-temx-ins:hasAnalyticsDetails ;
+	.
+
+fibo-md-temx-ins:quotedOn
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-be-fct-pub:hasPublisher ;
+	rdfs:label "quoted on"@en ;
+	rdfs:comment "QName: NONE:quotedOn" ;
+	rdfs:domain fibo-md-temx-ins:ExchangeTradedSecurityPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/MultilateralTradingFacility>
+			<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/SecuritiesExchange>
+		) ;
+	] ;
+	.
+
+fibo-md-temx-ins:referenceFactorHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "reference factor has value"@en ;
+	rdfs:comment "QName: NONE:referenceFactorHasValue" ;
+	rdfs:domain fibo-md-temx-ins:ReferenceFactor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-fnd-math-math:TimedValue ;
+	.
+
+fibo-md-temx-ins:yieldHasValue
+	a owl:ObjectProperty ;
+	rdfs:label "yield has value"@en ;
+	rdfs:comment "QName: NONE:yieldHasValue" ;
+	rdfs:domain fibo-md-temx-ins:Yield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The value of the yield expressed as a percentage."@en ;
+	.
+

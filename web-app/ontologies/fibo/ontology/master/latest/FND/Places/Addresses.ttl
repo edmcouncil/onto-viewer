@@ -1,0 +1,153 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-plc-adr: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> .
+@prefix fibo-fnd-plc-loc: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/>
+	a owl:Ontology ;
+	rdfs:label "Addresses Ontology" ;
+	rdfs:comment "QName: fibo-fnd-plc-adr:" ;
+	dct:abstract "This ontology provides a very high level definition of address, essentially a placeholder for use in mapping addresses to the appropriate regional standards or to some as yet undefined global address ontology, for use in other FIBO ontology elements. A minimal set of address related terms are included as required for financial risk management and other application use cases, and these are all to be considered as placeholders for suitable global address standards as these become available." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-plc-adr" ;
+	sm:filename "Addresses.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20141101/Places/Addresses.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.1 RTF report. Differences from the 1.0 version include the addition of a hasAddress property and PhysicalAddress class as a parent of PostalAddress." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20160201/Places/Addresses.rdf version of this ontology was modified for the FIBO 2.0 RFC to integrate LCC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/. Primary differences include elimination of data properties in favor of a simple class model,the addition of virtual address, and the addition of addressing scheme." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses.rdf version of this ontology was modified replace hasDefinition with isDefinedIn to clarify intent, and the address hierarchy was simplified to enable extensions for international and national delivery address specification, and to eliminate deprecated elements." ,
+		"""The https://spec.edmcouncil.org/fibo/ontology/Foundations/20130601/Organizations/Addresses.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations
+   (6) to move this ontology from Organizations to Places and eliminate unnecessary properties and related imports dependencies."""
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-plc-adr:Address
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Index ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:onClass fibo-fnd-plc-adr:AddressingScheme ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-id:isIndexTo ;
+			owl:onClass lcc-cr:Location ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "address"@en ;
+	rdfs:comment "QName: fibo-fnd-plc-adr:Address" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> ;
+	skos:definition "index to a location to which communications may be delivered" ;
+	.
+
+fibo-fnd-plc-adr:AddressingScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:IndexingScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:allValuesFrom fibo-fnd-plc-adr:Address ;
+		]
+		;
+	rdfs:label "addressing scheme" ;
+	rdfs:comment "QName: fibo-fnd-plc-adr:AddressingScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> ;
+	skos:definition "system for allocating addresses to objects" ;
+	.
+
+fibo-fnd-plc-adr:PhysicalAddress
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plc-adr:Address ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-id:isIndexTo ;
+			owl:onClass fibo-fnd-plc-loc:PhysicalLocation ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "physical address"@en ;
+	rdfs:comment "QName: fibo-fnd-plc-adr:PhysicalAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> ;
+	skos:definition "physical address where communications can be addressed, papers served or representatives located for any kind of organization or person" ;
+	skos:editorialNote "There are existing international and regional standards for defining postal addresses.  This is a place holder for mapping to regional standards for postal address representation." ;
+	skos:scopeNote "An address may be used as an index to the location of a building, apartment, or other structure or parcel of land, often using political boundaries and street names as references, along with other information such as house or building numbers or names.  Some addresses also contain secondary elements such as apartment or building numbers, or special codes to aid routing of mail and packages." ;
+	.
+
+fibo-fnd-plc-adr:PostCodeArea
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plc-loc:PhysicalLocation ;
+	rdfs:label "post code area"@en ;
+	rdfs:comment "QName: fibo-fnd-plc-adr:PostCodeArea" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> ;
+	skos:definition "physical area uniquely identified by some postal code" ;
+	.
+
+fibo-fnd-plc-adr:VirtualAddress
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plc-adr:Address ;
+	rdfs:label "virtual address" ;
+	rdfs:comment "QName: fibo-fnd-plc-adr:VirtualAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> ;
+	owl:disjointWith fibo-fnd-plc-adr:PhysicalAddress ;
+	skos:definition "address identifying a virtual, i.e. non-physical, location" ;
+	.
+
+fibo-fnd-plc-adr:hasAddress
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has address" ;
+	rdfs:comment "QName: fibo-fnd-plc-adr:hasAddress" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> ;
+	rdfs:range fibo-fnd-plc-adr:Address ;
+	skos:definition "indicates a means by which something (in the case of a network address) or some entity may be located or contacted or may receive correspondence" ;
+	.
+

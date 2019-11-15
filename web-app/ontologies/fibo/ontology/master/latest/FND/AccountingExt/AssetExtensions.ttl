@@ -1,0 +1,94 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-assx: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/>
+	a owl:Ontology ;
+	rdfs:label "AssetExtensions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Extensions of concepts in the Asset concept in the main Ownership ontology, where asset is defined as something owned. This ontology covers different categories of asset in that sense, such as physical and real estate (property) assets." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-accx-assx:MeasurableAsset
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-oac-own:Asset ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-assx:measuredIn ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		]
+		;
+	rdfs:label "measurable asset"@en ;
+	rdfs:comment "QName: NONE:MeasurableAsset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/> ;
+	skos:definition 'Some asset which is or may be measured monearality in some currency. Editorial Note: This class introduced because the original FIBO model has a property "measured in" (with range of Currency) which is not in FIBO-FND v1.0 and because this lets us use the parent class to define anything as an asset if it is owned whether or not it is measured monetarily. Applications of the concept of Asset to accouting, book-keeping etc where it is measured should use this now term in place of the parent term "Asset". Note also that the moved property "measured in" is an object property, having a range of Currency.'@en ;
+	.
+
+fibo-fnd-accx-assx:PhysicalAsset
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-assx:MeasurableAsset ;
+	rdfs:label "physical asset"@en ;
+	rdfs:comment "QName: NONE:PhysicalAsset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/> ;
+	skos:definition "A Physical Thing held by some party and having some value."@en ;
+	.
+
+fibo-fnd-accx-assx:PropertyAsset
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-assx:PhysicalAsset ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-assx:propertyAssetTakesForm ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+		]
+		;
+	rdfs:label "property asset"@en ;
+	rdfs:comment "QName: NONE:PropertyAsset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/> ;
+	skos:definition "A physical property (building) regarded as an asset."@en ;
+	.
+
+fibo-fnd-accx-assx:measuredIn
+	a owl:ObjectProperty ;
+	rdfs:label "measured in"@en ;
+	rdfs:comment "QName: NONE:measuredIn" ;
+	rdfs:domain fibo-fnd-accx-assx:MeasurableAsset ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "The currency in which the asset is denominated, measured and / or reported. Explanatory Note: This property was introduced as part of accounting alignment to identify how an asset, when reported for accounting purposes, has some currency in which it may be measured."@en ;
+	.
+
+fibo-fnd-accx-assx:propertyAssetTakesForm
+	a owl:ObjectProperty ;
+	rdfs:label "property asset takes form"@en ;
+	rdfs:comment "QName: NONE:propertyAssetTakesForm" ;
+	rdfs:domain fibo-fnd-accx-assx:PropertyAsset ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AssetExtensions/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+	skos:definition "The physical form of the Property Asset is Real Estate, also known as Bricks and Mortar."@en ;
+	.
+

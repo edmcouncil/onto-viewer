@@ -1,0 +1,128 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-inf-msg: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/>
+	a owl:Ontology ;
+	rdfs:label "Messaging"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This is a conceptual ontology for the core notion of a message and the basic facts that apply to all messages. These include applications, messages and requests, as being relevant both for corporate events and for many loan related information exchanges such as loan applications. 
+		Note that the newly introduced (Dec 2017) Communications module and ontology are intended to cover the same ground in a more data- and application-facing format. Some de-duplication is required for these concepts. At present parts of Provisional FIBO refer to these concepts, principally in the Corporate Actions and Events domain and in Loans.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-inf-msg:Applicant
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-msg:RequestingParty ;
+	rdfs:label "applicant"@en ;
+	rdfs:comment "QName: NONE:Applicant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ;
+	skos:definition "The party making some application."@en ;
+	.
+
+fibo-fnd-inf-msg:ApplicationInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-msg:Request ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-msg:madeBy ;
+			owl:someValuesFrom fibo-fnd-inf-msg:Applicant ;
+		]
+		;
+	rdfs:label "application information"@en ;
+	rdfs:comment "QName: NONE:ApplicationInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ;
+	skos:definition "A formal application by some party to some other party, in which the requesting party sets out some requirement which they request to be fulfilled by the other party."@en ;
+	.
+
+fibo-fnd-inf-msg:Message
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:Information ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-msg:hasSubject ;
+			owl:someValuesFrom owl:Thing ;
+		]
+		;
+	rdfs:label "message"@en ;
+	rdfs:comment "QName: NONE:Message" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ;
+	skos:definition "Some message communicating something from some party to some other party."@en ;
+	skos:editorialNote "Added to support Corporate Events messages. Grammatical facts to be added, for example sender and receiveer, as defining facts about a Message. Decide whether Party or Actor, or something new."@en ;
+	.
+
+fibo-fnd-inf-msg:Request
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:Information ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-msg:requestedBy ;
+			owl:someValuesFrom fibo-fnd-inf-msg:RequestingParty ;
+		]
+		;
+	rdfs:label "request"@en ;
+	rdfs:comment "QName: NONE:Request" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ;
+	skos:definition "A request by some party to some other party for some thing or service."@en ;
+	.
+
+fibo-fnd-inf-msg:RequestingParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:label "requesting party"@en ;
+	rdfs:comment "QName: NONE:RequestingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ;
+	skos:definition "The party making some request."@en ;
+	.
+
+fibo-fnd-inf-msg:hasSubject
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:isAbout ;
+	rdfs:label "has subject"@en ;
+	rdfs:comment "QName: NONE:hasSubject" ;
+	rdfs:domain fibo-fnd-inf-msg:Message ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ;
+	rdfs:range owl:Thing ;
+	.
+
+fibo-fnd-inf-msg:madeBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-msg:requestedBy ;
+	rdfs:label "made by"@en ;
+	rdfs:comment "QName: NONE:madeBy" ;
+	rdfs:domain fibo-fnd-inf-msg:ApplicationInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ;
+	rdfs:range fibo-fnd-inf-msg:Applicant ;
+	.
+
+fibo-fnd-inf-msg:requestedBy
+	a owl:ObjectProperty ;
+	rdfs:label "requested by"@en ;
+	rdfs:comment "QName: NONE:requestedBy" ;
+	rdfs:domain fibo-fnd-inf-msg:Request ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ;
+	rdfs:range fibo-fnd-inf-msg:RequestingParty ;
+	.
+

@@ -1,0 +1,56 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/MetadataDERFxDerivatives/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/MetadataDERFxDerivatives/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-fx-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/MetadataDERFxDerivatives/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/MetadataDERFxDerivatives/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Derivatives (DER) Foreign Exchange (FX) Derivatives Module" ;
+	rdfs:comment "QName: fibo-der-fx-mod:" ;
+	dct:abstract "The foreign exchange derivatives module covers derivatives that have underlying foreign exchange rates, including forwards, options, spots, and swaps." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-der-fx-mod" ;
+	sm:filename "MetadataDERFxDerivatives.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/MetadataDERFxDerivatives/> ;
+	.
+
+fibo-der-fx-mod:FxDerivativesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Foreign Exchange Derivatives" ;
+	rdfs:comment "QName: fibo-der-fx-mod:FxDerivativesModule" ;
+	dct:abstract "The foreign exchange derivatives module covers derivatives that have underlying foreign exchange rates, including forwards, options, spots, and swaps." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Derivatives (DER) Foreign Exchange (FX) Derivatives Module" ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-der-fx" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/MetadataDERFxDerivatives/> ;
+	rdfs:seeAlso "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	.
+

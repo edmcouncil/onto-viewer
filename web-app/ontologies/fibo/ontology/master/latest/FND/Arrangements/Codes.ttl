@@ -1,0 +1,93 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-cd: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-lr: <https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/>
+	a owl:Ontology ;
+	rdfs:label "Codes and Code Sets Ontology" ;
+	rdfs:comment "QName: fibo-fnd-arr-cd:" ;
+	dct:abstract "This ontology defines abstract concepts for representation of codes and coding schemes for use in other FIBO ontology elements." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2018 EDM Council, Inc." ,
+		"Copyright (c) 2014-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-arr-cd" ;
+	sm:filename "Codes.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes.rdf version of this ontology was introduced as a part of the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/ in advance of the Long Beach meeting in December 2014." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes.rdf version of this ontology was revised for the FIBO 2.0 RFC to include the mapping to LCC."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-arr-cd:CodeElement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-rel-rel:Reference ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:denotes ;
+			owl:cardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isMemberOf ;
+			owl:onClass fibo-fnd-arr-cd:CodeSet ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "code element" ;
+	rdfs:comment "QName: fibo-fnd-arr-cd:CodeElement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> ;
+	owl:equivalentClass lcc-lr:CodeElement ;
+	skos:definition "a sequence of characters, capable of identifying that with which it is associated for some purpose, within a specified context, i.e., a code set, according to a pre-established set of rules" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+
+fibo-fnd-arr-cd:CodeSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Arrangement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:someValuesFrom fibo-fnd-arr-cd:CodeElement ;
+		]
+		;
+	rdfs:label "code set" ;
+	rdfs:comment "QName: fibo-fnd-arr-cd:CodeSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> ;
+	owl:equivalentClass lcc-lr:CodeSet ;
+	skos:definition "A system of valid symbols that substitute for specified values, e.g., alpha, numeric, symbols and/or combinations" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+

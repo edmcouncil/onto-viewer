@@ -1,0 +1,229 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/Settlement/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/Settlement/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-fi-stl: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/>
+	a owl:Ontology ;
+	rdfs:label "Settlement Ontology"@en ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:" ;
+	dct:abstract "This ontology defines high-level concepts for settlement that are applicable across FIBO domain areas, such as for loans, securities, and derivatives." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fbc-fi-stl" ;
+	sm:filename "Settlement.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/Settlement/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-fbc-fi-stl:CommodityDelivery
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fi-stl:SecurityDeliveryMethod
+		;
+	rdfs:label "commodity delivery" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:CommodityDelivery" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	skos:definition "the transfer of some commodity as consideration in exchange for a security" ;
+	.
+
+fibo-fbc-fi-stl:CurrencyDelivery
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fi-stl:SecurityDeliveryMethod
+		;
+	rdfs:label "currency delivery" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:CurrencyDelivery" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	skos:definition "the transfer of currency as consideration in exchange for a security" ;
+	.
+
+fibo-fbc-fi-stl:DeliveryInCash
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fi-stl:SecurityDeliveryMethod
+		;
+	rdfs:label "delivery in cash" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:DeliveryInCash" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	skos:definition "the transfer of cash as consideration in exchange for a security" ;
+	.
+
+fibo-fbc-fi-stl:DeliveryOfASecurity
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fi-stl:SecurityDeliveryMethod
+		;
+	rdfs:label "delivery of a security" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:DeliveryOfASecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	skos:definition "the transfer of some other security as consideration in exchange for a security" ;
+	.
+
+fibo-fbc-fi-stl:DeliveryOfAnInstrument
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fi-stl:SecurityDeliveryMethod
+		;
+	rdfs:label "delivery of an instrument" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:DeliveryOfAnInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	skos:definition "the transfer of some other financial instrument as consideration in exchange for a security" ;
+	.
+
+fibo-fbc-fi-stl:SecurityDeliveryMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:DeliveryMethod ;
+	rdfs:label "delivery method"@en ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:SecurityDeliveryMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	skos:definition "the method specified for transferring a commodity, currency, security, cash or another instrument as defined in the settlement terms of the contract" ;
+	.
+
+fibo-fbc-fi-stl:Settlement
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-oc:OccurrenceKind ;
+	rdfs:label "settlement"@en ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:Settlement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	skos:definition "the act of finalizing a transaction, concluding negotiations, finalizing accounting, exchanging consideration, and/or legally recording documents, as applicable, as a result of that transaction" ;
+	.
+
+fibo-fbc-fi-stl:SettlementConvention
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-bd:Convention ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:hasNumericValue ;
+			owl:someValuesFrom xsd:decimal ;
+		]
+		;
+	rdfs:label "settlement convention" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:SettlementConvention" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	skos:definition "a convention employed to determine the closing date (from the stated settlement date) in the process of settling a transaction on which securities or interests in securities are delivered, usually against (in simultaneous exchange for) payment of some consideration" ;
+	fibo-fnd-utl-av:explanatoryNote "This is usually stated in the form 'T+n' where n is the number of business days from the specified settlement date (T). There are no date roll rules,the T+n simply refers to the next available business days and is specified as a whole number." ;
+	.
+
+fibo-fbc-fi-stl:allowsContractualSettlement
+	a owl:DatatypeProperty ;
+	rdfs:label "allows contractual settlement" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:allowsContractualSettlement" ;
+	rdfs:domain fibo-fbc-pas-fpas:SettlementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the market allows contractual settlement" ;
+	.
+
+fibo-fbc-fi-stl:hasPreferredSettlementCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "has preferred settlement currency" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:hasPreferredSettlementCurrency" ;
+	rdfs:domain fibo-fbc-pas-fpas:SettlementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "indicates the preferred currency for settlement purposes" ;
+	.
+
+fibo-fbc-fi-stl:isFractionalEligible
+	a owl:DatatypeProperty ;
+	rdfs:label "is fractional eligible" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:isFractionalEligible" ;
+	rdfs:domain fibo-fbc-pas-fpas:SettlementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the security can contain fractional share/amounts" ;
+	.
+
+fibo-fbc-fi-stl:isFullyAutomatedSecuritiesTransferApplicable
+	a owl:DatatypeProperty ;
+	rdfs:label "is fully automated securities transfer applicable" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:isFullyAutomatedSecuritiesTransferApplicable" ;
+	rdfs:domain fibo-fbc-pas-fpas:SettlementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the security is to be held at the transfer agent as part of the FAST (Fully Automated Securities Transfer) program" ;
+	skos:editorialNote "Term is specific to DTCC / US context. Is there a more generic meaning similar to this which applies across different jurisdictions? If not this term should be defined with reference to this specific context." ;
+	fibo-fnd-utl-av:abbreviation "is FAST applicable" ;
+	.
+
+fibo-fbc-fi-stl:isInterchangeable
+	a owl:DatatypeProperty ;
+	rdfs:label "is interchangeable" ;
+	rdfs:comment "QName: fibo-fbc-fi-stl:isInterchangeable" ;
+	rdfs:domain fibo-fbc-pas-fpas:SettlementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether or not the security is freely interchangeable with other securities of the same type" ;
+	.
+
+fibo-fbc-pas-fpas:SettlementTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-fbc-fi-stl:SecurityDeliveryMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-fbc-fi-stl:SettlementConvention ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-fbc-fi-stl:Settlement ;
+		]
+		;
+	.
+

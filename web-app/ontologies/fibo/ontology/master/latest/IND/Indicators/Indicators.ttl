@@ -1,0 +1,329 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/>
+	a owl:Ontology ;
+	rdfs:label "Indicators Ontology" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:" ;
+	dct:abstract "This ontology provides the concepts common to all market rates, indices and indicators; that is concepts descriptive of the numeric parameters themselves. These are modeled independently of the values they may take over time." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2019 EDM Council, Inc." ,
+		"Copyright (c) 2014-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/BE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/>
+		;
+	sm:fileAbbreviation "fibo-ind-ind-ind" ;
+	sm:filename "Indicators.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators.rdf version of this ontology was modified per the FIBO 2.0 RFC, namely, to integrate concepts recently added to the FND domain including Rate, ExchangeRate, InterestRate and StructuredCollection and revise definitions of TermStructure and Volatility to better support concepts such as yield curves and analysis of market rates generally." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators.rdf version of this ontology was modified per the issue resolutions identified in the FIBO IND 1.0 FTF 1 report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators.rdf version of this ontology was modified to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators.rdf version of this ontology was modified to integrate the composite date value and reflect migration of statistical measures to Analytics."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-ind-ind-ind:DailyAverageMarketRate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:MarketRate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ind-ind:hasQuotationDateTime ;
+			owl:onDataRange fibo-fnd-dt-fd:CombinedDateTime ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "daily average market rate" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:DailyAverageMarketRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a measure of the overall price level of a given rate, calculated as the sum of all values of the rates for a particular reference rate, foreign exchange rate, lending rate, or other market rate divided by the total number of rates collected over the course of a twenty-four (24) hour period for a specific date" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/m/marketaverage.asp"^^xsd:anyURI ;
+	.
+
+fibo-ind-ind-ind:EndOfDayMarketRate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:MarketRate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ind-ind:hasQuotationDateTime ;
+			owl:onDataRange fibo-fnd-dt-fd:CombinedDateTime ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "end-of-day market rate" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:EndOfDayMarketRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a measure of the price level (value) of a given market rate of the end of the business day for a specific date" ;
+	.
+
+fibo-ind-ind-ind:FinancialInformationPublisher
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-pub:Publisher ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:publishes ;
+			owl:onClass fibo-ind-ind-ind:PublishedFinancialInformation ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-fnd-org-fm:FormalOrganization ;
+		]
+		;
+	rdfs:label "financial information publisher" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:FinancialInformationPublisher" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a formal organization acting as a publisher or provider of information related to the financial markets or of interest to financial market participants such as information on economies" ;
+	.
+
+fibo-ind-ind-ind:MarketRate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:RatioValue ,
+		fibo-ind-ind-ind:PublishedFinancialInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ind-ind:hasQuotationDateTime ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+			owl:onDataRange fibo-fnd-dt-fd:CombinedDateTime ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasRateValue ;
+			owl:onDataRange xsd:decimal ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "market rate" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:MarketRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a rate that measures market trends for a set of instruments (S&P500, NASDAQ composite, 30 day CD) or that describes the economic climate for an industry (Dow Jones Industrial Average (DJIA), H&Q Growth Technologies) and/or political region (LIBOR, Prime)" ;
+	skos:example "Financial market rates include, but are not limited to reference rates, foreign exchange rates, lending rates, bankers' acceptance rates, and so forth." ;
+	skos:scopeNote
+		"""Market rates include but may not be limited to the following:
+(1) Index: Statistical composite that measures changes in the economy or in financial markets, often expressed in percentage changes from a base year or from the previous month
+(2) Money Rate: Benchmark or guideline for interest rates determined by central banks or economical climate as a whole
+(3) Bankers' Acceptance Rate: Benchmark reflecting market fluctuations of Bankers' Acceptance issued instruments                
+(4) Commercial Paper Rate: Benchmark reflecting market fluctuations of Commercial Paper issued instruments        
+(5) Certificate of Deposit Rate: Benchmark reflecting market fluctuations of Certificate of Deposit issued instruments                
+(6) Interbank Rate                                                
+(7) Prime                        
+(8) Time Deposit Rate: Benchmark reflecting market fluctuations of Deposit/Redeposit issued instruments""" ,
+		"known collectively (in the CFI Standard) as referential instruments"
+		;
+	fibo-fnd-utl-av:synonym "benchmark" ;
+	.
+
+fibo-ind-ind-ind:MarketSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:ScopedMeasure ,
+		fibo-fnd-utl-alx:StatisticalMeasure ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:onClass fibo-ind-ind-ind:MarketRate ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "market spread" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:MarketSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a statistical measure providing the difference (or spread) between two market rates" ;
+	.
+
+fibo-ind-ind-ind:PriceStructure
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:DatedStructuredCollection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-ind-ind-ind:QuotedPrice ;
+		]
+		;
+	rdfs:label "price structure" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:PriceStructure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a structured collection of quoted prices, such as market prices for some index or security, such that volatility may be constructed for the structure" ;
+	.
+
+fibo-ind-ind-ind:PriceVolatility
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:Volatility ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-ind-ind-ind:PriceStructure ;
+		]
+		;
+	rdfs:label "price volatility" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:PriceVolatility" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a statistical measure of the rate of change in pricing for a given security or market index" ;
+	skos:editorialNote "Volatility is modeled here using a structured collection, comprised of a series of individual prices of something (a security, index, etc., typically quoted prices), dates, and the source for those prices for some overall period of time" ;
+	fibo-fnd-utl-av:explanatoryNote "Volatility can be determined using the standard deviation or variance among prices for the security or market index over some period of time. For a specific security, volatility may measure the amount and frequency in rapid price fluctuation. It is computed as the annualized standard deviation of the percentage change in a security's daily price." ;
+	.
+
+fibo-ind-ind-ind:PublishedFinancialInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-pub:Publication ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:hasPublisher ;
+			owl:allValuesFrom fibo-ind-ind-ind:FinancialInformationPublisher ;
+		]
+		;
+	rdfs:label "published financial information" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:PublishedFinancialInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "published information made available by a financial information publisher" ;
+	.
+
+fibo-ind-ind-ind:QuotedPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:MonetaryPrice ,
+		fibo-ind-ind-ind:PublishedFinancialInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ind-ind:hasQuotationDateTime ;
+			owl:onDataRange fibo-fnd-dt-fd:CombinedDateTime ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "quoted price" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:QuotedPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a monetary price quoted by some publisher on a given date" ;
+	.
+
+fibo-ind-ind-ind:TermStructure
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:DatedStructuredCollection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-ind-ind-ind:MarketRate ;
+		]
+		;
+	rdfs:label "term structure" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:TermStructure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a structured collection of rates, such as interest rates, or bond yields with different terms to maturity, such that a yield curve may be constructed for the structure" ;
+	skos:editorialNote "Term structure refers to a set of discrete points; elements are ordered by time. Restrictions on the rate (see above) and a point in time, paired together, and then ordered in a structured collection is how this should ultimately be modeled.  Then the concept of yield curve would be a child of term structure, for calculation of net present value, for example." ;
+	skos:scopeNote "Term Structure has been modeled with reference to MarketRate generally, which incorporates more kinds of rate than would normally be included in a term structure. Term structures consist of two or more of something with some time to maturity, typically debt instruments or interest rates. Currency exchange rates may in principle be grouped in a term structure as forward rates. For this specification, debt instruments are not in scope, so these are not included in the current scope of this TermStructure concept." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/t/termstructure.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "The term structure reflects expectations of market participants about future changes in interest rates and their assessment of monetary policy conditions." ;
+	.
+
+fibo-ind-ind-ind:Volatility
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Dispersion ,
+		[
+			a owl:Class ;
+			owl:unionOf (
+				fibo-fnd-utl-alx:Variance
+				fibo-fnd-utl-alx:StandardDeviation
+			) ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDatePeriod ;
+			owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-fnd-arr-arr:DatedStructuredCollection ;
+		]
+		;
+	rdfs:label "volatility" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:Volatility" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "a statistical measure of the dispersion around the average of some random variable over some period of time" ;
+	.
+
+fibo-ind-ind-ind:hasQuotationDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has quotation date" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:hasQuotationDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "indicates the quotation date for a given market rate or indicator" ;
+	fibo-fnd-utl-av:explanatoryNote "Typically this property reflects a daily average or end of day quote." ;
+	fibo-fnd-utl-av:usageNote "Note that this property requires a reified date value, if used." ;
+	.
+
+fibo-ind-ind-ind:hasQuotationDateTime
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-arr-arr:hasObservedDateTime ;
+	rdfs:label "has quotation date and time" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:hasQuotationDateTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	rdfs:range fibo-fnd-dt-fd:CombinedDateTime ;
+	skos:definition "indicates a quotation date and possibly a time for a given market rate, interest rate, indicator, or other quoted pricing information" ;
+	.
+
+fibo-ind-ind-ind:isVolatilityOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:appliesTo ;
+	rdfs:label "is volatility of" ;
+	rdfs:comment "QName: fibo-ind-ind-ind:isVolatilityOf" ;
+	rdfs:domain fibo-ind-ind-ind:Volatility ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	skos:definition "indicates something to which the volatility measure applies and of which it is a measure" ;
+	.
+

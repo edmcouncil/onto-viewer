@@ -1,0 +1,129 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesClassification/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesClassification/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-sec-cls: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/>
+	a owl:Ontology ;
+	rdfs:label "Securities Classification Ontology" ;
+	rdfs:comment "QName: fibo-sec-sec-cls:" ;
+	dct:abstract "This ontology defines the fundamental concepts for classifying financial instruments, particularly securities, including, but not limited to classification schemes developed by government, regulatory agencies, and industry to classify the issuers of such securities as well as the securities themselves." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-sec-sec-cls" ;
+	sm:filename "SecuritiesClassification.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesClassification/> ;
+	skos:changeNote "The https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification.rdf version of this ontology was modified to rename (migrate) the hasDefinition property to isDefinedIn to clarify intent." ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fi-fi:FinancialInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:onClass fibo-fnd-arr-cls:IndustrySectorClassifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:onClass fibo-sec-sec-cls:FinancialInstrumentClassifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	.
+
+fibo-sec-sec-cls:AssetClass
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-cls:FinancialInstrumentClassifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:classifies ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "asset class" ;
+	rdfs:comment "QName: fibo-sec-sec-cls:AssetClass" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/> ;
+	skos:definition "a financial instrument classifier for a group of securities that exhibit similar characteristics, behave similarly in the marketplace and are subject to the same laws and regulations" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.investopedia.com/terms/a/assetclasses.asp"^^xsd:anyURI ,
+		"https://www.law.cornell.edu/cfr/text/17/45.1"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote
+		"Asset class means the broad category of goods, services or commodities, including any 'excluded commodity' as defined in CEA section 1a(19), with common characteristics underlying a swap. The asset classes include credit, equity, foreign exchange (excluding cross-currency), interest rate (including cross-currency), other commodity, and such other asset classes as may be determined by the Commission." ,
+		"The three main asset classes are equities, or stocks; fixed income, or bonds; and cash equivalents, or money market instruments. Some investment professionals add real estate and commodities, and possibly other types of investments, to the asset class mix."
+		;
+	.
+
+fibo-sec-sec-cls:FinancialInstrumentClassificationScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:ClassificationScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:allValuesFrom fibo-sec-sec-cls:FinancialInstrumentClassifier ;
+		]
+		;
+	rdfs:label "financial instrument classification scheme" ;
+	rdfs:comment "QName: fibo-sec-sec-cls:FinancialInstrumentClassificationScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/> ;
+	skos:definition "a classification scheme defining a particular classifier for a security, such as the ISO 10962 CFI classification scheme" ;
+	.
+
+fibo-sec-sec-cls:FinancialInstrumentClassifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:Classifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:onClass fibo-sec-sec-cls:FinancialInstrumentClassificationScheme ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:classifies ;
+			owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+		]
+		;
+	rdfs:label "financial instrument classifier" ;
+	rdfs:comment "QName: fibo-sec-sec-cls:FinancialInstrumentClassifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/> ;
+	skos:definition "a standardized classifier for a financial instrument based on its type" ;
+	skos:example "Examples include equity instrument, debt instrument, option, future, etc. per the the ISO 10962 CFI (Classification of Financial Instruments) standard, as cash instruments or derivative instruments per the Financial Accounting Standards Board (FASB) and International Accounting Standards Board (IASB) accounting standards, and so forth." ;
+	.
+

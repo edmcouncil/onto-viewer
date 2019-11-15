@@ -1,0 +1,67 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/MetadataBP/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/MetadataBPProcess/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/MetadataBPSecuritiesIssuance/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/MetadataBP/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-bp-iss-mod: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MetadataBPSecuritiesIssuance/> .
+@prefix fibo-bp-mod: <https://spec.edmcouncil.org/fibo/ontology/BP/MetadataBP/> .
+@prefix fibo-bp-prc-mod: <https://spec.edmcouncil.org/fibo/ontology/BP/Process/MetadataBPProcess/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BP/MetadataBP/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Business Process (BP) Domain" ;
+	rdfs:comment "QName: fibo-bp-mod:" ;
+	dct:abstract "The metadata for Business Process ontology describes the BP domain." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-bp-mod" ;
+	sm:filename "MetadataBP.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/MetadataBPProcess/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/MetadataBPSecuritiesIssuance/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/BP/MetadataBP/> ;
+	.
+
+fibo-bp-mod:BPDomain
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Business Process" ;
+	rdfs:comment "QName: fibo-bp-mod:BPDomain" ;
+	dct:abstract """The Business Process (BP) domain includes ontologies that define financial process flows such as securities issuance and transaction workflows. In the case of securities issuance process models, these are provided in order to be able to represent reference data concepts that are dependent on the process by which a security was issued. Transaction process semantics provide the basis for the temporal dimension of securities and derivatives transactions. 
+
+These are process models represented using basic semantic primitive concepts of events, activities and control flows.""" ;
+	dct:creator "https://spec.edmcouncil.org/fibo/fct/Foundations"^^xsd:anyURI ;
+	dct:hasPart
+		fibo-bp-prc-mod:ProcessModule ,
+		fibo-bp-iss-mod:SecuritiesIssuanceModule
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Business Process (BP) Domain" ;
+	sm:copyright "Copyright (c) 2013-2018 EDM Council, Inc." ;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/MetadataBE/BEDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/MetadataFBC/FBCDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/FNDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/MetadataLOAN/LOANDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/MetadataMD/MDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/SECDomain>
+		;
+	sm:keyword "foundational vocabulary" ;
+	sm:moduleAbbreviation "fibo-bp" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/MetadataBP/> ;
+	.
+

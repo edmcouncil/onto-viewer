@@ -1,0 +1,47 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/MetadataMDDebtTemporal/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/MetadataMDDebtTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-md-dbtx-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/MetadataMDDebtTemporal/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/MetadataMDDebtTemporal/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Market Data (MD) DebtTemporal Module" ;
+	rdfs:comment "QName: fibo-md-dbtx-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the MD Debt Temporal Module." ;
+	dct:issued "2018-06-30T18:00:00"^^xsd:dateTime ;
+	dct:license sm:MITLicense ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-md-dbtx-mod" ;
+	sm:filename "MetadataMDDebtTemporal.rdf" ;
+	owl:imports <http://www.omg.org/techprocess/ab/SpecificationMetadata/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/MD/DebtTemporal/MetadataMDDebtTemporal/> ;
+	.
+
+fibo-md-dbtx-mod:DebtTemporalModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Debt Temporal" ;
+	rdfs:comment "QName: fibo-md-dbtx-mod:DebtTemporalModule" ;
+	dct:abstract "This module contains ontologies of temporally variable concepts relating to debt instruments. These are concepts for variables that have past, presented and projected future values, such as pricing, yields and analytics." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtInterestAmounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtRedemptionAmounts/>
+		;
+	dct:title "FIBO Market Data - Debt Temporal Terms Module" ;
+	sm:moduleAbbreviation "fibo-md-dbtx" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/MetadataMDDebtTemporal/> ;
+	.
+

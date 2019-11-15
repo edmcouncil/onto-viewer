@@ -1,0 +1,478 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CMOs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CMOs/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-ab-cmo: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> .
+@prefix fibo-sec-dbt-ab-mbs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/> .
+@prefix fibo-sec-dbt-ab-pbs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> .
+@prefix fibo-sec-dbt-bnd: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/>
+	a owl:Ontology ;
+	rdfs:label "CMOs"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Collateralized Mortgage Obligations are similar to other kinds of collateralized debt or asset backed security, with the underlying asset being a pool of mortgage loans. These may be issued by a government agency (in the US) or by a commercial entity (when they are known as private label CMOs). This ontology includes an extensive range of tranche types. 
+		Note that some work is still required on the precise categorization of this class of instrument. Note also that the range of tranche types given here may be applicable to other types of collateralized debt instrument.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-sec-dbt-ab-cmo:AgencyCMO
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-pbs:CollateralizedObligationInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:hasUnderlyingPool ;
+			owl:someValuesFrom fibo-sec-dbt-ab-mbs:AgencyMBSPool ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:providesPrepaymentSupport ;
+			owl:someValuesFrom fibo-sec-dbt-ab-cmo:AgencyCMO ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:hasTrancheType ;
+			owl:someValuesFrom fibo-sec-dbt-ab-mbs:TrancheType ;
+		]
+		;
+	rdfs:label "agency c m o"@en ;
+	rdfs:comment "QName: NONE:AgencyCMO" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:editorialNote "Definition for the property 'has tranche type' which is now a restriction: The type of tranche for the CMO. Many different structures are used in practice, including stable PAC bonds or risky IOs and POs. There are floaters and inverse floaters. There are also Z-bonds, which are analogous to zero-coupon bonds."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:AgencyIOTranche
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-cmo:AgencyCMO ;
+	rdfs:label "agency i o tranche"@en ;
+	rdfs:comment "QName: NONE:AgencyIOTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	owl:disjointWith fibo-sec-dbt-ab-cmo:AgencyPOTranche ;
+	.
+
+fibo-sec-dbt-ab-cmo:AgencyJumpTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:AgencyCMO ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:specifiesTrigger ;
+			owl:someValuesFrom fibo-sec-dbt-ab-cmo:JumpZTriggerEvent ;
+		]
+		;
+	rdfs:label "agency jump tranche"@en ;
+	rdfs:comment "QName: NONE:AgencyJumpTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "A tranche where if there is some sort of trigger event reached then the holders of the tranche will begin to receive payments."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:AgencyJumpZTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:AgencyJumpTranche ,
+		fibo-sec-dbt-ab-cmo:AgencyZTranche
+		;
+	rdfs:label "agency jump z tranche"@en ;
+	rdfs:comment "QName: NONE:AgencyJumpZTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "A Jump Z tranche is like a Z tranche but if there is some sort of trigger event reached then the holders of the Jump Z tranche will begin to receive payments. Regular non-Sticky Jump Z tranches maintain their changed status only while the trigger event is in effect, and revert to their old payment status once the trigger event has passed."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:AgencyPOTranche
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-cmo:AgencyCMO ;
+	rdfs:label "agency p o tranche"@en ;
+	rdfs:comment "QName: NONE:AgencyPOTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Principal Only tranche. This tranche will only pay principal."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:AgencyRegularJumpZ
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:AgencyJumpZTranche ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:revertsOn ;
+			owl:someValuesFrom fibo-sec-dbt-ab-cmo:JumpZTriggerEventReversal ;
+		]
+		;
+	rdfs:label "agency regular jump z"@en ;
+	rdfs:comment "QName: NONE:AgencyRegularJumpZ" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Regular non-Sticky Jump Z tranches maintain their changed status only while the trigger event is in effect, and revert to their old payment status once the trigger event has passed."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:AgencyStickyJumpZ
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-cmo:AgencyJumpZTranche ;
+	rdfs:label "agency sticky jump z"@en ;
+	rdfs:comment "QName: NONE:AgencyStickyJumpZ" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition '"Sticky" Jump Z tranches maintain the payment priority of a Jump Z tranche until they are retired.'@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:AgencyZTranche
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-cmo:AgencyCMO ;
+	rdfs:label "agency z tranche"@en ;
+	rdfs:comment "QName: NONE:AgencyZTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "A tranche that does not receive payments while other tranches remain."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:CMODeal
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-pbs:CollateralizedObligationDeal ;
+	rdfs:label "c m o deal"@en ;
+	rdfs:comment "QName: NONE:CMODeal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "An issue of Collateralized mortgaged Obligations."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:IOette
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-cmo:AgencyIOTranche ;
+	rdfs:label "i oette"@en ;
+	rdfs:comment "QName: NONE:IOette" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "REVIEW: Is this a kind of IO Tranche."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:JumpZTriggerEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-cmo:TriggerEvent ;
+	rdfs:label "jump z trigger event"@en ;
+	rdfs:comment "QName: NONE:JumpZTriggerEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "The event which triggers the Jump Z"@en ;
+	fibo-fnd-utl-av:explanatoryNote "If this trigger event is reached then the holders of the Jump Z tranche will begin to receive payments. Regular non-Sticky Jump Z tranches maintain their changed status only while the trigger event is in effect, and revert to their old payment status once the trigger event has passed. The event may be a market event or an event relating to the deal."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:JumpZTriggerEventReversal
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:TriggerEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:specifiesReverseTrigger ;
+			owl:someValuesFrom fibo-sec-dbt-ab-cmo:JumpZTriggerEvent ;
+		]
+		;
+	rdfs:label "jump z trigger event reversal"@en ;
+	rdfs:comment "QName: NONE:JumpZTriggerEventReversal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "The reversal of the event which triggers the Jump Z"@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:PAC-1Class
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:takesPrepaymentAfter ;
+			owl:allValuesFrom fibo-sec-dbt-ab-cmo:PAC-2Class ;
+		]
+		;
+	rdfs:label "p a c-1 class"@en ;
+	rdfs:comment "QName: NONE:PAC-1Class" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Planned Amortization Class tranche. PAC-1 is the most senior Planned Amortization Class tranche."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Principal payment must follow a certain schedule. These tranches have priority over the other tranches in the deal, which are then referred to as the support or companion tranches."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:PAC-2Class
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:takesPrepaymentAfter.1 ;
+			owl:allValuesFrom fibo-sec-dbt-ab-cmo:PAC-3Class ;
+		]
+		;
+	rdfs:label "p a c-2 class"@en ;
+	rdfs:comment "QName: NONE:PAC-2Class" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Planned Amortization Class tranche. PAC-2 refers to a support tranche that is given a scheduled payment structure like a PAC bond."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Principal payment must follow a certain schedule. These tranches have priority over the other tranches in the deal, which are then referred to as the support or companion tranches. For example, let's say you have a deal with a PAC tranche and a support tranche (i.e., a tranche that is a support tranche and is therefore subordinate to the PAC tranche) that has a scheduled payment structure like you did with the PAC bond. That support bond then is called the PAC-2 bond. If you continue, and create another support tranche that also has scheduled payments, that would become the PAC-3 bond."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:PAC-3Class
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+	rdfs:label "p a c-3 class"@en ;
+	rdfs:comment "QName: NONE:PAC-3Class" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Planned Amortization Class tranche. Additional support tranche with scheduled payments."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Principal payment must follow a certain schedule. These tranches have priority over the other tranches in the deal, which are then referred to as the support or companion tranches. See PAC-2 for explanation. If you continue, and create another support tranche that also has scheduled payments, that would become the PAC-3 bond."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:PAC-ZTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:AgencyZTranche ,
+		fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond
+		;
+	rdfs:label "p a c- z tranche"@en ;
+	rdfs:comment "QName: NONE:PAC-ZTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Planned Amortization Class tranche which is also a Z tranche, that is Definition needed."@en ;
+	skos:editorialNote "Assume this is a PAC tranche that is a Z Tranche."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:PACPOTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:AgencyPOTranche ,
+		fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond
+		;
+	rdfs:label "p a c p o tranche"@en ;
+	rdfs:comment "QName: NONE:PACPOTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Planned Amortization Class principal only tranche."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:PACTrancheAmortizationSchedule
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-bnd:RedemptionSchedule ;
+	rdfs:label "p a c tranche amortization schedule"@en ;
+	rdfs:comment "QName: NONE:PACTrancheAmortizationSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	.
+
+fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:AgencyCMO ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:providesPrepaymentSupportFor ;
+			owl:allValuesFrom fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:supportedBy ;
+			owl:allValuesFrom fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:specifies ;
+			owl:someValuesFrom fibo-sec-dbt-ab-cmo:PACTrancheAmortizationSchedule ;
+		]
+		;
+	rdfs:label "planned amortization class bond"@en ;
+	rdfs:comment "QName: NONE:PlannedAmortizationClassBond" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Planned Amortization Class tranche.This is a tranche where the principal payment must follow a certain schedule."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These tranches have priority over the other tranches in the deal, which are then referred to as the support or companion tranches. There are usually several PAC tranches created. PAC-1, PAC-2, PAC-3 -- this requires some more explanation. PAC-2 refers to a support tranche that is given a scheduled payment structure like a PAC bond. For example, let's say you have a deal with a PAC tranche and a support tranche (i.e., a tranche that is a support tranche and is therefore subordinate to the PAC tranche) that has a scheduled payment structure like you did with the PAC bond. That support bond then is called the PAC-2 bond. If you continue, and create another support tranche that also has scheduled payments, that would become the PAC-3 bond. Prospectus will cover each class. Prospectus is at the level of an issue."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:SuperPOTranche
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-cmo:AgencyPOTranche ;
+	rdfs:label "super p o tranche"@en ;
+	rdfs:comment "QName: NONE:SuperPOTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Principal Only tranche. This tranche will only pay principal. Not clear how this is distinct from generic PO."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:SupportTranche
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-sec-dbt-ab-cmo:identity ;
+		owl:someValuesFrom fibo-sec-dbt-ab-cmo:PAC-2Class ;
+	] ;
+	rdfs:label "support tranche"@en ;
+	rdfs:comment "QName: NONE:SupportTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "A tranche which provides payment support to a PAC Tranche."@en ;
+	fibo-fnd-utl-av:explanatoryNote "PAC tranches have priority over the other tranches in the deal, which are then referred to as the support or companion tranches."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:TACTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cmo:AgencyCMO ,
+		fibo-sec-dbt-ab-mbs:TranchedMBSInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-cmo:specifies.1 ;
+			owl:someValuesFrom fibo-sec-dbt-ab-cmo:TACTrancheAmortizationSchedule ;
+		]
+		;
+	rdfs:label "t a c tranche"@en ;
+	rdfs:comment "QName: NONE:TACTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition "Targeted Amortization Class. This is related to a PAC tranche and has a payment schedule geared towards a specified prepayment speed (called the pricing speed). Agency CMO"@en ;
+	skos:editorialNote 'The main difference between TAC and PAC is that the PAC schedule remains under a certain prepayment range (such as 50-150 PSA) while the TAC tranche is geared from the outset at a specified prepayment speed (such as 150 PSA). Math note: Originally specified in PSAin the examples. What is PSA? Review how we have modeled "Payment Speed" as a concept.'@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:TACTrancheAmortizationSchedule
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-bnd:RedemptionSchedule ;
+	rdfs:label "t a c tranche amortization schedule"@en ;
+	rdfs:comment "QName: NONE:TACTrancheAmortizationSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	.
+
+fibo-sec-dbt-ab-cmo:TriggerEvent
+	a owl:Class ;
+	rdfs:label "trigger event"@en ;
+	rdfs:comment "QName: NONE:TriggerEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	skos:definition 'Any event where some value passes some threashold. Or some other type of business event. This is not restricted to "trigger" in the sense of a value passing a threshold. Can also be an seen such as a CDO manager going into bankruptcy.'@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:hasUnderlyingPool
+	a owl:ObjectProperty ;
+	rdfs:label "has underlying pool"@en ;
+	rdfs:comment "QName: NONE:hasUnderlyingPool" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:AgencyCMO ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-mbs:AgencyMBSPool ;
+	.
+
+fibo-sec-dbt-ab-cmo:identity
+	a owl:ObjectProperty ;
+	rdfs:label "identity"@en ;
+	rdfs:comment "QName: NONE:identity" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:SupportTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:PAC-2Class ;
+	.
+
+fibo-sec-dbt-ab-cmo:maximumPrepaymentSpeed
+	a owl:ObjectProperty ;
+	rdfs:label "maximum prepayment speed"@en ;
+	rdfs:comment "QName: NONE:maximumPrepaymentSpeed" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-mbs:PaymentSpeed ;
+	skos:definition "The prepayment range under which the PAC schedule must remain, in PSA."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:pricingSpeed
+	a owl:ObjectProperty ;
+	rdfs:label "pricing speed"@en ;
+	rdfs:comment "QName: NONE:pricingSpeed" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:TACTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-mbs:PaymentSpeed ;
+	skos:definition "The prepayment speed specified fo the TAC Tranche at the outset of the deal, in PSA."@en ;
+	.
+
+fibo-sec-dbt-ab-cmo:providesPrepaymentSupport
+	a owl:ObjectProperty ;
+	rdfs:label "provides prepayment support"@en ;
+	rdfs:comment "QName: NONE:providesPrepaymentSupport" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:AgencyCMO ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:AgencyCMO ;
+	.
+
+fibo-sec-dbt-ab-cmo:providesPrepaymentSupportFor
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-sec-dbt-ab-cmo:providesPrepaymentSupport ;
+	rdfs:label "provides prepayment support for"@en ;
+	rdfs:comment "QName: NONE:providesPrepaymentSupportFor" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+	owl:inverseOf fibo-sec-dbt-ab-cmo:supportedBy ;
+	.
+
+fibo-sec-dbt-ab-cmo:revertsOn
+	a owl:ObjectProperty ;
+	rdfs:label "reverts on"@en ;
+	rdfs:comment "QName: NONE:revertsOn" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:AgencyRegularJumpZ ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:JumpZTriggerEventReversal ;
+	.
+
+fibo-sec-dbt-ab-cmo:specifies
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:PACTrancheAmortizationSchedule ;
+	.
+
+fibo-sec-dbt-ab-cmo:specifies.1
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies.1" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:TACTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:TACTrancheAmortizationSchedule ;
+	.
+
+fibo-sec-dbt-ab-cmo:specifiesReverseTrigger
+	a owl:ObjectProperty ;
+	rdfs:label "specifies reverse trigger"@en ;
+	rdfs:comment "QName: NONE:specifiesReverseTrigger" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:JumpZTriggerEventReversal ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:JumpZTriggerEvent ;
+	.
+
+fibo-sec-dbt-ab-cmo:specifiesTrigger
+	a owl:ObjectProperty ;
+	rdfs:label "specifies trigger"@en ;
+	rdfs:comment "QName: NONE:specifiesTrigger" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:AgencyJumpTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:JumpZTriggerEvent ;
+	.
+
+fibo-sec-dbt-ab-cmo:supportedBy
+	a owl:ObjectProperty ;
+	rdfs:label "supported by"@en ;
+	rdfs:comment "QName: NONE:supportedBy" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:PlannedAmortizationClassBond ;
+	.
+
+fibo-sec-dbt-ab-cmo:takesPrepaymentAfter
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-sec-dbt-ab-cmo:supportedBy ;
+	rdfs:label "takes prepayment after"@en ;
+	rdfs:comment "QName: NONE:takesPrepaymentAfter" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:PAC-1Class ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:PAC-2Class ;
+	.
+
+fibo-sec-dbt-ab-cmo:takesPrepaymentAfter.1
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-sec-dbt-ab-cmo:supportedBy ;
+	rdfs:label "takes prepayment after"@en ;
+	rdfs:comment "QName: NONE:takesPrepaymentAfter.1" ;
+	rdfs:domain fibo-sec-dbt-ab-cmo:PAC-2Class ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cmo:PAC-3Class ;
+	.
+

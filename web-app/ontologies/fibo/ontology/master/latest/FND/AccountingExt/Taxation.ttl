@@ -1,0 +1,229 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/Taxation/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/Taxation/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-accx-tax: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-tim-tim: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/>
+	a owl:Ontology ;
+	rdfs:label "Taxation"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Tax laws, rules and their jurisdictions. This ontology is intended for reference by instrument terms that have some tax related implication." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/Taxation/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-accx-tax:TaxJurisdiction
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-jur:Jurisdiction ;
+	rdfs:label "tax jurisdiction"@en ;
+	rdfs:comment "QName: NONE:TaxJurisdiction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	.
+
+fibo-fnd-accx-tax:TaxLaw
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-jur:StatuteLaw ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-tax:applicableIn ;
+			owl:someValuesFrom fibo-fnd-accx-tax:TaxJurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-tax:laysDown ;
+			owl:someValuesFrom fibo-fnd-accx-tax:TaxRule ;
+		]
+		;
+	rdfs:label "tax law"@en ;
+	rdfs:comment "QName: NONE:TaxLaw" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	skos:definition "A law or body of law pertaining to the liability for and payment of tax by persons or legal entities which are subject to the jurisdiction covered by that law."@en ;
+	.
+
+fibo-fnd-accx-tax:TaxRule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-meth:Rule ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-tax:applicableIn ;
+			owl:someValuesFrom fibo-fnd-accx-tax:TaxJurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-tax:isLaidDownIn ;
+			owl:someValuesFrom fibo-fnd-accx-tax:TaxLaw ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-tax:setsOut ;
+			owl:someValuesFrom fibo-fnd-accx-tax:TaxTreatment ;
+		]
+		;
+	rdfs:label "tax rule"@en ;
+	rdfs:comment "QName: NONE:TaxRule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	skos:definition "The tax rule which is applied in determing the applicable tax."@en ;
+	.
+
+fibo-fnd-accx-tax:TaxRuleCode
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-meth:RuleCode ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arrxx-meth:standsFor ;
+			owl:someValuesFrom fibo-fnd-accx-tax:TaxRule ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/isDefinedIn> ;
+			owl:someValuesFrom fibo-fnd-accx-tax:TaxRuleScheme ;
+		]
+		;
+	rdfs:label "tax rule code"@en ;
+	rdfs:comment "QName: NONE:TaxRuleCode" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	.
+
+fibo-fnd-accx-tax:TaxRuleScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-meth:RuleScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/defines> ;
+			owl:someValuesFrom fibo-fnd-accx-tax:TaxRuleCode ;
+		]
+		;
+	rdfs:label "tax rule scheme"@en ;
+	rdfs:comment "QName: NONE:TaxRuleScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	skos:definition "The scheme in which the tax rule is identified and defined."@en ;
+	.
+
+fibo-fnd-accx-tax:TaxTreatment
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-accx-tax:definedIn ;
+		owl:someValuesFrom fibo-fnd-accx-tax:TaxRule ;
+	] ;
+	rdfs:label "tax treatment"@en ;
+	rdfs:comment "QName: NONE:TaxTreatment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	skos:definition "Amount of money due to the government or tax authority, applicable to some thing or activity in some jurisdiction"@en ;
+	.
+
+fibo-fnd-accx-tax:applicableIn
+	a owl:ObjectProperty ;
+	rdfs:label "applicable in"@en ;
+	rdfs:comment "QName: NONE:applicableIn" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxLaw ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range fibo-fnd-accx-tax:TaxJurisdiction ;
+	.
+
+fibo-fnd-accx-tax:definedIn
+	a owl:ObjectProperty ;
+	rdfs:label "defined in"@en ;
+	rdfs:comment "QName: NONE:definedIn" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxTreatment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range fibo-fnd-accx-tax:TaxRule ;
+	owl:inverseOf fibo-fnd-accx-tax:setsOut ;
+	.
+
+fibo-fnd-accx-tax:description
+	a owl:DatatypeProperty ;
+	rdfs:label "description"@en ;
+	rdfs:comment "QName: NONE:description" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Free text description of the tax rule."@en ;
+	.
+
+fibo-fnd-accx-tax:effectivePeriod
+	a owl:ObjectProperty ;
+	rdfs:label "effective period"@en ;
+	rdfs:comment "QName: NONE:effectivePeriod" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range fibo-fnd-tim-tim:DatePeriod ;
+	skos:definition "Period during which the tax rule applies within the jurisdiction."@en ;
+	.
+
+fibo-fnd-accx-tax:isLaidDownIn
+	a owl:ObjectProperty ;
+	rdfs:label "is laid down in"@en ;
+	rdfs:comment "QName: NONE:isLaidDownIn" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range fibo-fnd-accx-tax:TaxLaw ;
+	.
+
+fibo-fnd-accx-tax:laysDown
+	a owl:ObjectProperty ;
+	rdfs:label "lays down"@en ;
+	rdfs:comment "QName: NONE:laysDown" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxLaw ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range fibo-fnd-accx-tax:TaxRule ;
+	owl:inverseOf fibo-fnd-accx-tax:isLaidDownIn ;
+	.
+
+fibo-fnd-accx-tax:rate
+	a owl:ObjectProperty ;
+	rdfs:label "rate"@en ;
+	rdfs:comment "QName: NONE:rate" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Rate used for calculation of the tax."@en ;
+	.
+
+fibo-fnd-accx-tax:ruleName
+	a owl:DatatypeProperty ;
+	rdfs:label "rule name"@en ;
+	rdfs:comment "QName: NONE:ruleName" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Common name of the Tax Rule"@en ;
+	.
+
+fibo-fnd-accx-tax:setsOut
+	a owl:ObjectProperty ;
+	rdfs:label "sets out"@en ;
+	rdfs:comment "QName: NONE:setsOut" ;
+	rdfs:domain fibo-fnd-accx-tax:TaxRule ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/Taxation/> ;
+	rdfs:range fibo-fnd-accx-tax:TaxTreatment ;
+	skos:definition "The treatment of the financial instrument for taxation purposes. This is the most general form of tax treatment for financial instruments, including cash."@en ;
+	.
+

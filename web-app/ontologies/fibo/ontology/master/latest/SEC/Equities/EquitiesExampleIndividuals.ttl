@@ -1,0 +1,167 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquitiesExampleIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USExampleIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIdentification/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquitiesExampleIndividuals/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-ge-usj: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-fct-usind: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USExampleIndividuals/> .
+@prefix fibo-fbc-fct-usmkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-eq-eq: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> .
+@prefix fibo-sec-eq-eqind: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/> .
+@prefix fibo-sec-sec-id: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIdentification/> .
+@prefix fibo-sec-sec-idind: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIdentificationIndividuals/> .
+@prefix fibo-sec-sec-lst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/>
+	a owl:Ontology ;
+	rdfs:label "Equities Example Individuals Ontology" ;
+	rdfs:comment "QName: fibo-sec-eq-eqind:" ;
+	dct:abstract "This ontologyprovides examples of how to represent simple equities." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2019 EDM Council, Inc." ,
+		"Copyright (c) 2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIdentification/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-sec-eq-eqind" ;
+	sm:filename "EquitiesExampleIndividuals.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USExampleIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIdentification/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquitiesExampleIndividuals/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-sec-eq-eqind:BBG000BWQFY7
+	a
+		owl:NamedIndividual ,
+		fibo-sec-sec-idind:FinancialInstrumentGlobalIdentifier
+		;
+	rdfs:label "BBG000BWQFY7" ;
+	rdfs:comment "QName: fibo-sec-eq-eqind:BBG000BWQFY7" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/> ;
+	skos:definition "Wells Fargo & Company share class Financial Instrument Global Identifier (FIGI) listed in the New York Stock Exchange (NYSE)" ;
+	fibo-fnd-aap-agt:identifies fibo-sec-eq-eqind:XNYSListedWellsFargoCommonStock ;
+	fibo-fnd-rel-rel:hasTag "BBG000BWQFY7" ;
+	.
+
+fibo-sec-eq-eqind:BBG001S5XF23
+	a
+		owl:NamedIndividual ,
+		fibo-sec-sec-idind:FinancialInstrumentGlobalIdentifier
+		;
+	rdfs:label "BBG001S5XF23" ;
+	rdfs:comment "QName: fibo-sec-eq-eqind:BBG001S5XF23" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/> ;
+	skos:definition "Wells Fargo & Company share class Financial Instrument Global Identifier (FIGI)" ;
+	fibo-fnd-aap-agt:identifies fibo-sec-eq-eqind:WellsFargoCommonStock ;
+	fibo-fnd-rel-rel:hasTag "BBG001S5XF23" ;
+	.
+
+fibo-sec-eq-eqind:CUSIP-949746101
+	a
+		owl:NamedIndividual ,
+		fibo-sec-sec-idind:CommitteeOnUniformSecuritiesIdentificationProceduresNumber
+		;
+	rdfs:label "949746101" ;
+	rdfs:comment "QName: fibo-sec-eq-eqind:CUSIP-949746101" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/> ;
+	skos:definition "Wells Fargo & Company share class CUSIP" ;
+	fibo-fnd-aap-agt:identifies fibo-sec-eq-eqind:WellsFargoCommonStock ;
+	fibo-fnd-rel-rel:hasTag "949746101" ;
+	.
+
+fibo-sec-eq-eqind:ISIN-US9497461015
+	a
+		owl:NamedIndividual ,
+		fibo-sec-sec-id:InternationalSecuritiesIdentificationNumber
+		;
+	rdfs:label "US9497461015" ;
+	rdfs:comment "QName: fibo-sec-eq-eqind:ISIN-US9497461015" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/> ;
+	skos:definition "Wells Fargo & Company share class ISIN" ;
+	fibo-fnd-aap-agt:identifies fibo-sec-eq-eqind:WellsFargoCommonStock ;
+	fibo-fnd-rel-rel:hasTag "US9497461015" ;
+	.
+
+fibo-sec-eq-eqind:TickerSymbol-XNYS-WFC
+	a
+		owl:NamedIndividual ,
+		fibo-sec-sec-id:TickerSymbol
+		;
+	rdfs:label "XNYS - WFC" ;
+	rdfs:comment "QName: fibo-sec-eq-eqind:TickerSymbol-XNYS-WFC" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/> ;
+	skos:definition "ticker symbol for Wells Fargo & Company common stock listed on the New York Stock Exchange (NYSE)" ;
+	fibo-fbc-fct-ra:isRegisteredBy fibo-fbc-fct-usmkt:NewYorkStockExchange ;
+	fibo-fnd-aap-agt:identifies fibo-sec-eq-eqind:XNYSListedWellsFargoCommonStock ;
+	fibo-fnd-rel-rel:hasTag "WFC" ;
+	.
+
+fibo-sec-eq-eqind:WellsFargoCommonStock
+	a
+		owl:NamedIndividual ,
+		fibo-sec-eq-eq:CommonShare
+		;
+	rdfs:label "Wells Fargo common stock" ;
+	rdfs:comment "QName: fibo-sec-eq-eqind:WellsFargoCommonStock" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/> ;
+	skos:definition "Wells Fargo & Company common share" ;
+	fibo-fbc-fi-fi:isLegallyRecordedIn fibo-be-ge-usj:StateOfDelawareJurisdiction ;
+	fibo-fbc-fi-fi:isNegotiable "true"^^xsd:boolean ;
+	fibo-fnd-rel-rel:isIssuedBy fibo-fbc-fct-usind:WellsFargoAndCompany ;
+	.
+
+fibo-sec-eq-eqind:XNYSListedWellsFargoCommonStock
+	a
+		owl:NamedIndividual ,
+		fibo-sec-eq-eq:ExchangeSpecificShare
+		;
+	rdfs:label "XNYS-listed Wells Fargo common stock" ;
+	rdfs:comment "QName: fibo-sec-eq-eqind:XNYSListedWellsFargoCommonStock" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/> ;
+	skos:definition "Wells Fargo & Company common share listed in the New York Stock Exchange (NYSE)" ;
+	fibo-sec-sec-lst:hasIssue fibo-sec-eq-eqind:WellsFargoCommonStock ;
+	fibo-sec-sec-lst:isIssuedOn fibo-fbc-fct-usmkt:NewYorkStockExchange ;
+	fibo-sec-sec-lst:isTradedOn fibo-fbc-fct-usmkt:NewYorkStockExchange ;
+	.
+

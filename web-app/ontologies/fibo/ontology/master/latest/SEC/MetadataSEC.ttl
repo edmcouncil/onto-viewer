@@ -1,0 +1,104 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/MetadataSEC/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/MetadataSECDebt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/MetadataSECEquities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/MetadataSECSecurities/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/MetadataSEC/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-mod: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/MetadataSECDebt/> .
+@prefix fibo-sec-eq-mod: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/MetadataSECEquities/> .
+@prefix fibo-sec-mod: <https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/> .
+@prefix fibo-sec-sec-mod: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/MetadataSECSecurities/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Securities (SEC) Domain" ;
+	rdfs:comment "QName: fibo-sec-mod:" ;
+	dct:abstract "The Securities (SEC) Domain covers many of the concepts that are common to a wide variety of securities as well as those specific to equities and various debt instruments, including but not limited to bonds and a wide range of asset-backed securities. This ontology provides metadata about the Securities Domain and its contents." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-sec-mod" ;
+	sm:filename "MetadataSEC.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/MetadataSECDebt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/MetadataSECEquities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/MetadataSECSecurities/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/MetadataSEC/> ;
+	.
+
+fibo-sec-mod:SECDomain
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Securities" ;
+	rdfs:comment "QName: fibo-sec-mod:SECDomain" ;
+	dct:abstract "The FIBO Securities (SEC) domain provides a model of concepts that are common to financial instruments that are also securities, including but not limited to exchange-traded securities. High-level concepts relevant to securities classification, identification, issuance, and registration of securities generally are covered, as well as additional detail for equities and debt instruments.  More details defining derivatives in particular are covered in a separate derivatives domain area." ;
+	dct:creator "https://wiki.edmcouncil.org/pages/viewpage.action?pageId=786661"^^xsd:anyURI ;
+	dct:hasPart
+		fibo-sec-dbt-mod:DebtModule ,
+		fibo-sec-eq-mod:EquitiesModule ,
+		fibo-sec-sec-mod:SecuritiesModule
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Securities (SEC) Domain" ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"BIAN" ,
+		"Bloomberg LP" ,
+		"Citigroup" ,
+		"Credit Suisse" ,
+		"Deutsche Bank" ,
+		"Exprentis" ,
+		"Goldman Sachs" ,
+		"HP Enterprise / Mphasis" ,
+		"Mizuho" ,
+		"NoMagic" ,
+		"Nordea Bank AB" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Quarule" ,
+		"State Street Bank and Trust" ,
+		"Statistics Canada" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo"
+		;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/"^^xsd:anyURI
+		;
+	sm:keyword
+		"debt instruments, bonds, asset-backed securities" ,
+		"equities" ,
+		"financial instruments" ,
+		"securities"
+		;
+	sm:moduleAbbreviation "fibo-sec" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/> ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	.
+

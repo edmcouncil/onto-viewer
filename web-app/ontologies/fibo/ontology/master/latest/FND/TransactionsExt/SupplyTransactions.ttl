@@ -1,0 +1,198 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-txn-ecr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> .
+@prefix fibo-fnd-txn-mkt: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-txn-sup: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/>
+	a owl:Ontology ;
+	rdfs:label "SupplyTransactions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology defines the basic concepts in a supply transaction. 
+		This is an extension of the Market Transactions ontology and is included for completeness of those concepts and differentiates other kinds of market transaction from securities transactions. It is not expected that this is referred to in other FIBO ontologies and it may be left out of application ontologies.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-sup:BundleOfResources
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-ecr:EconomicResource ;
+	rdfs:label "bundle of resources"@en ;
+	rdfs:comment "QName: NONE:BundleOfResources" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	.
+
+fibo-fnd-txn-sup:Customer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-mkt:TransactionCounterparty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-mkt:customerTransactsWithVendor ;
+			owl:someValuesFrom fibo-fnd-txn-sup:Vendor ;
+		]
+		;
+	rdfs:label "customer"@en ;
+	rdfs:comment "QName: NONE:Customer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	.
+
+fibo-fnd-txn-sup:DeliveryTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-sup:SupplyTransactionTerms ;
+	rdfs:label "delivery terms"@en ;
+	rdfs:comment "QName: NONE:DeliveryTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	.
+
+fibo-fnd-txn-sup:NegotiableCash
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-ecr:EconomicResource ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:isQuantityOf.1 ;
+			owl:someValuesFrom fibo-fnd-accx-acc:Cash ;
+		]
+		;
+	rdfs:label "negotiable cash"@en ;
+	rdfs:comment "QName: NONE:NegotiableCash" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	.
+
+fibo-fnd-txn-sup:SupplyTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-mkt:MarketTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-mkt:consideration ;
+			owl:someValuesFrom fibo-fnd-txn-sup:NegotiableCash ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-sup:customer ;
+			owl:someValuesFrom fibo-fnd-txn-sup:Customer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-sup:governedByTerms ;
+			owl:someValuesFrom fibo-fnd-txn-sup:SupplyTransactionTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-sup:supply ;
+			owl:someValuesFrom fibo-fnd-txn-sup:BundleOfResources ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-sup:vendor ;
+			owl:someValuesFrom fibo-fnd-txn-sup:Vendor ;
+		]
+		;
+	rdfs:label "supply transaction"@en ;
+	rdfs:comment "QName: NONE:SupplyTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	.
+
+fibo-fnd-txn-sup:SupplyTransactionTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-rea:EconomicContractTermsSet ;
+	rdfs:label "supply transaction terms"@en ;
+	rdfs:comment "QName: NONE:SupplyTransactionTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	.
+
+fibo-fnd-txn-sup:Vendor
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-mkt:TransactionPrincipal ;
+	rdfs:label "vendor"@en ;
+	rdfs:comment "QName: NONE:Vendor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	.
+
+fibo-fnd-txn-sup:customer
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-mkt:counterparty ;
+	rdfs:label "customer"@en ;
+	rdfs:comment "QName: NONE:customer" ;
+	rdfs:domain fibo-fnd-txn-sup:SupplyTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	rdfs:range fibo-fnd-txn-sup:Customer ;
+	.
+
+fibo-fnd-txn-sup:denomination
+	a owl:ObjectProperty ;
+	rdfs:label "denomination"@en ;
+	rdfs:comment "QName: NONE:denomination" ;
+	rdfs:domain fibo-fnd-txn-sup:NegotiableCash ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition 'The currency in which the negotiable cash is denominated. This is the currency seen in the "Monetary Amount".'@en ;
+	.
+
+fibo-fnd-txn-sup:governedByTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:transactedUnder ;
+	rdfs:label "governed by terms"@en ;
+	rdfs:comment "QName: NONE:governedByTerms" ;
+	rdfs:domain fibo-fnd-txn-sup:SupplyTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	rdfs:range fibo-fnd-txn-sup:SupplyTransactionTerms ;
+	.
+
+fibo-fnd-txn-sup:scheduledDeliveryDate
+	a owl:DatatypeProperty ;
+	rdfs:label "scheduled delivery date"@en ;
+	rdfs:comment "QName: NONE:scheduledDeliveryDate" ;
+	rdfs:domain fibo-fnd-txn-sup:DeliveryTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	.
+
+fibo-fnd-txn-sup:supply
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:subject ;
+	rdfs:label "supply"@en ;
+	rdfs:comment "QName: NONE:supply" ;
+	rdfs:domain fibo-fnd-txn-sup:SupplyTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	rdfs:range fibo-fnd-txn-sup:BundleOfResources ;
+	.
+
+fibo-fnd-txn-sup:vendor
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-mkt:principal ;
+	rdfs:label "vendor"@en ;
+	rdfs:comment "QName: NONE:vendor" ;
+	rdfs:domain fibo-fnd-txn-sup:SupplyTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> ;
+	rdfs:range fibo-fnd-txn-sup:Vendor ;
+	.
+

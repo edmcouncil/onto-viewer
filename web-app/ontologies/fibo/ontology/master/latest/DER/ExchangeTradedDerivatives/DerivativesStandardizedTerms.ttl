@@ -1,0 +1,108 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/ETOptionsTemporal/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-etd-std: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/>
+	a owl:Ontology ;
+	rdfs:label "DerivativesStandardizedTerms"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Core concepts for standardized terms for exchange traded options and futures, that are common to both. Includes the definition of the derivatives exchange and the listing of a product on that exchange along with price determination methods." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/ETOptionsTemporal/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-etd-std:DerivativesClearing
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-std:DerivativesListing ;
+	rdfs:label "derivatives clearing"@en ;
+	rdfs:comment "QName: NONE:DerivativesClearing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	skos:definition "The service... This is correect - this role applies the same to Futures and Options contracts on derivatives exchanges. This is always on a Futures Exchange. There are similar terms / facilities for options traded on a Stock Exchange. Also American v European by implication of the nature of the underlying i.e. whether it's a stock or a futures contract."@en ;
+	.
+
+fibo-der-etd-std:DerivativesExchange
+	a owl:Class ;
+	rdfs:label "derivatives exchange"@en ;
+	rdfs:comment "QName: NONE:DerivativesExchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	skos:definition "Exchange where futures contracts and options on futures contracts are traded."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Exchanges may trade commodities, financial derivatives, or a combination of the two, as well as futures and options on indices and equity products."@en ;
+	.
+
+fibo-der-etd-std:DerivativesListing
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/SecurityListing> ;
+	rdfs:label "derivatives listing"@en ;
+	rdfs:comment "QName: NONE:DerivativesListing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	skos:definition "A listing of an instrument on a derivatives exchange. The listing is a product of the individual exchange."@en ;
+	fibo-fnd-utl-av:explanatoryNote "An exchange traded derivative is a product offered by the exchange, whereby the investor chooses to invest in that option and it then becomes a contract between them and the exchange. In this sense this is not the same as an Equity listing, and the facts about equities ot other exchange traded products listings do not apply to a derivatives listing. Update 24 Nov 2010: Later reviews (see notes elsewhere) don't support this description. In fact the contract is between investors (participants in the exchange)."@en ;
+	.
+
+fibo-der-etd-std:DerivativesPriceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-meth:Method ,
+		fibo-fnd-arrxx-meth:PriceDeterminationMethod
+		;
+	rdfs:label "derivatives price determination method"@en ;
+	rdfs:comment "QName: NONE:DerivativesPriceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	skos:definition "Method by which prices are arrived at for derivatives securities (futures or options)."@en ;
+	.
+
+fibo-der-etd-std:ElectronicPriceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-std:DerivativesPriceDeterminationMethod ;
+	rdfs:label "electronic price determination method"@en ;
+	rdfs:comment "QName: NONE:ElectronicPriceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	skos:definition "Other price determination method. More information required."@en ;
+	.
+
+fibo-der-etd-std:OpenOutcryPriceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-std:DerivativesPriceDeterminationMethod ;
+	rdfs:label "open outcry price determination method"@en ;
+	rdfs:comment "QName: NONE:OpenOutcryPriceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	skos:definition "Method of trading on a commodity exchange. The term derives from the fact that traders must shout out their buy or sell orders. When a trader shouts he wants to sell at a particular price and someone else shouts he wants to buy at that price the two traders have made a contract that will be recorded."@en ;
+	.
+
+fibo-der-etd-std:evenLotSize
+	a owl:DatatypeProperty ;
+	rdfs:label "even lot size"@en ;
+	rdfs:comment "QName: NONE:evenLotSize" ;
+	rdfs:domain fibo-der-etd-std:DerivativesExchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "Unit of trading in a commodity, established by an exchange, and to which official price quotations from that exchange apply."@en ;
+	.
+
+fibo-der-etd-std:openOutcry
+	a owl:DatatypeProperty ;
+	rdfs:label "open outcry"@en ;
+	rdfs:comment "QName: NONE:openOutcry" ;
+	rdfs:domain fibo-der-etd-std:DerivativesExchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether trading on the exchange is by way of open outcry in the form of physical interaction between participants. No means that trading is carried out electronically."@en ;
+	.
+

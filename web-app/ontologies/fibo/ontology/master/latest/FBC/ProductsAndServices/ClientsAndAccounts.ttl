@@ -1,0 +1,686 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/Executives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-fbo: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix fibo-be-oac-exec: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/Executives/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-caa: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/>
+	a owl:Ontology ;
+	rdfs:label "Clients and Accounts Ontology" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:" ;
+	dct:abstract "This ontology provides basic concepts such as account, account holder, account provider, relationship manager that are commonly used by financial services providers to describe customers and to determine counterparty identities." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/BE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/>
+		;
+	sm:fileAbbreviation "fibo-fbc-pas-caa" ;
+	sm:filename "ClientsAndAccounts.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/Executives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts.rdf version of this ontology was revised per the FIBO 2.0 RFC with respect to the definitions for accounts and account identifiers, such as BBAN and IBAN identifiers, including but not limited to bank accounts." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts.rdf version of this ontology was revised to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/ version of this ontology was modified to replace hasDefinition with isDefinedIn to clarify intent." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/ version of this ontology was modified to support the addition of maturity-related properties to financial instruments."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-pas-caa:Account
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:onClass fibo-fbc-pas-caa:AccountIdentifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-fnd-arr-doc:Record ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fbc-pas-caa:AccountProvider ;
+		]
+		;
+	rdfs:label "account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:Account" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a container for records associated with a business arrangement for regular dealings or services (such as personal or professional services, banking)" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ,
+		"https://www.merriam-webster.com/dictionary/account"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "In general, an account is associated with a contractual relationship between a buyer and seller under which payment may be made at a later time." ;
+	.
+
+fibo-fbc-pas-caa:AccountHolder
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-oac-own:Owner ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-oac-own:owns ;
+				owl:someValuesFrom fibo-fbc-pas-caa:Account ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-fbc-pas-caa:Account ;
+			] ;
+		]
+		;
+	rdfs:label "account holder" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:AccountHolder" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a party holding an account" ;
+	.
+
+fibo-fbc-pas-caa:AccountIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fbc-pas-caa:Account ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "account identifier" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:AccountIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an identifier that identifies an account" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 13616-1:2007 Financial services - International bank account number (IBAN)" ;
+	fibo-fnd-utl-av:synonym "account number" ;
+	.
+
+fibo-fbc-pas-caa:AccountProvider
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:ServiceProvider ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-fbc-pas-caa:Account ;
+			] ;
+		]
+		;
+	rdfs:label "account provider" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:AccountProvider" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a party that provides and services the account" ;
+	.
+
+fibo-fbc-pas-caa:AccountSpecificServiceAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:ServiceAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractParty ;
+			owl:someValuesFrom fibo-fbc-pas-caa:AccountHolder ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractParty ;
+			owl:someValuesFrom fibo-fbc-pas-caa:AccountProvider ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-fbc-pas-caa:Account ;
+		]
+		;
+	rdfs:label "account-specific service agreement" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:AccountSpecificServiceAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a service-agreement that is account-specific, applicable in cases where a client holds multiple accounts with differing terms and conditions" ;
+	fibo-fnd-utl-av:explanatoryNote "Customers of financial service providers frequently hold multiple accounts - brokerage accounts, checking and savings accounts, trust accounts, and so forth - which may have specific terms and conditions associated with them." ;
+	.
+
+fibo-fbc-pas-caa:AccountingTransaction
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-pas:TransactionEvent ;
+	rdfs:label "accounting transaction" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:AccountingTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "event or condition recognized by an entry in the records of an account" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	.
+
+fibo-fbc-pas-caa:BankAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:Account ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:someValuesFrom fibo-fbc-pas-caa:BankAccountIdentifier ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fbc-fct-fse:Bank ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fbc-fct-fse:Bank ;
+		]
+		;
+	rdfs:label "bank account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:BankAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an account held or provided by, as a service, a bank" ;
+	.
+
+fibo-fbc-pas-caa:BankAccountIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:AccountIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fbc-pas-caa:BankAccount ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "bank account identifier" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:BankAccountIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an identifier that identifies a bank account" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 13616-1:2007 Financial services - International bank account number (IBAN)" ;
+	fibo-fnd-utl-av:synonym "bank account number" ;
+	.
+
+fibo-fbc-pas-caa:BankIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-fbo:OrganizationIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fbc-fct-fse:Bank ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "bank identifier" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:BankIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an identifier that uniquely identifies the financial institution and, when appropriate, the branch of that financial institution servicing an account" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 13616-1:2007 Financial services - International bank account number (IBAN)" ;
+	fibo-fnd-utl-av:synonym "bank number" ;
+	.
+
+fibo-fbc-pas-caa:BasicBankAccountIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:BankAccountIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-fbc-pas-caa:BankAccountIdentifier ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-fbc-pas-caa:BankIdentifier ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "basic bank account identifier" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:BasicBankAccountIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an identifier that uniquely identifies an individual account at a specific financial institution in a particular country and which includes a bank identifier of the financial institution servicing that account" ;
+	fibo-fnd-utl-av:abbreviation "BBAN" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 13616-1:2007 Financial services - International bank account number (IBAN)" ;
+	fibo-fnd-utl-av:synonym "basic bank account number" ;
+	.
+
+fibo-fbc-pas-caa:BrokerageAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:InvestmentAccount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fct-fse:Bank
+					fibo-fbc-fct-fse:BrokerageFirm
+					fibo-fbc-fct-fse:FuturesCommissionMerchant
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fct-fse:Bank
+					fibo-fbc-fct-fse:BrokerageFirm
+					fibo-fbc-fct-fse:FuturesCommissionMerchant
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "brokerage account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:BrokerageAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an account offered by a broker that allows the investor to deposit funds and place investment orders" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/b/brokerageaccount.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "The investor owns the assets contained in the brokerage account and must usually claim as income any capital gains incurred." ;
+	.
+
+fibo-fbc-pas-caa:CertificateOfDeposit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:CashInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasInterestRate ;
+			owl:onClass fibo-fnd-acc-cur:InterestRate ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasNotionalAmount ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:hasTerm ;
+			owl:onClass fibo-fnd-dt-fd:Duration ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "certificate of deposit"@en ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:CertificateOfDeposit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition 'a cash instrument associated with a time deposit account that cannot be withdrawn for a certain "term" or period of time.'@en ;
+	fibo-fnd-utl-av:abbreviation "CD" ;
+	fibo-fnd-utl-av:explanatoryNote "When the term is over it can be withdrawn or it can be held for another term. The longer the term the better the yield on the money." ;
+	.
+
+fibo-fbc-pas-caa:DemandDepositAccount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-caa:TransactionDepositAccount ;
+	rdfs:label "demand deposit account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:DemandDepositAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a noninterest-bearing deposit account in which deposits are payable immediately on demand, or that are issued with an original maturity or required notice period of less than seven days, or that represent funds for which the depository institution does not reserve the right to require at least seven days' written notice of an intended withdrawal" ;
+	fibo-fnd-utl-av:abbreviation "DDA" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.fdic.gov/regulations/resources/call/crinst/2010-09/910gloss_093010.pdf" ;
+	fibo-fnd-utl-av:explanatoryNote "Demand deposits include any matured time deposits without automatic renewal provisions, unless the deposit agreement provides for the funds to be transferred at maturity to another type of account. Demand deposits do not include: (i) money market deposit accounts (MMDAs) or (ii) NOW accounts." ;
+	.
+
+fibo-fbc-pas-caa:DepositAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:BankingProduct ,
+		fibo-fbc-pas-caa:InvestmentOrDepositAccount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fbc-fct-fse:DepositoryInstitution ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fbc-fct-fse:DepositoryInstitution ;
+		]
+		;
+	rdfs:label "deposit account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:DepositAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an account that provides a record of money placed with a depository institution for safekeeping and management" ;
+	skos:example "Deposit accounts include savings accounts, money market accounts, and transactional accounts, such as demand deposit accounts, among others." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/b/bank-deposits.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "The account holder has the right to withdraw deposited funds, as set forth in the terms and conditions governing the account agreement. Deposit accounts may be insured up to a certain amount, depending on the jurisdiction." ;
+	.
+
+fibo-fbc-pas-caa:FinancialServiceAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:Account ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-pas-caa:realizes ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-pas-fpas:FinancialProduct
+					fibo-fbc-pas-fpas:FinancialService
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:someValuesFrom fibo-fbc-pas-caa:AccountIdentifier ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:intersectionOf (
+					fibo-fbc-pas-caa:AccountHolder
+					[
+						a owl:Class ;
+						owl:unionOf (
+							fibo-fnd-pas-pas:Client
+							fibo-fnd-pas-pas:Customer
+						) ;
+					]
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:intersectionOf (
+					fibo-fbc-pas-caa:AccountProvider
+					fibo-fbc-pas-fpas:FinancialServiceProvider
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:someValuesFrom fibo-fnd-pas-pas:ServiceAgreement ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fbc-pas-fpas:FinancialServiceProvider ;
+		]
+		;
+	rdfs:label "financial service account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:FinancialServiceAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an account provided by a financial service provider associated with a specific financial product or service" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	.
+
+fibo-fbc-pas-caa:InternationalBankAccountIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:BankAccountIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-fbc-pas-caa:BasicBankAccountIdentifier ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass lcc-cr:Alpha2Code ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:onClass lcc-cr:Country ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "international bank account identifier" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:InternationalBankAccountIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an identifier for a bank account that is an expanded version of the basic bank account number (BBAN), intended for use internationally" ;
+	fibo-fnd-utl-av:abbreviation "IBAN" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 13616-1:2007 Financial services - International bank account number (IBAN)" ;
+	fibo-fnd-utl-av:explanatoryNote "Note that international bank account numbers are formatted uniquely by country. A description of the country-specific formats is available from SWIFT (https://www.swift.com/), which is the ISO registrar for ISO 13616." ;
+	fibo-fnd-utl-av:synonym "international bank account number" ;
+	.
+
+fibo-fbc-pas-caa:InvestmentAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:InvestmentOrDepositAccount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fbc-fct-fse:FinancialInstitution ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fbc-fct-fse:FinancialInstitution ;
+		]
+		;
+	rdfs:label "investment account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:InvestmentAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	owl:disjointWith fibo-fbc-pas-caa:DepositAccount ;
+	skos:definition "an account that provides a record of deposits of funds and/or securities held at a financial institution" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investorwords.com/11655/investment_account.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "The typical objectives of an investment account are to achieve long term growth, income or capital preservation from the deposited asset portfolio.  Investment accounts are typically not insured." ;
+	.
+
+fibo-fbc-pas-caa:InvestmentOrDepositAccount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-caa:FinancialServiceAccount ;
+	rdfs:label "investment or deposit account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:InvestmentOrDepositAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "an account associated with a product or service that requires the account holder to provide funds for management by the account provider" ;
+	fibo-fnd-utl-av:explanatoryNote "The account holder may or may not be entitled to consideration in exchange for providing such funds, for example, interest, depending on the type of account and the terms and conditions associated with it.  Also, there may be fees associated with management services provided by the account provider." ;
+	.
+
+fibo-fbc-pas-caa:LoanOrCreditAccount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-caa:FinancialServiceAccount ;
+	rdfs:label "loan or credit account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:LoanOrCreditAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	owl:disjointWith fibo-fbc-pas-caa:InvestmentOrDepositAccount ;
+	skos:definition "an account associated with a service in which the account holder receives funds from the account provider under certain terms and conditions for repayment" ;
+	.
+
+fibo-fbc-pas-caa:NonTransactionDepositAccount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-caa:DepositAccount ;
+	rdfs:label "non-transaction deposit account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:NonTransactionDepositAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	owl:disjointWith fibo-fbc-pas-caa:TransactionDepositAccount ;
+	skos:definition "any deposit account that is not explicitly considered a transaction account" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.fdic.gov/regulations/resources/call/crinst/2010-09/910gloss_093010.pdf" ;
+	fibo-fnd-utl-av:explanatoryNote "Nontransaction accounts include: (a) savings deposits ((i) money market deposit accounts (MMDAs) and (ii) other savings deposits) and (b) time deposits ((i) time certificates of deposit and (ii) time deposits, open account)." ;
+	.
+
+fibo-fbc-pas-caa:RelationshipManager
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-oac-exec:ResponsibleParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:manages ;
+			owl:someValuesFrom fibo-fbc-pas-caa:Account ;
+		]
+		;
+	rdfs:label "relationship manager" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:RelationshipManager" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a responsible party who manages the client's account (or portfolio of accounts) and oversees their relationship with the service provider" ;
+	fibo-fnd-utl-av:synonym "account manager" ;
+	.
+
+fibo-fbc-pas-caa:TimeCertificateOfDepositAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:TimeDepositAccount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-pas-caa:isRealizedBy ;
+			owl:someValuesFrom fibo-fbc-pas-caa:CertificateOfDeposit ;
+		]
+		;
+	rdfs:label "time certificate of deposit account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:TimeCertificateOfDepositAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a time deposit account that allows deposits evidenced by a negotiable or nonnegotiable instrument, or a deposit in book entry form evidenced by a receipt or similar acknowledgement issued by the bank, that provides, on its face, that the amount of such deposit is payable to the bearer, to any specified person, or to the order of a specified person, as follows: (1) on a certain date not less than seven days after the date of deposit, (2) at the expiration of a specified period not less than seven days after the date of the deposit, or (3) upon written notice to the bank which is to be given not less than seven days before the date of withdrawal." ;
+	fibo-fnd-utl-av:abbreviation "CDA" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.fdic.gov/regulations/resources/call/crinst/2010-09/910gloss_093010.pdf" ;
+	.
+
+fibo-fbc-pas-caa:TimeDepositAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:NonTransactionDepositAccount ,
+		fibo-fnd-pas-pas:ContractualProduct
+		;
+	rdfs:label "time deposit account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:TimeDepositAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a deposit account that the depositor does not have a right, and is not permitted, to make withdrawals from within six days after the date of deposit unless the deposit is subject to an early withdrawal penalty of at least seven days' simple interest on amounts withdrawn within the first six days after deposit" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.fdic.gov/regulations/resources/call/crinst/2010-09/910gloss_093010.pdf" ;
+	fibo-fnd-utl-av:explanatoryNote "A time deposit from which partial early withdrawals are permitted must impose additional early withdrawal penalties of at least seven days' simple interest on amounts withdrawn within six days after each partial withdrawal. If such additional early withdrawal penalties are not imposed, the account ceases to be a time deposit. The account may become a savings deposit if it meets the requirements for a savings deposit; otherwise it becomes a demand deposit." ;
+	.
+
+fibo-fbc-pas-caa:TimeDepositOpenAccount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-caa:TimeDepositAccount ;
+	rdfs:label "time deposit open account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:TimeDepositOpenAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	owl:disjointWith fibo-fbc-pas-caa:TimeCertificateOfDepositAccount ;
+	skos:definition "a time deposit account that allows deposits (other than time certificates of deposit) for which there is in force a written contract with the depositor that neither the whole nor any part of such deposit may be withdrawn prior to (1) the date of maturity which shall be not less than seven days after the date of the deposit, or (2) the expiration of a specified period of written notice of not less than seven days." ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.fdic.gov/regulations/resources/call/crinst/2010-09/910gloss_093010.pdf" ;
+	.
+
+fibo-fbc-pas-caa:TransactionDepositAccount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-caa:DepositAccount ;
+	rdfs:label "transaction deposit account" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:TransactionDepositAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "a deposit or account from which the depositor or account holder is permitted to make transfers or withdrawals by negotiable or transferable instruments, payment orders of withdrawal, telephone transfers, or other similar devices for the purpose of making payments or transfers to third persons or others or from which the depositor may make third party payments at an automated teller machine (ATM), a remote service unit (RSU), or another electronic device, including by debit card" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.fdic.gov/regulations/resources/call/crinst/2010-09/910gloss_093010.pdf" ;
+	fibo-fnd-utl-av:explanatoryNote "Excluded from transaction accounts are savings deposits (both money market deposit accounts (MMDAs) and other savings deposits), even though such deposits permit some third-party transfers. However, an account that otherwise meets the definition of a savings deposit but that authorizes or permits the depositor to exceed the transfer limitations specified for that account shall be reported as a transaction account." ;
+	.
+
+fibo-fbc-pas-caa:isRealizedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is realized by" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:isRealizedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	owl:inverseOf fibo-fbc-pas-caa:realizes ;
+	skos:definition "is made concrete by" ;
+	.
+
+fibo-fbc-pas-caa:realizes
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:appliesTo ;
+	rdfs:label "realizes" ;
+	rdfs:comment "QName: fibo-fbc-pas-caa:realizes" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> ;
+	skos:definition "makes concrete" ;
+	.
+
+fibo-fnd-pas-pas:ContractualProduct
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fbc-pas-caa:isRealizedBy ;
+		owl:someValuesFrom fibo-fnd-agr-ctr:Contract ;
+	] ;
+	.
+

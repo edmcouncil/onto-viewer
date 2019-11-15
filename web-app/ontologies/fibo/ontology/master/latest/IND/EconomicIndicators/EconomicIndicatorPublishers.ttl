@@ -1,0 +1,115 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-be-ge-ge: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ei-pub: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/>
+	a owl:Ontology ;
+	rdfs:label "Economic Indicator Publishers Ontology" ;
+	rdfs:comment "QName: fibo-ind-ei-pub:" ;
+	dct:abstract "This ontology provides concepts descriptive of the publishers of market indicators, such as gross domestic product, employment statistics, inflation rates and so on. These may include government or quasi-government bodies, international agencies, third parties and data providers." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2018 EDM Council, Inc." ,
+		"Copyright (c) 2014-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-ind-ei-pub" ;
+	sm:filename "EconomicIndicatorPublishers.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers.rdf version of this ontology was modified per the issue resolutions identified in the FIBO IND 1.0 FTF 3 report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers.rdf version of this ontology was modified per the issue resolutions identified in the FIBO IND 1.0 FTF report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers.rdf version of this ontology was revised per the FIBO 2.0 RFC."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-ind-ei-pub:EconomicIndicatorPublisher
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-pub:StatisticalInformationPublisher ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:publishes ;
+			owl:someValuesFrom fibo-ind-ei-pub:EconomicNewsRelease ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-be-ge-ge:GovernmentBody ;
+		]
+		;
+	rdfs:label "economic indicator publisher" ;
+	rdfs:comment "QName: fibo-ind-ei-pub:EconomicIndicatorPublisher" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/> ;
+	skos:definition "a statistical information publisher that publishes economic news, including economic indicators" ;
+	.
+
+fibo-ind-ei-pub:EconomicNewsRelease
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-pub:Publication ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:involves ;
+			owl:someValuesFrom fibo-ind-ei-ei:EconomicIndicator ;
+		]
+		;
+	rdfs:label "economic news release" ;
+	rdfs:comment "QName: fibo-ind-ei-pub:EconomicNewsRelease" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/> ;
+	skos:definition "published statistical information that is about economic indicators and possibly other economic news" ;
+	.
+
+fibo-ind-ei-pub:StatisticalInformationPublisher
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-pub:Publisher ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-fnd-org-fm:FormalOrganization ;
+		]
+		;
+	rdfs:label "statistical information publisher" ;
+	rdfs:comment "QName: fibo-ind-ei-pub:StatisticalInformationPublisher" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/> ;
+	skos:definition "a publisher that publishes statistical information" ;
+	.
+

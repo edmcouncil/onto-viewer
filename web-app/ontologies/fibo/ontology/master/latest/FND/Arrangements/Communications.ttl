@@ -1,0 +1,121 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Communications/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Communications/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-arr-com: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/>
+	a owl:Ontology ;
+	rdfs:label "Communication Ontology" ;
+	rdfs:comment "QName: fibo-fnd-arr-com:" ;
+	dct:abstract "This ontology defines concepts around communication, including requests, responses, submissions etc." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:dependsOn "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ;
+	sm:fileAbbreviation "fibo-fnd-arr-com" ;
+	sm:filename "Communication.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Communications/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-fnd-arr-com:Application
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-com:Request ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDateReceived ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		]
+		;
+	rdfs:label "application" ;
+	rdfs:comment "QName: fibo-fnd-arr-com:Application" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/> ;
+	skos:definition "a request submitted by an applicant to receive something (e.g. a licence, a loan, a membership) accompanied by documentation of pertinent information to determine whether the request should be granted" ;
+	.
+
+fibo-fnd-arr-com:Request
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-oc:Occurrence ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isRequestFor ;
+			owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isSentFrom ;
+			owl:someValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-com:isSentTo ;
+			owl:someValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		]
+		;
+	rdfs:label "request" ;
+	rdfs:comment "QName: fibo-fnd-arr-com:Request" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/> ;
+	skos:definition "an occurrence whereby an agent asks another agent for something or to do something" ;
+	.
+
+fibo-fnd-arr-com:isRequestFor
+	a owl:ObjectProperty ;
+	rdfs:label "is request for" ;
+	rdfs:comment "QName: fibo-fnd-arr-com:isRequestFor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/> ;
+	skos:definition "relates a request to that which is being requested, e.g. a report" ;
+	skos:editorialNote "Future consideration: move this property to somewhere in FND." ;
+	.
+
+fibo-fnd-arr-com:isResponseTo
+	a owl:ObjectProperty ;
+	rdfs:label "is response to" ;
+	rdfs:comment "QName: fibo-fnd-arr-com:isResponseTo" ;
+	rdfs:domain fibo-fnd-dt-oc:Occurrence ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/> ;
+	rdfs:range fibo-fnd-dt-oc:Occurrence ;
+	skos:definition "relates an occurrence to another occurrence that it is a response to, most often in the context of communication" ;
+	skos:editorialNote "Future consideration: move this property to somewhere in FND." ;
+	.
+
+fibo-fnd-arr-com:isSentFrom
+	a owl:ObjectProperty ;
+	rdfs:label "is from" ;
+	rdfs:comment "QName: fibo-fnd-arr-com:isSentFrom" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/> ;
+	skos:definition "relates e.g. a communication to its source or origin (e.g. the agent originating a request)" ;
+	skos:editorialNote "Future consideration: move this property to the Relations ontology (fibo-fnd-rel-rel)." ;
+	.
+
+fibo-fnd-arr-com:isSentTo
+	a owl:ObjectProperty ;
+	rdfs:label "is to" ;
+	rdfs:comment "QName: fibo-fnd-arr-com:isSentTo" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/> ;
+	skos:definition "relates e.g. a communication to a target or destination (e.g. the agent receiving a request)" ;
+	skos:editorialNote "Future consideration: move this property to the Relations ontology (fibo-fnd-rel-rel)." ;
+	.
+

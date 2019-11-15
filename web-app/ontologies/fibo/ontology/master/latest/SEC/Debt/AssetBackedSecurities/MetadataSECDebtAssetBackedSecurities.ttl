@@ -1,0 +1,56 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MetadataSECDebtAssetBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MetadataSECDebtAssetBackedSecurities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-ab-mod: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MetadataSECDebtAssetBackedSecurities/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MetadataSECDebtAssetBackedSecurities/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Securities (SEC) Asset-Backed Securities Debt Module" ;
+	rdfs:comment "QName: fibo-sec-dbt-ab-mod:" ;
+	dct:abstract "This ontology provides metadata about the Debt Asset-Backed Securities module and its contents." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-sec-dbt-ab-mod" ;
+	sm:filename "MetadataSECDebtAssetBackedSecurities.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/MetadataSECDebtAssetBackedSecurities/> ;
+	.
+
+fibo-sec-dbt-ab-mod:DebtAssetBackedSecuritiesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "FIBO SEC Asset-Backed Securities Debt Module" ;
+	rdfs:comment "QName: fibo-sec-dbt-ab-mod:DebtAssetBackedSecuritiesModule" ;
+	dct:abstract "Asset-backed securities have income payments derived from and backed (collateralized) by a specified pool of underlying assets which are generally small and illiquid and unable to be sold individually." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CBOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CDOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CLOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/LoanParticipationNotes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "FIBO-SEC-DBT-AB" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MetadataSECDebtAssetBackedSecurities/> ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	.
+

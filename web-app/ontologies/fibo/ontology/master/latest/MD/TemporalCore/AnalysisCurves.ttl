@@ -1,0 +1,65 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/AnalysisCurves/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/AnalysisCurves/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-temx-cur: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/AnalysisCurves/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/AnalysisCurves/>
+	a owl:Ontology ;
+	rdfs:label "AnalysisCurves"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology defines the basic concept of a curve, as well as specific applications of this in credit and spread curves. 
+		Note that there is one concept for which no label could be agreed, being rendered simply as a kind of 'curve to use'. Further research on the usage context and application of this and the related credit curve to use, is required.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/AnalysisCurves/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-temx-cur:CreditCurveToUse
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-cur:CurveToUse ;
+	rdfs:label "credit curve to use"@en ;
+	rdfs:comment "QName: NONE:CreditCurveToUse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/AnalysisCurves/> ;
+	skos:definition "This is a working note from ongoing reviews."@en ;
+	.
+
+fibo-md-temx-cur:CurveToUse
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-cur:SpreadCurve ;
+	rdfs:label "curve to use"@en ;
+	rdfs:comment "QName: NONE:CurveToUse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/AnalysisCurves/> ;
+	skos:definition "This is a working note from ongoing reviews."@en ;
+	skos:editorialNote "There is a big list of these. Bloomberg will have publicly available lists of these curves. Thyere are people that clean these up, e.g. Bmb, MarkIT, TR, and so on. No-one uses the raw feed so thtese curves, they are always cleaned up by someone first. At least for Risk Mgt purposes.For trading purposes they may well use a raw fee of risk Curves from e.g. Bmb. It takes the form of a selectable lists of names of curves. trhese have various ways of identifying what they are, so there are many ID schemes, e.g. CUSIPs, and other non security tyes of ID e.g. Red numbers. Different types o finstruments may have different ways in which these curves are generated. Some are proivided directly, some have highly complex stuff gong in to them, and so on. But for our purposes they are just a named list of pre-identified things which are a Curve. you might then specify a technique that you apply to the use of this curve."@en ;
+	.
+
+fibo-md-temx-cur:DiscountCurveToUse
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-cur:CurveToUse ;
+	rdfs:label "discount curve to use"@en ;
+	rdfs:comment "QName: NONE:DiscountCurveToUse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/AnalysisCurves/> ;
+	skos:definition "This is a working note from ongoing reviews."@en ;
+	.
+
+fibo-md-temx-cur:SpreadCurve
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-math-math:MathematicalCurve ;
+	rdfs:label "spread curve"@en ;
+	rdfs:comment "QName: NONE:SpreadCurve" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/AnalysisCurves/> ;
+	.
+

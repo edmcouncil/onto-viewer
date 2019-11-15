@@ -1,0 +1,762 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Pools/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-inf-tem: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-dbtx-aly: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> .
+@prefix fibo-md-dbtx-py: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> .
+@prefix fibo-md-temx-ins: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix fibo-sec-dbt-ab-abs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/> .
+@prefix fibo-sec-dbt-ab-pbs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> .
+@prefix fibo-sec-dbt-bnd: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/>
+	a owl:Ontology ;
+	rdfs:label "DebtAnalytics"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology covers an extensive range of analytical measures for debt instruments and pools of debt instruments. These cover the well-known concepts of convexity, duration and life, as well as weighted average loan ages and maturities, prepayments speeds etc. for debt pools. Most of the widely referenced variants of these are included, for example modified duration. Some yield related concepts (e.g. for equivalent yield) are also included." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Pools/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-dbtx-aly:AverageLife
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:LifeAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:takesIntoAccount ;
+			owl:someValuesFrom fibo-md-dbtx-aly:PrepaymentSpeed ;
+		]
+		;
+	rdfs:label "average life"@en ;
+	rdfs:comment "QName: NONE:AverageLife" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	owl:disjointWith fibo-md-dbtx-aly:EquivalentLifeAnalytic ;
+	skos:definition "An estimate of the number of terms to maturity, taking the possibility of early payments into account. Average life is calculated using the weighted average time to the receipt of all future cash flows."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Where it refers to pre-payment above, if the bond does not include prepayment then this is not included. However, analytics that refer to this e.g. Yield to Average Life, then this figure is relevant. It is not relevant for other types of bond where e.g. you would use yield to next call, yield to worst etc. Average Life used in place of Maturity for Yield Calculation. This is not only used for Yield calculations though. It is referred to as an analytic figure in its own right. Average Life uses one of a number of standard pre-payment models (for structured finance at least). For MBS, the average life includes some calculations to take account of pre-payments on the underlying mortgages. This takes account of the possibillity of borrowers paying early. This has to be modeled or forecast (not given) as it's a function of market conditions and interest rate. You would not see this in a market data feed. When you model MBS you calculate Average Life as part of the model i.e. you estimate the percentage of prepayment in the next x length of time and factor this into the Average Life. Refers to Weighted Average Time to receipt of future cash flows. For MBS, early payments will shorten the Average Life. For Student Loans, Credit Card, Loan etc, i.e. all Pool Backed (any bond that has securitized debt). Other bonds: Sinking Funds etc., also Early Payment - partial Call for a corporate / regular bond. Early Payment for pass through has the same effect. Sinking Fund: Each payment is part principal and part interest, this is implicit in the overall definition of \"Early payment\"."@en ;
+	.
+
+fibo-md-dbtx-aly:AverageLifeAtIssue
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:AverageLife ;
+	rdfs:label "average life at issue"@en ;
+	rdfs:comment "QName: NONE:AverageLifeAtIssue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The Average Life analytic at the time the security was issued."@en ;
+	.
+
+fibo-md-dbtx-aly:DebtConvexityAnalytic
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:DatedCollectionConstituent ,
+		fibo-md-temx-tem:CurveConvexity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:definedInRelationTo ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtInstrumentYield ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:isRateOfChangeOf ;
+			owl:someValuesFrom fibo-md-dbtx-aly:DurationAnalytic ;
+		]
+		;
+	rdfs:label "debt convexity analytic"@en ;
+	rdfs:comment "QName: NONE:DebtConvexityAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The second derivative of a security's price with respect to its yield, divided by the security's price. A security exhibits positive convexity when its price rises more for a downward move in its yield than its price declines for an equal upward move in its yield. Further notes: A measure of the change in price for a given change in Modified Duration. This always (necessarily) refers to Modified Duration. This is used as another risk measurement. Numerator is always (a) duration - either MacCaulays or Modified. Always rate of change of (one of the) Duration against some other parameter. The other paramater can be characterised as a Yield (it may be the Price, but that has a relationship to the Yield in any case). REVIEW: Inconsistency in the above - is it always necessarily Modified Duration that is referred to, or \"any\" Duration measure (Macaulays and.or Modified)? notes 9 Dec A measure of the sensitivity of the price with reference to interest rates. This is normally determined with reference to maturity, but since there are different maturity dates, this figure gives an estimate of the equitvalent if you had a homogenous portfolio, i.e. this is an estimate based on a pure equivalent, homogenous portfolio. Convexity of instrument versus portfolio. Sees instrument in terms of the set of cashflows. The term Convexity can be applied either to a bond or to a portfolio. More notes: When you get Convexit in MD, it will tell you what Duration it is refrfering to, along with Redemption Date (logically). Also if there is Option Adjusted Yield, there is a third set of analytics. What are they? i.e. OA Convexity, Duration Yield and the rest. Conclusions: Agreed to revisit this in OTC."@en ;
+	.
+
+fibo-md-dbtx-aly:DebtInstrumentAnalyticalParameter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:providesAnalysisAbout ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/TradableDebtInstrument> ;
+		]
+		;
+	rdfs:label "debt instrument analytical parameter"@en ;
+	rdfs:comment "QName: NONE:DebtInstrumentAnalyticalParameter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "Parameter describing some aspect of the behaviour of a debt instrument, that may vary over time."@en ;
+	.
+
+fibo-md-dbtx-aly:DebtInstrumentPoolAnalytic
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:DebtPoolAnalyticalParameter ;
+	rdfs:label "debt instrument pool analytic"@en ;
+	rdfs:comment "QName: NONE:DebtInstrumentPoolAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "A measure of some aspect of the behaviour or a pool of securitized debt i.e. a pool of debt instruments. Futher Notes: Nothing defined under this yet. We have analytics for pools of individual debt products (mortgages, loans, auto loans), but not the equivalent sorts of terms implied for a securitixed debt pool. Presumably these would be aggregate terms similar or equivalent to analytics for debt instruments, such as yield, average live, convixity and so on. As such these would be similar to porfolio analytics (not modeled)."@en ;
+	.
+
+fibo-md-dbtx-aly:DebtPool
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:hasAnalytic ;
+			owl:someValuesFrom fibo-md-dbtx-aly:DebtPoolAnalyticalParameter ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:hasFactor ;
+			owl:someValuesFrom fibo-md-dbtx-aly:PoolFactor ;
+		]
+		;
+	rdfs:label "debt pool"@en ;
+	rdfs:comment "QName: NONE:DebtPool" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	.
+
+fibo-md-dbtx-aly:DebtPoolAnalyticalParameter
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:PoolAnalyticalParameter ;
+	rdfs:label "debt pool analytical parameter"@en ;
+	rdfs:comment "QName: NONE:DebtPoolAnalyticalParameter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "A measure of some aspect of some pool of debt, such as a pool of loans or a pool of securitized debt products."@en ;
+	.
+
+fibo-md-dbtx-aly:DurationAnalytic
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:DebtInstrumentAnalyticalParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtInstrumentYield ;
+		]
+		;
+	rdfs:label "duration analytic"@en ;
+	rdfs:comment "QName: NONE:DurationAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "Weighted average time to receipt of all the payments."@en ;
+	skos:editorialNote 'Duration in general is a measure of % price change for a given change in yield. See definition from BMB The duration on a traditional bond will be much shorter than the duration relative to the maturity. Duration is the first derivative of the curve between Price and Yield. There are multiple types of duration, all of which are variants of this. So Duration is the first derivative and the different type of duration measure are different ways of measuring this, for example a "quick and dirty" measure of duration or one which.'@en ;
+	.
+
+fibo-md-dbtx-aly:EffectiveDuration
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:DurationAnalytic ;
+	rdfs:label "effective duration"@en ;
+	rdfs:comment "QName: NONE:EffectiveDuration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	.
+
+fibo-md-dbtx-aly:EquivalentLifeAnalytic
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:LifeAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:someValuesFrom fibo-sec-dbt-bnd:BondWithPartialCall ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:derivedUsing ;
+			owl:someValuesFrom fibo-md-dbtx-aly:PartialCallsEstimationModel ;
+		]
+		;
+	rdfs:label "equivalent life analytic"@en ;
+	rdfs:comment "QName: NONE:EquivalentLifeAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	.
+
+fibo-md-dbtx-aly:EquivalentYieldCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:RelativeYieldCalculationMethod ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:isDefaultIn ;
+			owl:someValuesFrom fibo-md-dbtx-py:BondMarket ;
+		]
+		;
+	rdfs:label "equivalent yield calculation method"@en ;
+	rdfs:comment "QName: NONE:EquivalentYieldCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	.
+
+fibo-md-dbtx-aly:FFIECDown300PrepaySpeed
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:PrepaymentSpeed ;
+	rdfs:label "f f i e c down 300 prepay speed"@en ;
+	rdfs:comment "QName: NONE:FFIECDown300PrepaySpeed" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition 'Public Securities Association (PSA) speed used for the underlying collateral for cash-flow calculations in the "down 300" scenario.'@en ;
+	skos:editorialNote 'Detailed parameters to follow, but basically these three PSA terms are differentiated by the fact that they reference 3 different prepayment models, so each of these will refer to a sub-type of the term "Loan Pool Prepayment Model". For now the semantics are defined only in this written definition. Add model variants and terms in a future version.'@en ;
+	.
+
+fibo-md-dbtx-aly:FFIECUp300PrepaySpeed
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:PrepaymentSpeed ;
+	rdfs:label "f f i e c up 300 prepay speed"@en ;
+	rdfs:comment "QName: NONE:FFIECUp300PrepaySpeed" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition 'Public Securities Association (PSA) speed used for the underlying collateral for cash-flow calculations in the "up 300" scenario.'@en ;
+	skos:editorialNote 'Detailed parameters to follow, but basically these three PSA terms are differentiated by the fact that they reference 3 different prepayment models, so each of these will refer to a sub-type of the term "Loan Pool Prepayment Model". For now the semantics are defined only in this written definition. Add model variants and terms in a future version.'@en ;
+	.
+
+fibo-md-dbtx-aly:ICMAYieldFormula
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:YieldCalculationFormula ;
+	rdfs:label "i c m a yield formula"@en ;
+	rdfs:comment "QName: NONE:ICMAYieldFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The calculation method specified by ICMA (formerly ISMA) for determination of yield for fixed-rate bonds."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This basic formula is used across many markets, including the US and most of Europe. While individual markets may have different flavors (French round their bonds to 5 decimals, UK Gilts have ex-div), the formula is still the same. This would be the formula used by "Wall Street Yield", "US Treasury Yield", "Corporate Bond Yield" etc. Notes Origin:Fidessa'@en ;
+	.
+
+fibo-md-dbtx-aly:ImpliedForwardRate
+	a owl:Class ;
+	rdfs:label "implied forward rate"@en ;
+	rdfs:comment "QName: NONE:ImpliedForwardRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	.
+
+fibo-md-dbtx-aly:InstrumentAggregateLoanAnalytic
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:isAggregateOf ;
+			owl:someValuesFrom fibo-md-dbtx-py:LoanPoolAnalytic ;
+		]
+		;
+	rdfs:label "instrument aggregate loan analytic"@en ;
+	rdfs:comment "QName: NONE:InstrumentAggregateLoanAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "Parameters that describe some feature of loan pools or mortgage pools, aggregated and defined at the level of the instrument (i.e. the tranche or class of security within the issue)."@en ;
+	skos:editorialNote "for some of these there may also be a similar aggregated figure at the level of the issue (i.e. for a whole MBS issue) and for some there would not. To be determined"@en ;
+	.
+
+fibo-md-dbtx-aly:InstrumentWeightedAverageLoanAge
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:InstrumentAggregateLoanAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:aggregateOf ;
+			owl:someValuesFrom fibo-md-dbtx-aly:PoolWeightedAverageLoanAge ;
+		]
+		;
+	rdfs:label "instrument weighted average loan age"@en ;
+	rdfs:comment "QName: NONE:InstrumentWeightedAverageLoanAge" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "A dollar-weighted average measuring the age of the individual loans in a mortgage pass-through or pooled security, such as Ginnie Mae or a Freddie Mac security. The WALA is measured as the time in months since the origination of the loans, with the weighting based on each loan's size in proportion to the aggregate total of the pool."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is defined by the issuer. WALA is more official, not an analysis from a vendor. This changes but the values are relayed by the issuer on an ongoing basis. Investopedia explains Weighted Average Loan Age - WALA The weighted average age will change over time as some mortgages get paid off faster than others. Based on the issuer of the mortgage-backed securities (MBS), the WALA may be weighted on the remaining principal balance dollar figure, or the beginning notional value of the loan. The flip side of the WALA is the weighted average maturity (WAM), which is a dollar-weighted measure of the months remaining until the principal amounts are completely repaid on each loan in the pool."@en ;
+	.
+
+fibo-md-dbtx-aly:InstrumentWeightedAverageRemainingMaturity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:InstrumentAggregateLoanAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:aggregateOf.1 ;
+			owl:someValuesFrom fibo-md-dbtx-aly:PoolWeightedAverageRemainingMaturity ;
+		]
+		;
+	rdfs:label "instrument weighted average remaining maturity"@en ;
+	rdfs:comment "QName: NONE:InstrumentWeightedAverageRemainingMaturity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The weighted average of the time until all maturities on loans in a mortgage-backed or asset backed security. The higher the weighted average to maturity of the loans, the longer the loans in the security have until maturity."@en ;
+	.
+
+fibo-md-dbtx-aly:InternallyDeterminedPriceSpread
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-py:DebtPriceSpread ;
+	rdfs:label "internally determined price spread"@en ;
+	rdfs:comment "QName: NONE:InternallyDeterminedPriceSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The spread determined internally within the organisation from information available at their own trading desks. Further Notes Internal prices within a bank would be determined by surveying their own traders. So e.g. corporate desk trades these 30 bonds, get the daily spreads on those at the end of the day and calculate the price. The traders determine the pricing during the based on market movements. (this is all for OTC traded bonds, not exchange traded bonds)."@en ;
+	.
+
+fibo-md-dbtx-aly:KeyRateDuration
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:DurationAnalytic ;
+	rdfs:label "key rate duration"@en ;
+	rdfs:comment "QName: NONE:KeyRateDuration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	.
+
+fibo-md-dbtx-aly:LifeAnalytic
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:DebtInstrumentAnalyticalParameter ;
+	rdfs:label "life analytic"@en ;
+	rdfs:comment "QName: NONE:LifeAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "Some measure of the life of a security, other than the actual time to maturity itself. This is a derived figure, based on certain parameters as appropriate to that type of instrument, to give a figure that is equivalent to and similar to the basic maturity of the instrument, for the purposes of analysing that security."@en ;
+	.
+
+fibo-md-dbtx-aly:MaturityEquivalentPSA
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:PrepaymentSpeed ;
+	rdfs:label "maturity equivalent p s a"@en ;
+	rdfs:comment "QName: NONE:MaturityEquivalentPSA" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "Prepayment speed that results in the same average life as that computed for the Collateralized Mortgage Obligation (CMO), Asset Backed Securities (ABS) or Mortgage Backed Securities (MBS) using the Maturity Prepay Model."@en ;
+	skos:editorialNote 'Detailed parameters to follow, but basically these three PSA terms are differentiated by the fact that they reference 3 different prepayment models, so each of these will refer to a sub-type of the term "Loan Pool Prepayment Model". For now the semantics are defined only in this written definition. Add model variants and terms in a future version.'@en ;
+	.
+
+fibo-md-dbtx-aly:ModifiedDurationAnalytic
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:DurationAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:someValuesFrom fibo-md-dbtx-py:MacCaulaysDurationAnalytic ;
+		]
+		;
+	rdfs:label "modified duration analytic"@en ;
+	rdfs:comment "QName: NONE:ModifiedDurationAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	owl:disjointWith fibo-md-dbtx-py:MacCaulaysDurationAnalytic ;
+	skos:definition "The percentage price change of a security for a given change in yield. The higher the modified duration of a security, the higher its risk. Ad/ModDuration = [duration / {1 + (IRR/M)}]; where IRR is the internal rate of return and M is the number of compounding periods per year."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The higher the MD the greater the change in price for a given change in yield."@en ;
+	.
+
+fibo-md-dbtx-aly:MortgageInstrumentWeightedAverageRemainingMaturity
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-dbtx-aly:InstrumentWeightedAverageRemainingMaturity ;
+	rdfs:label "mortgage instrument weighted average remaining maturity"@en ;
+	rdfs:comment "QName: NONE:MortgageInstrumentWeightedAverageRemainingMaturity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The weighted average of the time until all maturities on mortgages in a mortgage-backed security (MBS). The higher the weighted average to maturity, the longer the mortgages in the security have until maturity."@en ;
+	skos:editorialNote 'Synonym (if this is the same term): Also known as "average effective maturity". Investopedia explains Weighted Average Maturity - WAM The measure is calculated by totaling each mortgage value represented by the MBS. The weights of each mortgage is found by dividing the value of each into the total of all. To arrive at the WAM number the weight of each security is multiplied by the time until maturity of each mortgage, and then all the values are added together. For example say an MBS has three mortgages valued at $1,000, $2,000 and $3,000 (a total of $6,000) and mature in one, two and three years respectively. The weights of these are 1/6 (1,000/6,000), 1/3 (2,000/6,000) and 1/2 (3,000/6,000). The WAM is 2 1/3 years (1/6 x 1 year + 1/3 x 2 years + 1/2 x 3 years). Analysis: this investopedia decription does not take account of there being more than one Pool behind the MBS.'@en ;
+	.
+
+fibo-md-dbtx-aly:PVBP
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:DebtInstrumentAnalyticalParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:definedInRelationTo ;
+			owl:someValuesFrom fibo-md-dbtx-py:DebtInstrumentYield ;
+		]
+		;
+	rdfs:label "p v b p"@en ;
+	rdfs:comment "QName: NONE:PVBP" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "Sensitivity of the price for one basis point change in yield, defined as the difference in price given 1 bp change in yield."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Price value of Basis Point Definition: The difference in price given 1 bp change in yield. This is like Duration but normalized to 1 basis point. Synonym DV01"@en ;
+	.
+
+fibo-md-dbtx-aly:PartialCallsEstimationModel
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:AnalyticsCalculationModel ;
+	rdfs:label "partial calls estimation model"@en ;
+	rdfs:comment "QName: NONE:PartialCallsEstimationModel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "A model of how the early partial calls are estimated."@en ;
+	.
+
+fibo-md-dbtx-aly:PoolAnalyticalParameter
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:AnalyticalInformation ;
+	rdfs:label "pool analytical parameter"@en ;
+	rdfs:comment "QName: NONE:PoolAnalyticalParameter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "Paramater that describes some aspect of the behaviour of some kind of pool."@en ;
+	.
+
+fibo-md-dbtx-aly:PoolFactor
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:ReferenceFactor ;
+	rdfs:label "pool factor"@en ;
+	rdfs:comment "QName: NONE:PoolFactor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "How much of the original pool is still outstanding. This is a number below one. Expressed as percentage."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Would multiply the factor by the starting value of the pool. This determines how much it is paying down. Would take the form of a 10 digit decimal factor showing how much of the pool is outstanding. You get Factor information every month or so which includes the WAM figure (and the WALA and WAC). The rate can be derived from this. that would be the rate at which the pool is paying down. These all come from the issuer."@en ;
+	.
+
+fibo-md-dbtx-aly:PoolPaydownRate
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-md-dbtx-aly:derivedFrom ;
+		owl:someValuesFrom fibo-md-dbtx-aly:PoolFactor ;
+	] ;
+	rdfs:label "pool paydown rate"@en ;
+	rdfs:comment "QName: NONE:PoolPaydownRate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The rate at which the pool is paying down. This is based on observed factor. CPR, SMM, etc. etc. Measured differently for different kinds of security. CBO might have a prepayment rate for example if the underlying bond is callable. with a non agency mortgge dela, defualts will effect this. so for instance there is principal is no lnger inthe pool because the mortgagee defaults. With agency these are not taken out in the case of default but for non agency these mortgages are removed from the pool if and when a mortgagee defualts."@en ;
+	.
+
+fibo-md-dbtx-aly:PoolWeightedAverageLoanAge
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:LoanPoolAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:derivedFrom ;
+			owl:someValuesFrom fibo-md-dbtx-py:LoanAge ;
+		]
+		;
+	rdfs:label "pool weighted average loan age"@en ;
+	rdfs:comment "QName: NONE:PoolWeightedAverageLoanAge" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "A dollar-weighted average measuring the age of the individual loans in a mortgage pass-through or pooled security, such as Ginnie Mae or a Freddie Mac security. The WALA is measured as the time in months since the origination of the loans, with the weighting based on each loan's size in proportion to the aggregate total of the pool."@en ;
+	skos:editorialNote "Adaptation taken from the instrument level figure. This definition looks as though it may already be defined with reference to the Loan Pool. Note also that this figure is specific to Pass Through securities. These are mutually exclusive with Tranched securities (static model update to come)."@en ;
+	.
+
+fibo-md-dbtx-aly:PoolWeightedAverageRemainingMaturity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:LoanPoolAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:derivedFrom ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fbc-fi-fi:hasTimeToMaturity ;
+				owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+			] ;
+		]
+		;
+	rdfs:label "pool weighted average remaining maturity"@en ;
+	rdfs:comment "QName: NONE:PoolWeightedAverageRemainingMaturity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The weighted average of the time until all maturities on loans in a pool. The higher the weighted average to maturity of the loans, the longer the loans in the pool have until maturity. REVIEW: Adapted from instrument specific definition from Investopedia. Review of 23 September identified that certain figures exist for pool and for instrument, whereas Investopedia definition was for Instrument (tranche, class etc.)."@en ;
+	.
+
+fibo-md-dbtx-aly:PrepaymentSpeed
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-py:LoanPoolAnalytic ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-dbtx-aly:determinedBy ;
+			owl:someValuesFrom fibo-md-dbtx-py:LoanPoolPrepaymentModel ;
+		]
+		;
+	rdfs:label "prepayment speed"@en ;
+	rdfs:comment "QName: NONE:PrepaymentSpeed" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The rate at which the pool is paying down."@en ;
+	skos:editorialNote "This is a model. Includes other factors such as homogeniety. Earlier notes: Same as Payment. Curtailment. Paydown is normally scheduled payments of the mortgage. Prepayment is when someone pays off the mortgage early I may send in 1500 when my monthly amount is 1000 a month. So the 500 is a prepayment. Scheduled principal payment. More notes 25 nov: Also factor in changes to the pool constituents where this is allowed for that kind of MBS. So we make estimates of how face value will will change. face value won't change but the underlying value of the Pf changes, so eg. the current mortgage factor. Model update note June 2010: Detailed types of \"Prepayment Speed\" analytic received from thomson Reuters, now modeled as sub types of this term. So term origin is PSA by extension, since this is the common super class of 3 specific prepayment speed analytic types defined by PSA. PSA stands for Public Securities Association. Type: PSA gives this as numeric, however definitions imply percentage, so defined as dated percentage for now. Many data models use numbers which are interpreted later as percentages so this may be the case here."@en ;
+	.
+
+fibo-md-dbtx-aly:PriceAnalytic
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter ,
+		fibo-md-temx-ins:MarketData ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:derivedFrom ;
+			owl:someValuesFrom fibo-fnd-acc-cur:MonetaryPrice ;
+		]
+		;
+	rdfs:label "price analytic"@en ;
+	rdfs:comment "QName: NONE:PriceAnalytic" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "Information that is about prices, rather than actually being a price."@en ;
+	.
+
+fibo-md-dbtx-aly:aggregateOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-md-dbtx-aly:isAggregateOf ;
+	rdfs:label "aggregate of"@en ;
+	rdfs:comment "QName: NONE:aggregateOf" ;
+	rdfs:domain fibo-md-dbtx-aly:InstrumentWeightedAverageLoanAge ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-aly:PoolWeightedAverageLoanAge ;
+	.
+
+fibo-md-dbtx-aly:aggregateOf.1
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-md-dbtx-aly:isAggregateOf ;
+	rdfs:label "aggregate of"@en ;
+	rdfs:comment "QName: NONE:aggregateOf.1" ;
+	rdfs:domain fibo-md-dbtx-aly:InstrumentWeightedAverageRemainingMaturity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-aly:PoolWeightedAverageRemainingMaturity ;
+	.
+
+fibo-md-dbtx-aly:averageLifeDateAtIssue
+	a owl:DatatypeProperty ;
+	rdfs:label "average life date at issue"@en ;
+	rdfs:comment "QName: NONE:averageLifeDateAtIssue" ;
+	rdfs:domain fibo-md-dbtx-aly:AverageLifeAtIssue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	skos:definition "The date equivalent to the Average Life figure, as measured at Issue Date."@en ;
+	.
+
+fibo-md-dbtx-aly:averageLifeValue
+	a owl:ObjectProperty ;
+	rdfs:label "average life value"@en ;
+	rdfs:comment "QName: NONE:averageLifeValue" ;
+	rdfs:domain fibo-md-dbtx-aly:AverageLife ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "The value of the Average Life analytic at some time in the past or at the present. For MBS this would be expressed as a month eg 50 months."@en ;
+	.
+
+fibo-md-dbtx-aly:averageLifeValue.1
+	a owl:ObjectProperty ;
+	rdfs:label "average life value"@en ;
+	rdfs:comment "QName: NONE:averageLifeValue.1" ;
+	rdfs:domain fibo-md-dbtx-aly:AverageLifeAtIssue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The value of the Average Life analytic at the time the security was issued."@en ;
+	.
+
+fibo-md-dbtx-aly:decimalPlaces
+	a owl:DatatypeProperty ;
+	rdfs:label "decimal places"@en ;
+	rdfs:comment "QName: NONE:decimalPlaces" ;
+	rdfs:domain fibo-md-dbtx-aly:PoolFactor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of decimal places used in the publication of the factor value."@en ;
+	.
+
+fibo-md-dbtx-aly:definedInRelationTo
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "defined in relation to"@en ;
+	rdfs:comment "QName: NONE:definedInRelationTo" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-py:DebtInstrumentYield ;
+	.
+
+fibo-md-dbtx-aly:derivedFrom
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "derived from" ;
+	rdfs:comment "QName: NONE:derivedFrom" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	.
+
+fibo-md-dbtx-aly:derivedUsing
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "derived using"@en ;
+	rdfs:comment "QName: NONE:derivedUsing" ;
+	rdfs:domain fibo-md-dbtx-aly:EquivalentLifeAnalytic ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-aly:PartialCallsEstimationModel ;
+	.
+
+fibo-md-dbtx-aly:determinedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "determined by"@en ;
+	rdfs:comment "QName: NONE:determinedBy" ;
+	rdfs:domain fibo-md-dbtx-aly:PrepaymentSpeed ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-py:LoanPoolPrepaymentModel ;
+	.
+
+fibo-md-dbtx-aly:equivalentLifeValue
+	a owl:ObjectProperty ;
+	rdfs:label "equivalent life value"@en ;
+	rdfs:comment "QName: NONE:equivalentLifeValue" ;
+	rdfs:domain fibo-md-dbtx-aly:EquivalentLifeAnalytic ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "The Equivalent Life in years at the stated date."@en ;
+	.
+
+fibo-md-dbtx-aly:factorValue
+	a owl:ObjectProperty ;
+	rdfs:label "factor value"@en ;
+	rdfs:comment "QName: NONE:factorValue" ;
+	rdfs:domain fibo-md-dbtx-aly:PoolFactor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The factor, expressed as a numeric amount in the past or present."@en ;
+	.
+
+fibo-md-dbtx-aly:hasAnalytic
+	a owl:ObjectProperty ;
+	rdfs:label "has analytic"@en ;
+	rdfs:comment "QName: NONE:hasAnalytic" ;
+	rdfs:domain fibo-md-dbtx-aly:DebtPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-aly:DebtPoolAnalyticalParameter ;
+	.
+
+fibo-md-dbtx-aly:hasFactor
+	a owl:ObjectProperty ;
+	rdfs:label "has factor"@en ;
+	rdfs:comment "QName: NONE:hasFactor" ;
+	rdfs:domain fibo-md-dbtx-aly:DebtPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-aly:PoolFactor ;
+	.
+
+fibo-md-dbtx-aly:hasMeasure
+	a owl:ObjectProperty ;
+	rdfs:label "has measure"@en ;
+	rdfs:comment "QName: NONE:hasMeasure" ;
+	rdfs:domain fibo-sec-dbt-ab-abs:LoanPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-aly:PrepaymentSpeed ;
+	.
+
+fibo-md-dbtx-aly:isAggregateOf
+	a owl:ObjectProperty ;
+	rdfs:label "is aggregate of"@en ;
+	rdfs:comment "QName: NONE:isAggregateOf" ;
+	rdfs:domain fibo-md-dbtx-aly:InstrumentAggregateLoanAnalytic ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-py:LoanPoolAnalytic ;
+	.
+
+fibo-md-dbtx-aly:isDefaultIn
+	a owl:ObjectProperty ;
+	rdfs:label "is default in"@en ;
+	rdfs:comment "QName: NONE:isDefaultIn" ;
+	rdfs:domain fibo-md-dbtx-aly:EquivalentYieldCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-py:BondMarket ;
+	.
+
+fibo-md-dbtx-aly:isRateOfChangeOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-tem:analyzes ;
+	rdfs:label "is rate of change of"@en ;
+	rdfs:comment "QName: NONE:isRateOfChangeOf" ;
+	rdfs:domain fibo-md-dbtx-aly:DebtConvexityAnalytic ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-aly:DurationAnalytic ;
+	.
+
+fibo-md-dbtx-aly:modifiedDurationValue
+	a owl:ObjectProperty ;
+	rdfs:label "modified duration value"@en ;
+	rdfs:comment "QName: NONE:modifiedDurationValue" ;
+	rdfs:domain fibo-md-dbtx-aly:ModifiedDurationAnalytic ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "The Modified Duration in Years."@en ;
+	.
+
+fibo-md-dbtx-aly:prepaymentSpeedValue
+	a owl:ObjectProperty ;
+	rdfs:label "prepayment speed value"@en ;
+	rdfs:comment "QName: NONE:prepaymentSpeedValue" ;
+	rdfs:domain fibo-md-dbtx-aly:PrepaymentSpeed ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-temx-tem:DatedPercentage ;
+	.
+
+fibo-md-dbtx-aly:takesIntoAccount
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "takes into account"@en ;
+	rdfs:comment "QName: NONE:takesIntoAccount" ;
+	rdfs:domain fibo-md-dbtx-aly:AverageLife ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-dbtx-aly:PrepaymentSpeed ;
+	.
+
+fibo-md-dbtx-aly:value.2
+	a owl:ObjectProperty ;
+	rdfs:label "value"@en ;
+	rdfs:comment "QName: NONE:value.2" ;
+	rdfs:domain fibo-md-dbtx-aly:PVBP ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	skos:definition "The value of the PVBP expressed as a price change, with price denominated in percentage."@en ;
+	.
+
+fibo-md-dbtx-aly:wALAValue
+	a owl:ObjectProperty ;
+	rdfs:label "w a l a value"@en ;
+	rdfs:comment "QName: NONE:wALAValue" ;
+	rdfs:domain fibo-md-dbtx-aly:InstrumentWeightedAverageLoanAge ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "The weighted average loan age, at some point in the past or present."@en ;
+	.
+
+fibo-md-dbtx-aly:wARMValue
+	a owl:ObjectProperty ;
+	rdfs:label "w a r m value"@en ;
+	rdfs:comment "QName: NONE:wARMValue" ;
+	rdfs:domain fibo-md-dbtx-aly:MortgageInstrumentWeightedAverageRemainingMaturity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "The amount of the WARM in the past or present."@en ;
+	.
+
+fibo-sec-dbt-ab-abs:LoanPool
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-md-dbtx-aly:hasMeasure ;
+		owl:someValuesFrom fibo-md-dbtx-aly:PrepaymentSpeed ;
+	] ;
+	.
+
+fibo-sec-dbt-ab-pbs:PoolBackedSecurityInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isCharacterizedBy ;
+			owl:someValuesFrom fibo-md-dbtx-aly:InstrumentWeightedAverageLoanAge ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isCharacterizedBy ;
+			owl:someValuesFrom fibo-md-dbtx-aly:InstrumentWeightedAverageRemainingMaturity ;
+		]
+		;
+	.
+

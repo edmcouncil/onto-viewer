@@ -1,0 +1,214 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanPhases/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansStatus/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanPhases/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-inf-tem: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-loan-tem-ph: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> .
+@prefix fibo-loan-tem-sta: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansStatus/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/>
+	a owl:Ontology ;
+	rdfs:label "LoanPhases"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology defines the phases in the life of a loan, including delinquent loans, up to the point where the loan is repaid. 
+		Future integration of this work should be based on the lifecycle concept, in the same way as product lifecycles.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansStatus/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanPhases/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-tem-ph:DeferredLoan
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-ph:DisbursedLoan ;
+	rdfs:label "deferred loan"@en ;
+	rdfs:comment "QName: NONE:DeferredLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	.
+
+fibo-loan-tem-ph:DelinquentLoan
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-ph:DisbursedLoan ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ph:hasStatus ;
+			owl:allValuesFrom fibo-loan-tem-sta:LoanArrearsStatus ;
+		]
+		;
+	rdfs:label "delinquent loan"@en ;
+	rdfs:comment "QName: NONE:DelinquentLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	skos:definition "A loan which is an active loan (in Repayment phase), which is in default."@en ;
+	skos:editorialNote 'Possible outcomes including settlement where the loan is not paid off in full but a settlement is arrived at in which this is considered to be closed. Legal Proceedings may undertaken be in relation to Loan Defaults. Default versus Arrears? There are states within the space of being in arrears where it is not yet in default unless the borrower has not paid within a given period of time. For instance a decision is made after e.g. 3 months, when it is decided they are in default - a "Notice of Default" is then served, leading into the set of legal events we see in the Loan Default Proceedings.'@en ;
+	.
+
+fibo-loan-tem-ph:DisbursedLoan
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-loan-loan:LoanDrawdown ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasLoanPhase ;
+			owl:someValuesFrom fibo-loan-tem-ph:RepaymentPhase ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ph:hasStatus ;
+			owl:someValuesFrom fibo-loan-tem-sta:LoanPaymentStatus ;
+		]
+		;
+	rdfs:label "disbursed loan"@en ;
+	rdfs:comment "QName: NONE:DisbursedLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	owl:disjointWith fibo-loan-tem-ph:RepaidLoan ;
+	.
+
+fibo-loan-tem-ph:InDefaultLoan
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-ph:DelinquentLoan ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-ph:inDefaultLoanIncludes ;
+			owl:someValuesFrom fibo-loan-tem-sta:LoanDefaultProceedingStatus ;
+		]
+		;
+	rdfs:label "in default loan"@en ;
+	rdfs:comment "QName: NONE:InDefaultLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	skos:definition "Formal notice served."@en ;
+	.
+
+fibo-loan-tem-ph:LoanPaidInFull
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-ph:LoanPhase ;
+	rdfs:label "loan paid in full"@en ;
+	rdfs:comment "QName: NONE:LoanPaidInFull" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	.
+
+fibo-loan-tem-ph:LoanPhase
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:Phase ;
+	rdfs:label "loan phase"@en ;
+	rdfs:comment "QName: NONE:LoanPhase" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	.
+
+fibo-loan-tem-ph:RepaidLoan
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-loan-loan:LoanDrawdown ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasLoanPhase ;
+			owl:someValuesFrom fibo-loan-tem-ph:LoanPaidInFull ;
+		]
+		;
+	rdfs:label "repaid loan"@en ;
+	rdfs:comment "QName: NONE:RepaidLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	.
+
+fibo-loan-tem-ph:RepaymentPhase
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-tem-ph:LoanPhase ;
+	rdfs:label "repayment phase"@en ;
+	rdfs:comment "QName: NONE:RepaymentPhase" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	.
+
+fibo-loan-tem-ph:deferred
+	a owl:DatatypeProperty ;
+	rdfs:label "deferred"@en ;
+	rdfs:comment "QName: NONE:deferred" ;
+	rdfs:domain fibo-loan-tem-ph:DeferredLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-loan-tem-ph:disbursementDate
+	a owl:ObjectProperty ;
+	rdfs:label "disbursement date"@en ;
+	rdfs:comment "QName: NONE:disbursementDate" ;
+	rdfs:domain fibo-loan-tem-ph:DisbursedLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-loan-tem-ph:hasStatus
+	a owl:ObjectProperty ;
+	rdfs:label "has status"@en ;
+	rdfs:comment "QName: NONE:hasStatus" ;
+	rdfs:domain fibo-loan-tem-ph:DisbursedLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	rdfs:range fibo-loan-tem-sta:LoanPaymentStatus ;
+	.
+
+fibo-loan-tem-ph:inDefault
+	a owl:DatatypeProperty ;
+	rdfs:label "in default"@en ;
+	rdfs:comment "QName: NONE:inDefault" ;
+	rdfs:domain fibo-loan-tem-ph:DisbursedLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the loan is in default."@en ;
+	.
+
+fibo-loan-tem-ph:inDefaultLoanIncludes
+	a owl:ObjectProperty ;
+	rdfs:label "in default loan includes"@en ;
+	rdfs:comment "QName: NONE:inDefaultLoanIncludes" ;
+	rdfs:domain fibo-loan-tem-ph:InDefaultLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	rdfs:range fibo-loan-tem-sta:LoanDefaultProceedingStatus ;
+	skos:definition "The status of any legal proceedings, as a part of this status information at a given point in time."@en ;
+	.
+
+fibo-loan-tem-ph:isDeferred
+	a owl:DatatypeProperty ;
+	rdfs:label "is deferred"@en ;
+	rdfs:comment "QName: NONE:isDeferred" ;
+	rdfs:domain fibo-loan-tem-ph:DisbursedLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-loan-tem-ph:loanStatus
+	a owl:ObjectProperty ;
+	rdfs:label "loan status"@en ;
+	rdfs:comment "QName: NONE:loanStatus" ;
+	rdfs:domain fibo-loan-tem-ph:DisbursedLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	rdfs:range fibo-loan-tem-sta:LoanStatus ;
+	.
+
+fibo-loan-tem-ph:repaymentDate
+	a owl:ObjectProperty ;
+	rdfs:label "repayment date"@en ;
+	rdfs:comment "QName: NONE:repaymentDate" ;
+	rdfs:domain fibo-loan-tem-ph:RepaidLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The date the loan was deemed to be repaid."@en ;
+	.
+

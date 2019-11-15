@@ -1,0 +1,205 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetBaskets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetBaskets/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-ass: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> .
+@prefix fibo-der-ass-bas: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-ind-mkt-bas: <https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/> .
+@prefix fibo-sec-sec-bsk: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/>
+	a owl:Ontology ;
+	rdfs:label "AssetBaskets"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Underlier concepts for derivatives based on baskets of security assets or indices based on these. At present these are all equity based assets." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetBaskets/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-ass-bas:BasketOfEquityIndices
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-bsk:BasketOfIndices ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-der-ass-bas:EquitiesBasketIndexConstituent ;
+		]
+		;
+	rdfs:label "basket of equity indices"@en ;
+	rdfs:comment "QName: NONE:BasketOfEquityIndices" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	skos:definition "A basket of indices which are all equity-only indices."@en ;
+	.
+
+fibo-der-ass-bas:EquitiesBasketIndexConstituent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-mkt-bas:EquityReferenceIndex ,
+		fibo-sec-sec-bsk:BasketOfIndicesConstituent
+		;
+	rdfs:label "equities basket index constituent"@en ;
+	rdfs:comment "QName: NONE:EquitiesBasketIndexConstituent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	skos:definition "An index which makes up a part of a Basket."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is an index which is a component of a (locally defined) Basket, and NOT a constituent of an index - that is a separate term."@en ;
+	.
+
+fibo-der-ass-bas:EquitiesMixedBasket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-bsk:MixedBasket ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-ass-bas:EquitiesBasketIndexConstituent
+					fibo-ind-mkt-bas:EquitiesBasketConstituent
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "equities mixed basket"@en ;
+	rdfs:comment "QName: NONE:EquitiesMixedBasket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	skos:definition "A basket which has a mix of constituents which are shares and equity indices."@en ;
+	.
+
+fibo-der-ass-bas:EquitiesSingleNameBasket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-mkt-bas:BasketOfEquities ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:onClass fibo-ind-mkt-bas:EquitiesBasketConstituent ;
+			owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "equities single name basket"@en ;
+	rdfs:comment "QName: NONE:EquitiesSingleNameBasket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	skos:definition "A basket of securities consisting only of equities securities (publicly issued and traded shares)."@en ;
+	.
+
+fibo-der-ass-bas:EquityBasket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:Basket ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-ass-bas:EquitiesBasketIndexConstituent
+					fibo-ind-mkt-bas:EquitiesBasketConstituent
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "equity basket"@en ;
+	rdfs:comment "QName: NONE:EquityBasket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-der-ass-bas:BasketOfEquityIndices
+			fibo-der-ass-bas:EquitiesMixedBasket
+			fibo-der-ass-bas:EquitiesSingleNameBasket
+		) ;
+	] ;
+	skos:definition "Any basket of equity consituents. This may be a basket of shares, of equity indices or a basket which is mixture of both."@en ;
+	.
+
+fibo-der-ass-bas:EquityBasketObservable
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-ass:EquityObservable ;
+	rdfs:label "equity basket observable"@en ;
+	rdfs:comment "QName: NONE:EquityBasketObservable" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	.
+
+fibo-der-ass-bas:EquityBasketOptionAnnex
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:onClass fibo-ind-mkt-bas:EquitiesBasketConstituent ;
+			owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-bas:specifiesCompositionOf ;
+			owl:someValuesFrom fibo-der-ass-bas:EquitiesSingleNameBasket ;
+		]
+		;
+	rdfs:label "equity basket option annex"@en ;
+	rdfs:comment "QName: NONE:EquityBasketOptionAnnex" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	skos:definition "An annex to an Equities Basket Option, setting out in detail the composition of the Basket."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This consists of a list of the constituents with the composition of each (as a number of shares or as a monetary amount (nominal). More often it would be specified as a weight rather than a notional. If equal weight it would be 1 share of each. Or it could be specified as 20% of this and 30% of that. This is irrelevant to whether it's an index or a single stock that makes up the constituent. Will have a total notional value fo rthe basket, and then the percentage will determine the number of shares that woulb be boiught to make up that basket. These ratios are possibly determine through some negotiation. If a basket changes its constituents then the constituents that would ... Indices (if regared as a type of basket) then when the authority decides to rebase the index, then - this would impact on the original peception of the index. When its rebased, you value the of at that time and work out the ratio of shares that give you the same equivalent value. [move this comment to Index Underlyer] Changes to the basket: This can still change during the life of the option, due to corporate actions."@en ;
+	.
+
+fibo-der-ass-bas:numberOfShares
+	a owl:DatatypeProperty ;
+	rdfs:label "number of shares"@en ;
+	rdfs:comment "QName: NONE:numberOfShares" ;
+	rdfs:domain fibo-ind-mkt-bas:EquitiesBasketConstituent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of this share that makes up this component of the index."@en ;
+	.
+
+fibo-der-ass-bas:percentage
+	a owl:ObjectProperty ;
+	rdfs:label "percentage"@en ;
+	rdfs:comment "QName: NONE:percentage" ;
+	rdfs:domain fibo-ind-mkt-bas:EquitiesBasketConstituent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The percentage of the basket which this constituent makes up."@en ;
+	.
+
+fibo-der-ass-bas:specifiesCompositionOf
+	a owl:ObjectProperty ;
+	rdfs:label "specifies composition of"@en ;
+	rdfs:comment "QName: NONE:specifiesCompositionOf" ;
+	rdfs:domain fibo-der-ass-bas:EquityBasketOptionAnnex ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/> ;
+	rdfs:range fibo-der-ass-bas:EquitiesSingleNameBasket ;
+	.
+

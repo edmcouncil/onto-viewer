@@ -1,0 +1,141 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Assessments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Assessments/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-asmt: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/> .
+@prefix fibo-fnd-arr-rep: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/>
+	a owl:Ontology ;
+	rdfs:label "Assessments Ontology" ;
+	rdfs:comment "QName: fibo-fnd-arr-asmt:" ;
+	dct:abstract "This ontology defines abstract concepts for assessments, evaluations, and outcomes, as the basis for various analysis, such as for business performance, compliance and risk." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2019 EDM Council, Inc." ;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-arr-asmt" ;
+	sm:filename "Assessments.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Assessments/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-arr-asmt:AssessmentActivity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-oc:OccurrenceKind ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:evaluates ;
+			owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fnd-pty-pty:PartyInRole ;
+		]
+		;
+	rdfs:label "assessment activity" ;
+	rdfs:comment "QName: fibo-fnd-arr-asmt:AssessmentActivity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/> ;
+	skos:definition "activity involving the evaluation or estimation of the nature, quality, ability, or value of someone or something" ;
+	.
+
+fibo-fnd-arr-asmt:AssessmentEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-oc:Occurrence ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasOutput ;
+			owl:onClass fibo-fnd-arr-asmt:AssessmentReport ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:exemplifies ;
+			owl:onClass fibo-fnd-arr-asmt:AssessmentActivity ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasOutput ;
+			owl:someValuesFrom fibo-fnd-arr-asmt:Opinion ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fnd-pty-pty:PartyInRole ;
+		]
+		;
+	rdfs:label "assessment event" ;
+	rdfs:comment "QName: fibo-fnd-arr-asmt:AssessmentEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/> ;
+	skos:definition "event involving the evaluation or estimation of the nature, quality, or ability of someone or something" ;
+	.
+
+fibo-fnd-arr-asmt:AssessmentReport
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-rep:Report ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rep:reportsOn ;
+			owl:onClass fibo-fnd-arr-asmt:Opinion ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "assessment report" ;
+	rdfs:comment "QName: fibo-fnd-arr-asmt:AssessmentReport" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/> ;
+	skos:definition "report that includes an opinion, judgement, appraisal, or view about something and typically the methodology and raw inputs used to arrive at that opinion" ;
+	.
+
+fibo-fnd-arr-asmt:Opinion
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:isOutputFrom ;
+			owl:someValuesFrom fibo-fnd-arr-asmt:AssessmentEvent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGeneratedBy ;
+			owl:someValuesFrom fibo-fnd-pty-pty:PartyInRole ;
+		]
+		;
+	rdfs:label "opinion" ;
+	rdfs:comment "QName: fibo-fnd-arr-asmt:Opinion" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/> ;
+	skos:definition "judgement, appraisal, or view about something" ;
+	.
+

@@ -1,0 +1,365 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/Executives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-fct: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-be-oac-exec: <https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/Executives/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/>
+	a owl:Ontology ;
+	rdfs:label "Registration Authorities Ontology" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:" ;
+	dct:abstract "This ontology defines concepts for representation of registration authorities, registrars, registration-specific identifiers and related identification schemes, and registration authorities specific to ISO and the financial industry.  Examples of financial industry registration authorities in the US include the Federal Deposit Insurance Corporation (FDIC) and the Securities Exchange Commission (SEC)." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fbc-fct-ra" ;
+	sm:filename "RegistrationAuthorities.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/OwnershipAndControl/Executives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities.rdf version of this ontology was modified as a part of organizational hierarchy simplification, to loosen the definition of registrar, and to leverage the composite date value datatype." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities.rdf version of this ontology was modified per the FIBO 2.0 RFC."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fct-ra:Registrar
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:registers ;
+			owl:someValuesFrom owl:Thing ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:intersectionOf (
+					[
+						a owl:Restriction ;
+						owl:onProperty fibo-fnd-law-lcap:hasCapacity ;
+						owl:someValuesFrom fibo-fbc-fct-ra:RegistrationCapacity ;
+					]
+					[
+						a owl:Restriction ;
+						owl:onProperty fibo-fnd-rel-rel:isAppointedBy ;
+						owl:someValuesFrom [
+							a owl:Restriction ;
+							owl:onProperty fibo-fnd-pty-rl:playsRole ;
+							owl:someValuesFrom fibo-fbc-fct-ra:RegistrationAuthority ;
+						] ;
+					]
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "registrar" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:Registrar" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "a party that has the capacity to act as a representative of a registration authority to provide registration services, including official record keeping" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economic Terms, Fifth Edition, 2012" ;
+	.
+
+fibo-fbc-fct-ra:RegistrationAuthority
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:ServiceProvider ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:registers ;
+			owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:provides ;
+			owl:onClass fibo-fbc-fct-ra:RegistrationService ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:manages ;
+			owl:onClass fibo-fbc-fct-ra:Registry ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-lp:LegalEntity ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:isRegistrationAuthorityFor ;
+			owl:someValuesFrom owl:Thing ;
+		]
+		;
+	rdfs:label "registration authority" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:RegistrationAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "a formally constituted organization and legal entity that is responsible for maintaining a registry and provides registration services" ;
+	fibo-fnd-utl-av:abbreviation "RA" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+
+fibo-fbc-fct-ra:RegistrationCapacity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalCapacity ;
+	rdfs:label "registration capacity" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:RegistrationCapacity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "the capacity of some natural person to formally register information in a registry on behalf of some registration authority" ;
+	.
+
+fibo-fbc-fct-ra:RegistrationScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:IdentificationScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:someValuesFrom fibo-fbc-fct-ra:RegistryIdentifier ;
+		]
+		;
+	rdfs:label "registration scheme" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:RegistrationScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "a scheme for organizing information and allocating identifiers to items in a registry" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+
+fibo-fbc-fct-ra:RegistrationService
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-pas:Service ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fct-ra:RegistrationAuthority
+					fibo-fbc-fct-ra:Registrar
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "registration service" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:RegistrationService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "service provided to individuals and/or organizations to register items in a registry" ;
+	.
+
+fibo-fbc-fct-ra:Registry
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Collection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:hasRegistryEntry ;
+			owl:someValuesFrom fibo-fbc-fct-ra:RegistryEntry ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fct-ra:RegistrationAuthority
+					fibo-fbc-fct-ra:Registrar
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "registry" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:Registry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "a system, typically an information system, that records the registration of items" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+
+fibo-fbc-fct-ra:RegistryEntry
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-rel-rel:Reference ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIncludedIn ;
+			owl:allValuesFrom fibo-fbc-fct-ra:Registry ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-fbc-fct-ra:RegistryIdentifier ;
+		]
+		;
+	rdfs:label "registry entry" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:RegistryEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "an entry in a registry that specifies something about the thing that is registered" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+
+fibo-fbc-fct-ra:RegistryIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-id:isIndexTo ;
+			owl:onClass fibo-fbc-fct-ra:Registry ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:isRegisteredIn ;
+			owl:someValuesFrom fibo-fbc-fct-ra:Registry ;
+		]
+		;
+	rdfs:label "registry identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:RegistryIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "an identifier associated with an entry in a registry, i.e., one that provides an index to the registry for the identified item" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+
+fibo-fbc-fct-ra:hasRegistrationAuthority
+	a owl:ObjectProperty ;
+	rdfs:label "has registration authority" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:hasRegistrationAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	rdfs:range fibo-fbc-fct-ra:RegistrationAuthority ;
+	owl:inverseOf fibo-fbc-fct-ra:isRegistrationAuthorityFor ;
+	skos:definition "indicates the registration authority for something" ;
+	.
+
+fibo-fbc-fct-ra:hasRegistrationDate
+	a owl:DatatypeProperty ;
+	rdfs:label "has registration date" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:hasRegistrationDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	rdfs:range fibo-fnd-dt-fd:CombinedDateTime ;
+	skos:definition "the date or date and time on which something is recorded" ;
+	.
+
+fibo-fbc-fct-ra:hasRegistryEntry
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:comprises ;
+	rdfs:label "has registry entry" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:hasRegistryEntry" ;
+	rdfs:domain fibo-fbc-fct-ra:Registry ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	rdfs:range fibo-fbc-fct-ra:RegistryEntry ;
+	skos:definition "links a registry to entries that it contains" ;
+	.
+
+fibo-fbc-fct-ra:isRegisteredBy
+	a owl:ObjectProperty ;
+	rdfs:label "is registered by" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:isRegisteredBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fbc-fct-ra:RegistrationAuthority
+			fibo-fbc-fct-ra:Registrar
+		) ;
+	] ;
+	skos:definition "indicates the registration authority or registrar that registers something" ;
+	.
+
+fibo-fbc-fct-ra:isRegisteredIn
+	a owl:ObjectProperty ;
+	rdfs:label "is registered in" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:isRegisteredIn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	rdfs:range fibo-fbc-fct-ra:Registry ;
+	skos:definition "indicates the registry that something is registered in" ;
+	.
+
+fibo-fbc-fct-ra:isRegistrationAuthorityFor
+	a owl:ObjectProperty ;
+	rdfs:label "is registration authority for" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:isRegistrationAuthorityFor" ;
+	rdfs:domain fibo-fbc-fct-ra:RegistrationAuthority ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "indicates the thing (typically an identifier or code) that the registration authority has authority for" ;
+	.
+
+fibo-fbc-fct-ra:registers
+	a owl:ObjectProperty ;
+	rdfs:label "registers" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:registers" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fbc-fct-ra:RegistrationAuthority
+			fibo-fbc-fct-ra:Registrar
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	owl:inverseOf fibo-fbc-fct-ra:isRegisteredBy ;
+	skos:definition "records something in a registry or archive" ;
+	.
+
+fibo-fbc-fct-ra:specifies
+	a owl:ObjectProperty ;
+	rdfs:label "specifies" ;
+	rdfs:comment "QName: fibo-fbc-fct-ra:specifies" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ;
+	skos:definition "states a fact about something" ;
+	.
+

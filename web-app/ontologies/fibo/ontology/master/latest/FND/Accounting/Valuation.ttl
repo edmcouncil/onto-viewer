@@ -1,0 +1,82 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-acc-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/Valuation/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/Valuation/>
+	a owl:Ontology ;
+	rdfs:label "Valuation Ontology" ;
+	rdfs:comment "QName: fibo-fnd-acc-val:" ;
+	dct:abstract "This ontology defines concepts around assessing the value of things." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:dependsOn "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ;
+	sm:fileAbbreviation "fibo-fnd-acc-val" ;
+	sm:filename "Valuation.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-fnd-acc-val:Valuation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-oc:Occurrence ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-val:isEvaluationOf ;
+			owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "valuation" ;
+	rdfs:comment "QName: fibo-fnd-acc-val:Valuation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/Valuation/> ;
+	skos:definition "a measurement to assess the value of something expressed in some currency" ;
+	.
+
+fibo-fnd-acc-val:hasAppraiser
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasParty ;
+	rdfs:label "has appraiser" ;
+	rdfs:comment "QName: fibo-fnd-acc-val:hasAppraiser" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/Valuation/> ;
+	skos:definition "relates e.g. an appraisal, to a party that plays the role of conducting a property appraisal" ;
+	.
+
+fibo-fnd-acc-val:hasEstimatedValue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-acc-cur:hasMonetaryAmount ;
+	rdfs:label "has estimated value" ;
+	rdfs:comment "QName: fibo-fnd-acc-val:hasEstimatedValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/Valuation/> ;
+	skos:definition "relates something to its estimated value" ;
+	skos:editorialNote "Future consideration: move this property to CurrencyAmount ontology (fibo-fnd-add-cur)." ;
+	.
+
+fibo-fnd-acc-val:isEvaluationOf
+	a owl:ObjectProperty ;
+	rdfs:label "is evaluation of" ;
+	rdfs:comment "QName: fibo-fnd-acc-val:isEvaluationOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/Valuation/> ;
+	skos:definition "relates a valuation to the thing being valued" ;
+	.
+

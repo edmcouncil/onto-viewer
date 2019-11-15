@@ -1,0 +1,151 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/ConstructionLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/ConstructionLoansTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansStatus/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/ConstructionLoans/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-crf: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditFacilities/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-loan-tem-cl: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/ConstructionLoansTemporal/> .
+@prefix fibo-loan-tem-sta: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansStatus/> .
+@prefix fibo-loan-typ-cl: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/>
+	a owl:Ontology ;
+	rdfs:label "ConstructionLoans"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Construction loans are loans in name only, in that the concept referred to as a construction loan is effectively a credit facility, with separate draw-downs (loans as defined in these ontologies) being enabled upon evidence of completion of agreed stages of the construction project, 
+		Note that for completion this ontology will need to be extended with a number of project management concepts describing the parameters of the construction project that are referred to in the contract for this facility. Some basic project management terms such as milestones are already included but will need framing within more foundational concepts for project management.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/ConstructionLoansTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansStatus/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/ConstructionLoans/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-typ-cl:ConstructionLoan
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-loan-loan:LoanDrawdown ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-tem-sta:hasSnapshot ;
+			owl:someValuesFrom fibo-loan-tem-cl:ConstructionLoanSnapshot ;
+		]
+		;
+	rdfs:label "construction loan"@en ;
+	rdfs:comment "QName: NONE:ConstructionLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	.
+
+fibo-loan-typ-cl:ConstructionLoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-crf:CreditFacilityAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-crf:setsOutCommitmentTo ;
+			owl:someValuesFrom fibo-loan-typ-cl:ConstructionLoanCreditFacilityTranche ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-cl:hasMilestoneTerm ;
+			owl:someValuesFrom fibo-loan-typ-cl:ConstructionLoanMilestoneTermsSet ;
+		]
+		;
+	rdfs:label "construction loan contract"@en ;
+	rdfs:comment "QName: NONE:ConstructionLoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	.
+
+fibo-loan-typ-cl:ConstructionLoanCreditFacilityTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-crf:CommittedCreditFacilityTranche ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-crf:issuedAs ;
+			owl:someValuesFrom fibo-loan-typ-cl:ConstructionLoan ;
+		]
+		;
+	rdfs:label "construction loan credit facility tranche"@en ;
+	rdfs:comment "QName: NONE:ConstructionLoanCreditFacilityTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	skos:definition 'A loan taken out for construction purposes. Further notes: These are a temporary loan. when the construction is finished then that loan is transformed to another loan, which would be a permanent loan. Information to follow on what the new permanent loan would be. Terms are adjusted in the new loan, since in construction loans the rates are significantly higher. This is an incentive to complete the construction works. Notes from PoC reviews, discussing Maximum Balance concept: In a Construction Loan you agree a maximum amount that you could draw. As you progress with the construction you continue to draw more and more. So you start with the minimum. Example: for purpose of construction of a house you could need to borrow up to 500K and the bank establishes the milestones at which certain amounts are made availalbe and can be drawn. For instance prior to start you might draw 10%, (50K); the next 50K would be available to draw only once the foundations are laid. And so on. Milestones may include "Frame standing" (for American-style frame based houses). Each stage requires inspection on behalf of the bank. So you are starting with no more than 10% (in this example) of what is allowable, and could arrive to the full 500K by the end of ths construction but it is not mandated that you arrive to that. What differentiates a Construction Loan is that there si a max amount specified and there are Milestones specified in which the amounts for each milestone can be advanced.'@en ;
+	.
+
+fibo-loan-typ-cl:ConstructionLoanMilestoneTermsSet
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crf:LoanPrecedentConditions ;
+	rdfs:label "construction loan milestone terms set"@en ;
+	rdfs:comment "QName: NONE:ConstructionLoanMilestoneTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	skos:definition "An agreed point at which an amount is advanced to the lender on completion of some pre-agreed scope of works on the construction."@en ;
+	skos:editorialNote "from review of a separate question, where we identified the need for this term:"@en ;
+	.
+
+fibo-loan-typ-cl:hasMilestoneTerm
+	a owl:ObjectProperty ;
+	rdfs:label "has milestone term"@en ;
+	rdfs:comment "QName: NONE:hasMilestoneTerm" ;
+	rdfs:domain fibo-loan-typ-cl:ConstructionLoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	rdfs:range fibo-loan-typ-cl:ConstructionLoanMilestoneTermsSet ;
+	.
+
+fibo-loan-typ-cl:maximumAllowedBalance
+	a owl:ObjectProperty ;
+	rdfs:label "maximum allowed balance"@en ;
+	rdfs:comment "QName: NONE:maximumAllowedBalance" ;
+	rdfs:domain fibo-loan-typ-cl:ConstructionLoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Maximum balance - For loans with flexible re-draw facilities, the maximum loan amount that could potentially be outstanding"@en ;
+	.
+
+fibo-loan-typ-cl:maximumAnticipatedBalance
+	a owl:ObjectProperty ;
+	rdfs:label "maximum anticipated balance"@en ;
+	rdfs:comment "QName: NONE:maximumAnticipatedBalance" ;
+	rdfs:domain fibo-loan-typ-cl:ConstructionLoanCreditFacilityTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Maximum balance - For loans with flexible re-draw facilities, the maximum loan amount that could potentially be outstanding"@en ;
+	.
+
+fibo-loan-typ-cl:milestoneDescription
+	a owl:DatatypeProperty ;
+	rdfs:label "milestone description"@en ;
+	rdfs:comment "QName: NONE:milestoneDescription" ;
+	rdfs:domain fibo-loan-typ-cl:ConstructionLoanMilestoneTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	rdfs:range xsd:string ;
+	skos:definition "A textual description of the point at which it is legally recognized that the construction milestone has been reached."@en ;
+	.
+
+fibo-loan-typ-cl:milestoneMaximumDrawdownAmount
+	a owl:ObjectProperty ;
+	rdfs:label "milestone maximum drawdown amount"@en ;
+	rdfs:comment "QName: NONE:milestoneMaximumDrawdownAmount" ;
+	rdfs:domain fibo-loan-typ-cl:ConstructionLoanMilestoneTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The maximum amount of the loan that can be drawn by the Borrower on completion of this Milestone."@en ;
+	.
+

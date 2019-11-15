@@ -1,0 +1,96 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansAppraisal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanApplicationsTemporal/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansAppraisal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-ppl: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-loan-pty: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansParties/> .
+@prefix fibo-loan-tem-app: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanApplicationsTemporal/> .
+@prefix fibo-loan-tem-apr: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/>
+	a owl:Ontology ;
+	rdfs:label "LoansAppraisal"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Concepts relating to the appraisal of a loan, including mortgage borrower assessment information and repossession history." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanApplicationsTemporal/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoansAppraisal/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-tem-apr:MortgageLoanBorrowerAssessmentInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-tem-app:LoanApplicationBorrowerAssessmentInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/appraisedBy> ;
+			owl:someValuesFrom fibo-loan-tem-app:MortgageLoanAppraiser ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanBorrowersTemporal/isAbout.1> ;
+			owl:someValuesFrom fibo-loan-tem-app:MortgageLoanApplication ;
+		]
+		;
+	rdfs:label "mortgage loan borrower assessment information"@en ;
+	rdfs:comment "QName: NONE:MortgageLoanBorrowerAssessmentInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> ;
+	.
+
+fibo-loan-tem-apr:RepossessionHistory
+	a owl:Class ;
+	rdfs:label "repossession history"@en ;
+	rdfs:comment "QName: NONE:RepossessionHistory" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> ;
+	skos:definition "Information about an entity which has a history of repossessions, about those repossessions."@en ;
+	.
+
+fibo-loan-tem-apr:appraisedBy
+	a owl:ObjectProperty ;
+	rdfs:label "appraised by"@en ;
+	rdfs:comment "QName: NONE:appraisedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> ;
+	rdfs:range fibo-loan-loan-pty:LoanServicer.1 ;
+	.
+
+fibo-loan-tem-apr:firstTimeBuyer
+	a owl:DatatypeProperty ;
+	rdfs:label "first time buyer"@en ;
+	rdfs:comment "QName: NONE:firstTimeBuyer" ;
+	rdfs:domain fibo-loan-tem-apr:MortgageLoanBorrowerAssessmentInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the borrower is a first time buyer."@en ;
+	.
+
+fibo-loan-tem-apr:mayBecome
+	a owl:ObjectProperty ;
+	rdfs:label "may become"@en ;
+	rdfs:comment "QName: NONE:mayBecome" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> ;
+	rdfs:range fibo-loan-loan-pty:LoanBorrower ;
+	.
+
+fibo-loan-tem-apr:obtainedFrom
+	a owl:ObjectProperty ;
+	rdfs:label "obtained from"@en ;
+	rdfs:comment "QName: NONE:obtainedFrom" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansAppraisal/> ;
+	rdfs:range fibo-fnd-aap-ppl:Person ;
+	.
+

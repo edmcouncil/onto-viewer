@@ -1,0 +1,57 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/MetadataFBCDebtAndEquities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/MetadataFBCDebtAndEquities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-mod: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/MetadataFBCDebtAndEquities/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/MetadataFBCDebtAndEquities/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Financial Business and Commerce(FBC) Debt and Equities Module" ;
+	rdfs:comment "QName: fibo-fbc-dae-mod:" ;
+	dct:abstract "The debt and equities module includes ontologies describing concepts that are common to debt and equity instruments, as well as across debt instruments, such as loans, bonds, asset-backed securities, and so forth." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2017-2019 EDM Council, Inc." ,
+		"Copyright (c) 2017-2019 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fbc-dae-mod" ;
+	sm:filename "MetadataFBCDebtAndEquities.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/MetadataFBCDebtAndEquities/> ;
+	.
+
+fibo-fbc-dae-mod:DebtAndEquitiesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "FIBO FBC Debt and Equities Module" ;
+	rdfs:comment "QName: fibo-fbc-dae-mod:DebtAndEquitiesModule" ;
+	dct:abstract "The debt and equities module includes ontologies describing concepts that are common to debt and equity instruments, as well as across debt instruments, such as loans, bonds, asset-backed securities, and so forth." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditFacilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2017-2019 EDM Council, Inc." ,
+		"Copyright (c) 2017-2019 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "FIBO-FBC-DAE" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/MetadataFBCDebtAndEquities/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

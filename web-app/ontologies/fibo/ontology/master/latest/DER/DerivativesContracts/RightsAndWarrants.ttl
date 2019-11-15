@@ -1,0 +1,499 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/RightsAndWarrants/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/ExerciseConventions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecurityAssets/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/RightsAndWarrants/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-raw: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-ex: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/ExerciseConventions/> .
+@prefix fibo-sec-eq-eq: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> .
+@prefix fibo-sec-sec-ast: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/> .
+@prefix fibo-sec-sec-lst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/>
+	a owl:Ontology ;
+	rdfs:label "Rights and Warrants Ontology"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This covers a range of special contracts or arrangement with selected holders such as company participants. These include rights (privileges) extended to existing security holders to make new securities available to them at reduced prices or free, and warrants whereby the holder can purchase or sell back a given quantity of the instrument, commodity or currency during a specified period at a pre-defined price." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/ExerciseConventions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecurityAssets/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/RightsAndWarrants/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-drc-raw:AllotmentRight
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:StockholdersRightsInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:numberOfSecuritiesDeterminedBy ;
+			owl:someValuesFrom fibo-der-drc-raw:AllotmentRightFormula ;
+		]
+		;
+	rdfs:label "allotment right"@en ;
+	rdfs:comment "QName: NONE:AllotmentRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "Privileges allotted to existing security holders, entitling them to receive new securities free of charge."@en ;
+	.
+
+fibo-der-drc-raw:AllotmentRightFormula
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Formula ;
+	rdfs:label "allotment right formula"@en ;
+	rdfs:comment "QName: NONE:AllotmentRightFormula" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "A formula used to calculate the number of securities for an Allotment Right, based on the number of these instruments that the holder holds. Conesnsus:Review"@en ;
+	.
+
+fibo-der-drc-raw:AllotmentRightHolder
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-ast:SecurityHolder ;
+	rdfs:label "allotment right holder"@en ;
+	rdfs:comment "QName: NONE:AllotmentRightHolder" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "The party which is the holder of an allotment right. This is identified as being a party which is also an existing holder of the security identified as the underlying security."@en ;
+	.
+
+fibo-der-drc-raw:CommodityWarrant
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:Warrant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-drc-raw:CommodityWarrantExerciseTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasWarrantUnderlying ;
+			owl:someValuesFrom fibo-fnd-pas-pas:NegotiableCommodity ;
+		]
+		;
+	rdfs:label "commodity warrant"@en ;
+	rdfs:comment "QName: NONE:CommodityWarrant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "A derivative based on commodities contracts traded on exchanges."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Example: Commodity Warrants Australia (CWA) is a locally owned outfit that has been in business for 18 months. It sells warrants based on 12 commodities and financial markets - crude oil, gold, silver, live cattle, corn, orange juice, soy, coffee, cocoa, the Dow Jones Industrial Average, the NASDAQ Composite Index and the S&P 500 Index"@en ;
+	.
+
+fibo-der-drc-raw:CommodityWarrantExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:WarrantExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:delivery ;
+			owl:someValuesFrom fibo-fnd-acc-cur:AmountOfMoney ;
+		]
+		;
+	rdfs:label "commodity warrant exercise terms"@en ;
+	rdfs:comment "QName: NONE:CommodityWarrantExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "Terms setting out how a commodity warrant may be exercised, including the form which delivery takes."@en ;
+	.
+
+fibo-der-drc-raw:CompanyWarrant
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:Warrant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-drc-raw:CompanyWarrantExerciseTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasWarrantUnderlying ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "company warrant"@en ;
+	rdfs:comment "QName: NONE:CompanyWarrant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	owl:disjointWith fibo-der-drc-raw:CoveredWarrant ;
+	skos:definition "Warrants which are issued by the issuer of the underlying."@en ;
+	.
+
+fibo-der-drc-raw:CompanyWarrantExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:WarrantExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:delivery ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "company warrant exercise terms set"@en ;
+	rdfs:comment "QName: NONE:CompanyWarrantExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	owl:disjointWith fibo-der-drc-raw:CoveredWarrantExerciseTerms ;
+	skos:definition "Terms setting out how a company warrant or naked warrant may be exercised, including the form which delivery takes."@en ;
+	.
+
+fibo-der-drc-raw:CoveredWarrant
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:Warrant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-drc-raw:CoveredWarrantExerciseTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasWarrantUnderlying ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "covered warrant"@en ;
+	rdfs:comment "QName: NONE:CoveredWarrant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	.
+
+fibo-der-drc-raw:CoveredWarrantExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:WarrantExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:delivery ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "covered warrant exercise terms"@en ;
+	rdfs:comment "QName: NONE:CoveredWarrantExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	.
+
+fibo-der-drc-raw:ExchangeTradedWarrant
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:Warrant ,
+		fibo-sec-sec-lst:ExchangeTradedSecurity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasListing ;
+			owl:someValuesFrom fibo-der-drc-raw:WarrantListing ;
+		]
+		;
+	rdfs:label "exchange traded warrant"@en ;
+	rdfs:comment "QName: NONE:ExchangeTradedWarrant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "A warrant which is traded on a securities exchange."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This may be any kind of warrant except a (usually) Company Warrant. According to notes on Traditional Wwarrant: Warrants may be privately issued and may not necessarily be traded on an exchange. (Wikipedia)"@en ;
+	.
+
+fibo-der-drc-raw:PurchaseRight
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-raw:StockholdersRightsInstrument ;
+	rdfs:label "purchase right"@en ;
+	rdfs:comment "QName: NONE:PurchaseRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "Anti-takeover device that gives a prospective acquiree’s shareholders the right to buy usually shares of the firm or shares of anyone who acquires the firm at a deep discount to their fair market value."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'The underlying is usually shares but this not necessarily the case. Also known as "Poison Pill".'@en ;
+	.
+
+fibo-der-drc-raw:StockholdersRightsInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Entitlement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:givesTheRightToBuy ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isHeldBy ;
+			owl:someValuesFrom fibo-sec-sec-ast:SecurityHolder ;
+		]
+		;
+	rdfs:label "stockholders rights instrument"@en ;
+	rdfs:comment "QName: NONE:StockholdersRightsInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "A security giving stockholders entitlement to purchase new securities issued by the corporation at a predetermined price (normally less than the current market price) in proportion to the number of securities already owned."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Stockholders may sell these to non stockholders if they wish. Rights are issued only for a short period of time, after which they expire."@en ;
+	.
+
+fibo-der-drc-raw:SubscriptionRight
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-raw:StockholdersRightsInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:givesRightToBuy ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "subscription right"@en ;
+	rdfs:comment "QName: NONE:SubscriptionRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "Privileges allotted to existing security holders, entitling them to subscribe to new securities at a price normally lower than the prevailing market price."@en ;
+	skos:editorialNote "Why prevailing? It could be a new security of exactly the same class. Is this always new securities? Notes May 25: May be more an accounting or legal term for bonus issue, more accurate than scrip or bonus issue which reflects what happens in the books of the company. THis would mean that capitalization issue is seemingly synonymous with Bonus Issue / Scrip Issue (see moneytterms.co.uk which says that capitalization is less common but more correct, for scrip. \"The share capital on the balance sheet has to increate by the nominal value of the newly issued shares. This is balanced by an equal decrease in another part of hte shareholder's funds such as retained income of valuation reserves\""@en ;
+	.
+
+fibo-der-drc-raw:ThirdPartyWarrantIssuer
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-raw:WarrantIssuer ;
+	rdfs:label "third party warrant issuer"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyWarrantIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	owl:disjointWith fibo-der-drc-raw:UnderlyingIssuer ;
+	.
+
+fibo-der-drc-raw:TraditionalWarrant
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-raw:CompanyWarrant ;
+	rdfs:label "traditional warrant"@en ;
+	rdfs:comment "QName: NONE:TraditionalWarrant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "Financial instruments which permit the holder to purchase or sell back to the issuer a specified amount of a share."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Warrants may be privately issued and may not necessarily be traded on an exchange. From Wikipedia: A warrant issued with a bond gives the holder the right to purchase equity shares issued by the company that issued the bond with the warrant."@en ;
+	.
+
+fibo-der-drc-raw:UnderlyingIssuer
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-raw:WarrantIssuer ;
+	rdfs:label "underlying issuer"@en ;
+	rdfs:comment "QName: NONE:UnderlyingIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "A party which is the issuer of a Covered Warrant. This party is by definition the issuer of the underlying securities."@en ;
+	skos:editorialNote 'Specializes the term "Issuer" for different instrument classes; this specialization is not present in ISO FIBIM where the term is "Issuer" in each case.'@en ;
+	.
+
+fibo-der-drc-raw:Warrant
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Entitlement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-drc-raw:WarrantExerciseTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:hasWarrantUnderlying ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/Underlier> ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+			owl:someValuesFrom fibo-der-drc-raw:WarrantIssuer ;
+		]
+		;
+	rdfs:label "warrant"@en ;
+	rdfs:comment "QName: NONE:Warrant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "Financial instruments which permit the holder to purchase or sell back to the issuer a specified amount of a financial instrument, commodity, currency or other during a specified period at a specified price."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Warrants are for any kind of instrument. Warrants may be privately issued and may not necessarily be traded on an exchange."@en ;
+	.
+
+fibo-der-drc-raw:WarrantExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ex:ExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-raw:delivery ;
+			owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+		]
+		;
+	rdfs:label "warrant exercise terms set"@en ;
+	rdfs:comment "QName: NONE:WarrantExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "Terms setting out how a warrant instrument may be exercised. Further Notes Exercise terms as defined here also cover the automatic exercise of the warrant in the event of its expiry. These terms include the exercise style (FIBIM = OptionStyle type OptionStyleCode) and the delivery."@en ;
+	.
+
+fibo-der-drc-raw:WarrantIssuer
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:Issuer ;
+	rdfs:label "warrant issuer"@en ;
+	rdfs:comment "QName: NONE:WarrantIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "The issuer of a Warrant. This is defined in terms of what individual entity is the issuer and also what other roles they may or may not play for a specific type of warranty, specifically whether or not they are also the issuer of the underlying, if the underlying is a security."@en ;
+	skos:editorialNote 'Specializes the term "Issuer" for different instrument classes; this specialization is not present in ISO FIBIM where the term is "Issuer" in each case.'@en ;
+	.
+
+fibo-der-drc-raw:WarrantListing
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-lst:SecurityListing ;
+	rdfs:label "warrant listing"@en ;
+	rdfs:comment "QName: NONE:WarrantListing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	skos:definition "The listing of a warrant on a securities exchange. Action: confirm whether all the facts shown for listing of tradable securities generally, apply to the listing of a warrant. Also determine whether any of the terms in Listing need to be specialized or added to for Warrant Listing."@en ;
+	.
+
+fibo-der-drc-raw:delivery
+	a owl:ObjectProperty ;
+	rdfs:label "delivery"@en ;
+	rdfs:comment "QName: NONE:delivery" ;
+	rdfs:domain fibo-der-drc-raw:WarrantExerciseTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range fibo-fbc-fi-fi:FinancialInstrument ;
+	.
+
+fibo-der-drc-raw:formulaText
+	a owl:DatatypeProperty ;
+	rdfs:label "formula text"@en ;
+	rdfs:comment "QName: NONE:formulaText" ;
+	rdfs:domain fibo-der-drc-raw:AllotmentRightFormula ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The formula stated as text."@en ;
+	.
+
+fibo-der-drc-raw:givesRightToBuy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-drc-raw:givesTheRightToBuy ;
+	rdfs:label "gives right to buy"@en ;
+	rdfs:comment "QName: NONE:givesRightToBuy" ;
+	rdfs:domain fibo-der-drc-raw:SubscriptionRight ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	.
+
+fibo-der-drc-raw:givesTheRightToBuy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/hasUnderlier> ;
+	rdfs:label "gives the right to buy"@en ;
+	rdfs:comment "QName: NONE:givesTheRightToBuy" ;
+	rdfs:domain fibo-der-drc-raw:StockholdersRightsInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range fibo-fbc-fi-fi:Security ;
+	.
+
+fibo-der-drc-raw:hasExerciseTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has exercise terms"@en ;
+	rdfs:comment "QName: NONE:hasExerciseTerms" ;
+	rdfs:domain fibo-der-drc-raw:Warrant ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range fibo-der-drc-raw:WarrantExerciseTerms ;
+	.
+
+fibo-der-drc-raw:hasListing
+	a owl:ObjectProperty ;
+	rdfs:label "has listing"@en ;
+	rdfs:comment "QName: NONE:hasListing" ;
+	rdfs:domain fibo-der-drc-raw:ExchangeTradedWarrant ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range fibo-der-drc-raw:WarrantListing ;
+	.
+
+fibo-der-drc-raw:hasWarrantUnderlying
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/hasUnderlier> ;
+	rdfs:label "has warrant underlying"@en ;
+	rdfs:comment "QName: NONE:hasWarrantUnderlying" ;
+	rdfs:domain fibo-der-drc-raw:Warrant ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/Underlier> ;
+	.
+
+fibo-der-drc-raw:numberOfSecurities
+	a owl:DatatypeProperty ;
+	rdfs:label "number of securities"@en ;
+	rdfs:comment "QName: NONE:numberOfSecurities" ;
+	rdfs:domain fibo-der-drc-raw:AllotmentRight ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The number of securities based on the number of these instruments that the holder holds."@en ;
+	.
+
+fibo-der-drc-raw:numberOfSecuritiesDeterminedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "number of securities determined by"@en ;
+	rdfs:comment "QName: NONE:numberOfSecuritiesDeterminedBy" ;
+	rdfs:domain fibo-der-drc-raw:AllotmentRight ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range fibo-der-drc-raw:AllotmentRightFormula ;
+	.
+
+fibo-der-drc-raw:oversubscribeOption
+	a owl:DatatypeProperty ;
+	rdfs:label "oversubscribe option"@en ;
+	rdfs:comment "QName: NONE:oversubscribeOption" ;
+	rdfs:domain fibo-der-drc-raw:StockholdersRightsInstrument ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Option whereby the holders of the rights instrument may get securities in the event that other right holders choose not to subscribe to theirs."@en ;
+	.
+
+fibo-der-drc-raw:perpetualMaturity
+	a owl:DatatypeProperty ;
+	rdfs:label "perpetual maturity"@en ;
+	rdfs:comment "QName: NONE:perpetualMaturity" ;
+	rdfs:domain fibo-der-drc-raw:Warrant ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether this is a perpetual warrant, in other words it has no expiry date."@en ;
+	.
+
+fibo-der-drc-raw:putWarrant
+	a owl:DatatypeProperty ;
+	rdfs:label "put warrant"@en ;
+	rdfs:comment "QName: NONE:putWarrant" ;
+	rdfs:domain fibo-der-drc-raw:Warrant ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "If Yes, this warrant gives the holder the right to sell the underlying security back to the issuer at a predetermined price; if No, the warrant gives the holder the right to purchase the instrument at the predetermined price (a call warrant)."@en ;
+	.
+
+fibo-der-drc-raw:ratio
+	a owl:DatatypeProperty ;
+	rdfs:label "ratio"@en ;
+	rdfs:comment "QName: NONE:ratio" ;
+	rdfs:domain
+		fibo-der-drc-raw:CompanyWarrant ,
+		fibo-der-drc-raw:CoveredWarrant
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The ratio of warrant units to underlying security units for delivery when the warrant is exercised."@en ;
+	.
+
+fibo-fbc-fi-fi:Entitlement
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-fi:Security ;
+	.
+

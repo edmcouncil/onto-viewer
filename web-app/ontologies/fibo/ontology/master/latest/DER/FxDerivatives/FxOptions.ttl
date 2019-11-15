@@ -1,0 +1,332 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxOptions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-fx-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> .
+@prefix fibo-der-fx-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/>
+	a owl:Ontology ;
+	rdfs:label "Foreign Exchange (FX) Options"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Options where the option for the holder to call or put the option is based on a rate of exchange between two currencies at a time or times in the future." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxOptions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-fx-opt:CashCallOption
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-der-fx-opt:allowsForOptionOf ;
+		owl:someValuesFrom fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+	] ;
+	rdfs:label "cash call option"@en ;
+	rdfs:comment "QName: NONE:CashCallOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	skos:definition "Option to purchase cash at an agreed rate on an agreed date."@en ;
+	.
+
+fibo-der-fx-opt:CashPutOption
+	a owl:Class ;
+	rdfs:label "cash put option"@en ;
+	rdfs:comment "QName: NONE:CashPutOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	skos:definition "Option to sell cash at an agreed rate on an agreed date."@en ;
+	fibo-fnd-utl-av:explanatoryNote "In Fx Put and Call refer to the Dealt Ccy, ie. I will put the dealt Ccy\" o I will cal the Dealt ccy\". The business does use the terms Put and Call. Put and Call are always from the PoV of the option beneficiary, always specifieds the side the bene will put or call. Have to know the Dealt Ccy and that it's to the Beneficiary not the granter of the option. The beneficiary gets to put the dealt ccy. Put X and Call Y in the same contract can also be stated in order to disambiguate, but you don't have to because the DC is already defined."@en ;
+	.
+
+fibo-der-fx-opt:ForeignExchangeOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-fx-ctr:ForeignExchangeDerivativeContract ,
+		fibo-fbc-fi-fi:Option ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-opt:buyer ;
+			owl:someValuesFrom fibo-der-fx-opt:ForeignExchangeOptionBuyer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-opt:hasSeller ;
+			owl:someValuesFrom fibo-der-fx-opt:ForeignExchangeOptionSeller ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:embodies ;
+			owl:someValuesFrom fibo-der-fx-opt:ForeignExchangeOptionTransaction ;
+		]
+		;
+	rdfs:label "foreign exchange (FX) option"@en ;
+	rdfs:comment "QName: NONE:ForeignExchangeOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	.
+
+fibo-der-fx-opt:ForeignExchangeOptionBuyer
+	a owl:Class ;
+	rdfs:label "fx option buyer"@en ;
+	rdfs:comment "QName: NONE:ForeignExchangeOptionBuyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	.
+
+fibo-der-fx-opt:ForeignExchangeOptionLeg
+	a owl:Class ;
+	rdfs:label "fx option leg"@en ;
+	rdfs:comment "QName: NONE:ForeignExchangeOptionLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	skos:definition "A standard FX OTC option (European or American) which may be a complete trade in its own right or part of a trade strategy. FpML A type that is used for describing a standard FX OTC option (European or American) which may be a complete trade in its own right or part of a trade strategy."@en ;
+	.
+
+fibo-der-fx-opt:ForeignExchangeOptionPremium
+	a owl:ObjectProperty ;
+	rdfs:label "fx option premium"@en ;
+	rdfs:comment "QName: NONE:ForeignExchangeOptionPremium" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "FpML 'Premium amount or premium installment amount for an option.'"@en ;
+	.
+
+fibo-der-fx-opt:ForeignExchangeOptionSeller
+	a owl:Class ;
+	rdfs:label "fx option seller"@en ;
+	rdfs:comment "QName: NONE:ForeignExchangeOptionSeller" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	.
+
+fibo-der-fx-opt:ForeignExchangeOptionTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionalUnderlyingTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-opt:buyerIsParty ;
+			owl:someValuesFrom fibo-der-fx-opt:ForeignExchangeOptionBuyer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-opt:hasCorrespondingContract ;
+			owl:someValuesFrom fibo-der-fx-opt:ForeignExchangeOption ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-opt:hasLeg ;
+			owl:someValuesFrom fibo-der-fx-opt:ForeignExchangeOptionLeg ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-opt:seller ;
+			owl:someValuesFrom fibo-der-fx-opt:ForeignExchangeOptionSeller ;
+		]
+		;
+	rdfs:label "fx option transaction"@en ;
+	rdfs:comment "QName: NONE:ForeignExchangeOptionTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	skos:definition "Define option as a wrapper. Done on a spot txn, but could logically be others. Adds the right whether or not to go into that."@en ;
+	.
+
+fibo-der-fx-opt:FxCallOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-fx-opt:ForeignExchangeOption ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-opt:establishes ;
+			owl:someValuesFrom fibo-der-fx-opt:CashCallOption ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-opt:establishes.1 ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashConditionalDeliveryCommitment ;
+		]
+		;
+	rdfs:label "fx call option contract"@en ;
+	rdfs:comment "QName: NONE:FxCallOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	.
+
+fibo-der-fx-opt:FxPutOptionContract
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-fx-opt:ForeignExchangeOption ;
+	rdfs:label "fx put option contract"@en ;
+	rdfs:comment "QName: NONE:FxPutOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	.
+
+fibo-der-fx-opt:FxVolatilityOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OTCOptionContract ,
+		fibo-der-fx-ctr:ForeignExchangeDerivativeContract
+		;
+	rdfs:label "fx volatility option"@en ;
+	rdfs:comment "QName: NONE:FxVolatilityOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	skos:definition "An option on the volatility of an FX rate. Further Note: Not found in FpML product definitions or taxonomy."@en ;
+	.
+
+fibo-der-fx-opt:OTCCurrencyOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OTCOptionContract ,
+		fibo-der-fx-ctr:ForeignExchangeDerivativeContract
+		;
+	rdfs:label "o t c currency option"@en ;
+	rdfs:comment "QName: NONE:OTCCurrencyOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	skos:definition "A contract that grants the holder the right, but not the obligation, to buy or sell currency at a specified exchange rate during a specified period of time."@en ;
+	fibo-fnd-utl-av:explanatoryNote "For this right, a premium is paid to the broker, which will vary depending on the number of contracts purchased. Currency options are one of the best ways for corporations or individuals to hedge against adverse movements in exchange rates. Investors can hedge against foreign currency risk by purchasing a currency option put or call. For example, assume that an investor believes that the USD/EUR rate is going to increase from 0.80 to 0.90 (meaning that it will become more expensive for a European investor to buy U.S dollars). In this case, the investor would want to buy a call option on USD/EUR so that he or she could stand to gain from an increase in the exchange rate (or the USD rise)."@en ;
+	.
+
+fibo-der-fx-opt:allowsForOptionOf
+	a owl:ObjectProperty ;
+	rdfs:label "allows for option of"@en ;
+	rdfs:comment "QName: NONE:allowsForOptionOf" ;
+	rdfs:domain fibo-der-fx-opt:CashCallOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+	.
+
+fibo-der-fx-opt:buyer
+	a owl:ObjectProperty ;
+	rdfs:label "buyer"@en ;
+	rdfs:comment "QName: NONE:buyer" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-fx-opt:ForeignExchangeOptionBuyer ;
+	.
+
+fibo-der-fx-opt:buyerIsParty
+	a owl:ObjectProperty ;
+	rdfs:label "buyer is party"@en ;
+	rdfs:comment "QName: NONE:buyerIsParty" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOptionTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-fx-opt:ForeignExchangeOptionBuyer ;
+	.
+
+fibo-der-fx-opt:buyingCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "buying currency"@en ;
+	rdfs:comment "QName: NONE:buyingCurrency" ;
+	rdfs:domain fibo-der-fx-opt:OTCCurrencyOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "The currency in which the option is bought."@en ;
+	.
+
+fibo-der-fx-opt:establishes
+	a owl:ObjectProperty ;
+	rdfs:label "establishes"@en ;
+	rdfs:comment "QName: NONE:establishes" ;
+	rdfs:domain fibo-der-fx-opt:FxCallOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-fx-opt:CashCallOption ;
+	.
+
+fibo-der-fx-opt:establishes.1
+	a owl:ObjectProperty ;
+	rdfs:label "establishes"@en ;
+	rdfs:comment "QName: NONE:establishes.1" ;
+	rdfs:domain fibo-der-fx-opt:FxCallOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-der-fwd:ForwardCashConditionalDeliveryCommitment ;
+	.
+
+fibo-der-fx-opt:expiry
+	a owl:ObjectProperty ;
+	rdfs:label "expiry"@en ;
+	rdfs:comment "QName: NONE:expiry" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "FpML 'The date and time in a location of the option expiry. In the case of american options this is the latest possible expiry date and time.'"@en ;
+	.
+
+fibo-der-fx-opt:hasCorrespondingContract
+	a owl:ObjectProperty ;
+	rdfs:label "has corresponding contract"@en ;
+	rdfs:comment "QName: NONE:hasCorrespondingContract" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOptionTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-fx-opt:ForeignExchangeOption ;
+	.
+
+fibo-der-fx-opt:hasLeg
+	a owl:ObjectProperty ;
+	rdfs:label "has leg"@en ;
+	rdfs:comment "QName: NONE:hasLeg" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOptionTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-fx-opt:ForeignExchangeOptionLeg ;
+	.
+
+fibo-der-fx-opt:hasSeller
+	a owl:ObjectProperty ;
+	rdfs:label "has seller"@en ;
+	rdfs:comment "QName: NONE:hasSeller" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-fx-opt:ForeignExchangeOptionSeller ;
+	.
+
+fibo-der-fx-opt:seller
+	a owl:ObjectProperty ;
+	rdfs:label "seller"@en ;
+	rdfs:comment "QName: NONE:seller" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOptionTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-der-fx-opt:ForeignExchangeOptionSeller ;
+	.
+
+fibo-der-fx-opt:sellingCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "selling currency"@en ;
+	rdfs:comment "QName: NONE:sellingCurrency" ;
+	rdfs:domain fibo-der-fx-opt:OTCCurrencyOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "The currency in which the Option is sold."@en ;
+	.
+
+fibo-der-fx-opt:strikeRate
+	a owl:DatatypeProperty ;
+	rdfs:label "strike rate"@en ;
+	rdfs:comment "QName: NONE:strikeRate" ;
+	rdfs:domain fibo-der-fx-opt:ForeignExchangeOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/> ;
+	rdfs:range xsd:decimal ;
+	.
+

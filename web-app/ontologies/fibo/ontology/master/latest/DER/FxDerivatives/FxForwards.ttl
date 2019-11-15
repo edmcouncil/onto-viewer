@@ -1,0 +1,213 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxForwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSpots/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxForwards/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-fx-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> .
+@prefix fibo-der-fx-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> .
+@prefix fibo-der-fx-sp: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> .
+@prefix fibo-der-fx-sw: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/>
+	a owl:Ontology ;
+	rdfs:label "FxForwards"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "A forward transaction and the corresponding or implied contract in which payment is made or received in the future based on the exchange rate between two currencies at that defined future date. Includes the notion of an Fx Forward Outright Contract." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSpots/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxForwards/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-fx-fwd:FXForwardOutrightContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		fibo-der-fx-ctr:ForeignExchangeDerivativeContract
+		;
+	rdfs:label "f x forward outright contract"@en ;
+	rdfs:comment "QName: NONE:FXForwardOutrightContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	skos:definition 'A forward contract in the forex market that locks in the price at which an entity can buy or sell a currency on a future date. Also known as "outright forward currency transaction", "forward outright" or "FX forward".'@en ;
+	fibo-fnd-utl-av:explanatoryNote "In currency forward contracts, the contract holders are obligated to buy or sell the currency at a specified price, at a specified quantity and on a specified future date. These contracts cannot be transferred. Jan 10 Review Notes Outright Forward is the term for the professional markets. Spot + Swap where Swap is 2 simultaneous transactions."@en ;
+	.
+
+fibo-der-fx-fwd:FxForwardContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		fibo-der-fx-ctr:ForeignExchangeDerivativeContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:establishes ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashSettlementCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:establishes.1 ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashDeliveryCommitment ;
+		]
+		;
+	rdfs:label "fx forward contract"@en ;
+	rdfs:comment "QName: NONE:FxForwardContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	skos:definition "A agreement to deliver and settle a given amount of currency in one currency, in exchange for a given amount in another currency, at an agreed date in the future and at an agreed rate of exchange."@en ;
+	.
+
+fibo-der-fx-fwd:FxForwardOutright
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-fx-ctr:OTCFxProduct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-fwd:hasPart ;
+			owl:someValuesFrom fibo-der-fx-sp:FxSpot ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-fwd:hasPart.1 ;
+			owl:someValuesFrom fibo-der-fx-sw:FxSwap ;
+		]
+		;
+	rdfs:label "fx forward outright"@en ;
+	rdfs:comment "QName: NONE:FxForwardOutright" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	.
+
+fibo-der-fx-fwd:FxForwardTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-fwd:ForwardTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-fwd:embodies ;
+			owl:someValuesFrom fibo-der-fx-fwd:FxForwardContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-fwd:side ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashDelivery ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-fwd:side.1 ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+		]
+		;
+	rdfs:label "fx forward transaction"@en ;
+	rdfs:comment "QName: NONE:FxForwardTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	skos:definition "A transaction in which cash is exchanged in two currencies at an agreed rate at an agreed date in the future."@en ;
+	.
+
+fibo-der-fx-fwd:embodies
+	a owl:ObjectProperty ;
+	rdfs:label "embodies"@en ;
+	rdfs:comment "QName: NONE:embodies" ;
+	rdfs:domain fibo-der-fx-fwd:FxForwardTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range fibo-der-fx-fwd:FxForwardContract ;
+	.
+
+fibo-der-fx-fwd:exchangedCurrencyOne
+	a owl:ObjectProperty ;
+	rdfs:label "exchanged currency one"@en ;
+	rdfs:comment "QName: NONE:exchangedCurrencyOne" ;
+	rdfs:domain fibo-der-fx-fwd:FxForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "FpML has a term exchangedCurrency1 but this refers to the currency flow not the currency as in USD, CDN etc. FpML definition for exchangedCurrency1: 'This is the first of the two currency flows that define a single leg of a standard foreign exchange transaction.'"@en ;
+	.
+
+fibo-der-fx-fwd:exchangedCurrencyTwo
+	a owl:ObjectProperty ;
+	rdfs:label "exchanged currency two"@en ;
+	rdfs:comment "QName: NONE:exchangedCurrencyTwo" ;
+	rdfs:domain fibo-der-fx-fwd:FxForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	.
+
+fibo-der-fx-fwd:forwardRate
+	a owl:ObjectProperty ;
+	rdfs:label "forward rate"@en ;
+	rdfs:comment "QName: NONE:forwardRate" ;
+	rdfs:domain fibo-der-fx-fwd:FXForwardOutrightContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The rate at which the seller currency is purchased in the buyer currency."@en ;
+	.
+
+fibo-der-fx-fwd:fxForwardRate
+	a owl:DatatypeProperty ;
+	rdfs:label "fx forward rate"@en ;
+	rdfs:comment "QName: NONE:fxForwardRate" ;
+	rdfs:domain fibo-der-fx-fwd:FxForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "'The rate of exchange between the two currencies.'"@en ;
+	.
+
+fibo-der-fx-fwd:hasPart
+	a owl:ObjectProperty ;
+	rdfs:label "has part"@en ;
+	rdfs:comment "QName: NONE:hasPart" ;
+	rdfs:domain fibo-der-fx-fwd:FxForwardOutright ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range fibo-der-fx-sp:FxSpot ;
+	.
+
+fibo-der-fx-fwd:hasPart.1
+	a owl:ObjectProperty ;
+	rdfs:label "has part"@en ;
+	rdfs:comment "QName: NONE:hasPart.1" ;
+	rdfs:domain fibo-der-fx-fwd:FxForwardOutright ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range fibo-der-fx-sw:FxSwap ;
+	.
+
+fibo-der-fx-fwd:side
+	a owl:ObjectProperty ;
+	rdfs:label "side"@en ;
+	rdfs:comment "QName: NONE:side" ;
+	rdfs:domain fibo-der-fx-fwd:FxForwardTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardCashDelivery ;
+	.
+
+fibo-der-fx-fwd:side.1
+	a owl:ObjectProperty ;
+	rdfs:label "side"@en ;
+	rdfs:comment "QName: NONE:side.1" ;
+	rdfs:domain fibo-der-fx-fwd:FxForwardTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+	.
+

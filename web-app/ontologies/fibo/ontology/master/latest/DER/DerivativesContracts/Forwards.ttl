@@ -1,0 +1,622 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-txn-ev: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/>
+	a owl:Ontology ;
+	rdfs:label "Forwards"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Concepts defining a derivative contract in which one side represents a commitment to sell or purchase the underlier at a defined price at a given time in the future." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-der-fwd:CalculationAgent
+	a owl:Class ;
+	rdfs:label "calculation agent"@en ;
+	rdfs:comment "QName: NONE:CalculationAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "The entity which carries out the valuation of an underlying asset, or from which the valuation of the underlying is to be taken."@en ;
+	.
+
+fibo-der-der-fwd:CashCloseout
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-fwd:ForwardDeliveryTermsSet ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:closedOutBy ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardContract ;
+		]
+		;
+	rdfs:label "cash closeout"@en ;
+	rdfs:comment "QName: NONE:CashCloseout" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "Closeout of the contract in the form of the cash equivalent of the asset or commodity rather than the underlying asset or commodity itself."@en ;
+	skos:editorialNote "Various SME REview notes from OTC sessions: This is where you go into the market and buy the offsetting contract. Exchange Traded: Standard process for exchange traded: if you have an open contract you close out the contract by taking the reverse contract, then present those contracts to the clearing house to be closed out. What clearing house? What is the relationship between the two partie sand the clearing house. That's for futures. What about OTC? Does this exist? Closeout does exist for OTC. For OTC. Terms of contract are that they are cash settled. Except maybe gold."@en ;
+	.
+
+fibo-der-der-fwd:CloseTime
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ValuationTimeType ;
+	rdfs:label "close time"@en ;
+	rdfs:comment "QName: NONE:CloseTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	.
+
+fibo-der-der-fwd:DerivativesCloseTime
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ValuationTimeType ;
+	rdfs:label "derivatives close time"@en ;
+	rdfs:comment "QName: NONE:DerivativesCloseTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	.
+
+fibo-der-der-fwd:ForwardCashConditionalDeliveryCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-fwd:ForwardCashDeliveryCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:allowsForOptionOf ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashDelivery ;
+		]
+		;
+	rdfs:label "forward cash conditional delivery commitment"@en ;
+	rdfs:comment "QName: NONE:ForwardCashConditionalDeliveryCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "Commitment to deliver agreed amountof cash in the event that the option is exercised."@en ;
+	.
+
+fibo-der-der-fwd:ForwardCashDelivery
+	a owl:Class ;
+	rdfs:label "forward cash delivery"@en ;
+	rdfs:comment "QName: NONE:ForwardCashDelivery" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "'This is the first of the two currency flows that define a single leg of a standard foreign exchange transaction.'"@en ;
+	.
+
+fibo-der-der-fwd:ForwardCashDeliveryCommitment
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-der-der-fwd:commitsTo ;
+		owl:someValuesFrom fibo-der-der-fwd:ForwardCashDelivery ;
+	] ;
+	rdfs:label "forward cash delivery commitment"@en ;
+	rdfs:comment "QName: NONE:ForwardCashDeliveryCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "A commitment to deliver a cash amount at an agreed date in the future."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Not the earliest possible date as in a Spot. FpML exchangedCurrency1 referred to as a \"Currency Stream\" 'This is the first of the two currency flows that define a single leg of a standard foreign exchange transaction.'"@en ;
+	.
+
+fibo-der-der-fwd:ForwardCashSettlementCommitment
+	a owl:Class ;
+	rdfs:label "forward cash settlement commitment"@en ;
+	rdfs:comment "QName: NONE:ForwardCashSettlementCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "A commitment to settle a cash amount at an agreed date in the future."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Note the earliest possible date as in a Spot. FpML exchangedCurrency2 referred to as a \"Currency Stream\" 'This is the second of the two currency flows that define a single leg of a standard foreign exchange transaction.'"@en ;
+	.
+
+fibo-der-der-fwd:ForwardCashSettlementTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/SettlementTerms> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:embodies ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashSettlementCommitment ;
+		]
+		;
+	rdfs:label "forward cash settlement terms set"@en ;
+	rdfs:comment "QName: NONE:ForwardCashSettlementTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "'This is the second of the two currency flows that define a single leg of a standard foreign exchange transaction.'"@en ;
+	.
+
+fibo-der-der-fwd:ForwardContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/DerivativeInstrument> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:establishes ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashSettlementCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:establishes.1 ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardDeliveryCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:hasBuyer ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardContractBuyer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:hasSeller ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardContractSeller ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:hasValuationTerms ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardValuationTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:side ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:side.1 ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+		]
+		;
+	rdfs:label "forward contract"@en ;
+	rdfs:comment "QName: NONE:ForwardContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "A cash market transaction in which a seller agrees to deliver a specific cash commodity to a buyer at some point in the future."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Unlike futures contracts (which occur through a clearing firm), forward contracts are privately negotiated and are not standardized. Further, the two parties must bear each other's credit risk, which is not the case with a futures contract. Also, since the contracts are not exchange traded, there is no marking to market requirement, which allows a buyer to avoid almost all capital outflow initially (though some counterparties might set collateral requirements). Given the lack of standardization in these contracts, there is very little scope for a secondary market in forwards. The price specified in a forward contract for a specific commodity. The forward price makes the forward contract have no value when the contract is written. However, if the value of the underlying commodity changes, the value of the forward contract becomes positive or negative, depending on the position held. Forwards are priced in a manner similar to futures. Like in the case of a futures contract, the first step in pricing a forward is to add the spot price to the cost of carry (interest forgone, convenience yield, storage costs and interest/dividend received on the underlying). Unlike a futures contract though, the price may also include a premium for counterparty credit risk, and the fact that there is not daily marking to market process to minimize default risk. If there is no allowance for these credit risks, then the forward price will equal the futures price."@en ;
+	.
+
+fibo-der-der-fwd:ForwardContractBuyer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:DerivativeContractParty ,
+		fibo-fnd-agr-ctr:ContractCounterparty
+		;
+	rdfs:label "forward contract buyer"@en ;
+	rdfs:comment "QName: NONE:ForwardContractBuyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	owl:disjointWith fibo-der-der-fwd:ForwardContractSeller ;
+	.
+
+fibo-der-der-fwd:ForwardContractSeller
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:DerivativeContractParty ,
+		fibo-fnd-agr-ctr:ContractPrincipal
+		;
+	rdfs:label "forward contract seller"@en ;
+	rdfs:comment "QName: NONE:ForwardContractSeller" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "A seller of the underlying instrument in a Forward contract."@en ;
+	.
+
+fibo-der-der-fwd:ForwardDeliveryCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:commitsTo ;
+			owl:someValuesFrom fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:madeBy ;
+			owl:someValuesFrom fibo-der-der-opt:OptionUnderlyingSeller ;
+		]
+		;
+	rdfs:label "forward delivery commitment"@en ;
+	rdfs:comment "QName: NONE:ForwardDeliveryCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "A commitment to deliver something at some time or under some terms in the future."@en ;
+	fibo-fnd-utl-av:explanatoryNote "In an Option, there is still a commitment on one side to deliver in the event that the other side chooses to exercise the option."@en ;
+	.
+
+fibo-der-der-fwd:ForwardDeliveryTermsSet
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-bsc:DeliveryTerms ;
+	rdfs:label "forward delivery terms"@en ;
+	rdfs:comment "QName: NONE:ForwardDeliveryTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "The delivery of something in the future, at an agreed date or dates and under agreed terms."@en ;
+	.
+
+fibo-der-der-fwd:ForwardTransaction
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-der-der-fwd:embodies ;
+		owl:someValuesFrom fibo-der-der-fwd:ForwardContract ;
+	] ;
+	rdfs:label "forward transaction"@en ;
+	rdfs:comment "QName: NONE:ForwardTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "A transaction in which one party commits at the present to delivery of something in the future."@en ;
+	.
+
+fibo-der-der-fwd:ForwardValuationTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:hasValuationTiming ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-der-fwd:MasterConfirmationValuationTimeTermsSet
+					fibo-der-der-fwd:ValuationTimeType
+					fibo-fnd-dt-fd:DateTime
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:specifies ;
+			owl:someValuesFrom fibo-der-der-fwd:UnderlyingValuation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:valuationDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		]
+		;
+	rdfs:label "forward valuation terms set"@en ;
+	rdfs:comment "QName: NONE:ForwardValuationTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "Terms for valuation of underlying(s) for a Forward Contract."@en ;
+	.
+
+fibo-der-der-fwd:MasterConfirmationValuationTimeTermsSet
+	a owl:Class ;
+	rdfs:label "master confirmation valuation time terms set"@en ;
+	rdfs:comment "QName: NONE:MasterConfirmationValuationTimeTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "Formal terms specifying the time for Valuation of Equity Underlying."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Note this is referred to in the selection list for times of day at which valuation can occur, as "As Specified in Master Confirmation". Since that is not a time of day, Master confirmation is added here. Presumably the Master Confirmation (contract / covering agreement) has other terms. REVIEW'@en ;
+	.
+
+fibo-der-der-fwd:OSP
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ValuationTimeType ;
+	rdfs:label "o s p"@en ;
+	rdfs:comment "QName: NONE:OSP" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	.
+
+fibo-der-der-fwd:OpenTime
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ValuationTimeType ;
+	rdfs:label "open time"@en ;
+	rdfs:comment "QName: NONE:OpenTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	.
+
+fibo-der-der-fwd:UnderlyingValuation
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-der-der-fwd:undertakenBy ;
+		owl:someValuesFrom fibo-der-der-fwd:CalculationAgent ;
+	] ;
+	rdfs:label "underlying valuation"@en ;
+	rdfs:comment "QName: NONE:UnderlyingValuation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "The act of valuation of the underlying on some OTC Derivative."@en ;
+	skos:editorialNote "Abstracted from FpML term for calculation Agent and Valuation terms as referred to in Equity Forward and presumably other derivatives also."@en ;
+	.
+
+fibo-der-der-fwd:ValuationTimeType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:DateTime ;
+	rdfs:label "valuation time type"@en ;
+	rdfs:comment "QName: NONE:ValuationTimeType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "The time of day at which the calculation agent values the underlying, for example the official closing time of the exchange."@en ;
+	.
+
+fibo-der-der-fwd:XETRA
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ValuationTimeType ;
+	rdfs:label "x e t r a"@en ;
+	rdfs:comment "QName: NONE:XETRA" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	.
+
+fibo-der-der-fwd:allowsForOptionOf
+	a owl:ObjectProperty ;
+	rdfs:label "allows for option of"@en ;
+	rdfs:comment "QName: NONE:allowsForOptionOf" ;
+	rdfs:domain fibo-der-der-fwd:ForwardCashConditionalDeliveryCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardCashDelivery ;
+	.
+
+fibo-der-der-fwd:cashDelivery
+	a owl:DatatypeProperty ;
+	rdfs:label "cash delivery"@en ;
+	rdfs:comment "QName: NONE:cashDelivery" ;
+	rdfs:domain fibo-der-der-fwd:CashCloseout ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-der-der-fwd:cashDelivery.1
+	a owl:DatatypeProperty ;
+	rdfs:label "cash delivery"@en ;
+	rdfs:comment "QName: NONE:cashDelivery.1" ;
+	rdfs:domain fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-der-der-fwd:closedOutBy
+	a owl:ObjectProperty ;
+	rdfs:label "closed out by"@en ;
+	rdfs:comment "QName: NONE:closedOutBy" ;
+	rdfs:domain fibo-der-der-fwd:CashCloseout ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardContract ;
+	.
+
+fibo-der-der-fwd:commitsTo
+	a owl:ObjectProperty ;
+	rdfs:label "commits to"@en ;
+	rdfs:comment "QName: NONE:commitsTo" ;
+	rdfs:domain fibo-der-der-fwd:ForwardCashDeliveryCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardCashDelivery ;
+	.
+
+fibo-der-der-fwd:contractSize
+	a owl:DatatypeProperty ;
+	rdfs:label "contract size"@en ;
+	rdfs:comment "QName: NONE:contractSize" ;
+	rdfs:domain fibo-der-der-fwd:ForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The deliverable quantity of goods or commodities underlying futures, forward and option contracts."@en ;
+	.
+
+fibo-der-der-fwd:deliveryAmount
+	a owl:ObjectProperty ;
+	rdfs:label "delivery amount"@en ;
+	rdfs:comment "QName: NONE:deliveryAmount" ;
+	rdfs:domain fibo-der-der-fwd:ForwardCashDelivery ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	.
+
+fibo-der-der-fwd:deliveryDate
+	a owl:DatatypeProperty ;
+	rdfs:label "delivery date"@en ;
+	rdfs:comment "QName: NONE:deliveryDate" ;
+	rdfs:domain fibo-der-der-fwd:ForwardCashDelivery ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "FpML = valueDate Definition for 'valueDate' in FpML 'The date on which both currencies traded will settle.' Definition for 'currency1ValueDate' in FpML 'The date on which the currency1 amount will be settled. To be used in a split value date scenario.' Notes 20 Jan: single value date scenario adds nothing to the model. The \"split value date\" is when Payment Date and SettlementDate are different; otherwise they are the same. We don't need to model this."@en ;
+	.
+
+fibo-der-der-fwd:deliveryDate.1
+	a owl:DatatypeProperty ;
+	rdfs:label "delivery date"@en ;
+	rdfs:comment "QName: NONE:deliveryDate.1" ;
+	rdfs:domain fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	.
+
+fibo-der-der-fwd:embodies
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:transactionEmbodiesEconomicAgreement ;
+	rdfs:label "embodies"@en ;
+	rdfs:comment "QName: NONE:embodies" ;
+	rdfs:domain fibo-der-der-fwd:ForwardTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardContract ;
+	.
+
+fibo-der-der-fwd:establishes
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:establishesContractualEconomicCommitment ;
+	rdfs:label "establishes"@en ;
+	rdfs:comment "QName: NONE:establishes" ;
+	rdfs:domain fibo-der-der-fwd:ForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardCashSettlementCommitment ;
+	.
+
+fibo-der-der-fwd:establishes.1
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-txn-rea:establishesContractualEconomicCommitment ;
+	rdfs:label "establishes"@en ;
+	rdfs:comment "QName: NONE:establishes.1" ;
+	rdfs:domain fibo-der-der-fwd:ForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardDeliveryCommitment ;
+	.
+
+fibo-der-der-fwd:forwardPrice
+	a owl:ObjectProperty ;
+	rdfs:label "forward price"@en ;
+	rdfs:comment "QName: NONE:forwardPrice" ;
+	rdfs:domain fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The forward price of the underlying."@en ;
+	.
+
+fibo-der-der-fwd:hasBuyer
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasCounterparty ;
+	rdfs:label "has buyer"@en ;
+	rdfs:comment "QName: NONE:hasBuyer" ;
+	rdfs:domain fibo-der-der-fwd:ForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardContractBuyer ;
+	.
+
+fibo-der-der-fwd:hasSeller
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasPrincipalParty ;
+	rdfs:label "has seller"@en ;
+	rdfs:comment "QName: NONE:hasSeller" ;
+	rdfs:domain fibo-der-der-fwd:ForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardContractSeller ;
+	.
+
+fibo-der-der-fwd:hasValuationTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has valuation terms"@en ;
+	rdfs:comment "QName: NONE:hasValuationTerms" ;
+	rdfs:domain fibo-der-der-fwd:ForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardValuationTermsSet ;
+	.
+
+fibo-der-der-fwd:hasValuationTimeOfDay
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDateTime ;
+	rdfs:label "has valuation time of day"@en ;
+	rdfs:comment "QName: NONE:hasValuationTimeOfDay" ;
+	rdfs:domain fibo-der-der-fwd:MasterConfirmationValuationTimeTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	.
+
+fibo-der-der-fwd:hasValuationTiming
+	a owl:ObjectProperty ;
+	rdfs:label "has valuation timing"@en ;
+	rdfs:comment "QName: NONE:hasValuationTiming" ;
+	rdfs:domain fibo-der-der-fwd:ForwardValuationTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-der-der-fwd:MasterConfirmationValuationTimeTermsSet
+			fibo-der-der-fwd:ValuationTimeType
+			fibo-fnd-dt-fd:DateTime
+		) ;
+	] ;
+	.
+
+fibo-der-der-fwd:paymentFeeType
+	a owl:DatatypeProperty ;
+	rdfs:label "payment fee type"@en ;
+	rdfs:comment "QName: NONE:paymentFeeType" ;
+	rdfs:domain fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The type of fee or additional payment, e.g. brokerage, upfront fee etc."@en ;
+	.
+
+fibo-der-der-fwd:paymentType
+	a owl:DatatypeProperty ;
+	rdfs:label "payment type"@en ;
+	rdfs:comment "QName: NONE:paymentType" ;
+	rdfs:domain fibo-der-der-fwd:ForwardCashDelivery ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "'A classification of the type of fee or additional payment, e.g. brokerage, upfront fee etc. FpML does not define domain values for this element.'"@en ;
+	.
+
+fibo-der-der-fwd:settlementAmount
+	a owl:ObjectProperty ;
+	rdfs:label "settlement amount"@en ;
+	rdfs:comment "QName: NONE:settlementAmount" ;
+	rdfs:domain fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	.
+
+fibo-der-der-fwd:settlementDate
+	a owl:DatatypeProperty ;
+	rdfs:label "settlement date"@en ;
+	rdfs:comment "QName: NONE:settlementDate" ;
+	rdfs:domain fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	skos:definition "FpML = valueDate Definition for 'valueDate' in FpML 'The date on which both currencies traded will settle.' Definition for 'currency2ValueDate' in FpML 'The date on which the currency2 amount will be settled. To be used in a split value date scenario.' Notes 20 Jan: This is the scenario where \"t\" for one leg is different to \"t\" for the other leg."@en ;
+	.
+
+fibo-der-der-fwd:side
+	a owl:ObjectProperty ;
+	rdfs:label "side"@en ;
+	rdfs:comment "QName: NONE:side" ;
+	rdfs:domain fibo-der-der-fwd:ForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+	.
+
+fibo-der-der-fwd:side.1
+	a owl:ObjectProperty ;
+	rdfs:label "side"@en ;
+	rdfs:comment "QName: NONE:side.1" ;
+	rdfs:domain fibo-der-der-fwd:ForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+	.
+
+fibo-der-der-fwd:specifies
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies" ;
+	rdfs:domain fibo-der-der-fwd:ForwardValuationTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:UnderlyingValuation ;
+	.
+
+fibo-der-der-fwd:undertakenBy
+	a owl:ObjectProperty ;
+	rdfs:label "undertaken by"@en ;
+	rdfs:comment "QName: NONE:undertakenBy" ;
+	rdfs:domain fibo-der-der-fwd:UnderlyingValuation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-der-der-fwd:CalculationAgent ;
+	.
+
+fibo-der-der-fwd:valuationDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "valuation date"@en ;
+	rdfs:comment "QName: NONE:valuationDate" ;
+	rdfs:domain fibo-der-der-fwd:ForwardValuationTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+

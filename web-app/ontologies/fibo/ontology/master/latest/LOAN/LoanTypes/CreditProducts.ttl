@@ -1,0 +1,164 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CreditProducts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CreditProducts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-crf: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditFacilities/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-typ-cr: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/>
+	a owl:Ontology ;
+	rdfs:label "CreditProducts"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Terms specific to the existence and extension of credit. Includes terms like home equity lines of credit which may be referenced in asset backed securities. Also includes credit card facilities." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CreditProducts/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-typ-cr:CreditCard
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crf:CommittedCreditFacilityTranche ;
+	rdfs:label "credit card facility"@en ;
+	rdfs:comment "QName: NONE:CreditCard" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	.
+
+fibo-loan-typ-cr:HomeEquityLineOfCredit
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-typ-cr:RevolvingLineOfCredit ;
+	rdfs:label "home equity line of credit"@en ;
+	rdfs:comment "QName: NONE:HomeEquityLineOfCredit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	skos:definition "A credit line on a house or other property, that can be drawn down and/or paid back by the borrower."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is both a revolving line of credit and a mortgage, in that the collateral for the revolving line of credit in this case is some real estate, which is a defining fact for a mortgage. This form of product can either have an increase or decrease in principal, according to the actions of the borrower. These may also be used in the formation of asset pools for asset backed securities, though a specific named type of security has not been identified with these as underlying."@en ;
+	.
+
+fibo-loan-typ-cr:HomeEquityLineOfCreditContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-typ-cr:RevolvingCreditContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-crf:setsOutCommitmentTo ;
+			owl:someValuesFrom fibo-loan-typ-cr:HomeEquityLineOfCreditTranche ;
+		]
+		;
+	rdfs:label "home equity line of credit contract"@en ;
+	rdfs:comment "QName: NONE:HomeEquityLineOfCreditContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	skos:definition "A credit line on a house or other property, that can be drawn down and/or paid back by the borrower."@en ;
+	.
+
+fibo-loan-typ-cr:HomeEquityLineOfCreditTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-typ-cr:RevolvingLineOfCreditTranche ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-cr:becomesRevolvingLineOfCredit ;
+			owl:someValuesFrom fibo-loan-typ-cr:HomeEquityLineOfCredit ;
+		]
+		;
+	rdfs:label "home equity line of credit tranche"@en ;
+	rdfs:comment "QName: NONE:HomeEquityLineOfCreditTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	.
+
+fibo-loan-typ-cr:RevolvingCreditContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-crf:CreditFacilityAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-crf:setsOutCommitmentTo ;
+			owl:someValuesFrom fibo-loan-typ-cr:RevolvingLineOfCreditTranche ;
+		]
+		;
+	rdfs:label "revolving credit contract"@en ;
+	rdfs:comment "QName: NONE:RevolvingCreditContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	skos:definition "Contract which embodies and defines the terms and conditions for a credit line based on some collaterial, which can be drawn down and/or paid back by the borrower."@en ;
+	.
+
+fibo-loan-typ-cr:RevolvingLineOfCredit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-dbt:Debt ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:isCollateralizedBy ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/LoanCollateral> ;
+		]
+		;
+	rdfs:label "revolving line of credit"@en ;
+	rdfs:comment "QName: NONE:RevolvingLineOfCredit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	skos:definition "A credit line based on some collateral, that can be drawn down and/or paid back by the borrower."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This form of product can either have an increase or decrease in principal, according to the actions of the borrower."@en ;
+	.
+
+fibo-loan-typ-cr:RevolvingLineOfCreditTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-crf:CommittedCreditFacilityTranche ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-cr:becomesRevolvingLineOfCredit ;
+			owl:someValuesFrom fibo-loan-typ-cr:RevolvingLineOfCredit ;
+		]
+		;
+	rdfs:label "revolving line of credit tranche"@en ;
+	rdfs:comment "QName: NONE:RevolvingLineOfCreditTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	skos:definition "A contractually committed line of credit which is issued as a revolving line of credit which can be drawn upon and has collateral"@en ;
+	.
+
+fibo-loan-typ-cr:becomesRevolvingLineOfCredit
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fbc-dae-crf:issuedAs ;
+	rdfs:label "becomes revolving line of credit"@en ;
+	rdfs:comment "QName: NONE:becomesRevolvingLineOfCredit" ;
+	rdfs:domain fibo-loan-typ-cr:RevolvingLineOfCreditTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	rdfs:range fibo-loan-typ-cr:RevolvingLineOfCredit ;
+	.
+
+fibo-loan-typ-cr:maximumAllowedBalance
+	a owl:ObjectProperty ;
+	rdfs:label "maximum allowed balance"@en ;
+	rdfs:comment "QName: NONE:maximumAllowedBalance" ;
+	rdfs:domain fibo-loan-typ-cr:RevolvingCreditContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The maximum loan amount that is allowed to be outstanding as defined in this loan contract."@en ;
+	.
+
+fibo-loan-typ-cr:maximumAnticipatedBalance
+	a owl:ObjectProperty ;
+	rdfs:label "maximum anticipated balance"@en ;
+	rdfs:comment "QName: NONE:maximumAnticipatedBalance" ;
+	rdfs:domain fibo-loan-typ-cr:RevolvingLineOfCredit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The maximum loan amount that could potentially be outstanding."@en ;
+	.
+

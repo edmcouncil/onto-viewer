@@ -1,0 +1,3699 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/CIV/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/Corporations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/Settlement/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Lifecycles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Pools/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesClassification/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIdentification/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesRestrictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecurityAssets/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/CIV/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-corp-corp: <https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/Corporations/> .
+@prefix fibo-be-fct-fct: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-be-le-fbo: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-civ-fnd-civ: <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-fi-stl: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/> .
+@prefix fibo-fbc-pas-caa: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-accx-bal: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/BalanceSheetBalances/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-arr-lif: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Lifecycles/> .
+@prefix fibo-fnd-arr-rt: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> .
+@prefix fibo-fnd-arrxx-ins: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-inf-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-law-cor: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-math-math: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/Math/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-tim-tim: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/Time/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-sec-eq-eq: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> .
+@prefix fibo-sec-sec-cls: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/> .
+@prefix fibo-sec-sec-iss: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/> .
+@prefix fibo-sec-sec-rst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/>
+	a owl:Ontology ;
+	rdfs:label "Collective Investment Vehicles Ontology"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:" ;
+	dct:abstract "Reference data terms and non time dependent facts about funds and CIVs." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage <http://www.w3.org/standards/techs/owl#w3c_all> ;
+	sm:copyright "Copyright (c) 2015-2019 EDM Council, Inc." ;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/BE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/>
+		;
+	sm:fileAbbreviation "fibo-civ-fnd-civ" ;
+	sm:filename "CIV.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Corporations/Corporations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/Settlement/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Lifecycles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Pools/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesClassification/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIdentification/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesRestrictions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecurityAssets/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/CIV/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-civ-fnd-civ:AccumulatingShareClass
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:label "accumulating share class"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:AccumulatingShareClass" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	owl:disjointWith fibo-civ-fnd-civ:DistributingShareClass ;
+	skos:definition "A share class in which there is no option to reinvest."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This fact would be determined by the fund unit having a specific Fund Distribution Policy of Accumulating."@en ;
+	.
+
+fibo-civ-fnd-civ:AnnualReportingPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:ReportingFrequencyPolicy ;
+	rdfs:label "annual reporting policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:AnnualReportingPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Reports are presented once a year"@en ;
+	.
+
+fibo-civ-fnd-civ:AnnualizedPerformanceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:PerformanceDeterminationMethod ;
+	rdfs:label "annualized performance determination method"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:AnnualizedPerformanceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Annualized performance determination."@en ;
+	.
+
+fibo-civ-fnd-civ:AssetClassStrategy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:identifiesAssetTypesBy ;
+			owl:someValuesFrom fibo-sec-sec-cls:FinancialInstrumentClassifier ;
+		]
+		;
+	rdfs:label "asset class strategy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:AssetClassStrategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Strategy which is asset class based."@en ;
+	fibo-fnd-utl-av:explanatoryNote "EFAMA: The type of securities or other holdings that may be invested in. FIBIM: Strategy which is asset class based. Can implement this in terms of a classification of those things. Wording implies this is a policy."@en ;
+	.
+
+fibo-civ-fnd-civ:BricksAndMortarHolding
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/PortfolioHolding> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:takesFormOf ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+		]
+		;
+	rdfs:label "bricks and mortar holding"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:BricksAndMortarHolding" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A holding of built property."@en ;
+	.
+
+fibo-civ-fnd-civ:CommonShareInFund
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:label "common share in fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:CommonShareInFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	owl:disjointWith fibo-civ-fnd-civ:PreferredShareInFund ;
+	skos:definition "A share unit in a fund, which is classified as a Common Share class."@en ;
+	fibo-fnd-utl-av:explanatoryNote "SR Review session notes: US: Closed and open ended funds may have common and preferred shares."@en ;
+	.
+
+fibo-civ-fnd-civ:CurrencyStrategy
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	rdfs:label "currency strategy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:CurrencyStrategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Strategy which is currency based."@en ;
+	.
+
+fibo-civ-fnd-civ:DebtStakeInFund
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:StakeInFund ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:definesRelationshipWith ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundLegalForm ;
+		]
+		;
+	rdfs:label "debt stake in fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:DebtStakeInFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A stake held in a fund by way of a Bond Unit."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Note that you cannot buy fractional amounts in a bond. Review Session Note: Similar to what happens in a CDO where the collaterial manager and the issuer are two different entities. So model this along the same lines as the SPV in the structured finance model. Therefore: further modeling and review required"@en ;
+	.
+
+fibo-civ-fnd-civ:DistributingShareClass
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:label "distributing share class"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:DistributingShareClass" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	.
+
+fibo-civ-fnd-civ:EquityAsset
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/SecurityHolding> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:allValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "equity asset"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:EquityAsset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The holding of equity securities in a portfolio."@en ;
+	.
+
+fibo-civ-fnd-civ:EquityFund
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:Fund ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-civ-fnd-civ:EquityPortfolio ;
+		]
+		;
+	rdfs:label "equity fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:EquityFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A fund which invests in at least 85% shares."@en ;
+	.
+
+fibo-civ-fnd-civ:EquityPortfolio
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundPortfolio ;
+	rdfs:label "equity portfolio"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:EquityPortfolio" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A portfolio which has at least 85% exposure to shares."@en ;
+	.
+
+fibo-civ-fnd-civ:EquityStakeInFund
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:StakeInFund ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:definesRelationshipWith ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundLegalForm ;
+		]
+		;
+	rdfs:label "equity stake in fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:EquityStakeInFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A stake held in a fund by way of a Share Class Unit."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Theoretically you can buy a fraction of a share in a fund. This would depend on the legal structure of the fund, e.g. a minimum investment. There is always a distribution plan."@en ;
+	.
+
+fibo-civ-fnd-civ:FCP
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-fct-fct:FunctionalBusinessEntity ;
+	rdfs:label "f c p"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FCP" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A French fund vehicle type. Designation and definition needed."@en ;
+	.
+
+fibo-civ-fnd-civ:Fund
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Pools/Pool> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:domicile ;
+			owl:onClass lcc-cr:Country ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:administeredBy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundAdministrator ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:advisedBy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:InvestmentAdvisor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:describedIn ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundProspectus ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:distributedBy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundDistributor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:domicile ;
+			owl:someValuesFrom lcc-cr:Country ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:fundHasRelatedParty ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundsProcessingParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasAccountant ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundAccountant ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasAccountingInformation ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundReportingTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasAdditionalInformation ;
+			owl:someValuesFrom fibo-civ-fnd-civ:OtherInvestmentFundInformation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasAuditor ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundAuditor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasDataProvider ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundDataProvider ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasDepository ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundDepositary ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasDistributionPolicy.1 ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnitDistributionMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasFundIdentification ;
+			owl:someValuesFrom fibo-be-le-fbo:OrganizationIdentifier ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasFundPolicy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundInvestmentPolicy ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasLegalForm ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundLegalForm ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasManagementCompany ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundManager ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasPerformanceDeterminationMethod ;
+			owl:someValuesFrom fibo-civ-fnd-civ:PerformanceDeterminationMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasRelatedFundTerms ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundProcessingTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasSubscriptionTerms ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundSubscriptionTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasTradableUnit ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnit ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasTransferAgent ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundTransferAgent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasUnitIssuer ;
+			owl:someValuesFrom fibo-civ-fnd-civ:UnitIssuer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:legallyRecordedIn ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:promotedBy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundPromoter ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:supervisedBy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundSupervisoryAuthority ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-gao-obj:hasObjective ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundInvestmentObjective ;
+		]
+		;
+	rdfs:label "fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:Fund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Distinct pool of financial instruments managed by a single investment policy."@en ;
+	fibo-fnd-utl-av:explanatoryNote "From EFAMA DD: The word fund can refer to either an investment pool, umbrella or share class, and is commonly refered to as a collective investment vehicle (can have ISIN or not). The meaning here is for the investment pool (of which an Umbrella fund is also one such) and not to the share class."@en ;
+	.
+
+fibo-civ-fnd-civ:FundAccountant
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundsProcessingParty ;
+	rdfs:label "fund accountant"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundAccountant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The party that keeps accounting records of the available assets and liabilities of the Fund. It calculates dealing prices, the Net Asset Value (NAV) of the Fund, and may provide fund performance and tax data. Can be subcontracted by the FundAdministrator."@en ;
+	.
+
+fibo-civ-fnd-civ:FundAdministrator
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundsProcessingParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:mayAlsoBe ;
+			owl:someValuesFrom fibo-civ-fnd-civ:UnitIssuer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:processingPartyHasIdentity ;
+			owl:someValuesFrom fibo-be-le-lp:LegalEntity ;
+		]
+		;
+	rdfs:label "fund administrator"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundAdministrator" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Entity that has to fulfil the legal and supervisory requirements of the fund. Responsible for all the business purposes around the investment pool, and so is reponsible for the issuing of the shares."@en ;
+	fibo-fnd-utl-av:explanatoryNote "If the unit is a bond, then the issuer is separate from the Fund Administrator. WG11 text: The party in charge of financial accounting, NAV calculation, management and performance fee calculation. Can also be in charge of orders centralisation and registration. Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:FundAuditor
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundsProcessingParty ;
+	rdfs:label "fund auditor"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundAuditor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The party that is in charge of examining and verifying a fund's financial and accounting records as well as supporting documents and fulfilment of legal requirements. Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:FundBondClassUnit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundUnit ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasDistributiojnPolicy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnitDistributionPolicy ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasExpectedCoupon ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundBondUnitCoupon ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:definesTermsFor ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundDebt ;
+		]
+		;
+	rdfs:label "fund bond class unit"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundBondClassUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A fund unit which takes the form of debt in that fund."@en ;
+	fibo-fnd-utl-av:explanatoryNote "From EFAMA Review: called denominations e.g. issued in $5000 pieces. You cannot buy fractional amounts in a bond."@en ;
+	.
+
+fibo-civ-fnd-civ:FundBondUnitCoupon
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:TimedParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasPolicyTerms ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundCouponPolicy ;
+		]
+		;
+	rdfs:label "fund bond unit coupon"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundBondUnitCoupon" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A fixed coupon paid out to holders of the Fund Bond Unit."@en ;
+	.
+
+fibo-civ-fnd-civ:FundCashDistributionPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundUnitDistributionPolicy ;
+	rdfs:label "fund cash distribution policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundCashDistributionPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition 'Policy for distribution of cash dividends or notes in the event that the fund units have a distribution policy of "Cash" rather than "Reinvestment".'@en ;
+	.
+
+fibo-civ-fnd-civ:FundClassification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:Classifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:classifies ;
+			owl:someValuesFrom fibo-civ-fnd-civ:Fund ;
+		]
+		;
+	rdfs:label "fund classification"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundClassification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition 'The category of the fund according to the asset class. This is a published code by which the Fund is classified. Further notes: Could be EFCF codes. This is the way in which "Type of fund" is articulated.'@en ;
+	.
+
+fibo-civ-fnd-civ:FundClassificationScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:ClassificationScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundClassification ;
+		]
+		;
+	rdfs:label "fund classification scheme"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundClassificationScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A published scheme for the category of a fund according to the asset class."@en ;
+	.
+
+fibo-civ-fnd-civ:FundCouponPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundCashDistributionPolicy ;
+	rdfs:label "fund coupon policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundCouponPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Terms for the expected distribution of bond unit coupons."@en ;
+	.
+
+fibo-civ-fnd-civ:FundDataProvider
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundsProcessingParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:processingPartyHasIdentity ;
+			owl:someValuesFrom fibo-be-le-lp:LegalEntity ;
+		]
+		;
+	rdfs:label "fund data provider"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundDataProvider" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A party which supplies market data to a fund."@en ;
+	.
+
+fibo-civ-fnd-civ:FundDebt
+	a owl:Class ;
+	rdfs:label "fund debt"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundDebt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Debt issued by a Fund."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This would normally be held by participants in that pool. in this case the pool is a fund which is formed by each of the participants extending credit to that pool and holding bond units in the pool representing that debt."@en ;
+	.
+
+fibo-civ-fnd-civ:FundDepositary
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundsProcessingParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:providesDepositaryServiceFor ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnit ;
+		]
+		;
+	rdfs:label "fund depositary"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundDepositary" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The party that holds and safeguards holdings owned by a fund. It is also responsible for compliance of the portfolio with legal ratios etc."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The depository may delegate custody to another entity (custodian). Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:FundDistributionPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:Policy ;
+	rdfs:label "fund distribution policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundDistributionPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "policy indicating the overall strategy or limitations on distribution for the fund"@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Note that individual classes of Fund Unit also have specific distribution polcies as they effect that class of unit. This class is for terms with wording of the form: " ... whether or not it is possible to hold shares ..." for a given parameter.'@en ;
+	.
+
+fibo-civ-fnd-civ:FundDistributor
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundsProcessingParty ;
+	rdfs:label "fund distributor"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundDistributor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "an entity through which a fund may be bought by or for an investor. This may be on a discretionary or advisory basis, or as an execution-only service. Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:FundDividendPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundCashDistributionPolicy ;
+	rdfs:label "fund dividend policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundDividendPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Terms for the expected distributions of dividends."@en ;
+	.
+
+fibo-civ-fnd-civ:FundEquity
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Pools/PoolEquity> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-aeq:representsAnInterestIn ;
+			owl:someValuesFrom fibo-civ-fnd-civ:Fund ;
+		]
+		;
+	rdfs:label "fund equity"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundEquity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A share or proportion of the capital gains in a fund."@en ;
+	.
+
+fibo-civ-fnd-civ:FundInvestmentObjective
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-gao-obj:InvestmentObjective ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasIntendedRiskLevel ;
+			owl:someValuesFrom fibo-civ-fnd-civ:RiskLevel ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:statedIn ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundProspectus ;
+		]
+		;
+	rdfs:label "fund investment objective"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundInvestmentObjective" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The aim of a Fund e.g outperfom a given benchmark."@en ;
+	skos:editorialNote "This could be broken down into other terms that can be itemised here, that are not in the EFAMA DD explicitly. Examples may include: - Risk level - Return - Exposure to different markets"@en ;
+	.
+
+fibo-civ-fnd-civ:FundInvestmentPolicy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:Policy ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:stipulatesBenchmark ;
+			owl:onClass fibo-ind-ind-ind:MarketRate ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:someValuesFrom fibo-civ-fnd-civ:InvestmentRestriction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom fibo-civ-fnd-civ:PortfolioInvestmentStrategy ;
+		]
+		;
+	rdfs:label "fund investment policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundInvestmentPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "policy that the fund implements in order to achieve the stated fund objectives"@en ;
+	fibo-fnd-utl-av:explanatoryNote 'EFAMA Note: Model distinguishes between strategy (what you intend to invest in) and portfolio structure (what is held). This semantics matches the EFAMA DD "Fund Investment Policy" No stated definition in EFAMA DD ("Further discussion required").'@en ;
+	.
+
+fibo-civ-fnd-civ:FundInvestor
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:TransferableContractHolder ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:isUnitHolder ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnit ;
+		]
+		;
+	rdfs:label "fund investor"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundInvestor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A party which invests in the Fund. It does this by holding some tradable unit (which represents some stake) in that fund."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Facts about investor tolerance and so on, are facts about Investor."@en ;
+	.
+
+fibo-civ-fnd-civ:FundInvestorType
+	a owl:Class ;
+	rdfs:label "fund investor type"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundInvestorType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The type of party that is eligible to invest in a fund."@en ;
+	.
+
+fibo-civ-fnd-civ:FundLegalContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-fbo:OrganizationCoveringAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:isEvidencedBy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundLegalFormDocumentation ;
+		]
+		;
+	rdfs:label "fund legal contract"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundLegalContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "For a fund which is constituted under the law of contract, the contract that embodies the fund legal form."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'From ISO FIBIM "Umbrella Fund" narrative: In securities, a collective investment scheme that has a contractual or a corporate form. When it has a contractual form, a fund is constituted under either the law of contract or under the trust law and thus it is not a legal entity. In its corporate form, a fund is a legal entity and is structured as a company.'@en ;
+	.
+
+fibo-civ-fnd-civ:FundLegalForm
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-civ-fnd-civ:identifiedAs.3 ;
+		owl:someValuesFrom [
+			a owl:Class ;
+			owl:unionOf (
+				fibo-civ-fnd-civ:FundsSPV
+				fibo-be-le-cb:Corporation
+				fibo-civ-fnd-civ:FundLegalContract
+				fibo-be-corp-corp:JointStockCompany
+			) ;
+		] ;
+	] ;
+	rdfs:label "fund legal form"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundLegalForm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The legal form of the fund, eg Joint Stock Company, SPV etc."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This term does not cover the structure of the fund (Open or Closed, Open Ended or Closed Ended); these facts are covered in separate terms. This fact is the legal form which the fund takes, as a legal entity of some kind. It refers to a selection of possible legal forms, such as Joint Stock Company. This has been defined as a separate, relative class of thing rather than simply a relationship, so as to be able to model relationships to the fund legal form regardless of what form that takes. For example, the various kinds of Stake" in the fund have a relationship to the legal entity which is the fund, regardless of what kind of entity that is.'@en ;
+	.
+
+fibo-civ-fnd-civ:FundLegalFormDocumentation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-cor:Constitution ;
+	rdfs:label "fund legal form documentation"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundLegalFormDocumentation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "For a fund which is constituted under the law of contract, the constitution or articles that define the fund. These are embodied in a Contract."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'From ISO FIBIM "Umbrella Fund" narrative: In securities, a collective investment scheme that has a contractual or a corporate form. When it has a contractual form, a fund is constituted under either the law of contract or under the trust law and thus it is not a legal entity. In its corporate form, a fund is a legal entity and is structured as a company.'@en ;
+	.
+
+fibo-civ-fnd-civ:FundManagementCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-lp:LegalEntity ;
+	rdfs:label "fund management company"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundManagementCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The party that sets up the fund, decides the investment strategy, appoints the agents, and is responsible for the promotion and the marketing of the fund. It makes all of the important decisions related to the fund. Also called fund promotor or fund sponsor or fund manager."@en ;
+	fibo-fnd-utl-av:explanatoryNote "In the US: operates on a percentage of the Portfolio assets under management."@en ;
+	.
+
+fibo-civ-fnd-civ:FundManager
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundsProcessingParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:processingPartyHasIdentity ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundManagementCompany ;
+		]
+		;
+	rdfs:label "fund manager"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundManager" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The party that sets up the fund, decides the investment strategy, appoints the agents, and is responsible for the promotion and the marketing of the fund. It makes all of the important decisions related to the fund. Also called fund promotor or fund sponsor. This is a dupliucate of Fund Management Company at the moment"@en ;
+	.
+
+fibo-civ-fnd-civ:FundOrderDesk
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:AccountProvider ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:providerHasIdentity ;
+			owl:someValuesFrom fibo-be-le-lp:LegalEntity ;
+		]
+		;
+	rdfs:label "fund order desk"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundOrderDesk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The Fund Order Desk is a party to the Fund Order Desk Account."@en ;
+	skos:editorialNote "This party would presumably be identified as the Fund Management Company in terms of what legal entity fulcils this role? to be determined at further review."@en ;
+	.
+
+fibo-civ-fnd-civ:FundOrderDeskPhysicalFormDocument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:WrittenInformation ;
+	rdfs:label "fund order desk physical form document"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundOrderDeskPhysicalFormDocument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A phsyical form obtained through the main fund order desk."@en ;
+	.
+
+fibo-civ-fnd-civ:FundPortfolio
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:InvestmentPortfolio ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:assessedAgainst ;
+			owl:someValuesFrom fibo-civ-fnd-civ:PortfolioBenchmark ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasLiquidity ;
+			owl:someValuesFrom fibo-civ-fnd-civ:Liquidity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:implementsFundPolicy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundPortfolioInvestmentPolicy ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasMonetaryAmount ;
+			owl:someValuesFrom fibo-fnd-accx-bal:CashBalance ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:strategy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:PortfolioInvestmentStrategy ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/PortfolioHolding> ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:PortfolioManager ;
+		]
+		;
+	rdfs:label "fund portfolio"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundPortfolio" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "An account containing a number of financial instruments along with cash positions in one or more currencies and belonging to a Fund"@en ;
+	.
+
+fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:InvestmentRestriction ;
+	rdfs:label "fund portfolio investment limitations"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Detailed Policy on approximately how the portfolio is to be allocated to achieve the stated investment goals. This underpins the detailed strategy of how to achieve this."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Defined as "Strategy" in FIBIM and elsewhere. WG11: Rough allocation of the portfolio.'@en ;
+	.
+
+fibo-civ-fnd-civ:FundPortfolioInvestmentPolicy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:Policy ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:definesAllocations ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom fibo-civ-fnd-civ:PortfolioInvestmentStrategy ;
+		]
+		;
+	rdfs:label "fund portfolio investment policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundPortfolioInvestmentPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "policy with respect to allocation of the portfolio that is designed to meet the stated investment strategy and goals"@en ;
+	fibo-fnd-utl-av:explanatoryNote "ISO FIBIM: Rough allocation of the portfolio."@en ;
+	.
+
+fibo-civ-fnd-civ:FundProcessingForm
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-doc:ControlDocument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:mayBe.1 ;
+			owl:onClass fibo-civ-fnd-civ:FundOrderDeskPhysicalFormDocument ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "fund processing form"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundProcessingForm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The form of documentation or control mechanism required for some funds processing activity."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Equates to the "Physical Form" in SIO FIBIM for certain activities in funds processing. May or may not be a written physical document. ISO FIBIM Definition: Specifies whether a physical form is required.'@en ;
+	.
+
+fibo-civ-fnd-civ:FundProcessingGeneralTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundProcessingTerms ;
+	rdfs:label "fund processing general terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundProcessingGeneralTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Formal terms for general processing of the fund. These set out what the investor and the fund may or may not do."@en ;
+	.
+
+fibo-civ-fnd-civ:FundProcessingTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:definesMainFundOrderDeskAccount ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundsProcessingAccount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasDefaultSettlementConvention ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnitsSettlementTermsConvention ;
+		]
+		;
+	rdfs:label "fund processing terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundProcessingTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Formal terms for processing of the fund. These set out what the investor and the fund may or may not do. These include terms for redemption and subscription processing as well as general processing terms. ISO FIBIM definition: Processing characteristics linked to the instrument, ie, not to the market."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These include Fund Subscription Terms, Fund Redemption Terms. and terms which relate to general processing and restrictions or otherwise on the holder. FPP notes: FPP presentation identifies many of these terms under the heading of Valuation Dealing characteristics. May need to revise which goes where in line with FPP. See also terms under NAV Valuation Calculation Method. Others of these terms appear in FPP under Instrument Restrictions. These cover the subscription, redemption and holding amounts and units and minimum holding period."@en ;
+	.
+
+fibo-civ-fnd-civ:FundPromoter
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundsProcessingParty ;
+	rdfs:label "fund promoter"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundPromoter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "An entity that promotes a fund. May be an investor, pension fund, bank, insurance company or management company"@en ;
+	.
+
+fibo-civ-fnd-civ:FundProspectus
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-iss:Prospectus ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:anticipates ;
+			owl:someValuesFrom fibo-ind-ind-ind:MarketRate ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:outlines ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundInvestmentObjective ;
+		]
+		;
+	rdfs:label "fund prospectus"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundProspectus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The Prospectus for the Fund. This is a document made available publicly for potential investors. It will include facts about the fund investment objective, investment focus and other details of the fund. Some of this information becomes binding on the fund once it is issued, while other information is guidelines only."@en ;
+	skos:editorialNote "EFAMA Review description for this: The fund is issued with a prospectus; there is material in the prospectus that is binding; material that is expected but not binding, and information that may or may not be in the prospectus or a given fund."@en ;
+	.
+
+fibo-civ-fnd-civ:FundRedemptionRestriction
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-rst:SecuritiesRestriction ;
+	rdfs:label "fund redemption restriction"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundRedemptionRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	.
+
+fibo-civ-fnd-civ:FundRedemptionTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundProcessingTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasAdditionalRedemptionRestrictions ;
+			owl:someValuesFrom fibo-civ-fnd-civ:ReferToFundOrderDesk ;
+		]
+		;
+	rdfs:label "fund redemption terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundRedemptionTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Formal terms for redemption of units in the fund. These set out what the investor and the fund may or may not do."@en ;
+	.
+
+fibo-civ-fnd-civ:FundReinvestmentPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundUnitDistributionPolicy ;
+	rdfs:label "fund reinvestment policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundReinvestmentPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Terms for the expected reinvestment of profits on fund units."@en ;
+	.
+
+fibo-civ-fnd-civ:FundReportingTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:Information ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasAccountingReportingFrequency ;
+			owl:someValuesFrom fibo-civ-fnd-civ:ReportingFrequencyPolicy ;
+		]
+		;
+	rdfs:label "fund reporting terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundReportingTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Terms describing the accounting methods and reporting arrangements used by the fund."@en ;
+	.
+
+fibo-civ-fnd-civ:FundShareClassUnit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundUnit ,
+		fibo-fbc-fi-fi:EquityInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:confersOwnershipOf ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundEquity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasDistributionPolicy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnitDistributionPolicy ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasExpectedDividend ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundShareClassUnitDividend ;
+		]
+		;
+	rdfs:label "fund share class unit"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundShareClassUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The legal structure in which you can purchase part of an investment pool, defined by a variety of characteristics like investor type, minimum size of investment, distribution type, fee and currency. A fund unit which gives the holder an equity stake in the fund."@en ;
+	fibo-fnd-utl-av:explanatoryNote "From review sessions: Theoretically you can buy a fraction of a share in a fund. This would depend on the legal structure of the fund, e.g. a minimum investment. There is always a distribution plan."@en ;
+	.
+
+fibo-civ-fnd-civ:FundShareClassUnitDividend
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-math-math:TimedParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasPolicyTerms.1 ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundDividendPolicy ;
+		]
+		;
+	rdfs:label "fund share class unit dividend"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundShareClassUnitDividend" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Expected dividend payment from a Fund Unit. REVIEW: Does this apply to the Fund as a whole or to a unit in the fund? This term will be redefined following the Funds model restructuring"@en ;
+	.
+
+fibo-civ-fnd-civ:FundStructure
+	a owl:Class ;
+	rdfs:label "fund structure"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundStructure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "One of the different ways in which a Fund may be structured."@en ;
+	.
+
+fibo-civ-fnd-civ:FundSubscriptionTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundProcessingTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnit ;
+		]
+		;
+	rdfs:label "fund subscription terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundSubscriptionTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Subscription terms for the fund. Further notes: ISO FIBIM, EFAMA DD and FPP combine terms for subscription, redemption and general holding requirements. These have been separated here as they are different kinds of term, but this can be reviewed. Subscription Terms are identified as terms of the fund and not the fund unit, since terms for how you might subscribe can't be binding one someone who has not yet subscribed."@en ;
+	.
+
+fibo-civ-fnd-civ:FundSupervisoryAuthority
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-be-le-cb:Corporation ;
+		]
+		;
+	rdfs:label "fund supervisory authority"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundSupervisoryAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The legal entity which supervises the fund or fund industry"@en ;
+	.
+
+fibo-civ-fnd-civ:FundTransferAgent
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundsProcessingParty ;
+	rdfs:label "fund transfer agent"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundTransferAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "An entity that undertakes the execution of subscription, redemption and switch orders on behalf of a fund. Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:FundUnit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:TransferableContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:denominationCurrency ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasDetails ;
+			owl:someValuesFrom fibo-civ-fnd-civ:NetAssetValueCalculationMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasFundProcessingTerms ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasFundProcessingTerms ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundRedemptionTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:isOpenEndedOrClosed ;
+			owl:someValuesFrom fibo-civ-fnd-civ:OpenEndedOrClosed ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:isLegallyRecordedIn ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIdentification/SecurityIdentifier> ;
+		]
+		;
+	rdfs:label "fund unit"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A unit in a fund, which may be traded and is a contract between the fund and the holder of that unit."@en ;
+	fibo-fnd-utl-av:explanatoryNote "If it is a closed fund, you can still trade the units. You trade back with the fund. Not with a counterparty. Therefore this is a tradable contract, though it may not necessarily be a transferable contract."@en ;
+	.
+
+fibo-civ-fnd-civ:FundUnitDistributionMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:DistributionMethod ;
+	rdfs:label "fund unit distribution method"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundUnitDistributionMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The normal distribution policy for funds."@en ;
+	.
+
+fibo-civ-fnd-civ:FundUnitDistributionPolicy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:Policy ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasDistributionPolicy.2 ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnitDistributionMethod ;
+		]
+		;
+	rdfs:label "fund unit distribution policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundUnitDistributionPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "policy relating to the unit, e.g. if income is paid out or retained in the fund and how this is treated, including distribution policy details for dividends and coupons."@en ;
+	.
+
+fibo-civ-fnd-civ:FundUnitHolding
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/PortfolioHolding> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:allValuesFrom fibo-civ-fnd-civ:FundUnit ;
+		]
+		;
+	rdfs:label "fund unit holding"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundUnitHolding" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A holding of a unit in another fund."@en ;
+	.
+
+fibo-civ-fnd-civ:FundUnitsSettlementTermsConvention
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fi-stl:SettlementConvention ;
+	rdfs:label "fund units settlement terms convention"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundUnitsSettlementTermsConvention" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Default settlement terms which may apply to a fund, trading of for units in the fund and for redemption of fund units."@en ;
+	fibo-fnd-utl-av:explanatoryNote "From EFAMA DD Review Notes: Default settlement terms. Related to the Unit. Usually the terms are set already at the fund level, and won't vary at share class level between different share classes, but they are facts about the share classes / Notes / Bonds i.e. what you can trade. In fact this happens already - different kinds of investors may have different settlement dates. In this example you announce it earlier - not the same. This may be a separate fact. Conesnsus:Review"@en ;
+	.
+
+fibo-civ-fnd-civ:FundsCashDistribution
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundUnitDistributionMethod ;
+	rdfs:label "funds cash distribution"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundsCashDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Accrued income is distributed periodically to the investor."@en ;
+	.
+
+fibo-civ-fnd-civ:FundsCreation
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:SPVPurpose ;
+	rdfs:label "funds creation"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundsCreation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "SPV set up for fund management Conesnsus:Review"@en ;
+	.
+
+fibo-civ-fnd-civ:FundsProcessing
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-lif:LifecycleStage ;
+	rdfs:label "funds processing"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundsProcessing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The context of managing and processing funds, issuing funds units etc. This is the context in which the different parties involved in a fund are defined as parties."@en ;
+	.
+
+fibo-civ-fnd-civ:FundsProcessingAccount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-caa:Account ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-accx-acc:accountHasProvider ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundOrderDesk ;
+		]
+		;
+	rdfs:label "funds processing account"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundsProcessingAccount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "An account used specifically in the processing of funds. Like all accounts this is (per FIBIM definition) a business relationship between two entities; one entity is the account owner, the other entity is the account servicer. Please refer to Financial global model for treatment of accounts relationships in this model."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Derived from FIBIM definition for "Account", which is: "Business relationship between two entities; one entity is the account owner, the other entity is the account servicer." this corresponds to the Global Terms definition for Account.'@en ;
+	.
+
+fibo-civ-fnd-civ:FundsProcessingParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:label "funds processing party"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundsProcessingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A party involved in the processing of funds in some way."@en ;
+	.
+
+fibo-civ-fnd-civ:FundsProcessingPassport
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:WrittenInformation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasInformationAbout ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnit ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:mayBeDefinedIn ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundProspectus ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:definesTermsFor ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundProcessingTerms ;
+		]
+		;
+	rdfs:label "funds processing passport"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundsProcessingPassport" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The Funds Processing Passport. This is defined as a document. This has terms drawn from elsewhere in the model which are defined as part of the FPP for reasons defined in the FPP descriptions."@en ;
+	skos:editorialNote "Please see FPP Data Descriptions for more information (when available - not included in this model). See EFAMA website for this. Also see XLS for terms of this. These terms are often but net necessarily part of the Prospectus. See also the Thing Formerly Referred To As Investment. The definitions in the FPP descriptions may not be accurate. This is defining what kind of information is requested. Further Action: Now that we have defined sets of formal contractual terems for subvscriptions, redemptions and general terms, and since these terms don't have a direct relationship to any one Contract at present (as contractual terms should do), there may be a relationship between those terms and the FPP. To be handled in next review."@en ;
+	.
+
+fibo-civ-fnd-civ:FundsSPV
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:SpecialPurposeVehicle ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:holds ;
+			owl:someValuesFrom fibo-civ-fnd-civ:Fund ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:isSetUpFor ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundsCreation ;
+		]
+		;
+	rdfs:label "funds s p v"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:FundsSPV" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A Special Purpose Vehicle (SPV) set up specifically to create an investment fund. It is set up by a company or a group of companies for this purpose. The SPV is formed for a specific reason and exists for a specific period of time and is then disbanded."@en ;
+	.
+
+fibo-civ-fnd-civ:GrossOfFeePerformanceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:PerformanceDeterminationMethod ;
+	rdfs:label "gross of fee performance determination method"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:GrossOfFeePerformanceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Performance determined gross of fee. Review: Is this mutually exclusive with the other listed method? It sounds like it is not."@en ;
+	.
+
+fibo-civ-fnd-civ:HedgeFund
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:Fund ;
+	rdfs:label "hedge fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:HedgeFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Definition needed Review notes (EFAMA?) Also only closed ended according to regulations. This is not always a kind of closed fund."@en ;
+	.
+
+fibo-civ-fnd-civ:IncomeAccumulation
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundUnitDistributionMethod ;
+	rdfs:label "income accumulation"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:IncomeAccumulation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Accrued income is not distributed and instead remains reflected within the unit/share price."@en ;
+	.
+
+fibo-civ-fnd-civ:InvestmentAdvisor
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundsProcessingParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:processingPartyHasIdentity ;
+			owl:someValuesFrom fibo-be-le-lp:LegalEntity ;
+		]
+		;
+	rdfs:label "investment advisor"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:InvestmentAdvisor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The party that provides investment guidance at a fee. Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:InvestmentRestriction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-rst:SecuritiesRestriction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isPartOf ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundProspectus ;
+		]
+		;
+	rdfs:label "fund investment restrictions set"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:InvestmentRestriction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Limitations that apply to the fund as a whole, such as risk factors. these are used to determine whether the fund is appropriate for a given type of investor to invest in."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These are defined by the overall Fund investment policy. Not the same as the detailed policies for investing in percentages of this or that."@en ;
+	.
+
+fibo-civ-fnd-civ:JurisdictionStrategy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:identifies.1 ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		]
+		;
+	rdfs:label "jurisdiction strategy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:JurisdictionStrategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Strategy which is jurisdiction based."@en ;
+	.
+
+fibo-civ-fnd-civ:Liquidity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-oac-own:Asset ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:denominatedIn ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		]
+		;
+	rdfs:label "liquidity"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:Liquidity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Precise definition needed for liquidity, and check that it is modeled accordingly."@en ;
+	.
+
+fibo-civ-fnd-civ:MoneyWeightedRateOfReturnPerformanceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:PerformanceDeterminationMethod ;
+	rdfs:label "money weighted rate of return performance determination method"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:MoneyWeightedRateOfReturnPerformanceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Money weighted rate of return."@en ;
+	.
+
+fibo-civ-fnd-civ:NetAssetValueCalculationMethod
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arrxx-meth:Method ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:isCalculatedIn ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		]
+		;
+	rdfs:label "net asset value calculation method"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:NetAssetValueCalculationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Parameters for the calculation of the net asset value for an investment fund/fund class."@en ;
+	skos:editorialNote "These terms were in the ISO FIBIM model but correspond to some details in the EFAMA DD."@en ;
+	.
+
+fibo-civ-fnd-civ:NoteFundUnit
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundUnit ;
+	rdfs:label "note fund unit"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:NoteFundUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Need a legal definition - to follow. This is one of the mechanisms by which an investor may hold an interest in a fund, but is not a Bond or a Share."@en ;
+	skos:editorialNote "It is not possible to determine at this time whether some of the policy facts that apply to bund and share class units apply to all fund units including this one. Once this is defined, all Fund Distribution Policy terms and relationships should be rechecked."@en ;
+	.
+
+fibo-civ-fnd-civ:NoteStakeInFund
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:StakeInFund ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:definesRelationshipWith ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundLegalForm ;
+		]
+		;
+	rdfs:label "note stake in fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:NoteStakeInFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A stake held in a fund by way of a note."@en ;
+	skos:editorialNote "Need a legal definition - to follow. This is one of the mechanisms by which an investor may hold an interest in a fund, but is not a Bond or a Share. Therefore it's not clear what sort of stake to label this as - usually a stake in anything must be either equity or debt."@en ;
+	.
+
+fibo-civ-fnd-civ:OpenEndedOrClosed
+	a owl:Class ;
+	rdfs:label "open ended or closed"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:OpenEndedOrClosed" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	.
+
+fibo-civ-fnd-civ:OrganizationStrategy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:definedInRelationTo ;
+			owl:someValuesFrom fibo-be-le-cb:Corporation ;
+		]
+		;
+	rdfs:label "organization strategy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:OrganizationStrategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Strategy which is organization based."@en ;
+	.
+
+fibo-civ-fnd-civ:OtherInvestmentFundInformation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:Information ;
+	rdfs:label "other investment fund information"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:OtherInvestmentFundInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Things which are not part of the prospectus but are important if you want to understand the fund."@en ;
+	skos:editorialNote 'See terms in EFAMA spreadsheet. These are properties of the fund but are not legally binding. Author follow-up note: I have managed to find a "home" for disposition for most of the entries that are in the spreadsheet. It is not clear which of the spreadsheet terms are indended to come under the general heading in this class. The first place I would look is in the terms I have defined as "Fund Processing Terms", which are defined as formal, legal contractual terms. If any of those are not legally binding on some party, then this is where they belong instead.'@en ;
+	.
+
+fibo-civ-fnd-civ:PerformanceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "performance determination method"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:PerformanceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A method for performance determination (e.g. Time weighted and money weighted, annualized, gross of fee) along with the time frame in which this is determined. PLUS Performances NamePeriod"@en ;
+	.
+
+fibo-civ-fnd-civ:PortfolioBenchmark
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:definesBenchmark ;
+			owl:someValuesFrom fibo-ind-ind-ind:MarketRate ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundPortfolio ;
+		]
+		;
+	rdfs:label "portfolio benchmark"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:PortfolioBenchmark" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Security or other price against which the performance of the portfolio is evaluated."@en ;
+	.
+
+fibo-civ-fnd-civ:PortfolioInvestmentStrategy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:InvestmentStrategy ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:includes ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+		]
+		;
+	rdfs:label "portfolio investment strategy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:PortfolioInvestmentStrategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The manner in which the portfolio manager tries to reach the funds objectives."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Describes how you get there. E.g fully invested v not fully invested. MB Note: The terms labeled "Strategy" in EFAMA and in FIBIM are more like dictionary definition of policy, while "How you get there" is a dictionary definition of Strategy. Therefore original labels may be reversed from dictionary definition of the global semantics these are derived from.'@en ;
+	.
+
+fibo-civ-fnd-civ:PortfolioManager
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:OrganizationMember ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-rel-rel:isMemberOf ;
+				owl:allValuesFrom fibo-civ-fnd-civ:FundManagementCompany ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:manages ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundPortfolio ;
+		]
+		;
+	rdfs:label "portfolio manager" ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:PortfolioManager" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "person or entity responsible for day to day investment decisions for a fund or asset" ;
+	.
+
+fibo-civ-fnd-civ:PreferredShareInFund
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:label "preferred share in fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:PreferredShareInFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	.
+
+fibo-civ-fnd-civ:PrivateEquityHolding
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/PortfolioHolding> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom fibo-sec-eq-eq:PrivatelyHeldShare ;
+		]
+		;
+	rdfs:label "private equity holding"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:PrivateEquityHolding" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A holding of private equity."@en ;
+	.
+
+fibo-civ-fnd-civ:ReferToFundOrderDesk
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundRedemptionRestriction ;
+	rdfs:label "refer to fund order desk"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:ReferToFundOrderDesk" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Restriction requiring an investor to refer to the fund order desk prior to redeeming a fund."@en ;
+	skos:editorialNote "While it's unclear from original data models, it's likely that this restriction is actually to learn from the fund order desk of any other individual kinds of restriction that will apply. This is itself treated as a kind of restriction here."@en ;
+	.
+
+fibo-civ-fnd-civ:ReportingFrequencyPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ReportingPolicy ;
+	rdfs:label "reporting frequency policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:ReportingFrequencyPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Frequency with which financial reports will be presented."@en ;
+	skos:editorialNote "This could theoretically be defined in terms of a Frequency (reciprocal of time), but since this kind of reporting in accounting is always either annual or semi-annual these are defined as policies for the provision of such reports"@en ;
+	.
+
+fibo-civ-fnd-civ:RiskLevel
+	a owl:Class ;
+	rdfs:label "risk level"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:RiskLevel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	.
+
+fibo-civ-fnd-civ:SICAF
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-fct-fct:FunctionalBusinessEntity ;
+	rdfs:label "s i c a f"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SICAF" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A French fund vehicle type. Designation and definition needed."@en ;
+	.
+
+fibo-civ-fnd-civ:SICAV
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-fct-fct:FunctionalBusinessEntity ;
+	rdfs:label "s i c a v"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SICAV" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Societe Collective a Capital Variable"@en ;
+	.
+
+fibo-civ-fnd-civ:SPVPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-ins:Purpose ;
+	rdfs:label "s p v purpose"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SPVPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The reason for the creation of a Special Purpose Vehicle."@en ;
+	skos:editorialNote "This is used to identify different kinds of SPV which may have different detailed facts about them; however in general all SPVs are much the same."@en ;
+	.
+
+fibo-civ-fnd-civ:SectorStrategy
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	rdfs:label "sector strategy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SectorStrategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Strategy which is sector based."@en ;
+	.
+
+fibo-civ-fnd-civ:SemiAnnualReportingPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:ReportingFrequencyPolicy ;
+	rdfs:label "semi annual reporting policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SemiAnnualReportingPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Reports are presented twice a year."@en ;
+	.
+
+fibo-civ-fnd-civ:SovereignWealthFund
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-fct-fct:FunctionalBusinessEntity ;
+	rdfs:label "sovereign wealth fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SovereignWealthFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Government investment fund funded by foreign currency reserves. Review: Also include things like International Monetary Fund. Are these a Legal Entity? See also Funds model. Move the question about Sovereign Wealth Funds to the Funds model. Looking at definitions (e.g. Wikipedia) it's a state owned investment fund. The legal entity owner is a government (or in fact a State, which is governed by a Government)."@en ;
+	.
+
+fibo-civ-fnd-civ:SpecialPurposeVehicle
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-fct:FunctionalBusinessEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:constitutedAs ;
+			owl:someValuesFrom fibo-be-le-lp:LegalEntity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:isSetUpFor ;
+			owl:someValuesFrom fibo-civ-fnd-civ:SPVPurpose ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:sPVHoldsPool ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Pools/Pool> ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:sponsoredBy ;
+			owl:someValuesFrom fibo-be-le-lp:LegalPerson ;
+		]
+		;
+	rdfs:label "special purpose vehicle"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SpecialPurposeVehicle" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A Special Purpose Vehicle (SPV) set up specifically to issue a security or securities. It is set up by a company or a group of companies for some purpose such as to create instruments that are off the company's balance sheet or to issue Participation Notes for investors in another jurisdiction. The SPV is formed for a specific reason and exists for a specific period of time and is then disbanded. Further notes: Special Purpose Vehicles are also referred to as bankruptcy remote entities, as they isolate financial risk. For Participation Notes: slightly different purpose but the same kind of vehicle. The only investment made by the SPV is that they buy in the stock. These are the same kind of entity in all of the contexts in which they exist."@en ;
+	.
+
+fibo-civ-fnd-civ:StakeInFund
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:Position ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:definesRelationshipWith ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundLegalForm ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:givesOwnershipOf ;
+			owl:someValuesFrom fibo-civ-fnd-civ:Fund ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:identifiedAs.5 ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnit ;
+		]
+		;
+	rdfs:label "stake in fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:StakeInFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The holding of some portion in a fund, by some party. This stake will generally tak ethe form of some sort of unit in that fund."@en ;
+	.
+
+fibo-civ-fnd-civ:SubFund
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:Fund ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:subFund.1 ;
+			owl:allValuesFrom xsd:boolean ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:supervisedBy ;
+			owl:someValuesFrom fibo-civ-fnd-civ:SubfundSupervisoryAuthority ;
+		]
+		;
+	rdfs:label "sub fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SubFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A set of share classes is a compartment of an umbrella fund. In this case, subfund is a synonym of investment fund and therefore has the same attributes as investment fund."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'The terms given for Fund may relate to fund, sub fund or umbrella. Sub Fund is differentiated by the fact that it is part of an umbrella fund, otherwise it is the same as any other fund. ISO FIBIM Definition for SubFundIndicator (property of InvestmentFund): "Indicates whether the investment fund is a subfund, when it is a compartment of an umbrella fund. In this case, subfund is a synonym of investment fund and therefore has the same attributes as investment fund."'@en ;
+	.
+
+fibo-civ-fnd-civ:SubFundManager
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundManager ;
+	rdfs:label "sub fund manager"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SubFundManager" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "A sub fund manager is ..."@en ;
+	.
+
+fibo-civ-fnd-civ:SubfundSupervisoryAuthority
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:FundSupervisoryAuthority ;
+	rdfs:label "subfund supervisory authority"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:SubfundSupervisoryAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The legal entity which supervises the fund or fund industry(for a subfund located in a different country)"@en ;
+	.
+
+fibo-civ-fnd-civ:TimeWeightedRateOfReturnPerformanceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:PerformanceDeterminationMethod ;
+	rdfs:label "time weighted rate of return performance determination method"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:TimeWeightedRateOfReturnPerformanceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Time weighted rate of return."@en ;
+	.
+
+fibo-civ-fnd-civ:UmbrellaFund
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:Fund ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:hasSubFund ;
+			owl:someValuesFrom fibo-civ-fnd-civ:SubFund ;
+		]
+		;
+	rdfs:label "umbrella fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:UmbrellaFund" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Fund structure which has one or more investment pools."@en ;
+	fibo-fnd-utl-av:explanatoryNote "An umbrella consists of several funds, and is a pool. ISO FIBIM definition: In securities, a collective investment scheme that has a contractual or a corporate form. When it has a contractual form, a fund is constituted under either the law of contract or under the trust law and thus it is not a legal entity. In its corporate form, a fund is a legal entity and is structured as a company. However it is not clear how this uniquely defines an umbrella fund as such."@en ;
+	.
+
+fibo-civ-fnd-civ:UnitIssuer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:FundsProcessingParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:issues ;
+			owl:someValuesFrom fibo-civ-fnd-civ:FundUnit ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:processingPartyHasIdentity ;
+			owl:someValuesFrom fibo-be-le-cb:Corporation ;
+		]
+		;
+	rdfs:label "unit issuer"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:UnitIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The party which issues the Fund Unit."@en ;
+	.
+
+fibo-civ-fnd-civ:accountingYearEndDate
+	a owl:ObjectProperty ;
+	rdfs:label "accounting year end date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:accountingYearEndDate" ;
+	rdfs:domain fibo-civ-fnd-civ:FundReportingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DayMonthValue ;
+	skos:definition "Last day of the accounting year for the fund."@en ;
+	.
+
+fibo-civ-fnd-civ:additionalRestrictions
+	a owl:DatatypeProperty ;
+	rdfs:label "additional restrictions"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:additionalRestrictions" ;
+	rdfs:domain fibo-civ-fnd-civ:OrganizationStrategy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Other restrictions or treatment information in respect of this strategy and the organization to which it refers."@en ;
+	.
+
+fibo-civ-fnd-civ:administeredBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "administered by"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:administeredBy" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundAdministrator ;
+	.
+
+fibo-civ-fnd-civ:advisedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "advised by"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:advisedBy" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:InvestmentAdvisor ;
+	.
+
+fibo-civ-fnd-civ:allowedInvestorType
+	a owl:ObjectProperty ;
+	rdfs:label "allowed investor type"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:allowedInvestorType" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundInvestorType ;
+	skos:definition "Type of investor that can invest in the fund class."@en ;
+	.
+
+fibo-civ-fnd-civ:anticipatedVolatility
+	a owl:ObjectProperty ;
+	rdfs:label "anticipated volatility"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:anticipatedVolatility" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProspectus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	.
+
+fibo-civ-fnd-civ:anticipates
+	a owl:ObjectProperty ;
+	rdfs:label "anticipates"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:anticipates" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProspectus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-ind-ind-ind:MarketRate ;
+	.
+
+fibo-civ-fnd-civ:assessedAgainst
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:details ;
+	rdfs:label "assessed against"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:assessedAgainst" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolio ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:PortfolioBenchmark ;
+	.
+
+fibo-civ-fnd-civ:authorizedCountry
+	a owl:ObjectProperty ;
+	rdfs:label "authorized country"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:authorizedCountry" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range lcc-cr:Country ;
+	skos:definition "Country in which it is authorised to commercialise the fund."@en ;
+	.
+
+fibo-civ-fnd-civ:backEndLoadApplicable
+	a owl:DatatypeProperty ;
+	rdfs:label "back end load applicable"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:backEndLoadApplicable" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether an exit charge, eg, CDSC, on redemption orders for this class can be applied."@en ;
+	.
+
+fibo-civ-fnd-civ:benchmarkWeight
+	a owl:ObjectProperty ;
+	rdfs:label "benchmark weight"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:benchmarkWeight" ;
+	rdfs:domain fibo-civ-fnd-civ:PortfolioBenchmark ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Instrument weighting in the benchmark for the portfolio."@en ;
+	.
+
+fibo-civ-fnd-civ:blacklisted
+	a owl:DatatypeProperty ;
+	rdfs:label "blacklisted"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:blacklisted" ;
+	rdfs:domain fibo-civ-fnd-civ:OrganizationStrategy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether or not the strategy in framed so as to include the referenced business entity as being blacklisted. If yes, the strategy prevents investment in securities issued by that organization."@en ;
+	.
+
+fibo-civ-fnd-civ:clearFundsRequired
+	a owl:DatatypeProperty ;
+	rdfs:label "clear funds required"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:clearFundsRequired" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnitsSettlementTermsConvention ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether cleared funds may be required before a subscription order can be executed."@en ;
+	.
+
+fibo-civ-fnd-civ:closedEndFund
+	a owl:DatatypeProperty ;
+	rdfs:label "closed end fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:closedEndFund" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Closed to new investments. So there are a fixed number of units. May be open or closed to new units being issued (whether or not the units can be traded)."@en ;
+	.
+
+fibo-civ-fnd-civ:closedFund
+	a owl:DatatypeProperty ;
+	rdfs:label "closed fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:closedFund" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Closed to new investors. So an existing investor can buy new shares."@en ;
+	.
+
+fibo-civ-fnd-civ:confersOwnershipOf
+	a owl:ObjectProperty ;
+	rdfs:label "confers ownership of"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:confersOwnershipOf" ;
+	rdfs:domain fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundEquity ;
+	.
+
+fibo-civ-fnd-civ:constitutedAs
+	a owl:ObjectProperty ;
+	rdfs:label "constituted as"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:constitutedAs" ;
+	rdfs:domain fibo-civ-fnd-civ:SpecialPurposeVehicle ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-be-le-lp:LegalEntity ;
+	skos:definition "The Special Purpose Vehicle is constituted as some kind of Formal Organization."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This may be a company incorporated by shares, a limited liability company or some other form of legal entity, including legal person and non incorporated formal organization. These are usually limited in their articles as to what they can do. It is as this entity that the SPV is able to be party to contracts and incur debts. Note that it cannot be an individual human being."@en ;
+	.
+
+fibo-civ-fnd-civ:couponPaymentDate
+	a owl:ObjectProperty ;
+	rdfs:label "coupon payment date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:couponPaymentDate" ;
+	rdfs:domain fibo-civ-fnd-civ:FundCouponPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DayMonthValue ;
+	skos:definition "The date at which the coupon is distributed to the bond unit holder."@en ;
+	.
+
+fibo-civ-fnd-civ:dealingFrequencyDescription
+	a owl:DatatypeProperty ;
+	rdfs:label "dealing frequency description"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:dealingFrequencyDescription" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Description of frequency at which the subscriptions and redemptions are done."@en ;
+	.
+
+fibo-civ-fnd-civ:decimalPlaceRounding
+	a owl:DatatypeProperty ;
+	rdfs:label "decimal place rounding"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:decimalPlaceRounding" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "Number of decimal places to which quantities of units/shares are rounded."@en ;
+	.
+
+fibo-civ-fnd-civ:declarationChannel
+	a owl:DatatypeProperty ;
+	rdfs:label "declaration channel"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:declarationChannel" ;
+	rdfs:domain fibo-civ-fnd-civ:NetAssetValueCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Means of the net asset value publication, eg, a newspaper."@en ;
+	.
+
+fibo-civ-fnd-civ:definedInRelationTo
+	a owl:ObjectProperty ;
+	rdfs:label "defined in relation to"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:definedInRelationTo" ;
+	rdfs:domain fibo-civ-fnd-civ:OrganizationStrategy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-be-le-cb:Corporation ;
+	.
+
+fibo-civ-fnd-civ:definesAllocations
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:defines ;
+	rdfs:label "defines allocations"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:definesAllocations" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolioInvestmentPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	.
+
+fibo-civ-fnd-civ:definesBenchmark
+	a owl:ObjectProperty ;
+	rdfs:label "defines benchmark"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:definesBenchmark" ;
+	rdfs:domain fibo-civ-fnd-civ:PortfolioBenchmark ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-ind-ind-ind:MarketRate ;
+	.
+
+fibo-civ-fnd-civ:definesMainFundOrderDeskAccount
+	a owl:ObjectProperty ;
+	rdfs:label "defines main fund order desk account"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:definesMainFundOrderDeskAccount" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundsProcessingAccount ;
+	.
+
+fibo-civ-fnd-civ:definesRelationshipWith
+	a owl:ObjectProperty ;
+	rdfs:label "defines relationship with"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:definesRelationshipWith" ;
+	rdfs:domain fibo-civ-fnd-civ:StakeInFund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundLegalForm ;
+	.
+
+fibo-civ-fnd-civ:denominatedIn
+	a owl:ObjectProperty ;
+	rdfs:label "denominated in"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:denominatedIn" ;
+	rdfs:domain fibo-civ-fnd-civ:Liquidity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	.
+
+fibo-civ-fnd-civ:denomination
+	a owl:ObjectProperty ;
+	rdfs:label "denomination"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:denomination" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "Denomination Currency of the fund - Currency in which the fund unit is issued or redenominated and the currency of the NAV calculation."@en ;
+	.
+
+fibo-civ-fnd-civ:denominationCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "denomination currency"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:denominationCurrency" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	.
+
+fibo-civ-fnd-civ:describedIn
+	a owl:ObjectProperty ;
+	rdfs:label "described in"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:describedIn" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundProspectus ;
+	.
+
+fibo-civ-fnd-civ:description
+	a owl:DatatypeProperty ;
+	rdfs:label "description"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:description" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolioInvestmentPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The manner in which the manager tries to reach the funds objectives"@en ;
+	.
+
+fibo-civ-fnd-civ:description.1
+	a owl:DatatypeProperty ;
+	rdfs:label "description"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:description.1" ;
+	rdfs:domain fibo-civ-fnd-civ:PortfolioBenchmark ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Description of the benchmark used to determine the performance of a portfolio."@en ;
+	.
+
+fibo-civ-fnd-civ:distributedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "distributed by"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:distributedBy" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundDistributor ;
+	.
+
+fibo-civ-fnd-civ:distributionWithReinvestment
+	a owl:DatatypeProperty ;
+	rdfs:label "distribution with reinvestment"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:distributionWithReinvestment" ;
+	rdfs:domain
+		fibo-civ-fnd-civ:FundReinvestmentPolicy ,
+		fibo-civ-fnd-civ:FundUnitDistributionPolicy
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "It is possible to hold shares for which the accrued income is distributed, but then reinvested automatically in additional units/shares allocated to the investor."@en ;
+	.
+
+fibo-civ-fnd-civ:dividendPaymentDate
+	a owl:ObjectProperty ;
+	rdfs:label "dividend payment date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:dividendPaymentDate" ;
+	rdfs:domain fibo-civ-fnd-civ:FundDividendPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DayMonthValue ;
+	skos:definition "Day and month on which the dividends would normally be paid."@en ;
+	.
+
+fibo-civ-fnd-civ:dividendPaymentFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "dividend payment frequency"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:dividendPaymentFrequency" ;
+	rdfs:domain fibo-civ-fnd-civ:FundDividendPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "The frequency with which income is allocated (or deemed to be allocated) to investors (eg. six-monthly, yearly, etc)."@en ;
+	.
+
+fibo-civ-fnd-civ:domicile
+	a owl:ObjectProperty ;
+	rdfs:label "domicile"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:domicile" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range lcc-cr:Country ;
+	skos:definition "Country in which the investment fund is domiciled."@en ;
+	.
+
+fibo-civ-fnd-civ:dualFund
+	a owl:DatatypeProperty ;
+	rdfs:label "dual fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:dualFund" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the fund has two prices."@en ;
+	.
+
+fibo-civ-fnd-civ:endOfFiscalYear
+	a owl:ObjectProperty ;
+	rdfs:label "end of fiscal year"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:endOfFiscalYear" ;
+	rdfs:domain fibo-civ-fnd-civ:FundReportingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DayMonthValue ;
+	skos:definition "Day and month on any given year at which the books are closed and profit and loss is determined."@en ;
+	.
+
+fibo-civ-fnd-civ:exCouponDate
+	a owl:ObjectProperty ;
+	rdfs:label "ex coupon date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:exCouponDate" ;
+	rdfs:domain fibo-civ-fnd-civ:FundCouponPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DayMonthValue ;
+	skos:definition "The date at which the coupon is substracted from the NAV"@en ;
+	.
+
+fibo-civ-fnd-civ:exDivDate
+	a owl:ObjectProperty ;
+	rdfs:label "ex div date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:exDivDate" ;
+	rdfs:domain fibo-civ-fnd-civ:FundDividendPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DayMonthValue ;
+	skos:definition "The date at which the dividend is substracted from the NAV"@en ;
+	.
+
+fibo-civ-fnd-civ:firstAccountingYearEndDate
+	a owl:DatatypeProperty ;
+	rdfs:label "first accounting year end date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:firstAccountingYearEndDate" ;
+	rdfs:domain fibo-civ-fnd-civ:FundReportingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Last day of the first accounting year for the fund."@en ;
+	.
+
+fibo-civ-fnd-civ:firstNAVCalculationDate
+	a owl:DatatypeProperty ;
+	rdfs:label "first n a v calculation date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:firstNAVCalculationDate" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The first date of NAV calculation"@en ;
+	.
+
+fibo-civ-fnd-civ:frontEndLoadApplicable
+	a owl:DatatypeProperty ;
+	rdfs:label "front end load applicable"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:frontEndLoadApplicable" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether a front end charge on subscription orders for this class can be applied."@en ;
+	.
+
+fibo-civ-fnd-civ:fundClassTypeIdentifier
+	a owl:DatatypeProperty ;
+	rdfs:label "fund class type identifier"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:fundClassTypeIdentifier" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "A textual identification of the class of fund units. This is used to uniquely identify a particular class of fund units, and thereby identify features of this type of unit within the fund."@en ;
+	.
+
+fibo-civ-fnd-civ:fundHasRelatedParty
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-pty-pty:hasRelatedPartyInRole ;
+	rdfs:label "fund has related party"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:fundHasRelatedParty" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundsProcessingParty ;
+	.
+
+fibo-civ-fnd-civ:fundStructure
+	a owl:ObjectProperty ;
+	rdfs:label "fund structure"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:fundStructure" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundStructure ;
+	skos:definition "Structure of the subfund, eg, single fund, multi-class."@en ;
+	.
+
+fibo-civ-fnd-civ:givesOwnershipOf
+	a owl:ObjectProperty ;
+	rdfs:label "gives ownership of"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:givesOwnershipOf" ;
+	rdfs:domain fibo-civ-fnd-civ:StakeInFund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:Fund ;
+	.
+
+fibo-civ-fnd-civ:hasAccountant
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "has accountant"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasAccountant" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundAccountant ;
+	.
+
+fibo-civ-fnd-civ:hasAccountingInformation
+	a owl:ObjectProperty ;
+	rdfs:label "has accounting information"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasAccountingInformation" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundReportingTerms ;
+	.
+
+fibo-civ-fnd-civ:hasAccountingReportingFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "has accounting reporting frequency"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasAccountingReportingFrequency" ;
+	rdfs:domain fibo-civ-fnd-civ:FundReportingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:ReportingFrequencyPolicy ;
+	.
+
+fibo-civ-fnd-civ:hasAdditionalInformation
+	a owl:ObjectProperty ;
+	rdfs:label "has additional information"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasAdditionalInformation" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:OtherInvestmentFundInformation ;
+	.
+
+fibo-civ-fnd-civ:hasAdditionalRedemptionRestrictions
+	a owl:ObjectProperty ;
+	rdfs:label "has additional redemption restrictions"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasAdditionalRedemptionRestrictions" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:ReferToFundOrderDesk ;
+	.
+
+fibo-civ-fnd-civ:hasAuditor
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "has auditor"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasAuditor" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundAuditor ;
+	.
+
+fibo-civ-fnd-civ:hasContactDetails
+	a owl:ObjectProperty ;
+	rdfs:label "has contact details"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasContactDetails" ;
+	rdfs:domain fibo-civ-fnd-civ:PortfolioManager ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	.
+
+fibo-civ-fnd-civ:hasDataProvider
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "has data provider"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasDataProvider" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundDataProvider ;
+	skos:definition "has an organization which is the data provider and is legally responsible for the information provided"@en ;
+	.
+
+fibo-civ-fnd-civ:hasDefaultSettlementConvention
+	a owl:ObjectProperty ;
+	rdfs:label "has default settlement convention"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasDefaultSettlementConvention" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnitsSettlementTermsConvention ;
+	.
+
+fibo-civ-fnd-civ:hasDepository
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "has depository"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasDepository" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundDepositary ;
+	.
+
+fibo-civ-fnd-civ:hasDetails
+	a owl:ObjectProperty ;
+	rdfs:label "has details"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasDetails" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:NetAssetValueCalculationMethod ;
+	skos:definition "Information on the net asset value calculation of the investment fund component."@en ;
+	.
+
+fibo-civ-fnd-civ:hasDistributiojnPolicy
+	a owl:ObjectProperty ;
+	rdfs:label "has distributiojn policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasDistributiojnPolicy" ;
+	rdfs:domain fibo-civ-fnd-civ:FundBondClassUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnitDistributionPolicy ;
+	.
+
+fibo-civ-fnd-civ:hasDistributionPolicy
+	a owl:ObjectProperty ;
+	rdfs:label "has distribution policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasDistributionPolicy" ;
+	rdfs:domain fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnitDistributionPolicy ;
+	.
+
+fibo-civ-fnd-civ:hasDistributionPolicy.1
+	a owl:ObjectProperty ;
+	rdfs:label "has distribution policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasDistributionPolicy.1" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnitDistributionMethod ;
+	skos:definition "Income policy relating to a class type, ie, if income is paid out or retained in the fund."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is a fact about each individual type of Fund Unit. Additional facts may apply to the Fund as a whole - to be reviewed. Need to determine if there is an overall distribution policy term applicable to the Fund. Kept as a place holder in case there is."@en ;
+	.
+
+fibo-civ-fnd-civ:hasDistributionPolicy.2
+	a owl:ObjectProperty ;
+	rdfs:label "has distribution policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasDistributionPolicy.2" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnitDistributionPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnitDistributionMethod ;
+	skos:definition "Income policy relating to a class type, ie, if income is paid out or retained in the fund."@en ;
+	.
+
+fibo-civ-fnd-civ:hasExpectedCoupon
+	a owl:ObjectProperty ;
+	rdfs:label "has expected coupon"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasExpectedCoupon" ;
+	rdfs:domain fibo-civ-fnd-civ:FundBondClassUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundBondUnitCoupon ;
+	.
+
+fibo-civ-fnd-civ:hasExpectedDividend
+	a owl:ObjectProperty ;
+	rdfs:label "has expected dividend"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasExpectedDividend" ;
+	rdfs:domain fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundShareClassUnitDividend ;
+	.
+
+fibo-civ-fnd-civ:hasFundIdentification
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-aap-agt:isIdentifiedBy ;
+	rdfs:label "has fund identification"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasFundIdentification" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-be-le-fbo:OrganizationIdentifier ;
+	skos:definition "Identification of the investment fund. Note this relationship has no parent, and is a sibling to the identifiaciton relationship for Incorporated Company. As BEI work progresses, these should both have a parent relationship for all legal entitity identification."@en ;
+	.
+
+fibo-civ-fnd-civ:hasFundPolicy
+	a owl:ObjectProperty ;
+	rdfs:label "has fund policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasFundPolicy" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundInvestmentPolicy ;
+	skos:definition "Overall policy for amounts invested, limitations etc. Not the same as the detailed Portfolio policy."@en ;
+	.
+
+fibo-civ-fnd-civ:hasFundProcessingTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has fund processing terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasFundProcessingTerms" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundProcessingTerms ;
+	.
+
+fibo-civ-fnd-civ:hasInformationAbout
+	a owl:ObjectProperty ;
+	rdfs:label "has information about"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasInformationAbout" ;
+	rdfs:domain fibo-civ-fnd-civ:FundsProcessingPassport ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnit ;
+	.
+
+fibo-civ-fnd-civ:hasIntendedRiskLevel
+	a owl:ObjectProperty ;
+	rdfs:label "has intended risk level"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasIntendedRiskLevel" ;
+	rdfs:domain fibo-civ-fnd-civ:FundInvestmentObjective ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:RiskLevel ;
+	.
+
+fibo-civ-fnd-civ:hasIssueDate
+	a owl:ObjectProperty ;
+	rdfs:label "has issue date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasIssueDate" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Date of first NAV calculation and start of performance calculations (same as launch date)"@en ;
+	.
+
+fibo-civ-fnd-civ:hasLegalForm
+	a owl:ObjectProperty ;
+	rdfs:label "has legal form"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasLegalForm" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundLegalForm ;
+	.
+
+fibo-civ-fnd-civ:hasLiquidity
+	a owl:ObjectProperty ;
+	rdfs:label "has liquidity"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasLiquidity" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolio ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:Liquidity ;
+	.
+
+fibo-civ-fnd-civ:hasManagementCompany
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "has management company"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasManagementCompany" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundManager ;
+	.
+
+fibo-civ-fnd-civ:hasPerformanceDeterminationMethod
+	a owl:ObjectProperty ;
+	rdfs:label "has performance determination method"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasPerformanceDeterminationMethod" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:PerformanceDeterminationMethod ;
+	.
+
+fibo-civ-fnd-civ:hasPolicyTerms
+	a owl:ObjectProperty ;
+	rdfs:label "has policy terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasPolicyTerms" ;
+	rdfs:domain fibo-civ-fnd-civ:FundBondUnitCoupon ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundCouponPolicy ;
+	.
+
+fibo-civ-fnd-civ:hasPolicyTerms.1
+	a owl:ObjectProperty ;
+	rdfs:label "has policy terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasPolicyTerms.1" ;
+	rdfs:domain fibo-civ-fnd-civ:FundShareClassUnitDividend ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundDividendPolicy ;
+	skos:definition "Terms for the expected distributions of dividends."@en ;
+	.
+
+fibo-civ-fnd-civ:hasPortfolio
+	a owl:ObjectProperty ;
+	rdfs:label "has portfolio"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasPortfolio" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundPortfolio ;
+	.
+
+fibo-civ-fnd-civ:hasRelatedFundTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:hasRelatedTerms ;
+	rdfs:label "has related fund terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasRelatedFundTerms" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundProcessingTerms ;
+	.
+
+fibo-civ-fnd-civ:hasRelatedTerms
+	a owl:ObjectProperty ;
+	rdfs:label "has related terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasRelatedTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-agr-ctr:ContractualElement ;
+	.
+
+fibo-civ-fnd-civ:hasSubFund
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasPart ;
+	rdfs:label "has sub fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasSubFund" ;
+	rdfs:domain fibo-civ-fnd-civ:UmbrellaFund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:SubFund ;
+	.
+
+fibo-civ-fnd-civ:hasSubscriptionTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:hasRelatedFundTerms ;
+	rdfs:label "has subscription terms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasSubscriptionTerms" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	.
+
+fibo-civ-fnd-civ:hasTradableUnit
+	a owl:ObjectProperty ;
+	rdfs:label "has tradable unit"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasTradableUnit" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnit ;
+	.
+
+fibo-civ-fnd-civ:hasTransferAgent
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "has transfer agent"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasTransferAgent" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundTransferAgent ;
+	.
+
+fibo-civ-fnd-civ:hasUnitIssuer
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "has unit issuer"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:hasUnitIssuer" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:UnitIssuer ;
+	.
+
+fibo-civ-fnd-civ:historicPricingIndicator
+	a owl:DatatypeProperty ;
+	rdfs:label "historic pricing indicator"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:historicPricingIndicator" ;
+	rdfs:domain fibo-civ-fnd-civ:NetAssetValueCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Indicates whether the price is historic or forward."@en ;
+	.
+
+fibo-civ-fnd-civ:holderMayReinvest
+	a owl:DatatypeProperty ;
+	rdfs:label "holder may reinvest"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:holderMayReinvest" ;
+	rdfs:domain fibo-civ-fnd-civ:DistributingShareClass ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether or not the holder may reinvest dividends in the fund."@en ;
+	.
+
+fibo-civ-fnd-civ:holdingTransferable
+	a owl:DatatypeProperty ;
+	rdfs:label "holding transferable"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:holdingTransferable" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether registered investors are able to transfer some or all of their holdings to third parties."@en ;
+	.
+
+fibo-civ-fnd-civ:holds
+	a owl:ObjectProperty ;
+	rdfs:label "holds"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:holds" ;
+	rdfs:domain fibo-civ-fnd-civ:FundsSPV ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:Fund ;
+	skos:definition "The Funds Special Purpose Vehicle holds this Fund."@en ;
+	.
+
+fibo-civ-fnd-civ:identifiedAs.3
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasIdentity ;
+	rdfs:label "identified as"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:identifiedAs.3" ;
+	rdfs:domain fibo-civ-fnd-civ:FundLegalForm ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-civ-fnd-civ:FundsSPV
+			fibo-be-le-cb:Corporation
+			fibo-civ-fnd-civ:FundLegalContract
+			fibo-be-corp-corp:JointStockCompany
+		) ;
+	] ;
+	.
+
+fibo-civ-fnd-civ:identifiedAs.5
+	a owl:ObjectProperty ;
+	rdfs:label "identified as"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:identifiedAs.5" ;
+	rdfs:domain fibo-civ-fnd-civ:StakeInFund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnit ;
+	.
+
+fibo-civ-fnd-civ:identifies.1
+	a owl:ObjectProperty ;
+	rdfs:label "identifies"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:identifies.1" ;
+	rdfs:domain fibo-civ-fnd-civ:JurisdictionStrategy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	skos:definition "Jurisdiction (country, county, state, province, city) of the investment."@en ;
+	.
+
+fibo-civ-fnd-civ:identifiesAssetTypesBy
+	a owl:ObjectProperty ;
+	rdfs:label "identifies asset types by"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:identifiesAssetTypesBy" ;
+	rdfs:domain fibo-civ-fnd-civ:AssetClassStrategy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-sec-sec-cls:FinancialInstrumentClassifier ;
+	.
+
+fibo-civ-fnd-civ:implementsFundPolicy
+	a owl:ObjectProperty ;
+	rdfs:label "implements fund policy"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:implementsFundPolicy" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolio ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundPortfolioInvestmentPolicy ;
+	.
+
+fibo-civ-fnd-civ:inceptionDate
+	a owl:ObjectProperty ;
+	rdfs:label "inception date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:inceptionDate" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:Date ;
+	skos:definition "Authorization date in the country of origin."@en ;
+	.
+
+fibo-civ-fnd-civ:inceptionDate.1
+	a owl:ObjectProperty ;
+	rdfs:label "inception date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:inceptionDate.1" ;
+	rdfs:domain fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:Date ;
+	skos:definition 'Authorization date in the country of origin. Further Notes See definition in Inception Date for Fund. Separate fact exists here. Same definition used. EFAMA Review notes: Inception Date exists as soon as there is a prospectus, so it is a fact about a Share Class even if the share class is never formally issued or offered to the public. Legal structure exists even if something is not launched. Editor question: Review stated this was a fact about Share Class; confirm this fact does not apply to Bond and Note units, or was the term Share Class being used to mean all three? Meanwhile I have put the term "Issue Date" as a fact about all Fund Unit, as this is given a sa separate term in the EFAMA DD spreadsheet. MAy come clearer in the next version of that.'@en ;
+	.
+
+fibo-civ-fnd-civ:includeRelatedFirms
+	a owl:DatatypeProperty ;
+	rdfs:label "include related firms"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:includeRelatedFirms" ;
+	rdfs:domain fibo-civ-fnd-civ:OrganizationStrategy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether or not the strategy includes firms which are related in some way to the referenced organization."@en ;
+	.
+
+fibo-civ-fnd-civ:includes
+	a owl:ObjectProperty ;
+	rdfs:label "includes"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:includes" ;
+	rdfs:domain fibo-civ-fnd-civ:PortfolioInvestmentStrategy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	.
+
+fibo-civ-fnd-civ:inclusion
+	a owl:DatatypeProperty ;
+	rdfs:label "inclusion"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:inclusion" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the referred strategy is included. No means this description refers to the exclusion of what is described, from the portfolio."@en ;
+	.
+
+fibo-civ-fnd-civ:initialApplicationForm
+	a owl:ObjectProperty ;
+	rdfs:label "initial application form"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:initialApplicationForm" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundProcessingForm ;
+	skos:definition "Physical application form for the initial subscription by the investor."@en ;
+	.
+
+fibo-civ-fnd-civ:intendedLiquidationDate
+	a owl:ObjectProperty ;
+	rdfs:label "intended liquidation date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:intendedLiquidationDate" ;
+	rdfs:domain fibo-civ-fnd-civ:SpecialPurposeVehicle ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The date on which the SPV is scheduled to be disbanded and wound up."@en ;
+	.
+
+fibo-civ-fnd-civ:investmentFocus
+	a owl:DatatypeProperty ;
+	rdfs:label "investment focus"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:investmentFocus" ;
+	rdfs:domain fibo-civ-fnd-civ:PortfolioInvestmentStrategy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The information about the area the fund is mostly invested into (for example stock market in Germany)."@en ;
+	.
+
+fibo-civ-fnd-civ:isCalculatedIn
+	a owl:ObjectProperty ;
+	rdfs:label "is calculated in"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:isCalculatedIn" ;
+	rdfs:domain fibo-civ-fnd-civ:NetAssetValueCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	.
+
+fibo-civ-fnd-civ:isOpenEndedOrClosed
+	a owl:ObjectProperty ;
+	rdfs:label "is open ended or closed"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:isOpenEndedOrClosed" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:OpenEndedOrClosed ;
+	skos:definition "Whether the fund is open ended or closed."@en ;
+	.
+
+fibo-civ-fnd-civ:isSetUpFor
+	a owl:ObjectProperty ;
+	rdfs:label "is set up for"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:isSetUpFor" ;
+	rdfs:domain fibo-civ-fnd-civ:SpecialPurposeVehicle ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:SPVPurpose ;
+	.
+
+fibo-civ-fnd-civ:isSubFundOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isPartOf ;
+	rdfs:label "is sub fund of"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:isSubFundOf" ;
+	rdfs:domain fibo-civ-fnd-civ:SubFund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:UmbrellaFund ;
+	.
+
+fibo-civ-fnd-civ:isUnitHolder
+	a owl:ObjectProperty ;
+	rdfs:label "is unit holder"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:isUnitHolder" ;
+	rdfs:domain fibo-civ-fnd-civ:FundInvestor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnit ;
+	.
+
+fibo-civ-fnd-civ:issuePrice
+	a owl:ObjectProperty ;
+	rdfs:label "issue price"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:issuePrice" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:Price ;
+	skos:definition "The price at which the Fund Unit was first issued."@en ;
+	.
+
+fibo-civ-fnd-civ:issues
+	a owl:ObjectProperty ;
+	rdfs:label "issues"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:issues" ;
+	rdfs:domain fibo-civ-fnd-civ:UnitIssuer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnit ;
+	.
+
+fibo-civ-fnd-civ:launchDate
+	a owl:DatatypeProperty ;
+	rdfs:label "launch date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:launchDate" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "Date of first NAV calculation and start of performance calculations"@en ;
+	.
+
+fibo-civ-fnd-civ:legallyRecordedIn
+	a owl:ObjectProperty ;
+	rdfs:label "fund legally recorded in"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:legallyRecordedIn" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	skos:definition "Relationship note: This relationship has no obvious parent; it is similar to Security legally recorded in Jurisdiction, but that inherits from Contract jurisdiction whereas a Fund is a Pool not a Contract. So the meaning is not the same. Assign parent relationship in future if a more general one exists; at present there is none."@en ;
+	.
+
+fibo-civ-fnd-civ:limitedSharesAreIssued
+	a owl:DatatypeProperty ;
+	rdfs:label "limited shares are issued"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:limitedSharesAreIssued" ;
+	rdfs:domain fibo-civ-fnd-civ:FundShareClassUnit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether or not new shares can be issued in the fund. This is what makes it a closed end or open end fund."@en ;
+	.
+
+fibo-civ-fnd-civ:mainFundOrderDesk
+	a owl:DatatypeProperty ;
+	rdfs:label "main fund order desk"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:mainFundOrderDesk" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the fund order desk is the principal entity appointed by the fund to which orders should be submitted."@en ;
+	.
+
+fibo-civ-fnd-civ:maximumDeviation
+	a owl:ObjectProperty ;
+	rdfs:label "maximum deviation"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:maximumDeviation" ;
+	rdfs:domain fibo-civ-fnd-civ:PortfolioBenchmark ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Maximum allowable deviation from the benchmark."@en ;
+	.
+
+fibo-civ-fnd-civ:maximumInvestmentAmount
+	a owl:ObjectProperty ;
+	rdfs:label "maximum investment amount"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:maximumInvestmentAmount" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Maximum amount that may be invested in the specified strategy."@en ;
+	.
+
+fibo-civ-fnd-civ:maximumInvestmentPercentage
+	a owl:ObjectProperty ;
+	rdfs:label "maximum investment percentage"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:maximumInvestmentPercentage" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Maximum percentage that may be invested in the specified strategy."@en ;
+	.
+
+fibo-civ-fnd-civ:maximumPurchasingFee
+	a owl:ObjectProperty ;
+	rdfs:label "maximum purchasing fee"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:maximumPurchasingFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-accx-acc:Fee ;
+	skos:definition "Maximum percentage or fixed amount of money due when purchasing fund shares Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:maximumRedemptionAmount
+	a owl:ObjectProperty ;
+	rdfs:label "maximum redemption amount"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:maximumRedemptionAmount" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Maximum quantity of securities, expressed as an amount that can be sold."@en ;
+	.
+
+fibo-civ-fnd-civ:maximumRedemptionFee
+	a owl:ObjectProperty ;
+	rdfs:label "maximum redemption fee"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:maximumRedemptionFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-accx-acc:Fee ;
+	skos:definition "Maximum percentage or fixed amount of money due when redeeming fund shares Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:maximumRedemptionPercentage
+	a owl:ObjectProperty ;
+	rdfs:label "maximum redemption percentage"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:maximumRedemptionPercentage" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Maximum quantity of securities, expressed as a percentage that can be sold."@en ;
+	.
+
+fibo-civ-fnd-civ:maximumRedemptionUnits
+	a owl:DatatypeProperty ;
+	rdfs:label "maximum redemption units"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:maximumRedemptionUnits" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "Maximum number of shares/units that may be redeemed on a single dealing day."@en ;
+	.
+
+fibo-civ-fnd-civ:mayAlsoBe
+	a owl:ObjectProperty ;
+	rdfs:label "may also be"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:mayAlsoBe" ;
+	rdfs:domain fibo-civ-fnd-civ:FundAdministrator ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:UnitIssuer ;
+	skos:definition "The unit issuer would be the fund administrator (except when it is a Bond)."@en ;
+	.
+
+fibo-civ-fnd-civ:mayBe.1
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-doc:identifiedAs ;
+	rdfs:label "may be"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:mayBe.1" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingForm ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundOrderDeskPhysicalFormDocument ;
+	.
+
+fibo-civ-fnd-civ:mayBeDefinedIn
+	a owl:ObjectProperty ;
+	rdfs:label "may be defined in"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:mayBeDefinedIn" ;
+	rdfs:domain fibo-civ-fnd-civ:FundsProcessingPassport ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundProspectus ;
+	.
+
+fibo-civ-fnd-civ:minimumDeviation
+	a owl:ObjectProperty ;
+	rdfs:label "minimum deviation"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumDeviation" ;
+	rdfs:domain fibo-civ-fnd-civ:PortfolioBenchmark ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Minimum allowable deviation from the benchmark."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumHoldingPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "minimum holding period"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumHoldingPeriod" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:KnownCalendarDuration ;
+	skos:definition "Period, in days, during which the units/shares must be held following their issue before redemption will be permitted."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumInitialSubscriptionAmount
+	a owl:ObjectProperty ;
+	rdfs:label "minimum initial subscription amount"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumInitialSubscriptionAmount" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Minimum initial subscription value."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumInitialSubscriptionUnits
+	a owl:DatatypeProperty ;
+	rdfs:label "minimum initial subscription units"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumInitialSubscriptionUnits" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "Minimum initial number of units/shares that must be purchased."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumInvestmentAmount
+	a owl:ObjectProperty ;
+	rdfs:label "minimum investment amount"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumInvestmentAmount" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Minimum amount that has to be invested in the specified strategy."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumInvestmentPercentage
+	a owl:ObjectProperty ;
+	rdfs:label "minimum investment percentage"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumInvestmentPercentage" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolioInvestmentLimitations ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Minimum percentage that has to be invested in the specified strategy."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumRatingRestriction
+	a owl:ObjectProperty ;
+	rdfs:label "minimum rating restriction"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumRatingRestriction" ;
+	rdfs:domain fibo-civ-fnd-civ:InvestmentRestriction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-arr-rt:RatingScore ;
+	skos:definition "The minimum rating of securities to be invested in."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumRemainingHoldingAmount
+	a owl:ObjectProperty ;
+	rdfs:label "minimum remaining holding amount"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumRemainingHoldingAmount" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Minimum value of units/shares that must be retained to avoid automatic redemption."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumRemainingHoldingUnits
+	a owl:DatatypeProperty ;
+	rdfs:label "minimum remaining holding units"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumRemainingHoldingUnits" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "Minimum number of units/shares that must be retained to avoid automatic redemption."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumSubscriptionAmount
+	a owl:ObjectProperty ;
+	rdfs:label "minimum subscription amount"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumSubscriptionAmount" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Minimum subscription value for existing investors."@en ;
+	.
+
+fibo-civ-fnd-civ:minimumSubscriptionUnits
+	a owl:DatatypeProperty ;
+	rdfs:label "minimum subscription units"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:minimumSubscriptionUnits" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "Minimum number of units/shares that must be purchased by existing investors."@en ;
+	.
+
+fibo-civ-fnd-civ:name
+	a owl:DatatypeProperty ;
+	rdfs:label "name"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:name" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Name of the investment fund."@en ;
+	.
+
+fibo-civ-fnd-civ:name.1
+	a owl:DatatypeProperty ;
+	rdfs:label "name"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:name.1" ;
+	rdfs:domain fibo-civ-fnd-civ:FundPortfolioInvestmentPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Name given to the defined strategy."@en ;
+	.
+
+fibo-civ-fnd-civ:outlines
+	a owl:ObjectProperty ;
+	rdfs:label "outlines"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:outlines" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProspectus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundInvestmentObjective ;
+	owl:inverseOf fibo-civ-fnd-civ:statedIn ;
+	.
+
+fibo-civ-fnd-civ:percentageInvested
+	a owl:ObjectProperty ;
+	rdfs:label "percentage invested"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:percentageInvested" ;
+	rdfs:domain fibo-civ-fnd-civ:InvestmentRestriction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The percentage of funds that is to be invested at any given time."@en ;
+	.
+
+fibo-civ-fnd-civ:performanceDeterminationTimeframe
+	a owl:ObjectProperty ;
+	rdfs:label "performance determination timeframe"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:performanceDeterminationTimeframe" ;
+	rdfs:domain fibo-civ-fnd-civ:PerformanceDeterminationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DatePeriod ;
+	skos:definition "The timeframe on which the performance is reported (e.g. 1month, 1 year, YTD)."@en ;
+	.
+
+fibo-civ-fnd-civ:performanceFee
+	a owl:ObjectProperty ;
+	rdfs:label "performance fee"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:performanceFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-accx-acc:Fee ;
+	skos:definition "Fees paid for the achivements of predefined outperformance objectives Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:physicalDocumentRequired
+	a owl:DatatypeProperty ;
+	rdfs:label "physical document required"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:physicalDocumentRequired" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingForm ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether a phsyical form is required through the main fund order desk. Yes: A phsyical form is required through the main fund order desk. No: A phsyical form is not required through the main fund order desk."@en ;
+	.
+
+fibo-civ-fnd-civ:processingCountry
+	a owl:ObjectProperty ;
+	rdfs:label "processing country"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:processingCountry" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range lcc-cr:Country ;
+	skos:definition "Country in which the processing characteristic applies."@en ;
+	.
+
+fibo-civ-fnd-civ:processingPartyHasIdentity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasIdentity ;
+	rdfs:label "processing party has identity"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:processingPartyHasIdentity" ;
+	rdfs:domain fibo-civ-fnd-civ:FundsProcessingParty ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-be-le-lp:LegalEntity ;
+	skos:definition "The organization which plays the role of the funds processing party"@en ;
+	.
+
+fibo-civ-fnd-civ:productGroupDescription
+	a owl:DatatypeProperty ;
+	rdfs:label "product group description"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:productGroupDescription" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Company specific description of a group of funds."@en ;
+	.
+
+fibo-civ-fnd-civ:promotedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-civ-fnd-civ:fundHasRelatedParty ;
+	rdfs:label "promoted by"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:promotedBy" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundPromoter ;
+	.
+
+fibo-civ-fnd-civ:providerHasIdentity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasIdentity ;
+	rdfs:label "provider has identity"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:providerHasIdentity" ;
+	rdfs:domain fibo-fbc-pas-caa:AccountProvider ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-be-le-lp:LegalEntity ;
+	.
+
+fibo-civ-fnd-civ:providesDepositaryServiceFor
+	a owl:ObjectProperty ;
+	rdfs:label "provides depositary service for"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:providesDepositaryServiceFor" ;
+	rdfs:domain fibo-civ-fnd-civ:FundDepositary ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundUnit ;
+	.
+
+fibo-civ-fnd-civ:purchasingFee
+	a owl:ObjectProperty ;
+	rdfs:label "purchasing fee"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:purchasingFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-accx-acc:Fee ;
+	skos:definition "Actual percentage or fixed amount of money due when purchasing fund shares Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:redemptionCutoffDateTime
+	a owl:ObjectProperty ;
+	rdfs:label "redemption cutoff date time"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:redemptionCutoffDateTime" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "Last date/time at which an order to redeem can be given."@en ;
+	.
+
+fibo-civ-fnd-civ:redemptionCycleInBusinessDays
+	a owl:DatatypeProperty ;
+	rdfs:label "redemption cycle in business days"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:redemptionCycleInBusinessDays" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnitsSettlementTermsConvention ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The last business day following the day on which a redemption order is priced (T) by which settlement will be due for orders placed with the main Fund Order Desk. Alternatively, if proceeds will be paid following receipt of written renunciation, the last business day following receipt of the relevant renunciation documentation by the main Fund Order Desk (R) by which the proceeds will be sent."@en ;
+	.
+
+fibo-civ-fnd-civ:redemptionDealingFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "redemption dealing frequency"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:redemptionDealingFrequency" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "Frequency at which the redemptions are done."@en ;
+	.
+
+fibo-civ-fnd-civ:redemptionFee
+	a owl:ObjectProperty ;
+	rdfs:label "redemption fee"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:redemptionFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-accx-acc:Fee ;
+	skos:definition "Actual percentage or fixed amount of money due when redeeming fund shares Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:redemptionForm
+	a owl:ObjectProperty ;
+	rdfs:label "redemption form"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:redemptionForm" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundProcessingForm ;
+	skos:definition "Physical written instruction/renunciation form for redemption of units/shares by the investor."@en ;
+	.
+
+fibo-civ-fnd-civ:redemptionInAmountAllowed
+	a owl:DatatypeProperty ;
+	rdfs:label "redemption in amount allowed"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:redemptionInAmountAllowed" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether redemptions in amount are allowed."@en ;
+	.
+
+fibo-civ-fnd-civ:redemptionPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "redemption period"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:redemptionPeriod" ;
+	rdfs:domain fibo-civ-fnd-civ:FundRedemptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DatePeriod ;
+	skos:definition "Specific period, eg, for some guaranteed funds, during which the units/shares may be redeemed."@en ;
+	.
+
+fibo-civ-fnd-civ:registrationDate
+	a owl:DatatypeProperty ;
+	rdfs:label "registration date"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:registrationDate" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	skos:definition "The date at which the fund is legally approved in a country other than the country of origin."@en ;
+	.
+
+fibo-civ-fnd-civ:reinvestmentFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "reinvestment frequency"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:reinvestmentFrequency" ;
+	rdfs:domain fibo-civ-fnd-civ:FundReinvestmentPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "For units where there is Reinvestment distribution, the frequency with which the reinvestment takes place (this will be the same or less frequently than the Dividend Payment Frequency), otherwise this fact does not apply."@en ;
+	.
+
+fibo-civ-fnd-civ:sPVHoldsPool
+	a owl:ObjectProperty ;
+	rdfs:label "s p v holds pool"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:sPVHoldsPool" ;
+	rdfs:domain fibo-civ-fnd-civ:SpecialPurposeVehicle ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Pools/Pool> ;
+	skos:definition "A Special Purpose Vehicle always holds some kind of pool. This may be a debt pool, an asset pool (fund) or some pool of securities from which it issues Participation Notes."@en ;
+	.
+
+fibo-civ-fnd-civ:settlementPeriodInBusinessDays
+	a owl:DatatypeProperty ;
+	rdfs:label "settlement period in business days"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:settlementPeriodInBusinessDays" ;
+	rdfs:domain fibo-civ-fnd-civ:FundUnitsSettlementTermsConvention ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The last business day following the day on which a subscription order is priced (T) by which settlement will be due for orders placed with the main Fund Order Desk, eg. T+3."@en ;
+	.
+
+fibo-civ-fnd-civ:signatureRequired
+	a owl:DatatypeProperty ;
+	rdfs:label "signature required"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:signatureRequired" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingForm ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether a phsyical form with the investor's written signature is required through the main fund order desk. Yes:A phsyical form with the investor's written signature is required through the main fund order desk."@en ;
+	.
+
+fibo-civ-fnd-civ:sponsoredBy
+	a owl:ObjectProperty ;
+	rdfs:label "sponsored by"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:sponsoredBy" ;
+	rdfs:domain fibo-civ-fnd-civ:SpecialPurposeVehicle ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-be-le-lp:LegalPerson ;
+	skos:definition "The entity which is the creator and servicer of the SPV. Notes: To protect investors from possible bankruptcy of the corporation, there are three legal safeguards: - Transfer of assets from the corporation is a non-recourse, true sale. - Investors receive a perfected interest in the assets' cash flows. - A non-consolidation legal opinion is obtained certifying that assets of the trust or special purpose vehicle cannot be consolidated with the corporation's assets in the event of bankruptcy."@en ;
+	.
+
+fibo-civ-fnd-civ:statedDistributionFee
+	a owl:ObjectProperty ;
+	rdfs:label "stated distribution fee"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:statedDistributionFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProspectus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	.
+
+fibo-civ-fnd-civ:statedIn
+	a owl:ObjectProperty ;
+	rdfs:label "stated in"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:statedIn" ;
+	rdfs:domain fibo-civ-fnd-civ:FundInvestmentObjective ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundProspectus ;
+	.
+
+fibo-civ-fnd-civ:statedInvestmentAim
+	a owl:DatatypeProperty ;
+	rdfs:label "stated investment aim"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:statedInvestmentAim" ;
+	rdfs:domain fibo-civ-fnd-civ:FundInvestmentObjective ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The stated aim of the Fund in words, e.g outperfom a given benchmark."@en ;
+	.
+
+fibo-civ-fnd-civ:statedManagementFee
+	a owl:ObjectProperty ;
+	rdfs:label "stated management fee"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:statedManagementFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProspectus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The fee that is stated in the Prospectus as being what is to be charged for management. Further notes: Can be monetary amount or a percentage or a combination. Action: simple type is wrong."@en ;
+	.
+
+fibo-civ-fnd-civ:statedObjective
+	a owl:DatatypeProperty ;
+	rdfs:label "stated objective"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:statedObjective" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProspectus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The stated objective of the fund, in words."@en ;
+	.
+
+fibo-civ-fnd-civ:stipulatesBenchmark
+	a owl:ObjectProperty ;
+	rdfs:label "stipulates benchmark"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:stipulatesBenchmark" ;
+	rdfs:domain fibo-civ-fnd-civ:FundInvestmentPolicy ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-ind-ind-ind:MarketRate ;
+	.
+
+fibo-civ-fnd-civ:subFund
+	a owl:DatatypeProperty ;
+	rdfs:label "sub fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:subFund" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the investment fund is a subfund, when it is a compartment of an umbrella fund. If so, subfund is a synonym of investment fund and therefore has the same attributes as investment fund."@en ;
+	.
+
+fibo-civ-fnd-civ:subFund.1
+	a owl:DatatypeProperty ;
+	rdfs:label "is sub fund"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:subFund.1" ;
+	rdfs:domain fibo-civ-fnd-civ:SubFund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "The investment fund is a subfund, when it is a compartment of an umbrella fund. In this case, subfund is a synonym of investment fund and therefore has the same attributes as investment fund."@en ;
+	.
+
+fibo-civ-fnd-civ:subscriptionCutoffDateTime
+	a owl:ObjectProperty ;
+	rdfs:label "subscription cutoff date time"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:subscriptionCutoffDateTime" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "Last date/time at which an order to subscribe can be given."@en ;
+	.
+
+fibo-civ-fnd-civ:subscriptionDealingFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "subscription dealing frequency"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:subscriptionDealingFrequency" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "Frequency at which the subscriptions are done."@en ;
+	.
+
+fibo-civ-fnd-civ:subscriptionPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "subscription period"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:subscriptionPeriod" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-tim-tim:DatePeriod ;
+	skos:definition "Specific period, eg, for some guaranteed funds, during which the units/shares may be subscribed to."@en ;
+	.
+
+fibo-civ-fnd-civ:subscriptionsInAmountAllowed
+	a owl:DatatypeProperty ;
+	rdfs:label "subscriptions in amount allowed"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:subscriptionsInAmountAllowed" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether subscriptions in amount are allowed."@en ;
+	.
+
+fibo-civ-fnd-civ:subsequentApplicationForm
+	a owl:ObjectProperty ;
+	rdfs:label "subsequent application form"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:subsequentApplicationForm" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundProcessingForm ;
+	skos:definition "Physical application form for subsequent investments by the same investor."@en ;
+	.
+
+fibo-civ-fnd-civ:supervisedBy
+	a owl:ObjectProperty ;
+	rdfs:label "supervised by"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:supervisedBy" ;
+	rdfs:domain fibo-civ-fnd-civ:Fund ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-civ-fnd-civ:FundSupervisoryAuthority ;
+	.
+
+fibo-civ-fnd-civ:switchingChargeable
+	a owl:DatatypeProperty ;
+	rdfs:label "switching chargeable"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:switchingChargeable" ;
+	rdfs:domain fibo-civ-fnd-civ:FundProcessingGeneralTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether a switching charge for changing between sub-funds of the same umbrella can be applied."@en ;
+	.
+
+fibo-civ-fnd-civ:switchingFee
+	a owl:ObjectProperty ;
+	rdfs:label "switching fee"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:switchingFee" ;
+	rdfs:domain fibo-civ-fnd-civ:FundSubscriptionTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-accx-acc:Fee ;
+	skos:definition "Actual percentage or fixed amount of money due when switching to another fund. Definition origin:EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:takesFormOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:comprises ;
+	rdfs:label "takes form of"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:takesFormOf" ;
+	rdfs:domain fibo-civ-fnd-civ:BricksAndMortarHolding ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/RealEstate> ;
+	.
+
+fibo-civ-fnd-civ:trackingError
+	a owl:ObjectProperty ;
+	rdfs:label "tracking error"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:trackingError" ;
+	rdfs:domain fibo-civ-fnd-civ:InvestmentRestriction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "See RiskFactors narrative in EFAMA DD"@en ;
+	.
+
+fibo-civ-fnd-civ:typeOfSecurities
+	a owl:DatatypeProperty ;
+	rdfs:label "type of securities"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:typeOfSecurities" ;
+	rdfs:domain fibo-civ-fnd-civ:InvestmentRestriction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The type of securities or other holdings that may be invested in."@en ;
+	.
+
+fibo-civ-fnd-civ:valuationFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "valuation frequency"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:valuationFrequency" ;
+	rdfs:domain fibo-civ-fnd-civ:NetAssetValueCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "Frequency of the net asset value calculation."@en ;
+	.
+
+fibo-civ-fnd-civ:valuationFrequencyTextualDescription
+	a owl:DatatypeProperty ;
+	rdfs:label "valuation frequency textual description"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:valuationFrequencyTextualDescription" ;
+	rdfs:domain fibo-civ-fnd-civ:NetAssetValueCalculationMethod ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Description of the frequency of the net asset value calculation."@en ;
+	.
+
+fibo-civ-fnd-civ:valueAtRisk
+	a owl:ObjectProperty ;
+	rdfs:label "value at risk"@en ;
+	rdfs:comment "QName: fibo-civ-fnd-civ:valueAtRisk" ;
+	rdfs:domain fibo-civ-fnd-civ:InvestmentRestriction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "See RiskClassification_NameOf in EFAMA DD Applies to Fund not Portfolio."@en ;
+	.
+

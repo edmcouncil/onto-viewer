@@ -1,0 +1,961 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-fct: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/> .
+@prefix fibo-be-ge-ge: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-be-le-fbo: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fct-rga: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-cd: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/>
+	a owl:Ontology ;
+	rdfs:label "Financial Services Entities Ontology" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:" ;
+	dct:abstract "This ontology defines basic financial service providers, such as holding companies, financial institutions (both depository and non-depository institutions), and clearing houses at a relatively general level. Nuances specific to the institutions located in a specific country are defined in jurisdiction specific dependent ontologies." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage <http://www.w3.org/standards/techs/owl#w3c_all> ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fbc-fct-fse" ;
+	sm:filename "FinancialServicesEntities.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FBC 1.0 FTF report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/ version of this ontology was modified per the FIBO 2.0 RFC, including, but not limited to, the addition of trade settlement concepts and generalizing the concept of a credit union." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/ version of this ontology was modified to generalize certain unions where they were no longer required and incorporate a new financial service provider identifier that is assigned functionally rather than to a legal entity." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/ version of this ontology was modified to refine the concept of a credit union and generalize the definition of an underwriter." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/FunctionalEntities/FinancialServicesEntities.rdf version of this ontology was revised to leverage the new party identifier and replace hasDefinition with isDefinedIn to clarify intent."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fct-fse:Bank
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:DepositoryInstitution ;
+	rdfs:label "bank" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:Bank" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <https://www.sec.gov/about/laws/ica40.pdf> ;
+	skos:definition "a depository institution, usually a corporation, that accepts deposits, makes loans, pays checks, and performs related services, for individual members of the public, businesses or other organizations" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Banking Terms, Sixth Edition, 2012" ;
+	.
+
+fibo-fbc-fct-fse:BankForInternationalSettlements
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:Bank ;
+	rdfs:label "bank for international settlements" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BankForInternationalSettlements" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "an international financial organization that serves central banks in their pursuit of monetary and financial stability, helping to foster international cooperation in those areas and acting as a bank for central banks" ;
+	fibo-fnd-utl-av:definitionOrigin "Office of Financial Research (OFR) Annual Report, 2012, Glossary" ;
+	.
+
+fibo-fbc-fct-fse:BankHoldingCompany
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:HoldingCompany ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-cb:Corporation ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "bank holding company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BankHoldingCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "any company that owns and/or has direct or indirect control of one or more banks; BHCs may also own nonbanking subsidiaries such as broker-dealers and asset managers" ;
+	fibo-fnd-utl-av:adaptedFrom "Office of Financial Research (OFR) Annual Report, 2012, Glossary" ;
+	fibo-fnd-utl-av:explanatoryNote "A bank holding company may also own another bank holding company, which in turn owns or controls a bank; the company at the top of the ownership chain is called the top holder." ;
+	.
+
+fibo-fbc-fct-fse:BankingProduct
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:FinancialProduct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fbc-fct-fse:DepositoryInstitution ;
+		]
+		;
+	rdfs:label "banking product" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BankingProduct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a product provided to consumers and businesses by a bank or similar depository institution such as a checking account, savings account, certificate of deposit, debit or pre-paid card, or credit card" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/r/retailbanking.asp"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-fse:BankingService
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:FinancialService ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fbc-fct-fse:DepositoryInstitution ;
+		]
+		;
+	rdfs:label "banking service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BankingService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service offered by a bank or similar depository institution, such as a cash management service, foreign exchange service, lending or credit service, investment service, insurance service, merchant service, payroll service, etc." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/r/retailbanking.asp"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-fse:BrokerageFirm
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:NonDepositoryInstitution ,
+		fibo-fbc-pas-fpas:BrokerDealer
+		;
+	rdfs:label "brokerage firm" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BrokerageFirm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a firm in the business of buying and selling securities, operating as both a broker and a dealer, depending on the transaction" ;
+	fibo-fnd-utl-av:definitionOrigin "Office of Financial Research (OFR) Annual Report, 2012, Glossary" ;
+	fibo-fnd-utl-av:explanatoryNote "The term broker-dealer is used in U.S. securities regulation parlance to describe stock brokerages, because most of them act as both agents and principals. A brokerage acts as a broker (or agent) when it executes orders on behalf of clients, whereas it acts as a dealer (or principal) when it trades for its own account." ;
+	.
+
+fibo-fbc-fct-fse:BusinessIdentifierCode
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-fbo:OrganizationIdentifier ,
+		fibo-fnd-arr-cd:CodeElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-be-le-fbo:OrganizationPartIdentifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-fbc-fct-fse:BusinessPartyPrefix ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-fbc-fct-fse:BusinessPartySuffix ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fnd-org-fm:FormalOrganization ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass lcc-cr:Alpha2Code ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:onClass lcc-cr:Country ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:someValuesFrom fibo-fbc-fct-fse:BusinessIdentifierCodeScheme ;
+		]
+		;
+	rdfs:label "business identifier code" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BusinessIdentifierCode" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "an international identifier for financial and non-financial institutions used to facilitate automated processing of information for financial services" ;
+	fibo-fnd-utl-av:abbreviation "BIC" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 9362:2014 Banking -- Banking telecommunication messages -- Business identifier code (BIC)" ;
+	fibo-fnd-utl-av:explanatoryNote "The BIC is used for addressing messages, routing business transactions and identifying business parties.  Note that the use of OrganizationPartIdentifier in FIBO corresponds to the Branch Code in the SWIFT scheme." ;
+	fibo-fnd-utl-av:synonym
+		"SWIFT ID" ,
+		"SWIFT code" ,
+		"SWIFT-BIC" ,
+		"bank identifier code" ,
+		"business entity identifier"
+		;
+	.
+
+fibo-fbc-fct-fse:BusinessIdentifierCodeScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-fbo:OrganizationIdentificationScheme ,
+		fibo-fnd-arr-cd:CodeSet ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:someValuesFrom fibo-fbc-fct-fse:BusinessIdentifierCode ;
+		]
+		;
+	rdfs:label "business identifier code scheme" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BusinessIdentifierCodeScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a scheme that specifies the elements of a unique business identifier code (BIC) scheme to identify financial and non-financial institutions used to facilitate automated processing of information for financial services" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"ISO 9362:2014 Banking -- Banking telecommunication messages -- Business identifier code (BIC)" ,
+		"https://www.iso.org/standard/60390.html"^^xsd:anyURI
+		;
+	.
+
+fibo-fbc-fct-fse:BusinessPartyPrefix
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-fbo:OrganizationIdentifier ,
+		fibo-fnd-arr-cd:CodeElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIncludedIn ;
+			owl:onClass fibo-fbc-fct-fse:BusinessIdentifierCode ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:someValuesFrom fibo-fbc-fct-fse:BusinessIdentifierCodeScheme ;
+		]
+		;
+	rdfs:label "business party prefix" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BusinessPartyPrefix" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a four-character (4 alphanumeric) code associated with the individual institution or business" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 9362:2014 Banking -- Banking telecommunication messages -- Business identifier code (BIC)" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"For new BIC registration by an organization already identified with a BIC or an affiliated organization [after the transition period ending November 2018], SWIFT will still reserve the usage of an existing party prefix to these organizations. This legacy rule will be reserved to existing BIC owners. If they wish to preserve this value, no other organization will be allowed to use the same code" ,
+		"For new BIC registration from an organization not yet identified by a BIC, the party prefix will be allocated at the discretion of the RA. The code will not have a mnemonic or acronym value anymore."
+		;
+	fibo-fnd-utl-av:synonym
+		"bank code" ,
+		"institution code"
+		;
+	.
+
+fibo-fbc-fct-fse:BusinessPartySuffix
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cd:CodeElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:someValuesFrom fibo-fbc-fct-fse:BusinessIdentifierCodeScheme ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIncludedIn ;
+			owl:someValuesFrom fibo-fbc-fct-fse:BusinessIdentifierCode ;
+		]
+		;
+	rdfs:label "business party suffix" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:BusinessPartySuffix" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a two-character (2 alphanumeric) code associated with the individual institution or business" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 9362:2014 Banking -- Banking telecommunication messages -- Business identifier code (BIC)" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"In the prior version of the standard, position 7 of the BIC determined the location of the BIC in a particular country. In a country spanning over multiple time zones, each character may have been used to define a different time zone. If an organization moved location to a different time zone within the same country, the existing BIC would normally have been deleted and replaced by a new BIC with the appropriate location code." ,
+		"With the revision of the standard [and transition period ending November 2018], the location code has been re-defined as a 'party suffix' without any specific meaning. A new reference data attribute has been introduced in the SWIFTRef directories to indicate where the institution is located and to which time zone it refers."
+		;
+	.
+
+fibo-fbc-fct-fse:CentralBank
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:Bank ,
+		fibo-fbc-fct-fse:MonetaryAuthority ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:allValuesFrom fibo-be-ge-ge:Instrumentality ;
+		]
+		;
+	rdfs:label "central bank" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:CentralBank" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial institution that is the monetary authority and major regulatory bank for a country (or group of countries)" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://lexicon.ft.com/Term?term=central-bank"^^xsd:anyURI ,
+		"http://www.investopedia.com/terms/c/centralbank.asp"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "Its functions include issuing and managing the country's currency, controlling monetary policy and supervising money market operations, managing exchange and gold reserves, acting as lender of last resort to commercial banks, and providing banking services to the government. Central banks are state-controlled but are increasingly being given an independent status to insulate them from partisan politics." ;
+	.
+
+fibo-fbc-fct-fse:CentralCounterpartyClearingHouse
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:ClearingHouse ;
+	rdfs:label "central counterparty clearing house" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:CentralCounterpartyClearingHouse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <http://www.esma.europa.eu/system/files/EACH2.pdf> ;
+	skos:definition "a clearing house that helps facilitate trading in derivatives and equities markets" ;
+	fibo-fnd-utl-av:abbreviation "CCP" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/c/ccph.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote """These clearing houses are often operated by the major banks in the country. The house's prime responsibility is to provide efficiency and stability to the financial markets that they operate in.
+
+There are two main processes that are carried out by CCPs: clearing and settlement of market transactions. Clearing relates to identifying the obligations of both parties on either side of a transaction. Settlement occurs when the final transfer of securities and funds occur.
+
+CCPs benefit both parties in a transaction because they bear most of the credit risk. If two individuals deal with one another, the buyer bears the credit risk of the seller, and vice versa. When a CCP is used the credit risk that is held against both buyer and seller is coming from the CCP, which in all likelihood is much less than in the previous situation.""" ;
+	.
+
+fibo-fbc-fct-fse:CentralSecuritiesDepository
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialServiceProvider ;
+	rdfs:label "central securities depository" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:CentralSecuritiesDepository" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a functional entity that provides a central point for depositing financial instruments ('securities'), for example bonds and shares" ;
+	fibo-fnd-utl-av:abbreviation "CSD" ;
+	fibo-fnd-utl-av:adaptedFrom "http://ecsda.eu/facts/faq"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "CSDs' clients are typically financial institutions themselves (such as custodian banks and brokers) rather than individual investors." ;
+	.
+
+fibo-fbc-fct-fse:ClearingBank
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:ClearingHouse ,
+		fibo-fbc-fct-fse:CommercialBank
+		;
+	rdfs:label "clearing bank" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:ClearingBank" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a commercial bank that facilitates payment and settlement of financial transactions, such as check clearing or facilitating trades between the sellers and buyers of securities or other financial instruments or contracts" ;
+	fibo-fnd-utl-av:definitionOrigin "Office of Financial Research (OFR) Annual Report, 2012, Glossary" ;
+	.
+
+fibo-fbc-fct-fse:ClearingCorporation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:ClearingHouse ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-cb:Corporation ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "clearing corporation" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:ClearingCorporation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a clearing house that is organized as a corporation" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	.
+
+fibo-fbc-fct-fse:ClearingHouse
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:FinancialServiceProvider ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:provides ;
+			owl:someValuesFrom fibo-fbc-fct-fse:ClearingService ;
+		]
+		;
+	rdfs:label "clearing house" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:ClearingHouse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service provider that is exchange affiliated and provides clearing services, including the validation, delivery, and settlement of financial transactions, for financial intermediaries" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	.
+
+fibo-fbc-fct-fse:ClearingService
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialService ;
+	rdfs:label "clearing service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:ClearingService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <http://www.dtcc.com/news/2014/january/28/101-key-terms-about-dtcc-and-financial-market-infrastructures> ;
+	skos:definition "a set of activities provided on behalf of an institutional market participant by a clearing services provider following a trade that finalizes the transfer of security ownership" ;
+	fibo-fnd-utl-av:adaptedFrom "EDM Council / Quarule" ;
+	.
+
+fibo-fbc-fct-fse:CommercialBank
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:Bank ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-cb:Corporation ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "commercial bank" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:CommercialBank" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <http://www.ffiec.gov/nicpubweb/Content/HELP/Institution%20Type%20Description.htm> ;
+	skos:definition "a bank that provides services, such as accepting deposits, giving business loans and auto loans, mortgage lending, and basic investment products like savings accounts and certificates of deposit" ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.investopedia.com/terms/c/commercialbank.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote
+		"A commercial bank is a financial institution that is owned by stockholders, operates for a profit, and engages in various lending activities." ,
+		"The traditional commercial bank is a brick and mortar institution with tellers, safe deposit boxes, vaults and ATMs. However, some commercial banks do not have any physical branches and require consumers to complete all transactions by phone or Internet. In exchange, they generally pay higher interest rates on investments and deposits, and charge lower fees."
+		;
+	.
+
+fibo-fbc-fct-fse:CommercialFinanceCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:FinanceCompany ;
+	rdfs:label "commercial finance company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:CommercialFinanceCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a finance company that makes loans to manufacturers and wholesalers, secured by accounts receivable, inventories, and equipment" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	fibo-fnd-utl-av:synonym "commercial credit company" ;
+	.
+
+fibo-fbc-fct-fse:CommodityTradingAdvisor
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:NonDepositoryInstitution ;
+	rdfs:label "commodity trading advisor" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:CommodityTradingAdvisor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "an individual or organization that directly or indirectly advises others as to the value or advisability of buying or selling futures contracts or options" ;
+	fibo-fnd-utl-av:abbreviation "CTA" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	fibo-fnd-utl-av:explanatoryNote "Indirect advice includes exercising trading authority over a customer's account. In the U.S., registered CTAs are registered with the Commodities Futures Trading Commission (CFTC) and are generally required to be members of the National Futures Association (NFA)." ;
+	.
+
+fibo-fbc-fct-fse:ConsumerFinanceCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:FinanceCompany ;
+	rdfs:label "consumer finance company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:ConsumerFinanceCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a finance company that lends to individuals under the small loans laws of the jurisdiction in which they operate" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	fibo-fnd-utl-av:synonym
+		"direct loan company" ,
+		"small loan company"
+		;
+	.
+
+fibo-fbc-fct-fse:CreditUnion
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-fct:CooperativeSociety ,
+		fibo-fbc-fct-fse:DepositoryInstitution ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-be-le-fbo:NotForProfitOrganization ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "credit union" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:CreditUnion" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a not-for-profit depository institution that makes personal loans and offers other consumer banking services, organized for the purpose of promoting thrift among its members and creating a source of credit for provident or productive purposes" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.ncua.gov/Legal/Documents/fcu_act.pdf"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-fse:DepositoryInstitution
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:FinancialInstitution ;
+	rdfs:label "depository institution" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:DepositoryInstitution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "any financial institution engaged in the business of receiving demand deposits from the public or other institutions" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"12 U.S. Code Section 1813 - Definitions, see, for example, http://www.law.cornell.edu/uscode/text/12/1813" ,
+		"https://www.fdic.gov/regulations/laws/rules/1000-400.html#fdic1000sec.3a"^^xsd:anyURI
+		;
+	.
+
+fibo-fbc-fct-fse:ElectronicFundsTransferService
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialService ;
+	rdfs:label "electronic funds transfer service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:ElectronicFundsTransferService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <https://www.federalreserve.gov/boarddocs/caletters/2008/0807/08-07_attachment.pdf> ;
+	skos:definition "a service involving any transfer of funds other than a transaction involving a paper instrument, that is initiated through an electronic terminal, telephone, or computer and that orders or authorizes a financial institution to debit or credit an account" ;
+	skos:example "EFT services include transfers through automated teller machines, point-of-sale terminals, automated clearinghouse systems, telephone bill-payment plans in which periodic or recurring transfers are contemplated, and remote banking programs." ;
+	fibo-fnd-utl-av:abbreviation "EFT" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	fibo-fnd-utl-av:synonym "wire transfer service" ;
+	.
+
+fibo-fbc-fct-fse:FaceAmountCertificateCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:InvestmentCompany ;
+	rdfs:label "face amount certificate company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:FaceAmountCertificateCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <http://www.investopedia.com/study-guide/series-99/chapters-46/chapter-5-investment-companies/introduction-investment-companies/> ;
+	owl:disjointWith fibo-fbc-fct-fse:ManagementCompany ;
+	skos:definition "an investment company which is engaged or proposes to engage in the business of issuing face-amount certificates of the installment type, or which has been engaged in such business and has any such certificate outstanding" ;
+	fibo-fnd-utl-av:definitionOrigin "Section 4, definition of investment companies, Investment Company Act of 1940 as amended and approved as of 3 January 2012, see https://www.sec.gov/about/laws/ica40.pdf" ;
+	fibo-fnd-utl-av:explanatoryNote "An investor may enter into a contract with an issuer of a face amount certificate to contract to receive a stated or fixed amount of money (the face amount) at a stated date in the future. In exchange for this future sum, the investor must deposit an agreed lump sum or make scheduled installment payments over time. Face amount certificates are rarely issued these days, as most of the tax advantages that the investment once offered have been lost through changes in the tax laws." ;
+	.
+
+fibo-fbc-fct-fse:FinanceCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:NonDepositoryInstitution ;
+	rdfs:label "finance company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:FinanceCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial intermediary in the business of making loans to individuals or businesses that obtains its financing from banks, institutions, and other money market sources rather than from deposits" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	.
+
+fibo-fbc-fct-fse:FinancialInstitution
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:FinancialServiceProvider ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-rga:isRegulatedBy ;
+			owl:someValuesFrom fibo-fbc-fct-rga:RegulatoryAgency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:provides ;
+			owl:someValuesFrom fibo-fbc-pas-fpas:FinancialService ;
+		]
+		;
+	rdfs:label "financial institution" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:FinancialInstitution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service provider identified as either a government agency or privately owned entity that collects funds from the public and from other institutions, and invests those funds in financial assets, such as loans, securities, bank deposits, and income-generating property" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Banking Terms, Sixth Edition, 2012" ;
+	fibo-fnd-utl-av:explanatoryNote "Financial institutions are differentiated by the way they obtain and invest funds. Depository institutions accept public deposits, which are insured by the government against loss, and channel those deposits into lending activities.  Non-depository institutions, such as brokerage firms, life insurance companies, pension funds, and investment companies, fund their investment activities directly from financial markets by selling securities to the public or by selling insurance policies, in the case of insurance companies." ;
+	fibo-fnd-utl-av:synonym "financial intermediary" ;
+	.
+
+fibo-fbc-fct-fse:FinancialServiceProviderIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRoleIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:onClass fibo-fnd-law-jur:Jurisdiction ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fbc-pas-fpas:FinancialServiceProvider ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:someValuesFrom fibo-fbc-fct-fse:FinancialServiceProviderIdentifierScheme ;
+		]
+		;
+	rdfs:label "financial service provider identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:FinancialServiceProviderIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "an identifier that is officially allocated to a financial service provider based on a function that they provide, typically in a jurisdiction over which a regulatory agency has some jurisdiction" ;
+	.
+
+fibo-fbc-fct-fse:FinancialServiceProviderIdentifierScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:IdentificationScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:someValuesFrom fibo-fbc-fct-fse:FinancialServiceProviderIdentifier ;
+		]
+		;
+	rdfs:label "financial service provider identifier scheme" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:FinancialServiceProviderIdentifierScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "the scheme that defines the financial service provider identifier per the issuing registration authority or regulatory agency" ;
+	.
+
+fibo-fbc-fct-fse:FuturesCommissionMerchant
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:NonDepositoryInstitution ;
+	rdfs:label "futures commission merchant" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:FuturesCommissionMerchant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "an individual or organization that which does both of the following: (1) solicits or accepts orders to buy or sell futures contracts, options on futures, retail off-exchange forex contracts, or swaps and (2) accepts money or other assets from customers to support such orders" ;
+	fibo-fnd-utl-av:abbreviation "FCM" ;
+	fibo-fnd-utl-av:adaptedFrom "National Futures Association" ;
+	.
+
+fibo-fbc-fct-fse:HoldingCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-fct-fct:FunctionalBusinessEntity ;
+	rdfs:label "holding company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:HoldingCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a business (corporation, limited liability company, or limited partnership) that has been established to own stock in another company, typically to own enough voting shares to have some level of control over that company's policies and management" ;
+	fibo-fnd-utl-av:explanatoryNote "Holding companies protect their owners from losses to some degree, protecting assets, for example, in case of bankruptcy.  They can also be set up to own property such as real estate, patents, trademarks, stocks and other assets to limit financial and legal liability" ;
+	.
+
+fibo-fbc-fct-fse:InsuranceCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:NonDepositoryInstitution ;
+	rdfs:label "insurance company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:InsuranceCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a non-depository institution whose primary and predominant business activity is the writing of insurance or the reinsuring of risks underwritten by insurance companies, and that provides compensation based on the happening of one or more contingencies" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.ffiec.gov/nicpubweb/Content/HELP/Institution%20Type%20Description.htm"^^xsd:anyURI ,
+		"https://www.sec.gov/about/laws/ica40.pdf"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote """In the US, insurance companies are subject to supervision by the insurance commissioner or a similar official or agency of a State; or any receiver or similar official or any liquidating agent for such a company, in his capacity as such. Common forms of insurance include life, property and casualty, and health insurance. In addition to insuring against hazards, many insurance companies also sell investments or investment-like products. The most prevalent investment products offered by insurers are annuities and life insurance policies that also feature investment elements.
+
+A number of insurance companies operate brokerage arms that trade securities on behalf of clients.""" ;
+	.
+
+fibo-fbc-fct-fse:InsuranceService
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialService ;
+	rdfs:label "insurance service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:InsuranceService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service in which the insurer promises to provide compensation for specific potential future losses in exchange for a periodic payment" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	fibo-fnd-utl-av:explanatoryNote "Insurance providers invest the compensation they receive in order to make a profit. In general, insurance transfers risk from individuals or organizations to a larger pool of individuals or organizations that are better able to mitigate that risk." ;
+	.
+
+fibo-fbc-fct-fse:InvestmentBank
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-fct:Business ,
+		fibo-fbc-fct-fse:FinancialInstitution ,
+		[
+			a owl:Class ;
+			owl:unionOf (
+				fibo-fbc-fct-fse:Bank
+				fibo-fbc-fct-fse:BrokerageFirm
+			) ;
+		]
+		;
+	rdfs:label "investment bank" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:InvestmentBank" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service provider that performs a variety of services. Investment banks specialize in large and complex financial transactions such as underwriting, acting as an intermediary between a securities issuer and the investing public, facilitating mergers and other corporate reorganizations, and acting as a broker and/or financial adviser for institutional clients." ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.investopedia.com/terms/i/investmentbank.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Major investment banks include Barclays, BofA Merrill Lynch, Warburgs, Goldman Sachs, Deutsche Bank, JP Morgan, Morgan Stanley, Salomon Brothers, UBS, Credit Suisse, Citibank and Lazard. Some investment banks specialize in particular industry sectors. Many investment banks also have retail operations that serve small, individual customers." ;
+	.
+
+fibo-fbc-fct-fse:InvestmentCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:NonDepositoryInstitution ;
+	rdfs:label "investment company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:InvestmentCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <http://www.investopedia.com/study-guide/series-99/chapters-46/chapter-5-investment-companies/introduction-investment-companies/> ;
+	skos:definition "Any issuer which: (a) is or holds itself out as being engaged primarily, or proposes to engage primarily, in the business of investing, reinvesting, or trading in securities; (b) is engaged or proposes to engage in the business of issuing face-amount certificates of the installment type, or has been engaged in such business and has any such certificate outstanding; or (c) is engaged or proposes to engage in the business of investing, reinvesting, owning, holding, or trading in securities, and owns or proposes to acquire investment securities having a value exceeding 40 per centum of the value of such issuer&apos;s total assets (exclusive of Government securities and cash items) on an unconsolidated basis" ;
+	fibo-fnd-utl-av:definitionOrigin "Section 3a of the Investment Company Act of 1940 as amended in January, 2012, https://www.sec.gov/about/laws/ica40.pdf" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"An investment company is organized as either a corporation or as a trust. Individual investors' money is then pooled together in a single account and used to purchase securities that will have the greatest chance of helping the investment company reach its objectives. All investors jointly own the portfolio that is created through these pooled funds, and each investor has an undivided interest in the securities." ,
+		"In the US, all investment company offerings are subject to the Securities Act of 1933, which requires the investment company to register with the Securities Exchange Commission (SEC) and to give all purchasers a prospectus. Investment companies are also subject to the Investment Company Act of 1940, which sets forth guidelines on how investment companies must operate."
+		;
+	.
+
+fibo-fbc-fct-fse:InvestmentService
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialService ;
+	rdfs:label "investment service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:InvestmentService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service designed to assist investors in using capital to create more money, either through income-producing vehicles or through more risk-oriented ventures to result in capital gains, including but not limited to providing investment advice, asset and portfolio management, brokerage services, and so forth" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	.
+
+fibo-fbc-fct-fse:ManagementCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:InvestmentCompany ;
+	rdfs:label "management company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:ManagementCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	owl:disjointWith fibo-fbc-fct-fse:UnitInvestmentTrust ;
+	skos:definition "Any investment company that sells and manages a portfolio of securities other than a face-amount certificate company or unit investment fund." ;
+	fibo-fnd-utl-av:definitionOrigin "Section 4, definition of investment companies, Investment Company Act of 1940 as amended and approved as of 3 January 2012, see https://www.sec.gov/about/laws/ica40.pdf" ;
+	fibo-fnd-utl-av:explanatoryNote "Management companies allow investors to pool their capital with that of other investors in order to purchase professionally-managed groups of diversified securities." ;
+	.
+
+fibo-fbc-fct-fse:MerchantService
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialService ;
+	rdfs:label "merchant service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:MerchantService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service provided by a financial institution to a merchant or other business, including but not limited to managing financial transactions via a secure channel" ;
+	skos:example "Example merchant services include credit and debit card processing, check guarantee and conversion services, point of sale (PoS) systems, gift card and loyalty programs, online transaction processing, etc." ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	.
+
+fibo-fbc-fct-fse:MonetaryAuthority
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-rga:RegulatoryAgency ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-fse:regulatesSupplyOf ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		]
+		;
+	rdfs:label "monetary authority" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:MonetaryAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a regulatory agency that controls the monetary policy, regulation and supply of money in some country or group of countries" ;
+	skos:example "a central bank, the executive branch of a government, a central bank for several nations, a currency board" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://lexicon.ft.com/Term?term=monetary-authority"^^xsd:anyURI ,
+		"http://www.investordictionary.com/definition/monetary-authority"^^xsd:anyURI
+		;
+	.
+
+fibo-fbc-fct-fse:NonDepositoryInstitution
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-fct-fct:Business ,
+		fibo-fbc-fct-fse:FinancialInstitution
+		;
+	rdfs:label "non-depository institution" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:NonDepositoryInstitution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "any financial institution that acts as the middleman between two parties in a financial transaction, and that does not provide traditional depository services, such as brokerage firms, insurance companies, investment companies, etc." ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Banking Terms, Sixth Edition, 2012" ;
+	.
+
+fibo-fbc-fct-fse:PaymentService
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-fse:MerchantService ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:involves ;
+			owl:someValuesFrom fibo-fnd-pas-psch:PaymentObligation ;
+		]
+		;
+	rdfs:label "payment service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:PaymentService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <https://ec.europa.eu/info/business-economy-euro/banking-and-finance/consumer-finance-and-payments/payment-services/payment-services_en> ;
+	skos:definition "a financial service that involves acceptance of electronic payments by a variety of payment methods including credit card, bank-based payments such as direct debit, bank transfer, and real-time bank transfer based on online banking" ;
+	.
+
+fibo-fbc-fct-fse:PayrollService
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialService ;
+	rdfs:label "payroll service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:PayrollService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service, typically provided to small businesses that are not large enough to have an internal finance organization, that involves managing payment of wages to employees" ;
+	fibo-fnd-utl-av:explanatoryNote "Payroll services typically include printing of employee pay checks, direct deposit of wages to employee bank accounts, calculation and withholding of employee taxes, calculation and payment of corporate payroll taxes and fees with appropriate government authorities (such as Social Security in the US), filing government quarterly and annual reports, and so forth. They may also include management of retirement and savings plans, health benefits, timekeeping, automated integration with the business' accounting system, etc." ;
+	.
+
+fibo-fbc-fct-fse:PrincipalUnderwriter
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:Underwriter ;
+	rdfs:label "principal underwriter" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:PrincipalUnderwriter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "Principal underwriter of or for any investment company other than a closed-end company, or of any security issued by such a company, means any underwriter who as principal purchases from such company, or pursuant to contract has the right (whether absolute or conditional) from time to time to purchase from such company, any such security for distribution, or who as agent for such company sells or has the right to sell any such security to a dealer or to the public or both, but does not include a dealer who purchases from such company through a principal underwriter acting as agent for such company. Principal underwriter of or for a closed-end company or any issuer which is not an investment company, or of any security issued by such a company or issuer, means any underwriter who, in connection with a primary distribution of securities, (a) is in privity of contract with the issuer or an affiliated person of the issuer; (b) acting alone or in concert with one or more other persons, initiates or directs the formation of an underwriting syndicate; or (c) is allowed a rate of gross commission, spread, or other profit greater than the rate allowed another underwriter participating in the distribution." ;
+	fibo-fnd-utl-av:definitionOrigin "Section 3a of the Investment Company Act of 1940 as amended in January, 2012, https://www.sec.gov/about/laws/ica40.pdf" ;
+	.
+
+fibo-fbc-fct-fse:SalesFinanceCompany
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:FinanceCompany ;
+	rdfs:label "sales finance company" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:SalesFinanceCompany" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a finance company that purchases retail and wholesale paper from automobile and other consumer and commercial goods dealers" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014" ;
+	fibo-fnd-utl-av:synonym "acceptance company" ;
+	.
+
+fibo-fbc-fct-fse:SavingsAssociation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:DepositoryInstitution ;
+	rdfs:label "savings association" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:SavingsAssociation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "A savings association is defined as: (a) any Federal savings association, where a Federal savings association means any Federal savings association or Federal savings bank which is chartered under section 1464 of the Federal Deposit Insurance Act; (b) any State savings association, where a State savings association means any building and loan association, savings and loan association, or homestead association; or any cooperative bank (other than a cooperative bank which is a State bank as defined in subsection (a)(2)) of the Federal Deposit Insurance Act, which is organized and operating according to the laws of the State (as defined in subsection (a)(3)) in which it is chartered or organized; and (c) any corporation (other than a bank) that the Board of Directors and the Comptroller of the Currency jointly determine to be operating in substantially the same manner as a savings association." ;
+	fibo-fnd-utl-av:definitionOrigin "https://www.fdic.gov/regulations/laws/rules/1000-400.html#fdic1000sec.3a"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-fse:SelfRegulatingOrganization
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-rga:RegulatoryAgency ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-be-le-fbo:NonGovernmentalOrganization ;
+		]
+		;
+	rdfs:label "self-regulating organization" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:SelfRegulatingOrganization" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:seeAlso <https://en.wikipedia.org/wiki/Self-regulatory_organization> ;
+	skos:definition "a non-governmental organization that has the power to create and exercise some degree of regulatory authority over an industry or profession in some country or group of countries" ;
+	fibo-fnd-utl-av:abbreviation "SRO" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/s/sro.asp"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-fse:Underwriter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:FinancialServiceProvider ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-fbc-fct-fse:UnderwritingArrangement ;
+			] ;
+		]
+		;
+	rdfs:label "underwriter" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:Underwriter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a financial service provider that evaluates and assumes another party's risk for a fee, such as a commission, premium, spread or interest" ;
+	.
+
+fibo-fbc-fct-fse:UnderwritingArrangement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:MutualContractualAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fbc-fct-fse:Underwriter ;
+		]
+		;
+	rdfs:label "underwriting arrangement" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:UnderwritingArrangement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a contractual agreement between parties that commits the underwriter to assuming risk" ;
+	.
+
+fibo-fbc-fct-fse:UnitInvestmentTrust
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-fse:InvestmentCompany ;
+	rdfs:label "unit investment trust" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:UnitInvestmentTrust" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "an investment company which (a) is organized under a trust indenture, contract of custodianship or agency, or similar instrument, (b) does not have a board of directors, and (c) issues only redeemable securities, each of which represents an undivided interest in a unit of specified securities; but does not include a voting trust" ;
+	fibo-fnd-utl-av:definitionOrigin "Section 4, definition of investment companies, Investment Company Act of 1940 as amended and approved as of 3 January 2012, see https://www.sec.gov/about/laws/ica40.pdf" ;
+	fibo-fnd-utl-av:synonym "unit investment company" ;
+	.
+
+fibo-fbc-fct-fse:WealthManagementService
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-fpas:FinancialService ;
+	rdfs:label "wealth management service" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:WealthManagementService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "a high-level financial service that combines financial and investment advice, accounting and tax services, retirement planning and legal or estate planning for one set fee" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/w/wealthmanagement.asp"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-fse:hasDateEstablished
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has date established" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:hasDateEstablished" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "the date that the financial service provider was established" ;
+	.
+
+fibo-fbc-fct-fse:hasDateInsured
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has date insured" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:hasDateInsured" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "the date that the financial service provider was first insured for the purposes of protecting client accounts" ;
+	.
+
+fibo-fbc-fct-fse:regulatesSupplyOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:governs ;
+	rdfs:label "regulates supply of" ;
+	rdfs:comment "QName: fibo-fbc-fct-fse:regulatesSupplyOf" ;
+	rdfs:domain fibo-fbc-fct-rga:RegulatoryAgency ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> ;
+	skos:definition "relates a regulatory agency to something it controls or supervises the availability of in some market by means of rules and regulations" ;
+	skos:example "The Federal Reserve System, whose banks together comprise the central bank of the United States, supervises banking system and regulates the money supply in the US." ;
+	.
+

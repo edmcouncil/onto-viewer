@@ -1,0 +1,938 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesMasterAgreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/ContractElements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionsExtended/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesMasterAgreements/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-drc-ma: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> .
+@prefix fibo-fbc-dae-cre: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditEvents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-agrx-ele: <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-txn-txnx: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/>
+	a owl:Ontology ;
+	rdfs:label "Derivatives Master Agreements Ontology"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Terms that make up the OTC Derivatives Master agreement as defined in the ISDA literature. This is an experimental ontology and needs considerable re-work if it is to be considered for release." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/ContractElements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionsExtended/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-drc-ma:CreditEventDefinition
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementElement ,
+		fibo-fnd-agr-ctr:ContractualDefinition ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:definesTermsFor ;
+			owl:someValuesFrom fibo-fbc-dae-cre:CreditEvent ;
+		]
+		;
+	rdfs:label "credit event definition"@en ;
+	rdfs:comment "QName: NONE:CreditEventDefinition" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "contract definition for a credit event as it pertains to the master agreement"@en ;
+	.
+
+fibo-der-drc-ma:CreditSupportAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:Contract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:hasBeneficiary ;
+			owl:someValuesFrom fibo-der-drc-ma:CreditSupportBeneficiary ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fnd-agr-ctr:ContractPrincipal ;
+		]
+		;
+	rdfs:label "credit support agreement"@en ;
+	rdfs:comment "QName: NONE:CreditSupportAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:CreditSupportBeneficiary
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractCounterparty ;
+	rdfs:label "credit support beneficiary"@en ;
+	rdfs:comment "QName: NONE:CreditSupportBeneficiary" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:CreditSupportDefaultEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-cre:CreditEvent ,
+		fibo-fnd-dt-oc:Occurrence ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:isFailureInForceOf ;
+			owl:someValuesFrom fibo-der-drc-ma:CreditSupportAgreement ;
+		]
+		;
+	rdfs:label "credit support default event"@en ;
+	rdfs:comment "QName: NONE:CreditSupportDefaultEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Failure of some Credit Support Agreement."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Per ISDA Master Agreement exmple, this may take one of the following forms (there may be others not in this example): - Failure to comply with some obligation under the Credit Support Agreement (after a suitable grace period has elapsed) - Expiration or Termination of Credit Support Agreement while it is still needed for the transactions it covers (i.e. not normal termination); - Disavowal or repudiation of the Credit Suport Agreement by one or other party to it. Note that these three all relate to the state of the Credit Support Agreement, and have the effect that the Credit Support Agreement is no longer in effect, during a time when there is some Transaction in play which was intended to be covered by that Agreement. ISDA original terms from Master Agreement example, in full: Credit Support Default. (1) Failure by the party or any Credit Support Provider of such party to comply with or perform any agreement or obligation to be complied with or performed by it in accordance with any Credit Support Document if such failure is continuing after any applicable grace period has elapsed; (2) the expiration or termination of such Credit Support Document or the failing or ceasing of such Credit Support Document to be in full force and effect for the purpose of this Agreement (in either case other than in accordance with its terms) prior to the satisfaction of all obligations of such party under each Transaction to which such Credit Support Document relates without the written consent of the other party; or (3) the party or such Credit Support Provider disaffirms, disclaims, repudiates or rejects, in whole or in part, or challenges the validity of, such Credit Support Document Definition Agreement: SR Draft. Details from ISDA above."@en ;
+	.
+
+fibo-der-drc-ma:CrossDefaultProvisions
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-ma:MasterAgreementContractualCommitment ;
+	rdfs:label "cross default provisions"@en ;
+	rdfs:comment "QName: NONE:CrossDefaultProvisions" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:CurrencySpecificationTerm
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementElement ,
+		fibo-fnd-agr-ctr:ContractualDefinition
+		;
+	rdfs:label "currency specification term"@en ;
+	rdfs:comment "QName: NONE:CurrencySpecificationTerm" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Term defining the currency or currencies for payments."@en ;
+	skos:editorialNote "is found in general terms in example Master Agreement."@en ;
+	.
+
+fibo-der-drc-ma:DefaultInterestObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-txnx:MasterAgreementObligation ;
+	rdfs:label "default interest obligation"@en ;
+	rdfs:comment "QName: NONE:DefaultInterestObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Obligation in respect of defaults in the performance of any payment obligation."@en ;
+	skos:example 'Example text: Default Interest; Other Amounts. Prior to the occurrence or effective designation of an Early Termination Date in respect of the relevant Transaction, a party that defaults in the performance of any payment obligation will, to the extent permitted by law and subject to Section 6(c), be required to pay interest (before as well as after judgment) on the overdue amount to the other party on demand in the same currency as such overdue amount, for the period from (and including) the original due date for payment to (but excluding) the date of actual payment, at the Default Rate. Such interest will be calculated on the basis of daily compounding and the actual number of days elapsed. If, prior to the occurrence or effective designation of an Early Termination Date in respect of the relevant Transaction, a party defaults in the performance of any obligation required to be settled by delivery, it will compensate the other party on demand if and to the extent provided for in the relevant Confirmation or elsewhere in this Agreement. " Note that this last sentence relates to a separate Obligation, labeled as Other Amount Obligation.'@en ;
+	.
+
+fibo-der-drc-ma:DefaultingParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractParty ;
+	rdfs:label "defaulting party"@en ;
+	rdfs:comment "QName: NONE:DefaultingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:DeliveryObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-txnx:MasterAgreementObligation ;
+	rdfs:label "delivery obligation"@en ;
+	rdfs:comment "QName: NONE:DeliveryObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Obligation to make deliveries on transactions transacted under the Master Agreement, as specified in any Confirmation made by that party."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This and the Payment Obligation may be set out in one clause of the Master Agreement. This is the clause which obligates the parties to make the payments or deliveries in accordance with those Confirmations, which are generally messages. May be subject to other provisions in the Master Agreement. Example text: "Each party will make each payment or delivery specified in each Confirmation to be made by it, subject to the other provisions of this Agreement. "'@en ;
+	.
+
+fibo-der-drc-ma:DerivativeTransactionMasterAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-txnx:MasterAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-der-drc-ma:MasterAgreementElement ;
+		]
+		;
+	rdfs:label "derivative transaction master agreement"@en ;
+	rdfs:comment "QName: NONE:DerivativeTransactionMasterAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "a master agreement covering derivatives transactions to be carried out between the parties to this contract"@en ;
+	skos:example 'Sample preamble to one of these: "EXAMPLE BANK, a Michigan banking corporation and SAMPLECOMPANY US, INC. a Delaware corporation have entered and/or anticipate entering into one or more transactions (each a "Transaction") that are or will be governed by this Master Agreement, which includes the schedule (the "Schedule"), and the documents and other confirming evidence (each a "Confirmation") exchanged between the parties confirming those Transactions. "'@en ;
+	.
+
+fibo-der-drc-ma:EarlyTermination
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:hasEarlyTerminationDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Date ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasExpirationDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDate ;
+		]
+		;
+	rdfs:label "early termination" ;
+	rdfs:comment "QName: NONE:EarlyTermination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "termination of an agreement for any reason prior to its expiration date" ;
+	fibo-fnd-utl-av:explanatoryNote "Early termination may be automatically triggered by an event of default with respect to any contract obligation, due to corporate action, or for other reasons.  An early termination date may be calculated per the terms of the agreement or specified explicitly at the time the termination event occurs." ;
+	.
+
+fibo-der-drc-ma:MasterAgreementAccountChangeNotificationObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-ma:MasterAgreementChangeNotificationObligation ;
+	rdfs:label "master agreement account change notification obligation"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementAccountChangeNotificationObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "The obligtation to notify the counterparty to this agreement, of any changes in account details."@en ;
+	skos:example 'Example text: "Either party may change its account for receiving a payment or delivery by giving notice to the other party at least five Local Business Days prior to the scheduled date for the payment or delivery to which such change applies unless such other party gives timely notice of a reasonable objection to such change." Note that the notice period is given as a fact about the general kind of obligation which is Master Agreement Change notification Obligation.'@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementChangeNotificationObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-txnx:MasterAgreementObligation ;
+	rdfs:label "master agreement change notification obligation"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementChangeNotificationObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "The obligtaion to notify the counterparty to this agreement, of any changes in details."@en ;
+	fibo-fnd-utl-av:explanatoryNote "General term of which Change of Account is an example."@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementConditionsPrecedent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementElement ,
+		fibo-fnd-agr-ctr:ConditionsPrecedent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:isPredicatedOn ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-drc-ma:DeliveryObligation
+					fibo-der-drc-ma:PaymentObligation
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "master agreement conditions precedent"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementConditionsPrecedent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Conditions precedent on payment or delivery on a transaction transacted under this Master Agreement."@en ;
+	skos:example 'Example text: "Each obligation of each party under Section 2(a)(i) is subject to (1) the condition precedent that no Event of Default or Potential Event of Default with respect to the other party has occurred and is continuing, (2) the condition precedent that no Early Termination Date in respect of the relevant Transaction has occurred or been effectively designated and (3) each other applicable condition precedent specified in this Agreement. " In the above, the Obligations defined under Section 2(a)(i) of the Master Agrement is the obligation to make each payment or delivery defined in a Confirmation for a transaction carried out under this Master Agreement.'@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementContractualCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementElement ,
+		fibo-fnd-agr-ctr:ContractualCommitment
+		;
+	rdfs:label "master agreement contractual commitment"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementContractualCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:MasterAgreementEarlyTerminationProvisions
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementTerminationProvision ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:definesTermsFor ;
+			owl:someValuesFrom fibo-der-drc-ma:MasterAgreementEarlyTerminationRight ;
+		]
+		;
+	rdfs:label "master agreement early termination provisions"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementEarlyTerminationProvisions" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Terms and Conditions around early termination of the Master Agreement."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Terms here include: Additional Terminaton Event Affected Parties"@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementEarlyTerminationRight
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ContractualRight ;
+	rdfs:label "master agreement early termination right"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementEarlyTerminationRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "a contractual right of a party to the master agreement to terminate the agreement early"@en ;
+	fibo-fnd-utl-av:explanatoryNote "This generally arises from some Default Event on the part of the other party."@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementElement
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractualElement ;
+	rdfs:label "master agreement element"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementElement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "a contract element specific to a master agreement governing derivatives transactions between contract parties"@en ;
+	skos:editorialNote "This is included so that all OTC Master Agreement Contract Terms Sets may be included under this one set. Terms are also described as specializations of the sorts of terms that they are (e.g. conditions Precedent, Commitments Terms and so on)."@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementObligationTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementContractualCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:definesTermsFor ;
+			owl:someValuesFrom fibo-fnd-txn-txnx:MasterAgreementObligation ;
+		]
+		;
+	rdfs:label "master agreement obligations terms"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementObligationTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "contract terms setting out the obligations on a party to the agreement"@en ;
+	skos:editorialNote "The obligations are modeled in detail as Obligations. There is little merit in setting out the terms themselves as a model of textual elements - these terms are bext understood in relation to the Obligations which they represent, which are modeled in detail."@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementRepresentation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualElement ,
+		fibo-fnd-agrx-ele:RepresentationsSection
+		;
+	rdfs:label "master agreement representation"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementRepresentation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "a representation made by one of the parties included in the master agreement"@en ;
+	fibo-fnd-utl-av:explanatoryNote "These typically include: Basic Representations - Status of the organization - Powers of the organization - Absence of conflicts - Existence of the relevant consents - Binding nature of the Agreement. Absence of default and similar events Absence of litigation Accuracy of information Tax representations (withholding; notifications) - Payer - Payee Representations as to the Credit Support Agreement Representations as to regulatory matters"@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementRightToTerminationFollowingDefaultEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementEarlyTerminationRight ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:invokedInEventOf.1 ;
+			owl:someValuesFrom fibo-fbc-dae-cre:CreditEvent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:specifies ;
+			owl:someValuesFrom fibo-der-drc-ma:NonDefaultingParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:specifies.1 ;
+			owl:someValuesFrom fibo-der-drc-ma:DefaultingParty ;
+		]
+		;
+	rdfs:label "master agreement right to termination following default event"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementRightToTerminationFollowingDefaultEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "the right to terminate a master agreement following an event of default"@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is a right which may be invoked by either party to the Master Agreement; in so doing they acome the "Non Defaulting Party" with respect to this Right. ISDA Definition in full: Right to Terminate Following Event of Default. If at any time an Event of Default with respect to a party (the "Defaulting Party") has occurred and is then continuing, the other party (the "Non-defaulting Party") may, by not more than 20 days notice to the Defaulting Party specifying the relevant Event of Default, designate a day not earlier than the day such notice is effective as an Early Termination Date in respect of all outstanding Transactions. If, however, "Automatic Early Termination" is specified in the Schedule as applying to a party, then an Early Termination Date in respect of all outstanding Transactions will occur immediately upon the occurrence with respect to such party of an Event of Default specified in Section 5(a)(vii)(1), (3), (5), (6) or, to the extent analogous thereto, (8), and as of the time immediately preceding the institution of the relevant proceeding or the presentation of the relevant petition upon the occurrence with respect to such party of an Event of Default specified in Section 5(a)(vii)(4) or, to the extent analogous thereto, (8).'@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementRightToTerminationFollowingTerminationEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementEarlyTerminationRight ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:invokedInEventOf ;
+			owl:someValuesFrom fibo-der-drc-ma:MasterAgreementTerminationEvent ;
+		]
+		;
+	rdfs:label "master agreement right to termination following termination event"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementRightToTerminationFollowingTerminationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "the right to terminate the agreement following some termination-triggering event"@en ;
+	fibo-fnd-utl-av:definitionOrigin "This specifies an event which is predefined in the Agreement as constituting a Termination Event, with the effect that this right (tro termination) is invoked by the occurrence of that event. That is the assumption modeled here. ISDA Master Agreement example text in full: Right to Terminate Following Termination Event. (i) Notice. If a Termination Event occurs, an Affected Party will, promptly upon becoming aware of it, notify the other party, specifying the nature of that Termination Event and each Affected Transaction and will also give such other information about that Termination Event as the other party may reasonably require. (ii) Transfer to Avoid Termination Event. If either an Illegality under Section 5(b)(i)(1) or a Tax Event occurs and there is only one Affected Party, or if a Tax Event Upon Merger occurs and the Burdened Party is the Affected Party, the Affected Party will, as a condition to its right to designate an Early Termination Date under Section 6(b)(iv), use all reasonable efforts (which will not require such party to incur a loss, excluding immaterial, incidental expenses) to transfer within 20 days after it gives notice under Section 6(b)(i) all its rights and obligations under this Agreement in respect of the Affected Transactions to another of its Offices or Affiliates so that such Termination Event ceases to exist. If the Affected Party is not able to make such a transfer it will give notice to the other party to that effect within such 20 day period, whereupon the other party may effect such a transfer within 30 days after the notice is given under Section 6(b)(i). Any such transfer by a party under this Section 6(b)(ii) will be subject to and conditional upon the prior written consent of the other party, which consent will not be withheld if such other party&rsquo;s policies in effect at such time would permit it to enter into transactions with the transferee on the terms proposed. (iii) Two Affected Parties. If an Illegality under Section 5(b)(i)(1) or a Tax Event occurs and there are two Affected Parties, each party will use all reasonable efforts to reach agreement within 30 days after notice thereof is given under Section 6(b)(i) on action to avoid that Termination Event. (iv) Right to Terminate. If:- (1) a transfer under Section 6(b)(ii) or an agreement under Section 6(b)(iii), as the case may be, has not been effected with respect to all Affected Transactions within 30 days after an Affected Party gives notice under Section 6(b)(i); or (2) an Illegality under Section 5(b)(i)(2), a Credit Event Upon Merger or an Additional Termination Event occurs, or a Tax Event Upon Merger occurs and the Burdened Party is not the Affected Party, either party in the case of an Illegality, the Burdened Party in the case of a Tax Event Upon Merger, any Affected Party in the case of a Tax Event or an Additional Termination Event if there is more than one Affected Party, or the party which is not the Affected Party in the case of a Credit Event Upon Merger or an Additional Termination Event if there is only one Affected Party may, by not more than 20 days notice to the other party and provided that the relevant Termination Event is then continuing, designate a day not earlier than the day such notice is effective as an Early Termination Date in respect of all Affected Transactions."@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementTerminationEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-oc:OccurrenceKind ;
+	rdfs:label "master agreement termination event"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementTerminationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition '"Termination Event" means an Illegality, a Tax Event or a Tax Event Upon Merger or, if specified to be applicable, a Credit Event Upon Merger or an Additional Termination Event.'@en ;
+	.
+
+fibo-der-drc-ma:MasterAgreementTerminationProvision
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementElement ,
+		fibo-fnd-agrx-ele:TerminationProvisions ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:describesTreatmentOf ;
+			owl:someValuesFrom fibo-der-drc-ma:MasterAgreementTerminationEvent ;
+		]
+		;
+	rdfs:label "master agreement termination provision"@en ;
+	rdfs:comment "QName: NONE:MasterAgreementTerminationProvision" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "a provision in the master agreement, setting out the conditions, consequences etc. of termination of the agreement"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Early Termination is a specific set of terms within this, that are specific to this kind of Master Agreement."@en ;
+	.
+
+fibo-der-drc-ma:NettingTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-ma:MasterAgreementContractualCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:definesTermsFor ;
+			owl:someValuesFrom fibo-der-drc-ma:ObligationInRespectOfNetting ;
+		]
+		;
+	rdfs:label "netting terms"@en ;
+	rdfs:comment "QName: NONE:NettingTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Terms setting out how Netting may or may not take place and the Obligations on each party in respect of that Netting."@en ;
+	skos:editorialNote 'These terms are set out as text in the Sample Master Agreement and may be difficult (and unproductive) to model). Here they are: Example Text: "Netting. If on any date amounts would otherwise be payable:- (i) in the same currency; and (ii) in respect of the same Transaction, by each party to the other, then, on such date, each party’s obligation to make payment of any such amount will be automatically satisfied and discharged and, if the aggregate amount that would otherwise have been payable by one party exceeds the aggregate amount that would otherwise have been payable by the other party, replaced by an obligation upon the party by whom the larger aggregate amount would have been payable to pay to the other party the excess of the larger aggregate amount over the smaller aggregate amount. The parties may elect in respect of two or more Transactions that a net amount will be determined in respect of all amounts payable on the same date in the same currency in respect of such Transactions, regardless of whether such amounts are payable in respect of the same Transaction. The election may be made in the Schedule or a Confirmation by specifying that subparagraph (ii) above will not apply to the Transactions identified as being subject to the election, together with the starting date (in which case subparagraph (ii) above will not, or will cease to, apply to such Transactions from such date). This election may be made separately for different groups of Transactions and will apply separately to each pairing of Offices through which the parties make and receive payments or deliveries. "'@en ;
+	.
+
+fibo-der-drc-ma:NonDefaultingParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractParty ;
+	rdfs:label "non-defaulting party"@en ;
+	rdfs:comment "QName: NONE:NonDefaultingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:ObligationInRespectOfNetting
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-txnx:MasterAgreementObligation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-ma:mayBeVariedByOne ;
+			owl:someValuesFrom fibo-der-drc-bsc:OTCTransactionConfirmation ;
+		]
+		;
+	rdfs:label "obligation in respect of netting"@en ;
+	rdfs:comment "QName: NONE:ObligationInRespectOfNetting" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Some obligation on one or other party in respect of any netting up of amounts due under a combination of transactions transacted under this Master Agreement."@en ;
+	.
+
+fibo-der-drc-ma:OtherAmountsObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-txnx:MasterAgreementObligation ;
+	rdfs:label "other amounts obligation"@en ;
+	rdfs:comment "QName: NONE:OtherAmountsObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition 'Obligation in regard to other defaults on obligations. Example Contract Text: "If, prior to the occurrence or effective designation of an Early Termination Date in respect of the relevant Transaction, a party defaults in the performance of any obligation required to be settled by delivery, it will compensate the other party on demand if and to the extent provided for in the relevant Confirmation or elsewhere in this Agreement. "'@en ;
+	.
+
+fibo-der-drc-ma:PaymentObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-txnx:MasterAgreementObligation ;
+	rdfs:label "payment obligation"@en ;
+	rdfs:comment "QName: NONE:PaymentObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Obligation to make payments on transactions transacted under the Master Agreement, as specified in any Confirmation made by that party."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This and the Delivery Obligation may be set out in one clause of the Master Agreement. This is the clause which obligates the parties to make the payments or deliveries in accordance with those Confirmations, which are generally messages. May be subject to other provisions in the Master Agreement. Example text: "Each party will make each payment or delivery specified in each Confirmation to be made by it, subject to the other provisions of this Agreement. " Additional terms in the clause which follows the above, deal with more specific terms about payments.'@en ;
+	.
+
+fibo-der-drc-ma:PaymentObligationAsDelivery
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-ma:PaymentObligation ;
+	rdfs:label "payment obligation as delivery"@en ;
+	rdfs:comment "QName: NONE:PaymentObligationAsDelivery" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Obligation for payment in settlement of a transaction when this payment takes the form of delivery of some payment in kind."@en ;
+	skos:example 'Sample text: "... Where settlement is by delivery (that is, other than by payment), such delivery will be made for receipt on the due date in the manner customary for the relevant obligation unless otherwise specified in the relevant Confirmation or elsewhere in this Agreement. "'@en ;
+	.
+
+fibo-der-drc-ma:PaymentPlaceSpecificationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "payment place specification method"@en ;
+	rdfs:comment "QName: NONE:PaymentPlaceSpecificationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Selection of possible places to be specified for the payments in a Master Agreement."@en ;
+	.
+
+fibo-der-drc-ma:PaymentPlaceSpecifiedEitherInMasterAgreementOrConfirmation
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-ma:PaymentPlaceSpecificationMethod ;
+	rdfs:label "payment place specified either in master agreement or confirmation"@en ;
+	rdfs:comment "QName: NONE:PaymentPlaceSpecifiedEitherInMasterAgreementOrConfirmation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:PaymentPlaceSpecifiedInConfirmationMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-ma:PaymentPlaceSpecificationMethod ;
+	rdfs:label "payment place specified in confirmation message"@en ;
+	rdfs:comment "QName: NONE:PaymentPlaceSpecifiedInConfirmationMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:PaymentPlaceSpecifiedInMasterAgreement
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-ma:PaymentPlaceSpecificationMethod ;
+	rdfs:label "payment place specified in master agreement"@en ;
+	rdfs:comment "QName: NONE:PaymentPlaceSpecifiedInMasterAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	.
+
+fibo-der-drc-ma:TaxWithholdingGrossupObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-ma:TaxWithholdingObligation ;
+	rdfs:label "tax withholding grossup obligation"@en ;
+	rdfs:comment "QName: NONE:TaxWithholdingGrossupObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Grossup Obligations in respect of Tax, that is an obligation to deduct or withhold tax in respect of payments made under transactions governed by the Master Agreement."@en ;
+	skos:example 'Example Text Gross-Up. All payments under this Agreement will be made without any deduction or withholding for or on account of any Tax unless such deduction or withholding is required by any applicable law, as modified by the practice of any relevant governmental revenue authority, then in effect. If a party is so required to deduct or withhold, then that party ("X") will:- (1) promptly notify the other party ("Y") of such requirement; (2) pay to the relevant authorities the full amount required to be deducted or withheld (including the full amount required to be deducted or withheld from any additional amount paid by X to Y under this Section 2(d)) promptly upon the earlier of determining that such deduction or withholding is required or receiving notice that such amount has been assessed against Y; (3) promptly forward to Y an official receipt (or a certified copy), or other documentation reasonably acceptable to Y, evidencing such payment to such authorities; and (4) if such Tax is an Indemnifiable Tax, pay to Y, in addition to the payment to which Y is otherwise entitled under this Agreement, such additional amount as is necessary to ensure that the net amount actually received by Y (free and clear of Indemnifiable Taxes, whether assessed against X or Y) will equal the full amount Y would have received had no such deduction or withholding been required. However, X will not be required to pay any additional amount to Y to the extent that it would not be required to be paid but for:- (A) the failure by Y to comply with or perform any agreement contained in Section 4(a)(i), 4(a)(iii) or 4(d); or (B) the failure of a representation made by Y pursuant to Section 3(f) to be accurate and true unless such failure would not have occurred but for (I) any action taken by a taxing authority, or brought in a court of competent jurisdiction, on or after the date on which a Transaction is entered into (regardless of whether such action is taken or brought with respect to a party to this Agreement) or (II) a Change in Tax Law.'@en ;
+	.
+
+fibo-der-drc-ma:TaxWithholdingLiability
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-ma:TaxWithholdingObligation ;
+	rdfs:label "tax withholding liability"@en ;
+	rdfs:comment "QName: NONE:TaxWithholdingLiability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "Obligation in respect of liability for tax. This defines whether or not the party which is required to deduct some tax payment and does not do so, is then entitled to receive the funds from the other party in the event that a liability for this tax is later assessed against the first party."@en ;
+	skos:example "Example text: Liability. If:- (1) X is required by any applicable law, as modified by the practice of any relevant governmental revenue authority, to make any deduction or withholding in respect of which X would not be required to pay an additional amount to Y under Section 2(d)(i)(4); (2) X does not so deduct or withhold; and (3) a liability resulting from such Tax is assessed directly against X, then, except to the extent Y has satisfied or then satisfies the liability resulting from such Tax, Y will promptly pay to X the amount of such liability (including any related liability for interest, but including any related liability for penalties only if Y has failed to comply with or perform any agreement contained in Section 4(a)(i), 4(a)(iii) or 4(d))."@en ;
+	.
+
+fibo-der-drc-ma:TaxWithholdingObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-txnx:MasterAgreementObligation ;
+	rdfs:label "tax withholding obligation"@en ;
+	rdfs:comment "QName: NONE:TaxWithholdingObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition "An obligation with regard to the payment of taxes."@en ;
+	.
+
+fibo-der-drc-ma:automaticNettingApplicable
+	a owl:DatatypeProperty ;
+	rdfs:label "automatic netting applicable"@en ;
+	rdfs:comment "QName: NONE:automaticNettingApplicable" ;
+	rdfs:domain fibo-der-drc-ma:NettingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'Whether netting takes place automatically in respect of one transaction. Example text: "If on any date amounts would otherwise be payable:- (i) in the same currency; and (ii) in respect of the same Transaction, by each party to the other, then, on such date, each party’s obligation to make payment of any such amount will be automatically satisfied and discharged and, if the aggregate amount that would otherwise have been payable by one party exceeds the aggregate amount that would otherwise have been payable by the other party, replaced by an obligation upon the party by whom the larger aggregate amount would have been payable to pay to the other party the excess of the larger aggregate amount over the smaller aggregate amount. "'@en ;
+	.
+
+fibo-der-drc-ma:changeOfAccountDetailsAllowed
+	a owl:DatatypeProperty ;
+	rdfs:label "change of account details allowed"@en ;
+	rdfs:comment "QName: NONE:changeOfAccountDetailsAllowed" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementAccountChangeNotificationObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the account details may be varied for individual transactions transacted under this Master Agreement."@en ;
+	.
+
+fibo-der-drc-ma:compensateOtherParty
+	a owl:DatatypeProperty ;
+	rdfs:label "compensate other party"@en ;
+	rdfs:comment "QName: NONE:compensateOtherParty" ;
+	rdfs:domain fibo-der-drc-ma:OtherAmountsObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether or not, under the stated circumstances, if a party defaults in the performance of any obligation required to be settled by delivery, it is obliged to compensate the other party on demand if and to the extent provided for in the relevant Confirmation or elsewhere in this Agreement."@en ;
+	.
+
+fibo-der-drc-ma:crossTransactionNettingElection
+	a owl:DatatypeProperty ;
+	rdfs:label "cross transaction netting election"@en ;
+	rdfs:comment "QName: NONE:crossTransactionNettingElection" ;
+	rdfs:domain fibo-der-drc-ma:NettingTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether either party may elect to carry out netting in respect of two or more transactions carried out under this Master Agreement."@en ;
+	.
+
+fibo-der-drc-ma:currencySpecificMethods
+	a owl:DatatypeProperty ;
+	rdfs:label "currency specific methods"@en ;
+	rdfs:comment "QName: NONE:currencySpecificMethods" ;
+	rdfs:domain fibo-der-drc-ma:PaymentObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	skos:definition 'Payment is to be in the manner customary for the currency in question. Example text: "... in the manner customary for payments in the required currency." It is not clear what if anything the alternative would be. Included as a "yes/no" term for completeness.'@en ;
+	.
+
+fibo-der-drc-ma:defaultInterestApplicable
+	a owl:DatatypeProperty ;
+	rdfs:label "default interest applicable"@en ;
+	rdfs:comment "QName: NONE:defaultInterestApplicable" ;
+	rdfs:domain fibo-der-drc-ma:DefaultInterestObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether a party that defaults in the performance of any payment obligation will, to the extent permitted by law and this agreement be required to pay interest (before as well as after judgment) on the overdue amount to the other party on demand in the same currency as such overdue amount, for the period from (and including) the original due date for payment to (but excluding) the date of actual payment."@en ;
+	.
+
+fibo-der-drc-ma:defaultInterestCompoundingBasis
+	a owl:ObjectProperty ;
+	rdfs:label "default interest compounding basis"@en ;
+	rdfs:comment "QName: NONE:defaultInterestCompoundingBasis" ;
+	rdfs:domain fibo-der-drc-ma:DefaultInterestObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	skos:definition "The basis upon which default interest is to be calculated, as a period of time (e.g. daily)."@en ;
+	.
+
+fibo-der-drc-ma:describesTreatmentOf
+	a owl:ObjectProperty ;
+	rdfs:label "describes treatment of"@en ;
+	rdfs:comment "QName: NONE:describesTreatmentOf" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementTerminationProvision ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-ma:MasterAgreementTerminationEvent ;
+	.
+
+fibo-der-drc-ma:dischargedByNetting
+	a owl:DatatypeProperty ;
+	rdfs:label "discharged by netting"@en ;
+	rdfs:comment "QName: NONE:dischargedByNetting" ;
+	rdfs:domain fibo-der-drc-ma:ObligationInRespectOfNetting ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "The obligations for payment by either party is automatically discharged or satisfied in the event of other amounts being due on the same day and in the same currency. The Obligation in question is ether discharged completely or replaced with an obligation in respect of the outstanding difference, on the part of whichever party has a greater amount due to the other (a positive amount after netting) for that transaction on that date."@en ;
+	.
+
+fibo-der-drc-ma:effectOfDesignation
+	a owl:DatatypeProperty ;
+	rdfs:label "effect of designation"@en ;
+	rdfs:comment "QName: NONE:effectOfDesignation" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementEarlyTerminationProvisions ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Description of the effect of designation of this right."@en ;
+	.
+
+fibo-der-drc-ma:forward
+	a owl:DatatypeProperty ;
+	rdfs:label "forward"@en ;
+	rdfs:comment "QName: NONE:forward" ;
+	rdfs:domain fibo-der-drc-ma:TaxWithholdingGrossupObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "If a party is required to deduct or withhold tax, whether that party is to promptly forward to the other party an official receipt (or a certified copy), or other documentation reasonably acceptable to that party, evidencing such payment to such authorities."@en ;
+	.
+
+fibo-der-drc-ma:freelyTransferableFunds
+	a owl:DatatypeProperty ;
+	rdfs:label "freely transferable funds"@en ;
+	rdfs:comment "QName: NONE:freelyTransferableFunds" ;
+	rdfs:domain fibo-der-drc-ma:PaymentObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-der-drc-ma:hasBeneficiary
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasCounterparty ;
+	rdfs:label "has beneficiary"@en ;
+	rdfs:comment "QName: NONE:hasBeneficiary" ;
+	rdfs:domain fibo-der-drc-ma:CreditSupportAgreement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-ma:CreditSupportBeneficiary ;
+	.
+
+fibo-der-drc-ma:hasEarlyTerminationDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-arr-arr:hasTerminationDate ;
+	rdfs:label "has early termination date"@en ;
+	rdfs:comment "QName: NONE:hasEarlyTerminationDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "indicates a termination date that occurs prior to an explicit expiration date"@en ;
+	.
+
+fibo-der-drc-ma:inDefault
+	a owl:DatatypeProperty ;
+	rdfs:label "in default"@en ;
+	rdfs:comment "QName: NONE:inDefault" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementConditionsPrecedent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'The condition that some default has occurred in respect to the other party. Further notes: Conditions precedent typically include that no default has occurred, so this is typically or always "no". Sample text (of which this term is a part): " the condition precedent that no Event of Default or Potential Event of Default with respect to the other party has occurred and is continuing, "'@en ;
+	.
+
+fibo-der-drc-ma:includesPenaltyPayments
+	a owl:DatatypeProperty ;
+	rdfs:label "includes penalty payments"@en ;
+	rdfs:comment "QName: NONE:includesPenaltyPayments" ;
+	rdfs:domain fibo-der-drc-ma:TaxWithholdingLiability ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether liability on the part of the counterparty (the party which is not assessed as being liable for the relevant tax) includes liability for penalties in respect of the late or non payment of that tax by the party so assessed."@en ;
+	.
+
+fibo-der-drc-ma:invokedInEventOf
+	a owl:ObjectProperty ;
+	rdfs:label "invoked in event of"@en ;
+	rdfs:comment "QName: NONE:invokedInEventOf" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementRightToTerminationFollowingTerminationEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-ma:MasterAgreementTerminationEvent ;
+	.
+
+fibo-der-drc-ma:invokedInEventOf.1
+	a owl:ObjectProperty ;
+	rdfs:label "invoked in event of"@en ;
+	rdfs:comment "QName: NONE:invokedInEventOf.1" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementRightToTerminationFollowingDefaultEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-fbc-dae-cre:CreditEvent ;
+	.
+
+fibo-der-drc-ma:isFailureInForceOf
+	a owl:ObjectProperty ;
+	rdfs:label "is failure in force of"@en ;
+	rdfs:comment "QName: NONE:isFailureInForceOf" ;
+	rdfs:domain fibo-der-drc-ma:CreditSupportDefaultEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-ma:CreditSupportAgreement ;
+	.
+
+fibo-der-drc-ma:isPredicatedOn
+	a owl:ObjectProperty ;
+	rdfs:label "is predicated on"@en ;
+	rdfs:comment "QName: NONE:isPredicatedOn" ;
+	rdfs:domain fibo-fnd-agr-ctr:ConditionsPrecedent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-fnd-agr-ctr:ContractualCommitment ;
+	.
+
+fibo-der-drc-ma:makeUpForIndemnifiable
+	a owl:DatatypeProperty ;
+	rdfs:label "make up for indemnifiable"@en ;
+	rdfs:comment "QName: NONE:makeUpForIndemnifiable" ;
+	rdfs:domain fibo-der-drc-ma:TaxWithholdingGrossupObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'If a party ("X") is required to deduct or withhold tax, and if such Tax is an Indemnifiable Tax, whether X is to pay to the other party ("Y"), in addition to the payment to which Y is otherwise entitled under this Agreement, such additional amount as is necessary to ensure that the net amount actually received by Y (free and clear of Indemnifiable Taxes, whether assessed against X or Y) will equal the full amount Y would have received had no such deduction or withholding been required. However, X will not be required to pay any additional amount to Y to the extent that it would not be required to be paid but for:- (A) the failure by Y to comply with or perform any agreement contained in the provisions for furnishing specified information in this agreement; or (B) the failure of a representation made by Y pursuant to the Representation Section of the agreement to be accurate and true unless such failure would not have occurred but for (I) any action taken by a taxing authority, or brought in a court of competent jurisdiction, on or after the date on which a Transaction is entered into (regardless of whether such action is taken or brought with respect to a party to this Agreement) or (II) a Change in Tax Law. Further notes: The above is all definitional of this term.'@en ;
+	.
+
+fibo-der-drc-ma:masterAgreementCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "master agreement currency"@en ;
+	rdfs:comment "QName: NONE:masterAgreementCurrency" ;
+	rdfs:domain fibo-der-drc-ma:CurrencySpecificationTerm ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition 'The currency for payments under this Master Agreement. ISDA Master Agreement example text: Payment in the Contractual Currency. Each payment under this Agreement will be made in the relevant currency specified in this Agreement for that payment (the "Contractual Currency"). To the extent permitted by applicable law, any obligation to make payments under this Agreement in the Contractual Currency will not be discharged or satisfied by any tender in any currency other than the Contractual Currency, except to the extent such tender results in the actual receipt by the party to which payment is owed, acting in a reasonable manner and in good faith in converting the currency so tendered into the Contractual Currency, of the full amount in the Contractual Currency of all amounts payable in respect of this Agreement. If for any reason the amount in the Contractual Currency so received falls short of the amount in the Contractual Currency payable in respect of this Agreement, the party required to make the payment will, to the extent permitted by applicable law, immediately pay such additional amount in the Contractual Currency as may be necessary to compensate for the shortfall. If for any reason the amount in the Contractual Currency so received exceeds the amount in the Contractual Currency payable in respect of this Agreement, the party receiving the payment will refund promptly the amount of such excess.'@en ;
+	.
+
+fibo-der-drc-ma:mayBeVariedByOne
+	a owl:ObjectProperty ;
+	rdfs:label "may be varied by one"@en ;
+	rdfs:comment "QName: NONE:mayBeVariedByOne" ;
+	rdfs:domain fibo-der-drc-ma:ObligationInRespectOfNetting ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-bsc:OTCTransactionConfirmation ;
+	.
+
+fibo-der-drc-ma:mayVary
+	a owl:ObjectProperty ;
+	rdfs:label "may vary"@en ;
+	rdfs:comment "QName: NONE:mayVary" ;
+	rdfs:domain fibo-der-drc-bsc:OTCTransactionConfirmation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-ma:ObligationInRespectOfNetting ;
+	owl:inverseOf fibo-der-drc-ma:mayBeVariedByOne ;
+	.
+
+fibo-der-drc-ma:notify
+	a owl:DatatypeProperty ;
+	rdfs:label "notify"@en ;
+	rdfs:comment "QName: NONE:notify" ;
+	rdfs:domain fibo-der-drc-ma:TaxWithholdingGrossupObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "If a party is required to deduct or withhold tax, whether obligation is to promptly notify the other party of Tax Withholding Grossup requirement."@en ;
+	.
+
+fibo-der-drc-ma:ongoingDefault
+	a owl:DatatypeProperty ;
+	rdfs:label "ongoing default"@en ;
+	rdfs:comment "QName: NONE:ongoingDefault" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementConditionsPrecedent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'The condition that some default or potential default is ongoing in respect to the other party. Further notes: Conditions precedent typically include that no default is ongoing, so this is typically or always "no". Sample text (of which this term is a part): " the condition precedent that no Event of Default or Potential Event of Default with respect to the other party has occurred and is continuing, "'@en ;
+	.
+
+fibo-der-drc-ma:pay
+	a owl:DatatypeProperty ;
+	rdfs:label "pay"@en ;
+	rdfs:comment "QName: NONE:pay" ;
+	rdfs:domain fibo-der-drc-ma:TaxWithholdingGrossupObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'If a party "X" is required to deduct or withhold tax, whether Obligation is to pay to the relevant authorities the full amount required to be deducted or withheld (including the full amount required to be deducted or withheld from any additional amount paid by X to Y under this obligation promptly upon the earlier of determining that such deduction or withholding is required or receiving notice that such amount has been assessed against Y;'@en ;
+	.
+
+fibo-der-drc-ma:payableByCounterparty
+	a owl:DatatypeProperty ;
+	rdfs:label "payable by counterparty"@en ;
+	rdfs:comment "QName: NONE:payableByCounterparty" ;
+	rdfs:domain fibo-der-drc-ma:TaxWithholdingLiability ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the counterparty is obliged to promptly pay to the party which is assessed as being liable for the relevant tax, the amount of such liability."@en ;
+	.
+
+fibo-der-drc-ma:paymentDateCalculationRequirement
+	a owl:DatatypeProperty ;
+	rdfs:label "payment date calculation requirement"@en ;
+	rdfs:comment "QName: NONE:paymentDateCalculationRequirement" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementEarlyTerminationProvisions ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Provisions for calculation of Payment dates in the event of this Early Termination."@en ;
+	.
+
+fibo-der-drc-ma:paymentInKindDeliveryObligation
+	a owl:DatatypeProperty ;
+	rdfs:label "payment in kind delivery obligation"@en ;
+	rdfs:comment "QName: NONE:paymentInKindDeliveryObligation" ;
+	rdfs:domain fibo-der-drc-ma:PaymentObligationAsDelivery ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Precise description of the form in which payment is to be made when payment is in kind."@en ;
+	.
+
+fibo-der-drc-ma:paymentPlaceSpecification
+	a owl:ObjectProperty ;
+	rdfs:label "payment place specification"@en ;
+	rdfs:comment "QName: NONE:paymentPlaceSpecification" ;
+	rdfs:domain fibo-der-drc-ma:PaymentObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-ma:PaymentPlaceSpecificationMethod ;
+	skos:definition "The place for payments specified in this Master Agreement."@en ;
+	.
+
+fibo-der-drc-ma:potentialDefault
+	a owl:DatatypeProperty ;
+	rdfs:label "potential default"@en ;
+	rdfs:comment "QName: NONE:potentialDefault" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementConditionsPrecedent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'The condition that some potential default has occurred in respect to the other party. Further notes: Conditions precedent typically include that no potential default has occurred, so this is typically or always "no". Sample text (of which this term is a part): " the condition precedent that no Event of Default or Potential Event of Default with respect to the other party has occurred and is continuing, "'@en ;
+	.
+
+fibo-der-drc-ma:requiredDaysNotice
+	a owl:DatatypeProperty ;
+	rdfs:label "required days notice"@en ;
+	rdfs:comment "QName: NONE:requiredDaysNotice" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementChangeNotificationObligation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of days notice to be given for a change in the given kinds of details."@en ;
+	.
+
+fibo-der-drc-ma:specifiedIndebtedness
+	a owl:DatatypeProperty ;
+	rdfs:label "specified indebtedness"@en ;
+	rdfs:comment "QName: NONE:specifiedIndebtedness" ;
+	rdfs:domain fibo-der-drc-ma:CrossDefaultProvisions ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:string ;
+	skos:definition 'Any obligation (whether present or future, contingent or otherwise, as principal or surety or otherwise) in respect of borrowed money. May not include obligations in respect of deposits received in the ordinary course of a party’s banking business. FpML: In Schedule: "Specified Indebtedness" will have the meaning specified in Section 14 except that such term shall not include obligations in respect of deposits received in the ordinary course of a party’s banking business. Section 14: "Specified Indebtedness" means, subject to the Schedule, any obligation (whether present or future, contingent or otherwise, as principal or surety or otherwise) in respect of borrowed money. Modeling note: Could extend this to have a yes/no option on the exclusion described in the Schedule to the sample Master Agreement'@en ;
+	.
+
+fibo-der-drc-ma:specifies
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementRightToTerminationFollowingDefaultEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-ma:NonDefaultingParty ;
+	.
+
+fibo-der-drc-ma:specifies.1
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies.1" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementRightToTerminationFollowingDefaultEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-der-drc-ma:DefaultingParty ;
+	.
+
+fibo-der-drc-ma:statementCalculationRequirements
+	a owl:DatatypeProperty ;
+	rdfs:label "statement calculation requirements"@en ;
+	rdfs:comment "QName: NONE:statementCalculationRequirements" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementEarlyTerminationProvisions ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Provisions for calculation of statements and statement amounts in the event of this Early Termination."@en ;
+	.
+
+fibo-der-drc-ma:subjectToOtherProvisions
+	a owl:DatatypeProperty ;
+	rdfs:label "subject to other provisions"@en ;
+	rdfs:comment "QName: NONE:subjectToOtherProvisions" ;
+	rdfs:domain
+		fibo-der-drc-ma:DeliveryObligation ,
+		fibo-der-drc-ma:PaymentObligation
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether this Obligation is subject to other provisions in the Master Agreement."@en ;
+	.
+
+fibo-der-drc-ma:thresholdAmount
+	a owl:ObjectProperty ;
+	rdfs:label "threshold amount"@en ;
+	rdfs:comment "QName: NONE:thresholdAmount" ;
+	rdfs:domain fibo-der-drc-ma:CrossDefaultProvisions ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	.
+
+fibo-der-drc-ma:transactionEarlyTerminationDate
+	a owl:DatatypeProperty ;
+	rdfs:label "transaction early termination date"@en ;
+	rdfs:comment "QName: NONE:transactionEarlyTerminationDate" ;
+	rdfs:domain fibo-der-drc-ma:MasterAgreementConditionsPrecedent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'The condition that some early termination date as been defined in respect to the transaction carried out under this Master Agreement. Further notes: note that this is in respect of a specific transaction transacted under the Master Agreement, so that the condition precedent for the obligation in respect of that specific transaction, is that this early transaction termation has not taken place in respect of this same transaction. Conditions precedent typically include this is not the case, so this is typically or always "no". Sample text: "the condition precedent that no Early Termination Date in respect of the relevant Transaction has occurred or been effectively designated."'@en ;
+	.
+

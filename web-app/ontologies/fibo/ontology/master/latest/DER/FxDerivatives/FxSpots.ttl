@@ -1,0 +1,178 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSpots/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Spots/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/ForeignExchange/ForeignExchange/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSpots/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-der-sp: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-fx-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> .
+@prefix fibo-der-fx-sp: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-txn-sup: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/>
+	a owl:Ontology ;
+	rdfs:label "FxSpots"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Simple transactions where an amount in one currency is exchanged for an amount in another currency, with settlement in the immediate future by both participants. This forms a point of reference for Fx forward and option transactions where the future or optional future transaction may be compared with the effects of completing that transaction in the present." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Spots/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/ForeignExchange/ForeignExchange/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxSpots/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-fx-sp:FxSpot
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-fx-ctr:OTCFxProduct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-sp:hasCorrespondingTransaction ;
+			owl:someValuesFrom fibo-der-fx-sp:FxSpotTransaction ;
+		]
+		;
+	rdfs:label "fx spot"@en ;
+	rdfs:comment "QName: NONE:FxSpot" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	.
+
+fibo-der-fx-sp:FxSpotContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-bsc:OTCInstrument ,
+		fibo-der-der-sp:SpotContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/IND/ForeignExchange/ForeignExchange/CurrencySpotBuyRate> ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-sp:establishes ;
+			owl:someValuesFrom fibo-der-drc-bsc:DeliveryTerms ;
+		]
+		;
+	rdfs:label "fx spot contract"@en ;
+	rdfs:comment "QName: NONE:FxSpotContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	skos:definition 'The rate of a foreign-exchange contract for immediate delivery. Also known as "benchmark rates", "straightforward rates" or "outright rates", spot rates represent the price that a buyer expects to pay for a foreign currency in another currency.'@en ;
+	fibo-fnd-utl-av:explanatoryNote "Though the spot exchange rate is said to be settled immediately, the globally accepted settlement cycle for foreign-exchange contracts is two days. Foreign-exchange contracts are therefore settled on the second day after the day the deal is made."@en ;
+	.
+
+fibo-der-fx-sp:FxSpotTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-sp:SpotTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-sp:hasImpliedContract ;
+			owl:someValuesFrom fibo-der-fx-sp:FxSpotContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-sp:hasSide ;
+			owl:someValuesFrom fibo-der-drc-bsc:DeliverCash ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-fx-sp:hasSide ;
+			owl:someValuesFrom fibo-der-der-sp:SpotCashSettlementTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:subject ;
+			owl:someValuesFrom fibo-fnd-txn-sup:NegotiableCash ;
+		]
+		;
+	rdfs:label "fx spot transaction"@en ;
+	rdfs:comment "QName: NONE:FxSpotTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	.
+
+fibo-der-fx-sp:buyerCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "buyer currency"@en ;
+	rdfs:comment "QName: NONE:buyerCurrency" ;
+	rdfs:domain fibo-der-fx-sp:FxSpotContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "The buyer's currency as specified in the contract."@en ;
+	.
+
+fibo-der-fx-sp:establishes
+	a owl:ObjectProperty ;
+	rdfs:label "establishes"@en ;
+	rdfs:comment "QName: NONE:establishes" ;
+	rdfs:domain fibo-der-fx-sp:FxSpotContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	rdfs:range fibo-der-drc-bsc:DeliveryTerms ;
+	.
+
+fibo-der-fx-sp:fxSpotRate
+	a owl:DatatypeProperty ;
+	rdfs:label "fx spot rate"@en ;
+	rdfs:comment "QName: NONE:fxSpotRate" ;
+	rdfs:domain fibo-der-fx-sp:FxSpotContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "'The rate of exchange between the two currencies.'"@en ;
+	.
+
+fibo-der-fx-sp:hasCorrespondingTransaction
+	a owl:ObjectProperty ;
+	rdfs:label "has corresponding transaction"@en ;
+	rdfs:comment "QName: NONE:hasCorrespondingTransaction" ;
+	rdfs:domain fibo-der-fx-sp:FxSpot ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	rdfs:range fibo-der-fx-sp:FxSpotTransaction ;
+	.
+
+fibo-der-fx-sp:hasSide
+	a owl:ObjectProperty ;
+	rdfs:label "has side"@en ;
+	rdfs:comment "QName: NONE:hasSide" ;
+	rdfs:domain fibo-der-fx-sp:FxSpotTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/SettlementTerms> ;
+	.
+
+fibo-der-fx-sp:sellerCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "seller currency"@en ;
+	rdfs:comment "QName: NONE:sellerCurrency" ;
+	rdfs:domain fibo-der-fx-sp:FxSpotContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "The seller's currency as specified in the contract."@en ;
+	.
+

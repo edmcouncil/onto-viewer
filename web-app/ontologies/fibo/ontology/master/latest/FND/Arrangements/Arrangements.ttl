@@ -1,0 +1,184 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-lr: <https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/>
+	a owl:Ontology ;
+	rdfs:label "Arrangements Ontology" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:" ;
+	dct:abstract "This ontology defines abstract structural concepts, including arrangement and collection, for use in other FIBO ontology elements. These abstract concepts are further refined to support definition of identifiers, codes, quantities, and schemata that organize and classify such identifiers and codes." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2019 EDM Council, Inc." ,
+		"Copyright (c) 2014-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-arr-arr" ;
+	sm:filename "Arrangements.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements.rdf version of this ontology was introduced as a part of the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/.  It was further revised in the FTF in advance of the Long Beach meeting to promote Collection to the top level in the hierarchy, resulting in https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements.rdf version of this ontology was revised as a part of the issue resolutions identified in the FIBO FND 1.2 RTF report to add a definition for a structured collection." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements.rdf version of this ontology was revised for the FIBO 2.0 RFC report to add a general definition for scheme, add dated collection, and add mappings to LCC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements.rdf version of this ontology was revised to loosen the range on hasObservedDateTime such that it can be used more generally." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements.rdf version of this ontology was revised to loosen the restriction on hasObservedDateTime so that it can be used with the new CombinedDateTime datatype (in FinancialDates, which is not imported herein to avoid circular dependencies), with finer granularity than seconds as appropriate for trades, for example."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-arr-arr:Arrangement
+	a owl:Class ;
+	rdfs:label "arrangement" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:Arrangement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	owl:equivalentClass lcc-lr:Arrangement ;
+	skos:definition "an organizing structure for something" ;
+	.
+
+fibo-fnd-arr-arr:Collection
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-arr:Arrangement ;
+	rdfs:label "collection" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:Collection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	owl:equivalentClass lcc-lr:Collection ;
+	skos:definition "a grouping of some variable number of things (may be zero) that have some shared significance" ;
+	.
+
+fibo-fnd-arr-arr:CollectionConstituent
+	a owl:Class ;
+	rdfs:label "collection constituent" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:CollectionConstituent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	owl:equivalentClass [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-arr-arr:isConstituentOf ;
+		owl:someValuesFrom lcc-lr:Collection ;
+	] ;
+	skos:definition "a constituent of a collection" ;
+	.
+
+fibo-fnd-arr-arr:DatedCollectionConstituent
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-arr:CollectionConstituent ;
+	rdfs:label "dated collection constituent" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:DatedCollectionConstituent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	owl:equivalentClass [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-arr-arr:hasObservedDateTime ;
+		owl:someValuesFrom [
+			a rdfs:Datatype ;
+			owl:unionOf (
+				xsd:string
+				xsd:dateTime
+				xsd:dateTimeStamp
+			) ;
+		] ;
+	] ;
+	skos:definition "a constituent of a collection that is associated with a date and time" ;
+	fibo-fnd-utl-av:explanatoryNote "Note that the use of several options for the representation of a date and time stamp enables extensions for milliseconds, nanoseconds using an xsd:string that has the format of an xsd:dateTime datatype but extending the level of granularity consistently.  An example of where this is required is to represent prices that change multiple times in a given day." ;
+	.
+
+fibo-fnd-arr-arr:DatedStructuredCollection
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:StructuredCollection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-fnd-arr-arr:DatedCollectionConstituent ;
+		]
+		;
+	rdfs:label "dated structured collection" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:DatedStructuredCollection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	skos:definition "a structured collection that includes some dated elements" ;
+	.
+
+fibo-fnd-arr-arr:Scheme
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:Arrangement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "scheme" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:Scheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	skos:definition "a structure or means of organizing information such as a schema, numbering system, organization scheme, measurement system, taxonomy, or language for organizing information" ;
+	.
+
+fibo-fnd-arr-arr:StructuredCollection
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-arr:Collection ;
+	rdfs:label "structured collection" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:StructuredCollection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	skos:definition "a collection that has a clearly defined structure or organization" ;
+	.
+
+fibo-fnd-arr-arr:hasCollectionSize
+	a owl:DatatypeProperty ;
+	rdfs:label "has collection size" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:hasCollectionSize" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	rdfs:range xsd:nonNegativeInteger ;
+	skos:definition "indicates the number of elements in a given collection" ;
+	.
+
+fibo-fnd-arr-arr:hasConstituent
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:comprises ;
+	rdfs:label "has constituent" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:hasConstituent" ;
+	rdfs:domain fibo-fnd-arr-arr:Collection ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	skos:definition "an essential part, component, or element of some collection or set" ;
+	.
+
+fibo-fnd-arr-arr:hasObservedDateTime
+	a owl:DatatypeProperty ;
+	rdfs:label "has observed date and time" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:hasObservedDateTime" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	skos:definition "indicates a date and time for an observation captured in a collection constituent" ;
+	.
+
+fibo-fnd-arr-arr:isConstituentOf
+	a owl:ObjectProperty ;
+	rdfs:label "is constituent of" ;
+	rdfs:comment "QName: fibo-fnd-arr-arr:isConstituentOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> ;
+	rdfs:range fibo-fnd-arr-arr:Collection ;
+	owl:inverseOf fibo-fnd-arr-arr:hasConstituent ;
+	skos:definition "identifies the collection that something is an essential part, component, or element of" ;
+	.
+

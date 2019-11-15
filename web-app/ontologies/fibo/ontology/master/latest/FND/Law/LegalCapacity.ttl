@@ -1,0 +1,609 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Goals/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-agr-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-gao-gl: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Goals/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-law-cor: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/>
+	a owl:Ontology ;
+	rdfs:label "Legal Capacity Ontology" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:" ;
+	dct:abstract "This ontology defines high-level legal concepts, especially those related to legal responsibilities, for use in other FIBO ontology elements. The ontology defines things which are conferred upon some entity by some legal instrument, and elaborates this into a number of specific capacities, responsibilities and powers, each of which forms the basis for many of the concepts used elsewhere in FIBO in defining legal personhood, executive powers and the like." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Goals/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-law-lcap" ;
+	sm:filename "LegalCapacity.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Goals/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ;
+	skos:changeNote
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/Law/LegalCapacity.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations.""" ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity.rdf version of the ontology was modified per the FIBO 1.1 RTF to add the concept of litigation capacity to the ontology." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity.rdf version of the ontology was modified per the FIBO 2.0 RFC integrate contingent rights and obligations." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity.rdf version of the ontology was modified per the FIBO FBC RFC, namely to add concepts to support license, licensee, and licensor to the ontology." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity.rdf version of the ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity.rdf version of the ontology was modified to add concepts related to policies, and adjust the hierarchy to better support regulatory requirements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity.rdf version of the ontology was modified to eliminate deprecated elements."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-law-lcap:Claim
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalConstruct ;
+	rdfs:label "claim"@en ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:Claim" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "a demand or assertion made by one party on another, based on facts that, taken together, give rise to a legally enforceable right or judicial action" ;
+	fibo-fnd-utl-av:explanatoryNote "Claims arise from the existence of a formal commitment between the parties or as implicitly agreed upon through the operation of law or constitution." ;
+	.
+
+fibo-fnd-law-lcap:ContingentObligation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:Duty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-agr:isObligationOf ;
+			owl:someValuesFrom fibo-fnd-agr-agr:Obligor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-lcap:isImpliedBy ;
+			owl:someValuesFrom fibo-fnd-law-lcap:ContingentRight ;
+		]
+		;
+	rdfs:label "contingent obligation"@en ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:ContingentObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "an obligation that depends on a future event or the performance of an action" ;
+	.
+
+fibo-fnd-law-lcap:ContingentRight
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:Claim ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-lcap:implies ;
+			owl:someValuesFrom fibo-fnd-law-lcap:ContingentObligation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredOn ;
+			owl:someValuesFrom fibo-fnd-pty-pty:IndependentParty ;
+		]
+		;
+	rdfs:label "contingent right"@en ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:ContingentRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "a right that depends on a future event or the performance of an action" ;
+	fibo-fnd-utl-av:explanatoryNote "Contingent means that the interest, claim, or right is conditional, realized only when and if something occurs." ;
+	.
+
+fibo-fnd-law-lcap:ContractualCapability
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalCapacity ;
+	rdfs:label "contractual capability"@en ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:ContractualCapability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "the capacity to enter into legally binding contracts" ;
+	skos:editorialNote "This is the capacity which defines Contractually Capable Entity (sometimes labeled as 'Legal Entity') as distinct from 'Legal Person'. In the latter case the liabilities incurred in the contract accrue also to the Legal Person. In the case of contractual capability, the entity has the authority to enter into contracts, whether or not the liabilities accrue to that same entity (which they do if it is also a Legal Person). For Legal Entities which are not Legal Persons, the liability unwinds to some legal person within the structure of the entity, for example a General Partner or a Trustee." ;
+	.
+
+fibo-fnd-law-lcap:ContractualObligation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:LegalObligation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-lcap:isImpliedBy ;
+			owl:allValuesFrom fibo-fnd-law-lcap:ContractualRight ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom fibo-fnd-agr-ctr:Contract ;
+		]
+		;
+	rdfs:label "contractual obligation" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:ContractualObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "an obligation or duty that is specified in and imposed by a contract" ;
+	.
+
+fibo-fnd-law-lcap:ContractualOption
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:ContractualRight ;
+	rdfs:label "contractual option" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:ContractualOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "a contractual right that may be exercised at some point in the future, such as an option to extend a contract, or other available but not obligatory rights as defined in the contract" ;
+	.
+
+fibo-fnd-law-lcap:ContractualRight
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:ContingentRight ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-lcap:implies ;
+			owl:someValuesFrom fibo-fnd-law-lcap:ContractualObligation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom fibo-fnd-agr-ctr:Contract ;
+		]
+		;
+	rdfs:label "contractual right" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:ContractualRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "a contingent right conferred via a contract" ;
+	.
+
+fibo-fnd-law-lcap:DelegatedLegalAuthority
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalCapacity ;
+	rdfs:label "delegated legal authority" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:DelegatedLegalAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "institutionalized and legal power inherent in a particular job, function, or position that is meant to enable its holder to successfully carry out his or her responsibilities, where such power has been delegated through some formal means" ;
+	skos:scopeNote "This specifically means the authority to make legally binding commitments." ;
+	fibo-fnd-utl-av:explanatoryNote "This is always accompanied by an equal responsibility for one's actions or a failure to act." ;
+	.
+
+fibo-fnd-law-lcap:Duty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalConstruct ;
+	rdfs:label "duty" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:Duty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "some obligation which exists and is imposed on some individual" ;
+	skos:editorialNote "This can also be thought of as an obligation - not in the sense in which an obligation and a right are the converse aspects of one another, but in and of itself, independent of the perspective from which it is considered. Examples include statutory obligations, reporting obligations and so on." ;
+	.
+
+fibo-fnd-law-lcap:LegalCapacity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalConstruct ;
+	rdfs:label "legal capacity" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:LegalCapacity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "the capability to carry out certain actions or to have certain rights together with the resources to do so" ;
+	.
+
+fibo-fnd-law-lcap:LegalConstruct
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredOn ;
+			owl:onClass fibo-fnd-pty-pty:IndependentParty ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:onClass [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-agr-ctr:Contract
+					fibo-fnd-law-cor:Constitution
+					fibo-fnd-law-cor:Law
+				) ;
+			] ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "legal construct" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:LegalConstruct" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "something which is conferred by way of law or contract, such as a right" ;
+	skos:editorialNote "Obligations are an aspect of this category of thing, as are rights." ;
+	.
+
+fibo-fnd-law-lcap:LegalObligation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:Duty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-jur:appliesIn ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-agr-ctr:Contract
+					fibo-fnd-law-jur:StatuteLaw
+					fibo-fnd-law-lcap:Regulation
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isMandatedBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-agr-ctr:Contract
+					fibo-fnd-law-jur:StatuteLaw
+					fibo-fnd-law-lcap:Regulation
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "legal obligation" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:LegalObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "an obligation or duty that is enforceable by a court" ;
+	.
+
+fibo-fnd-law-lcap:LegalRight
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:ContingentRight ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:StatuteLaw ;
+		]
+		;
+	rdfs:label "legal right" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:LegalRight" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "a contingent right or privilege that, if challenged, would be supported in court as a claim that is recognizable and enforceable in law, statutes, regulations, or other legislative actions" ;
+	.
+
+fibo-fnd-law-lcap:LiabilityCapacity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalCapacity ;
+	rdfs:label "liability capacity"@en ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:LiabilityCapacity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "the ability to be sued at law" ;
+	skos:editorialNote "Note that for the purposes of this model, this is distinct from culpability (the ability to commit criminal acts). That would be a separate and analogous term but with grounding in criminal rather than civil law." ;
+	.
+
+fibo-fnd-law-lcap:License
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-doc:LegalDocument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-bd:holdsDuring ;
+			owl:onClass fibo-fnd-dt-fd:DatePeriod ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fnd-law-lcap:Licensee ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:someValuesFrom fibo-fnd-law-lcap:LegalCapacity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+			owl:someValuesFrom fibo-fnd-law-lcap:Licensor ;
+		]
+		;
+	rdfs:label "license" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:License" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "grant of permission needed to do something" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	fibo-fnd-utl-av:explanatoryNote "Note that in some cases, a license may also be considered an agreement or contract, depending on the specifics of the license and jurisdiction." ;
+	.
+
+fibo-fnd-law-lcap:LicenseIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fnd-law-lcap:License ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "license identifier" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:LicenseIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "an identifier associated with a license" ;
+	.
+
+fibo-fnd-law-lcap:Licensee
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-fnd-law-lcap:License ;
+			] ;
+		]
+		;
+	rdfs:label "licensee" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:Licensee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "a party to whom a license has been granted" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	.
+
+fibo-fnd-law-lcap:Licensor
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-lcap:licenses ;
+			owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-fnd-law-lcap:License ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:issues ;
+			owl:someValuesFrom fibo-fnd-law-lcap:License ;
+		]
+		;
+	rdfs:label "licensor" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:Licensor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "a party who grants a license" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ;
+	.
+
+fibo-fnd-law-lcap:LitigationCapacity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalCapacity ;
+	rdfs:label "litigation capacity" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:LitigationCapacity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "the legal capacity to pursue a litigation action in law" ;
+	.
+
+fibo-fnd-law-lcap:Policy
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-lcap:implements ;
+			owl:onClass [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-law-lcap:LegalConstruct
+					fibo-fnd-gao-gl:Goal
+					fibo-fnd-gao-obj:Objective
+				) ;
+			] ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:governs ;
+			owl:someValuesFrom fibo-fnd-gao-obj:Strategy ;
+		]
+		;
+	rdfs:label "policy" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:Policy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "system of principles, rules and guidelines, adopted by an organization to guide decision making with respect to particular situations and implemented via procedures or protocols to achieve stated goals" ;
+	.
+
+fibo-fnd-law-lcap:Regulation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-lcap:LegalConstruct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-law-jur:appliesIn ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom fibo-fnd-law-cor:Law ;
+		]
+		;
+	rdfs:label "regulation" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:Regulation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "a rule used to carry out a law" ;
+	fibo-fnd-utl-av:explanatoryNote "Many government agencies issue regulations to administer laws." ;
+	.
+
+fibo-fnd-law-lcap:ReportingPolicy
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:Policy ;
+	rdfs:label "reporting policy" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:ReportingPolicy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "policy specifying principles, rules and/or guidelines regarding some aspect of reporting" ;
+	skos:example "For example a policy for how frequently a given kind of report is produced." ;
+	.
+
+fibo-fnd-law-lcap:SignatoryCapacity
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-law-lcap:LegalCapacity ;
+	rdfs:label "signatory capacity" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:SignatoryCapacity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "the capacity of some natural person to sign agreements on the part of some organization or legal person" ;
+	.
+
+fibo-fnd-law-lcap:hasCapacity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has capacity" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:hasCapacity" ;
+	rdfs:domain fibo-fnd-aap-agt:AutonomousAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	rdfs:range fibo-fnd-law-lcap:LegalCapacity ;
+	owl:inverseOf fibo-fnd-law-lcap:isCapacityOf ;
+	skos:definition "identifies an individual or organization that has some capability to carry out certain actions, or has certain rights or obligations" ;
+	.
+
+fibo-fnd-law-lcap:implements
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:involves ;
+	rdfs:label "implements" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:implements" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "carries out or puts into effect, fulfills" ;
+	.
+
+fibo-fnd-law-lcap:implies
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:involves ;
+	rdfs:label "implies" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:implies" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "strongly suggests or involves as a logical consequence based on some set of observations, facts, or events" ;
+	.
+
+fibo-fnd-law-lcap:isCapacityOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isConferredOn ;
+	rdfs:label "is capacity of" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:isCapacityOf" ;
+	rdfs:domain fibo-fnd-law-lcap:LegalCapacity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	rdfs:range fibo-fnd-aap-agt:AutonomousAgent ;
+	skos:definition "identifies an individual or organization on which a given legal capacity has been conferred" ;
+	skos:scopeNote "This includes capacities specific to duties at law (such as those for corporate officers) as well as the ability or capacity to incur liability." ;
+	.
+
+fibo-fnd-law-lcap:isImplementedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is implemented by" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:isImplementedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	owl:inverseOf fibo-fnd-law-lcap:implements ;
+	skos:definition "indicates something that is carried out, incorporated or put into effect by" ;
+	skos:example "A regulation may be implemented by or more corporate policies. Such policies, in turn, may be implemented via various systems, executed by humans and/or automation, that can be audited for compliance purposes." ;
+	.
+
+fibo-fnd-law-lcap:isImpliedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is implied by" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:isImpliedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	owl:inverseOf fibo-fnd-law-lcap:implies ;
+	skos:definition "indicates something that is strongly suggested by something else, such as a logical consequence based on some set of observations, facts, or events" ;
+	.
+
+fibo-fnd-law-lcap:isLicensedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isGovernedBy ;
+	rdfs:label "is licensed by" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:isLicensedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	rdfs:range fibo-fnd-pty-pty:PartyInRole ;
+	owl:inverseOf fibo-fnd-law-lcap:licenses ;
+	skos:definition "indicates the party that has issued a particular license to some other party" ;
+	.
+
+fibo-fnd-law-lcap:licenses
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:governs ;
+	rdfs:label "licenses" ;
+	rdfs:comment "QName: fibo-fnd-law-lcap:licenses" ;
+	rdfs:domain fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> ;
+	skos:definition "issues a license required in order to perform some task, provide some service, exercise some privilege, or pursue some line of business or occupation to some party" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.merriam-webster.com/dictionary/regulate"^^xsd:anyURI ;
+	.
+

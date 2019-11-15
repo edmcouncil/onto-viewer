@@ -1,0 +1,149 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/>
+	a owl:Ontology ;
+	rdfs:label "MethodsAndRules"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology sets out the basic concepts of method and rule along with kinds and variations of either of these, as a basis for extensive lists of kinds of method such as accrual method, or kinds of rule such as date roll rules, throughout FIBO reference concepts. These form the bulk of the concepts that underlie the contents of extensional code lists in financial data. 
+		This is intended to be a Provisional ontology not (as now) an Informative one, since the vast majority of lists of things that were once in textual code lists, are sets of methods or rules. This usage is endemic across all of the FIBO reference information universe.""" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-arrxx-meth:AdjustmentMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "adjustment method"@en ;
+	rdfs:comment "QName: NONE:AdjustmentMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "The method by which something is adjusted, for example the terms of a contract, in reaction to events."@en ;
+	.
+
+fibo-fnd-arrxx-meth:DeliveryMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "delivery method"@en ;
+	rdfs:comment "QName: NONE:DeliveryMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "The means or process used in delivering something."@en ;
+	.
+
+fibo-fnd-arrxx-meth:DistributionMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "distribution method"@en ;
+	rdfs:comment "QName: NONE:DistributionMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "The means by which monies or benefits accruing from the possession of something are distributed to the holders of that thing."@en ;
+	.
+
+fibo-fnd-arrxx-meth:Method
+	a owl:Class ;
+	rdfs:label "method"@en ;
+	rdfs:comment "QName: NONE:Method" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "A way in which something is done."@en ;
+	.
+
+fibo-fnd-arrxx-meth:Preference
+	a owl:Class ;
+	rdfs:label "preference"@en ;
+	rdfs:comment "QName: NONE:Preference" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	.
+
+fibo-fnd-arrxx-meth:PriceDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:VariableDeterminationMethod ;
+	rdfs:label "price determination method"@en ;
+	rdfs:comment "QName: NONE:PriceDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "The way in which the price of something is determined or is to be determined."@en ;
+	.
+
+fibo-fnd-arrxx-meth:Rule
+	a owl:Class ;
+	rdfs:label "rule"@en ;
+	rdfs:comment "QName: NONE:Rule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "A Rule is any statement which determines how something must be. It is defined in relation to that something (which may be an event or a parameter), and with some reference to the way in which that Rule is defined, e.g. whether it forms part of some legally binding contract, is defined by physics and so on."@en ;
+	.
+
+fibo-fnd-arrxx-meth:RuleCode
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/CodeElement> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arrxx-meth:standsFor ;
+			owl:someValuesFrom fibo-fnd-arrxx-meth:Rule ;
+		]
+		;
+	rdfs:label "rule code"@en ;
+	rdfs:comment "QName: NONE:RuleCode" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	.
+
+fibo-fnd-arrxx-meth:RuleScheme
+	a owl:Class ;
+	rdfs:subClassOf
+		<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/CodeSet> ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/defines> ;
+			owl:someValuesFrom fibo-fnd-arrxx-meth:RuleCode ;
+		]
+		;
+	rdfs:label "rule scheme"@en ;
+	rdfs:comment "QName: NONE:RuleScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	.
+
+fibo-fnd-arrxx-meth:SaleMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "sale method"@en ;
+	rdfs:comment "QName: NONE:SaleMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "The means by which something is sold."@en ;
+	.
+
+fibo-fnd-arrxx-meth:VariableDeterminationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "variable determination method"@en ;
+	rdfs:comment "QName: NONE:VariableDeterminationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "The way in which some variable amount, quantity or value is determined or is to be determined."@en ;
+	.
+
+fibo-fnd-arrxx-meth:isWayOfDoing
+	a owl:ObjectProperty ;
+	rdfs:label "is way of doing"@en ;
+	rdfs:comment "QName: NONE:isWayOfDoing" ;
+	rdfs:domain fibo-fnd-arrxx-meth:Method ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	skos:definition "What the Method is a means of carrying out."@en ;
+	.
+
+fibo-fnd-arrxx-meth:standsFor
+	a owl:ObjectProperty ;
+	rdfs:label "stands for"@en ;
+	rdfs:comment "QName: NONE:standsFor" ;
+	rdfs:domain fibo-fnd-arrxx-meth:RuleCode ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> ;
+	rdfs:range fibo-fnd-arrxx-meth:Rule ;
+	.
+

@@ -1,0 +1,48 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/MetadataMDTemporalCore/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/MetadataMDTemporalCore/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-md-temx-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/MetadataMDTemporalCore/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/MetadataMDTemporalCore/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Market Data (MD) TemporalCore Module" ;
+	rdfs:comment "QName: fibo-md-temx-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the MD Temporal Core Module." ;
+	dct:issued "2018-06-30T18:00:00"^^xsd:dateTime ;
+	dct:license sm:MITLicense ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-md-temx-mod" ;
+	sm:filename "MetadataMDTemporalCore.rdf" ;
+	owl:imports <http://www.omg.org/techprocess/ab/SpecificationMetadata/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/MD/TemporalCore/MetadataMDTemporalCore/> ;
+	.
+
+fibo-md-temx-mod:TemporalCoreModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Temporal Core" ;
+	rdfs:comment "QName: fibo-md-temx-mod:TemporalCoreModule" ;
+	dct:abstract "This module contains ontologies of temporally variable concepts common to all instruments, funds and loans. These are concepts for variables that have past, presented and projected future values, such as pricing, yields and analytics." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/AnalysisCurves/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/>
+		;
+	dct:title "FIBO Market Data - Core Temporal Terms Module" ;
+	sm:moduleAbbreviation "fibo-md-temx" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/MetadataMDTemporalCore/> ;
+	.
+

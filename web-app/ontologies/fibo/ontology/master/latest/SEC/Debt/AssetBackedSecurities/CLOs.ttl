@@ -1,0 +1,69 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CLOs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CMOs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CLOs/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-ab-abs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/> .
+@prefix fibo-sec-dbt-ab-clo: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CLOs/> .
+@prefix fibo-sec-dbt-ab-cmo: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/> .
+@prefix fibo-sec-dbt-ab-pbs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CLOs/>
+	a owl:Ontology ;
+	rdfs:label "CLOs"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Collateralized Loan Obligations are similar to asset backed securities and have a pool of loans as their underlying asset type. 
+		Note that some work is still required on the precise categorization of this class of instrument.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CMOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CLOs/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-sec-dbt-ab-clo:CLO
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-pbs:CollateralizedObligationInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-clo:isPoolOf ;
+			owl:someValuesFrom fibo-sec-dbt-ab-abs:LoanPool ;
+		]
+		;
+	rdfs:label "c l o"@en ;
+	rdfs:comment "QName: NONE:CLO" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CLOs/> ;
+	owl:disjointWith fibo-sec-dbt-ab-cmo:AgencyCMO ;
+	.
+
+fibo-sec-dbt-ab-clo:CLODeal
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-pbs:CollateralizedObligationDeal ;
+	rdfs:label "c l o deal"@en ;
+	rdfs:comment "QName: NONE:CLODeal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CLOs/> ;
+	skos:definition "An issue of Collateralized Loan Obligations."@en ;
+	.
+
+fibo-sec-dbt-ab-clo:isPoolOf
+	a owl:ObjectProperty ;
+	rdfs:label "is pool of"@en ;
+	rdfs:comment "QName: NONE:isPoolOf" ;
+	rdfs:domain fibo-sec-dbt-ab-clo:CLO ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CLOs/> ;
+	rdfs:range fibo-sec-dbt-ab-abs:LoanPool ;
+	.
+

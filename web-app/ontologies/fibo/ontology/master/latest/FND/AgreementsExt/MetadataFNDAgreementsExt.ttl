@@ -1,0 +1,47 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/MetadataFNDAgreementsExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/MetadataFNDAgreementsExt/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agrx-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/MetadataFNDAgreementsExt/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/MetadataFNDAgreementsExt/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) AgreementsExt Module" ;
+	rdfs:comment "QName: fibo-fnd-agrx-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Agreements Extensions Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-fnd-agrx-mod" ;
+	sm:filename "MetadataFNDAgreementsExt.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/MetadataFNDAgreementsExt/> ;
+	.
+
+fibo-fnd-agrx-mod:AgreementsExtModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Agreements Extensions" ;
+	rdfs:comment "QName: fibo-fnd-agrx-mod:AgreementsExtModule" ;
+	dct:abstract "This module contains an ontology that is an extension to content in the Agreements module, specifically in the area of Contracts." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Agreements Extensions Module" ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-fnd-agrx" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/MetadataFNDAgreementsExt/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	skos:editorialNote "This module contains additional material for the main Agreements module. Some of this may currently be referenced from Provisional or Informative modules elsewhere. Where possible these will be replaced by references into the main module, possibly by moving original material from this into the main one." ;
+	.
+

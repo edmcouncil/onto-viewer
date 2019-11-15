@@ -1,0 +1,82 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditySwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ReturnSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditySwaps/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-com-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/> .
+@prefix fibo-der-com-sw: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySwaps/> .
+@prefix fibo-der-der-rsw: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySwaps/>
+	a owl:Ontology ;
+	rdfs:label "CommoditySwaps"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Swap contracts and their corresponding transactions where one leg is the return on some commodity." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/ReturnSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditySwaps/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-com-sw:CommodityReturnLeg
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-rsw:AssetReturnStream ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-rsw:hasReferenceAsset ;
+			owl:someValuesFrom fibo-der-com-ctr:CommodityUnderlying ;
+		]
+		;
+	rdfs:label "commodity return leg"@en ;
+	rdfs:comment "QName: NONE:CommodityReturnLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySwaps/> ;
+	skos:definition "Return on the value of an underlying commodity."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The cash flows from a commodity may be negative as you have a cost from holding the commodity but there are no interim cash flows, so it equates to a negative interest rate. So a commodity swap is like a TRS in that it is based the return on the increase in value."@en ;
+	.
+
+fibo-der-com-sw:CommoditySwapContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-com-ctr:CommodityDerivativeContract ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/Swap>
+		;
+	rdfs:label "commodity swap contract"@en ;
+	rdfs:comment "QName: NONE:CommoditySwapContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySwaps/> ;
+	skos:definition "Definition needed."@en ;
+	skos:editorialNote "FpML Definition (unusable): Defines a commodity swap product."@en ;
+	.
+
+fibo-der-com-sw:CommoditySwapTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-rsw:ReturnSwapTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-rsw:hasReturnLeg ;
+			owl:someValuesFrom fibo-der-com-sw:CommodityReturnLeg ;
+		]
+		;
+	rdfs:label "commodity swap transaction"@en ;
+	rdfs:comment "QName: NONE:CommoditySwapTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySwaps/> ;
+	.
+

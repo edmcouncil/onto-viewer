@@ -1,0 +1,337 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/>
+	a owl:Ontology ;
+	rdfs:label "Business Dates Ontology" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:" ;
+	dct:abstract "This ontology extends definitions of date and schedule concepts from the FinancialDates ontology with concepts defining dates that may be adjusted when they fall on weekends or holidays as defined in a given business center, for use in other FIBO ontologies." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2018 EDM Council, Inc." ,
+		"Copyright (c) 2014-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-dt-bd" ;
+	sm:filename "BusinessDates.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/ version of this ontology was revised by the FIBO FND 1.2 RTF in order to add definitions for business recurrence intervals such as the day of the month and week, and to revise the representation of the end of the month to correspond to the way that the other intervals are represented for use in parametric schedules." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/ version of this ontology was revised to better support definitions related to business day adjustments." ,
+		"""This ontology was added to Foundations in advance of the December 2014 Long Beach meeting in support of the SEC specification.  It is also needed to provide temporal relationships for Ownership and Control.
+
+These three ontologies are designed for use together:
+
+   * FinancialDates  -- financial Dates and Schedules
+   * BusinessDates -- business day adjustments
+   * Occurrences    -- occurrences (events) and kinds of occurrences
+
+They are modularized this way to minimize the ontological committments that are imposed upon ontologies that rely upon them.  Ontologies can import FinancialDates alone, or FinancialDates + BusinessDates, or FinancialDates + Occurrences, or all three together."""
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-dt-bd:BusinessDayAdjustment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-bd:Convention ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-bd:hasBusinessDayConvention ;
+			owl:onClass fibo-fnd-dt-bd:BusinessDayConvention ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-bd:hasBusinessCenter ;
+			owl:someValuesFrom fibo-fnd-plc-cty:BusinessCenter ;
+		]
+		;
+	rdfs:label "business day adjustment" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessDayAdjustment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a convention that specifies what happens when a date falls on a day that is a weekend or a holiday in one or more business centers" ;
+	.
+
+fibo-fnd-dt-bd:BusinessDayConvention
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-bd:Convention ;
+	rdfs:label "business day convention" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessDayConvention" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a convention that enumerates the possible ways to handle a date that falls on a weekend or holiday" ;
+	.
+
+fibo-fnd-dt-bd:BusinessDayFollowing
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-bd:BusinessDayConvention
+		;
+	rdfs:label "business day following" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessDayFollowing" ;
+	sm:normativeReference 'FPML 5.1 "BusinessDayConventionEnum"' ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "BusinessDayFollowing is a BusinessDayConvention that means a non-business date will be adjusted to the first following day that is a business day." ;
+	.
+
+fibo-fnd-dt-bd:BusinessDayModifiedFollowing
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-bd:BusinessDayConvention
+		;
+	rdfs:label "business day modified following" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessDayModifiedFollowing" ;
+	sm:normativeReference 'FPML 5.1 "BusinessDayConventionEnum"' ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "BusinessDayModifiedFollowing is a BusinessDayConvention that means a non-business date will be adjusted to the first following day that is a business day unless that day falls in the next calendar month, in which case that date will be the first preceding day that is a calendar date." ;
+	.
+
+fibo-fnd-dt-bd:BusinessDayModifiedPreceding
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-bd:BusinessDayConvention
+		;
+	rdfs:label "business day modified preceding" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessDayModifiedPreceding" ;
+	sm:normativeReference 'FPML 5.1 "BusinessDayConventionEnum"' ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "BusinessDayModifiedPreceding is a BusinessDayConvention that means that a non-business date will be adjusted to the first preceding day that is a business day unless that day falls in the previous month, in which case that date will be the first following day that is a business day." ;
+	.
+
+fibo-fnd-dt-bd:BusinessDayNearest
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-bd:BusinessDayConvention
+		;
+	rdfs:label "business day nearest" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessDayNearest" ;
+	sm:normativeReference 'FPML 5.1 "BusinessDayConventionEnum"' ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "BusinessDayNearest is a BusinessDayConvention that means that a non-business date will be adjusted to the nearest day that is a business day -- i.e. if the non-business day falls on any day other than a Sunday or a Monday, it will be the first preceding day that is a business day, and will be the first following business day if it falls on a Sunday or a Monday." ;
+	.
+
+fibo-fnd-dt-bd:BusinessDayNone
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-bd:BusinessDayConvention
+		;
+	rdfs:label "business day none" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessDayNone" ;
+	sm:normativeReference 'FPML 5.1 "BusinessDayConventionEnum"' ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "BusinessDayNone is a BusinessDayConvention that means that a date will not be adjusted if it falls on a day that is not a business day." ;
+	.
+
+fibo-fnd-dt-bd:BusinessDayPreceding
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-bd:BusinessDayConvention
+		;
+	rdfs:label "business day preceding" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessDayPreceding" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a BusinessDayConvention that means that a date will be adjusted to the first previous day that is a business day" ;
+	.
+
+fibo-fnd-dt-bd:BusinessRecurrenceInterval
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:RecurrenceInterval ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-bd:hasBusinessRecurrenceIntervalConvention ;
+			owl:onClass fibo-fnd-dt-bd:BusinessRecurrenceIntervalConvention ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "business recurrence interval" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessRecurrenceInterval" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a recurrence interval that is specified using a business recurrence interval convention" ;
+	.
+
+fibo-fnd-dt-bd:BusinessRecurrenceIntervalConvention
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-bd:Convention ;
+	rdfs:label "business recurrence interval convention" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessRecurrenceIntervalConvention" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a convention for modeling recurring days, such as the end of the month, a particular day of the month, a day of the week, or more specifically, a t-bill auction date" ;
+	.
+
+fibo-fnd-dt-bd:BusinessRecurrenceIntervalEndOfMonth
+	a
+		owl:NamedIndividual ,
+		fibo-fnd-dt-bd:BusinessRecurrenceIntervalConvention
+		;
+	rdfs:label "business recurrence interval end-of-month" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:BusinessRecurrenceIntervalEndOfMonth" ;
+	sm:normativeReference
+		'FIX 5.0SP2 "LegDateRollConvention/EOM"' ,
+		"FPML 5.1 'RollConventionEnum/EOM'"
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "The last day of a calendar month irrespective of the length of the calendar month." ;
+	.
+
+fibo-fnd-dt-bd:Convention
+	a owl:Class ;
+	rdfs:label "convention" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:Convention" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a widely accepted or established way of doing 'something' within some community of practice" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Business and Economics Terms, Fifth Edition, 2012" ,
+		"https://en.oxforddictionaries.com/definition/convention"^^xsd:anyURI
+		;
+	.
+
+fibo-fnd-dt-bd:DayOfMonth
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-bd:BusinessRecurrenceInterval ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasOrdinalNumber ;
+			owl:onDataRange xsd:nonNegativeInteger ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "day of the month" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:DayOfMonth" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a business recurrence interval that indicates a specific, recurring day of the month" ;
+	skos:scopeNote "This class is only used or meaningful when a regular period in a schedule is monthly, i.e., period is 1 month." ;
+	.
+
+fibo-fnd-dt-bd:DayOfWeek
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-bd:BusinessRecurrenceInterval ;
+	rdfs:label "day of the week" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:DayOfWeek" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:oneOf (
+			fibo-fnd-dt-fd:Monday
+			fibo-fnd-dt-fd:Tuesday
+			fibo-fnd-dt-fd:Wednesday
+			fibo-fnd-dt-fd:Thursday
+			fibo-fnd-dt-fd:Friday
+			fibo-fnd-dt-fd:Saturday
+			fibo-fnd-dt-fd:Sunday
+		) ;
+	] ;
+	skos:definition "a business recurrence interval that indicates a specific, recurring day of the week" ;
+	skos:scopeNote "This class is only used or meaningful when a regular period in a schedule is weekly, i.e., period is 1 week." ;
+	.
+
+fibo-fnd-dt-bd:EndOfMonth
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-bd:BusinessRecurrenceInterval ;
+	rdfs:label "end of the month" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:EndOfMonth" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a business recurrence interval that indicates the last day of a calendar month, regardless of the length of that month" ;
+	.
+
+fibo-fnd-dt-bd:hasBusinessCenter
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has business center" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:hasBusinessCenter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	rdfs:range fibo-fnd-plc-cty:BusinessCenter ;
+	skos:definition "identifies a location where business is conducted, and hence the business calendar used to adjust dates" ;
+	.
+
+fibo-fnd-dt-bd:hasBusinessDayAdjustment
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has business day adjustment" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:hasBusinessDayAdjustment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	rdfs:range fibo-fnd-dt-bd:BusinessDayAdjustment ;
+	skos:definition "identifies a convention for adjustment of the business day for handling weekends and holidays" ;
+	.
+
+fibo-fnd-dt-bd:hasBusinessDayConvention
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has business day convention" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:hasBusinessDayConvention" ;
+	rdfs:domain fibo-fnd-dt-bd:BusinessDayAdjustment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	rdfs:range fibo-fnd-dt-bd:BusinessDayConvention ;
+	skos:definition "identifies a convention regarding how a date should be handled when it falls on a day that is not a business day" ;
+	.
+
+fibo-fnd-dt-bd:hasBusinessRecurrenceIntervalConvention
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has business recurrence interval convention" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:hasBusinessRecurrenceIntervalConvention" ;
+	rdfs:domain fibo-fnd-dt-bd:BusinessRecurrenceInterval ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	rdfs:range fibo-fnd-dt-bd:BusinessRecurrenceIntervalConvention ;
+	skos:definition "identifies a convention regarding how certain recurring dates should be handled with respect to a given schedule, such as the end of the month" ;
+	.
+
+fibo-fnd-dt-bd:holdsDuring
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDatePeriod ;
+	rdfs:label "holds during" ;
+	rdfs:comment "QName: fibo-fnd-dt-bd:holdsDuring" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> ;
+	skos:definition "a relationship that states that some condition or state holds during a specified date period" ;
+	.
+
+fibo-fnd-dt-fd:CalculatedDate
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-dt-bd:hasBusinessDayAdjustment ;
+		owl:onClass fibo-fnd-dt-bd:BusinessDayAdjustment ;
+		owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	] ;
+	.
+
+fibo-fnd-dt-fd:RegularSchedule
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-dt-bd:hasBusinessDayAdjustment ;
+		owl:onClass fibo-fnd-dt-bd:BusinessDayAdjustment ;
+		owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	] ;
+	.
+

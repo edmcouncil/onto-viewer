@@ -1,0 +1,730 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+# imports: https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix lcc-lr: <https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/>
+	a owl:Ontology ;
+	rdfs:label "Relations Ontology" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:" ;
+	dct:abstract "This ontology defines a set of general purpose relations for use in other FIBO ontology elements.  These include a number of properties required for reuse across the foundations and business entities models." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-rel-rel" ;
+	sm:filename "Relations.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> ,
+		<https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20170201/Relations/Relations.rdf version of this ontology was modified per the FIBO 2.0 RFC to include additional properties and the linkage to LCC." ,
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/Relations/Relations.owl version of the ontology submitted with 
+the FIBO FND RFC, was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations
+   (6) to move the ontology from the Utilities module to an independent Relations module
+   (7) to revise a number of definitions, per discussion with various stakeholders.
+   (8) to augment the definitions to include entity names from Business Entities.""" ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/. It was further revised in FTF 2 resulting in https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.2 RTF report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations.rdf version of this ontology was modified to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations.rdf version of this ontology was modified to incorporate evaluates and isEvaluatedBy, and to loosen constraints on hasName properties to allow multi-lingual names." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations.rdf version of this ontology was modified to loosen constraints on properties using xsd:dateTime in their range to allow for more flexible representation, and to add properties including produces, isProducedBy." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations.rdf version of this ontology was modified to rename (migrate) the hasDefinition property to isDefinedIn." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations.rdf version of this ontology was revised to add the appliesTo object property in support of the IND RFC."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-rel-rel:Reference
+	a owl:Class ;
+	rdfs:label "reference" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:Reference" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "a concept that refers to (or stands in for) another concept" ;
+	fibo-fnd-utl-av:adaptedFrom "http://grammar.about.com/od/rs/g/referenceterm.htm"^^xsd:anyURI ;
+	.
+
+fibo-fnd-rel-rel:Referent
+	a owl:Class ;
+	rdfs:label "referent" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:Referent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "the concept that another concept stands for or refers to" ;
+	fibo-fnd-utl-av:adaptedFrom "http://grammar.about.com/od/rs/g/referentterm.htm"^^xsd:anyURI ;
+	.
+
+fibo-fnd-rel-rel:appliesTo
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "applies to" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:appliesTo" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "a relation indicating something that is pertinent or relevant to the concept" ;
+	.
+
+fibo-fnd-rel-rel:appoints
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:designates ;
+	rdfs:label "appoints" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:appoints" ;
+	rdfs:domain fibo-fnd-aap-agt:AutonomousAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range fibo-fnd-aap-agt:AutonomousAgent ;
+	skos:definition "assigns a job or role to someone, selects or designates to fill an office or a position, fixes or sets by authority or by mutual agreement" ;
+	skos:scopeNote "typically requires having the capacity or authority to appoint" ;
+	fibo-fnd-utl-av:adaptedFrom "Free Online Dictionary" ;
+	.
+
+fibo-fnd-rel-rel:causes
+	a owl:ObjectProperty ;
+	rdfs:label "causes" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:causes" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "the relationship between an event (the cause) and a second event (the effect), where the second event is understood as a consequence of the first; also, the relationship between a set of factors (causes) and a phenomenon (the effect)" ;
+	.
+
+fibo-fnd-rel-rel:characterizes
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "characterizes" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:characterizes" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "a feature or quality that distinguishes something from something else" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.thefreedictionary.com/characterized"^^xsd:anyURI ;
+	.
+
+fibo-fnd-rel-rel:classifies
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "classifies" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:classifies" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-cr:classifies ;
+	skos:definition "arranges in classes; assigns to a category" ;
+	fibo-fnd-utl-av:definitionOrigin "Merriam-Webster Dictionary" ;
+	.
+
+fibo-fnd-rel-rel:comprises
+	a owl:ObjectProperty ;
+	rdfs:label "comprises" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:comprises" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "includes, especially within a particular scope, is made up of" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.merriam-webster.com/dictionary/comprise"^^xsd:anyURI ;
+	fibo-fnd-utl-av:usageNote "Note that something can be comprised of something(s) that may or may not be understood as separable parts, and thus is not defined as being explicitly transitive." ;
+	.
+
+fibo-fnd-rel-rel:confers
+	a owl:ObjectProperty ;
+	rdfs:label "confers" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:confers" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "grants or bestows by virtue of some authority" ;
+	fibo-fnd-utl-av:definitionOrigin "Merriam-Webster Online Dictionary" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as describing the conferral of some legal power or duty, some commitment or some social construct, and is a property of some social construct such as an agreement or some legal authority. These concepts, which would describe the kind of thing of which this is a property, and the kinds of thing in terms of which this property is framed, are outside the scope of this mode land so are not shown." ;
+	fibo-fnd-utl-av:synonym "invests with" ;
+	.
+
+fibo-fnd-rel-rel:controls
+	a owl:ObjectProperty ;
+	rdfs:label "controls" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:controls" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "exercises authoritative or dominating influence over; directs" ;
+	fibo-fnd-utl-av:adaptedFrom "The American Heritage(R) Dictionary of the English Language, Fourth Edition" ;
+	.
+
+fibo-fnd-rel-rel:defines
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:represents ;
+	rdfs:label "defines" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:defines" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "determines or identifies the essential qualities or meaning of, discovers and sets forth the meaning of, fixes or marks the limits of, demarcates" ;
+	.
+
+fibo-fnd-rel-rel:denotes
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:represents ;
+	rdfs:label "denotes" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:denotes" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-lr:denotes ;
+	skos:definition "serves as a linguistic expression of the notion of, signifies" ;
+	.
+
+fibo-fnd-rel-rel:designates
+	a owl:ObjectProperty ;
+	rdfs:label "designates" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:designates" ;
+	rdfs:domain fibo-fnd-aap-agt:AutonomousAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "to name something officially or appoint someone to a position officially" ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.dictionarycentral.com/definition/designate.html"^^xsd:anyURI ;
+	.
+
+fibo-fnd-rel-rel:embodies
+	a owl:ObjectProperty ;
+	rdfs:label "embodies" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:embodies" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "is an expression of, or gives a tangible or visible form to (an idea, quality, or feeling), makes concrete and perceptible" ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.merriam-webster.com/dictionary/govern"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be interpreted as being the property of a union of concrete things and information constructs, and as referring to some abstract thing or to some mediating thing or both, in the informative ontology of conceptual abstractions." ;
+	.
+
+fibo-fnd-rel-rel:evaluates
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:appliesTo ;
+	rdfs:label "evaluates" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:evaluates" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "assesses the nature, quality, or ability of someone or something" ;
+	.
+
+fibo-fnd-rel-rel:generates
+	a owl:ObjectProperty ;
+	rdfs:label "generates" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:generates" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "produces through the application of one or more mathematical or logical steps or rules" ;
+	.
+
+fibo-fnd-rel-rel:governs
+	a owl:ObjectProperty ;
+	rdfs:label "governs" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:governs" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "prevails or has decisive influence over; exercises authority" ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.merriam-webster.com/dictionary/govern"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as being the property of a logical union of social construct (in the informative abstractions ontology) and legal person, and as referring to 'thing'." ;
+	.
+
+fibo-fnd-rel-rel:has
+	a owl:ObjectProperty ;
+	rdfs:label "has" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:has" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-lr:has ;
+	skos:definition "indicates that someone (or something) possesses something, such as a characteristic, attribute, feature, or capability" ;
+	skos:editorialNote "As used in FIBO, this definition of has specifically excludes possession in the sense of ownership." ;
+	fibo-fnd-utl-av:adaptedFrom "Encarta Webster's Dictionary of the English Language (2004)" ;
+	.
+
+fibo-fnd-rel-rel:hasAcquisitionDate
+	a
+		owl:DatatypeProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:label "has acquisition date" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasAcquisitionDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range [
+		a rdfs:Datatype ;
+		owl:unionOf (
+			xsd:string
+			xsd:dateTime
+			xsd:dateTimeStamp
+		) ;
+	] ;
+	skos:definition "links an asset or owner/controller/controllee to the date or date and time of acquisition" ;
+	.
+
+fibo-fnd-rel-rel:hasAlias
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-aap-agt:hasName ;
+	rdfs:label "has alias" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasAlias" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "Any other name by which an individual or organization is known" ;
+	skos:editorialNote "Added at SME Review, to meet AML requirements" ;
+	.
+
+fibo-fnd-rel-rel:hasCommonName
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-aap-agt:hasName ;
+	rdfs:label "has common name" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasCommonName" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "a name by which something is frequently referred, without reference to any formal usage or structure" ;
+	.
+
+fibo-fnd-rel-rel:hasContext
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has context" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasContext" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "provides a context in which something is defined, expressed, or represented" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as referring to some context (known as 'mediating thing') in the informative upper ontology which is not included in this model. It should also be read as being the property of some contextually defined thing (known in the informative upper ontology as 'relative thing')." ;
+	.
+
+fibo-fnd-rel-rel:hasDenotation
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasRepresentation ;
+	rdfs:label "has denotation" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasDenotation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range fibo-fnd-rel-rel:Reference ;
+	owl:equivalentProperty lcc-lr:hasDenotation ;
+	owl:inverseOf fibo-fnd-rel-rel:denotes ;
+	skos:definition "relates a concept (or something else, but typically a concept) to a representation or denotation for that concept" ;
+	.
+
+fibo-fnd-rel-rel:hasDesignation
+	a owl:ObjectProperty ;
+	rdfs:label "has designation" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasDesignation" ;
+	rdfs:domain fibo-fnd-aap-agt:AutonomousAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "relates an individual or organization to a position, role, or other designation" ;
+	.
+
+fibo-fnd-rel-rel:hasDispositionDate
+	a
+		owl:DatatypeProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:label "has disposition date" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasDispositionDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range [
+		a rdfs:Datatype ;
+		owl:unionOf (
+			xsd:string
+			xsd:dateTime
+			xsd:dateTimeStamp
+		) ;
+	] ;
+	skos:definition "links something, such as an asset or its owner/controller/controllee to the date or date and time something was sold, transferred, destroyed, etc." ;
+	.
+
+fibo-fnd-rel-rel:hasFormalName
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-aap-agt:hasName ;
+	rdfs:label "has formal name" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasFormalName" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "a name by which something is known for some official purpose or context, or which is structured in some way such as to always follow the same format regardless of usage" ;
+	.
+
+fibo-fnd-rel-rel:hasIdentity
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has identity" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasIdentity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "provides a means for identifying something that fills a particular role" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as being a property of some kind of 'relative thing' as defined externality to this ontology. The property is usually but not exclusively framed with reference to some 'independent thing' but may take other forms and so should be regarded as having a target of 'thing'." ;
+	.
+
+fibo-fnd-rel-rel:hasLegalName
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasFormalName ;
+	rdfs:label "has legal name" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasLegalName" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "the name used to refer to an person or organization in legal communications" ;
+	.
+
+fibo-fnd-rel-rel:hasMember
+	a owl:ObjectProperty ;
+	rdfs:label "has member" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasMember" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-lr:hasMember ;
+	owl:inverseOf fibo-fnd-rel-rel:isMemberOf ;
+	skos:definition "relates something, typically a group or organization, to some discrete thing identified as a part (member) of it" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as being the property of a logical union of group and organization (not shown)." ;
+	.
+
+fibo-fnd-rel-rel:hasPart
+	a owl:ObjectProperty ;
+	rdfs:label "has part" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasPart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-cr:hasPart ;
+	skos:definition "indicates any portion of a thing, regardless of whether the portion itself is attached to the remainder or detached; cognitively salient or arbitrarily demarcated; self-connected or disconnected; homogeneous or gerrymandered; material or immaterial; extended or unextended; spatial or temporal" ;
+	fibo-fnd-utl-av:adaptedFrom "Stanford Encyclopedia of Philosophy at http://plato.stanford.edu/entries/mereology/" ;
+	fibo-fnd-utl-av:explanatoryNote "This property relates a thing to anything which is a proper part of that thing. This is not parthood in the sense of a the role of part which may be played by interchangeable things such as wheels; instead this property relates an independent thing to something which makes up a part of it." ;
+	.
+
+fibo-fnd-rel-rel:hasRepresentation
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has representation" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasRepresentation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range fibo-fnd-rel-rel:Reference ;
+	skos:definition "relates a concept to some textual or other symbol which is intended to convey the sense of that concept or to some form of words which sets out the meaning of that concept" ;
+	.
+
+fibo-fnd-rel-rel:hasTag
+	a owl:DatatypeProperty ;
+	rdfs:label "has tag" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:hasTag" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range [
+		a rdfs:Datatype ;
+		owl:unionOf (
+			xsd:string
+			xsd:base64Binary
+			xsd:hexBinary
+		) ;
+	] ;
+	skos:definition "has a unique combination of alphanumeric characters or binary representation corresponding to the identifier, code, or other element to which it applies" ;
+	.
+
+fibo-fnd-rel-rel:holds
+	a owl:ObjectProperty ;
+	rdfs:label "holds" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:holds" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "is the relationship between a party and something it possesses, or over which it exercises some ownership or control or has at its discretion the ability to dispose of it as it sees fit" ;
+	.
+
+fibo-fnd-rel-rel:involves
+	a owl:ObjectProperty ;
+	rdfs:label "involves" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:involves" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "(of a situation or event) includes (something) as a necessary part or result" ;
+	.
+
+fibo-fnd-rel-rel:isAppointedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is appointed by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isAppointedBy" ;
+	rdfs:domain fibo-fnd-aap-agt:AutonomousAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range fibo-fnd-aap-agt:AutonomousAgent ;
+	owl:inverseOf fibo-fnd-rel-rel:appoints ;
+	skos:definition "indicates the individual or group that has assigned or appointed someone to an office or position" ;
+	.
+
+fibo-fnd-rel-rel:isCausedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is caused by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isCausedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:causes ;
+	skos:definition "is the relationship between an event (the effect) and a second event (the cause), where the first event is understood as a consequence of the second; also, the relationship between a set of factors (causes) and a phenomenon (the effect)" ;
+	.
+
+fibo-fnd-rel-rel:isCharacterizedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is characterized by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isCharacterizedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:characterizes ;
+	skos:definition "indicates a quality or feature of something, distinguishing it from something else" ;
+	.
+
+fibo-fnd-rel-rel:isClassifiedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is classified by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isClassifiedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range fibo-fnd-rel-rel:Reference ;
+	owl:equivalentProperty lcc-cr:isClassifiedBy ;
+	owl:inverseOf fibo-fnd-rel-rel:classifies ;
+	skos:definition "indicates the classification scheme used to classify something" ;
+	.
+
+fibo-fnd-rel-rel:isConferredBy
+	a owl:ObjectProperty ;
+	rdfs:label "is conferred by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isConferredBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:confers ;
+	skos:definition "a relationship between a right or obligation and the vehicle, such as an agreement or contract, that vests (or confers) said right or obligation" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as describing some legal power or duty, some commitment or some social construct being conferred as a result of some social construct such as an agreement or some legal authority. These concepts, which would describe the kind of thing of which this is a property, and the kinds of thing in terms of which this property is framed, are outside the scope of this model and so are not shown." ;
+	.
+
+fibo-fnd-rel-rel:isConferredOn
+	a owl:ObjectProperty ;
+	rdfs:label "is conferred on" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isConferredOn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	rdfs:range fibo-fnd-aap-agt:AutonomousAgent ;
+	skos:definition "that on which the conferred thing is conferred" ;
+	.
+
+fibo-fnd-rel-rel:isControlledBy
+	a owl:ObjectProperty ;
+	rdfs:label "is controlled by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isControlledBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:controls ;
+	skos:definition "is influenced, managed, or directed by" ;
+	.
+
+fibo-fnd-rel-rel:isDefinedIn
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasRepresentation ;
+	rdfs:label "is defined in" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isDefinedIn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:defines ;
+	skos:definition "indicates something that specifies the meaning associated with the subject" ;
+	fibo-fnd-utl-av:explanatoryNote "Typically, a concept, such as a classifier or identifier, will be defined in terms of a scheme, contract, specification, standard, or other reference." ;
+	.
+
+fibo-fnd-rel-rel:isEvaluatedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is evaluated by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isEvaluatedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:evaluates ;
+	skos:definition "is ascertained or determined by" ;
+	.
+
+fibo-fnd-rel-rel:isGeneratedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is generated by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isGeneratedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:generates ;
+	skos:definition "identifies some party or something that produces something via some equation, logic, or rules" ;
+	.
+
+fibo-fnd-rel-rel:isGovernedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is governed by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isGovernedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:governs ;
+	skos:definition "a relationship between a contract, agreement, jurisdiction, or other legal construct and the regulation, policy, procedure, or legal person that regulates or oversees (governs) it" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as being the property of some thing and as referring to a logical union of social construct (in the informative abstractions ontology) and legal person." ;
+	.
+
+fibo-fnd-rel-rel:isHeldBy
+	a owl:ObjectProperty ;
+	rdfs:label "is held by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isHeldBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:holds ;
+	skos:definition "indicates the party that possesses and has at least partial control of something, regardless of ownership" ;
+	.
+
+fibo-fnd-rel-rel:isIncludedIn
+	a owl:ObjectProperty ;
+	rdfs:label "is included in" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isIncludedIn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:comprises ;
+	skos:definition "relates something to something that contains it" ;
+	.
+
+fibo-fnd-rel-rel:isIssuedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isProvidedBy ;
+	rdfs:label "is issued by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isIssuedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "indicates a functional entity or party responsible for circulating, distributing, or publishing something" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.thefreedictionary.com/issue"^^xsd:anyURI ;
+	.
+
+fibo-fnd-rel-rel:isManagedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is managed by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isManagedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "relates something to another thing that has some role in directing its affairs" ;
+	fibo-fnd-utl-av:explanatoryNote "The target or range of this property should be read as always being some kind of 'relative thing', that is a thing defined in some context. Generally this will be a 'party in role'. This property is not intended to be used to relate a thing to some independent thing which it is managed by, only to something in the role of being that which manages it." ;
+	.
+
+fibo-fnd-rel-rel:isMandatedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isConferredBy ;
+	rdfs:label "is mandated by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isMandatedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "relates a responsibility, capacity, or action to that which requires it" ;
+	.
+
+fibo-fnd-rel-rel:isMemberOf
+	a owl:ObjectProperty ;
+	rdfs:label "is member of" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isMemberOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-lr:isMemberOf ;
+	skos:definition "belonging, either individually or collectively, to a group" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as being framed in terms of a logical union of group and organization (not shown)." ;
+	.
+
+fibo-fnd-rel-rel:isPartOf
+	a
+		owl:ObjectProperty ,
+		owl:TransitiveProperty
+		;
+	rdfs:label "is a part of" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isPartOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-cr:isPartOf ;
+	owl:inverseOf fibo-fnd-rel-rel:hasPart ;
+	skos:definition "relates something to a thing that it is some component or portion of, regardless of how that whole-part relationship is manifested, i.e., attached to the remainder or detached; cognitively salient or arbitrarily demarcated; self-connected or disconnected; homogeneous or gerrymandered; material or immaterial; extended or unextended; spatial or temporal; the most generic part relation, reflexive, asymmetric, and transitive" ;
+	fibo-fnd-utl-av:adaptedFrom "Stanford Encyclopedia of Philosophy at http://plato.stanford.edu/entries/mereology/" ;
+	fibo-fnd-utl-av:explanatoryNote "This property represents what is also known in the literature of 'proper parthood',that is the recursive (transitive) relationship whereby things have parts which have parts and so on. This is distinct from a separate meaning of 'has part' which would refer to an item playing the named role of a part such as a nearside front wheel. for the avoidance of doubt, this is not that relationship, and this property applies betwen independent things and other independent things which may make up their parts." ;
+	.
+
+fibo-fnd-rel-rel:isProducedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isProvidedBy ;
+	rdfs:label "is produced by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isProducedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:produces ;
+	skos:definition "identifies the producer that fabricates, manufactures or otherwise creates something through some production process" ;
+	.
+
+fibo-fnd-rel-rel:isProvidedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is provided by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isProvidedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:provides ;
+	skos:definition "is made available by" ;
+	fibo-fnd-utl-av:explanatoryNote "The target or range of this property should be read as always being some kind of 'relative thing', that is a thing defined in some context. Generally this will be a 'party in role'. This property is not intended to be used to relate a thing to some independent thing which it is provided by, only to something in the role of being that which provides it." ;
+	.
+
+fibo-fnd-rel-rel:isUsedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is used by" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:isUsedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-cr:isUsedBy ;
+	skos:definition "relates something to a thing that has the ability to employ or deploy it as appropriate" ;
+	.
+
+fibo-fnd-rel-rel:issues
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:provides ;
+	rdfs:label "issues" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:issues" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:isIssuedBy ;
+	skos:definition "officially makes something available" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.merriam-webster.com/dictionary/issue"^^xsd:anyURI ;
+	.
+
+fibo-fnd-rel-rel:manages
+	a owl:ObjectProperty ;
+	rdfs:label "manages" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:manages" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:isManagedBy ;
+	skos:definition "relates an autonomous agent to something that it directs in some way" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as always being a property of some kind of 'relative thing', that is a thing defined in some context. Generally this will be a 'party in role'. This property is not intended to be used to relate some independent thing to that which it manages, instead it must only be a property of something in the role of being that which manages some thing." ;
+	.
+
+fibo-fnd-rel-rel:mandates
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:confers ;
+	rdfs:label "mandates" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:mandates" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:isMandatedBy ;
+	skos:definition "relates something to a commitment, contract, law, obligation, requirement, regulation, or similar concept that requires it" ;
+	.
+
+fibo-fnd-rel-rel:produces
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:provides ;
+	rdfs:label "produces" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:produces" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "identifies something that is fabricated, manufactured or created via some production process" ;
+	.
+
+fibo-fnd-rel-rel:provides
+	a owl:ObjectProperty ;
+	rdfs:label "provides" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:provides" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "makes something available" ;
+	fibo-fnd-utl-av:explanatoryNote "This property should be read as always being a property of some kind of 'relative thing', that is a thing defined in some context. Generally this will be a 'party in role'. This property is not intended to be used to relate some independent thing to that which it provides, instead it must only be a property of something in the role of being that which provides some thing." ;
+	.
+
+fibo-fnd-rel-rel:refersTo
+	a owl:ObjectProperty ;
+	rdfs:label "refers to" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:refersTo" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "the relationship between a reference and the concept it stands for or refers to, i.e., the referent for that reference" ;
+	.
+
+fibo-fnd-rel-rel:represents
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "represents" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:represents" ;
+	rdfs:domain fibo-fnd-rel-rel:Reference ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:inverseOf fibo-fnd-rel-rel:hasRepresentation ;
+	skos:definition "relates some textual or other symbol or some set of words to some concept that has the sense or meaning the representation is intended to convey" ;
+	.
+
+fibo-fnd-rel-rel:uses
+	a owl:ObjectProperty ;
+	rdfs:label "uses" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:uses" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	owl:equivalentProperty lcc-cr:uses ;
+	owl:inverseOf fibo-fnd-rel-rel:isUsedBy ;
+	skos:definition "relates something to something else that it has the ability to employ in some way" ;
+	.
+
+fibo-fnd-rel-rel:wasFormerlyKnownAs
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-aap-agt:hasName ;
+	rdfs:label "was formerly known as" ;
+	rdfs:comment "QName: fibo-fnd-rel-rel:wasFormerlyKnownAs" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> ;
+	skos:definition "a name by which something was known in the past" ;
+	.
+
+lcc-lr:hasTag
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasTag ;
+	.
+

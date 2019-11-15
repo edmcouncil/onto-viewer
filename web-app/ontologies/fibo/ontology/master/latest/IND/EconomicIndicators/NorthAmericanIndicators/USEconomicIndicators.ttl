@@ -1,0 +1,323 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-be-ge-ge: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/> .
+@prefix fibo-be-ge-usj: <https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ei-pub: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/> .
+@prefix fibo-ind-ei-usei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> .
+@prefix lcc-3166-1: <https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/>
+	a owl:Ontology ;
+	rdfs:label "American Economic Indicators Ontology" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:" ;
+	dct:abstract "This ontology provides specific parameters which make up the various types of market economic indicators applicable to the American economy." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2019 EDM Council, Inc." ,
+		"Copyright (c) 2016-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-ind-ei-usei" ;
+	sm:filename "USEconomicIndicators.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicatorPublishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators.rdf version of this ontology was added to the IND specification per the issue resolutions identified in the FIBO IND 1.0 FTF 3 report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators.rdf version of this ontology was revised per the FIBO 2.0 RFC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators.rdf version of this ontology was revised to reflect the new hasCoverageArea property and migration of statistical measures in FND."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-ind-ei-usei:AmericanStatisticsPublisher
+	a owl:Class ;
+	rdfs:subClassOf fibo-ind-ei-pub:StatisticalInformationPublisher ;
+	rdfs:label "American statistics publisher" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:AmericanStatisticsPublisher" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "a statistical information publisher comprised of the government agencies and departments that publish statistical information on behalf of the U.S. Federal Government" ;
+	skos:example "Examples of American statistical information publishers include the Department of Commerce, Bureau of Economic Analysis (Commerce), Census Bureau (Commerce), Bureau of Labor Statistics (Labor), Department of the Treasury, and the Federal Reserve Board, among others." ;
+	.
+
+fibo-ind-ei-usei:BureauOfLaborStatistics
+	a
+		owl:NamedIndividual ,
+		fibo-be-ge-ge:GovernmentAgency
+		;
+	rdfs:label "Bureau of Labor Statistics" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:BureauOfLaborStatistics" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	rdfs:seeAlso <http://www.bls.gov/> ;
+	skos:definition "individual representing the Bureau of Labor Statistics, the principal Federal agency responsible for measuring labor market activity, working conditions, and price changes in the economy" ;
+	fibo-fnd-plc-cty:hasCoverageArea lcc-3166-1:UnitedStatesOfAmerica ;
+	fibo-fnd-rel-rel:isPartOf fibo-ind-ei-usei:UnitedStatesDepartmentOfLabor ;
+	fibo-fnd-utl-av:abbreviation "BLS" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.bls.gov/bls/infohome.htm"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Its mission is to collect, analyze, and disseminate essential economic information to support public and private decision-making. As an independent statistical agency, BLS serves its diverse user communities by providing products and services that are objective, timely, accurate, and relevant." ;
+	.
+
+fibo-ind-ei-usei:ConsumerExpenditureSurvey
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:StatisticalProgram ;
+	rdfs:label "consumer expenditure survey" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:ConsumerExpenditureSurvey" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "a program conducted on a regular basis that provides information on the buying habits of consumers, including data on their expenditures, income, and consumer unit (families and single consumers) characteristics" ;
+	fibo-fnd-utl-av:adaptedFrom <http://www.bls.gov/cex/> ;
+	.
+
+fibo-ind-ei-usei:CurrentEmploymentStatistics
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:StatisticalProgram ;
+	rdfs:label "current employment statistics" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:CurrentEmploymentStatistics" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "a survey conducted on a regular basis that presents analytical information related to businesses and government agencies, in order to provide detailed industry data on employment, hours, and earnings of workers" ;
+	fibo-fnd-utl-av:adaptedFrom <http://www.bls.gov/ces/> ;
+	.
+
+fibo-ind-ei-usei:CurrentPopulationSurvey
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:StatisticalProgram ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-ind-ei-ei:CivilianNonInstitutionalPopulation ;
+		]
+		;
+	rdfs:label "current population survey" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:CurrentPopulationSurvey" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "a survey conducted on a regular basis that presents analytical information related to the general population of a given statistical area with respect to labor force, employment, unemployment, persons not in the labor force, hours of work, earnings, and other demographic and labor force characteristics" ;
+	fibo-fnd-utl-av:adaptedFrom <http://www.bls.gov/cps/> ;
+	.
+
+fibo-ind-ei-usei:EmploymentSituationEstablishmentSurvey
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-usei:EmploymentSituationSurvey ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasContext ;
+			owl:someValuesFrom fibo-ind-ei-ei:Establishment ;
+		]
+		;
+	rdfs:label "employment situation establishment survey" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:EmploymentSituationEstablishmentSurvey" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	rdfs:seeAlso <http://www.bls.gov/web/empsit/ces_cps_trends.pdf> ;
+	skos:definition "a survey conducted on a regular basis that presents analytical information related to the labor force of a given statistical area, surveyed with respect to businesses, and is, for the most part, seasonally adjusted" ;
+	fibo-fnd-utl-av:adaptedFrom "U.S. Bureau of Labor Statistics and Statistics Canada reference definitions - https://wiki.edmcouncil.org/pages/viewpage.action?pageId=6358041" ;
+	.
+
+fibo-ind-ei-usei:EmploymentSituationHouseholdSurvey
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-usei:EmploymentSituationSurvey ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasContext ;
+			owl:someValuesFrom fibo-ind-ei-ei:Household ;
+		]
+		;
+	rdfs:label "employment situation household survey" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:EmploymentSituationHouseholdSurvey" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	rdfs:seeAlso <http://www.bls.gov/web/empsit/ces_cps_trends.pdf> ;
+	skos:definition "a survey conducted on a regular basis that presents analytical information related to the labor force of a given statistical area, surveyed with respect to households, and is, for the most part, seasonally adjusted" ;
+	fibo-fnd-utl-av:adaptedFrom "U.S. Bureau of Labor Statistics and Statistics Canada reference definitions - https://wiki.edmcouncil.org/pages/viewpage.action?pageId=6358041" ;
+	.
+
+fibo-ind-ei-usei:EmploymentSituationSurvey
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-usei:CurrentEmploymentStatistics ,
+		fibo-ind-ei-usei:CurrentPopulationSurvey ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ei-ei:isSeasonallyAdjusted ;
+			owl:onDataRange xsd:boolean ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "employment situation survey" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:EmploymentSituationSurvey" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "a survey conducted on a regular basis that presents analytical information focused on the employment characteristics of a given statistical area" ;
+	fibo-fnd-utl-av:adaptedFrom <http://www.bls.gov/opub/reports/about.htm> ;
+	.
+
+fibo-ind-ei-usei:PointOfPurchaseSurvey
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:StatisticalProgram ;
+	rdfs:label "point of purchase survey" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:PointOfPurchaseSurvey" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "a program conducted on a regular basis that provides information on purchases of various items and services by consumers" ;
+	fibo-fnd-utl-av:adaptedFrom <http://www.bls.gov/respondents/cpi/tpops/> ;
+	.
+
+fibo-ind-ei-usei:USProducerPriceIndex
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-ei:ProducerPriceIndex ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:isPublishedBy ;
+			owl:hasValue fibo-ind-ei-usei:BureauOfLaborStatistics ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:hasPublisher ;
+			owl:someValuesFrom fibo-ind-ei-usei:AmericanStatisticsPublisher ;
+		]
+		;
+	rdfs:label "U.S. producer price index" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:USProducerPriceIndex" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "an economic indicator representing a measure of the change over time in the selling prices received by domestic producers for their output" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.bls.gov/ppi/"^^xsd:anyURI ;
+	.
+
+fibo-ind-ei-usei:UnitedStatesDepartmentOfLabor
+	a
+		owl:NamedIndividual ,
+		fibo-be-ge-ge:GovernmentDepartment
+		;
+	rdfs:label "United States Department of Labor" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:UnitedStatesDepartmentOfLabor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	rdfs:seeAlso <https://www.dol.gov/> ;
+	skos:definition "individual representing the U.S. Department of Labor, a government department whose mission is to foster, promote, and develop the welfare of the wage earners, job seekers, and retirees of the United States; improve working conditions; advance opportunities for profitable employment; and assure work-related benefits and rights" ;
+	fibo-be-ge-ge:hasJurisdiction fibo-be-ge-usj:UnitedStatesJurisdiction ;
+	fibo-fnd-plc-cty:hasCoverageArea lcc-3166-1:UnitedStatesOfAmerica ;
+	fibo-fnd-rel-rel:isPartOf fibo-be-ge-usj:UnitedStatesGovernment ;
+	fibo-fnd-utl-av:abbreviation "DOL" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.dol.gov/general/aboutdol/mission"^^xsd:anyURI ;
+	.
+
+fibo-ind-ei-usei:UrbanConsumerPriceIndex
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-utl-alx:Expression ,
+		fibo-ind-ei-ei:ConsumerPriceIndex ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:isPublishedBy ;
+			owl:hasValue fibo-ind-ei-usei:BureauOfLaborStatistics ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:onClass fibo-ind-ei-usei:UrbanConsumersUniverse ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:hasPublisher ;
+			owl:someValuesFrom fibo-ind-ei-usei:AmericanStatisticsPublisher ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-ind-ei-usei:UrbanConsumersUniverse ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-fbc-pas-fpas:Basket ;
+		]
+		;
+	rdfs:label "urban consumer price index" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:UrbanConsumerPriceIndex" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "an economic indicator representing a measure of the average change over time in the prices paid by urban consumers for a market basket of consumer goods and services" ;
+	fibo-fnd-utl-av:abbreviation "CPI-U" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.bls.gov/cpi/"^^xsd:anyURI ;
+	.
+
+fibo-ind-ei-usei:UrbanConsumersUniverse
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ei-ei:CivilianNonInstitutionalPopulation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasContext ;
+			owl:someValuesFrom fibo-ind-ei-usei:ConsumerExpenditureSurvey ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasContext ;
+			owl:someValuesFrom fibo-ind-ei-usei:PointOfPurchaseSurvey ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasMember ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:playsRole ;
+				owl:someValuesFrom fibo-ind-ei-ei:UltimateConsumer ;
+			] ;
+		]
+		;
+	rdfs:label "urban consumers universe" ;
+	rdfs:comment "QName: fibo-ind-ei-usei:UrbanConsumersUniverse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/> ;
+	skos:definition "a statistical universe for consumer expenditure surveys consisting of people within a household that make joint expenditure decisions" ;
+	fibo-fnd-utl-av:adaptedFrom "U.S. Bureau of Labor Statistics, http://www.bls.gov/cpi/" ;
+	fibo-fnd-utl-av:explanatoryNote "In the United States, the CPI-U population, which covers about 88 percent of the U.S. population, covers households in all areas of the United States except people living in rural nonmetropolitan areas, in farm households, on military installations, in religious communities, and in institutions such as prisons and mental hospitals." ;
+	.
+

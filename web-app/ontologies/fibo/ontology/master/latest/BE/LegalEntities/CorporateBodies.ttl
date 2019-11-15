@@ -1,0 +1,312 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-be-le-fbo: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-law-cor: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/>
+	a owl:Ontology ;
+	rdfs:label "Corporate Bodies Ontology" ;
+	rdfs:comment "QName: fibo-be-le-cb:" ;
+	dct:abstract "This ontology defines the basic mechanisms that establish legal personhood for judicial or artificial persons, specifically those that are corporate bodies, including bodies incorporated by equity, by guarantee, and by agreement." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-be-le-cb" ;
+	sm:filename "CorporateBodies.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/AccountingEquity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/BE/20160201/LegalEntities/CorporateBodies.rdf version of this ontology was modified per the FIBO 2.0 RFC to address issues including elimination of missing labels and comments, integration with LCC, and replacing min 1 QCRs with someValuesFrom." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/BE/20180801/LegalEntities/CorporateBodies.rdf version of this ontology was modified to simplify / merge the legal person and formal organization class hierarchies." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies.rdf version of this ontology was modified per the issue resolutions identified in the FIBO BE 1.0 FTF report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies.rdf version of this ontology was modified to reflect the move of hasObjective to FND to enable higher level reuse and eliminate deprecated elements."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-be-le-cb:BenefitCorporation
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-cb:NotForProfitCorporation ;
+	rdfs:label "benefit corporation" ;
+	rdfs:comment "QName: fibo-be-le-cb:BenefitCorporation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	rdfs:seeAlso "http://www.business.ca.gov/Portals/0/Home/Docs/AB%202641%20SOS.pdf"^^xsd:anyURI ;
+	skos:definition "a not for profit corporation set up under specific state legislation to provide some stated societal benefit, and with some corresponding relaxation of the obligation to maximize shareholder return" ;
+	fibo-fnd-utl-av:adaptedFrom "www.bcorporation.net"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "This is a US-specific type of non-profit corporation defined in recent legislation in a number of states. In California, for example, benefit corporations may be defined as public benefit or mutual benefit corporations, depending on their purpose." ;
+	.
+
+fibo-be-le-cb:BodyIncorporatedThroughAgreement
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-cb:Corporation ;
+	rdfs:label "body incorporated through agreement" ;
+	rdfs:comment "QName: fibo-be-le-cb:BodyIncorporatedThroughAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	skos:definition "A body with legal personhood, incorporated through some agreement among the principals, and without equity or guarantee instruments which would isolate the principals from liability." ;
+	skos:editorialNote "An LLP (in the UK) is an example of this, and is also a partnership. There, the LLP Document is the legal document which effectively constitutes the Partnership." ;
+	.
+
+fibo-be-le-cb:BodyIncorporatedWithGuarantee
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-cb:Corporation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:onClass fibo-be-le-cb:BodyLimitedByGuaranteePrincipalsAgreement ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "body incorporated with guarantee" ;
+	rdfs:comment "QName: fibo-be-le-cb:BodyIncorporatedWithGuarantee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	owl:disjointWith fibo-be-le-cb:BodyIncorporatedThroughAgreement ;
+	skos:definition "Incorporated entity without share capital, and in which the liability of its members is limited to the amount each one of them undertakes to contribute at the time the firm is wound up." ;
+	skos:editorialNote "The profit motive is not the prime objective of the organization." ;
+	.
+
+fibo-be-le-cb:BodyLimitedByGuaranteePrincipalsAgreement
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-fbo:OrganizationCoveringAgreement ;
+	rdfs:label "body limited by guarantee principals agreement" ;
+	rdfs:comment "QName: fibo-be-le-cb:BodyLimitedByGuaranteePrincipalsAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	skos:definition "The formal agreement between the principals of a body limited by guarantee." ;
+	.
+
+fibo-be-le-cb:CommonInterestDevelopmentCorporation
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-cb:NotForProfitCorporation ;
+	rdfs:label "common interest development corporation" ;
+	rdfs:comment "QName: fibo-be-le-cb:CommonInterestDevelopmentCorporation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	skos:definition "a not for profit corporation set up under specific state legislation as a business entity for homeowners' associations" ;
+	skos:example "http://www.dre.ca.gov/files/pdf/re39.pdf"^^xsd:anyURI ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.nolo.com/dictionary/common-interest-development-term.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A common interest development is typically a type of housing, composed of individually owned units, such as condominiums, townhouses, or single-family homes, that share ownership of common areas, such as swimming pools, landscaping, and parking. Common interest developments (also known as community interest developments or CIDs) are managed by homeowners' associations." ;
+	.
+
+fibo-be-le-cb:CompanyIncorporatedByGuarantee
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-cb:BodyIncorporatedWithGuarantee ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:onClass fibo-be-le-cb:BodyLimitedByGuaranteePrincipalsAgreement ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "company incorporated by guarantee" ;
+	rdfs:comment "QName: fibo-be-le-cb:CompanyIncorporatedByGuarantee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	skos:definition "a body limited by guarantee whose principals agreement' includes statements indicating how much money each principal will contribute to the company if it becomes insolvent" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investorguide.com/definition/guarantee.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:synonym "company limited by guarantee" ;
+	.
+
+fibo-be-le-cb:Corporation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-lp:LegalEntity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-le-cb:isConstitutedBy ;
+			owl:onClass fibo-be-le-cb:InstrumentOfIncorporation ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-le-cb:isIncorporatedIn ;
+			owl:onClass fibo-fnd-law-jur:Jurisdiction ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-org-fm:isDomiciledIn ;
+			owl:someValuesFrom lcc-cr:Country ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasLegalName ;
+			owl:someValuesFrom xsd:string ;
+		]
+		;
+	rdfs:label "corporation"@en ;
+	rdfs:comment "QName: fibo-be-le-cb:Corporation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	skos:definition "a formal organization treated as an entity - an artificial person or legal entity distinct from its owners - created by or under the authority of the laws of a state or nation" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"Barron's Dictionary of Banking Terms, Sixth Edition, 2012, definition of corporation" ,
+		"http://thelawdictionary.org/corporation/"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote
+		"A corporation has three distinguishing characteristics: (1) separation of ownership from management and general liability, i.e., its liability to creditors is limited to its resources, unlike some partnerships and sole proprietorships, (2) the ability to negotiate contracts and own property, and (3) transferable ownership, irrespective of changes in membership or the lifetimes of its stockholders." ,
+		"A corporation is managed by or under the direction of a board of directors, which generally determines corporate policy. Officers manage the day-to-day affairs of the corporation."
+		;
+	fibo-fnd-utl-av:synonym "body corporate" ;
+	.
+
+fibo-be-le-cb:ForProfitCorporation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-cb:Corporation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-gao-obj:hasObjective ;
+			owl:someValuesFrom fibo-be-le-lp:ProfitObjective ;
+		]
+		;
+	rdfs:label "for profit corporation" ;
+	rdfs:comment "QName: fibo-be-le-cb:ForProfitCorporation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	owl:disjointWith fibo-be-le-cb:NotForProfitCorporation ;
+	skos:definition "a corporation whose objective is to make money, in other words, to ensure realization of a financial benefit such that the amount of revenue gained from a business activity exceeds the expenses, costs and taxes needed to sustain that activity" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/p/profit.asp"^^xsd:anyURI ;
+	.
+
+fibo-be-le-cb:IncorporationGuarantee
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-cor:Constitution ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:cardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasNotionalAmount ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "incorporation guarantee" ;
+	rdfs:comment "QName: fibo-be-le-cb:IncorporationGuarantee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	skos:definition "A guarantee which is part of the means by which some incorporated entity is incorporated by guarantee." ;
+	.
+
+fibo-be-le-cb:InstrumentOfIncorporation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-law-cor:Constitution ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:onClass fibo-fnd-law-jur:Jurisdiction ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "instrument of incorporation" ;
+	rdfs:comment "QName: fibo-be-le-cb:InstrumentOfIncorporation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	skos:definition "Some legal instrument by which some legal entity which is not a natural person is made to exist." ;
+	skos:editorialNote "This may be the issuance of shares, the existence of some agreement, guaranties and so on." ;
+	.
+
+fibo-be-le-cb:NotForProfitCorporation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-be-le-cb:Corporation ,
+		fibo-be-le-fbo:NotForProfitOrganization
+		;
+	rdfs:label "not for profit corporation" ;
+	rdfs:comment "QName: fibo-be-le-cb:NotForProfitCorporation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	skos:definition "a corporation approved by its jurisdictional oversight and taxing authorities as operating for educational, charitable, social, religious, civic or humanitarian purposes" ;
+	fibo-fnd-utl-av:adaptedFrom "http://legal-dictionary.thefreedictionary.com/nonprofit+corporation"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "A not for profit corporation is formed by incorporators, and has a board of directors and officers, but no shareholders. These incorporators, directors and officers may not receive a distribution of (any money from) profits, but officers and management may be paid reasonable salaries for services to the corporation." ;
+	fibo-fnd-utl-av:synonym "non-profit corporation" ;
+	.
+
+fibo-be-le-cb:StockCorporation
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-cb:Corporation ;
+	rdfs:label "stock corporation"@en ;
+	rdfs:comment "QName: fibo-be-le-cb:StockCorporation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	owl:disjointWith
+		fibo-be-le-cb:BodyIncorporatedThroughAgreement ,
+		fibo-be-le-cb:BodyIncorporatedWithGuarantee
+		;
+	skos:definition "a corporation that has shareholders (stockholders), each of whom receives a portion of the ownership of the corporation through shares of stock" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://biztaxlaw.about.com/od/glossarys/g/stockcorp.htm"^^xsd:anyURI ,
+		"http://www.oecd.org/daf/ca/CorporateGovernanceFactbook.pdf"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "The shares in a stock corporation may receive a return on their investment in the form of dividends. Shares are used for voting on matters of corporate policy or to elect directors, at the corporation's annual meeting and at other meetings of the corporation." ;
+	.
+
+fibo-be-le-cb:isConstitutedBy
+	a owl:ObjectProperty ;
+	rdfs:label "is constituted by" ;
+	rdfs:comment "QName: fibo-be-le-cb:isConstitutedBy" ;
+	rdfs:domain fibo-be-le-cb:Corporation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	rdfs:range fibo-fnd-law-cor:Constitution ;
+	skos:definition "the instrument by which an entity is incorporated" ;
+	.
+
+fibo-be-le-cb:isIncorporatedIn
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-be-le-lp:isOrganizedIn ;
+	rdfs:label "is incorporated in" ;
+	rdfs:comment "QName: fibo-be-le-cb:isIncorporatedIn" ;
+	rdfs:domain fibo-be-le-cb:Corporation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	skos:definition "the legal jurisdiction under which the legal entity is incorporated" ;
+	skos:editorialNote "It is the laws of this jurisdiction that cause and allow the legal entity to exist and to incur debt and be sued at law as a legal entity." ;
+	.
+

@@ -1,0 +1,81 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/MetadataMD/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/MetadataMDCIVTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/MetadataMDDebtTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/MetadataMDDerivativesTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/MetadataMDEquityTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/MetadataMDTemporalCore/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/MetadataMD/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-md-civx-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/MetadataMDCIVTemporal/> .
+@prefix fibo-md-dbtx-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/MetadataMDDebtTemporal/> .
+@prefix fibo-md-derx-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/MetadataMDDerivativesTemporal/> .
+@prefix fibo-md-eqx-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/MetadataMDEquityTemporal/> .
+@prefix fibo-md-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/MetadataMD/> .
+@prefix fibo-md-temx-mod: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/MetadataMDTemporalCore/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/MetadataMD/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Market Data (MD) Domain" ;
+	rdfs:comment "QName: fibo-md-mod:" ;
+	dct:abstract "The metadata for Market Data ontology describes the MD domain." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-md-mod" ;
+	sm:filename "MetadataMD.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/MetadataMDCIVTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/MetadataMDDebtTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/MetadataMDDerivativesTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/MetadataMDEquityTemporal/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/MetadataMDTemporalCore/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/MD/MetadataMD/> ;
+	.
+
+fibo-md-mod:MDDomain
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Market Data" ;
+	rdfs:comment "QName: fibo-md-mod:MDDomain" ;
+	dct:abstract "The Market Data (MD) domain contains ontologies that represent temporally variant concepts for the whole range of financial instruments, loans and funds. While all concepts can be regarded as having some relationship to time, the ones in this domain are those concepts which explicitly have a set of past values a present value and projected future values. As such this domain covers the concepts represented in market data, such as prices, yields and analytics for debt and for pools of assets." ;
+	dct:creator "https://spec.edmcouncil.org/fibo/fct/Foundations"^^xsd:anyURI ;
+	dct:hasPart
+		fibo-md-civx-mod:CIVTemporalModule ,
+		fibo-md-dbtx-mod:DebtTemporalModule ,
+		fibo-md-derx-mod:DerivativesTemporalModule ,
+		fibo-md-eqx-mod:EquityTemporalModule ,
+		fibo-md-temx-mod:TemporalCoreModule
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Market Data (MD) Domain" ;
+	sm:copyright "Copyright (c) 2013-2018 EDM Council, Inc." ;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/MetadataBE/BEDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/BP/MetadataBP/BPDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/CIV/MetadataCIV/CIVDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/MetadataDER/DERDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/MetadataFBC/FBCDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/FNDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/IND/MetadataIND/INDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/MetadataLOAN/LOANDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/SECDomain>
+		;
+	sm:keyword "foundational vocabulary" ;
+	sm:moduleAbbreviation "fibo-md" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/MetadataMD/> ;
+	rdfs:seeAlso "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	.
+

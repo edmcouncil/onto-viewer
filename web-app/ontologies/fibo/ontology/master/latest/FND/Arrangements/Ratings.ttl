@@ -1,0 +1,443 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Assessments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-asmt: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/> .
+@prefix fibo-fnd-arr-cd: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-rep: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> .
+@prefix fibo-fnd-arr-rt: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-dt-oc: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/>
+	a owl:Ontology ;
+	rdfs:label "Ratings Ontology" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:" ;
+	dct:abstract "This ontology defines abstract concepts for representation of ratings and rating schemes, particularly for ratings describing aspects of business performance, credit worthiness, and investment quality at a high level." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2019 EDM Council, Inc." ;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Codes/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-arr-rt" ;
+	sm:filename "Ratings.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Assessments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Codes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings.rdf version of this ontology was revised to add properties indicating the 'best' and 'worst' scores on a given scale." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings.rdf version of this ontology was revised to replace hasDefinition with isDefinedIn to clarify intent."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-arr-rt:QualitativeRatingScore
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cd:CodeElement ,
+		fibo-fnd-arr-rt:RatingScore ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasTag ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "qualitative rating score" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:QualitativeRatingScore" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "rating score that is a qualitative code in some rating scale, such as a triple-A (i.e., AAA) or 5-star rating for something" ;
+	.
+
+fibo-fnd-arr-rt:QuantitativeRatingScore
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-rt:RatingScore ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rt:hasMeasureWithinScale ;
+			owl:onDataRange xsd:decimal ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "quantitative rating score" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:QuantitativeRatingScore" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "rating score that is a simple numeric value on some scale, such as a credit rating for an individual" ;
+	.
+
+fibo-fnd-arr-rt:Rating
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-asmt:Opinion ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rt:rates ;
+			owl:cardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasEffectiveDate ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+			owl:onClass fibo-fnd-arr-rt:RatingIssuer ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGeneratedBy ;
+			owl:onClass fibo-fnd-arr-rt:RatingParty ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-doc:hasDateOfIssuance ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rt:hasRatingScore ;
+			owl:someValuesFrom fibo-fnd-arr-rt:RatingScore ;
+		]
+		;
+	rdfs:label "rating" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:Rating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "standing of something at a particular time as indicated by one or more rating scores with respect to some scale according to some rating party" ;
+	.
+
+fibo-fnd-arr-rt:RatingAgency
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-rt:RatingIssuer ,
+		fibo-fnd-arr-rt:RatingScalePublisher ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-fnd-org-fm:FormalOrganization ;
+		]
+		;
+	rdfs:label "rating agency" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingAgency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "rating issuer that is also a rating scale publisher, frequently but not always an independent rating service" ;
+	.
+
+fibo-fnd-arr-rt:RatingAssessmentActivity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-asmt:AssessmentActivity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fnd-arr-rt:RatingParty ;
+		]
+		;
+	rdfs:label "rating assessment activity" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingAssessmentActivity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "assessment activity resulting in a grade or score and potentially a report describing the score and the process used to determine that score" ;
+	.
+
+fibo-fnd-arr-rt:RatingAssessmentEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-asmt:AssessmentEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasOutput ;
+			owl:onClass fibo-fnd-arr-rt:RatingReport ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:exemplifies ;
+			owl:onClass fibo-fnd-arr-rt:RatingAssessmentActivity ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-oc:hasOutput ;
+			owl:someValuesFrom fibo-fnd-arr-rt:Rating ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-fnd-arr-rt:RatingParty ;
+		]
+		;
+	rdfs:label "rating assessment event" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingAssessmentEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "individual assessment resulting in a grade or score and potentially a report describing the score" ;
+	.
+
+fibo-fnd-arr-rt:RatingIssuer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:issues ;
+			owl:someValuesFrom fibo-fnd-arr-rt:Rating ;
+		]
+		;
+	rdfs:label "rating issuer" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "party that is responsible for issuing ratings" ;
+	fibo-fnd-utl-av:explanatoryNote "A rating issuer is frequently, but not always the rating scale publisher. A rating issuer may delegate responsibility for producing a rating to a rating party." ;
+	.
+
+fibo-fnd-arr-rt:RatingParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:generates ;
+			owl:someValuesFrom fibo-fnd-arr-rt:Rating ;
+		]
+		;
+	rdfs:label "rating party" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "person, organization or group that analyzes some aspect of something and develops a rating" ;
+	.
+
+fibo-fnd-arr-rt:RatingReport
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-asmt:AssessmentReport ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rep:reportsOn ;
+			owl:someValuesFrom fibo-fnd-arr-rt:Rating ;
+		]
+		;
+	rdfs:label "rating report" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingReport" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "report describing a set of ratings" ;
+	.
+
+fibo-fnd-arr-rt:RatingScale
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:ClassificationScheme ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rt:hasBestMeasure ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:decimal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rt:hasWorstMeasure ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:decimal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:onClass fibo-fnd-arr-rt:RatingScalePublisher ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:defines ;
+			owl:someValuesFrom fibo-fnd-arr-rt:RatingScore ;
+		]
+		;
+	rdfs:label "rating scale" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingScale" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "system for assigning a value to something according to some scale with respect to quality, a standard, or ranking" ;
+	.
+
+fibo-fnd-arr-rt:RatingScalePublisher
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:manages ;
+			owl:someValuesFrom fibo-fnd-arr-rt:RatingScale ;
+		]
+		;
+	rdfs:label "rating scale publisher" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingScalePublisher" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "party responsible for managing one or more rating schemes and potentially publishing ratings based on those schemes" ;
+	fibo-fnd-utl-av:explanatoryNote "Rating scale publishers are frequently also rating agencies." ;
+	.
+
+fibo-fnd-arr-rt:RatingScore
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-cls:Classifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rt:hasMeasureWithinScale ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:decimal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:onClass fibo-fnd-arr-rt:RatingScale ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "rating score" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:RatingScore" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "grade, classification, or ranking of for something in accordance with some rating scale" ;
+	fibo-fnd-utl-av:explanatoryNote "The meaning and methodology for determining a rating score for the rating of something is determined by a rating issuer. A given rating may apply at some point in time, as a part of a lifecycle or process, or generally.  Typically ratings reflect an assessment of a state of affairs at some point in time." ;
+	.
+
+fibo-fnd-arr-rt:hasBestMeasure
+	a owl:DatatypeProperty ;
+	rdfs:label "has best measure" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:hasBestMeasure" ;
+	rdfs:domain fibo-fnd-arr-rt:RatingScale ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "indicates the 'best' (most desirable) possible value for a rating score's hasMeasureWithinScale property" ;
+	fibo-fnd-utl-av:explanatoryNote "Note that hasBestMeasure and hasWorstMeasure may be used together to determine the direction and range of a scale's measure values." ;
+	.
+
+fibo-fnd-arr-rt:hasMeasureWithinScale
+	a owl:DatatypeProperty ;
+	rdfs:label "has measure within scale" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:hasMeasureWithinScale" ;
+	rdfs:domain fibo-fnd-arr-rt:RatingScore ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "indicates a relative, numeric measure or ordering on a rating scale" ;
+	.
+
+fibo-fnd-arr-rt:hasRating
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isClassifiedBy ;
+	rdfs:label "has rating" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:hasRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	rdfs:range fibo-fnd-arr-rt:Rating ;
+	owl:inverseOf fibo-fnd-arr-rt:rates ;
+	skos:definition "indicates the rating assigned to a thing based on a grade or score according to a particular rating scale" ;
+	.
+
+fibo-fnd-arr-rt:hasRatingScore
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has rating score" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:hasRatingScore" ;
+	rdfs:domain fibo-fnd-arr-rt:Rating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	rdfs:range fibo-fnd-arr-rt:RatingScore ;
+	skos:definition "indicates the grade or score associated with a rating with respect to a particular rating scale" ;
+	.
+
+fibo-fnd-arr-rt:hasWorstMeasure
+	a owl:DatatypeProperty ;
+	rdfs:label "has worst measure" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:hasWorstMeasure" ;
+	rdfs:domain fibo-fnd-arr-rt:RatingScale ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "indicates the 'worst' (least desirable) possible value for a rating score's hasMeasureWithinScale property" ;
+	fibo-fnd-utl-av:explanatoryNote "Note that hasBestMeasure and hasWorstMeasure may be used together to determine the direction and range of a scale's measure values." ;
+	.
+
+fibo-fnd-arr-rt:producesRatingsFor
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:produces ;
+	rdfs:label "produces ratings for" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:producesRatingsFor" ;
+	rdfs:domain fibo-fnd-arr-rt:RatingParty ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	rdfs:range fibo-fnd-arr-rt:RatingIssuer ;
+	owl:inverseOf fibo-fnd-arr-rt:usesRatingParty ;
+	skos:definition "issuer for which ratings are produced or posted through" ;
+	.
+
+fibo-fnd-arr-rt:rates
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:classifies ;
+	rdfs:label "rates" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:rates" ;
+	rdfs:domain fibo-fnd-arr-rt:Rating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	skos:definition "indicates the instrument, party or something else to which a rating applies" ;
+	.
+
+fibo-fnd-arr-rt:usesRatingParty
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:isProducedBy ;
+	rdfs:label "uses rating performer" ;
+	rdfs:comment "QName: fibo-fnd-arr-rt:usesRatingParty" ;
+	rdfs:domain fibo-fnd-arr-rt:RatingIssuer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> ;
+	rdfs:range fibo-fnd-arr-rt:RatingParty ;
+	skos:definition "rating performer an issuer uses to assess ratings" ;
+	.
+

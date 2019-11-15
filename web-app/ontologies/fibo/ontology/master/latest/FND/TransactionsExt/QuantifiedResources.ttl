@@ -1,0 +1,66 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/QuantifiedResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/QuantifiedResources/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-txn-ecr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> .
+@prefix fibo-fnd-txn-qr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/QuantifiedResources/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/QuantifiedResources/>
+	a owl:Ontology ;
+	rdfs:label "QuantifiedResources"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Provides for the quantification of economic resources and raw material" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/QuantifiedResources/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-qr:QuantifiedRawMaterial
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-qr:QuantifiedResource ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-qr:quantifiedRawMaterialTakesMaterialForm ;
+			owl:someValuesFrom fibo-fnd-qt-qtu:QuantityValue ;
+		]
+		;
+	rdfs:label "quantified raw material"@en ;
+	rdfs:comment "QName: NONE:QuantifiedRawMaterial" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/QuantifiedResources/> ;
+	skos:definition "Some measured or quantified amount of some raw material. Scope Note: This is a kind of economic resource i.e. it may be bought or sold or exchanged, or put to work in some process."@en ;
+	.
+
+fibo-fnd-txn-qr:QuantifiedResource
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-ecr:EconomicResource ;
+	rdfs:label "quantified resource"@en ;
+	rdfs:comment "QName: NONE:QuantifiedResource" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/QuantifiedResources/> ;
+	skos:definition "An amount of something which is defined in terms of its use for some purpose."@en ;
+	fibo-fnd-utl-av:explanatoryNote "An example would be Capital, which is an amount of money with a purpose."@en ;
+	.
+
+fibo-fnd-txn-qr:quantifiedRawMaterialTakesMaterialForm
+	a owl:ObjectProperty ;
+	rdfs:label "quantified raw material takes material form"@en ;
+	rdfs:comment "QName: NONE:quantifiedRawMaterialTakesMaterialForm" ;
+	rdfs:domain fibo-fnd-txn-qr:QuantifiedRawMaterial ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/QuantifiedResources/> ;
+	skos:definition "The actual numerical amount of some material, that is represented as quantified raw material."@en ;
+	.
+

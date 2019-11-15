@@ -1,0 +1,66 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-txn-ecr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/>
+	a owl:Ontology ;
+	rdfs:label "EconomicResources"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Provides the contextually defined concept of an economic resource, corresponding to the same concept in REA." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-ecr:EconomicContext
+	a owl:Class ;
+	rdfs:label "economic context"@en ;
+	rdfs:comment "QName: NONE:EconomicContext" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> ;
+	.
+
+fibo-fnd-txn-ecr:EconomicResource
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ecr:takesMaterialForm ;
+			owl:someValuesFrom owl:Thing ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:definedInContextOf ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicTransaction ;
+		]
+		;
+	rdfs:label "economic resource"@en ;
+	rdfs:comment "QName: NONE:EconomicResource" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> ;
+	skos:definition "Anything that can bought sold or exchanged."@en ;
+	skos:editorialNote "Formerly labeled as Negotiable Thing. Changed to REA terminology with no effect on meaning. Note that this is a relative thing - the thing which is itself the economic resource, is some good or some service (i.e. some physical thing or some event/activity) which can be framed as an economic resource in the context of exchanging it for some other economic resource. Scope Note: Economic Resource may also define things which are not exchanged but are defined as resources in some other context, for example Capital is a kind of economic resource."@en ;
+	.
+
+fibo-fnd-txn-ecr:takesMaterialForm
+	a owl:ObjectProperty ;
+	rdfs:label "takes material form"@en ;
+	rdfs:comment "QName: NONE:takesMaterialForm" ;
+	rdfs:domain fibo-fnd-txn-ecr:EconomicResource ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> ;
+	rdfs:range owl:Thing ;
+	skos:definition 'The material form of the Economic Resource; that is the thing which is recognized as being an Economic Resource as defined here, Editorial Note: This would usually be some Independent Thing. However it is conceivable that the existence of some relative thing, for example an asset, may itself be regarded and defined as a resource, over and above the role or context already defined for it. Therefore this identity relationship has a range of Thing, but is modeled as a sub property of "identity" to make this conclusion explicit. Editorial Note: This is a relationship with the sense that some relative thing takes the form of something, but is distinct from the similar concept as applied to Asset, in which the thing which takes the form of some asset is owned by someone. Here it is a resource, irrespective of whether or by whom it is owned. Labeled as "takes material form" to disambiguate these two relationships.'@en ;
+	.
+

@@ -1,0 +1,138 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/>
+	a owl:Ontology ;
+	rdfs:label "Roles Ontology" ;
+	rdfs:comment "QName: fibo-fnd-pty-rl:" ;
+	dct:abstract "This ontology defines some high-level concepts of roles for use in other FIBO ontology elements. These concepts include the basic property whereby something has some role, along with the high-level concept of an agent in a role. The agent in role concept provides the basis for party in role concepts in the PartyRoles ontology and is framed as some entity defined specifically in respect to some role which it performs in some context.." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2018 EDM Council, Inc." ,
+		"Copyright (c) 2013-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-pty-rl" ;
+	sm:filename "Roles.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20130801/Parties/Roles.rdf version of the ontology was was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in http://www.omg.org/spec/EDMC-FIBO/FND/1.0/AboutFND-1.0/." ,
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/Roles/Roles.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations.
+   (6) to combine Parties, Party Roles, and Roles in a single, new, Parties module."""
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-pty-rl:AgentInRole
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-rl:ThingInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:onClass fibo-fnd-aap-agt:AutonomousAgent ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "agent in role" ;
+	rdfs:comment "QName: fibo-fnd-pty-rl:AgentInRole" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> ;
+	skos:definition "An agent-in-role is a relative concept that ties an autonomous agent to a role they are playing in a given situational context." ;
+	fibo-fnd-utl-av:adaptedFrom "OMG Property and Casualty Information Models, dtc/12-01-04, Annex A, Glossary of Data Model Terms and Definitions" ;
+	.
+
+fibo-fnd-pty-rl:Role
+	a owl:Class ;
+	rdfs:label "role" ;
+	rdfs:comment "QName: fibo-fnd-pty-rl:Role" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> ;
+	skos:definition "A role is a set of connected behaviours, rights, obligations, beliefs, and norms as conceptualised by actors in the context of some situation." ;
+	fibo-fnd-utl-av:adaptedFrom "http://en.wikipedia.org/wiki/Role"^^xsd:anyURI ;
+	.
+
+fibo-fnd-pty-rl:ThingInRole
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:cardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:hasRole ;
+			owl:someValuesFrom fibo-fnd-pty-rl:Role ;
+		]
+		;
+	rdfs:label "thing in role" ;
+	rdfs:comment "QName: fibo-fnd-pty-rl:ThingInRole" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> ;
+	skos:definition "a thing-in-role is a relative concept that ties some thing to a role it plays in a given situational context" ;
+	.
+
+fibo-fnd-pty-rl:hasRole
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has role" ;
+	rdfs:comment "QName: fibo-fnd-pty-rl:hasRole" ;
+	rdfs:domain fibo-fnd-pty-rl:ThingInRole ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> ;
+	rdfs:range fibo-fnd-pty-rl:Role ;
+	skos:definition "provides a means for relating a person, organization, group, or other entity to a role that entity plays in some relationship and context" ;
+	.
+
+fibo-fnd-pty-rl:isPlayedBy
+	a
+		owl:ObjectProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasIdentity ;
+	rdfs:label "is played by" ;
+	rdfs:comment "QName: fibo-fnd-pty-rl:isPlayedBy" ;
+	rdfs:domain fibo-fnd-pty-rl:ThingInRole ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> ;
+	owl:inverseOf fibo-fnd-pty-rl:playsRole ;
+	skos:definition "indicates the independent thing, typically a person or organization filling a role" ;
+	skos:example "a party, counterparty, or third party to a contract is played by an organization or person; an issuer of a financial instrument is typically played by an organization." ;
+	.
+
+fibo-fnd-pty-rl:playsRole
+	a owl:ObjectProperty ;
+	rdfs:label "plays role" ;
+	rdfs:comment "QName: fibo-fnd-pty-rl:playsRole" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> ;
+	rdfs:range fibo-fnd-pty-rl:ThingInRole ;
+	skos:definition "indicates a role that an independent thing, such as a person or organization, plays under some circumstance" ;
+	skos:example "an organization in the role of employer, issuer, regulatory agency, bank, custodian, etc." ;
+	.
+

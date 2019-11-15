@@ -1,0 +1,60 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/MetadataCAE/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/CorporateEvents/CorporateActionsEvents/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/MetadataCAE/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-cae-ce-mod: <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/MetadataCAECorporateEvents/> .
+@prefix fibo-cae-mod: <https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Corporate Actions and Events (CAE) Domain" ;
+	rdfs:comment "QName: fibo-cae-mod:" ;
+	dct:abstract "The metadata for CAE ontology describes the CAE domain." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-cae-mod" ;
+	sm:filename "MetadataCAE.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/CorporateEvents/CorporateActionsEvents/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/CAE/MetadataCAE/> ;
+	.
+
+fibo-cae-mod:CAEDomain
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Corporate Actions and Events" ;
+	rdfs:comment "QName: fibo-cae-mod:CAEDomain" ;
+	dct:abstract "The Corporate Actions and Events (CAE) domain contain ontologies that define events and actions that may occur during the life of a security, and are typically those events which may cause some change in some part of the underlying reference information for that security. Corporate actions include actions that require some action on the part of the holder, and in these and some other cases there are process descriptions for the flow of activities involved." ;
+	dct:creator "https://spec.edmcouncil.org/fibo/fct/Foundations"^^xsd:anyURI ;
+	dct:hasPart fibo-cae-ce-mod:CorporateEventsModule ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Corporate Actions and Events (CAE) Domain" ;
+	sm:copyright "Copyright (c) 2013-2018 EDM Council, Inc." ;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/MetadataBE/BEDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/BP/MetadataBP/BPDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/MetadataDER/DERDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/MetadataFBC/FBCDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/FNDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/MD/MetadataMD/MDDomain> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/SECDomain>
+		;
+	sm:keyword "foundational vocabulary" ;
+	sm:moduleAbbreviation "fibo-cae" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/> ;
+	.
+

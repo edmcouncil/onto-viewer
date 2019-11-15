@@ -1,0 +1,380 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CreditDerivatives/CreditDefaultSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CDOs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-cr-cds: <https://spec.edmcouncil.org/fibo/ontology/DER/CreditDerivatives/CreditDefaultSwaps/> .
+@prefix fibo-fbc-dae-crt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-sec-dbt-ab-cdo: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CDOs/> .
+@prefix fibo-sec-dbt-ab-pbs: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/> .
+@prefix fibo-sec-dbt-ab-spv: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> .
+@prefix fibo-sec-dbt-ab-syn: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/>
+	a owl:Ontology ;
+	rdfs:label "SyntheticCDOs"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Synthetic collateralized debt obligations are instruments designed to provide the same kind of structure and returns as a CDO, but these are not backed by an actual pool of debt assets." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CreditDerivatives/CreditDefaultSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/CDOs/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-sec-dbt-ab-cdo:CashCDOTranche
+	a owl:Class ;
+	owl:disjointWith fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+	.
+
+fibo-sec-dbt-ab-syn:ArbitrageSyntheticCDO
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cdo:ArbitrageCDO ,
+		fibo-sec-dbt-ab-syn:SyntheticCDO ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:assetsManagedBy ;
+			owl:someValuesFrom fibo-sec-dbt-ab-cdo:CDOPortfolioManager ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:issues ;
+			owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+		]
+		;
+	rdfs:label "arbitrage synthetic c d o"@en ;
+	rdfs:comment "QName: NONE:ArbitrageSyntheticCDO" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	owl:disjointWith fibo-sec-dbt-ab-syn:SyntheticBalanceSheetCDO ;
+	skos:definition "Arbitrage synthetic CDO deals are motivated by regulatory or practical considerations that might make a bank want to retain ownership of debt while achieving capital relief through CDSs. In this case, the sponsoring bank has a portfolio of obligations, called the reference portfolio. It retains that portfolio, but offloads its credit risk by transacting CDSs with the CDO."@en ;
+	fibo-fnd-utl-av:explanatoryNote "For arbitrage synthetic deals, two advantages are - an abbreviated ramp-up period (for managed deals), and - the possibility that selling protection through CDSs can be less expensive than directly buying the underlying bonds. This is often true at the lower end of the credit spectrum."@en ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticAmortizingSecurity
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-syn:SyntheticStructuredFinanceInstrument ;
+	rdfs:label "synthetic amortizing security"@en ;
+	rdfs:comment "QName: NONE:SyntheticAmortizingSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	skos:definition "Security constructed to emulate an amortizing security."@en ;
+	skos:scopeNote "Synthetic instruments can be created to mimic a wide range of debt instruments. These are not all shown here. This one is shown as an example"@en ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticBalanceSheetCDO
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cdo:BalanceSheetCDO ,
+		fibo-sec-dbt-ab-syn:SyntheticCDO ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:issues ;
+			owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+		]
+		;
+	rdfs:label "synthetic balance sheet c d o"@en ;
+	rdfs:comment "QName: NONE:SyntheticBalanceSheetCDO" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticCDO
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cdo:CDODeal ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:issues ;
+			owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+		]
+		;
+	rdfs:label "synthetic c d o"@en ;
+	rdfs:comment "QName: NONE:SyntheticCDO" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticCDOPortfolio
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-sec-dbt-ab-syn:notionallyHolds ;
+		owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticCDOPortfolioConstituent ;
+	] ;
+	rdfs:label "synthetic c d o portfolio"@en ;
+	rdfs:comment "QName: NONE:SyntheticCDOPortfolio" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	skos:editorialNote "Review notes: What real stuff is this made of? Would be the actual contracts (the Ref Obligation contracts or the CDS contract)? Buyer of protection is buying protection and paying a fee. Similar to shorting on a stock. Seller of the protection is the one creating the instruments. So the Protection Seller is using the synthetic CDO as some kind of synthetic vehicle. Inside the portfolio is the actual contract that generates the cash."@en ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticCDOPortfolioConstituent
+	a owl:Class ;
+	rdfs:label "synthetic c d o portfolio constituent"@en ;
+	rdfs:comment "QName: NONE:SyntheticCDOPortfolioConstituent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	skos:definition "An instrument which is defined as a constituent of a synthetic pool of instruments. These are not holdings because they are not held, but in all other respects they are the constituents of the portfolio."@en ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticCDOTranche
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-cdo:CDONote ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:isTrancheOf ;
+			owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPool ;
+		]
+		;
+	rdfs:label "synthetic c d o tranche"@en ;
+	rdfs:comment "QName: NONE:SyntheticCDOTranche" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPool
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:AbstractCashflowConstruct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:fundedBy ;
+			owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPoolFundingAsset ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:hasUnderlyingContract ;
+			owl:someValuesFrom fibo-der-cr-cds:CreditDefaultSwapContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:makesReferenceTo ;
+			owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticCDOPortfolio ;
+		]
+		;
+	rdfs:label "synthetic debt instrument pool"@en ;
+	rdfs:comment "QName: NONE:SyntheticDebtInstrumentPool" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	skos:definition "A cash flow structure which synthesizes the behavior of a portfolio of debt securities. For example a synthesized portfolio of CDO / Bonds / ABS using Total Returns Swaps and CDS. This does exist, it is just manufactured from different instruments."@en ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPoolFundingAsset
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-sec-dbt-ab-syn:hasInvestmentGrade ;
+		owl:someValuesFrom fibo-fbc-dae-crt:InstrumentCreditRating ;
+	] ;
+	rdfs:label "synthetic debt instrument pool funding asset"@en ;
+	rdfs:comment "QName: NONE:SyntheticDebtInstrumentPoolFundingAsset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	skos:definition
+		"An asset which provides the funding for a synthetic debt instrument pool, as used in a synthetic CDO."@en ,
+		"From April 28 review session: CDS mechanization: Q: Are the CDS taken out on the constituents of the (non owned) pool or on some other instrument? A: There is funding to underpin the pool. The funding may be high grade debt or may be low grade. There is an undedrlying source of funds. then you swap (using CDS) into other risks. so I might lend to a government institution, and then sell protection against a whole series of corporates. So I've taken the high quality portfolio and added other risks to it. Or the other way round. conclusions:"@en
+		;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticDebtSPV
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-spv:DebtSPV ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:holds ;
+			owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPoolFundingAsset ;
+		]
+		;
+	rdfs:label "synthetic debt s p v"@en ;
+	rdfs:comment "QName: NONE:SyntheticDebtSPV" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	skos:definition "A Special Purpose Vehicle set up for the issuance of synthetics CDOs. This entity (like all SPVs) its itself registered as some kind of legal entity, distinct from the sponsoring organization. It becomes the Issuer of Synthetic CDO issues."@en ;
+	skos:editorialNote 'REVIEW: Whether this is (or is ever) a separate SPV for Synthetics, as it is for Cash CDO and other Cash structured finance. If not, how to define the facts at the level of SPV without contradictions. Moving stuff off the balance sheet is involved in putting it into the SPV. So talking a bout balance sheet or off balanc sheet, this is about creating the pool which is going to be sold off. This applies whether hte pool is cash (real holdings) or synthetics. Either way ,the instruments are transferred into the CPV to sell them off. conclusion: applies to cash and non cash. In the old days there were all sorts of guarantees added to that SPOV. Now if you provide support to that =SPV it is no longer "Off balance sheet" froma regulatory point of view. Accounting rules refer.'@en ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticPoolAsset
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-accx-acc:AbstractCashflowConstruct ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-syn:simulatedBy ;
+			owl:someValuesFrom fibo-der-cr-cds:CreditDefaultSwapContract ;
+		]
+		;
+	rdfs:label "synthetic pool asset"@en ;
+	rdfs:comment "QName: NONE:SyntheticPoolAsset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	.
+
+fibo-sec-dbt-ab-syn:SyntheticStructuredFinanceInstrument
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ab-pbs:StructuredFinanceInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ab-pbs:hasUnderlying.1 ;
+			owl:someValuesFrom fibo-sec-dbt-ab-syn:SyntheticPoolAsset ;
+		]
+		;
+	rdfs:label "synthetic structured finance instrument"@en ;
+	rdfs:comment "QName: NONE:SyntheticStructuredFinanceInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	.
+
+fibo-sec-dbt-ab-syn:assetsManagedBy
+	a owl:ObjectProperty ;
+	rdfs:label "assets managed by"@en ;
+	rdfs:comment "QName: NONE:assetsManagedBy" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:ArbitrageSyntheticCDO ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cdo:CDOPortfolioManager ;
+	.
+
+fibo-sec-dbt-ab-syn:fundedBy
+	a owl:ObjectProperty ;
+	rdfs:label "funded by"@en ;
+	rdfs:comment "QName: NONE:fundedBy" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPoolFundingAsset ;
+	.
+
+fibo-sec-dbt-ab-syn:hasInvestmentGrade
+	a owl:ObjectProperty ;
+	rdfs:label "has investment grade"@en ;
+	rdfs:comment "QName: NONE:hasInvestmentGrade" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPoolFundingAsset ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-fbc-dae-crt:InstrumentCreditRating ;
+	.
+
+fibo-sec-dbt-ab-syn:hasUnderlyingContract
+	a owl:ObjectProperty ;
+	rdfs:label "has underlying contract"@en ;
+	rdfs:comment "QName: NONE:hasUnderlyingContract" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-der-cr-cds:CreditDefaultSwapContract ;
+	skos:definition "The underlying CDS which is created to mechanise the cash flows in the synthetic portfolio."@en ;
+	.
+
+fibo-sec-dbt-ab-syn:holds
+	a owl:ObjectProperty ;
+	rdfs:label "holds"@en ;
+	rdfs:comment "QName: NONE:holds" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticDebtSPV ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPoolFundingAsset ;
+	.
+
+fibo-sec-dbt-ab-syn:isCash
+	a owl:DatatypeProperty ;
+	rdfs:label "is cash"@en ;
+	rdfs:comment "QName: NONE:isCash" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the CDO has an underlying pool of real assets. This is No: the CDO has a synthetic pool of underlying assets."@en ;
+	.
+
+fibo-sec-dbt-ab-syn:isTrancheOf
+	a owl:ObjectProperty ;
+	rdfs:label "is tranche of"@en ;
+	rdfs:comment "QName: NONE:isTrancheOf" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPool ;
+	.
+
+fibo-sec-dbt-ab-syn:issues
+	a owl:ObjectProperty ;
+	rdfs:label "issues"@en ;
+	rdfs:comment "QName: NONE:issues" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticCDO ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+	.
+
+fibo-sec-dbt-ab-syn:makesReferenceTo
+	a owl:ObjectProperty ;
+	rdfs:label "makes reference to"@en ;
+	rdfs:comment "QName: NONE:makesReferenceTo" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-sec-dbt-ab-syn:SyntheticCDOPortfolio ;
+	.
+
+fibo-sec-dbt-ab-syn:notionallyHolds
+	a owl:ObjectProperty ;
+	rdfs:label "notionally holds"@en ;
+	rdfs:comment "QName: NONE:notionallyHolds" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticCDOPortfolio ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-sec-dbt-ab-syn:SyntheticCDOPortfolioConstituent ;
+	.
+
+fibo-sec-dbt-ab-syn:percentageOfDefaultsThisTranche
+	a owl:ObjectProperty ;
+	rdfs:label "percentage of defaults this tranche"@en ;
+	rdfs:comment "QName: NONE:percentageOfDefaultsThisTranche" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The percentage of defaults which holders of this are exposed to, that is the percentage of defaults that this tranche represents. Further Notes Review session notes 21 April: The first, second and so on, to stop paying out when there is a default. In each case you get the first, second etc. x% of defaults. Base underlying may be high or low quality. Create the pool by buying or selling protection depending on hich way you want to go, e..g. have high quality funds, (borrowers), would sell protection. If low quality, would buy protection to improve quality. So risk is no longer bound to the funding. REVIEW: More likely this is a band of percentages (from and to); review and formalize. See also note on attachment and detachment points."@en ;
+	.
+
+fibo-sec-dbt-ab-syn:simulatedBy
+	a owl:ObjectProperty ;
+	rdfs:label "simulated by"@en ;
+	rdfs:comment "QName: NONE:simulatedBy" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticPoolAsset ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-der-cr-cds:CreditDefaultSwapContract ;
+	skos:definition "The underlying CDS which is created to mechanise the cash flows in the synthetic portfolio."@en ;
+	.
+
+fibo-sec-dbt-ab-syn:simulates
+	a owl:ObjectProperty ;
+	rdfs:label "simulates"@en ;
+	rdfs:comment "QName: NONE:simulates" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticPoolAsset ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	.
+
+fibo-sec-dbt-ab-syn:simulates.1
+	a owl:ObjectProperty ;
+	rdfs:label "simulates"@en ;
+	rdfs:comment "QName: NONE:simulates.1" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticDebtInstrumentPool ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	.
+
+fibo-sec-dbt-ab-syn:trancheType
+	a owl:ObjectProperty ;
+	rdfs:label "tranche type"@en ;
+	rdfs:comment "QName: NONE:trancheType" ;
+	rdfs:domain fibo-sec-dbt-ab-syn:SyntheticCDOTranche ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/> ;
+	rdfs:range fibo-sec-dbt-ab-cdo:CDOTrancheSenioritySelection ;
+	.
+

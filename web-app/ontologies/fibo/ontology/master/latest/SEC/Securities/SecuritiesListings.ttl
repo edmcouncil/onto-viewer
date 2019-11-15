@@ -1,0 +1,329 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Facilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fct-mkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-pas-pas: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/> .
+@prefix fibo-fnd-plc-fac: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Facilities/> .
+@prefix fibo-fnd-plc-vrt: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-sec-lst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/>
+	a owl:Ontology ;
+	rdfs:label "Securities Listings Ontology" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:" ;
+	dct:abstract "This ontology defines the fundamental concepts for listing securities, such as registered, listed, and exchange-traded security, the notion of a securities exchange, and related services." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2016-2019 EDM Council, Inc." ,
+		"Copyright (c) 2018-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-sec-sec-lst" ;
+	sm:filename "SecuritiesListings.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Facilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings.rdf version of this ontology was revised to eliminate an extraneous subclass axiom." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings.rdf version of this ontology was revised to rename isIssuedIn to isIssuedOn, which is more natural to most securities SMEs, generalized certain references to securities exchanges, and eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings.rdf version of this ontology was revised to reuse the composite date value datatype and add disjointness between registered security and exempt security."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-sec-sec-lst:ExchangeAndListingService
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:FinancialService ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:isProvisionedBy ;
+			owl:onClass fibo-fbc-fct-mkt:Exchange ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:onClass fibo-fbc-fct-mkt:Exchange ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:provides ;
+			owl:onClass fibo-sec-sec-lst:SecurityListing ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "exchange and listing service" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:ExchangeAndListingService" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	skos:definition "a trading and (optionally) listing service for the purposes of securities trading" ;
+	.
+
+fibo-sec-sec-lst:ExchangeTradedSecurity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-lst:ListedSecurity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-lst:hasIssue ;
+			owl:onClass fibo-fbc-fi-fi:Security ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-lst:isIssuedOn ;
+			owl:someValuesFrom fibo-fbc-fct-mkt:Exchange ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-lst:isTradedOn ;
+			owl:someValuesFrom fibo-fbc-fct-mkt:Exchange ;
+		]
+		;
+	rdfs:label "exchange traded security"@en ;
+	rdfs:comment "QName: fibo-sec-sec-lst:ExchangeTradedSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	skos:definition "listed security that may be traded on a particular exchange" ;
+	fibo-fnd-utl-av:synonym "market listing"@en ;
+	.
+
+fibo-sec-sec-lst:ListedSecurity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Security ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-lst:hasListingDate ;
+			owl:onClass fibo-fnd-dt-fd:Date ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasCurrency ;
+			owl:someValuesFrom fibo-fnd-acc-cur:Currency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-lst:isListedVia ;
+			owl:someValuesFrom fibo-sec-sec-lst:SecurityListing ;
+		]
+		;
+	rdfs:label "listed security" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:ListedSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	skos:definition "a registered security listed on a specific exchange" ;
+	.
+
+fibo-sec-sec-lst:NotionalFinancialMarketplace
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:Exchange ,
+		fibo-fnd-plc-vrt:NotionalPlace
+		;
+	rdfs:label "notional financial marketplace" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:NotionalFinancialMarketplace" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	skos:definition "a place which is identified as a financial market but which is not a physical place such as a country or region. This may be a conceptual place such as the Eurobond market or the Global market." ;
+	skos:editorialNote "These may still have properties such as holiday calendars, e.g. the London Interbank Market in USD has New York dates fo negotiation but pricing can changes whenever London is open." ;
+	.
+
+fibo-sec-sec-lst:RegisteredSecurity
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Security ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:isRegisteredBy ;
+			owl:onClass fibo-fbc-fct-ra:RegistrationAuthority ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:mayBeTradedIn ;
+			owl:someValuesFrom fibo-fbc-fct-mkt:Exchange ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:hasRegistrationDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:CombinedDateTime ;
+		]
+		;
+	rdfs:label "registered security" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:RegisteredSecurity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	owl:disjointWith fibo-fbc-fi-fi:ExemptSecurity ;
+	skos:definition "a security that is registered with some registration authority and that may be traded in some trading venue (market)" ;
+	.
+
+fibo-sec-sec-lst:SecuritiesExchange
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:Exchange ,
+		fibo-fbc-pas-fpas:FinancialServiceProvider ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:onClass fibo-fbc-fct-mkt:MarketIdentifier ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:provisions ;
+			owl:someValuesFrom fibo-sec-sec-lst:ExchangeAndListingService ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pas-pas:provisions ;
+			owl:someValuesFrom fibo-sec-sec-lst:SecuritiesExchange ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:provides ;
+			owl:someValuesFrom fibo-sec-sec-lst:ExchangeAndListingService ;
+		]
+		;
+	rdfs:label "securities exchange"@en ;
+	rdfs:comment "QName: fibo-sec-sec-lst:SecuritiesExchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	skos:definition "an organized, national exchange where securities, options, and futures contracts may be traded by members for their own accounts and for the accounts of their customers" ;
+	fibo-fnd-utl-av:adaptedFrom "Barron's Dictionary of Finance and Investment Terms, Ninth Edition, 2014." ;
+	fibo-fnd-utl-av:explanatoryNote """A securities exchange is a corporation or mutual organization that provides securities trading services, where securities may be bought and sold by third parties. As a facility, a securities exchange is also a place of trade associated with a particular site, i.e., stock exchange, regulated market such as an Electronic Trading Platform (ECN), or unregulated market, such as an Automated Trading System (ATS) (MIC - ISO 10383). Stock exchanges also provide facilities for the issue and redemption of securities as well as other financial instruments and capital events including the payment of income and dividends.
+
+The securities traded on a stock exchange include: shares issued by companies, unit trusts, derivatives, pooled investment products and bonds. To be able to trade a security on a certain stock exchange, it has to be listed there. Usually there is a central location at least for recordkeeping, but trade is less and less linked to such a physical place, as modern markets are electronic networks, which gives them advantages of speed and cost of transactions. Trade on an exchange is by members only.""" ;
+	.
+
+fibo-sec-sec-lst:SecurityListing
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-ra:RegistrationService ,
+		fibo-fbc-pas-fpas:FinancialService ,
+		fibo-fnd-plc-fac:Capability ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-sec-lst:lists ;
+			owl:onClass fibo-sec-sec-lst:ListedSecurity ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+			owl:someValuesFrom fibo-sec-sec-lst:SecuritiesExchange ;
+		]
+		;
+	rdfs:label "security listing"@en ;
+	rdfs:comment "QName: fibo-sec-sec-lst:SecurityListing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	skos:definition "a capability for listing a security provided by a securities trading facility" ;
+	.
+
+fibo-sec-sec-lst:hasIssue
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has issue" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:hasIssue" ;
+	rdfs:domain fibo-sec-sec-lst:ExchangeTradedSecurity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	rdfs:range fibo-fbc-fi-fi:Security ;
+	skos:definition "links a given exchange-specific security to its issue" ;
+	.
+
+fibo-sec-sec-lst:hasListingDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "has listing date" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:hasListingDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "indicates the date on which a security is listed" ;
+	.
+
+fibo-sec-sec-lst:isIssuedOn
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-sec-sec-lst:isTradedOn ;
+	rdfs:label "is issued on" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:isIssuedOn" ;
+	rdfs:domain fibo-sec-sec-lst:ExchangeTradedSecurity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	rdfs:range fibo-fbc-fct-mkt:Exchange ;
+	skos:definition "identifies the exchange in which a security is issued" ;
+	.
+
+fibo-sec-sec-lst:isListedVia
+	a owl:ObjectProperty ;
+	rdfs:label "is listed via" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:isListedVia" ;
+	rdfs:domain fibo-sec-sec-lst:ListedSecurity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	rdfs:range fibo-sec-sec-lst:SecurityListing ;
+	owl:inverseOf fibo-sec-sec-lst:lists ;
+	skos:definition "identifies the service responsible for listing the security" ;
+	.
+
+fibo-sec-sec-lst:isTradedOn
+	a owl:ObjectProperty ;
+	rdfs:label "is traded on" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:isTradedOn" ;
+	rdfs:domain fibo-sec-sec-lst:ListedSecurity ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	rdfs:range fibo-fbc-fct-mkt:Exchange ;
+	skos:definition "identifies the trading facility on which the security is traded" ;
+	.
+
+fibo-sec-sec-lst:lists
+	a owl:ObjectProperty ;
+	rdfs:label "lists" ;
+	rdfs:comment "QName: fibo-sec-sec-lst:lists" ;
+	rdfs:domain fibo-sec-sec-lst:SecurityListing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> ;
+	rdfs:range fibo-sec-sec-lst:ListedSecurity ;
+	skos:definition "identifies a security that is listed by the listing service" ;
+	.
+

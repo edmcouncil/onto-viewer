@@ -1,0 +1,100 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionAccounting/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionAccounting/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-txn-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/>
+	a owl:Ontology ;
+	rdfs:label "TransactionAccounting"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology introduces the notion of an accounts ledger entry which is referred to in transaction events and workflows.
+		This ontology extends the notion of aspects of a commitment in order to provide the bridge between an REA accounting view of transactions and a general ledger view.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionAccounting/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-rea:TransactionBusinessEvent
+	a owl:Class ;
+	.
+
+fibo-fnd-txn-rea:TransactionEvent
+	a owl:Class ;
+	.
+
+fibo-fnd-txn-acc:AccountsLedgerEntry
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-txn-acc:isPartOf ;
+		owl:someValuesFrom fibo-fnd-accx-acc:LedgerAccount ;
+	] ;
+	rdfs:label "accounts ledger entry"@en ;
+	rdfs:comment "QName: NONE:AccountsLedgerEntry" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> ;
+	.
+
+fibo-fnd-txn-acc:amount
+	a owl:ObjectProperty ;
+	rdfs:label "amount"@en ;
+	rdfs:comment "QName: NONE:amount" ;
+	rdfs:domain fibo-fnd-txn-acc:AccountsLedgerEntry ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	.
+
+fibo-fnd-txn-acc:isPartOf
+	a owl:ObjectProperty ;
+	rdfs:label "is part of"@en ;
+	rdfs:comment "QName: NONE:isPartOf" ;
+	rdfs:domain fibo-fnd-txn-acc:AccountsLedgerEntry ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> ;
+	rdfs:range fibo-fnd-accx-acc:LedgerAccount ;
+	.
+
+fibo-fnd-txn-acc:narrative
+	a owl:DatatypeProperty ;
+	rdfs:label "narrative"@en ;
+	rdfs:comment "QName: NONE:narrative" ;
+	rdfs:domain fibo-fnd-txn-acc:AccountsLedgerEntry ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> ;
+	rdfs:range xsd:string ;
+	.
+
+fibo-fnd-txn-acc:reflectedInSome
+	a owl:ObjectProperty ;
+	rdfs:label "reflected in some"@en ;
+	rdfs:comment "QName: NONE:reflectedInSome" ;
+	rdfs:domain fibo-fnd-txn-rea:TransactionEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> ;
+	rdfs:range fibo-fnd-txn-acc:AccountsLedgerEntry ;
+	.
+
+fibo-fnd-txn-acc:triggers
+	a owl:ObjectProperty ;
+	rdfs:label "triggers"@en ;
+	rdfs:comment "QName: NONE:triggers" ;
+	rdfs:domain fibo-fnd-txn-rea:TransactionBusinessEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> ;
+	rdfs:range fibo-fnd-txn-acc:AccountsLedgerEntry ;
+	.
+

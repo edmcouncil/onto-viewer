@@ -1,0 +1,238 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-crt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-arr-rt: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-sec-iss: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/>
+	a owl:Ontology ;
+	rdfs:label "Credit Ratings Ontology"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology defines the concept of a credit rating, along with credit watch and outlook qualifying terms. There are credit ratings for individuals, for organizations and for instruments. 
+		These are referenced extensively in the securities models but are also applicable to business entities generally and in the context of lending and account maintenance.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-fbc-dae-crt:CreditRating
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-rt:Rating ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isDefinedIn ;
+			owl:someValuesFrom fibo-fbc-dae-crt:CreditRatingScale ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+			owl:someValuesFrom fibo-fbc-dae-crt:CreditRatingAgency ;
+		]
+		;
+	rdfs:label "credit rating"@en ;
+	rdfs:comment "QName: NONE:CreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	skos:definition "an assessment of creditworthiness of a borrower generally or with respect to a particular debt or financial obligation"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Typically, a credit rating is provided as a detailed report based on the financial history of borrowing or lending and creditworthiness of the entity or person derived from income statements, historical records related to borrowing, etc. with an aim to determine their ability to meet debt obligations."@en ;
+	.
+
+fibo-fbc-dae-crt:CreditRatingAgency
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-rt:RatingAgency ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:issues ;
+			owl:someValuesFrom fibo-fbc-dae-crt:CreditRating ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:manages ;
+			owl:someValuesFrom fibo-fbc-dae-crt:CreditRatingScale ;
+		]
+		;
+	rdfs:label "credit rating agency"@en ;
+	rdfs:comment "QName: NONE:CreditRatingAgency" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	skos:definition "a rating agency that publishes reports assessing the creditworthiness of a borrower or legal entity, either generally or with respect to a specific obligation"@en ;
+	.
+
+fibo-fbc-dae-crt:CreditRatingScale
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-rt:RatingScale ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:someValuesFrom fibo-fbc-dae-crt:CreditRatingAgency ;
+		]
+		;
+	rdfs:label "credit rating scale"@en ;
+	rdfs:comment "QName: NONE:CreditRatingScale" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	skos:definition "rating scale for assigning a credit rating to individual, entity, or instrument, including defining a set of codes or numeric scores and indicating how an assessment that is assigned a score based on that scale means"@en ;
+	.
+
+fibo-fbc-dae-crt:CreditWatchDirection
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "credit watch direction"@en ;
+	rdfs:comment "QName: NONE:CreditWatchDirection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	.
+
+fibo-fbc-dae-crt:CreditWatchDowngrade
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:CreditWatchDirection ;
+	rdfs:label "credit watch downgrade"@en ;
+	rdfs:comment "QName: NONE:CreditWatchDowngrade" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	.
+
+fibo-fbc-dae-crt:CreditWatchOutlook
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-rt:Rating ;
+	rdfs:label "credit watch outlook"@en ;
+	rdfs:comment "QName: NONE:CreditWatchOutlook" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	.
+
+fibo-fbc-dae-crt:CreditWatchUpgrade
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:CreditWatchDirection ;
+	rdfs:label "credit watch upgrade"@en ;
+	rdfs:comment "QName: NONE:CreditWatchUpgrade" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	.
+
+fibo-fbc-dae-crt:IndividualCreditRating
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:CreditRating ;
+	rdfs:label "individual credit rating"@en ;
+	rdfs:comment "QName: NONE:IndividualCreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	.
+
+fibo-fbc-dae-crt:InstrumentCreditRating
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-crt:InvestmentCreditRating ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rt:rates ;
+			owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+		]
+		;
+	rdfs:label "instrument credit rating"@en ;
+	rdfs:comment "QName: NONE:InstrumentCreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	skos:definition "An Instrument Credit Rating, that is the creditworthiness of the investment as determined by a Ratings Agency."@en ;
+	fibo-fnd-utl-av:explanatoryNote "For tranched securities: the instrument /is/ the Tranche for tranched securities so this is really just the Instrument Credit Rating under a different name? However the term Tranche Rating at Issue is meaningful."@en ;
+	.
+
+fibo-fbc-dae-crt:InvestmentCreditRating
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:CreditRating ;
+	rdfs:label "investment credit rating"@en ;
+	rdfs:comment "QName: NONE:InvestmentCreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	skos:definition "The creditworthiness of an investment as determined by a Ratings Agency. Further notes: Anything can be bought and sold can have a rating. Credit rating can be assigned to an instrument, an organization, even a person. The rating is assigned to any kind of instrument that the organization etc. issues. Use Wikipedia credit rating definition Long term, short term and generic ratings The rating differentiates between short and long term (not sure about generic). In all systems these are differentiated. This relates to how long the holder might hold the thing. Or does it? The agencies offer two different servies and you pay 2 different fees for short and long. ACTION: to find The codes themselves are different. So it's not AAA etc. for short term it's something else. so the thing we've been thinking about is actually long term ratings."@en ;
+	.
+
+fibo-fbc-dae-crt:IssueCreditRating
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:InvestmentCreditRating ;
+	rdfs:label "issue credit rating"@en ;
+	rdfs:comment "QName: NONE:IssueCreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	skos:definition "The creditworthiness of the overall issue as determined by a Ratings Agency."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'For a tranched secrutity issue, there is a credit rating for the overall issue as well as a different ratings for each tranche. The rating for the individual tranche is covered as the term "Instrument Credit Rating" since each tranche is an individual instrument (contract).'@en ;
+	.
+
+fibo-fbc-dae-crt:OnWatchOutlook
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:CreditWatchOutlook ;
+	rdfs:label "on watch outlook"@en ;
+	rdfs:comment "QName: NONE:OnWatchOutlook" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	.
+
+fibo-fbc-dae-crt:OrganizationCreditRating
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-crt:IndividualCreditRating ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rt:rates ;
+			owl:someValuesFrom fibo-fnd-org-fm:FormalOrganization ;
+		]
+		;
+	rdfs:label "organization credit rating"@en ;
+	rdfs:comment "QName: NONE:OrganizationCreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	skos:definition "The credit rating of the organization. That is the creditworthiness of the organization as determined by a ratings agency. If the organization is the issuer of a security then this becomes the issuer rating for that security."@en ;
+	.
+
+fibo-fbc-dae-crt:ShortTermCreditRating
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:InvestmentCreditRating ;
+	rdfs:label "short term credit rating"@en ;
+	rdfs:comment "QName: NONE:ShortTermCreditRating" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	skos:definition "A short term rating is a probability factor of an individual going into default within a year. This is in contrast to long-term rating which is evaluated over a long timeframe."@en ;
+	.
+
+fibo-fbc-dae-crt:StableOutlook
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-crt:CreditWatchOutlook ;
+	rdfs:label "stable outlook"@en ;
+	rdfs:comment "QName: NONE:StableOutlook" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	.
+
+fibo-fbc-dae-crt:watchDirection
+	a owl:ObjectProperty ;
+	rdfs:label "watch direction"@en ;
+	rdfs:comment "QName: NONE:watchDirection" ;
+	rdfs:domain fibo-fbc-dae-crt:InvestmentCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	rdfs:range fibo-fbc-dae-crt:CreditWatchDirection ;
+	skos:definition "The direction in which the credit rating is expected to move, for something which has a credit rating on watch."@en ;
+	.
+
+fibo-fbc-dae-crt:watchOutlook
+	a owl:ObjectProperty ;
+	rdfs:label "watch outlook"@en ;
+	rdfs:comment "QName: NONE:watchOutlook" ;
+	rdfs:domain fibo-fbc-dae-crt:InvestmentCreditRating ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/> ;
+	rdfs:range fibo-fbc-dae-crt:CreditWatchOutlook ;
+	skos:definition "The expected outlook for the rated entity."@en ;
+	.
+

@@ -1,0 +1,255 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanHMDA/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoanGeneric/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanHMDA/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fbc-fct-rga: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/> .
+@prefix fibo-fnd-arr-cls: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-arr-rep: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-ln-hmda: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> .
+@prefix fibo-loan-ln-ln: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> .
+@prefix fibo-loan-lnx-lgn: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanExt/LoanGeneric/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/>
+	a owl:Ontology ;
+	rdfs:label "Loan HMDA Ontology" ;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:" ;
+	dct:abstract "This ontology defines concepts specific to the HMDA rule. This includes the concept of a HMDA report as well as specializations of the core classes for pre-approval requests, covered loan contracts." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:copyright """Copyright (c) 2015-2018 EDM Council, Inc.
+Copyright (c) 2015-2018 Object Management Group, Inc.""" ;
+	sm:fileAbbreviation "fibo-loan-lnx-lgn" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoanGeneric/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanHMDA/> ;
+	owl:versionInfo "Created with e6Tools Graphical OWL Editor from D:\\SEMANTIC-ARTS\\NAS\\ClientsAndPartners\\EDM Council\\fibo ontologies\\LoanOntology\\loans.vsdx Page:loanHMDA" ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-ln-ln:_HowSubmitted_directly
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:HowSubmitted
+		;
+	.
+
+fibo-loan-ln-ln:_HowSubmitted_notDirectly
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-ln:HowSubmitted
+		;
+	.
+
+fibo-loan-ln-hmda:HMDA_CoveredLoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-ln-ln:MortgageLoanContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:someValuesFrom fibo-loan-ln-ln:CommitmentToReport ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isClassifiedBy ;
+			owl:someValuesFrom fibo-loan-ln-ln:HowSubmitted ;
+		]
+		;
+	rdfs:label "HMDA covered loan contract" ;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:HMDA_CoveredLoanContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	skos:definition "a closed-end mortgage loan or open-end line of credit that is not an excluded transaction for HMDA reporting under US section 1003.3(c) of the Revised Home Mortgage Disclosure Act of 2015" ;
+	fibo-fnd-utl-av:adaptedFrom "the Revised HMDA regulatory text." ;
+	.
+
+fibo-loan-ln-hmda:HMDA_Disposition
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-cls:Classifier ;
+	rdfs:label "HMDA disposition" ;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:HMDA_Disposition" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	skos:definition "a type of action taken regarding an application for a HMDA covered loan" ;
+	.
+
+fibo-loan-ln-hmda:HMDA_PreApprovalRequest
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-ln-ln:PreApprovalRequest ;
+	rdfs:label "HMDA pre-approval request" ;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:HMDA_PreApprovalRequest" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	skos:definition "a request for pre-approval of a home purchase loan up to a certain amount, and subject to certain non-credit related conditions" ;
+	fibo-fnd-utl-av:adaptedFrom "the 2015 Revised HMDA regulation." ;
+	fibo-fnd-utl-av:explanatoryNote "This request is approved only after a comprehensive analysis of the credit worthiness of the borrower is carried out." ;
+	.
+
+fibo-loan-ln-hmda:HMDA_Report
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-rep:Report ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-lnx-lgn:hasContactInformation ;
+			owl:onClass fibo-loan-lnx-lgn:IndividualContactInformation ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-lnx-lgn:hasContactInformation ;
+			owl:onClass fibo-loan-lnx-lgn:OrganizationContactInformation ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rep:isSubmittedBy ;
+			owl:onClass [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+				owl:someValuesFrom [
+					a owl:Class ;
+					owl:intersectionOf (
+						fibo-be-le-lp:LegalPerson
+						fibo-fnd-org-fm:FormalOrganization
+					) ;
+				] ;
+			] ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-rep:isSubmittedTo ;
+			owl:someValuesFrom fibo-fbc-fct-rga:RegulatoryAgency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasNumberOfEntries ;
+			owl:someValuesFrom xsd:positiveInteger ;
+		]
+		;
+	rdfs:label "HMDA report" ;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:HMDA_Report" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	skos:definition "a report prepared to satisfy HMDA regulatory reporting requirements as described US section 1003.3(c) of the Revised Home Mortgage Disclosure Act of 2015" ;
+	skos:editorialNote "The filter class on the hasReportingAgent restriction comes from the hasIdentity restriction on FinancialServiceProvider, which, unfortunately,  is a PartyInRole." ;
+	fibo-fnd-utl-av:adaptedFrom "the Revised HMDA regulatory text." ;
+	.
+
+fibo-loan-ln-hmda:_HMDA_Disposition_ApplicationApprovedButNotAccepted
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-hmda:HMDA_Disposition
+		;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:_HMDA_Disposition_ApplicationApprovedButNotAccepted" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	.
+
+fibo-loan-ln-hmda:_HMDA_Disposition_ApplicationDenied
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-hmda:HMDA_Disposition
+		;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:_HMDA_Disposition_ApplicationDenied" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	.
+
+fibo-loan-ln-hmda:_HMDA_Disposition_ApplicationWithdrawn
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-hmda:HMDA_Disposition
+		;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:_HMDA_Disposition_ApplicationWithdrawn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	.
+
+fibo-loan-ln-hmda:_HMDA_Disposition_FileClosedForIncompleteness
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-hmda:HMDA_Disposition
+		;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:_HMDA_Disposition_FileClosedForIncompleteness" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	.
+
+fibo-loan-ln-hmda:_HMDA_Disposition_LoanOriginated
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-hmda:HMDA_Disposition
+		;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:_HMDA_Disposition_LoanOriginated" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	.
+
+fibo-loan-ln-hmda:_HMDA_Disposition_LoanPurchasedByYourInstitution
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-hmda:HMDA_Disposition
+		;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:_HMDA_Disposition_LoanPurchasedByYourInstitution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	.
+
+fibo-loan-ln-hmda:_HMDA_Disposition_PreapprovalRequestApprovedButNotAccepted
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-hmda:HMDA_Disposition
+		;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:_HMDA_Disposition_PreapprovalRequestApprovedButNotAccepted" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	.
+
+fibo-loan-ln-hmda:_HMDA_Disposition_PreapprovalRequestDenied
+	a
+		owl:NamedIndividual ,
+		fibo-loan-ln-hmda:HMDA_Disposition
+		;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:_HMDA_Disposition_PreapprovalRequestDenied" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	.
+
+fibo-loan-ln-hmda:hasHMDA_DispositionDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDate ;
+	rdfs:label "HMDA disposition date" ;
+	rdfs:comment "QName: fibo-loan-lnx-lgn:hasHMDA_DispositionDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/> ;
+	skos:definition "the date associated with the HMDA Disposition for a HMDA Covered Loan" ;
+	.
+

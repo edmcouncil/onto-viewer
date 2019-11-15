@@ -1,0 +1,284 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/ETOptionsTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/ETOptionsTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-der-etd-eto: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> .
+@prefix fibo-der-etd-std: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> .
+@prefix fibo-fnd-accx-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/AccountsMain/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-derx-eto: <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> .
+@prefix fibo-md-temx-ins: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/>
+	a owl:Ontology ;
+	rdfs:label "ETOptionsTemporal"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Exchange traded options date and time dependent terms such as pricing, time values, margining, as well as volatility and other analytics. Also covers greeks (deltas, thetas etc.)" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-derx-eto:Delta
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-derx-eto:OptionsGreek ;
+	rdfs:label "delta"@en ;
+	rdfs:comment "QName: NONE:Delta" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "First derivative of option value with respect to theoretical price is a delta (or on a position). Theoretical price"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Delta tells you what options to buy to get the equivalent price sensitivity to the underlying. How many at that price to get that hedge. So for example an at the money option has a delta of 50. Units"@en ;
+	.
+
+fibo-md-derx-eto:ETOptionPremium
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:SecurityPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-derx-eto:reflects ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-md-derx-eto:OptionIntrinsicValue
+					fibo-md-derx-eto:OptionTimeValue
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "e t option premium"@en ;
+	rdfs:comment "QName: NONE:ETOptionPremium" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "The amount that is paid for an option. That's for the whole contract. Units: The premium is a monetary amount; the rate is a percentage."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The term premium originates because these are in the nature of insurance contract (hedges). this is analogous to Price in other securities or indeed anything; that is, the price is what a party would be willing to pay for something. Just like the price of anything at all, the Option Premium has two value components, one which can be determined (known as Value In Use when applied to products or services) and an element which is more subjective and reflects investor sentiment (for products and services this is the Value In Exchange). For Options, these are Intrinsic Value and Time Value respectively; that is, the intrinsic value can be calculated directly while the Time Value reflects the difference between this and the Premium. Additionally, statistical measures can be used to reduce the level of unknown in the Time Value. Time Value reduces to zero as exercise date approaches. Notes Origin:MB Draft"@en ;
+	.
+
+fibo-md-derx-eto:ExchangeOptionsPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:TradedSecurityPublishedPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-derx-eto:expressedAs ;
+			owl:someValuesFrom fibo-md-derx-eto:ETOptionPremium ;
+		]
+		;
+	rdfs:label "exchange options price"@en ;
+	rdfs:comment "QName: NONE:ExchangeOptionsPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "options prices types: Bid Ask There is also a bid/ask spread exchange will quote option price as a premium rate. e.g. I ill pay you 2% of face value of underlying trade. That turns into a price (Premium = face x that 2%). OTC uses volatility to get to premium value."@en ;
+	.
+
+fibo-md-derx-eto:OptionClosingPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-derx-eto:ExchangeOptionsPrice ;
+	rdfs:label "option closing price"@en ;
+	rdfs:comment "QName: NONE:OptionClosingPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	.
+
+fibo-md-derx-eto:OptionDailySettlementPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:SecurityPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-derx-eto:setBy ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-etd-std:DerivativesExchange
+					fibo-der-etd-eto:OptionsClearingEntity
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "option daily settlement price"@en ;
+	rdfs:comment "QName: NONE:OptionDailySettlementPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "The official price at the end of a trading session. This price is established by The Options Clearing Corporation and is used to determine changes in account equity, margin requirements, and for other purposes."@en ;
+	.
+
+fibo-md-derx-eto:OptionIntrinsicValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:ValueInUse ;
+	rdfs:label "option intrinsic value"@en ;
+	rdfs:comment "QName: NONE:OptionIntrinsicValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "Intrinsic Value (Calls): When the underlying security's price is higher than the strike price a call option is said to be \"in-the-money.\" Intrinsic Value (Puts): If the underlying security's price is less than the strike price, a put option is \"in-the-money.\" Only in-the-money options have intrinsic value, representing the difference between the current price of the underlying security and the option's exercise price, or strike price."@en ;
+	.
+
+fibo-md-derx-eto:OptionTheoreticalValue
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-md-derx-eto:definedBy ;
+		owl:someValuesFrom fibo-md-temx-tem:PriceVolatilitySpecification ;
+	] ;
+	rdfs:label "option theoretical value"@en ;
+	rdfs:comment "QName: NONE:OptionTheoreticalValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "Theoretical value looks at variability of the price. The longer until exercise the more this will vary. the more likely it is to finish in the money, the more I am likely to pay for it. But meanwhile, I also have to look at the current value - the amount I would pay for the thing. Any change would be a cost to me."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Fair Value is the amount I would spend in maintaining a neutral hedge."@en ;
+	.
+
+fibo-md-derx-eto:OptionTheoreticalValueSpecification
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-tem:PriceVolatilitySpecification ;
+	rdfs:label "option theoretical value specification"@en ;
+	rdfs:comment "QName: NONE:OptionTheoreticalValueSpecification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	.
+
+fibo-md-derx-eto:OptionTimeValue
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-accx-acc:ValueInExchange ;
+	rdfs:label "option time value"@en ;
+	rdfs:comment "QName: NONE:OptionTimeValue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "Prior to expiration, any premium in excess of intrinsic value is called time value. Time value is also known as the amount an investor is willing to pay for an option above its intrinsic value, in the hope that at some time prior to expiration its value will increase because of a favorable change in the price of the underlying security. The longer the amount of time for market conditions to work to an investor's benefit, the greater the time value."@en ;
+	.
+
+fibo-md-derx-eto:OptionVolatility
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/Volatility> ;
+	rdfs:label "option volatility"@en ;
+	rdfs:comment "QName: NONE:OptionVolatility" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "A measure of the fluctuation in the market price of the underlying security. Mathematically, volatility is the annualized standard deviation of returns. More generally: A measure of stock price fluctuation. Mathematically the volatility is the annualized standard deviation of a stock's daily price changes"@en ;
+	.
+
+fibo-md-derx-eto:OptionsGreek
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter ;
+	rdfs:label "options greek"@en ;
+	rdfs:comment "QName: NONE:OptionsGreek" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "One of a set of measures about an option which is used to analyze the value or performance of that instrument."@en ;
+	.
+
+fibo-md-derx-eto:OptionsTheta
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-derx-eto:OptionsGreek ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-derx-eto:refersTo ;
+			owl:someValuesFrom fibo-md-derx-eto:OptionTheoreticalValue ;
+		]
+		;
+	rdfs:label "options theta"@en ;
+	rdfs:comment "QName: NONE:OptionsTheta" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "A measure of the rate of change in an option's theoretical value for a one-unit change in time to the option's expiration date. Action: add terms that define or influence this."@en ;
+	.
+
+fibo-md-derx-eto:OptionsVega
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-derx-eto:OptionsGreek ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-derx-eto:refersTo.1 ;
+			owl:someValuesFrom fibo-md-derx-eto:OptionTheoreticalValue ;
+		]
+		;
+	rdfs:label "options vega"@en ;
+	rdfs:comment "QName: NONE:OptionsVega" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	skos:definition "A measure of the rate of change in an option's theoretical value for a one-unit change in the volatility assumption. Action: add terms that define or influence this."@en ;
+	.
+
+fibo-md-derx-eto:definedBy
+	a owl:ObjectProperty ;
+	rdfs:label "defined by"@en ;
+	rdfs:comment "QName: NONE:definedBy" ;
+	rdfs:domain fibo-md-derx-eto:OptionTheoreticalValue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	rdfs:range fibo-md-temx-tem:PriceVolatilitySpecification ;
+	.
+
+fibo-md-derx-eto:expressedAs
+	a owl:ObjectProperty ;
+	rdfs:label "expressed as"@en ;
+	rdfs:comment "QName: NONE:expressedAs" ;
+	rdfs:domain fibo-md-derx-eto:ExchangeOptionsPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	rdfs:range fibo-md-derx-eto:ETOptionPremium ;
+	.
+
+fibo-md-derx-eto:refersTo
+	a owl:ObjectProperty ;
+	rdfs:label "refers to"@en ;
+	rdfs:comment "QName: NONE:refersTo" ;
+	rdfs:domain fibo-md-derx-eto:OptionsTheta ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	rdfs:range fibo-md-derx-eto:OptionTheoreticalValue ;
+	.
+
+fibo-md-derx-eto:refersTo.1
+	a owl:ObjectProperty ;
+	rdfs:label "refers to"@en ;
+	rdfs:comment "QName: NONE:refersTo.1" ;
+	rdfs:domain fibo-md-derx-eto:OptionsVega ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	rdfs:range fibo-md-derx-eto:OptionTheoreticalValue ;
+	.
+
+fibo-md-derx-eto:reflects
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-accx-acc:purportsToReflect ;
+	rdfs:label "reflects"@en ;
+	rdfs:comment "QName: NONE:reflects" ;
+	rdfs:domain fibo-md-derx-eto:ETOptionPremium ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-md-derx-eto:OptionIntrinsicValue
+			fibo-md-derx-eto:OptionTimeValue
+		) ;
+	] ;
+	.
+
+fibo-md-derx-eto:setBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-be-fct-pub:hasPublisher ;
+	rdfs:label "set by"@en ;
+	rdfs:comment "QName: NONE:setBy" ;
+	rdfs:domain fibo-md-derx-eto:OptionDailySettlementPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-der-etd-std:DerivativesExchange
+			fibo-der-etd-eto:OptionsClearingEntity
+		) ;
+	] ;
+	.
+

@@ -1,0 +1,1173 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/MuniIssuance/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/FinancialContextAndProcess/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/DebtIssuance/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceDocuments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcess/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcessTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/MuniIssuance/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-bp-iss-dbti: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/DebtIssuance/> .
+@prefix fibo-bp-iss-doc: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceDocuments/> .
+@prefix fibo-bp-iss-muni: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> .
+@prefix fibo-bp-iss-prc: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceProcess/> .
+@prefix fibo-bp-iss-trm: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceProcessTerms/> .
+@prefix fibo-bp-prc-fcp: <https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-sec-dbt-dbti: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> .
+@prefix fibo-sec-sec-iss: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/>
+	a owl:Ontology ;
+	rdfs:label "MuniIssuance"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Ontology for the process in which municipal bonds are issued." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/FinancialContextAndProcess/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/DebtIssuance/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceDocuments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcess/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcessTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/MuniIssuance/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-bp-iss-trm:Subscriber
+	a owl:Class ;
+	.
+
+fibo-bp-iss-muni:AnnounceSecuritiesIssue
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-dbti:announces ;
+			owl:someValuesFrom fibo-sec-sec-iss:SecuritiesOffering ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:announcesIssueOf ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "announce securities issue"@en ;
+	rdfs:comment "QName: NONE:AnnounceSecuritiesIssue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:BondCounsel
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:isBondCounsel ;
+		owl:someValuesFrom fibo-bp-iss-muni:DebtUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "bond counsel"@en ;
+	rdfs:comment "QName: NONE:BondCounsel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:Correspondent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:MuniIssuanceProcessParticipant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:participatesIn ;
+			owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+		]
+		;
+	rdfs:label "correspondent"@en ;
+	rdfs:comment "QName: NONE:Correspondent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "A bank, brokerage or other financial institution that is not a direct DTC member. Correspondents rely on direct DTC Participants to perform their DTC settlement services"@en ;
+	.
+
+fibo-bp-iss-muni:DTCCMember
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:MuniIssuanceProcessParticipant ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:participatesIn ;
+			owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+		]
+		;
+	rdfs:label "d t c c member"@en ;
+	rdfs:comment "QName: NONE:DTCCMember" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "A firm which is a member of DTCC. Note: this Actor may perform any of the Roles described elsewhere in this Issuance model, i.e. the DTCC Member may also be any of the Actors defined. REVIEW: does this apply to ALL the defined Actor types?"@en ;
+	.
+
+fibo-bp-iss-muni:DebtAuctionProcess
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-prc:SecuritiesIssuanceProcess ;
+	rdfs:label "debt auction process"@en ;
+	rdfs:comment "QName: NONE:DebtAuctionProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	owl:disjointWith fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:DebtIssueOverAllotmentTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-muni:IssueOverAllotmentTerms ;
+	rdfs:label "debt issue over allotment terms"@en ;
+	rdfs:comment "QName: NONE:DebtIssueOverAllotmentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "Terms for Change to an Issue Amount for Debt securities"@en ;
+	.
+
+fibo-bp-iss-muni:DebtUnderwritingClosing
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:UnderwritingIssuanceClosing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:refersTo ;
+			owl:someValuesFrom fibo-bp-iss-dbti:UnderwriterTakedownForDebt ;
+		]
+		;
+	rdfs:label "debt underwriting closing"@en ;
+	rdfs:comment "QName: NONE:DebtUnderwritingClosing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:DebtUnderwritingIssuanceProcess
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasBondCounsel ;
+			owl:someValuesFrom fibo-bp-iss-muni:BondCounsel ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:step ;
+			owl:someValuesFrom fibo-sec-dbt-dbti:DebtOffering ;
+		]
+		;
+	rdfs:label "debt underwriting issuance process"@en ;
+	rdfs:comment "QName: NONE:DebtUnderwritingIssuanceProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	owl:disjointWith fibo-bp-iss-muni:EquityUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:Dissemination
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-muni:UnderwritingProcessActivity ;
+	rdfs:label "dissemination"@en ;
+	rdfs:comment "QName: NONE:Dissemination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:DisseminationUnderwriter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:PotentialMuniUnderwriter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:makesDecisionOn ;
+			owl:someValuesFrom fibo-bp-iss-muni:Dissemination ;
+		]
+		;
+	rdfs:label "dissemination underwriter"@en ;
+	rdfs:comment "QName: NONE:DisseminationUnderwriter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:EquityDemutualizationProcess
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-prc:SecuritiesIssuanceProcess ;
+	rdfs:label "equity demutualization process"@en ;
+	rdfs:comment "QName: NONE:EquityDemutualizationProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:EquityIPOProcess
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-muni:RegisteredSecurityIssuanceProcess ;
+	rdfs:label "equity i p o process"@en ;
+	rdfs:comment "QName: NONE:EquityIPOProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:EquityUnderwritingIssuanceProcess
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-muni:RegisteredSecurityIssuanceProcess ;
+	rdfs:label "equity underwriting issuance process"@en ;
+	rdfs:comment "QName: NONE:EquityUnderwritingIssuanceProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:IssuanceAgent
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:isAgentIn ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "issuance agent"@en ;
+	rdfs:comment "QName: NONE:IssuanceAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:IssuanceClosing
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-dbti:IssuanceProcessActivity ;
+	rdfs:label "issuance closing"@en ;
+	rdfs:comment "QName: NONE:IssuanceClosing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "The process of crediting the DTC participant account on settlement date with the position for the new issue. The overall closing process includes the exchange of funds that happens outside of DTC."@en ;
+	.
+
+fibo-bp-iss-muni:IssuanceCreditingParticipant
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:isCreditingParticipant ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "issuance crediting participant"@en ;
+	rdfs:comment "QName: NONE:IssuanceCreditingParticipant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:IssuanceFinancialAdvisor
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:advises ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "issuance financial advisor"@en ;
+	rdfs:comment "QName: NONE:IssuanceFinancialAdvisor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:IssuancePrinter
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:prints ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "issuance printer"@en ;
+	rdfs:comment "QName: NONE:IssuancePrinter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:IssuanceProcessParticipant
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-muni:ProcessParticipant ;
+	rdfs:label "issuance process participant"@en ;
+	rdfs:comment "QName: NONE:IssuanceProcessParticipant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:IssuanceSettlement
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-dbti:IssuanceProcessActivity ;
+	rdfs:label "issuance settlement"@en ;
+	rdfs:comment "QName: NONE:IssuanceSettlement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:IssueOverAllotmentTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-doc:OfferingDocumentTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:maximumOverAllotmentAmount ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "issue over allotment terms"@en ;
+	rdfs:comment "QName: NONE:IssueOverAllotmentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "Terms for Change to an Issue Amount. A provision in an underwriting agreement, which allows members of the underwriting syndicate to purchase additional shares at the original price."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Also known as a green shoe. Note that this set of terms does not refer to over-allotment as change to a the total issue amount issued to an individual investor. That would require separate but similar terms. FIBIM has "Over Allotment Amount" as an individual term.'@en ;
+	.
+
+fibo-bp-iss-muni:IssuerCounsel
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:isIssuerCounsel ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "issuer counsel"@en ;
+	rdfs:comment "QName: NONE:IssuerCounsel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:MuniDebtOffering
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:DebtOffering ;
+	rdfs:label "muni debt offering"@en ;
+	rdfs:comment "QName: NONE:MuniDebtOffering" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "The process step of offering a Municipal Debt security for issue."@en ;
+	.
+
+fibo-bp-iss-muni:MuniIssuanceProcessParticipant
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-muni:IssuanceProcessParticipant ;
+	rdfs:label "muni issuance process participant"@en ;
+	rdfs:comment "QName: NONE:MuniIssuanceProcessParticipant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:Obligor
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:obligorTo ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "obligor"@en ;
+	rdfs:comment "QName: NONE:Obligor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:PayingAgent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:IssuanceAgent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:facilitatesPayment ;
+			owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+		]
+		;
+	rdfs:label "paying agent"@en ;
+	rdfs:comment "QName: NONE:PayingAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:PotentialMuniUnderwriter
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-prc:PotentialUnderwriter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:underwrites ;
+			owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+		]
+		;
+	rdfs:label "potential muni underwriter"@en ;
+	rdfs:comment "QName: NONE:PotentialMuniUnderwriter" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "An intermediary between an issuer of a security and the investing public. An underwriter can either be DTC Participant or Correspondent who would clear the underwriting deal using the Crediting Participant."@en ;
+	.
+
+fibo-bp-iss-muni:PrivatePlacement
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-prc:SecuritiesIssuanceProcess ;
+	rdfs:label "private placement"@en ;
+	rdfs:comment "QName: NONE:PrivatePlacement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:ProcessParticipant
+	a owl:Class ;
+	rdfs:label "process participant"@en ;
+	rdfs:comment "QName: NONE:ProcessParticipant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:RegisteredSecurityIssuanceProcess
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-prc:SecuritiesIssuanceProcess ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:includesStep ;
+			owl:someValuesFrom fibo-bp-iss-muni:Registration ;
+		]
+		;
+	rdfs:label "registered security issuance process"@en ;
+	rdfs:comment "QName: NONE:RegisteredSecurityIssuanceProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:Registration
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-dbti:IssuanceProcessActivity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:registeredUnder ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		]
+		;
+	rdfs:label "registration"@en ;
+	rdfs:comment "QName: NONE:Registration" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:RemarketingAgent
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:facililtatesRemarketing ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "remarketing agent"@en ;
+	rdfs:comment "QName: NONE:RemarketingAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:SecuritiesIssuanceContext
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-prc-fcp:PrimaryMarket ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-prc:refersToIssuanceOf ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "securities issuance context"@en ;
+	rdfs:comment "QName: NONE:SecuritiesIssuanceContext" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:SecuritiesUnderwritingIssuance
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:SecuritiesIssuanceContext ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-prc:refersToIssuanceOf ;
+			owl:someValuesFrom fibo-fbc-fi-fi:Security ;
+		]
+		;
+	rdfs:label "securities underwriting issuance"@en ;
+	rdfs:comment "QName: NONE:SecuritiesUnderwritingIssuance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "Underwriting, as a method of Securities Issuance."@en ;
+	.
+
+fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-prc:SecuritiesIssuanceProcess ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasAgent ;
+			owl:someValuesFrom fibo-bp-iss-muni:IssuanceAgent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasFinancialAdvisor ;
+			owl:someValuesFrom fibo-bp-iss-muni:IssuanceFinancialAdvisor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasIssuerCounsel ;
+			owl:someValuesFrom fibo-bp-iss-muni:IssuerCounsel ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasObligor ;
+			owl:someValuesFrom fibo-bp-iss-muni:Obligor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasPayingAgent ;
+			owl:someValuesFrom fibo-bp-iss-muni:PayingAgent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasPrinter ;
+			owl:someValuesFrom fibo-bp-iss-muni:IssuancePrinter ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasRemarketingAgent ;
+			owl:someValuesFrom fibo-bp-iss-muni:RemarketingAgent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasServicer ;
+			owl:someValuesFrom fibo-bp-iss-muni:Servicer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasSubscriber ;
+			owl:someValuesFrom fibo-bp-iss-trm:Subscriber ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasTransferAgent ;
+			owl:someValuesFrom fibo-bp-iss-muni:TransferAgent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:hasTrustee ;
+			owl:someValuesFrom fibo-bp-iss-muni:Trustee ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:produces ;
+			owl:someValuesFrom fibo-bp-iss-trm:UnderwritingProcessDetails ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:requestedBy ;
+			owl:someValuesFrom fibo-bp-iss-muni:UnderwritingIssuanceRequestor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:underwrittenBy ;
+			owl:someValuesFrom fibo-bp-iss-muni:PotentialMuniUnderwriter ;
+		]
+		;
+	rdfs:label "securities underwriting issuance process"@en ;
+	rdfs:comment "QName: NONE:SecuritiesUnderwritingIssuanceProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "The process by which debt instruments are offered to the market by a syndicate of underwriters who underwrite the issue."@en ;
+	.
+
+fibo-bp-iss-muni:Servicer
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:services ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "servicer"@en ;
+	rdfs:comment "QName: NONE:Servicer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:TransferAgent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:IssuanceAgent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:facilitatesTransfer ;
+			owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+		]
+		;
+	rdfs:label "transfer agent"@en ;
+	rdfs:comment "QName: NONE:TransferAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:Trustee
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:isTrustee ;
+		owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	] ;
+	rdfs:label "trustee"@en ;
+	rdfs:comment "QName: NONE:Trustee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:UnderwritingIssuanceClosing
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-muni:IssuanceClosing ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:refersTo ;
+			owl:someValuesFrom fibo-bp-iss-trm:UnderwriterTakedown ;
+		]
+		;
+	rdfs:label "underwriting issuance closing"@en ;
+	rdfs:comment "QName: NONE:UnderwritingIssuanceClosing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:UnderwritingIssuanceRequestor
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-prc:PotentialIssuer ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-bp-iss-muni:requests ;
+			owl:someValuesFrom fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+		]
+		;
+	rdfs:label "underwriting issuance requestor"@en ;
+	rdfs:comment "QName: NONE:UnderwritingIssuanceRequestor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:UnderwritingProcessActivity
+	a owl:Class ;
+	rdfs:subClassOf fibo-bp-iss-dbti:IssuanceProcessActivity ;
+	rdfs:label "underwriting process activity"@en ;
+	rdfs:comment "QName: NONE:UnderwritingProcessActivity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:UnderwritingProcessActor
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-bp-iss-muni:underwritingProcessActorHasIdentity ;
+		owl:someValuesFrom [
+			a owl:Class ;
+			owl:unionOf (
+				fibo-bp-iss-muni:Correspondent
+				fibo-bp-iss-muni:DTCCMember
+			) ;
+		] ;
+	] ;
+	rdfs:label "underwriting process actor"@en ;
+	rdfs:comment "QName: NONE:UnderwritingProcessActor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	skos:definition "any actor within the DTYCC Underwriting Process or any other Underwriting Process. Note: At present all these Actors (e.g. Underwriter) are defined simply as Process Actors and not as specializations of this type of Actor. Therefore this Actor is a Union of all of those."@en ;
+	.
+
+fibo-bp-iss-muni:actualClosingDate
+	a owl:ObjectProperty ;
+	rdfs:label "actual closing date"@en ;
+	rdfs:comment "QName: NONE:actualClosingDate" ;
+	rdfs:domain fibo-bp-iss-muni:IssuanceClosing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The date in which closing has been done for the underwriter of a security."@en ;
+	.
+
+fibo-bp-iss-muni:advises
+	a owl:ObjectProperty ;
+	rdfs:label "advises"@en ;
+	rdfs:comment "QName: NONE:advises" ;
+	rdfs:domain fibo-bp-iss-muni:IssuanceFinancialAdvisor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:announcementComments
+	a owl:DatatypeProperty ;
+	rdfs:label "announcement comments"@en ;
+	rdfs:comment "QName: NONE:announcementComments" ;
+	rdfs:domain fibo-bp-iss-muni:AnnounceSecuritiesIssue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Free form description of Purpose of Issue, Source of funds etc."@en ;
+	.
+
+fibo-bp-iss-muni:announcesIssueOf
+	a owl:ObjectProperty ;
+	rdfs:label "announces issue of"@en ;
+	rdfs:comment "QName: NONE:announcesIssueOf" ;
+	rdfs:domain fibo-bp-iss-muni:AnnounceSecuritiesIssue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-fbc-fi-fi:Security ;
+	.
+
+fibo-bp-iss-muni:disseminationDecisionDateAndTime
+	a owl:ObjectProperty ;
+	rdfs:label "dissemination decision date and time"@en ;
+	rdfs:comment "QName: NONE:disseminationDecisionDateAndTime" ;
+	rdfs:domain fibo-bp-iss-muni:Dissemination ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "Date and Time when the Dissemination Underwriter made the Decision about Dissemination."@en ;
+	.
+
+fibo-bp-iss-muni:facililtatesRemarketing
+	a owl:ObjectProperty ;
+	rdfs:label "facililtates remarketing"@en ;
+	rdfs:comment "QName: NONE:facililtatesRemarketing" ;
+	rdfs:domain fibo-bp-iss-muni:RemarketingAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:facilitatesPayment
+	a owl:ObjectProperty ;
+	rdfs:label "facilitates payment"@en ;
+	rdfs:comment "QName: NONE:facilitatesPayment" ;
+	rdfs:domain fibo-bp-iss-muni:PayingAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:facilitatesTransfer
+	a owl:ObjectProperty ;
+	rdfs:label "facilitates transfer"@en ;
+	rdfs:comment "QName: NONE:facilitatesTransfer" ;
+	rdfs:domain fibo-bp-iss-muni:TransferAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:formalAwardDateAndTime
+	a owl:ObjectProperty ;
+	rdfs:label "formal award date and time"@en ;
+	rdfs:comment "QName: NONE:formalAwardDateAndTime" ;
+	rdfs:domain fibo-sec-dbt-dbti:DebtOffering ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "Date and time the issuer formally accepts a bid for Competitive Issues or, the Date and Time the Bond Purchase Agreement is executed for Negotiated Issues. Time Zone: Include in date/time data or add a term for it?"@en ;
+	.
+
+fibo-bp-iss-muni:givesRiseTo
+	a owl:ObjectProperty ;
+	rdfs:label "gives rise to" ;
+	rdfs:comment "QName: NONE:givesRiseTo" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:hasAgent
+	a owl:ObjectProperty ;
+	rdfs:label "has agent"@en ;
+	rdfs:comment "QName: NONE:hasAgent" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:IssuanceAgent ;
+	.
+
+fibo-bp-iss-muni:hasBondCounsel
+	a owl:ObjectProperty ;
+	rdfs:label "has bond counsel"@en ;
+	rdfs:comment "QName: NONE:hasBondCounsel" ;
+	rdfs:domain fibo-bp-iss-muni:DebtUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:BondCounsel ;
+	.
+
+fibo-bp-iss-muni:hasFinancialAdvisor
+	a owl:ObjectProperty ;
+	rdfs:label "has financial advisor"@en ;
+	rdfs:comment "QName: NONE:hasFinancialAdvisor" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:IssuanceFinancialAdvisor ;
+	.
+
+fibo-bp-iss-muni:hasIssuanceGuarantor
+	a owl:ObjectProperty ;
+	rdfs:label "has issuance guarantor" ;
+	rdfs:comment "QName: NONE:hasIssuanceGuarantor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:hasIssuerCounsel
+	a owl:ObjectProperty ;
+	rdfs:label "has issuer counsel"@en ;
+	rdfs:comment "QName: NONE:hasIssuerCounsel" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:IssuerCounsel ;
+	.
+
+fibo-bp-iss-muni:hasObligor
+	a owl:ObjectProperty ;
+	rdfs:label "has obligor"@en ;
+	rdfs:comment "QName: NONE:hasObligor" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:Obligor ;
+	.
+
+fibo-bp-iss-muni:hasPayingAgent
+	a owl:ObjectProperty ;
+	rdfs:label "has paying agent"@en ;
+	rdfs:comment "QName: NONE:hasPayingAgent" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:PayingAgent ;
+	.
+
+fibo-bp-iss-muni:hasPotentialIssuer
+	a owl:ObjectProperty ;
+	rdfs:label "has potential issuer" ;
+	rdfs:comment "QName: NONE:hasPotentialIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:hasPrinter
+	a owl:ObjectProperty ;
+	rdfs:label "has printer"@en ;
+	rdfs:comment "QName: NONE:hasPrinter" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:IssuancePrinter ;
+	.
+
+fibo-bp-iss-muni:hasRemarketingAgent
+	a owl:ObjectProperty ;
+	rdfs:label "has remarketing agent"@en ;
+	rdfs:comment "QName: NONE:hasRemarketingAgent" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:RemarketingAgent ;
+	.
+
+fibo-bp-iss-muni:hasServicer
+	a owl:ObjectProperty ;
+	rdfs:label "has servicer"@en ;
+	rdfs:comment "QName: NONE:hasServicer" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:Servicer ;
+	.
+
+fibo-bp-iss-muni:hasSubscriber
+	a owl:ObjectProperty ;
+	rdfs:label "has subscriber"@en ;
+	rdfs:comment "QName: NONE:hasSubscriber" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-trm:Subscriber ;
+	.
+
+fibo-bp-iss-muni:hasTransferAgent
+	a owl:ObjectProperty ;
+	rdfs:label "has transfer agent"@en ;
+	rdfs:comment "QName: NONE:hasTransferAgent" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:TransferAgent ;
+	.
+
+fibo-bp-iss-muni:hasTrustee
+	a owl:ObjectProperty ;
+	rdfs:label "has trustee"@en ;
+	rdfs:comment "QName: NONE:hasTrustee" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:Trustee ;
+	.
+
+fibo-bp-iss-muni:includesStep
+	a owl:ObjectProperty ;
+	rdfs:label "includes step"@en ;
+	rdfs:comment "QName: NONE:includesStep" ;
+	rdfs:domain fibo-bp-iss-muni:RegisteredSecurityIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:Registration ;
+	.
+
+fibo-bp-iss-muni:isAgentIn
+	a owl:ObjectProperty ;
+	rdfs:label "is agent in"@en ;
+	rdfs:comment "QName: NONE:isAgentIn" ;
+	rdfs:domain fibo-bp-iss-muni:IssuanceAgent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:isBondCounsel
+	a owl:ObjectProperty ;
+	rdfs:label "is bond counsel"@en ;
+	rdfs:comment "QName: NONE:isBondCounsel" ;
+	rdfs:domain fibo-bp-iss-muni:BondCounsel ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:DebtUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:isCreditingParticipant
+	a owl:ObjectProperty ;
+	rdfs:label "is crediting participant"@en ;
+	rdfs:comment "QName: NONE:isCreditingParticipant" ;
+	rdfs:domain fibo-bp-iss-muni:IssuanceCreditingParticipant ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:isIssuerCounsel
+	a owl:ObjectProperty ;
+	rdfs:label "is issuer counsel"@en ;
+	rdfs:comment "QName: NONE:isIssuerCounsel" ;
+	rdfs:domain fibo-bp-iss-muni:IssuerCounsel ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:isTrustee
+	a owl:ObjectProperty ;
+	rdfs:label "is trustee"@en ;
+	rdfs:comment "QName: NONE:isTrustee" ;
+	rdfs:domain fibo-bp-iss-muni:Trustee ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:issuanceSettlementDate
+	a owl:ObjectProperty ;
+	rdfs:label "issuance settlement date"@en ;
+	rdfs:comment "QName: NONE:issuanceSettlementDate" ;
+	rdfs:domain fibo-bp-iss-muni:IssuanceSettlement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Settlement date for the initial Issuance transaction."@en ;
+	.
+
+fibo-bp-iss-muni:makesDecisionOn
+	a owl:ObjectProperty ;
+	rdfs:label "makes decision on"@en ;
+	rdfs:comment "QName: NONE:makesDecisionOn" ;
+	rdfs:domain fibo-bp-iss-muni:DisseminationUnderwriter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:Dissemination ;
+	.
+
+fibo-bp-iss-muni:maximumOverAllotmentAmount
+	a owl:ObjectProperty ;
+	rdfs:label "maximum over allotment amount"@en ;
+	rdfs:comment "QName: NONE:maximumOverAllotmentAmount" ;
+	rdfs:domain
+		fibo-bp-iss-muni:DebtIssueOverAllotmentTerms ,
+		fibo-bp-iss-muni:IssueOverAllotmentTerms
+		;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The maximum amount that is available as part of providing the over-allotment option."@en ;
+	.
+
+fibo-bp-iss-muni:maximumOverAllotmentPercentage
+	a owl:ObjectProperty ;
+	rdfs:label "maximum over allotment percentage"@en ;
+	rdfs:comment "QName: NONE:maximumOverAllotmentPercentage" ;
+	rdfs:domain fibo-bp-iss-muni:IssueOverAllotmentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The percentage that is available as part of providing the over-allotment option."@en ;
+	.
+
+fibo-bp-iss-muni:maximumOverAllotmentShares
+	a owl:DatatypeProperty ;
+	rdfs:label "maximum over allotment shares"@en ;
+	rdfs:comment "QName: NONE:maximumOverAllotmentShares" ;
+	rdfs:domain fibo-bp-iss-muni:IssueOverAllotmentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The maximum amount of shares that are available as part of providing the over-allotment option."@en ;
+	.
+
+fibo-bp-iss-muni:obligorTo
+	a owl:ObjectProperty ;
+	rdfs:label "obligor to"@en ;
+	rdfs:comment "QName: NONE:obligorTo" ;
+	rdfs:domain fibo-bp-iss-muni:Obligor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:offeringRequestor
+	a owl:ObjectProperty ;
+	rdfs:label "offering requestor" ;
+	rdfs:comment "QName: NONE:offeringRequestor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:overAllotmentAvailable
+	a owl:DatatypeProperty ;
+	rdfs:label "over allotment available"@en ;
+	rdfs:comment "QName: NONE:overAllotmentAvailable" ;
+	rdfs:domain fibo-bp-iss-muni:IssueOverAllotmentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether an over-allotment option is available for the security."@en ;
+	.
+
+fibo-bp-iss-muni:overAllotmentExpiryPeriodDays
+	a owl:DatatypeProperty ;
+	rdfs:label "over allotment expiry period days"@en ;
+	rdfs:comment "QName: NONE:overAllotmentExpiryPeriodDays" ;
+	rdfs:domain fibo-bp-iss-muni:IssueOverAllotmentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "Number of calendar days after the closing of initial offering for expiry of over-allotment option."@en ;
+	.
+
+fibo-bp-iss-muni:participatesIn
+	a owl:ObjectProperty ;
+	rdfs:label "participates in"@en ;
+	rdfs:comment "QName: NONE:participatesIn" ;
+	rdfs:domain fibo-bp-iss-muni:MuniIssuanceProcessParticipant ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:prints
+	a owl:ObjectProperty ;
+	rdfs:label "prints"@en ;
+	rdfs:comment "QName: NONE:prints" ;
+	rdfs:domain fibo-bp-iss-muni:IssuancePrinter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:produces
+	a owl:ObjectProperty ;
+	rdfs:label "produces"@en ;
+	rdfs:comment "QName: NONE:produces" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-trm:UnderwritingProcessDetails ;
+	.
+
+fibo-bp-iss-muni:refersTo
+	a owl:ObjectProperty ;
+	rdfs:label "refers to"@en ;
+	rdfs:comment "QName: NONE:refersTo" ;
+	rdfs:domain fibo-bp-iss-muni:UnderwritingIssuanceClosing ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-trm:UnderwriterTakedown ;
+	.
+
+fibo-bp-iss-muni:registeredUnder
+	a owl:ObjectProperty ;
+	rdfs:label "registered under"@en ;
+	rdfs:comment "QName: NONE:registeredUnder" ;
+	rdfs:domain fibo-bp-iss-muni:Registration ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	.
+
+fibo-bp-iss-muni:requestedBy
+	a owl:ObjectProperty ;
+	rdfs:label "requested by"@en ;
+	rdfs:comment "QName: NONE:requestedBy" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:UnderwritingIssuanceRequestor ;
+	.
+
+fibo-bp-iss-muni:requests
+	a owl:ObjectProperty ;
+	rdfs:label "requests"@en ;
+	rdfs:comment "QName: NONE:requests" ;
+	rdfs:domain fibo-bp-iss-muni:UnderwritingIssuanceRequestor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:saleMethod
+	a owl:DatatypeProperty ;
+	rdfs:label "sale method"@en ;
+	rdfs:comment "QName: NONE:saleMethod" ;
+	rdfs:domain fibo-bp-iss-muni:MuniDebtOffering ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Sale Method of the security."@en ;
+	.
+
+fibo-bp-iss-muni:services
+	a owl:ObjectProperty ;
+	rdfs:label "services"@en ;
+	rdfs:comment "QName: NONE:services" ;
+	rdfs:domain fibo-bp-iss-muni:Servicer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:step
+	a owl:ObjectProperty ;
+	rdfs:label "step"@en ;
+	rdfs:comment "QName: NONE:step" ;
+	rdfs:domain fibo-bp-iss-muni:DebtUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-sec-dbt-dbti:DebtOffering ;
+	.
+
+fibo-bp-iss-muni:subscriber.1
+	a owl:ObjectProperty ;
+	rdfs:label "subscriber" ;
+	rdfs:comment "QName: NONE:subscriber.1" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	.
+
+fibo-bp-iss-muni:subscribesTo
+	a owl:ObjectProperty ;
+	rdfs:label "subscribes to"@en ;
+	rdfs:comment "QName: NONE:subscribesTo" ;
+	rdfs:domain fibo-bp-iss-trm:Subscriber ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	skos:definition "Subscriber responds to marketing / draft propspectus, indicates interest and is allocated shares / debt units based on interest."@en ;
+	.
+
+fibo-bp-iss-muni:subscribesTo.1
+	a owl:ObjectProperty ;
+	rdfs:label "subscribes to"@en ;
+	rdfs:comment "QName: NONE:subscribesTo.1" ;
+	rdfs:domain fibo-bp-iss-trm:Subscriber ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-prc:SecuritiesIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:underwrites
+	a owl:ObjectProperty ;
+	rdfs:label "underwrites"@en ;
+	rdfs:comment "QName: NONE:underwrites" ;
+	rdfs:domain fibo-bp-iss-muni:PotentialMuniUnderwriter ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	.
+
+fibo-bp-iss-muni:underwritingProcessActorHasIdentity
+	a owl:ObjectProperty ;
+	rdfs:label "underwriting process actor has identity"@en ;
+	rdfs:comment "QName: NONE:underwritingProcessActorHasIdentity" ;
+	rdfs:domain fibo-bp-iss-muni:UnderwritingProcessActor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-bp-iss-muni:Correspondent
+			fibo-bp-iss-muni:DTCCMember
+		) ;
+	] ;
+	.
+
+fibo-bp-iss-muni:underwrittenBy
+	a owl:ObjectProperty ;
+	rdfs:label "underwritten by"@en ;
+	rdfs:comment "QName: NONE:underwrittenBy" ;
+	rdfs:domain fibo-bp-iss-muni:SecuritiesUnderwritingIssuanceProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/> ;
+	rdfs:range fibo-bp-iss-muni:PotentialMuniUnderwriter ;
+	.
+

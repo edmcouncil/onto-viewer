@@ -1,0 +1,57 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/MetadataBELegalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/MetadataBELegalEntities/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-mod: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/MetadataBELegalEntities/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/MetadataBELegalEntities/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Business Entities (BE) Legal Entities Module" ;
+	rdfs:comment "QName: fibo-be-le-mod:" ;
+	dct:abstract "The legal entities module contains ontologies which define the basis for legal personhood and business entities generally. This includes (1) definitions that distinguish between judicial and natural person, (2) definitions of formally constituted organizations, their members and high-level subdivisions, and identification and classification schemes, (3) definitions of corporate entities and the ways in which they may be incorporated, and (4) definitions required for implementation and use of the ISO 17442 Legal Entity Identifier (LEI) standard, including concepts for contractually capable and legal entities that reuse properties defined elsewhere in FIBO FND and BE." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-be-le-mod" ;
+	sm:filename "MetadataBELegalEntities.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/MetadataBELegalEntities/> ;
+	.
+
+fibo-be-le-mod:LegalEntitiesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Legal Entities" ;
+	rdfs:comment "QName: fibo-be-le-mod:LegalEntitiesModule" ;
+	dct:abstract "The legal entities module contains ontologies which define the basis for legal personhood and business entities generally. This includes (1) definitions that distinguish between judicial and natural person, (2) definitions of formally constituted organizations, their members and high-level subdivisions, and identification and classification schemes, (3) definitions of corporate entities and the ways in which they may be incorporated, and (4) definitions required for implementation and use of the ISO 17442 Legal Entity Identifier (LEI) standard, including concepts for contractually capable and legal entities that reuse properties defined elsewhere in FIBO FND and BE." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Business Entities (BE) Legal Entities Module" ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-be-le" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/MetadataBELegalEntities/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	.
+

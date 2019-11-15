@@ -1,0 +1,838 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/EquityPricing/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/EquityPricing/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-fct-mkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-aeq: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-md-dbtx-aly: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/> .
+@prefix fibo-md-dbtx-py: <https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/> .
+@prefix fibo-md-eqx-pri: <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> .
+@prefix fibo-md-temx-ins: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix fibo-sec-eq-eq: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/>
+	a owl:Ontology ;
+	rdfs:label "EquityPricing"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Pricing and analytics for equity products. Includes types of price which may be quoted by stock exchanges (end of day, intra-day, first and last prices and so on). All prices are a feature of a given market or exchange." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/EquityPricing/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-eqx-pri:BestBid
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-eqx-pri:BidPrice ,
+		fibo-md-eqx-pri:MarketPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasApplicableDatePeriod ;
+			owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-eqx-pri:hasPricingSource ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fct-mkt:Exchange
+					fibo-md-eqx-pri:CompositeMarket
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "best bid"@en ;
+	rdfs:comment "QName: NONE:BestBid" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "highest bid price for the stock"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Always based on a quote (not a trade) and is measured across markets, not just on the one market. Takes into account time and quote size. Real time price based on latest quotes and their sizes."@en ;
+	.
+
+fibo-md-eqx-pri:BestOffer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-eqx-pri:MarketPrice ,
+		fibo-md-eqx-pri:OfferPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasApplicableDatePeriod ;
+			owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-eqx-pri:hasPricingSource ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fct-mkt:Exchange
+					fibo-md-eqx-pri:CompositeMarket
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "best offer"@en ;
+	rdfs:comment "QName: NONE:BestOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "lowest bid price for the stock up"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Takes into account time and quote size. And time (it's the latest). If these take place on more than one exchange at the same time, the best Bid or Offer are the ones with the highest size."@en ;
+	.
+
+fibo-md-eqx-pri:BidAskSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-eqx-pri:SharePriceSpread ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-md-eqx-pri:BidPrice ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-md-eqx-pri:OfferPrice ;
+		]
+		;
+	rdfs:label "bid ask spread"@en ;
+	rdfs:comment "QName: NONE:BidAskSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Spread: Range between Bid and Ask"@en ;
+	skos:editorialNote "SMER 18 Nov: this also applies to debt or indeed any purblicy traded insturment. Appliues whether exchange traded or OTC traded."@en ;
+	.
+
+fibo-md-eqx-pri:BidPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:SharePrice ;
+	rdfs:label "bid price"@en ;
+	rdfs:comment "QName: NONE:BidPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	owl:disjointWith fibo-md-eqx-pri:OfferPrice ;
+	skos:definition "The price at which a market participant would put out in an order book indicating that they are willing to pay for a given stock."@en ;
+	fibo-fnd-utl-av:explanatoryNote "If there is not a bid in the market then there would not be a bid price. Bid is a value that requires a size"@en ;
+	.
+
+fibo-md-eqx-pri:CompositeMarket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:StructuredCollection ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:hasConstituent ;
+			owl:someValuesFrom fibo-fbc-fct-mkt:Exchange ;
+		]
+		;
+	rdfs:label "composite market"@en ;
+	rdfs:comment "QName: NONE:CompositeMarket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "a number of exchanges or trading venues in a particular marketplace or area"@en ;
+	skos:editorialNote 'From SMER: Definition for "Composite" - across exchanges. Must be exchange or MTF not a vague "Market". Would always a specofic group of exchanges and MTFs, for example "US Exchanges". Origin: SEC regulation. Use this and make it less jurisdiction specific if applicable.'@en ;
+	.
+
+fibo-md-eqx-pri:DecimalPriceQuotation
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:EquityPriceQuotationMethod ;
+	rdfs:label "decimal price quotation"@en ;
+	rdfs:comment "QName: NONE:DecimalPriceQuotation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The price is quoted in decimal"@en ;
+	.
+
+fibo-md-eqx-pri:EquitiesStatisticalPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:PriceAnalytic ,
+		fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fct-mkt:Exchange
+					fibo-md-eqx-pri:CompositeMarket
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasApplicableDatePeriod ;
+			owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+		]
+		;
+	rdfs:label "equities statistical price"@en ;
+	rdfs:comment "QName: NONE:EquitiesStatisticalPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Analytics about prices, as determined by markets, exchanges or data providers."@en ;
+	.
+
+fibo-md-eqx-pri:EquityPriceQuotationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "equity price quotation method"@en ;
+	rdfs:comment "QName: NONE:EquityPriceQuotationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "How a price is quoted."@en ;
+	.
+
+fibo-md-eqx-pri:EquityStatus
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-arr:DatedCollectionConstituent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-fbc-fi-fi:EquityInstrument ;
+		]
+		;
+	rdfs:label "equity status"@en ;
+	rdfs:comment "QName: NONE:EquityStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Information about the status of the equity at a given point in time."@en ;
+	skos:editorialNote 'Note that the individual status indications take "dated" values which include date or current value, therefore there is no "Status Date" for these terms. Note also that these values remain steady most of the time and any changes to these values would be the result of corporate actions or events.'@en ;
+	.
+
+fibo-md-eqx-pri:ExchangeOpeningPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:SharePrice ;
+	rdfs:label "exchange opening price"@en ;
+	rdfs:comment "QName: NONE:ExchangeOpeningPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The value at the beginning of trading or opening of the market."@en ;
+	skos:editorialNote "MDDL Exchange published price. Sometimes opening price is implied, sometimes it's published. you don't always see an opening price given. Review notes: One possibility: Opening price is an average of pre-market prices. This marks out the difference between closing price and opening price. Caution: Most exchanges may do it that way but some will not. Each exchange will have its on variane in how they determine an oprnhing price., Usually quoted as athe closing price of the previous session but see above. Opening price may be: Previous Closing Price First trade on that venue Difference between last closing and the out of market hours trading. If there is no OOO trading then the Previous Close in the Opening Price. This is only 2 possibillities: It never happens that out of hours trading is ignored. some regulations require some exchange to use the first trade. Composite Open: (also apples to Last, High, Low) BMB: Price at which the security first traded on the current session. Treat this as the only possible Opening Price. THe very 1st trade of the day is taken by the vendors as a trading price. It's a trading price semantically, and it becomes known as the Opening Price."@en ;
+	.
+
+fibo-md-eqx-pri:ExchangeTradingSession
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:DatePeriod ;
+	rdfs:label "exchange trading session"@en ;
+	rdfs:comment "QName: NONE:ExchangeTradingSession" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:editorialNote "See list in original model - e.g. morning, afternoon kerb trading etc."@en ;
+	.
+
+fibo-md-eqx-pri:FractionalPriceQuotation
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:EquityPriceQuotationMethod ;
+	rdfs:label "fractional price quotation"@en ;
+	rdfs:comment "QName: NONE:FractionalPriceQuotation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Price is quoted as a fraction."@en ;
+	.
+
+fibo-md-eqx-pri:HighPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:SharePrice ;
+	rdfs:label "high price"@en ;
+	rdfs:comment "QName: NONE:HighPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The highest valuation over the period specified. this can be regarded as a derived price. See also note in LowPrice Difference: different rules used. May be mased on trade OR quote price Analytic or Price?? this is a derived type but with a much simpler rule."@en ;
+	.
+
+fibo-md-eqx-pri:LastPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:SharePrice ;
+	rdfs:label "last price"@en ;
+	rdfs:comment "QName: NONE:LastPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The last (or most recent) valuation. This is an actual trade price not a derived price MDDL"@en ;
+	.
+
+fibo-md-eqx-pri:LowPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:SharePrice ;
+	rdfs:label "low price"@en ;
+	rdfs:comment "QName: NONE:LowPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The lowest valuation over the period specified. Possibly but not necessarily based on a trade. Determined by the trading venue as to whether it's based on a trade or an offer. this can be regarded as a derived price. Price is based on a riule whil will cause one to pick a certain price type."@en ;
+	.
+
+fibo-md-eqx-pri:MarketOpeningPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:MarketPrice ;
+	rdfs:label "market opening price"@en ;
+	rdfs:comment "QName: NONE:MarketOpeningPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The market opening price is the price a broker or someone would refer to at the start of trading."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Difference between last closing and the out of market hours trading. If there is no OOD trading then the Opening Price is the Previous Closing Price."@en ;
+	.
+
+fibo-md-eqx-pri:MarketOpeningPriceType
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "market opening price type"@en ;
+	rdfs:comment "QName: NONE:MarketOpeningPriceType" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	.
+
+fibo-md-eqx-pri:MarketPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:SharePrice ;
+	rdfs:label "market price"@en ;
+	rdfs:comment "QName: NONE:MarketPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "a price determined by a trading market as a whole"@en ;
+	.
+
+fibo-md-eqx-pri:MidPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-dbtx-aly:PriceAnalytic ,
+		fibo-md-eqx-pri:SharePrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-md-eqx-pri:BidPrice ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-utl-alx:hasArgument ;
+			owl:someValuesFrom fibo-md-eqx-pri:OfferPrice ;
+		]
+		;
+	rdfs:label "mid price"@en ;
+	rdfs:comment "QName: NONE:MidPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Mid (arithmetic mean) between Bid and Offer (Ask) price. Referred to in Europe not in US. e.g. LSE published a Mid price. Always an exchange that publishes. Question from editor: Can a Mid Price ever be an allotted price? Suspect not. Same question for Dealt Price."@en ;
+	.
+
+fibo-md-eqx-pri:OfferPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:SharePrice ;
+	rdfs:label "offer price"@en ;
+	rdfs:comment "QName: NONE:OfferPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	.
+
+fibo-md-eqx-pri:OfficialClosingPrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-eqx-pri:SharePrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:hasClosingPriceDeterminationMethod ;
+			owl:someValuesFrom fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+		]
+		;
+	rdfs:label "official closing price"@en ;
+	rdfs:comment "QName: NONE:OfficialClosingPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The price at close of trading on a given trading day on an exchange."@en ;
+	skos:editorialNote "The type of price which is quoted will be determined by the exchange. Last Price is recognised as the last trade on that exchange, not a last quote price. (fact about closing Price) Possibles: Last trade at the close of the market Last offer. Variants: what if there is no trade for example. Also may use prior to last trade. Official exchange calculated closing price. Questions at review: What about closing bid, mid offer. MDDL definition:The final price as of market close."@en ;
+	.
+
+fibo-md-eqx-pri:OrdinaryShareYield
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:Yield ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-ins:derivedFromOutlay ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-sec-eq-eq:OrdinaryDividend
+					fibo-md-eqx-pri:SharePrice
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "ordinary share yield"@en ;
+	rdfs:comment "QName: NONE:OrdinaryShareYield" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The return on an equity instrument investment."@en ;
+	.
+
+fibo-md-eqx-pri:SharePrice
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-ins:ExchangeTradedSecurityPrice ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-eqx-pri:hasPricingSource ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fbc-fct-mkt:Exchange
+					fibo-md-eqx-pri:CompositeMarket
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-eqx-pri:isBasedOnATradedPrice ;
+			owl:someValuesFrom xsd:boolean ;
+		]
+		;
+	rdfs:label "share price"@en ;
+	rdfs:comment "QName: NONE:SharePrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "amount of money that is paid or could be paid for a share"@en ;
+	skos:editorialNote "From SME Review sessions: There are these sorts of prices: Price based on trades; Price Bid or Offer (i.e. quote) that was placed; analytics of prices. These are generally prices on a regulated market."@en ;
+	.
+
+fibo-md-eqx-pri:SharePriceSpread
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:MarketSpread ,
+		fibo-md-dbtx-aly:PriceAnalytic
+		;
+	rdfs:label "share price spread"@en ;
+	rdfs:comment "QName: NONE:SharePriceSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Bid offer spread applies to any traded instrument."@en ;
+	.
+
+fibo-md-eqx-pri:ShareStatus
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-eqx-pri:EquityStatus ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "share status"@en ;
+	rdfs:comment "QName: NONE:ShareStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Information about the status of the security at a given point in time."@en ;
+	skos:editorialNote 'Note that the individual status indications take "dated" or "Timed" values which include date/time or current value, therefore there is no "Status Date" for these Current Share Status terms. Note also that these values remain steady most of the time and any changes to these values would be the result of corporate actions or events.'@en ;
+	.
+
+fibo-md-eqx-pri:UncrossingPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-eqx-pri:SharePrice ;
+	rdfs:label "uncrossing price"@en ;
+	rdfs:comment "QName: NONE:UncrossingPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "The indicative uncrossing price and corresponding uncrossing volume broadcast during auction calls and immediately following uncrossing."@en ;
+	.
+
+fibo-md-eqx-pri:VWAP
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-eqx-pri:EquitiesStatisticalPrice ,
+		fibo-md-eqx-pri:SharePrice
+		;
+	rdfs:label "v w a p"@en ;
+	rdfs:comment "QName: NONE:VWAP" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Volume Weighted Average Price determined by multiplying each trade by its volume then dividing by the volume for the day. MDDL"@en ;
+	.
+
+fibo-md-eqx-pri:VWOP
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-eqx-pri:EquitiesStatisticalPrice ,
+		fibo-md-eqx-pri:SharePrice
+		;
+	rdfs:label "v w o p"@en ;
+	rdfs:comment "QName: NONE:VWOP" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	skos:definition "Volume Weighted Open Price determined by multiplying each trade by its volume then dividing by the volume over a certain period during the open. MDDL"@en ;
+	.
+
+fibo-md-eqx-pri:allotted
+	a owl:DatatypeProperty ;
+	rdfs:label "allotted"@en ;
+	rdfs:comment "QName: NONE:allotted" ;
+	rdfs:domain fibo-md-eqx-pri:SharePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the Quote Price was allotted."@en ;
+	.
+
+fibo-md-eqx-pri:applicableTradingPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "applicable trading period"@en ;
+	rdfs:comment "QName: NONE:applicableTradingPeriod" ;
+	rdfs:domain fibo-md-eqx-pri:SharePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-eqx-pri:ExchangeTradingSession ;
+	skos:definition "Session that the exchange traded price refers to."@en ;
+	.
+
+fibo-md-eqx-pri:attribution
+	a owl:ObjectProperty ;
+	rdfs:label "attribution"@en ;
+	rdfs:comment "QName: NONE:attribution" ;
+	rdfs:domain fibo-md-eqx-pri:MarketPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	.
+
+fibo-md-eqx-pri:bestBidDateTime
+	a owl:ObjectProperty ;
+	rdfs:label "best bid date time"@en ;
+	rdfs:comment "QName: NONE:bestBidDateTime" ;
+	rdfs:domain fibo-md-eqx-pri:BestBid ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "The date and time on which the best bid was made."@en ;
+	.
+
+fibo-md-eqx-pri:bestOfferDateTime
+	a owl:ObjectProperty ;
+	rdfs:label "best offer date time"@en ;
+	rdfs:comment "QName: NONE:bestOfferDateTime" ;
+	rdfs:domain fibo-md-eqx-pri:BestOffer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "The date and time that the Best Offer was made"@en ;
+	.
+
+fibo-md-eqx-pri:closingPriceValue
+	a owl:ObjectProperty ;
+	rdfs:label "closing price value"@en ;
+	rdfs:comment "QName: NONE:closingPriceValue" ;
+	rdfs:domain fibo-md-eqx-pri:OfficialClosingPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The value of the price at closing, as a monetary amount (amount and currency)."@en ;
+	.
+
+fibo-md-eqx-pri:depthOfOrderBook
+	a owl:DatatypeProperty ;
+	rdfs:label "depth of order book"@en ;
+	rdfs:comment "QName: NONE:depthOfOrderBook" ;
+	rdfs:domain fibo-md-eqx-pri:SharePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The depth of the order book to which the price refers."@en ;
+	.
+
+fibo-md-eqx-pri:hasNumberOfSharesOutstanding
+	a owl:DatatypeProperty ;
+	rdfs:label "has number of shares outstanding"@en ;
+	rdfs:comment "QName: NONE:hasNumberOfSharesOutstanding" ;
+	rdfs:domain fibo-md-eqx-pri:ShareStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:positiveInteger ;
+	skos:definition "number of shares outstanding at the time of the snapshot"@en ;
+	.
+
+fibo-md-eqx-pri:hasPricingSource
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:refersTo ;
+	rdfs:label "has origin"@en ;
+	rdfs:comment "QName: NONE:hasPricingSource" ;
+	rdfs:domain fibo-md-eqx-pri:SharePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fbc-fct-mkt:Exchange
+			fibo-md-eqx-pri:CompositeMarket
+		) ;
+	] ;
+	skos:definition "indicates the source for a given price"@en ;
+	skos:editorialNote "need to determine whether or not some other market data vendor could also be a source under certain circumstances"@en ;
+	.
+
+fibo-md-eqx-pri:hasQuoteLotSize
+	a owl:DatatypeProperty ;
+	rdfs:label "has quote lot size"@en ;
+	rdfs:comment "QName: NONE:hasQuoteLotSize" ;
+	rdfs:domain fibo-md-eqx-pri:SharePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:positiveInteger ;
+	skos:definition "magnitude of the offering, order or trade to which the quote price refers (i.e., number of shares)"@en ;
+	fibo-fnd-utl-av:explanatoryNote "The number of securities against which the price is quoted. This is usually the default lot size for a given exchange, but may be different."@en ;
+	.
+
+fibo-md-eqx-pri:hasStatus
+	a owl:ObjectProperty ;
+	rdfs:label "has status"@en ;
+	rdfs:comment "QName: NONE:hasStatus" ;
+	rdfs:domain fibo-sec-eq-eq:ExchangeSpecificShare ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-eqx-pri:ShareStatus ;
+	.
+
+fibo-md-eqx-pri:howQuoted
+	a owl:ObjectProperty ;
+	rdfs:label "how quoted"@en ;
+	rdfs:comment "QName: NONE:howQuoted" ;
+	rdfs:domain fibo-md-eqx-pri:SharePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-eqx-pri:EquityPriceQuotationMethod ;
+	skos:definition "How the price is quoted e.g. decimal or fraction."@en ;
+	.
+
+fibo-md-eqx-pri:isBasedOnATradedPrice
+	a owl:DatatypeProperty ;
+	rdfs:label "traded"@en ;
+	rdfs:comment "QName: NONE:isBasedOnATradedPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "indicates whether the price was based on a trade or quote (true means that the price is based on a traded price for the period in question"@en ;
+	.
+
+fibo-md-eqx-pri:nextExDivDate
+	a owl:ObjectProperty ;
+	rdfs:label "next ex div date"@en ;
+	rdfs:comment "QName: NONE:nextExDivDate" ;
+	rdfs:domain fibo-sec-eq-eq:OrdinaryDividend ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-md-eqx-pri:nextExpectedDividendDate
+	a owl:ObjectProperty ;
+	rdfs:label "next expected dividend date"@en ;
+	rdfs:comment "QName: NONE:nextExpectedDividendDate" ;
+	rdfs:domain fibo-sec-eq-eq:OrdinaryDividend ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-md-eqx-pri:nonPaidAmount
+	a owl:ObjectProperty ;
+	rdfs:label "non paid amount"@en ;
+	rdfs:comment "QName: NONE:nonPaidAmount" ;
+	rdfs:domain fibo-md-eqx-pri:ShareStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-temx-tem:DatedMonetaryAmount ;
+	skos:definition "Nominal amount which is not paid at a given time"@en ;
+	.
+
+fibo-md-eqx-pri:openingPriceMethod
+	a owl:DatatypeProperty ;
+	rdfs:label "opening price method"@en ;
+	rdfs:comment "QName: NONE:openingPriceMethod" ;
+	rdfs:domain fibo-md-eqx-pri:ExchangeOpeningPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The method by which the Opening Price is determined for that exchange."@en ;
+	.
+
+fibo-md-eqx-pri:openingPriceType
+	a owl:ObjectProperty ;
+	rdfs:label "opening price type"@en ;
+	rdfs:comment "QName: NONE:openingPriceType" ;
+	rdfs:domain fibo-md-eqx-pri:MarketOpeningPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-eqx-pri:MarketOpeningPriceType ;
+	skos:definition "The type of price which is used and disseminated as the Opening Price on that particular market, for example the first trade price in that session or the closing price of the previous session."@en ;
+	.
+
+fibo-md-eqx-pri:outstandingEquityAmount
+	a owl:ObjectProperty ;
+	rdfs:label "outstanding equity amount"@en ;
+	rdfs:comment "QName: NONE:outstandingEquityAmount" ;
+	rdfs:domain fibo-md-eqx-pri:EquityStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-temx-tem:DatedMonetaryAmount ;
+	.
+
+fibo-md-eqx-pri:precision
+	a owl:DatatypeProperty ;
+	rdfs:label "precision"@en ;
+	rdfs:comment "QName: NONE:precision" ;
+	rdfs:domain fibo-md-eqx-pri:SharePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of decimal places in the price."@en ;
+	.
+
+fibo-md-eqx-pri:priceDateVolume
+	a owl:DatatypeProperty ;
+	rdfs:label "price date volume"@en ;
+	rdfs:comment "QName: NONE:priceDateVolume" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "Number of units traded on the price date."@en ;
+	.
+
+fibo-md-eqx-pri:priceDeterminationConventionNotes
+	a owl:DatatypeProperty ;
+	rdfs:label "price determination convention notes"@en ;
+	rdfs:comment "QName: NONE:priceDeterminationConventionNotes" ;
+	rdfs:domain fibo-md-eqx-pri:OfficialClosingPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:string ;
+	skos:definition "Further free text notes on the way in which the closing price is determined."@en ;
+	.
+
+fibo-md-eqx-pri:priceDeterminationMethod
+	a owl:DatatypeProperty ;
+	rdfs:label "price determination method"@en ;
+	rdfs:comment "QName: NONE:priceDeterminationMethod" ;
+	rdfs:domain fibo-md-eqx-pri:HighPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The method by which the High Price is determined on that exchange."@en ;
+	.
+
+fibo-md-eqx-pri:priceDeterminationMethod.1
+	a owl:DatatypeProperty ;
+	rdfs:label "price determination method"@en ;
+	rdfs:comment "QName: NONE:priceDeterminationMethod.1" ;
+	rdfs:domain fibo-md-eqx-pri:LowPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The method by which the Low Price is determined on that exchange."@en ;
+	.
+
+fibo-md-eqx-pri:priceDeterminationMethod.2
+	a owl:ObjectProperty ;
+	rdfs:label "price determination method"@en ;
+	rdfs:comment "QName: NONE:priceDeterminationMethod.2" ;
+	rdfs:domain fibo-md-eqx-pri:OfficialClosingPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-temx-ins:ClosingPriceDeterminationMethod ;
+	skos:definition "The method by which the closing price is defined."@en ;
+	.
+
+fibo-md-eqx-pri:redeemedEquityAmount
+	a owl:ObjectProperty ;
+	rdfs:label "redeemed equity amount"@en ;
+	rdfs:comment "QName: NONE:redeemedEquityAmount" ;
+	rdfs:domain fibo-md-eqx-pri:EquityStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-temx-tem:DatedMonetaryAmount ;
+	.
+
+fibo-md-eqx-pri:scheduledDividendPayment
+	a owl:ObjectProperty ;
+	rdfs:label "scheduled dividend payment" ;
+	rdfs:comment "QName: NONE:scheduledDividendPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	.
+
+fibo-md-eqx-pri:tradingDate
+	a owl:ObjectProperty ;
+	rdfs:label "trading date"@en ;
+	rdfs:comment "QName: NONE:tradingDate" ;
+	rdfs:domain fibo-md-eqx-pri:SharePrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The trading date for which the price is published."@en ;
+	.
+
+fibo-md-eqx-pri:tradingDate.1
+	a owl:ObjectProperty ;
+	rdfs:label "trading date"@en ;
+	rdfs:comment "QName: NONE:tradingDate.1" ;
+	rdfs:domain fibo-md-eqx-pri:OfficialClosingPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "The trading date for which this information is applicable."@en ;
+	.
+
+fibo-md-eqx-pri:tradingSession
+	a owl:ObjectProperty ;
+	rdfs:label "trading session"@en ;
+	rdfs:comment "QName: NONE:tradingSession" ;
+	rdfs:domain fibo-md-eqx-pri:MarketOpeningPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-eqx-pri:ExchangeTradingSession ;
+	skos:definition "Whether the price reflects the Open in post market session, pre market session or some trading period within the trading day."@en ;
+	.
+
+fibo-md-eqx-pri:uncrossingVolume
+	a owl:DatatypeProperty ;
+	rdfs:label "uncrossing volume"@en ;
+	rdfs:comment "QName: NONE:uncrossingVolume" ;
+	rdfs:domain fibo-md-eqx-pri:UncrossingPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The uncrossing volume broadcast during auction calls and immediately following uncrossing."@en ;
+	.
+
+fibo-md-eqx-pri:vWAPValue
+	a owl:ObjectProperty ;
+	rdfs:label "v w a p value"@en ;
+	rdfs:comment "QName: NONE:vWAPValue" ;
+	rdfs:domain fibo-md-eqx-pri:VWAP ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-temx-tem:TimedMonetaryAmount ;
+	skos:definition "The value of the VWAP."@en ;
+	.
+
+fibo-md-eqx-pri:vWOPValue
+	a owl:ObjectProperty ;
+	rdfs:label "v w o p value"@en ;
+	rdfs:comment "QName: NONE:vWOPValue" ;
+	rdfs:domain fibo-md-eqx-pri:VWOP ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-temx-tem:TimedMonetaryAmount ;
+	skos:definition "The value of the VWOP."@en ;
+	.
+
+fibo-md-eqx-pri:valuationDateAndTime
+	a owl:ObjectProperty ;
+	rdfs:label "valuation date and time"@en ;
+	rdfs:comment "QName: NONE:valuationDateAndTime" ;
+	rdfs:domain fibo-md-eqx-pri:LastPrice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-fnd-dt-fd:DateTime ;
+	skos:definition "The date and time at which the Last Price was determined i.e. the time time and date of the offer or trade that the price relates to."@en ;
+	.
+
+fibo-md-eqx-pri:yieldType
+	a owl:ObjectProperty ;
+	rdfs:label "yield type"@en ;
+	rdfs:comment "QName: NONE:yieldType" ;
+	rdfs:domain fibo-md-eqx-pri:OrdinaryShareYield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-dbtx-py:YieldCalculationMethod ;
+	.
+
+fibo-md-eqx-pri:yieldValue
+	a owl:ObjectProperty ;
+	rdfs:label "yield value"@en ;
+	rdfs:comment "QName: NONE:yieldValue" ;
+	rdfs:domain fibo-md-eqx-pri:OrdinaryShareYield ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/EquityTemporal/EquityPricing/> ;
+	rdfs:range fibo-md-temx-tem:TimedPercentage ;
+	.
+

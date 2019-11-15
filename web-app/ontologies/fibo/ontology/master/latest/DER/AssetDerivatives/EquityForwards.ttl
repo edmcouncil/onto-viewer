@@ -1,0 +1,288 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/EquityForwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/EquitySwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/EquityForwards/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-ass-ass: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> .
+@prefix fibo-der-ass-eqf: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> .
+@prefix fibo-der-ass-eqs: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquitySwaps/> .
+@prefix fibo-der-der-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/>
+	a owl:Ontology ;
+	rdfs:label "EquityForwards"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Forward contracts based on an underlying equity instrument." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/EquitySwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/EquityForwards/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-ass-eqf:CalculationAgentAdjustmentMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-eqf:ForwardContractAdjustmentMethod ;
+	rdfs:label "calculation agent adjustment method"@en ;
+	rdfs:comment "QName: NONE:CalculationAgentAdjustmentMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "The calculation agent has the right to adjust the terms following a corporate event"@en ;
+	.
+
+fibo-der-ass-eqf:DividendAdjustmentPeriod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:DatePeriod ;
+	rdfs:label "dividend adjustment period"@en ;
+	rdfs:comment "QName: NONE:DividendAdjustmentPeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "A period used to calculate the Deviation between Expected Dividend and Actual Dividend in that Period."@en ;
+	skos:editorialNote "Referred to in formal terms for OTC Equity Forwards and Options. REVIEW: It does not look as though we have completely pinned down the meaning on this one, only that it's a piece of data that's used for something. We really need to see and model details of those deviation claculations, along with who does them and when. Also they may not directly be facts about the contract as such. REVIEW FpML: 'A single Dividend Adjustment Period.'"@en ;
+	.
+
+fibo-der-ass-eqf:EquityForwardBuyer
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ForwardContractBuyer ;
+	rdfs:label "equity forward buyer"@en ;
+	rdfs:comment "QName: NONE:EquityForwardBuyer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "The party that buys this forwward contract, that is the party which pays for this instrument and receives the rights defined by it."@en ;
+	fibo-fnd-utl-av:explanatoryNote "See note in Seller. See 2000 ISDA definitions Article 11.1 (b). FpML: 'A reference to the party that buys this instrument, ie. pays for this instrument and receives the rights defined by it. See 2000 ISDA definitions Article 11.1 (b). In the case of FRAs this the fixed rate payer.' Interpretation: this is the party which is the counterparty to the contract."@en ;
+	.
+
+fibo-der-ass-eqf:EquityForwardCashSettlement
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ForwardCashSettlementTermsSet ;
+	rdfs:label "equity forward cash settlement"@en ;
+	rdfs:comment "QName: NONE:EquityForwardCashSettlement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	.
+
+fibo-der-ass-eqf:EquityForwardContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-ass:EquityDerivativeContract ,
+		fibo-der-der-fwd:ForwardContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqf:dividendAdjustment ;
+			owl:someValuesFrom fibo-der-ass-eqf:DividendAdjustmentPeriod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqf:hasConditions ;
+			owl:someValuesFrom fibo-der-ass-eqs:DividendConditions ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-ass-eqf:hasMethodOfAdjustment ;
+			owl:someValuesFrom fibo-der-ass-eqf:ForwardContractAdjustmentMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/hasUnderlier> ;
+			owl:someValuesFrom fibo-der-ass-ass:EquityObservable ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:establishes.1 ;
+			owl:someValuesFrom fibo-der-ass-eqf:EquityForwardDeliveryCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:hasBuyer ;
+			owl:someValuesFrom fibo-der-ass-eqf:EquityForwardBuyer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:hasSeller ;
+			owl:someValuesFrom fibo-der-ass-eqf:EquityForwardSeller ;
+		]
+		;
+	rdfs:label "equity forward contract"@en ;
+	rdfs:comment "QName: NONE:EquityForwardContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "Definition needed"@en ;
+	skos:editorialNote "FpMl definition (unusable): A component describing an Equity Forward product."@en ;
+	.
+
+fibo-der-ass-eqf:EquityForwardDeliveryCommitment
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ForwardDeliveryCommitment ;
+	rdfs:label "equity forward delivery commitment"@en ;
+	rdfs:comment "QName: NONE:EquityForwardDeliveryCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "The commitment to deliver an equity underlying at the maturity of an OTC Equity Forward contract."@en ;
+	skos:editorialNote "Or, presumably, some cash equivalent in the event that the undelying is non deliverable, or for a non deliverable forward generally."@en ;
+	.
+
+fibo-der-ass-eqf:EquityForwardSeller
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ForwardContractSeller ;
+	rdfs:label "equity forward seller"@en ;
+	rdfs:comment "QName: NONE:EquityForwardSeller" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "The party that sells or writes this forward instrument, that is the party which grants the rights defined by this instrument and in return receives a payment for it."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The forward is always written by the party that is committing to sell the underlying, and is always bought by the party that is committing to take delivery of the underlying on the settlement date. The forward contract is the same as a conventional secondary market sale transaction but with the difference that the settlement date is in the future. See 2000 ISDA definitions Article 11.1 (a). FpML: 'A reference to the party that sells (\"writes\") this instrument, i.e. that grants the rights defined by this instrument and in return receives a payment for it. See 2000 ISDA definitions Article 11.1 (a). In the case of FRAs this is the floating rate payer.' Interpretation: this is the party which is the principal or writing party to the contract."@en ;
+	.
+
+fibo-der-ass-eqf:EquityForwardTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-fwd:ForwardTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:embodies ;
+			owl:someValuesFrom fibo-der-ass-eqf:EquityForwardContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:side ;
+			owl:someValuesFrom fibo-der-ass-eqf:EquityForwardCashSettlement ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:side.1 ;
+			owl:someValuesFrom fibo-der-ass-ass:SecurityForwardDelivery ;
+		]
+		;
+	rdfs:label "equity forward transaction"@en ;
+	rdfs:comment "QName: NONE:EquityForwardTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "A transaction in which one party commits at the present to delivery of an equity security or securities or cash equivalent in the future."@en ;
+	.
+
+fibo-der-ass-eqf:EquitySecurityDelivery
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-ass:UnderlyingSecurityDelivery ;
+	rdfs:label "equity security delivery"@en ;
+	rdfs:comment "QName: NONE:EquitySecurityDelivery" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	.
+
+fibo-der-ass-eqf:EquityValuation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-fwd:UnderlyingValuation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:undertakenBy ;
+			owl:someValuesFrom fibo-der-ass-eqf:EquityValuationCalculationAgent ;
+		]
+		;
+	rdfs:label "equity valuation"@en ;
+	rdfs:comment "QName: NONE:EquityValuation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "The act of valuation of an equity underlying (share, basket or index) during the life of an OTC equity option or forward."@en ;
+	fibo-fnd-utl-av:explanatoryNote "FpML: 'The parameters for defining when valuation of the underlying takes place.'"@en ;
+	.
+
+fibo-der-ass-eqf:EquityValuationCalculationAgent
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:CalculationAgent ;
+	rdfs:label "equity valuation calculation agent"@en ;
+	rdfs:comment "QName: NONE:EquityValuationCalculationAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "The entity which carries out the valuation of an asset underlying an equity forward or option, or from which the valuation of the underlying is to be taken."@en ;
+	.
+
+fibo-der-ass-eqf:ForwardContractAdjustmentMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:AdjustmentMethod ;
+	rdfs:label "forward contract adjustment method"@en ;
+	rdfs:comment "QName: NONE:ForwardContractAdjustmentMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "Method by which adjustments will be made to the forward contract should one or more of a number of extraordinary events occur."@en ;
+	fibo-fnd-utl-av:explanatoryNote "FpML: Defines how adjustments will be made to the contract should one or more of the extraordinary events occur."@en ;
+	.
+
+fibo-der-ass-eqf:OptionsExchangeAdjustmentMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-ass-eqf:ForwardContractAdjustmentMethod ;
+	rdfs:label "options exchange adjustment method"@en ;
+	rdfs:comment "QName: NONE:OptionsExchangeAdjustmentMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	skos:definition "The trade will be adjusted according to ... exchange on which the options (??) are listed"@en ;
+	skos:editorialNote "REVIEW: Seems to be traded-option-underlying specific."@en ;
+	.
+
+fibo-der-ass-eqf:dividendAdjustment
+	a owl:ObjectProperty ;
+	rdfs:label "dividend adjustment"@en ;
+	rdfs:comment "QName: NONE:dividendAdjustment" ;
+	rdfs:domain fibo-der-ass-eqf:EquityForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	rdfs:range fibo-der-ass-eqf:DividendAdjustmentPeriod ;
+	skos:definition "One or more Dividend Adjustment Periods, which are used to calculate the Deviation between Expected Dividend and Actual Dividend in that Period.'"@en ;
+	.
+
+fibo-der-ass-eqf:hasConditions
+	a owl:ObjectProperty ;
+	rdfs:label "has conditions"@en ;
+	rdfs:comment "QName: NONE:hasConditions" ;
+	rdfs:domain fibo-der-ass-eqf:EquityForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	rdfs:range fibo-der-ass-eqs:DividendConditions ;
+	.
+
+fibo-der-ass-eqf:hasMethodOfAdjustment
+	a owl:ObjectProperty ;
+	rdfs:label "has method of adjustment"@en ;
+	rdfs:comment "QName: NONE:hasMethodOfAdjustment" ;
+	rdfs:domain fibo-der-ass-eqf:EquityForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	rdfs:range fibo-der-ass-eqf:ForwardContractAdjustmentMethod ;
+	.
+
+fibo-der-ass-eqf:priceSource
+	a owl:DatatypeProperty ;
+	rdfs:label "price source"@en ;
+	rdfs:comment "QName: NONE:priceSource" ;
+	rdfs:domain fibo-der-ass-eqf:EquityForwardCashSettlement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The Price source to be used to determine the settlement price."@en ;
+	.
+
+fibo-der-ass-eqf:settlementMethodElection
+	a owl:DatatypeProperty ;
+	rdfs:label "settlement method election"@en ;
+	rdfs:comment "QName: NONE:settlementMethodElection" ;
+	rdfs:domain fibo-der-ass-eqf:EquityForwardCashSettlement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/> ;
+	rdfs:range xsd:string ;
+	skos:definition "How the forward will be settled."@en ;
+	.
+

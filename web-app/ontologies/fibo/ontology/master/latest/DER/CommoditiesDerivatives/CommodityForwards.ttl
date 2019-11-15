@@ -1,0 +1,154 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommodityForwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommodityForwards/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-com-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/> .
+@prefix fibo-der-com-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> .
+@prefix fibo-der-der-fwd: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/>
+	a owl:Ontology ;
+	rdfs:label "CommodityForwards"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Forward contracts with a commodity underlier, along with the corresponding transactions, including cash settled contracts." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Forwards/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-com-fwd:CashSettledForwardContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-com-fwd:CommodityForwardContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-com-fwd:hasCalculationAgent ;
+			owl:someValuesFrom fibo-der-com-fwd:CommodityForwardCalculationAgent ;
+		]
+		;
+	rdfs:label "cash settled forward contract"@en ;
+	rdfs:comment "QName: NONE:CashSettledForwardContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	.
+
+fibo-der-com-fwd:CommodityContractCashCloseout
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-com-fwd:CommodityForwardDelivery ,
+		fibo-der-der-fwd:CashCloseout ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:closedOutBy ;
+			owl:someValuesFrom fibo-der-com-fwd:CommodityForwardContract ;
+		]
+		;
+	rdfs:label "commodity contract cash closeout"@en ;
+	rdfs:comment "QName: NONE:CommodityContractCashCloseout" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	.
+
+fibo-der-com-fwd:CommodityForwardCalculationAgent
+	a owl:Class ;
+	rdfs:label "commodity forward calculation agent"@en ;
+	rdfs:comment "QName: NONE:CommodityForwardCalculationAgent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	.
+
+fibo-der-com-fwd:CommodityForwardContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-com-ctr:CommodityDerivativeContract ,
+		fibo-der-der-fwd:ForwardContract
+		;
+	rdfs:label "commodity forward contract"@en ;
+	rdfs:comment "QName: NONE:CommodityForwardContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	skos:definition "Definition needed."@en ;
+	skos:editorialNote "FpML Definition (unusable): Defines a commodity forward product."@en ;
+	.
+
+fibo-der-com-fwd:CommodityForwardDelivery
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-fwd:ForwardDeliveryTermsSet ;
+	rdfs:label "commodity forward delivery"@en ;
+	rdfs:comment "QName: NONE:CommodityForwardDelivery" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	skos:definition "The agreed forward delivery of a commodity or cash equivalent."@en ;
+	.
+
+fibo-der-com-fwd:CommodityForwardTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-fwd:ForwardTransaction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:embodies ;
+			owl:someValuesFrom fibo-der-com-fwd:CommodityForwardContract ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-fwd:side.1 ;
+			owl:someValuesFrom fibo-der-com-fwd:CommodityForwardDelivery ;
+		]
+		;
+	rdfs:label "commodity forward transaction"@en ;
+	rdfs:comment "QName: NONE:CommodityForwardTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	.
+
+fibo-der-com-fwd:CommodityPhysicalDelivery
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-com-fwd:CommodityForwardDelivery ;
+	rdfs:label "commodity physical delivery"@en ;
+	rdfs:comment "QName: NONE:CommodityPhysicalDelivery" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	owl:disjointWith fibo-der-com-fwd:CommodityContractCashCloseout ;
+	skos:definition "The physical delivery of some commodity at some agreed point in the future."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Would be entered into by bullion houses and the like - people who specialze in commodities. They would have facilities for physical delivery of their primary commodities. THere are very different terms for delivery of these different kinds of commodity."@en ;
+	.
+
+fibo-der-com-fwd:cashSettled
+	a owl:DatatypeProperty ;
+	rdfs:label "cash settled"@en ;
+	rdfs:comment "QName: NONE:cashSettled" ;
+	rdfs:domain fibo-der-com-fwd:CommodityForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "The contract is settled for cash i.e. closed out against a similar but reverse contact."@en ;
+	.
+
+fibo-der-com-fwd:hasCalculationAgent
+	a owl:ObjectProperty ;
+	rdfs:label "has calculation agent"@en ;
+	rdfs:comment "QName: NONE:hasCalculationAgent" ;
+	rdfs:domain fibo-der-com-fwd:CashSettledForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	rdfs:range fibo-der-com-fwd:CommodityForwardCalculationAgent ;
+	.
+
+fibo-der-com-fwd:referenceRate
+	a owl:ObjectProperty ;
+	rdfs:label "reference rate"@en ;
+	rdfs:comment "QName: NONE:referenceRate" ;
+	rdfs:domain fibo-der-com-fwd:CommodityForwardContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Is actually a price of something."@en ;
+	.
+

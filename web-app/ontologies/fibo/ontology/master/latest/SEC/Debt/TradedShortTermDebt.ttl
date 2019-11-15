@@ -1,0 +1,231 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/TradedShortTermDebt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/TradedShortTermDebt/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-gty: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-caa: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> .
+@prefix fibo-fnd-agr-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-dbti: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/> .
+@prefix fibo-sec-dbt-tstd: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/>
+	a owl:Ontology ;
+	rdfs:label "Traded Short-Term Debt Ontology"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:" ;
+	dct:abstract "This ontology defines a number of basic, traded short-term debt instruments, many of which are considered money market instruments that may be freely traded." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2018-2019 EDM Council, Inc." ;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/IND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/>
+		;
+	sm:fileAbbreviation "fibo-sec-dbt-tstd" ;
+	sm:filename "TradedShortTermDebt.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/TradedShortTermDebt/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-sec-dbt-tstd:BankersAcceptance
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-tstd:BillOfExchange ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRelativePriceAtIssue ;
+			owl:hasValue fibo-sec-dbt-dbti:AtADiscount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRelativePriceAtMaturity ;
+			owl:hasValue fibo-sec-dbt-dbti:ParValue ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-gty:hasGuarantor ;
+			owl:someValuesFrom fibo-fbc-fct-fse:CommercialBank ;
+		]
+		;
+	rdfs:label "bankers' acceptance"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:BankersAcceptance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> ;
+	skos:definition "a short-term debt instrument issued by a company that is guaranteed by a commercial bank"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Considered negotiable instruments with features of a time draft, bankers' acceptances are created by the drawer and provide the bearer with the right to the amount noted on the face of the acceptance on the specified date. Unlike traditional checks, bankers' acceptances function based on the creditworthiness of the banking institution instead of the individual or business acting as the drawer. Additionally, the drawer must provide the funds necessary to support the bankers' acceptance, eliminating the risk associated with insufficient funds on the part of the drawer."@en ;
+	.
+
+fibo-sec-dbt-tstd:BillOfExchange
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-dbti:FixedIncomeSecurity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:onClass fibo-fnd-pas-psch:Payee ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-sec-dbt-tstd:Drawee ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-sec-dbt-tstd:Drawer ;
+		]
+		;
+	rdfs:label "bill of exchange"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:BillOfExchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> ;
+	skos:definition "short-term negotiable financial instrument consisting of an order in writing addressed by one person (the seller of goods) to another (the buyer), requiring the latter to pay a fixed amount of money on demand (a sight draft) or on a predetermined date (a time draft)"@en ;
+	fibo-fnd-utl-av:synonym "draft"@en ;
+	.
+
+fibo-sec-dbt-tstd:CommercialPaper
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-tstd:MoneyMarketInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRelativePriceAtIssue ;
+			owl:hasValue fibo-sec-dbt-dbti:AtADiscount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-dbti:hasRelativePriceAtMaturity ;
+			owl:hasValue fibo-sec-dbt-dbti:ParValue ;
+		]
+		;
+	rdfs:label "commercial paper"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:CommercialPaper" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> ;
+	skos:definition "an unsecured short-term debt instrument typically issued by a bank, corporation, or foreign government to obtain funds to meet short-term debt obligations, such as accounts receivable, inventories, or payroll, backed only by an issuing bank or company promise to pay the face amount on the maturity date specified on the note"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Commercial paper has a very-short to short maturity period (usually, 2 to 30 days, and rarely more than 270 days)."@en ;
+	.
+
+fibo-sec-dbt-tstd:Drawee
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-psch:Payer ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-sec-dbt-tstd:BillOfExchange ;
+			] ;
+		]
+		;
+	rdfs:label "drawee" ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:Drawee" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> ;
+	skos:definition "a party that is required to pay the amount stated on the bill of exchange to the payee" ;
+	.
+
+fibo-sec-dbt-tstd:Drawer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-agr:Obligee ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-rl:isPlayedBy ;
+			owl:someValuesFrom [
+				a owl:Restriction ;
+				owl:onProperty fibo-fnd-pty-pty:isAPartyTo ;
+				owl:someValuesFrom fibo-sec-dbt-tstd:BillOfExchange ;
+			] ;
+		]
+		;
+	rdfs:label "drawer" ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:Drawer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> ;
+	skos:definition "a party that requires the drawee to pay a third party (or the drawer can be paid by the drawee)" ;
+	.
+
+fibo-sec-dbt-tstd:EurodollarDeposit
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-pas-caa:CertificateOfDeposit ;
+	rdfs:label "eurodollar deposit"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:EurodollarDeposit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> ;
+	skos:definition "a certificate of deposit with a fixed interest rate issued in U.S. dollars outside the jurisdiction of the Federal Reserve, held at banks outside of the United States, including branches of U.S. banks located outside of the U.S."@en ;
+	skos:editorialNote "From riskglossary.com (part of Money Market Deposit article): The Eurodollar market has become global, so its name is a bit of a misnomer. A bank in Japan or Singapore may accept dollar deposits, but these are still called Eurodollar deposits. The market also includes other currencies, so there are Eurosterling, Euroyen, Euroswiss, etc. To confuse matters, in 1999, the European Union embraced the euro as its new currency, so you can now hear of Euroeuro. Eurocurrency is the general term for any currency deposited in bank branches outside countries where it is the national currency. Comment: Should this not rather be labeled as Eurocurrency Deposit, corresponding with the above definition? Eurodollar deposit would be a dollar-denominated sub type of this."@en ;
+	.
+
+fibo-sec-dbt-tstd:MoneyMarketInstrument
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-dbti:FixedIncomeSecurity ;
+	rdfs:label "money market instrument"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:MoneyMarketInstrument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> ;
+	skos:definition "a short-term debt security that gives the owner the unconditional right to receive a stated, fixed sum of money on a specified date"@en ;
+	fibo-fnd-utl-av:adaptedFrom "https://stats.oecd.org/glossary/detail.asp?ID=6073"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "These instruments usually are traded at a discount in organized markets; the discount is dependent upon the interest rate and the time remaining to maturity. Included are such instruments as treasury bills, commercial and financial paper, bankers' acceptances, negotiable certificates of deposit (with original maturities of one year or less), and short-term notes issued under note issuance facilities."@en ;
+	.
+
+fibo-sec-dbt-tstd:RepurchaseAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:MutualContractualAgreement ,
+		fibo-sec-dbt-tstd:MoneyMarketInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDuration ;
+			owl:onClass fibo-fnd-dt-fd:Duration ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "repurchase agreement"@en ;
+	rdfs:comment "QName: fibo-sec-dbt-tstd:RepurchaseAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/> ;
+	skos:definition "an agreement between two parties whereby one party lends the other a security at a specified price with a commitment to take the security back at a later date for another specified price"@en ;
+	fibo-fnd-utl-av:abbreviation "REPO"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Most repos are overnight transactions, with the sale taking place one day and being reversed the next day. Long-term repos - called term repos - can extend for a month or more. Usually, repos are for a fixed period of time, but open-ended deals are also possible. Reverse repo is a term used to describe the opposite side of a repo transaction. The party who sells and later repurchases a security is said to perform a repo. The other party - who purchases and later resells the security - is said to perform a reverse repo. While a repo functions like the sale and subsequent repurchase of a security, but the legal reality and the economic effect is that of a secured loan. This is a loan as the original owner retains the rights to the cashflows of the underlying security. Economically, the party purchasing the security makes funds available to the seller and holds the security as collateral. If the repoed security pays a dividend, coupon or partial redemptions during the repo, this is returned to the original owner. The difference between the sale and repurchase prices paid for the security represent interest on the loan. Indeed, repos are quoted as interest rates. A repo always pays interest at maturity i.e. there are no periodic interest payments. Status: The above facts were agreed at review, definition to be reviewed for completeness after this reworking."@en ;
+	.
+

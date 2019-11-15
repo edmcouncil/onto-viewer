@@ -1,0 +1,160 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/FuturesTemporal/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/Futures/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/FuturesTemporal/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-etd-std: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-der-fut: <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> .
+@prefix fibo-md-temx-ins: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/InstrumentTemporalTerms/> .
+@prefix fibo-md-temx-tem: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/TemporalConcepts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/>
+	a owl:Ontology ;
+	rdfs:label "FuturesTemporal"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Exchange traded futures date and time dependent terms such as prices and margining. Also covers greeks (thetas etc.)" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/Futures/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/TemporalConcepts/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/FuturesTemporal/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-etd-std:DerivativesExchange
+	a owl:Class ;
+	.
+
+fibo-md-der-fut:ExchangeFuturesPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:TradedSecurityPublishedPrice ;
+	rdfs:label "exchange futures price"@en ;
+	rdfs:comment "QName: NONE:ExchangeFuturesPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	.
+
+fibo-md-der-fut:FuturesClosingPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-der-fut:ExchangeFuturesPrice ;
+	rdfs:label "futures closing price"@en ;
+	rdfs:comment "QName: NONE:FuturesClosingPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	.
+
+fibo-md-der-fut:FuturesDailySettlementPrice
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:SecurityPrice ;
+	rdfs:label "futures daily settlement price"@en ;
+	rdfs:comment "QName: NONE:FuturesDailySettlementPrice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	skos:definition "Review whether this exists"@en ;
+	.
+
+fibo-md-der-fut:FuturesGreek
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-ins:FinancialInstrumentAnalyticalParameter ;
+	rdfs:label "futures greek"@en ;
+	rdfs:comment "QName: NONE:FuturesGreek" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	skos:definition "One of a set of measures about an option which is used to analyze the value or performance of that instrument."@en ;
+	skos:editorialNote "ACTION: Do these exist? They have been harvested from the Options world."@en ;
+	.
+
+fibo-md-der-fut:FuturesInitialTradingMargin
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-der-fut:FuturesTradingMargin ;
+	rdfs:label "futures initial trading margin"@en ;
+	rdfs:comment "QName: NONE:FuturesInitialTradingMargin" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	skos:definition "When you open a futures contract, the futures exchange will state a minimum amount of money that you must deposit into your account. This original deposit of money is called the initial margin."@en ;
+	skos:editorialNote 'See also notes under "Futures Trading Margin"'@en ;
+	.
+
+fibo-md-der-fut:FuturesTheta
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-der-fut:FuturesGreek ;
+	rdfs:label "futures theta"@en ;
+	rdfs:comment "QName: NONE:FuturesTheta" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	.
+
+fibo-md-der-fut:FuturesTradingAccountHolder
+	a owl:Class ;
+	rdfs:label "futures trading account holder"@en ;
+	rdfs:comment "QName: NONE:FuturesTradingAccountHolder" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	skos:definition "A party who has an account for futures trading at a derivatives exchange. Further notes: The trader opens an account with a given amount known as a margin."@en ;
+	.
+
+fibo-md-der-fut:FuturesTradingMargin
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-md-temx-tem:TimedMonetaryAmount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-der-fut:heldBy ;
+			owl:someValuesFrom fibo-md-der-fut:FuturesTradingAccountHolder ;
+		]
+		;
+	rdfs:label "futures trading margin"@en ;
+	rdfs:comment "QName: NONE:FuturesTradingMargin" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	skos:definition 'In the futures market, margin refers to the initial deposit of "good faith" made into an account in order to enter into a futures contract. This margin is referred to as good faith because it is this money that is used to debit any day-to-day losses.'@en ;
+	fibo-fnd-utl-av:explanatoryNote "When you open a futures contract, the futures exchange will state a minimum amount of money that you must deposit into your account. This original deposit of money is called the initial margin. When your contract is liquidated, you will be refunded the initial margin plus or minus any gains or losses that occur over the span of the futures contract. In other words, the amount in your margin account changes daily as the market fluctuates in relation to your futures contract. The minimum-level margin is determined by the futures exchange and is usually 5% to 10% of the futures contract. These predetermined initial margin amounts are continuously under review: at times of high market volatility, initial margin requirements can be raised. Notes from Investopedia"@en ;
+	.
+
+fibo-md-der-fut:FuturesVega
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-der-fut:FuturesGreek ;
+	rdfs:label "futures vega"@en ;
+	rdfs:comment "QName: NONE:FuturesVega" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	.
+
+fibo-md-der-fut:MinimumMargin
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-der-fut:FuturesTradingMargin ;
+	rdfs:label "minimum margin"@en ;
+	rdfs:comment "QName: NONE:MinimumMargin" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	skos:definition "The lowest amount an account can reach before needing to be replenished."@en ;
+	.
+
+fibo-md-der-fut:hasAccountHolder
+	a owl:ObjectProperty ;
+	rdfs:label "has account holder" ;
+	rdfs:comment "QName: NONE:hasAccountHolder" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	.
+
+fibo-md-der-fut:heldBy
+	a owl:ObjectProperty ;
+	rdfs:label "held by"@en ;
+	rdfs:comment "QName: NONE:heldBy" ;
+	rdfs:domain fibo-md-der-fut:FuturesTradingMargin ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	rdfs:range fibo-md-der-fut:FuturesTradingAccountHolder ;
+	.
+
+fibo-md-der-fut:holds
+	a owl:ObjectProperty ;
+	rdfs:label "holds"@en ;
+	rdfs:comment "QName: NONE:holds" ;
+	rdfs:domain fibo-der-etd-std:DerivativesExchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/> ;
+	rdfs:range fibo-md-der-fut:FuturesTradingMargin ;
+	.
+

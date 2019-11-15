@@ -1,0 +1,154 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/>
+	a owl:Ontology ;
+	rdfs:label "InfoCore"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This is the core conceptual ontology for the notion of an information construct (being any non random or information artifact), along with semantically primitive kinds of information such as names and written information. 
+		This is intended as a purely conceptual ontology and the concepts here would not be used in published Release FIBO for applications. Some work remains to integrate these concepts with those being introduced in Release under the Arrangements module.""" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-inf-inf:Information
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-inf:derivedFrom ;
+			owl:allValuesFrom owl:Thing ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-inf:isAbout ;
+			owl:someValuesFrom owl:Thing ;
+		]
+		;
+	rdfs:label "information"@en ;
+	rdfs:comment "QName: NONE:Information" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	skos:definition "Information in any of its forms."@en ;
+	fibo-fnd-utl-av:explanatoryNote "For an ontology, these are only kinds of information construct which are of direct relevance to the business domain and exist exclusively or primarily in the business domain, for example documents, identifiers and the like. Identifiers which are internal to some application are not included."@en ;
+	.
+
+fibo-fnd-inf-inf:Name
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:Information ;
+	rdfs:label "name"@en ;
+	rdfs:comment "QName: NONE:Name" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	skos:definition "Some text or sounds by which an autonomous entity may be known and which is used to refer to it."@en ;
+	.
+
+fibo-fnd-inf-inf:StructuredName
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:Name ;
+	rdfs:label "structured name"@en ;
+	rdfs:comment "QName: NONE:StructuredName" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	skos:definition "A name with additional details besides simply being a string of text. This may include multilingual support or structuring of name content (as seen for example in financial securities names)."@en ;
+	.
+
+fibo-fnd-inf-inf:WrittenInformation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-inf:Information ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-inf:originator ;
+			owl:someValuesFrom fibo-fnd-aap-agt:AutonomousAgent ;
+		]
+		;
+	rdfs:label "written information"@en ;
+	rdfs:comment "QName: NONE:WrittenInformation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	skos:definition "Some information which is written in some format (physical or electronic) and is or may be communicated in some way."@en ;
+	.
+
+fibo-fnd-inf-inf:derivedFrom
+	a owl:ObjectProperty ;
+	rdfs:label "derived from"@en ;
+	rdfs:comment "QName: NONE:derivedFrom" ;
+	rdfs:domain fibo-fnd-inf-inf:Information ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	rdfs:range owl:Thing ;
+	skos:definition "What the information derives from or refers to in order to be complete."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is semantically distinct from what the information is 'about'. Here, we refer to something (usually but not necessarily some other information) which is referred to in the course of arriving at this information. Examples include mathematical terms referred to in order to derive this information, which in turn is actually about something else (the 'is about' thing)."@en ;
+	.
+
+fibo-fnd-inf-inf:details
+	a owl:ObjectProperty ;
+	rdfs:label "details"@en ;
+	rdfs:comment "QName: NONE:details" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	rdfs:range fibo-fnd-inf-inf:Information ;
+	.
+
+fibo-fnd-inf-inf:hasName
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:details ;
+	rdfs:label "has name"@en ;
+	rdfs:comment "QName: NONE:hasName" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	rdfs:range fibo-fnd-inf-inf:Name ;
+	.
+
+fibo-fnd-inf-inf:informationFlow
+	a owl:ObjectProperty ;
+	rdfs:label "information flow"@en ;
+	rdfs:comment "QName: NONE:informationFlow" ;
+	rdfs:domain fibo-fnd-inf-inf:Information ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	rdfs:range fibo-fnd-inf-inf:Information ;
+	skos:definition "Information Flow, whereby one piece of information becomes another. The information which the information becomes. Term origin:SR modeling"@en ;
+	.
+
+fibo-fnd-inf-inf:isAbout
+	a owl:ObjectProperty ;
+	rdfs:label "is about"@en ;
+	rdfs:comment "QName: NONE:isAbout" ;
+	rdfs:domain fibo-fnd-inf-inf:Information ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	rdfs:range owl:Thing ;
+	skos:definition "What the information is about"@en ;
+	.
+
+fibo-fnd-inf-inf:nameWrittenAs
+	a owl:DatatypeProperty ;
+	rdfs:label "name written as"@en ;
+	rdfs:comment "QName: NONE:nameWrittenAs" ;
+	rdfs:domain fibo-fnd-inf-inf:Name ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The textual string which forms the name. In the case of a human being, this primary name becomes the surname."@en ;
+	.
+
+fibo-fnd-inf-inf:originator
+	a owl:ObjectProperty ;
+	rdfs:label "originator"@en ;
+	rdfs:comment "QName: NONE:originator" ;
+	rdfs:domain fibo-fnd-inf-inf:WrittenInformation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ;
+	rdfs:range fibo-fnd-aap-agt:AutonomousAgent ;
+	.
+

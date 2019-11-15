@@ -1,0 +1,62 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/MetadataINDIndicators/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/MetadataINDIndicators/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ind-mod: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/MetadataINDIndicators/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/MetadataINDIndicators/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Indices and Indicators (IND) Indicators Module" ;
+	rdfs:comment "QName: fibo-ind-ind-mod:" ;
+	dct:abstract "This module includes ontologies for concepts common to all market indices and market indicators, including economic measures." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-ind-ind-mod" ;
+	sm:filename "MetadataINDIndicators.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/MetadataINDIndicators/> ;
+	.
+
+fibo-ind-ind-mod:IndicatorsModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "FIBO IND Indicators Module" ;
+	rdfs:comment "QName: fibo-ind-ind-mod:IndicatorsModule" ;
+	dct:abstract "This module includes ontologies for concepts common to all market indices and market indicators, including economic measures." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Bureau of Labor Statistics (BLS, US Department of Commerce)" ,
+		"State Street Bank and Trust" ,
+		"Statistics Canada" ,
+		"Thematix Partners LLC"
+		;
+	sm:copyright
+		"Copyright (c) 2015-2018 EDM Council, Inc." ,
+		"Copyright (c) 2015-2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "FIBO-IND-IND" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/MetadataINDIndicators/> ;
+	rdfs:seeAlso <https://www.edmcouncil.org/fibo/> ;
+	.
+

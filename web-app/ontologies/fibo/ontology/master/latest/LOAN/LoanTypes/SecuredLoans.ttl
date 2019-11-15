@@ -1,0 +1,161 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/SecuredLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/UnsecuredLoans/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansGuaranties/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/SecuredLoans/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-loan-loan-col: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansCollateral/> .
+@prefix fibo-loan-loan-gty: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansGuaranties/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-loan-typ-sec: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> .
+@prefix fibo-loan-typ-uns: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/UnsecuredLoans/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/>
+	a owl:Ontology ;
+	rdfs:label "SecuredLoans"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology provides concepts relating to secured loans. All loans are either secured or unsecured, and secured loans are secured either by collateral or by guaranty. 
+		This ontology covers these core concepts, so that mortgage loans, where the collateral is more specific, can be built on to of this. These concepts may not be needed for stand-along application-specific ontologies for mortgage lending as the concepts here provide the abstractions for definition of mortgage loan concepts and differentiates them from other categories of loan. These intermediate abstracations may or may not be presented in the separate Loan Contracts module for mortgage loans.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/UnsecuredLoans/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansGuaranties/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/SecuredLoans/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-loan-typ-sec:CollateralizedSecuredLoan
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-typ-sec:SecuredLoan ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:isCollateralizedBy ;
+			owl:someValuesFrom fibo-loan-loan-col:LoanCollateral ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-sec:coveredBy ;
+			owl:someValuesFrom fibo-loan-loan-col:LoanCollateralAgreement ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-sec:howSecured.2 ;
+			owl:someValuesFrom fibo-loan-typ-sec:SecuredByCollateral ;
+		]
+		;
+	rdfs:label "collateralized secured loan"@en ;
+	rdfs:comment "QName: NONE:CollateralizedSecuredLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	skos:definition "Loan in which some asset is provided as collateral to the loan."@en ;
+	.
+
+fibo-loan-typ-sec:GuaranteedLoan
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-typ-sec:SecuredLoan ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-typ-sec:howSecured.2 ;
+			owl:someValuesFrom fibo-loan-typ-sec:SecuredByGuaranty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-gty:guaranteedBy ;
+			owl:someValuesFrom fibo-loan-loan-gty:LoanGuarantor ;
+		]
+		;
+	rdfs:label "guaranteed loan"@en ;
+	rdfs:comment "QName: NONE:GuaranteedLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	skos:definition "Loan secured by guaranty."@en ;
+	.
+
+fibo-loan-typ-sec:LoanSecuritizationMethod
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "loan securitization method"@en ;
+	rdfs:comment "QName: NONE:LoanSecuritizationMethod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	.
+
+fibo-loan-typ-sec:SecuredByCollateral
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-typ-sec:LoanSecuritizationMethod ;
+	rdfs:label "secured by collateral"@en ;
+	rdfs:comment "QName: NONE:SecuredByCollateral" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	.
+
+fibo-loan-typ-sec:SecuredByGuaranty
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-typ-sec:LoanSecuritizationMethod ;
+	rdfs:label "secured by guaranty"@en ;
+	rdfs:comment "QName: NONE:SecuredByGuaranty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	.
+
+fibo-loan-typ-sec:SecuredLoan
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:label "secured loan"@en ;
+	rdfs:comment "QName: NONE:SecuredLoan" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	owl:disjointWith fibo-loan-typ-uns:UnsecuredLoan ;
+	skos:definition "A loan which is secured by some security in the form either of collateral or of guaranty."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'All loans are either secured or unsecured All secured loans are secured by some asset or some guaranty Guaranties have various forms. Guaranties have a guarantor. The guarantor may or may not elect to introduce some collateral of their own. Guarantor may or may not be Co-borrower. Linguistic clues: Collateral Agreement: Side agreement (co - lateral) giving the lender acccess to those assets. Set of terms existing the contract. "Security Interest".'@en ;
+	.
+
+fibo-loan-typ-sec:coveredBy
+	a owl:ObjectProperty ;
+	rdfs:label "covered by"@en ;
+	rdfs:comment "QName: NONE:coveredBy" ;
+	rdfs:domain fibo-loan-typ-sec:CollateralizedSecuredLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	rdfs:range fibo-loan-loan-col:LoanCollateralAgreement ;
+	.
+
+fibo-loan-typ-sec:howSecured.2
+	a owl:ObjectProperty ;
+	rdfs:label "how secured"@en ;
+	rdfs:comment "QName: NONE:howSecured.2" ;
+	rdfs:domain fibo-loan-typ-sec:SecuredLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	rdfs:range fibo-loan-typ-sec:LoanSecuritizationMethod ;
+	.
+
+fibo-loan-typ-sec:secured
+	a owl:DatatypeProperty ;
+	rdfs:label "secured"@en ;
+	rdfs:comment "QName: NONE:secured" ;
+	rdfs:domain fibo-loan-typ-sec:CollateralizedSecuredLoan ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-loan-typ-sec:secured.1
+	a owl:DatatypeProperty ;
+	rdfs:label "secured"@en ;
+	rdfs:comment "QName: NONE:secured.1" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/> ;
+	rdfs:range xsd:boolean ;
+	.
+

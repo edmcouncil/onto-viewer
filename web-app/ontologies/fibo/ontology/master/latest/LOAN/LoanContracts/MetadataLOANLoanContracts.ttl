@@ -1,0 +1,45 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/MetadataLOANLoanContracts/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/MetadataLOANLoanContracts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-loan-ln-mod: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/MetadataLOANLoanContracts/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/MetadataLOANLoanContracts/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Loans (LOAN) LoanContracts Module" ;
+	rdfs:comment "QName: fibo-loan-ln-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the LOAN Loan Contracts Module." ;
+	dct:issued "2018-06-30T18:00:00"^^xsd:dateTime ;
+	dct:license sm:MITLicense ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-loan-ln-mod" ;
+	sm:filename "MetadataLOANLoanContracts.rdf" ;
+	owl:imports <http://www.omg.org/techprocess/ab/SpecificationMetadata/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/LOAN/LoanContracts/MetadataLOANLoanContracts/> ;
+	.
+
+fibo-loan-ln-mod:LoanContractsModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Loan Contracts" ;
+	rdfs:comment "QName: fibo-loan-ln-mod:LoanContractsModule" ;
+	dct:abstract "This module contains ontologies of general loans related concepts with a focus on concepts needed to support mortgage lending." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/>
+		;
+	dct:title "FIBO Loans - Loan Contracts Module" ;
+	sm:moduleAbbreviation "fibo-loan-ln" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/MetadataLOANLoanContracts/> ;
+	.
+

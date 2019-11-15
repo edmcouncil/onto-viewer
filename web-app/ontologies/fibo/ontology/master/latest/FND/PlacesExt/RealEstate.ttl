@@ -1,0 +1,240 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/Geophysical/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-inf-padr: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> .
+@prefix fibo-fnd-oac-own: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/> .
+@prefix fibo-fnd-plc-adr: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> .
+@prefix fibo-fnd-plc-loc: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> .
+@prefix fibo-fnd-plcx-gph: <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/Geophysical/> .
+@prefix fibo-fnd-plcx-re: <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/>
+	a owl:Ontology ;
+	rdfs:label "RealEstate"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Defines the notion of real estate. This draws on a combination of geophysical (land parcel) and built environment concepts, and also allows for the use of leasehold contracts as collateral in mortgages as a kind of real estate asset. 
+		This model is considerably more complex and conceptual than the published Release ontology for real estate, which defines it merely as some kind of location. Some of these concepts will be needed in defining details about mortgage loans and other applications of collateral.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Ownership/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/Geophysical/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-plc-adr:PhysicalAddress
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-inf-padr:isOf ;
+		owl:someValuesFrom fibo-fnd-plc-loc:RealEstate ;
+	] ;
+	.
+
+fibo-fnd-plc-loc:RealEstate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plc-loc:PhysicalLocation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-plcx-re:realEstateCoextensiveWith ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-plcx-gph:LandParcel
+					fibo-fnd-plcx-re:BuiltProperty
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-plcx-re:realEstateOwnedBy ;
+			owl:someValuesFrom fibo-fnd-plcx-re:PropertyOwner ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasPart ;
+			owl:someValuesFrom fibo-fnd-plc-loc:RealEstate ;
+		]
+		;
+	skos:definition 'Land plus anything permanently fixed to it, including buildings, sheds and other items attached to the structure. Explanatory Note: Although, media often refers to the "real estate market" from the perspective of residential living, real estate can be grouped into three broad categories based on its use, namely residential, commercial and industrial. Explanatory Note: Examples of real estate include undeveloped land, houses, condominiums, townhomes, office buildings, retail store buildings and factories. Scope Note: Bricks and mortar or land which can be owned.'@en ;
+	.
+
+fibo-fnd-plcx-re:Apartment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plcx-re:BuildingSubUnit ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:apartmentIdentifiedBy ;
+			owl:someValuesFrom fibo-fnd-inf-padr:BuildingSubUnitAddressFragment ;
+		]
+		;
+	rdfs:label "apartment"@en ;
+	rdfs:comment "QName: NONE:Apartment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	skos:definition "A building subbdivision intended for habitation."@en ;
+	.
+
+fibo-fnd-plcx-re:Building
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plcx-re:BuiltProperty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:buildingIdentifiedBy ;
+			owl:someValuesFrom fibo-fnd-inf-padr:StreetAddressText ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasPart ;
+			owl:someValuesFrom fibo-fnd-plcx-re:BuildingSubUnit ;
+		]
+		;
+	rdfs:label "building"@en ;
+	rdfs:comment "QName: NONE:Building" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	skos:definition "A discrete construction on its own foundations or pilings."@en ;
+	.
+
+fibo-fnd-plcx-re:BuildingSubUnit
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plcx-re:BuiltProperty ;
+	rdfs:label "building sub unit"@en ;
+	rdfs:comment "QName: NONE:BuildingSubUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	skos:definition "A discrete subdivision of some Building."@en ;
+	.
+
+fibo-fnd-plcx-re:BuiltProperty
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-plcx-re:hasLocation ;
+		owl:someValuesFrom fibo-fnd-plcx-gph:GeophysicalLocation ;
+	] ;
+	rdfs:label "built property"@en ;
+	rdfs:comment "QName: NONE:BuiltProperty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	skos:definition "Something which is constructed via construction methods; bricks and mortar."@en ;
+	.
+
+fibo-fnd-plcx-re:Floor
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plcx-re:BuildingSubUnit ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:floorIdentifiedBy ;
+			owl:someValuesFrom fibo-fnd-inf-padr:BuildingSubUnitAddressFragment ;
+		]
+		;
+	rdfs:label "floor"@en ;
+	rdfs:comment "QName: NONE:Floor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	skos:definition "A building subdivision whose extent is the horizontal extent of the building at that height."@en ;
+	.
+
+fibo-fnd-plcx-re:PropertyOwner
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-oac-own:Owner ;
+	rdfs:label "property owner"@en ;
+	rdfs:comment "QName: NONE:PropertyOwner" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	.
+
+fibo-fnd-plcx-re:Suite
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plcx-re:BuildingSubUnit ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:suiteIdentifiedBy ;
+			owl:someValuesFrom fibo-fnd-inf-padr:BuildingSubUnitAddressFragment ;
+		]
+		;
+	rdfs:label "suite"@en ;
+	rdfs:comment "QName: NONE:Suite" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	skos:definition "A subdivision of a building for which the purposes are not clearly defined or may be variable, generally consisting of a number of contiguous rooms on one or more floors."@en ;
+	.
+
+fibo-fnd-plcx-re:hasLocation
+	a owl:ObjectProperty ;
+	rdfs:label "has location"@en ;
+	rdfs:comment "QName: NONE:hasLocation" ;
+	rdfs:domain fibo-fnd-plcx-re:BuiltProperty ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	rdfs:range fibo-fnd-plcx-gph:GeophysicalLocation ;
+	skos:definition "The physical location of the built item or property."@en ;
+	.
+
+fibo-fnd-plcx-re:identifiedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:details ;
+	rdfs:label "identified by"@en ;
+	rdfs:comment "QName: NONE:identifiedBy" ;
+	rdfs:domain fibo-fnd-plc-loc:RealEstate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	rdfs:range fibo-fnd-plc-adr:PhysicalAddress ;
+	.
+
+fibo-fnd-plcx-re:leasehold
+	a owl:DatatypeProperty ;
+	rdfs:label "leasehold"@en ;
+	rdfs:comment "QName: NONE:leasehold" ;
+	rdfs:domain fibo-fnd-plc-loc:RealEstate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Typically a leasehold is where the land is not owned by the borrower, rather it is leased from a third party for a term that exceeds the life of the mortgage."@en ;
+	.
+
+fibo-fnd-plcx-re:realEstateCoextensiveWith
+	a owl:ObjectProperty ;
+	rdfs:label "real estate coextensive with"@en ;
+	rdfs:comment "QName: NONE:realEstateCoextensiveWith" ;
+	rdfs:domain fibo-fnd-plc-loc:RealEstate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-fnd-plcx-gph:LandParcel
+			fibo-fnd-plcx-re:BuiltProperty
+		) ;
+	] ;
+	skos:definition "Real Estate corresponds to either some built item or some parcel of land."@en ;
+	skos:scopeNote "This is represented as a logical union of Built Item and Land Parcel. Scope Note: Future changes in Real Estate ontology alignment may well change or elaborate on this."@en ;
+	.
+
+fibo-fnd-plcx-re:realEstateOwnedBy
+	a owl:ObjectProperty ;
+	rdfs:label "real estate owned by"@en ;
+	rdfs:comment "QName: NONE:realEstateOwnedBy" ;
+	rdfs:domain fibo-fnd-plc-loc:RealEstate ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> ;
+	rdfs:range fibo-fnd-plcx-re:PropertyOwner ;
+	.
+

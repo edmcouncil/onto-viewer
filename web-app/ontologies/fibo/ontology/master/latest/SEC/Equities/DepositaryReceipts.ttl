@@ -1,0 +1,150 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/DepositaryReceipts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcessTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/DepositaryReceipts/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-bp-iss-trm: <https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceProcessTerms/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-eq-dr: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> .
+@prefix fibo-sec-eq-eq: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> .
+@prefix fibo-sec-sec-lst: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/>
+	a owl:Ontology ;
+	rdfs:label "DepositaryReceipts"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Depositary receipts are certificates which represent ownership of some underlying equity instruments. These are issued by a bank and give the holder the ability to participate in the returns of an equity instruments they may not be able to hold directly." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcessTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/DepositaryReceipts/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-sec-eq-dr:DepositaryBank
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/Bank> ;
+	rdfs:label "depositary bank"@en ;
+	rdfs:comment "QName: NONE:DepositaryBank" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ;
+	skos:definition "A bank which is set up and authorized to issue Depositary Receipts."@en ;
+	.
+
+fibo-sec-eq-dr:DepositaryReceiptIssuer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-bp-iss-trm:SecurityIssuer ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-dr:identifiedAs ;
+			owl:someValuesFrom fibo-sec-eq-dr:DepositaryBank ;
+		]
+		;
+	rdfs:label "depositary receipt issuer"@en ;
+	rdfs:comment "QName: NONE:DepositaryReceiptIssuer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ;
+	skos:definition "The party which is the issuer of a Depository Receipt in some jurisdiciton."@en ;
+	.
+
+fibo-sec-eq-dr:InternationalDepositaryReceipt
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:EquityInstrument ,
+		fibo-sec-sec-lst:ExchangeTradedSecurity ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isIssuedBy ;
+			owl:someValuesFrom fibo-sec-eq-dr:DepositaryReceiptIssuer ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-dr:authorizedUnder ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-eq-dr:hasUnderlying ;
+			owl:someValuesFrom fibo-sec-eq-eq:ExchangeSpecificShare ;
+		]
+		;
+	rdfs:label "international depositary receipt"@en ;
+	rdfs:comment "QName: NONE:InternationalDepositaryReceipt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ;
+	skos:definition "Certificate which represent ownership of an underlying Equity."@en ;
+	skos:editorialNote "Additional facts which are not shown as they do not define the instrument as such. but could be added, uinclude the fact that the underlying is a security which has a restriction on owner domicile. These may also funge back after the restriction period. This could be shown but does not need to be."@en ;
+	.
+
+fibo-sec-eq-dr:authorizedUnder
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fbc-fi-fi:isLegallyRecordedIn ;
+	rdfs:label "authorized under"@en ;
+	rdfs:comment "QName: NONE:authorizedUnder" ;
+	rdfs:domain fibo-sec-eq-dr:InternationalDepositaryReceipt ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ;
+	rdfs:range fibo-fnd-law-jur:Jurisdiction ;
+	.
+
+fibo-sec-eq-dr:hasUnderlying
+	a owl:ObjectProperty ;
+	rdfs:label "has underlying"@en ;
+	rdfs:comment "QName: NONE:hasUnderlying" ;
+	rdfs:domain fibo-sec-eq-dr:InternationalDepositaryReceipt ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ;
+	rdfs:range fibo-sec-eq-eq:ExchangeSpecificShare ;
+	.
+
+fibo-sec-eq-dr:identifiedAs
+	a owl:ObjectProperty ;
+	rdfs:label "identified as"@en ;
+	rdfs:comment "QName: NONE:identifiedAs" ;
+	rdfs:domain fibo-sec-eq-dr:DepositaryReceiptIssuer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ;
+	rdfs:range fibo-sec-eq-dr:DepositaryBank ;
+	.
+
+fibo-sec-eq-dr:multiplier
+	a owl:DatatypeProperty ;
+	rdfs:label "multiplier"@en ;
+	rdfs:comment "QName: NONE:multiplier" ;
+	rdfs:domain fibo-sec-eq-dr:InternationalDepositaryReceipt ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of underlying shares (whether multiple or fractional) represented by a single Depositary Receipt."@en ;
+	.
+
+fibo-sec-eq-dr:numberOfCertificatesIssued
+	a owl:DatatypeProperty ;
+	rdfs:label "number of certificates issued"@en ;
+	rdfs:comment "QName: NONE:numberOfCertificatesIssued" ;
+	rdfs:domain fibo-sec-eq-dr:InternationalDepositaryReceipt ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The number of certificates issued to the general public."@en ;
+	.
+

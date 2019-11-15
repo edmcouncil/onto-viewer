@@ -1,0 +1,3013 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/CorporateEvents/CorporateActionsEvents/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcessTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/RightsAndWarrants/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityTradingStatuses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/CorporateEvents/CorporateActionsEvents/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-cb: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-cae-ce-cae: <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> .
+@prefix fibo-der-drc-raw: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/> .
+@prefix fibo-fbc-dae-cre: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditEvents/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-inf-msg: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> .
+@prefix fibo-fnd-txn-sup: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-temx-trs: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/> .
+@prefix fibo-sec-dbt-bnd: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/> .
+@prefix fibo-sec-eq-eq: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/>
+	a owl:Ontology ;
+	rdfs:label "CorporateActionsEvents"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "All corporate events and actions, along with definitions of kinds of message in which those events are communicated." ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcessTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/RightsAndWarrants/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityTradingStatuses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-cae-ce-cae:AbstentionResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponse ;
+	rdfs:label "abstention response"@en ;
+	rdfs:comment "QName: NONE:AbstentionResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Vote expressed as abstain. In this case, the issuing company will add the number of shares to the quorum of the meeting."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'If the voting right is not executed, it will not be added to the quorum. In this case the response should be "No Action". . SWIFT definition Vote expressed as abstain. In this case, the issuing company will add the number of shares to the quorum of the meeting. If the voting right is not executed, it will not be added to the quorum. In this case, code NOAC should be used. SWIFT Code: ABST'@en ;
+	.
+
+fibo-cae-ce-cae:AbstentionResponseMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponseMessage ;
+	rdfs:label "abstention response message"@en ;
+	rdfs:comment "QName: NONE:AbstentionResponseMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:AdviceOfAPossibleAction
+	a owl:Class ;
+	rdfs:label "advice of a possible action"@en ;
+	rdfs:comment "QName: NONE:AdviceOfAPossibleAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Advice - action voluntary This includes a number of things, it's not always clear why these things are here."@en ;
+	.
+
+fibo-cae-ce-cae:AllOrNoneChoiceCorporateAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:MandatoryWithChoiceCorporateAction ;
+	rdfs:label "all or none choice corporate action"@en ;
+	rdfs:comment "QName: NONE:AllOrNoneChoiceCorporateAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A Mandator Corporate Action with some choice for the Holder, where the Holder's options are limited to all of the stated choices or none of them."@en ;
+	.
+
+fibo-cae-ce-cae:AnnouncementMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventOrActionCommunication ;
+	rdfs:label "announcement message"@en ;
+	rdfs:comment "QName: NONE:AnnouncementMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:AnnualGeneralMeeting
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:Meeting ;
+	rdfs:label "annual general meeting"@en ;
+	rdfs:comment "QName: NONE:AnnualGeneralMeeting" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Annual General Meeting. SWIFT = MEET"@en ;
+	.
+
+fibo-cae-ce-cae:AssimilationPariPassu
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "assimilation pari passu"@en ;
+	rdfs:comment "QName: NONE:AssimilationPariPassu" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Assimilation. Occurs when securities with different characteristics, eg, shares with different entitlements to dividend or voting rights, become identical in all respects, ie, pari-passu. SWIFT = PARI"@en ;
+	.
+
+fibo-cae-ce-cae:AttachmentAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:SecuritiesCombinationOrDetachment ;
+	rdfs:label "attachment action"@en ;
+	rdfs:comment "QName: NONE:AttachmentAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	owl:disjointWith fibo-cae-ce-cae:DetachmentAction ;
+	skos:definition 'The combination of different security types to create a unit. Units are usually comprised of warrants and bond or warrants and equity. Securities may be combined at the request of the security holder or based on market convention. Further NOtes: is there some common term for these (see Detachment event)?; Are there separate scenarios for attachment of different kinds of security. Definition says "usually" Warrant. Probably applies to any fungible securities, whether or not warrants. For example two fungible tranches of a debt issues, that are funged later on in their life. Are these ever notified differently or have different details for warrants, fungible debt etc.? No. the message can relate to any, and the event defined here can be defined in terms of "any" securities.'@en ;
+	.
+
+fibo-cae-ce-cae:AttachmentNotificationMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:AttachmentOrDetachmentNotificationMessage ;
+	rdfs:label "attachment notification message"@en ;
+	rdfs:comment "QName: NONE:AttachmentNotificationMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of the combination of different security types to create a unit."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Units usually comprise warrants and bond or warrants and equity. Securities may be combined at the request of the security holder or based on market convention. Examples of automatic ones: If you have a unit with warrants and the warrants expore, they would be detached immediately. Is there a Notification? They would have to break up the unit as the unit no longer exists. Have to deliver off the unit and put the bond back into the client's account or into you position as an operation. depositories would change the CUSIP from the Unit CUSIP to the Bond CUSIP. Who initiates? The issuer has to do this based on the terms. Attavhment and Detachment also applicable to TRahcnes in CDOs. At some point a tranch might attach at 6 and detach at 10% for example. This might be a corporate action as it is declared when the issue is created - the attachment and deta chment points are specified inthe prospectus for the deal and would not be seen as a corporate action. SWIFT full text: \"The combination of different security types to create a unit. Units are usually comprised of warrants and bond or warrants and equity. Securities may be combined at the request of the security holder or based on market convention.\""@en ;
+	.
+
+fibo-cae-ce-cae:AttachmentOrDetachmentNotificationMessage
+	a owl:Class ;
+	rdfs:label "attachment or detachment notification message"@en ;
+	rdfs:comment "QName: NONE:AttachmentOrDetachmentNotificationMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an action in which the issuer attaches or detaches securities."@en ;
+	.
+
+fibo-cae-ce-cae:BondAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DebtSecurityAction ;
+	rdfs:label "bond action"@en ;
+	rdfs:comment "QName: NONE:BondAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some action in relation to a bond, by the Issuer."@en ;
+	.
+
+fibo-cae-ce-cae:BondDefaultEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-cre:DefaultEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.2 ;
+			owl:someValuesFrom fibo-sec-dbt-bnd:Bond ;
+		]
+		;
+	rdfs:label "bond default event"@en ;
+	rdfs:comment "QName: NONE:BondDefaultEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Non payment of interest or non payment of debt principal when due."@en ;
+	.
+
+fibo-cae-ce-cae:BondDefaultNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ExPostNotification ;
+	rdfs:label "bond default notification"@en ;
+	rdfs:comment "QName: NONE:BondDefaultNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of non payment of interest or non payment of debt principal when due."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is an Ex Post notification."@en ;
+	.
+
+fibo-cae-ce-cae:BondPutRedemption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:BondAction ,
+		fibo-cae-ce-cae:PutAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.3 ;
+			owl:someValuesFrom fibo-sec-dbt-bnd:Bond ;
+		]
+		;
+	rdfs:label "bond put redemption"@en ;
+	rdfs:comment "QName: NONE:BondPutRedemption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Early redemption of a bond at the election of the bondholder subject to the terms and condition of the issue."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Notification in advance of this happening."@en ;
+	.
+
+fibo-cae-ce-cae:BondPutRedemptionInstruction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:HolderInitiatedInstruction ;
+	rdfs:label "bond put redemption instruction"@en ;
+	rdfs:comment "QName: NONE:BondPutRedemptionInstruction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Early redemption of a bond at the election of the bondholder subject to the terms and condition of the issue."@en ;
+	.
+
+fibo-cae-ce-cae:BonusIssue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CapitalizationIssue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:isIssueOf ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.4 ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "bonus issue"@en ;
+	rdfs:comment "QName: NONE:BonusIssue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Event in which security holders are awarded additional assets free of payment from the issuer in proportion to their holding. These may be from current profits or may be from accumulated reserves of the company."@en ;
+	fibo-fnd-utl-av:explanatoryNote "There are different taxation rules for the Bonus Issue compared to the Dividend. There could also be a difference in the ranking of the shares that are given, to what the holder already holds. Always announce the event on the ones that they hold, and based on the holding they are given additional shares. They may be of a different ranking. Bonus Issues increase the capital base but not the capital value of the company, since all they are doing is diluting the share capital. Difference from Dividend: Increases holding of shareholder. Other similar terms: Awards; Also see difference between Dividend and Bonus. Dividend is from current profits and bonus may be from accumulated reserves of the company. Separate this into 2 terms. We have: Capitalisation Issue Bonus rights Issue Original SWIFT definition - strippoed out synonyms for the formal definition above: \"Attribution Gratuite (FR); Scrip Issue (GB); Capitalisation Issue. Security holders are awarded additional assets free of payment from the issuer in priportion to their holding.\" More 25 May A scrip issue is the issue of new shares at no charge pro rata to the holder of existing shares. This means the term Scrip Issue is as modeled here \"no charge\". But Capitalization becomes close to this in definition. More detail May 25: No change to the par value of the share so why would there be a change inthe capitaliation? Because from an accountingf point of view they change the value of overall capital of the company - they don't change the market value of the conpany but the accountants will record an increase in the issued capital of the company. This is the disctinction between nominal capital and the market capital. Nominal - there is more nominal share value."@en ;
+	.
+
+fibo-cae-ce-cae:BonusIssueNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CapitalizationIssueNotification ;
+	rdfs:label "bonus issue notification"@en ;
+	rdfs:comment "QName: NONE:BonusIssueNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of event in which security holders are awarded additional assets free of payment from the issuer in proportion to their holding."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'These may be from current profits or may be from accumulated reserves of the company. SWIFT definition text: "Attribution Gratuite (FR); Scrip Issue (GB); Capitalisation Issue. Security holders are awarded additional assets free of payment from the issuer in priportion to their holding."'@en ;
+	.
+
+fibo-cae-ce-cae:BonusRightsIssue
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:RightsIssue ;
+	rdfs:label "bonus rights issue"@en ;
+	rdfs:comment "QName: NONE:BonusRightsIssue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A Rights Issue in which the rights are given to the holders of the referenced shares for free."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Rights = right to buy shares at a specified price. May be given the right for nothing (Bonus Rights Issue) or you may be offered to purchase that right at a subscription price (which you take up or don't). Bonus Rights Issue: given the option for free. May exercise at the Exercise Price."@en ;
+	.
+
+fibo-cae-ce-cae:BonusRightsIssueNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:RightsIssueNotification ;
+	rdfs:label "bonus rights issue notification"@en ;
+	rdfs:comment "QName: NONE:BonusRightsIssueNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of a Bonus Rights Issue, that is a Rights Issue in which the rights are given to the holders of the referenced shares for free."@en ;
+	.
+
+fibo-cae-ce-cae:BonusSharePlanDistribution
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CapitalDistribution ;
+	rdfs:label "bonus share plan distribution"@en ;
+	rdfs:comment "QName: NONE:BonusSharePlanDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Event in which shares are issued from the Share Premium Reserve of the company and are considered as a capital distribution rather than a disbursement of income, with different tax implications. SWIFT Definition (adapted above) \"Typically found in Australia, shares are issued from the Share Premium Reserve of the company and are considered as a capital distribution rather than a disbursement of income, with different tax implications.\" To be researches further. There are certainly Share Plans in Australia, where you can take a dividend as shares. Thewse would be in the nature of Bonus Shares. They are a tradeoff from cash dividends. Other terms to model: A \"Scheme of Arrangment\" - does this change the capital reserves or is it just another word for restructure. An arrangement with the company's debtors, and coule potentially change the capital base by converting the debt to shares (see other diagram note with these in)."@en ;
+	.
+
+fibo-cae-ce-cae:BonusSharePlanDistributionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CapitalDistributionNotification ;
+	rdfs:label "bonus share plan distribution notification"@en ;
+	rdfs:comment "QName: NONE:BonusSharePlanDistributionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of issue of shares from the Share Premium Reserve of the company."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'These are are considered as a capital distribution rather than a disbursement of income, with different tax implications. Typically found in Australia. SWIFT full text: "Typically found in Australia, shares are issued from the Share Premium Reserve of the company and are considered as a capital distribution rather than a disbursement of income, with different tax implications."'@en ;
+	.
+
+fibo-cae-ce-cae:CallAction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:ExerciseAction ,
+		fibo-cae-ce-cae:IssuerCorporateAction
+		;
+	rdfs:label "call action"@en ;
+	rdfs:comment "QName: NONE:CallAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Note this is an Issuer action."@en ;
+	.
+
+fibo-cae-ce-cae:CallMeeting
+	a owl:Class ;
+	rdfs:label "call meeting"@en ;
+	rdfs:comment "QName: NONE:CallMeeting" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:CancellationOfShares
+	a owl:Class ;
+	rdfs:label "cancellation of shares"@en ;
+	rdfs:comment "QName: NONE:CancellationOfShares" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The cancellation of shares. Further Notes Only possible with shares not publicly issued i.e. treasury shares"@en ;
+	.
+
+fibo-cae-ce-cae:CapitalDistribution
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VoluntaryDistribution ;
+	rdfs:label "capital distribution"@en ;
+	rdfs:comment "QName: NONE:CapitalDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An action in which capital of the issuing company is distributed. Trem Orign:SME Reviews"@en ;
+	.
+
+fibo-cae-ce-cae:CapitalDistributionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateActionNotificationMessage ;
+	rdfs:label "capital distribution notification"@en ;
+	rdfs:comment "QName: NONE:CapitalDistributionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an action in which capital of the issuing company is distributed."@en ;
+	.
+
+fibo-cae-ce-cae:CapitalReservesDistribution
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CapitalDistribution ;
+	rdfs:label "capital reserves distribution"@en ;
+	rdfs:comment "QName: NONE:CapitalReservesDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Distribution of capital reserves of the issuing company. Further Notes Distribution comes from earnings and reduces the capital base. REVIEW: How does this differ from CAPG? That is, does this scenario exist outside of funds capital gains distribution?"@en ;
+	.
+
+fibo-cae-ce-cae:CapitalReservesDistributionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CapitalDistributionNotification ;
+	rdfs:label "capital reserves distribution notification"@en ;
+	rdfs:comment "QName: NONE:CapitalReservesDistributionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of distribution of capital reserves of the issuing company."@en ;
+	.
+
+fibo-cae-ce-cae:CapitalizationIssue
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "capitalization issue"@en ;
+	rdfs:comment "QName: NONE:CapitalizationIssue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A general kind of issue which increases the capital base of the company. Other kinds of issue: Like a Bonus Issue except that it would increase the capital. There could be several events which could be considered as Capitalization Issues. 25 May Later research: Scrip or Bonus issue is seen to be synonymous with this but more accurate. However, we question this - if you have the chance to purchase shares at a particular price (which is a right) would extend the definition of .. 20 July: this could have a broader meaning than Capital reserves Distribution It would include distribution of capital and trying to raise capital by additional capital injection Example: If the company issues bonds, that also changes the capital base. Now to change the capital base, there are two directions, up or down. Bonus issue falls into the above because you are increasing the capital base. A rights issue also increateses the capital base. Distributions of capital has the opposite effect. Paying out cash to reduce those items that are in your reserves. the reserves are greater than you need so you pay out cash on those. Labeling: capitalization implies the creation of capital so only suggests an increase the capital base"@en ;
+	.
+
+fibo-cae-ce-cae:CapitalizationIssueNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateActionNotificationMessage ;
+	rdfs:label "capitalization issue notification"@en ;
+	rdfs:comment "QName: NONE:CapitalizationIssueNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an issue which increases the capital base of the company."@en ;
+	.
+
+fibo-cae-ce-cae:CashAndSecuritiesResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DisbursementResponse ;
+	rdfs:label "cash and securities response"@en ;
+	rdfs:comment "QName: NONE:CashAndSecuritiesResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Response is to take a distribution of both securities and cash as offered."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'SWIFT: Term:"Cash and Securities" Definition:"Election choice includes a distribution of both cash and securities to holders."'@en ;
+	.
+
+fibo-cae-ce-cae:CashDisbursementResponseMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DisbursementResponseMessage ;
+	rdfs:label "cash disbursement response message"@en ;
+	rdfs:comment "QName: NONE:CashDisbursementResponseMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of response opting to take cash."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'SWIFT: Term: "Cash" Definition: "Distribution of cash to holders."'@en ;
+	.
+
+fibo-cae-ce-cae:CashDividendEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistribution ;
+	rdfs:label "cash dividend event"@en ;
+	rdfs:comment "QName: NONE:CashDividendEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Distribution of cash to shareholders, in proportion to their equity holding. Ordinary dividends are recurring and regular. Shareholder must take cash and is not offered a choice in the form of distribution."@en ;
+	.
+
+fibo-cae-ce-cae:CashDividendNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistributionNotification ;
+	rdfs:label "cash dividend notification"@en ;
+	rdfs:comment "QName: NONE:CashDividendNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:CashResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DisbursementResponse ;
+	rdfs:label "cash response"@en ;
+	rdfs:comment "QName: NONE:CashResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Response is to take cash."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'SWIFT: "Distribution of cash to holders."'@en ;
+	.
+
+fibo-cae-ce-cae:ChangeInDetailsNotification
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CorporateEventOrActionCommunication ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.5 ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security>
+					fibo-be-le-cb:StockCorporation
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "change in details notification"@en ;
+	rdfs:comment "QName: NONE:ChangeInDetailsNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Information regarding a generic change, eg, change in the terms of an issue, change in the identification of a security, change of board lot, change from global to definitive."@en ;
+	.
+
+fibo-cae-ce-cae:ChangeOfSecurityTradingStatusEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CorporateChangeOfStatusEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.6 ;
+			owl:someValuesFrom fibo-md-temx-trs:SecurityTradingStatus ;
+		]
+		;
+	rdfs:label "change of security trading status event"@en ;
+	rdfs:comment "QName: NONE:ChangeOfSecurityTradingStatusEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An event in which the trading status of a tradable security changes."@en ;
+	skos:editorialNote "Link this to the State Transition diagram (not yet done)."@en ;
+	.
+
+fibo-cae-ce-cae:ChangeOfStateEvent
+	a owl:Class ;
+	rdfs:label "change of state event"@en ;
+	rdfs:comment "QName: NONE:ChangeOfStateEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some event relating to some change of state."@en ;
+	.
+
+fibo-cae-ce-cae:ChangeToSmallestNegotiableUnit
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:InformationAction ;
+	rdfs:label "change to smallest negotiable unit"@en ;
+	rdfs:comment "QName: NONE:ChangeToSmallestNegotiableUnit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Modification of the smallest negotiable unit of shares in order to obtain a new negotiable unit. SWIFT:SMAL"@en ;
+	.
+
+fibo-cae-ce-cae:ChoiceExists
+	a owl:Class ;
+	rdfs:label "choice exists"@en ;
+	rdfs:comment "QName: NONE:ChoiceExists" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ChoiceOffer
+	a owl:Class ;
+	rdfs:label "choice offer"@en ;
+	rdfs:comment "QName: NONE:ChoiceOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ClassActionProposedSettlementEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ManagementAction ;
+	rdfs:label "class action proposed settlement event"@en ;
+	rdfs:comment "QName: NONE:ClassActionProposedSettlementEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Proposed settlement to a class action filing. Situation where interested parties seek restitution for financial loss."@en ;
+	fibo-fnd-utl-av:explanatoryNote '''Security holder may be offered the opportunity to join a class action proceeding and would need to respond with an instruction. 
+Further Notes:Original SWIFT definition: "Class action filing; Proposed settlement. Situation where interested parties seek restitution for financial loss. Security holder may be offered the opportunity to join a class action proceeding and would need to respond with an instruction." Description clarifies that the event is not the class action or the initiation of the class action, but the initiation of a proposed settlement, in which holders are encouraged to participate. Note that this is an action with some optional action on the part of the Holder.'''@en ;
+	.
+
+fibo-cae-ce-cae:CombinedCashAndSecuritiesResponseMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DisbursementResponseMessage ;
+	rdfs:label "combined cash and securities response message"@en ;
+	rdfs:comment "QName: NONE:CombinedCashAndSecuritiesResponseMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of response opting to take a distribution of both securities and cash as offered."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'SWIFT: Term:"Cash and Securities" Definition:"Election choice includes a distribution of both cash and securities to holders."'@en ;
+	.
+
+fibo-cae-ce-cae:CompanyOptionEvent
+	a owl:Class ;
+	rdfs:label "company option event"@en ;
+	rdfs:comment "QName: NONE:CompanyOptionEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A company option may be granted by the company, allowing the holder to take up shares at some future date(s) at a pre arranged price in the company."@en ;
+	skos:editorialNote "Is this an Event? Or is notification of the option the event?"@en ;
+	.
+
+fibo-cae-ce-cae:ConsentDenied
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponse ;
+	rdfs:label "consent denied"@en ;
+	rdfs:comment "QName: NONE:ConsentDenied" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Vote not to approve the event or proposal. SWIFT: CONN"@en ;
+	.
+
+fibo-cae-ce-cae:ConsentDeniedMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponseMessage ;
+	rdfs:label "consent denied message"@en ;
+	rdfs:comment "QName: NONE:ConsentDeniedMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ConsentGranted.1
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponse ;
+	rdfs:label "consent granted"@en ;
+	rdfs:comment "QName: NONE:ConsentGranted.1" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Vote to approve the event or proposal. SWIFT: CONY"@en ;
+	.
+
+fibo-cae-ce-cae:ConsentGrantedMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponseMessage ;
+	rdfs:label "consent granted message"@en ;
+	rdfs:comment "QName: NONE:ConsentGrantedMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ConsentSolicitation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CorporateAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:AbstentionResponse ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:ConsentDenied ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:ConsentGranted.1 ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:VotingNoAction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.7 ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "consent solicitation"@en ;
+	rdfs:comment "QName: NONE:ConsentSolicitation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Solicitation of shareholders consent. Procedure aimed at obtaining consent of holders to proposal by issuer or a third party without a formal general meeting."@en ;
+	.
+
+fibo-cae-ce-cae:ConsentSolicitationCommunication
+	a owl:Class ;
+	rdfs:label "consent solicitation communication"@en ;
+	rdfs:comment "QName: NONE:ConsentSolicitationCommunication" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Activity in which the issuer of a security, wanting consent, communicates this to the holders, from whom consent would need to be granted."@en ;
+	.
+
+fibo-cae-ce-cae:ConsentSolicitationEnd
+	a owl:Class ;
+	rdfs:label "consent solicitation end"@en ;
+	rdfs:comment "QName: NONE:ConsentSolicitationEnd" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ConsentSolicitationRequest
+	a owl:Class ;
+	rdfs:label "consent solicitation request"@en ;
+	rdfs:comment "QName: NONE:ConsentSolicitationRequest" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Solicitation of shareholders consent."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Procedure aimed at obtaining consent of holders to proposal by issuer or a third party without a formal general meeting. SWIFT Full TExt: "Solicitation of shareholders consent. Procedure aimed at obtaining consent of holders to proposal by issuer or a third party without a formal general meeting."'@en ;
+	.
+
+fibo-cae-ce-cae:ConsentSolicitationResponse
+	a owl:Class ;
+	rdfs:label "consent solicitation response"@en ;
+	rdfs:comment "QName: NONE:ConsentSolicitationResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ConsentSolicitationStart
+	a owl:Class ;
+	rdfs:label "consent solicitation start"@en ;
+	rdfs:comment "QName: NONE:ConsentSolicitationStart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ConversionAction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:SecurityAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:ConversionResponse ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:DisbursementResponse ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:conversionActionAvailableResponseTakeNoActionResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:TakeNoActionResponse ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:isConversionFrom ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:isConversionTo ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		]
+		;
+	rdfs:label "conversion action"@en ;
+	rdfs:comment "QName: NONE:ConversionAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Conversion or optional exchange of securities (generally convertible bonds or preferred shares) into another form of securities (usually common shares) at a pre-stated price."@en ;
+	.
+
+fibo-cae-ce-cae:ConversionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "conversion notification"@en ;
+	rdfs:comment "QName: NONE:ConversionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Conversion or optional exchange of securities (generally convertible bonds or preferred shares) into another form of securities (usually common shares) at a pre-stated price."@en ;
+	.
+
+fibo-cae-ce-cae:ConversionResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionHolderResponse ;
+	rdfs:label "conversion response"@en ;
+	rdfs:comment "QName: NONE:ConversionResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Response of the holder is to convert. SWIFT: Convert (CONV)"@en ;
+	.
+
+fibo-cae-ce-cae:ConversionSuspensionAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:SecurityAction ;
+	rdfs:label "conversion suspension action"@en ;
+	rdfs:comment "QName: NONE:ConversionSuspensionAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Suspensiion of conversion of securities generally a couple of weeks before a meeting takes place. SWIFT = SCOP"@en ;
+	.
+
+fibo-cae-ce-cae:ConversionSuspensionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "conversion suspension notification"@en ;
+	rdfs:comment "QName: NONE:ConversionSuspensionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Suspensiion of conversion of securities generally a couple of weeks before a meeting takes place. SWIFT = SCOP"@en ;
+	.
+
+fibo-cae-ce-cae:CorporateAction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CorporateEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:CorporateActionHolderResponse ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.8 ;
+			owl:someValuesFrom fibo-be-le-lp:LegalEntity ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.8 ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		]
+		;
+	rdfs:label "corporate action"@en ;
+	rdfs:comment "QName: NONE:CorporateAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An event which has some effect on the details or terms of an issued Financial Security or on market perception of the value of that security."@en ;
+	skos:scopeNote "Removed from scope of this term and moved to Issuer Corporate Action: \"This is an action which is compulsory on the issuer of the security.\" - REVIEW AND CLEAN OUT OF HERE Earlier review notes (pre refinement of this scope). REVIEW AND CLEAN OUT: Broader definition would also include things which might change the market price (for debt or equity), there asre things fo which you have to notify the market. these do not necessarily include changes to the details of the security. Most CAE will change the market perception. Not all actions which change the market perception are Corporate Events. Suggestion A corporate action is a generic class not actually homogenous, one of whcih si the Corporate Action of providin information to the market. There are legal requirements in most jurisdicitons saying that companies must advise their shareholders or bondhoders, about things whic might change the price. A separate kind of event notifies holders of securities (shares or bonds) of events which require an aciton on the part of the older (mandatory or bvoluntart) of the holder of the share. Then there are a set of events that don't get classified as CAE but have been included by SWIFT which are the actions by the holder, which would impact the issuer. These include calls on rights. Conclusion: There is one \"Corporate Event\" superclass of which everything is defined. earlier Event: Event has Terms and Conditions asspciated with it. Ts and Cs include mandatory and voluntary responses."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateActionAnnouncer
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:FinancialSecuritiesActor ;
+	rdfs:label "corporate action announcer"@en ;
+	rdfs:comment "QName: NONE:CorporateActionAnnouncer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The party which makes the CA announcement. Best label for this? unclear. note that they may be issuers of other stock but they do not have to be. You can initiate a corporate action but you are not the issuer of that security, but the action is still about a particular security. Not all actions are bound to specific to a security/. A n action may impact one or more securities, The actions may require different communications. So we should probably distinguish actions versus communications about events. ADD: Communication. Example: Bell breakout. Sample use case for CAE."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateActionConfirmation
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventOrActionCommunication ;
+	rdfs:label "corporate action confirmation"@en ;
+	rdfs:comment "QName: NONE:CorporateActionConfirmation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:CorporateActionHolderResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateAction ;
+	rdfs:label "corporate action holder response"@en ;
+	rdfs:comment "QName: NONE:CorporateActionHolderResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Response by the Holder of a security, to a previous Offer made by the Issuer."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Some CAE types fall under this heading. The action will specify what choices are available to the Holder by way of a response (for example cash, securities, no action and so on). See list ... Embedded as a scheme in a ISO 15022 field."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateActionNarrative
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventOrActionCommunication ;
+	rdfs:label "corporate action narrative"@en ;
+	rdfs:comment "QName: NONE:CorporateActionNarrative" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A message containing further narrative about some corporate action. This does not relate to any specific kind of action but is an additional stand-alone message."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Can extend information with user defined language and fields."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateActionObligation
+	a owl:Class ;
+	rdfs:label "corporate action obligation"@en ;
+	rdfs:comment "QName: NONE:CorporateActionObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An obligation related to the holding of a Security."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Delivery of a security. Not defining direction at this level of the model - one party may have an obligation to deliver security or to pay; other party may have an obligation to deliver or to pay. Or there may be just one."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateActionPaymentObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionObligation ;
+	rdfs:label "corporate action payment obligation"@en ;
+	rdfs:comment "QName: NONE:CorporateActionPaymentObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:CorporateActionSecuritiesDeliveryObligation
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionObligation ;
+	rdfs:label "corporate action securities delivery obligation"@en ;
+	rdfs:comment "QName: NONE:CorporateActionSecuritiesDeliveryObligation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some obligation to deliver some security in the thr context of corporate actions. All cash proceeds and security proceeds can be represented a s acontractual obligation. Where does that obligation arise? Usually in the Contract itself - but there may be other answers to this. Defines what has to be delivered. or paid. Entitlement meanwhile is a calculation based on the Contract."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateActionStatusMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventOrActionCommunication ;
+	rdfs:label "corporate action status message"@en ;
+	rdfs:comment "QName: NONE:CorporateActionStatusMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A message which relates to the status of a corporate action."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Example would be if there is a Tender Offer, and the offer has been accepted, then a processing instruction would be sent. Not to be confused with a message about the status of a security or company."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateChangeOfStatusEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:ChangeOfStateEvent ,
+		fibo-cae-ce-cae:CorporateEvent
+		;
+	rdfs:label "corporate change of status event"@en ;
+	rdfs:comment "QName: NONE:CorporateChangeOfStatusEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some change to the status of some security."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is generally described by a corporate event message. For example, change in trading status, listing status."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateEvent
+	a owl:Class ;
+	rdfs:label "corporate event"@en ;
+	rdfs:comment "QName: NONE:CorporateEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Events v Actions Notifiable versus non notifiable. Whether notfiable could be required by statute or by listing rules. Notifiable: Does this apply only to those events compulsory on the issuer? See Tender Offer. In takeover scenarios, the issuer will have actions incumbent o nthem to inform the market (e..g Aus Part B response). Offerer initiates Part A (Takeover Offer) with the details. Akin to a information memorandum or prospectus on the takeover. All interest parties (and non shareholders) have a potential interest, as it has a potential effect on the shares."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateEventOrActionCommunication
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-msg:Message ;
+	rdfs:label "corporate event or action communication"@en ;
+	rdfs:comment "QName: NONE:CorporateEventOrActionCommunication" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Communication about an event, action or status. Further Notes Includes name changes, consent (communication only) and others. Pre marketing agreements and so on. Note: some of these are very data driven, some are not. General meetings and so on."@en ;
+	.
+
+fibo-cae-ce-cae:CorporateEventProcess
+	a owl:Class ;
+	rdfs:label "corporate event process"@en ;
+	rdfs:comment "QName: NONE:CorporateEventProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:CorporateModificationEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEvent ;
+	rdfs:label "corporate modification event"@en ;
+	rdfs:comment "QName: NONE:CorporateModificationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some change in details of some company, which needs to be described for publicly issued securities issued by that company."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Usually described in a corporate event message. Note that the change relates to the company, but notification about this, for publicly issued securities (shares, bonds) is notificed to the holders of each such security, as corporate event messages."@en ;
+	.
+
+fibo-cae-ce-cae:CouponStrip
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:BondAction ,
+		fibo-cae-ce-cae:SecuritiesCombinationOrDetachment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.9 ;
+			owl:someValuesFrom fibo-sec-dbt-bnd:Bond ;
+		]
+		;
+	rdfs:label "coupon strip"@en ;
+	rdfs:comment "QName: NONE:CouponStrip" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Coupon stripping is the process whereby interest coupons for future payment dates are separated from the security corpus that entitles the holder to the principal repayment."@en ;
+	.
+
+fibo-cae-ce-cae:CouponStripNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DebtIssuerCorporateActionNotification ;
+	rdfs:label "coupon strip notification"@en ;
+	rdfs:comment "QName: NONE:CouponStripNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification that the debt security is to be stripped, that is that interest coupons for future payment dates are separated from the security corpus that entitles the holder to the principal repayment."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'THis will result in two securities where previously there was one. REVIEW: precise details for the relation between the stripped instrument and the traded interest and principal components (does one of the remain the same security, or are two new securities created and one retired?); also account for recombination. SWIFT full text: "Coupon stripping is the process whereby interest coupons for future payment dates are separated from the security corpus that entitles the holder to the principal repayment."'@en ;
+	.
+
+fibo-cae-ce-cae:CourtDecisionSubsequentMeeting
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:Meeting ;
+	rdfs:label "court decision subsequent meeting"@en ;
+	rdfs:comment "QName: NONE:CourtDecisionSubsequentMeeting" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Meeting following a court decision."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Named according to the description. Original SWIFT name is "Court Meeting", which is not what it is.'@en ;
+	.
+
+fibo-cae-ce-cae:Custodian
+	a owl:Class ;
+	rdfs:label "custodian"@en ;
+	rdfs:comment "QName: NONE:Custodian" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:DebtDrawingNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "debt drawing notification"@en ;
+	rdfs:comment "QName: NONE:DebtDrawingNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Redemption in part before the scheduled final maturity date of a security. SWIFT = DRAW"@en ;
+	.
+
+fibo-cae-ce-cae:DebtInstrumentBuybackNotification
+	a owl:Class ;
+	rdfs:label "debt instrument buyback notification"@en ;
+	rdfs:comment "QName: NONE:DebtInstrumentBuybackNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an event where det securities are bought back by the issuer."@en ;
+	fibo-fnd-utl-av:explanatoryNote "See also puts and calls (these are usually pre-arranged). Here the company goes out to the market and buys back their own debt. This does not really need to be a corporate event, they just do it. REVIEW: This term may not be needed. Not a corporate action."@en ;
+	.
+
+fibo-cae-ce-cae:DebtIssuerCorporateActionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "debt issuer corporate action notification"@en ;
+	rdfs:comment "QName: NONE:DebtIssuerCorporateActionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:DebtRedenomination
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:DebtSecurityAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.10 ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/TradableDebtInstrument> ;
+		]
+		;
+	rdfs:label "debt redenomination"@en ;
+	rdfs:comment "QName: NONE:DebtRedenomination" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Event by which the unit (currency and/or nominal) of a debt is restated, eg, a debt in a national currency unit is restated in euro."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Would be notified in advance."@en ;
+	.
+
+fibo-cae-ce-cae:DebtSecurityAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:SecurityAction ;
+	rdfs:label "debt security action"@en ;
+	rdfs:comment "QName: NONE:DebtSecurityAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:DetachmentAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:SecuritiesCombinationOrDetachment ;
+	rdfs:label "detachment action"@en ;
+	rdfs:comment "QName: NONE:DetachmentAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:DetachmentNotificationMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:AttachmentOrDetachmentNotificationMessage ;
+	rdfs:label "detachment notification message"@en ;
+	rdfs:comment "QName: NONE:DetachmentNotificationMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of separation of components that comprise a security - usually units comprised of warrants and bond or warrants and equity."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Units may be broken up at the request of the security holder or based on market convention. Scope: See Attachment. SWIFT Full text: "Separation of components that comprise a security - usually units comprised of warrants and bond or warrants and equity. Units may be broken up at the request of the security holder or based on market convention."'@en ;
+	.
+
+fibo-cae-ce-cae:DeterminationEvent
+	a owl:Class ;
+	rdfs:label "determination event"@en ;
+	rdfs:comment "QName: NONE:DeterminationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An Event in which some amount or other parameter is determined, independently of any other event in which that which was determined is put into use. For example, the event by which interest is determined, as distinct from the event by which interest is paid on a different date or time."@en ;
+	.
+
+fibo-cae-ce-cae:DisbursementResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionHolderResponse ;
+	rdfs:label "disbursement response"@en ;
+	rdfs:comment "QName: NONE:DisbursementResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Response by a holder to some choice of disbursement method, as offered by the issuer in some corporate action."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is a generalization of a range of possible responses to offers by an issuer, which may be made in a number of Corporate Actions. Not all responses are available in all instances, and the Corporate Action notitificaiton will generally define which actions are held out to the Holder for a specific action; also some action types by their nature will be constrained to a sub set of these kinds of response. Note that this action (of choosing) is communicated to the Issuer by some message; the SWIFT terms for the messages are replicated here as kinds of Action which correspond to those. Hence the Action types and Message types are the same, and have the same origin in the SWIFT messages."@en ;
+	.
+
+fibo-cae-ce-cae:DisbursementResponseMessage
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:HolderResponseMessage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:conveys ;
+			owl:someValuesFrom fibo-cae-ce-cae:DisbursementResponse ;
+		]
+		;
+	rdfs:label "disbursement response message"@en ;
+	rdfs:comment "QName: NONE:DisbursementResponseMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Message conveying the response by a holder to some choice of disbursement method, as offered by the issuer in some corporate action."@en ;
+	.
+
+fibo-cae-ce-cae:DisclosureMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventOrActionCommunication ;
+	rdfs:label "disclosure message"@en ;
+	rdfs:comment "QName: NONE:DisclosureMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Disclosure of some fact or facts, by the holder of some security, as a result of some formal requirement imposed upon holders or beneficial owners under some applicable regulation."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'The message modeled here is the message in which the disclosure is made. Individual types of disclosure are not modeled and may vary across jurisdictions. A fact about the disclosure is the regulation under which it was required to be made. Another fact is the disclosing party, that is the holder or beneficial owner. Note that in the Business Entities ontology, beneficial ownership is modeled separately from control ownership. This type of message may result from formal requirements placed upon either. SWIFT Full text: "Requirement under some regulations for holders or beneficial owners to disclose"'@en ;
+	.
+
+fibo-cae-ce-cae:DividendDistribution
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:ShareAction ,
+		fibo-cae-ce-cae:VoluntaryDistribution ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:DisbursementResponse ;
+		]
+		;
+	rdfs:label "dividend distribution"@en ;
+	rdfs:comment "QName: NONE:DividendDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Any event relating to a dividend payment."@en ;
+	.
+
+fibo-cae-ce-cae:DividendDistributionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "dividend distribution notification"@en ;
+	rdfs:comment "QName: NONE:DividendDistributionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:DividendOption
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistribution ;
+	rdfs:label "dividend option"@en ;
+	rdfs:comment "QName: NONE:DividendOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Distribution of a dividend to shareholder with the choice of payment method. Shareholder must choose the form of payment - stock, cash, or both."@en ;
+	.
+
+fibo-cae-ce-cae:DividendOptionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistributionNotification ;
+	rdfs:label "dividend option notification"@en ;
+	rdfs:comment "QName: NONE:DividendOptionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:DividendReinvestment
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistribution ;
+	rdfs:label "dividend reinvestment"@en ;
+	rdfs:comment "QName: NONE:DividendReinvestment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Dividend payment where cash dividend is rolled over into additional shares in the issuing company."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Announcement would by that either get stock or cash. May have an announcement that pays a stock dividend only - hence this would be a bonus Issue. Dividend reinvestment is a choice on the part of the Holder but is not part of the announcement."@en ;
+	.
+
+fibo-cae-ce-cae:DividendReinvestmentNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistributionNotification ;
+	rdfs:label "dividend reinvestment notification"@en ;
+	rdfs:comment "QName: NONE:DividendReinvestmentNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:Drawing
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DebtSecurityAction ;
+	rdfs:label "drawing"@en ;
+	rdfs:comment "QName: NONE:Drawing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Redemption in part before the scheduled final maturity date of a security."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Notification in advance of this happening."@en ;
+	.
+
+fibo-cae-ce-cae:DutchAuction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ThirdPartyCorporateAction ;
+	rdfs:label "dutch auction"@en ;
+	rdfs:comment "QName: NONE:DutchAuction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Similar to a tender offer, a Dutch auction is an action by a party wishing to acquire a particular security. Current holders of the targeted security are invited to make an offer in which they would be willling to sell their holdings. UPDATE THIS DEFINITION: Similar to a tender offer, a Dutch auction is the result of an action by a third party wishing to acquire a particular security. Current holders of the targeted security are invited (and given a message by the issuer) to make an offer in which they would be willling to sell their holdings. OR It might also represent a separate scenario where third parties do this, as per the original SWIFT defition. You can only go to the Registrar which would the other scenario impossible. Agents and Registrars: The issue issuer os the company which issued the shares (as modeled); Most companies don't interact directly with the market to find out who they need to disseminate the info to. They can, but more likely the employ \"Issuers Agent\". That provides one point of contact from the organization. That agent handles all coms with the Registrars, and to the news wires etc., to disseminate the corporate action. Context: CAE only, or in the context of the Issue? When you issue the security you nominate an Agent, in the prospectus, there is specified an Issuing Agent. This is the one that does these things. Usually a merchant bank etc. in the old days. This is who will have directly facilitated that direct market engagement. Next question: This is part of going public, so these agents are appointed as part of going public."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'The party to which the offer is made need not be the holder. Details: Question on "Who is the actor?" Dutch auction would have multiple parties? What is the scenario? Usually happens when a company is about to go into administration. Looking at the scneario descried in the SWIFT definition - not clear if this is the only such scenario. Possibly the issuer has to notif ythe shareholders that the offer is being made. The offer is made by the third party but the notice is sent by the issuer (via their agent) and via the registrar who holds the details of who holds all the shares. Example: Lloyds banking group - most shares would be owned by the market, and a small percentage might be held by private investors. So in this scenario everyone has to be given the opportunity to sell at the given price. so the CAE message is still issued by the Issuer. SWIFT detailed names (synonym?) "Dutch Auction, Bid Tender"'@en ;
+	.
+
+fibo-cae-ce-cae:DutchAuctionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ThirdPartyFormalOfferNotification ;
+	rdfs:label "dutch auction notification"@en ;
+	rdfs:comment "QName: NONE:DutchAuctionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of a Dutch auction, that is an action by a party wishing to acquire a particular security. Under the terms of this offer, current holders of the targeted security are invited to make an offer in which they would be willling to sell their holdings."@en ;
+	fibo-fnd-utl-av:explanatoryNote "See notes for the event itself - there is some unclarity as to whether this notification supports one message flow or several i.e. whether it is from third party, from Issuer's Agent to holders, from third party to Issuers Agent, or all three. REVIEW SWIFT full text: \"Similar to a tender offer, a Dutch auction is an action by a party wishing to acquire a particular security. Current holders of the targeted security are invited to make an offer in which they would be willling to sell their holdings.\""@en ;
+	.
+
+fibo-cae-ce-cae:EventAnnouncement.1
+	a owl:Class ;
+	rdfs:label "event announcement"@en ;
+	rdfs:comment "QName: NONE:EventAnnouncement.1" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition
+		"An Event whereby some parties announces its intention to carry out some act at some present or future time. An Announcement is defined relative to the Event that is announced, for example the announcement of the issue of a financial security is defined in relation to the issue of a security (an Issuance Event)."@en ,
+		"The announcement"@en
+		;
+	.
+
+fibo-cae-ce-cae:EventNotification
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-cae-ce-cae:communicatedBy ;
+		owl:someValuesFrom fibo-cae-ce-cae:IssuerCorporateActionNotificationMessage ;
+	] ;
+	rdfs:label "event notification"@en ;
+	rdfs:comment "QName: NONE:EventNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ExPostNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "ex post notification"@en ;
+	rdfs:comment "QName: NONE:ExPostNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an event that is expected or unexpected and has happened."@en ;
+	.
+
+fibo-cae-ce-cae:ExchangeOffer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:IssuerFormalOffer ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.12 ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		]
+		;
+	rdfs:label "exchange offer"@en ;
+	rdfs:comment "QName: NONE:ExchangeOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Exchange offer; Capital reorganisation. Offer to shareholders to exchange their holdings for other securities and/or cash. Exchange offers are usually voluntary. Example: Where the \"usually voluntary\" comes in is that Announcement Payout Option 1: Cash 2. Stocks 3. Cash and Stock Holder picks option 1, 2 or 3 (= 1 & 2). the voluntary aspect is where it's an Exchange Offer. It's mandatory to pick one of 1 - 3. Otherwise defaults to cash on payment date. Option Payout Componnet is the terms for the choice. Exchange Offer may be voluntary, not always Mandator With Choice. for example, there are legal qualifications on what is possible. Preceded by Tender Offer. Consequences dependent on scenarios. Once the firm making the offer gets to a given (legally defined) threshold e.g. 90% then they have the right to acquire all of the outstanding shares. An Exchange Offer is therefore a specialization of a Tender Offer. It's the specialization where the above mentioned requirements have been met. Further detail: Happens in a wider range of circumsntaces. Is soecifically associated with the issuer. this could be voluntary or not. EXOF could be any of the three (mand, vol, man w choice). tendre is always voluntary."@en ;
+	.
+
+fibo-cae-ce-cae:ExchangeOfferNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerFormalOfferNotification ;
+	rdfs:label "exchange offer notification"@en ;
+	rdfs:comment "QName: NONE:ExchangeOfferNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an offer to shareholders to exchange their holdings for other securities and/or cash."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Exchange offers are usually voluntary. Full SWIFT Definition text: "Exchange offer; Capital reorganisation. Offer to shareholders to exchange their holdings for other securities and/or cash. Exchange offers are usually voluntary."'@en ;
+	.
+
+fibo-cae-ce-cae:ExerciseAction
+	a owl:Class ;
+	rdfs:label "exercise action"@en ;
+	rdfs:comment "QName: NONE:ExerciseAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some action in which spome party decides to exercise some option or some optionality concept."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These include puts and calls - I can put it to you or I can call it from you. can also be full or partial. Hence full call, partial call. Note that in Bonds, only the Issuer can call it, and only the Holder can Put it. However with this exception / narrowing of scope, the meaning of Put and Call are the same as for any other context, it's just that the implied other two cominations are not realizable in the world of Bonds."@en ;
+	.
+
+fibo-cae-ce-cae:ExerciseExChangeOptionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:HolderInitiatedInstruction ;
+	rdfs:label "exercise ex change option notification"@en ;
+	rdfs:comment "QName: NONE:ExerciseExChangeOptionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition
+		'Exchange options are mentioned in the terms and conditions of a security and are valid during the whole lifetime of a security. SWIFT: "Option for shareholders to exchange their holdings for other secuities and/or cash. Exchange options are mentioned in the terms and conditions of a security and are valid during the whole lifetime of a security."'@en ,
+		"Notification of exercise by Holder of an exsting option for shareholders to exchange their holdings for other securities and/or cash."@en
+		;
+	.
+
+fibo-cae-ce-cae:ExerciseExchangeOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:HolderInitiatedAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableChoices ;
+			owl:someValuesFrom fibo-cae-ce-cae:DisbursementResponse ;
+		]
+		;
+	rdfs:label "exercise exchange option"@en ;
+	rdfs:comment "QName: NONE:ExerciseExchangeOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ExtraordinaryGeneralMeeting
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:Meeting ;
+	rdfs:label "extraordinary general meeting"@en ;
+	rdfs:comment "QName: NONE:ExtraordinaryGeneralMeeting" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Extraordinary General Meeting"@en ;
+	.
+
+fibo-cae-ce-cae:FinancialSecuritiesActor
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-cae-ce-cae:hasSomeRoleIn ;
+		owl:someValuesFrom fibo-cae-ce-cae:CorporateAction ;
+	] ;
+	rdfs:label "financial securities actor"@en ;
+	rdfs:comment "QName: NONE:FinancialSecuritiesActor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some actor which has some agency in securities issuance or trading, or is some third party in such."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Is generally also a Party to some security, but need not be (e.g. hostile take-over bid actor)."@en ;
+	.
+
+fibo-cae-ce-cae:FormalOffer
+	a owl:Class ;
+	rdfs:label "formal offer"@en ;
+	rdfs:comment "QName: NONE:FormalOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-cae-ce-cae:DutchAuction
+			fibo-cae-ce-cae:ExchangeOffer
+			fibo-cae-ce-cae:ShareBuybackOffer
+			fibo-cae-ce-cae:TenderOffer
+		) ;
+	] ;
+	skos:definition "Event which is an offer to the holder or potential holder or other intersted party, to enter into a trade which is or would be legally binding on the part of the party making the offer (the offeror)."@en ;
+	.
+
+fibo-cae-ce-cae:FullCall
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CallAction ;
+	rdfs:label "full call"@en ;
+	rdfs:comment "QName: NONE:FullCall" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:FullExerciseAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ExerciseAction ;
+	rdfs:label "full exercise action"@en ;
+	rdfs:comment "QName: NONE:FullExerciseAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:FundCapitalGainsDistribution
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VoluntaryDistribution ;
+	rdfs:label "fund capital gains distribution"@en ;
+	rdfs:comment "QName: NONE:FundCapitalGainsDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Distribution of profits resulting from the sale of securities. Shareholders of Mutual Funds, Unit Trusts, or Sicavs are recipients of capital gains distributions which are often reinvested in additional shares of the fund."@en ;
+	.
+
+fibo-cae-ce-cae:FundCapitalGainsDistributionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CapitalDistributionNotification ;
+	rdfs:label "fund capital gains distribution notification"@en ;
+	rdfs:comment "QName: NONE:FundCapitalGainsDistributionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of distribution to shareholders of funds, of profits resulting from the sale of securities."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Shareholders of Mutual Funds, Unit Trusts, or Sicavs are recipients of capital gains distributions which are often reinvested in additional shares of the fund. SWIFT full text: "Distribution of profits resulting from the sale of securities. Shareholders of Mutual Funds, Unit Trusts, or Sicavs are recipients of capital gains distributions which are often reinvested in additional shares of the fund."'@en ;
+	.
+
+fibo-cae-ce-cae:HolderDisclosure
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:HolderInitiatedAction ;
+	rdfs:label "holder disclosure"@en ;
+	rdfs:comment "QName: NONE:HolderDisclosure" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An action by a holder to voluntarily disclose some information. Examples: ENRON Disclosure rules. This is an action by the Holder on discovery of their legal requirement. Is there an Issuer action If so there may be an Issuer action asking for such disclosure. Or this may not exist since at the time of the action the Issuer should know all this. Conclusion: From a CA viewpoint specifically, the Disclosure would be from the holder."@en ;
+	.
+
+fibo-cae-ce-cae:HolderDisclosureMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:HolderInitiatedInstruction ;
+	rdfs:label "holder disclosure message"@en ;
+	rdfs:comment "QName: NONE:HolderDisclosureMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An action by a holder to voluntarily disclose some information."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'SWIFT:"Requirement under some regulations for holders or beneficial owners to disclose" This comes from examples such as ENRON, and is a message in which the holdler of the security volunteers some information without prompting.'@en ;
+	.
+
+fibo-cae-ce-cae:HolderEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateAction ;
+	rdfs:label "holder event"@en ;
+	rdfs:comment "QName: NONE:HolderEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A CAE event relating to actions on the part of the holder."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Change of ownership has a message. Someone has to communicate the exercise."@en ;
+	.
+
+fibo-cae-ce-cae:HolderInitatedActionStart
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-cae-ce-cae:flow ;
+		owl:someValuesFrom fibo-cae-ce-cae:HolderInitiatedActionInitiation ;
+	] ;
+	rdfs:label "holder initated action start"@en ;
+	rdfs:comment "QName: NONE:HolderInitatedActionStart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:HolderInitiatedAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateAction ;
+	rdfs:label "holder initiated action"@en ;
+	rdfs:comment "QName: NONE:HolderInitiatedAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Any action initiated by a Holder of a Security."@en ;
+	.
+
+fibo-cae-ce-cae:HolderInitiatedActionEnd
+	a owl:Class ;
+	rdfs:label "holder initiated action end"@en ;
+	rdfs:comment "QName: NONE:HolderInitiatedActionEnd" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:HolderInitiatedActionInitiation
+	a owl:Class ;
+	rdfs:label "holder initiated action initiation"@en ;
+	rdfs:comment "QName: NONE:HolderInitiatedActionInitiation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:HolderInitiatedInstruction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:InstructionMessage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:conveys.1 ;
+			owl:someValuesFrom fibo-cae-ce-cae:HolderInitiatedAction ;
+		]
+		;
+	rdfs:label "holder initiated instruction"@en ;
+	rdfs:comment "QName: NONE:HolderInitiatedInstruction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A message being an instruction by the holder of some security, made not in response to come choice offered by the issuer, but made on the holder's own initiative."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is a general category of message. Note that there is one kind of message of this type in the original SWIFT-derived list of event message types, however it is assumed there must be others."@en ;
+	.
+
+fibo-cae-ce-cae:HolderMeetingResponse
+	a owl:Class ;
+	rdfs:label "holder meeting response"@en ;
+	rdfs:comment "QName: NONE:HolderMeetingResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:HolderResponseMessage
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:InstructionMessage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:conveys.2 ;
+			owl:someValuesFrom fibo-cae-ce-cae:CorporateActionHolderResponse ;
+		]
+		;
+	rdfs:label "holder response message"@en ;
+	rdfs:comment "QName: NONE:HolderResponseMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A message conveying the Holder's choice in some Corporate Action."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The message identifies the Corporate Action that they are a response to. In the event that they are not, this is highlighted in the message instructions - these are identified as such as in the ISO 15022 descriptions. See worksheet: some responses can be responses to more than one kind of message. Based on the type of notificaiton, there are various applicable response types. Based on the message sent out as a notification there are some or all of these responses, as being the possible responses to the message itself. That is down to the notifying party. Specified in the Notification what available responses there are."@en ;
+	.
+
+fibo-cae-ce-cae:HolderResponseToChoice
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-cae-ce-cae:givesRiseTo ;
+		owl:someValuesFrom fibo-cae-ce-cae:HolderResponseMessage ;
+	] ;
+	rdfs:label "holder response to choice"@en ;
+	rdfs:comment "QName: NONE:HolderResponseToChoice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition 'Instructions consequent upon notifications. Instruction messages - some of these are responses to notifications. May be MT 565 related - has consent Yes, consent No, no action, accept shares, accept cash and securities etc. There are also ones that can be initiated by holders (not in this process step) such as puts. These can be presented without a notification previously having been sense. These are the ones we deided not to classify as "Corporate Actions" as these can be initiated by the holder. As such these are an instruction rather than a notification.'@en ;
+	.
+
+fibo-cae-ce-cae:InformationAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateAction ;
+	rdfs:label "information action"@en ;
+	rdfs:comment "QName: NONE:InformationAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	fibo-fnd-utl-av:explanatoryNote "These will have an Effective date. Similar to name change - actions where there is nothign the Holder can do about it, but there is an action at a certain date."@en ;
+	.
+
+fibo-cae-ce-cae:InformationEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEvent ;
+	rdfs:label "information event"@en ;
+	rdfs:comment "QName: NONE:InformationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A corporate event which is simply a notification about something. People may wish to respond"@en ;
+	.
+
+fibo-cae-ce-cae:InstalmentCall
+	a owl:Class ;
+	rdfs:label "instalment call"@en ;
+	rdfs:comment "QName: NONE:InstalmentCall" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Increase of share capital through additional payment on face value of partly-paid shares, with part payments in several instalments. SWIFT = PPMT"@en ;
+	.
+
+fibo-cae-ce-cae:InstructionMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventOrActionCommunication ;
+	rdfs:label "instruction message"@en ;
+	rdfs:comment "QName: NONE:InstructionMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A message which embodies some instruction."@en ;
+	skos:editorialNote "Review whether we need this."@en ;
+	.
+
+fibo-cae-ce-cae:InterestPayment
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:PaymentOrInterestPaymentAction ;
+	rdfs:label "interest payment"@en ;
+	rdfs:comment "QName: NONE:InterestPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Payment of Interest to the Holder. Further notes: Are there options on the Holder? Yes, you can opt to be paid in a certain currency. It is not always defined in the security terms. So if the Terms in the Security terms sheet gives you an option, there is a choice for the Holder at this point. Such choices would include: - Currency - Pay in Kind (\"Spinoff\" or PiK - see PiK corporate Action) Could be mandatory. If there were an option then the letter announcing it would require a response. This is usually stated in the message. Is there a message even if there is no option? Yes. Usually have to generate the events artificially as the Servicing organization. you can't rely on a feed or message coming in but because it is part of the security contract the above has to generate at the expected time, and arrange the payments. Q: That is the point at there was a choice you would expect to see a message, or end up still having to generate it but with the choices. A: The ones with Choices come as announcements and don't ave to be generated by the Service. Older definitin (re-scoped now: An Event in which a payment occurs. Anything can have a payment event. If a thing hits a pay date, whether it's voluntary or mandatory, that's a payment event. Divide into: Securities Cash Combination Payment or Distribution? Are these exclusive? Take an event that's always a combination of options, and an option is a combination of payouts. Generates transactions - determine what txns happen when a customer chooses that option. Distribution / delivery: generic concept Payment - implis cash distribution. So payment is specialization of distribution."@en ;
+	.
+
+fibo-cae-ce-cae:InterestPaymentAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:InterestPayment ;
+	rdfs:label "interest payment action"@en ;
+	rdfs:comment "QName: NONE:InterestPaymentAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Regular interest payment, only in cash, distributed to holders of an interest bearing asset. According to the terms of the issue, a bondholder may be able to elect the currency interest is paid in."@en ;
+	.
+
+fibo-cae-ce-cae:InterestPaymentInKind
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:InterestPaymentAction ;
+	rdfs:label "interest payment in kind"@en ;
+	rdfs:comment "QName: NONE:InterestPaymentInKind" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Interest payment, in any kind except cash, distributed to holders of an interest bearing asset. SWIFT = PINK"@en ;
+	.
+
+fibo-cae-ce-cae:InterestPaymentWithPrincipal
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:InterestPaymentAction ;
+	rdfs:label "interest payment with principal"@en ;
+	rdfs:comment "QName: NONE:InterestPaymentWithPrincipal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A payment of a portion of the principal of an interest bearing asset, in addition to the interest payment. SWIFT = PRII"@en ;
+	.
+
+fibo-cae-ce-cae:InterestRateAdjustment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:DebtSecurityAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.13 ;
+			owl:someValuesFrom fibo-sec-dbt-bnd:VariableCouponBond ;
+		]
+		;
+	rdfs:label "interest rate adjustment"@en ;
+	rdfs:comment "QName: NONE:InterestRateAdjustment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Scheduled change to the coupon rate for a floating or adjustable rate security."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The SWIFT definition as given defines the notification of the interest rate change, not the adjustment. Adjusted to describe the event. REVIEW: Is this really an action? Usually consider that it's expected. Given definition was for the announcement. SWIFT full definition \"Announcement of the current coupon rate for a floating or adjustable rate security.\""@en ;
+	.
+
+fibo-cae-ce-cae:InterestRateAdjustmentNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ExPostNotification ;
+	rdfs:label "interest rate adjustment notification"@en ;
+	rdfs:comment "QName: NONE:InterestRateAdjustmentNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Announcement of the current coupon rate for a floating or adjustable rate security."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Definition as given refers to this notification (message) rather than the event itself. This is done for completeness, and sent out as a Notification by the Issuer or the Issuer's Agent. SWIFT Full definition: \"Announcement of the current coupon rate for a floating or adjustable rate security.\""@en ;
+	.
+
+fibo-cae-ce-cae:IssuerCorporateAction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CorporateAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:announcedBy ;
+			owl:someValuesFrom fibo-cae-ce-cae:IssuerCorporateActionAnnouncer ;
+		]
+		;
+	rdfs:label "issuer corporate action"@en ;
+	rdfs:comment "QName: NONE:IssuerCorporateAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some corporate action initiated by the issuer of the Security. This is an action which is compulsory on the issuer of the security."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is most of the kinds of action generally thought of as "Corporate Actions". These may be mandaytory, voluntary, or mandatory with one or more choices fo rthe holder to make. This is the term for which it is mandatory on the issuer to notify this event to the marketplace and / or to holders of the security.'@en ;
+	.
+
+fibo-cae-ce-cae:IssuerCorporateActionAnnouncer
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionAnnouncer ;
+	rdfs:label "issuer corporate action announcer"@en ;
+	rdfs:comment "QName: NONE:IssuerCorporateActionAnnouncer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The announcer of an event which is also the issuer of the security that the event is about."@en ;
+	.
+
+fibo-cae-ce-cae:IssuerCorporateActionNotificationMessage
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:NotificationMessage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-msg:hasSubject ;
+			owl:someValuesFrom fibo-cae-ce-cae:IssuerCorporateAction ;
+		]
+		;
+	rdfs:label "issuer corporate action notification message"@en ;
+	rdfs:comment "QName: NONE:IssuerCorporateActionNotificationMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an action by the issuer of the security."@en ;
+	.
+
+fibo-cae-ce-cae:IssuerFormalOffer
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "issuer formal offer"@en ;
+	rdfs:comment "QName: NONE:IssuerFormalOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An action in which the issuer of the security makes a formal offer."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Encompasses Exchange Offer and Repurchase Offer. Note that there are also offers made by third parties. These do not come under this term."@en ;
+	.
+
+fibo-cae-ce-cae:IssuerFormalOfferNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateActionNotificationMessage ;
+	rdfs:label "issuer formal offer notification"@en ;
+	rdfs:comment "QName: NONE:IssuerFormalOfferNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of some formal offer by the issuer of the security."@en ;
+	.
+
+fibo-cae-ce-cae:LiquidationEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:InformationEvent ;
+	rdfs:label "liquidation event"@en ;
+	rdfs:comment "QName: NONE:LiquidationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Liquidating dividend/Liquidation consist of a distribution of cash, assets, or both. Debt may be paid in order of priority based on preferred claims to assets specified by the security. SWIFT = LIQU"@en ;
+	.
+
+fibo-cae-ce-cae:ListingStatusDelistingMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventOrActionCommunication ;
+	rdfs:label "listing status delisting message"@en ;
+	rdfs:comment "QName: NONE:ListingStatusDelistingMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Security is no longer able to comply with the listing requirements of a stock exchange and is removed from official board quotation."@en ;
+	.
+
+fibo-cae-ce-cae:ManagementAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "management action"@en ;
+	rdfs:comment "QName: NONE:ManagementAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An event relating to the management of a company or other concern."@en ;
+	.
+
+fibo-cae-ce-cae:MandatoryCashDividendEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CashDividendEvent ;
+	rdfs:label "mandatory cash dividend event"@en ;
+	rdfs:comment "QName: NONE:MandatoryCashDividendEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Cash dividend with no option."@en ;
+	.
+
+fibo-cae-ce-cae:MandatoryCashDividendNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CashDividendNotification ;
+	rdfs:label "mandatory cash dividend notification"@en ;
+	rdfs:comment "QName: NONE:MandatoryCashDividendNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:MandatoryCorporateAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "mandatory corporate action"@en ;
+	rdfs:comment "QName: NONE:MandatoryCorporateAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An event where there are no choice on the part of the Holder."@en ;
+	fibo-fnd-utl-av:explanatoryNote "for the purposes of clarity: Mandatory here means mandatory on the holder. Corporate Events as a whole are defined in terms of being mandatory on the part of the Issuer. In other words, Mandatory actions versus mandatory reactions. See Barron's: Dictionary of banking terms - no definition of Corporate Action."@en ;
+	.
+
+fibo-cae-ce-cae:MandatoryCorporateEventProcess
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CorporateEventProcess ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:hasStart ;
+			owl:someValuesFrom fibo-cae-ce-cae:MandatoryEventStart ;
+		]
+		;
+	rdfs:label "mandatory corporate event process"@en ;
+	rdfs:comment "QName: NONE:MandatoryCorporateEventProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Mandatory corporate event: Action requires an action by the shareholder Corporate action event initiated by the corporation. Participation by shareholders is mandatory (for those relating to shares)."@en ;
+	.
+
+fibo-cae-ce-cae:MandatoryEventEnd
+	a owl:Class ;
+	rdfs:label "mandatory event end"@en ;
+	rdfs:comment "QName: NONE:MandatoryEventEnd" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:MandatoryEventStart
+	a owl:Class ;
+	rdfs:label "mandatory event start"@en ;
+	rdfs:comment "QName: NONE:MandatoryEventStart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:MandatoryPutEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:MandatoryCorporateAction ,
+		fibo-cae-ce-cae:PutAction
+		;
+	rdfs:label "mandatory put event"@en ;
+	rdfs:comment "QName: NONE:MandatoryPutEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	owl:disjointWith fibo-cae-ce-cae:OptionalPut ;
+	fibo-fnd-utl-av:explanatoryNote "There is a Put Bond, which is a kind of option in the sense that in return for getting less yield it allows you to put it back to the issuer. This means Put is a voluntary event. Therefore Mandatory Put is nonsensical? discussion: Or is it? If you are the issuer (therefore the granter of the option) then the event is to the holder). Partly paid shre for example gives the issuer the right to call funds but also has the right to put. So put is not by definition ... someone can have the right to put something. Conclusion: these do not appear to make sense as terms. A put bond allows the holder to redeem the issue. So this is by definition a voluntary event. Conclusion: go back to Pershing and find out what this term meant. Also we don't even know what kind of security this event was intended to refer to. We assume it refers to Put bond. This is on the assumption that Options can't be defined as having corporate action."@en ;
+	.
+
+fibo-cae-ce-cae:MandatoryWithChoiceCorporateAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:MandatoryCorporateAction ;
+	rdfs:label "mandatory with choice corporate action"@en ;
+	rdfs:comment "QName: NONE:MandatoryWithChoiceCorporateAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An event which is going to happen but there are choices to be made by the Holder."@en ;
+	fibo-fnd-utl-av:explanatoryNote "There is usually some default, e.g. if you don't choose by the payment date there is some default e.g. the issue currency. Voluntary differ from this in that the Holder chooses whether to do anything or not."@en ;
+	.
+
+fibo-cae-ce-cae:MaturityExtension
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:BondAction ;
+	rdfs:label "maturity extension"@en ;
+	rdfs:comment "QName: NONE:MaturityExtension" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "As stipulated in a bond's Terms and Conditions, the issuer or the bondholder may prolong the maturity date of a bond. After extension, the security may differ from original issue (new rate or maturity date). May be subject to bondholder's approval."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This would ne notified in advance. Fits into the normal "Action" workflow. SWIFT = EXTM'@en ;
+	.
+
+fibo-cae-ce-cae:MaturityExtensionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "maturity extension notification"@en ;
+	rdfs:comment "QName: NONE:MaturityExtensionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an extension to the maturity date of a bond by the issuer, in line with existing terms and conditions."@en ;
+	fibo-fnd-utl-av:explanatoryNote "As stipulated in a bond's Terms and Conditions, the issuer or the bondholder may prolong the maturity date of a bond. After extension, the security may differ from original issue (new rate or maturity date). May be subject to bondholder's approval. Note that the definition given for this in SWIFT is really narrative. New definition drafted in its place. SWIFT Full Text \"As stipulated in a bond's Terms and Conditions, the issuer or the bondholder may prolong the maturity date of a bond. After extension, the security may differ from original issue (new rate or maturity date). May be subject to bondholder's approval.\""@en ;
+	.
+
+fibo-cae-ce-cae:Meeting
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ManagementAction ;
+	rdfs:label "meeting"@en ;
+	rdfs:comment "QName: NONE:Meeting" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A Management Event in which stakeholders meet one another either face to face or through some electronic or voice medium, in order to process some management activity (the Agenda)."@en ;
+	.
+
+fibo-cae-ce-cae:MeetingProcessEnd
+	a owl:Class ;
+	rdfs:label "meeting process end"@en ;
+	rdfs:comment "QName: NONE:MeetingProcessEnd" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:MeetingProcessStart
+	a owl:Class ;
+	rdfs:label "meeting process start"@en ;
+	rdfs:comment "QName: NONE:MeetingProcessStart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:NonIssuerCorporateActionAnnouncer
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionAnnouncer ;
+	rdfs:label "non issuer corporate action announcer"@en ;
+	rdfs:comment "QName: NONE:NonIssuerCorporateActionAnnouncer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The announcer of an event which is not the issuer of the security that the event is about."@en ;
+	.
+
+fibo-cae-ce-cae:NotificationEvent
+	a owl:Class ;
+	rdfs:label "notification event"@en ;
+	rdfs:comment "QName: NONE:NotificationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A notification to the shareholders that therre is a corporate action out there. This is distinct from the CA itself. not the same as Event Announcement. There are steps between when the announcement happens and the rest Announcement: at the level of sub custodians. then you gether the people who are affected by the event that's to come. Then you send the announcement - a notification to the holder, informing them of the options that are available to them. If it's mandatory these distinctions still happen, but there is no choice. So still announcement is made, then when it effects people you send out notificaiton and collect responses. \"EVENT\": two aspects: The event itself Events within the Corporat eAction, e.g. notification, deadline when a responses is due by, payment dates, Define as: lifecycle of the Corporate Action. Sometimes have to re-notify, there may be changes in the life oc the \"Corporate Event\". So the Corporate Event is a sequence of events."@en ;
+	.
+
+fibo-cae-ce-cae:NotificationMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventOrActionCommunication ;
+	rdfs:label "notification message"@en ;
+	rdfs:comment "QName: NONE:NotificationMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an event."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Some events have a preliminiary notification followed by a confirmation of that. For example MT564 would have a preliminary notification. MT564 is not exclusively messages sent by an issuer, it may also be sent by a third party. Relationship Facts: sent by Related term: SWIFT Corporate Action Notification: "The process of notifying of an upcoming corporate action. It provides corporate action details including the different options." (source for that term: SWIFT CAE analysis)'@en ;
+	.
+
+fibo-cae-ce-cae:OddLotOffer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:IssuerCorporateAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:availableResponse ;
+			owl:someValuesFrom fibo-cae-ce-cae:OddLotSale ;
+		]
+		;
+	rdfs:label "odd lot offer"@en ;
+	rdfs:comment "QName: NONE:OddLotOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Offer by issuer to allow holders of an odd lot of a security to order a commission-free transaction at market price, to sell the odd lot, or to buy an amount of shares which will bring the position to a round lot (board lot). SWIFT = ODLT"@en ;
+	.
+
+fibo-cae-ce-cae:OddLotOfferMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "odd lot offer message"@en ;
+	rdfs:comment "QName: NONE:OddLotOfferMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:OddLotSale
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionHolderResponse ;
+	rdfs:label "odd lot sale"@en ;
+	rdfs:comment "QName: NONE:OddLotSale" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Sale of odd-lot back to the issuing company."@en ;
+	.
+
+fibo-cae-ce-cae:OddLotSaleInstruction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:HolderResponseMessage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:conveys.2 ;
+			owl:someValuesFrom fibo-cae-ce-cae:OddLotSale ;
+		]
+		;
+	rdfs:label "odd lot sale instruction"@en ;
+	rdfs:comment "QName: NONE:OddLotSaleInstruction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of holder choice to sell odd-lot back to the issuing company."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is in response to the Issuer-initiated Corporate Action in which they make an Odd Lot Offer. SWIFT: Term:"Odd Lot Sale" Definition:"Sale of odd-lot back to the issuing company."'@en ;
+	.
+
+fibo-cae-ce-cae:OptionalCashDividendEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CashDividendEvent ;
+	rdfs:label "optional cash dividend event"@en ;
+	rdfs:comment "QName: NONE:OptionalCashDividendEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Cash dividend with currency options. This is a dividend payment where payment is mandatorily in the form of Cash. The choice is what currency the cash is to be received in."@en ;
+	.
+
+fibo-cae-ce-cae:OptionalCashDividendNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CashDividendNotification ;
+	rdfs:label "optional cash dividend notification"@en ;
+	rdfs:comment "QName: NONE:OptionalCashDividendNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:OptionalPut
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:PutAction ,
+		fibo-cae-ce-cae:VoluntaryCorporateAction
+		;
+	rdfs:label "optional put"@en ;
+	rdfs:comment "QName: NONE:OptionalPut" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:OrdinaryGeneralMeeting
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:Meeting ;
+	rdfs:label "ordinary general meeting"@en ;
+	rdfs:comment "QName: NONE:OrdinaryGeneralMeeting" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Ordinary General Meeting SWIFT = OMET"@en ;
+	.
+
+fibo-cae-ce-cae:OrganizationModificationEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateModificationEvent ;
+	rdfs:label "organization modification event"@en ;
+	rdfs:comment "QName: NONE:OrganizationModificationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:OrganizationNameChange
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:OrganizationModificationEvent ;
+	rdfs:label "organization name change"@en ;
+	rdfs:comment "QName: NONE:OrganizationNameChange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The issuing company changes it's name. Event shows the change from old name to new name and may involve surrendering physical shares with the old name to the registrar. SWIFT = NAME"@en ;
+	.
+
+fibo-cae-ce-cae:PartialCall
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CallAction ;
+	rdfs:label "partial call action"@en ;
+	rdfs:comment "QName: NONE:PartialCall" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:PartialDefeasanceAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:InformationAction ;
+	rdfs:label "partial defeasance action"@en ;
+	rdfs:comment "QName: NONE:PartialDefeasanceAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The setting aside by a borrower of cash or bonds sufficient to service the borrower's debt."@en ;
+	fibo-fnd-utl-av:explanatoryNote "From Free dictionary: Both the borrower's debt and the offsetting cash or bonds are removed from the balance sheet. In securities trading, where a clearing house becomes counterparty to each side of a trade, after the trade has been agreed. This is necessary to facilitate netting, and reduce counterparty risk exposure. The term has become popular recently, because of the growth of central counterparty clearing services in European cash equities markets. Origin: http://financial-dictionary.thefreedictionary.com/defeasance SWIFT: Term:PDEF; \"Partial Defeasance/Prefunding\" Definition:\"Issuer has money set aside to redeem a portion of an issue and the indenture states that the securities could be called earlier than the stated maturity.\""@en ;
+	.
+
+fibo-cae-ce-cae:PartialExerciseEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ExerciseAction ;
+	rdfs:label "partial exercise event"@en ;
+	rdfs:comment "QName: NONE:PartialExerciseEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:PaymentOrInterestPaymentAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "payment or interest payment action"@en ;
+	rdfs:comment "QName: NONE:PaymentOrInterestPaymentAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The payment of some mandatory payment as defined in the contractual terms of the security, such as interst payment of amortization. this is income generated to the HOlder because of the security contract."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is distinct from any other kind of distribution based on the Issuer deciding to do something;l in this case the OIssuer has no choice (these are payments defined in contractual terms) and if they do not do it,. this is a Default"@en ;
+	.
+
+fibo-cae-ce-cae:PayoutOptionTerms
+	a owl:Class ;
+	rdfs:label "payout option terms"@en ;
+	rdfs:comment "QName: NONE:PayoutOptionTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:PlaceOfIncorporationChange
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:OrganizationModificationEvent ;
+	rdfs:label "place of incorporation change"@en ;
+	rdfs:comment "QName: NONE:PlaceOfIncorporationChange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Changes in the state of incorporation for US companies and changes in the place of incorporation for foreign companies. Where shares need to be registered following the incorporation change, the holder(s) may have to elect the registrar. SWIFT = PLAC"@en ;
+	.
+
+fibo-cae-ce-cae:PostMergerSecuritiesExchange
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:IssuerCorporateAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:definesAdditional ;
+			owl:allValuesFrom fibo-fnd-txn-sup:NegotiableCash ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:exchangesFrom ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:exchangesInto ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		]
+		;
+	rdfs:label "post merger securities exchange"@en ;
+	rdfs:comment "QName: NONE:PostMergerSecuritiesExchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Mandatory or voluntary exchange of an outstanding securities as the result of two or more companies combining assets. Cash payments may accompany share exchange."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is an action as a result of the Merger, not the merger itself."@en ;
+	.
+
+fibo-cae-ce-cae:PostMergerSecuritiesExchangeNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateActionNotificationMessage ;
+	rdfs:label "post merger securities exchange notification"@en ;
+	rdfs:comment "QName: NONE:PostMergerSecuritiesExchangeNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of mandatory or voluntary exchange of outstanding securities as the result of two or more companies combining assets."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Cash payments may accompany share exchange. Note that the event to which this applies was labeled "Merger" in source material but refers to the exchange of securities following a merger, not the merger itself. SWIFT full definition "Mandatory or voluntary exchange of an outstanding securities as the result of two or more companies combining assets. Cash payments may accompany share exchange."'@en ;
+	.
+
+fibo-cae-ce-cae:PriorityIssue
+	a owl:Class ;
+	rdfs:label "priority issue"@en ;
+	rdfs:comment "QName: NONE:PriorityIssue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Form of open or public offer where priority is given to existing shareholders due to limited amount of securities available in the offer. Shareholders can buy a type of security during a short period of time."@en ;
+	.
+
+fibo-cae-ce-cae:PutAction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:ExerciseAction ,
+		fibo-cae-ce-cae:HolderInitiatedAction
+		;
+	rdfs:label "put action"@en ;
+	rdfs:comment "QName: NONE:PutAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The putting of some debt security back to its issuer by the holder"@en ;
+	fibo-fnd-utl-av:explanatoryNote "Note this is a holder action. There may be terms in the security giving the holder the ability to redeem early. If so, this is the event where that happens. Could apply to MTN as well as Bonds. We have defined MTN as a kind of Bond in this model. Review discussion: scope fo this: You could in theory put a share but no-one has come across this. Issuer may buy back shares at a given price but that's a different context - there's message for that. Makes an offer to repurchase shares. So therefore it is not possible in principle to have a call fo ra non debt instrument. In other circumstances e.g. compulsory acquisition in a takeover, is equivalent to this but it's a different term."@en ;
+	.
+
+fibo-cae-ce-cae:Redemption
+	a owl:Class ;
+	rdfs:label "redemption"@en ;
+	rdfs:comment "QName: NONE:Redemption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Repayment in full of a debt security, investment trust or a preferred stock issue, at stated maturity. SWIFT = REDM"@en ;
+	.
+
+fibo-cae-ce-cae:ReverseStockSplit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:AdviceOfAPossibleAction ,
+		fibo-cae-ce-cae:ShareAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.15 ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "reverse stock split"@en ;
+	rdfs:comment "QName: NONE:ReverseStockSplit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	owl:disjointWith fibo-cae-ce-cae:StockSplit ;
+	.
+
+fibo-cae-ce-cae:RightsDistribution
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:RightsIssue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:oversubscriptionAmount ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.16 ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "rights distribution"@en ;
+	rdfs:comment "QName: NONE:RightsDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The distribution of rights to shareholders, in proportion to their equity holding."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Does the Rights Distribution have to be proportion to the Shareholding? Sometimes this is offered at market prices, so all you are doing is offering shareholders the right to purchase. Conclusion: Not \"in proportion\" at all. REVISE: May also have Bonus Rights Issue, where you don' have a subscriptiojn price. This works like a rights issue but without a price attached to it. The rate of how many you can buy is definitely in proportion to your holding. The rate of distribution of the right is proportional to the holdings. Another difference: A Rights thing you have to pay for the additional shares if you choose to purchase them (exercise the right) whereas a Bonus Issue you do not pay, you get them outright for free. TWO PARTS: 1. Distribution of the rights in proportion to their holding 2. Exercise of the Rights. Hence RHDI v EXRI where EXRI is the exercising of the right to purchase the shares. The Rights that are distributed is a formal \"Rights\" instrument. This may have the sort of features we see in other rights instruments, such as restriction in when you can exercise it."@en ;
+	.
+
+fibo-cae-ce-cae:RightsDistributionNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:RightsIssueNotification ;
+	rdfs:label "rights distribution notification"@en ;
+	rdfs:comment "QName: NONE:RightsDistributionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of the distribution of rights to shareholders, in proportion to their equity holding."@en ;
+	.
+
+fibo-cae-ce-cae:RightsExerciseEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:HolderEvent ;
+	rdfs:label "rights exercise event"@en ;
+	rdfs:comment "QName: NONE:RightsExerciseEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Exercising the right to purchase the shares. Furhter Notes: This is an action on the part of the holder. SWIFT: Call/exercise on nil-paid securities/rights resulting from a rights distribution (RHDI) (To be used for the second event in case rights issue is dealt with in 2 events, first event being the RHDI)."@en ;
+	fibo-fnd-utl-av:explanatoryNote "There is a rights trading period overlaps with rights subscriptiuon period (you can trade the rights) Rights exercise period - expiry date. Some time after the expiry the new shares are distributed. This is the distribution."@en ;
+	.
+
+fibo-cae-ce-cae:RightsIssue
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CapitalizationIssue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:isDistributionOf ;
+			owl:someValuesFrom fibo-der-drc-raw:SubscriptionRight ;
+		]
+		;
+	rdfs:label "rights issue"@en ;
+	rdfs:comment "QName: NONE:RightsIssue" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some issue of rights to holders."@en ;
+	.
+
+fibo-cae-ce-cae:RightsIssueNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CapitalizationIssueNotification ;
+	rdfs:label "rights issue notification"@en ;
+	rdfs:comment "QName: NONE:RightsIssueNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of some issue of rights to holders."@en ;
+	.
+
+fibo-cae-ce-cae:ScripDividend
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistribution ;
+	rdfs:label "scrip dividend"@en ;
+	rdfs:comment "QName: NONE:ScripDividend" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Dividend paid in the form of scrip (temporary certificate) which represents the company's promise to pay a cash dividend. Occurs when earnings are sufficient but issuer wishes to conserve cash holdings. Shareholders are not offered a choice."@en ;
+	.
+
+fibo-cae-ce-cae:ScripDividendNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistributionNotification ;
+	rdfs:label "scrip dividend notification"@en ;
+	rdfs:comment "QName: NONE:ScripDividendNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:SecuritiesCombinationOrDetachment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:SecurityAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo ;
+			owl:onClass <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+			owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "securities combination or detachment"@en ;
+	rdfs:comment "QName: NONE:SecuritiesCombinationOrDetachment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An event in which a security is split into separate securities or separate seucrities are combined into one security. Includes splits, detachments, attachments and so on."@en ;
+	.
+
+fibo-cae-ce-cae:SecuritiesDisbursementResponseMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DisbursementResponseMessage ;
+	rdfs:label "securities disbursement response message"@en ;
+	rdfs:comment "QName: NONE:SecuritiesDisbursementResponseMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of response opting to take the securities offered."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'SWIFT: Term:"Securities Option" Definition:"Distribution of securities to holders."'@en ;
+	.
+
+fibo-cae-ce-cae:SecurityAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "security action"@en ;
+	rdfs:comment "QName: NONE:SecurityAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some action taken with respect to some Security, by the Issuer of that security. THIS IS REDUNDANT"@en ;
+	.
+
+fibo-cae-ce-cae:SecurityDeliveryResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DisbursementResponse ;
+	rdfs:label "security delivery response"@en ;
+	rdfs:comment "QName: NONE:SecurityDeliveryResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Response is to take the securities"@en ;
+	fibo-fnd-utl-av:explanatoryNote 'SWIFT: "Distribution of securities to holders."'@en ;
+	.
+
+fibo-cae-ce-cae:SecurityModificationEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateModificationEvent ;
+	rdfs:label "security modification event"@en ;
+	rdfs:comment "QName: NONE:SecurityModificationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ShareAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:SecurityAction ;
+	rdfs:label "share action"@en ;
+	rdfs:comment "QName: NONE:ShareAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some action relating to equity shares. Add: relationship to Share"@en ;
+	.
+
+fibo-cae-ce-cae:ShareBuybackOffer
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerFormalOffer ;
+	rdfs:label "share buyback offer"@en ;
+	rdfs:comment "QName: NONE:ShareBuybackOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Issuer bid; Reduction of circulation shares; Reverse Rights. Offer by Issuing company to existing shareholders to repurchase the company's own shares or other securities convertible into shares."@en ;
+	.
+
+fibo-cae-ce-cae:ShareBuybackOfferNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerFormalOfferNotification ;
+	rdfs:label "share buyback offer notification"@en ;
+	rdfs:comment "QName: NONE:ShareBuybackOfferNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an offer by the issuing company to existing shareholders to repurchase the company's own shares or other securities convertible into shares."@en ;
+	fibo-fnd-utl-av:explanatoryNote "SWIFT extra text, presumably synonyms: \"Issuer bid; Reduction of circulation shares; Reverse Rights.\" Scope: Shares only? The definition implies Shares but can this apply to Debt security. Issuer of debt securities could repurchase. In the case of Debt repurchase you would purchase the debt and then cancel the debt. Also RePo market - would this Notification be used and this action apply? No. SWIFT definition full text: \"Issuer bid; Reduction of circulation shares; Reverse Rights. Offer by Issuing company to existing shareholders to repurchase the company's own shares or other securities convertible into shares.\""@en ;
+	.
+
+fibo-cae-ce-cae:ShareValueChangeAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "share value change action"@en ;
+	rdfs:comment "QName: NONE:ShareValueChangeAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Event in which there is some change to the value of Shares."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Added to accommodate events like decrease in value. Definition there refers explicitly to Shares. Identify whether applicable to other types of instrument (I can't think of any)."@en ;
+	.
+
+fibo-cae-ce-cae:ShareValueChangeNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateActionNotificationMessage ;
+	rdfs:label "share value change notification"@en ;
+	rdfs:comment "QName: NONE:ShareValueChangeNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of a change in the face value of a share."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These are styled as a kind of Action not simply an Event, since this is something that the issuer carries out."@en ;
+	.
+
+fibo-cae-ce-cae:ShareValueDecreaseAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ShareValueChangeAction ;
+	rdfs:label "share value decrease action"@en ;
+	rdfs:comment "QName: NONE:ShareValueDecreaseAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Reduction of the share capital and face value of a single share. The number of the circulating shares remains unchanged. May include a capital pay-out to shareholder."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is a type of Action. Not the same as the resulting change of value from a stock split or similar. Here we have the change of the par value."@en ;
+	.
+
+fibo-cae-ce-cae:ShareValueDecreaseNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ShareValueChangeNotification ;
+	rdfs:label "share value decrease notification"@en ;
+	rdfs:comment "QName: NONE:ShareValueDecreaseNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of a reduction of the share capital and face value of a single share."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'The number of the circulating shares remains unchanged. May include a capital pay-out to shareholder. SWIFT full text: "Reduction of the share capital and face value of a single share. The number of the circulating shares remains unchanged. May include a capital pay-out to shareholder."'@en ;
+	.
+
+fibo-cae-ce-cae:ShareValueIncreaseAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ShareValueChangeAction ;
+	rdfs:label "share value increase action"@en ;
+	rdfs:comment "QName: NONE:ShareValueIncreaseAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Increase of the share capital. The face value of the single share is changed without modification of the number of shares in circulation. May include a capital payout to shareholder."@en ;
+	.
+
+fibo-cae-ce-cae:ShareValueIncreaseNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ShareValueChangeNotification ;
+	rdfs:label "share value increase notification"@en ;
+	rdfs:comment "QName: NONE:ShareValueIncreaseNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an increase of the share capital. The face value of the single share is changed without modification of the number of shares in circulation."@en ;
+	fibo-fnd-utl-av:explanatoryNote '''May include a capital payout to shareholder. 
+Further Notes:SWIFT Full Text: "Increase of the share capital. The face value of the single share is changed without modification of the number of shares in circulation. May include a capital payout to shareholder."'''@en ;
+	.
+
+fibo-cae-ce-cae:SharesDistributionEvent
+	a owl:Class ;
+	rdfs:label "shares distribution event"@en ;
+	rdfs:comment "QName: NONE:SharesDistributionEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The distribution of shares in response to the exercise of some rights."@en ;
+	skos:editorialNote "not in CAE lists. This would not involve any further announcements."@en ;
+	.
+
+fibo-cae-ce-cae:SharesPremiumDividendPayment
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistribution ;
+	rdfs:label "shares premium dividend payment"@en ;
+	rdfs:comment "QName: NONE:SharesPremiumDividendPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "This corporate event pays shareholders an amount in cash issued from the shares premium reserve. It is similar to a dividend but with different tax implications. SWIFT = SHPR"@en ;
+	.
+
+fibo-cae-ce-cae:SharesPremiumDividendPaymentNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistributionNotification ;
+	rdfs:label "shares premium dividend payment notification"@en ;
+	rdfs:comment "QName: NONE:SharesPremiumDividendPaymentNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:SpinOff
+	a owl:Class ;
+	rdfs:label "spin off"@en ;
+	rdfs:comment "QName: NONE:SpinOff" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Demerger; Distribution; Unbundling. A distribution of subsidiary stock to the shareholders of the parent company without a surrender of shares. Spin-off represents a form of divestiture resulting in an independent company."@en ;
+	.
+
+fibo-cae-ce-cae:StockDividend
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistribution ;
+	rdfs:label "stock dividend"@en ;
+	rdfs:comment "QName: NONE:StockDividend" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Dividend paid to shareholders in the form of shares of stock in the issuing company or in another company. Shareholder must take stock and is not offered a choice in the form of distribution."@en ;
+	.
+
+fibo-cae-ce-cae:StockDividendNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:DividendDistributionNotification ;
+	rdfs:label "stock dividend notification"@en ;
+	rdfs:comment "QName: NONE:StockDividendNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:StockSplit
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:AdviceOfAPossibleAction ,
+		fibo-cae-ce-cae:ShareAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.17 ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "stock split"@en ;
+	rdfs:comment "QName: NONE:StockSplit" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "The increase in a company's number of outstanding shares of stock without any change in the shareholder's equity or the aggregate market value at the time of the split."@en ;
+	fibo-fnd-utl-av:explanatoryNote "SWIFT: Change in nominal value; Subdivision."@en ;
+	.
+
+fibo-cae-ce-cae:TakeNoActionNotificationMessage
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:HolderResponseMessage ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:conveys.2 ;
+			owl:someValuesFrom fibo-cae-ce-cae:TakeNoActionResponse ;
+		]
+		;
+	rdfs:label "take no action notification message"@en ;
+	rdfs:comment "QName: NONE:TakeNoActionNotificationMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition 'Notification of a Take No Action response. SWIFT: Term: NOAC Definition: "Take no action"'@en ;
+	.
+
+fibo-cae-ce-cae:TakeNoActionResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionHolderResponse ;
+	rdfs:label "take no action response"@en ;
+	rdfs:comment "QName: NONE:TakeNoActionResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition 'Take No Action. SWIFT: Term: NOAC Definition: "Take no action"'@en ;
+	.
+
+fibo-cae-ce-cae:TaxReclaimActivity
+	a owl:Class ;
+	rdfs:label "tax reclaim activity"@en ;
+	rdfs:comment "QName: NONE:TaxReclaimActivity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "We dont' have detailed information on what kinds of activities there are, but there may be a broad range of these. For instance, may be giving the issuer's location, or the rules for tax reclaims. Different rules exist. May set the rules on each action. For instance, It versus Fr, different rules. The CA notificaiton may be setting out the rules on each tax reclaim. Example: Aus: Issuer may make declaration to tax department, that securities are widely issued, this has some effect on withholding etc. Countries may have standing rules fo rreclaims, but may be special rules at an issue action level for large issue action. this would go out as a message (notification) using this message code. Similar to VAT in Canada - as an individual you pay VAT and reclaim it when you leave the country. Fill out a form etc. Then they send the VAT back. Conclusions: A general activity of Tax Reclaim - not formally modeled, just iterated here; notification which is the SWIFT message notoification type."@en ;
+	.
+
+fibo-cae-ce-cae:TaxReclaimActivityMessage
+	a owl:Class ;
+	rdfs:label "tax reclaim activity message"@en ;
+	rdfs:comment "QName: NONE:TaxReclaimActivityMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition 'Message about some Tax Reclaim activity. SWIFT:"Event related to tax reclaim activities."'@en ;
+	.
+
+fibo-cae-ce-cae:TenderOffer
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:ThirdPartyCorporateAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:relatesTo.18 ;
+			owl:someValuesFrom fibo-sec-eq-eq:Share ;
+		]
+		;
+	rdfs:label "tender offer"@en ;
+	rdfs:comment "QName: NONE:TenderOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Offer made to shareholders, normally by a third party, requesting them to sell (tender) their shares for a specified price usually at a premium over prevailing market prices. Generally, the objective of a tender is to take control of the target company."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The announcer is not the issuer of the shares. The party to which the offer is made need not be the holder. Assumption: someone else trying to take over ythe company."@en ;
+	.
+
+fibo-cae-ce-cae:TenderOfferNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ThirdPartyFormalOfferNotification ;
+	rdfs:label "tender offer notification"@en ;
+	rdfs:comment "QName: NONE:TenderOfferNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of an offer made to shareholders, normally by a third party, requesting them to sell (tender) their shares for a specified price usually at a premium over prevailing market prices."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'Generally, the objective of a tender is to take control of the target company. SWIFT whole text: "Offer made to shareholders, normally by a third party, requesting them to sell (tender) their shares for a specified price usually at a premium over prevailing market prices. Generally, the objective of a tender is to take control of the target company."'@en ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyActionAnnouncement
+	a owl:Class ;
+	rdfs:label "third party action announcement"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyActionAnnouncement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyActionChoiceExists
+	a owl:Class ;
+	rdfs:label "third party action choice exists"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyActionChoiceExists" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyActionChoiceOffer
+	a owl:Class ;
+	rdfs:label "third party action choice offer"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyActionChoiceOffer" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyActionHolderResponseToChoice
+	a owl:Class ;
+	rdfs:label "third party action holder response to choice"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyActionHolderResponseToChoice" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyActionNotification
+	a owl:Class ;
+	rdfs:label "third party action notification"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyActionNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyCorporateAction
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CorporateAction ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:announcedBy.1 ;
+			owl:someValuesFrom fibo-cae-ce-cae:NonIssuerCorporateActionAnnouncer ;
+		]
+		;
+	rdfs:label "third party corporate action"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyCorporateAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some action initiated by some third party to the security, i.e. not the issuer."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'For example an offer made in the context of a takeover bid. Quesytion: if a third party makes such an action, doe sthe issuer also have to send out the notification? If the company is listed ,then the issuer is also obligated to notify holders that this thing is taking place. If both companies are listed, both have to send out a notificaiton to the market that they are doing this action. So the target company has to notify the market. sothere is a separate message which is the target company notifying its holders that a Tender Offer etc. is taking place. Is this in the ISO 15022 list? Are they both done with the same message? Example: Company B makes a bid in private to Company A. Discussion may go on in private. At some point you have to legally make it clear. So then Company A says "we are being approached by company B" and Company B has to put out a message saying "We are going to try and take over Company B". Are they the same message? The "Tender Offer" message type is rich enough that both things can be conveyed. So when we try to semantically distinguish the message from the action? The party making the bid completes different fields in the message, to those filled in by the target company. This then marks out the semantics of "This is a bid offer and I am the 3rd party" or "I am reporting a bid offer". Semantically: There is an event and there is a message describing the event. TElling the market about something happening to a company can be something your company is doing, or something causing a change in circumstances. Either way, the issuer of the affected securities has to identify and notify that there is something which might be affecting the price of their securities. May be internal or external things, and either way the issuer has to notify the market.'@en ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyCorporateActionEnd
+	a owl:Class ;
+	rdfs:label "third party corporate action end"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyCorporateActionEnd" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyCorporateActionIssuerMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ThirdPartyCorporateActionNotificationMessage ;
+	rdfs:label "third party corporate action issuer message"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyCorporateActionIssuerMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Message from security issuer, notifying holders of a third party action."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These actions are initiated by some party other than the issuer. The issuer would also send out a message to holders, in order that they are formally notified of the action. Note also that the CAE message types may be the same in both cases."@en ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyCorporateActionNotificationMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:label "third party corporate action notification message"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyCorporateActionNotificationMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of a third party corporate action."@en ;
+	fibo-fnd-utl-av:explanatoryNote "There will be two lots of notification message for third party action."@en ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyCorporateActionOriginatorMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ThirdPartyCorporateActionNotificationMessage ;
+	rdfs:label "third party corporate action originator message"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyCorporateActionOriginatorMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Message from a third party, notifying holders of a third party action."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These actions are initiated by some party other than the issuer. As well as this message, the issuer would also send out a message to holders, in order that they are formally notified of the action. Note also that the CAE message types may be the same in both cases."@en ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyCorporateActionStart
+	a owl:Class ;
+	rdfs:label "third party corporate action start"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyCorporateActionStart" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:ThirdPartyFormalOfferNotification
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:ThirdPartyCorporateActionNotificationMessage ;
+	rdfs:label "third party formal offer notification"@en ;
+	rdfs:comment "QName: NONE:ThirdPartyFormalOfferNotification" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Notification of some third party offer, to the shareholders."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This message may be circulated by the third party or by the issuer REVIEW: to be confirmed."@en ;
+	.
+
+fibo-cae-ce-cae:TradingStatusActiveMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:TradingStatusMessage ;
+	rdfs:label "trading status active message"@en ;
+	rdfs:comment "QName: NONE:TradingStatusActiveMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Trading in security has commenced or security has been re-activated after a supsension in trading."@en ;
+	.
+
+fibo-cae-ce-cae:TradingStatusMessage
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-cae-ce-cae:CorporateEventOrActionCommunication ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-cae-ce-cae:isAbout ;
+			owl:someValuesFrom fibo-md-temx-trs:SecurityTradingStatus ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-inf:isAbout ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		]
+		;
+	rdfs:label "trading status message"@en ;
+	rdfs:comment "QName: NONE:TradingStatusMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "A message about trading status."@en ;
+	fibo-fnd-utl-av:explanatoryNote "There are a number of such messages. Events v Status: See e.g. Active: this relates to one state OR two transitions (transition from pre-issuance to Trading, or from Suspended to Trading)."@en ;
+	.
+
+fibo-cae-ce-cae:TradingStatusSuspendedMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:TradingStatusMessage ;
+	rdfs:label "trading status suspended message"@en ;
+	rdfs:comment "QName: NONE:TradingStatusSuspendedMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Trading in the security has been suspended."@en ;
+	.
+
+fibo-cae-ce-cae:VoluntaryCorporateAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:label "voluntary corporate action"@en ;
+	rdfs:comment "QName: NONE:VoluntaryCorporateAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An event with some choice on the part of the Holder."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Voluntary on the part of the Holder. This refers to voluntary types of actions (not necessarily for dividends). Rights take-up is an example."@en ;
+	.
+
+fibo-cae-ce-cae:VoluntaryCorporateEventProcess
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateEventProcess ;
+	rdfs:label "voluntary corporate event process"@en ;
+	rdfs:comment "QName: NONE:VoluntaryCorporateEventProcess" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:VoluntaryDistribution
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:SecurityAction ;
+	rdfs:label "voluntary distribution"@en ;
+	rdfs:comment "QName: NONE:VoluntaryDistribution" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "An action in which funds are distributed voluntarily by the issuer of a security."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is distinct from expected and contractually obligation distributions such as payments of interest or repayments of debt capital. 29 June notes: Have Income Services these then divide into: Interest income Dividend income If income includes both interest and dividend, this may be artificial and not useful - not how the business uses the term. If we include Capital Gains Distribiution? Older notes Pay date: examples - splits and so on. Also Calls. (Options calls; Debt calls have different meaning) Applies to either. Call is "to you" where distributing is "from you".'@en ;
+	.
+
+fibo-cae-ce-cae:VoteAgainstManagement
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponse ;
+	rdfs:label "vote against management"@en ;
+	rdfs:comment "QName: NONE:VoteAgainstManagement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Vote against management."@en ;
+	skos:editorialNote "It is not clear how this is distinct from Consent Denied. It is not a response to a Consent message, but it is a voting response of some sort. Possibly a specialization of Consent Denied? Keep it distinct for now. Consent Denied is not necessarily a vote against management, since management may have one or another view about the proposal that is on the table, that is defined in the Consent message. SWIFT: AMGT"@en ;
+	.
+
+fibo-cae-ce-cae:VoteAgainstManagementMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponseMessage ;
+	rdfs:label "vote against management message"@en ;
+	rdfs:comment "QName: NONE:VoteAgainstManagementMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:VotingNoAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponse ;
+	rdfs:label "voting no action"@en ;
+	rdfs:comment "QName: NONE:VotingNoAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Option for the account owner not to take part in the event. SWIFT: NOAC"@en ;
+	.
+
+fibo-cae-ce-cae:VotingNoActionMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:VotingResponseMessage ;
+	rdfs:label "voting no action message"@en ;
+	rdfs:comment "QName: NONE:VotingNoActionMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:VotingResponse
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:CorporateActionHolderResponse ;
+	rdfs:label "voting response"@en ;
+	rdfs:comment "QName: NONE:VotingResponse" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Some response to a voting activity."@en ;
+	.
+
+fibo-cae-ce-cae:VotingResponseMessage
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:HolderResponseMessage ;
+	rdfs:label "voting response message"@en ;
+	rdfs:comment "QName: NONE:VotingResponseMessage" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:WarrantExerciseAction
+	a owl:Class ;
+	rdfs:subClassOf fibo-cae-ce-cae:SecurityAction ;
+	rdfs:label "warrant exercise action"@en ;
+	rdfs:comment "QName: NONE:WarrantExerciseAction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition "Option offered to holders to buy (call warrant) or to sell (put warrant) a specific amount of stock, cash, or commodity, at a predetermined price, during a predetermined period of time (which usually corresponds to the life of the issue). Fiurther Notes: Note this is the issuer offering the holders the opportunity to do this exercise, it is not the exercise itself - misnamed in SWIFT. SWIFT = EXWA"@en ;
+	.
+
+fibo-cae-ce-cae:WorthlessSecurityBookingOut
+	a owl:Class ;
+	rdfs:label "worthless security booking out"@en ;
+	rdfs:comment "QName: NONE:WorthlessSecurityBookingOut" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	skos:definition 'Booking out of some worthless security by the Issuer. SWIFT:"Booking out of valueless securities."'@en ;
+	.
+
+fibo-cae-ce-cae:announcedBy
+	a owl:ObjectProperty ;
+	rdfs:label "announced by"@en ;
+	rdfs:comment "QName: NONE:announcedBy" ;
+	rdfs:domain fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:IssuerCorporateActionAnnouncer ;
+	.
+
+fibo-cae-ce-cae:announcedBy.1
+	a owl:ObjectProperty ;
+	rdfs:label "announced by"@en ;
+	rdfs:comment "QName: NONE:announcedBy.1" ;
+	rdfs:domain fibo-cae-ce-cae:ThirdPartyCorporateAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:NonIssuerCorporateActionAnnouncer ;
+	.
+
+fibo-cae-ce-cae:availableChoices
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-cae-ce-cae:availableResponse ;
+	rdfs:label "available choices"@en ;
+	rdfs:comment "QName: NONE:availableChoices" ;
+	rdfs:domain fibo-cae-ce-cae:ExerciseExchangeOption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:DisbursementResponse ;
+	.
+
+fibo-cae-ce-cae:availableResponse
+	a owl:ObjectProperty ;
+	rdfs:label "available response"@en ;
+	rdfs:comment "QName: NONE:availableResponse" ;
+	rdfs:domain fibo-cae-ce-cae:CorporateAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:CorporateActionHolderResponse ;
+	.
+
+fibo-cae-ce-cae:communicatedBy
+	a owl:ObjectProperty ;
+	rdfs:label "communicated by"@en ;
+	rdfs:comment "QName: NONE:communicatedBy" ;
+	rdfs:domain fibo-cae-ce-cae:EventNotification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:IssuerCorporateActionNotificationMessage ;
+	.
+
+fibo-cae-ce-cae:conversionActionAvailableResponseTakeNoActionResponse
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-cae-ce-cae:availableResponse ;
+	rdfs:label "conversion action available response take no action response"@en ;
+	rdfs:comment "QName: NONE:conversionActionAvailableResponseTakeNoActionResponse" ;
+	rdfs:domain fibo-cae-ce-cae:ConversionAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:TakeNoActionResponse ;
+	.
+
+fibo-cae-ce-cae:conveys
+	a owl:ObjectProperty ;
+	rdfs:label "conveys"@en ;
+	rdfs:comment "QName: NONE:conveys" ;
+	rdfs:domain fibo-cae-ce-cae:DisbursementResponseMessage ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:DisbursementResponse ;
+	.
+
+fibo-cae-ce-cae:conveys.1
+	a owl:ObjectProperty ;
+	rdfs:label "conveys"@en ;
+	rdfs:comment "QName: NONE:conveys.1" ;
+	rdfs:domain fibo-cae-ce-cae:HolderInitiatedInstruction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:HolderInitiatedAction ;
+	.
+
+fibo-cae-ce-cae:conveys.2
+	a owl:ObjectProperty ;
+	rdfs:label "conveys"@en ;
+	rdfs:comment "QName: NONE:conveys.2" ;
+	rdfs:domain fibo-cae-ce-cae:HolderResponseMessage ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:CorporateActionHolderResponse ;
+	.
+
+fibo-cae-ce-cae:definesAdditional
+	a owl:ObjectProperty ;
+	rdfs:label "defines additional"@en ;
+	rdfs:comment "QName: NONE:definesAdditional" ;
+	rdfs:domain fibo-cae-ce-cae:PostMergerSecuritiesExchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-fnd-txn-sup:NegotiableCash ;
+	.
+
+fibo-cae-ce-cae:effectiveDate
+	a owl:ObjectProperty ;
+	rdfs:label "effective date"@en ;
+	rdfs:comment "QName: NONE:effectiveDate" ;
+	rdfs:domain fibo-cae-ce-cae:InformationAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	.
+
+fibo-cae-ce-cae:exchangesFrom
+	a owl:ObjectProperty ;
+	rdfs:label "exchanges from"@en ;
+	rdfs:comment "QName: NONE:exchangesFrom" ;
+	rdfs:domain fibo-cae-ce-cae:PostMergerSecuritiesExchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	.
+
+fibo-cae-ce-cae:exchangesInto
+	a owl:ObjectProperty ;
+	rdfs:label "exchanges into"@en ;
+	rdfs:comment "QName: NONE:exchangesInto" ;
+	rdfs:domain fibo-cae-ce-cae:PostMergerSecuritiesExchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	.
+
+fibo-cae-ce-cae:flow
+	a owl:ObjectProperty ;
+	rdfs:label "flow"@en ;
+	rdfs:comment "QName: NONE:flow" ;
+	rdfs:domain fibo-cae-ce-cae:HolderInitatedActionStart ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:HolderInitiatedActionInitiation ;
+	.
+
+fibo-cae-ce-cae:givesRiseTo
+	a owl:ObjectProperty ;
+	rdfs:label "gives rise to"@en ;
+	rdfs:comment "QName: NONE:givesRiseTo" ;
+	rdfs:domain fibo-cae-ce-cae:HolderResponseToChoice ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:HolderResponseMessage ;
+	.
+
+fibo-cae-ce-cae:hasSomeRoleIn
+	a owl:ObjectProperty ;
+	rdfs:label "has some role in"@en ;
+	rdfs:comment "QName: NONE:hasSomeRoleIn" ;
+	rdfs:domain fibo-cae-ce-cae:FinancialSecuritiesActor ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:CorporateAction ;
+	.
+
+fibo-cae-ce-cae:hasStart
+	a owl:ObjectProperty ;
+	rdfs:label "has start"@en ;
+	rdfs:comment "QName: NONE:hasStart" ;
+	rdfs:domain fibo-cae-ce-cae:MandatoryCorporateEventProcess ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-cae-ce-cae:MandatoryEventStart ;
+	.
+
+fibo-cae-ce-cae:holderHasChoices
+	a owl:DatatypeProperty ;
+	rdfs:label "holder has choices"@en ;
+	rdfs:comment "QName: NONE:holderHasChoices" ;
+	rdfs:domain fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-cae-ce-cae:isAbout
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-msg:hasSubject ;
+	rdfs:label "is about"@en ;
+	rdfs:comment "QName: NONE:isAbout" ;
+	rdfs:domain fibo-cae-ce-cae:TradingStatusMessage ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-md-temx-trs:SecurityTradingStatus ;
+	.
+
+fibo-cae-ce-cae:isConversionFrom
+	a owl:ObjectProperty ;
+	rdfs:label "is conversion from"@en ;
+	rdfs:comment "QName: NONE:isConversionFrom" ;
+	rdfs:domain fibo-cae-ce-cae:ConversionAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	.
+
+fibo-cae-ce-cae:isConversionTo
+	a owl:ObjectProperty ;
+	rdfs:label "is conversion to"@en ;
+	rdfs:comment "QName: NONE:isConversionTo" ;
+	rdfs:domain fibo-cae-ce-cae:ConversionAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	.
+
+fibo-cae-ce-cae:isDistributionOf
+	a owl:ObjectProperty ;
+	rdfs:label "is distribution of"@en ;
+	rdfs:comment "QName: NONE:isDistributionOf" ;
+	rdfs:domain fibo-cae-ce-cae:RightsIssue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-der-drc-raw:SubscriptionRight ;
+	.
+
+fibo-cae-ce-cae:isIssueOf
+	a owl:ObjectProperty ;
+	rdfs:label "is issue of"@en ;
+	rdfs:comment "QName: NONE:isIssueOf" ;
+	rdfs:domain fibo-cae-ce-cae:BonusIssue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	.
+
+fibo-cae-ce-cae:mandatory
+	a owl:DatatypeProperty ;
+	rdfs:label "mandatory"@en ;
+	rdfs:comment "QName: NONE:mandatory" ;
+	rdfs:domain fibo-cae-ce-cae:BonusRightsIssue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-cae-ce-cae:mandatory.1
+	a owl:DatatypeProperty ;
+	rdfs:label "mandatory"@en ;
+	rdfs:comment "QName: NONE:mandatory.1" ;
+	rdfs:domain fibo-cae-ce-cae:IssuerCorporateAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the action is mandatory on the Holder."@en ;
+	.
+
+fibo-cae-ce-cae:mandatory.2
+	a owl:DatatypeProperty ;
+	rdfs:label "mandatory"@en ;
+	rdfs:comment "QName: NONE:mandatory.2" ;
+	rdfs:domain fibo-cae-ce-cae:MandatoryCashDividendEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'Whether the action is mandatory on the Holder. This is "yes" i.e. it is a mandatory event.'@en ;
+	.
+
+fibo-cae-ce-cae:mandatory.3
+	a owl:DatatypeProperty ;
+	rdfs:label "mandatory"@en ;
+	rdfs:comment "QName: NONE:mandatory.3" ;
+	rdfs:domain fibo-cae-ce-cae:OptionalCashDividendEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition 'Whether the action is mandatory on the Holder. This is "no" i.e. it is a voluntary event.'@en ;
+	.
+
+fibo-cae-ce-cae:oversubscriptionAmount
+	a owl:ObjectProperty ;
+	rdfs:label "oversubscription amount"@en ;
+	rdfs:comment "QName: NONE:oversubscriptionAmount" ;
+	rdfs:domain fibo-cae-ce-cae:RightsDistribution ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The amount of additional rights that may be purchased by the holder over and above the initial allocation. Further notes: In addition to a Subscription Price (see the Price term in the Subscription rights term), there is an additional privilege extended to the holders, to subscribe to additional shares. This also is in a certain proportion. This is to catch if not enough rights were subscribed, you may be left with some left over. These can then be given to the over-subscribers. Additional terms: if this exists there is a ratio for this as well. Notes Some people may pass up the right, and another person may pick this up through over-subscription. Therefore there is no oversubscription on a Bonus issue because people are getting it for free."@en ;
+	.
+
+fibo-cae-ce-cae:relatesTo
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo" ;
+	rdfs:domain fibo-cae-ce-cae:SecuritiesCombinationOrDetachment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	.
+
+fibo-cae-ce-cae:relatesTo.10
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.10" ;
+	rdfs:domain fibo-cae-ce-cae:DebtRedenomination ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/TradableDebtInstrument> ;
+	.
+
+fibo-cae-ce-cae:relatesTo.11
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.11" ;
+	rdfs:domain fibo-cae-ce-cae:EventAnnouncement.1 ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	.
+
+fibo-cae-ce-cae:relatesTo.12
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.12" ;
+	rdfs:domain fibo-cae-ce-cae:ExchangeOffer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	.
+
+fibo-cae-ce-cae:relatesTo.13
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.13" ;
+	rdfs:domain fibo-cae-ce-cae:InterestRateAdjustment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-dbt-bnd:VariableCouponBond ;
+	.
+
+fibo-cae-ce-cae:relatesTo.15
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.15" ;
+	rdfs:domain fibo-cae-ce-cae:ReverseStockSplit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	.
+
+fibo-cae-ce-cae:relatesTo.16
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.16" ;
+	rdfs:domain fibo-cae-ce-cae:RightsDistribution ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	skos:definition "The Rights Distribution relates to Share."@en ;
+	skos:editorialNote "REVIEW: Share or Publicly Traded Share?"@en ;
+	.
+
+fibo-cae-ce-cae:relatesTo.17
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.17" ;
+	rdfs:domain fibo-cae-ce-cae:StockSplit ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	.
+
+fibo-cae-ce-cae:relatesTo.18
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.18" ;
+	rdfs:domain fibo-cae-ce-cae:TenderOffer ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	.
+
+fibo-cae-ce-cae:relatesTo.2
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.2" ;
+	rdfs:domain fibo-cae-ce-cae:BondDefaultEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-dbt-bnd:Bond ;
+	.
+
+fibo-cae-ce-cae:relatesTo.3
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.3" ;
+	rdfs:domain fibo-cae-ce-cae:BondPutRedemption ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-dbt-bnd:Bond ;
+	.
+
+fibo-cae-ce-cae:relatesTo.4
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.4" ;
+	rdfs:domain fibo-cae-ce-cae:BonusIssue ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	.
+
+fibo-cae-ce-cae:relatesTo.5
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.5" ;
+	rdfs:domain fibo-cae-ce-cae:ChangeInDetailsNotification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			<https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security>
+			fibo-be-le-cb:StockCorporation
+		) ;
+	] ;
+	.
+
+fibo-cae-ce-cae:relatesTo.6
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.6" ;
+	rdfs:domain fibo-cae-ce-cae:ChangeOfSecurityTradingStatusEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-md-temx-trs:SecurityTradingStatus ;
+	.
+
+fibo-cae-ce-cae:relatesTo.7
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.7" ;
+	rdfs:domain fibo-cae-ce-cae:ConsentSolicitation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-eq-eq:Share ;
+	.
+
+fibo-cae-ce-cae:relatesTo.8
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.8" ;
+	rdfs:domain fibo-cae-ce-cae:CorporateAction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-be-le-lp:LegalEntity ;
+	skos:definition "The business entity to which the corporate event relates. It is from this that the securities affected are determined."@en ;
+	.
+
+fibo-cae-ce-cae:relatesTo.9
+	a owl:ObjectProperty ;
+	rdfs:label "relates to"@en ;
+	rdfs:comment "QName: NONE:relatesTo.9" ;
+	rdfs:domain fibo-cae-ce-cae:CouponStrip ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-sec-dbt-bnd:Bond ;
+	.
+
+fibo-cae-ce-cae:requiresResponse
+	a owl:DatatypeProperty ;
+	rdfs:label "requires response"@en ;
+	rdfs:comment "QName: NONE:requiresResponse" ;
+	rdfs:domain fibo-cae-ce-cae:NotificationMessage ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the notification refers to an event which requires a response from the holder of the security ."@en ;
+	.
+
+fibo-cae-ce-cae:requiresResponse.1
+	a owl:DatatypeProperty ;
+	rdfs:label "requires response"@en ;
+	rdfs:comment "QName: NONE:requiresResponse.1" ;
+	rdfs:domain fibo-cae-ce-cae:ShareValueChangeNotification ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-cae-ce-cae:subscriptionPrice
+	a owl:ObjectProperty ;
+	rdfs:label "subscription price"@en ;
+	rdfs:comment "QName: NONE:subscriptionPrice" ;
+	rdfs:domain fibo-cae-ce-cae:RightsDistribution ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The price at which the Subscription Rights instrument itself may be purchased."@en ;
+	.
+

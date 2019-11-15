@@ -1,0 +1,147 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-gao-obj: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/>
+	a owl:Ontology ;
+	rdfs:label "Objectives Ontology" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:" ;
+	dct:abstract "This ontology defines the concept of an objective, for use in other FIBO ontology elements. Objectives are defined as being distinct from goals, in that they constitute time limited and measurable targets which some entity may seek to attain in pursuit  of its goals." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ;
+	sm:fileAbbreviation "fibo-fnd-gao-obj" ;
+	sm:filename "Objectives.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ;
+	skos:changeNote
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/GoalsAndObjectives/Objectives.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations
+   (6) to eliminate an unnecessary hasObjectives property and related imports dependencies.""" ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives.rdf version of this ontology was modified to integrate concepts such as investment objective, business objective, strategy, and related properties."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-gao-obj:BusinessObjective
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-gao-obj:Objective ;
+	rdfs:label "business objective" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:BusinessObjective" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> ;
+	skos:definition "objective that reflects the strategic goals and direction of a business within a time frame and available resources" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"Business objectives allow an organization to define its goals and direction. A company uses strategy and tactics at every level of its operation to achieve its objectives. These define the way a company allocates its resources and the strengths, weaknesses and opportunities it may have. Companies usually do not alter their objectives once they are implemented, unless changes in circumstances arise. Setting a clear course for the organization is key to its success." ,
+		"In general, objectives are more specific and easier to measure than goals. Objectives are basic tools that underlie all planning and strategic activities. They serve as the basis for creating policy and evaluating performance. Some examples of business objectives include minimizing expenses, expanding internationally, or making a profit."
+		;
+	.
+
+fibo-fnd-gao-obj:BusinessStrategy
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-gao-obj:Strategy ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-gao-obj:isDesignedToAchieve ;
+			owl:someValuesFrom fibo-fnd-gao-obj:BusinessObjective ;
+		]
+		;
+	rdfs:label "business strategy" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:BusinessStrategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> ;
+	skos:definition "strategy for achieving a specific business goal, objective, solution or outcome" ;
+	.
+
+fibo-fnd-gao-obj:FinancialObjective
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-gao-obj:Objective ;
+	rdfs:label "financial objective" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:FinancialObjective" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> ;
+	skos:definition "objective that reflects the strategic financial goals and direction of a person, organization or system within a time frame and available resources" ;
+	.
+
+fibo-fnd-gao-obj:InvestmentObjective
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-gao-obj:FinancialObjective ;
+	rdfs:label "investment objective" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:InvestmentObjective" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> ;
+	skos:definition "financial objective used by an investor to determine whether or not a given potential investment is appropriate for themselves or on behalf of another party" ;
+	skos:example "An investor whose objective is capital growth might choose to invest in more aggressive, growth-oriented mutual funds and/or stocks, over income-generating mutual funds and/or bonds." ;
+	fibo-fnd-utl-av:explanatoryNote "The combination of investment objectives and risk tolerance are typically used to identify appropriate investment options." ;
+	.
+
+fibo-fnd-gao-obj:Objective
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-dt-fd:hasDatePeriod ;
+		owl:someValuesFrom fibo-fnd-dt-fd:DatePeriod ;
+	] ;
+	rdfs:label "objective" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:Objective" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> ;
+	skos:definition "short-term, quantitative, measurable result that a person, organization, or system seeks to attain in order to achieve its long-term goals" ;
+	.
+
+fibo-fnd-gao-obj:Strategy
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-gao-obj:hasObjective ;
+		owl:someValuesFrom fibo-fnd-gao-obj:Objective ;
+	] ;
+	rdfs:label "strategy" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:Strategy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> ;
+	skos:definition "plan or method for achieving a specific goal, objective, solution or outcome" ;
+	fibo-fnd-utl-av:explanatoryNote "A strategy may involve activities that are needed in order to achieve specific goals or objectives. It may take into account one or more policies or any number of restrictions and constraints."@en ;
+	.
+
+fibo-fnd-gao-obj:hasObjective
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:has ;
+	rdfs:label "has objective" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:hasObjective" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> ;
+	rdfs:range fibo-fnd-gao-obj:Objective ;
+	skos:definition "relates something to a specific objective (result) that it aims to achieve within a time frame and with available resources" ;
+	.
+
+fibo-fnd-gao-obj:isDesignedToAchieve
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:involves ;
+	rdfs:label "is designed to achieve" ;
+	rdfs:comment "QName: fibo-fnd-gao-obj:isDesignedToAchieve" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/> ;
+	skos:definition "relates an approach, method, plan, or strategy to an objective or goal or outcome that is the goal, objective, or intended result" ;
+	.
+

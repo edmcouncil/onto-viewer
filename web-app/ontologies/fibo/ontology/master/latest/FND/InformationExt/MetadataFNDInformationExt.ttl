@@ -1,0 +1,53 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-inf-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/MetadataFNDInformationExt/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/MetadataFNDInformationExt/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) InformationExt Module" ;
+	rdfs:comment "QName: fibo-fnd-inf-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the Foundations Information Module." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-fnd-inf-mod" ;
+	sm:filename "MetadataFNDInformationExt.rdf" ;
+	owl:imports <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/> ;
+	.
+
+fibo-fnd-inf-mod:InformationExtModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Information" ;
+	rdfs:comment "QName: fibo-fnd-inf-mod:InformationExtModule" ;
+	dct:abstract "This module contains ontologies of information constructs, including the basic abstractions for codes, identification, messaging, documentation." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Documentation/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/Messaging/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "Financial Industry Business Ontology (FIBO) Foundations (FND) Information Module" ;
+	sm:copyright "Copyright (c) 2017-2018 EDM Council, Inc." ;
+	sm:moduleAbbreviation "fibo-fnd-inf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/MetadataFNDInformationExt/> ;
+	rdfs:seeAlso <https://spec.edmcouncil.org/fibo/> ;
+	skos:editorialNote "The concepts in this module are intended to be replaced by concepts in the separate Arrangements module. Some of the material in this module may currently be referenced from Provisional or Informative modules elsewhere. Where possible these will be replaced by references into the Arrangements module, possibly by moving original material from this module." ;
+	.
+

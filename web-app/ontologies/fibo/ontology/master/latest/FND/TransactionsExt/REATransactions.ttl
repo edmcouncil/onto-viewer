@@ -1,0 +1,490 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REAClaimsEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-le-lei: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities/> .
+@prefix fibo-fnd-agr-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-txn-cle: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/> .
+@prefix fibo-fnd-txn-ecr: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/> .
+@prefix fibo-fnd-txn-ev: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/>
+	a owl:Ontology ;
+	rdfs:label "REATransactions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This is the core REA-derived ontology for transactions. A transaction is defined as an exchange of commitments between parties. 
+		Other aspects of REA such as claims and transaction events (commitment lifecycles) are given in separate ontologies in this module.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LEIEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REAClaimsEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-rea:ContractualEconomicAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:Contract ,
+		fibo-fnd-txn-rea:EconomicAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:someValuesFrom fibo-fnd-txn-rea:ContractualEconomicCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:contractualEconomicAgreementHasParty ;
+			owl:someValuesFrom fibo-fnd-txn-rea:ContractualTransactionParty ;
+		]
+		;
+	rdfs:label "contractual economic agreement"@en ;
+	rdfs:comment "QName: NONE:ContractualEconomicAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "An economic agreement forming part of a transaction, which has contractual standing as evidenced by a contract between the two parties to the Agreement."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The REA Economic Agreement may or may not be between two distinct legal persons, as the REA scope includes transactions within organizations. For REA based transaction models which are between separate legal entities or persons, the form of agreement in force is this Contractual Economic Agreement, that is the agreement, backed by a written or implied contract, which is in force between the parties to this agreement."@en ;
+	.
+
+fibo-fnd-txn-rea:ContractualEconomicCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualCommitment ,
+		fibo-fnd-txn-rea:EconomicCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom fibo-fnd-txn-rea:ContractualEconomicAgreement ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:contractualEconomicCommitmentDescribedIn ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicContractTermsSet ;
+		]
+		;
+	rdfs:label "contractual economic commitment"@en ;
+	rdfs:comment "QName: NONE:ContractualEconomicCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "Some Commitment, made as part of a transaction (economic) agreement, which has contractual standing."@en ;
+	fibo-fnd-utl-av:explanatoryNote "In REA, transactions may be modeled with or without contractual standing, for example transactions between departments within an organization. For all transactions which are between distinct legal persons or entities, this Contractual Economic Commitment represents the type of commitment which is in force. In an economic transaction there are always two of these, corresponding to the two sides of the transaction (e.g. delivery and payment, or payment of two separate swap streams)."@en ;
+	.
+
+fibo-fnd-txn-rea:ContractualTransaction
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-txn-rea:EconomicTransaction ;
+	rdfs:label "contractual transaction"@en ;
+	rdfs:comment "QName: NONE:ContractualTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "An economic transaction which has some contractual basis."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'This is distinct from a transaction between business units within an enterprise. This is the usual sense of "Transaction" and forms the basis for all securities and derivatives transactions, while the parent term "Economic Transaction" may also be used to define internal transactions and transactions that have no legal or contractual basis.'@en ;
+	.
+
+fibo-fnd-txn-rea:ContractualTransactionParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractParty ,
+		fibo-fnd-txn-rea:TransactionParty ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:contractualTransactionPartyIdentity ;
+			owl:someValuesFrom fibo-be-le-lei:ContractuallyCapableEntity ;
+		]
+		;
+	rdfs:label "contractual transaction party"@en ;
+	rdfs:comment "QName: NONE:ContractualTransactionParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "That which is party to a transaction which has contractual standing."@en ;
+	fibo-fnd-utl-av:explanatoryNote "In REA, transactions may include those which are not between legal entities,such as for example internal transactions within a business and between business units. This term Contractual Transaction Party forms the basis for all party definitions for transactions which have some formal contractual basis as being between discrete legal entities (legal persons or other contractually capable entities e.g. non incorporated entities). This is the basis for all derivatives transactions, securities market transactions and so on."@en ;
+	.
+
+fibo-fnd-txn-rea:EconomicAgreement
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:MutualContractualAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-pty-pty:hasPartyInRole ;
+			owl:someValuesFrom fibo-fnd-txn-rea:TransactionParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:confers ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:economicAgreementGovernsTransaction ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicTransaction ;
+		]
+		;
+	rdfs:label "economic agreement"@en ;
+	rdfs:comment "QName: NONE:EconomicAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	.
+
+fibo-fnd-txn-rea:EconomicCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-agr:MutualCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isConferredBy ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicAgreement ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:madeBy ;
+			owl:someValuesFrom fibo-fnd-txn-rea:TransactionParty ;
+		]
+		;
+	rdfs:label "economic commitment"@en ;
+	rdfs:comment "QName: NONE:EconomicCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "Some Commitment which forms part of the subject of some Transaction, being an undertaking by one or other of the parties to the transaction, extended to the other party to that same transaction."@en ;
+	.
+
+fibo-fnd-txn-rea:EconomicContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:MutualContractualAgreement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicContractTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:embodies ;
+			owl:someValuesFrom fibo-fnd-txn-rea:ContractualEconomicAgreement ;
+		]
+		;
+	rdfs:label "economic contract"@en ;
+	rdfs:comment "QName: NONE:EconomicContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "A contract relating to and governing an economic transaction between two parties."@en ;
+	skos:editorialNote "From REA ontology."@en ;
+	.
+
+fibo-fnd-txn-rea:EconomicContractTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:setsOutContractualEconomicCommitment ;
+			owl:someValuesFrom fibo-fnd-txn-rea:ContractualEconomicCommitment ;
+		]
+		;
+	rdfs:label "economic contract commitment"@en ;
+	rdfs:comment "QName: NONE:EconomicContractTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "Terms underlying the contract for a transaction."@en ;
+	.
+
+fibo-fnd-txn-rea:EconomicTransaction
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:subject ;
+			owl:onClass fibo-fnd-txn-ecr:EconomicResource ;
+			owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:transactedUnder ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicContractTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:transactionEmbodiesEconomicAgreement ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicAgreement ;
+		]
+		;
+	rdfs:label "economic transaction"@en ;
+	rdfs:comment "QName: NONE:EconomicTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "Some exchange of some items of economic value between two parties (economic agents)."@en ;
+	.
+
+fibo-fnd-txn-rea:REAClaim
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-txn-rea:isImbalanceIn ;
+		owl:someValuesFrom fibo-fnd-law-lcap:LegalConstruct ;
+	] ;
+	rdfs:label "r e a claim"@en ;
+	rdfs:comment "QName: NONE:REAClaim" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "Some imbalance, at a given point in time, between the respective rights and obligations of two parties with respect to one another."@en ;
+	.
+
+fibo-fnd-txn-rea:TransactionBusinessEvent
+	a owl:Class ;
+	rdfs:label "transaction business event"@en ;
+	rdfs:comment "QName: NONE:TransactionBusinessEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "Occurrence in time that partners to a business transaction wish to monitor or control."@en ;
+	skos:editorialNote "Term derived from REA as expressed in ISO 15944-4 Additional notes in ISO 15944-4 itself: NOTE 1 Business events are the workflow tasks that business partners need to accomplish to complete a business transaction among themselves. As business events occur, they cause a business transaction to move through its various phases of planning, identification, negotiation, actualization and post-actualization. NOTE 2 Occurrences in time can either - be internal as mutually agreed to among the parties to a business transaction; and/or, - reference some common publicly available and recognized date/time referencing schema (e.g. one based on using ISO 8601 and/or ISO 19135)."@en ;
+	.
+
+fibo-fnd-txn-rea:TransactionEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:embodies ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-cle:hasEnd ;
+			owl:someValuesFrom fibo-fnd-txn-ev:DischargingEvent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-cle:hasStart ;
+			owl:someValuesFrom fibo-fnd-txn-ev:TransactionUndertaking ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:hasCorresponding ;
+			owl:someValuesFrom fibo-fnd-txn-rea:TransactionEvent ;
+		]
+		;
+	rdfs:label "transaction event"@en ;
+	rdfs:comment "QName: NONE:TransactionEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "The event component of a transaction"@en ;
+	fibo-fnd-utl-av:explanatoryNote "This describes an event. The event may be delivery of something or settlement of monies in payment for something delivered. A Transaction Event will have terms describing the commitment embodied in that side of that transaction."@en ;
+	.
+
+fibo-fnd-txn-rea:TransactionEventAspect
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-txn-rea:hasCorrespondingAlternativeAspect ;
+		owl:someValuesFrom fibo-fnd-txn-rea:TransactionEventAspect ;
+	] ;
+	rdfs:label "transaction event aspect"@en ;
+	rdfs:comment "QName: NONE:TransactionEventAspect" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "A transaction side as seen from the perspective of one of the parties to the transaction."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This describes one side of one transaction event. The event may be delivery of something or settlement of monies in payment for something delivered. A Transaction Event Side shows that side of that transaction from the perspective of one or other party."@en ;
+	.
+
+fibo-fnd-txn-rea:TransactionParty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pty-pty:PartyInRole ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-rea:transactsWith ;
+			owl:someValuesFrom fibo-fnd-txn-rea:TransactionParty ;
+		]
+		;
+	rdfs:label "transaction party"@en ;
+	rdfs:comment "QName: NONE:TransactionParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	skos:definition "Some entity which takes part in some transaction by receiving and/or parting with some item of economic value or some payment or both."@en ;
+	skos:editorialNote "Referred to in REA as Economic Agent (in the context of the economic event, known here as transaction)."@en ;
+	.
+
+fibo-fnd-txn-rea:contractualEconomicAgreementHasParty
+	a owl:ObjectProperty ;
+	rdfs:label "contractual economic agreement has party"@en ;
+	rdfs:comment "QName: NONE:contractualEconomicAgreementHasParty" ;
+	rdfs:domain fibo-fnd-txn-rea:ContractualEconomicAgreement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:ContractualTransactionParty ;
+	.
+
+fibo-fnd-txn-rea:contractualEconomicCommitmentDescribedIn
+	a owl:ObjectProperty ;
+	rdfs:label "contractual economic commitment described in"@en ;
+	rdfs:comment "QName: NONE:contractualEconomicCommitmentDescribedIn" ;
+	rdfs:domain fibo-fnd-txn-rea:ContractualEconomicCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:EconomicContractTermsSet ;
+	.
+
+fibo-fnd-txn-rea:contractualTransactionPartyIdentity
+	a owl:ObjectProperty ;
+	rdfs:label "contractual transaction party identity"@en ;
+	rdfs:comment "QName: NONE:contractualTransactionPartyIdentity" ;
+	rdfs:domain fibo-fnd-txn-rea:ContractualTransactionParty ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-be-le-lei:ContractuallyCapableEntity ;
+	skos:definition "Transaction Party is identified as some form of Legal Entity in all cases."@en ;
+	skos:editorialNote 'Follows reviews. Reasons include that transactions always embody some contract. Subsequent thinking (see Review Notes for 27 Oct 2010) - the most general form of "Transaction" should be so general as to also include the "sweet shop" transaction. Also (per REA case studies), transaction parties include those within firms and therefore not between contractually capable entities. To resolve this, we introduced the notion of a Contractual Transaction Party, for transactions which are between entities. This relationship, which originally obtained for Transaction Party, now applies specifically for Contractual Transaction Party.'@en ;
+	.
+
+fibo-fnd-txn-rea:definedInContextOf
+	a owl:ObjectProperty ;
+	rdfs:label "defined in context of" ;
+	rdfs:comment "QName: NONE:definedInContextOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	.
+
+fibo-fnd-txn-rea:economicAgreementGovernsTransaction
+	a owl:ObjectProperty ;
+	rdfs:label "economic agreement governs transaction"@en ;
+	rdfs:comment "QName: NONE:economicAgreementGovernsTransaction" ;
+	rdfs:domain fibo-fnd-txn-rea:EconomicAgreement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:EconomicTransaction ;
+	skos:definition "The transaction which is set out by this agreement."@en ;
+	skos:editorialNote "From REA ontology."@en ;
+	.
+
+fibo-fnd-txn-rea:establishesContractualEconomicCommitment
+	a owl:ObjectProperty ;
+	rdfs:label "establishes contractual economic commitment"@en ;
+	rdfs:comment "QName: NONE:establishesContractualEconomicCommitment" ;
+	rdfs:domain fibo-fnd-txn-rea:EconomicContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:ContractualEconomicCommitment ;
+	skos:definition "An economic contract sets up some commitment on the part of one or other party to the contract."@en ;
+	fibo-fnd-utl-av:explanatoryNote "For example this may be a commitment to deliver some goods, perform some service or pay some payment in cash or in kind. From REA ontology."@en ;
+	.
+
+fibo-fnd-txn-rea:hasCorresponding
+	a owl:ObjectProperty ;
+	rdfs:label "has corresponding"@en ;
+	rdfs:comment "QName: NONE:hasCorresponding" ;
+	rdfs:domain fibo-fnd-txn-rea:TransactionEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:TransactionEvent ;
+	.
+
+fibo-fnd-txn-rea:hasCorrespondingAlternativeAspect
+	a owl:ObjectProperty ;
+	rdfs:label "has corresponding alternative aspect"@en ;
+	rdfs:comment "QName: NONE:hasCorrespondingAlternativeAspect" ;
+	rdfs:domain fibo-fnd-txn-rea:TransactionEventAspect ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:TransactionEventAspect ;
+	.
+
+fibo-fnd-txn-rea:hasPerspective
+	a owl:ObjectProperty ;
+	rdfs:label "has perspective"@en ;
+	rdfs:comment "QName: NONE:hasPerspective" ;
+	rdfs:domain fibo-fnd-txn-rea:TransactionEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:TransactionEventAspect ;
+	.
+
+fibo-fnd-txn-rea:hasTransactionComponent
+	a owl:ObjectProperty ;
+	rdfs:label "has transaction component"@en ;
+	rdfs:comment "QName: NONE:hasTransactionComponent" ;
+	rdfs:domain fibo-fnd-txn-rea:EconomicTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:TransactionEvent ;
+	.
+
+fibo-fnd-txn-rea:hasTransactionParty
+	a owl:ObjectProperty ;
+	rdfs:label "has transaction party"@en ;
+	rdfs:comment "QName: NONE:hasTransactionParty" ;
+	rdfs:domain fibo-fnd-txn-rea:EconomicTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:TransactionParty ;
+	.
+
+fibo-fnd-txn-rea:isImbalanceIn
+	a owl:ObjectProperty ;
+	rdfs:label "is imbalance in"@en ;
+	rdfs:comment "QName: NONE:isImbalanceIn" ;
+	rdfs:domain fibo-fnd-txn-rea:REAClaim ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-law-lcap:LegalConstruct ;
+	skos:definition "The imbalance in Obligations or Rights (depending on the viewpoint from which it is described) between one party and another."@en ;
+	.
+
+fibo-fnd-txn-rea:setsOutContractualEconomicCommitment
+	a owl:ObjectProperty ;
+	rdfs:label "sets out contractual economic commitment"@en ;
+	rdfs:comment "QName: NONE:setsOutContractualEconomicCommitment" ;
+	rdfs:domain fibo-fnd-txn-rea:EconomicContractTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:ContractualEconomicCommitment ;
+	owl:inverseOf fibo-fnd-txn-rea:contractualEconomicCommitmentDescribedIn ;
+	skos:definition "The economic commitment set out in the terms to the contract which formalizes the agreement to the transaction."@en ;
+	.
+
+fibo-fnd-txn-rea:subject
+	a owl:ObjectProperty ;
+	rdfs:label "subject"@en ;
+	rdfs:comment "QName: NONE:subject" ;
+	rdfs:domain fibo-fnd-txn-rea:EconomicTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-ecr:EconomicResource ;
+	.
+
+fibo-fnd-txn-rea:transactedUnder
+	a owl:ObjectProperty ;
+	rdfs:label "transacted under"@en ;
+	rdfs:comment "QName: NONE:transactedUnder" ;
+	rdfs:domain fibo-fnd-txn-rea:EconomicTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:EconomicContractTermsSet ;
+	.
+
+fibo-fnd-txn-rea:transactionEmbodiesEconomicAgreement
+	a owl:ObjectProperty ;
+	rdfs:label "transaction embodies economic agreement"@en ;
+	rdfs:comment "QName: NONE:transactionEmbodiesEconomicAgreement" ;
+	rdfs:domain fibo-fnd-txn-rea:EconomicTransaction ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:EconomicAgreement ;
+	owl:inverseOf fibo-fnd-txn-rea:economicAgreementGovernsTransaction ;
+	.
+
+fibo-fnd-txn-rea:transactionEventFollowsBusinessProcess
+	a owl:ObjectProperty ;
+	rdfs:label "transaction event follows business process"@en ;
+	rdfs:comment "QName: NONE:transactionEventFollowsBusinessProcess" ;
+	rdfs:domain fibo-fnd-txn-rea:TransactionEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	.
+
+fibo-fnd-txn-rea:transactsWith
+	a owl:ObjectProperty ;
+	rdfs:label "transacts with"@en ;
+	rdfs:comment "QName: NONE:transactsWith" ;
+	rdfs:domain fibo-fnd-txn-rea:TransactionParty ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> ;
+	rdfs:range fibo-fnd-txn-rea:TransactionParty ;
+	.
+

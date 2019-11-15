@@ -1,0 +1,172 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-doc: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/>
+	a owl:Ontology ;
+	rdfs:label "Documents Ontology" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:" ;
+	dct:abstract "This ontology defines abstract concepts for representation documents for use in other FIBO ontology elements." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2019 EDM Council, Inc." ,
+		"Copyright (c) 2014-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-arr-doc" ;
+	sm:filename "Documents.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents.rdf version of this ontology was introduced as a part of the issue resolutions identified in the FIBO FND 1.0 FTF report and in https://spec.edmcouncil.org/fibo/ontology/FND/1.0/AboutFND-1.0/ in advance of the Long Beach meeting in December 2014." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents.rdf version of this ontology was revised as a part of the FIBO 2.0 RFC to add definitions for general purpose reports." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents.rdf version of this ontology was revised as a part of the issue resolutions identified in the FIBO FND 1.1 RTF report to add a parent of hasDate to date properties." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents.rdf version of this ontology was revised as a part of the issue resolutions identified in the FIBO FND 1.2 RTF report to add a definition for a record." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents.rdf version of this ontology was revised to add a new records property." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents.rdf version of this ontology was revised to eliminate deprecated properties."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-arr-doc:Document
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-arr-doc:isAbout ;
+		owl:someValuesFrom owl:Thing ;
+	] ;
+	rdfs:label "document" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:Document" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	skos:definition "something tangible that records something, such as a recording or a photograph, or a writing that can be used to furnish evidence or information" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"http://www.businessdictionary.com/definition/document.html"^^xsd:anyURI ,
+		"https://en.oxforddictionaries.com/definition/document"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote "A document serves to establish one or several facts, and can be relied upon as a proof thereof." ;
+	.
+
+fibo-fnd-arr-doc:LegalDocument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-doc:Document ;
+	rdfs:label "legal document" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:LegalDocument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	skos:definition "a written or printed paper that bears the original, official, or legal form of something and can be used to furnish decisive evidence or information" ;
+	.
+
+fibo-fnd-arr-doc:Record
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-arr:Collection ;
+	rdfs:label "record" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:Record" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	skos:definition "a memorialization and objective evidence of activities performed, events occurred, results achieved, or statements made, regardless of its characteristics, media, physical form, or the manner in which it is recorded or stored" ;
+	skos:example "Records include accounts, agreements, books, drawings, letters, magnetic/optical disks, memos, micrographics, etc." ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.businessdictionary.com/definition/record.html"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "Records are created or received by an organization in routine transaction of its business or in pursuance of its legal obligations." ;
+	.
+
+fibo-fnd-arr-doc:ReferenceDocument
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-doc:Document ;
+	rdfs:label "reference document" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:ReferenceDocument" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	skos:definition "a document that provides pertinent details for consultation about a subject" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15" ;
+	.
+
+fibo-fnd-arr-doc:hasDataSource
+	a owl:ObjectProperty ;
+	rdfs:label "has data source" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:hasDataSource" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	skos:definition "relates something, such as an agreement, contract, document, report, process, and so forth to a source of data used to analyze, develop, explain, produce, or otherwise create it (e.g., Experian provides data for a CreditReport)" ;
+	.
+
+fibo-fnd-arr-doc:hasDateOfIssuance
+	a
+		owl:ObjectProperty ,
+		owl:FunctionalProperty
+		;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasStartDate ;
+	rdfs:label "has date of issuance" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:hasDateOfIssuance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "links something, typically an agreement, contract, or document, with the date it was issued" ;
+	.
+
+fibo-fnd-arr-doc:hasExpirationDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasEndDate ;
+	rdfs:label "has expiration date" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:hasExpirationDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "links something, typically an agreement, contract, document, or perishable item, with an expiration date" ;
+	.
+
+fibo-fnd-arr-doc:hasReportingPeriod
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasDatePeriod ;
+	rdfs:label "has reporting period" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:hasReportingPeriod" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDatePeriod ;
+	skos:definition "specifies the reporting period for which a report or something else, such as a market rate or economic indicator, applies" ;
+	.
+
+fibo-fnd-arr-doc:hasTerminationDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasEndDate ;
+	rdfs:label "has termination date" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:hasTerminationDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "links something, typically an agreement, contract, document, or process, with a date on which it was terminated" ;
+	.
+
+fibo-fnd-arr-doc:isAbout
+	a owl:ObjectProperty ;
+	rdfs:label "is about" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:isAbout" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	skos:definition "indicates the subject or topic of a given document" ;
+	.
+
+fibo-fnd-arr-doc:records
+	a owl:ObjectProperty ;
+	rdfs:label "records" ;
+	rdfs:comment "QName: fibo-fnd-arr-doc:records" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/> ;
+	skos:definition "documents for later reference" ;
+	.
+

@@ -1,0 +1,246 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionAccounting/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-agr-agr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-law-lcap: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/> .
+@prefix fibo-fnd-txn-acc: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/> .
+@prefix fibo-fnd-txn-ev: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> .
+@prefix fibo-fnd-txn-rea: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/>
+	a owl:Ontology ;
+	rdfs:label "TransactionEvents"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This ontology provides the temporal dimension of the transaction events given in REA. Each commitment in a transaction comes into being when the transaction is struck and ceases to exist when that commitment is discharged." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionAccounting/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/TransactionEvents/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-txn-ev:ContractualUndertaking
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-ev:UndertakingEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:givesRiseTo ;
+			owl:someValuesFrom fibo-fnd-agr-ctr:ContractualCommitment ;
+		]
+		;
+	rdfs:label "contractual undertaking"@en ;
+	rdfs:comment "QName: NONE:ContractualUndertaking" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	skos:definition "A commitment, defined in a Contract, in which one Party to that Contract undertakes to do something or to deliver something or make some payment, to the other Party."@en ;
+	fibo-fnd-utl-av:explanatoryNote 'It is often the Principal to the Contract which makes the commitment, however for Transaction contracts, each sides makes a reciprocal commitment to the other. Parties to specific Commitments may be shown where this clarifies the model, else it is simply identified as being a commitment. Orginally REA "Commitment" but separated in order to cover cashflow feature comitments in some options; commitments in Loan contracts (interest and principal repayment) and so on.'@en ;
+	.
+
+fibo-fnd-txn-ev:DischargingEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:TransactionBusinessEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-acc:triggers ;
+			owl:someValuesFrom fibo-fnd-txn-acc:AccountsLedgerEntry ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:terminates ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicCommitment ;
+		]
+		;
+	rdfs:label "discharging event"@en ;
+	rdfs:comment "QName: NONE:DischargingEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	skos:definition "The event in which the"@en ;
+	.
+
+fibo-fnd-txn-ev:Revaluation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:TransactionBusinessEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-acc:triggers ;
+			owl:someValuesFrom fibo-fnd-txn-acc:AccountsLedgerEntry ;
+		]
+		;
+	rdfs:label "revaluation"@en ;
+	rdfs:comment "QName: NONE:Revaluation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	.
+
+fibo-fnd-txn-ev:TransactionUndertaking
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-ev:UndertakingEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:givesRiseTo ;
+			owl:someValuesFrom fibo-fnd-txn-rea:EconomicCommitment ;
+		]
+		;
+	rdfs:label "transaction undertaking"@en ;
+	rdfs:comment "QName: NONE:TransactionUndertaking" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	skos:definition "A contractually defined and established commitment to deliver some goods, perform some service or make some payment in cash or in kind."@en ;
+	skos:editorialNote "From REA ontology."@en ;
+	.
+
+fibo-fnd-txn-ev:Undertaking
+	a owl:Class ;
+	rdfs:subClassOf
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:bestows ;
+			owl:someValuesFrom fibo-fnd-law-lcap:ContingentRight ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:givesRiseTo ;
+			owl:someValuesFrom fibo-fnd-agr-agr:MutualCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:isMadeAsPartOf ;
+			owl:someValuesFrom fibo-fnd-agr-agr:Agreement ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:isUndertakingTo ;
+			owl:someValuesFrom fibo-fnd-law-lcap:ContingentObligation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-ev:undertakenBy ;
+			owl:someValuesFrom fibo-fnd-txn-ev:UndertakingParty ;
+		]
+		;
+	rdfs:label "undertaking"@en ;
+	rdfs:comment "QName: NONE:Undertaking" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	skos:definition "Some undertaking to act."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This could be an undertaking to deliver something, to do something and so on. These correspond to negative and positive pledges in the contract."@en ;
+	.
+
+fibo-fnd-txn-ev:UndertakingEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-txn-rea:TransactionBusinessEvent ,
+		fibo-fnd-txn-ev:Undertaking ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-txn-acc:triggers ;
+			owl:someValuesFrom fibo-fnd-txn-acc:AccountsLedgerEntry ;
+		]
+		;
+	rdfs:label "undertaking event"@en ;
+	rdfs:comment "QName: NONE:UndertakingEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	skos:definition "Something which occurs at a point in time, at which a party makes some commitment to some other party."@en ;
+	.
+
+fibo-fnd-txn-ev:UndertakingParty
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-txn-ev:isPartyTo ;
+		owl:someValuesFrom fibo-fnd-agr-agr:Agreement ;
+	] ;
+	rdfs:label "undertaking party"@en ;
+	rdfs:comment "QName: NONE:UndertakingParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	.
+
+fibo-fnd-txn-ev:bestows
+	a owl:ObjectProperty ;
+	rdfs:label "bestows"@en ;
+	rdfs:comment "QName: NONE:bestows" ;
+	rdfs:domain fibo-fnd-txn-ev:Undertaking ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	rdfs:range fibo-fnd-law-lcap:ContingentRight ;
+	.
+
+fibo-fnd-txn-ev:givesRiseTo
+	a owl:ObjectProperty ;
+	rdfs:label "gives rise to"@en ;
+	rdfs:comment "QName: NONE:givesRiseTo" ;
+	rdfs:domain fibo-fnd-txn-ev:Undertaking ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	rdfs:range fibo-fnd-agr-agr:MutualCommitment ;
+	.
+
+fibo-fnd-txn-ev:isMadeAsPartOf
+	a owl:ObjectProperty ;
+	rdfs:label "is made as part of"@en ;
+	rdfs:comment "QName: NONE:isMadeAsPartOf" ;
+	rdfs:domain fibo-fnd-txn-ev:Undertaking ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	rdfs:range fibo-fnd-agr-agr:Agreement ;
+	.
+
+fibo-fnd-txn-ev:isPartyTo
+	a owl:ObjectProperty ;
+	rdfs:label "is party to"@en ;
+	rdfs:comment "QName: NONE:isPartyTo" ;
+	rdfs:domain fibo-fnd-txn-ev:UndertakingParty ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	rdfs:range fibo-fnd-agr-agr:Agreement ;
+	.
+
+fibo-fnd-txn-ev:isUndertakingTo
+	a owl:ObjectProperty ;
+	rdfs:label "is undertaking to"@en ;
+	rdfs:comment "QName: NONE:isUndertakingTo" ;
+	rdfs:domain fibo-fnd-txn-ev:Undertaking ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	rdfs:range fibo-fnd-law-lcap:ContingentObligation ;
+	.
+
+fibo-fnd-txn-ev:madeBy
+	a owl:ObjectProperty ;
+	rdfs:label "made by"@en ;
+	rdfs:comment "QName: NONE:madeBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	rdfs:range fibo-fnd-txn-rea:TransactionParty ;
+	.
+
+fibo-fnd-txn-ev:terminates
+	a owl:ObjectProperty ;
+	rdfs:label "terminates"@en ;
+	rdfs:comment "QName: NONE:terminates" ;
+	rdfs:domain fibo-fnd-txn-ev:DischargingEvent ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	rdfs:range fibo-fnd-txn-rea:EconomicCommitment ;
+	.
+
+fibo-fnd-txn-ev:undertakenBy
+	a owl:ObjectProperty ;
+	rdfs:label "undertaken by"@en ;
+	rdfs:comment "QName: NONE:undertakenBy" ;
+	rdfs:domain fibo-fnd-txn-ev:Undertaking ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/> ;
+	rdfs:range fibo-fnd-txn-ev:UndertakingParty ;
+	.
+

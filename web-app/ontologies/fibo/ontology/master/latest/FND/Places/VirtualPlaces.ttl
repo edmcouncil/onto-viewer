@@ -1,0 +1,105 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-plc-adr: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> .
+@prefix fibo-fnd-plc-loc: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> .
+@prefix fibo-fnd-plc-vrt: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/>
+	a owl:Ontology ;
+	rdfs:label "Virtual Places Ontology" ;
+	rdfs:comment "QName: fibo-fnd-plc-vrt:" ;
+	dct:abstract "This ontology provides scaffolding for use in describing virtual location-oriented concepts." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2018 EDM Council, Inc." ,
+		"Copyright (c) 2013-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-plc-vrt" ;
+	sm:filename "VirtualPlaces.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20141101/Places/VirtualPlaces.rdf version of this ontology was modified for the FIBO 2.0 RFC to integrate it with LCC." ,
+		"This ontology was added to Foundations in advance of the December 2014 Long Beach meeting in support of the SEC specification."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-plc-vrt:NetworkLocation
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plc-vrt:VirtualLocation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:onClass fibo-fnd-plc-adr:Address ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "network location" ;
+	rdfs:comment "QName: fibo-fnd-plc-vrt:NetworkLocation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/> ;
+	skos:definition "a virtual location that may be identified by a network address (an identifier for a node or interface)" ;
+	.
+
+fibo-fnd-plc-vrt:NotionalPlace
+	a owl:Class ;
+	rdfs:subClassOf lcc-cr:Location ;
+	rdfs:label "notional place" ;
+	rdfs:comment "QName: fibo-fnd-plc-vrt:NotionalPlace" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/> ;
+	skos:definition "an abstract place; one of many commonly understood concepts such as domestic, Eurozone etc." ;
+	.
+
+fibo-fnd-plc-vrt:VirtualLocation
+	a owl:Class ;
+	rdfs:subClassOf lcc-cr:Location ;
+	rdfs:label "virtual location"@en ;
+	rdfs:comment "QName: fibo-fnd-plc-vrt:VirtualLocation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/> ;
+	skos:definition "a place that is not located in any single physical location; a network location without geographic boundaries" ;
+	.
+
+fibo-fnd-plc-vrt:hasURL
+	a owl:DatatypeProperty ;
+	rdfs:label "has URL" ;
+	rdfs:comment "QName: fibo-fnd-plc-vrt:hasURL" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/> ;
+	rdfs:range xsd:anyURI ;
+	skos:definition "links something to a web resource that specifies its location on a computer network and a method for retrieving it" ;
+	fibo-fnd-utl-av:synonym "has uniform resource locator" ;
+	.
+

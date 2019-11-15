@@ -1,0 +1,102 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/CIV/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Pools/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-civ-fnd-civ: <https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-sec-dbt-ab-spv: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/>
+	a owl:Ontology ;
+	rdfs:label "AssetBackedSPVs"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Special purpose vehicles used in the issuance of asset backed securities." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/CIV/Funds/CIV/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Pools/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-sec-dbt-ab-spv:DebtSPV
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:SpecialPurposeVehicle ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:isSetUpFor ;
+			owl:someValuesFrom fibo-sec-dbt-ab-spv:DebtSecuritiesIssuance ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/SecuritizedDebtPool> ;
+		]
+		;
+	rdfs:label "debt s p v"@en ;
+	rdfs:comment "QName: NONE:DebtSPV" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> ;
+	skos:definition "A Special Purpose Vehicle (SPV) set up specifically to issue a debt security or securities. It is set up by a company or a group of companies to create instruments that are off the company's balance sheet."@en ;
+	fibo-fnd-utl-av:explanatoryNote "The SPV exists for a specific period of time and is then disbanded. It may take the form of an LLC or other legal entity. Special Purpose Vehicles are also referred to as bankruptcy remote entities, as they isolate financial risk."@en ;
+	.
+
+fibo-sec-dbt-ab-spv:DebtSecuritiesIssuance
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-dbt-ab-spv:SecuritiesIssuance ;
+	rdfs:label "debt securities issuance"@en ;
+	rdfs:comment "QName: NONE:DebtSecuritiesIssuance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> ;
+	skos:definition "SPV set up to issue debt instruments such as for structured finance."@en ;
+	.
+
+fibo-sec-dbt-ab-spv:SecuritiesIssuance
+	a owl:Class ;
+	rdfs:subClassOf fibo-civ-fnd-civ:SPVPurpose ;
+	rdfs:label "securities issuance"@en ;
+	rdfs:comment "QName: NONE:SecuritiesIssuance" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> ;
+	skos:definition "The SPV is set up to issue securities."@en ;
+	.
+
+fibo-sec-dbt-ab-spv:SecuritiesIssuanceSPV
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-civ-fnd-civ:SpecialPurposeVehicle ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-civ-fnd-civ:isSetUpFor ;
+			owl:someValuesFrom fibo-sec-dbt-ab-spv:SecuritiesIssuance ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/SecuritizedDebtPool> ;
+		]
+		;
+	rdfs:label "securities issuance s p v"@en ;
+	rdfs:comment "QName: NONE:SecuritiesIssuanceSPV" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> ;
+	skos:definition "An SPV set up specifically to issue securities."@en ;
+	.
+
+fibo-sec-dbt-ab-spv:isREMIC
+	a owl:DatatypeProperty ;
+	rdfs:label "is r e m i c"@en ;
+	rdfs:comment "QName: NONE:isREMIC" ;
+	rdfs:domain fibo-sec-dbt-ab-spv:DebtSPV ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the SPV is set up and registered as a Real Estate Mortgage Investment Conduit (REMIC). REMICs are a type of special purpose vehicle used for the pooling of mortgage loans and issuance of mortgage-backed securities. They are defined under the United States Internal Revenue Code (Tax Reform Act of 1986), and are the typical vehicle of choice for the securitization of residential mortgages in the US."@en ;
+	.
+

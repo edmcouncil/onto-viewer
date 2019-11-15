@@ -1,0 +1,75 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-plc-loc: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/>
+	a owl:Ontology ;
+	rdfs:label "Locations Ontology" ;
+	rdfs:comment "QName: fibo-fnd-plc-loc:" ;
+	dct:abstract "This ontology provides a placeholder for use in mapping geographic location-oriented concepts to the appropriate standards." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-fnd-plc-loc" ;
+	sm:filename "Locations.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20130801/Places/Locations.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in http://www.omg.org/spec/EDMC-FIBO/FND/1.0/AboutFND-1.0/." ,
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20141101/Places/Locations.rdf version of this ontology was modified for the FIBO 2.0 RFC to integrate it with LCC." ,
+		"The https://www.omg.org/spec/EDMC-FIBO/FND/20180801/Places/Locations.rdf version of this ontology was modified eliminate deprecated elements."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-plc-loc:PhysicalLocation
+	a owl:Class ;
+	rdfs:subClassOf lcc-cr:Location ;
+	rdfs:label "physical location" ;
+	rdfs:comment "QName: fibo-fnd-plc-loc:PhysicalLocation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> ;
+	skos:definition "A location in physical space" ;
+	.
+
+fibo-fnd-plc-loc:RealEstate
+	a owl:Class ;
+	rdfs:subClassOf lcc-cr:Location ;
+	rdfs:label "real estate"@en ;
+	rdfs:comment "QName: fibo-fnd-plc-loc:RealEstate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> ;
+	skos:definition "land plus anything permanently fixed to it, including buildings, sheds and other items attached to the structure" ;
+	fibo-fnd-utl-av:definitionOrigin "http://www.investopedia.com/terms/r/realestate.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote 'Although media often refers to the "real estate market" from the perspective of residential living, real estate can be grouped into three broad categories based on its use, namely residential, commercial and industrial. Examples of real estate include undeveloped land, houses, condominiums, townhomes, office buildings, retail store buildings and factories.' ;
+	.
+
+fibo-fnd-plc-loc:isLocatedAt
+	a owl:ObjectProperty ;
+	rdfs:label "is located at" ;
+	rdfs:comment "QName: fibo-fnd-plc-loc:isLocatedAt" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> ;
+	rdfs:range lcc-cr:Location ;
+	skos:definition "a property linking something to a location or place, which might be physical or virtual" ;
+	.
+

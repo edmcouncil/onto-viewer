@@ -1,0 +1,42 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/MetadataBPProcess/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/MetadataBPProcess/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-bp-prc-mod: <https://spec.edmcouncil.org/fibo/ontology/BP/Process/MetadataBPProcess/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/BP/Process/MetadataBPProcess/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Business Process (BP) Process Module" ;
+	rdfs:comment "QName: fibo-bp-prc-mod:" ;
+	dct:abstract "This is the metadata ontology used to describe the BP Process Module." ;
+	dct:issued "2018-06-30T18:00:00"^^xsd:dateTime ;
+	dct:license sm:MITLicense ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright "Copyright (c) 2014-2018 EDM Council, Inc." ;
+	sm:fileAbbreviation "fibo-bp-prc-mod" ;
+	sm:filename "MetadataBPProcess.rdf" ;
+	owl:imports <http://www.omg.org/techprocess/ab/SpecificationMetadata/> ;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/master/2018Q2/BP/Process/MetadataBPProcess/> ;
+	.
+
+fibo-bp-prc-mod:ProcessModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Process" ;
+	rdfs:comment "QName: fibo-bp-prc-mod:ProcessModule" ;
+	dct:abstract "This module contains ontologies of Process concepts including concepts common to a range of business processes, along with basic financial context concepts." ;
+	dct:hasPart <https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/> ;
+	dct:title "FIBO Business Process - Core Process Terms Module" ;
+	sm:moduleAbbreviation "fibo-bp-prc" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/BP/Process/MetadataBPProcess/> ;
+	.
+

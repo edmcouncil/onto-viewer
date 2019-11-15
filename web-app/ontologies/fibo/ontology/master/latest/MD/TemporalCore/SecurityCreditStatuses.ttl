@@ -1,0 +1,115 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityCreditStatuses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityCreditStatuses/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-inf-tem: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/TemporalInfo/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-md-temx-crs: <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/>
+	a owl:Ontology ;
+	rdfs:label "SecurityCreditStatuses"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """This ontology extends the credit status ontology to define credit status concepts that are specific to issued securities. These include cashflow status and the basic credit statuses of being OK or in default. 
+		Note that in application data models these concepts would be represented as one or more selectable code lists or enumerations.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityCreditStatuses/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-md-temx-crs:CreditOK
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-crs:SecurityCreditStatus ;
+	rdfs:label "credit o k"@en ;
+	rdfs:comment "QName: NONE:CreditOK" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ;
+	skos:definition "Not defaulted."@en ;
+	.
+
+fibo-md-temx-crs:InDefault
+	a owl:Class ;
+	rdfs:subClassOf fibo-md-temx-crs:SecurityCreditStatus ;
+	rdfs:label "in default"@en ;
+	rdfs:comment "QName: NONE:InDefault" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ;
+	skos:definition "The issuer has failed to pay somthing that they are contractually obliged to pay."@en ;
+	skos:editorialNote "(review 7 Oct 09) Does this exist as a term? This is a characteristic of the instrument not the rating. Because it's in default you can expect the rating to drop. Applies to instrument not to debtor. So a company may have 3 bond issues and may be defualt on only one. 14 Oct: Degrees of defaults e.g. tranche not paying interest due to losses on the underlying portrfolio; tranches being used to pay down more senior tranches."@en ;
+	.
+
+fibo-md-temx-crs:SecurityCashflowStatus
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-tem:Status ;
+	rdfs:label "security cashflow status"@en ;
+	rdfs:comment "QName: NONE:SecurityCashflowStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ;
+	owl:disjointWith fibo-md-temx-crs:SecurityCreditStatus ;
+	skos:definition "The status of the cashflow due to the holder from the security."@en ;
+	skos:editorialNote "Specialize this for preferred stocks, debt tranches and so on."@en ;
+	.
+
+fibo-md-temx-crs:SecurityCreditStatus
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-tem:Status ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-md-temx-crs:isStatusOf ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+		]
+		;
+	rdfs:label "security credit status"@en ;
+	rdfs:comment "QName: NONE:SecurityCreditStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ;
+	.
+
+fibo-md-temx-crs:acceleratedPrincipalPaymentsExpected
+	a owl:DatatypeProperty ;
+	rdfs:label "accelerated principal payments expected"@en ;
+	rdfs:comment "QName: NONE:acceleratedPrincipalPaymentsExpected" ;
+	rdfs:domain fibo-md-temx-crs:SecurityCashflowStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-md-temx-crs:interestPaymentsExpected
+	a owl:DatatypeProperty ;
+	rdfs:label "interest payments expected"@en ;
+	rdfs:comment "QName: NONE:interestPaymentsExpected" ;
+	rdfs:domain fibo-md-temx-crs:SecurityCashflowStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-md-temx-crs:isStatusOf
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-tem:isOf ;
+	rdfs:label "is status of"@en ;
+	rdfs:comment "QName: NONE:isStatusOf" ;
+	rdfs:domain fibo-md-temx-crs:SecurityCreditStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security> ;
+	.
+
+fibo-md-temx-crs:principalPaymentsExpected
+	a owl:DatatypeProperty ;
+	rdfs:label "principal payments expected"@en ;
+	rdfs:comment "QName: NONE:principalPaymentsExpected" ;
+	rdfs:domain fibo-md-temx-crs:SecurityCashflowStatus ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/> ;
+	rdfs:range xsd:boolean ;
+	.
+

@@ -1,0 +1,350 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/Geophysical/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-inf-padr: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> .
+@prefix fibo-fnd-plc-adr: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/> .
+@prefix fibo-fnd-plc-loc: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/> .
+@prefix fibo-fnd-plcx-gph: <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/Geophysical/> .
+@prefix fibo-fnd-plcx-re: <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/RealEstate/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/>
+	a owl:Ontology ;
+	rdfs:label "PostalAddress"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "Extensions to the Addresses ontology in Places, to include concepts specific to postal addresses and physical address concepts, where these are not already covered in that ontology. This follows the conceptual pattern whereby address concepts bring together information constructs that are indices to some kind of location or real estate, and the corresponding geophysical geopolitical and real estate constructs to which they refer." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Addresses/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/Geophysical/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Informative ;
+	.
+
+fibo-fnd-inf-padr:BuildingSubUnitAddressFragment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-padr:PostalAddressElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:identifiesBuildingSubUnit ;
+			owl:someValuesFrom fibo-fnd-plcx-re:BuildingSubUnit ;
+		]
+		;
+	rdfs:label "building sub unit address fragment"@en ;
+	rdfs:comment "QName: NONE:BuildingSubUnitAddressFragment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-inf-padr:NonSpecificAddressText
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-padr:PostalAddressElement ;
+	rdfs:label "non specific address text"@en ;
+	rdfs:comment "QName: NONE:NonSpecificAddressText" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-inf-padr:POBoxNumber
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-padr:PostalAddressElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:identifiesPostBox ;
+			owl:someValuesFrom fibo-fnd-inf-padr:PostBox ;
+		]
+		;
+	rdfs:label "p o box number"@en ;
+	rdfs:comment "QName: NONE:POBoxNumber" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-inf-padr:PostBox
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-plc-loc:PhysicalLocation ;
+	rdfs:label "post box"@en ;
+	rdfs:comment "QName: NONE:PostBox" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	skos:definition "A PO Box."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is physical and essentially geographical in that it has a location."@en ;
+	.
+
+fibo-fnd-inf-padr:PostalAddressElement
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-inf-padr:identifiesPhysicalAddressComponent ;
+		owl:someValuesFrom [
+			a owl:Class ;
+			owl:unionOf (
+				lcc-cr:Country
+				lcc-cr:CountrySubdivision
+				fibo-fnd-inf-padr:PostBox
+				fibo-fnd-plcx-gph:GeophysicalLocation
+				fibo-fnd-plcx-re:BuiltProperty
+			) ;
+		] ;
+	] ;
+	rdfs:label "postal address element"@en ;
+	rdfs:comment "QName: NONE:PostalAddressElement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	skos:definition "Text which is part of some Postal Address. Editorial Note: This is labeled as Address Element but is specific to Postal Addresses. The more general term for elements of any type of address is Address Component. This also covers e.g. network addresses, URIs."@en ;
+	.
+
+fibo-fnd-inf-padr:PostalCode
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-padr:PostalAddressElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:identifiesPostCodeArea ;
+			owl:someValuesFrom fibo-fnd-plc-adr:PostCodeArea ;
+		]
+		;
+	rdfs:label "postal code"@en ;
+	rdfs:comment "QName: NONE:PostalCode" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-inf-padr:StreetAddressText
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-inf-padr:PostalAddressElement ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:identifiesBuilding ;
+			owl:someValuesFrom fibo-fnd-plcx-re:Building ;
+		]
+		;
+	rdfs:label "street address text"@en ;
+	rdfs:comment "QName: NONE:StreetAddressText" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-inf-padr:addressFragment
+	a owl:DatatypeProperty ;
+	rdfs:label "address fragment"@en ;
+	rdfs:comment "QName: NONE:addressFragment" ;
+	rdfs:domain fibo-fnd-inf-padr:BuildingSubUnitAddressFragment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range xsd:string ;
+	.
+
+fibo-fnd-inf-padr:apartmentIdentifiedBy
+	a owl:ObjectProperty ;
+	rdfs:label "apartment identified by" ;
+	rdfs:comment "QName: NONE:apartmentIdentifiedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-inf-padr:boxNumber
+	a owl:DatatypeProperty ;
+	rdfs:label "box number"@en ;
+	rdfs:comment "QName: NONE:boxNumber" ;
+	rdfs:domain fibo-fnd-inf-padr:POBoxNumber ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range xsd:string ;
+	skos:definition "The PO Box number expressed as text."@en ;
+	.
+
+fibo-fnd-inf-padr:buildingIdentifiedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-padr:physicalAddressComponentIdentifiedBy ;
+	rdfs:label "building identified by"@en ;
+	rdfs:comment "QName: NONE:buildingIdentifiedBy" ;
+	rdfs:domain fibo-fnd-plcx-re:Building ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range fibo-fnd-inf-padr:StreetAddressText ;
+	.
+
+fibo-fnd-inf-padr:floorIdentifiedBy
+	a owl:ObjectProperty ;
+	rdfs:label "floor identified by" ;
+	rdfs:comment "QName: NONE:floorIdentifiedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-inf-padr:identifiesBuilding
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-padr:identifiesPhysicalAddressComponent ;
+	rdfs:label "identifies building"@en ;
+	rdfs:comment "QName: NONE:identifiesBuilding" ;
+	rdfs:domain fibo-fnd-inf-padr:StreetAddressText ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range fibo-fnd-plcx-re:Building ;
+	owl:inverseOf fibo-fnd-inf-padr:buildingIdentifiedBy ;
+	.
+
+fibo-fnd-inf-padr:identifiesBuildingSubUnit
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-padr:identifiesPhysicalAddressComponent ;
+	rdfs:label "identifies building sub unit"@en ;
+	rdfs:comment "QName: NONE:identifiesBuildingSubUnit" ;
+	rdfs:domain fibo-fnd-inf-padr:BuildingSubUnitAddressFragment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range fibo-fnd-plcx-re:BuildingSubUnit ;
+	.
+
+fibo-fnd-inf-padr:identifiesPhysicalAddressComponent
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-arr-id:isIndexTo ;
+	rdfs:label "identifies physical address component"@en ;
+	rdfs:comment "QName: NONE:identifiesPhysicalAddressComponent" ;
+	rdfs:domain fibo-fnd-inf-padr:PostalAddressElement ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range [
+		a owl:Class ;
+		owl:unionOf (
+			lcc-cr:Country
+			lcc-cr:CountrySubdivision
+			fibo-fnd-inf-padr:PostBox
+			fibo-fnd-plcx-gph:GeophysicalLocation
+			fibo-fnd-plcx-re:BuiltProperty
+		) ;
+	] ;
+	.
+
+fibo-fnd-inf-padr:identifiesPostBox
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-padr:identifiesPhysicalAddressComponent ;
+	rdfs:label "identifies post box"@en ;
+	rdfs:comment "QName: NONE:identifiesPostBox" ;
+	rdfs:domain fibo-fnd-inf-padr:POBoxNumber ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range fibo-fnd-inf-padr:PostBox ;
+	.
+
+fibo-fnd-inf-padr:identifiesPostCodeArea
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-padr:identifiesPhysicalAddressComponent ;
+	rdfs:label "identifies post code area"@en ;
+	rdfs:comment "QName: NONE:identifiesPostCodeArea" ;
+	rdfs:domain fibo-fnd-inf-padr:PostalCode ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range fibo-fnd-plc-adr:PostCodeArea ;
+	owl:inverseOf fibo-fnd-inf-padr:postCodeAreaIdentifiedBy ;
+	.
+
+fibo-fnd-inf-padr:isOf
+	a owl:ObjectProperty ;
+	rdfs:label "is of" ;
+	rdfs:comment "QName: NONE:isOf" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-inf-padr:nonSpecificAddressText
+	a owl:DatatypeProperty ;
+	rdfs:label "non specific address text"@en ;
+	rdfs:comment "QName: NONE:nonSpecificAddressText" ;
+	rdfs:domain fibo-fnd-inf-padr:NonSpecificAddressText ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range xsd:string ;
+	.
+
+fibo-fnd-inf-padr:physicalAddressComponentIdentifiedBy
+	a owl:ObjectProperty ;
+	rdfs:label "physical address component identified by"@en ;
+	rdfs:comment "QName: NONE:physicalAddressComponentIdentifiedBy" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			lcc-cr:Country
+			lcc-cr:CountrySubdivision
+			fibo-fnd-inf-padr:PostBox
+			fibo-fnd-plcx-gph:GeophysicalLocation
+			fibo-fnd-plcx-re:BuiltProperty
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range fibo-fnd-inf-padr:PostalAddressElement ;
+	owl:inverseOf fibo-fnd-inf-padr:identifiesPhysicalAddressComponent ;
+	.
+
+fibo-fnd-inf-padr:postCodeAreaIdentifiedBy
+	a owl:ObjectProperty ;
+	rdfs:label "post code area identified by"@en ;
+	rdfs:comment "QName: NONE:postCodeAreaIdentifiedBy" ;
+	rdfs:domain fibo-fnd-plc-adr:PostCodeArea ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range fibo-fnd-inf-padr:PostalCode ;
+	.
+
+fibo-fnd-inf-padr:postalCode
+	a owl:DatatypeProperty ;
+	rdfs:label "postal code"@en ;
+	rdfs:comment "QName: NONE:postalCode" ;
+	rdfs:domain fibo-fnd-inf-padr:PostalCode ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range xsd:string ;
+	.
+
+fibo-fnd-inf-padr:streetAddress
+	a owl:DatatypeProperty ;
+	rdfs:label "street address"@en ;
+	rdfs:comment "QName: NONE:streetAddress" ;
+	rdfs:domain fibo-fnd-inf-padr:StreetAddressText ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range xsd:string ;
+	.
+
+fibo-fnd-inf-padr:streetIdentifiedBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-padr:physicalAddressComponentIdentifiedBy ;
+	rdfs:label "street identified by"@en ;
+	rdfs:comment "QName: NONE:streetIdentifiedBy" ;
+	rdfs:domain fibo-fnd-plcx-gph:Street ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	rdfs:range fibo-fnd-inf-padr:StreetAddressText ;
+	.
+
+fibo-fnd-inf-padr:suiteIdentifiedBy
+	a owl:ObjectProperty ;
+	rdfs:label "suite identified by" ;
+	rdfs:comment "QName: NONE:suiteIdentifiedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/PostalAddress/> ;
+	.
+
+fibo-fnd-plc-adr:PostCodeArea
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plcx-gph:GeophysicalLocation ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-inf-padr:postCodeAreaIdentifiedBy ;
+			owl:someValuesFrom fibo-fnd-inf-padr:PostalCode ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isPartOf ;
+			owl:someValuesFrom fibo-fnd-plcx-gph:GeographicalArea ;
+		]
+		;
+	.
+
+fibo-fnd-plcx-gph:Street
+	a owl:Class ;
+	.
+

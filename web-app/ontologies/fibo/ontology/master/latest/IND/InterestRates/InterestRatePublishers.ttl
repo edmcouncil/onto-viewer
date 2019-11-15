@@ -1,0 +1,161 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-fbc-fct-fse: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ind-ind: <https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/> .
+@prefix fibo-ind-ir-ir: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/> .
+@prefix fibo-ind-ir-pub: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/>
+	a owl:Ontology ;
+	rdfs:label "Interest Rate Publishers Ontology" ;
+	rdfs:comment "QName: fibo-ind-ir-pub:" ;
+	dct:abstract "This ontology provides concepts descriptive of the publishers of interest rates, such as banks and the bodies which publish inter-bank offer rates." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2014-2018 EDM Council, Inc." ,
+		"Copyright (c) 2014-2018 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"https://spec.edmcouncil.org/fibo/ontology/BE/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FBC/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/FND/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/"^^xsd:anyURI ,
+		"https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/"^^xsd:anyURI
+		;
+	sm:fileAbbreviation "fibo-ind-ir-pub" ;
+	sm:filename "InterestRatePublishers.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers.rdf version of this ontology was modified per the FIBO 2.0 RFC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers.rdf version of this ontology was modified per the issue resolutions identified in the FIBO IND 1.0 FTF 1 report." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers.rdf version of this ontology was modified per the issue resolutions identified in the FIBO IND 1.0 FTF 2 report."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-ind-ir-pub:BaseRateAuthority
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ir-pub:InterestRateAuthority ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ir-pub:sets ;
+			owl:someValuesFrom fibo-ind-ir-ir:BaseRate ;
+		]
+		;
+	rdfs:label "base rate authority" ;
+	rdfs:comment "QName: fibo-ind-ir-pub:BaseRateAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> ;
+	skos:definition "an interest rate authority responsible for setting the base rate for a given currency, typically a central bank" ;
+	.
+
+fibo-ind-ir-pub:InterbankRateAuthority
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ir-pub:InterestRateAuthority ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ir-pub:sets ;
+			owl:allValuesFrom fibo-ind-ir-ir:InterbankRate ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ir-pub:convenes ;
+			owl:someValuesFrom fibo-fbc-fct-fse:MonetaryAuthority ;
+		]
+		;
+	rdfs:label "interbank rate authority" ;
+	rdfs:comment "QName: fibo-ind-ir-pub:InterbankRateAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> ;
+	skos:definition "an interest rate authority responsible for setting the interbank rate" ;
+	fibo-fnd-utl-av:explanatoryNote "This is announced by the relevant central bank or other authority at intervals following a meeting of the relevant policy group or committee." ;
+	.
+
+fibo-ind-ir-pub:InterestRateAuthority
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-pas-fpas:FinancialServiceProvider ,
+		fibo-ind-ind-ind:FinancialInformationPublisher ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-ind-ir-pub:sets ;
+			owl:someValuesFrom fibo-ind-ir-ir:ReferenceInterestRate ;
+		]
+		;
+	rdfs:label "interest rate authority" ;
+	rdfs:comment "QName: fibo-ind-ir-pub:InterestRateAuthority" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> ;
+	skos:definition "an authority responsible for the publication of some interest rate" ;
+	skos:example "This is typically a bank, central bank in the case of the publication of bank interest rates, or the committee responsible for publishing interbank rates, such as LIBOR." ;
+	fibo-fnd-utl-av:explanatoryNote "Interest rates which are referred to as market rates, for example as used in interest rate derivatives, are published by some authority responsible for the rate as a kind of market data." ;
+	.
+
+fibo-ind-ir-pub:MarketDataProvider
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-ind-ind-ind:FinancialInformationPublisher ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:publishes ;
+			owl:someValuesFrom fibo-ind-ind-ind:MarketRate ;
+		]
+		;
+	rdfs:label "market data provider" ;
+	rdfs:comment "QName: fibo-ind-ir-pub:MarketDataProvider" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> ;
+	skos:definition "a publisher that publishes data about the financial markets" ;
+	.
+
+fibo-ind-ir-pub:convenes
+	a owl:ObjectProperty ;
+	rdfs:label "convenes" ;
+	rdfs:comment "QName: fibo-ind-ir-pub:convenes" ;
+	rdfs:domain fibo-fnd-pty-rl:AgentInRole ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> ;
+	rdfs:range fibo-fnd-pty-rl:AgentInRole ;
+	skos:definition "a predicate indicating that someone acting in the role of convenor brings together some number of parties for a meeting or conference; assembles; makes arrangements for a meeting to take place" ;
+	.
+
+fibo-ind-ir-pub:sets
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:provides ;
+	rdfs:label "sets" ;
+	rdfs:comment "QName: fibo-ind-ir-pub:sets" ;
+	rdfs:domain fibo-fnd-pty-rl:AgentInRole ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRatePublishers/> ;
+	skos:definition "a predicate indicating that some party places something in some relationship to something or someone else" ;
+	skos:example "The interest rate authority (such as a central bank or monetary authority or a panel working behalf of such) determines and sets the reference rate which is in force at a given time." ;
+	.
+

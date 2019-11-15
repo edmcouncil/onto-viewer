@@ -1,0 +1,159 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/MetadataFNDAccounting/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/MetadataFNDAccountingExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/MetadataFNDAgentsAndPeople/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/MetadataFNDAgreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/MetadataFNDAgreementsExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/MetadataFNDArrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/MetadataFNDLaw/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/MetadataFNDMathExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/MetadataFNDOwnershipAndControl/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/MetadataFNDParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/MetadataFNDPlaces/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/MetadataFNDPlacesExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/MetadataFNDProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/MetadataFNDQuantities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/MetadataFNDRelations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/MetadataFNDTimeExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/MetadataFNDUtilities/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-aap-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/MetadataFNDAgentsAndPeople/> .
+@prefix fibo-fnd-acc-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/MetadataFNDAccounting/> .
+@prefix fibo-fnd-accx-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/AccountingExt/MetadataFNDAccountingExt/> .
+@prefix fibo-fnd-agr-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/MetadataFNDAgreements/> .
+@prefix fibo-fnd-agrx-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/MetadataFNDAgreementsExt/> .
+@prefix fibo-fnd-arr-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/MetadataFNDArrangements/> .
+@prefix fibo-fnd-arrxx-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MetadataFNDArrangementsExt/> .
+@prefix fibo-fnd-dt-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/MetadataFNDDatesAndTimes/> .
+@prefix fibo-fnd-gao-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/> .
+@prefix fibo-fnd-inf-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/MetadataFNDInformationExt/> .
+@prefix fibo-fnd-law-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/MetadataFNDLaw/> .
+@prefix fibo-fnd-math-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/MathExt/MetadataFNDMathExt/> .
+@prefix fibo-fnd-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/> .
+@prefix fibo-fnd-oac-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/MetadataFNDOwnershipAndControl/> .
+@prefix fibo-fnd-org-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/MetadataFNDOrganizations/> .
+@prefix fibo-fnd-pas-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/MetadataFNDProductsAndServices/> .
+@prefix fibo-fnd-plc-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/MetadataFNDPlaces/> .
+@prefix fibo-fnd-plcx-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/PlacesExt/MetadataFNDPlacesExt/> .
+@prefix fibo-fnd-pty-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/MetadataFNDParties/> .
+@prefix fibo-fnd-qt-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/MetadataFNDQuantities/> .
+@prefix fibo-fnd-rel-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/MetadataFNDRelations/> .
+@prefix fibo-fnd-risk-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/RiskExt/MetadataFNDRiskExt/> .
+@prefix fibo-fnd-tim-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/TimeExt/MetadataFNDTimeExt/> .
+@prefix fibo-fnd-txn-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MetadataFNDTransactionsExt/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-mod: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/MetadataFNDUtilities/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/>
+	a owl:Ontology ;
+	rdfs:label "Metadata for the EDMC-FIBO Foundations (FND) Domain" ;
+	rdfs:comment "QName: fibo-fnd-mod:" ;
+	dct:abstract "The 'metadata for FND' describes the FND domain." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2018 EDM Council, Inc." ,
+		"Copyright (c) 2013-2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fnd-mod" ;
+	sm:filename "MetadataFND.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/MetadataFNDAccounting/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/MetadataFNDAccountingExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/MetadataFNDAgentsAndPeople/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/MetadataFNDAgreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/MetadataFNDAgreementsExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/MetadataFNDArrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/MetadataFNDLaw/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/MetadataFNDMathExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/MetadataFNDOwnershipAndControl/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/MetadataFNDParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/MetadataFNDPlaces/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/MetadataFNDPlacesExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/MetadataFNDProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/MetadataFNDQuantities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/MetadataFNDRelations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/MetadataFNDTimeExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/MetadataFNDUtilities/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/> ;
+	.
+
+fibo-fnd-mod:FNDDomain
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Foundations" ;
+	rdfs:comment "QName: fibo-fnd-mod:FNDDomain" ;
+	dct:abstract """The Foundations (FND) domain includes ontologies that define general purpose concepts required to support other FIBO domains. These include concepts and relationships about people, organizations, places, and most importantly, contracts that are essential to domains such as Business Entities (BE), Financial Business and Commerce (FBC), Indices and Indicators (IND), and Securities (SEC). 
+
+The scope of the definitions provided in FND is limited to coverage of exactly those concepts needed by other FIBO specifications.  They may be useful for other domains, such as insurance, but are intentionally underspecified to avoid unintended consequences and thus do not provide exhaustive coverage for any concept contained herein.  However, Foundations is designed for growth over time.  The expectation is that as additional foundational knowledge is needed to define concepts in other FIBO domain areas, additional ontologies and/or concepts will be integrated into Foundations as required.""" ;
+	dct:creator "https://spec.edmcouncil.org/fibo/fct/Foundations"^^xsd:anyURI ;
+	dct:hasPart
+		fibo-fnd-acc-mod:AccountingModule ,
+		fibo-fnd-accx-mod:AccountingExtModule ,
+		fibo-fnd-aap-mod:AgentsAndPeopleModule ,
+		fibo-fnd-agr-mod:AgreementsModule ,
+		fibo-fnd-agrx-mod:AgreementsExtModule ,
+		fibo-fnd-arr-mod:ArrangementsModule ,
+		fibo-fnd-arrxx-mod:ArrangementsExtModule ,
+		fibo-fnd-dt-mod:DatesAndTimesModule ,
+		fibo-fnd-gao-mod:GoalsAndObjectivesModule ,
+		fibo-fnd-inf-mod:InformationExtModule ,
+		fibo-fnd-law-mod:LawModule ,
+		fibo-fnd-math-mod:MathExtModule ,
+		fibo-fnd-org-mod:OrganizationsModule ,
+		fibo-fnd-oac-mod:OwnershipAndControlModule ,
+		fibo-fnd-pty-mod:PartiesModule ,
+		fibo-fnd-plc-mod:PlacesModule ,
+		fibo-fnd-plcx-mod:PlacesExtModule ,
+		fibo-fnd-pas-mod:ProductsAndServicesModule ,
+		fibo-fnd-qt-mod:QuantitiesModule ,
+		fibo-fnd-rel-mod:RelationsModule ,
+		fibo-fnd-risk-mod:RiskExtModule ,
+		fibo-fnd-tim-mod:TimeExtModule ,
+		fibo-fnd-txn-mod:TransactionsExtModule ,
+		fibo-fnd-utl-mod:UtilitiesModule
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Foundations (FND) Domain" ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		"http://www.omg.org/techprocess/ab/SpecificationMetadata/"^^xsd:anyURI ,
+		"https://www.omg.org/spec/LCC/"^^xsd:anyURI
+		;
+	sm:keyword "foundational vocabulary" ;
+	sm:moduleAbbreviation "fibo-fnd" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/> ;
+	rdfs:seeAlso "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	.
+

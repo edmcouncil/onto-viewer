@@ -1,0 +1,491 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Lifecycles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Facilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://www.omg.org/spec/LCC/Countries/CountryRepresentation/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-fct: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-fbc-fct-breg: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/> .
+@prefix fibo-fbc-fct-mkt: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-fct-rga: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-aap-agt: <https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/> .
+@prefix fibo-fnd-arr-arr: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/> .
+@prefix fibo-fnd-arr-id: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/> .
+@prefix fibo-fnd-arr-lif: <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Lifecycles/> .
+@prefix fibo-fnd-law-jur: <https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/> .
+@prefix fibo-fnd-org-fm: <https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/> .
+@prefix fibo-fnd-plc-cty: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Countries/> .
+@prefix fibo-fnd-plc-fac: <https://spec.edmcouncil.org/fibo/ontology/FND/Places/Facilities/> .
+@prefix fibo-fnd-pty-rl: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix lcc-cr: <https://www.omg.org/spec/LCC/Countries/CountryRepresentation/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/>
+	a owl:Ontology ;
+	rdfs:label "Markets Ontology" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:" ;
+	dct:abstract "This ontology defines the fundamental concepts for markets, exchanges, regulated markets, and multilateral trading facilities for use in the development of downstream FIBO domain ontologies that require them." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2015-2019 EDM Council, Inc." ,
+		"Copyright (c) 2015-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/BE/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/> ,
+		<https://www.omg.org/spec/LCC/>
+		;
+	sm:fileAbbreviation "fibo-fbc-fct-mkt" ;
+	sm:filename "Markets.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/IdentifiersAndIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Lifecycles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Countries/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Facilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://www.omg.org/spec/LCC/Countries/CountryRepresentation/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/> ;
+	skos:changeNote
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/ version of this ontology was modified per the FIBO 2.0 RFC." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/ version of this ontology was modified to eliminate deprecated elements." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/ version of this ontology was modified to generalize certain unions where they were no longer required and to move international registration authorities individuals to a separate ontology for better modularity." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/ version of this ontology was modified to reflect issue resolutions detailed in the FIBO FBC 1.0 RTF report."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fbc-fct-mkt:ActiveMICStatus
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-mkt:MarketIdentifierCodeStatus
+		;
+	rdfs:label "active MIC status" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:ActiveMICStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "as of the last report or update, the exchange code was registered and actively in use" ;
+	fibo-fnd-rel-rel:hasTag "ACTIVE" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:DeletedMICStatus
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-mkt:MarketIdentifierCodeStatus
+		;
+	rdfs:label "deleted MIC status" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:DeletedMICStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "as of the last report or update, the exchange code was deleted" ;
+	fibo-fnd-rel-rel:hasTag "DELETED" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:Exchange
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-plc-fac:Facility ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-breg:hasWebsite ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-mkt:hasExchangeAcronym ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+			owl:onDataRange xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-mkt:operatesInMunicipality ;
+			owl:onClass fibo-fnd-plc-cty:Municipality ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-mkt:operatesInCountry ;
+			owl:onClass lcc-cr:Country ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-mkt:hasExchangeName ;
+			owl:someValuesFrom xsd:string ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:someValuesFrom fibo-fbc-fct-mkt:MarketIdentifier ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-fnd-org-fm:FormalOrganization ;
+		]
+		;
+	rdfs:label "exchange" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:Exchange" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "any organization, association, or group of persons, whether incorporated or unincorporated, which constitutes, maintains, or provides a facility for bringing together purchasers and sellers of financial instruments, commodities, or other products, services, or goods, and includes the market place and facilities maintained by such exchange" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ,
+		"Securities Exchange Act of 1934, as amended 12 August 2012"
+		;
+	fibo-fnd-utl-av:synonym "market" ;
+	.
+
+fibo-fbc-fct-mkt:MarketIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-arr-id:Identifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:identifies ;
+			owl:onClass fibo-fbc-fct-mkt:Exchange ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-mkt:hasOperatingOrSegmentIndicator ;
+			owl:onDataRange xsd:string ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "market identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:MarketIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "an identifier and code that specifies a universal method of identifying exchanges, trading platforms and regulated or non-regulated markets as sources of prices and related information in order to facilitate automated processing, i.e., stock exchanges, regulated markets, e.g., Electronic Trading Platforms (ECN), and unregulated markets, e.g., Automated Trading Systems (ATS)" ;
+	fibo-fnd-utl-av:abbreviation "MIC" ;
+	fibo-fnd-utl-av:adaptedFrom
+		"ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ,
+		"https://www.anna-web.org/standards/mic-iso-10383/"^^xsd:anyURI ,
+		"https://www.iso20022.org/10383/iso-10383-market-identifier-codes"^^xsd:anyURI
+		;
+	fibo-fnd-utl-av:explanatoryNote """It is intended for use in any application and communication for identification of places
+- where a financial instrument is listed (place of official listing),
+- where a related trade is executed (place of trade), and
+- where trade details are reported (trade reporting facility).""" ;
+	fibo-fnd-utl-av:synonym "Market Identifier Code" ;
+	.
+
+fibo-fbc-fct-mkt:MarketIdentifierCodeStatus
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arr-lif:LifecycleStage ;
+	rdfs:label "market indicator code status" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:MarketIdentifierCodeStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "a lifecycle stage indicating the status of the MIC code, as specified by the registration authority" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.iso20022.org/10383/iso-10383-market-identifier-codes"^^xsd:anyURI ;
+	.
+
+fibo-fbc-fct-mkt:MarketSegmentLevelMarket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:Exchange ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:onClass fibo-fbc-fct-mkt:MarketSegmentLevelMarketIdentifier ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-arr-arr:isConstituentOf ;
+			owl:onClass fibo-fbc-fct-mkt:OperatingLevelMarket ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "market segment-level market" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:MarketSegmentLevelMarket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "an exchange/market/trade reporting facility that specializes in one or more specific instruments or that is regulated uniquely from the operating-level market that manages it" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:MarketSegmentLevelMarketIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:MarketIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-mkt:hasOperatingOrSegmentIndicator ;
+			owl:hasValue "S" ;
+		]
+		;
+	rdfs:label "market segment-level market identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:MarketSegmentLevelMarketIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "a market identifier that identifies a section of an exchange/market/trade reporting facility that specializes in one or more specific instruments or that is regulated differently" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:ModifiedMICStatus
+	a
+		owl:NamedIndividual ,
+		fibo-fbc-fct-mkt:MarketIdentifierCodeStatus
+		;
+	rdfs:label "modified MIC status" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:ModifiedMICStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "as of the last report or update, the exchange code was revised" ;
+	fibo-fnd-rel-rel:hasTag "MODIFIED" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:MultilateralTradingFacility
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:Exchange ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:allValuesFrom fibo-fbc-pas-fpas:FinancialServiceProvider ;
+		]
+		;
+	rdfs:label "multilateral trading facility" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:MultilateralTradingFacility" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "a trading system that facilitates the exchange of financial instruments between multiple parties" ;
+	fibo-fnd-utl-av:abbreviation "MTF" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/m/multilateral_trading_facility.asp" ;
+	fibo-fnd-utl-av:explanatoryNote "Multilateral trading facilities allow eligible contract participants to gather and transfer a variety of securities, especially instruments that may not have an official market. These facilities are often electronic systems controlled by approved market operators or larger investment banks. Traders will usually submit orders electronically, where a matching software engine is used to pair buyers with sellers." ;
+	.
+
+fibo-fbc-fct-mkt:OperatingLevelMarket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:Exchange ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-aap-agt:isIdentifiedBy ;
+			owl:someValuesFrom fibo-fbc-fct-mkt:OperatingLevelMarketIdentifier ;
+		]
+		;
+	rdfs:label "operating-level market" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:OperatingLevelMarket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "an exchange/market/trade/reporting facility that operates in a specific market/country" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:OperatingLevelMarketIdentifier
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:MarketIdentifier ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-mkt:hasOperatingOrSegmentIndicator ;
+			owl:hasValue "O" ;
+		]
+		;
+	rdfs:label "operating-level market identifier" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:OperatingLevelMarketIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "a market identifier that identifies an entity operating an exchange/market/trade/reporting facility that operates in a specific market/country" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:OrganizedTradingFacility
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:Exchange ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:allValuesFrom fibo-fbc-pas-fpas:FinancialServiceProvider ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		]
+		;
+	rdfs:label "organized trading facility" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:OrganizedTradingFacility" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	owl:disjointWith
+		fibo-fbc-fct-mkt:MultilateralTradingFacility ,
+		fibo-fbc-fct-mkt:RegulatedMarket
+		;
+	skos:definition "a multi-lateral system which is not an RM or an MTF and in which multiple third-party buying and selling interests in bonds, structured finance products, emission allowances or derivatives are able to interact in the system in a way that results in a contract in accordance with the provisions of Title II of MiFID II" ;
+	fibo-fnd-utl-av:abbreviation "OTF" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.marketswiki.com/mwiki/Organized_Trading_Facility" ;
+	fibo-fnd-utl-av:explanatoryNote
+		"""OTFs were introduced by the European Commission as part of MiFID II and are focused on non-equities such as derivatives and cash bond markets.
+
+OTFs are intended to be similar in scope to a swap execution facility (SEF), a type of entity created by the Dodd-Frank Act in the U.S. The goal of SEFs and OTFs is to bring transparency and structure to OTC derivatives trading.""" ,
+		"Unlike RMs and MTFs, operators of OTFs will have discretion as to how to execute orders, subject to pre-transparency and best execution obligations."
+		;
+	.
+
+fibo-fbc-fct-mkt:RegisteredMultilateralTradingFacility
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:MultilateralTradingFacility ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:isRegisteredBy ;
+			owl:someValuesFrom fibo-fbc-fct-ra:RegistrationAuthority ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isManagedBy ;
+			owl:someValuesFrom fibo-fbc-pas-fpas:FinancialServiceProvider ;
+		]
+		;
+	rdfs:label "registered multilateral trading facility" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:RegisteredMultilateralTradingFacility" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "a multilateral system operated by an investment firm or market operator, which brings together multiple third-party buying and selling interests in financial instruments in the system, in accordance with non-discretionary rules, in a way that results in a contract in accordance with the provisions of Title II of the MiFID II" ;
+	.
+
+fibo-fbc-fct-mkt:RegulatedMarket
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fct-mkt:Exchange ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-rga:isRegulatedBy ;
+			owl:someValuesFrom fibo-fbc-fct-rga:RegulatoryAgency ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:isGovernedBy ;
+			owl:someValuesFrom fibo-fnd-law-jur:Jurisdiction ;
+		]
+		;
+	rdfs:label "regulated market" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:RegulatedMarket" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "a medium for the exchange of goods or services over which a government body exerts a level of control. This control may require market participants to comply with environmental standards, product-safety specifications, information disclosure requirements and so on." ;
+	fibo-fnd-utl-av:abbreviation "RM" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/r/regulated-market.asp" ;
+	fibo-fnd-utl-av:explanatoryNote "In the financial community in the EU, a regulated market is more specifically defined as a multilateral system operated by and/or managed by a market operator, which brings together or facilitates the bringing together of multiple third-party buying and selling interests in financial instruments - in the system and in accordance with its non-discretionary rules - in a way that results in a contract, in respect of the financial instruments admitted to trading under its rules and/or systems, and which is authorised and functions regularly and in accordance with the provisions of Title III of MiFID II." ;
+	.
+
+fibo-fbc-fct-mkt:SystematicInternaliser
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-fct-mkt:Exchange ;
+	rdfs:label "systematic internaliser" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:SystematicInternaliser" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	skos:definition "an investment firm that, on an organised, frequent, systematic and substantial basis, deals on its own account by executing client orders outside a regulated market, MTF or OTF without operating a multilateral system" ;
+	fibo-fnd-utl-av:abbreviation "SI" ;
+	fibo-fnd-utl-av:adaptedFrom "https://www.emissions-euets.com/systematic-internaliser" ;
+	.
+
+fibo-fbc-fct-mkt:hasExchangeAcronym
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasAlias ;
+	rdfs:label "has exchange acronym" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:hasExchangeAcronym" ;
+	rdfs:domain fibo-fbc-fct-mkt:Exchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	rdfs:range xsd:string ;
+	skos:definition "indicates an acronym for the exchange / institution" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:hasExchangeName
+	a owl:DatatypeProperty ;
+	rdfs:subPropertyOf fibo-fnd-rel-rel:hasLegalName ;
+	rdfs:label "has exchange name" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:hasExchangeName" ;
+	rdfs:domain fibo-fbc-fct-mkt:Exchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	rdfs:range xsd:string ;
+	skos:definition "indicates the name or description of the exchange / institution (which may be different from the name of the legal entity)" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:hasMarketIdentifierCodeStatus
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-arr-lif:hasStage ;
+	rdfs:label "has market identifier code status" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:hasMarketIdentifierCodeStatus" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	rdfs:range fibo-fbc-fct-mkt:MarketIdentifierCodeStatus ;
+	skos:definition "indicates the status of a specific market identifier code (MIC)" ;
+	.
+
+fibo-fbc-fct-mkt:hasOperatingOrSegmentIndicator
+	a owl:DatatypeProperty ;
+	rdfs:label "has operating or segment indicator" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:hasOperatingOrSegmentIndicator" ;
+	rdfs:domain fibo-fbc-fct-mkt:MarketIdentifier ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	rdfs:range xsd:string ;
+	skos:definition "indicates whether the market identifier is for an operating exchange or market segment exchange" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 10383, Securities and related financial instruments - Codes for exchanges and market identification (MIC), Third edition, 2012-10-01" ;
+	.
+
+fibo-fbc-fct-mkt:operatesInCountry
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fbc-fct-breg:hasCountry ;
+	rdfs:label "operates in country" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:operatesInCountry" ;
+	rdfs:domain fibo-fbc-fct-mkt:Exchange ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	rdfs:range lcc-cr:Country ;
+	skos:definition "indicates the country in which the exchange is registered and operates" ;
+	.
+
+fibo-fbc-fct-mkt:operatesInMunicipality
+	a owl:DatatypeProperty ;
+	rdfs:label "operates in municipality" ;
+	rdfs:comment "QName: fibo-fbc-fct-mkt:operatesInMunicipality" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/> ;
+	rdfs:range fibo-fnd-plc-cty:Municipality ;
+	skos:definition "indicates the municipality or business center in which the exchange is registered and operates" ;
+	.
+

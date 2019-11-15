@@ -1,0 +1,191 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: http://www.w3.org/2004/02/skos/core
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/>
+	a owl:Ontology ;
+	rdfs:label "Annotation Vocabulary" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:" ;
+	dct:abstract """This vocabulary provides a set of metadata annotations for use in describing FIBO ontology elements.  The annotations extend properties defined in the OMG's Specification Metadata Recommendation, in the Dublin Core Metadata Terms Vocabulary and in the W3C Simple Knowledge Organization System (SKOS) Vocabulary, and have been customized to suit the FIBO specification development process.  
+
+Note that any of the original properties provided in Dublin Core and SKOS can be used in addition to the terms provided herein.  However, any Dublin Core terms that are not explicitly defined as OWL annotation properties in this ontology or in any of its imports must be so declared in the ontologies that use them.""" ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2013-2019 EDM Council, Inc." ,
+		"Copyright (c) 2013-2019 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-fnd-utl-av" ;
+	sm:filename "AnnotationVocabulary.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<http://www.w3.org/2004/02/skos/core>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ;
+	skos:changeNote
+		"The http://www.omg.org/spec/EDMC-FIBO/FND/20130801/Utilities/AnnotationVocabulary.rdf version of this ontology was modified per the issue resolutions identified in the FIBO FND 1.0 FTF report and in http://www.omg.org/spec/EDMC-FIBO/FND/1.0/AboutFND-1.0/." ,
+		"""The http://www.omg.org/spec/FIBO/Foundations/20130601/Utilities/AnnotationVocabulary.owl version of the ontology was revised in advance of the September 2013 New Brunswick, NJ meeting, as follows:
+   (1) to use slash style URI/IRIss (also called 303 URIs, vs. hash style) as required to support server side processing 
+   (2) to use version-independent IRIs for all definitions internally as opposed to version-specific IRIs
+   (3) to change the file suffix from .owl to .rdf to increase usability in RDF tools
+   (4) to use 4-level abbreviations and corresponding namespace prefixes for all FIBO ontologies, reflecting a family/specification/module/ontology structure
+   (5) to incorporate changes to the specification metadata to support documentation at the family, specification, module, and ontology level, similar to the abbreviations""" ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary.rdf version of this ontology was modified to add the symbol annotation." ,
+		"The https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary.rdf version of this ontology was modified to eliminate deprecated properties."
+		;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-fnd-utl-av:Informative
+	a fibo-fnd-utl-av:MaturityLevel ;
+	rdfs:label "informative" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:Informative" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "This entity has been excluded from publication, but appears here for informational purposes only.  Typically, there is one or more provisional entity that refers to it."@en ;
+	.
+
+fibo-fnd-utl-av:MaturityLevel
+	a owl:Class ;
+	rdfs:subClassOf skos:Concept ;
+	rdfs:label "maturity level" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:MaturityLevel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "Level of development in some lifecycle that an artifact has reached" ;
+	.
+
+fibo-fnd-utl-av:Provisional
+	a fibo-fnd-utl-av:MaturityLevel ;
+	rdfs:label "provisional" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:Provisional" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "Developmental maturity;  someone has proposed this, but it hasn't been approved for release"@en ;
+	.
+
+fibo-fnd-utl-av:Release
+	a fibo-fnd-utl-av:MaturityLevel ;
+	rdfs:label "release" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:Release" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "The most mature level of maturity. Approved for release to the general public"@en ;
+	.
+
+fibo-fnd-utl-av:abbreviation
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf skos:altLabel ;
+	rdfs:label "abbreviation" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:abbreviation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "An abbreviation is short form for a particular designation that can be substituted for the primary representation." ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 1087-1 Terminology work - Vocabulary" ;
+	.
+
+fibo-fnd-utl-av:adaptedFrom
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf sm:directSource ;
+	rdfs:label "adapted from" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:adaptedFrom" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "the document from which a given term (or its definition) was adapted; the range for this annotation can be a string, URI, or BibliographicCitation" ;
+	.
+
+fibo-fnd-utl-av:definitionOrigin
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf sm:directSource ;
+	rdfs:label "definition origin" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:definitionOrigin" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "Document from which a given definition was taken directly; the range for this annotation can be a string, URI, or BibliographicCitation" ;
+	.
+
+fibo-fnd-utl-av:explanatoryNote
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf skos:note ;
+	rdfs:label "explanatory note" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:explanatoryNote" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "a note that provides additional explanatory information about a given concept" ;
+	.
+
+fibo-fnd-utl-av:hasMaturityLevel
+	a owl:AnnotationProperty ;
+	rdfs:label "has maturity level" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:hasMaturityLevel" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "links something to its state with respect to a development lifecycle" ;
+	.
+
+fibo-fnd-utl-av:logicalDefinition
+	a owl:AnnotationProperty ;
+	rdfs:label "logical definition" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:logicalDefinition" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "describes the OWL logic of a class in natural language" ;
+	.
+
+fibo-fnd-utl-av:modifiedBy
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf sm:contributor ;
+	rdfs:label "modified by" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:modifiedBy" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "identifies the organization or person responsible for making a change to a model element in the body of an ontology" ;
+	.
+
+fibo-fnd-utl-av:modifiedOn
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf dct:modified ;
+	rdfs:label "modified on" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:modifiedOn" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "identifies the date a model element in the body of an ontology was changed" ;
+	.
+
+fibo-fnd-utl-av:symbol
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf fibo-fnd-utl-av:abbreviation ;
+	rdfs:label "symbol" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:symbol" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "abbreviation that is a design, mark, or character(s) used conventionally to represent something, such as a currency, quantity, or variable in an expression" ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 31-0 Quantities and units - General principles" ;
+	fibo-fnd-utl-av:explanatoryNote "The symbols for quantities are generally single letters of the Latin or Greek alphabet, sometimes with subscripts or other modifying signs." ;
+	.
+
+fibo-fnd-utl-av:synonym
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf skos:altLabel ;
+	rdfs:label "synonym" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:synonym" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "A synonym is another designation that can be substituted for the primary representation. It is a designation for the same concept." ;
+	fibo-fnd-utl-av:adaptedFrom "ISO 1087-1 Terminology work - Vocabulary" ;
+	.
+
+fibo-fnd-utl-av:termOrigin
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf sm:directSource ;
+	rdfs:label "term origin" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:termOrigin" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "Document from which a given term was taken directly; the range for this annotation can be a string, URI, or BibliographicCitation" ;
+	.
+
+fibo-fnd-utl-av:usageNote
+	a owl:AnnotationProperty ;
+	rdfs:subPropertyOf skos:note ;
+	rdfs:label "usage note" ;
+	rdfs:comment "QName: fibo-fnd-utl-av:usageNote" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> ;
+	skos:definition "a note that provides information about how a given concept is used in the FIBO context" ;
+	.
+

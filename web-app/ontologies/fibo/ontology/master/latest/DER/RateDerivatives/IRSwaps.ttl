@@ -1,0 +1,754 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/IRSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/ParametricSchedules/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/IRSwaps/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-drc-swp: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> .
+@prefix fibo-der-rtd-irswp: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> .
+@prefix fibo-der-rtd-rtd: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-fct-ra: <https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/> .
+@prefix fibo-fbc-pas-fpas: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-bd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-pas-psch: <https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/> .
+@prefix fibo-fnd-qt-qtu: <https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-utl-alx: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-ind-ei-ei: <https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/> .
+@prefix fibo-ind-ir-ir: <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/> .
+@prefix fibo-sec-sec-sch: <https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/ParametricSchedules/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/>
+	a owl:Ontology ;
+	rdfs:label "Interest Rate Swaps Ontology" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:" ;
+	dct:abstract "This ontology defines concepts specific to interest rate swap contracts, including but not limited to fixed and floating rate combinations, single and cross-currency contracts, etc." ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage <http://www.w3.org/standards/techs/owl#w3c_all> ;
+	sm:copyright
+		"Copyright (c) 2016-2019 EDM Council, Inc." ,
+		"Copyright (c) 2016-2019 Object Management Group, Inc."
+		;
+	sm:dependsOn
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FBC/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/FND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/IND/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/SEC/>
+		;
+	sm:fileAbbreviation "fibo-der-rtd-irswp" ;
+	sm:filename "IRSwaps.rdf" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Swaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/ParametricSchedules/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/IRSwaps/> ;
+	skos:changeNote "The https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps.rdf version of this ontology was modified to use the generic statistical measures and measurements now in FND." ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Release ;
+	.
+
+fibo-der-rtd-irswp:CrossCurrencyInterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-irswp:InterestRateSwap ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:onClass fibo-fnd-acc-cur:Currency ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "cross-currency interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:CrossCurrencyInterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "an interest rate swap in which the two streams of interest payments are in different currencies" ;
+	.
+
+fibo-der-rtd-irswp:ExplicitInterestAmountCalculationEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-irswp:InterestRateStreamEvent ,
+		fibo-sec-sec-sch:ScheduledCalculationPeriodEndEvent
+		;
+	rdfs:label "explicit interest amount calculation event" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:ExplicitInterestAmountCalculationEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "the explicit representation of the calculation event in a given period, in which an interest payment is calculated based on the rate (fixed or floating) and the notional amount (in the payment currency, and factored for Fx if necessary), on a given date" ;
+	.
+
+fibo-der-rtd-irswp:FixedFloatCrossCurrencyInterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-irswp:CrossCurrencyInterestRateSwap ,
+		fibo-der-rtd-irswp:FixedFloatInterestRateSwap
+		;
+	rdfs:label "fixed float cross-currency interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:FixedFloatCrossCurrencyInterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-rtd-irswp:CrossCurrencyInterestRateSwap
+			fibo-der-rtd-irswp:FixedFloatInterestRateSwap
+		) ;
+	] ;
+	skos:definition "an interest rate swap in which fixed interest payments on the notional are exchanged for floating interest payments and the two streams of interest payments are in different currencies" ;
+	fibo-fnd-utl-av:synonym
+		"fixed float cross currency interest rate swap" ,
+		"fixed-float cross-currency interest rate swap"
+		;
+	.
+
+fibo-der-rtd-irswp:FixedFloatInterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-irswp:InterestRateSwap ,
+		[
+			a owl:Class ;
+			owl:intersectionOf (
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-der-drc-swp:exchanges ;
+					owl:someValuesFrom fibo-der-rtd-irswp:FixedInterestRateLeg ;
+				]
+				[
+					a owl:Restriction ;
+					owl:onProperty fibo-der-drc-swp:exchanges ;
+					owl:someValuesFrom fibo-der-rtd-irswp:FloatingInterestRateLeg ;
+				]
+			) ;
+		]
+		;
+	rdfs:label "fixed float interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:FixedFloatInterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-rtd-irswp:InterestRateSwap
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-der-drc-swp:hasLeg ;
+				owl:someValuesFrom fibo-der-rtd-irswp:FixedInterestRateLeg ;
+			]
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-der-drc-swp:hasLeg ;
+				owl:someValuesFrom fibo-der-rtd-irswp:FloatingInterestRateLeg ;
+			]
+		) ;
+	] ;
+	skos:definition "an interest rate swap in which fixed interest payments on the notional are exchanged for floating interest payments" ;
+	fibo-fnd-utl-av:synonym
+		"fixed-float interest rate swap" ,
+		"vanilla interest rate swap"
+		;
+	.
+
+fibo-der-rtd-irswp:FixedFloatSingleCurrencyInterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-rtd-irswp:FixedFloatInterestRateSwap ;
+	rdfs:label "fixed float single currency interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:FixedFloatSingleCurrencyInterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-rtd-irswp:FixedFloatInterestRateSwap
+			fibo-der-rtd-irswp:SingleCurrencyInterestRateSwap
+		) ;
+	] ;
+	skos:definition "an interest rate swap in which fixed interest payments on the notional are exchanged for floating interest payments and where both payment streams are expressed in terms of the same currency" ;
+	fibo-fnd-utl-av:synonym "fixed-float single-currency interest rate swap" ;
+	.
+
+fibo-der-rtd-irswp:FixedInterestRateLeg
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-rtd-irswp:InterestRateSwapLeg ;
+	rdfs:label "fixed interest rate leg" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:FixedInterestRateLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:disjointWith fibo-der-rtd-irswp:FloatingInterestRateLeg ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-rtd-irswp:InterestRateSwapLeg
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fbc-dae-dbt:hasInterestRate ;
+				owl:someValuesFrom fibo-fbc-dae-dbt:FixedInterestRate ;
+			]
+		) ;
+	] ;
+	skos:definition "a swap stream that specifies fixed interest amounts and terms for the payment of that interest" ;
+	skos:editorialNote "This may be the funding leg of some swaps (i.e. one party agrees to pay fixed interest amounts in exchange for whatever is the other leg) or it may be one or both sides of an Interest Rate Swap, where the two parties exchange different interest streams. Note that the FpML term on which this Swapstream term was based, is the one for asset return swaps, where this is the payment leg. This is the leg which has interest amounts, interest calculations and calculation dates, and optional stub calculation terms. It should be possible to relate this to the specific interest payments of an underlier if there is one." ;
+	fibo-fnd-utl-av:synonym "fixed interest rate swap stream" ;
+	.
+
+fibo-der-rtd-irswp:FloatFloatCrossCurrencyInterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-rtd-irswp:FloatFloatInterestRateSwap ;
+	rdfs:label "float float cross-currency interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:FloatFloatCrossCurrencyInterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-rtd-irswp:CrossCurrencyInterestRateSwap
+			fibo-der-rtd-irswp:FloatFloatInterestRateSwap
+		) ;
+	] ;
+	skos:definition "an interest rate swap that exchanges cashflows based on two different interest rates in different currencies" ;
+	fibo-fnd-utl-av:synonym "float-float cross-currency interest rate swap" ;
+	.
+
+fibo-der-rtd-irswp:FloatFloatInterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:BasisSwap ,
+		fibo-der-rtd-irswp:InterestRateSwap ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:exchanges ;
+			owl:onClass fibo-der-rtd-irswp:FloatingInterestRateLeg ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "float float interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:FloatFloatInterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-rtd-irswp:InterestRateSwap
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-der-drc-swp:hasLeg ;
+				owl:onClass fibo-der-rtd-irswp:FloatingInterestRateLeg ;
+				owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+			]
+		) ;
+	] ;
+	skos:definition "an interest rate swap that exchanges cashflows based on two different floating interest rates" ;
+	fibo-fnd-utl-av:adaptedFrom "http://www.investopedia.com/terms/b/basisrateswap.asp"^^xsd:anyURI ;
+	fibo-fnd-utl-av:explanatoryNote "This is a swap in which two parties swap variable interest rates based on different money markets, and this is usually done to limit interest-rate risk that a company faces as a result of having differing lending and borrowing rates." ;
+	fibo-fnd-utl-av:synonym
+		"basis rate swap" ,
+		"float-float interest rate swap"
+		;
+	.
+
+fibo-der-rtd-irswp:FloatFloatSingleCurrencyInterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-rtd-irswp:FloatFloatInterestRateSwap ;
+	rdfs:label "float float single currency interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:FloatFloatSingleCurrencyInterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-rtd-irswp:FloatFloatInterestRateSwap
+			fibo-der-rtd-irswp:SingleCurrencyInterestRateSwap
+		) ;
+	] ;
+	skos:definition "an interest rate swap that exchanges cashflows based on two different floating interest rates in the same currency" ;
+	fibo-fnd-utl-av:synonym "float-float single-currency interest rate swap" ;
+	.
+
+fibo-der-rtd-irswp:FloatingInterestRateLeg
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-irswp:InterestRateSwapLeg ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-rtd-irswp:hasInterestCalculationSchedule ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestCalculationSchedule ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-rtd-irswp:hasInterestRateResetSchedule ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestRateResetSchedule ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestRateReset ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestRateSettingEvent ;
+		]
+		;
+	rdfs:label "floating interest rate leg" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:FloatingInterestRateLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-rtd-irswp:InterestRateSwapLeg
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fbc-dae-dbt:hasInterestRate ;
+				owl:someValuesFrom fibo-fbc-dae-dbt:FloatingInterestRate ;
+			]
+		) ;
+	] ;
+	skos:definition "a swapstream in which variable interest is paid on some notional amount, linked to some underlying interest reference rate" ;
+	skos:editorialNote "Instead of an absolute rate you have an underlier and an offset called a spread (same as margin in floating rate notes)." ;
+	fibo-fnd-utl-av:synonym "floating interest rate swap stream" ;
+	.
+
+fibo-der-rtd-irswp:InterestRateStreamEvent
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-drc-swp:SwapStreamEvent ;
+	rdfs:label "interest rate stream event" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:InterestRateStreamEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "an interest-rate specific event occurring with respect to one leg of a swap" ;
+	.
+
+fibo-der-rtd-irswp:InterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:Swap ,
+		fibo-der-rtd-rtd:InterestRateDerivativeInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:exchanges ;
+			owl:onClass fibo-der-rtd-irswp:InterestRateSwapLeg ;
+			owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:InterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-drc-swp:Swap
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-der-drc-swp:hasLeg ;
+				owl:onClass fibo-der-rtd-irswp:InterestRateSwapLeg ;
+				owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+			]
+		) ;
+	] ;
+	skos:definition "a swap in which the underlier for one or both legs is an interest rate" ;
+	.
+
+fibo-der-rtd-irswp:InterestRateSwapLeg
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-drc-swp:SwapLeg ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:onClass fibo-der-rtd-irswp:NotionalStepChangeEvent ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-rtd-irswp:hasNotionalStepSchedule ;
+			owl:onClass fibo-der-rtd-irswp:NotionalStepSchedule ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:onClass fibo-fnd-acc-cur:Currency ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-swp:hasPaymentSchedule ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestPaymentSchedule ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-rtd-irswp:InterestRateStreamEvent ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestCalculation ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestPayment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-bd:hasBusinessRecurrenceIntervalConvention ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:DayCountConvention ;
+		]
+		;
+	rdfs:label "interest rate swap leg" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:InterestRateSwapLeg" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	owl:equivalentClass [
+		a owl:Class ;
+		owl:intersectionOf (
+			fibo-der-drc-swp:SwapLeg
+			[
+				a owl:Restriction ;
+				owl:onProperty fibo-fbc-dae-dbt:hasInterestRate ;
+				owl:someValuesFrom fibo-fnd-acc-cur:InterestRate ;
+			]
+		) ;
+	] ;
+	skos:definition "the components specifiying an interest rate stream, including both a parametric and cashflow representation for the stream of payments" ;
+	skos:editorialNote "In IR markets there is no real distinction between an IR leg and a return leg, rather there are 2 funding legs." ;
+	fibo-fnd-utl-av:synonym "interest rate swap stream" ;
+	.
+
+fibo-der-rtd-irswp:NotionalStepAmount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-qt-qtu:QuantityValue ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-acc-cur:hasNotionalAmount ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-fnd-acc-cur:MonetaryAmount
+					fibo-fnd-acc-cur:PercentageMonetaryAmount
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "notional step amount" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:NotionalStepAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "the amount of money that is subtracted from the notional on each step date" ;
+	skos:editorialNote "Note that this is an actual concrete sum of money, which may be specified either as a monetary amount (e.g. dollars and cents) or as a percentage of either the original notional amount or the previous notional amount." ;
+	.
+
+fibo-der-rtd-irswp:NotionalStepChangeEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-irswp:InterestRateStreamEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDate ;
+			owl:someValuesFrom fibo-fnd-dt-fd:CalculatedDate ;
+		]
+		;
+	rdfs:label "notional step change event" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:NotionalStepChangeEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "an event on which a step change in the notional amount of the swap stream occurs" ;
+	skos:editorialNote "This always occurs on a calculation date (that is, one of the calculation period end dates). Therefore the frequency / period length of the steps in the step schedule is a multiple of the calculation period or frequency. For example, if the notional is recalculated on every calculation date, applying a new interest rate to the new notional amount, then the two frequencies are the same. If notional is updated every second calculation period, then the step schedule specifies periods that are twice as long, and so on." ;
+	.
+
+fibo-der-rtd-irswp:NotionalStepPercentageAmount
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-acc-cur:PercentageMonetaryAmount ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-qt-qtu:hasQuantityKind ;
+			owl:allValuesFrom fibo-fnd-acc-cur:MonetaryMeasure ;
+		]
+		;
+	rdfs:label "notional step percentage amount" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:NotionalStepPercentageAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "the percentage amount by which the notional changes on each step date" ;
+	skos:editorialNote "The percentage is either a percentage applied to the initial notional amount or the previous outstanding notional, and may be positive or negative." ;
+	.
+
+fibo-der-rtd-irswp:NotionalStepPeriodLength
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-dt-fd:RecurrenceInterval ;
+	rdfs:label "notional step period length" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:NotionalStepPeriodLength" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "a recurrence interval indicating the frequency with which step changes occur, which is a multiple of the calculation period in the calculation schedule" ;
+	.
+
+fibo-der-rtd-irswp:NotionalStepSchedule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-sec-sch:ParametricSchedule ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:someValuesFrom fibo-der-rtd-irswp:NotionalStepAmount ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:refersTo ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestCalculationSchedule ;
+		]
+		;
+	rdfs:label "notional step schedule" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:NotionalStepSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "schedule of changes in the notional amount on which interest is paid, comprising the regular sequence of step events" ;
+	skos:editorialNote "For the Notional Step Schedule there are no stubs." ;
+	.
+
+fibo-der-rtd-irswp:SingleCurrencyInterestRateSwap
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-irswp:InterestRateSwap ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fct-ra:specifies ;
+			owl:onClass fibo-fnd-acc-cur:Currency ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		]
+		;
+	rdfs:label "single currency interest rate swap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SingleCurrencyInterestRateSwap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "an interest rate swap in which the two streams of interest payments are in the same currency" ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamCalculationRelativeDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:RelativeDate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:isRelativeTo ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestRateResetSchedule ;
+		]
+		;
+	rdfs:label "swap stream calculation relative date" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamCalculationRelativeDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "a calculation date that is relative to the rate reset schedule" ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamInterestCalculation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-utl-alx:Expression ;
+	rdfs:label "swapstream interest calculation" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamInterestCalculation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "an expression that represents a calculation of interest" ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamInterestCalculationSchedule
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-sch:ParametricSchedule ;
+	rdfs:label "swap stream interest calculation schedule" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamInterestCalculationSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "a parametric schedule that represents the dates on which interest is calculated" ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamInterestPayment
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pas-psch:Payment ;
+	rdfs:label "swap stream interest payment" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamInterestPayment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "an event involving the payment of interest for a given swap leg" ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamInterestPaymentSchedule
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-pas-psch:PaymentSchedule ,
+		fibo-sec-sec-sch:ParametricSchedule
+		;
+	rdfs:label "swap stream interest payment schedule" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamInterestPaymentSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "a parametric schedule that represents the dates on which interest is due to be paid" ;
+	skos:editorialNote "These may more commonly be expressed as an offset of the Calculation dates, however the creation of a schedule specifically for payment dates is allowed for." ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamInterestRateReset
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-rtd-irswp:InterestRateStreamEvent ;
+	rdfs:label "swap stream interest rate reset" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamInterestRateReset" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "an event on which an interest rate for a given swap stream changes (resets)" ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamInterestRateResetSchedule
+	a owl:Class ;
+	rdfs:subClassOf fibo-sec-sec-sch:ParametricSchedule ;
+	rdfs:label "swapstream interest rate reset schedule" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamInterestRateResetSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "a parametric schedule of reset dates" ;
+	skos:editorialNote "These may more commonly be expressed as an offset of the Calculation dates, however the creation of a schedule specifically for reset dates is allowed for." ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamInterestRateSettingEvent
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-rtd-irswp:InterestRateStreamEvent ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:hasDate ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestSettingRelativeDate ;
+		]
+		;
+	rdfs:label "swap stream interest rate setting event" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamInterestRateSettingEvent" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "an event on which an interest rate for a given swap stream is determined" ;
+	.
+
+fibo-der-rtd-irswp:SwapStreamInterestSettingRelativeDate
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-dt-fd:RelativeDate ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-dt-fd:isRelativeTo ;
+			owl:someValuesFrom fibo-der-rtd-irswp:SwapStreamInterestRateReset ;
+		]
+		;
+	rdfs:label "swap stream interest setting relative date" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:SwapStreamInterestSettingRelativeDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	skos:definition "a date on which an interest rate is revised is that is relative to a rate reset event" ;
+	.
+
+fibo-der-rtd-irswp:hasFirstNotionalStepDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasStartDate ;
+	rdfs:label "has first notional step date" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasFirstNotionalStepDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDate ;
+	skos:definition "indicates the initial date in a notional step schedule" ;
+	.
+
+fibo-der-rtd-irswp:hasFloatingRateCap
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fbc-dae-dbt:hasInterestRate ;
+	rdfs:label "has floating rate cap" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasFloatingRateCap" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range fibo-fbc-dae-dbt:FloatingInterestRate ;
+	skos:definition "indicates an optional ceiling or 'cap' on interest rates on floating rate debts" ;
+	fibo-fnd-utl-av:explanatoryNote "Rate caps can be viewed as insurance, ensuring that the maximum borrowing rate never exceeds the specified cap level." ;
+	.
+
+fibo-der-rtd-irswp:hasFloatingRateFloor
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fbc-dae-dbt:hasInterestRate ;
+	rdfs:label "has floating rate floor" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasFloatingRateFloor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range fibo-fbc-dae-dbt:FloatingInterestRate ;
+	skos:definition "indicates an optional lower bound on interest rates on floating rate debts" ;
+	.
+
+fibo-der-rtd-irswp:hasFloatingRateSpread
+	a owl:DatatypeProperty ;
+	rdfs:label "has floating rate spread" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasFloatingRateSpread" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "defines the spread rate which can optionally be added to or subtracted from the floating rate" ;
+	.
+
+fibo-der-rtd-irswp:hasInterestCalculationSchedule
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasSchedule ;
+	rdfs:label "has interest calculation schedule" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasInterestCalculationSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range fibo-fnd-dt-fd:RegularSchedule ;
+	skos:definition "links a set of terms to a corresponding schedule for calculating interest" ;
+	.
+
+fibo-der-rtd-irswp:hasInterestRateResetSchedule
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasSchedule ;
+	rdfs:label "has interest rate reset schedule" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasInterestRateResetSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range fibo-fnd-dt-fd:Schedule ;
+	skos:definition "links a set of terms to a corresponding schedule for resetting the  interest rate, which may be either a regular or ad hoc schedule" ;
+	.
+
+fibo-der-rtd-irswp:hasLastNotionalStepDate
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasEndDate ;
+	rdfs:label "has last notional step date" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasLastNotionalStepDate" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDate ;
+	skos:definition "indicates the final date in a notional step schedule" ;
+	.
+
+fibo-der-rtd-irswp:hasNotionalStepSchedule
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-dt-fd:hasSchedule ;
+	rdfs:label "has notional step schedule" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasNotionalStepSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range fibo-fnd-dt-fd:Schedule ;
+	skos:definition "links a set of terms to a corresponding notional step schedule, which may be either a regular or ad hoc schedule" ;
+	.
+
+fibo-der-rtd-irswp:hasRateMultiplier
+	a owl:DatatypeProperty ;
+	rdfs:label "has rate multiplier" ;
+	rdfs:comment "QName: fibo-der-rtd-irswp:hasRateMultiplier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "indicates a multiplier applied to the coupon before adding the floating rate spread" ;
+	.
+

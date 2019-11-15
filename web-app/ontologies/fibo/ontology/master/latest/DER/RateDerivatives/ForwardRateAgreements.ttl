@@ -1,0 +1,40 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/ForwardRateAgreements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/ForwardRateAgreements/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-fx-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> .
+@prefix fibo-der-rat-fra: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/ForwardRateAgreements/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/ForwardRateAgreements/>
+	a owl:Ontology ;
+	rdfs:label "ForwardRateAgreements"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "A forward agreement in which the underlier is the interest rate of a single instrument. The interest rate is known at the start of the contract period and if it has changed at the end of that period the participants settle for the difference." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/ForwardRateAgreements/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-rat-fra:ForwardRateAgreement
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-fx-ctr:ForeignExchangeDerivativeContract ;
+	rdfs:label "forward rate agreement"@en ;
+	rdfs:comment "QName: NONE:ForwardRateAgreement" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/ForwardRateAgreements/> ;
+	skos:definition "Definition needed."@en ;
+	skos:editorialNote "FpML: A type defining a Forward Rate Agreement (FRA) product. Clarified by Andrew Jacobs (Jan 2012): A FRA is an interest rate instrument with a single instrument. The interest rate is known at the start of the period. If it has changed at the end of the period, you settle for the difference."@en ;
+	.
+

@@ -1,0 +1,872 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/Futures/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/ForeignExchange/ForeignExchange/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/ExerciseConventions/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-be-fct-pub: <https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/> .
+@prefix fibo-be-le-lp: <https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/> .
+@prefix fibo-der-ass-ass: <https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/> .
+@prefix fibo-der-com-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/> .
+@prefix fibo-der-der-opt: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/> .
+@prefix fibo-der-drc-bsc: <https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/> .
+@prefix fibo-der-etd-eto: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> .
+@prefix fibo-der-etd-fut: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/Futures/> .
+@prefix fibo-der-etd-std: <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> .
+@prefix fibo-der-fx-ctr: <https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/> .
+@prefix fibo-fbc-dae-gty: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fbc-pas-caa: <https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-rel-rel: <https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/> .
+@prefix fibo-fnd-txn-sup: <https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-ind-mkt-bas: <https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/> .
+@prefix fibo-sec-dbt-ex: <https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/ExerciseConventions/> .
+@prefix fibo-sec-eq-eq: <https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/>
+	a owl:Ontology ;
+	rdfs:label "ExchangeTradedOptions"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract """Option contracts offered on an options exchange. Includes a wide range of asset types (instruments, indices, foreign exchange, rates, commodities etc.) and the kinds of exchange traded option that are based on these.
+		Note that some of the contract types are named similarly to their OTC equivalents, such as bond option.""" ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/Publishers/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/FormalBusinessOrganizations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/AssetDerivatives/AssetDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CommoditiesDerivatives/CommoditiesContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/DerivativesBasics/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/DerivativesContracts/Options/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/Futures/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/FxDerivatives/FxContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/RateDerivatives/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/REATransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SecuritiesTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/SupplyTransactions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/ForeignExchange/ForeignExchange/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/ExerciseConventions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-der-etd-std:DerivativesListing
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fnd-rel-rel:isProvidedBy ;
+		owl:allValuesFrom [
+			a owl:Class ;
+			owl:unionOf (
+				fibo-der-etd-std:DerivativesExchange
+				fibo-der-etd-eto:OptionsClearingEntity
+			) ;
+		] ;
+	] ;
+	.
+
+fibo-der-etd-eto:BondOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-ass:DebtDerivativeContract ,
+		fibo-der-etd-eto:OptionContractOnFutures ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-etd-eto:BondOptionUnderlying ;
+		]
+		;
+	rdfs:label "bond option"@en ;
+	rdfs:comment "QName: NONE:BondOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "An option on a traded futures contract for a Bond. When exercised, the holder exercises the right to buy the future on a Bond, s/he does not exercise the right to buy a bond."@en ;
+	fibo-fnd-utl-av:explanatoryNote "For example an option on a Treasury Bill is an option on a T Bill Future, not on a T Bill itself. Hence these are defined as a kind of futures option."@en ;
+	.
+
+fibo-der-etd-eto:BondOptionUnderlying
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-eto:OptionOnFuturesUnderlying ;
+	rdfs:label "bond option underlying"@en ;
+	rdfs:comment "QName: NONE:BondOptionUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "The underlying on a Bond Option, which is the corresponding Bond Future contract on the same exchange."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the underlying in the sense that when the option is exercised the investor takes delivery of the corresponding futures contract."@en ;
+	.
+
+fibo-der-etd-eto:CommoditiesOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-com-ctr:CommodityDerivativeContract ,
+		fibo-der-etd-eto:OptionContractOnFutures ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-etd-eto:CommoditiesOptionUnderlying ;
+		]
+		;
+	rdfs:label "commodities option"@en ;
+	rdfs:comment "QName: NONE:CommoditiesOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "An option to buy or sell the future on some underlying commodity. The exercise is always to buy the underlying asset i.e. the future instrument NOT the underlying goods."@en ;
+	.
+
+fibo-der-etd-eto:CommoditiesOptionUnderlying
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-eto:OptionOnFuturesUnderlying ;
+	rdfs:label "commodities option underlying"@en ;
+	rdfs:comment "QName: NONE:CommoditiesOptionUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "The underlying on a Commodities Option, which is the corresponding Commodity Future contract on the same exchange."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the underlying in the sense that when the option is exercised the investor takes delivery of the corresponding futures contract."@en ;
+	.
+
+fibo-der-etd-eto:CurrencyOptionExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:OptionInstrumentExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:delivery ;
+			owl:someValuesFrom fibo-fnd-txn-sup:NegotiableCash ;
+		]
+		;
+	rdfs:label "currency option exercise terms"@en ;
+	rdfs:comment "QName: NONE:CurrencyOptionExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Contractual terms defining when or under what circumstances an currency option is to be exercised."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Also includes terms defining delivery when the contract is exercised. Delivery for currency options is by way of cash."@en ;
+	.
+
+fibo-der-etd-eto:EquityIndexOptionUnderlying
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:UnderlyingOnOption ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-ind-mkt-bas:EquityReferenceIndex ;
+		]
+		;
+	rdfs:label "equity index option underlying"@en ;
+	rdfs:comment "QName: NONE:EquityIndexOptionUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "The inderlying of the equity index option, which is a reference index consisting of shares."@en ;
+	skos:editorialNote "Review session note 16 Dec 2009: Nature of the \"Underlying\" as a class here: Somebody takes a defined Pf of those at that time. Modeling response: this describes a different sort of equity option, one based on a locally defined basket of equities. This has not been modeled. An equity index as defined here and in the Indices and Indicators part of the model is a published figure, out out by an index publisher. The composition of the basiet underkying that index is a matter for the publisher and not for the Options Contract. It sounds as though a locally defined basket may be used as another kind of Underlying, and may be loosely referred to as an index option, however that's not the term modeled here."@en ;
+	.
+
+fibo-der-etd-eto:EquityOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-ass:EquityDerivativeContract ,
+		fibo-der-etd-eto:ExchangeTradedOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-etd-eto:EquityOptionUnderlying ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ex:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-etd-eto:StockOptionExerciseTerms ;
+		]
+		;
+	rdfs:label "equity option"@en ;
+	rdfs:comment "QName: NONE:EquityOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Equity options are the most common type of equity derivative. They provide the right, but not the obligation to trade a quantity of stock at a set price at a future time."@en ;
+	.
+
+fibo-der-etd-eto:EquityOptionUnderlying
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:UnderlyingOnOption ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-sec-eq-eq:ExchangeSpecificShare ;
+		]
+		;
+	rdfs:label "equity option underlying"@en ;
+	rdfs:comment "QName: NONE:EquityOptionUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "The equity security that must be delivered when the option contract is exercised."@en ;
+	skos:editorialNote "From SME Review 16 Dec 2009: Equity Option uses consolidated market data feed for the price of the underlying. so this is specified by for instance the national market system that consolidates the market information, so everyone is looking at the same Last Trade information. See Equity diagram where we have \"Composite\" market consisting of a number of markets. The Equity is normally not traded on the options exchange. But they will still attach to a market even if it's not their own. Further research: national market systems (US, what about the rest?)"@en ;
+	.
+
+fibo-der-etd-eto:ExchangeTradedEquityIndexOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-ass-ass:EquityDerivativeContract ,
+		fibo-der-etd-eto:ExchangeTradedOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-etd-eto:EquityIndexOptionUnderlying ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ex:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-etd-eto:IndexOptionExerciseTerms ;
+		]
+		;
+	rdfs:label "exchange traded equity index option"@en ;
+	rdfs:comment "QName: NONE:ExchangeTradedEquityIndexOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Equity Index options offer the investor an opportunity to either capitalize on an expected market move or to protect holdings in the underlying instruments. The difference is that the underlying instruments are indexes."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These indexes can reflect the characteristics of either the broad equity market as a whole or specific industry sectors within the marketplace."@en ;
+	.
+
+fibo-der-etd-eto:ExchangeTradedOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:Option ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:hasFeature ;
+			owl:onClass fibo-der-der-opt:OptionBarrierFeatureTerms ;
+			owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:definesOptional ;
+			owl:someValuesFrom fibo-der-etd-eto:ExchangeTradedOptionTransaction ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasSeller ;
+			owl:someValuesFrom fibo-der-etd-eto:TradedOptionPrincipal ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:hasContractDuration ;
+			owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:hasCounterparty ;
+			owl:someValuesFrom fibo-der-etd-eto:TradedOptionsCounterparty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:hasPriceDeterminationMethod ;
+			owl:someValuesFrom fibo-der-etd-std:DerivativesPriceDeterminationMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-gty:hasGuarantor ;
+			owl:someValuesFrom fibo-der-etd-eto:OptionGuarantor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ex:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-etd-eto:OptionInstrumentExerciseTerms ;
+		]
+		;
+	rdfs:label "exchange traded option contract"@en ;
+	rdfs:comment "QName: NONE:ExchangeTradedOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	.
+
+fibo-der-etd-eto:ExchangeTradedOptionTransaction
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-der-opt:OptionalUnderlyingTransaction ;
+	rdfs:label "exchange traded option transaction"@en ;
+	rdfs:comment "QName: NONE:ExchangeTradedOptionTransaction" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	.
+
+fibo-der-etd-eto:ForeignCurrencyOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:ExchangeTradedOptionContract ,
+		fibo-der-fx-ctr:ForeignExchangeDerivativeContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-etd-eto:FxOptionUnderlying ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ex:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-etd-eto:CurrencyOptionExerciseTerms ;
+		]
+		;
+	rdfs:label "foreign currency option"@en ;
+	rdfs:comment "QName: NONE:ForeignCurrencyOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "An option on a currency, based on the spot exchange rate of that currency to the currency of the security itself."@en ;
+	skos:editorialNote "Definition needed - this is just a place holder. Actually, this would also have a Currency Future as the Underlying Action: change this. Definition:Review"@en ;
+	.
+
+fibo-der-etd-eto:FutureOptionsExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:OptionInstrumentExerciseTerms ,
+		fibo-sec-dbt-ex:AmericanExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:delivery ;
+			owl:someValuesFrom fibo-der-etd-fut:FutureInstrument ;
+		]
+		;
+	rdfs:label "future options exercise terms"@en ;
+	rdfs:comment "QName: NONE:FutureOptionsExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Contractual terms defining when or under what circumstances an options instrument may be exercised."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Also includes terms defining delivery when the contract is exercised."@en ;
+	.
+
+fibo-der-etd-eto:FxOptionUnderlying
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:UnderlyingOnOption ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/IND/ForeignExchange/ForeignExchange/CurrencySpotBuyRate> ;
+		]
+		;
+	rdfs:label "fx option underlying"@en ;
+	rdfs:comment "QName: NONE:FxOptionUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "The underlying of the foreign currency option is a currency spot rate."@en ;
+	.
+
+fibo-der-etd-eto:IROptionUnderlying
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-eto:OptionOnFuturesUnderlying ;
+	rdfs:label "i r option underlying"@en ;
+	rdfs:comment "QName: NONE:IROptionUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "The underlying on a Commodities Option, which is the corresponding Commodity Future contract on the same exchange."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is the underlying in the sense that when the option is exercised the investor takes delivery of the corresponding futures contract."@en ;
+	.
+
+fibo-der-etd-eto:IndexOptionExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:OptionInstrumentExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:delivery ;
+			owl:someValuesFrom fibo-fnd-txn-sup:NegotiableCash ;
+		]
+		;
+	rdfs:label "index option exercise terms"@en ;
+	rdfs:comment "QName: NONE:IndexOptionExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Contractual terms defining when or under what circumstances an options instrument may be exercised."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Also includes terms defining delivery when the contract is exercised. Delivery for index options is by way of cash."@en ;
+	.
+
+fibo-der-etd-eto:InterestRateOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:OptionContractOnFutures ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-etd-eto:IROptionUnderlying ;
+		]
+		;
+	rdfs:label "interest rate option"@en ;
+	rdfs:comment "QName: NONE:InterestRateOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "An option on some underlying interest rate. If the option is exercised, delivery is in the frorm of the corresponding interest rate future."@en ;
+	.
+
+fibo-der-etd-eto:LongTermEquityOption
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:EquityOption ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:hasContractDuration ;
+			owl:someValuesFrom fibo-fnd-dt-fd:Duration ;
+		]
+		;
+	rdfs:label "long term equity option"@en ;
+	rdfs:comment "QName: NONE:LongTermEquityOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "An option whose contract expires at a date longer than one year. Also known as long-term equity anticipation securities (LEAPS). From Investopedia: These options are called long-term equity anticipation securities (LEAPS). By providing opportunities to control and manage risk or even to speculate, LEAPS are virtually identical to regular options. LEAPS, however, provide these opportunities for much longer periods of time. Although they are not available on all stocks, LEAPS are available on most widely held issues."@en ;
+	.
+
+fibo-der-etd-eto:NovatedOptionContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:ExchangeTradedOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-der-opt:hasSeller ;
+			owl:someValuesFrom fibo-der-etd-eto:NovatedOptionContractPrincipal ;
+		]
+		;
+	rdfs:label "novated option contract"@en ;
+	rdfs:comment "QName: NONE:NovatedOptionContract" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "An Option Contract after the stage where a Derivatives Exchange has novated this contract and become the principal to it, for purposes of clearing and settlement. The Clearing House novates both contract. So when you are on the floor (as a Broker), you trade with another Broker. Then you take it to th eRing, and present it to the Ring. So you write a contract and give it to the ringleader, who then books it. So the party you dealt with deals with the exahcnge, and you deal with the exchange. THen there are two contracts for one deal. So the answer here is that there are two novated contracts for one Options deal. Difference: If not open outcry? In OO the deal is done and given to the ringleader, who represents the Cleaing house. When it's not open outcry, the clearing house gets the deal, books the deal, and margins it. So you don't know as much about the deal and process. This eliminiates stickiness of a market that has credit. Similar to what occurs in share markets, where clearing takes place, e.g. when someone defaults on delivery. Clearing House simply closes out the contract."@en ;
+	.
+
+fibo-der-etd-eto:NovatedOptionContractPrincipal
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:TradedOptionPrincipal ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-etd-std:DerivativesExchange
+					fibo-der-etd-eto:OptionsClearingEntity
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "novated option contract principal"@en ;
+	rdfs:comment "QName: NONE:NovatedOptionContractPrincipal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	.
+
+fibo-der-etd-eto:OptionContractOnFutures
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:ExchangeTradedOptionContract ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-drc-bsc:hasUnderlier ;
+			owl:someValuesFrom fibo-der-etd-eto:OptionOnFuturesUnderlying ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-sec-dbt-ex:hasExerciseTerms ;
+			owl:someValuesFrom fibo-der-etd-eto:FutureOptionsExerciseTerms ;
+		]
+		;
+	rdfs:label "option contract on futures"@en ;
+	rdfs:comment "QName: NONE:OptionContractOnFutures" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Future options are the most common type of equity derivative. They provide the right, but not the obligation to trade a quantity of futures instruments at a set price at a future time."@en ;
+	.
+
+fibo-der-etd-eto:OptionGuarantor
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-gty:Guarantor ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-etd-std:DerivativesExchange
+					fibo-der-etd-eto:OptionsClearingEntity
+				) ;
+			] ;
+		]
+		;
+	rdfs:label "option guarantor"@en ;
+	rdfs:comment "QName: NONE:OptionGuarantor" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "The Guarantor of an options security. This is the party that agreed to make good any losses incurred by the holder in the event of a default by the issuer."@en ;
+	.
+
+fibo-der-etd-eto:OptionInstrumentExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-sec-dbt-ex:ExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:delivery ;
+			owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+		]
+		;
+	rdfs:label "option instrument exercise terms"@en ;
+	rdfs:comment "QName: NONE:OptionInstrumentExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Contractual terms defining when or under what circumstances an options instrument may be exercised."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Also includes terms defining delivery when the contract is exercised."@en ;
+	.
+
+fibo-der-etd-eto:OptionOnFuturesUnderlying
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:UnderlyingOnOption ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:hasIdentity ;
+			owl:someValuesFrom fibo-der-etd-fut:FutureInstrument ;
+		]
+		;
+	rdfs:label "option on futures underlying"@en ;
+	rdfs:comment "QName: NONE:OptionOnFuturesUnderlying" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "The underlying of a traded Futures Option, which is a traded Futures contract, generally on the same derivatives exchange."@en ;
+	skos:editorialNote "Review notes: This seems right. The underlying is the future contract because it's what's delivered when the option expires or is exercised."@en ;
+	.
+
+fibo-der-etd-eto:OptionsClearingEntity
+	a owl:Class ;
+	rdfs:subClassOf fibo-be-le-lp:LegalEntity ;
+	rdfs:label "options clearing entity"@en ;
+	rdfs:comment "QName: NONE:OptionsClearingEntity" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "An entity which is responsible for clearing transactions for put and call options on common stocks and other equity issues, stock indexes, foreign currencies, interest rate composites and single-stock futures."@en ;
+	fibo-fnd-utl-av:explanatoryNote "e.g. Options Clearing Corporation (US). In Canada the equivalent is In the US, the Options Clearing Corporation defines defaults e.g. lot sizes. This applies to equity options, index options, flex options, yield based options and short dated options. It does not apply to other types of option. Its roles are: 1. Clearing 2. Advocate for sound business practice. Similar to regulator though not officially one. Has a role in risk management Full list from OCC website: OCC clears transactions for put and call options on common stocks and other equity issues, stock indexes, foreign currencies, interest rate composites and single-stock futures"@en ;
+	.
+
+fibo-der-etd-eto:OptionsExchangeParticipant
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:label "options exchange participant"@en ;
+	rdfs:comment "QName: NONE:OptionsExchangeParticipant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	.
+
+fibo-der-etd-eto:OptionsListing
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-std:DerivativesListing ;
+	rdfs:label "options listing"@en ;
+	rdfs:comment "QName: NONE:OptionsListing" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "A listing of an options instrument on a derivatives exchange. The listing is a product of the individual exchange."@en ;
+	skos:editorialNote "This term sdoes not exist. If there was a listing of something that was an option, it would be a warrant. Review: We agreed to come back to this definition and verify whether it means the same as listing in the equities sense ."@en ;
+	.
+
+fibo-der-etd-eto:SingleStockOption
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-eto:EquityOption ;
+	rdfs:label "single stock option"@en ;
+	rdfs:comment "QName: NONE:SingleStockOption" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Option instrument based on a single equity security (share) underlying."@en ;
+	.
+
+fibo-der-etd-eto:StandardizedExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:StandardizedOptionsTerms ,
+		fibo-sec-dbt-ex:ExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:specifies ;
+			owl:someValuesFrom fibo-fbc-fi-fi:FinancialInstrument ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-der-etd-eto:OptionInstrumentExerciseTerms ;
+		]
+		;
+	rdfs:label "standardized exercise terms"@en ;
+	rdfs:comment "QName: NONE:StandardizedExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Standard exercise terms for an option contract, determined in advance by the exchange. These will become exercise terms of an individual option contract. These may be varied or overridden for individual contracts."@en ;
+	.
+
+fibo-der-etd-eto:StandardizedOptionsTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:StandardizedTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:comprises ;
+			owl:onClass fibo-der-der-opt:OptionBarrierFeatureTerms ;
+			owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-be-fct-pub:hasPublisher ;
+			owl:someValuesFrom [
+				a owl:Class ;
+				owl:unionOf (
+					fibo-der-etd-std:DerivativesExchange
+					fibo-der-etd-eto:OptionsClearingEntity
+				) ;
+			] ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:pricingToBeDeterminedBy ;
+			owl:someValuesFrom fibo-der-etd-std:DerivativesPriceDeterminationMethod ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-rel-rel:appliesTo ;
+			owl:someValuesFrom fibo-der-etd-eto:ExchangeTradedOptionContract ;
+		]
+		;
+	rdfs:label "standardized options terms"@en ;
+	rdfs:comment "QName: NONE:StandardizedOptionsTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "A standardized set of terms for an options contract. These are defined by a securities exchange or an options clearing entity. Options contracts issued by the exchange may embody these terms or have equivalent terms which override these."@en ;
+	.
+
+fibo-der-etd-eto:StockOptionExerciseTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-etd-eto:OptionInstrumentExerciseTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-der-etd-eto:delivery ;
+			owl:someValuesFrom fibo-sec-eq-eq:ExchangeSpecificShare ;
+		]
+		;
+	rdfs:label "stock option exercise terms"@en ;
+	rdfs:comment "QName: NONE:StockOptionExerciseTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	skos:definition "Contractual terms defining when or under what circumstances a single stock options instrument may be exercised."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Delivery when the contract is exercised is by delivery of the underlying stock. ADD: Delivery dates, as being distinct from exercise dates."@en ;
+	.
+
+fibo-der-etd-eto:TradedOptionPrincipal
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionWritingParty ,
+		fibo-der-etd-eto:NovatedOptionContractPrincipal ,
+		fibo-der-etd-eto:TradingParticipant
+		;
+	rdfs:label "traded option principal"@en ;
+	rdfs:comment "QName: NONE:TradedOptionPrincipal" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	owl:disjointWith fibo-der-etd-eto:TradedOptionsCounterparty ;
+	skos:definition "The principal to the Traded Option contract. THis is the party which gives the other party the right to take up the obligation, and which is obliged to honor that transaction if that option is taken up."@en ;
+	.
+
+fibo-der-etd-eto:TradedOptionsCounterparty
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-der-der-opt:OptionBuyer ,
+		fibo-der-etd-eto:TradingParticipant
+		;
+	rdfs:label "traded options counterparty"@en ;
+	rdfs:comment "QName: NONE:TradedOptionsCounterparty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	.
+
+fibo-der-etd-eto:TradingParticipant
+	a owl:Class ;
+	rdfs:subClassOf fibo-der-etd-eto:OptionsExchangeParticipant ;
+	rdfs:label "trading participant"@en ;
+	rdfs:comment "QName: NONE:TradingParticipant" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	.
+
+fibo-der-etd-eto:contractSize
+	a owl:DatatypeProperty ;
+	rdfs:label "contract size"@en ;
+	rdfs:comment "QName: NONE:contractSize" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-der-etd-eto:ExchangeTradedOptionContract
+			fibo-der-etd-eto:StandardizedOptionsTerms
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "number of shares, futures, monetary units or other underlyers in this contract"@en ;
+	.
+
+fibo-der-etd-eto:delivery
+	a owl:ObjectProperty ;
+	rdfs:label "delivery"@en ;
+	rdfs:comment "QName: NONE:delivery" ;
+	rdfs:domain fibo-der-etd-eto:OptionInstrumentExerciseTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-fbc-fi-fi:FinancialInstrument ;
+	.
+
+fibo-der-etd-eto:hasContractDuration
+	a owl:ObjectProperty ;
+	rdfs:label "has contract duration"@en ;
+	rdfs:comment "QName: NONE:hasContractDuration" ;
+	rdfs:domain fibo-der-etd-eto:ExchangeTradedOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-fnd-dt-fd:ExplicitDuration ;
+	.
+
+fibo-der-etd-eto:hasCounterparty
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-der-der-opt:hasBuyer ;
+	rdfs:label "has counterparty"@en ;
+	rdfs:comment "QName: NONE:hasCounterparty" ;
+	rdfs:domain fibo-der-etd-eto:ExchangeTradedOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-der-etd-eto:TradedOptionsCounterparty ;
+	.
+
+fibo-der-etd-eto:hasFeature
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has feature"@en ;
+	rdfs:comment "QName: NONE:hasFeature" ;
+	rdfs:domain fibo-der-etd-eto:ExchangeTradedOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-der-der-opt:OptionBarrierFeatureTerms ;
+	.
+
+fibo-der-etd-eto:hasListing
+	a owl:ObjectProperty ;
+	rdfs:label "has listing"@en ;
+	rdfs:comment "QName: NONE:hasListing" ;
+	rdfs:domain fibo-der-etd-eto:ExchangeTradedOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-der-etd-eto:OptionsListing ;
+	.
+
+fibo-der-etd-eto:hasPriceDeterminationMethod
+	a owl:ObjectProperty ;
+	rdfs:label "has price determination method"@en ;
+	rdfs:comment "QName: NONE:hasPriceDeterminationMethod" ;
+	rdfs:domain fibo-der-etd-eto:ExchangeTradedOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-der-etd-std:DerivativesPriceDeterminationMethod ;
+	.
+
+fibo-der-etd-eto:minimumLotSize
+	a owl:DatatypeProperty ;
+	rdfs:label "minimum lot size"@en ;
+	rdfs:comment "QName: NONE:minimumLotSize" ;
+	rdfs:domain fibo-der-etd-eto:ExchangeTradedOptionContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range xsd:integer ;
+	skos:definition "The minimum number of options contracts that may be traded at any one time."@en ;
+	.
+
+fibo-der-etd-eto:optionType
+	a owl:ObjectProperty ;
+	rdfs:label "option type"@en ;
+	rdfs:comment "QName: NONE:optionType" ;
+	rdfs:domain [
+		a owl:Class ;
+		owl:unionOf (
+			fibo-der-etd-eto:ExchangeTradedOptionContract
+			fibo-der-etd-eto:StandardizedOptionsTerms
+		) ;
+	] ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-der-der-opt:OptionTypeSelection ;
+	skos:definition "Whether the option is a call or a put option."@en ;
+	.
+
+fibo-der-etd-eto:pricingToBeDeterminedBy
+	a owl:ObjectProperty ;
+	rdfs:label "pricing to be determined by"@en ;
+	rdfs:comment "QName: NONE:pricingToBeDeterminedBy" ;
+	rdfs:domain fibo-der-etd-eto:StandardizedOptionsTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-der-etd-std:DerivativesPriceDeterminationMethod ;
+	.
+
+fibo-der-etd-eto:specifies
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies" ;
+	rdfs:domain fibo-der-etd-eto:StandardizedExerciseTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-fbc-fi-fi:FinancialInstrument ;
+	.
+
+fibo-der-etd-eto:strikePrice
+	a owl:ObjectProperty ;
+	rdfs:label "strike price"@en ;
+	rdfs:comment "QName: NONE:strikePrice" ;
+	rdfs:domain fibo-der-etd-eto:CurrencyOptionExerciseTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryPrice ;
+	skos:definition "Predetermined price at which the holder will have to buy or sell the underlying currency."@en ;
+	.
+
+fibo-der-etd-eto:strikePrice.1
+	a owl:ObjectProperty ;
+	rdfs:label "strike price"@en ;
+	rdfs:comment "QName: NONE:strikePrice.1" ;
+	rdfs:domain fibo-der-etd-eto:FutureOptionsExerciseTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryPrice ;
+	skos:definition "Predetermined spread at which the holder will have to buy or sell the futures contract for the underlying."@en ;
+	.
+
+fibo-der-etd-eto:strikePrice.2
+	a owl:DatatypeProperty ;
+	rdfs:label "strike price"@en ;
+	rdfs:comment "QName: NONE:strikePrice.2" ;
+	rdfs:domain fibo-der-etd-eto:OptionInstrumentExerciseTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "Predetermined price or spread at which the holder will have to buy or sell the underlying"@en ;
+	.
+
+fibo-der-etd-eto:strikePrice.3
+	a owl:ObjectProperty ;
+	rdfs:label "strike price"@en ;
+	rdfs:comment "QName: NONE:strikePrice.3" ;
+	rdfs:domain fibo-der-etd-eto:StockOptionExerciseTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryPrice ;
+	skos:definition "Predetermined price at which the holder will have to buy or sell the underlying instrument."@en ;
+	.
+
+fibo-der-etd-eto:strikeSpread
+	a owl:ObjectProperty ;
+	rdfs:label "strike spread"@en ;
+	rdfs:comment "QName: NONE:strikeSpread" ;
+	rdfs:domain fibo-der-etd-eto:IndexOptionExerciseTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Predetermined spread at which the holder may exercise the contract."@en ;
+	.
+

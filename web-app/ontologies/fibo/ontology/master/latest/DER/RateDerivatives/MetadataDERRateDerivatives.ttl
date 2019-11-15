@@ -1,0 +1,78 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/MetadataDERRateDerivatives/
+# imports: http://www.omg.org/techprocess/ab/SpecificationMetadata/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/MetadataDERRateDerivatives/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-der-rat-mod: <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/MetadataDERRateDerivatives/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/MetadataDERRateDerivatives/>
+	a owl:Ontology ;
+	rdfs:label "Metadata about the EDMC-FIBO Derivatives (DER) Rate Derivatives Module" ;
+	rdfs:comment "QName: fibo-der-rat-mod:" ;
+	dct:abstract "The rate derivatives module defines derivatives that are based on numerical rates such as interest rates, indices and the like." ;
+	dct:issued "2018-08-27T18:00:00"^^xsd:dateTime ;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	sm:contentLanguage "http://www.w3.org/standards/techs/owl#w3c_all"^^xsd:anyURI ;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:fileAbbreviation "fibo-der-rat-mod" ;
+	sm:filename "MetadataDERRateDerivatives.rdf" ;
+	owl:imports
+		<http://www.omg.org/techprocess/ab/SpecificationMetadata/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/RateDerivatives/MetadataDERRateDerivatives/> ;
+	.
+
+fibo-der-rat-mod:RateDerivativesModule
+	a
+		owl:NamedIndividual ,
+		sm:Module
+		;
+	rdfs:label "Rate Derivatives" ;
+	rdfs:comment "QName: fibo-der-rat-mod:RateDerivativesModule" ;
+	dct:abstract "This module defines derivatives that are based on numerical rates such as interest rates, indices and the like." ;
+	dct:hasPart
+		<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/ForwardRateAgreements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/OTCIndexOptions/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/>
+		;
+	dct:license "http://opensource.org/licenses/MIT"^^xsd:anyURI ;
+	dct:title "EDMC Financial Industry Business Ontology (FIBO) Derivatives (DER) Rate Derivatives Module" ;
+	sm:contributor
+		"Adaptive, Inc." ,
+		"Bloomberg LP" ,
+		"Citigroup" ,
+		"Commodities Futures Trading Commission (CFTC)" ,
+		"Deutsche Bank" ,
+		"Nordea Bank AB" ,
+		"Office of Financial Research (US Dept of the Treasury)" ,
+		"Quarule" ,
+		"State Street Bank and Trust" ,
+		"Tahoe Blue Ltd" ,
+		"Thematix Partners LLC" ,
+		"Wells Fargo" ,
+		"Working Ontologist"
+		;
+	sm:copyright
+		"Copyright (c) 2018 EDM Council, Inc." ,
+		"Copyright (c) 2018 Object Management Group, Inc."
+		;
+	sm:moduleAbbreviation "fibo-der-rat" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/MetadataDERRateDerivatives/> ;
+	rdfs:seeAlso "https://spec.edmcouncil.org/fibo/"^^xsd:anyURI ;
+	.
+

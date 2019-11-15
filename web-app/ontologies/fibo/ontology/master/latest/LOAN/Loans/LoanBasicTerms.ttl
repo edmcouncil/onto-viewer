@@ -1,0 +1,1292 @@
+# baseURI: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CreditDerivatives/CreditDefaultSwaps/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/ContractElements/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoansGeneral/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansGuaranties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanPhases/
+
+@base <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix fibo-fbc-dae-crf: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditFacilities/> .
+@prefix fibo-fbc-dae-dbt: <https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/> .
+@prefix fibo-fbc-fi-fi: <https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix fibo-fnd-agr-ctr: <https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/> .
+@prefix fibo-fnd-agrx-ele: <https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/> .
+@prefix fibo-fnd-arrxx-ins: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/ToolsAndInstruments/> .
+@prefix fibo-fnd-arrxx-meth: <https://spec.edmcouncil.org/fibo/ontology/FND/ArrangementsExt/MethodsAndRules/> .
+@prefix fibo-fnd-dt-fd: <https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/> .
+@prefix fibo-fnd-inf-inf: <https://spec.edmcouncil.org/fibo/ontology/FND/InformationExt/InfoCore/> .
+@prefix fibo-fnd-pty-pty: <https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/> .
+@prefix fibo-fnd-utl-av: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/> .
+@prefix fibo-fnd-utl-val: <https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/> .
+@prefix fibo-loan-ln-ln: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/> .
+@prefix fibo-loan-lnx-gen: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanExt/LoansGeneral/> .
+@prefix fibo-loan-loan-gty: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansGuaranties/> .
+@prefix fibo-loan-loan-loan: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> .
+@prefix fibo-loan-loan-pty: <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansParties/> .
+@prefix fibo-loan-tem-ph: <https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/>
+	a owl:Ontology ;
+	rdfs:label "LoanBasicTerms"@en ;
+	rdfs:comment "QName: NONE:" ;
+	dct:abstract "This is the core ontology for loans concepts. These include loan purposes, loan payment terms and parties." ;
+	owl:imports
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/DER/CreditDerivatives/CreditDefaultSwaps/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgreementsExt/ContractElements/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Values/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoansGeneral/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansGuaranties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoansTemporal/LoanPhases/>
+		;
+	owl:versionIRI <https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/> ;
+	fibo-fnd-utl-av:hasMaturityLevel fibo-fnd-utl-av:Provisional ;
+	.
+
+fibo-fbc-dae-crf:CreditFacilityLoanTranche
+	a owl:Class ;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty fibo-fbc-dae-crf:issuedAs ;
+		owl:someValuesFrom fibo-loan-loan-loan:LoanDrawdown ;
+	] ;
+	.
+
+fibo-loan-ln-ln:LoanContract
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-fi-fi:DebtInstrument ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasInterestTerms ;
+			owl:onClass fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:hasScheduledMaturityDate ;
+			owl:onClass fibo-fnd-dt-fd:ExplicitDate ;
+			owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agrx-ele:hasProvisions ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanTerminationProvisions ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:establishes ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanInterestPaymentCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:establishes.1 ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanPrincipalRepaymentCommitment ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasConditions ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanConditions ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasPaymentSchedule ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanPaymentSchedule ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasPrepaymentTerms ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanPrepaymentTermsSet ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasPrincipalTerms ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanPrincipalRepaymentTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:setsOutTermsFor ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanDrawdown ;
+		]
+		;
+	.
+
+fibo-loan-loan-loan:AutoLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "auto loan purpose"@en ;
+	rdfs:comment "QName: NONE:AutoLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:BridgingLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "bridging loan purpose"@en ;
+	rdfs:comment "QName: NONE:BridgingLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:ConstructionLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "construction loan purpose"@en ;
+	rdfs:comment "QName: NONE:ConstructionLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:CreditCardReceivablePurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "credit card receivable purpose"@en ;
+	rdfs:comment "QName: NONE:CreditCardReceivablePurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:CurrentPrincipalBalanceApplicability
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:PenaltyInterestBalanceApplicability ;
+	rdfs:label "current principal balance applicability"@en ;
+	rdfs:comment "QName: NONE:CurrentPrincipalBalanceApplicability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:CurtailmentAmountApplicability
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:PenaltyInterestBalanceApplicability ;
+	rdfs:label "curtailment amount applicability"@en ;
+	rdfs:comment "QName: NONE:CurtailmentAmountApplicability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:DrawingRightsPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "drawing rights purpose"@en ;
+	rdfs:comment "QName: NONE:DrawingRightsPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:HomeEquityLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "home equity loan purpose"@en ;
+	rdfs:comment "QName: NONE:HomeEquityLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:LoanBorrowerCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fnd-agr-ctr:ContractualCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:acceptedBy ;
+			owl:onClass fibo-loan-loan-pty:LoanBorrower ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-crf:issuedAs ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanDrawdown ;
+		]
+		;
+	rdfs:label "loan borrower commitment"@en ;
+	rdfs:comment "QName: NONE:LoanBorrowerCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "The commitment of a given borrower to be a borrower and to repay this loan."@en ;
+	skos:editorialNote 'This is in the sense of a commitment as defined in a Contract. The Loan Contract between Lender and Borrower(s) would define these commitments. Includes commitments to pay principal, commitment to pay interest, and other covenants or conditions agreed upon. There is also a status of a commitment prior to the loan, in relation to the credit facility. This is not the same as what is modeled here, where I now have it as a parent of the legal commitments made by the borrower when they sign the loan. On the above, see also "Loan Precedent Conditions" which covers the conditions to be met before the loan may be initiated (approved). PoC Review comment: Not needed in data model. Renamed from "Loan Borrower Association" in logical model. PoC Review comments on original term (renamed and re-interpreted since): This should just be Loan borrower, i.e. it defines which borrower is associated with each loan. It represents the commitment of this borrower to be a borrower and to repay this loan. IBM Notes: Unique identifier per borrower (not showing the real name) - to enable borrowers with multiple loans in the pool to be identified (e.g. further advances / second liens are shown as separate entries). Should not change over the life of the transaction By storing this identifier in the loan Borrower commitment a separate value is available for each loan borrower Modeling Note: The original PoC SDM term described above fulfilled the dual role of being an intermediate table between borrower and loan, and have the name and meaning of "Commitment". The Semantic Model defines commitments already (e.g. for transaction models), and so we have chosen to model the commitments of the borrower in terms of their relationship to the contract and terms for interest and principal, which would need to be modeled anyway. The PoC notes above are of little relevance to the semantics of this term.'@en ;
+	.
+
+fibo-loan-loan-loan:LoanConditions
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-dbt:DebtTerms ;
+	rdfs:label "loan conditions"@en ;
+	rdfs:comment "QName: NONE:LoanConditions" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Conditions which must be met by the Borrower during the course of the loan. Breach of these conditions will have predetermined consequences."@en ;
+	.
+
+fibo-loan-loan-loan:LoanDrawdown
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-dbt:Debt ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-gty:guaranteedBy ;
+			owl:allValuesFrom fibo-loan-loan-gty:LoanGuarantor ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:loanSubsidyAmount ;
+			owl:onClass fibo-fnd-acc-cur:MonetaryAmount ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:hasTimeToMaturity ;
+			owl:onClass fibo-fnd-dt-fd:ExplicitDuration ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:isCollateralizedBy ;
+			owl:onClass fibo-fbc-dae-dbt:Collateral ;
+			owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasBorrower ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:Borrower ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-dae-dbt:hasLender ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:Lender ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fbc-fi-fi:hasTimeToMaturity ;
+			owl:someValuesFrom fibo-fnd-dt-fd:ExplicitDuration ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-fnd-agr-ctr:hasContractualElement ;
+			owl:someValuesFrom fibo-fbc-dae-dbt:DebtTerms ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:drawnDownBy ;
+			owl:someValuesFrom fibo-loan-loan-pty:LoanBorrower ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-pty:hasLoanThirdParty ;
+			owl:someValuesFrom fibo-loan-loan-pty:LoanThirdParty ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-pty:originatedBy ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanOriginator ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-pty:servicedBy ;
+			owl:someValuesFrom fibo-loan-loan-pty:LoanServicer.1 ;
+		]
+		;
+	rdfs:label "loan drawdown"@en ;
+	rdfs:comment "QName: NONE:LoanDrawdown" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "An amount of money, drawn down by one party (the borrower) from a credit tranche made available by another party (the lender) at a specific point in time. Formal terms for the loan are defined in a Loan Contract."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is not the amount owed at a specific point in time (that is the Loan Balance) but rather the amount drawn down as a loan. The balance of the loan changes over time as principal is paid off, and the balance of monies between the lender and the borrower is further impacted by interest payments, interest due and fees."@en ;
+	.
+
+fibo-loan-loan-loan:LoanEarlyPrepaymentHardPenaltyTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanEarlyPrepaymentTerms ;
+	rdfs:label "loan early prepayment hard penalty terms"@en ;
+	rdfs:comment "QName: NONE:LoanEarlyPrepaymentHardPenaltyTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Early repayment penalty in the event of the loan being paid off without any refinancing with the same lender."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These terms cover prepayment penalty period, penalty amount and whether or not there is provision for waiver of the penalty, all inherited from the parent term."@en ;
+	.
+
+fibo-loan-loan-loan:LoanEarlyPrepaymentSoftPenaltyTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanEarlyPrepaymentTerms ;
+	rdfs:label "loan early prepayment soft penalty terms"@en ;
+	rdfs:comment "QName: NONE:LoanEarlyPrepaymentSoftPenaltyTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Early repayment penalty in the event of the loan being paid off in order to refinance with the same lender."@en ;
+	fibo-fnd-utl-av:explanatoryNote "These terms cover prepayment penalty period, penalty amount and whether or not there is provision for waiver of the penalty, all inherited from the parent term."@en ;
+	.
+
+fibo-loan-loan-loan:LoanEarlyPrepaymentTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPrepaymentTermsSet ;
+	rdfs:label "loan early prepayment terms"@en ;
+	rdfs:comment "QName: NONE:LoanEarlyPrepaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Terms governing the prepayment in full of a loan early in the life of that loan."@en ;
+	.
+
+fibo-loan-loan-loan:LoanFixedInterestPaymentTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	rdfs:label "loan fixed interest payment terms"@en ;
+	rdfs:comment "QName: NONE:LoanFixedInterestPaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:LoanFloatingInterestPaymentTerms
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-loan-loan:LoanInterestPaymentTermsSet ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasBaseRate ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/ReferenceInterestRate> ;
+		]
+		;
+	rdfs:label "loan floating interest payment terms set"@en ;
+	rdfs:comment "QName: NONE:LoanFloatingInterestPaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:LoanIdentificationScheme
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/IdentificationScheme> ;
+	rdfs:label "loan identification scheme"@en ;
+	rdfs:comment "QName: NONE:LoanIdentificationScheme" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "A scheme for formal identification of loans. Further notes: May be a published, public scheme or an internal scheme. MAy not be a database-specific key."@en ;
+	.
+
+fibo-loan-loan-loan:LoanIdentifier
+	a owl:Class ;
+	rdfs:subClassOf <https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/Identifier> ;
+	rdfs:label "loan identifier"@en ;
+	rdfs:comment "QName: NONE:LoanIdentifier" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "A formal identification code allocated to loans."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Not an internal database key but a published identifier. May be published internally in the absence of public (e.g. ISO) standard."@en ;
+	.
+
+fibo-loan-loan-loan:LoanInterestPaymentCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-loan-loan:LoanBorrowerCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:governedBy ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+		]
+		;
+	rdfs:label "loan interest payment commitment"@en ;
+	rdfs:comment "QName: NONE:LoanInterestPaymentCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "A commitment by the borrower of a loan to pay interest on that loan or on amounts of that loan."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is established by a Loan Contract, and described in Loan Interest Payment Terms of that contract."@en ;
+	.
+
+fibo-loan-loan-loan:LoanInterestPaymentTermsSet
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-fbc-dae-dbt:InterestPaymentTerms ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:loanInterestRateCap ;
+			owl:onClass fibo-fnd-utl-val:PercentageValue ;
+			owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+		] ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:hasBaseRate.1 ;
+			owl:someValuesFrom <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/ReferenceInterestRate> ;
+		]
+		;
+	rdfs:label "loan interest payment terms"@en ;
+	rdfs:comment "QName: NONE:LoanInterestPaymentTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Contractual terms governing the payment of interest on the loan."@en ;
+	skos:editorialNote "Contains similar terms to debt securities interest payment terms, but defined separately here."@en ;
+	.
+
+fibo-loan-loan-loan:LoanOngoingPrepaymentTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPrepaymentTermsSet ;
+	rdfs:label "loan ongoing prepayment terms"@en ;
+	rdfs:comment "QName: NONE:LoanOngoingPrepaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Terms governing prepayments of the principal on a loan by the borrower throughout the life of the loan."@en ;
+	skos:editorialNote "Comment: Determine whether this is mortgage-specific or applicable to all types of loan. Some definitions are mortgage specific but there must in principle be terms governing early payments on other types of loan. This also governs an important collective metric in loan pools (Loan prepayment speed) which would suggest these are terms applicable to other loan types."@en ;
+	.
+
+fibo-loan-loan-loan:LoanOriginator
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-pty-pty:PartyInRole ;
+	rdfs:label "loan originator"@en ;
+	rdfs:comment "QName: NONE:LoanOriginator" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "The party which finds the lender for the loan, for the borrower."@en ;
+	fibo-fnd-utl-av:explanatoryNote "Similar to mortgages: the originator may be a bank but the person able to lend the money may be some other party. In other instances the originator will become the lender."@en ;
+	.
+
+fibo-loan-loan-loan:LoanParty
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agr-ctr:ContractParty ;
+	rdfs:label "loan party"@en ;
+	rdfs:comment "QName: NONE:LoanParty" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "A Party to the Loan."@en ;
+	skos:editorialNote 'This covers the principals to the Loan contract (Loan Borrower and Loan Lender) as well as third parties, including Loan Originator. Transformation notes: In the PoC SDM the sub-classes of Loan Third Party will not be articulated as separate parties but defined via a selection list under "Loan Party" or "Loan Third Party".'@en ;
+	.
+
+fibo-loan-loan-loan:LoanPaymentSchedule
+	a owl:Class ;
+	rdfs:label "loan payment schedule"@en ;
+	rdfs:comment "QName: NONE:LoanPaymentSchedule" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "The schedule for payments made by the borrower."@en ;
+	skos:editorialNote "This is calculated to ensure that a constant amount is paid but the amount is applied differently each time to principal and interest. This is called a Credit Foncier. TERMS TO ADD Payment Identifier: A unique identifier for this individual scheduloed payment. this is used to track what payments made by the borrower, are made against this specific scheduled payment. Also known as Coupon Identifier. ACTION: Put this term in the Explicit Schedule listings."@en ;
+	.
+
+fibo-loan-loan-loan:LoanPrepaymentTermsSet
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPrincipalRepaymentTerms ;
+	rdfs:label "loan prepayment terms set"@en ;
+	rdfs:comment "QName: NONE:LoanPrepaymentTermsSet" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Terms governing prepayments of the principal on a loan by the borrower."@en ;
+	skos:editorialNote "Terms so far are mortgage specific but there must in principle be terms governing early payments on other types of loan. This also governs an important collective metric in loan pools (Loan speed)."@en ;
+	.
+
+fibo-loan-loan-loan:LoanPrincipalRepaymentCommitment
+	a owl:Class ;
+	rdfs:subClassOf
+		fibo-loan-loan-loan:LoanBorrowerCommitment ,
+		[
+			a owl:Restriction ;
+			owl:onProperty fibo-loan-loan-loan:governedBy.1 ;
+			owl:someValuesFrom fibo-loan-loan-loan:LoanPrincipalRepaymentTerms ;
+		]
+		;
+	rdfs:label "loan principal repayment commitment"@en ;
+	rdfs:comment "QName: NONE:LoanPrincipalRepaymentCommitment" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "A commitment by a borrower to repay the principal on a loan under the terms described."@en ;
+	fibo-fnd-utl-av:explanatoryNote "This is established by a Loan Contract, and described in the Loan Principal Repayment Terms of that contract"@en ;
+	.
+
+fibo-loan-loan-loan:LoanPrincipalRepaymentTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-fbc-dae-dbt:PrincipalRepaymentTerms ;
+	rdfs:label "loan principal repayment terms"@en ;
+	rdfs:comment "QName: NONE:LoanPrincipalRepaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Terms governing the repayment of principal of the loan."@en ;
+	.
+
+fibo-loan-loan-loan:LoanPurposeSelection
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-ins:Purpose ;
+	rdfs:label "loan purpose"@en ;
+	rdfs:comment "QName: NONE:LoanPurposeSelection" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "A selection of different types of loan purpose, being the purpose for which and manner in which loan (credit) draw-down amounts are to be used. This shows the purpose for which credit is to be used, and implies certain kinds of fact that relate to that specific type of loan e.g. mortgages. These are also identified as tranche types in tranches of a credit facility."@en ;
+	.
+
+fibo-loan-loan-loan:LoanRetainedAmount
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-acc-cur:MonetaryAmount ;
+	rdfs:label "loan retained amount"@en ;
+	rdfs:comment "QName: NONE:LoanRetainedAmount" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Retained amount, an amount the Issuer will be obliged to fund to the borrower at a later date, for example construction deposit."@en ;
+	skos:editorialNote "This is a monetary amount by descent from the Monetary Amount term in the taxonomy of kinds of amount. Hence it does not have a monetary amount attribute because it is one."@en ;
+	.
+
+fibo-loan-loan-loan:LoanStandardizationDocumentation
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-inf-inf:WrittenInformation ;
+	rdfs:label "loan standardization documentation"@en ;
+	rdfs:comment "QName: NONE:LoanStandardizationDocumentation" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Very specific categorization of documentation obtained by the lender at the time of origination to qualify a borrower. Documentation Types vary from lender to lender and need to be completely understood. takes a code list in the data world see eg S&P codes of these. not exhaustive? example tax returns etc. categorize as hi low or medium type of doc risk there are also 'no doc' mtges"@en ;
+	.
+
+fibo-loan-loan-loan:LoanTerminationProvisions
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-agrx-ele:TerminationProvisions ;
+	rdfs:label "loan termination provisions"@en ;
+	rdfs:comment "QName: NONE:LoanTerminationProvisions" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:LoanVariableInterestPaymentTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	rdfs:label "loan variable interest payment terms"@en ;
+	rdfs:comment "QName: NONE:LoanVariableInterestPaymentTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:MotorhomeLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "motorhome loan purpose"@en ;
+	rdfs:comment "QName: NONE:MotorhomeLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:OrdinaryLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "ordinary loan purpose"@en ;
+	rdfs:comment "QName: NONE:OrdinaryLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:OriginalBalanceApplicability
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:PenaltyInterestBalanceApplicability ;
+	rdfs:label "original balance applicability"@en ;
+	rdfs:comment "QName: NONE:OriginalBalanceApplicability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:OverdraftFacilityPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "overdraft facility purpose"@en ;
+	rdfs:comment "QName: NONE:OverdraftFacilityPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:PaymentArrangementTerms
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPrincipalRepaymentTerms ;
+	rdfs:label "payment arrangement terms"@en ;
+	rdfs:comment "QName: NONE:PaymentArrangementTerms" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Terms covering other arrangements for payments such as paying scheduled payments early to be applied on the scheduled payment dates."@en ;
+	.
+
+fibo-loan-loan-loan:PenaltyInterestBalanceApplicability
+	a owl:Class ;
+	rdfs:subClassOf fibo-fnd-arrxx-meth:Method ;
+	rdfs:label "penalty interest balance applicability"@en ;
+	rdfs:comment "QName: NONE:PenaltyInterestBalanceApplicability" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Selection of types of balance to which pre-payment interest penalties may be applied."@en ;
+	.
+
+fibo-loan-loan-loan:ResidentialHouseboatLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "residential houseboat loan purpose"@en ;
+	rdfs:comment "QName: NONE:ResidentialHouseboatLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:StudentLoanPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "student loan purpose"@en ;
+	rdfs:comment "QName: NONE:StudentLoanPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:WorkingCapitalPurpose
+	a owl:Class ;
+	rdfs:subClassOf fibo-loan-loan-loan:LoanPurposeSelection ;
+	rdfs:label "working capital purpose"@en ;
+	rdfs:comment "QName: NONE:WorkingCapitalPurpose" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:aRMConvertible
+	a owl:DatatypeProperty ;
+	rdfs:label "a r m convertible"@en ;
+	rdfs:comment "QName: NONE:aRMConvertible" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the Loan can be converted into an ARM."@en ;
+	.
+
+fibo-loan-loan-loan:acceptedBy
+	a owl:ObjectProperty ;
+	rdfs:label "accepted by"@en ;
+	rdfs:comment "QName: NONE:acceptedBy" ;
+	rdfs:domain fibo-loan-loan-loan:LoanBorrowerCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-pty:LoanBorrower ;
+	.
+
+fibo-loan-loan-loan:accepts
+	a owl:ObjectProperty ;
+	rdfs:label "accepts"@en ;
+	rdfs:comment "QName: NONE:accepts" ;
+	rdfs:domain fibo-loan-loan-pty:LoanBorrower ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanBorrowerCommitment ;
+	owl:inverseOf fibo-loan-loan-loan:acceptedBy ;
+	.
+
+fibo-loan-loan-loan:applicableToSameLenderRefinance
+	a owl:DatatypeProperty ;
+	rdfs:label "applicable to same lender refinance"@en ;
+	rdfs:comment "QName: NONE:applicableToSameLenderRefinance" ;
+	rdfs:domain fibo-loan-loan-loan:LoanEarlyPrepaymentHardPenaltyTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the penalty is specified as being for the loan being paid off in the event of a refinance with same lender. No = these terms relate to penalties where the loan is not so refinanced."@en ;
+	.
+
+fibo-loan-loan-loan:applicableToSameLenderRefinance.1
+	a owl:DatatypeProperty ;
+	rdfs:label "applicable to same lender refinance"@en ;
+	rdfs:comment "QName: NONE:applicableToSameLenderRefinance.1" ;
+	rdfs:domain fibo-loan-loan-loan:LoanEarlyPrepaymentSoftPenaltyTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the penalty is specified as being for the loan being paid off in the event of a refinance with same lender. Yes = these terms define the penalty payable when the debt is refinanced by arrangement with the same lender."@en ;
+	.
+
+fibo-loan-loan-loan:applicableToSameLenderRefinance.2
+	a owl:DatatypeProperty ;
+	rdfs:label "applicable to same lender refinance"@en ;
+	rdfs:comment "QName: NONE:applicableToSameLenderRefinance.2" ;
+	rdfs:domain fibo-loan-loan-loan:LoanEarlyPrepaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the penalty is specified as being for the loan being paid off in the event of a refinance with same lender."@en ;
+	.
+
+fibo-loan-loan-loan:assumable
+	a owl:DatatypeProperty ;
+	rdfs:label "assumable"@en ;
+	rdfs:comment "QName: NONE:assumable" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether another borrower may take ownership of the property and assume the payments on this loan."@en ;
+	.
+
+fibo-loan-loan-loan:balloon
+	a owl:DatatypeProperty ;
+	rdfs:label "baloon"@en ;
+	rdfs:comment "QName: NONE:balloon" ;
+	rdfs:domain fibo-loan-loan-loan:LoanPrincipalRepaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the loan will or will not amortize the loan balance fully by the maturity date."@en ;
+	.
+
+fibo-loan-loan-loan:borrows
+	a owl:ObjectProperty ;
+	rdfs:label "borrows"@en ;
+	rdfs:comment "QName: NONE:borrows" ;
+	rdfs:domain fibo-loan-loan-pty:LoanBorrower ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanDrawdown ;
+	.
+
+fibo-loan-loan-loan:buydownExists
+	a owl:DatatypeProperty ;
+	rdfs:label "buydown exists"@en ;
+	rdfs:comment "QName: NONE:buydownExists" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether a third party (usually a builder) is making payments to subsize a borrower."@en ;
+	.
+
+fibo-loan-loan-loan:docType
+	a owl:ObjectProperty ;
+	rdfs:label "doc type"@en ;
+	rdfs:comment "QName: NONE:docType" ;
+	rdfs:domain fibo-loan-loan-loan:LoanStandardizationDocumentation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-lnx-gen:LoanStandarizationDocumentType ;
+	.
+
+fibo-loan-loan-loan:drawDownDate
+	a owl:DatatypeProperty ;
+	rdfs:label "draw down date"@en ;
+	rdfs:comment "QName: NONE:drawDownDate" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "The date on which the funds are drawn down, that define the start of the loan."@en ;
+	.
+
+fibo-loan-loan-loan:drawnDownBy
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fbc-dae-dbt:hasBorrower ;
+	rdfs:label "drawn down by"@en ;
+	rdfs:comment "QName: NONE:drawnDownBy" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-pty:LoanBorrower ;
+	owl:inverseOf fibo-loan-loan-loan:borrows ;
+	.
+
+fibo-loan-loan-loan:earlyPrepaymentPenalty
+	a owl:ObjectProperty ;
+	rdfs:label "early prepayment penalty"@en ;
+	rdfs:comment "QName: NONE:earlyPrepaymentPenalty" ;
+	rdfs:domain fibo-loan-loan-loan:LoanEarlyPrepaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The amount to be paid as a penalty in the event of early payment of the loan."@en ;
+	.
+
+fibo-loan-loan-loan:escrowApplicable
+	a owl:DatatypeProperty ;
+	rdfs:label "escrow applicable"@en ;
+	rdfs:comment "QName: NONE:escrowApplicable" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the servicer is contractually responsible for maintaining an escrow against the account for payment of txes and insurance."@en ;
+	.
+
+fibo-loan-loan-loan:establishes
+	a owl:ObjectProperty ;
+	rdfs:label "establishes"@en ;
+	rdfs:comment "QName: NONE:establishes" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanInterestPaymentCommitment ;
+	.
+
+fibo-loan-loan-loan:establishes.1
+	a owl:ObjectProperty ;
+	rdfs:label "establishes"@en ;
+	rdfs:comment "QName: NONE:establishes.1" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanPrincipalRepaymentCommitment ;
+	.
+
+fibo-loan-loan-loan:governedBy
+	a owl:ObjectProperty ;
+	rdfs:label "governed by"@en ;
+	rdfs:comment "QName: NONE:governedBy" ;
+	rdfs:domain fibo-loan-loan-loan:LoanInterestPaymentCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	.
+
+fibo-loan-loan-loan:governedBy.1
+	a owl:ObjectProperty ;
+	rdfs:label "governed by"@en ;
+	rdfs:comment "QName: NONE:governedBy.1" ;
+	rdfs:domain fibo-loan-loan-loan:LoanPrincipalRepaymentCommitment ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanPrincipalRepaymentTerms ;
+	.
+
+fibo-loan-loan-loan:gracePeriod
+	a owl:ObjectProperty ;
+	rdfs:label "grace period"@en ;
+	rdfs:comment "QName: NONE:gracePeriod" ;
+	rdfs:domain fibo-loan-loan-loan:LoanTerminationProvisions ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	skos:definition "The period of time after any due date that the borrower has to fulfil its obligations before a a default (failure to pay) is deemed to have occurred."@en ;
+	.
+
+fibo-loan-loan-loan:hasBaseRate
+	a owl:ObjectProperty ;
+	rdfs:label "has base rate"@en ;
+	rdfs:comment "QName: NONE:hasBaseRate" ;
+	rdfs:domain fibo-loan-loan-loan:LoanFloatingInterestPaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/ReferenceInterestRate> ;
+	.
+
+fibo-loan-loan-loan:hasBaseRate.1
+	a owl:ObjectProperty ;
+	rdfs:label "has base rate"@en ;
+	rdfs:comment "QName: NONE:hasBaseRate.1" ;
+	rdfs:domain fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range <https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/ReferenceInterestRate> ;
+	.
+
+fibo-loan-loan-loan:hasConditions
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has conditions"@en ;
+	rdfs:comment "QName: NONE:hasConditions" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanConditions ;
+	.
+
+fibo-loan-loan-loan:hasInterestTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has interest terms"@en ;
+	rdfs:comment "QName: NONE:hasInterestTerms" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	.
+
+fibo-loan-loan-loan:hasLoanPhase
+	a owl:ObjectProperty ;
+	rdfs:label "has loan phase"@en ;
+	rdfs:comment "QName: NONE:hasLoanPhase" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-tem-ph:LoanPhase ;
+	.
+
+fibo-loan-loan-loan:hasPaymentSchedule
+	a owl:ObjectProperty ;
+	rdfs:label "has payment schedule"@en ;
+	rdfs:comment "QName: NONE:hasPaymentSchedule" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanPaymentSchedule ;
+	.
+
+fibo-loan-loan-loan:hasPrepaymentTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has prepayment terms"@en ;
+	rdfs:comment "QName: NONE:hasPrepaymentTerms" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanPrepaymentTermsSet ;
+	.
+
+fibo-loan-loan-loan:hasPrincipalTerms
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-agr-ctr:hasContractualElement ;
+	rdfs:label "has principal terms"@en ;
+	rdfs:comment "QName: NONE:hasPrincipalTerms" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanPrincipalRepaymentTerms ;
+	.
+
+fibo-loan-loan-loan:loanAmortizationPaymentsNumber
+	a owl:DatatypeProperty ;
+	rdfs:label "loan amortization payments number"@en ;
+	rdfs:comment "QName: NONE:loanAmortizationPaymentsNumber" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:decimal ;
+	skos:definition "The number of payments contractually required at origination to repay the loan. For monthly paying loans this is the number of months from the contractual first payment date to the maturity date."@en ;
+	.
+
+fibo-loan-loan-loan:loanAmortizationPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "loan amortization period"@en ;
+	rdfs:comment "QName: NONE:loanAmortizationPeriod" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-dt-fd:DatePeriod ;
+	skos:definition "Loan Term, that is the original contractual term of the loan, in months."@en ;
+	.
+
+fibo-loan-loan-loan:loanAnnualPrePaymentsRate
+	a owl:ObjectProperty ;
+	rdfs:label "loan annual pre payments rate"@en ;
+	rdfs:comment "QName: NONE:loanAnnualPrePaymentsRate" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Percentage amount of pre-payments allowed (without penalty ) under the loan contract in any given year"@en ;
+	.
+
+fibo-loan-loan-loan:loanDenominationCurrency
+	a owl:ObjectProperty ;
+	rdfs:label "loan denomination currency"@en ;
+	rdfs:comment "QName: NONE:loanDenominationCurrency" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-acc-cur:Currency ;
+	skos:definition "The currency in which the loan is denominated."@en ;
+	.
+
+fibo-loan-loan-loan:loanFurtherAdvancesAllowed
+	a owl:DatatypeProperty ;
+	rdfs:label "loan further advances allowed"@en ;
+	rdfs:comment "QName: NONE:loanFurtherAdvancesAllowed" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the lender allows the borrower the possibility to have further advances i.e. advances above the original loan balance."@en ;
+	.
+
+fibo-loan-loan-loan:loanGuaranteeInsuredPoint
+	a owl:ObjectProperty ;
+	rdfs:label "loan guarantee insured point"@en ;
+	rdfs:comment "QName: NONE:loanGuaranteeInsuredPoint" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Loan to Value percentage above which losses are insured."@en ;
+	.
+
+fibo-loan-loan-loan:loanGuarantorType
+	a owl:DatatypeProperty ;
+	rdfs:label "loan guarantor type"@en ;
+	rdfs:comment "QName: NONE:loanGuarantorType" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "The type of guarantee provider, if applicable. Actiojn: Move down th eGuaranteed Loan."@en ;
+	.
+
+fibo-loan-loan-loan:loanIdentifier
+	a owl:ObjectProperty ;
+	rdfs:label "loan identifier"@en ;
+	rdfs:comment "QName: NONE:loanIdentifier" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanIdentifier ;
+	skos:definition 'Unique identifier for the loan. Further notes: This is an information construct. It is internal rather than a publicly available ID (like ISIN) but is included since it is a fundamental "fact" about the loan regardless of the fact that it exists only as a data model construct. The loan ID should not change through the life of the transaction. Data model note (not applicable to semantic model): If the original loan ID cannot be maintained in this field enter the original ID followed by the new ID, comma delimited'@en ;
+	.
+
+fibo-loan-loan-loan:loanInterestPaymentFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "loan interest payment frequency"@en ;
+	rdfs:comment "QName: NONE:loanInterestPaymentFrequency" ;
+	rdfs:domain fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "Payment Frequency - Frequency of payments due, i.e. number of months between payments."@en ;
+	.
+
+fibo-loan-loan-loan:loanInterestRateCap
+	a owl:ObjectProperty ;
+	rdfs:label "loan interest rate cap"@en ;
+	rdfs:comment "QName: NONE:loanInterestRateCap" ;
+	rdfs:domain fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The cap on the interest rate chargeable, if there is one."@en ;
+	.
+
+fibo-loan-loan-loan:loanInterestRateType
+	a owl:DatatypeProperty ;
+	rdfs:label "loan interest rate type"@en ;
+	rdfs:comment "QName: NONE:loanInterestRateType" ;
+	rdfs:domain fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Loan Interest Rate Type."@en ;
+	.
+
+fibo-loan-loan-loan:loanInterestResetInterval
+	a owl:ObjectProperty ;
+	rdfs:label "loan interest reset interval"@en ;
+	rdfs:comment "QName: NONE:loanInterestResetInterval" ;
+	rdfs:domain fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition "Interest Rate Reset interval - The interval in months at which the interest rate is adjusted (for floating loans)"@en ;
+	.
+
+fibo-loan-loan-loan:loanMaximumAllowedBalance
+	a owl:ObjectProperty ;
+	rdfs:label "loan maximum allowed balance"@en ;
+	rdfs:comment "QName: NONE:loanMaximumAllowedBalance" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Maximum balance - For loans with flexible re-draw facilities, the maximum loan amount that could potentially be outstanding"@en ;
+	.
+
+fibo-loan-loan-loan:loanOriginalAdvanceAmount
+	a owl:ObjectProperty ;
+	rdfs:label "loan original advance amount"@en ;
+	rdfs:comment "QName: NONE:loanOriginalAdvanceAmount" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The Original Balance of the loan, that is the amount advanced under this loan. Further notes: PoC workings: Original balance (inclusive of fees)"@en ;
+	.
+
+fibo-loan-loan-loan:loanOriginalAdvanceDate
+	a owl:DatatypeProperty ;
+	rdfs:label "loan original advance date"@en ;
+	rdfs:comment "QName: NONE:loanOriginalAdvanceDate" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Loan origination date, that is the date of original loan advance."@en ;
+	.
+
+fibo-loan-loan-loan:loanOriginationChannelType
+	a owl:DatatypeProperty ;
+	rdfs:label "loan origination channel type"@en ;
+	rdfs:comment "QName: NONE:loanOriginationChannelType" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "The type of bank, division or organization which was responsible for arranging the loan."@en ;
+	.
+
+fibo-loan-loan-loan:loanPaymentFrequency
+	a owl:ObjectProperty ;
+	rdfs:label "loan payment frequency"@en ;
+	rdfs:comment "QName: NONE:loanPaymentFrequency" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-dt-fd:RecurrenceInterval ;
+	skos:definition "Payment Frequency - Frequency of payments due, i.e. number of months between payments. Further notes: This is defined as a frequency, i.e. the reciprocal of a period of time. Corresponding Data model entries: Monthly Quarterly Semi annually Annual Bullet Other (to provide details, if applicable) No data Note that not all of these correspond to frequency. Therefore one possibility is that this term is not present. Arrangements such as bullet payments are part of the principal and interest payment terms. This term is retained as a fact about the Loan Contract because the lender may be contractually obliged to make payments with this regularity, which combine interest, principal and other amounts (Tax, ESCROW etc.)."@en ;
+	.
+
+fibo-loan-loan-loan:loanPeriodicPayment
+	a owl:ObjectProperty ;
+	rdfs:label "loan periodic payment"@en ;
+	rdfs:comment "QName: NONE:loanPeriodicPayment" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Periodic contractual payment due (the payment due if there are no other payment arrangements in force)"@en ;
+	.
+
+fibo-loan-loan-loan:loanPeriodicPaymentType
+	a owl:DatatypeProperty ;
+	rdfs:label "loan periodic payment type"@en ;
+	rdfs:comment "QName: NONE:loanPeriodicPaymentType" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Periodic payment type. May combine interst and principal amounts. See selection of values. May also be principal interest and ESCROW."@en ;
+	.
+
+fibo-loan-loan-loan:loanPhase
+	a owl:DatatypeProperty ;
+	rdfs:label "loan phase"@en ;
+	rdfs:comment "QName: NONE:loanPhase" ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	.
+
+fibo-loan-loan-loan:loanPurpose
+	a owl:DatatypeProperty ;
+	rdfs:label "loan purpose"@en ;
+	rdfs:comment "QName: NONE:loanPurpose" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "The purpose for which the loan has been advanced."@en ;
+	.
+
+fibo-loan-loan-loan:loanRetainedAmount
+	a owl:ObjectProperty ;
+	rdfs:label "loan retained amount"@en ;
+	rdfs:comment "QName: NONE:loanRetainedAmount" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Retained amount, this is an amount the Issuer will be obliged to fund to the borrower at a later date, for example construction deposit."@en ;
+	.
+
+fibo-loan-loan-loan:loanRetainedAmountDate
+	a owl:DatatypeProperty ;
+	rdfs:label "loan retained amount date"@en ;
+	rdfs:comment "QName: NONE:loanRetainedAmountDate" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Date when the retained amount is to be drawn by."@en ;
+	.
+
+fibo-loan-loan-loan:loanSubsidyAmount
+	a owl:ObjectProperty ;
+	rdfs:label "loan subsidy amount"@en ;
+	rdfs:comment "QName: NONE:loanSubsidyAmount" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "Loan Subsidy Received - Amount of subsidy received from government by borrower."@en ;
+	.
+
+fibo-loan-loan-loan:mayHave
+	a owl:ObjectProperty ;
+	rdfs:subPropertyOf fibo-fnd-inf-inf:details ;
+	rdfs:label "may have"@en ;
+	rdfs:comment "QName: NONE:mayHave" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanStandardizationDocumentation ;
+	.
+
+fibo-loan-loan-loan:penaltyInterestAppliedTo
+	a owl:ObjectProperty ;
+	rdfs:label "penalty interest applied to"@en ;
+	rdfs:comment "QName: NONE:penaltyInterestAppliedTo" ;
+	rdfs:domain fibo-loan-loan-loan:LoanOngoingPrepaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:PenaltyInterestBalanceApplicability ;
+	skos:definition "The balance to which the penalty interest is to be applied."@en ;
+	.
+
+fibo-loan-loan-loan:preArrangedPaymentFee
+	a owl:ObjectProperty ;
+	rdfs:label "pre arranged payment fee"@en ;
+	rdfs:comment "QName: NONE:preArrangedPaymentFee" ;
+	rdfs:domain fibo-loan-loan-loan:PaymentArrangementTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-acc-cur:MonetaryAmount ;
+	skos:definition "The Handling Fee that would be payable in the event of the borrower wishing to make funds available early for application on the schedule due dates (so they are not principal prepayments)."@en ;
+	.
+
+fibo-loan-loan-loan:prepaymentPenaltyInterest
+	a owl:ObjectProperty ;
+	rdfs:label "prepayment penalty interest"@en ;
+	rdfs:comment "QName: NONE:prepaymentPenaltyInterest" ;
+	rdfs:domain fibo-loan-loan-loan:LoanOngoingPrepaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Prepayment Penalty Interest."@en ;
+	.
+
+fibo-loan-loan-loan:prepaymentPenaltyPeriod
+	a owl:ObjectProperty ;
+	rdfs:label "prepayment penalty period"@en ;
+	rdfs:comment "QName: NONE:prepaymentPenaltyPeriod" ;
+	rdfs:domain fibo-loan-loan-loan:LoanEarlyPrepaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-dt-fd:Duration ;
+	skos:definition 'Period during which penalities are incurred for partial or full principal repayment prior to loan maturity. MISMO definition: "Information specific to calculation of penalities for partial or full principal repayment prior to loan maturity. " There is a penalty for this as well, perhaps as a monetary amount.'@en ;
+	.
+
+fibo-loan-loan-loan:prepaymentPenaltyWaiver
+	a owl:DatatypeProperty ;
+	rdfs:label "prepayment penalty waiver"@en ;
+	rdfs:comment "QName: NONE:prepaymentPenaltyWaiver" ;
+	rdfs:domain fibo-loan-loan-loan:LoanEarlyPrepaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the Loan Contract includes a provision for the lender to waive the prepayment penalty at their discretion."@en ;
+	.
+
+fibo-loan-loan-loan:prepaymentThreshold
+	a owl:ObjectProperty ;
+	rdfs:label "prepayment threshold"@en ;
+	rdfs:comment "QName: NONE:prepaymentThreshold" ;
+	rdfs:domain fibo-loan-loan-loan:LoanOngoingPrepaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "Percentage amount of pre-payments allowed under the product per year. This is for mortgages that allow a certain threshold of pre-payments (ie 10%) before charges are incurred."@en ;
+	.
+
+fibo-loan-loan-loan:recourseLoan
+	a owl:DatatypeProperty ;
+	rdfs:label "recourse loan"@en ;
+	rdfs:comment "QName: NONE:recourseLoan" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "The only way you get the money back in the event of default is the security. Recourse is where you still have the opportunity to go back to the borrower for the rest of the money."@en ;
+	.
+
+fibo-loan-loan-loan:renegotiable
+	a owl:DatatypeProperty ;
+	rdfs:label "renegotiable"@en ;
+	rdfs:comment "QName: NONE:renegotiable" ;
+	rdfs:domain fibo-loan-loan-loan:LoanInterestPaymentTermsSet ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the terms for payment of interest can be renegotiated during the life of the loan."@en ;
+	.
+
+fibo-loan-loan-loan:renegotiable.1
+	a owl:DatatypeProperty ;
+	rdfs:label "renegotiable"@en ;
+	rdfs:comment "QName: NONE:renegotiable.1" ;
+	rdfs:domain fibo-loan-loan-loan:LoanVariableInterestPaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	.
+
+fibo-loan-loan-loan:retainedUntil
+	a owl:ObjectProperty ;
+	rdfs:label "retained until"@en ;
+	rdfs:comment "QName: NONE:retainedUntil" ;
+	rdfs:domain fibo-loan-loan-loan:LoanRetainedAmount ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-dt-fd:Date ;
+	skos:definition "Date when the retained amount is to be drawn by."@en ;
+	.
+
+fibo-loan-loan-loan:riskLevel
+	a owl:ObjectProperty ;
+	rdfs:label "risk level"@en ;
+	rdfs:comment "QName: NONE:riskLevel" ;
+	rdfs:domain fibo-loan-loan-loan:LoanStandardizationDocumentation ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-lnx-gen:LoanDocumentRiskLevel ;
+	.
+
+fibo-loan-loan-loan:secured
+	a owl:DatatypeProperty ;
+	rdfs:label "secured"@en ;
+	rdfs:comment "QName: NONE:secured" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range xsd:boolean ;
+	skos:definition "Whether the loan is secured. Further Details: All loans are either secured or unsecured All secured loans are secured by some asset or some guaranty Guaranties have various forms. Guaranties have a guarantor. The guarantor may or may not elect to introduce some collateral of their own. Guarantor may or may not be Co-borrower."@en ;
+	.
+
+fibo-loan-loan-loan:setsOutTermsFor
+	a owl:ObjectProperty ;
+	rdfs:label "sets out terms for"@en ;
+	rdfs:comment "QName: NONE:setsOutTermsFor" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanDrawdown ;
+	skos:definition "Extended credit (debt or Credit depending on the Viewpoint) has terms set out in a Contract, governing the terms fo extension of the cerdit, payment of interest, principal repayment and any other required clauses defining conditions of the loan or credit. Note feb 2010: term created in Sept 2008 as part of upper ontology. Review and perhaps specialise the kind of contract this relationship comes from."@en ;
+	.
+
+fibo-loan-loan-loan:specifies
+	a owl:ObjectProperty ;
+	rdfs:label "specifies"@en ;
+	rdfs:comment "QName: NONE:specifies" ;
+	rdfs:domain fibo-loan-ln-ln:LoanContract ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-loan-loan-loan:LoanRetainedAmount ;
+	.
+
+fibo-loan-loan-loan:spread
+	a owl:ObjectProperty ;
+	rdfs:label "spread"@en ;
+	rdfs:comment "QName: NONE:spread" ;
+	rdfs:domain fibo-loan-loan-loan:LoanFloatingInterestPaymentTerms ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	rdfs:range fibo-fnd-utl-val:PercentageValue ;
+	skos:definition "The percentage of interest added to the base rate."@en ;
+	.
+
+fibo-loan-loan-loan:subsidyPeriodEndDate
+	a owl:DatatypeProperty ;
+	rdfs:label "subsidy period end date"@en ;
+	rdfs:comment "QName: NONE:subsidyPeriodEndDate" ;
+	rdfs:domain fibo-loan-loan-loan:LoanDrawdown ;
+	rdfs:isDefinedBy <https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/> ;
+	skos:definition "Subsidy Period - date at which subsidy period ends"@en ;
+	.
+
