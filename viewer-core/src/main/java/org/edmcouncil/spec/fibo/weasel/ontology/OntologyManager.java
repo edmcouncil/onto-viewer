@@ -41,11 +41,6 @@ public class OntologyManager {
       System.exit(-1);
     }
   }
-
-  /*private OWLOntology loadOntologyFromFile(String ontoPath) throws IOException, OWLOntologyCreationException {
-    
-  }*/
-
   
   public OWLOntology getOntology() {
     return ontology;
