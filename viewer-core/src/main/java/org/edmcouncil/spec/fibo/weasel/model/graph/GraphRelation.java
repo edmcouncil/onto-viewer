@@ -45,7 +45,7 @@ public class GraphRelation extends GraphElement {
   }
 
   @Override
-  public String toSimpleJson() {
+  public String toVisNetworkJson() {
     String iriDto = super.getIri();
     iriDto = iriDto == null || iriDto.isEmpty() ? "http://www.w3.org/2002/07/owl#Thing" : iriDto;
     String outIri = ", iri:'" + iriDto.replaceAll("#", "%23") + "'";

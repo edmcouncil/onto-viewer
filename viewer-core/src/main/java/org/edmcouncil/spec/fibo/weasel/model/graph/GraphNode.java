@@ -45,7 +45,7 @@ public class GraphNode extends GraphElement {
 
   //
   @Override
-  public String toSimpleJson() {
+  public String toVisNetworkJson() {
     //TODO: String.format in this case
     String iriDto = super.getIri();
     iriDto = iriDto == null || iriDto.isEmpty() ? "http://www.w3.org/2002/07/owl#Thing" : iriDto;

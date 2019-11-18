@@ -24,6 +24,7 @@
         </appender>
     </springProfile>
     <logger name="org.edmcouncil.spec.fibo" level="DEBUG" />
+    <logger name="org.semanticweb.owlapi" level="DEBUG" />
     <root level="INFO">
         <appender-ref ref="STDOUT" />
         <springProfile name="prod">
