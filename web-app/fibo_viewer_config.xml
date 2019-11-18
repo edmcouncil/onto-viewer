@@ -188,8 +188,9 @@
   <groups>
     <!--The order of elements in groups will be their priority-->
     <group>
-      <groupName>Natural language characteristic</groupName>
+      <groupName>Glossary</groupName>
       <groupItem>http://www.w3.org/2000/01/rdf-schema#label</groupItem>
+      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#definition</groupItem>
@@ -209,12 +210,12 @@
 
     <group>
       <groupName>Ontological characteristic</groupName>
+      <groupItem>@viewer.function.direct_subclasses</groupItem>
+      <groupItem>@viewer.function.instances</groupItem>
       <groupItem>@viewer.axiom.EquivalentClasses</groupItem>
       <groupItem>@viewer.axiom.SubClassOf</groupItem>
       <groupItem>@viewer.function.anonymous_ancestor</groupItem>
       <groupItem>@viewer.axiom.DisjointClasses</groupItem>
-      <groupItem>@viewer.function.direct_subclasses</groupItem>
-      <groupItem>@viewer.function.instances</groupItem>
       <groupItem>@viewer.axiom.ClassAssertion</groupItem>
       <groupItem>@viewer.axiom.SameIndividual</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyAssertion</groupItem>
@@ -233,7 +234,6 @@
     
     <group>
       <groupName>Meta-information</groupName>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel</groupItem>
       <groupItem>http://purl.org/dc/terms/creator</groupItem>
       <groupItem>http://purl.org/dc/terms/license</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright</groupItem>
