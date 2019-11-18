@@ -147,17 +147,17 @@ public class OwlDataHandler {
     return taxElements;
   }
 
-  private void setResultValues(OwlListDetails resultDetails, 
-      OwlTaxonomyImpl tax, 
-      OwlDetailsProperties<PropertyValue> axioms, 
-      OwlDetailsProperties<PropertyValue> annotations, 
-      OwlDetailsProperties<PropertyValue> directSubclasses, 
-      OwlDetailsProperties<PropertyValue> individuals, 
-      OwlDetailsProperties<PropertyValue> inheritedAxioms, 
-      ViewerGraph vg, 
+  private void setResultValues(OwlListDetails resultDetails,
+      OwlTaxonomyImpl tax,
+      OwlDetailsProperties<PropertyValue> axioms,
+      OwlDetailsProperties<PropertyValue> annotations,
+      OwlDetailsProperties<PropertyValue> directSubclasses,
+      OwlDetailsProperties<PropertyValue> individuals,
+      OwlDetailsProperties<PropertyValue> inheritedAxioms,
+      ViewerGraph vg,
       List<PropertyValue> subclasses) {
     axioms.getProperties().put(subClassOfIriString, subclasses);
-    
+
     resultDetails.setTaxonomy(tax);
     resultDetails.addAllProperties(axioms);
     resultDetails.addAllProperties(annotations);
@@ -269,7 +269,13 @@ public class OwlDataHandler {
       OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
       OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(val1, val2);
       List<OwlTaxonomyElementImpl> currentTax = new LinkedList<>();
+      label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
+      OwlTaxonomyValue valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
+      OwlTaxonomyValue valThingIri = new OwlTaxonomyValue(WeaselOwlType.IRI, "http://www.w3.org/2002/07/owl#Thing");
+      OwlTaxonomyElementImpl taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
+      currentTax.add(taxElThing);
       currentTax.add(taxEl);
+
       taxonomy.addTaxonomy(currentTax);
     }
 
@@ -640,7 +646,7 @@ public class OwlDataHandler {
         .map((c) -> handleAxioms(c, ontology))
         .forEachOrdered((handleAxioms) -> {
           for (Map.Entry<String, List<PropertyValue>> entry : handleAxioms.getProperties().entrySet()) {
-            
+
             if (entry.getKey().equals(subClassOfKey)) {
               for (PropertyValue propertyValue : entry.getValue()) {
                 if (propertyValue.getType() != WeaselOwlType.TAXONOMY) {
