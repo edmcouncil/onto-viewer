@@ -32,6 +32,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
+import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraphJson;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
@@ -84,7 +85,7 @@ public class OwlDataHandler {
   private AppConfiguration config;
 
   private final String subClassOfIriString = ViewerIdentifierFactory
-      .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName()).toString();
+      .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
 
   public OwlListDetails handleParticularClass(IRI iri, OWLOntology ontology) {
     OwlListDetails resultDetails = new OwlListDetails();
@@ -163,7 +164,8 @@ public class OwlDataHandler {
     resultDetails.addAllProperties(directSubclasses);
     resultDetails.addAllProperties(individuals);
     resultDetails.addAllProperties(inheritedAxioms);
-    resultDetails.setGraph(vg);
+    ViewerGraphJson vgj = new ViewerGraphJson(vg);
+    resultDetails.setGraph(vgj);
     // resultDetails.addAllProperties(modules);
   }
 
