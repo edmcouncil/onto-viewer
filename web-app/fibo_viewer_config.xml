@@ -209,6 +209,18 @@
     </group>
 
     <group>
+      <groupName>This ontology contains</groupName>
+      <groupItem>@viewer.internal.clazz</groupItem>
+      <groupItem>@viewer.external.clazz</groupItem>
+      <groupItem>@viewer.internal.objectProperty</groupItem>      
+      <groupItem>@viewer.external.objectProperty</groupItem>    
+      <groupItem>@viewer.internal.dataProperty</groupItem>
+      <groupItem>@viewer.external.dataProperty</groupItem>    
+      <groupItem>@viewer.internal.instance</groupItem>
+      <groupItem>@viewer.external.instance</groupItem>    
+    </group> 
+    
+    <group>
       <groupName>Ontological characteristic</groupName>
       <groupItem>@viewer.function.direct_subclasses</groupItem>
       <groupItem>@viewer.function.instances</groupItem>
@@ -252,17 +264,6 @@
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/relatedSpecification</groupItem>                  
     </group>   
     
-    <group>
-      <groupName>This ontology contains</groupName>
-      <groupItem>@viewer.internal.clazz</groupItem>
-      <groupItem>@viewer.external.clazz</groupItem>
-      <groupItem>@viewer.internal.objectProperty</groupItem>      
-      <groupItem>@viewer.external.objectProperty</groupItem>    
-      <groupItem>@viewer.internal.dataProperty</groupItem>
-      <groupItem>@viewer.external.dataProperty</groupItem>    
-      <groupItem>@viewer.internal.instance</groupItem>
-      <groupItem>@viewer.external.instance</groupItem>		
-    </group> 
   </groups>
     
 </properties>
