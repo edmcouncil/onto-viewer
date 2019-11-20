@@ -13,6 +13,7 @@ import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.DataRangeType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClassExpression;
+import org.semanticweb.owlapi.model.OWLDataExactCardinality;
 import org.semanticweb.owlapi.model.OWLDataMaxCardinality;
 import org.semanticweb.owlapi.model.OWLDataMinCardinality;
 import org.semanticweb.owlapi.model.OWLDataSomeValuesFrom;
@@ -262,6 +263,42 @@ public class OntologyVisitors {
 
       @Override
       public Map<GraphNode, OWLClassExpression> visit(OWLDataSomeValuesFrom axiom) {
+
+        String propertyIri = null;
+        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        DataRangeType objectType = axiom.getFiller().getDataRangeType();
+        Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
+
+        switch (objectType) {
+          case DATATYPE:
+            IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
+
+            GraphNode endNode = new GraphNode(vg.nextId());
+            endNode.setIri(datatypeIri.toString());
+            endNode.setType(type);
+            String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
+            endNode.setLabel(label);
+
+            GraphRelation rel = new GraphRelation(vg.nextId());
+            rel.setIri(propertyIri);
+            rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+            rel.setStart(node);
+            rel.setEnd(endNode);
+            rel.setEndNodeType(type);
+            vg.addNode(endNode);
+            vg.addRelation(rel);
+
+            return null;
+
+          default:
+            LOG.debug("Unsupported switch case (DataRangeType): {}", objectType);
+        }
+
+        return returnedVal;
+      }
+      
+      @Override
+      public Map<GraphNode, OWLClassExpression> visit(OWLDataExactCardinality axiom) {
 
         String propertyIri = null;
         propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);

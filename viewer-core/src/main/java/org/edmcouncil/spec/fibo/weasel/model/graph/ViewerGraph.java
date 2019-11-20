@@ -114,6 +114,42 @@ public class ViewerGraph {
     return sb.toString();
   }
 
+  public String toJsonListNodes() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("[");
+    if (nodes != null) {
+      int size = nodes.size();
+      int i = 0;
+      for (GraphNode node : nodes) {
+        sb.append(node.toSimpleJson());
+        if (i < size - 1) {
+          sb.append(", ");
+        }
+        i++;
+      }
+    }
+    sb.append("]");
+    return sb.toString();
+  }
+
+  public String toJsonListEdges() {
+     StringBuilder sb = new StringBuilder();
+     sb.append("[");
+    if (relations != null) {
+      int size = relations.size();
+      int i = 0;
+      for (GraphRelation rel : relations) {
+        sb.append(rel.toSimpleJson());
+        if (i < size-1) {
+          sb.append(", ");
+        }
+        i++;
+      }
+    }
+    sb.append("]");
+    return sb.toString();
+  }
+
   public boolean isEmpty() {
     return nodes.isEmpty() && relations.isEmpty();
   }

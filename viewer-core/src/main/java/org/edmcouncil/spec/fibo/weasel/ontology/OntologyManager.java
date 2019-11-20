@@ -105,7 +105,7 @@ public class OntologyManager {
     LOG.debug("direct imports");
     Stream<OWLOntology> directImports = m.imports(o);
     Set<OWLOntology> ontologiesTmp = directImports.collect(Collectors.toSet());
-    ontologiesTmp.addAll(getDefaultOntologies());
+    //ontologiesTmp.addAll(getDefaultOntologies());
     directImports = ontologiesTmp.stream();
     LOG.debug("create ontology");
     o = m.createOntology(fiboIRI, directImports, false);
