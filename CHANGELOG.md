@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- displaying OWLDataExactCardinality in graph
+
+### Changed
+- graph in json being returned in string value
+
+### Removed
+- 
+
 
 ## [0.1.0] - 2019-11-08
 ### Added
@@ -16,10 +25,3 @@ All notable changes to this project will be documented in this file.
 - label support
 - graph from the OWLRestriction for class
 - ignore some items to display defined in configuration file
-
-
-### Changed
--
-
-### Removed
-- 
