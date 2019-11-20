@@ -27,8 +27,8 @@
   </properties>
 
   <modules>
-    <module>web-app</module>
-    <module>viewer-core</module>
     <module>config-loader</module>
+    <module>viewer-core</module>
+    <module>web-app</module>
   </modules>
 </project>

@@ -13,6 +13,8 @@
   <ignoreToDisplaying>
     <ignore>@viewer.axiom.SubObjectPropertyOf</ignore>
     <ignore>http://www.w3.org/2000/01/rdf-schema#isDefinedBy</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#definition</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#label</ignore>
   </ignoreToDisplaying>
        
   <!-- This is configuration about labels and displaying values -->
@@ -160,6 +162,11 @@
         <resourceIriName>contributor</resourceIriName>
       </userDefinedName>
       
+      <userDefinedName>
+        <resourceIriToName>http://spec.edmcouncil.org/owlnames#mdDefinition</resourceIriToName>
+        <resourceIriName>ontological definition</resourceIriName>
+      </userDefinedName>
+      
   
     </userDefaultNameList>
     
@@ -173,7 +180,7 @@
   <!-- Here we define URIs to be treated as IRIs -->
   <!-- We are currently using the method contains(), please be careful when define URIs -->
   <scopeIri>
-    <uriNamespace>https://spec.edmcouncil.org/fibo/ontology</uriNamespace>
+    <uriNamespace>https://spec.edmcouncil.org/fibo/ontology/</uriNamespace>
     <uriNamespace>https://www.omg.org/spec/</uriNamespace>
     <uriNamespace>http://www.omg.org/techprocess</uriNamespace>
   </scopeIri>
@@ -194,6 +201,7 @@
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#definition</groupItem>
+      <groupItem>http://spec.edmcouncil.org/owlnames#mdDefinition</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/definitionOrigin</groupItem>
       <groupItem>http://purl.org/dc/terms/source</groupItem>         
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/adaptedFrom</groupItem>

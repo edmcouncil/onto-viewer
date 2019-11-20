@@ -74,25 +74,27 @@
     
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.0.1</version>
-      </plugin>
-      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <!-- <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.1</version>
+      </plugin>-->
     </plugins>
-    <resources>
+    <!-- <resources>
       <resource>
         <filtering>true</filtering>
         <directory>src/main/resources</directory>
         <includes>
           <include>application.properties</include>
+          <include>logback-spring.xml</include>
+          <include>**/*.*</include>
         </includes>
       </resource>
       
-    </resources>
+    </resources>-->
     
   </build>
   

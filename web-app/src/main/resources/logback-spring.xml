@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{yy-MM-dd HH:mm:ss} [%19.19thread] %-5level %-4line %-42logger{38}: %msg%n</pattern>
-        </encoder>
-    </appender>
-
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yy-MM-dd HH:mm:ss} [%19.19thread] %-5level %-4line %-42logger{38}: %msg%n</pattern>
+    </encoder>
+  </appender>
+  <logger name="org.edmcouncil.spec.fibo" level="DEBUG">
+    <appender-ref ref="STDOUT" />
+  </logger>
+  <logger name="org.semanticweb.owlapi" level="DEBUG">
+    <appender-ref ref="STDOUT" />
+  </logger>
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
     <springProfile name="prod">
-        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>logs/weasel.log</file>
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <!-- daily rollover -->
-                <fileNamePattern>splitview.%d{yyyy-MM-dd}.log</fileNamePattern>
-
-                <!-- keep 30 days' worth of history capped at 1GB total size -->
-                <maxHistory>30</maxHistory>
-                <totalSizeCap>1GB</totalSizeCap>
-            </rollingPolicy>
-
-            <encoder>
-                <pattern>%d{yy-MM-dd HH:mm:ss} [%19.19thread] %-5level %-4line %-42logger{38}: %msg%n</pattern>
-            </encoder>
-        </appender>
+      <appender-ref ref="FILE" />
     </springProfile>
-    <logger name="org.edmcouncil.spec.fibo" level="DEBUG" />
-    <root level="INFO">
-        <appender-ref ref="STDOUT" />
-        <springProfile name="prod">
-            <appender-ref ref="FILE" />
-        </springProfile>
-    </root>
+  </root>
 </configuration>
