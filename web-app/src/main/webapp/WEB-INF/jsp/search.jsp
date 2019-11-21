@@ -127,10 +127,18 @@
               if (nodes.length !== 0) {
                 startHeight = 500;
               }
+              if(nodes.length > 0 && nodes.length < 3){
+                startHeight = 250;
+              }
               var height = startHeight + 20 * nodes.length;
+             
               var container = document.getElementById('ontograph');
 
               container.style.height = height + 'px';
+              
+              if(nodes.length > 0 && nodes.length < 3){
+                 container.style.width = 400 + 'px';
+              }
               network.redraw();
 
               network.on("doubleClick", function (params) {

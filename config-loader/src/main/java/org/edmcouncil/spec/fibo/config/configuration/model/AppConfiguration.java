@@ -18,10 +18,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppConfiguration {
 
-  @Autowired
-  private FileSystemManager fileSystemManager;
   private static final Logger LOG = LoggerFactory.getLogger(AppConfiguration.class);
 
+  @Autowired
+  private FileSystemManager fileSystemManager;
   private ViewerCoreConfiguration weaselConfig;
 
   public AppConfiguration() {
@@ -68,5 +68,5 @@ public class AppConfiguration {
   public ViewerCoreConfiguration getWeaselConfig() {
     return weaselConfig;
   }
- 
+
 }

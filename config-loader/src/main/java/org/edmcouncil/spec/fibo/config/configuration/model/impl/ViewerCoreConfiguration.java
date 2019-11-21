@@ -67,15 +67,23 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
     return configuration.containsKey(ConfigKeys.ONTOLOGY_URL);
   }
 
-  public String getURLOntology() {
-    Set<ConfigItem> elements = configuration.get(ConfigKeys.ONTOLOGY_URL);
+  private String getURLOntology() {
+    Set<ConfigItem> elements = configuration.getOrDefault(ConfigKeys.ONTOLOGY_URL, new HashSet<>(0));
     for (ConfigItem element : elements) {
       return element.toString();
     }
     return null;
   }
 
-  public String getPathOntology() {
+  public String getOntologyLocation() {
+    String url = getURLOntology();
+    if (url != null) {
+      return url;
+    }
+    return getPathOntology();
+  }
+
+  private String getPathOntology() {
     Set<ConfigItem> elements = configuration.get(ConfigKeys.ONTOLOGY_PATH);
     for (ConfigItem element : elements) {
       return element.toString();
@@ -180,10 +188,10 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
     return result;
   }
-  
-  public LabelPriority.Priority getLabelPriority(){
+
+  public LabelPriority.Priority getLabelPriority() {
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_PRIORITY, new HashSet<>());
-    
+
     for (ConfigItem value : values) {
       LabelPriority item = (LabelPriority) value;
       return item.getValue();

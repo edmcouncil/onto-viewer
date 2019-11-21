@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
+import org.edmcouncil.spec.fibo.view.util.ModelBuilderFactory;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
@@ -37,6 +38,8 @@ public class SearchController {
   private SearchService searchService;
   @Autowired
   private DataManager dataManager;
+  @Autowired
+  private ModelBuilderFactory modelFactory;
 
   @PostMapping
   public ModelAndView redirectSearch(@Valid @ModelAttribute("queryValue") Query query) {
@@ -52,7 +55,7 @@ public class SearchController {
     LOG.info("[REQ] GET : search ? query = {{}}", query);
     Query q = new Query();
     q.setValue(query);
-    ModelBuilder modelBuilder = new ModelBuilder(model);
+    ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
     searchService.search(query, modelBuilder);
     modelBuilder.modelTree(modules);

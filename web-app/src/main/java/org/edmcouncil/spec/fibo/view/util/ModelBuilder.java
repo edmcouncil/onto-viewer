@@ -55,5 +55,9 @@ public class ModelBuilder {
     model.addAttribute("modelTree", modules);
     return this;
   }
+  public ModelBuilder setVersion(String version) {
+    model.addAttribute("version", version);
+    return this;
+  }
 
 }

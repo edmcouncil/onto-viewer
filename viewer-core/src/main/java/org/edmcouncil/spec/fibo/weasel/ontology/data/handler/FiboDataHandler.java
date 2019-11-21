@@ -186,6 +186,11 @@ public class FiboDataHandler {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
+
+      if (!onto.getOntologyID().getOntologyIRI().isPresent()) {
+        continue;
+      }
+
       if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
         annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations(), ontology, details);
 
@@ -274,14 +279,33 @@ public class FiboDataHandler {
     manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
       OntologyResources ontoResources = extractOntologyResources(owlOntology);
 
-      allResources.put(owlOntology.getOntologyID().getOntologyIRI().get().toString(), ontoResources);
+      if (ontoResources != null) {
+        String ontIri = owlOntology.getOntologyID().getOntologyIRI().get().toString();
+        if (!ontIri.equals("https://spec.edmcouncil.org/fibo/ontology")) {
+          allResources.put(ontIri, ontoResources);
+        }
+      }
     });
     resources = allResources;
   }
 
   private OntologyResources extractOntologyResources(OWLOntology selectedOntology) {
     OntologyResources ontoResources = new OntologyResources();
-    IRI ontologyIri = selectedOntology.getOntologyID().getOntologyIRI().get();
+    Optional<IRI> opt = selectedOntology.getOntologyID().getOntologyIRI();
+    IRI ontologyIri;
+    if (opt.isPresent()) {
+      ontologyIri = opt.get();
+    } else {
+      opt = selectedOntology.getOntologyID().getDefaultDocumentIRI();
+      if (opt.isPresent()) {
+        ontologyIri = opt.get();
+        LOG.debug("IRI for this ontology doesn't exist, use Default Document IRI {}", ontologyIri.toString());
+      } else {
+        LOG.debug("Ontology doesn't have any iri to present... Ontology ID: {}", selectedOntology.getOntologyID().toString());
+        return null;
+      }
+
+    }
     selectedOntology.classesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
@@ -289,7 +313,8 @@ public class FiboDataHandler {
           return pv;
         })
         .forEachOrdered(c -> ontoResources
-        .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.clazz), c));
+        .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.clazz), c)
+        );
 
     selectedOntology.dataPropertiesInSignature()
         .map(c -> {
@@ -397,8 +422,8 @@ public class FiboDataHandler {
     String annotationIri = c.getValue().getIri();
 
     return annotationIri.contains(ontologyIri)
-        ? ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal, element).toString()
-        : ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external, element).toString();
+        ? ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal, element)
+        : ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external, element);
   }
 
   /**
@@ -436,7 +461,7 @@ public class FiboDataHandler {
    * @return ontology iri where the element is present
    */
   private String findElementInOntology(String elementIri) {
-
+    //https://spec.edmcouncil.org/fibo/ontology
     String ontologyIri = null;
     for (Map.Entry<String, OntologyResources> entry : resources.entrySet()) {
       for (Map.Entry<String, List<PropertyValue>> entryResource : entry.getValue().getResources().entrySet()) {

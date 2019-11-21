@@ -12,16 +12,17 @@
 	
   <groupId>org.edbcouncil.spec.fibo</groupId>
   <artifactId>web-app</artifactId>
-  <version>v0.1.0-SNAPSHOT</version>
+  <version>v0.1.1-beta</version>
   <name>Fibo-Web-App</name>
   <description>Description needs to be completed</description>
   <packaging>war</packaging>
-
+  
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
+    <resource.delimiter>@</resource.delimiter>
   </properties>
 
   <dependencies>
@@ -70,12 +71,33 @@
   </dependencies>
 
   <build>
+    
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <!-- <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.1</version>
+      </plugin>-->
     </plugins>
+    <!-- <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>application.properties</include>
+          <include>logback-spring.xml</include>
+          <include>**/*.*</include>
+        </includes>
+      </resource>
+      
+    </resources>-->
+    
   </build>
+  
+  
 
 </project>

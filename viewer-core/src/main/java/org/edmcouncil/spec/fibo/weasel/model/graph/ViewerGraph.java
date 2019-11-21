@@ -14,6 +14,11 @@ public class ViewerGraph {
   private GraphNode root;
   private int lastId = 0;
 
+  public ViewerGraph() {
+    this.nodes = new HashSet<>();
+    this.relations = new HashSet<>();
+  }
+
   public Set<GraphNode> getNodes() {
     return nodes;
   }
@@ -133,14 +138,14 @@ public class ViewerGraph {
   }
 
   public String toJsonListEdges() {
-     StringBuilder sb = new StringBuilder();
-     sb.append("[");
+    StringBuilder sb = new StringBuilder();
+    sb.append("[");
     if (relations != null) {
       int size = relations.size();
       int i = 0;
       for (GraphRelation rel : relations) {
         sb.append(rel.toSimpleJson());
-        if (i < size-1) {
+        if (i < size - 1) {
           sb.append(", ");
         }
         i++;

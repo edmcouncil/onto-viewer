@@ -14,7 +14,7 @@ public class OwlDetails {
   private String label;
   private String iri;
   private String type;
-  private String qName;
+  private String qName = "";
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
   private ViewerGraphJson graph;
@@ -79,6 +79,7 @@ public class OwlDetails {
   public int hashCode() {
     int hash = 7;
     hash = 59 * hash + Objects.hashCode(this.label);
+    hash = 59 * hash + Objects.hashCode(this.qName);
     hash = 59 * hash + Objects.hashCode(this.iri);
     hash = 59 * hash + Objects.hashCode(this.type);
     hash = 59 * hash + Objects.hashCode(this.taxonomy);
