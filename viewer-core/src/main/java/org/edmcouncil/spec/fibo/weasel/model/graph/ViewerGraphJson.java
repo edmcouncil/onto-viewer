@@ -10,6 +10,11 @@ public class ViewerGraphJson {
   private String edges;
 
   public ViewerGraphJson(ViewerGraph vg) {
+    if (vg == null) {
+      this.nodes = null;
+      this.edges = null;
+      return;
+    }
     this.nodes = vg.toJsonListNodes();
     this.edges = vg.toJsonListEdges();
   }

@@ -1,7 +1,5 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
-import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.FiboDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.AnnotationsDataHandler;
 import java.util.ArrayList;
@@ -112,7 +110,7 @@ public class OwlDataHandler {
         OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, clazz);
 
         OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
-        ViewerGraph vg = null;
+        ViewerGraph vg = new ViewerGraph();
         if (skipNothingData) {
           inheritedAxioms = handleInheritedAxioms(ontology, clazz);
           vg = graphDataHandler.handleGraph(clazz, ontology);
@@ -170,8 +168,13 @@ public class OwlDataHandler {
     resultDetails.addAllProperties(directSubclasses);
     resultDetails.addAllProperties(individuals);
     resultDetails.addAllProperties(inheritedAxioms);
-    ViewerGraphJson vgj = new ViewerGraphJson(vg);
-    resultDetails.setGraph(vgj);
+
+    if (vg.isEmpty()) {
+      resultDetails.setGraph(null);
+    } else {
+      ViewerGraphJson vgj = new ViewerGraphJson(vg);
+      resultDetails.setGraph(vgj);
+    }
     // resultDetails.addAllProperties(modules);
   }
 
@@ -705,7 +708,6 @@ public class OwlDataHandler {
         resultDetails.setLabel(StringUtils.getFragment(data.getIRI()));
 
         //OwlDetailsProperties<PropertyValue> axioms = handleAxioms(data, ontology);
-
         OwlDetailsProperties<PropertyValue> annotations
             = handleAnnotations(data.getIRI(), ontology, resultDetails);
 
