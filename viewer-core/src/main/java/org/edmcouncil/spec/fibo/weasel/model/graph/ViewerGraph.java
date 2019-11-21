@@ -90,7 +90,7 @@ public class ViewerGraph {
       int size = nodes.size();
       int i = 0;
       for (GraphNode node : nodes) {
-        sb.append(node.toVisNetworkJson());
+        sb.append(node.toSimpleJson());
         if (i < size) {
           sb.append(", ");
         }
@@ -103,7 +103,7 @@ public class ViewerGraph {
       int size = relations.size();
       int i = 0;
       for (GraphRelation rel : relations) {
-        sb.append(rel.toVisNetworkJson());
+        sb.append(rel.toSimpleJson());
         if (i < size) {
           sb.append(", ");
         }

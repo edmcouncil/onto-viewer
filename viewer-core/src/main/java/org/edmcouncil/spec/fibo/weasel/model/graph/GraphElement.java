@@ -43,7 +43,7 @@ public class GraphElement {
     return "" + "id=" + id + ", iri=" + iri + ", label=" + label + '}';
   }
   
-  public String toVisNetworkJson() {
+  public String toSimpleJson() {
     //TODO: String.format in this case
     String format = "{id: %s, label: '%s'}";
     return String.format(format, id, label);
