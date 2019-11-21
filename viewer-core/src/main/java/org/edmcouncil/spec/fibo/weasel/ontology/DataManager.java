@@ -72,6 +72,10 @@ public class DataManager {
         LOG.info("Handle individual data.");
         OwlListDetails wd = dataHandler.handleParticularIndividual(iri, ontologyManager.getOntology());
         result = wd;
+      } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri)){
+        LOG.info("Handle datatype");
+        OwlListDetails wd = dataHandler.handleParticularDatatype(iri, ontologyManager.getOntology());
+        result = wd;
       }
     }
     if (result == null) {

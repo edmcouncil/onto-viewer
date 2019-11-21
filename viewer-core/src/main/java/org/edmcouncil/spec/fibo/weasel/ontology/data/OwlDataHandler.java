@@ -47,6 +47,7 @@ import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
@@ -681,6 +682,31 @@ public class OwlDataHandler {
   public List<String> getElementLocationInModules(String iriString, OWLOntology ontology) {
     LOG.debug("[Data Handler] Handle location for element {}", iriString);
     return fiboDataHandler.getElementLocationInModules(iriString, ontology);
+  }
+
+  public OwlListDetails handleParticularDatatype(IRI iri, OWLOntology ontology) {
+    OwlListDetails resultDetails = new OwlListDetails();
+    Iterator<OWLDatatype> dataTypeIterator = ontology.datatypesInSignature().iterator();
+
+    while (dataTypeIterator.hasNext()) {
+      OWLDatatype data = dataTypeIterator.next();
+
+      if (data.getIRI().equals(iri)) {
+        LOG.debug("[Data Handler] Find owl dataType wih iri: {}", iri.toString());
+
+        resultDetails.setLabel(StringUtils.getFragment(data.getIRI()));
+
+        //OwlDetailsProperties<PropertyValue> axioms = handleAxioms(data, ontology);
+
+        OwlDetailsProperties<PropertyValue> annotations
+            = handleAnnotations(data.getIRI(), ontology, resultDetails);
+
+        //resultDetails.addAllProperties(axioms);
+        resultDetails.addAllProperties(annotations);
+
+      }
+    }
+    return resultDetails;
   }
 
 }

@@ -43,6 +43,7 @@ public class AnnotationsDataHandler {
   /**
    * @param iri IRI element with annotations to capture
    * @param ontology Loaded ontology
+   * @param details
    * @return
    */
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology, OwlListDetails details) {
