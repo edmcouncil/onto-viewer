@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - handle dataproperties annotaions
+- load default ontologies (dcterms, owl, rdf-schema, rdf-syntax, skos, fibo-glosary) from resource folder in application
 
 ### Changed
 -
