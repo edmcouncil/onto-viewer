@@ -32,6 +32,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
+import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraphJson;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
@@ -169,7 +170,8 @@ public class OwlDataHandler {
     resultDetails.addAllProperties(directSubclasses);
     resultDetails.addAllProperties(individuals);
     resultDetails.addAllProperties(inheritedAxioms);
-    resultDetails.setGraph(vg);
+    ViewerGraphJson vgj = new ViewerGraphJson(vg);
+    resultDetails.setGraph(vgj);
     // resultDetails.addAllProperties(modules);
   }
 
@@ -273,7 +275,13 @@ public class OwlDataHandler {
       OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
       OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(val1, val2);
       List<OwlTaxonomyElementImpl> currentTax = new LinkedList<>();
+      label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
+      OwlTaxonomyValue valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
+      OwlTaxonomyValue valThingIri = new OwlTaxonomyValue(WeaselOwlType.IRI, "http://www.w3.org/2002/07/owl#Thing");
+      OwlTaxonomyElementImpl taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
+      currentTax.add(taxElThing);
       currentTax.add(taxEl);
+
       taxonomy.addTaxonomy(currentTax);
     }
 

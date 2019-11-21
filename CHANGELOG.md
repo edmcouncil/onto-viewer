@@ -8,7 +8,8 @@ All notable changes to this project will be documented in this file.
 - load default ontologies (dcterms, owl, rdf-schema, rdf-syntax, skos, fibo-glosary) from resource folder in application
 
 ### Changed
--
+- displaying OWLDataExactCardinality in graph
+- graph in json being returned in string value
 
 ### Removed
 - 
@@ -26,6 +27,3 @@ All notable changes to this project will be documented in this file.
 - label support
 - graph from the OWLRestriction for class
 - ignore some items to display defined in configuration file
-
-
-
