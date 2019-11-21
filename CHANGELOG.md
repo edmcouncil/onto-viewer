@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
--
+- handle dataproperties annotaions
 
 ### Changed
 -
