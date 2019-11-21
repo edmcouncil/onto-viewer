@@ -79,6 +79,7 @@ public class OwlDetails {
   public int hashCode() {
     int hash = 7;
     hash = 59 * hash + Objects.hashCode(this.label);
+    hash = 59 * hash + Objects.hashCode(this.qName);
     hash = 59 * hash + Objects.hashCode(this.iri);
     hash = 59 * hash + Objects.hashCode(this.type);
     hash = 59 * hash + Objects.hashCode(this.taxonomy);
