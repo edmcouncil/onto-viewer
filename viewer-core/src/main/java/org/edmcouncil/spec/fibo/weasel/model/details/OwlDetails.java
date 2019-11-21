@@ -14,7 +14,7 @@ public class OwlDetails {
   private String label;
   private String iri;
   private String type;
-  private String qName;
+  private String qName = "";
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
   private ViewerGraphJson graph;
