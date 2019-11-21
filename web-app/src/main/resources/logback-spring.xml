@@ -11,10 +11,10 @@
   <logger name="org.semanticweb.owlapi" level="DEBUG">
     <appender-ref ref="STDOUT" />
   </logger>
+  <logger name="uk.ac.manchester.cs.owl.owlapi." level="DEBUG">
+    <appender-ref ref="STDOUT" />
+  </logger>
   <root level="INFO">
     <appender-ref ref="STDOUT" />
-    <springProfile name="prod">
-      <appender-ref ref="FILE" />
-    </springProfile>
   </root>
 </configuration>
