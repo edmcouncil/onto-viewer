@@ -68,7 +68,7 @@ class FileOntologyLoader implements OntologyLoader {
     IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
     //IRI fiboIRI = IRI.create("");
     LOG.debug("Load import request");
-    loadDefaultsOntologies(m, o);
+    //loadDefaultsOntologies(m, o);
     //m.load
     m.makeLoadImportRequest(new OWLImportsDeclarationImpl(m.getOntologyDocumentIRI(o)));
     //m.

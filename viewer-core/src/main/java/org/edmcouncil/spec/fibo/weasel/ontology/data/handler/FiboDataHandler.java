@@ -213,13 +213,15 @@ public class FiboDataHandler {
     }
     List<FiboModule> result = new LinkedList<>();
     IRI moduleIri = IRI.create(MODULE_IRI);
-    OWLClass clazz = ontology
+    Optional<OWLClass> clazzOpt = ontology
         .classesInSignature()
         .filter(c -> c.getIRI().equals(moduleIri))
-        .findFirst()
-        .get();
+        .findFirst();
+    if(!clazzOpt.isPresent()){
+        return new LinkedList<>();
+    }
 
-    OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazz);
+    OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazzOpt.get());
 
     Set<String> modulesIriSet = new HashSet<>();
 

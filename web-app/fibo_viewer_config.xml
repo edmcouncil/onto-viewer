@@ -6,8 +6,9 @@
   <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
   <ontology>
     <!--<ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl</ontologyURL>
-    <ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>-->
-    <ontologyPath>AboutFIBODev.ttl</ontologyPath>
+    <ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>
+    <ontologyPath>AboutFIBODev.ttl</ontologyPath>-->
+    <ontologyDir>ontologies</ontologyDir>
   </ontology>
   
   <ignoreToDisplaying>
@@ -17,6 +18,7 @@
     <ignore>http://spec.edmcouncil.org/owlnames#label</ignore>
     <ignore>http://spec.edmcouncil.org/owlnames#synonym</ignore>
     <ignore>http://spec.edmcouncil.org/owlnames#example</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#explanatoryNote</ignore>
   </ignoreToDisplaying>
        
   <!-- This is configuration about labels and displaying values -->
