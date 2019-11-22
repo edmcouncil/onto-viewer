@@ -45,6 +45,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case ConfigKeys.GROUPS:
       case ConfigKeys.ONTOLOGY_URL:
       case ConfigKeys.ONTOLOGY_PATH:
+      case ConfigKeys.ONTOLOGY_DIR:
       case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
       case ConfigKeys.LABEL_LANG:
@@ -87,9 +88,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         cge.addElement(new StringItem(val));
         break;
       case ConfigKeys.ONTOLOGY_URL:
-        StringItem ontologyURL = new StringItem(val);
-        config.addCongigElement(key, ontologyURL);
-        break;
+      case ConfigKeys.ONTOLOGY_DIR:
       case ConfigKeys.ONTOLOGY_PATH:
         StringItem ontologyPath = new StringItem(val);
         config.addCongigElement(key, ontologyPath);

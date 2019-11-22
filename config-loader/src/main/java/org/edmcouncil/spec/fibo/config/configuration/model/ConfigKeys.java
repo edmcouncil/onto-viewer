@@ -17,6 +17,7 @@ public class ConfigKeys {
   public static final String GROUP_ITEM = "groupItem";
   public static final String ONTOLOGY_URL = "ontologyURL";
   public static final String ONTOLOGY_PATH = "ontologyPath";
+  public static final String ONTOLOGY_DIR = "ontologyDir";
   public static final String SCOPE_IRI = "scopeIri";
   public static final String URI_NAMESPACE = "uriNamespace";
   public static final String DISPLAY_LABEL = "displayLabel";
