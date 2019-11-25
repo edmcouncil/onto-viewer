@@ -17,6 +17,7 @@
     <ignore>http://spec.edmcouncil.org/owlnames#label</ignore>
     <ignore>http://spec.edmcouncil.org/owlnames#synonym</ignore>
     <ignore>http://spec.edmcouncil.org/owlnames#example</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#explanatoryNote</ignore>
   </ignoreToDisplaying>
        
   <!-- This is configuration about labels and displaying values -->
