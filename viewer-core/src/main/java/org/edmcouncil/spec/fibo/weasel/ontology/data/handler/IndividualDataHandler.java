@@ -9,6 +9,7 @@ import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -29,6 +30,7 @@ import org.springframework.stereotype.Component;
 public class IndividualDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(IndividualDataHandler.class);
+  private static final String instanceKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
 
   @Autowired
   private LabelProvider labelExtractor;
@@ -58,7 +60,7 @@ public class IndividualDataHandler {
       s.setType(WeaselOwlType.INSTANCES);
       String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual);
       s.setValue(new PairImpl(label, namedIndividual.getIRI().toString()));
-      result.addProperty(WeaselOwlType.INSTANCES.name(), s);
+      result.addProperty(instanceKey, s);
       namedIndividual.getEntityType();
     }
     return result;

@@ -13,8 +13,11 @@ public class OntologyLoaderFactory {
     if (viewerCoreConfiguration.isOntologyLocationSet()) {
       if (viewerCoreConfiguration.isOntologyLocationURL()) {
         return new UrlOntologyLoader();
-      } else {
+      } else if (viewerCoreConfiguration.isOntologyLocationPath()) {
         return new FileOntologyLoader(fsm);
+      } else {
+          //in last case is directory
+          return new DirectoryOntologyLoader(fsm);
       }
     } else {
       return new FileOntologyLoader(fsm);

@@ -38,6 +38,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualPr
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
@@ -74,6 +75,8 @@ public class OwlDataHandler {
   private FiboDataHandler fiboDataHandler;
   @Autowired
   private AnnotationsDataHandler annotationsDataHandler;
+  @Autowired
+  private IndividualDataHandler individualDataHandler;
   @Autowired
   private LabelProvider labelExtractor;
   @Autowired
@@ -622,7 +625,7 @@ public class OwlDataHandler {
    * @return properties of Inherited Axioms.
    */
   private OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLClass clazz) {
-    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+    /*OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
     OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
     NodeSet<OWLNamedIndividual> instances = reasoner.getInstances(clazz, true);
@@ -635,7 +638,9 @@ public class OwlDataHandler {
       String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
           WeaselOwlType.INSTANCES.name().toLowerCase());
       result.addProperty(key, s);
-    }
+    }*/
+    OwlDetailsProperties<PropertyValue> result = individualDataHandler.handleClassIndividuals(ontology, clazz);
+    result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
 
