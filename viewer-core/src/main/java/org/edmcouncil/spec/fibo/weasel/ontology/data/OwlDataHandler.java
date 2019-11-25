@@ -387,17 +387,27 @@ public class OwlDataHandler {
       LOG.trace("OWL Entity: {}", next.toStringID());
 
       for (int i = 0; i < splited.length; i++) {
-        String string = splited[i];
+        String string = splited[i].trim();
+        LOG.trace("Splited string i: '{}', str: '{}'", i, string);
         //more than 1 because when it's 1, it's a number
-        Boolean hasOpeningParenthesis = string.length() > 1 ? string.startsWith(openingParenthesis) : false;
+        Boolean hasOpeningParenthesis = string.length() > 1 ? string.contains("(") : false;
         int countOpeningParenthesis = StringUtils.countLetter(string, '(');
         Boolean hasClosingParenthesis = string.length() > 1 ? string.endsWith(closingParenthesis) : false;
         int countClosingParenthesis = StringUtils.countLetter(string, ')');
         if (hasOpeningParenthesis) {
-          string = string.substring(countOpeningParenthesis);
+          String newString = string.substring(countOpeningParenthesis);
+          LOG.trace("Old string: '{}', new string '{}', count opening parenthesis '{}'", string,
+              newString,
+              countOpeningParenthesis);
+          string = newString;
         }
         if (hasClosingParenthesis) {
-          string = string.substring(0, string.length() - countClosingParenthesis);
+          String newString = string.substring(0, string.length() - countClosingParenthesis);
+          LOG.trace("Old string: '{}', new string '{}', count closing parenthesis '{}'", string,
+              newString,
+              countClosingParenthesis);
+          
+          string = newString;
         }
         if (string.equals(eSignature)) {
           String generatedKey = String.format(argPattern, i);

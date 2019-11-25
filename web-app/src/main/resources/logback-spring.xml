@@ -5,7 +5,7 @@
       <pattern>%d{yy-MM-dd HH:mm:ss} [%19.19thread] %-5level %-4line %-42logger{38}: %msg%n</pattern>
     </encoder>
   </appender>
-  <logger name="org.edmcouncil.spec.fibo" level="DEBUG">
+  <logger name="org.edmcouncil.spec.fibo" level="TRACE">
     <appender-ref ref="STDOUT" />
   </logger>
   <logger name="org.semanticweb.owlapi" level="DEBUG">
