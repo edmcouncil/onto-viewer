@@ -42,9 +42,10 @@ class DirectoryOntologyLoader implements OntologyLoader {
         OWLOntology onto = manager.createOntology();
         onto = openOntologiesFromDirectory(dirPath.toFile(), manager, onto);
         manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(onto)));
-        Stream<OWLOntology> imports = manager.imports(onto);
+      try (Stream<OWLOntology> imports = manager.imports(onto)) {
         LOG.debug("create ontology");
         onto = manager.createOntology(IRI.create(""), imports, false);
+      }
         return onto;
     }
 

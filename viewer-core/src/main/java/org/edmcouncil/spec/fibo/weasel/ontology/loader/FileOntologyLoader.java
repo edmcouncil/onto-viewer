@@ -74,14 +74,15 @@ class FileOntologyLoader implements OntologyLoader {
     //m.
 
     LOG.debug("Make imports");
-    Stream<OWLOntology> imports = m.imports(o);
-//    Set<OWLOntology> ontologiesTmp = imports.collect(Collectors.toSet());
+    try (Stream<OWLOntology> imports = m.imports(o)) {
+      //    Set<OWLOntology> ontologiesTmp = imports.collect(Collectors.toSet());
 //    LOG.debug("OntologiesTmp size a: {}", ontologiesTmp.size());
 //    ontologiesTmp.addAll(getDefaultOntologies());
 //    LOG.debug("OntologiesTmp size b: {}", ontologiesTmp.size());
-    //directImports = ontologiesTmp.stream();
-    LOG.debug("create ontology");
-    o = m.createOntology(fiboIRI, imports, false);
+//directImports = ontologiesTmp.stream();
+      LOG.debug("create ontology");
+      o = m.createOntology(fiboIRI, imports, false);
+    }
     return o;
 
   }

@@ -52,7 +52,7 @@
               <div class="ml-4">
                 <label>
                   <input type="checkbox" name="edgesFilter" value="internal" checked="true">
-                  class specyfic
+                  class specific
                 </label>
                 <label>
                   <input type="checkbox" name="edgesFilter" value="external" checked="true">

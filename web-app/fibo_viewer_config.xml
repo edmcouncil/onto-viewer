@@ -208,6 +208,7 @@
       <groupItem>http://spec.edmcouncil.org/owlnames#mdDefinition</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/definitionOrigin</groupItem>
       <groupItem>http://purl.org/dc/terms/source</groupItem>         
+      <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/directSource</groupItem>         
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/adaptedFrom</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#example</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#scopeNote</groupItem>

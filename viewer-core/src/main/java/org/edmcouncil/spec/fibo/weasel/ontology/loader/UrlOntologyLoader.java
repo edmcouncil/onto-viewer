@@ -69,8 +69,10 @@ class UrlOntologyLoader implements OntologyLoader {
       //OWLOntologyManager m = OWLManager.createOWLOntologyManager();
 
       newOntology = manager.createOntology(fiboIRI, imports, false);
+      httpClient.close();
       return newOntology;
     }
+    httpClient.close();
     return null;
   }
 

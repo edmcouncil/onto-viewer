@@ -38,7 +38,7 @@ public class LabelProvider {
 
   private static final Logger LOG = LoggerFactory.getLogger(LabelProvider.class);
 
-  private Map<IRI, String> previouslyUsedLabels = new HashMap<>();
+  private Map<String, String> previouslyUsedLabels = new HashMap<>();
 
   @Autowired
   private OntologyManager ontology;
@@ -70,11 +70,11 @@ public class LabelProvider {
     DefaultAppLabels defAppLabels = DefaultLabelsFactory.createDefaultAppLabels();
 
     for (Map.Entry<IRI, String> entry : defAppLabels.getLabels().entrySet()) {
-      previouslyUsedLabels.put(entry.getKey(), entry.getValue());
+      previouslyUsedLabels.put(entry.getKey().toString(), entry.getValue());
     }
     if (useLabels && groupLabelPriority == Priority.USER_DEFINED) {
       defaultUserLabels.forEach((defaultLabel) -> {
-        previouslyUsedLabels.put(IRI.create(defaultLabel.getIri()), defaultLabel.getLabel());
+        previouslyUsedLabels.put(defaultLabel.getIri(), defaultLabel.getLabel());
       });
     }
   }
@@ -83,8 +83,8 @@ public class LabelProvider {
     if (entity == null) {
       return null;
     }
-    if (previouslyUsedLabels.containsKey(entity.getIRI())) {
-      String label = previouslyUsedLabels.get(entity.getIRI());
+    if (previouslyUsedLabels.containsKey(entity.getIRI().toString())) {
+      String label = previouslyUsedLabels.get(entity.getIRI().toString());
       LOG.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, entity.getIRI().toString());
       return label;
     }
@@ -126,7 +126,7 @@ public class LabelProvider {
           .findFirst()
           .get().getKey();
     }
-    previouslyUsedLabels.put(entity.getIRI(), labelResult);
+    previouslyUsedLabels.put(entity.getIRI().toString(), labelResult);
     return labelResult;
   }
 
@@ -181,8 +181,8 @@ public class LabelProvider {
 
   public String getLabelOrDefaultFragment(IRI iri) {
 
-    if (previouslyUsedLabels.containsKey(iri)) {
-      String label = previouslyUsedLabels.get(iri);
+    if (previouslyUsedLabels.containsKey(iri.toString())) {
+      String label = previouslyUsedLabels.get(iri.toString());
       LOG.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, iri.toString());
       return label;
     }

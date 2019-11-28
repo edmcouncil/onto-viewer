@@ -4,6 +4,7 @@ import java.util.Collection;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
+import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class SearchService {
   @Autowired
   private AppConfiguration config;
 
-  public OwlDetails search(String query, ModelBuilder mb) {
+  public OwlDetails search(String query, ModelBuilder mb) throws NotFoundElementInOntologyException {
     //Collection details = ontologyManager.getDetailsByIri(query);
     OwlDetails details = ontologyManager.getDetailsByIri(query);
     boolean isGrouped = ((ViewerCoreConfiguration) config.getWeaselConfig()).isGrouped();

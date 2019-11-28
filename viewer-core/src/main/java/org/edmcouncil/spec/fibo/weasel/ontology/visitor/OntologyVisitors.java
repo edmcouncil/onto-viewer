@@ -422,86 +422,87 @@ public class OntologyVisitors {
         propertyIri = "";
         ClassExpressionType objectType = axiom.getClassExpressionType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
+        if (node.getLabel().equals(DEFAULT_BLANK_NODE_LABEL)) {
+          switch (objectType) {
+            case OWL_CLASS:
+              OWLClassExpression expression = axiom.getObjectComplementOf();
+              String object = null;
+              object = extractStringObject(expression, object);
 
-        switch (objectType) {
-          case OWL_CLASS:
-            OWLClassExpression expression = axiom.getObjectComplementOf();
-            String object = null;
-            object = extractStringObject(expression, object);
+              GraphNode endNode = new GraphNode(vg.nextId());
+              endNode.setIri(object);
+              endNode.setType(type);
+              String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
 
-            GraphNode endNode = new GraphNode(vg.nextId());
-            endNode.setIri(object);
-            endNode.setType(type);
-            String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
+              endNode.setLabel(label);
 
-            endNode.setLabel(label);
+              GraphRelation rel = new GraphRelation(vg.nextId());
+              rel.setIri(propertyIri);
+              rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+              rel.setStart(node);
+              rel.setEnd(endNode);
+              rel.setEndNodeType(type);
+              vg.addNode(endNode);
+              vg.addRelation(rel);
+              break;
 
-            GraphRelation rel = new GraphRelation(vg.nextId());
-            rel.setIri(propertyIri);
-            rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-            rel.setStart(node);
-            rel.setEnd(endNode);
-            rel.setEndNodeType(type);
-            vg.addNode(endNode);
-            vg.addRelation(rel);
-            break;
+            case OBJECT_SOME_VALUES_FROM:
+            case OBJECT_EXACT_CARDINALITY:
+            case OBJECT_MIN_CARDINALITY:
+            case OBJECT_MAX_CARDINALITY:
+            case DATA_MIN_CARDINALITY:
+            case DATA_MAX_CARDINALITY:
+            case OBJECT_ALL_VALUES_FROM:
 
-          case OBJECT_SOME_VALUES_FROM:
-          case OBJECT_EXACT_CARDINALITY:
-          case OBJECT_MIN_CARDINALITY:
-          case OBJECT_MAX_CARDINALITY:
-          case DATA_MIN_CARDINALITY:
-          case DATA_MAX_CARDINALITY:
-          case OBJECT_ALL_VALUES_FROM:
+              GraphNode blankNode = new GraphNode(vg.nextId());
+              blankNode.setType(type);
+              blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
 
-            GraphNode blankNode = new GraphNode(vg.nextId());
-            blankNode.setType(type);
-            blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
+              GraphRelation relSomeVal = new GraphRelation(vg.nextId());
+              relSomeVal.setIri(propertyIri);
+              relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+              relSomeVal.setStart(node);
+              relSomeVal.setEnd(blankNode);
+              relSomeVal.setOptional(true);
+              relSomeVal.setEndNodeType(type);
+              vg.addNode(blankNode);
+              vg.addRelation(relSomeVal);
+              vg.setRoot(blankNode);
 
-            GraphRelation relSomeVal = new GraphRelation(vg.nextId());
-            relSomeVal.setIri(propertyIri);
-            relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-            relSomeVal.setStart(node);
-            relSomeVal.setEnd(blankNode);
-            relSomeVal.setOptional(true);
-            relSomeVal.setEndNodeType(type);
-            vg.addNode(blankNode);
-            vg.addRelation(relSomeVal);
-            vg.setRoot(blankNode);
+              returnedVal.put(blankNode, axiom.getObjectComplementOf());
+              break;
+            case OBJECT_UNION_OF:
 
-            returnedVal.put(blankNode, axiom.getObjectComplementOf());
-            break;
-          case OBJECT_UNION_OF:
+              GraphNode unionRootNode = node;
+              //unionRootNode.setType(type);
+              //unionRootNode.setIri(propertyIri);
+              unionRootNode.setLabel("or");
+              /**GraphRelation orRel = new GraphRelation(vg.nextId());
+              orRel.setStart(node);
+              orRel.setEnd(unionRootNode);
+              vg.addNode(unionRootNode);
+              vg.addRelation(orRel);*/
 
-            GraphNode unionRootNode = new GraphNode(vg.nextId());
-            unionRootNode.setType(type);
-            unionRootNode.setIri(propertyIri);
-            unionRootNode.setLabel("OR");
-            GraphRelation orRel = new GraphRelation(vg.nextId());
-            orRel.setStart(node);
-            orRel.setEnd(unionRootNode);
-            vg.addNode(unionRootNode);
-            vg.addRelation(orRel);
+              for (OWLEntity owlEntity : axiom.signature().collect(Collectors.toList())) {
+                LOG.trace("OWLObjectUnionOf axiom with owl entity {}", owlEntity);
+                GraphNode unionNode = new GraphNode(vg.nextId());
+                unionNode.setLabel(labelExtractor.getLabelOrDefaultFragment(owlEntity));
+                unionNode.setIri(owlEntity.getIRI().toString());
+                unionNode.setType(type);
 
-            for (OWLEntity owlEntity : axiom.signature().collect(Collectors.toList())) {
-              LOG.trace("OWLObjectUnionOf axiom with owl entity {}", owlEntity);
-              GraphNode unionNode = new GraphNode(vg.nextId());
-              unionNode.setLabel(labelExtractor.getLabelOrDefaultFragment(owlEntity));
-              unionNode.setIri(owlEntity.getIRI().toString());
-              unionNode.setType(type);
+                GraphRelation unionRel = new GraphRelation(vg.nextId());
+                unionRel.setStart(unionRootNode);
+                unionRel.setEnd(unionNode);
+                unionRel.setEndNodeType(type);
+                vg.addNode(unionNode);
+                vg.addRelation(unionRel);
+              }
 
-              GraphRelation unionRel = new GraphRelation(vg.nextId());
-              unionRel.setStart(unionRootNode);
-              unionRel.setEnd(unionNode);
-              unionRel.setEndNodeType(type);
-              vg.addNode(unionNode);
-              vg.addRelation(unionRel);
-            }
+              break;
+            default:
+              LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
 
-            break;
-          default:
-            LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
-
+          }
         }
         return returnedVal;
       }

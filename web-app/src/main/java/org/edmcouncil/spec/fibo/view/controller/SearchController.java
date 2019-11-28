@@ -1,13 +1,17 @@
 package org.edmcouncil.spec.fibo.view.controller;
 
+import java.util.Arrays;
 import org.edmcouncil.spec.fibo.view.model.Query;
 import org.edmcouncil.spec.fibo.view.service.SearchService;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import javax.validation.Valid;
+import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilderFactory;
+import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
@@ -22,8 +26,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.context.request.WebRequest;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -57,20 +65,42 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
-    searchService.search(query, modelBuilder);
+    try {
+      searchService.search(query, modelBuilder);
+    } catch (NotFoundElementInOntologyException ex) {
+      LOG.info("Handle NotFoundElementInOntologyException. Message: '{}'", ex.getMessage());
+      LOG.trace(Arrays.toString(ex.getStackTrace()));
+      ErrorResult er = new ErrorResult();
+      er.setExMessage(ex.getMessage());
+      er.setMessage("Element Not Found.");
+      modelBuilder.emptyQuery();
+      modelBuilder.error(er);
+      return "error";
+    }
     modelBuilder.modelTree(modules);
 
     return "search";
   }
 
   @PostMapping("/json")
-  public <T extends OwlDetails> ResponseEntity<T> searchJson(@RequestBody String query, Model model) {
+  public <T extends OwlDetails> ResponseEntity searchJson(@RequestBody String query, Model model) {
 
     LOG.info("[REQ] POST : search / json   RequestBody = {{}}", query);
     ModelBuilder modelBuilder = new ModelBuilder(model);
 
-    OwlDetails search = searchService.search(query, modelBuilder);
+    OwlDetails search = null;
+    try {
+      search = searchService.search(query, modelBuilder);
+    } catch (NotFoundElementInOntologyException ex) {
+      LOG.info("Handle NotFoundElementInOntologyException. Message: '{}'", ex.getMessage());
+      LOG.trace(Arrays.toString(ex.getStackTrace()));
+      ErrorResult er = new ErrorResult();
+      er.setExMessage(ex.getMessage());
+      er.setMessage("Element Not Found.");
+      return ResponseEntity.badRequest().body(er);
+    }
 
     return ResponseEntity.ok((T) search);
   }
+
 }

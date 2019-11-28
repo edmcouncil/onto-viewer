@@ -2,8 +2,6 @@ package org.edmcouncil.spec.fibo.view.configuration;
 
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * TODO: do that correctly.

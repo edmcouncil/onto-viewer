@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
 import org.edmcouncil.spec.fibo.weasel.changer.ChangerIriToLabel;
+import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -46,7 +47,7 @@ public class DataManager {
     return ontologyManager.getOntology();
   }
 
-  public <T extends OwlDetails> T getDetailsByIri(String iriString) {
+  public <T extends OwlDetails> T getDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
     IRI iri = IRI.create(iriString);
     OwlListDetails result = null;
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
@@ -79,7 +80,7 @@ public class DataManager {
       }
     }
     if (result == null) {
-      throw new NoSuchFieldError("Result is a null, no value present. Element IRI: " + iriString);
+      throw new NotFoundElementInOntologyException("Not found element in ontology with IRI: " + iriString);
     }
     result.setIri(iriString);
 

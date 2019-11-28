@@ -2,6 +2,7 @@ package org.edmcouncil.spec.fibo.view.util;
 
 import org.edmcouncil.spec.fibo.view.model.Query;
 import java.util.List;
+import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 
@@ -55,8 +56,14 @@ public class ModelBuilder {
     model.addAttribute("modelTree", modules);
     return this;
   }
+
   public ModelBuilder setVersion(String version) {
     model.addAttribute("version", version);
+    return this;
+  }
+
+  public ModelBuilder error(ErrorResult er) {
+    model.addAttribute("error", er);
     return this;
   }
 
