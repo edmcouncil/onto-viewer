@@ -145,6 +145,16 @@
         <resourceIriToName>@viewer.axiom.InverseObjectProperties</resourceIriToName>
         <resourceIriName>Inverse object properties</resourceIriName>
       </userDefinedName>
+
+      <userDefinedName>
+        <resourceIriToName>@viewer.axiom.FunctionalObjectProperty</resourceIriToName>
+        <resourceIriName>Functional object property</resourceIriName>
+      </userDefinedName>
+      
+      <userDefinedName>
+        <resourceIriToName>@viewer.axiom.DataPropertyRange</resourceIriToName>
+        <resourceIriName>Data property range</resourceIriName>
+      </userDefinedName>
       
       <userDefinedName>
         <resourceIriToName>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</resourceIriToName>
@@ -252,6 +262,8 @@
       <groupItem>@viewer.axiom.ObjectPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.DataPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyRange</groupItem>
+      <groupItem>@viewer.axiom.FunctionalObjectProperty</groupItem>
+      <groupItem>@viewer.axiom.DataPropertyRange</groupItem>
       <groupItem>@viewer.axiom.InverseObjectProperties</groupItem>
       <groupItem>http://purl.org/dc/terms/hasPart</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn</groupItem>

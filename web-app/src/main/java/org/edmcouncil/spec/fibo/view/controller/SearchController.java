@@ -2,12 +2,12 @@ package org.edmcouncil.spec.fibo.view.controller;
 
 import java.util.Arrays;
 import org.edmcouncil.spec.fibo.view.model.Query;
-import org.edmcouncil.spec.fibo.view.service.SearchService;
+import org.edmcouncil.spec.fibo.view.service.UrlSearchService;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
+import java.util.regex.Pattern;
 import javax.validation.Valid;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilderFactory;
@@ -26,12 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.context.request.WebRequest;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -43,7 +39,7 @@ public class SearchController {
   private static final Logger LOG = LoggerFactory.getLogger(SearchController.class);
 
   @Autowired
-  private SearchService searchService;
+  private UrlSearchService searchService;
   @Autowired
   private DataManager dataManager;
   @Autowired
@@ -65,6 +61,12 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
+    String pattern = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+    if(query.matches(pattern)){
+      LOG.info("URL detected, search specyfic element");
+    } else {
+      LOG.info("String detected, search elements with given label");
+    }
     try {
       searchService.search(query, modelBuilder);
     } catch (NotFoundElementInOntologyException ex) {

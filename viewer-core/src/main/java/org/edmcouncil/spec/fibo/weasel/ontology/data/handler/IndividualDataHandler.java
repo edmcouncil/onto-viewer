@@ -53,6 +53,8 @@ public class IndividualDataHandler {
       LOG.error(e.toString());
       return result;
     }
+    
+    reasoner.dispose();
 
     Set<OWLNamedIndividual> individualList = instances.entities().collect(Collectors.toSet());
     for (OWLNamedIndividual namedIndividual : individualList) {
