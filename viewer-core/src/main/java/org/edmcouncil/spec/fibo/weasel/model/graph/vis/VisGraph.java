@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.model.graph.vis;
+  package org.edmcouncil.spec.fibo.weasel.model.graph.vis;
 
 import java.util.Set;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
