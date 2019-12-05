@@ -9,6 +9,7 @@ import java.util.Set;
 public class TextDbItem {
 
   private final Set<Item> value;
+  private static final Double BASE_BOST = 10.0d;
 
   public TextDbItem() {
     value = new HashSet<>();
@@ -37,24 +38,25 @@ public class TextDbItem {
       for (Item item : value) {
         Double tmpVal = 0.0d;
         if (item.type.equals(field) && item.value.contains(text)) {
-          tmpVal = (double) text.length() / item.value.length();
+          tmpVal = ((double) text.length() / item.value.length()) * BASE_BOST;
         }
-        result = tmpVal>result?tmpVal:result;
+        result = tmpVal > result ? tmpVal : result;
       }
     }
 
     return result;
   }
+
   Double computeRelevance(String text) {
     Double result = 0.0d;
 
-      for (Item item : value) {
-        Double tmpVal = 0.0d;
-        if (item.value.contains(text)) {
-          tmpVal = (double) text.length() / item.value.length();
-        }
-        result = tmpVal>result?tmpVal:result;
+    for (Item item : value) {
+      Double tmpVal = 0.0d;
+      if (item.value.contains(text)) {
+        tmpVal = ((double) text.length() / item.value.length())*BASE_BOST;
       }
+      result = tmpVal > result ? tmpVal : result;
+    }
 
     return result;
   }
