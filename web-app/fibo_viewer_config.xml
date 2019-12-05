@@ -259,6 +259,7 @@
       <groupItem>@viewer.axiom.SubDataPropertyOf</groupItem>
       <groupItem>@viewer.axiom.SubAnnotationPropertyOf</groupItem>
       <groupItem>@viewer.axiom.EquivalentObjectProperties</groupItem>
+      <groupItem>@viewer.axiom.EquivalentDataProperties</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.DataPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyRange</groupItem>

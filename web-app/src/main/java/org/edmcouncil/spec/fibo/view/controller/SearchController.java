@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import javax.validation.Valid;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilderFactory;
+import org.edmcouncil.spec.fibo.view.util.UrlChecker;
 import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
@@ -61,8 +62,8 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
-    String pattern = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-    if(query.matches(pattern)){
+    
+    if(UrlChecker.isUrl(query)){
       LOG.info("URL detected, search specyfic element");
     } else {
       LOG.info("String detected, search elements with given label");

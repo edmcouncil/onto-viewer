@@ -21,13 +21,12 @@ function showHint(event) {
 
 function autocomplete() {
   $text = $("#search-query").val();
-  $path = '/autocomplete/';
+  $path = '/hint/'+$text;
   $.ajax({
     url: $path,
     dataType: 'json',
     contentType: 'application/json',
-    type: 'POST',
-    data: $text
+    type: 'GET'
   })
           .done(function (results) {
             console.log(results);
@@ -45,7 +44,7 @@ function showAutocompletes(autocomplates) {
   $inner = "";
   //<a class="dropdown-item" href="#">Action</a>
   $.each(autocomplates, function (index, object) {
-    $inner += "<a id=\"ac_" + index + "\" class=\"dropdown-item\" onkeyup=\"autocompleteNavigation(event)\" href=\"search?query=" + object + "\">" + object + "</a>";
+    $inner += "<a id=\"ac_" + index + "\" class=\"dropdown-item\" onkeyup=\"autocompleteNavigation(event)\" href=\"search?query=" + object.iri + "\">" + object.label + "</a>";
   });
 
   document.getElementById("autocomplete").innerHTML = $inner;

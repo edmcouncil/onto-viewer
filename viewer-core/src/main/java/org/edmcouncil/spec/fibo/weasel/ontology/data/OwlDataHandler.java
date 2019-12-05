@@ -44,6 +44,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.AxiomType;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
@@ -60,6 +61,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.springframework.stereotype.Component;
+import uk.ac.manchester.cs.owl.owlapi.OWLAnnotationPropertyImpl;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -722,7 +724,7 @@ public class OwlDataHandler {
       if (data.getIRI().equals(iri)) {
         LOG.debug("[Data Handler] Find owl dataType wih iri: {}", iri.toString());
 
-        resultDetails.setLabel(StringUtils.getFragment(data.getIRI()));
+        resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(iri));
 
         //OwlDetailsProperties<PropertyValue> axioms = handleAxioms(data, ontology);
         OwlDetailsProperties<PropertyValue> annotations
@@ -734,6 +736,31 @@ public class OwlDataHandler {
       }
     }
     return resultDetails;
+  }
+
+  public OwlListDetails handleParticularAnnotationProperty(IRI iri, OWLOntology ontology) {
+    OwlListDetails resultDetails = new OwlListDetails();
+    Iterator<OWLAnnotationProperty> dataTypeIterator = ontology.annotationPropertiesInSignature().iterator();
+
+    while (dataTypeIterator.hasNext()) {
+      OWLAnnotationProperty data = dataTypeIterator.next();
+
+      if (data.getIRI().equals(iri)) {
+        LOG.debug("[Data Handler] Find owl dataType wih iri: {}", iri.toString());
+
+        resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(iri));
+
+        //OwlDetailsProperties<PropertyValue> axioms = handleAxioms(data, ontology);
+        OwlDetailsProperties<PropertyValue> annotations
+            = handleAnnotations(data.getIRI(), ontology, resultDetails);
+
+        //resultDetails.addAllProperties(axioms);
+        resultDetails.addAllProperties(annotations);
+
+      }
+    }
+    return resultDetails;
+    
   }
 
 }

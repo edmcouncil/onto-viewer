@@ -7,6 +7,6 @@ import java.util.List;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class ListResult extends SearcherResult{
-  private List<StringSearchItem> result;
+  private List<SearchItem> result;
       
 }

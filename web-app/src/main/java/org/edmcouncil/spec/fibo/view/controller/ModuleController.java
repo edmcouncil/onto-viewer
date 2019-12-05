@@ -2,7 +2,6 @@ package org.edmcouncil.spec.fibo.view.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;

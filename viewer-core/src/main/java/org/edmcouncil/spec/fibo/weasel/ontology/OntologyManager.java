@@ -3,7 +3,6 @@ package org.edmcouncil.spec.fibo.weasel.ontology;
 import java.io.IOException;
 import java.util.Arrays;
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
