@@ -34,10 +34,10 @@ public class OntologyManager {
   @PostConstruct
   public void init() {
     LOG.info("Configuration loaded ? : {}", appConfiguration != null
-        || !appConfiguration.getWeaselConfig().isEmpty());
+        || !appConfiguration.getViewerCoreConfig().isEmpty());
     LOG.info("File system manager created ? : {}", fileSystemManager != null);
 
-    ViewerCoreConfiguration viewerCoreConfiguration = appConfiguration.getWeaselConfig();
+    ViewerCoreConfiguration viewerCoreConfiguration = appConfiguration.getViewerCoreConfig();
     OntologyLoader loader = new OntologyLoaderFactory().getInstance(viewerCoreConfiguration, fileSystemManager);
     String location = viewerCoreConfiguration.getOntologyLocation();
 

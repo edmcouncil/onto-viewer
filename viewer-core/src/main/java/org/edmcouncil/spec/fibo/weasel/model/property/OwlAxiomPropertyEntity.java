@@ -6,7 +6,6 @@ package org.edmcouncil.spec.fibo.weasel.model.property;
 public class OwlAxiomPropertyEntity {
 
   private String iri;
-  ;
   private String label;
 
   public String getIri() {

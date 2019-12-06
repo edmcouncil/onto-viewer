@@ -1,5 +1,7 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.searcher.text;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.ViewerSearcher;
@@ -33,6 +35,9 @@ public class TextSearcher implements ViewerSearcher {
       String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(hi.getIri()));
       hi.setLabel(label);
     });
+    Collections.sort(result, Comparator.comparing(HintItem::getRelevancy).reversed()
+        .thenComparing(HintItem::getLabel).reversed());
+    Collections.reverse(result);
     return result;
   }
 

@@ -51,7 +51,7 @@ public class LabelProvider {
 
   @Inject
   public LabelProvider(AppConfiguration config) {
-    ViewerCoreConfiguration weaselConfig = (ViewerCoreConfiguration) config.getWeaselConfig();
+    ViewerCoreConfiguration weaselConfig = config.getViewerCoreConfig();
     this.forceLabelLang = weaselConfig.isForceLabelLang();
     this.labelLang = weaselConfig.getLabelLang();
     this.useLabels = weaselConfig.useLabels();

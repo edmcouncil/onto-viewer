@@ -92,8 +92,9 @@ public class DataManager {
     List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontologyManager.getOntology());
     result.setLocationInModules(elementLocation);
 
-    if (!config.getWeaselConfig().isEmpty()) {
-      ViewerCoreConfiguration cfg = config.getWeaselConfig();
+    //Group elements if in the
+    if (!config.getViewerCoreConfig().isEmpty()) {
+      ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
       if (cfg.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, cfg);
 
@@ -127,6 +128,7 @@ public class DataManager {
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
     groupedDetails.sortProperties(groups, cfg);
+    
     //first must be sorted next we need to change keys
     groupedDetails = changerIriToLabel.changeIriKeysInGroupedDetails(groupedDetails);
 
@@ -155,7 +157,7 @@ public class DataManager {
   }
 
   private void sortResults(OwlListDetails result) {
-    Set set = (Set) config.getWeaselConfig()
+    Set set = config.getViewerCoreConfig()
         .getConfigVal(ConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;

@@ -385,7 +385,7 @@ public class FiboDataHandler {
 
     private void completeKeysUsingTheConfiguration() {
 
-        ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) configuration.getWeaselConfig();
+        ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) configuration.getViewerCoreConfig();
 
         resourceInternal = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal,
                 ViewerIdentifierFactory.Element.empty).toString();

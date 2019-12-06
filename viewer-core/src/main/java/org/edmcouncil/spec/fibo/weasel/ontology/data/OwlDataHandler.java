@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
+import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
@@ -43,7 +44,9 @@ import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvide
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
+import org.edmcouncil.spec.fibo.weasel.utils.UrlChecker;
 import org.semanticweb.owlapi.model.AxiomType;
+import org.semanticweb.owlapi.model.OWLAnnotationAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLDataProperty;
@@ -243,6 +246,13 @@ public class OwlDataHandler {
     return handleAxioms(axiomsIterator, obj.getIRI());
   }
 
+  private OwlDetailsProperties<PropertyValue> handleAxioms(
+      OWLAnnotationProperty obj,
+      OWLOntology ontology) {
+    Iterator<OWLAnnotationAxiom> axiomsIterator = ontology.axioms(obj).iterator();
+    return handleAxioms(axiomsIterator, obj.getIRI());
+  }
+
   private OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, IRI objIri, OWLOntology ontology, WeaselOwlType type) {
     OwlTaxonomyImpl taxonomy = new OwlTaxonomyImpl();
     if (subElements.size() > 0) {
@@ -331,7 +341,7 @@ public class OwlDataHandler {
     String splitFragment = StringUtils.getFragment(elementIri);
     Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-    Set<String> ignoredToDisplay = config.getWeaselConfig().getIgnoredElements();
+    Set<String> ignoredToDisplay = config.getViewerCoreConfig().getIgnoredElements();
 
     while (axiomsIterator.hasNext()) {
       T axiom = axiomsIterator.next();
@@ -364,6 +374,7 @@ public class OwlDataHandler {
     return result;
   }
 
+  //TODO: refactor this method
   private <T extends OWLAxiom> void processingAxioms(
       T axiom,
       Boolean fixRenderedIri,
@@ -377,6 +388,7 @@ public class OwlDataHandler {
     String openingParenthesis = "(";
     String closingParenthesis = ")";
     Iterator<OWLEntity> iterator = axiom.signature().iterator();
+    ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
 
     LOG.trace("Rendered Val: {}", renderedVal);
 
@@ -408,7 +420,7 @@ public class OwlDataHandler {
           LOG.trace("Old string: '{}', new string '{}', count closing parenthesis '{}'", string,
               newString,
               countClosingParenthesis);
-          
+
           string = newString;
         }
         if (string.equals(eSignature)) {
@@ -424,24 +436,74 @@ public class OwlDataHandler {
             textToReplace = textToReplace + postfix;
           }
           splited[i] = textToReplace;
-          break;
-        }
-      }
-      if (key == null) {
-        continue;
-      }
 
-      String eIri = next.getIRI().toString();
+          String eIri = next.getIRI().toString();
+          if (cfg.isUriIri(eIri)) {
+            parseToIri(eIri, opv, key, splited, i, key);
+            break;
+          } else {
+            parseUrl(eIri, splited, i);
+            break;
+          }
+
+        }
+
+      }
+      /*if (key == null) {
+        continue;
+      }*/
+
+ /*String eIri = next.getIRI().toString();
+      //Checking iri is defined in configuration
+
       OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
       axiomPropertyEntity.setIri(eIri);
       String label = labelExtractor.getLabelOrDefaultFragment(next.getIRI());
       axiomPropertyEntity.setLabel(label);
-      opv.addEntityValues(key, axiomPropertyEntity);
-
+      opv.addEntityValues(key, axiomPropertyEntity);*/
     }
+
+    checkAndParseUriInLiteral(splited, argPattern, opv);
+
     String value = String.join(" ", splited);
     LOG.debug("[Data Handler] Prepared value for axiom : {}", value);
     opv.setValue(value);
+  }
+
+  private void checkAndParseUriInLiteral(String[] splited, String argPattern, OwlAxiomPropertyValue opv) {
+    ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
+    for (int j = 0; j < splited.length; j++) {
+      String str = splited[j].trim();
+      if (str.startsWith("<") && str.endsWith(">")) {
+        int length = str.length();
+        String probablyUrl = str.substring(1, length - 1);
+        if (UrlChecker.isUrl(probablyUrl)) {
+          String generatedKey = String.format(argPattern, j);
+          String key = generatedKey;
+
+          if (cfg.isUriIri(probablyUrl)) {
+            parseToIri(probablyUrl, opv, key, splited, j, generatedKey);
+          } else {
+            parseUrl(probablyUrl, splited, j);
+          }
+        }
+      }
+    }
+  }
+
+  private void parseUrl(String probablyUrl, String[] splited, int j) {
+    String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(probablyUrl));
+    splited[j] = label;
+  }
+
+  private void parseToIri(String probablyUrl, OwlAxiomPropertyValue opv, String key, String[] splited, int j, String generatedKey) {
+    OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
+    axiomPropertyEntity.setIri(probablyUrl);
+    String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(probablyUrl));
+    axiomPropertyEntity.setLabel(label);
+    opv.addEntityValues(key, axiomPropertyEntity);
+
+    splited[j] = generatedKey;
   }
 
   private String fixRenderedValue(String value, String iriFragment, String splitFragment, Boolean fixRenderedIri) {
@@ -754,13 +816,16 @@ public class OwlDataHandler {
         OwlDetailsProperties<PropertyValue> annotations
             = handleAnnotations(data.getIRI(), ontology, resultDetails);
 
+        OwlDetailsProperties<PropertyValue> axioms = handleAxioms(data, ontology);
+
         //resultDetails.addAllProperties(axioms);
         resultDetails.addAllProperties(annotations);
+        resultDetails.addAllProperties(axioms);
 
       }
     }
     return resultDetails;
-    
+
   }
 
 }

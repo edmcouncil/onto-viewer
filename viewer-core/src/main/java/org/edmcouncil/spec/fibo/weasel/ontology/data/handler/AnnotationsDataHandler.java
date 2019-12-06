@@ -48,7 +48,7 @@ public class AnnotationsDataHandler {
    */
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology, OwlListDetails details) {
 
-    Set<String> ignoredToDisplay = appConfig.getWeaselConfig().getIgnoredElements();
+    Set<String> ignoredToDisplay = appConfig.getViewerCoreConfig().getIgnoredElements();
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -107,7 +107,7 @@ public class AnnotationsDataHandler {
    */
   public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology, OwlListDetails details) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-    Set<String> ignoredToDisplay = appConfig.getWeaselConfig().getIgnoredElements();
+    Set<String> ignoredToDisplay = appConfig.getViewerCoreConfig().getIgnoredElements();
     Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
     while (annotationIterator.hasNext()) {
       OWLAnnotation next = annotationIterator.next();
@@ -156,7 +156,7 @@ public class AnnotationsDataHandler {
   private void checkUriAsIri(PropertyValue opv, String value) {
     //TODO: Change this to more pretty solution
     if (opv.getType() == WeaselOwlType.ANY_URI) {
-      ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) appConfig.getWeaselConfig();
+      ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) appConfig.getViewerCoreConfig();
       if (weaselConfiguration.isUriIri(value)) {
         opv.setType(WeaselOwlType.IRI);
       }

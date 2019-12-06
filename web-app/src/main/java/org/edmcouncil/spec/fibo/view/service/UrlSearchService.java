@@ -28,7 +28,7 @@ public class UrlSearchService {
   public OwlDetails search(String query, ModelBuilder mb) throws NotFoundElementInOntologyException {
     //Collection details = ontologyManager.getDetailsByIri(query);
     OwlDetails details = ontologyManager.getDetailsByIri(query);
-    boolean isGrouped = ((ViewerCoreConfiguration) config.getWeaselConfig()).isGrouped();
+    boolean isGrouped = ((ViewerCoreConfiguration) config.getViewerCoreConfig()).isGrouped();
     mb.setQuery(query)
         .ontoDetails(details)
         .isGrouped(isGrouped);

@@ -157,6 +157,16 @@
       </userDefinedName>
       
       <userDefinedName>
+        <resourceIriToName>@viewer.axiom.AnnotationPropertyDomain</resourceIriToName>
+        <resourceIriName>Annotation property domain</resourceIriName>
+      </userDefinedName>
+      
+      <userDefinedName>
+        <resourceIriToName>@viewer.axiom.AnnotationPropertyRangeOf</resourceIriToName>
+        <resourceIriName>Annotation property range</resourceIriName>
+      </userDefinedName>
+      
+      <userDefinedName>
         <resourceIriToName>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</resourceIriToName>
         <resourceIriName>synonym(s)</resourceIriName>
       </userDefinedName>
@@ -197,6 +207,12 @@
     <uriNamespace>https://spec.edmcouncil.org/fibo/ontology/</uriNamespace>
     <uriNamespace>https://www.omg.org/spec/</uriNamespace>
     <uriNamespace>http://www.omg.org/techprocess</uriNamespace>
+    <uriNamespace>http://www.w3.org/2002/07/owl#</uriNamespace>
+    <uriNamespace>http://purl.org/dc/terms/</uriNamespace>
+    <uriNamespace>http://purl.org/dc/elements/1.1/</uriNamespace>
+    <uriNamespace>http://www.w3.org/2000/01/rdf-schema#</uriNamespace>
+    <uriNamespace>http://www.w3.org/2004/02/skos/core#</uriNamespace>
+    <uriNamespace>http://www.w3.org/1999/02/22-rdf-syntax-ns#</uriNamespace>
   </scopeIri>
     
 
@@ -265,6 +281,8 @@
       <groupItem>@viewer.axiom.ObjectPropertyRange</groupItem>
       <groupItem>@viewer.axiom.FunctionalObjectProperty</groupItem>
       <groupItem>@viewer.axiom.DataPropertyRange</groupItem>
+      <groupItem>@viewer.axiom.AnnotationPropertyDomain</groupItem>
+      <groupItem>@viewer.axiom.AnnotationPropertyRangeOf</groupItem>
       <groupItem>@viewer.axiom.InverseObjectProperties</groupItem>
       <groupItem>http://purl.org/dc/terms/hasPart</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn</groupItem>
@@ -281,6 +299,7 @@
       <groupItem>http://purl.org/dc/terms/issued</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/contentLanguage</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#changeNote</groupItem>
+      <groupItem>http://www.w3.org/2004/02/skos/core#note</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/fileAbbreviation</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/filename</groupItem>         
       <groupItem>http://www.w3.org/2000/01/rdf-schema#comment</groupItem>
@@ -288,6 +307,7 @@
       <groupItem>http://www.w3.org/2000/01/rdf-schema#seeAlso</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#historyNote</groupItem> 
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/relatedSpecification</groupItem>                  
+      <groupItem>http://purl.org/dc/terms/hasVersion</groupItem>                  
     </group>   
     
   </groups>
