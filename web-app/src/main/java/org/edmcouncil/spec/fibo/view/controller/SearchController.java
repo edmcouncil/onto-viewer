@@ -7,15 +7,16 @@ import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import javax.validation.Valid;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
+import org.edmcouncil.spec.fibo.view.service.TextSearchService;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilderFactory;
 import org.edmcouncil.spec.fibo.view.util.UrlChecker;
 import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -45,6 +46,8 @@ public class SearchController {
   private DataManager dataManager;
   @Autowired
   private ModelBuilderFactory modelFactory;
+  @Autowired
+  private TextSearchService textSearchService;
 
   @PostMapping
   public ModelAndView redirectSearch(@Valid @ModelAttribute("queryValue") Query query) {
@@ -62,8 +65,8 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
-    
-    if(UrlChecker.isUrl(query)){
+
+    if (UrlChecker.isUrl(query)) {
       LOG.info("URL detected, search specyfic element");
     } else {
       LOG.info("String detected, search elements with given label");
@@ -104,6 +107,22 @@ public class SearchController {
     }
 
     return ResponseEntity.ok((T) search);
+  }
+
+  @PostMapping("/text/json")
+  public <T extends SearcherResult> ResponseEntity searchTextJson(@RequestBody String query, Model model) {
+
+    LOG.info("[REQ] POST : search / text /json   RequestBody = {{}}", query);
+
+    if (UrlChecker.isUrl(query)) {
+      LOG.info("URL detected, search specyfic element");
+    } else {
+      LOG.info("String detected, search elements with given label");
+    }
+
+    SearcherResult sr = textSearchService.search(query, 100);
+
+    return ResponseEntity.ok((T) sr);
   }
 
 }

@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.searcher.text;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,13 +12,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
-import org.eclipse.rdf4j.model.Literal;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.hint.HintItem;
-import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.OWLAnnotation;
-import org.semanticweb.owlapi.model.OWLAnnotationProperty;
-import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -39,6 +38,7 @@ public class TextSearcherDb {
   private static Set<String> labels;
 
   private static final String LABEL_STRING = "http://www.w3.org/2000/01/rdf-schema#label";
+  private static final String DEFINITION_STRING = "http://www.w3.org/2004/02/skos/core#definition";
 
   private final Set<String> searchFields = new HashSet<>();
   private final Double RESULT_THRESHOLD;
@@ -52,6 +52,7 @@ public class TextSearcherDb {
     labels.add(LABEL_STRING);
 
     searchFields.add(LABEL_STRING);
+    searchFields.add(DEFINITION_STRING);
 
   }
 
@@ -88,6 +89,7 @@ public class TextSearcherDb {
         db.put(entityIri, tdi);
       }
     });
+
     LOG.info("End of initialize TextSearcherDB");
     //debug only
     List<HintItem> hitems = getHints("cred", 20);
@@ -106,14 +108,59 @@ public class TextSearcherDb {
         HintItem hi = new HintItem();
         hi.setIri(record.getKey());
         hi.setRelevancy(relevancy);
+        hi.setLabel(getValue(record.getKey(), LABEL_STRING));
         result.add(hi);
       }
     }
-    result.sort(Comparator.comparingDouble(HintItem::getRelevancy).reversed());
     Integer endIndex = result.size() > maxHintCount ? maxHintCount : result.size();
+    Collections.sort(result, Comparator.comparing(HintItem::getRelevancy).reversed()
+        .thenComparing(HintItem::getLabel).reversed());
+    Collections.reverse(result);
+
     result = result.subList(0, endIndex);
 
     return result;
+  }
+
+  public List<SearchItem> getSearchResult(String text, Integer maxResults) {
+    List<SearchItem> result = new LinkedList<>();
+
+    for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
+      Double relevancy = record.getValue().computeRelevancy(text);
+      if (relevancy > RESULT_THRESHOLD) {
+        SearchItem si = new SearchItem();
+        si.setIri(record.getKey());
+        si.setRelevancy(relevancy);
+        String label = getValue(record.getKey(), LABEL_STRING);
+        String description = getValue(record.getKey(), DEFINITION_STRING);
+        si.setLabel(label);
+        si.setDescription(StringUtils.cutString(description, 150, true));
+        result.add(si);
+      }
+    }
+
+    Integer endIndex = result.size() > maxResults ? maxResults : result.size();
+    Collections.sort(result, Comparator.comparing(SearchItem::getRelevancy).reversed()
+        .thenComparing(SearchItem::getDescription).reversed());
+    Collections.reverse(result);
+    
+    result = result.subList(0, endIndex);
+
+    return result;
+  }
+
+  private String getValue(String recordID, String recordProperty) {
+    if (!searchFields.contains(recordProperty) && !db.containsKey(recordID)) {
+      return null;
+    }
+
+    for (TextDbItem.Item val : db.get(recordID).getValue()) {
+      if (val.getType().equals(recordProperty)) {
+        return val.getValue();
+      }
+    }
+    return null;
+
   }
 
 }

@@ -53,7 +53,7 @@ public class StringUtils {
    */
   public static String cutString(String string, int length, boolean soft) {
     if (string == null || string.trim().isEmpty()) {
-      return string;
+      return "";
     }
 
     StringBuilder sb = new StringBuilder(string);
@@ -64,6 +64,10 @@ public class StringUtils {
         return sb.insert(actualLength, "...").substring(0, actualLength + 3);
       } else {
         int endIndex = sb.indexOf(" ", actualLength);
+        if(endIndex == -1 ){
+          return string;
+        }
+        endIndex = endIndex >= sb.length() ? sb.length() : endIndex;
         return sb.insert(endIndex, "...").substring(0, endIndex + 3);
       }
     }

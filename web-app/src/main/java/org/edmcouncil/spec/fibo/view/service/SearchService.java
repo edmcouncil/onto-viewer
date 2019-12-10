@@ -1,9 +1,11 @@
 package org.edmcouncil.spec.fibo.view.service;
 
+import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
+
 /**
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public interface SearchService {
-  Object search(String query);
+  SearcherResult search(String query, int maxValues);
 }

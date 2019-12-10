@@ -6,7 +6,10 @@ import java.util.List;
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class ListResult extends SearcherResult{
-  private List<SearchItem> result;
-      
+public class ListResult extends SearcherResult<List<SearchItem>> {
+
+  public ListResult(Type type, List<SearchItem> result) {
+    super(type, result);
+  }
+
 }

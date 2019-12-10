@@ -21,14 +21,8 @@ public class TextDbItem {
     value.add(new Item(type, val));
   }
 
-  private boolean containsText(String text) {
-    for (Item item : value) {
-      if (item.getValue().contains(text)) {
-        return Boolean.TRUE;
-      }
-    }
-
-    return Boolean.FALSE;
+  public Set<Item> getValue() {
+    return value;
   }
 
   Double computeRelevancy(String text, Set<String> fields) {
@@ -47,13 +41,13 @@ public class TextDbItem {
     return result;
   }
 
-  Double computeRelevance(String text) {
+  Double computeRelevancy(String text) {
     Double result = 0.0d;
 
     for (Item item : value) {
       Double tmpVal = 0.0d;
       if (item.value.contains(text)) {
-        tmpVal = ((double) text.length() / item.value.length())*BASE_BOST;
+        tmpVal = ((double) text.length() / item.value.length()) * BASE_BOST;
       }
       result = tmpVal > result ? tmpVal : result;
     }

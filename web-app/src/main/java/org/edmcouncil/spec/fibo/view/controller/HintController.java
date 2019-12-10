@@ -2,6 +2,7 @@ package org.edmcouncil.spec.fibo.view.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.edmcouncil.spec.fibo.view.service.TextSearchService;
 import org.edmcouncil.spec.fibo.view.util.UrlChecker;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextSearcher;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.hint.HintItem;
@@ -26,7 +27,7 @@ public class HintController {
   private static final String DEFAULT_MAX_HINT_RESULT_COUNT = "20";
 
   @Autowired
-  private TextSearcher textSearcher;
+  private TextSearchService textSearch;
 
   @GetMapping("/{query}")
   public ResponseEntity getHints(
@@ -41,7 +42,7 @@ public class HintController {
       return ResponseEntity.badRequest().body(new ArrayList<HintItem>(0));
     }
 
-    List<HintItem> result = textSearcher.getHints(query, maxHintCount);
+    List<HintItem> result = textSearch.getHints(query, maxHintCount);
 
     //return list of hint result
     return ResponseEntity.ok(result);

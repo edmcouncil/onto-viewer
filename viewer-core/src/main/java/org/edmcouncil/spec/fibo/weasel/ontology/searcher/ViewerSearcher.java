@@ -6,5 +6,5 @@ import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public interface ViewerSearcher {
-  SearcherResult search();
+  SearcherResult search(String query, Integer max);
 }
