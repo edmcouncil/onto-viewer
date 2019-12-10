@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.fibo.view.service;
 
-import java.util.Collection;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
