@@ -16,6 +16,7 @@ public class StringUtils {
     String iriString = iri.toString();
     return getFragment(iriString);
   }
+  
 
   public static String getFragment(String iri) {
     if (iri.contains(AXIOM_PATTERN)) {
