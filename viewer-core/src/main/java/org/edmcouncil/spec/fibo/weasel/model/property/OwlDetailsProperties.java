@@ -110,4 +110,9 @@ public class OwlDetailsProperties<T> {
     return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties=" + properties.toString() + '}';
   }
 
+  public void release() {
+    taxonomy = null;
+    properties = null;
+  }
+
 }

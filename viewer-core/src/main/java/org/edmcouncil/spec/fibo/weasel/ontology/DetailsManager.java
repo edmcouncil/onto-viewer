@@ -29,9 +29,9 @@ import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyExcept
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
-public class DataManager {
+public class DetailsManager {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DataManager.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DetailsManager.class);
   private static final String DEFAULT_GROUP_NAME = "other";
 
   @Autowired
@@ -53,39 +53,40 @@ public class DataManager {
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
     if (iriString.endsWith("/")) {
       LOG.debug("Handle ontology metadata. IRI: {}", iriString);
-      OwlListDetails wd = dataHandler.handleOntologyMetadata(iri, ontologyManager.getOntology());
+      OwlListDetails wd = dataHandler.handleOntologyMetadata(iri, getOntology());
 
       result = wd;
     } else {
       if (ontologyManager.getOntology().containsClassInSignature(iri)) {
         LOG.debug("Handle class data.");
-        OwlListDetails wd = dataHandler.handleParticularClass(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularClass(iri, getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri)) {
         LOG.info("Handle data property.");
-        OwlListDetails wd = dataHandler.handleParticularDataProperty(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularDataProperty(iri, getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri)) {
         LOG.info("Handle object property.");
-        OwlListDetails wd = dataHandler.handleParticularObjectProperty(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularObjectProperty(iri, getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsIndividualInSignature(iri)) {
         LOG.info("Handle individual data.");
-        OwlListDetails wd = dataHandler.handleParticularIndividual(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularIndividual(iri, getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri)){
         LOG.info("Handle datatype");
-        OwlListDetails wd = dataHandler.handleParticularDatatype(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularDatatype(iri, getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsAnnotationPropertyInSignature(iri)){
         LOG.info("Handle annotation property");
-        OwlListDetails wd = dataHandler.handleParticularAnnotationProperty(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularAnnotationProperty(iri, getOntology());
         result = wd;
       }
     }
     if (result == null) {
       throw new NotFoundElementInOntologyException("Not found element in ontology with IRI: " + iriString);
     }
+    
     result.setIri(iriString);
 
     //Path to element in modules
@@ -127,6 +128,7 @@ public class DataManager {
     groupedDetails.setLocationInModules(owlDetails.getLocationInModules());
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
+    
     groupedDetails.sortProperties(groups, cfg);
     
     //first must be sorted next we need to change keys
@@ -135,7 +137,9 @@ public class DataManager {
     for (Map.Entry<String, Map<String, List<PropertyValue>>> entry : groupedDetails.getProperties().entrySet()) {
       LOG.debug(entry.toString());
     }
-
+    
+    owlDetails.release();
+    
     newResult = groupedDetails;
     return newResult;
   }

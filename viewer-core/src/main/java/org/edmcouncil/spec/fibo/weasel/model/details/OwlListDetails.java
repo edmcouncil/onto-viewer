@@ -71,4 +71,8 @@ public class OwlListDetails extends OwlDetails {
     return true;
   }
 
+  public void release() {
+    properties.release();
+  }
+
 }

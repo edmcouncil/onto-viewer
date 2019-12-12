@@ -14,6 +14,9 @@ function showHint(event) {
     $("#autocomplete").removeClass("show");
     return;
   }
+  if (event.key === "Spacebar" || event.key === ' ') {
+    $("#search-query").val(x + " ");
+  }
 
 
   autocomplete();
@@ -40,13 +43,16 @@ function autocomplete() {
 
 function showAutocompletes(autocomplates) {
   document.getElementById("autocomplete").innerHTML = "";
-
+  $text = $("#search-query").val();
   $inner = "";
   //<a class="dropdown-item" href="#">Action</a>
+  var count = 0;
   $.each(autocomplates, function (index, object) {
     $inner += "<a id=\"ac_" + index + "\" class=\"dropdown-item\" onkeyup=\"autocompleteNavigation(event)\" href=\"search?query=" + object.iri + "\">" + object.label + "</a>";
+    count ++;
   });
 
+  $inner += "<a id=\"ac_" + count + "\" class=\"dropdown-item\" onkeyup=\"autocompleteNavigation(event)\" href=\"search?query=" + $text + "\"> Advanced search for " +  $text + " ...</a>";
   document.getElementById("autocomplete").innerHTML = $inner;
 
   $("#autocomplete").addClass("show");

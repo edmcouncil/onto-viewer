@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.fibo.view.service;
 
 import java.util.List;
+import org.edmcouncil.spec.fibo.weasel.exception.ViewerException;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.hint.HintItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextSearcher;
@@ -17,7 +18,7 @@ public class TextSearchService implements SearchService {
   private TextSearcher searcher;
 
   @Override
-  public SearcherResult search(String query, int maxValues) {
+  public SearcherResult search(String query, int maxValues) throws ViewerException {
     return searcher.search(query, maxValues);
   }
 

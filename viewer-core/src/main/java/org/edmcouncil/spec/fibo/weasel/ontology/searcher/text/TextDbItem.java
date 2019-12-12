@@ -27,11 +27,11 @@ public class TextDbItem {
 
   Double computeRelevancy(String text, Set<String> fields) {
     Double result = 0.0d;
-
+    String sText = text.toLowerCase();
     for (String field : fields) {
       for (Item item : value) {
         Double tmpVal = 0.0d;
-        if (item.type.equals(field) && item.value.contains(text)) {
+        if (item.type.equals(field) && item.value.toLowerCase().contains(sText)) {
           tmpVal = ((double) text.length() / item.value.length()) * BASE_BOST;
         }
         result = tmpVal > result ? tmpVal : result;
@@ -43,10 +43,10 @@ public class TextDbItem {
 
   Double computeRelevancy(String text) {
     Double result = 0.0d;
-
+    String sText = text.toLowerCase();
     for (Item item : value) {
       Double tmpVal = 0.0d;
-      if (item.value.contains(text)) {
+      if (item.value.toLowerCase().contains(sText)) {
         tmpVal = ((double) text.length() / item.value.length()) * BASE_BOST;
       }
       result = tmpVal > result ? tmpVal : result;

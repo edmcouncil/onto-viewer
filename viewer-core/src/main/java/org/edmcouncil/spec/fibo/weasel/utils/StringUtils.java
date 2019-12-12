@@ -20,7 +20,7 @@ public class StringUtils {
 
   public static String getFragment(String iri) {
     if (iri.contains(AXIOM_PATTERN)) {
-      return iri.substring(iri.lastIndexOf("."));
+      return iri.substring(iri.lastIndexOf(".")+1);
     }
     String[] splitIri = iri.split("/");
     String lastElement = splitIri[splitIri.length - 1];
