@@ -1,19 +1,19 @@
-
 package org.edmcouncil.spec.fibo.weasel.model.graph.vis;
 
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.ViewerNode;
 
 /**
- * @author Patrycja Miazek (patrycja.miazek@makolab.com) 
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
-
 public class VisNode {
 
-   
   private String iri;
-  private String nodeStyle;
-  private String nodeShape;
+  //private String nodeStyle;
+  //private String nodeShape;
+  private String color;
+  private String label;
+  private String shape;
 
   public String getIri() {
     return iri;
@@ -23,30 +23,34 @@ public class VisNode {
     this.iri = iri;
   }
 
-  public String getNodeStyle() {
-    return nodeStyle;
+  public String getColor() {
+    return color;
   }
 
-  public void setNodeStyle(String nodeStyle) {
-    this.nodeStyle = nodeStyle;
+  public void setColor(String color) {
+    this.color = color;
   }
 
-  public String getNodeShape() {
-    return nodeShape;
+  public String getLabel() {
+    return label;
   }
 
-  public void setNodeShape(String nodeShape) {
-    this.nodeShape = nodeShape;
+  public void setLabel(String label) {
+    this.label = label;
   }
 
-  public VisNode(String iri, String nodeStyle, String nodeShape) {
-    this.iri = iri;
-    this.nodeStyle = nodeStyle;
-    this.nodeShape = nodeShape;
+  public String getShape() {
+    return shape;
   }
-  
-  
 
-  
+  public void setShape(String shape) {
+    this.shape = shape;
+  }
+
+  @Override
+  public String toString() {
+    return "VisNode{" + "iri=" + iri + ", color=" + color + ", label=" + label + ", shape=" + shape + '}';
+  }
+
   
 }
