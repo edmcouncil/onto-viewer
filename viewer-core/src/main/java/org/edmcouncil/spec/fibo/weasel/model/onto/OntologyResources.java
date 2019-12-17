@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 
@@ -13,7 +12,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
  */
 public class OntologyResources {
 
-  private final Map<String, List<PropertyValue>> resources = new ConcurrentHashMap<>();
+  private final Map<String, List<PropertyValue>> resources = new HashMap<>();
 
   public void addElement(String type, PropertyValue element) {
     List<PropertyValue> resList = resources.getOrDefault(type, new LinkedList<>());

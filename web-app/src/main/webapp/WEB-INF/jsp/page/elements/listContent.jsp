@@ -15,7 +15,7 @@
         <c:forEach items="${result.result}" var="resEl">
           <div class="ml-5">
             <div class="row">
-              <span ><h5> <a class="font-weight-bold" href="search?query=${resEl.iri}">${resEl.label}</a> </h5></span>
+              <span><h5> <a class="font-weight-bold" href="search?query=${resEl.iri}">${resEl.label}</a> </h5></span>
             </div>
             <div class="row">
               <span> <a class="text-secondary" href="search?query=${resEl.iri}">${resEl.iri}</a> </span>

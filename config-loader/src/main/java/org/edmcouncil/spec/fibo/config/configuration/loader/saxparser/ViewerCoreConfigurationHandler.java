@@ -16,16 +16,18 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.searcher.TextSearcherConfig;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultLabelItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.searcher.SearcherField;
 
 /**
  * Configuration reader from xml file
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class WeaselConfigurationHandler extends DefaultHandler {
+public class ViewerCoreConfigurationHandler extends DefaultHandler {
 
-  private static final Logger LOG = LoggerFactory.getLogger(WeaselConfigurationHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ViewerCoreConfigurationHandler.class);
 
   private ViewerCoreConfiguration config = new ViewerCoreConfiguration();
   String key = null;
@@ -34,6 +36,8 @@ public class WeaselConfigurationHandler extends DefaultHandler {
   RenameItem cre = null;
   GroupsItem cge = null;
   DefaultLabelItem dli = null;
+  TextSearcherConfig tsc = null;
+  SearcherField sf = null;
 
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -61,7 +65,16 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case ConfigKeys.USER_DEFINED_NAME:
         dli = new DefaultLabelItem();
         break;
-      
+      case ConfigKeys.TEXT_SEARCH_CONFIG:
+        this.key = qName;
+        tsc = new TextSearcherConfig();
+        break;
+      case ConfigKeys.HINT_FIELD:
+      case ConfigKeys.SEARCH_FIELD:
+        //this.key = qName;
+        sf = new SearcherField();
+        break;
+
     }
   }
 
@@ -76,6 +89,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         if (!val.trim().isEmpty()) {
           ConfigItem configEl = new StringItem(val);
           config.addCongigElement(key, configEl);
+          configEl = null;
         }
         break;
       case ConfigKeys.GROUP:
@@ -92,6 +106,7 @@ public class WeaselConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_PATH:
         StringItem ontologyPath = new StringItem(val);
         config.addCongigElement(key, ontologyPath);
+        ontologyPath = null;
         break;
       case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
@@ -99,18 +114,21 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         cbe.setType(ConfigItemType.BOOLEAN);
         cbe.setValue(Boolean.valueOf(val));
         config.addCongigElement(key, cbe);
+        cbe = null;
         break;
       case ConfigKeys.LABEL_PRIORITY:
         LabelPriority cpe = new LabelPriority();
         cpe.setType(ConfigItemType.PRIORITY);
         cpe.setValue(LabelPriority.Priority.valueOf(val));
         config.addCongigElement(key, cpe);
+        cpe = null;
         break;
       case ConfigKeys.MISSING_LANGUAGE_ACTION:
         MissingLanguageItem cmle = new MissingLanguageItem();
         cmle.setType(ConfigItemType.MISSING_LANGUAGE_ACTION);
         cmle.setValue(MissingLanguageItem.Action.valueOf(val));
         config.addCongigElement(key, cmle);
+        cmle = null;
         break;
       case ConfigKeys.RESOURCE_IRI_TO_NAME:
         dli.setIri(val);
@@ -120,6 +138,33 @@ public class WeaselConfigurationHandler extends DefaultHandler {
         break;
       case ConfigKeys.USER_DEFINED_NAME:
         config.addCongigElement(key, dli);
+        break;
+      case ConfigKeys.HINT_FIELD:
+        tsc.addHintField(sf);
+        break;
+      case ConfigKeys.SEARCH_FIELD:
+        tsc.addSearchField(sf);
+        break;
+      case ConfigKeys.FIELD_IRI:
+        sf.setIri(val);
+        break;
+      case ConfigKeys.FIELD_BOOST:
+        sf.setBoost(Double.valueOf(val));
+        break;
+      case ConfigKeys.HINT_THRESHOLD:
+        tsc.setHintThreshold(Double.valueOf(val));
+        break;
+      case ConfigKeys.SEARCH_THRESHOLD:
+        tsc.setSearchThreshold(Double.valueOf(val));
+        break;
+      case ConfigKeys.SEARCH_DESCRIPTION:
+        tsc.addSearchDescription(val);
+        break;
+      case ConfigKeys.TEXT_SEARCH_CONFIG:
+        config.addCongigElement(key, tsc);
+        tsc = null;
+        break;
+
     }
   }
 

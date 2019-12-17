@@ -200,6 +200,40 @@
     
   </labelConfig>
   
+  <searchConfig>
+    
+    <hintFields>
+      <hintField>
+        <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </hintField>
+    </hintFields>
+    <hintThreshold>0.0</hintThreshold>
+    
+    <searchFields>
+      <searchField>
+        <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
+        <fieldBoost>2.0</fieldBoost>
+      </searchField>
+      
+      <searchField>
+        <fieldIri>http://www.w3.org/2004/02/skos/core#definition</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+      
+      <searchField>
+        <fieldIri>http://purl.org/dc/terms/abstract</fieldIri>
+        <fieldBoost>0.0</fieldBoost>
+      </searchField>
+      
+    </searchFields>
+    <searchThreshold>0.0</searchThreshold>
+    <searchDescriptions>
+      <searchDescription>http://www.w3.org/2004/02/skos/core#definition</searchDescription>
+      <searchDescription>http://purl.org/dc/terms/abstract</searchDescription>
+    </searchDescriptions>
+  </searchConfig>
+  
   <!--Feature will be added if future
   <ignoreToLinking>
     <ignore>http://www.some.iri#ignoreToLinking</ignore>

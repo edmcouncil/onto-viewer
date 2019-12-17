@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.edmcouncil.spec.fibo.view.service.TextSearchService;
 import org.edmcouncil.spec.fibo.view.util.UrlChecker;
-import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextSearcher;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.hint.HintItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

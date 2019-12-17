@@ -1,16 +1,16 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data.handler;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
+import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
-import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -30,10 +30,18 @@ import org.springframework.stereotype.Component;
 public class IndividualDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(IndividualDataHandler.class);
-  private static final String instanceKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
+  private static final String instanceKey = ViewerIdentifierFactory
+      .createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
 
   @Autowired
   private LabelProvider labelExtractor;
+  private OWLReasoner reasoner;
+
+  @Inject
+  public IndividualDataHandler(OntologyManager m) {
+    OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
+    reasoner = reasonerFactory.createNonBufferingReasoner(m.getOntology());
+  }
 
   /**
    * Handle all individual for OWLClass given on parameter.
@@ -44,8 +52,7 @@ public class IndividualDataHandler {
    */
   public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-    OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
-    OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
+
     NodeSet<OWLNamedIndividual> instances = null;
     try {
       instances = reasoner.getInstances(clazz, true);
@@ -53,7 +60,7 @@ public class IndividualDataHandler {
       LOG.error(e.toString());
       return result;
     }
-    
+
     reasoner.dispose();
 
     Set<OWLNamedIndividual> individualList = instances.entities().collect(Collectors.toSet());

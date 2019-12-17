@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import org.edmcouncil.spec.fibo.config.configuration.loader.saxparser.WeaselConfigurationHandler;
+import org.edmcouncil.spec.fibo.config.configuration.loader.saxparser.ViewerCoreConfigurationHandler;
 import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.slf4j.Logger;
@@ -34,7 +34,7 @@ public class ConfigLoader {
           return configuration;
         }
         SAXParser saxParser = saxParserFactory.newSAXParser();
-        WeaselConfigurationHandler handler = new WeaselConfigurationHandler();
+        ViewerCoreConfigurationHandler handler = new ViewerCoreConfigurationHandler();
         saxParser.parse(configFile, handler);
         
         configuration = handler.getConfiguration();
