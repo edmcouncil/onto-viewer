@@ -218,7 +218,7 @@
       
       <searchField>
         <fieldIri>http://www.w3.org/2004/02/skos/core#definition</fieldIri>
-        <fieldBoost>1.0</fieldBoost>
+        <fieldBoost>0.0</fieldBoost>
       </searchField>
       
       <searchField>
