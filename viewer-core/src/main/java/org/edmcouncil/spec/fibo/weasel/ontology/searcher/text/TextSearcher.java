@@ -21,9 +21,9 @@ public class TextSearcher implements ViewerSearcher {
   private TextSearcherDb db;
 
   @Override
-  public SearcherResult search(String query, Integer maxResultCount) throws ViewerException{
+  public SearcherResult search(String query, Integer maxResultCount, Integer currentPage) throws ViewerException{
 
-    List<SearchItem> result = db.getSearchResult(query, maxResultCount);
+    List<SearchItem> result = db.getSearchResult(query, maxResultCount, currentPage);
     
     return ResultFactory.cresteSearchResult(result);
   }

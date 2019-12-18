@@ -213,7 +213,7 @@
     <searchFields>
       <searchField>
         <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
-        <fieldBoost>2.0</fieldBoost>
+        <fieldBoost>1.0</fieldBoost>
       </searchField>
       
       <searchField>

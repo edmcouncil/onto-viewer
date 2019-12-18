@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.searcher.text;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -141,7 +142,7 @@ public class TextSearcherDb {
     return result;
   }
 
-  public List<SearchItem> getSearchResult(String text, Integer maxResults) {
+  public List<SearchItem> getSearchResult(String text, Integer maxResults, Integer currentPage) {
     List<SearchItem> result = new LinkedList<>();
 
     for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
@@ -160,13 +161,20 @@ public class TextSearcherDb {
         result.add(si);
       }
     }
+    Integer startIndex = (currentPage - 1) * maxResults;
+    if (startIndex > result.size()) {
+      return new ArrayList<>();
+    }
 
-    Integer endIndex = result.size() > maxResults ? maxResults : result.size();
+    //Integer endIndex = result.size() > maxResults ? maxResults : result.size();
+    Integer endIndex = (currentPage - 1) * maxResults + maxResults;
+    endIndex = endIndex > result.size() ? result.size() : endIndex;
+
     Collections.sort(result, Comparator.comparing(SearchItem::getRelevancy).reversed()
         .thenComparing(SearchItem::getDescription).reversed());
     Collections.reverse(result);
 
-    result = result.subList(0, endIndex);
+    result = result.subList(startIndex, endIndex);
 
     return result;
   }
@@ -226,7 +234,6 @@ public class TextSearcherDb {
       if (tsc.getSearchDescriptions().isEmpty()) {
         tsc.addSearchDescription(DEFINITION_IRI);
       }
-
     }
     this.conf = tsc;
   }

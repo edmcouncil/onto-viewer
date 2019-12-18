@@ -17,13 +17,17 @@ public class TextSearchService implements SearchService {
   @Autowired
   private TextSearcher searcher;
 
-  @Override
-  public SearcherResult search(String query, int maxValues) throws ViewerException {
-    return searcher.search(query, maxValues);
+  public SearcherResult search(String query, Integer maxValues, Integer currentPage) throws ViewerException {
+    return searcher.search(query, maxValues, currentPage);
   }
 
   public List<HintItem> getHints(String query, Integer maxHintCount) {
     return searcher.getHints(query, maxHintCount);
+  }
+
+  @Override
+  public SearcherResult search(String query, int maxValues) throws ViewerException {
+    return searcher.search(query, maxValues, 1);
   }
 
 }

@@ -7,6 +7,7 @@ import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -50,6 +52,9 @@ public class SearchController {
   private OntologySearcherService ontologySearcher;
   @Autowired
   private AppConfiguration config;
+
+  private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 100;
+  private static final Integer DEFAULT_RESULT_PAGE = 1;
 
   @PostMapping
   public ModelAndView redirectSearch(@Valid @ModelAttribute("queryValue") Query query) {
@@ -99,10 +104,15 @@ public class SearchController {
     return "search";
   }
 
-  @PostMapping("/json")
-  public <SearcherResult> ResponseEntity searchJson(@RequestBody String query, Model model) {
+  @PostMapping(value = {"/json", "/json/max/{max}", "/json/max/{max}/page/{page}"})
+  public <SearcherResult> ResponseEntity searchJson(
+      @RequestBody String query,
+      Model model,
+      @PathVariable Optional<Integer> max,
+      @PathVariable Optional<Integer> page
+  ) {
 
-    LOG.info("[REQ] POST : search / json   RequestBody = {{}}", query);
+    LOG.info("[REQ] POST : search / json / max / {{}} / page /{{}} | RequestBody = {{}}", query);
 
     SearcherResult result = null;
     try {
@@ -111,8 +121,10 @@ public class SearchController {
         LOG.info("URL detected, search specyfic element");
         result = (SearcherResult) ontologySearcher.search(query, 0);
       } else {
+        Integer maxResults = max.isPresent() ? max.get() : DEFAULT_MAX_SEARCH_RESULT_COUNT;
+        Integer currentPage = page.isPresent() ? page.get() : DEFAULT_RESULT_PAGE;
         LOG.info("String detected, search elements with given label");
-        result = (SearcherResult) textSearchService.search(query, 100);
+        result = (SearcherResult) textSearchService.search(query, maxResults, currentPage);
       }
 
     } catch (ViewerException ex) {
