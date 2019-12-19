@@ -14,7 +14,7 @@
           <form:form method="POST" action="/search" modelAttribute="query"
                      class="ml-2 mr-4" autocomplete="off">
             <div class="input-group custom-search-form">
-              <form:input path="value" placeholder="Search for FIBO resource IRI" id="search-query" 
+              <form:input path="value" placeholder="Search ..." id="search-query" 
                           aria-label="Search" class="form-control" type="text"
                           onkeyup="showHint(event)"/>
               <span class="input-group-btn">
