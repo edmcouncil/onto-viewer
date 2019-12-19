@@ -321,7 +321,7 @@ public class OwlDataHandler {
             currentTax.add(taxElThing);
             break;
           case AXIOM_NAMED_INDIVIDUAL:
-            
+
             break;
           default:
             label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
@@ -330,12 +330,7 @@ public class OwlDataHandler {
             taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
             currentTax.add(taxElThing);
             break;
-            
-            
         }
-
-        
-
       }
       currentTax.add(taxEl);
 
