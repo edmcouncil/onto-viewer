@@ -3,6 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.searcher.text;
 import java.util.List;
 import org.edmcouncil.spec.fibo.weasel.exception.ViewerException;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.ViewerSearcher;
+import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.ExtendedResult;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.hint.HintItem;
@@ -23,7 +24,7 @@ public class TextSearcher implements ViewerSearcher {
   @Override
   public SearcherResult search(String query, Integer maxResultCount, Integer currentPage) throws ViewerException{
 
-    List<SearchItem> result = db.getSearchResult(query, maxResultCount, currentPage);
+    ExtendedResult result = db.getSearchResult(query, maxResultCount, currentPage);
     
     return ResultFactory.cresteSearchResult(result);
   }

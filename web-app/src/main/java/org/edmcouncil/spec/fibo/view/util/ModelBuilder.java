@@ -4,7 +4,6 @@ import org.edmcouncil.spec.fibo.view.model.Query;
 import java.util.List;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
-import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
 
 import org.springframework.ui.Model;

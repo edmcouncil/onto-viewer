@@ -53,7 +53,7 @@ public class SearchController {
   @Autowired
   private AppConfiguration config;
 
-  private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 100;
+  private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 20;
   private static final Integer DEFAULT_RESULT_PAGE = 1;
 
   @PostMapping
@@ -65,7 +65,10 @@ public class SearchController {
   }
 
   @GetMapping
-  public String search(@RequestParam("query") String query, Model model) {
+  public String search(@RequestParam("query") String query,
+      Model model,
+      @RequestParam(value = "max", required = false, defaultValue = "25") Integer max,
+      @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
 
     LOG.info("[REQ] GET : search ? query = {{}}", query);
     Query q = new Query();
@@ -83,7 +86,7 @@ public class SearchController {
       } else {
         LOG.info("String detected, search elements with given label");
         modelBuilder.setQuery(query);
-        result = textSearchService.search(query, 100);
+        result = textSearchService.search(query, max, page);
       }
     } catch (ViewerException ex) {
       LOG.info("Handle ViewerException. Message: '{}'", ex.getMessage());
@@ -104,7 +107,7 @@ public class SearchController {
     return "search";
   }
 
-  @PostMapping(value = {"/json", "/json/max/{max}", "/json/max/{max}/page/{page}"})
+  @PostMapping(value = {"/json", "/json/max/{max}", "/json/page/{page}", "/json/max/{max}/page/{page}"})
   public <SearcherResult> ResponseEntity searchJson(
       @RequestBody String query,
       Model model,

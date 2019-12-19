@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.searcher.text;
 
+import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.ExtendedResult;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -142,8 +143,10 @@ public class TextSearcherDb {
     return result;
   }
 
-  public List<SearchItem> getSearchResult(String text, Integer maxResults, Integer currentPage) {
-    List<SearchItem> result = new LinkedList<>();
+  public ExtendedResult getSearchResult(String text, Integer maxResults, Integer currentPage) {
+    ExtendedResult result = new ExtendedResult();
+
+    List<SearchItem> listResult = new LinkedList<>();
 
     for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
       Double relevancy = record.getValue().computeSearchRelevancy(text, conf.getSearchFields());
@@ -158,23 +161,30 @@ public class TextSearcherDb {
 
         si.setLabel(label);
         si.setDescription(StringUtils.cutString(description, 150, true));
-        result.add(si);
+        listResult.add(si);
       }
     }
+
+    int listSize = listResult.size();
+
     Integer startIndex = (currentPage - 1) * maxResults;
-    if (startIndex > result.size()) {
-      return new ArrayList<>();
+    if (startIndex > listSize) {
+      return result;
     }
-
-    //Integer endIndex = result.size() > maxResults ? maxResults : result.size();
     Integer endIndex = (currentPage - 1) * maxResults + maxResults;
-    endIndex = endIndex > result.size() ? result.size() : endIndex;
+    endIndex = endIndex > listSize ? listSize : endIndex;
 
-    Collections.sort(result, Comparator.comparing(SearchItem::getRelevancy).reversed()
+    Collections.sort(listResult, Comparator.comparing(SearchItem::getRelevancy).reversed()
         .thenComparing(SearchItem::getDescription).reversed());
-    Collections.reverse(result);
+    Collections.reverse(listResult);
 
-    result = result.subList(startIndex, endIndex);
+    listResult = listResult.subList(startIndex, endIndex);
+
+    result.setResult(listResult);
+    result.setPage(currentPage);
+    result.setQuery(text);
+    result.setHasMorePage(listSize > endIndex);
+    result.setMaxPage(listSize / maxResults + (listSize % maxResults != 0 ? 1 : 0));
 
     return result;
   }
