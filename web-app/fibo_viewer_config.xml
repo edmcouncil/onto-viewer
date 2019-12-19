@@ -78,7 +78,7 @@
       
       <userDefinedName>
         <resourceIriToName>@viewer.axiom.SubClassOf</resourceIriToName>
-        <resourceIriName>IS-A restrictions (necessary criteria)</resourceIriName>
+        <resourceIriName>IS-A restrictions</resourceIriName>
       </userDefinedName>
       
       <userDefinedName>
@@ -193,7 +193,12 @@
       
       <userDefinedName>
         <resourceIriToName>http://www.w3.org/2004/02/skos/core#definition</resourceIriToName>
-        <resourceIriName>definiens</resourceIriName>
+        <resourceIriName>definition</resourceIriName>
+      </userDefinedName>  
+      
+      <userDefinedName>
+        <resourceIriToName>@viewer.function.instances</resourceIriToName>
+        <resourceIriName>Instances</resourceIriName>
       </userDefinedName>  
   
     </userDefaultNameList>
