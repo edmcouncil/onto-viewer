@@ -55,7 +55,7 @@
               <c:when test="${result.maxPage>8}">
 
                 <c:choose>
-                  <c:when test="${result.page<3}">
+                  <c:when test="${result.page<=3}">
 
                     <c:forEach begin="1" end="3" varStatus="loop" var="index">
                       <c:choose>
