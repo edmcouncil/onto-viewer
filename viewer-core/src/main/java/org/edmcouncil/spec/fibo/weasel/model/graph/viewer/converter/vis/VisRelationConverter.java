@@ -10,4 +10,22 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisNode;
 public class VisRelationConverter {
   private VisNode start;
   private VisNode end;
+
+  public VisNode getStart() {
+    return start;
+  }
+
+  public void setStart(VisNode start) {
+    this.start = start;
+  }
+
+  public VisNode getEnd() {
+    return end;
+  }
+
+  public void setEnd(VisNode end) {
+    this.end = end;
+  }
+  
+  
 }

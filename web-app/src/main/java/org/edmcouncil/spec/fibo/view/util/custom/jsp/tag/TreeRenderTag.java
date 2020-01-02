@@ -95,11 +95,10 @@ public class TreeRenderTag extends SimpleTagSupport {
     } else {
       if (elementLocation != null && elementLocation.contains(link)) {
         text = wrapSpanCleanMatch(emptyDisplayedVal);
-         result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
+        result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
       } else {
         text = wrapSpanClean(emptyDisplayedVal);
       }
-
     }
     renderElement(text);
     renderElement(result);
