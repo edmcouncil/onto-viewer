@@ -24,6 +24,8 @@ public class ChangerIriToLabel {
   @Autowired
   private LabelProvider labelProvider;
 
+  //TODO: changeIriKeysOnLabels, Information about GrupedDetails - dev code
+  
   public OwlGroupedDetails changeIriKeysInGroupedDetails(OwlGroupedDetails det) {
    OwlGroupedDetailsProperties<PropertyValue> newProp = new OwlGroupedDetailsProperties<>();
     

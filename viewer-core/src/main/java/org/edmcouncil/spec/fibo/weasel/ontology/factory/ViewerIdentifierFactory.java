@@ -20,7 +20,7 @@ public class ViewerIdentifierFactory {
 
   /**
    * IRI creation using the pattern. This IRI is used in the "Fibo-viewer" functions to recognize
-   * elements that are not represented by IRI. The pattern looks like http: //viewer.type#element.
+   * elements that are not represented by IRI. The pattern looks like @viewer.type#element.
    *
    * @param type Specific type
    * @param element Specific element
@@ -36,7 +36,7 @@ public class ViewerIdentifierFactory {
 
    /**
    * IRI creation using the pattern. This IRI is used in the "Fibo-viewer" functions to recognize
-   * elements that are not represented by IRI. The pattern looks like http: //viewer.type#element.
+   * elements that are not represented by IRI. The pattern looks like @viewer.type#element.
    *
    * @param type Specific type
    * @param element Specific element

@@ -153,6 +153,7 @@ public class AnnotationsDataHandler {
     return result;
   }
 
+  //TODO: change method name
   private void checkUriAsIri(PropertyValue opv, String value) {
     //TODO: Change this to more pretty solution
     if (opv.getType() == WeaselOwlType.ANY_URI) {

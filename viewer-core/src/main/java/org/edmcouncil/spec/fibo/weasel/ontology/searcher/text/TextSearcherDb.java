@@ -48,20 +48,10 @@ public class TextSearcherDb {
   @Autowired
   private OntologyManager om;
   private TextSearcherConfig conf;
-
-  @Inject
-  public TextSearcherDb(AppConfiguration appConfig) {
-
-    TextSearcherConfig tsc = appConfig.getViewerCoreConfig().getTextSearcherConfig();
-
-    if (tsc == null) {
-      loadDefaultConfiguration();
-    } else {
-      loadConfiguration(tsc);
-    }
-
-  }
-
+  @Autowired
+  private AppConfiguration appConfig;
+  
+  
   private void loadDefaultConfiguration() {
 
     TextSearcherConfig tsc = new TextSearcherConfig();
@@ -84,6 +74,16 @@ public class TextSearcherDb {
 
   @PostConstruct
   public void init() {
+    
+    this.conf = appConfig.getViewerCoreConfig().getTextSearcherConfig();
+    
+    if (conf == null) {
+      loadDefaultConfiguration();
+    } else {
+      loadConfiguration(conf);
+    }
+    
+    
     //TODO: move this into configuration, default is only label to search
 
     LOG.info("Start initialize TextSearcherDB");
