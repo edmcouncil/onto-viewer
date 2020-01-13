@@ -148,7 +148,6 @@ public class AnnotationsDataHandler {
       LOG.info("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", opv, propertyiri.toString());
 
       result.addProperty(propertyiri.toString(), opv);
-      //result.addProperty(property, opv);
     }
     return result;
   }

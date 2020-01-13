@@ -17,7 +17,6 @@ public class ResultFactory {
   }
 
   public static SearcherResult cresteDetailsResult(OwlDetails result) {
-    // SearcherResult.Type.details.
     return new DetailsResult(SearcherResult.Type.details, result);
   }
   

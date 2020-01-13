@@ -1,23 +1,18 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data.handler;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.reasoner.NodeSet;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
-import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +30,6 @@ public class IndividualDataHandler {
 
   @Autowired
   private LabelProvider labelExtractor;
-  private OWLReasoner reasoner;
-
-  @Inject
-  public IndividualDataHandler(OntologyManager m) {
-    OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
-    reasoner = reasonerFactory.createNonBufferingReasoner(m.getOntology());
-  }
 
   /**
    * Handle all individual for OWLClass given on parameter.
@@ -53,17 +41,7 @@ public class IndividualDataHandler {
   public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
-    NodeSet<OWLNamedIndividual> instances = null;
-    try {
-      instances = reasoner.getInstances(clazz, true);
-    } catch (java.util.NoSuchElementException e) {
-      LOG.error(e.toString());
-      return result;
-    }
-
-    reasoner.dispose();
-
-    Set<OWLNamedIndividual> individualList = instances.entities().collect(Collectors.toSet());
+    Set<OWLNamedIndividual> individualList = getInstancesByClass(ontology, clazz);
     for (OWLNamedIndividual namedIndividual : individualList) {
       OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
       s.setType(WeaselOwlType.INSTANCES);
@@ -74,4 +52,20 @@ public class IndividualDataHandler {
     }
     return result;
   }
+
+  private Set<OWLNamedIndividual> getInstancesByClass(OWLOntology ontology, OWLClass clazz) {
+
+    Set<OWLNamedIndividual> result = new HashSet<>();
+    ontology.individualsInSignature().collect(Collectors.toSet()).forEach((individual) -> {
+      ontology.classAssertionAxioms(individual).collect(Collectors.toSet())
+          .stream()
+          .filter((classAssertion) -> (classAssertion.containsEntityInSignature(clazz)))
+          .forEachOrdered((_item) -> {
+            result.add(individual);
+          });
+    });
+
+    return result;
+  }
+
 }

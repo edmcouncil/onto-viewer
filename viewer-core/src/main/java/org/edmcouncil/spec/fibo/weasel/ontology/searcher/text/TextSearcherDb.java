@@ -1,7 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.searcher.text;
 
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.ExtendedResult;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -43,49 +42,36 @@ public class TextSearcherDb {
   private static final String LABEL_IRI = "http://www.w3.org/2000/01/rdf-schema#label";
   private static final String DEFINITION_IRI = "http://www.w3.org/2004/02/skos/core#definition";
 
-  private Double HINT_THRESHOLD = 0.0d;
-  private Double RESULT_THRESHOLD = 0.0d;
+  private final Double HINT_THRESHOLD = 0.0d;
+  private final Double RESULT_THRESHOLD = 0.0d;
   @Autowired
   private OntologyManager om;
   private TextSearcherConfig conf;
   @Autowired
   private AppConfiguration appConfig;
-  
-  
-  private void loadDefaultConfiguration() {
 
-    TextSearcherConfig tsc = new TextSearcherConfig();
-    tsc.setHintThreshold(HINT_THRESHOLD);
-    tsc.setSearchThreshold(RESULT_THRESHOLD);
-    SearcherField sf = new SearcherField();
-    sf.setIri(LABEL_IRI);
-    tsc.addHintField(sf);
+  @Inject
+  public TextSearcherDb(OntologyManager om) {
+    this.om = om;
 
-    tsc.addSearchField(sf);
-
-    sf = new SearcherField();
-    sf.setIri(DEFINITION_IRI);
-    tsc.addSearchField(sf);
-
-    tsc.addSearchDescription(DEFINITION_IRI);
-
-    this.conf = tsc;
   }
 
+  /**
+   * Initialize database.
+   *
+   */
   @PostConstruct
   public void init() {
-    
+
     this.conf = appConfig.getViewerCoreConfig().getTextSearcherConfig();
-    
+
     if (conf == null) {
       loadDefaultConfiguration();
     } else {
       loadConfiguration(conf);
     }
-    
-    
-    //TODO: move this into configuration, default is only label to search
 
+    //TODO: move this into configuration, default is only label to search
     LOG.info("Start initialize TextSearcherDB");
     db = new HashMap<>();
     OWLOntology onto = om.getOntology();
@@ -93,33 +79,47 @@ public class TextSearcherDb {
     Stream<OWLEntity> entities = onto.signature();
 
     entities.collect(Collectors.toSet()).forEach((owlEntity) -> {
-      Stream<OWLAnnotation> annotations = EntitySearcher.getAnnotations(owlEntity, onto);
-      String entityIri = owlEntity.getIRI().toString();
-      LOG.trace("Entity IRI: {}", entityIri);
-      TextDbItem tdi = new TextDbItem();
-      boolean emptyTdi = true;
-      for (OWLAnnotation annotation : annotations.collect(Collectors.toSet())) {
-        String propertyIri = annotation.getProperty().getIRI().toString();
-        if (conf.hasHintFieldWithIri(propertyIri)
-            || conf.hasSearchFieldWithIri(propertyIri)) {
-          LOG.trace("Find property: {}", propertyIri);
-          Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
-          if (opt.isPresent()) {
-            tdi.addValue(propertyIri, opt.get().getLiteral());
-            emptyTdi = false;
-            LOG.trace("Literal value: {}", opt.get().getLiteral());
-          }
-        }
-      }
-
-      if (!emptyTdi) {
-        db.put(entityIri, tdi);
-      }
+      collectEntityData(owlEntity, onto);
     });
 
     LOG.info("End of initialize TextSearcherDB");
   }
 
+  private void collectEntityData(OWLEntity owlEntity, OWLOntology onto) {
+    Stream<OWLAnnotation> annotations = EntitySearcher.getAnnotations(owlEntity, onto);
+    String entityIri = owlEntity.getIRI().toString();
+    LOG.trace("Entity IRI: {}", entityIri);
+    TextDbItem tdi = collectValues(annotations);
+
+    if (!tdi.isEmpty()) {
+      db.put(entityIri, tdi);
+    }
+  }
+
+  private TextDbItem collectValues(Stream<OWLAnnotation> annotations) {
+    TextDbItem tdi = new TextDbItem();
+    annotations.collect(Collectors.toSet()).forEach((annotation) -> {
+      String propertyIri = annotation.getProperty().getIRI().toString();
+      if (conf.hasHintFieldWithIri(propertyIri)
+          || conf.hasSearchFieldWithIri(propertyIri)) {
+        LOG.trace("Find property: {}", propertyIri);
+        Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
+        if (opt.isPresent()) {
+          tdi.addValue(propertyIri, opt.get().getLiteral());
+          LOG.trace("Literal value: {}", opt.get().getLiteral());
+        }
+      }
+    });
+    return tdi;
+  }
+
+  /**
+   * Hint search. Return list of hints, based on text search on own prepared database.
+   *
+   * @param text
+   * @param maxHintCount
+   * @return
+   */
   public List<HintItem> getHints(String text, Integer maxHintCount) {
     List<HintItem> result = new LinkedList<>();
 
@@ -133,16 +133,34 @@ public class TextSearcherDb {
         result.add(hi);
       }
     }
-    Integer endIndex = result.size() > maxHintCount ? maxHintCount : result.size();
-    Collections.sort(result, Comparator.comparing(HintItem::getRelevancy).reversed()
-        .thenComparing(HintItem::getLabel).reversed());
-    Collections.reverse(result);
+    sortHints(result);
 
-    result = result.subList(0, endIndex);
+    result = cutHintResults(result, maxHintCount);
 
     return result;
   }
 
+  private List<HintItem> cutHintResults(List<HintItem> result, Integer maxHintCount) {
+    Integer endIndex = result.size() > maxHintCount ? maxHintCount : result.size();
+    result = result.subList(0, endIndex);
+    return result;
+  }
+
+  private void sortHints(List<HintItem> result) {
+    Collections.sort(result, Comparator.comparing(HintItem::getRelevancy).reversed()
+        .thenComparing(HintItem::getLabel).reversed());
+    Collections.reverse(result);
+  }
+
+  /**
+   * Advanced search. You can use different properties than the hint search (other fields,
+   * threshholds, bost). Support simply paggination.
+   *
+   * @param text
+   * @param maxResults
+   * @param currentPage
+   * @return Search result of extended search.
+   */
   public ExtendedResult getSearchResult(String text, Integer maxResults, Integer currentPage) {
     ExtendedResult result = new ExtendedResult();
 
@@ -151,42 +169,50 @@ public class TextSearcherDb {
     for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
       Double relevancy = record.getValue().computeSearchRelevancy(text, conf.getSearchFields());
       if (relevancy > conf.getSearchThreshold()) {
-        SearchItem si = new SearchItem();
-        si.setIri(record.getKey());
-        si.setRelevancy(relevancy);
-        String label = getValue(record.getKey(), LABEL_IRI);
-
-        String description = getDescription(record);
-        LOG.debug("Find description: {}", description);
-
-        si.setLabel(label);
-        si.setDescription(StringUtils.cutString(description, 150, true));
+        SearchItem si = getPreparedSearchResultItem(record, relevancy);
         listResult.add(si);
       }
     }
 
-    int listSize = listResult.size();
+    int countOfResults = listResult.size();
+
+    sortSearchResults(listResult);
 
     Integer startIndex = (currentPage - 1) * maxResults;
-    if (startIndex > listSize) {
+    if (startIndex > countOfResults) {
       return result;
     }
+    
     Integer endIndex = (currentPage - 1) * maxResults + maxResults;
-    endIndex = endIndex > listSize ? listSize : endIndex;
+    endIndex = endIndex > countOfResults ? countOfResults : endIndex;
 
-    Collections.sort(listResult, Comparator.comparing(SearchItem::getRelevancy).reversed()
-        .thenComparing(SearchItem::getDescription).reversed());
-    Collections.reverse(listResult);
-
+    //Cut results for approproate page
     listResult = listResult.subList(startIndex, endIndex);
 
     result.setResult(listResult);
     result.setPage(currentPage);
     result.setQuery(text);
-    result.setHasMorePage(listSize > endIndex);
-    result.setMaxPage(listSize / maxResults + (listSize % maxResults != 0 ? 1 : 0));
+    result.setHasMorePage(countOfResults > endIndex);
+    result.setMaxPage(countOfResults / maxResults + (countOfResults % maxResults != 0 ? 1 : 0));
 
     return result;
+  }
+
+  private void sortSearchResults(List<SearchItem> listResult) {
+    Collections.sort(listResult, Comparator.comparing(SearchItem::getRelevancy).reversed()
+        .thenComparing(SearchItem::getDescription).reversed());
+    Collections.reverse(listResult);
+  }
+
+  private SearchItem getPreparedSearchResultItem(Map.Entry<String, TextDbItem> record, Double relevancy) {
+    SearchItem si = new SearchItem();
+    si.setIri(record.getKey());
+    si.setRelevancy(relevancy);
+    String label = getValue(record.getKey(), LABEL_IRI);
+    String description = getDescription(record);
+    si.setLabel(label);
+    si.setDescription(StringUtils.cutString(description, 150, true));
+    return si;
   }
 
   private String getDescription(Map.Entry<String, TextDbItem> record) {
@@ -199,7 +225,6 @@ public class TextSearcherDb {
         return description;
       }
     }
-    //description = getValue(record.getKey(), conf.getSearchDescriptions());
     return description;
   }
 
@@ -248,4 +273,23 @@ public class TextSearcherDb {
     this.conf = tsc;
   }
 
+  private void loadDefaultConfiguration() {
+
+    TextSearcherConfig tsc = new TextSearcherConfig();
+    tsc.setHintThreshold(HINT_THRESHOLD);
+    tsc.setSearchThreshold(RESULT_THRESHOLD);
+    SearcherField sf = new SearcherField();
+    sf.setIri(LABEL_IRI);
+    tsc.addHintField(sf);
+
+    tsc.addSearchField(sf);
+
+    sf = new SearcherField();
+    sf.setIri(DEFINITION_IRI);
+    tsc.addSearchField(sf);
+
+    tsc.addSearchDescription(DEFINITION_IRI);
+
+    this.conf = tsc;
+  }
 }

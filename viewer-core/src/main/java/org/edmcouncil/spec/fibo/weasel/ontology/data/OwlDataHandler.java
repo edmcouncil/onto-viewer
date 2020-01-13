@@ -781,12 +781,11 @@ public class OwlDataHandler {
    */
   private OwlDetailsProperties<PropertyValue> handleInheritedAxioms(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-    OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
-    OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
     String subClassOfKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "SubClassOf");
-    NodeSet<OWLClass> rset = reasoner.getSuperClasses(clazz, InferenceDepth.ALL);
-    rset.entities().collect(Collectors.toSet())
-        .stream()
+    Set<OWLClass> rset = owlUtils.getSuperClasses(clazz, ontology);
+    
+    
+    rset.stream()
         .map((c) -> handleAxioms(c, ontology))
         .forEachOrdered((handleAxioms) -> {
           for (Map.Entry<String, List<PropertyValue>> entry : handleAxioms.getProperties().entrySet()) {
@@ -841,12 +840,8 @@ public class OwlDataHandler {
         LOG.debug("[Data Handler] Find owl dataType wih iri: {}", iri.toString());
 
         resultDetails.setLabel(labelExtractor.getLabelOrDefaultFragment(iri));
-
-        //OwlDetailsProperties<PropertyValue> axioms = handleAxioms(data, ontology);
         OwlDetailsProperties<PropertyValue> annotations
             = handleAnnotations(data.getIRI(), ontology, resultDetails);
-
-        //resultDetails.addAllProperties(axioms);
         resultDetails.addAllProperties(annotations);
 
       }

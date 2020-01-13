@@ -61,6 +61,10 @@ public class TextDbItem {
 
     return result;
   }
+  
+  public boolean isEmpty(){
+    return value.isEmpty();
+  }
 
   static class Item {
 
