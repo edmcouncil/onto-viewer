@@ -343,15 +343,6 @@ public class OwlDataHandler {
             currentTax.add(taxElThing);
             break;
         }
-         
-      /*if (!objIri.equals(IRI.create("http://www.w3.org/2002/07/owl#Thing"))) {
-        label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
-        OwlTaxonomyValue valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
-        OwlTaxonomyValue valThingIri = new OwlTaxonomyValue(WeaselOwlType.IRI, "http://www.w3.org/2002/07/owl#Thing");
-        OwlTaxonomyElementImpl taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
-        currentTax.add(taxElThing);
-        
-        */
         
       }
       currentTax.add(taxEl);
@@ -503,18 +494,6 @@ public class OwlDataHandler {
         }
 
       }
-      /*if (key == null) {
-        continue;
-      }*/
-
- /*String eIri = next.getIRI().toString();
-      //Checking iri is defined in configuration
-
-      OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
-      axiomPropertyEntity.setIri(eIri);
-      String label = labelExtractor.getLabelOrDefaultFragment(next.getIRI());
-      axiomPropertyEntity.setLabel(label);
-      opv.addEntityValues(key, axiomPropertyEntity);*/
     }
 
     checkAndParseUriInLiteral(splited, argPattern, opv);
@@ -753,20 +732,6 @@ public class OwlDataHandler {
    * @return properties of Inherited Axioms.
    */
   private OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLClass clazz) {
-    /*OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-    OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
-    OWLReasoner reasoner = reasonerFactory.createNonBufferingReasoner(ontology);
-    NodeSet<OWLNamedIndividual> instances = reasoner.getInstances(clazz, true);
-
-    for (OWLNamedIndividual namedIndividual : instances.entities().collect(Collectors.toSet())) {
-      OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
-      s.setType(WeaselOwlType.INSTANCES);
-      s.setValue(new PairImpl(labelExtractor
-          .getLabelOrDefaultFragment(namedIndividual.getIRI()), namedIndividual.getIRI().toString()));
-      String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
-          WeaselOwlType.INSTANCES.name().toLowerCase());
-      result.addProperty(key, s);
-    }*/
     OwlDetailsProperties<PropertyValue> result = individualDataHandler.handleClassIndividuals(ontology, clazz);
     result.sortPropertiesInAlphabeticalOrder();
     return result;
