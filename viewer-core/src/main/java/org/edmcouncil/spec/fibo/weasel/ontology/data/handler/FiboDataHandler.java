@@ -275,7 +275,7 @@ public class FiboDataHandler {
         OWLOntologyManager manager = ontology.getOWLOntologyManager();
         Map<String, OntologyResources> allResources = new HashMap<>();
 
-        completeKeysUsingTheConfiguration();
+        completeResourceKeys();
 
         manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
             OntologyResources ontoResources = extractOntologyResources(owlOntology);
@@ -382,16 +382,14 @@ public class FiboDataHandler {
         return result;
     }
 
-    private void completeKeysUsingTheConfiguration() {
-
-        ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) configuration.getViewerCoreConfig();
+    private void completeResourceKeys() {
 
         resourceInternal = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal,
-                ViewerIdentifierFactory.Element.empty).toString();
+            ViewerIdentifierFactory.Element.empty);
         LOG.debug("Internal resource iri: {}", resourceInternal);
 
         resourceExternal = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external,
-                ViewerIdentifierFactory.Element.empty).toString();
+            ViewerIdentifierFactory.Element.empty);
         LOG.debug("External resource iri: {}", resourceExternal);
 
     }

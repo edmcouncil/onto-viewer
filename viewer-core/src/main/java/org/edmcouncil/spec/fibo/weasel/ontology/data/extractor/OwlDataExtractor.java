@@ -59,8 +59,7 @@ public class OwlDataExtractor {
   }
 
   
-  //TODO: extractAxiomPropertyIri
-  public static String extrackAxiomPropertyIri(OWLRestriction someValuesFromAxiom) {
+  public static String extractAxiomPropertyIri(OWLRestriction someValuesFromAxiom) {
     String propertyIri = null;
     for (OWLEntity oWLEntity : someValuesFromAxiom.getProperty().signature().collect(Collectors.toList())) {
       propertyIri = oWLEntity.toStringID();

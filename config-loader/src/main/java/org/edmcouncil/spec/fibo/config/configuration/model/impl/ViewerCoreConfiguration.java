@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.fibo.config.configuration.model.impl;
 
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.RenameItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;

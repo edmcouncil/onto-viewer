@@ -1,7 +1,5 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.factory;
 
-import org.semanticweb.owlapi.model.IRI;
-
 /**
  *
  * @author Michał Daniel (michal.daniel@makolab.com)

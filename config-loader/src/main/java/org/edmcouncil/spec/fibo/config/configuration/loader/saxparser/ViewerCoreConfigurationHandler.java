@@ -71,7 +71,6 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
         break;
       case ConfigKeys.HINT_FIELD:
       case ConfigKeys.SEARCH_FIELD:
-        //this.key = qName;
         sf = new SearcherField();
         break;
 

@@ -36,7 +36,6 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraphJson;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
-import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
@@ -58,14 +57,8 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLProperty;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
-import org.semanticweb.owlapi.reasoner.InferenceDepth;
-import org.semanticweb.owlapi.reasoner.NodeSet;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
-import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.springframework.stereotype.Component;
-import uk.ac.manchester.cs.owl.owlapi.OWLAnnotationPropertyImpl;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -193,7 +186,6 @@ public class OwlDataHandler {
       ViewerGraphJson vgj = new ViewerGraphJson(vg);
       resultDetails.setGraph(vgj);
     }
-    // resultDetails.addAllProperties(modules);
   }
 
   public OwlListDetails handleParticularIndividual(IRI iri, OWLOntology ontology) {
@@ -738,7 +730,7 @@ public class OwlDataHandler {
   }
 
   /**
-   * This method is used to display Inherited Axioms
+   * This method is used to handle Inherited Axioms
    *
    * @param ontology Paramter which loaded ontology.
    * @param clazz Class are all properties of Inherited Axioms.

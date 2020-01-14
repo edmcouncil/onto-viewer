@@ -24,14 +24,14 @@ public class OntologySearcher implements ViewerSearcher {
 
     OwlDetails owd = detailsManager.getDetailsByIri(query);
 
-    return ResultFactory.cresteDetailsResult(owd);
+    return ResultFactory.createDetailsResult(owd);
   }
 
   @Override
   public SearcherResult search(String query, Integer max, Integer currentPage) throws ViewerException {
     OwlDetails owd = detailsManager.getDetailsByIri(query);
 
-    return ResultFactory.cresteDetailsResult(owd);
+    return ResultFactory.createDetailsResult(owd);
   }
 
 }

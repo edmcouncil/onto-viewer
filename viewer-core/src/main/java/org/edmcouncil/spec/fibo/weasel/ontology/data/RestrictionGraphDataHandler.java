@@ -100,7 +100,6 @@ public class RestrictionGraphDataHandler {
       root.setType(GraphNodeType.MAIN);
       String label = labelExtractor.getLabelOrDefaultFragment(elementIri);
       root.setLabel(label);
-      //root.setLabel(label.substring(0, 1).toLowerCase() + label.substring(1));
       vg.addNode(root);
     }
 

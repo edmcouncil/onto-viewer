@@ -11,12 +11,12 @@ import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
  */
 public class ResultFactory {
 
-  public static SearcherResult cresteSearchResult(ExtendedResult result) {
+  public static SearcherResult createSearchResult(ExtendedResult result) {
 
     return new ListResult(SearcherResult.Type.list, result);
   }
 
-  public static SearcherResult cresteDetailsResult(OwlDetails result) {
+  public static SearcherResult createDetailsResult(OwlDetails result) {
     return new DetailsResult(SearcherResult.Type.details, result);
   }
   

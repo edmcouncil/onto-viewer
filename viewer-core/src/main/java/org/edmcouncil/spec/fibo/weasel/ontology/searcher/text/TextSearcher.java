@@ -25,7 +25,7 @@ public class TextSearcher implements ViewerSearcher {
 
     ExtendedResult result = db.getSearchResult(query, maxResultCount, currentPage);
     
-    return ResultFactory.cresteSearchResult(result);
+    return ResultFactory.createSearchResult(result);
   }
 
   public List<HintItem> getHints(String query, Integer maxHintCount) {

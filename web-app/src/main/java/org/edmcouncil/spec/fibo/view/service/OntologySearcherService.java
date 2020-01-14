@@ -28,16 +28,6 @@ public class OntologySearcherService implements SearchService {
   @Autowired
   private OntologySearcher ontologySearcher;
 
-  /*public OwlDetails search(String query, ModelBuilder mb) throws NotFoundElementInOntologyException {
-    //Collection details = ontologyManager.getDetailsByIri(query);
-    OwlDetails details = ontologyManager.getDetailsByIri(query);
-    boolean isGrouped = config.getViewerCoreConfig().isGrouped();
-    mb.setQuery(query)
-        .setResult(details)
-        .isGrouped(isGrouped);
-    return details;
-  }*/
-
   @Override
   public SearcherResult search(String query, int maxValues) throws ViewerException {
 

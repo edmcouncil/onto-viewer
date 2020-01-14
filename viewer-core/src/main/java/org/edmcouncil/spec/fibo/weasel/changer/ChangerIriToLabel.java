@@ -1,7 +1,5 @@
 package org.edmcouncil.spec.fibo.weasel.changer;
 
-import java.util.List;
-import java.util.Map;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlGroupedDetailsProperties;
