@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.stream.Stream;
-import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
@@ -16,7 +15,6 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
 
 /**
@@ -57,29 +55,16 @@ class FileOntologyLoader implements OntologyLoader {
 
     OWLOntologyManager m = OWLManager.createOWLOntologyManager();
 
-    //OWLImportsDeclaration importDeclaration = m.getOWLDataFactory()
-    //  .getOWLImportsDeclaration(IRI.create(OWL_ONTOLOGY));
-    //m.makeLoadImportRequest(importDeclaration);
     LOG.debug("Load ontology from document");
     OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
 
-    //makeDefaultsOntologiesImport(m, o);
-    //m.applyChange(new AddImport(o, importDeclaration));
     IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
-    //IRI fiboIRI = IRI.create("");
     LOG.debug("Load import request");
-    //loadDefaultsOntologies(m, o);
-    //m.load
+
     m.makeLoadImportRequest(new OWLImportsDeclarationImpl(m.getOntologyDocumentIRI(o)));
-    //m.
 
     LOG.debug("Make imports");
     try (Stream<OWLOntology> imports = m.imports(o)) {
-      //    Set<OWLOntology> ontologiesTmp = imports.collect(Collectors.toSet());
-//    LOG.debug("OntologiesTmp size a: {}", ontologiesTmp.size());
-//    ontologiesTmp.addAll(getDefaultOntologies());
-//    LOG.debug("OntologiesTmp size b: {}", ontologiesTmp.size());
-//directImports = ontologiesTmp.stream();
       LOG.debug("create ontology");
       o = m.createOntology(fiboIRI, imports, false);
     }
@@ -100,6 +85,7 @@ class FileOntologyLoader implements OntologyLoader {
 
   }
 
+  @Deprecated
   private void loadDefaultsOntologies(OWLOntologyManager m, OWLOntology o) {
     File f = getFileFromResources("ontologies");
     for (File ff : f.listFiles()) {

@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 
 /**
+ *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class WeaselComparators {
+public class ComparatorWithPriority {
 
-  public static Comparator<String> getComparatorWithPriority(List<StringItem> prioritySortList) {
+  public static Comparator<String> get(List<StringItem> prioritySortList) {
     return (String obj1, String obj2) -> {
 
       if (obj1 == obj2) {
@@ -25,15 +26,15 @@ public class WeaselComparators {
       }
 
       Optional var1 = prioritySortList
-              .stream()
-              .map(StringItem::toString)
-              .filter(obj1::equals)
-              .findFirst();
+          .stream()
+          .map(StringItem::toString)
+          .filter(obj1::equals)
+          .findFirst();
       Optional var2 = prioritySortList
-              .stream()
-              .map(StringItem::toString)
-              .filter(obj2::equals)
-              .findFirst();
+          .stream()
+          .map(StringItem::toString)
+          .filter(obj2::equals)
+          .findFirst();
 
       boolean containsObj1 = var1.isPresent();
       boolean containsObj2 = var2.isPresent();
@@ -55,22 +56,4 @@ public class WeaselComparators {
 
     };
   }
-
-  public static Comparator<Object> getComparatorWithAlphabeticalOrder() {
-    return (Object obj1, Object obj2) -> {
-      if (obj1 == obj2) {
-        return 0;
-      }
-      if (obj1 == null) {
-        return -1;
-      }
-      if (obj2 == null) {
-        return 1;
-      }
-      return obj1.toString().toLowerCase()
-              .compareTo(obj2.toString().toLowerCase());
-
-    };
-  }
-
 }

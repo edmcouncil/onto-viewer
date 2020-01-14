@@ -2,7 +2,6 @@ package org.edmcouncil.spec.fibo.weasel.model.property;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,11 +13,12 @@ import java.util.TreeSet;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
-import org.edmcouncil.spec.fibo.weasel.comparator.WeaselComparators;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
+import org.edmcouncil.spec.fibo.weasel.comparator.ComparatorWithPriority;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @param <T>
  */
 public class OwlGroupedDetailsProperties<T> {
 
@@ -61,7 +61,7 @@ public class OwlGroupedDetailsProperties<T> {
   //TODO: Check where we used that and do something with this.. this is very ugly..
   public void sort(List<StringItem> priotityList) {
 
-    /*Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(priotityList);
+    /*Comparator<String> comparator = ComparatorWithPriority.get(priotityList);
     SortedSet<String> keys = new TreeSet<>(comparator);
     keys.addAll(properties.keySet());
 
@@ -123,7 +123,7 @@ public class OwlGroupedDetailsProperties<T> {
       Map<String, List<T>> newprop = new LinkedHashMap();
 
       List<StringItem> priotityList = new LinkedList(group.getElements());
-      Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(priotityList);
+      Comparator<String> comparator = ComparatorWithPriority.get(priotityList);
       SortedSet<String> keys = new TreeSet<>(comparator);
       keys.addAll(prop.keySet());
 
@@ -136,7 +136,7 @@ public class OwlGroupedDetailsProperties<T> {
 
     if (others != null) {
       Map<String, List<T>> newothers = new LinkedHashMap<>();
-      Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(new ArrayList<>(0));
+      Comparator<String> comparator = ComparatorWithPriority.get(new ArrayList<>(0));
       SortedSet<String> keys = new TreeSet<>(comparator);
       keys.addAll(others.keySet());
 

@@ -2,10 +2,9 @@ package org.edmcouncil.spec.fibo.view.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
-import org.edmcouncil.spec.fibo.weasel.ontology.DataManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.DetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ public class ModuleController {
   private static final Logger LOG = LoggerFactory.getLogger(ModuleController.class);
 
   @Autowired
-  private DataManager ontologyManager;
+  private DetailsManager ontologyManager;
 
   @GetMapping("/json")
   public ResponseEntity<List<FiboModule>> getAllModulesDataAsJson() {
@@ -46,20 +45,7 @@ public class ModuleController {
     List<FiboModule> modules = ontologyManager.getAllModulesData();
     ModelBuilder mb = new ModelBuilder(model);
 
-    if (query != null) {
-      OwlDetails details = null;
-      try {
-        details = ontologyManager.getDetailsByIri(query);
-      } catch (NotFoundElementInOntologyException ex) {
-        LOG.info("Handle No such field error. Message: '{}'", ex.getMessage());
-        LOG.trace(Arrays.toString(ex.getStackTrace()));
-        ErrorResult er = new ErrorResult();
-        er.setExMessage(ex.getMessage());
-        er.setMessage("Element not found in loaded ontologies.");
-        return "error";
-      }
-      mb.ontoDetails(details).isGrouped(true);
-    }
+    mb.setResult(null).isGrouped(true);
 
     mb.emptyQuery().modelTree(modules);
 

@@ -78,7 +78,7 @@
       
       <userDefinedName>
         <resourceIriToName>@viewer.axiom.SubClassOf</resourceIriToName>
-        <resourceIriName>IS-A restrictions (necessary criteria)</resourceIriName>
+        <resourceIriName>IS-A restrictions</resourceIriName>
       </userDefinedName>
       
       <userDefinedName>
@@ -145,6 +145,26 @@
         <resourceIriToName>@viewer.axiom.InverseObjectProperties</resourceIriToName>
         <resourceIriName>Inverse object properties</resourceIriName>
       </userDefinedName>
+
+      <userDefinedName>
+        <resourceIriToName>@viewer.axiom.FunctionalObjectProperty</resourceIriToName>
+        <resourceIriName>Functional object property</resourceIriName>
+      </userDefinedName>
+      
+      <userDefinedName>
+        <resourceIriToName>@viewer.axiom.DataPropertyRange</resourceIriToName>
+        <resourceIriName>Data property range</resourceIriName>
+      </userDefinedName>
+      
+      <userDefinedName>
+        <resourceIriToName>@viewer.axiom.AnnotationPropertyDomain</resourceIriToName>
+        <resourceIriName>Annotation property domain</resourceIriName>
+      </userDefinedName>
+      
+      <userDefinedName>
+        <resourceIriToName>@viewer.axiom.AnnotationPropertyRangeOf</resourceIriToName>
+        <resourceIriName>Annotation property range</resourceIriName>
+      </userDefinedName>
       
       <userDefinedName>
         <resourceIriToName>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</resourceIriToName>
@@ -171,10 +191,72 @@
         <resourceIriName>ontological definition</resourceIriName>
       </userDefinedName>
       
+      <userDefinedName>
+        <resourceIriToName>http://www.w3.org/2004/02/skos/core#definition</resourceIriToName>
+        <resourceIriName>definition</resourceIriName>
+      </userDefinedName>  
+      
+      <userDefinedName>
+        <resourceIriToName>@viewer.function.instances</resourceIriToName>
+        <resourceIriName>Instances</resourceIriName>
+      </userDefinedName>  
   
     </userDefaultNameList>
     
   </labelConfig>
+  
+  <searchConfig>
+    
+    <hintFields>
+      <hintField>
+        <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </hintField>
+      <hintField>
+        <fieldIri>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </hintField>
+    </hintFields>
+    <hintThreshold>0.0</hintThreshold>
+    
+    <searchFields>
+      <searchField>
+        <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+      
+      <searchField>
+        <fieldIri>http://www.w3.org/2004/02/skos/core#definition</fieldIri>
+        <fieldBoost>0.0</fieldBoost>
+      </searchField>
+	  
+	  <searchField>
+        <fieldIri>http://purl.org/dc/terms/abstract</fieldIri>
+        <fieldBoost>0.0</fieldBoost>
+      </searchField>
+	  
+	  <searchField>
+        <fieldIri>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+	  
+	  <searchField>
+        <fieldIri>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+	  
+	  <searchField>
+        <fieldIri>http://www.omg.org/techprocess/ab/SpecificationMetadata/keyword</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+      
+    </searchFields>
+    <searchThreshold>0.0</searchThreshold>
+    <searchDescriptions>
+      <searchDescription>http://www.w3.org/2004/02/skos/core#definition</searchDescription>
+      <searchDescription>http://purl.org/dc/terms/abstract</searchDescription>
+    </searchDescriptions>
+  </searchConfig>
   
   <!--Feature will be added if future
   <ignoreToLinking>
@@ -187,6 +269,12 @@
     <uriNamespace>https://spec.edmcouncil.org/fibo/ontology/</uriNamespace>
     <uriNamespace>https://www.omg.org/spec/</uriNamespace>
     <uriNamespace>http://www.omg.org/techprocess</uriNamespace>
+    <uriNamespace>http://www.w3.org/2002/07/owl#</uriNamespace>
+    <uriNamespace>http://purl.org/dc/terms/</uriNamespace>
+    <uriNamespace>http://purl.org/dc/elements/1.1/</uriNamespace>
+    <uriNamespace>http://www.w3.org/2000/01/rdf-schema#</uriNamespace>
+    <uriNamespace>http://www.w3.org/2004/02/skos/core#</uriNamespace>
+    <uriNamespace>http://www.w3.org/1999/02/22-rdf-syntax-ns#</uriNamespace>
   </scopeIri>
     
 
@@ -212,13 +300,13 @@
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/adaptedFrom</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#example</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#scopeNote</groupItem>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/usageNote</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#editorialNote</groupItem>
       <groupItem>http://purl.org/dc/terms/title</groupItem>
       <groupItem>http://purl.org/dc/terms/abstract</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/keyword</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/fileAbstract</groupItem> 
+	  <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote</groupItem>
     </group>
 
     <group>
@@ -249,9 +337,14 @@
       <groupItem>@viewer.axiom.SubDataPropertyOf</groupItem>
       <groupItem>@viewer.axiom.SubAnnotationPropertyOf</groupItem>
       <groupItem>@viewer.axiom.EquivalentObjectProperties</groupItem>
+      <groupItem>@viewer.axiom.EquivalentDataProperties</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.DataPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyRange</groupItem>
+      <groupItem>@viewer.axiom.FunctionalObjectProperty</groupItem>
+      <groupItem>@viewer.axiom.DataPropertyRange</groupItem>
+      <groupItem>@viewer.axiom.AnnotationPropertyDomain</groupItem>
+      <groupItem>@viewer.axiom.AnnotationPropertyRangeOf</groupItem>
       <groupItem>@viewer.axiom.InverseObjectProperties</groupItem>
       <groupItem>http://purl.org/dc/terms/hasPart</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn</groupItem>
@@ -268,6 +361,7 @@
       <groupItem>http://purl.org/dc/terms/issued</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/contentLanguage</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#changeNote</groupItem>
+      <groupItem>http://www.w3.org/2004/02/skos/core#note</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/fileAbbreviation</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/filename</groupItem>         
       <groupItem>http://www.w3.org/2000/01/rdf-schema#comment</groupItem>
@@ -275,6 +369,7 @@
       <groupItem>http://www.w3.org/2000/01/rdf-schema#seeAlso</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#historyNote</groupItem> 
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/relatedSpecification</groupItem>                  
+      <groupItem>http://purl.org/dc/terms/hasVersion</groupItem>                  
     </group>   
     
   </groups>

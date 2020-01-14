@@ -38,7 +38,7 @@ public class LabelProvider {
 
   private static final Logger LOG = LoggerFactory.getLogger(LabelProvider.class);
 
-  private Map<String, String> previouslyUsedLabels = new HashMap<>();
+  private final Map<String, String> previouslyUsedLabels = new HashMap<>();
 
   @Autowired
   private OntologyManager ontology;
@@ -51,7 +51,7 @@ public class LabelProvider {
 
   @Inject
   public LabelProvider(AppConfiguration config) {
-    ViewerCoreConfiguration weaselConfig = (ViewerCoreConfiguration) config.getWeaselConfig();
+    ViewerCoreConfiguration weaselConfig = config.getViewerCoreConfig();
     this.forceLabelLang = weaselConfig.isForceLabelLang();
     this.labelLang = weaselConfig.getLabelLang();
     this.useLabels = weaselConfig.useLabels();
@@ -130,6 +130,9 @@ public class LabelProvider {
     return labelResult;
   }
 
+  /**
+  * Return selected lebel with 
+  */
   private String getTheRightLabel(Map<String, String> labels, IRI entityIri) {
     Optional<String> optionalLab = labels.entrySet()
         .stream()
