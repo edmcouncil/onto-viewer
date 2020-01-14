@@ -4,6 +4,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.FiboDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.AnnotationsDataHandler;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
@@ -85,6 +86,15 @@ public class OwlDataHandler {
   private OwlUtils owlUtils;
   @Autowired
   private AppConfiguration config;
+
+  private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
+
+  {
+    /*static block*/
+    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#Thing");
+    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topObjectProperty");
+    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topDataProperty");
+  }
 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
@@ -281,12 +291,46 @@ public class OwlDataHandler {
       OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
       OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(val1, val2);
       List<OwlTaxonomyElementImpl> currentTax = new LinkedList<>();
-      if (!objIri.equals(IRI.create("http://www.w3.org/2002/07/owl#Thing"))) {
-        label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
-        OwlTaxonomyValue valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
-        OwlTaxonomyValue valThingIri = new OwlTaxonomyValue(WeaselOwlType.IRI, "http://www.w3.org/2002/07/owl#Thing");
-        OwlTaxonomyElementImpl taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
-        currentTax.add(taxElThing);
+
+      if (!unwantedEndOfLeafIri.contains(objIri.toString())) {
+
+        OwlTaxonomyValue valThingLabel = null;
+        OwlTaxonomyValue valThingIri = null;
+        OwlTaxonomyElementImpl taxElThing = null;
+
+        switch (type) {
+          case AXIOM_CLASS:
+            label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
+            valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
+            valThingIri = new OwlTaxonomyValue(WeaselOwlType.IRI, "http://www.w3.org/2002/07/owl#Thing");
+            taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
+            currentTax.add(taxElThing);
+            break;
+          case AXIOM_OBJECT_PROPERTY:
+            label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#topObjectProperty"));
+            valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
+            valThingIri = new OwlTaxonomyValue(WeaselOwlType.IRI, "http://www.w3.org/2002/07/owl#topObjectProperty");
+            taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
+            currentTax.add(taxElThing);
+            break;
+          case AXIOM_DATA_PROPERTY:
+            label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#topDataProperty"));
+            valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
+            valThingIri = new OwlTaxonomyValue(WeaselOwlType.IRI, "http://www.w3.org/2002/07/owl#topDataProperty");
+            taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
+            currentTax.add(taxElThing);
+            break;
+          case AXIOM_NAMED_INDIVIDUAL:
+
+            break;
+          default:
+            label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
+            valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
+            valThingIri = new OwlTaxonomyValue(WeaselOwlType.IRI, "http://www.w3.org/2002/07/owl#Thing");
+            taxElThing = new OwlTaxonomyElementImpl(valThingLabel, valThingIri);
+            currentTax.add(taxElThing);
+            break;
+        }
       }
       currentTax.add(taxEl);
 
@@ -406,7 +450,7 @@ public class OwlDataHandler {
           LOG.trace("Old string: '{}', new string '{}', count closing parenthesis '{}'", string,
               newString,
               countClosingParenthesis);
-          
+
           string = newString;
         }
         if (string.equals(eSignature)) {
