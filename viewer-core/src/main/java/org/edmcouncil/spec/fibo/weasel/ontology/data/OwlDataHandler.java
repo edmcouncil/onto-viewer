@@ -85,6 +85,15 @@ public class OwlDataHandler {
   @Autowired
   private AppConfiguration config;
 
+  private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
+
+  {
+    /*static block*/
+    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#Thing");
+    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topObjectProperty");
+    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topDataProperty");
+  }
+
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
   
@@ -295,14 +304,14 @@ public class OwlDataHandler {
       OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
       OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(val1, val2);
       List<OwlTaxonomyElementImpl> currentTax = new LinkedList<>();
-      
-       if (!unwantedEndOfLeafIri.contains(objIri.toString())) {
-         
-         OwlTaxonomyValue valThingLabel = null;
-         OwlTaxonomyValue valThingIri = null;
-         OwlTaxonomyElementImpl taxElThing = null;
-         
-         switch (type) {
+
+      if (!unwantedEndOfLeafIri.contains(objIri.toString())) {
+
+        OwlTaxonomyValue valThingLabel = null;
+        OwlTaxonomyValue valThingIri = null;
+        OwlTaxonomyElementImpl taxElThing = null;
+
+        switch (type) {
           case AXIOM_CLASS:
             label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
             valThingLabel = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
@@ -325,7 +334,6 @@ public class OwlDataHandler {
             currentTax.add(taxElThing);
             break;
           case AXIOM_NAMED_INDIVIDUAL:
-            
             break;
           default:
             label = labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/2002/07/owl#Thing"));
@@ -335,7 +343,6 @@ public class OwlDataHandler {
             currentTax.add(taxElThing);
             break;
         }
-        
       }
       currentTax.add(taxEl);
 
