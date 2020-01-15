@@ -87,7 +87,7 @@ public class OwlDataHandler {
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   
-    private final String subClassOfIriString = ViewerIdentifierFactory
+  private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
 
   {
