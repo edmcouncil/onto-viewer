@@ -85,15 +85,6 @@ public class OwlDataHandler {
   @Autowired
   private AppConfiguration config;
 
-  private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
-
-  {
-    /*static block*/
-    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#Thing");
-    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topObjectProperty");
-    unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topDataProperty");
-  }
-
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
   
