@@ -128,6 +128,7 @@ public class DetailsManager {
     groupedDetails.setLocationInModules(owlDetails.getLocationInModules());
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
+    groupedDetails.setMaturityLevel(owlDetails.getMaturityLevel());
     
     groupedDetails.sortProperties(groups, cfg);
     

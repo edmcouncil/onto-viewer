@@ -1,6 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
-import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.FiboDataHandler;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.AnnotationsDataHandler;
 import java.util.ArrayList;
 import java.util.Collections;

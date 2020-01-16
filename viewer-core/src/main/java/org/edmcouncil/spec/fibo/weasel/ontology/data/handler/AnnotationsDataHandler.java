@@ -9,10 +9,13 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfig
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevel;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevelFactory;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
@@ -32,7 +35,8 @@ public class AnnotationsDataHandler {
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final IRI COMMENT_IRI = IRI.create("http://www.w3.org/2000/01/rdf-schema#comment");
   private final String FIBO_QNAME = "QName:";
-  
+  private final IRI MATURITY_LEVEL_IRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel");
+
   @Autowired
   private OwlDataExtractor dataExtractor;
   @Autowired
@@ -73,15 +77,15 @@ public class AnnotationsDataHandler {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
           value = asLiteral.get().getLiteral();
-          
+
           if (propertyiri.equals(COMMENT_IRI) && value.contains(FIBO_QNAME)) {
             details.setqName(value);
             continue;
           }
-          
+
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
-          
+
           checkUriAsIri(opv, value);
           opv.setValue(value);
           if (opv.getType() == WeaselOwlType.IRI) {
@@ -126,6 +130,13 @@ public class AnnotationsDataHandler {
 
         opv = customDataFactory.createAnnotationIri(value);
 
+        if (propertyiri.equals(MATURITY_LEVEL_IRI)) {
+          OwlAnnotationIri oai = (OwlAnnotationIri) opv;
+          FiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
+          details.setMaturityLevel(fml);
+          LOG.debug(fml.toString());
+        }
+
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
@@ -134,13 +145,19 @@ public class AnnotationsDataHandler {
             details.setqName(value);
             continue;
           }
-          
+
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
           opv.setValue(value);
           checkUriAsIri(opv, value);
           if (opv.getType() == WeaselOwlType.IRI) {
             opv = customDataFactory.createAnnotationIri(value);
+            if (propertyiri.equals(MATURITY_LEVEL_IRI)) {
+              OwlAnnotationIri oai = (OwlAnnotationIri) opv;
+              FiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
+              details.setMaturityLevel(fml);
+              LOG.debug(fml.toString());
+            }
           }
         }
       }

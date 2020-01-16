@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.fibo.weasel.ontology.data.handler;
+package org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,6 +25,8 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.AnnotationsDataHandler;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -148,7 +150,7 @@ public class FiboDataHandler {
           FiboModule fm = new FiboModule();
           fm.setIri(rootModulesIri);
           fm.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(rootModulesIri)));
-          fm.setMaturityLevel(getMaturityLevelFromOntology(IRI.create(rootModulesIri), ontology));
+          //fm.setMaturityLevel(getMaturityLevelFromOntology(IRI.create(rootModulesIri)).getLabel());
           fm.setSubModule(getSubModules(rootModulesIri, ontology));
           return fm;
         }).forEachOrdered(result::add);
@@ -163,12 +165,11 @@ public class FiboDataHandler {
     return result;
   }
 
-  private String getMaturityLevelFromOntology(IRI iri, OWLOntology ontology) {
+  public FiboMaturityLevel getMaturityLevelFromOntology(IRI iri) {
 
     OntologyResources or = resources.get(iri.toString());
     if (or != null) {
       List list = or.getResources().getOrDefault(iri.toString(), new LinkedList<>());
-
       for (Object object : list) {
         LOG.debug("List Element {}", object.toString());
       }
@@ -354,7 +355,7 @@ public class FiboDataHandler {
       FiboModule fm = new FiboModule();
       fm.setIri(partModule);
       fm.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(partModule)));
-      fm.setMaturityLevel(getMaturityLevelFromOntology(IRI.create(partModule), ontology));
+      //fm.setMaturityLevel(getMaturityLevelFromOntology(IRI.create(partModule)).getLabel());
       fm.setSubModule(getSubModules(partModule, ontology));
       return fm;
     }).forEachOrdered(result::add);

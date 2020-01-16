@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import org.edmcouncil.spec.fibo.weasel.model.OwlTaxonomy;
 import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraphJson;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevel;
 
 /**
  *
@@ -18,6 +19,7 @@ public class OwlDetails {
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
   private ViewerGraphJson graph;
+  private FiboMaturityLevel maturityLevel;
 
   public ViewerGraphJson getGraph() {
     return graph;
@@ -73,6 +75,14 @@ public class OwlDetails {
 
   public OwlTaxonomy getTaxonomy() {
     return this.taxonomy;
+  }
+
+  public void setMaturityLevel(FiboMaturityLevel fml) {
+    this.maturityLevel = fml;
+  }
+
+  public FiboMaturityLevel getMaturityLevel() {
+    return maturityLevel;
   }
 
   @Override
