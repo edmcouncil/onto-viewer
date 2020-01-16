@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.fibo.weasel.model.graph.viewer;
 
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
+import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.converter.vis.VisNodeConverter;
 import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisNode;
 
 /**
@@ -12,6 +13,14 @@ public class ViewerNode {
   private boolean optional;
   private GraphNodeType type;
   private String iri;
+  public VisNodeConverter visNodeConverter;
+
+  public ViewerNode(int cardinality, boolean optional, GraphNodeType type, String iri) {
+    this.cardinality = cardinality;
+    this.optional = optional;
+    this.type = type;
+    this.iri = iri;
+  }
 
   public int getCardinality() {
     return cardinality;
@@ -45,12 +54,4 @@ public class ViewerNode {
     this.iri = iri;
   }
 
-  public ViewerNode(int cardinality, boolean optional, GraphNodeType type, String iri) {
-    this.cardinality = cardinality;
-    this.optional = optional;
-    this.type = type;
-    this.iri = iri;
-  }
-
-  
 }

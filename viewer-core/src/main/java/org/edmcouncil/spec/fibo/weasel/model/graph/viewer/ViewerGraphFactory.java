@@ -13,6 +13,7 @@ public class ViewerGraphFactory {
 
   public VisGraph convertToVisGraph(OntologyGraph toConvert, VisGraph visGraph){
     return convertToVisGraph(toConvert, visGraph);
+    
 //    if(VisGraph.getNodes().isEmpty()){
 //  throw new Exception("Graph is empty");
 //  }
@@ -20,11 +21,11 @@ public class ViewerGraphFactory {
 // if(VisGraph.getRelations().isEmpty()){
 // throw new s GraphIsEmpty()
 // }
+//
+//   visGraph.getNodes().add(e) ;
+//   visGraph.getRelations();
 
-   visGraph.getNodes().add(e) ;
-   visGraph.getRelations();
-}
-  
+}  
 }
 
 

@@ -1,12 +1,13 @@
 package org.edmcouncil.spec.fibo.weasel.model.graph.vis;
 
+import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.ViewerNode;
 
 /**
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
-public class VisNode {
+public class VisNode extends GraphNode{
 
   private String iri;
   //private String nodeStyle;
@@ -14,6 +15,14 @@ public class VisNode {
   private String color;
   private String label;
   private String shape;
+
+  public VisNode(String iri, String color, String label, String shape, int id) {
+    super(id);
+    this.iri = iri;
+    this.color = color;
+    this.label = label;
+    this.shape = shape;
+  }
 
   public String getIri() {
     return iri;
