@@ -148,11 +148,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/ISO4217-CurrencyCodes/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/MetadataFNDAccounting/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/MetadataFNDAccountingExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/Taxation/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/MetadataFNDAgentsAndPeople/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/
@@ -211,10 +206,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/MetadataFNDPlaces/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/AddressSites/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/Geophysical/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/MetadataFNDPlacesExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/MetadataFNDProductsAndServices/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
@@ -502,11 +493,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/ISO4217-CurrencyCodes/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/MetadataFNDAccounting/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/MetadataFNDAccountingExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/Taxation/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/MetadataFNDAgentsAndPeople/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/> ,
@@ -565,10 +551,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/MetadataFNDPlaces/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/AddressSites/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/Geophysical/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/MetadataFNDPlacesExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/MetadataFNDProductsAndServices/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,

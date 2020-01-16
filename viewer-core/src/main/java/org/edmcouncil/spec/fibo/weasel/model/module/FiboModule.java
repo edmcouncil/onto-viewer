@@ -13,6 +13,7 @@ public class FiboModule {
   private String iri;
   private String label;
   private List<FiboModule> subModule;
+  private String maturityLevel = "";
 
   public String getIri() {
     return iri;
@@ -38,10 +39,18 @@ public class FiboModule {
     this.subModule = subModule;
   }
 
+  public String getMaturityLevel() {
+    return maturityLevel;
+  }
+
+  public void setMaturityLevel(String maturityLevel) {
+    this.maturityLevel = maturityLevel;
+  }
+
   public int compareTo(FiboModule o) {
     return this.label.compareTo(o.getLabel());
   }
-  
+
   public void sort() {
     if (this.subModule != null && this.subModule.size() > 0) {
       subModule = subModule.stream()
