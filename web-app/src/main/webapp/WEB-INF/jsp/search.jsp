@@ -27,7 +27,6 @@
     </c:choose>
 
 
-
     <!--
         <ul class='custom-menu'>
           <li data-action = "goto">Show info</li>

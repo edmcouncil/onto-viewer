@@ -1,4 +1,4 @@
-# baseURI: http://www.edmcouncil.org/fibo/AboutFIBODev
+# baseURI: file:///AboutFIBO
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-Europe/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-EuropeAndNorthAmerica/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-NorthAmerica/
@@ -110,6 +110,7 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-NorthAmericanExamples/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-ReferenceMarkets/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/
@@ -192,8 +193,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/MetadataFNDLaw/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/MetadataFNDMathExt/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/LegitimateOrganizations/
@@ -225,8 +224,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/MetadataFNDTimeExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/
@@ -263,9 +260,11 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MetadataIND/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/AllLOAN/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoanGeneric/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanHMDA/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/MetadataLOANLoanContracts/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoanGeneric/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoansGeneral/
+# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/MetadataLOANLoanExt/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CommercialLoans/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/ConstructionLoans/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CreditProducts/
@@ -279,7 +278,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/UnsecuredLoans/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansGeneral/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansGuaranties/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansRegulatory/
@@ -299,9 +297,7 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/FundsTemporal/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/MetadataMDCIVTemporal/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtRedemptionAmounts/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/MetadataMDDebtTemporal/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/ETOptionsTemporal/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/FuturesTemporal/
@@ -309,8 +305,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/EquityPricing/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/MetadataMDEquityTemporal/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/MetadataMD/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/AnalysisCurves/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/MetadataMDTemporalCore/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityCreditStatuses/
@@ -350,13 +344,13 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesRestrictions/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecurityAssets/
 
-@base <http://www.edmcouncil.org/fibo/AboutFIBODev> .
+@base <file:///AboutFIBO> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://www.edmcouncil.org/fibo/AboutFIBODev>
+<file:///AboutFIBO>
 	a owl:Ontology ;
 	owl:imports
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE-Europe/> ,
@@ -470,6 +464,7 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-NorthAmericanExamples/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC-ReferenceMarkets/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditFacilities/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditRatings/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/> ,
@@ -552,8 +547,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/MetadataFNDLaw/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/Math/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MathExt/MetadataFNDMathExt/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/LegitimateOrganizations/> ,
@@ -585,8 +578,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/MetadataFNDTimeExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TimeExt/Time/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/> ,
@@ -623,9 +614,11 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MetadataIND/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/AllLOAN/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoanGeneric/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanHMDA/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/MetadataLOANLoanContracts/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoanGeneric/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoansGeneral/> ,
+		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/MetadataLOANLoanExt/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CommercialLoans/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/ConstructionLoans/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/CreditProducts/> ,
@@ -639,7 +632,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/UnsecuredLoans/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansCollateral/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanExt/LoansGeneral/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansGuaranties/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansParties/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoansRegulatory/> ,
@@ -659,9 +651,7 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/FundsTemporal/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/CIVTemporal/MetadataMDCIVTemporal/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtAnalytics/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtInterestAmounts/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtPricingYields/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/DebtRedemptionAmounts/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DebtTemporal/MetadataMDDebtTemporal/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/ETOptionsTemporal/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/DerivativesTemporal/FuturesTemporal/> ,
@@ -669,8 +659,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/EquityPricing/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/EquityTemporal/MetadataMDEquityTemporal/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/MetadataMD/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/AnalysisCurves/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/InstrumentTemporalTerms/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/MetadataMDTemporalCore/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityCreditStatuses/> ,

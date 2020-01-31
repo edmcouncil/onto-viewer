@@ -60,8 +60,6 @@
           var nodes = new vis.DataSet(${clazz.graph.getJsonNodes()});
           var edges = new vis.DataSet(${clazz.graph.getJsonEdges()});
           // create a network
-//          var nodes = new vis.DataSet(${clazz.graph.nodes});
-//          var edges = new vis.DataSet(${clazz.graph.edges});
           var container = document.getElementById('ontograph');
           const edgeFilters = document.getElementsByName('edgesFilter');
 

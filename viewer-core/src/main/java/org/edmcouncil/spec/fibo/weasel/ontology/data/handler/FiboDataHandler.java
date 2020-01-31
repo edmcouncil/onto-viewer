@@ -275,7 +275,6 @@ public class FiboDataHandler {
         OWLOntologyManager manager = ontology.getOWLOntologyManager();
         Map<String, OntologyResources> allResources = new HashMap<>();
 
-
        completeResourceKeys();
 
         manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
@@ -388,8 +387,6 @@ public class FiboDataHandler {
         }
         return result;
     }
-
-
     private void completeResourceKeys() {
 
         resourceInternal = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal,

@@ -7,7 +7,6 @@ import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.util.Optional;
 import javax.validation.Valid;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
@@ -30,12 +29,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.context.request.WebRequest;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -80,7 +76,6 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
-
     boolean isGrouped = config.getViewerCoreConfig().isGrouped();
 
     SearcherResult result = null;
@@ -105,7 +100,6 @@ public class SearchController {
       return "error";
     }
 
-
     modelBuilder
         .setResult(result)
         .isGrouped(isGrouped)
@@ -125,22 +119,8 @@ public class SearchController {
 
     LOG.info("[REQ] POST : search / json / max / {{}} / page /{{}} | RequestBody = {{}}", query);
 
-//<<<<<<< HEAD
-//    OwlDetails search = null;
-//    try {
-//      search = searchService.search(query, modelBuilder);
-//    } catch (NotFoundElementInOntologyException ex) {
-//      LOG.info("Handle NotFoundElementInOntologyException. Message: '{}'", ex.getMessage());
-//      LOG.trace(Arrays.toString(ex.getStackTrace()));
-//      ErrorResult er = new ErrorResult();
-//      er.setExMessage(ex.getMessage());
-//      er.setMessage("Element Not Found.");
-//      return ResponseEntity.badRequest().body(er);
-//    }
-//=======
     SearcherResult result = null;
     try {
-//>>>>>>> 698e8acd3ee3d6d286e9f0567ed72c6a8d03d7be
 
       if (UrlChecker.isUrl(query)) {
         LOG.info("URL detected, search specyfic element");
