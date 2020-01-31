@@ -34,7 +34,6 @@ public class OntologyManager {
   @PostConstruct
   public void init() {
     LOG.info("Configuration loaded ? : {}", appConfiguration != null
-
         || !appConfiguration.getViewerCoreConfig().isEmpty());
     LOG.info("File system manager created ? : {}", fileSystemManager != null);
 
