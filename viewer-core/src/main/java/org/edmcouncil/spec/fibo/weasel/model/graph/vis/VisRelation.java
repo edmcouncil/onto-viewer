@@ -1,40 +1,90 @@
 
 package org.edmcouncil.spec.fibo.weasel.model.graph.vis;
 
-import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
-import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.ViewerRelation;
 
 /**
  * @author Patrycja Miazek (patrycja.miazek@makolab.com) 
  */
 
-public class VisRelation extends ViewerRelation{
-  private VisNode start;
-  private VisNode end;
+public class VisRelation{
 
-  public VisNode getStart() {
-    return start;
-  }
+    private int from ;
+    private int to;
+    private String arrows = "to";
+    private String label;
+    private final VisColor color = VisColorFacory.getBlack();
+    private boolean dashes = true;
+    private String optional;
+    private String type;
+    private String iri;
 
-  public void setStart(VisNode start) {
-    this.start = start;
-  }
+    public int getFrom() {
+        return from;
+    }
 
-  public VisNode getEnd() {
-    return end;
-  }
+    public void setFrom(int from) {
+        this.from = from;
+    }
 
-  public void setEnd(VisNode end) {
-    this.end = end;
-  }
+    public int getTo() {
+        return to;
+    }
 
-  @Override
-  public String toString() {
-    return "VisRelation{" + "start=" + start + ", end=" + end + '}';
-  }
+    public void setTo(int to) {
+        this.to = to;
+    }
 
+    public String getArrows() {
+        return arrows;
+    }
 
-  
-  
+    public void setArrows(String arrows) {
+        this.arrows = arrows;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public boolean isDashes() {
+        return dashes;
+    }
+
+    public void setDashes(boolean dashes) {
+        this.dashes = dashes;
+    }
+
+    public String getOptional() {
+        return optional;
+    }
+
+    public void setOptional(String optional) {
+        this.optional = optional;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getIri() {
+        return iri;
+    }
+
+    public void setIri(String iri) {
+        this.iri = iri;
+    }
+
+    public VisColor getColor() {
+        return color;
+    }
+    
 }

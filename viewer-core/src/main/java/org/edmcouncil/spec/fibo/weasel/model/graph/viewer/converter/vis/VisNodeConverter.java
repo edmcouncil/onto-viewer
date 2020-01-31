@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.model.graph.viewer.converter.vis;
 
+import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.ViewerNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisNode;
@@ -8,62 +9,30 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisNode;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public class VisNodeConverter {
-
-  private String iri;
-  private String color;
-  private String label;
-  private String shape;
-
-  private ViewerNode viewerNode;
-  private VisRelationConverter visRelationConverter;
-  private VisNode visNode;
-
-  public VisNodeConverter(String iri, String color, String label, String shape, ViewerNode viewerNode) {
-    this.iri = iri;
-    this.color = color;
-    this.label = label;
-    this.shape = shape;
-    this.viewerNode = viewerNode;
-  }
-
-  public String getIri() {
-    return iri;
-  }
-
-  public void setIri(String iri) {
-    this.iri = iri;
-  }
-
-  public String getColor() {
-    return color;
-  }
-
-  public void setColor(String color) {
-    this.color = color;
-  }
-
-  public String getLabel() {
-    return label;
-  }
-
-  public void setLabel(String label) {
-    this.label = label;
-  }
-
-  public String getShape() {
-    return shape;
-  }
-
-  public void setShape(String shape) {
-    this.shape = shape;
-  }
-
-  public void convertNode() {
-    viewerNode.setIri(iri);
-    //visNode.setIri(iri);
-    //visNode.setShape(shape);
-visRelationConverter. setEnd(visNode);
-    visRelationConverter.setStart(visNode);
-
-  }
+    
+    public VisNode convert(GraphNode gn) {
+        VisNode result = new VisNode(gn.getId());
+        
+        //result.setCardinality(gn.getCardinality());
+        String jLabel = gn.getLabel();
+        jLabel = jLabel.replaceAll("'", "\u0027");
+        
+        result.setLabel(jLabel);
+        result.setOptional(gn.isOptional());
+        result.setType(gn.getType());
+        
+        String iriDto = gn.getIri();
+        iriDto = iriDto == null || iriDto.isEmpty() ? "http://www.w3.org/2002/07/owl#Thing" : iriDto;
+        String outIri = iriDto.replaceAll("#", "%23");
+        result.setIri(outIri);
+        
+        if (gn.getType() == GraphNodeType.MAIN) {
+            result.setColor("rgb(255,168,7)");
+        } else if (gn.getType() == GraphNodeType.INTERNAL) {
+            result.setColor("#C2FABC");
+        }
+        //String shape = super.getLabel().isEmpty() ? "" : ", \"shape\": \"box\"";
+        result.setShape("box");
+        return result;
+    }
 }

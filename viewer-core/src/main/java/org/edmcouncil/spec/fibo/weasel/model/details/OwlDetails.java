@@ -3,7 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.model.details;
 import java.util.List;
 import java.util.Objects;
 import org.edmcouncil.spec.fibo.weasel.model.OwlTaxonomy;
-import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraphJson;
+import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisGraph;
 
 /**
  *
@@ -14,18 +14,20 @@ public class OwlDetails {
   private String label;
   private String iri;
   private String type;
-  private String qName;
+  private String qName = "";
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
-  private ViewerGraphJson graph;
+  private VisGraph graph;
 
-  public ViewerGraphJson getGraph() {
-    return graph;
-  }
+    public VisGraph getGraph() {
+        return graph;
+    }
 
-  public void setGraph(ViewerGraphJson graph) {
-    this.graph = graph;
-  }
+    public void setGraph(VisGraph graph) {
+        this.graph = graph;
+    }
+
+
 
   public String getLabel() {
     return label;
@@ -79,6 +81,7 @@ public class OwlDetails {
   public int hashCode() {
     int hash = 7;
     hash = 59 * hash + Objects.hashCode(this.label);
+    hash = 59 * hash + Objects.hashCode(this.qName);
     hash = 59 * hash + Objects.hashCode(this.iri);
     hash = 59 * hash + Objects.hashCode(this.type);
     hash = 59 * hash + Objects.hashCode(this.taxonomy);

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY fibo-fbc-dae-cre "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditEvents/">
+	<!ENTITY fibo-fbc-dae-dbt "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/">
+	<!ENTITY fibo-fbc-fi-fi "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/">
+	<!ENTITY fibo-fbc-pas-fpas "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/">
+	<!ENTITY fibo-fnd-acc-cur "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/">
+	<!ENTITY fibo-fnd-arr-arr "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/">
+	<!ENTITY fibo-fnd-arr-cls "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/">
+	<!ENTITY fibo-fnd-arr-doc "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/">
+	<!ENTITY fibo-fnd-dt-fd "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/">
+	<!ENTITY fibo-fnd-pty-rl "https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/">
+	<!ENTITY fibo-fnd-qt-qtu "https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/">
+	<!ENTITY fibo-fnd-rel-rel "https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/">
+	<!ENTITY fibo-fnd-utl-alx "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/">
+	<!ENTITY fibo-fnd-utl-av "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+	<!ENTITY fibo-ind-ind-ind "https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/">
+	<!ENTITY fibo-ind-mkt-bas "https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/">
+	<!ENTITY fibo-sec-sec-bsk "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/">
+	<!ENTITY fibo-sec-sec-cls "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xml "http://www.w3.org/XML/1998/namespace">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:fibo-fbc-dae-cre="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditEvents/"
+	xmlns:fibo-fbc-dae-dbt="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/"
+	xmlns:fibo-fbc-fi-fi="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/"
+	xmlns:fibo-fbc-pas-fpas="https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/"
+	xmlns:fibo-fnd-acc-cur="https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/"
+	xmlns:fibo-fnd-arr-arr="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"
+	xmlns:fibo-fnd-arr-cls="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/"
+	xmlns:fibo-fnd-arr-doc="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"
+	xmlns:fibo-fnd-dt-fd="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"
+	xmlns:fibo-fnd-pty-rl="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/"
+	xmlns:fibo-fnd-qt-qtu="https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/"
+	xmlns:fibo-fnd-rel-rel="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"
+	xmlns:fibo-fnd-utl-alx="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/"
+	xmlns:fibo-fnd-utl-av="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+	xmlns:fibo-ind-ind-ind="https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/"
+	xmlns:fibo-ind-mkt-bas="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"
+	xmlns:fibo-sec-sec-bsk="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/"
+	xmlns:fibo-sec-sec-cls="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/">
+		<rdfs:label xml:lang="en">Basket Indices Ontology</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:</rdfs:comment>
+		<dct:abstract>This ontology defines market indices as hypothetical portfolios of investment holdings that correspond to some segment of the financial market, whose value is determined by the prices of the underlying holdings.  Coverage includes credit indices, security-based indices, economic indicator based indices, and combinations thereof.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<sm:contentLanguage rdf:datatype="&xsd;anyURI">http://www.w3.org/standards/techs/owl#w3c_all</sm:contentLanguage>
+		<sm:copyright>Copyright (c) 2014-2019 EDM Council, Inc.</sm:copyright>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/FBC/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/FND/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/SEC/</sm:dependsOn>
+		<sm:fileAbbreviation>fibo-ind-mkt-bas</sm:fileAbbreviation>
+		<sm:filename>BasketIndices.rdf</sm:filename>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/CreditEvents/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Arrangements/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/ClassificationSchemes/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/Baskets/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesClassification/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/"/>
+		<fibo-fnd-utl-av:hasMaturityLevel rdf:resource="&fibo-fnd-utl-av;Provisional"/>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&fibo-ind-mkt-bas;BasketOfCreditRisks">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-pas-fpas;WeightedBasket"/>
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-arr;DatedStructuredCollection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-arr-arr;hasConstituent"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-mkt-bas;CreditIndexConstituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">basket of credit risks</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:BasketOfCreditRisks</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<skos:definition xml:lang="en">basket of securities and / or legal entities, collected for the purpose of identifying risk</skos:definition>
+		<skos:editorialNote xml:lang="en">From OTPP: Variety: Criteria for constituent entities is based on sectors (emerging market, financial, sovereign, etc), spread range (investment grade, non-investment grade), or asset type (loan, bond, mortgage-backed, asset-backed), second criteria is based on maturity of protection (2,3,5,7,10 yrs). As a result, I&apos;m aware of over 2000 CDS indexes that Markit manages. Constituents can be on multiple indexes, based on maturity, etc. Because the indexes are maturity specific, it makes sense to have an entity AND an instrument with the corresponding maturity (or close to it) to measure the credit-risk of default. Premiums are standard and set depending on the composite spread at the initiation of the index, with upfront-fees to get into a deal thereafter depending on changes in the MTM of the spread. The payout per constituent credit-event is ~ Notional x weight. Modeling notes: Whereas this may be a basket of securities just like a &quot;Basket&quot; in the sense used in reference indices and in derivatives with basket underlyers, in this instance the constituents of the basket are collected, and are defined as constituents, in the context of the credit risks that they represent and not in the context of their market price as securities.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-ind-mkt-bas;BasketOfEquities">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-sec-bsk;BasketOfSecurities"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-arr-arr;hasConstituent"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-mkt-bas;EquitiesBasketConstituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">basket of equities</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:BasketOfEquities</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<skos:definition xml:lang="en">basket of securities whose constituents are equity instruments</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-ind-mkt-bas;CapitalizationBasedWeightingFunction">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-utl-alx;WeightingFunction"/>
+		<rdfs:label xml:lang="en">capitalization-based weighting function</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:CapitalizationBasedWeightingFunction</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<skos:definition xml:lang="en">weighting function derived from the movement in market capitalization (share price time the number of shares outstanding) of the companies tracked by the index</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-ind-mkt-bas;CreditIndex">
+		<rdfs:subClassOf rdf:resource="&fibo-ind-mkt-bas;ReferenceIndex"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;isBasedOn"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-mkt-bas;BasketOfCreditRisks"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">credit index</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:CreditIndex</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<skos:definition xml:lang="en">reference index that is a function of credit events that change the value of an underlying portfolio</skos:definition>
+		<skos:editorialNote xml:lang="en">Review session notes: Q: How does this differ from a basket of debt securities? A: Basket is defined as part of the contract. Whereas, with the Index, you don&apos;t reference the components. The index is based on a basket of risks (not a basket of debt instruments as such). So this is an indirection not a circularity as it is not an index of CDS contracts but of credit events as these effect a notional portfolio. In could be some form of valuation of underlying CDS (real or imagined). However this &quot;is&quot; the Reference Entity in the sense that it is what you refer to in order to determine the status of the portfolio, Contrast two types of CDS: Single Name and non singlename. With single name CDS: it&apos;s a binary process; if there&apos;s a default it&apos;s all over, as the contingent transaction kicks in. With indices if the index changes there would be partial payouts but the contract continues in existence,. It would pay out a portion of its value. The index indicates that some proportion has defaulted. Would deal with multi names. ALSO Index is not always a static portfolio, there may be proivisions for replacing defaulted securities. Need further research on the details. However, we only need to know them as something with a number and a publisher in order to model the CDS terms. See also: Credit Basket. This is locally defined and does form part of the CDS contract terms, but will have similar details to the index. SME Feedback - details of this term from OTPP: Because the indexes are maturity specific, it makes sense to have an entity AND an instrument with the corresponding maturity (or close to it) to measure the credit-risk of default. Premiums are standard and set depending on the composite spread at the initiation of the index, with upfront-fees to get into a deal thereafter depending on changes in the MTM of the spread. The payout per constituent credit-event is ~ Notional x weight. (cont&apos;d - examples from OTPP): Credit-events and Payouts - Similar to single-name, and triggered by a constituent. The constituent is removed, the Notional*weight is paid, the remaining notional lowered, and the weighting re-balanced. Can be physical or cash settled. Looks like cash settled is becoming more popular. Notionals can be large but the payouts are small because of the small weights. Eg. $250MM Notional, 125 entities, weight is 1/125 for a defaulting entity = $2MM (simplified) transfer.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-ind-mkt-bas;CreditIndexConstituent">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-pas-fpas;WeightedBasketConstituent"/>
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-arr;DatedCollectionConstituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-acc-cur;hasCurrency"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fnd-acc-cur;Currency"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;refersTo"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fbc-dae-cre;CreditEvent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">credit index reference constituent</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:CreditIndexConstituent</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-arr-arr;isConstituentOf"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-mkt-bas;BasketOfCreditRisks"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<skos:definition xml:lang="en">constituent of a basket of credit risks, such as an event represented in a credit index</skos:definition>
+		<skos:editorialNote xml:lang="en">OTPP Note:: There will be a specific reference entity and a specific instrument per index - and only one instrument per entity, per index. note that a credi index constituent may be in principal also be loans (as with CDS also), in which case some of the terms here would not apply (specifically, the reference security identity if the Reference Entity has not also issued any such), however it&apos;s not clear how this would be treated.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-ind-mkt-bas;EquitiesBasketConstituent">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-sec-bsk;SecuritiesBasketConstituent"/>
+		<rdfs:label>equities basket constituent</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:EquitiesBasketConstituent</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-arr-arr;isConstituentOf"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-mkt-bas;BasketOfEquities"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<skos:definition>equity instrument that is a component of a basket of securities</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-ind-mkt-bas;EquityIndex">
+		<rdfs:subClassOf rdf:resource="&fibo-ind-mkt-bas;ReferenceIndex"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;isBasedOn"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-mkt-bas;BasketOfEquities"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">equity index</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:EquityIndex</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<skos:definition xml:lang="en">benchmark whose constituents are exclusively equity instruments</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-ind-mkt-bas;ReferenceIndex">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-utl-alx;StatisticalMeasure"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-utl-alx;hasPeriodicity"/>
+				<owl:allValuesFrom rdf:resource="&fibo-fnd-dt-fd;RecurrenceInterval"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&fibo-fnd-arr-cls;IndustrySectorClassifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-utl-alx;hasReleaseDate"/>
+				<owl:onClass rdf:resource="&fibo-fnd-dt-fd;Date"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&fibo-sec-sec-cls;AssetClass"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-utl-alx;hasReleaseDateTime"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&fibo-fnd-dt-fd;CombinedDateTime"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-arr-doc;hasReportingPeriod"/>
+				<owl:onClass rdf:resource="&fibo-fnd-dt-fd;ExplicitDatePeriod"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;isBasedOn"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&fibo-ind-mkt-bas;BasketOfCreditRisks">
+							</rdf:Description>
+							<rdf:Description rdf:about="&fibo-sec-sec-bsk;BasketOfIndices">
+							</rdf:Description>
+							<rdf:Description rdf:about="&fibo-sec-sec-bsk;BasketOfSecurities">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-ind-mkt-bas;hasIndexValue"/>
+				<owl:someValuesFrom rdf:resource="&xsd;decimal"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">reference index</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:ReferenceIndex</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<skos:definition xml:lang="en">measure of change in the value of some basket of securities or other index, such as an economic index over time</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote xml:lang="en">An index is a function based on a set of structured calculations over time. Analysis may be computed based on historical values over time, projected values, etc.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:synonym xml:lang="en">benchmark</fibo-fnd-utl-av:synonym>
+	</owl:Class>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-ind-mkt-bas;hasDebtRanking">
+		<rdfs:label xml:lang="en">has debt ranking</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:hasDebtRanking</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-ind-mkt-bas;CreditIndexConstituent"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition xml:lang="en">indicates the ranking of this debt instrument with respect to the credit index as a whole</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-ind-mkt-bas;hasDurationOfProtection">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fbc-fi-fi;hasTerm"/>
+		<rdfs:label xml:lang="en">has duration of protection</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:hasDurationOfProtection</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-ind-mkt-bas;CreditIndex"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDuration"/>
+		<skos:definition xml:lang="en">indicates the lifespan of protection, from the release date to the scheduled maturity date for the index</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-ind-mkt-bas;hasIndexName">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-rel-rel;hasFormalName"/>
+		<rdfs:label xml:lang="en">has index name</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:hasIndexName</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-ind-mkt-bas;ReferenceIndex"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition xml:lang="en">specifies a formal name for the index</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-ind-mkt-bas;hasIndexValue">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-qt-qtu;hasNumericValue"/>
+		<rdfs:label>has index value</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:hasIndexValue</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<rdfs:range rdf:resource="&xsd;decimal"/>
+		<skos:definition>specifies the value of a given index as of the release date</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-ind-mkt-bas;hasOriginalNotionalValue">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasNotionalAmount"/>
+		<rdfs:label xml:lang="en">has original notional value</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:hasOriginalNotionalValue</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-ind-mkt-bas;CreditIndex"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-acc-cur;MonetaryAmount"/>
+		<skos:definition xml:lang="en">indicates the notional amount represented by the index when it is first constituted</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-ind-mkt-bas;hasPremium">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasMonetaryAmount"/>
+		<rdfs:label xml:lang="en">has premium</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:hasPremium</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-ind-mkt-bas;CreditIndex"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-acc-cur;MonetaryAmount"/>
+		<skos:definition xml:lang="en">indicates a premium payable for a contract based on the index</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-ind-mkt-bas;hasSpreadRange">
+		<rdfs:label xml:lang="en">has spread range</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:hasSpreadRange</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-ind-mkt-bas;CreditIndex"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition xml:lang="en">the range of credit spread for the constituents of the index</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-ind-mkt-bas;hasUpFrontFee">
+		<rdfs:label xml:lang="en">has up front fee</rdfs:label>
+		<rdfs:comment>QName: fibo-ind-mkt-bas:hasUpFrontFee</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-ind-mkt-bas;CreditIndex"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-acc-cur;MonetaryAmount"/>
+		<skos:definition xml:lang="en">specifies a fee payable by any party that wishes to participate in a contract based on the index after the start of its life</skos:definition>
+	</owl:ObjectProperty>
+
+</rdf:RDF>

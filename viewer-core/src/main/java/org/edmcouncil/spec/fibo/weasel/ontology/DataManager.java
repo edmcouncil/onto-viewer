@@ -83,8 +83,8 @@ public class DataManager {
     List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontologyManager.getOntology());
     result.setLocationInModules(elementLocation);
 
-    if (!config.getWeaselConfig().isEmpty()) {
-      ViewerCoreConfiguration cfg = config.getWeaselConfig();
+    if (!config.getViewerCoreConfig().isEmpty()) {
+      ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
       if (cfg.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, cfg);
 
@@ -146,7 +146,7 @@ public class DataManager {
   }
 
   private void sortResults(OwlListDetails result) {
-    Set set = (Set) config.getWeaselConfig()
+    Set set = (Set) config.getViewerCoreConfig()
         .getConfigVal(ConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;

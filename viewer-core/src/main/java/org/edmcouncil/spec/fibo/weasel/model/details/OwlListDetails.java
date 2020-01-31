@@ -48,8 +48,8 @@ public class OwlListDetails extends OwlDetails {
   @Override
   public int hashCode() {
     int hash = 7;
-    hash = 71 * hash + super.hashCode();
-    hash = 71 * hash + Objects.hashCode(this.properties);
+    hash = 51 * hash + super.hashCode();
+    hash = 51 * hash + Objects.hashCode(this.properties);
     return hash;
   }
 
@@ -69,6 +69,10 @@ public class OwlListDetails extends OwlDetails {
       return false;
     }
     return true;
+  }
+
+  public void release() {
+    properties.release();
   }
 
 }
