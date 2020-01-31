@@ -7,14 +7,16 @@ import java.util.Set;
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class ViewerGraph {
+public class OntologyGraph {
 
   private Set<GraphNode> nodes;
   private Set<GraphRelation> relations;
   private GraphNode root;
   private int lastId = 0;
 
-  public ViewerGraph() {
+
+  public OntologyGraph() {
+
     this.nodes = new HashSet<>();
     this.relations = new HashSet<>();
   }
@@ -88,72 +90,6 @@ public class ViewerGraph {
     return sb.toString();
   }
 
-  public String toJsVars() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("var nodes = new vis.DataSet([");
-    if (nodes != null) {
-      int size = nodes.size();
-      int i = 0;
-      for (GraphNode node : nodes) {
-        sb.append(node.toSimpleJson());
-        if (i < size) {
-          sb.append(", ");
-        }
-        i++;
-      }
-    }
-    sb.append("]);\n");
-    sb.append("var edges = new vis.DataSet([");
-    if (relations != null) {
-      int size = relations.size();
-      int i = 0;
-      for (GraphRelation rel : relations) {
-        sb.append(rel.toSimpleJson());
-        if (i < size) {
-          sb.append(", ");
-        }
-        i++;
-      }
-    }
-    sb.append("]);");
-    return sb.toString();
-  }
-
-  public String toJsonListNodes() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("[");
-    if (nodes != null) {
-      int size = nodes.size();
-      int i = 0;
-      for (GraphNode node : nodes) {
-        sb.append(node.toSimpleJson());
-        if (i < size - 1) {
-          sb.append(", ");
-        }
-        i++;
-      }
-    }
-    sb.append("]");
-    return sb.toString();
-  }
-
-  public String toJsonListEdges() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("[");
-    if (relations != null) {
-      int size = relations.size();
-      int i = 0;
-      for (GraphRelation rel : relations) {
-        sb.append(rel.toSimpleJson());
-        if (i < size - 1) {
-          sb.append(", ");
-        }
-        i++;
-      }
-    }
-    sb.append("]");
-    return sb.toString();
-  }
 
   public boolean isEmpty() {
     return nodes.isEmpty() && relations.isEmpty();

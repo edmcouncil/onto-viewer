@@ -3,7 +3,6 @@ package org.edmcouncil.spec.fibo.weasel.ontology;
 import java.io.IOException;
 import java.util.Arrays;
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
@@ -35,17 +34,19 @@ public class OntologyManager {
   @PostConstruct
   public void init() {
     LOG.info("Configuration loaded ? : {}", appConfiguration != null
-        || !appConfiguration.getWeaselConfig().isEmpty());
+
+        || !appConfiguration.getViewerCoreConfig().isEmpty());
     LOG.info("File system manager created ? : {}", fileSystemManager != null);
 
-    ViewerCoreConfiguration viewerCoreConfiguration = appConfiguration.getWeaselConfig();
+    ViewerCoreConfiguration viewerCoreConfiguration = appConfiguration.getViewerCoreConfig();
     OntologyLoader loader = new OntologyLoaderFactory().getInstance(viewerCoreConfiguration, fileSystemManager);
     String location = viewerCoreConfiguration.getOntologyLocation();
 
     try {
       this.ontology = loader.loadOntology(location);
     } catch (OWLOntologyCreationException ex) {
-      LOG.error("[ERROR]: Error when creating ontology. Stoping application. Exception: {}", ex.getStackTrace(), ex.getMessage());
+
+      LOG.error("[ERROR]: Error when creating ontology. Stoping application. Exception: {} \n Message: {}", ex.getStackTrace(), ex.getMessage());
       System.exit(-1);
     } catch (IOException ex) {
       LOG.error("[ERROR]: Cannot load ontology. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));

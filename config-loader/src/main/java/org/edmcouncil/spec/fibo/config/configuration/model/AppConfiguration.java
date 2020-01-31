@@ -2,7 +2,6 @@ package org.edmcouncil.spec.fibo.config.configuration.model;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.fibo.config.configuration.loader.ConfigLoader;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
@@ -22,7 +21,7 @@ public class AppConfiguration {
 
   @Autowired
   private FileSystemManager fileSystemManager;
-  private ViewerCoreConfiguration weaselConfig;
+  private ViewerCoreConfiguration viewerCoreConfig;
 
   public AppConfiguration() {
   }
@@ -41,11 +40,11 @@ public class AppConfiguration {
       LOG.error("[ERROR] IOException while loading config file");
     }
 
-    this.weaselConfig = cl.loadWeaselConfiguration(configFilePath);
+    this.viewerCoreConfig = cl.loadWeaselConfiguration(configFilePath);
 
-    if (!weaselConfig.isEmpty()) {
+    if (!viewerCoreConfig.isEmpty()) {
       LOG.debug("Configuration: ");
-      weaselConfig.getConfiguration()
+      viewerCoreConfig.getConfiguration()
           .entrySet()
           .stream()
           .map((entry) -> {
@@ -65,8 +64,8 @@ public class AppConfiguration {
 
   }
 
-  public ViewerCoreConfiguration getWeaselConfig() {
-    return weaselConfig;
+  public ViewerCoreConfiguration getViewerCoreConfig() {
+    return viewerCoreConfig;
   }
 
 }

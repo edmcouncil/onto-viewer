@@ -1,0 +1,1783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY fibo-be-ge-ge "https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/">
+	<!ENTITY fibo-be-le-cb "https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/">
+	<!ENTITY fibo-be-le-lp "https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/">
+	<!ENTITY fibo-be-tr-tr "https://spec.edmcouncil.org/fibo/ontology/BE/Trusts/Trusts/">
+	<!ENTITY fibo-fbc-dae-dbt "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/">
+	<!ENTITY fibo-fbc-dae-gty "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/">
+	<!ENTITY fibo-fbc-fct-fse "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/">
+	<!ENTITY fibo-fbc-fct-ra "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/">
+	<!ENTITY fibo-fbc-fi-fi "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/">
+	<!ENTITY fibo-fbc-pas-fpas "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/">
+	<!ENTITY fibo-fnd-acc-cur "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/">
+	<!ENTITY fibo-fnd-agr-agr "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/">
+	<!ENTITY fibo-fnd-agr-ctr "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/">
+	<!ENTITY fibo-fnd-arr-doc "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/">
+	<!ENTITY fibo-fnd-dt-bd "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/">
+	<!ENTITY fibo-fnd-dt-fd "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/">
+	<!ENTITY fibo-fnd-dt-oc "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/">
+	<!ENTITY fibo-fnd-gao-obj "https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/">
+	<!ENTITY fibo-fnd-pas-psch "https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/">
+	<!ENTITY fibo-fnd-pty-rl "https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/">
+	<!ENTITY fibo-fnd-rel-rel "https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/">
+	<!ENTITY fibo-fnd-utl-alx "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/">
+	<!ENTITY fibo-fnd-utl-av "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+	<!ENTITY fibo-ind-ei-ei "https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/">
+	<!ENTITY fibo-ind-ind-ind "https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/">
+	<!ENTITY fibo-ind-ir-ir "https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/">
+	<!ENTITY fibo-sec-dbt-bnd "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/">
+	<!ENTITY fibo-sec-dbt-dbti "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/">
+	<!ENTITY fibo-sec-dbt-ex "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/ExerciseConventions/">
+	<!ENTITY fibo-sec-dbt-tstd "https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/">
+	<!ENTITY fibo-sec-eq-eq "https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/">
+	<!ENTITY fibo-sec-sec-iss "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/">
+	<!ENTITY fibo-sec-sec-lst "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xml "http://www.w3.org/XML/1998/namespace">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:fibo-be-ge-ge="https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/"
+	xmlns:fibo-be-le-cb="https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/"
+	xmlns:fibo-be-le-lp="https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/"
+	xmlns:fibo-be-tr-tr="https://spec.edmcouncil.org/fibo/ontology/BE/Trusts/Trusts/"
+	xmlns:fibo-fbc-dae-dbt="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/"
+	xmlns:fibo-fbc-dae-gty="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/"
+	xmlns:fibo-fbc-fct-fse="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/"
+	xmlns:fibo-fbc-fct-ra="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/"
+	xmlns:fibo-fbc-fi-fi="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/"
+	xmlns:fibo-fbc-pas-fpas="https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/"
+	xmlns:fibo-fnd-acc-cur="https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/"
+	xmlns:fibo-fnd-agr-agr="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/"
+	xmlns:fibo-fnd-agr-ctr="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/"
+	xmlns:fibo-fnd-arr-doc="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"
+	xmlns:fibo-fnd-dt-bd="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/"
+	xmlns:fibo-fnd-dt-fd="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"
+	xmlns:fibo-fnd-dt-oc="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/"
+	xmlns:fibo-fnd-gao-obj="https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/"
+	xmlns:fibo-fnd-pas-psch="https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/"
+	xmlns:fibo-fnd-pty-rl="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/"
+	xmlns:fibo-fnd-rel-rel="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"
+	xmlns:fibo-fnd-utl-alx="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/"
+	xmlns:fibo-fnd-utl-av="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+	xmlns:fibo-ind-ei-ei="https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/"
+	xmlns:fibo-ind-ind-ind="https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/"
+	xmlns:fibo-ind-ir-ir="https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/"
+	xmlns:fibo-sec-dbt-bnd="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"
+	xmlns:fibo-sec-dbt-dbti="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/"
+	xmlns:fibo-sec-dbt-ex="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/ExerciseConventions/"
+	xmlns:fibo-sec-dbt-tstd="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/"
+	xmlns:fibo-sec-eq-eq="https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/"
+	xmlns:fibo-sec-sec-iss="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/"
+	xmlns:fibo-sec-sec-lst="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/">
+		<rdfs:label>Bonds Ontology</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:</rdfs:comment>
+		<dct:abstract>This ontology defines the basic concept of a bond and a number of bond variants including convertible and callable bonds. Medium term notes (MTNs) and debentures are also defined.</dct:abstract>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<sm:contentLanguage rdf:resource="http://www.w3.org/standards/techs/owl#w3c_all"/>
+		<sm:copyright>Copyright (c) 2016-2019 EDM Council, Inc.</sm:copyright>
+		<sm:copyright>Copyright (c) 2018-2019 Object Management Group, Inc.</sm:copyright>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/BE/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/FBC/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/FND/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/IND/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/ExerciseConventions/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/</sm:dependsOn>
+		<sm:fileAbbreviation>fibo-sec-dbt-bnd</sm:fileAbbreviation>
+		<sm:filename>Bonds.rdf</sm:filename>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/FunctionalEntities/FunctionalEntities/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/GovernmentEntities/GovernmentEntities/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/CorporateBodies/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/LegalEntities/LegalPersons/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/Trusts/Trusts/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Agreements/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/EconomicIndicators/EconomicIndicators/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/DebtInstruments/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/ExerciseConventions/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/TradedShortTermDebt/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Equities/EquityInstruments/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesIssuance/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Debt/Bonds/"/>
+		<skos:changeNote>The https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Debt/Bonds.rdf version of this ontology was revised to reflect the refactored definition of a listing and improve the definition of corporate bond.</skos:changeNote>
+		<fibo-fnd-utl-av:hasMaturityLevel rdf:resource="&fibo-fnd-utl-av;Release"/>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;AmortizingBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasRepaymentTerms"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;BondAmortizationPaymentTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>amortizing bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:AmortizingBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;BulletBond"/>
+		<skos:definition>bond that regularly pays down the principal (face value) on the debt along with its interest expense over the life of the bond</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;Bond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;FixedIncomeSecurity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasInterestPaymentTerms"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;CouponPaymentTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasRepaymentTerms"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;BondPrincipalRepaymentTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:Bond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>fixed-income instrument in which the issuer owes the holders a debt and, depending on the terms of the bond, is obliged to pay interest (the coupon) and/or to repay the principal at maturity</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondAmortizationPaymentTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;BondPrincipalRepaymentTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-dt-fd;hasSchedule"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fbc-dae-dbt;AmortizationSchedule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>bond amortization payment terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondAmortizationPaymentTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;BulletPrincipalRepaymentTerms"/>
+		<skos:definition>terms that include a schedule for repayment of the principal over the lifetime of the bond, typically in equal payments at regular intervals</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondConversionTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;TradableDebtInstrumentRedemptionProvision"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-sec-iss;ConversionTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-sec-iss;specifiesConversionInto"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-eq-eq;ListedShare"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>bond conversion terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondConversionTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>terms indicating when a convertible bond can be converted to another security (usually a publicly traded share issued by of the same issuer).</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondCoupon">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-acc-cur;InterestRate"/>
+		<rdfs:label>bond coupon</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondCoupon</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>interest rate on a debt security that the issuer promises to pay to the holder until maturity, expressed as an annual percentage of the face value</skos:definition>
+		<fibo-fnd-utl-av:synonym>coupon percent rate</fibo-fnd-utl-av:synonym>
+		<fibo-fnd-utl-av:synonym>coupon rate</fibo-fnd-utl-av:synonym>
+		<fibo-fnd-utl-av:synonym>nominal yield</fibo-fnd-utl-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondInsurance">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-dae-gty;InsurancePolicy"/>
+		<rdfs:label>bond insurance</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondInsurance</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>insurance policy that a bond issuer purchases that guarantees the repayment of the principal and all associated interest payments to the bondholders in the event of default</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondPrincipalRepaymentTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-dae-dbt;PrincipalRepaymentTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-dt-fd;hasSchedule"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fnd-pas-psch;PaymentSchedule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>bond principal repayment terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondPrincipalRepaymentTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<skos:definition>terms for the repayment of the principal on a bond</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondRegistrar">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-fct-ra;Registrar"/>
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-pas-fpas;LegalAgent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-fct-ra;registers"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>bond registrar</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondRegistrar</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>person or entity responsible for maintaining records on behalf of the issuer that identify the owners of a registered bond issue</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The trustee under a bond contract often also acts as registrar.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondVariableCoupon">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-dae-dbt;VariableInterestRate"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;BondCoupon"/>
+		<rdfs:label>bond variable coupon</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondVariableCoupon</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond coupon that has a variable interest rate</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondWithPartialCall">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;CallableBond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasCallFeature"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;PartialCallFeature"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>bond with partial call</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondWithPartialCall</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond with a feature whereby the issue can be partially called for amounts that are at the discretion of the issuer</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondWithPublishedSinkingFund">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;AmortizingBond"/>
+		<rdfs:label>bond with published sinking fund</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondWithPublishedSinkingFund</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond whereby amortization is via a known and published schedule</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BondWithWarrant">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;DebtOffering"/>
+		<rdfs:label>bond with warrant</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BondWithWarrant</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond issue whereby the issue includes a warrant</skos:definition>
+		<skos:editorialNote>This need not be any specific type of bond. This is NOT a kind of Bond Contract but a kind of Issue Offer, and is modeled as such, in the Issuance Terms section of the model. This class of contract is retained in the model for now in order to provide traceability with the CFI term for &quot;Bond With Warrant&quot; only.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BuildAmericaBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:label>Build America Bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BuildAmericaBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>taxable municipal bond issued through December 31, 2010 under the American Recovery and Reinvestment Act of 2009 (ARRA)</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>BABs may be direct pay subsidy bonds or tax credit bonds.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BulletBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasRepaymentTerms"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;BulletPrincipalRepaymentTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>bullet bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BulletBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;AmortizingBond"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;CallableBond"/>
+		<skos:definition>bond whose entire principal value is paid on the maturity date, rather than amortized over its lifetime</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;BulletPrincipalRepaymentTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;BondPrincipalRepaymentTerms"/>
+		<rdfs:label>bond bullet principal repayment terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:BulletPrincipalRepaymentTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>terms for repayment of the principal for a bond as a single payment covering the whole principal amount</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;CallableBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;isCallable"/>
+				<owl:hasValue rdf:datatype="&xsd;boolean">true</owl:hasValue>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;hasExtraordinaryRedemptionProvision"/>
+				<owl:onClass rdf:resource="&fibo-sec-dbt-bnd;ExtraordinaryRedemptionProvision"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasCallFeature"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>callable bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:CallableBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond that includes a stipulation allowing the issuer the right to repurchase and retire the bond at the call price after the call protection period</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;CallableConvertibleBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;CallableBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;ConvertibleBond"/>
+		<rdfs:label>callable convertible bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:CallableConvertibleBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>convertible bond that is also callable</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;CertificateOfObligation">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalSecurity"/>
+		<rdfs:label>certificate of obligation</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:CertificateOfObligation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>municipal security available to governing councils in case of emergency, such as a natural disaster, that needs immediate action without time for voter referendum</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>For example, when a hurricane destroys the police and emergency services building, there is no time to go through the process of voter referendum. The local council must be able to borrow the money to set up provisional buildings and necessary equipment for police and emergency services so that the community is served in continuity.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;CertificateOfParticipation">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalSecurity"/>
+		<rdfs:label>certificate of participation</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:CertificateOfParticipation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>municipal security evidencing a pro rata share in a specific pledged revenue stream, usually lease payments by the issuer that are typically subject to annual appropriation</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The certificate generally entitles the holder to receive a share, or participation, in the payments from a particular project. The payments are passed through the lessor to the certificate holders. The lessor typically assigns the lease and the payments to a trustee, which then distributes the payments to the certificate holders.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;ConvertibleBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-sec-iss;ConvertibleSecurity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-agr-ctr;hasContractualElement"/>
+				<owl:onClass rdf:resource="&fibo-sec-dbt-bnd;BondConversionTerms"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>convertible bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ConvertibleBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond that gives the holder the right to convert the bond into a fixed number of shares (conversion ratio) if the equity price rises above a specified level (strike price)</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>If the equity price remains below the strike price throughout the term of the bond it matures and is redeemed like a regular bond. The conversion ratio and strike price are usually set when the convertible bond is issued.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;CorporateBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isIssuedBy"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&fibo-fnd-pty-rl;isPlayedBy"/>
+						<owl:someValuesFrom rdf:resource="&fibo-be-le-lp;LegalEntity"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>corporate bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:CorporateBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;GovernmentBond"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<skos:definition>bond issued by a company in order to raise financing for purposes such as mergers and acquisitions, business expansion, or to cover ongoing operational needs</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Corporate bonds are typically longer-term debt instruments that have a maturity of at least one year. Corporate debt instruments with maturity shorter than one year are referred to as commercial paper.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:explanatoryNote>Note that some classification schemes consider any bond except those issued by a government in its own currency to be a corporate bond, for example, a bond issued by Canada in US dollars might be classified as a corporate bond. Bonds issued by multinational / supranational organizations such as the European Bank for Reconstruction and Development (EBRD) may also be considered corporate bonds rather than government bonds.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;CouponPayment">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-pas-psch;PaymentEvent"/>
+		<rdfs:label>coupon payment</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:CouponPayment</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>payment event involving an interest payment on a bond</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;CouponPaymentTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-dae-dbt;InterestPaymentTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;hasInterestRate"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;BondCoupon"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-acc-cur;hasCurrency"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fnd-acc-cur;Currency"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-dt-fd;hasSchedule"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;CouponSchedule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>coupon payment terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:CouponPaymentTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>terms for payment of interest on a bond</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;CouponSchedule">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-dt-fd;RegularSchedule"/>
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-pas-psch;PaymentSchedule"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;comprises"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;CouponPayment"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>coupon schedule</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:CouponSchedule</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>payment schedule that consists of interest payments on a bond</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;EquityLinkedBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;VariableCouponBond"/>
+		<rdfs:label>equity linked bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:EquityLinkedBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond based on the return on an equity over time, i.e. the price and dividend payments or the total return (similar to total return swaps)</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;ExtraordinaryRedemptionProvision">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:label>extraordinary redemption provision</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ExtraordinaryRedemptionProvision</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>provision that gives a bond issuer the right to call its bonds due to an unusual one-time occurrence, as specified in the offering statement</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Such redemptions may occur when bond proceeds are not spent according to schedule; when bond proceeds are used in a way that makes nontaxable bond interest taxable; or when a catastrophe destroys the project being financed, among other reasons.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;FirstRegularCouponDate">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<rdfs:label>first regular coupon date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:FirstRegularCouponDate</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>scheduled date for the first regular coupon payment, in a regular repeating series of coupon periods, after any non standard (long or short) first coupon period in the schedule</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;FixedCouponBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasInterestPaymentTerms"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;FixedCouponTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>fixed coupon bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:FixedCouponBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;VariableCouponBond"/>
+		<skos:definition>bond whose coupon rate and principal amount are fixed at the time of origination or sale and remain constant while the security is outstanding</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;FixedCouponTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;CouponPaymentTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;hasInterestRate"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fbc-dae-dbt;FixedInterestRate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>fixed coupon terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:FixedCouponTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;VariableCouponTerms"/>
+		<skos:definition>terms for payment of interest on a bond with a fixed interest rate</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;FloatingRateNote">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;VariableCouponBond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;hasInterestRate"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-ir-ir;ReferenceInterestRate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>floating rate note</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:FloatingRateNote</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond with a variable interest rate based on a published reference interest rate</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The adjustments to the interest rate (coupon) are made periodically, usually on a quarterly or monthly basis, and are tied to a certain money-market index. Also known as a &quot;floater&quot;. For example six months USD LIBOR + 0.20%.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;FullFaithAndCreditBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;UnsecuredBond"/>
+		<rdfs:label>full faith and credit bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:FullFaithAndCreditBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond secured by an unconditional promise to pay by another entity</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Full faith and credit bonds are typically backed by a government entity and are considered low risk.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;GeneralObligationMunicipalBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;FullFaithAndCreditBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:label>general obligation municipal bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:GeneralObligationMunicipalBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;RevenueBond"/>
+		<skos:definition>municipal bond that is backed by the full faith and credit and general resources of the issuing municipality, including its general taxing authority</skos:definition>
+		<fibo-fnd-utl-av:abbreviation>GO bond</fibo-fnd-utl-av:abbreviation>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;GovernmentBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;GovernmentIssuedDebtSecurity"/>
+		<rdfs:label>government bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:GovernmentBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>debt security issued by a government to fund government spending</skos:definition>
+		<fibo-fnd-utl-av:synonym>government-issued bond</fibo-fnd-utl-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;GovernmentIssuedDebtSecurity">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;FixedIncomeSecurity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isIssuedBy"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&fibo-fnd-pty-rl;isPlayedBy"/>
+						<owl:someValuesFrom rdf:resource="&fibo-be-ge-ge;Polity"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>government issued debt security</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:GovernmentIssuedDebtSecurity</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>debt security issued by some government on behalf of some polity, including sovereign and municipal debt</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;GreenBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:label>green bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:GreenBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond issued specifically to fund climate or environmental projects</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>These bonds are typically asset-linked and backed by the issuer&apos;s balance sheet.  Green bonds finance projects aimed at energy efficiency, pollution prevention, sustainable agriculture, fishery and forestry, the protection of aquatic and terrestrial ecosystems, clean transportation, sustainable water management and the cultivation of environmentally friendly technologies, and often include incentives such as tax exemption.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;ImplicitFullFaithAndCreditBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;UnsecuredBond"/>
+		<rdfs:label>implicit full faith and credit bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ImplicitFullFaithAndCreditBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond issued by a government sponsored agency or corporation rather than by the government directly</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>It doesn&apos;t carry an explicit full faith and credit guarantee but the market believes the government wouldn&apos;t let it default or fail.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;IndexLinkedSecurity">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;VariablePrincipalBond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;isBasedOn"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&fibo-ind-ei-ei;EconomicIndicator">
+							</rdf:Description>
+							<rdf:Description rdf:about="&fibo-ind-ind-ind;MarketRate">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>index linked security</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:IndexLinkedSecurity</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond in which payment of income on the principal is related to a specific index, such as the Consumer Price Index</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>This feature provides protection to investors by shielding them from changes in the underlying index. The bond&apos;s cash flows are adjusted to ensure that the holder of the bond receives a known real rate of return. Notes 04 May: There may also be a kind of security where the coupon payments fluctuate according to an &quot;Index&quot; in the sense of non Interest rate e.g. inflation rate, GDP. But more commonly the term Index Linked refers to principal.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;InflationBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;IndexLinkedSecurity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;isBasedOn"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-ei-ei;InflationRate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>inflation bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:InflationBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond whose principal amount is linked to an inflation rate index</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;LastRegularCouponDate">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<rdfs:label>last regular coupon date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:LastRegularCouponDate</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>scheduled date of the last regular coupon payment, that is the last of the payments that are made according to a regular repeating series of coupon periods, before any non-standard (long or short) final coupon period in the schedule</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;ListedBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-sec-lst;ListedSecurity"/>
+		<rdfs:label>listed bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ListedBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;UnlistedBond"/>
+		<skos:definition>bond that may be traded on one or more exchanges</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Most exchange traded bonds are corporate bonds (but most corporate bonds are not exchange traded bonds).</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&fibo-sec-dbt-bnd;LotteryConvention">
+		<rdf:type rdf:resource="&fibo-sec-dbt-bnd;PartialRedemptionAllocationConvention"/>
+		<rdfs:label>lottery convention</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:LotteryConvention</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>convention involving an impartial lottery for determining which securities are subject to partial call or partial redemption</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MakeWholeCall">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;CallEvent"/>
+		<rdfs:label>make whole call</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MakeWholeCall</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>call allowing the issuer to pay off remaining debt early</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The issuer typically has to make a lump sum payment to the investor(s) derived from a formula based on the net present value (NPV) of future coupon payments that will not be paid incrementally because of the call combined with the principal payment the investor would have received at maturity.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MandatoryConvertibleBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;ConvertibleBond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-agr-ctr;hasContractualElement"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;BondConversionTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>mandatory convertible bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MandatoryConvertibleBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>convertible bond that converts into shares at maturity regardless of the equity price</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The conversion ratio at maturity reflects the equity price and par value of the bond when issued. There is also typically a second higher conversion ratio if the equity price rises above the strike during the term of the bond.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MediumTermNote">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:label>medium term note</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MediumTermNote</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond issued over time under a shelf registration program, where each issue may have a different coupon and maturity typically ranging from one to ten years</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>A medium-term note (MTN) is a debt note that usually matures (is paid back) in 5 to 10 years, but the term may be less than one year or as long as 100 years. They can be issued on a fixed or floating coupon basis.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:explanatoryNote>By shelf registration we mean the security registration process where an issuer registers in advance, and can issue lots of securities for up to three years.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:explanatoryNote>Medium term notes are typically issued by corporations and financial institutions, although GSEs also have MTN programs. MTNs may be issued under a shelf registration program which allows the company to issue bonds over time with varying maturities and coupons. Companies issue MTNs to have a more flexible source of funding. They may also issue MTN in response to &apos;reverse inquiry&apos; by investors looking for bonds with specific maturities, issue size and coupon.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MunicipalBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;GovernmentBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalSecurity"/>
+		<rdfs:label>municipal bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MunicipalBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>government bond that may be issued by states, cities, counties, special tax districts or special agencies or authorities of state or local governments</skos:definition>
+		<fibo-fnd-utl-av:abbreviation>muni</fibo-fnd-utl-av:abbreviation>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MunicipalDebtFundsUsage">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;LegalDocument"/>
+		<rdfs:label>municipal debt funds usage</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MunicipalDebtFundsUsage</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>official statement specifying how the funds raised via a new issue of municipal securities are to be applied</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MunicipalDebtRemarketingAgent">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-pas-fpas;Dealer"/>
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-agr-ctr;ContractThirdParty"/>
+		<rdfs:label>municipal debt remarketing agent</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MunicipalDebtRemarketingAgent</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>municipal securities dealer responsible for reselling to investors securities (such as variable rate demand obligations and other tender option bonds) that have been tendered for purchase by their owner</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The remarketing agent also typically is responsible for resetting the interest rate for a variable rate issue and may act as tender agent.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MunicipalDebtSourceOfFunds">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;LegalDocument"/>
+		<rdfs:label>municipal debt source of funds</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MunicipalDebtSourceOfFunds</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>official statement identifying the source of funds for a new issue of municipal securities</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MunicipalNote">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalSecurity"/>
+		<rdfs:label>municipal note</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MunicipalNote</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>short-term obligation to repay a specified principal amount on a certain date, together with interest at a stated rate, usually payable from a defined source of anticipated revenues</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Notes usually mature in one year or less, although notes of longer maturities are also issued.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MunicipalSecurity">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;GovernmentIssuedDebtSecurity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-gao-obj;hasObjective"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;MunicipalDebtFundsUsage"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isIssuedBy"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&fibo-fnd-pty-rl;isPlayedBy"/>
+						<owl:someValuesFrom>
+							<owl:Class>
+								<owl:unionOf rdf:parseType="Collection">
+									<rdf:Description rdf:about="&fibo-be-ge-ge;MunicipalEntity">
+									</rdf:Description>
+									<rdf:Description rdf:about="&fibo-be-ge-ge;RegionalSovereignty">
+									</rdf:Description>
+								</owl:unionOf>
+							</owl:Class>
+						</owl:someValuesFrom>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;hasFundingSource"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;MunicipalDebtSourceOfFunds"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>municipal security</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MunicipalSecurity</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;SovereignDebtInstrument"/>
+		<skos:definition>bond, note, warrant, certificate of participation or other obligation issued by a state or local government or their agencies or authorities (such as cities, towns, villages, counties or special districts or authorities)</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>A prime feature of most municipal securities is that interest or other investment earnings on them are generally excluded from gross income of the bondholder for federal income tax purposes. Some municipal securities are subject to federal income tax, although the issuers or bondholders may receive other federal tax advantages for certain types of taxable municipal securities. Some examples include Build America Bonds, municipal fund securities and direct pay subsidy bonds.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;MunicipalTrustee">
+		<rdfs:subClassOf rdf:resource="&fibo-be-tr-tr;Trustee"/>
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-fct-fse;FinancialInstitution"/>
+		<rdfs:label>municipal trustee</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:MunicipalTrustee</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>financial institution with trust powers, designated by the issuer or borrower, that acts, pursuant to a bond contract, in a fiduciary capacity for the benefit of the bondholders in enforcing the terms of the bond contract</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>In many cases, the trustee also acts as custodian, paying agent, registrar and/or transfer agent for the bonds.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;PartialCall">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;CallEvent"/>
+		<rdfs:label>partial call</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:PartialCall</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>call of part of an issue</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;PartialCallFeature">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;hasPartialRedemptionAllocationConvention"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;PartialRedemptionAllocationConvention"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>partial call feature</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:PartialCallFeature</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>call feature whereby the issuer can recall part of the issue on scheduled dates, where bonds are selected to be called according to some rule, or by selecting various bonds at random</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;PartialRedemptionAllocationConvention">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-dt-bd;Convention"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-acc-cur;hasRateValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;decimal"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>partial redemption allocation convention</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:PartialRedemptionAllocationConvention</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>convention used to determine how the partial call will be actioned with respect to bond selection</skos:definition>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&fibo-sec-dbt-bnd;PercentageCumulativeAverageValue">
+		<rdf:type rdf:resource="&fibo-sec-dbt-bnd;RateBasisConvention"/>
+		<rdfs:label>percentage cumulative average value</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:PercentageCumulativeAverageValue</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>rate basis calculated as a percentage of cumulative average value</skos:definition>
+		<fibo-fnd-utl-av:abbreviation>percentage CAV</fibo-fnd-utl-av:abbreviation>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&fibo-sec-dbt-bnd;PercentageParValue">
+		<rdf:type rdf:resource="&fibo-sec-dbt-bnd;RateBasisConvention"/>
+		<rdfs:label>percentage par value</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:PercentageParValue</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>rate basis calculated as a percentage of par value</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;PerpetualBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:label>perpetual bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:PerpetualBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond that has no maturity date, i.e., one that pays interest in perpetuity</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Perpetual bonds function much like dividend-paying stocks or certain preferred securities. Just as the owner of the stock receives a dividend payment as long as the stock is held, the perpetual bond owner receives an interest payment as long as the bond is held.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:synonym>consul</fibo-fnd-utl-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&fibo-sec-dbt-bnd;ProRataConvention">
+		<rdf:type rdf:resource="&fibo-sec-dbt-bnd;PartialRedemptionAllocationConvention"/>
+		<rdfs:label>pro rata convention</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ProRataConvention</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>convention whereby securities that are subject to partial call or redemption are allocated proportionately</skos:definition>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;RateBasisConvention">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-dt-bd;Convention"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-acc-cur;hasRateValue"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;decimal"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>rate basis convention</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:RateBasisConvention</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>basis for a percentage quoted rate as used in specifying bond call percentage amounts</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;RedemptionPayment">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-pas-psch;PaymentEvent"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;RedemptionEvent"/>
+		<rdfs:label>redemption payment</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:RedemptionPayment</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>repayment event involving payment of a bond&apos;s principal amount at maturity or when it is called</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;RedemptionSchedule">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-pas-psch;PaymentSchedule"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;comprises"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-dbti;RedemptionEvent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>redemption schedule</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:RedemptionSchedule</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>repayment schedule whereby a given percentage of a bond issue is redeemed on predefined dates</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;RegularCouponSchedule">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-dt-fd;RegularSchedule"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;CouponSchedule"/>
+		<rdfs:label>regular coupon schedule</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:RegularCouponSchedule</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>schedule including an initial and/or final stub period and an interval of regular coupon payment dates</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;RegulatoryCall">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;CallEvent"/>
+		<rdfs:label>regulatory call</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:RegulatoryCall</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>call that is triggered by some regulatory event or rule</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;RemarketableBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;CorporateBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;FloatingRateNote"/>
+		<rdfs:label>remarketable bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:RemarketableBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>corporate bond program where the coupon rate on outstanding bonds is periodically reset through an auction process</skos:definition>
+		<skos:editorialNote>A remarketing agent (dealer or underwriter) periodically surveys bond holders to identify those who want to sell bonds. The agent surveys market (or holds an auction) to determine interest rate at which the bonds can be resold. The rate on all outstanding bonds resets at the new rate. These programs are perpetual in the sense they often don&apos;t have a fixed maturity date, but the company can redeem them. If an auction fails, i.e., the agent can&apos;t place all the bonds then.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;RevenueBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;SecuredBond"/>
+		<rdfs:label>revenue bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:RevenueBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>municipal bond supported by the revenue from a specific project, such as a toll bridge, highway or local stadium</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Revenue bonds are municipal bonds that finance income-producing projects and are secured by a specified revenue source. Typically, revenue bonds can be issued by any government agency or fund that is managed in the manner of a business, such as entities having both operating revenues and expenses.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;SecuredBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:label>secured bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:SecuredBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;UnsecuredBond"/>
+		<skos:definition>bond that is backed by collateral, such as a tangible asset or income stream, in addition to a general promise to pay</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>A secured bond may be collateralized by a claim on real assets, such as a factory or auto fleet; or by a claim on a revenue stream.  A secured bond differs from a mortgage in that proceeds of the bond sale aren&apos;t used to acquire the asset.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;SinkingFundAmortizationTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;BondAmortizationPaymentTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;isMandatory"/>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>sinking fund amortization terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:SinkingFundAmortizationTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>terms for the paydown of principal in a sinking fund type of amortizing security</skos:definition>
+		<skos:editorialNote>At present there is only a schedule, there should be other terms for what happens on the scheduled dates. Sinking fund may be bullet e.g. x percent over year for y years. SF may be mandatory or contingent on some other economic event.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;SovereignBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;GovernmentBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;SovereignDebtInstrument"/>
+		<rdfs:label>sovereign bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:SovereignBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<owl:disjointWith rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<skos:definition>bond issued by a national or sovereign government of a country</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Sovereign bonds issued by G20 developed countries are generally full faith and credit obligations. Sovereign bonds issued by emerging and developing countries may be issued in local currency or a G7 currency, and may either be full faith and credit (unsecured) or secured.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;SovereignDebtInstrument">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;GovernmentIssuedDebtSecurity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isIssuedBy"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&fibo-fnd-pty-rl;isPlayedBy"/>
+						<owl:someValuesFrom rdf:resource="&fibo-be-ge-ge;SovereignState"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>sovereign debt instrument</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:SovereignDebtInstrument</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>debt security issued by a national or sovereign government of a country</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;SpecialAssessmentBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;SecuredBond"/>
+		<rdfs:label>special assessment bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:SpecialAssessmentBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>an obligation payable from revenues of a special assessment</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>A special assessment is a charge imposed against a property in a particular locality because that property receives a special benefit by virtue of some public improvement, separate and apart from the general benefit accruing to the public at large. Special assessments may be apportioned according to the value of the benefit received, rather than merely the cost of the improvement.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;SpecialObligationBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:label>special obligation bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:SpecialObligationBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond secured by a limited revenue source or promise to pay</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;SpecialTaxBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;SecuredBond"/>
+		<rdfs:label>special tax bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:SpecialTaxBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond secured by revenues derived from one or more designated taxes other than ad valorem taxes</skos:definition>
+		<skos:example>For example, bonds for a particular purpose might be supported by sales, cigarette, fuel or business license taxes.</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;StepEvent">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;PrescriptiveEvent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;involves"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;FixedCouponTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>step event</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:StepEvent</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>event whereby a set of fixed coupon terms comes into force as specified in a step schedule</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;StepSchedule">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-dt-fd;AdHocSchedule"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;comprises"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;StepEvent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>step schedule</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:StepSchedule</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>schedule specifying the dates and rates relevant to securities that pay an initial interest rate but also have a feature where set rate increases happen at periodic intervals</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;StepUpBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasInterestPaymentTerms"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;SteppedCouponTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>step up bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:StepUpBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond with a coupon that increases (steps up) while the bond is outstanding</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The step up may be one time, or occur according to a schedule or at regular intervals.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;SteppedCouponTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;CouponPaymentTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-dt-fd;hasSchedule"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;StepSchedule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>stepped coupon terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:SteppedCouponTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>coupon payment terms for securities with a coupon that increases (steps up) while the bond is outstanding</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;StripBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;ZeroCouponBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;Strip"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;isBasedOn"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>strip bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:StripBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond that is part of a series of bonds formed by selling each interest payment and the principal amount of a bond as separate zero coupon bonds.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;TaxAllocationBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;SecuredBond"/>
+		<rdfs:label>tax allocation bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:TaxAllocationBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond payable from the incremental increase in tax revenues realized from any increase in property value and other economic activity, often designed to capture the economic benefit resulting from a bond financing</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Tax increment bonds, also known as tax allocation bonds, often are used to finance the redevelopment of blighted areas.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;TreasuryBill">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;TreasurySecurity"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-tstd;MoneyMarketInstrument"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasRelativePriceAtIssue"/>
+				<owl:hasValue rdf:resource="&fibo-sec-dbt-dbti;AtADiscount"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasRelativePriceAtMaturity"/>
+				<owl:hasValue rdf:resource="&fibo-sec-dbt-dbti;ParValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;hasInterestRate"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-ir-ir;ReferenceInterestRate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>treasury bill</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:TreasuryBill</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>short-term zero coupon treasury obligation with a maturity ranging from one to twelve months</skos:definition>
+		<fibo-fnd-utl-av:abbreviation>T-bill</fibo-fnd-utl-av:abbreviation>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;TreasuryBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;SovereignBond"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;TreasurySecurity"/>
+		<rdfs:label>treasury bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:TreasuryBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>long term term coupon bearing treasury obligation with original maturity over ten years, with 30 years being most common</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;TreasuryNote">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;MediumTermNote"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;TreasurySecurity"/>
+		<rdfs:label>treasury note</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:TreasuryNote</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>medium term coupon bearing treasury obligation with original maturity ranging from two to ten years</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;TreasurySecurity">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;SovereignDebtInstrument"/>
+		<rdfs:label>treasury security</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:TreasurySecurity</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>debt instrument issued by the United States Department of the Treasury that carries a full faith and credit guarantee</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;UnlistedBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:label>unlisted bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:UnlistedBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond that is traded over the counter rather than via an exchange or other listing facility</skos:definition>
+		<fibo-fnd-utl-av:synonym>OTC Bond</fibo-fnd-utl-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;UnsecuredBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:label>unsecured bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:UnsecuredBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond that is only secured by the bond issuer&apos;s good credit standing</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Most unsecured bonds pose limited risk of default, as the organizations that issue them are typically financially sound.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:synonym>debenture</fibo-fnd-utl-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;VariableCouponBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;VariableIncomeBond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;hasInterestRate"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;BondVariableCoupon"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>variable coupon bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:VariableCouponBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond that has a floating or variable interest rate, or coupon rate</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The rate adjusts according to a predetermined formula outlined in the bond&apos;s prospectus or official statement.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;VariableCouponTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;CouponPaymentTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;isBasedOn"/>
+				<owl:someValuesFrom rdf:resource="&fibo-ind-ind-ind;MarketRate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-utl-alx;hasExpression"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;VariableInterestCalculationFormula"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>variable coupon terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:VariableCouponTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>contractual terms specifying the calculation of the floating or variable interest rate, or coupon rate for a variable coupon bond</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;VariableDebtPrincipal">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;PubliclyIssuedDebt"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-acc-cur;hasMonetaryAmount"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fnd-acc-cur;MonetaryAmount"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>variable debt principal</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:VariableDebtPrincipal</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>principal that is defined in relation to some variable and so varies over time, as principal</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote xml:lang="en">Not the same as principal paydown. This is when the principal itself varies over time, usually as a result of being defined in relation to some index such as an inflation index. Forms the debt principal in instruments such as inflation bonds.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;VariableIncomeBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:label>variable income bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:VariableIncomeBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond whose income may vary over time, because either the coupon rate or principal amount changes in line with an index or schedule over the life of the security</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;VariableInterestCalculationFormula">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;FullyIndexedInterestRate"/>
+		<rdfs:label>variable interest calculation formula</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:VariableInterestCalculationFormula</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>formula for the calculation of variable interest</skos:definition>
+		<skos:editorialNote>This inherits all the facts about Interest Calculation Formula without alteration.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;VariableInterestExpression">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-utl-alx;Expression"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;hasCeiling"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;decimal"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;hasFloor"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;decimal"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-utl-alx;hasArgument"/>
+				<owl:onClass rdf:resource="&fibo-sec-dbt-dbti;FullyIndexedInterestRate"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>variable interest expression</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:VariableInterestExpression</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>an expression used to determine a variable interest payment amount</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;VariablePrincipalBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;VariableIncomeBond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-agr-ctr;definesTermsFor"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;VariableDebtPrincipal"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>variable principal bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:VariablePrincipalBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond whose principal adjusts over time with changes in an index such as inflation or GDP</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>The principal on variable principal bonds adjusts line with an index such as inflation or GDP. For example, for a bond linked to the CPI, if inflation rises two percent the principal increases by 2 percent. The coupon rate is typically fixed. The best-known example is TIPS or Treasury Inflation Protected Bonds, which are linked to the CPI. TIPs offer a real or inflation adjusted rate of return.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;ZeroCouponAndOriginalIssueDiscountBondCallTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;comprises"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;ZeroCouponBondCall"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>zero coupon and original issue discount bond call terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ZeroCouponAndOriginalIssueDiscountBondCallTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>call feature specific to a zero coupon or original issue discount (OID) bond</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Fannie Mae also issues zero-coupon callable debt securities. Zero-coupon notes are debt securities on which no coupon interest is paid to the investor. Rather, the security is purchased at a discounted dollar price and matures at par. If the option on a callable zero-coupon security is exercised, it is redeemed at a higher dollar price than the original issue price. The yield for a callable zero-coupon security is based on the difference between the original discounted price and the principal payment at the call date.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;ZeroCouponBond">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;Bond"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasRelativePriceAtMaturity"/>
+				<owl:hasValue rdf:resource="&fibo-sec-dbt-dbti;ParValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;hasOriginalIssueDiscountAmount"/>
+				<owl:onClass rdf:resource="&fibo-fnd-acc-cur;MonetaryAmount"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasCallFeature"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;ZeroCouponAndOriginalIssueDiscountBondCallTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-dbti;hasInterestPaymentTerms"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;ZeroCouponTerms"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>zero coupon bond</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ZeroCouponBond</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>bond issued with a coupon rate of zero and at a deep discount to face value</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>A zero coupon bond carries a carries a coupon rate of zero and is issued at a steep discount to face value. At maturity it is redeemed at full face value. Over time the outstanding principal amount accretes at a constant accrual rate. In effect, the accrual rate is the coupon rate or yield which is added to the outstanding principal rather than being paid out to investors.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:explanatoryNote>The principal amount accretes over time at a constant accrual rate and is redeemed at full face value at maturity.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:synonym>z-bond</fibo-fnd-utl-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;ZeroCouponBondCall">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-dbti;CallEvent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;hasCallRateBasis"/>
+				<owl:someValuesFrom rdf:resource="&fibo-sec-dbt-bnd;RateBasisConvention"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>zero coupon bond call</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ZeroCouponBondCall</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>call event associated with a zero coupon or original issue discount bond</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-bnd;ZeroCouponTerms">
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;BondAmortizationPaymentTerms"/>
+		<rdfs:subClassOf rdf:resource="&fibo-sec-dbt-bnd;FixedCouponTerms"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fbc-dae-dbt;hasInterestRate"/>
+				<owl:hasValue rdf:resource="&fibo-sec-dbt-bnd;ZeroInterestRate"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>zero coupon terms</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ZeroCouponTerms</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>terms for payment of interest on a zero coupon bond</skos:definition>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&fibo-sec-dbt-bnd;ZeroInterestRate">
+		<rdf:type rdf:resource="&fibo-fbc-dae-dbt;FixedInterestRate"/>
+		<rdfs:label>zero interest rate</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:ZeroInterestRate</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<skos:definition>an interest rate of zero (0) percent</skos:definition>
+		<fibo-fnd-acc-cur:hasRateValue rdf:datatype="&xsd;decimal">0.00</fibo-fnd-acc-cur:hasRateValue>
+	</owl:NamedIndividual>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasAwardDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:label>has award date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasAwardDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>specifies the date on which bonds are awarded to the lead manager or syndicate on negotiated deals, or the date of bidding on competitive deals</skos:definition>
+		<fibo-fnd-utl-av:synonym>has sale date</fibo-fnd-utl-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasCallPrice">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasPrice"/>
+		<rdfs:label>has call price</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasCallPrice</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-dbti;CallPrice"/>
+		<skos:definition>indicates the amount of the call on the specified call date, typically the sum of par value and the call premium, as specified in the contract</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>This is the price a bond issuer or preferred stock issuer must pay investors to buy back, or call, all or part of an issue before the maturity date.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:synonym>has redemption price</fibo-fnd-utl-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasCallRateBasis">
+		<rdfs:label>has call rate basis</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasCallRateBasis</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;ZeroCouponBondCall"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-bnd;RateBasisConvention"/>
+		<skos:definition>for each call event on the schedule, indicates whether the rate is expressed as a percentage of Par or percentage of CAV</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Zero coupon bonds and OID bonds are callable at an accreted value.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-sec-dbt-bnd;hasCeiling">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasRateValue"/>
+		<rdfs:label>has ceiling</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasCeiling</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;VariableInterestExpression"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&xsd;decimal"/>
+		<skos:definition>indicates the maximum variable interest payment amount</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasConvertibleDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:label>has convertible date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasConvertibleDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;BondConversionTerms"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>date on which a bond can be converted into the specified equity security</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasExerciseType">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-rel-rel;has"/>
+		<rdfs:label>has exercise type</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasExerciseType</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-ex;ExerciseConvention"/>
+		<skos:definition>indicates the exercise convention specified in the call feature</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasExtraordinaryRedemptionProvision">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-agr-ctr;hasContractualElement"/>
+		<rdfs:label>has extraordinary redemption provision</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasExtraordinaryRedemptionProvision</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;TradableDebtInstrumentRedemptionProvision"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-bnd;ExtraordinaryRedemptionProvision"/>
+		<skos:definition>relates the redemption provision of a debt instrument to one-time provision that may be exercised by the issuer under certain circumstances</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFinalMaturityDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:label>has final maturity date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFinalMaturityDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;TradableDebtInstrumentRedemptionProvision"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>indicates the final payment date of a loan or other financial instrument, at which point the principal (and all remaining interest) is due to be paid</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFirstCallPrice">
+		<rdfs:subPropertyOf rdf:resource="&fibo-sec-dbt-bnd;hasCallPrice"/>
+		<rdfs:label>has first call price</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFirstCallPrice</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-dbti;CallPrice"/>
+		<skos:definition>indicates the amount of the call on the first call date as specified in the call schedule</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFirstCouponPaymentDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasStartDate"/>
+		<rdfs:label>has first coupon payment date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFirstCouponPaymentDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;CouponPaymentTerms"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>specifies the first date on which the issuer or its agent expects or commits to make a coupon payment</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote xml:lang="en">The first coupon date sometimes occurs at an irregular time; that is, if the bond pays coupons every six months, the first coupon period may be longer or shorter than six months.</fibo-fnd-utl-av:explanatoryNote>
+		<fibo-fnd-utl-av:explanatoryNote xml:lang="en">The first coupon payment period can be long or short when this date doesn&apos;t coincide with the start of a normal coupon payment period.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFirstParCallDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasStartDate"/>
+		<rdfs:label>has first par call date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFirstParCallDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>indicates the first date on which the bond may be called at par for redemption</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFirstParCallPrice">
+		<rdfs:subPropertyOf rdf:resource="&fibo-sec-dbt-bnd;hasFirstCallPrice"/>
+		<rdfs:label>has first par call price</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFirstParCallPrice</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-dbti;CallPrice"/>
+		<skos:definition>specifies the amount of the call on the first par call date as specified in the call schedule</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFirstPremiumCallDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasStartDate"/>
+		<rdfs:label>has first premium call date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFirstPremiumCallDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>indicates the first date on which the bond may be called for redemption at a price above par</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFirstPremiumCallPrice">
+		<rdfs:subPropertyOf rdf:resource="&fibo-sec-dbt-bnd;hasFirstCallPrice"/>
+		<rdfs:label>has first premium call price</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFirstPremiumCallPrice</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-dbti;CallPrice"/>
+		<skos:definition>specifies the amount of the call on the first call date on which the bond may be called at a price above par as specified in the call schedule</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFirstPutDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:subPropertyOf rdf:resource="&fibo-sec-dbt-bnd;hasPutDate"/>
+		<rdfs:label>has first put date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFirstPutDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;PutFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>indicates the initial date on which the holder may sell the bond to the issuer prior to maturity</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFirstPutPrice">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasPrice"/>
+		<rdfs:label>has first put price</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFirstPutPrice</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;PutFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-dbti;PutPrice"/>
+		<skos:definition>specifies the initial price at which the holder may sell the bond to the issuer prior to maturity</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-sec-dbt-bnd;hasFloor">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasRateValue"/>
+		<rdfs:label>has floor</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFloor</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;VariableInterestExpression"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&xsd;decimal"/>
+		<skos:definition>indicates the minimum variable interest payment amount</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasFundingSource">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-rel-rel;has"/>
+		<rdfs:label>has funding source</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasFundingSource</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;MunicipalSecurity"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-bnd;MunicipalDebtSourceOfFunds"/>
+		<skos:definition>indicates the source of funds for a new issue of municipal securities</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasLastCouponPaymentDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasEndDate"/>
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:label>has last coupon payment date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasLastCouponPaymentDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;CouponPaymentTerms"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>specifies the final date on which the issuer or its agent expects or commits to make a coupon payment</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote xml:lang="en">The last coupon date sometimes occurs at an irregular time; that is, if the bond pays coupons every six months, the last coupon period may be longer or shorter than six months.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasLockoutPeriod">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasDatePeriod"/>
+		<rdfs:label>has lockout period</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasLockoutPeriod</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;DatePeriod"/>
+		<skos:definition>indicates the period of time for which a callable security cannot be called and only interest coupon payments are received by the security holder</skos:definition>
+		<skos:example>With a 10-year noncall 3-year (&quot;10nc3&quot;) debt security, the security cannot be called for the first three years.</skos:example>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasMunicipalTrustee">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-agr-ctr;hasThirdParty"/>
+		<rdfs:label>has municipal trustee</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasMunicipalTrustee</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-bnd;MunicipalTrustee"/>
+		<skos:definition>specifies the financial institution with trust powers, designated by the issuer or borrower, that acts, pursuant to a bond contract, in a fiduciary capacity for the benefit of the bondholders in enforcing the terms of the bond contract.</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasOriginalIssueDiscountAmount">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasMonetaryAmount"/>
+		<rdfs:label>has original issue discount amount</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasOriginalIssueDiscountAmount</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;ZeroCouponBond"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-acc-cur;MonetaryAmount"/>
+		<skos:definition>indicates the difference between the stated redemption price at maturity and the issue price</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasPartialRedemptionAllocationConvention">
+		<rdfs:label>has partial redemption allocation convention</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasPartialRedemptionAllocationConvention</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;PartialCallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-bnd;PartialRedemptionAllocationConvention"/>
+		<skos:definition>indicates the convention used to determine how the redemption is allocated over the set of bond holders</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasPenultimateCouponPaymentDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:label>has penultimate coupon payment date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasPenultimateCouponPaymentDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;CouponPaymentTerms"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>specifies the last coupon payment prior to maturity</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote xml:lang="en">This is important since the securities processing area needs to start its procedures in anticipation of maturity. For zero coupon bonds, it is the last compounding date prior to maturity.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasPremiumAmount">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasMonetaryAmount"/>
+		<rdfs:label>has premium amount</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasPremiumAmount</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;CallFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-acc-cur;MonetaryAmount"/>
+		<skos:definition>indicates the premium paid to a bond holder when the bond is called</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasPutDate">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasExplicitDate"/>
+		<rdfs:label>has put date</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasPutDate</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;PutFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;ExplicitDate"/>
+		<skos:definition>indicates the date on which a security is subject to optional or mandatory redemption by the bond holder</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasPutFrequency">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasRecurrenceInterval"/>
+		<rdfs:label>has put frequency</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasPutFrequency</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-dbti;PutFeature"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;RecurrenceInterval"/>
+		<skos:definition>indicates the frequency of the tender or put period</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasRedemptionAmount">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-acc-cur;hasMonetaryAmount"/>
+		<rdfs:label>has redemption amount</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasRedemptionAmount</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;RedemptionPayment"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-acc-cur;MonetaryAmount"/>
+		<skos:definition>indicates the amount of the principal paid with a redemption payment</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasRemarketingAgent">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-agr-ctr;hasThirdParty"/>
+		<rdfs:label>has remarketing agent</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasRemarketingAgent</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;MunicipalSecurity"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-sec-dbt-bnd;MunicipalDebtRemarketingAgent"/>
+		<skos:definition>identifies the dealer responsible for reselling to investors securities (such as variable rate demand obligations and other tender option bonds) that have been tendered for purchase by their owner.</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;hasResetDateOffset">
+		<rdfs:subPropertyOf rdf:resource="&fibo-fnd-dt-fd;hasDate"/>
+		<rdfs:label>has reset date offset</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:hasResetDateOffset</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;VariableCouponTerms"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-dt-fd;RelativeDate"/>
+		<skos:definition>indicates the offset from the coupon payment date on which the rate is reset</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-sec-dbt-bnd;isBankQualified">
+		<rdfs:label>is bank qualified</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:isBankQualified</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates whether or not a given municipal bond conforms with section 265(b)(3) of the IRS tax code; when purchased by a commercial bank for its portfolio, such designation allows the bank to deduct a portion of the interest cost of carry for the position</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>A bond that is bank qualified is also known as a qualified tax-exempt obligation.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-sec-dbt-bnd;isBasedOn">
+		<rdfs:label>is based on</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:isBasedOn</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;IndexLinkedSecurity"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&fibo-ind-ei-ei;EconomicIndicator">
+					</rdf:Description>
+					<rdf:Description rdf:about="&fibo-ind-ind-ind;MarketRate">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>indicates the economic indicator or market rate on which an index-based security depends</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-sec-dbt-bnd;isLegalOpinionAvailable">
+		<rdfs:label>is legal opinion available</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:isLegalOpinionAvailable</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;MunicipalBond"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates whether a legal opinion exists for a given municipal bond</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-sec-dbt-bnd;isMandatory">
+		<rdfs:label>is mandatory</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:isMandatory</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates whether something is mandatory</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-sec-dbt-bnd;isProRated">
+		<rdfs:label>is pro-rated</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:isProRated</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-fbc-dae-dbt;InterestPaymentTerms"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates whether the coupon is pro rated to the actual number of days in the payment period versus the number of payment periods</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-sec-dbt-bnd;isSuperSinker">
+		<rdfs:label>super sinker</rdfs:label>
+		<rdfs:comment>QName: fibo-sec-dbt-bnd:isSuperSinker</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-sec-dbt-bnd;SinkingFundAmortizationTerms"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates that the bond has a long-term coupon but short potential short maturity</skos:definition>
+		<fibo-fnd-utl-av:explanatoryNote>Super-sinker is a colloquial term for a term maturity, usually from a single family mortgage revenue issue with several term maturities, that will be the first to be called from a sinking fund into which all proceeds from prepayments of mortgages financed by the issue are deposited. The maturity&apos;s priority status under the call provisions means that it is likely to be redeemed in its entirety well before the stated maturity date.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:DatatypeProperty>
+	
+	<owl:Class rdf:about="&fibo-sec-dbt-dbti;PutFeature">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-sec-dbt-bnd;isMandatory"/>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+
+</rdf:RDF>

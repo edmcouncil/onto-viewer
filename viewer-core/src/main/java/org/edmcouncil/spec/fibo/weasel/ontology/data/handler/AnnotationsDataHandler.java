@@ -48,7 +48,7 @@ public class AnnotationsDataHandler {
    */
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology, OwlListDetails details) {
 
-    Set<String> ignoredToDisplay = appConfig.getWeaselConfig().getIgnoredElements();
+    Set<String> ignoredToDisplay = appConfig.getViewerCoreConfig().getIgnoredElements();
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -92,7 +92,6 @@ public class AnnotationsDataHandler {
       LOG.info("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\" ", opv, propertyiri.toString());
 
       result.addProperty(propertyiri.toString(), opv);
-      //result.addProperty(property, opv);
     }
     result.sortPropertiesInAlphabeticalOrder();
     return result;
@@ -107,7 +106,7 @@ public class AnnotationsDataHandler {
    */
   public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology, OwlListDetails details) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-    Set<String> ignoredToDisplay = appConfig.getWeaselConfig().getIgnoredElements();
+    Set<String> ignoredToDisplay = appConfig.getViewerCoreConfig().getIgnoredElements();
     Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
     while (annotationIterator.hasNext()) {
       OWLAnnotation next = annotationIterator.next();
@@ -148,15 +147,15 @@ public class AnnotationsDataHandler {
       LOG.info("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", opv, propertyiri.toString());
 
       result.addProperty(propertyiri.toString(), opv);
-      //result.addProperty(property, opv);
     }
     return result;
   }
 
+  //TODO: change method name
   private void checkUriAsIri(PropertyValue opv, String value) {
     //TODO: Change this to more pretty solution
     if (opv.getType() == WeaselOwlType.ANY_URI) {
-      ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) appConfig.getWeaselConfig();
+      ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) appConfig.getViewerCoreConfig();
       if (weaselConfiguration.isUriIri(value)) {
         opv.setType(WeaselOwlType.IRI);
       }

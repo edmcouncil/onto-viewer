@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphRelation;
-import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
+import org.edmcouncil.spec.fibo.weasel.model.graph.OntologyGraph;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.model.ClassExpressionType;
@@ -66,7 +66,7 @@ public class OntologyVisitors {
     };
   }
 
-  public final OWLObjectVisitorEx<Map<GraphNode, OWLClassExpression>> superClassAxiom(ViewerGraph vg, GraphNode node, GraphNodeType type) {
+  public final OWLObjectVisitorEx<Map<GraphNode, OWLClassExpression>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type) {
 
     return new OWLObjectVisitorEx() {
 
@@ -74,7 +74,7 @@ public class OntologyVisitors {
       public Map<GraphNode, OWLClassExpression> visit(OWLObjectSomeValuesFrom someValuesFromAxiom) {
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(someValuesFromAxiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(someValuesFromAxiom);
         ClassExpressionType objectType = someValuesFromAxiom.getFiller().getClassExpressionType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
@@ -143,7 +143,7 @@ public class OntologyVisitors {
         int cardinality = axiom.getCardinality();
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
@@ -210,7 +210,7 @@ public class OntologyVisitors {
         LOG.debug("Object all values from axiom: {}", axiom.toString());
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
@@ -272,7 +272,7 @@ public class OntologyVisitors {
       public Map<GraphNode, OWLClassExpression> visit(OWLDataSomeValuesFrom axiom) {
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         DataRangeType objectType = axiom.getFiller().getDataRangeType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
@@ -308,7 +308,7 @@ public class OntologyVisitors {
       public Map<GraphNode, OWLClassExpression> visit(OWLDataExactCardinality axiom) {
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         DataRangeType objectType = axiom.getFiller().getDataRangeType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
@@ -347,7 +347,7 @@ public class OntologyVisitors {
         cardinality = cardinality == 0 ? 1 : cardinality;
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
@@ -514,7 +514,7 @@ public class OntologyVisitors {
         cardinality = cardinality == 0 ? 1 : cardinality;
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
@@ -585,7 +585,7 @@ public class OntologyVisitors {
         cardinality = cardinality == 0 ? 1 : cardinality;
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         DataRangeType objectType = axiom.getFiller().getDataRangeType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
@@ -629,7 +629,7 @@ public class OntologyVisitors {
         cardinality = cardinality == 0 ? 1 : cardinality;
 
         String propertyIri = null;
-        propertyIri = OwlDataExtractor.extrackAxiomPropertyIri(axiom);
+        propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         DataRangeType objectType = axiom.getFiller().getDataRangeType();
         Map<GraphNode, OWLClassExpression> returnedVal = new HashMap<>();
 
