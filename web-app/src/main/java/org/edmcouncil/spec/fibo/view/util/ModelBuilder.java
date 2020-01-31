@@ -2,8 +2,9 @@ package org.edmcouncil.spec.fibo.view.util;
 
 import org.edmcouncil.spec.fibo.view.model.Query;
 import java.util.List;
+import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
-import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
 
 import org.springframework.ui.Model;
 
@@ -38,9 +39,8 @@ public class ModelBuilder {
     return this;
   }
 
-  public ModelBuilder ontoDetails(OwlDetails details) {
-
-    model.addAttribute("details", details);
+  public ModelBuilder setResult(SearcherResult result) {
+    model.addAttribute("result", result);
     model.addAttribute("details_display", true);
 
     return this;
@@ -53,6 +53,16 @@ public class ModelBuilder {
 
   public ModelBuilder modelTree(List<FiboModule> modules) {
     model.addAttribute("modelTree", modules);
+    return this;
+  }
+
+  public ModelBuilder setVersion(String version) {
+    model.addAttribute("version", version);
+    return this;
+  }
+
+  public ModelBuilder error(ErrorResult er) {
+    model.addAttribute("error", er);
     return this;
   }
 

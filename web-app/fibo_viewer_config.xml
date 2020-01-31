@@ -6,13 +6,18 @@
   <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
   <ontology>
     <!--<ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl</ontologyURL>
-    <ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>-->
-    <ontologyPath>AboutFIBODev.ttl</ontologyPath>
+-->
+    <ontologyDir>ontologies</ontologyDir>
   </ontology>
   
   <ignoreToDisplaying>
     <ignore>@viewer.axiom.SubObjectPropertyOf</ignore>
     <ignore>http://www.w3.org/2000/01/rdf-schema#isDefinedBy</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#definition</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#label</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#synonym</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#example</ignore>
+    <ignore>http://spec.edmcouncil.org/owlnames#explanatoryNote</ignore>
   </ignoreToDisplaying>
        
   <!-- This is configuration about labels and displaying values -->
@@ -101,6 +106,11 @@
       </userDefinedName>
       
       <userDefinedName>
+        <resourceIriToName>@viewer.axiom.DataPropertyDomain</resourceIriToName>
+        <resourceIriName>Data property domain</resourceIriName>
+      </userDefinedName>
+      
+      <userDefinedName>
         <resourceIriToName>@viewer.axiom.SubObjectPropertyOf</resourceIriToName>
         <resourceIriName>SubObject property</resourceIriName>
       </userDefinedName>
@@ -155,10 +165,68 @@
         <resourceIriName>contributor</resourceIriName>
       </userDefinedName>
       
+      <userDefinedName>
+        <resourceIriToName>http://spec.edmcouncil.org/owlnames#mdDefinition</resourceIriToName>
+        <resourceIriName>ontological definition</resourceIriName>
+      </userDefinedName>
+      
   
     </userDefaultNameList>
     
   </labelConfig>
+  
+  <searchConfig>
+    
+    <hintFields>
+      <hintField>
+        <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </hintField>
+      <hintField>
+        <fieldIri>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </hintField>
+    </hintFields>
+    <hintThreshold>0.0</hintThreshold>
+    
+    <searchFields>
+      <searchField>
+        <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+      
+      <searchField>
+        <fieldIri>http://www.w3.org/2004/02/skos/core#definition</fieldIri>
+        <fieldBoost>0.0</fieldBoost>
+      </searchField>
+	  
+	  <searchField>
+        <fieldIri>http://purl.org/dc/terms/abstract</fieldIri>
+        <fieldBoost>0.0</fieldBoost>
+      </searchField>
+	  
+	  <searchField>
+        <fieldIri>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+	  
+	  <searchField>
+        <fieldIri>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+	  
+	  <searchField>
+        <fieldIri>http://www.omg.org/techprocess/ab/SpecificationMetadata/keyword</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+      
+    </searchFields>
+    <searchThreshold>0.0</searchThreshold>
+    <searchDescriptions>
+      <searchDescription>http://www.w3.org/2004/02/skos/core#definition</searchDescription>
+      <searchDescription>http://purl.org/dc/terms/abstract</searchDescription>
+    </searchDescriptions>
+  </searchConfig>
   
   <!--Feature will be added if future
   <ignoreToLinking>
@@ -168,7 +236,7 @@
   <!-- Here we define URIs to be treated as IRIs -->
   <!-- We are currently using the method contains(), please be careful when define URIs -->
   <scopeIri>
-    <uriNamespace>https://spec.edmcouncil.org/fibo/ontology</uriNamespace>
+    <uriNamespace>https://spec.edmcouncil.org/fibo/ontology/</uriNamespace>
     <uriNamespace>https://www.omg.org/spec/</uriNamespace>
     <uriNamespace>http://www.omg.org/techprocess</uriNamespace>
   </scopeIri>
@@ -183,13 +251,16 @@
   <groups>
     <!--The order of elements in groups will be their priority-->
     <group>
-      <groupName>Natural Language characteristic</groupName>
+      <groupName>Glossary</groupName>
       <groupItem>http://www.w3.org/2000/01/rdf-schema#label</groupItem>
+      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#definition</groupItem>
+      <groupItem>http://spec.edmcouncil.org/owlnames#mdDefinition</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/definitionOrigin</groupItem>
       <groupItem>http://purl.org/dc/terms/source</groupItem>         
+      <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/directSource</groupItem>         
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/adaptedFrom</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#example</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#scopeNote</groupItem>
@@ -203,13 +274,25 @@
     </group>
 
     <group>
+      <groupName>This ontology contains</groupName>
+      <groupItem>@viewer.internal.clazz</groupItem>
+      <groupItem>@viewer.external.clazz</groupItem>
+      <groupItem>@viewer.internal.objectProperty</groupItem>      
+      <groupItem>@viewer.external.objectProperty</groupItem>    
+      <groupItem>@viewer.internal.dataProperty</groupItem>
+      <groupItem>@viewer.external.dataProperty</groupItem>    
+      <groupItem>@viewer.internal.instance</groupItem>
+      <groupItem>@viewer.external.instance</groupItem>    
+    </group> 
+    
+    <group>
       <groupName>Ontological characteristic</groupName>
+      <groupItem>@viewer.function.direct_subclasses</groupItem>
+      <groupItem>@viewer.function.instances</groupItem>
       <groupItem>@viewer.axiom.EquivalentClasses</groupItem>
       <groupItem>@viewer.axiom.SubClassOf</groupItem>
       <groupItem>@viewer.function.anonymous_ancestor</groupItem>
       <groupItem>@viewer.axiom.DisjointClasses</groupItem>
-      <groupItem>@viewer.function.direct_subclasses</groupItem>
-      <groupItem>@viewer.function.instances</groupItem>
       <groupItem>@viewer.axiom.ClassAssertion</groupItem>
       <groupItem>@viewer.axiom.SameIndividual</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyAssertion</groupItem>
@@ -219,6 +302,7 @@
       <groupItem>@viewer.axiom.SubAnnotationPropertyOf</groupItem>
       <groupItem>@viewer.axiom.EquivalentObjectProperties</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyDomain</groupItem>
+      <groupItem>@viewer.axiom.DataPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.ObjectPropertyRange</groupItem>
       <groupItem>@viewer.axiom.InverseObjectProperties</groupItem>
       <groupItem>http://purl.org/dc/terms/hasPart</groupItem>
@@ -227,7 +311,6 @@
     
     <group>
       <groupName>Meta-information</groupName>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel</groupItem>
       <groupItem>http://purl.org/dc/terms/creator</groupItem>
       <groupItem>http://purl.org/dc/terms/license</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright</groupItem>
@@ -246,17 +329,6 @@
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/relatedSpecification</groupItem>                  
     </group>   
     
-    <group>
-      <groupName>This ontology contains</groupName>
-      <groupItem>@viewer.internal.clazz</groupItem>
-      <groupItem>@viewer.external.clazz</groupItem>
-      <groupItem>@viewer.internal.objectProperty</groupItem>      
-      <groupItem>@viewer.external.objectProperty</groupItem>    
-      <groupItem>@viewer.internal.dataProperty</groupItem>
-      <groupItem>@viewer.external.dataProperty</groupItem>    
-      <groupItem>@viewer.internal.instance</groupItem>
-      <groupItem>@viewer.external.instance</groupItem>		
-    </group> 
   </groups>
     
 </properties>

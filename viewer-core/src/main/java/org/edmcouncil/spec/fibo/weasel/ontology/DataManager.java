@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
 import org.edmcouncil.spec.fibo.weasel.changer.ChangerIriToLabel;
+import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -46,7 +47,7 @@ public class DataManager {
     return ontologyManager.getOntology();
   }
 
-  public <T extends OwlDetails> T getDetailsByIri(String iriString) {
+  public <T extends OwlDetails> T getDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
     IRI iri = IRI.create(iriString);
     OwlListDetails result = null;
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
@@ -72,10 +73,14 @@ public class DataManager {
         LOG.info("Handle individual data.");
         OwlListDetails wd = dataHandler.handleParticularIndividual(iri, ontologyManager.getOntology());
         result = wd;
+      } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri)){
+        LOG.info("Handle datatype");
+        OwlListDetails wd = dataHandler.handleParticularDatatype(iri, ontologyManager.getOntology());
+        result = wd;
       }
     }
     if (result == null) {
-      throw new NoSuchFieldError("Result is a null, no value present. Element IRI: " + iriString);
+      throw new NotFoundElementInOntologyException("Not found element in ontology with IRI: " + iriString);
     }
     result.setIri(iriString);
 
@@ -83,8 +88,8 @@ public class DataManager {
     List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontologyManager.getOntology());
     result.setLocationInModules(elementLocation);
 
-    if (!config.getWeaselConfig().isEmpty()) {
-      ViewerCoreConfiguration cfg = config.getWeaselConfig();
+    if (!config.getViewerCoreConfig().isEmpty()) {
+      ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
       if (cfg.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, cfg);
 
@@ -146,7 +151,7 @@ public class DataManager {
   }
 
   private void sortResults(OwlListDetails result) {
-    Set set = (Set) config.getWeaselConfig()
+    Set set = (Set) config.getViewerCoreConfig()
         .getConfigVal(ConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;

@@ -1,7 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.model.property;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -12,7 +11,8 @@ import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.fibo.weasel.comparator.WeaselComparators;
+import org.edmcouncil.spec.fibo.weasel.comparator.ComparatorWithAlphabeticalOrder;
+import org.edmcouncil.spec.fibo.weasel.comparator.ComparatorWithPriority;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -57,7 +57,7 @@ public class OwlDetailsProperties<T> {
   }
 
   public void sort(List<StringItem> priotityList) {
-    Comparator<String> comparator = WeaselComparators.getComparatorWithPriority(priotityList);
+    Comparator<String> comparator = ComparatorWithPriority.get(priotityList);
     SortedSet<String> keys = new TreeSet<>(comparator);
     keys.addAll(properties.keySet());
 
@@ -100,13 +100,18 @@ public class OwlDetailsProperties<T> {
   public void sortPropertiesInAlphabeticalOrder() {
     for (Map.Entry<String, List<T>> entry : properties.entrySet()) {
       List<T> value = entry.getValue();
-      value.sort(WeaselComparators.getComparatorWithAlphabeticalOrder());
+      value.sort(ComparatorWithAlphabeticalOrder.get());
     }
   }
 
   @Override
   public String toString() {
     return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties=" + properties.toString() + '}';
+  }
+
+  public void release() {
+    taxonomy = null;
+    properties = null;
   }
 
 }
