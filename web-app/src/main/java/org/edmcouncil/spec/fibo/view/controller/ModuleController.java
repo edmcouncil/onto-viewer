@@ -45,7 +45,24 @@ public class ModuleController {
     List<FiboModule> modules = ontologyManager.getAllModulesData();
     ModelBuilder mb = new ModelBuilder(model);
 
+//<<<<<<< HEAD
+//    if (query != null) {
+//      OwlDetails details = null;
+//      try {
+//        details = ontologyManager.getDetailsByIri(query);
+//      } catch (NotFoundElementInOntologyException ex) {
+//        LOG.info("Handle No such field error. Message: '{}'", ex.getMessage());
+//        LOG.trace(Arrays.toString(ex.getStackTrace()));
+//        ErrorResult er = new ErrorResult();
+//        er.setExMessage(ex.getMessage());
+//        er.setMessage("Element not found in loaded ontologies.");
+//        return "error";
+//      }
+//      mb.ontoDetails(details).isGrouped(true);
+//    }
+//=======
     mb.setResult(null).isGrouped(true);
+//>>>>>>> 698e8acd3ee3d6d286e9f0567ed72c6a8d03d7be
 
     mb.emptyQuery().modelTree(modules);
 

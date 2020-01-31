@@ -55,6 +55,7 @@ class FileOntologyLoader implements OntologyLoader {
 
     OWLOntologyManager m = OWLManager.createOWLOntologyManager();
 
+
     LOG.debug("Load ontology from document");
     OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
 

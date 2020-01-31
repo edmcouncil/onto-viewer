@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Service
-public class OntologySearcherService implements SearchService {
+public class OntologySearcherService {
 
   private static final Logger LOG = LoggerFactory.getLogger(OntologySearcherService.class);
 
@@ -28,7 +28,6 @@ public class OntologySearcherService implements SearchService {
   @Autowired
   private OntologySearcher ontologySearcher;
 
-  @Override
   public SearcherResult search(String query, int maxValues) throws ViewerException {
 
     return ontologySearcher.search(query, maxValues);

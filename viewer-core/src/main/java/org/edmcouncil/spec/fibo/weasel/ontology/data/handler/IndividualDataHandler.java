@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 public class IndividualDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(IndividualDataHandler.class);
+
   private static final String instanceKey = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
 

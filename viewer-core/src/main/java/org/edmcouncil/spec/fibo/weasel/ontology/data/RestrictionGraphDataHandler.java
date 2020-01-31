@@ -9,6 +9,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvide
 import org.edmcouncil.spec.fibo.weasel.ontology.visitor.OntologyVisitors;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.semanticweb.owlapi.model.AxiomType;
+import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -144,7 +145,7 @@ public class RestrictionGraphDataHandler {
 
     if (expressionsMap != null && !expressionsMap.isEmpty()) {
       expressionsMap.entrySet().forEach((entry) -> {
-        handleRecursivelyRestrictions(entry.getValue(), vg, entry.getKey(), type);
+          handleRecursivelyRestrictions(entry.getValue(), vg, entry.getKey(), type);
       });
     }
   }

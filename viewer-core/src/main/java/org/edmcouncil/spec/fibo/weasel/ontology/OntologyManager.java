@@ -34,6 +34,7 @@ public class OntologyManager {
   @PostConstruct
   public void init() {
     LOG.info("Configuration loaded ? : {}", appConfiguration != null
+
         || !appConfiguration.getViewerCoreConfig().isEmpty());
     LOG.info("File system manager created ? : {}", fileSystemManager != null);
 
@@ -44,6 +45,7 @@ public class OntologyManager {
     try {
       this.ontology = loader.loadOntology(location);
     } catch (OWLOntologyCreationException ex) {
+
       LOG.error("[ERROR]: Error when creating ontology. Stoping application. Exception: {} \n Message: {}", ex.getStackTrace(), ex.getMessage());
       System.exit(-1);
     } catch (IOException ex) {

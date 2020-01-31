@@ -14,7 +14,9 @@ public class OntologyGraph {
   private GraphNode root;
   private int lastId = 0;
 
+
   public OntologyGraph() {
+
     this.nodes = new HashSet<>();
     this.relations = new HashSet<>();
   }
@@ -87,6 +89,7 @@ public class OntologyGraph {
 
     return sb.toString();
   }
+
 
   public boolean isEmpty() {
     return nodes.isEmpty() && relations.isEmpty();

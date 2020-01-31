@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.fibo.config.configuration.model.impl;
 
-import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.RenameItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
@@ -13,6 +12,7 @@ import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.Configuration;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
+import org.edmcouncil.spec.fibo.config.configuration.model.searcher.TextSearcherConfig;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.DefaultLabelItem;
 
 /**
@@ -60,23 +60,52 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   public boolean isOntologyLocationSet() {
     return configuration.containsKey(ConfigKeys.ONTOLOGY_URL)
-        || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH);
+        || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)
+        || configuration.containsKey(ConfigKeys.ONTOLOGY_DIR);
   }
 
   public boolean isOntologyLocationURL() {
     return configuration.containsKey(ConfigKeys.ONTOLOGY_URL);
   }
 
-  public String getURLOntology() {
-    Set<ConfigItem> elements = configuration.get(ConfigKeys.ONTOLOGY_URL);
+  public boolean isOntologyLocationPath() {
+    return configuration.containsKey(ConfigKeys.ONTOLOGY_PATH);
+  }
+
+  public boolean isOntologyLocationDir() {
+    return configuration.containsKey(ConfigKeys.ONTOLOGY_DIR);
+  }
+
+  private String getURLOntology() {
+    Set<ConfigItem> elements = configuration.getOrDefault(ConfigKeys.ONTOLOGY_URL, new HashSet<>(0));
     for (ConfigItem element : elements) {
       return element.toString();
     }
     return null;
   }
 
-  public String getPathOntology() {
-    Set<ConfigItem> elements = configuration.get(ConfigKeys.ONTOLOGY_PATH);
+  private String getOntologyDirectory() {
+    Set<ConfigItem> elements = configuration.getOrDefault(ConfigKeys.ONTOLOGY_DIR, new HashSet<>(0));
+    for (ConfigItem element : elements) {
+      return element.toString();
+    }
+    return null;
+  }
+
+  public String getOntologyLocation() {
+    String url = getURLOntology();
+    if (url != null) {
+      return url;
+    }
+    String path = getPathOntology();
+    if (path != null) {
+      return path;
+    }
+    return getOntologyDirectory();
+  }
+
+  private String getPathOntology() {
+    Set<ConfigItem> elements = configuration.getOrDefault(ConfigKeys.ONTOLOGY_PATH, new HashSet<>(0));
     for (ConfigItem element : elements) {
       return element.toString();
     }
@@ -180,15 +209,25 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
     return result;
   }
-  
-  public LabelPriority.Priority getLabelPriority(){
+
+  public LabelPriority.Priority getLabelPriority() {
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.LABEL_PRIORITY, new HashSet<>());
-    
+
     for (ConfigItem value : values) {
       LabelPriority item = (LabelPriority) value;
       return item.getValue();
     }
     return LabelPriority.Priority.USER_DEFINED;
+  }
+
+  public TextSearcherConfig getTextSearcherConfig() {
+    Set<ConfigItem> values = configuration.get(ConfigKeys.TEXT_SEARCH_CONFIG);
+
+    for (ConfigItem value : values) {
+      TextSearcherConfig tsc = (TextSearcherConfig) value;
+      return tsc;
+    }
+    return null;
   }
 
 }

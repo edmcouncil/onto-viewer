@@ -90,7 +90,7 @@ public class OwlDataHandler {
 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
-  
+
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
   {
@@ -122,6 +122,13 @@ public class OwlDataHandler {
 
         OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, clazz);
+
+        //OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
+//        OntologyGraph vg = new OntologyGraph();
+//        if (skipNothingData) {
+//          inheritedAxioms = handleInheritedAxioms(ontology, clazz);
+//          vg = graphDataHandler.handleGraph(clazz, ontology);
+//        }
 
         OntologyGraph vg = graphDataHandler.handleGraph(clazz, ontology);
         OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
@@ -185,10 +192,11 @@ public class OwlDataHandler {
     if (vg.isEmpty()) {
       resultDetails.setGraph(null);
     } else {
-        VisGraph vgj = new ViewerGraphFactory().convertToVisGraph(vg) ;
-       
+      VisGraph vgj = new ViewerGraphFactory().convertToVisGraph(vg);
+
       resultDetails.setGraph(vgj);
     }
+
   }
 
   public OwlListDetails handleParticularIndividual(IRI iri, OWLOntology ontology) {
@@ -725,6 +733,7 @@ public class OwlDataHandler {
    * @return properties of Inherited Axioms.
    */
   private OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLClass clazz) {
+
     OwlDetailsProperties<PropertyValue> result = individualDataHandler.handleClassIndividuals(ontology, clazz);
     result.sortPropertiesInAlphabeticalOrder();
     return result;
@@ -739,10 +748,10 @@ public class OwlDataHandler {
    */
   private OwlDetailsProperties<PropertyValue> handleInheritedAxioms(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+
     String subClassOfKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "SubClassOf");
     Set<OWLClass> rset = owlUtils.getSuperClasses(clazz, ontology);
-    
-    
+
     rset.stream()
         .map((c) -> handleAxioms(c, ontology))
         .forEachOrdered((handleAxioms) -> {
