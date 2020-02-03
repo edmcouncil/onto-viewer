@@ -40,6 +40,7 @@ import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.IndividualDataHandler;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevel;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
@@ -830,6 +831,10 @@ public class OwlDataHandler {
     }
     return resultDetails;
 
+  }
+
+  public FiboMaturityLevel getMaturityLevel(String iriString, OWLOntology ontology) {
+    return fiboDataHandler.getMaturityLevelForElement(iriString, ontology);
   }
 
 }

@@ -168,9 +168,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/MetadataFNDArrangements/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/
@@ -178,19 +175,14 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Goals/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/MetadataFNDLaw/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/LegitimateOrganizations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Control/
@@ -213,8 +205,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/MetadataFNDRelations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/
@@ -513,9 +503,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/MetadataFNDArrangements/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/> ,
@@ -523,19 +510,14 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Goals/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/MetadataFNDLaw/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/LegitimateOrganizations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Control/> ,
@@ -558,8 +540,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/MetadataFNDRelations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/> ,

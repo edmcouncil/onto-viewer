@@ -2,6 +2,7 @@ package org.edmcouncil.spec.fibo.weasel.model.module;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevel;
 
 /**
  * Class will be used to storage data about fibo modules.
@@ -13,7 +14,7 @@ public class FiboModule {
   private String iri;
   private String label;
   private List<FiboModule> subModule;
-  private String maturityLevel = "";
+  private FiboMaturityLevel maturityLevel = null;
 
   public String getIri() {
     return iri;
@@ -39,11 +40,11 @@ public class FiboModule {
     this.subModule = subModule;
   }
 
-  public String getMaturityLevel() {
+  public FiboMaturityLevel getMaturityLevel() {
     return maturityLevel;
   }
 
-  public void setMaturityLevel(String maturityLevel) {
+  public void setMaturityLevel(FiboMaturityLevel maturityLevel) {
     this.maturityLevel = maturityLevel;
   }
 

@@ -33,7 +33,7 @@
     <dependency>
       <groupId>net.sourceforge.owlapi</groupId>
       <artifactId>owlapi-distribution</artifactId>
-      <version>5.1.10</version>
+      <version>5.1.13</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

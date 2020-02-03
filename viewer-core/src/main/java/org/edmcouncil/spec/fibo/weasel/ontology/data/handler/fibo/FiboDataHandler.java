@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
@@ -32,9 +31,12 @@ import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvide
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectVisitor;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.search.EntitySearcher;
@@ -55,6 +57,7 @@ public class FiboDataHandler {
       .create("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel");
   //TODO: move this to set to configuration 
   private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
+  private static final String RELEASE_IRI = "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release";
 
   private static final Logger LOG = LoggerFactory.getLogger(FiboDataHandler.class);
   private static final String instanceKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
@@ -111,10 +114,11 @@ public class FiboDataHandler {
             annotations.addProperty(entry.getKey(), propertyValue);
           }
         }
-
+        details.setMaturityLevel(getMaturityLevelFromOntology(iri, onto));
         break;
       }
     }
+
     return annotations;
   }
 
@@ -134,6 +138,10 @@ public class FiboDataHandler {
 
     OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazzOpt.get());
 
+    if (indi.getProperties().isEmpty()) {
+      return result;
+    }
+
     Set<String> modulesIriSet = new HashSet<>();
 
     indi.getProperties().get(instanceKey).stream()
@@ -150,7 +158,7 @@ public class FiboDataHandler {
           FiboModule fm = new FiboModule();
           fm.setIri(rootModulesIri);
           fm.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(rootModulesIri)));
-          //fm.setMaturityLevel(getMaturityLevelFromOntology(IRI.create(rootModulesIri)).getLabel());
+          fm.setMaturityLevel(getMaturityLevelFromOntology(IRI.create(rootModulesIri), ontology));
           fm.setSubModule(getSubModules(rootModulesIri, ontology));
           return fm;
         }).forEachOrdered(result::add);
@@ -162,46 +170,47 @@ public class FiboDataHandler {
           return r;
         }).collect(Collectors.toList());
 
+    for (FiboModule module : modules) {
+      checkAndCompleteMaturityLevel(module);
+    }
+
     return result;
   }
 
-  public FiboMaturityLevel getMaturityLevelFromOntology(IRI iri) {
+  public FiboMaturityLevel getMaturityLevelForElement(IRI iri, OWLOntology ontology) {
+    return getMaturityLevelForElement(iri.toString(), ontology);
 
-    OntologyResources or = resources.get(iri.toString());
-    if (or != null) {
-      List list = or.getResources().getOrDefault(iri.toString(), new LinkedList<>());
-      for (Object object : list) {
-        LOG.debug("List Element {}", object.toString());
-      }
-    
-    }
-    /* OWLOntologyManager manager = ontology.getOWLOntologyManager();
+  }
+
+  public FiboMaturityLevel getMaturityLevelForElement(String iri, OWLOntology ontology) {
+    String ontologyIri = findElementInOntology(iri);
+    return getMaturityLevelFromOntology(IRI.create(ontologyIri), ontology);
+  }
+
+  private FiboMaturityLevel getMaturityLevelFromOntology(IRI iri, OWLOntology ontology) {
+
+    OWLOntologyManager manager = ontology.getOWLOntologyManager();
     for (OWLOntology o : manager.ontologies().collect(Collectors.toSet())) {
-      long count = o.entitiesInSignature(iri).count();
 
-      if (count > 0) {
-        LOG.debug("Entities Count : {}", count);
-        //OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
-        for (OWLAnnotation annotation : o.annotationsAsList()) {
-          if (annotation.annotationValue().isIRI()) {
-            LOG.debug("Annotation for property {}", annotation.getProperty().toString());
-            if (annotation.getProperty().getIRI().equals(MATURITY_LEVEL_IRI)) {
-              LOG.debug("Annotation value {}", annotation.annotationValue().asIRI().toString());
-              //return annotation.annotationValue().asIRI().toString();
+      if (o.getOntologyID().getOntologyIRI().isPresent()) {
+        if (o.getOntologyID().getOntologyIRI().get().equals(iri)) {
+          LOG.debug("Entities Count ");
+          for (OWLAnnotation annotation : o.annotationsAsList()) {
+            if (annotation.annotationValue().isIRI()) {
+              LOG.debug("Annotation for property {}", annotation.getProperty().toString());
+              if (annotation.getProperty().getIRI().equals(MATURITY_LEVEL_IRI)) {
+                LOG.debug("Annotation value {}", annotation.annotationValue().asIRI().toString());
+                String irii = annotation.annotationValue().asIRI().get().toString();
+                String labell = labelExtractor.getLabelOrDefaultFragment(IRI.create(irii));
+                return new FiboMaturityLevel(labell, irii);
+              }
             }
           }
         }
-         Stream<OWLAnnotation> annotations = EntitySearcher
-            .getAnnotations(IRI.create(""), o,
-                dataFactory.getOWLAnnotationProperty(MATURITY_LEVEL_IRI));
-
-        for (OWLAnnotation annotation : annotations.collect(Collectors.toSet())) {
-          return annotation.getValue().asIRI().toString();
-        }
       }
-    }*/
+    }
 
-    return null;
+    return new FiboMaturityLevel("", "");
   }
 
   private List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
@@ -355,7 +364,7 @@ public class FiboDataHandler {
       FiboModule fm = new FiboModule();
       fm.setIri(partModule);
       fm.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(partModule)));
-      //fm.setMaturityLevel(getMaturityLevelFromOntology(IRI.create(partModule)).getLabel());
+      fm.setMaturityLevel(getMaturityLevelFromOntology(IRI.create(partModule), ontology));
       fm.setSubModule(getSubModules(partModule, ontology));
       return fm;
     }).forEachOrdered(result::add);
@@ -391,8 +400,13 @@ public class FiboDataHandler {
       loadAllOntologyResources(ontology);
     }
     if (modules == null) {
-      getAllModulesData(ontology);
+      modules = getAllModulesData(ontology);
     }
+
+    if (modules.isEmpty()) {
+      return result;
+    }
+
     String ontologyIri = findElementInOntology(elementIri);
 
     ontologyIri = ontologyIri == null ? elementIri : ontologyIri;
@@ -457,6 +471,41 @@ public class FiboDataHandler {
       }
     }
     return false;
+  }
+
+  private void checkAndCompleteMaturityLevel(FiboModule module) {
+    if (module.getMaturityLevel() != null && !module.getMaturityLevel().getLabel().equals("")) {
+      return;
+    }
+    Map<FiboMaturityLevel, Integer> maturityMap = new HashMap<>();
+    Integer sum2 = 0;
+    module.getSubModule().stream().map((subModule) -> {
+      checkAndCompleteMaturityLevel(subModule);
+      return subModule;
+    }).map((subModule) -> subModule.getMaturityLevel()).forEachOrdered((fml) -> {
+      int c = maturityMap.getOrDefault(fml, 0);
+      c++;
+      maturityMap.put(fml, c);
+    });
+    int max = 0;
+    int sum = 0;
+    FiboMaturityLevel maxElement = null;
+    for (Map.Entry<FiboMaturityLevel, Integer> entry : maturityMap.entrySet()) {
+      LOG.debug("{} > {} ", max, entry.getValue());
+      if (entry.getValue() >= max) {
+        max = entry.getValue();
+        maxElement = entry.getKey();
+      }
+      sum += entry.getValue();
+    }
+    LOG.debug("Sum Of Elements: {}, max: {}, for: {}", sum, max, module.getIri());
+    if (sum == max) {
+      module.setMaturityLevel(maxElement);
+    } else {
+      String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(RELEASE_IRI));
+      module.setMaturityLevel(new FiboMaturityLevel(label, RELEASE_IRI));
+    }
+
   }
 
 }

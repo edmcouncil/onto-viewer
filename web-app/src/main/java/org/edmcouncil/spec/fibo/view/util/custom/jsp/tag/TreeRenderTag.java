@@ -95,7 +95,7 @@ public class TreeRenderTag extends SimpleTagSupport {
     } else {
       if (elementLocation != null && elementLocation.contains(link)) {
         text = wrapSpanCleanMatch(emptyDisplayedVal);
-         result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
+        result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
       } else {
         text = wrapSpanClean(emptyDisplayedVal);
       }
@@ -103,6 +103,10 @@ public class TreeRenderTag extends SimpleTagSupport {
     }
     renderElement(text);
     renderElement(result);
+    if (!property.getMaturityLevel().getLabel().equals("release")
+        && !property.getMaturityLevel().getLabel().equals("")) {
+      renderElement("<i class=\"fas fa-exclamation text-danger\"></i>");
+    }
     if (fmList != null && fmList.size() > 0) {
 
       if (elementLocation != null && elementLocation.contains(link)) {

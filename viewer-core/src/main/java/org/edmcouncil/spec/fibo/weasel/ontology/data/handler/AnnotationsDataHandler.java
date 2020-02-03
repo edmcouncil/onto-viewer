@@ -3,6 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data.handler;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
@@ -16,11 +17,15 @@ import org.edmcouncil.spec.fibo.weasel.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevel;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevelFactory;
+import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +40,7 @@ public class AnnotationsDataHandler {
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final IRI COMMENT_IRI = IRI.create("http://www.w3.org/2000/01/rdf-schema#comment");
   private final String FIBO_QNAME = "QName:";
-  private final IRI MATURITY_LEVEL_IRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel");
+  private final IRI HAS_MATURITY_LEVEL_IRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel");
 
   @Autowired
   private OwlDataExtractor dataExtractor;
@@ -111,9 +116,8 @@ public class AnnotationsDataHandler {
   public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology, OwlListDetails details) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     Set<String> ignoredToDisplay = appConfig.getViewerCoreConfig().getIgnoredElements();
-    Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
-    while (annotationIterator.hasNext()) {
-      OWLAnnotation next = annotationIterator.next();
+    //Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
+    for (OWLAnnotation next : annotations.collect(Collectors.toSet())) {
       IRI propertyiri = next.getProperty().getIRI();
 
       if (ignoredToDisplay.contains(propertyiri.toString())) {
@@ -130,7 +134,7 @@ public class AnnotationsDataHandler {
 
         opv = customDataFactory.createAnnotationIri(value);
 
-        if (propertyiri.equals(MATURITY_LEVEL_IRI)) {
+        if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
           OwlAnnotationIri oai = (OwlAnnotationIri) opv;
           FiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
           details.setMaturityLevel(fml);
@@ -152,7 +156,7 @@ public class AnnotationsDataHandler {
           checkUriAsIri(opv, value);
           if (opv.getType() == WeaselOwlType.IRI) {
             opv = customDataFactory.createAnnotationIri(value);
-            if (propertyiri.equals(MATURITY_LEVEL_IRI)) {
+            if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
               OwlAnnotationIri oai = (OwlAnnotationIri) opv;
               FiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
               details.setMaturityLevel(fml);
@@ -165,6 +169,11 @@ public class AnnotationsDataHandler {
 
       result.addProperty(propertyiri.toString(), opv);
     }
+    
+    
+    //entity seacher
+    //EntitySearcher.getAnnotations(ontology);
+    
     return result;
   }
 
@@ -177,5 +186,31 @@ public class AnnotationsDataHandler {
         opv.setType(WeaselOwlType.IRI);
       }
     }
+  }
+
+  public FiboMaturityLevel getMaturityLevelForOntology(IRI iri, OWLOntology o) {
+
+    OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
+
+    Stream<OWLAnnotation> annotations = EntitySearcher
+        .getAnnotations(iri, o,
+            dataFactory.getOWLAnnotationProperty(HAS_MATURITY_LEVEL_IRI));
+
+    for (Iterator<OWLAnnotation> it = annotations.collect(Collectors.toSet()).iterator(); it.hasNext();) {
+      OWLAnnotation object = it.next();
+      OwlAnnotationIri oai = customDataFactory.createAnnotationIri(object.getValue().asIRI().get().toString());
+      return FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
+    }
+
+    return null;
+  }
+
+  public OwlDetailsProperties<PropertyValue> handleOntologyAxiomsTMP(Stream<OWLAxiom> axioms, OWLOntology ontology, OwlListDetails details) {
+    for (OWLAxiom ax : axioms.collect(Collectors.toSet())) {
+
+      //LOG.debug("Axiom from ontology: {}", ax.toString());
+
+    }
+    return null;
   }
 }
