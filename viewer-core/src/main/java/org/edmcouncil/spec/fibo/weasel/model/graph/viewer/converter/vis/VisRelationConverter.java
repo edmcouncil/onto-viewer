@@ -22,8 +22,6 @@ public class VisRelationConverter {
         result.setIri(outIri);
 
         result.setOptional((gr.isOptional() ? "optional" : "non_optional"));
-        //boolean optionalStyle = gr.isOptional() ? true : false;
-        //result.setOptional(optionalStyle);
         String jLabel = gr.getLabel();
         jLabel = jLabel.replaceAll("'", "\u0027");
         result.setLabel(jLabel);

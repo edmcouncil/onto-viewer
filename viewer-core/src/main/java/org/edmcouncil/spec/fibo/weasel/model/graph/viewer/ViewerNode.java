@@ -2,7 +2,6 @@ package org.edmcouncil.spec.fibo.weasel.model.graph.viewer;
 
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.converter.vis.VisNodeConverter;
-import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisNode;
 
 /**
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)

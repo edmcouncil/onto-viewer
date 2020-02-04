@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - displaying OWLDataExactCardinality in graph
 - graph in json being returned in string value
+- changing the storing and returning graph value from generating string to objects
 
 ### Removed
 - 
