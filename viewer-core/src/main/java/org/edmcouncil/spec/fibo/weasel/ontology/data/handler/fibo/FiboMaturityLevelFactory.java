@@ -15,4 +15,8 @@ public class FiboMaturityLevelFactory {
     return new FiboMaturityLevel(label, iri);
   }
 
+  public static FiboMaturityLevel empty() {
+    return create("", "");
+  }
+
 }

@@ -222,7 +222,7 @@ public class FiboDataHandler {
                 LOG.debug("Annotation value {}", annotation.annotationValue().asIRI().toString());
                 String irii = annotation.annotationValue().asIRI().get().toString();
                 String labell = labelExtractor.getLabelOrDefaultFragment(IRI.create(irii));
-                return new FiboMaturityLevel(labell, irii);
+                return FiboMaturityLevelFactory.create(labell, irii);
               }
             }
           }
@@ -230,7 +230,7 @@ public class FiboDataHandler {
       }
     }
 
-    return new FiboMaturityLevel("", "");
+    return FiboMaturityLevelFactory.empty();
   }
 
   private List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
@@ -523,7 +523,7 @@ public class FiboDataHandler {
       module.setMaturityLevel(maxElement);
     } else {
       String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(RELEASE_IRI));
-      module.setMaturityLevel(new FiboMaturityLevel(label, RELEASE_IRI));
+      module.setMaturityLevel(FiboMaturityLevelFactory.create(label, RELEASE_IRI));
     }
 
   }

@@ -14,13 +14,9 @@ public class StringUtils {
 
   public static String getFragment(IRI iri) {
     String iriString = iri.toString();
-    //net.sourceforge.owlapi.model.IRI id;
     return getFragment(iriString);
   }
   
-  {
-    
-  }
 
   public static String getFragment(String iri) {
     if (iri.contains(AXIOM_PATTERN)) {
