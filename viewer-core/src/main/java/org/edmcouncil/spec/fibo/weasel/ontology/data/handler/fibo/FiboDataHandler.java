@@ -177,11 +177,31 @@ public class FiboDataHandler {
     return result;
   }
 
+  /**
+   * Find the ontology containing the resources with given iri and extract their level of maturity.
+   * When don't find resource in ontologies or ontology doesn't have maturity level method return
+   * empty fibo maturity level.
+   *
+   * @see #getMaturityLevelForElement(String, OWLOntology)
+   * @param iri IRI of element
+   * @param ontology loaded owl ontology
+   * @return extracted fibo maturity level
+   */
   public FiboMaturityLevel getMaturityLevelForElement(IRI iri, OWLOntology ontology) {
     return getMaturityLevelForElement(iri.toString(), ontology);
 
   }
 
+  /**
+   * Find the ontology containing the resources with given iri and extract their level of maturity.
+   * When don't find resource in ontologies or ontology doesn't have maturity level method return
+   * empty fibo maturity level.
+   *
+   * @see #getMaturityLevelForElement(IRI, OWLOntology)
+   * @param iri IRI of element
+   * @param ontology loaded owl ontology
+   * @return extracted fibo maturity level
+   */
   public FiboMaturityLevel getMaturityLevelForElement(String iri, OWLOntology ontology) {
     String ontologyIri = findElementInOntology(iri);
     return getMaturityLevelFromOntology(IRI.create(ontologyIri), ontology);

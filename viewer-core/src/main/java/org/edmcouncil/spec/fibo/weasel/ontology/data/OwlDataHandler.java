@@ -833,6 +833,12 @@ public class OwlDataHandler {
 
   }
 
+  /**
+   * @see FiboDataHandler#getMaturityLevelForElement FiboDataHandler
+   * @param iriString iri represented by string
+   * @param ontology loaded owl ontology
+   * @return 
+   */
   public FiboMaturityLevel getMaturityLevel(String iriString, OWLOntology ontology) {
     return fiboDataHandler.getMaturityLevelForElement(iriString, ontology);
   }

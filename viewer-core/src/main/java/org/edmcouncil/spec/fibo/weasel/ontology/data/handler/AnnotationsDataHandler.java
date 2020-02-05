@@ -21,7 +21,6 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
-import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -52,8 +51,8 @@ public class AnnotationsDataHandler {
   /**
    * @param iri IRI element with annotations to capture
    * @param ontology Loaded ontology
-   * @param details
-   * @return
+   * @param details <i>QName</i> will be set for this object if found
+   * @return Processed annotations
    */
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology, OwlListDetails details) {
 
@@ -108,15 +107,14 @@ public class AnnotationsDataHandler {
 
   /**
    *
-   * @param annotations Stream of OWL abbotations
+   * @param annotations Stream of OWL annotations
    * @param ontology Loaded ontology
-   * @param details qName is added to this object if found
+   * @param details <i>QName</i> will be set for this object if found
    * @return Processed annotations
    */
   public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology, OwlListDetails details) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     Set<String> ignoredToDisplay = appConfig.getViewerCoreConfig().getIgnoredElements();
-    //Iterator<OWLAnnotation> annotationIterator = annotations.iterator();
     for (OWLAnnotation next : annotations.collect(Collectors.toSet())) {
       IRI propertyiri = next.getProperty().getIRI();
 
@@ -170,10 +168,6 @@ public class AnnotationsDataHandler {
       result.addProperty(propertyiri.toString(), opv);
     }
     
-    
-    //entity seacher
-    //EntitySearcher.getAnnotations(ontology);
-    
     return result;
   }
 
@@ -188,6 +182,12 @@ public class AnnotationsDataHandler {
     }
   }
 
+  /**
+   * 
+   * @param iri an IRI element used to extract the maturity level
+   * @param o ontology with element for given iri
+   * @return 
+   */
   public FiboMaturityLevel getMaturityLevelForOntology(IRI iri, OWLOntology o) {
 
     OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
@@ -196,8 +196,7 @@ public class AnnotationsDataHandler {
         .getAnnotations(iri, o,
             dataFactory.getOWLAnnotationProperty(HAS_MATURITY_LEVEL_IRI));
 
-    for (Iterator<OWLAnnotation> it = annotations.collect(Collectors.toSet()).iterator(); it.hasNext();) {
-      OWLAnnotation object = it.next();
+    for (OWLAnnotation object : annotations.collect(Collectors.toSet())) {
       OwlAnnotationIri oai = customDataFactory.createAnnotationIri(object.getValue().asIRI().get().toString());
       return FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
     }
@@ -205,12 +204,4 @@ public class AnnotationsDataHandler {
     return null;
   }
 
-  public OwlDetailsProperties<PropertyValue> handleOntologyAxiomsTMP(Stream<OWLAxiom> axioms, OWLOntology ontology, OwlListDetails details) {
-    for (OWLAxiom ax : axioms.collect(Collectors.toSet())) {
-
-      //LOG.debug("Axiom from ontology: {}", ax.toString());
-
-    }
-    return null;
-  }
 }
