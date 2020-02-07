@@ -15,7 +15,7 @@ import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevel;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.OntoFiboMaturityLevel;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevelFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
@@ -134,7 +134,7 @@ public class AnnotationsDataHandler {
 
         if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
           OwlAnnotationIri oai = (OwlAnnotationIri) opv;
-          FiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
+          OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
           details.setMaturityLevel(fml);
           LOG.debug(fml.toString());
         }
@@ -156,7 +156,7 @@ public class AnnotationsDataHandler {
             opv = customDataFactory.createAnnotationIri(value);
             if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
               OwlAnnotationIri oai = (OwlAnnotationIri) opv;
-              FiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
+              OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
               details.setMaturityLevel(fml);
               LOG.debug(fml.toString());
             }
@@ -188,7 +188,7 @@ public class AnnotationsDataHandler {
    * @param o ontology with element for given iri
    * @return 
    */
-  public FiboMaturityLevel getMaturityLevelForOntology(IRI iri, OWLOntology o) {
+  public OntoFiboMaturityLevel getMaturityLevelForOntology(IRI iri, OWLOntology o) {
 
     OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
 
