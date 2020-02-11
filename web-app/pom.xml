@@ -34,7 +34,8 @@
     <dependency>
       <groupId>org.edmcouncil.spec</groupId>
       <artifactId>viewer-core</artifactId>
-      <version>v0.1.1-beta</version>
+      <version>${project.version}</version>
+     
      
     </dependency>
     

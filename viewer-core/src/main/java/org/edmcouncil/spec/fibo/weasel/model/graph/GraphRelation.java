@@ -39,19 +39,17 @@ public class GraphRelation extends GraphElement {
     this.end = end;
   }
 
-  @Override
-  public String toString() {
-    return "{" + "start=" + start + ", end=" + end + " " + super.toString();
-  }
-
- 
-
   public void setOptional(boolean b) {
     optional = b;
   }
 
   public boolean isOptional() {
     return optional;
+  }
+
+  @Override
+  public String toString() {
+    return "{" + "start=" + start + ", end=" + end + " " + super.toString();
   }
 
 }

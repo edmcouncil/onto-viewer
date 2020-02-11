@@ -57,8 +57,8 @@
         <div id="ontograph"></div>
 
         <script type="text/javascript">
-          var nodes = new vis.DataSet(${clazz.graph.getJsonNodes()});
-          var edges = new vis.DataSet(${clazz.graph.getJsonEdges()});
+          var nodes = new vis.DataSet(${clazz.graph.convertJsonNodes()});
+          var edges = new vis.DataSet(${clazz.graph.convertJsonEdges()});
           // create a network
           var container = document.getElementById('ontograph');
           const edgeFilters = document.getElementsByName('edgesFilter');

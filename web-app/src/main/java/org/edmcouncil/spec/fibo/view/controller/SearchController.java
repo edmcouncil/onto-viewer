@@ -45,7 +45,6 @@ public class SearchController {
   @Autowired
   private DetailsManager dataManager;
   @Autowired
-
   private ModelBuilderFactory modelFactory;
   @Autowired
   private TextSearchService textSearchService;
@@ -108,7 +107,6 @@ public class SearchController {
     return "search";
   }
 
-
   @PostMapping(value = {"/json", "/json/max/{max}", "/json/page/{page}", "/json/max/{max}/page/{page}"})
   public <SearcherResult> ResponseEntity searchJson(
       @RequestBody String query,
@@ -147,5 +145,4 @@ public class SearchController {
     er.setMessage("Element Not Found.");
     return ResponseEntity.badRequest().body(er);
   }
-
 }

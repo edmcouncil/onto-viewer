@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.fibo.weasel.model.graph.vis;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.ViewerGraph;
 
@@ -38,13 +39,13 @@ public class VisGraph extends ViewerGraph {
     this.root = root;
   }
 
-  public String getJsonNodes() {
+  public String convertJsonNodes() {
     Gson gson = new Gson();
     return gson.toJson(nodes);
 
   }
-
-  public String getJsonEdges() {
+  
+  public String convertJsonEdges() {
     Gson gson = new Gson();
     return gson.toJson(edges);
 

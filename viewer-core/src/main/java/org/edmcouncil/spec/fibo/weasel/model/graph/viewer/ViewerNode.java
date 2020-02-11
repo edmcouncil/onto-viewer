@@ -6,7 +6,7 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.converter.vis.VisNodeC
 /**
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
-public class ViewerNode {
+public abstract class ViewerNode {
 
   private int cardinality;
   private boolean optional;

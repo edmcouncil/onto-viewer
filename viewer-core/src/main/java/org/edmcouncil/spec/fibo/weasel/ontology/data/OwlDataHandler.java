@@ -90,7 +90,7 @@ public class OwlDataHandler {
 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
-  
+
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
   {
@@ -122,13 +122,6 @@ public class OwlDataHandler {
 
         OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, clazz);
-
-        //OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
-//        OntologyGraph vg = new OntologyGraph();
-//        if (skipNothingData) {
-//          inheritedAxioms = handleInheritedAxioms(ontology, clazz);
-//          vg = graphDataHandler.handleGraph(clazz, ontology);
-//        }
 
         OntologyGraph vg = graphDataHandler.handleGraph(clazz, ontology);
         OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
