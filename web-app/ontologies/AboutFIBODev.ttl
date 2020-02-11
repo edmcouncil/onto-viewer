@@ -148,11 +148,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/ISO4217-CurrencyCodes/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/MetadataFNDAccounting/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/MetadataFNDAccountingExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/Taxation/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/MetadataFNDAgentsAndPeople/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/
@@ -173,9 +168,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/MetadataFNDArrangements/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/
@@ -183,19 +175,14 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Goals/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/MetadataFNDLaw/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/LegitimateOrganizations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Control/
@@ -211,10 +198,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/MetadataFNDPlaces/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/AddressSites/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/Geophysical/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/MetadataFNDPlacesExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/MetadataFNDProductsAndServices/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/
@@ -222,8 +205,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/MetadataFNDRelations/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/
@@ -252,7 +233,6 @@
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/MetadataINDIndicators/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/CommonInterestRates/
-# imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/MetadataINDInterestRates/
 # imports: https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/
@@ -502,11 +482,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/ISO4217-CurrencyCodes/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/MetadataFNDAccounting/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/Valuation/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AccountsMain/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/AssetExtensions/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/BalanceSheetBalances/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/MetadataFNDAccountingExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AccountingExt/Taxation/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/Agents/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/MetadataFNDAgentsAndPeople/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/AgentsAndPeople/People/> ,
@@ -527,9 +502,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/MetadataFNDArrangements/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Ratings/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Reporting/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MetadataFNDArrangementsExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/MethodsAndRules/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ArrangementsExt/ToolsAndInstruments/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/BusinessDates/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/MetadataFNDDatesAndTimes/> ,
@@ -537,19 +509,14 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Goals/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/GoalsAndObjectives/Objectives/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Documentation/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/InfoCore/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/Messaging/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/MetadataFNDInformationExt/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/PostalAddress/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/InformationExt/TemporalInfo/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/Jurisdiction/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCapacity/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/LegalCore/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Law/MetadataFNDLaw/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/MetadataFND/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/FormalOrganizations/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/LegitimateOrganizations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/MetadataFNDOrganizations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Organizations/Organizations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/OwnershipAndControl/Control/> ,
@@ -565,10 +532,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/Locations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/MetadataFNDPlaces/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Places/VirtualPlaces/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/AddressSites/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/Geophysical/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/MetadataFNDPlacesExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/PlacesExt/RealEstate/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/MetadataFNDProductsAndServices/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/PaymentsAndSchedules/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/ProductsAndServices/ProductsAndServices/> ,
@@ -576,8 +539,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Quantities/QuantitiesAndUnits/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/MetadataFNDRelations/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/MetadataFNDRiskExt/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/RiskExt/Risk/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/EconomicResources/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MarketTransactions/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/TransactionsExt/MetadataFNDTransactionsExt/> ,
@@ -606,7 +567,6 @@
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/Indicators/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/Indicators/MetadataINDIndicators/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/CommonInterestRates/> ,
-		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRatePublishers/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/InterestRates/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/InterestRates/MetadataINDInterestRates/> ,
 		<https://spec.edmcouncil.org/fibo/ontology/master/latest/IND/MarketIndices/BasketIndices/> ,
