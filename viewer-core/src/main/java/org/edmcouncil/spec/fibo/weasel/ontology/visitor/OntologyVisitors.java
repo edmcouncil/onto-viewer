@@ -12,16 +12,24 @@ import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvide
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.DataRangeType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAxiomVisitorEx;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataExactCardinality;
 import org.semanticweb.owlapi.model.OWLDataMaxCardinality;
 import org.semanticweb.owlapi.model.OWLDataMinCardinality;
+import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectExactCardinality;
 import org.semanticweb.owlapi.model.OWLObjectMaxCardinality;
 import org.semanticweb.owlapi.model.OWLObjectMinCardinality;
+import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectUnionOf;
 import org.semanticweb.owlapi.model.OWLObjectVisitorEx;
@@ -45,7 +53,7 @@ public class OntologyVisitors {
   private LabelProvider labelExtractor;
 
   public final OWLObjectVisitorEx<Boolean> isRestrictionVisitor
-      = new OWLObjectVisitorEx<Boolean>() {
+          = new OWLObjectVisitorEx<Boolean>() {
     @Override
     public Boolean visit(OWLSubClassOfAxiom subClassAxiom) {
       OWLClassExpression superClass = subClassAxiom.getSuperClass();
@@ -63,6 +71,100 @@ public class OntologyVisitors {
           return subClassAxiom;
         }
       }
+    };
+  }
+
+  public final OWLAxiomVisitorEx<GraphNode> individualCompleteGraphNode(ViewerGraph vg, GraphNode node, GraphNodeType type) {
+
+    return new OWLAxiomVisitorEx<GraphNode>() {
+
+      @Override
+      public GraphNode visit(OWLObjectPropertyAssertionAxiom ax) {
+
+        LOG.debug("sub {}", ax.getSubject().toStringID());
+        LOG.debug("obj {}", ax.getObject().toStringID());
+        LOG.debug("prop {}", ax.getProperty().toString());
+
+        GraphNode endNode = new GraphNode(vg.nextId());
+        endNode.setIri(ax.getObject().toStringID());
+        endNode.setType(type);
+        String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(ax.getObject().toStringID()));
+        endNode.setLabel(label);
+        endNode.setType(type);
+
+        String propertyIri = null;
+        for (OWLEntity oWLEntity : ax.getProperty().signature().collect(Collectors.toList())) {
+          propertyIri = oWLEntity.toStringID();
+        }
+
+        GraphRelation rel = new GraphRelation(vg.nextId());
+        rel.setIri(propertyIri);
+        rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+        rel.setStart(node);
+        rel.setEnd(endNode);
+        rel.setEndNodeType(type);
+        vg.addNode(endNode);
+        vg.addRelation(rel);
+
+        return endNode;
+      }
+
+      @Override
+      public GraphNode visit(OWLDataPropertyAssertionAxiom ax) {
+
+        GraphNode endNode = new GraphNode(vg.nextId());
+        endNode.setIri("http://www.w3.org/2000/01/rdf-schema#Literal");
+        endNode.setType(type);
+        String label = ax.getObject().toString().replaceAll("\"", "").replaceAll("\\^\\^[\\w+|\\w+:\\w+]+", "");//labelExtractor.getLabelOrDefaultFragment(IRI.create(ax.getObject().toStringID()));
+        endNode.setLabel(label);
+        endNode.setType(type);
+
+        String propertyIri = null;
+        for (OWLEntity oWLEntity : ax.getProperty().signature().collect(Collectors.toList())) {
+          propertyIri = oWLEntity.toStringID();
+        }
+
+        GraphRelation rel = new GraphRelation(vg.nextId());
+        rel.setIri(propertyIri);
+        rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+        rel.setStart(node);
+        rel.setEnd(endNode);
+        rel.setEndNodeType(type);
+        vg.addNode(endNode);
+        vg.addRelation(rel);
+
+        return endNode;
+      }
+
+      @Override
+      public GraphNode visit(OWLClassAssertionAxiom ax) {
+        for (OWLClass owlClass : ax.getClassExpression().classesInSignature().collect(Collectors.toList())) {
+          String iri = owlClass.getIRI().toString();
+        
+        
+        GraphNode endNode = new GraphNode(vg.nextId());
+        endNode.setIri(iri);
+        endNode.setType(type);
+        String label = labelExtractor.getLabelOrDefaultFragment(owlClass.getIRI());
+        endNode.setLabel(label);
+        endNode.setType(type);
+
+        
+
+        GraphRelation rel = new GraphRelation(vg.nextId());
+        rel.setIri("#");
+        rel.setLabel("type");
+        rel.setStart(node);
+        rel.setEnd(endNode);
+        rel.setEndNodeType(type);
+        vg.addNode(endNode);
+        vg.addRelation(rel);
+
+        return endNode;
+        }
+        return null;
+      }
+
     };
   }
 
@@ -477,11 +579,10 @@ public class OntologyVisitors {
               //unionRootNode.setType(type);
               //unionRootNode.setIri(propertyIri);
               unionRootNode.setLabel("or");
-              /**GraphRelation orRel = new GraphRelation(vg.nextId());
-              orRel.setStart(node);
-              orRel.setEnd(unionRootNode);
-              vg.addNode(unionRootNode);
-              vg.addRelation(orRel);*/
+              /**
+               * GraphRelation orRel = new GraphRelation(vg.nextId()); orRel.setStart(node);
+               * orRel.setEnd(unionRootNode); vg.addNode(unionRootNode); vg.addRelation(orRel);
+               */
 
               for (OWLEntity owlEntity : axiom.signature().collect(Collectors.toList())) {
                 LOG.trace("OWLObjectUnionOf axiom with owl entity {}", owlEntity);
