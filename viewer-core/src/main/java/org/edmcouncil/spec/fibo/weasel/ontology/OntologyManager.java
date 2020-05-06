@@ -44,6 +44,7 @@ public class OntologyManager {
     try {
       this.ontology = loader.loadOntology(location);
     } catch (OWLOntologyCreationException ex) {
+
       LOG.error("[ERROR]: Error when creating ontology. Stoping application. Exception: {} \n Message: {}", ex.getStackTrace(), ex.getMessage());
       System.exit(-1);
     } catch (IOException ex) {

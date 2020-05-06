@@ -35,6 +35,8 @@
       <groupId>org.edmcouncil.spec</groupId>
       <artifactId>viewer-core</artifactId>
       <version>${project.version}</version>
+     
+     
     </dependency>
     
     <dependency>

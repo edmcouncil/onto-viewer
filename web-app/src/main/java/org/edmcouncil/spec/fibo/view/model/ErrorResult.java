@@ -9,6 +9,9 @@ public class ErrorResult {
   private String message;
   private String exMessage;
 
+  public ErrorResult() {
+  }
+
   public String getMessage() {
     return message;
   }

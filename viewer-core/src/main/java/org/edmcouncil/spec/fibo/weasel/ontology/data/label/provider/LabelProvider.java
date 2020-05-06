@@ -131,8 +131,8 @@ public class LabelProvider {
   }
 
   /**
-  * Return selected lebel with 
-  */
+   * Return selected lebel with
+   */
   private String getTheRightLabel(Map<String, String> labels, IRI entityIri) {
     Optional<String> optionalLab = labels.entrySet()
         .stream()

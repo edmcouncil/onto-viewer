@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Component
-public class TextSearchService implements SearchService {
+public class TextSearchService   {
+
 
   @Autowired
   private TextSearcher searcher;
@@ -25,7 +26,6 @@ public class TextSearchService implements SearchService {
     return searcher.getHints(query, maxHintCount);
   }
 
-  @Override
   public SearcherResult search(String query, int maxValues) throws ViewerException {
     return searcher.search(query, maxValues, 1);
   }

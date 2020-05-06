@@ -145,5 +145,4 @@ public class SearchController {
     er.setMessage("Element Not Found.");
     return ResponseEntity.badRequest().body(er);
   }
-
 }

@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
+import com.google.gson.Gson;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.FiboDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.AnnotationsDataHandler;
 import java.util.ArrayList;
@@ -31,8 +32,9 @@ import org.edmcouncil.spec.fibo.config.configuration.model.PairImpl;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
-import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
-import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraphJson;
+import org.edmcouncil.spec.fibo.weasel.model.graph.OntologyGraph;
+import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.ViewerGraphFactory;
+import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisGraph;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlDirectedSubClassesProperty;
@@ -58,6 +60,7 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLProperty;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.semanticweb.owlapi.search.EntitySearcher;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Component;
 
 /**
@@ -87,7 +90,7 @@ public class OwlDataHandler {
 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
-  
+
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
   {
@@ -120,13 +123,12 @@ public class OwlDataHandler {
         OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, clazz);
 
+        OntologyGraph vg = graphDataHandler.handleGraph(clazz, ontology);
         OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
-        ViewerGraph vg = new ViewerGraph();
         if (skipNothingData) {
           inheritedAxioms = handleInheritedAxioms(ontology, clazz);
           vg = graphDataHandler.handleGraph(clazz, ontology);
         }
-
         subclasses = filterSubclasses(subclasses);
 
         OwlTaxonomyImpl tax = extractTaxonomy(taxElements, iri, ontology, WeaselOwlType.AXIOM_CLASS);
@@ -169,7 +171,7 @@ public class OwlDataHandler {
       OwlDetailsProperties<PropertyValue> directSubclasses,
       OwlDetailsProperties<PropertyValue> individuals,
       OwlDetailsProperties<PropertyValue> inheritedAxioms,
-      ViewerGraph vg,
+      OntologyGraph vg,
       List<PropertyValue> subclasses) {
     axioms.getProperties().put(subClassOfIriString, subclasses);
 
@@ -183,7 +185,8 @@ public class OwlDataHandler {
     if (vg.isEmpty()) {
       resultDetails.setGraph(null);
     } else {
-      ViewerGraphJson vgj = new ViewerGraphJson(vg);
+      VisGraph vgj = new ViewerGraphFactory().convertToVisGraph(vg);
+
       resultDetails.setGraph(vgj);
     }
   }
@@ -722,6 +725,7 @@ public class OwlDataHandler {
    * @return properties of Inherited Axioms.
    */
   private OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLClass clazz) {
+
     OwlDetailsProperties<PropertyValue> result = individualDataHandler.handleClassIndividuals(ontology, clazz);
     result.sortPropertiesInAlphabeticalOrder();
     return result;
@@ -736,10 +740,10 @@ public class OwlDataHandler {
    */
   private OwlDetailsProperties<PropertyValue> handleInheritedAxioms(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+
     String subClassOfKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "SubClassOf");
     Set<OWLClass> rset = owlUtils.getSuperClasses(clazz, ontology);
-    
-    
+
     rset.stream()
         .map((c) -> handleAxioms(c, ontology))
         .forEachOrdered((handleAxioms) -> {

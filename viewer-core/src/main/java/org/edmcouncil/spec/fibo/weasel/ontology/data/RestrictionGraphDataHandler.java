@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
-import org.edmcouncil.spec.fibo.weasel.model.graph.ViewerGraph;
+import org.edmcouncil.spec.fibo.weasel.model.graph.OntologyGraph;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.visitor.OntologyVisitors;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
@@ -42,7 +42,7 @@ public class RestrictionGraphDataHandler {
   @Autowired
   private OntologyVisitors ontologyVisitors;
 
-  public ViewerGraph handleGraph(
+  public OntologyGraph handleGraph(
       OWLNamedIndividual obj,
       OWLOntology ontology) {
 
@@ -50,7 +50,7 @@ public class RestrictionGraphDataHandler {
     return handleGraph(axiomsIterator, obj.getIRI());
   }
 
-  public ViewerGraph handleGraph(
+  public OntologyGraph handleGraph(
       OWLObjectProperty obj,
       OWLOntology ontology) {
 
@@ -58,7 +58,7 @@ public class RestrictionGraphDataHandler {
     return handleGraph(axiomsIterator, obj.getIRI());
   }
 
-  public ViewerGraph handleGraph(
+  public OntologyGraph handleGraph(
       OWLDataProperty obj,
       OWLOntology ontology) {
 
@@ -66,32 +66,32 @@ public class RestrictionGraphDataHandler {
     return handleGraph(axiomsIterator, obj.getIRI());
   }
 
-  public ViewerGraph handleGraph(
+  public OntologyGraph handleGraph(
       OWLClass obj,
       OWLOntology ontology) {
 
     Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj).iterator();
 
-    ViewerGraph vg = handleGraph(axiomsIterator, obj.getIRI());
+    OntologyGraph vg = handleGraph(axiomsIterator, obj.getIRI());
     vg = handleInheritedAxiomsGraph(obj, vg, ontology);
     return vg;
   }
 
-  private <T extends OWLAxiom> ViewerGraph handleGraph(
+  private <T extends OWLAxiom> OntologyGraph handleGraph(
       Iterator<T> axiomsIterator,
       IRI elementIri) {
     return handleGraph(axiomsIterator, elementIri, null, null, GraphNodeType.INTERNAL);
   }
 
-  private <T extends OWLAxiom> ViewerGraph handleGraph(
+  private <T extends OWLAxiom> OntologyGraph handleGraph(
       Iterator<T> axiomsIterator,
       IRI elementIri,
       GraphNode root,
-      ViewerGraph vg,
+      OntologyGraph vg,
       GraphNodeType type) {
 
     if (vg == null) {
-      vg = new ViewerGraph();
+      vg = new OntologyGraph();
     }
 
     if (root == null) {
@@ -129,7 +129,7 @@ public class RestrictionGraphDataHandler {
 
   private void handleRecursivelyRestrictions(
       OWLClassExpression expression,
-      ViewerGraph vg,
+      OntologyGraph vg,
       GraphNode root,
       GraphNodeType type) {
 
@@ -149,7 +149,7 @@ public class RestrictionGraphDataHandler {
     }
   }
 
-  private ViewerGraph handleInheritedAxiomsGraph(OWLClass clazz, ViewerGraph vg, OWLOntology ontology) {
+  private OntologyGraph handleInheritedAxiomsGraph(OWLClass clazz, OntologyGraph vg, OWLOntology ontology) {
 
     owlUtils.getSuperClasses(clazz, ontology).forEach((owlClass) -> {
       Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(owlClass).iterator();
