@@ -152,8 +152,8 @@ public class OntologyVisitors {
         
 
         GraphRelation rel = new GraphRelation(vg.nextId());
-        rel.setIri("#");
-        rel.setLabel("type");
+        rel.setIri("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+        rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")));
         rel.setStart(node);
         rel.setEnd(endNode);
         rel.setEndNodeType(type);
