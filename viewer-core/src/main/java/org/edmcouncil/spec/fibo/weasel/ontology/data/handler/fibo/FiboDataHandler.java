@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
@@ -208,7 +209,10 @@ public class FiboDataHandler {
      */
     public OntoFiboMaturityLevel getMaturityLevelForElement(String iri, OWLOntology ontology) {
         String ontologyIri = findElementInOntology(iri);
-        return getMaturityLevelFromOntology(IRI.create(ontologyIri), ontology);
+        if (ontologyIri != null ) {
+            return getMaturityLevelFromOntology(IRI.create(ontologyIri), ontology);
+        }
+return null;
     }
 
     private OntoFiboMaturityLevel getMaturityLevelFromOntology(IRI iri, OWLOntology ontology) {
@@ -292,6 +296,15 @@ public class FiboDataHandler {
             }
 
         }
+        selectedOntology.annotationPropertiesInSignature()
+                .map(c -> {
+                    String istring = c.getIRI().toString();
+                    OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
+                    return pv;
+                })
+                .forEachOrdered(c -> ontoResources
+                .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.annotationProperty), c));
+        
         selectedOntology.classesInSignature()
                 .map(c -> {
                     String istring = c.getIRI().toString();
@@ -550,7 +563,7 @@ public class FiboDataHandler {
     private FiboMaturityLevel chooseTheRightVersion(OntoFiboMaturityLevel maturityLevelFromOntology) {
         if (maturityLevelFromOntology.getIri().equals(RELEASE_IRI)) {
             return FiboMaturityLevelFactory.prod;
-        } else  if (maturityLevelFromOntology.getIri().equals("")) {
+        } else if (maturityLevelFromOntology.getIri().equals("")) {
             return FiboMaturityLevelFactory.emptyAppFiboMaturityLabel();
         } else {
             return FiboMaturityLevelFactory.dev;
@@ -570,7 +583,7 @@ public class FiboDataHandler {
                 devCount++;
             }
         }
-        LOG.trace("Version select, prodCount:{}, devCount:{}, size:{}", prodCount,devCount,levels.size());
+        LOG.trace("Version select, prodCount:{}, devCount:{}, size:{}", prodCount, devCount, levels.size());
         if (prodCount == levels.size()) {
             return FiboMaturityLevelFactory.prod;
         } else if (devCount == levels.size()) {

@@ -93,8 +93,8 @@ public class DetailsManager {
     result.setIri(iriString);
 
     //Path to element in modules
-    List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontologyManager.getOntology());
-    result.setLocationInModules(elementLocation);
+   // List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontologyManager.getOntology());
+  //  result.setLocationInModules(elementLocation);
 
     //Group elements if in the
     if (!config.getViewerCoreConfig().isEmpty()) {
