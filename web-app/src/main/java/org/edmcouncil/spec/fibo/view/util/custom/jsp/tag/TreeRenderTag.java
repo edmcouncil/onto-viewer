@@ -20,10 +20,11 @@ public class TreeRenderTag extends SimpleTagSupport {
   private static final String WRAPPER_PATTERN = "<%1$s> %2$s </%1$s>";
   private static final String SPAN_WRAPPER_CARET_PATTERN = "<span class=\"caret\">%s</span>";
   private static final String SPAN_WRAPPER_CARET_DOWN_PATTERN = "<span class=\"caret caret-down font-weight-bold\">%s</span>";
-  private static final String SPAN_WRAPPER_CLEAN_PATTERN = "<span>%s</span>";
+  private static final String SPAN_WRAPPER_CLEAN_PATTERN = "<span class=\"ml-4\">%s</span>";
   private static final String SPAN_WRAPPER_CLEAN_MATCH_PATTERN = "<span class=\"font-weight-bold\">%s</span>";
   private static final String UL_NESTED = "<ul class=\"nested\">";
   private static final String UL_NESTED_ACTIVE = "<ul class=\"nested active\">";
+  private static final String MATURITY_INDICATOR_PATTERN="<i class=\"%sIndicator\"></i>";
 
   private String elementWrapper;
   private String searchPath;
@@ -95,14 +96,15 @@ public class TreeRenderTag extends SimpleTagSupport {
     } else {
       if (elementLocation != null && elementLocation.contains(link)) {
         text = wrapSpanCleanMatch(emptyDisplayedVal);
-         result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
+        result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
       } else {
         text = wrapSpanClean(emptyDisplayedVal);
       }
-
     }
     renderElement(text);
+    renderElement(String.format(MATURITY_INDICATOR_PATTERN, property.getMaturityLevel().getLabel()));
     renderElement(result);
+    
     if (fmList != null && fmList.size() > 0) {
 
       if (elementLocation != null && elementLocation.contains(link)) {

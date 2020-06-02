@@ -3,6 +3,20 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- handle dataproperties annotaions
+- load default ontologies (dcterms, owl, rdf-schema, rdf-syntax, skos, fibo-glosary) from resource folder in application
+- full configurable searcher
+- specially endpoint for hints
+
+### Changed
+- displaying OWLDataExactCardinality in graph
+- graph in json being returned in string value
+- changing the storing and returning graph value from generating string to objects
+
+### Removed
+- 
+
 
 ## [0.1.0] - 2019-11-08
 ### Added
@@ -16,10 +30,3 @@ All notable changes to this project will be documented in this file.
 - label support
 - graph from the OWLRestriction for class
 - ignore some items to display defined in configuration file
-
-
-### Changed
--
-
-### Removed
-- 

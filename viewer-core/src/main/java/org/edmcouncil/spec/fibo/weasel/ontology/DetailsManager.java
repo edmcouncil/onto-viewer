@@ -22,15 +22,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigItem;
 import org.edmcouncil.spec.fibo.weasel.changer.ChangerIriToLabel;
+import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
-public class DataManager {
+public class DetailsManager {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DataManager.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DetailsManager.class);
   private static final String DEFAULT_GROUP_NAME = "other";
 
   @Autowired
@@ -46,45 +47,58 @@ public class DataManager {
     return ontologyManager.getOntology();
   }
 
-  public <T extends OwlDetails> T getDetailsByIri(String iriString) {
+  public <T extends OwlDetails> T getDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
     IRI iri = IRI.create(iriString);
     OwlListDetails result = null;
     //FIBO: if '/' is at the end of the URL, we extract the ontolog metadata
     if (iriString.endsWith("/")) {
       LOG.debug("Handle ontology metadata. IRI: {}", iriString);
-      OwlListDetails wd = dataHandler.handleOntologyMetadata(iri, ontologyManager.getOntology());
+      OwlListDetails wd = dataHandler.handleOntologyMetadata(iri, getOntology());
 
       result = wd;
     } else {
       if (ontologyManager.getOntology().containsClassInSignature(iri)) {
         LOG.debug("Handle class data.");
-        OwlListDetails wd = dataHandler.handleParticularClass(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularClass(iri, getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri)) {
         LOG.info("Handle data property.");
-        OwlListDetails wd = dataHandler.handleParticularDataProperty(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularDataProperty(iri, getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri)) {
         LOG.info("Handle object property.");
-        OwlListDetails wd = dataHandler.handleParticularObjectProperty(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularObjectProperty(iri, getOntology());
         result = wd;
       } else if (ontologyManager.getOntology().containsIndividualInSignature(iri)) {
         LOG.info("Handle individual data.");
-        OwlListDetails wd = dataHandler.handleParticularIndividual(iri, ontologyManager.getOntology());
+        OwlListDetails wd = dataHandler.handleParticularIndividual(iri, getOntology());
         result = wd;
+      } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri)) {
+        LOG.info("Handle datatype");
+        OwlListDetails wd = dataHandler.handleParticularDatatype(iri, getOntology());
+        result = wd;
+      } else if (ontologyManager.getOntology().containsAnnotationPropertyInSignature(iri)) {
+        LOG.info("Handle annotation property");
+        OwlListDetails wd = dataHandler.handleParticularAnnotationProperty(iri, getOntology());
+        result = wd;
+      }
+      if (result != null) {
+        result.setMaturityLevel(dataHandler.getMaturityLevel(iriString, getOntology()));
       }
     }
     if (result == null) {
-      throw new NoSuchFieldError("Result is a null, no value present. Element IRI: " + iriString);
+      throw new NotFoundElementInOntologyException("Not found element in ontology with IRI: " + iriString);
     }
+
     result.setIri(iriString);
 
     //Path to element in modules
     List<String> elementLocation = dataHandler.getElementLocationInModules(iriString, ontologyManager.getOntology());
     result.setLocationInModules(elementLocation);
 
-    if (!config.getWeaselConfig().isEmpty()) {
-      ViewerCoreConfiguration cfg = config.getWeaselConfig();
+    //Group elements if in the
+    if (!config.getViewerCoreConfig().isEmpty()) {
+      ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
       if (cfg.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, cfg);
 
@@ -117,13 +131,18 @@ public class DataManager {
     groupedDetails.setLocationInModules(owlDetails.getLocationInModules());
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
+    groupedDetails.setMaturityLevel(owlDetails.getMaturityLevel());
+
     groupedDetails.sortProperties(groups, cfg);
+
     //first must be sorted next we need to change keys
     groupedDetails = changerIriToLabel.changeIriKeysInGroupedDetails(groupedDetails);
 
     for (Map.Entry<String, Map<String, List<PropertyValue>>> entry : groupedDetails.getProperties().entrySet()) {
       LOG.debug(entry.toString());
     }
+
+    owlDetails.release();
 
     newResult = groupedDetails;
     return newResult;
@@ -146,7 +165,7 @@ public class DataManager {
   }
 
   private void sortResults(OwlListDetails result) {
-    Set set = (Set) config.getWeaselConfig()
+    Set set = config.getViewerCoreConfig()
         .getConfigVal(ConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;

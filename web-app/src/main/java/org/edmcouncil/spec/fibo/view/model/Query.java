@@ -7,6 +7,9 @@ public class Query {
 
   private String value;
 
+  public Query() {
+  }
+
   public String getValue() {
     return value;
   }

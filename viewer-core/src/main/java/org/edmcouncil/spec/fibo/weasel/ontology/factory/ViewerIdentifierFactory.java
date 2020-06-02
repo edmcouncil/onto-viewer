@@ -1,7 +1,5 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.factory;
 
-import org.semanticweb.owlapi.model.IRI;
-
 /**
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -11,7 +9,7 @@ public class ViewerIdentifierFactory {
   private static final String IRI_FORMAT = "@viewer.%s.%s";
 
   public enum Element {
-    clazz, dataProperty, objectProperty, instance, empty
+    clazz, dataProperty, objectProperty, instance, empty, annotationProperty
   }
 
   public enum Type {
@@ -20,7 +18,7 @@ public class ViewerIdentifierFactory {
 
   /**
    * IRI creation using the pattern. This IRI is used in the "Fibo-viewer" functions to recognize
-   * elements that are not represented by IRI. The pattern looks like http: //viewer.type#element.
+   * elements that are not represented by IRI. The pattern looks like @viewer.type#element.
    *
    * @param type Specific type
    * @param element Specific element
@@ -36,7 +34,7 @@ public class ViewerIdentifierFactory {
 
    /**
    * IRI creation using the pattern. This IRI is used in the "Fibo-viewer" functions to recognize
-   * elements that are not represented by IRI. The pattern looks like http: //viewer.type#element.
+   * elements that are not represented by IRI. The pattern looks like @viewer.type#element.
    *
    * @param type Specific type
    * @param element Specific element

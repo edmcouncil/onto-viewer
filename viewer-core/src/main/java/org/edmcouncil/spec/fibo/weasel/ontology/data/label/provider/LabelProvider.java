@@ -38,7 +38,7 @@ public class LabelProvider {
 
   private static final Logger LOG = LoggerFactory.getLogger(LabelProvider.class);
 
-  private Map<IRI, String> previouslyUsedLabels = new HashMap<>();
+  private final Map<String, String> previouslyUsedLabels = new HashMap<>();
 
   @Autowired
   private OntologyManager ontology;
@@ -51,7 +51,7 @@ public class LabelProvider {
 
   @Inject
   public LabelProvider(AppConfiguration config) {
-    ViewerCoreConfiguration weaselConfig = (ViewerCoreConfiguration) config.getWeaselConfig();
+    ViewerCoreConfiguration weaselConfig = config.getViewerCoreConfig();
     this.forceLabelLang = weaselConfig.isForceLabelLang();
     this.labelLang = weaselConfig.getLabelLang();
     this.useLabels = weaselConfig.useLabels();
@@ -70,11 +70,11 @@ public class LabelProvider {
     DefaultAppLabels defAppLabels = DefaultLabelsFactory.createDefaultAppLabels();
 
     for (Map.Entry<IRI, String> entry : defAppLabels.getLabels().entrySet()) {
-      previouslyUsedLabels.put(entry.getKey(), entry.getValue());
+      previouslyUsedLabels.put(entry.getKey().toString(), entry.getValue());
     }
     if (useLabels && groupLabelPriority == Priority.USER_DEFINED) {
       defaultUserLabels.forEach((defaultLabel) -> {
-        previouslyUsedLabels.put(IRI.create(defaultLabel.getIri()), defaultLabel.getLabel());
+        previouslyUsedLabels.put(defaultLabel.getIri(), defaultLabel.getLabel());
       });
     }
   }
@@ -83,8 +83,8 @@ public class LabelProvider {
     if (entity == null) {
       return null;
     }
-    if (previouslyUsedLabels.containsKey(entity.getIRI())) {
-      String label = previouslyUsedLabels.get(entity.getIRI());
+    if (previouslyUsedLabels.containsKey(entity.getIRI().toString())) {
+      String label = previouslyUsedLabels.get(entity.getIRI().toString());
       LOG.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, entity.getIRI().toString());
       return label;
     }
@@ -126,10 +126,13 @@ public class LabelProvider {
           .findFirst()
           .get().getKey();
     }
-    previouslyUsedLabels.put(entity.getIRI(), labelResult);
+    previouslyUsedLabels.put(entity.getIRI().toString(), labelResult);
     return labelResult;
   }
 
+  /**
+   * Return selected lebel with
+   */
   private String getTheRightLabel(Map<String, String> labels, IRI entityIri) {
     Optional<String> optionalLab = labels.entrySet()
         .stream()
@@ -181,8 +184,8 @@ public class LabelProvider {
 
   public String getLabelOrDefaultFragment(IRI iri) {
 
-    if (previouslyUsedLabels.containsKey(iri)) {
-      String label = previouslyUsedLabels.get(iri);
+    if (previouslyUsedLabels.containsKey(iri.toString())) {
+      String label = previouslyUsedLabels.get(iri.toString());
       LOG.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label, iri.toString());
       return label;
     }
@@ -201,14 +204,17 @@ public class LabelProvider {
     OWLOntologyManager manager = ontology.getOntology().getOWLOntologyManager();
     OWLDataFactory df = OWLManager.getOWLDataFactory();
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
-      if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
-        onto.annotations(df.getRDFSLabel()).collect(Collectors.toSet()).forEach((annotation) -> {
-          String label = annotation.annotationValue().asLiteral().get().getLiteral();
+      Optional<IRI> opt = onto.getOntologyID().getOntologyIRI();
+      if (opt.isPresent()) {
+        if (opt.get().equals(iri)) {
+          onto.annotations(df.getRDFSLabel()).collect(Collectors.toSet()).forEach((annotation) -> {
+            String label = annotation.annotationValue().asLiteral().get().getLiteral();
 
-          String lang = annotation.annotationValue().asLiteral().get().getLang();
-          labelProcessing(lang, labels, label, iri);
-        });
-        break;
+            String lang = annotation.annotationValue().asLiteral().get().getLang();
+            labelProcessing(lang, labels, label, iri);
+          });
+          break;
+        }
       }
     }
     String labelResult = null;

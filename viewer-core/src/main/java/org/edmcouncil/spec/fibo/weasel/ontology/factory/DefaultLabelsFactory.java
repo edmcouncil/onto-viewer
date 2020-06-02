@@ -17,6 +17,7 @@ public class DefaultLabelsFactory {
     String iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external, ViewerIdentifierFactory.Element.clazz);
     result.addLabel(iri, DefaultAppLabels.DEF_EXT_CLASS);
     
+  
     iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal, ViewerIdentifierFactory.Element.clazz);
     result.addLabel(iri, DefaultAppLabels.DEF_INT_CLASS);
     
