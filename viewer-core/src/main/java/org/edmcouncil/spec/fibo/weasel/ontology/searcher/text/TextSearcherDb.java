@@ -19,6 +19,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.hint.HintItem;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLLiteral;
@@ -58,7 +59,6 @@ public class TextSearcherDb {
 
   /**
    * Initialize database.
-   *
    */
   @PostConstruct
   public void init() {
@@ -81,6 +81,10 @@ public class TextSearcherDb {
     entities.collect(Collectors.toSet()).forEach((owlEntity) -> {
       collectEntityData(owlEntity, onto);
     });
+    
+    for (OWLOntology owlOntology : om.getOntology().getOWLOntologyManager().ontologies().collect(Collectors.toSet())) {
+      collectOntologyData(owlOntology, onto);
+    }
 
     LOG.info("End of initialize TextSearcherDB");
   }
@@ -88,6 +92,16 @@ public class TextSearcherDb {
   private void collectEntityData(OWLEntity owlEntity, OWLOntology onto) {
     Stream<OWLAnnotation> annotations = EntitySearcher.getAnnotations(owlEntity, onto);
     String entityIri = owlEntity.getIRI().toString();
+    LOG.trace("Entity IRI: {}", entityIri);
+    TextDbItem tdi = collectValues(annotations);
+
+    if (!tdi.isEmpty()) {
+      db.put(entityIri, tdi);
+    }
+  }
+  private void collectOntologyData(OWLOntology owlOntology, OWLOntology onto) {
+    Stream<OWLAnnotation> annotations = owlOntology.annotations();
+    String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create("")).toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
 

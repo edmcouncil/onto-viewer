@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import org.edmcouncil.spec.fibo.weasel.model.OwlTaxonomy;
 import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisGraph;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.OntoFiboMaturityLevel;
 
 /**
  *
@@ -19,15 +20,14 @@ public class OwlDetails {
   private List<String> locationInModules;
   private VisGraph graph;
 
-    public VisGraph getGraph() {
-        return graph;
-    }
+  public VisGraph getGraph() {
+    return graph;
+  }
 
-    public void setGraph(VisGraph graph) {
-        this.graph = graph;
-    }
-
-
+  public void setGraph(VisGraph graph) {
+    this.graph = graph;
+  }
+  private OntoFiboMaturityLevel maturityLevel;
 
   public String getLabel() {
     return label;
@@ -75,6 +75,14 @@ public class OwlDetails {
 
   public OwlTaxonomy getTaxonomy() {
     return this.taxonomy;
+  }
+
+  public void setMaturityLevel(OntoFiboMaturityLevel fml) {
+    this.maturityLevel = fml;
+  }
+
+  public OntoFiboMaturityLevel getMaturityLevel() {
+    return maturityLevel;
   }
 
   @Override

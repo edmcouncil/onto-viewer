@@ -73,20 +73,23 @@ public class DetailsManager {
         LOG.info("Handle individual data.");
         OwlListDetails wd = dataHandler.handleParticularIndividual(iri, getOntology());
         result = wd;
-      } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri)){
+      } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri)) {
         LOG.info("Handle datatype");
         OwlListDetails wd = dataHandler.handleParticularDatatype(iri, getOntology());
         result = wd;
-      } else if (ontologyManager.getOntology().containsAnnotationPropertyInSignature(iri)){
+      } else if (ontologyManager.getOntology().containsAnnotationPropertyInSignature(iri)) {
         LOG.info("Handle annotation property");
         OwlListDetails wd = dataHandler.handleParticularAnnotationProperty(iri, getOntology());
         result = wd;
+      }
+      if (result != null) {
+        result.setMaturityLevel(dataHandler.getMaturityLevel(iriString, getOntology()));
       }
     }
     if (result == null) {
       throw new NotFoundElementInOntologyException("Not found element in ontology with IRI: " + iriString);
     }
-    
+
     result.setIri(iriString);
 
     //Path to element in modules
@@ -128,18 +131,19 @@ public class DetailsManager {
     groupedDetails.setLocationInModules(owlDetails.getLocationInModules());
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
-    
+    groupedDetails.setMaturityLevel(owlDetails.getMaturityLevel());
+
     groupedDetails.sortProperties(groups, cfg);
-    
+
     //first must be sorted next we need to change keys
     groupedDetails = changerIriToLabel.changeIriKeysInGroupedDetails(groupedDetails);
 
     for (Map.Entry<String, Map<String, List<PropertyValue>>> entry : groupedDetails.getProperties().entrySet()) {
       LOG.debug(entry.toString());
     }
-    
+
     owlDetails.release();
-    
+
     newResult = groupedDetails;
     return newResult;
   }

@@ -16,24 +16,28 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.vis.VisRelation;
  */
 public class ViewerGraphFactory {
 
-    public VisGraph convertToVisGraph(OntologyGraph og) {
-        VisGraph result = new VisGraph();
-        VisNodeConverter vnc = new VisNodeConverter();
-        VisRelationConverter vrc = new VisRelationConverter();
+  public ViewerGraphFactory() {
 
-        Set<VisNode> allNodes = new HashSet<>();
-        for (GraphNode node : og.getNodes()) {
-            allNodes.add(vnc.convert(node));
-        }
+  }
 
-        Set<VisRelation> allRelation = new HashSet<>();
-        for (GraphRelation relation : og.getRelations()) {
-            allRelation.add(vrc.convert(relation));
-        }
-        
-        result.setNodes(allNodes);
-        result.setEdges(allRelation);
-        return result;
+  public VisGraph convertToVisGraph(OntologyGraph og) {
+    VisGraph result = new VisGraph();
+    VisNodeConverter vnc = new VisNodeConverter();
+    VisRelationConverter vrc = new VisRelationConverter();
+
+    Set<VisNode> allNodes = new HashSet<>();
+    for (GraphNode node : og.getNodes()) {
+      allNodes.add(vnc.convert(node));
     }
+
+    Set<VisRelation> allRelation = new HashSet<>();
+    for (GraphRelation relation : og.getRelations()) {
+      allRelation.add(vrc.convert(relation));
+    }
+
+    result.setNodes(allNodes);
+    result.setEdges(allRelation);
+    return result;
+  }
 
 }
