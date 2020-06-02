@@ -1,7 +1,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var = "context" value = "*"/>
+<c:set var = "releaseLabel" value = "release"/>
 
-<div class="my-3 px-3">
+<div class="mb-3 px-3">
+  <c:if test="${not empty clazz.maturityLevel && not empty clazz.maturityLevel.label && clazz.maturityLevel.label ne releaseLabel}">
+    <div class="row ml-0 pl-0">
+      <div class="alert alert-warning col-12" role="alert">
+        This resource is on <i><b>${clazz.maturityLevel.label}</b></i> maturity level. Read more about <a class="alert-link" href="search?query=${clazz.maturityLevel.iri}">${clazz.maturityLevel.label}</a>.  
+      </div>
+    </div>
+  </c:if>
+
+  <c:if test="${empty clazz.maturityLevel}">
+    <div class="row ml-0 pl-0">
+      <div class="alert alert-danger col-12" role="alert">
+        Maturity level does not defined.
+      </div>
+    </div>
+  </c:if>
 
   <div class="row">
     <h3><b class="">${clazz.label}</b></h3>
