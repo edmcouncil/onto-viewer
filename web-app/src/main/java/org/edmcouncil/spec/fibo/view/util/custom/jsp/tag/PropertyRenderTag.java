@@ -212,25 +212,26 @@ public class PropertyRenderTag extends SimpleTagSupport {
     return result;
   }
 
-  private void renderDirectedSubclasses(PropertyValue property) throws IOException {
+private void renderDirectedSubclasses(PropertyValue property) throws IOException {
     OwlDirectedSubClassesProperty subclassProperty = (OwlDirectedSubClassesProperty) property;
     PairImpl value = subclassProperty.getValue();
-    String link = wrapIri((String) value.getValueB(), (String) value.getValueA());
+    String link = wrapIri((String) value.getIri(), (String) value.getLabel());
     renderProperty(link);
   }
 
   private void renderInstances(PropertyValue property) throws IOException {
     OwlListElementIndividualProperty instanceProperty = (OwlListElementIndividualProperty) property;
     PairImpl value = instanceProperty.getValue();
-    String link = wrapIri((String) value.getValueB(), (String) value.getValueA());
+    String link = wrapIri((String) value.getIri(), (String) value.getLabel());
     renderProperty(link);
   }
 
   private void renderModules(PropertyValue property) throws IOException {
     OwlFiboModuleProperty fiboModuleProperty = (OwlFiboModuleProperty) property;
     PairImpl value = fiboModuleProperty.getValue();
-    String link = wrapIri((String) value.getValueB(), (String) value.getValueA());
+    String link = wrapIri((String) value.getIri(), (String) value.getLabel());
     renderProperty(link);
   }
+
 
 }

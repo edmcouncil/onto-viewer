@@ -3,46 +3,38 @@ package org.edmcouncil.spec.fibo.config.configuration.model;
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  *
- * @param <A>
- * @param <B>
+ * @param <String>
+ * @param <IRI>
  */
 @Deprecated
-public class PairImpl<A, B> implements Pair<A, B> {
+public class PairImpl<String, IRI> implements Pair<String, IRI> {
 
-  private A valA;
-  private B valB;
+  private String label;
+  private IRI iri;
 
   public PairImpl() {
   }
 
-  public PairImpl(A valA, B valB) {
-    this.valA = valA;
-    this.valB = valB;
-  }
-
-
-
-  @Override
-  public A getValueA() {
-    return this.valA;
+  public PairImpl(String label, IRI iri) {
+    this.label = label;
+    this.iri = iri;
   }
 
   @Override
-  public B getValueB() {
-    return this.valB;
-  }
-
-  public void setValueA(A valA) {
-    this.valA = valA;
-  }
-
-  public void setValueB(B valB) {
-    this.valB = valB;
+  public String getLabel() {
+    return this.label;
   }
 
   @Override
-  public String toString() {
-    return "Pair<" + valA + ", " + valB + '>';
+  public IRI getIri() {
+    return this.iri;
   }
 
+  public void setLabel(String label) {
+    this.label = label;
+  }
+
+  public void setIri(IRI iri) {
+    this.iri = iri;
+  }
 }

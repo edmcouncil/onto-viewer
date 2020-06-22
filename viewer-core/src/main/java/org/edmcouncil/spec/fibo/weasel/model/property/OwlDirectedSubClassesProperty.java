@@ -9,6 +9,6 @@ public class OwlDirectedSubClassesProperty extends PropertyValueAbstract<PairImp
 
   @Override
   public String toString() {
-    return super.getValue().getValueA().toString();
+    return super.getValue().getLabel().toString();
   }
 }

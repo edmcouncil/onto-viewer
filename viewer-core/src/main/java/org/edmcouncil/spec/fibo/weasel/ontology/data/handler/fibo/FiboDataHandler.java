@@ -145,7 +145,7 @@ public class FiboDataHandler {
 
         indi.getProperties().get(instanceKey).stream()
                 .map((propertyValue) -> (OwlListElementIndividualProperty) propertyValue)
-                .map((individProperty) -> (String) individProperty.getValue().getValueB())
+                .map((individProperty) -> (String) individProperty.getValue().getIri())
                 .forEachOrdered((elIri) -> {
                     modulesIriSet.add(elIri);
                 });
@@ -205,10 +205,10 @@ public class FiboDataHandler {
      */
     public OntoFiboMaturityLevel getMaturityLevelForElement(String iri, OWLOntology ontology) {
         String ontologyIri = findElementInOntology(iri);
-        if (ontologyIri != null ) {
+        if (ontologyIri != null) {
             return getMaturityLevelFromOntology(IRI.create(ontologyIri), ontology);
         }
-return null;
+        return null;
     }
 
     private OntoFiboMaturityLevel getMaturityLevelFromOntology(IRI iri, OWLOntology ontology) {
@@ -300,7 +300,7 @@ return null;
                 })
                 .forEachOrdered(c -> ontoResources
                 .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.annotationProperty), c));
-        
+
         selectedOntology.classesInSignature()
                 .map(c -> {
                     String istring = c.getIRI().toString();
