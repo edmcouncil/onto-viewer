@@ -90,4 +90,12 @@ public class FileSystemManager {
     }
   }
 
+  public Path getPathToApiKey() {
+    return getviewerHomeDir().resolve("api.key");
+  }
+
+  public Path getPathToUpdateHistory() {
+    return getviewerHomeDir().resolve("updateHistory.json");
+  }
+
 }

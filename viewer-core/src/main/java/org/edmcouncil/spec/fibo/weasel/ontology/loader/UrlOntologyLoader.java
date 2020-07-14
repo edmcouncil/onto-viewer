@@ -43,36 +43,29 @@ class UrlOntologyLoader implements OntologyLoader {
 
     LOG.debug("URL to Ontology : {} ", path);
     HttpGet httpGet = new HttpGet(path);
+    httpGet.addHeader("Accept", "application/rdf+xml, application/xml; q=0.7, text/xml; q=0.6, text/plain; q=0.1, */*; q=0.09");
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-    CloseableHttpClient httpClient = HttpClients.createDefault();
-    HttpResponse response = httpClient.execute(httpGet);
-    HttpEntity entity = response.getEntity();
-    if (entity != null) {
-      InputStream inputStream = entity.getContent();
-
-      //manager.makeLoadImportRequest(importDeclaration);
-      OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
-
-      IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
-      //IRI fiboIRI = IRI.create("*");
-      makeDefaultsOntologiesImport(manager, newOntology);
-      OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
-      manager.makeLoadImportRequest(declaration);
-      Stream<OWLOntology> imports = manager.imports(newOntology);
-
-      //Set<OWLOntology> ontologiesTmp = imports.collect(Collectors.toSet());
-      //LOG.debug("OntologiesTmp size a: {}", ontologiesTmp.size());
-      //ontologiesTmp.addAll(getDefaultOntologies(manager));
-      //LOG.debug("OntologiesTmp size b: {}", ontologiesTmp.size());
-      //imports = ontologiesTmp.stream();
-      LOG.debug("Create Ontology from ontology list");
-      //OWLOntologyManager m = OWLManager.createOWLOntologyManager();
-
-      newOntology = manager.createOntology(fiboIRI, imports, false);
-      httpClient.close();
-      return newOntology;
+    try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+      HttpResponse response = httpClient.execute(httpGet);
+      HttpEntity entity = response.getEntity();
+      if (entity != null) {
+        InputStream inputStream = entity.getContent();
+        
+        //manager.makeLoadImportRequest(importDeclaration);
+        OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
+        
+        IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
+        
+        //makeDefaultsOntologiesImport(manager, newOntology);
+        OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
+        manager.makeLoadImportRequest(declaration);
+        Stream<OWLOntology> imports = manager.imports(newOntology);
+        
+        newOntology = manager.createOntology(fiboIRI, imports, false);
+        httpClient.close();
+        return newOntology;
+      }
     }
-    httpClient.close();
     return null;
   }
 

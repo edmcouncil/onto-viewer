@@ -51,10 +51,11 @@ public class TaxonomyElementRenderTag extends SimpleTagSupport {
   private void renderTaxonomyElement(OwlTaxonomyElementImpl property) throws IOException {
     String link = null;
     String val = null;
-    OwlTaxonomyValue otv1 = property.getValueA();
-    OwlTaxonomyValue otv2 = property.getValueB();
-    link = otv1.getType().equals(WeaselOwlType.IRI) ? otv1.getValue() : otv2.getValue();
-    val = otv1.getType().equals(WeaselOwlType.STRING) ? otv1.getValue() : otv2.getValue();
+      String otv1 = property.getIri();
+    String otv2 = property.getLabel();
+
+    link = property.getIri().equals(WeaselOwlType.IRI) ? property.getIri() : property.getLabel();
+    val = property.getLabel().equals(WeaselOwlType.STRING) ? property.getIri() : property.getLabel();
     String result = wrapToLink(link, val);
 
     renderElement(result);

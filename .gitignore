@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/java,eclipse,netbeans,intellij,java-web
 # Edit at https://www.gitignore.io/?templates=java,eclipse,netbeans,intellij,java-web
 
@@ -197,3 +196,4 @@ nbactions.xml
 /weasel/nbproject/
 */catalog-v001.xml
 **/nb-configuration.xml
+**/api.key

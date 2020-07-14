@@ -5,8 +5,8 @@ package org.edmcouncil.spec.fibo.config.configuration.model;
  */
 public interface Pair<A, B> {
 
-  A getValueA();
+  A getLabel();
 
-  B getValueB();
+  B getIri();
 
 }

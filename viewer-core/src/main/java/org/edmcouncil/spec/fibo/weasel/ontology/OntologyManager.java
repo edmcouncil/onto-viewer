@@ -56,4 +56,8 @@ public class OntologyManager {
   public OWLOntology getOntology() {
     return ontology;
   }
+  
+  public void updateOntology(OWLOntology ont){
+    this.ontology = ont;
+  }
 }
