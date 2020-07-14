@@ -197,3 +197,4 @@ nbactions.xml
 */catalog-v001.xml
 **/nb-configuration.xml
 **/api.key
+**/updateHistory.json
