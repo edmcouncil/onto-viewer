@@ -50,18 +50,18 @@ class UrlOntologyLoader implements OntologyLoader {
       HttpEntity entity = response.getEntity();
       if (entity != null) {
         InputStream inputStream = entity.getContent();
-        
+
         //manager.makeLoadImportRequest(importDeclaration);
         OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
-        
-        IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
-        
+
+        IRI ontoIri = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
+
         //makeDefaultsOntologiesImport(manager, newOntology);
         OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
         manager.makeLoadImportRequest(declaration);
         Stream<OWLOntology> imports = manager.imports(newOntology);
-        
-        newOntology = manager.createOntology(fiboIRI, imports, false);
+
+        newOntology = manager.createOntology(ontoIri, imports, false);
         httpClient.close();
         return newOntology;
       }
@@ -82,7 +82,6 @@ class UrlOntologyLoader implements OntologyLoader {
       manager.applyChange(new AddImport(ontology, importDeclaration));
       manager.makeLoadImportRequest(importDeclaration);
     }
-
   }
 
 }
