@@ -209,8 +209,7 @@
             <userDefinedName>
                 <resourceIriToName>@viewer.external.annotationProperty</resourceIriToName>
                 <resourceIriName>external annotation property</resourceIriName>
-            </userDefinedName>  
-  
+            </userDefinedName>    
         </userDefaultNameList>
     
     </labelConfig>
