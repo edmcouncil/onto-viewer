@@ -10,6 +10,7 @@ public class GraphRelation extends GraphElement {
   private GraphNode end;
   private boolean optional;
   private GraphNodeType endNodeType;
+  private Boolean equivalentTo = false;
 
   public GraphRelation(int id) {
     super(id);
@@ -45,6 +46,14 @@ public class GraphRelation extends GraphElement {
 
   public boolean isOptional() {
     return optional;
+  }
+
+  public Boolean getEquivalentTo() {
+    return equivalentTo;
+  }
+
+  public void setEquivalentTo(Boolean equivalentTo) {
+    this.equivalentTo = equivalentTo;
   }
 
   @Override

@@ -30,6 +30,10 @@ public class VisRelationConverter {
 
         String typeVariable = (gr.getEndNodeType() == GraphNodeType.INTERNAL ? "internal" : "external");
         result.setType(typeVariable);
+         result.setEquivalentTo(gr.getEquivalentTo());
+    if (gr.getEquivalentTo()) {
+      result.setArrows("to;from");
+    }
         return result;
     }
 

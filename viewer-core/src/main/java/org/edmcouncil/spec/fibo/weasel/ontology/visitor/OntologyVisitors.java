@@ -9,7 +9,6 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphRelation;
 import org.edmcouncil.spec.fibo.weasel.model.graph.OntologyGraph;
-import org.edmcouncil.spec.fibo.weasel.model.graph.viewer.ViewerGraph;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.model.ClassExpressionType;
@@ -25,8 +24,10 @@ import org.semanticweb.owlapi.model.OWLDataMinCardinality;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectExactCardinality;
+import org.semanticweb.owlapi.model.OWLObjectIntersectionOf;
 import org.semanticweb.owlapi.model.OWLObjectMaxCardinality;
 import org.semanticweb.owlapi.model.OWLObjectMinCardinality;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
@@ -46,6 +47,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OntologyVisitors {
 
+  private static final String THING_IRI = "http://www.w3.org/2002/07/owl#Thing";
   private static final Logger LOG = LoggerFactory.getLogger(OntologyVisitors.class);
   private static final String DEFAULT_BLANK_NODE_LABEL = "Thing";
 
@@ -75,7 +77,12 @@ public class OntologyVisitors {
   }
 
   public final OWLObjectVisitorEx<Map<GraphNode, Set<OWLClassExpression>>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type) {
+    return superClassAxiom(vg, node, type, false);
 
+  }
+
+  public final OWLObjectVisitorEx<Map<GraphNode, Set<OWLClassExpression>>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type, Boolean equivalentTo) {
+    LOG.debug("SuperClass Axiom Visitor {}");
     return new OWLObjectVisitorEx() {
 
       @Override
@@ -122,6 +129,7 @@ public class OntologyVisitors {
             GraphNode blankNode = new GraphNode(vg.nextId());
             blankNode.setType(type);
             blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
+            blankNode.setIri(THING_IRI);
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
             relSomeVal.setIri(propertyIri);
             relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
@@ -147,6 +155,90 @@ public class OntologyVisitors {
       public OWLRestriction doDefault(Object object) {
         LOG.debug("Unsupported axiom: " + object);
         return null;
+      }
+
+      @Override
+      public Map<GraphNode, Set<OWLClassExpression>> visit(OWLObjectIntersectionOf axiom) {
+        LOG.debug("visit OWLObjectIntersectionOf");
+        Map<GraphNode, Set<OWLClassExpression>> returnedVal = new HashMap<>();
+        Set<OWLClassExpression> axiomConjunct = axiom.conjunctSet().collect(Collectors.toSet());
+
+        GraphNode blankNode = new GraphNode(vg.nextId());
+        blankNode.setType(type);
+        blankNode.setIri(THING_IRI);
+        blankNode.setLabel("and");
+        GraphRelation relSomeVal = new GraphRelation(vg.nextId());
+        relSomeVal.setIri(DEFAULT_BLANK_NODE_LABEL);
+
+        relSomeVal.setStart(node);
+        relSomeVal.setEnd(blankNode);
+        relSomeVal.setEndNodeType(type);
+        relSomeVal.setEquivalentTo(equivalentTo);
+        vg.addNode(blankNode);
+        vg.addRelation(relSomeVal);
+        vg.setRoot(blankNode);
+        vg.setRoot(blankNode);
+
+        for (OWLClassExpression owlClassExpression : axiomConjunct) {
+          LOG.debug("Conjuct axioms {}", owlClassExpression.toString());
+          LOG.debug("getClassExpressionType {}", owlClassExpression.getClassExpressionType());
+
+          ClassExpressionType objectType = owlClassExpression.getClassExpressionType();
+          switch (objectType) {
+            case OWL_CLASS:
+              //  OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
+
+              String iri = null;
+              iri = extractStringObject(owlClassExpression, iri);
+
+              GraphNode endNode = new GraphNode(vg.nextId());
+              endNode.setIri(iri);
+              endNode.setType(type);
+              String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(iri));
+              endNode.setLabel(label);
+
+              GraphRelation rel = new GraphRelation(vg.nextId());
+
+              rel.setStart(blankNode);
+              rel.setEnd(endNode);
+              rel.setEndNodeType(type);
+              vg.addNode(endNode);
+              vg.addRelation(rel);
+
+              break;
+
+            default:
+              addValue(returnedVal, blankNode, owlClassExpression);
+
+          }
+        }
+        return returnedVal;
+      }
+
+      @Override
+      public Map<GraphNode, Set<OWLClassExpression>> visit(OWLEquivalentClassesAxiom axiom) {
+        LOG.debug("visit OWLEquivalentClassesAxiom");
+        Map<GraphNode, Set<OWLClassExpression>> returnedVal = new HashMap<>();
+
+        Set<OWLClassExpression> set = axiom.classExpressions().collect(Collectors.toSet());
+        for (OWLClassExpression owlClassExpression : set) {
+          LOG.debug("Visitor owlClassExpression {}", owlClassExpression.toString());
+          Set<OWLEntity> classExprssionSignature = owlClassExpression.signature().collect(Collectors.toSet());
+          boolean isTheSameIri = false;
+          for (OWLEntity owlEntity : classExprssionSignature) {
+            LOG.debug("Class Expression signature {}", owlEntity.toStringID());
+            if (node.getIri().equals(owlEntity.toStringID())) {
+              isTheSameIri = true;
+            }
+          }
+          if (classExprssionSignature.size() == 1 && isTheSameIri) {
+            continue;
+          }
+          addValue(returnedVal, node, owlClassExpression);
+        }
+
+        return returnedVal;
+
       }
 
       @Override
@@ -194,6 +286,7 @@ public class OntologyVisitors {
               GraphNode blankNode = new GraphNode(vg.nextId());
               blankNode.setType(type);
               blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
+              blankNode.setIri(THING_IRI);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
               relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
@@ -217,7 +310,6 @@ public class OntologyVisitors {
 
       @Override
       public Map<GraphNode, Set<OWLClassExpression>> visit(OWLObjectAllValuesFrom axiom) {
-        //int cardinality = axiom.getCardinality();
         LOG.debug("visit OWLObjectAllValuesFrom: {}", axiom.toString());
 
         String propertyIri = null;
@@ -262,6 +354,7 @@ public class OntologyVisitors {
             blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
             relSomeVal.setIri(propertyIri);
+            blankNode.setIri(THING_IRI);
             relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
             relSomeVal.setStart(node);
             relSomeVal.setEnd(blankNode);
@@ -402,6 +495,7 @@ public class OntologyVisitors {
               GraphNode blankNode = new GraphNode(vg.nextId());
               blankNode.setType(type);
               blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
+              blankNode.setIri(THING_IRI);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
               relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
@@ -466,7 +560,7 @@ public class OntologyVisitors {
               GraphNode blankNode = new GraphNode(vg.nextId());
               blankNode.setType(type);
               blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
-
+              blankNode.setIri(THING_IRI);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
               relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
@@ -518,7 +612,7 @@ public class OntologyVisitors {
           GraphNode blankNode = new GraphNode(vg.nextId());
           blankNode.setType(type);
           blankNode.setLabel("or");
-
+          blankNode.setIri(THING_IRI);
           GraphRelation relSomeVal = new GraphRelation(vg.nextId());
           relSomeVal.setStart(node);
           relSomeVal.setEnd(blankNode);
@@ -584,6 +678,7 @@ public class OntologyVisitors {
               GraphNode blankNode = new GraphNode(vg.nextId());
               blankNode.setType(type);
               blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
+              blankNode.setIri(THING_IRI);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
               relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));

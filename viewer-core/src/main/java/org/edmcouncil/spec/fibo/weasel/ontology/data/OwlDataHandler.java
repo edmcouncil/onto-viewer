@@ -471,7 +471,7 @@ public class OwlDataHandler {
 
                     String eIri = next.getIRI().toString();
                     if (cfg.isUriIri(eIri)) {
-                        parseToIri(eIri, opv, key, splited, i, key);
+                         parseToIri(eIri, opv, key, splited, i, splited[i]);
                         break;
                     } else {
                         parseUrl(eIri, splited, i);
