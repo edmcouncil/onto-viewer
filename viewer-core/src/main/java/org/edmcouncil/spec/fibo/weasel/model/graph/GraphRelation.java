@@ -3,6 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.model.graph;
 /**
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public class GraphRelation extends GraphElement {
 

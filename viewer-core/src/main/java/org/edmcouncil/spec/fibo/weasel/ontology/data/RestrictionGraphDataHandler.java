@@ -34,6 +34,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
 public class RestrictionGraphDataHandler {
