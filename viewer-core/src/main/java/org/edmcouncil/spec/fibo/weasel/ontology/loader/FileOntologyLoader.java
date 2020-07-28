@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.logging.Level;
 import java.util.stream.Stream;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
@@ -15,6 +19,11 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
 
 /**
@@ -52,6 +61,27 @@ class FileOntologyLoader implements OntologyLoader {
 
     LOG.debug("Path to ontology : {}", pathToOnto.toString());
     File inputOntologyFile = pathToOnto.toFile();
+
+    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    try {
+      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+      Document doc = dBuilder.parse(inputOntologyFile);
+      doc.getDocumentElement().normalize();
+
+      //owl:Ontology
+      NodeList nodes = doc.getElementsByTagName("http://www.w3.org/2002/07/owl#Ontology");
+
+      for (int i = 0; i < nodes.getLength(); i++) {
+        Node node = nodes.item(i);
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+          Element element = (Element) node;
+         LOG.debug("Attriubute {}", getAtribute("http://www.w3.org/1999/02/22-rdf-syntax-ns#about", element));
+        }
+      }
+
+    } catch (ParserConfigurationException | SAXException ex) {
+      LOG.debug("   ");
+    }
 
     OWLOntologyManager m = OWLManager.createOWLOntologyManager();
 
@@ -97,4 +127,12 @@ class FileOntologyLoader implements OntologyLoader {
     }
   }
 
+  static String getValue(String tag, Element element) {
+    NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
+    Node node = (Node) nodes.item(0);
+    return node.getNodeValue();
+  }
+    static String getAtribute(String attribute, Element element) {
+    return element.getAttribute(attribute);
+  }
 }
