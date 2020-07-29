@@ -88,15 +88,15 @@ class FileOntologyLoader implements OntologyLoader {
     LOG.debug("Load ontology from document");
     OWLOntology o = m.loadOntologyFromOntologyDocument(inputOntologyFile);
 
-    IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
-    LOG.debug("Load import request");
+    //IRI fiboIRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
+    LOG.debug("Load import request {}", o.getOntologyID().getOntologyIRI());
 
     m.makeLoadImportRequest(new OWLImportsDeclarationImpl(m.getOntologyDocumentIRI(o)));
 
     LOG.debug("Make imports");
     try (Stream<OWLOntology> imports = m.imports(o)) {
       LOG.debug("create ontology");
-      o = m.createOntology(fiboIRI, imports, false);
+      o = m.createOntology(o.getOntologyID().getOntologyIRI().get(), imports, false);
     }
     return o;
 

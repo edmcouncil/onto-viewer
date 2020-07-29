@@ -2,6 +2,8 @@ package org.edmcouncil.spec.fibo.weasel.ontology.loader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -60,8 +62,20 @@ class UrlOntologyLoader implements OntologyLoader {
         OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
         manager.makeLoadImportRequest(declaration);
         Stream<OWLOntology> imports = manager.imports(newOntology);
+        Set<OWLOntology> ontologies = imports.collect(Collectors.toSet());
+        ontologies.add(newOntology);
 
-        newOntology = manager.createOntology(ontoIri, imports, false);
+        newOntology = manager.createOntology(newOntology.getOntologyID().getOntologyIRI().get(), ontologies, false);
+
+        for (OWLOntology ontology : ontologies) {
+          /*OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+                  .getOWLImportsDeclaration(ontology.getOntologyID().getOntologyIRI().get());
+          manager.applyChange(new AddImport(newOntology, importDeclaration));
+          manager.makeLoadImportRequest(importDeclaration);*/
+          
+          manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(ontology)));
+        }
+
         httpClient.close();
         return newOntology;
       }
@@ -78,7 +92,7 @@ class UrlOntologyLoader implements OntologyLoader {
 
     for (String oo : ontologies) {
       OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
-          .getOWLImportsDeclaration(IRI.create(oo));
+              .getOWLImportsDeclaration(IRI.create(oo));
       manager.applyChange(new AddImport(ontology, importDeclaration));
       manager.makeLoadImportRequest(importDeclaration);
     }

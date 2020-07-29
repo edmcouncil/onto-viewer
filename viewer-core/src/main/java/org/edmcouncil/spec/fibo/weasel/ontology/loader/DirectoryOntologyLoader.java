@@ -47,7 +47,7 @@ class DirectoryOntologyLoader implements OntologyLoader {
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
     OWLOntology onto = manager.createOntology();
     onto = openOntologiesFromDirectory(dirPath.toFile(), manager, onto);
-    manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(onto.getOntologyID().getOntologyIRI().get() != null ? onto.getOntologyID().getOntologyIRI().get() : onto.getOntologyID().getDefaultDocumentIRI().get()));//manager.getOntologyDocumentIRI(onto)
+    //manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(onto.getOntologyID().getOntologyIRI().get() != null ? onto.getOntologyID().getOntologyIRI().get() : onto.getOntologyID().getDefaultDocumentIRI().get()));//manager.getOntologyDocumentIRI(onto)
     try (Stream<OWLOntology> imports = manager.imports(onto)) {
       LOG.debug("create ontology");
       onto = manager.createOntology(IRI.create(""), imports, false);
@@ -90,7 +90,7 @@ class DirectoryOntologyLoader implements OntologyLoader {
             importDeclaration = manager.getOWLDataFactory()
                 .getOWLImportsDeclaration(IRI.create(file));
           }
-
+          //manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(ontology)));
           manager.applyChange(new AddImport(onto, importDeclaration));
           manager.makeLoadImportRequest(importDeclaration);
         }
