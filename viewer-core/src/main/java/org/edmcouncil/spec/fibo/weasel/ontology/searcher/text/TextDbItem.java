@@ -6,6 +6,8 @@ import org.edmcouncil.spec.fibo.config.configuration.model.searcher.SearcherFiel
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
+ *
  */
 public class TextDbItem {
 
