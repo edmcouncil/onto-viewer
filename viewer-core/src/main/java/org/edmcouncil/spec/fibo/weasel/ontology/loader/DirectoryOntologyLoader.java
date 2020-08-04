@@ -3,30 +3,30 @@ package org.edmcouncil.spec.fibo.weasel.ontology.loader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.text.Collator;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
-import static org.edmcouncil.spec.fibo.weasel.ontology.loader.FileOntologyLoader.getAtribute;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyIRIMapper;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.util.AutoIRIMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
 
 /**
- * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author MichaĹ‚ Daniel (michal.daniel@makolab.com)
  */
 class DirectoryOntologyLoader implements OntologyLoader {
 
@@ -37,6 +37,7 @@ class DirectoryOntologyLoader implements OntologyLoader {
   DirectoryOntologyLoader(FileSystemManager fsm) {
     this.fsm = fsm;
   }
+  static List<String> supportedExtensions = Arrays.asList(".rdf", ".owl");
 
   @Override
   public OWLOntology loadOntology(String path) throws IOException, OWLOntologyCreationException {
@@ -45,9 +46,22 @@ class DirectoryOntologyLoader implements OntologyLoader {
     LOG.debug("Path to directory is '{}'", dirPath);
 
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+    AutoIRIMapper autoIRIMapper = new AutoIRIMapper(new File(dirPath.toAbsolutePath().toString()), true);
+    autoIRIMapper.setFileExtensions(supportedExtensions);
+    autoIRIMapper.update();
+    LOG.error("auto iri maper " + autoIRIMapper.getDocumentIRI(IRI.create("http://www.w3.org/2004/02/skos/core")));
+    LOG.info("mapped ontologies " + autoIRIMapper.getOntologyIRIs().stream().count());
     OWLOntology onto = manager.createOntology();
-    onto = openOntologiesFromDirectory(dirPath.toFile(), manager, onto);
-    manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(onto.getOntologyID().getOntologyIRI().get() != null ? onto.getOntologyID().getOntologyIRI().get() : onto.getOntologyID().getDefaultDocumentIRI().get()));//manager.getOntologyDocumentIRI(onto)
+
+    manager.getIRIMappers().add(autoIRIMapper);
+    //onto = manager.loadOntology(IRI.create("https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/"));
+
+    //onto = openOntologiesFromDirectory(dirPath.toFile(), manager, onto);
+    onto = loadOntologiesFromIRIs(autoIRIMapper.getOntologyIRIs(), onto, manager);
+    //Set<OWLOntology> ontologies = openOntologiesFromDirectorySet(dirPath.toFile(), manager, onto);
+
+    //onto = manager.createOntology(IRI.create(""), ontologies, false);
+    manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(onto)));
     try (Stream<OWLOntology> imports = manager.imports(onto)) {
       LOG.debug("create ontology");
       onto = manager.createOntology(IRI.create(""), imports, false);
@@ -62,39 +76,35 @@ class DirectoryOntologyLoader implements OntologyLoader {
    * @param manager Manager loading and acessing ontologies.
    * @return set of ontology.
    */
-  private OWLOntology openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager, OWLOntology onto) throws OWLOntologyCreationException, IOException {
+  private OWLOntology openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager, OWLOntology onto) throws OWLOntologyCreationException {
 
-    for (File file : ontologiesDir.listFiles()) {
+    Collator crl = Collator.getInstance();
+
+    List<File> files = Arrays.asList(ontologiesDir.listFiles())
+            .stream()
+            .sorted((File o1, File o2) -> crl.compare(o1.getName(), o2.getName()))
+            .collect(Collectors.toList());
+
+    AutoIRIMapper mapper = null;
+    for (OWLOntologyIRIMapper iriMapper : manager.getIRIMappers()) {
+      mapper = (AutoIRIMapper) iriMapper;
+    }
+
+    for (File file : files) {
       LOG.debug("Load ontology file : {}", file.getName());
-      Boolean loadedFromAbout = false;
+
       if (file.isFile()) {
-        if (!getFileExtension(file).equalsIgnoreCase("xml")) {
-          String about = null;
-          try {
-            about = getAboutFromFile(file);
-            LOG.debug("About in file: {}", about);
-            onto = tryToLoadOntologyFromAboutAttribute(about);
-            loadedFromAbout = true;
-          } catch (OWLOntologyCreationException | IOException | NullPointerException e) {
-            LOG.debug(e.getMessage());
-            loadedFromAbout = false;
-          }
-
-          OWLImportsDeclaration importDeclaration = null;
-
-          if (loadedFromAbout && about != null) {
-            importDeclaration = manager.getOWLDataFactory()
-                .getOWLImportsDeclaration(IRI.create(about));
-          } else {
-            onto = manager.loadOntologyFromOntologyDocument(file);
-            importDeclaration = manager.getOWLDataFactory()
-                .getOWLImportsDeclaration(IRI.create(file));
-          }
-
+        if (supportedExtensions.contains(getFileExtension(file).toLowerCase())) {
+          OWLOntology o = manager.loadOntologyFromOntologyDocument(IRI.create(file));
+          OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+                  .getOWLImportsDeclaration(mapper.getDocumentIRI(IRI.create(file)));
           manager.applyChange(new AddImport(onto, importDeclaration));
           manager.makeLoadImportRequest(importDeclaration);
         }
       } else if (file.isDirectory()) {
+//        AutoIRIMapper autoIRIMapper = new AutoIRIMapper(file, true);
+//        autoIRIMapper.setFileExtensions(supportedExtensions);
+//        manager.getIRIMappers().add(autoIRIMapper);
         openOntologiesFromDirectory(file, manager, onto);
 
       }
@@ -103,12 +113,34 @@ class DirectoryOntologyLoader implements OntologyLoader {
     return onto;
   }
 
-  private OWLOntology tryToLoadOntologyFromAboutAttribute(String about) throws IOException, OWLOntologyCreationException {
+  private Set<OWLOntology> openOntologiesFromDirectorySet(File ontologiesDir, OWLOntologyManager manager, OWLOntology onto) throws OWLOntologyCreationException {
+    Set<OWLOntology> result = new HashSet<>();
+    Collator crl = Collator.getInstance();
 
-    OWLOntology onto;
-    UrlOntologyLoader uol = new UrlOntologyLoader();
-    onto = uol.loadOntology(about);
-    return onto;
+    List<File> files = Arrays.asList(ontologiesDir.listFiles())
+            .stream()
+            .sorted((File o1, File o2) -> crl.compare(o1.getName(), o2.getName()))
+            .collect(Collectors.toList());
+
+    for (File file : files) {
+      LOG.debug("Load ontology file : {}", file.getName());
+
+      if (file.isFile()) {
+        if (supportedExtensions.contains(getFileExtension(file).toLowerCase())) {
+          OWLOntology ontology = manager.loadOntology(IRI.create(file));
+          result.add(ontology);
+//          OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+//                  .getOWLImportsDeclaration(IRI.create(file));
+//          manager.applyChange(new AddImport(onto, importDeclaration));
+          //manager.makeLoadImportRequest(importDeclaration);
+        }
+      } else if (file.isDirectory()) {
+        result.addAll(openOntologiesFromDirectorySet(file, manager, onto));
+
+      }
+
+    }
+    return result;
   }
 
   private static String getFileExtension(File file) {
@@ -120,38 +152,17 @@ class DirectoryOntologyLoader implements OntologyLoader {
     }
   }
 
-  static String getValue(String tag, Element element) {
-    NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
-    Node node = (Node) nodes.item(0);
-    return node.getNodeValue();
-  }
+  private OWLOntology loadOntologiesFromIRIs(Set<IRI> iris, OWLOntology onto, OWLOntologyManager manager) throws OWLOntologyCreationException {
 
-  static String getAtribute(String attribute, Element element) {
-    return element.getAttribute(attribute);
-  }
-
-  private String getAboutFromFile(File file) throws IOException {
-    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-    String about = null;
-    try {
-      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-      Document doc = dBuilder.parse(file);
-      doc.getDocumentElement().normalize();
-
-      //owl:Ontology
-      NodeList nodes = doc.getElementsByTagName("owl:Ontology");
-
-      for (int i = 0; i < nodes.getLength(); i++) {
-        Node node = nodes.item(i);
-        if (node.getNodeType() == Node.ELEMENT_NODE) {
-          Element element = (Element) node;
-          about = getAtribute("rdf:about", element);
-        }
-      }
-
-    } catch (ParserConfigurationException | SAXException ex) {
-      LOG.debug(ex.getMessage());
+    for (IRI iri : iris) {
+      OWLOntology o = manager.loadOntology(iri);
+      OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+              .getOWLImportsDeclaration(iri);
+      manager.applyChange(new AddImport(onto, importDeclaration));
+      manager.makeLoadImportRequest(importDeclaration);
     }
-    return about;
+
+    return onto;
   }
+
 }
