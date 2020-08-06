@@ -8,7 +8,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
-import static org.edmcouncil.spec.fibo.weasel.ontology.loader.FileOntologyLoader.getAtribute;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
@@ -47,7 +46,7 @@ class DirectoryOntologyLoader implements OntologyLoader {
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
     OWLOntology onto = manager.createOntology();
     onto = openOntologiesFromDirectory(dirPath.toFile(), manager, onto);
-    //manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(onto.getOntologyID().getOntologyIRI().get() != null ? onto.getOntologyID().getOntologyIRI().get() : onto.getOntologyID().getDefaultDocumentIRI().get()));//manager.getOntologyDocumentIRI(onto)
+    manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(onto)));
     try (Stream<OWLOntology> imports = manager.imports(onto)) {
       LOG.debug("create ontology");
       onto = manager.createOntology(IRI.create(""), imports, false);
@@ -62,36 +61,130 @@ class DirectoryOntologyLoader implements OntologyLoader {
    * @param manager Manager loading and acessing ontologies.
    * @return set of ontology.
    */
+  private OWLOntology openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager, OWLOntology onto) throws OWLOntologyCreationException {
+
+    for (File file : ontologiesDir.listFiles()) {
+      LOG.debug("Load ontology file : {}", file.getName());
+
+      if (file.isFile()) {
+        if (!getFileExtension(file).equalsIgnoreCase("xml")) {
+          /*
+          try {
+            String about = getAboutFromFile(file);
+            if (about != null) {
+              HttpGet httpGet = new HttpGet(about);
+              httpGet.addHeader("Accept", "application/rdf+xml, application/xml; q=0.7, text/xml; q=0.6, text/plain; q=0.1, *//*; q=0.09");
+              try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+                HttpResponse response = httpClient.execute(httpGet);
+                HttpEntity entity = response.getEntity();
+                if (entity != null) {
+                  InputStream inputStream = entity.getContent();
+                  onto = manager.loadOntologyFromOntologyDocument(inputStream);
+                  httpClient.close();
+                  OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+                          .getOWLImportsDeclaration(IRI.create(about));
+                  manager.applyChange(new AddImport(onto, importDeclaration));
+                  manager.makeLoadImportRequest(importDeclaration);
+                  continue;
+                }
+              }
+            } else {
+              LOG.debug("about is null");
+            }
+          } catch (IOException | NullPointerException e) {
+            LOG.debug(e.getMessage());
+
+          } */
+
+          manager.loadOntologyFromOntologyDocument(file);
+          OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+                  .getOWLImportsDeclaration(IRI.create(file));
+          manager.applyChange(new AddImport(onto, importDeclaration));
+          manager.makeLoadImportRequest(importDeclaration);
+        }
+      } else if (file.isDirectory()) {
+        openOntologiesFromDirectory(file, manager, onto);
+
+      }
+
+    }
+    return onto;
+  }
+
+  /*
+  
+  
+  @Override
+  public OWLOntology loadOntology(String path) throws IOException, OWLOntologyCreationException {
+    Path dirPath = fsm.getPathToOntologyFile(path);
+
+    LOG.debug("Path to directory is '{}'", dirPath);
+
+    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+    OWLOntology onto = manager.createOntology();
+    onto = openOntologiesFromDirectory(dirPath.toFile(), manager, onto);
+    manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(onto)));//onto.getOntologyID().getOntologyIRI().get() != null ? onto.getOntologyID().getOntologyIRI().get() : onto.getOntologyID().getDefaultDocumentIRI().get())
+    try (Stream<OWLOntology> imports = manager.imports(onto)) {
+      LOG.debug("create ontology");
+      onto = manager.createOntology(IRI.create(""), imports, false);
+      //for (OWLOntology aImport : imports.collect(Collectors.toSet())) {
+        //manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(aImport)));
+      //}
+    }
+    return onto;
+  }
+/*
+  /**
+   * This method is used to open all Ontologies from directory
+   *
+   * @param ontologiesDir OntologiesDir is a loaded ontology file.
+   * @param manager Manager loading and acessing ontologies.
+   * @return set of ontology.
+   */
+ /*
   private OWLOntology openOntologiesFromDirectory(File ontologiesDir, OWLOntologyManager manager, OWLOntology onto) throws OWLOntologyCreationException, IOException {
 
     for (File file : ontologiesDir.listFiles()) {
       LOG.debug("Load ontology file : {}", file.getName());
-      Boolean loadedFromAbout = false;
+     // Boolean loadedFromAbout = false;
       if (file.isFile()) {
         if (!getFileExtension(file).equalsIgnoreCase("xml")) {
-          String about = null;
-          try {
-            about = getAboutFromFile(file);
-            LOG.debug("About in file: {}", about);
-            onto = tryToLoadOntologyFromAboutAttribute(about);
-            loadedFromAbout = true;
-          } catch (OWLOntologyCreationException | IOException | NullPointerException e) {
-            LOG.debug(e.getMessage());
-            loadedFromAbout = false;
-          }
+//          String about = null;
+//          try {
+//            about = getAboutFromFile(file);
+//            if (about != null) {
+//              HttpGet httpGet = new HttpGet(about);
+//             // httpGet.addHeader("Accept", "application/rdf+xml, application/xml; q=0.7, text/xml; q=0.6, text/plain; q=0.1, *//*; q=0.09");<-blad tu bedzie po odkomentowaniu
+//              try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+//                HttpResponse response = httpClient.execute(httpGet);
+//                HttpEntity entity = response.getEntity();
+//                if (entity != null) {
+//                  InputStream inputStream = entity.getContent();
+//                  onto = manager.loadOntologyFromOntologyDocument(inputStream);
+//                  httpClient.close();
+//                  loadedFromAbout = true;
+//                }
+//              }
+//            } else {
+//              LOG.debug("about is null");
+//            }
+//          } catch (IOException | NullPointerException e) {
+//            LOG.debug(e.getMessage());
+//            loadedFromAbout = false;
+//          }
 
           OWLImportsDeclaration importDeclaration = null;
 
-          if (loadedFromAbout && about != null) {
-            importDeclaration = manager.getOWLDataFactory()
-                .getOWLImportsDeclaration(IRI.create(about));
-          } else {
+//          if (loadedFromAbout) {
+//            importDeclaration = manager.getOWLDataFactory()
+//                    .getOWLImportsDeclaration(IRI.create(about));
+//          } else {
             onto = manager.loadOntologyFromOntologyDocument(file);
             importDeclaration = manager.getOWLDataFactory()
-                .getOWLImportsDeclaration(IRI.create(file));
-          }
-          //manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(ontology)));
-          manager.applyChange(new AddImport(onto, importDeclaration));
+                    .getOWLImportsDeclaration(IRI.create(file));
+//          }
+          //manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(onto)));
+          //manager.applyChange(new AddImport(onto, importDeclaration));
           manager.makeLoadImportRequest(importDeclaration);
         }
       } else if (file.isDirectory()) {
@@ -110,7 +203,7 @@ class DirectoryOntologyLoader implements OntologyLoader {
     onto = uol.loadOntology(about);
     return onto;
   }
-
+   */
   private static String getFileExtension(File file) {
     String fileName = file.getName();
     if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {

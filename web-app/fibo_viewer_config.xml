@@ -8,7 +8,9 @@
         <!--<ontologyURL>https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/</ontologyURL>
         <ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>
         <ontologyPath>AboutFIBODev.ttl</ontologyPath>-->
+        <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBODev.rdf</ontologyURL>
         <ontologyDir>ontologies</ontologyDir>
+        <ontologyDir>staticOntologies</ontologyDir>
     </ontology>
   
     <ignoreToDisplaying>

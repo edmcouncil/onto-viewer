@@ -56,25 +56,32 @@ class UrlOntologyLoader implements OntologyLoader {
         //manager.makeLoadImportRequest(importDeclaration);
         OWLOntology newOntology = manager.loadOntologyFromOntologyDocument(inputStream);
 
-        IRI ontoIri = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
+        //IRI ontoIri = IRI.create("https://spec.edmcouncil.org/fibo/ontology");
+
+        //manager.loadOntologyFromOntologyDocument(file);
+        //OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+            //    .getOWLImportsDeclaration(newOntology.getOntologyID().getOntologyIRI().orElse(ontoIri));
+        //manager.applyChange(new AddImport(newOntology, importDeclaration));
+        //manager.makeLoadImportRequest(importDeclaration);
+        //manager.ma
 
         //makeDefaultsOntologiesImport(manager, newOntology);
-        OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
-        manager.makeLoadImportRequest(declaration);
-        Stream<OWLOntology> imports = manager.imports(newOntology);
-        Set<OWLOntology> ontologies = imports.collect(Collectors.toSet());
-        ontologies.add(newOntology);
-
-        newOntology = manager.createOntology(newOntology.getOntologyID().getOntologyIRI().get(), ontologies, false);
-
-        for (OWLOntology ontology : ontologies) {
-          /*OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
-                  .getOWLImportsDeclaration(ontology.getOntologyID().getOntologyIRI().get());
-          manager.applyChange(new AddImport(newOntology, importDeclaration));
-          manager.makeLoadImportRequest(importDeclaration);*/
-          
-          manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(ontology)));
-        }
+//        OWLImportsDeclaration declaration = new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(newOntology));
+//        manager.makeLoadImportRequest(declaration);
+//        Stream<OWLOntology> imports = manager.imports(newOntology);
+//        Set<OWLOntology> ontologies = imports.collect(Collectors.toSet());
+//        ontologies.add(newOntology);
+//
+//        newOntology = manager.createOntology(null, imports, false); //newOntology.getOntologyID().getOntologyIRI().get()
+//
+//        for (OWLOntology ontology : ontologies) {
+//          /*OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
+//                  .getOWLImportsDeclaration(ontology.getOntologyID().getOntologyIRI().get());
+//          manager.applyChange(new AddImport(newOntology, importDeclaration));
+//          manager.makeLoadImportRequest(importDeclaration);*/
+//
+//          //manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(ontology)));
+//        }
 
         httpClient.close();
         return newOntology;
