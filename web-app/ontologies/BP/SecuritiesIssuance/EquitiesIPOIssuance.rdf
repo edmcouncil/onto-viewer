@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY fibo-bp-iss-doc "https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceDocuments/">
+	<!ENTITY fibo-bp-iss-ipo "https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/">
+	<!ENTITY fibo-bp-iss-prc "https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceProcess/">
+	<!ENTITY fibo-fbc-fct-mkt "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/">
+	<!ENTITY fibo-fbc-fct-ra "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/">
+	<!ENTITY fibo-fbc-fi-fi "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/">
+	<!ENTITY fibo-fbc-pas-fpas "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/">
+	<!ENTITY fibo-fnd-acc-cur "https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/">
+	<!ENTITY fibo-fnd-arr-doc "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/">
+	<!ENTITY fibo-fnd-dt-fd "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/">
+	<!ENTITY fibo-fnd-dt-oc "https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/">
+	<!ENTITY fibo-fnd-pty-pty "https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/">
+	<!ENTITY fibo-fnd-pty-rl "https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/">
+	<!ENTITY fibo-fnd-rel-rel "https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/">
+	<!ENTITY fibo-fnd-utl-av "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+	<!ENTITY fibo-sec-sec-lst "https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xml "http://www.w3.org/XML/1998/namespace">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:fibo-bp-iss-doc="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceDocuments/"
+	xmlns:fibo-bp-iss-ipo="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"
+	xmlns:fibo-bp-iss-prc="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceProcess/"
+	xmlns:fibo-fbc-fct-mkt="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/"
+	xmlns:fibo-fbc-fct-ra="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/"
+	xmlns:fibo-fbc-fi-fi="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/"
+	xmlns:fibo-fbc-pas-fpas="https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/"
+	xmlns:fibo-fnd-acc-cur="https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/"
+	xmlns:fibo-fnd-arr-doc="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"
+	xmlns:fibo-fnd-dt-fd="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"
+	xmlns:fibo-fnd-dt-oc="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/"
+	xmlns:fibo-fnd-pty-pty="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/"
+	xmlns:fibo-fnd-pty-rl="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/"
+	xmlns:fibo-fnd-rel-rel="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"
+	xmlns:fibo-fnd-utl-av="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+	xmlns:fibo-sec-sec-lst="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/">
+		<rdfs:label xml:lang="en">EquitiesIPOIssuance</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:</rdfs:comment>
+		<dct:abstract>Issuance process for equity instruments that are issued via an Initial Public Offering (IPO).</dct:abstract>
+		<sm:fileAbbreviation>fibo-bp-iss-ipo</sm:fileAbbreviation>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceDocuments/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/IssuanceProcess/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Accounting/CurrencyAmount/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Documents/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/FinancialDates/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/DatesAndTimes/Occurrences/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Parties/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Parties/Roles/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/SEC/Securities/SecuritiesListings/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+		<fibo-fnd-utl-av:hasMaturityLevel rdf:resource="&fibo-fnd-utl-av;Provisional"/>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;AgreeBasisForAllocation">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">agree basis for allocation</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:AgreeBasisForAllocation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;Allocation">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">allocation</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:Allocation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;AllocationBasisDetails">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;Document"/>
+		<rdfs:label xml:lang="en">allocation basis details</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:AllocationBasisDetails</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;AllocationDetails">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;Document"/>
+		<rdfs:label xml:lang="en">allocation details</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:AllocationDetails</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;AnnounceEquityIssue">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">announce equity issue</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:AnnounceEquityIssue</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;ApplicationForShares">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;Document"/>
+		<rdfs:label xml:lang="en">application for shares</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:ApplicationForShares</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;AppointAdvisors">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-pty-rl;playsRole"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fbc-fi-fi;Issuer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;designates"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&fibo-bp-iss-ipo;CorporateBroker">
+							</rdf:Description>
+							<rdf:Description rdf:about="&fibo-bp-iss-ipo;Sponsor">
+							</rdf:Description>
+							<rdf:Description rdf:about="&fibo-bp-iss-ipo;ReportingAccountant">
+							</rdf:Description>
+							<rdf:Description rdf:about="&fibo-fbc-fct-ra;RegistrationAuthority">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">appoint advisors</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:AppointAdvisors</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;ApproveForFlotation">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isProvidedBy"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fbc-fct-mkt;Exchange"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">approve for flotation</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:ApproveForFlotation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;CorporateBroker">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-pas-fpas;Broker"/>
+		<rdfs:label xml:lang="en">corporate broker</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:CorporateBroker</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;EquityAnnouncement">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;Notice"/>
+		<rdfs:label xml:lang="en">equity announcement</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:EquityAnnouncement</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;FilingDetails">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;Document"/>
+		<rdfs:label xml:lang="en">filing details</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:FilingDetails</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;FormalApprovalForListingAndTrading">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isProvidedBy"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fbc-fct-mkt;Exchange"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">formal approval for listing and trading</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:FormalApprovalForListingAndTrading</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;IPOFullProspectus">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-doc;SecurityFinalProspectus"/>
+		<rdfs:label xml:lang="en">i p o full prospectus</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:IPOFullProspectus</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;IPOPreliminaryProspectus">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-doc;SecurityDraftProspectus"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-bp-iss-doc;becomesFinal"/>
+				<owl:someValuesFrom rdf:resource="&fibo-bp-iss-ipo;IPOFullProspectus"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">i p o preliminary prospectus</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:IPOPreliminaryProspectus</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;IPOProcess">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-dt-fd;hasDatePeriod"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fnd-dt-fd;DatePeriod"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">i p o process</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:IPOProcess</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;IPOSettlementDetails">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;Document"/>
+		<rdfs:label xml:lang="en">i p o settlement details</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:IPOSettlementDetails</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;IndicationOfInterest">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;Document"/>
+		<rdfs:label xml:lang="en">indication of interest</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:IndicationOfInterest</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-dt-oc;OccurrenceKind"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;appliesTo"/>
+				<owl:someValuesFrom rdf:resource="&fibo-bp-iss-ipo;IPOProcess"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>initial public offering process step</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:InitialPublicOfferingProcessStep</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+		<fibo-fnd-utl-av:abbreviation>IPO process step</fibo-fnd-utl-av:abbreviation>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;MarketingOfShareIssue">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">marketing of share issue</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:MarketingOfShareIssue</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;NoticeOfAllocation">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">notice of allocation</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:NoticeOfAllocation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;PotentialShareUnderwriter">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-prc;PotentialUnderwriter"/>
+		<rdfs:label xml:lang="en">potential share underwriter</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:PotentialShareUnderwriter</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;PublishInitialProspectus">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">publish initial prospectus</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:PublishInitialProspectus</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;PurchasePrice">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-acc-cur;MonetaryPrice"/>
+		<rdfs:label xml:lang="en">purchase price</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:PurchasePrice</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;PurchaseUnallocatedStock">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">purchase unallocated stock</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:PurchaseUnallocatedStock</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;ReceiveApplications">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">receive applications</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:ReceiveApplications</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;RegisterWithRegulatoryAuthority">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;isProvidedBy"/>
+				<owl:someValuesFrom rdf:resource="&fibo-fbc-fct-mkt;Exchange"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">register with regulatory authority</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:RegisterWithRegulatoryAuthority</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;RegistrationStatementDocument">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-doc;Document"/>
+		<rdfs:label xml:lang="en">registration statement document</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:RegistrationStatementDocument</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;ReportingAccountant">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-pty-pty;PartyInRole"/>
+		<rdfs:label xml:lang="en">reporting accountant</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:ReportingAccountant</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;SetPrice">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">set price</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:SetPrice</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;SettlementOfAllocatedShares">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-iss-ipo;InitialPublicOfferingProcessStep"/>
+		<rdfs:label xml:lang="en">settlement of allocated shares</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:SettlementOfAllocatedShares</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;ShareRegister">
+		<rdfs:subClassOf rdf:resource="&fibo-fbc-fct-ra;Registry"/>
+		<rdfs:label xml:lang="en">share register</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:ShareRegister</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;Sponsor">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-pty-pty;PartyInRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-bp-iss-ipo;mayBe"/>
+				<owl:someValuesFrom rdf:resource="&fibo-bp-iss-ipo;CorporateBroker"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">sponsor</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:Sponsor</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;SyndicateMember">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-pty-pty;PartyInRole"/>
+		<rdfs:label xml:lang="en">syndicate member</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:SyndicateMember</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-iss-ipo;Underwriting">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-bp-iss-ipo;shareUnderwriter"/>
+				<owl:someValuesFrom rdf:resource="&fibo-bp-iss-ipo;PotentialShareUnderwriter"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-bp-iss-ipo;syndicateMember"/>
+				<owl:someValuesFrom rdf:resource="&fibo-bp-iss-ipo;SyndicateMember"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">underwriting</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:Underwriting</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&fibo-bp-iss-ipo;lead">
+		<rdfs:label xml:lang="en">lead</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:lead</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-bp-iss-ipo;AppointAdvisors"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+		<rdfs:range rdf:resource="&fibo-bp-iss-ipo;Sponsor"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-bp-iss-ipo;mayBe">
+		<rdfs:label xml:lang="en">may be</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:mayBe</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-bp-iss-ipo;Sponsor"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+		<rdfs:range rdf:resource="&fibo-bp-iss-ipo;CorporateBroker"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-bp-iss-ipo;shareUnderwriter">
+		<rdfs:label xml:lang="en">share underwriter</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:shareUnderwriter</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-bp-iss-ipo;Underwriting"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+		<rdfs:range rdf:resource="&fibo-bp-iss-ipo;PotentialShareUnderwriter"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-bp-iss-ipo;syndicateMember">
+		<rdfs:label xml:lang="en">syndicate member</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-iss-ipo:syndicateMember</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-bp-iss-ipo;Underwriting"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"/>
+		<rdfs:range rdf:resource="&fibo-bp-iss-ipo;SyndicateMember"/>
+	</owl:ObjectProperty>
+
+</rdf:RDF>

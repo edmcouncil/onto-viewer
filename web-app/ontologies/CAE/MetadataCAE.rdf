@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY fibo-cae-ce-mod "https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/MetadataCAECorporateEvents/">
+	<!ENTITY fibo-cae-mod "https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xml "http://www.w3.org/XML/1998/namespace">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:fibo-cae-ce-mod="https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/MetadataCAECorporateEvents/"
+	xmlns:fibo-cae-mod="https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/">
+		<rdfs:label>Metadata about the EDMC-FIBO Corporate Actions and Events (CAE) Domain</rdfs:label>
+		<rdfs:comment>QName: fibo-cae-mod:</rdfs:comment>
+		<dct:abstract>The Corporate Actions and Events (CAE) domain covers events and actions that may occur during the life of a security, ranging from announcements regarding stock offerings, splits, dividends and so forth, to credit events that are relevant to investors and regulators alike. Corporate actions include actions that require some action on the part of the holder, and in these and some other cases there are process descriptions for the flow of activities involved.</dct:abstract>
+		<dct:issued rdf:datatype="&xsd;dateTime">2020-04-06T18:00:00</dct:issued>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<sm:contentLanguage rdf:datatype="&xsd;anyURI">http://www.w3.org/standards/techs/owl#w3c_all</sm:contentLanguage>
+		<sm:copyright>Copyright (c) 2013-2020 EDM Council, Inc.</sm:copyright>
+		<sm:fileAbbreviation>fibo-cae-mod</sm:fileAbbreviation>
+		<sm:filename>MetadataCAE.rdf</sm:filename>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/CorporateEvents/MetadataCAECorporateEvents/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/CAE/MetadataCAE/"/>
+	</owl:Ontology>
+	
+	<owl:NamedIndividual rdf:about="&fibo-cae-mod;CAEDomain">
+		<rdf:type rdf:resource="&sm;Module"/>
+		<rdfs:label>Corporate Actions and Events Domain</rdfs:label>
+		<rdfs:comment>QName: fibo-cae-mod:CAEDomain</rdfs:comment>
+		<dct:abstract>The Corporate Actions and Events (CAE) domain covers events and actions that may occur during the life of a security, ranging from announcements regarding stock offerings, splits, dividends and so forth, to credit events that are relevant to investors and regulators alike. Corporate actions include actions that require some action on the part of the holder, and in these and some other cases there are process descriptions for the flow of activities involved.</dct:abstract>
+		<dct:hasPart rdf:resource="&fibo-cae-ce-mod;CorporateEventsModule"/>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<sm:copyright>Copyright (c) 2013-2020 EDM Council, Inc.</sm:copyright>
+		<sm:moduleAbbreviation>fibo-cae</sm:moduleAbbreviation>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/"/>
+		<rdfs:seeAlso rdf:resource="https://spec.edmcouncil.org/fibo/"/>
+	</owl:NamedIndividual>
+
+</rdf:RDF>

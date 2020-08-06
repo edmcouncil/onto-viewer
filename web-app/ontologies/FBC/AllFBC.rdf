@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY fibo-fbc-all "https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC/">
+	<!ENTITY fibo-fbc-dae-dbt "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/">
+	<!ENTITY fibo-fbc-dae-gty "https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/">
+	<!ENTITY fibo-fbc-fct-bc "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/">
+	<!ENTITY fibo-fbc-fct-breg "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/">
+	<!ENTITY fibo-fbc-fct-fse "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/">
+	<!ENTITY fibo-fbc-fct-ireg "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/">
+	<!ENTITY fibo-fbc-fct-mkt "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/">
+	<!ENTITY fibo-fbc-fct-ra "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/">
+	<!ENTITY fibo-fbc-fct-rga "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/">
+	<!ENTITY fibo-fbc-fi-fi "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/">
+	<!ENTITY fibo-fbc-fi-ip "https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/InstrumentPricing/">
+	<!ENTITY fibo-fbc-pas-caa "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/">
+	<!ENTITY fibo-fbc-pas-fpas "https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/">
+	<!ENTITY fibo-fnd-utl-av "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xml "http://www.w3.org/XML/1998/namespace">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:fibo-fbc-all="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC/"
+	xmlns:fibo-fbc-dae-dbt="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/"
+	xmlns:fibo-fbc-dae-gty="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/"
+	xmlns:fibo-fbc-fct-bc="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/"
+	xmlns:fibo-fbc-fct-breg="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/"
+	xmlns:fibo-fbc-fct-fse="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/"
+	xmlns:fibo-fbc-fct-ireg="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/"
+	xmlns:fibo-fbc-fct-mkt="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/"
+	xmlns:fibo-fbc-fct-ra="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/"
+	xmlns:fibo-fbc-fct-rga="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/"
+	xmlns:fibo-fbc-fi-fi="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/"
+	xmlns:fibo-fbc-fi-ip="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/InstrumentPricing/"
+	xmlns:fibo-fbc-pas-caa="https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/"
+	xmlns:fibo-fbc-pas-fpas="https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/"
+	xmlns:fibo-fnd-utl-av="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC/">
+		<rdfs:label>Financial Business and Commerce Domain</rdfs:label>
+		<rdfs:comment>QName: fibo-fbc-all:</rdfs:comment>
+		<dct:abstract>The financial business and commerce domain covers business concepts that are common to common to a number of finance areas, such as loans, securities, and corporate actions, including products and services, financial intermediaries, registrars and regulators, and financial instruments and products.</dct:abstract>
+		<dct:issued rdf:datatype="&xsd;dateTime">2020-03-27T18:00:00</dct:issued>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
+		<dct:title>EDMC Financial Industry Business Ontology (FIBO) Financial Business and Commerce (FBC) Domain</dct:title>
+		<sm:contentLanguage rdf:datatype="&xsd;anyURI">http://www.w3.org/standards/techs/owl#w3c_all</sm:contentLanguage>
+		<sm:contributor>Adaptive, Inc.</sm:contributor>
+		<sm:contributor>Bloomberg LP</sm:contributor>
+		<sm:contributor>Citigroup</sm:contributor>
+		<sm:contributor>Credit Suisse</sm:contributor>
+		<sm:contributor>Deutsche Bank</sm:contributor>
+		<sm:contributor>Exprentis</sm:contributor>
+		<sm:contributor>NoMagic</sm:contributor>
+		<sm:contributor>Nordea Bank AB</sm:contributor>
+		<sm:contributor>Office of Financial Research (US Dept of the Treasury)</sm:contributor>
+		<sm:contributor>Pinnacle Bank (Morgan Hill, California)</sm:contributor>
+		<sm:contributor>Quarule</sm:contributor>
+		<sm:contributor>State Street Bank and Trust</sm:contributor>
+		<sm:contributor>Statistics Canada</sm:contributor>
+		<sm:contributor>Tahoe Blue Ltd</sm:contributor>
+		<sm:contributor>Thematix Partners LLC</sm:contributor>
+		<sm:contributor>Wells Fargo</sm:contributor>
+		<sm:copyright>Copyright (c) 2015-2020 EDM Council, Inc.</sm:copyright>
+		<sm:copyright>Copyright (c) 2015-2020 Object Management Group, Inc.</sm:copyright>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">http://www.omg.org/techprocess/ab/SpecificationMetadata/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/BE/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://spec.edmcouncil.org/fibo/ontology/FND/</sm:dependsOn>
+		<sm:dependsOn rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/LCC/</sm:dependsOn>
+		<sm:fileAbbreviation>fibo-fbc-all</sm:fileAbbreviation>
+		<sm:filename>AllFBC.rdf</sm:filename>
+		<sm:keyword>financial instruments</sm:keyword>
+		<sm:keyword>financial products</sm:keyword>
+		<sm:keyword>financial services, service providers, and accounts</sm:keyword>
+		<sm:keyword>markets</sm:keyword>
+		<sm:keyword>registration authorities</sm:keyword>
+		<sm:keyword>regulatory agencies</sm:keyword>
+		<sm:moduleAbbreviation>fibo-fbc</sm:moduleAbbreviation>
+		<rdfs:seeAlso rdf:resource="https://spec.edmcouncil.org/fibo/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BE/AllBE/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Debt/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/DebtAndEquities/Guaranty/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/InstrumentPricing/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessCenters/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/BusinessRegistries/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/FinancialServicesEntities/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/Markets/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegistrationAuthorities/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FunctionalEntities/RegulatoryAgencies/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/ClientsAndAccounts/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/ProductsAndServices/FinancialProductsAndServices/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/AllFBC/"/>
+		<fibo-fnd-utl-av:explanatoryNote>The &apos;all&apos; ontology for FBC is provided for convenience for FIBO users.  This ontology does not add new assertions, but imports most of the Production (Released) ontologies that comprise the FIBO Foundations (FND), Business Entities (BE) and Financial Business and Commerce (FBC) Version 2.0 domains, excluding individuals for governments and jurisdictions, financial services and regulatory organizations and related registries, as well as the LCC region-specific ontologies.</fibo-fnd-utl-av:explanatoryNote>
+	</owl:Ontology>
+
+</rdf:RDF>

@@ -4,13 +4,14 @@ import org.edmcouncil.spec.fibo.weasel.ontology.updater.util.UpdaterOperation;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
-import org.edmcouncil.spec.fibo.weasel.ontology.loader.OntologyLoader;
-import org.edmcouncil.spec.fibo.weasel.ontology.loader.OntologyLoaderFactory;
+import org.edmcouncil.spec.fibo.weasel.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextDbItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextSearcherDb;
 import org.edmcouncil.spec.fibo.weasel.ontology.updater.model.UpdateJob;
@@ -18,6 +19,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.SAXException;
 
 public abstract class UpdaterThread extends Thread implements Thread.UncaughtExceptionHandler {
 
@@ -73,18 +75,27 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     LOG.info("File system manager created ? : {}", fileSystemManager != null);
 
     ViewerCoreConfiguration viewerCoreConfiguration = config.getViewerCoreConfig();
-    OntologyLoader loader = new OntologyLoaderFactory().getInstance(viewerCoreConfiguration, fileSystemManager);
-    String location = viewerCoreConfiguration.getOntologyLocation();
 
     try {
-      ontology = loader.loadOntology(location);
+      AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager, viewerCoreConfiguration);
+      ontology = loader.load();
     } catch (OWLOntologyCreationException ex) {
       msgError = ex.getMessage();
-      LOG.error("[ERROR]: Error when creating ontology. Exception: {} \n Message: {}", ex.getStackTrace(), msgError);
+      LOG.error("[ERROR]: Error when creating ontology. Stoping application. Exception: {} \n Message: {}", ex.getStackTrace(), ex.getMessage());
     } catch (IOException ex) {
       msgError = ex.getMessage();
-      LOG.error("[ERROR]: Cannot load ontology. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
+      LOG.error("[ERROR]: Cannot load ontology. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
+    } catch (ParserConfigurationException ex) {
+      msgError = ex.getMessage();
+      LOG.error("[ERROR]: Cannot load ontology, parser exception. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
+    } catch (XPathExpressionException ex) {
+      msgError = ex.getMessage();
+      LOG.error("[ERROR]: Cannot load ontology, xpath expression exception. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
+    } catch (SAXException ex) {
+      msgError = ex.getMessage();
+      LOG.error("[ERROR]: Cannot load ontology, sax exception. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
     }
+
     if (msgError != null) {
       LOG.error("[ERROR]: Cannot update, id {}", job.getId());
       job = UpdaterOperation.setJobStatusToError(job, msgError);
@@ -102,13 +113,17 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     blocker.setBlockerStatus(Boolean.TRUE);
 
     ontologyManager.updateOntology(ontology);
+
     labelProvider.clearAndSet(defaultLabels);
+
     textSearcherDb.clearAndSetDb(textSearcherDbDefaultData);
 
     blocker.setBlockerStatus(Boolean.FALSE);
 
     job = UpdaterOperation.setJobStatusToDone(job);
+
     blocker.setUpdateNow(Boolean.FALSE);
+
     return;
   }
 

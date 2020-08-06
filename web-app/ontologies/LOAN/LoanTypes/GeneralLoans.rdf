@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY fibo-fnd-agr-ctr "https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/">
+	<!ENTITY fibo-fnd-utl-alx "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/">
+	<!ENTITY fibo-fnd-utl-av "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+	<!ENTITY fibo-loan-ln-ln "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/">
+	<!ENTITY fibo-loan-loan-loan "https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/">
+	<!ENTITY fibo-loan-typ-gen "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xml "http://www.w3.org/XML/1998/namespace">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:fibo-fnd-agr-ctr="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/"
+	xmlns:fibo-fnd-utl-alx="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/"
+	xmlns:fibo-fnd-utl-av="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+	xmlns:fibo-loan-ln-ln="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/"
+	xmlns:fibo-loan-loan-loan="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/"
+	xmlns:fibo-loan-typ-gen="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/">
+		<rdfs:label xml:lang="en">GeneralLoans</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:</rdfs:comment>
+		<dct:abstract>This ontology is for different kinds of general loan such as motor loans and marine finance.
+		Other types of general loan such as those for motorhomes or other specified purposes would also go in this ontology, which is not complete.</dct:abstract>
+		<sm:fileAbbreviation>fibo-loan-typ-gen</sm:fileAbbreviation>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Agreements/Contracts/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/Analytics/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanContracts/LoanCore/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/Loans/LoanBasicTerms/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/LOAN/LoanTypes/GeneralLoans/"/>
+		<fibo-fnd-utl-av:hasMaturityLevel rdf:resource="&fibo-fnd-utl-av;Provisional"/>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&fibo-loan-typ-gen;AutoLoan">
+		<rdfs:subClassOf rdf:resource="&fibo-loan-loan-loan;LoanDrawdown"/>
+		<rdfs:label xml:lang="en">auto loan</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:AutoLoan</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"/>
+		<skos:definition xml:lang="en">A loan specifically for the purpose of automobile purchase.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-loan-typ-gen;AutoLoanContract">
+		<rdfs:subClassOf rdf:resource="&fibo-loan-ln-ln;Loan"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-agr-ctr;definesTermsFor"/>
+				<owl:someValuesFrom rdf:resource="&fibo-loan-typ-gen;AutoLoan"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">auto loan contract</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:AutoLoanContract</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-loan-typ-gen;MarineFinance">
+		<rdfs:subClassOf rdf:resource="&fibo-loan-loan-loan;LoanDrawdown"/>
+		<rdfs:label xml:lang="en">marine finance</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:MarineFinance</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"/>
+		<skos:definition xml:lang="en">A loan for the purchase of a boat or other vessel.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-loan-typ-gen;MarineFinanceContract">
+		<rdfs:subClassOf rdf:resource="&fibo-loan-ln-ln;Loan"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-agr-ctr;definesTermsFor"/>
+				<owl:someValuesFrom rdf:resource="&fibo-loan-typ-gen;MarineFinance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">marine finance contract</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:MarineFinanceContract</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"/>
+		<skos:definition xml:lang="en">Contract embodying the terms under which a loan is advanced for marine finance.</skos:definition>
+	</owl:Class>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-loan-typ-gen;boatHeldAsChattel">
+		<rdfs:label xml:lang="en">boat held as chattel</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:boatHeldAsChattel</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-loan-typ-gen;MarineFinance"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition xml:lang="en">Whether the vessel is to be held in ownership as a form of chattel by the lender during the period of the loan.</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-loan-typ-gen;mooredAt">
+		<rdfs:label xml:lang="en">moored at</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:mooredAt</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-loan-typ-gen;MarineFinance"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"/>
+		<rdfs:range rdf:resource="&xsd;string"/>
+		<skos:definition xml:lang="en">Textual description (name etc.) of where the vessel is to be moored if it has a permanent mooring place.</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-loan-typ-gen;percentageAdvanced">
+		<rdfs:label xml:lang="en">percentage advanced</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:percentageAdvanced</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-loan-typ-gen;MarineFinance"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"/>
+		<rdfs:range rdf:resource="&fibo-fnd-utl-alx;Percentage"/>
+		<skos:definition xml:lang="en">The percentage of the purchase price advanced as the loan.</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-loan-typ-gen;residential">
+		<rdfs:label xml:lang="en">residential</rdfs:label>
+		<rdfs:comment>QName: fibo-loan-typ-gen:residential</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-loan-typ-gen;MarineFinance"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition xml:lang="en">Whether the boat is intended to be used and is legally able to be used as a place of residence.</skos:definition>
+	</owl:DatatypeProperty>
+
+</rdf:RDF>

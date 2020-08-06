@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY fibo-fnd-arr-lif "https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Lifecycles/">
+	<!ENTITY fibo-fnd-rel-rel "https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/">
+	<!ENTITY fibo-fnd-utl-av "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+	<!ENTITY fibo-md-temx-crs "https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xml "http://www.w3.org/XML/1998/namespace">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:fibo-fnd-arr-lif="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Lifecycles/"
+	xmlns:fibo-fnd-rel-rel="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"
+	xmlns:fibo-fnd-utl-av="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+	xmlns:fibo-md-temx-crs="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/">
+		<rdfs:label xml:lang="en">SecurityCreditStatuses</rdfs:label>
+		<rdfs:comment>QName: fibo-md-temx-crs:</rdfs:comment>
+		<dct:abstract>This ontology extends the credit status ontology to define credit status concepts that are specific to issued securities. These include cashflow status and the basic credit statuses of being OK or in default. 
+		Note that in application data models these concepts would be represented as one or more selectable code lists or enumerations.</dct:abstract>
+		<sm:fileAbbreviation>fibo-md-temx-crs</sm:fileAbbreviation>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FBC/FinancialInstruments/FinancialInstruments/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Arrangements/Lifecycles/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Relations/Relations/"/>
+		<owl:imports rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/FND/Utilities/AnnotationVocabulary/"/>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/MD/TemporalCore/SecurityCreditStatuses/"/>
+		<fibo-fnd-utl-av:hasMaturityLevel rdf:resource="&fibo-fnd-utl-av;Provisional"/>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&fibo-md-temx-crs;CreditOK">
+		<rdfs:subClassOf rdf:resource="&fibo-md-temx-crs;SecurityCreditStatus"/>
+		<rdfs:label xml:lang="en">credit o k</rdfs:label>
+		<rdfs:comment>QName: fibo-md-temx-crs:CreditOK</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"/>
+		<skos:definition xml:lang="en">Not defaulted.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-md-temx-crs;InDefault">
+		<rdfs:subClassOf rdf:resource="&fibo-md-temx-crs;SecurityCreditStatus"/>
+		<rdfs:label xml:lang="en">in default</rdfs:label>
+		<rdfs:comment>QName: fibo-md-temx-crs:InDefault</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"/>
+		<skos:definition xml:lang="en">The issuer has failed to pay somthing that they are contractually obliged to pay.</skos:definition>
+		<skos:editorialNote xml:lang="en">(review 7 Oct 09) Does this exist as a term? This is a characteristic of the instrument not the rating. Because it&apos;s in default you can expect the rating to drop. Applies to instrument not to debtor. So a company may have 3 bond issues and may be defualt on only one. 14 Oct: Degrees of defaults e.g. tranche not paying interest due to losses on the underlying portrfolio; tranches being used to pay down more senior tranches.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-md-temx-crs;SecurityCashflowStatus">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-lif;LifecycleStatus"/>
+		<rdfs:label xml:lang="en">security cashflow status</rdfs:label>
+		<rdfs:comment>QName: fibo-md-temx-crs:SecurityCashflowStatus</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"/>
+		<owl:disjointWith rdf:resource="&fibo-md-temx-crs;SecurityCreditStatus"/>
+		<skos:definition xml:lang="en">The status of the cashflow due to the holder from the security.</skos:definition>
+		<skos:editorialNote xml:lang="en">Specialize this for preferred stocks, debt tranches and so on.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-md-temx-crs;SecurityCreditStatus">
+		<rdfs:subClassOf rdf:resource="&fibo-fnd-arr-lif;LifecycleStatus"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-fnd-rel-rel;appliesTo"/>
+				<owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">security credit status</rdfs:label>
+		<rdfs:comment>QName: fibo-md-temx-crs:SecurityCreditStatus</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"/>
+	</owl:Class>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-md-temx-crs;acceleratedPrincipalPaymentsExpected">
+		<rdfs:label xml:lang="en">accelerated principal payments expected</rdfs:label>
+		<rdfs:comment>QName: fibo-md-temx-crs:acceleratedPrincipalPaymentsExpected</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-md-temx-crs;SecurityCashflowStatus"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-md-temx-crs;interestPaymentsExpected">
+		<rdfs:label xml:lang="en">interest payments expected</rdfs:label>
+		<rdfs:comment>QName: fibo-md-temx-crs:interestPaymentsExpected</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-md-temx-crs;SecurityCashflowStatus"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&fibo-md-temx-crs;principalPaymentsExpected">
+		<rdfs:label xml:lang="en">principal payments expected</rdfs:label>
+		<rdfs:comment>QName: fibo-md-temx-crs:principalPaymentsExpected</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-md-temx-crs;SecurityCashflowStatus"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"/>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+	</owl:DatatypeProperty>
+
+</rdf:RDF>

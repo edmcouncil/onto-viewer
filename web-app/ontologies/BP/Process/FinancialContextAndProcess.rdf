@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY fibo-bp-prc-fcp "https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/">
+	<!ENTITY fibo-fnd-utl-av "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/">
+	<!ENTITY xml "http://www.w3.org/XML/1998/namespace">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:fibo-bp-prc-fcp="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"
+	xmlns:fibo-fnd-utl-av="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/">
+		<rdfs:label xml:lang="en">FinancialContextAndProcess</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:</rdfs:comment>
+		<dct:abstract>Core ontology defining process concepts in general for refinement and re-use elsewhere in this domain.</dct:abstract>
+		<sm:fileAbbreviation>fibo-bp-prc-fcp</sm:fileAbbreviation>
+		<owl:versionIRI rdf:resource="https://spec.edmcouncil.org/fibo/ontology/master/latest/BP/Process/FinancialContextAndProcess/"/>
+		<fibo-fnd-utl-av:hasMaturityLevel rdf:resource="&fibo-fnd-utl-av;Provisional"/>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;Clearing">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;ClearingAndSettlement"/>
+		<rdfs:label xml:lang="en">clearing</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:Clearing</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+		<skos:definition xml:lang="en">The process by which securities trades are cleared.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;ClearingAndSettlement">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;FinancialIndustryContext"/>
+		<rdfs:label xml:lang="en">clearing and settlement</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:ClearingAndSettlement</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+		<skos:definition xml:lang="en">The business process or service area of securities clearing and settlement.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;FinancialIndustryContext">
+		<rdfs:label xml:lang="en">financial industry context</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:FinancialIndustryContext</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+		<skos:definition xml:lang="en">The context in which business activites take place within the financial industry, i.e. investment management, wholesale financial markets trading and so on.</skos:definition>
+		<skos:editorialNote xml:lang="en">REVIEW: Ther precise definition above defines the Scope of this model.</skos:editorialNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;FinancialMarketsRegulation">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;FinancialIndustryContext"/>
+		<rdfs:label xml:lang="en">financial markets regulation</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:FinancialMarketsRegulation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;InvestmentManagement">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;FinancialIndustryContext"/>
+		<rdfs:label xml:lang="en">investment management</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:InvestmentManagement</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;MarketDataProvision">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PreTrade"/>
+		<rdfs:label xml:lang="en">market data provision</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:MarketDataProvision</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;PortfolioManagement">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;InvestmentManagement"/>
+		<rdfs:label xml:lang="en">portfolio management</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:PortfolioManagement</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;PreTrade">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;InvestmentManagement"/>
+		<rdfs:label xml:lang="en">pre trade</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:PreTrade</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;PretradeQuotes">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PreTrade"/>
+		<rdfs:label xml:lang="en">pretrade quotes</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:PretradeQuotes</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;PretradeReferenceDataProvision">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PreTrade"/>
+		<rdfs:label xml:lang="en">pretrade reference data provision</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:PretradeReferenceDataProvision</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;PrimaryMarket">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;FinancialIndustryContext"/>
+		<rdfs:label xml:lang="en">primary market</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:PrimaryMarket</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+		<skos:definition xml:lang="en">Issuance and primary market trading of new Traded Financial Instruments</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;PrimaryMarketClosing">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PrimaryMarket"/>
+		<rdfs:label xml:lang="en">primary market closing</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:PrimaryMarketClosing</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;PrimaryMarketIndicationsOfInterest">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PreTrade"/>
+		<rdfs:label xml:lang="en">primary market indications of interest</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:PrimaryMarketIndicationsOfInterest</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecondaryMarketTradingContext">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;FinancialIndustryContext"/>
+		<rdfs:label xml:lang="en">secondary market trading context</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecondaryMarketTradingContext</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesCustody">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;FinancialIndustryContext"/>
+		<rdfs:label xml:lang="en">securities custody</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesCustody</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesPostTrade">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;FinancialIndustryContext"/>
+		<rdfs:label xml:lang="en">securities post trade</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesPostTrade</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesPostTradePositionManagement">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesPostTrade"/>
+		<rdfs:label xml:lang="en">securities post trade position management</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesPostTradePositionManagement</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTrade">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;FinancialIndustryContext"/>
+		<rdfs:label xml:lang="en">securities trade</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTrade</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTradeAllocation">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesPostTrade"/>
+		<rdfs:label xml:lang="en">securities trade allocation</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTradeAllocation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTradeCaptureAndValidation">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesPostTrade"/>
+		<rdfs:label xml:lang="en">securities trade capture and validation</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTradeCaptureAndValidation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTradeConfirmationAffirmation">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesPostTrade"/>
+		<rdfs:label xml:lang="en">securities trade confirmation affirmation</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTradeConfirmationAffirmation</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTradeDatePositionReporting">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesTrade"/>
+		<rdfs:label xml:lang="en">securities trade date position reporting</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTradeDatePositionReporting</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTradeExecution">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesTrade"/>
+		<rdfs:label xml:lang="en">securities trade execution</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTradeExecution</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTradeOrderRouting">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesTrade"/>
+		<rdfs:label xml:lang="en">securities trade order routing</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTradeOrderRouting</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTradesMatching">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesPostTrade"/>
+		<rdfs:label xml:lang="en">securities trades matching</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTradesMatching</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+		<skos:definition xml:lang="en">Matching of trade allegations to identify confirmed trades, on an Over the Counter market in Traded Securities.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecuritiesTradesReporting">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesPostTrade"/>
+		<rdfs:label xml:lang="en">securities trades reporting</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecuritiesTradesReporting</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;SecurityRetirement">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&fibo-bp-prc-fcp;isRetirementOf"/>
+				<owl:someValuesFrom rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label xml:lang="en">security retirement</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:SecurityRetirement</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;Settlement">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;ClearingAndSettlement"/>
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PrimaryMarketClosing"/>
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;WhenIssuedTrading"/>
+		<rdfs:label xml:lang="en">settlement</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:Settlement</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+		<skos:definition xml:lang="en">The process by which securities trades are settled.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;ShortSaleLocate">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PreTrade"/>
+		<rdfs:label xml:lang="en">short sale locate</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:ShortSaleLocate</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;TradeAdvertisements">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PreTrade"/>
+		<rdfs:label xml:lang="en">trade advertisements</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:TradeAdvertisements</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;TradedSecurityLifecycle">
+		<rdfs:label xml:lang="en">traded security lifecycle</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:TradedSecurityLifecycle</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;TradesReferenceDataProvision">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;SecuritiesTrade"/>
+		<rdfs:label xml:lang="en">trades reference data provision</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:TradesReferenceDataProvision</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&fibo-bp-prc-fcp;WhenIssuedTrading">
+		<rdfs:subClassOf rdf:resource="&fibo-bp-prc-fcp;PrimaryMarket"/>
+		<rdfs:label xml:lang="en">when issued trading</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:WhenIssuedTrading</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&fibo-bp-prc-fcp;context">
+		<rdfs:label xml:lang="en">context</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:context</rdfs:comment>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&fibo-bp-prc-fcp;isRetirementOf">
+		<rdfs:label xml:lang="en">is retirement of</rdfs:label>
+		<rdfs:comment>QName: fibo-bp-prc-fcp:isRetirementOf</rdfs:comment>
+		<rdfs:domain rdf:resource="&fibo-bp-prc-fcp;SecurityRetirement"/>
+		<rdfs:isDefinedBy rdf:resource="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"/>
+		<rdfs:range rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/Security"/>
+	</owl:ObjectProperty>
+
+</rdf:RDF>
