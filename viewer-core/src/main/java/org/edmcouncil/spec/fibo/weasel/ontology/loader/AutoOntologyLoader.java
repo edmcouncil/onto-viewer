@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigKeys;
@@ -15,16 +16,19 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfig
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.loader.mapper.VersionIriMapper;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.parameters.ChangeApplied;
 import org.semanticweb.owlapi.util.AutoIRIMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
+import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
 
 public class AutoOntologyLoader {
 
@@ -50,6 +54,7 @@ public class AutoOntologyLoader {
         case ConfigKeys.ONTOLOGY_DIR:
           for (String dir : entry.getValue()) {
             Path dirPath = fsm.getPathToOntologyFile(dir);
+            LOG.debug("directory path: {}", dirPath.toAbsolutePath().toString());
             AutoIRIMapper autoIRIMapper = new AutoIRIMapper(dirPath.toAbsolutePath().toFile(), true);
             autoIRIMapper.setFileExtensions(supportedExtensions);
             autoIRIMapper.update();
@@ -89,15 +94,20 @@ public class AutoOntologyLoader {
   private OWLOntology loadOntologiesFromIRIs(Set<IRI> iris, OWLOntology onto, OWLOntologyManager manager) throws OWLOntologyCreationException {
 
     for (IRI iri : iris) {
-      LOG.debug("Now load ontology with iri {}", iri);
+      //LOG.debug("Now load ontology with iri {}", iri);
       OWLOntology o = manager.loadOntology(iri);
       OWLImportsDeclaration importDeclaration = manager.getOWLDataFactory()
               .getOWLImportsDeclaration(iri);
-      manager.applyChange(new AddImport(onto, importDeclaration));
-      //manager.makeLoadImportRequest(importDeclaration);
-
+      AddImport importt = new AddImport(onto, importDeclaration);
+      onto.applyDirectChange(importt);
+      //onto.applyChange(importt);
+      manager.makeLoadImportRequest(importDeclaration);
     }
-
+    manager.makeLoadImportRequest(new OWLImportsDeclarationImpl(manager.getOntologyDocumentIRI(onto)));	
+    try (Stream<OWLOntology> imports = manager.imports(onto)) {	
+      LOG.debug("create ontology");	
+      onto = manager.createOntology(IRI.create(""), imports, false);	
+    }
     return onto;
   }
 }
