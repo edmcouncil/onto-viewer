@@ -106,13 +106,11 @@ public class TextSearcherDb {
     }
   }
 
-
   private void collectOntologyData(OWLOntology owlOntology, OWLOntology onto, Map<String, TextDbItem> tmp) {
     Stream<OWLAnnotation> annotations = owlOntology.annotations();
     String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create("")).toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
-
 
     if (!tdi.isEmpty()) {
       tmp.put(entityIri, tdi);
@@ -129,8 +127,10 @@ public class TextSearcherDb {
         Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
         if (opt.isPresent()) {
           String lang = opt.get().getLang();
-          if (lang == null || !lang.equals(appConfig.getViewerCoreConfig().getLabelLang())) {
-            return;
+          if (appConfig.getViewerCoreConfig().isForceLabelLang()) {
+            if (lang == null || !lang.equals(appConfig.getViewerCoreConfig().getLabelLang())) {
+              return;
+            }
           }
           tdi.addValue(propertyIri, opt.get().getLiteral(), lang);
           LOG.trace("Literal value: {}", opt.get().getLiteral());
@@ -319,7 +319,8 @@ public class TextSearcherDb {
 
     return tsc;
   }
-  public void clearAndSetDb(Map<String, TextDbItem> newDb){
+
+  public void clearAndSetDb(Map<String, TextDbItem> newDb) {
     db.clear();
     db = newDb;
   }
