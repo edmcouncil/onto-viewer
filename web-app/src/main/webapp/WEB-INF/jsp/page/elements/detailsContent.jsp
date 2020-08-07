@@ -7,7 +7,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-md-9 px-2" style="height: 100%">
 
       <div class="card">
@@ -64,54 +63,58 @@
           const edgeFilters = document.getElementsByName('edgesFilter');
 
           const edgesFilterValues = {
-          optional: true,
-          non_optional: true,
-          internal: true,
-          external: true
+            optional: true,
+            non_optional: true,
+            internal: true,
+            external: true
+
           };
           const edgesFilter = (edge) => {
-          return edgesFilterValues[edge.optional] && edgesFilterValues[edge.type];
+
+            return edgesFilterValues[edge.optional] && edgesFilterValues[edge.type];
+
           };
           edgeFilters.forEach(filter => function (e) {
-          filter.checked = "checked";
-          });
+              filter.checked = "checked";
+            });
 
           edgeFilters.forEach(filter => filter.addEventListener('change', (e) => {
-          const {value, checked} = e.target;
-          edgesFilterValues[value] = checked;
-          edgesView.refresh();
-          }));
+              const {value, checked} = e.target;
+              edgesFilterValues[value] = checked;
+              edgesView.refresh();
+            }));
           const edgesView = new vis.DataView(edges, {filter: edgesFilter});
           var data = {
-          nodes: nodes,
-          edges: edgesView
+            nodes: nodes,
+            edges: edgesView
           };
           var options = {
-          "edges": {
-          "smooth": {
-          "type": "cubicBezier",
-          "forceDirection": "none",
-          "roundness": 0.15
-          }
-          },
-          "physics": {
-          "forceAtlas2Based": {
-          "gravitationalConstant": -95,
-          "centralGravity": 0.005,
-          "springLength": 200,
-          "springConstant": 0.415
-          },
-          "minVelocity": 0.75,
-          "solver": "forceAtlas2Based"
-          }
+            "edges": {
+              "smooth": {
+                "type": "cubicBezier",
+                "forceDirection": "none",
+                "roundness": 0.15
+              }
+
+            },
+            "physics": {
+              "forceAtlas2Based": {
+                "gravitationalConstant": -95,
+                "centralGravity": 0.005,
+                "springLength": 200,
+                "springConstant": 0.415
+              },
+              "minVelocity": 0.75,
+              "solver": "forceAtlas2Based"
+            }
           };
           var network = new vis.Network(container, data, options);
           var startHeight = 0;
           if (nodes.length !== 0) {
-          startHeight = 500;
+            startHeight = 500;
           }
-          if(nodes.length > 0 && nodes.length < 3){
-          startHeight = 250;
+          if (nodes.length > 0 && nodes.length < 3) {
+            startHeight = 250;
           }
           var height = startHeight + 20 * nodes.length;
 
@@ -119,44 +122,44 @@
 
           container.style.height = height + 'px';
 
-          if(nodes.length > 0 && nodes.length < 3){
-          container.style.width = 400 + 'px';
+          if (nodes.length > 0 && nodes.length < 3) {
+            container.style.width = 400 + 'px';
           }
           network.redraw();
 
           network.on("doubleClick", function (params) {
-          params.event = "[original event]";
-          console.log('<h2>oncontext (right click) event:</h2>' + JSON.stringify(params, null, 4));
-          var selectedNodes = params.nodes;
-          var selectedEdges = params.edges;
-          console.log(selectedNodes);
-          console.log(selectedEdges);
+            params.event = "[original event]";
+            console.log('<h2>oncontext (right click) event:</h2>' + JSON.stringify(params, null, 4));
+            var selectedNodes = params.nodes;
+            var selectedEdges = params.edges;
+            console.log(selectedNodes);
+            console.log(selectedEdges);
 
-          if (selectedNodes[0] !== undefined) {
-          var sNode = selectedNodes[0];
-          console.log(sNode);
-          nodes.forEach(function (entry) {
-          if (entry.id === sNode) {
-          window.location.href = "/search?query=" + entry.iri;
-          //localStorage.setItem("selectElementIri", );
-          }
-          });
-          } else if (selectedEdges[0] !== undefined) {
-          var sEgde = selectedEdges[0];
-          console.log(sEgde);
-          edgesView.forEach(function (entry) {
-          if (entry.id === sEgde) {
-          window.location.href = "/search?query=" + entry.iri;
-          }
-          });
-          }
-          //show menu on right click on graph
-          /*event.preventDefault();
-          $(".custom-menu").finish().toggle(100).
-          css({
-          top: event.pageY - 20 + "px",
-          left: event.pageX - 20 + "px"
-          });*/
+            if (selectedNodes[0] !== undefined) {
+              var sNode = selectedNodes[0];
+              console.log(sNode);
+              nodes.forEach(function (entry) {
+                if (entry.id === sNode) {
+                  window.location.href = "/search?query=" + entry.iri;
+                  //localStorage.setItem("selectElementIri", );
+                }
+              });
+            } else if (selectedEdges[0] !== undefined) {
+              var sEgde = selectedEdges[0];
+              console.log(sEgde);
+              edgesView.forEach(function (entry) {
+                if (entry.id === sEgde) {
+                  window.location.href = "/search?query=" + entry.iri;
+                }
+              });
+            }
+            //show menu on right click on graph
+            /*event.preventDefault();
+             $(".custom-menu").finish().toggle(100).
+             css({
+             top: event.pageY - 20 + "px",
+             left: event.pageX - 20 + "px"
+             });*/
           });
         </script>
       </div>

@@ -81,7 +81,7 @@ public class TextSearcherDb {
     entities.collect(Collectors.toSet()).forEach((owlEntity) -> {
       collectEntityData(owlEntity, onto);
     });
-    
+
     for (OWLOntology owlOntology : om.getOntology().getOWLOntologyManager().ontologies().collect(Collectors.toSet())) {
       collectOntologyData(owlOntology, onto);
     }
@@ -99,13 +99,14 @@ public class TextSearcherDb {
       db.put(entityIri, tdi);
     }
   }
+
   private void collectOntologyData(OWLOntology owlOntology, OWLOntology onto) {
     Stream<OWLAnnotation> annotations = owlOntology.annotations();
     String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create("")).toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
 
-    if (!tdi.isEmpty()) {
+    if (tdi != null && !tdi.isEmpty()) {
       db.put(entityIri, tdi);
     }
   }
@@ -119,7 +120,11 @@ public class TextSearcherDb {
         LOG.trace("Find property: {}", propertyIri);
         Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
         if (opt.isPresent()) {
-          tdi.addValue(propertyIri, opt.get().getLiteral());
+          String lang = opt.get().getLang();
+          if (lang == null || !lang.equals(appConfig.getViewerCoreConfig().getLabelLang())) {
+            return;
+          }
+          tdi.addValue(propertyIri, opt.get().getLiteral(), lang);
           LOG.trace("Literal value: {}", opt.get().getLiteral());
         }
       }
@@ -196,7 +201,7 @@ public class TextSearcherDb {
     if (startIndex > countOfResults) {
       return result;
     }
-    
+
     Integer endIndex = (currentPage - 1) * maxResults + maxResults;
     endIndex = endIndex > countOfResults ? countOfResults : endIndex;
 

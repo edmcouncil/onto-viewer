@@ -21,6 +21,7 @@ import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
  * This class is used to load ontology file from computer.
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 class FileOntologyLoader implements OntologyLoader {
 

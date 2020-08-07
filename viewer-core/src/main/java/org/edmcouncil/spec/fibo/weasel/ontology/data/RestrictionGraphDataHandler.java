@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +20,7 @@ import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -32,6 +34,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
 public class RestrictionGraphDataHandler {
@@ -46,8 +49,8 @@ public class RestrictionGraphDataHandler {
   private OntologyVisitors ontologyVisitors;
 
   public OntologyGraph handleGraph(
-          OWLNamedIndividual obj,
-          OWLOntology ontology) {
+      OWLNamedIndividual obj,
+      OWLOntology ontology) {
 
     Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj).iterator();
 
@@ -85,44 +88,45 @@ public class RestrictionGraphDataHandler {
   }
 
   public OntologyGraph handleGraph(
-          OWLObjectProperty obj,
-          OWLOntology ontology) {
+      OWLObjectProperty obj,
+      OWLOntology ontology) {
 
     Iterator<OWLObjectPropertyAxiom> axiomsIterator = ontology.axioms(obj).iterator();
     return handleGraph(axiomsIterator, obj.getIRI());
   }
 
   public OntologyGraph handleGraph(
-          OWLDataProperty obj,
-          OWLOntology ontology) {
+      OWLDataProperty obj,
+      OWLOntology ontology) {
 
     Iterator<OWLDataPropertyAxiom> axiomsIterator = ontology.axioms(obj).iterator();
     return handleGraph(axiomsIterator, obj.getIRI());
   }
 
   public OntologyGraph handleGraph(
-          OWLClass obj,
-          OWLOntology ontology) {
+      OWLClass obj,
+      OWLOntology ontology) {
 
     Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj).iterator();
 
     OntologyGraph vg = handleGraph(axiomsIterator, obj.getIRI());
     vg = handleInheritedAxiomsGraph(obj, vg, ontology);
+    vg = handleEquivalentClassesAxiomGraph(obj, vg, ontology);
     return vg;
   }
 
   private <T extends OWLAxiom> OntologyGraph handleGraph(
-          Iterator<T> axiomsIterator,
-          IRI elementIri) {
+      Iterator<T> axiomsIterator,
+      IRI elementIri) {
     return handleGraph(axiomsIterator, elementIri, null, null, GraphNodeType.INTERNAL);
   }
 
   private <T extends OWLAxiom> OntologyGraph handleGraph(
-          Iterator<T> axiomsIterator,
-          IRI elementIri,
-          GraphNode root,
-          OntologyGraph vg,
-          GraphNodeType type) {
+      Iterator<T> axiomsIterator,
+      IRI elementIri,
+      GraphNode root,
+      OntologyGraph vg,
+      GraphNodeType type) {
 
     if (vg == null) {
       vg = new OntologyGraph();
@@ -148,12 +152,12 @@ public class RestrictionGraphDataHandler {
         OWLSubClassOfAxiom axiomEl = axiom.accept(ontologyVisitors.getAxiomElement(elementIri));
 
         Map<GraphNode, Set<OWLClassExpression>> qrestrictions = axiomEl.getSuperClass()
-                .accept(ontologyVisitors.superClassAxiom(vg, root, type));
+            .accept(ontologyVisitors.superClassAxiom(vg, root, type));
 
         if (qrestrictions != null && !qrestrictions.isEmpty()) {
           for (Map.Entry<GraphNode, Set<OWLClassExpression>> entry : qrestrictions.entrySet()) {
             for (OWLClassExpression classExpression : entry.getValue()) {
-              handleRecursivelyRestrictions(classExpression, vg, entry.getKey(), type);
+              handleRecursivelyRestrictions(classExpression, vg, entry.getKey(), type, false);
             }
           }
         }
@@ -163,11 +167,13 @@ public class RestrictionGraphDataHandler {
     return vg;
   }
 
-  private void handleRecursivelyRestrictions(
-          OWLClassExpression expression,
-          OntologyGraph vg,
-          GraphNode root,
-          GraphNodeType type) {
+  public void handleRecursivelyRestrictions(
+      OWLClassExpression expression,
+      OntologyGraph vg,
+      GraphNode root,
+      GraphNodeType type,
+      Boolean eqivalentTo
+  ) {
 
     LOG.debug("[Expression] Process expression: {}", expression.toString());
 
@@ -176,14 +182,14 @@ public class RestrictionGraphDataHandler {
     }
 
     Map<GraphNode, Set<OWLClassExpression>> expressionsMap = expression
-            .accept(ontologyVisitors.superClassAxiom(vg, root, type));
+        .accept(ontologyVisitors.superClassAxiom(vg, root, type, eqivalentTo));
 
     if (expressionsMap != null && !expressionsMap.isEmpty()) {
       expressionsMap.entrySet().forEach((entry) -> {
         for (OWLClassExpression classExpression : entry.getValue()) {
-          handleRecursivelyRestrictions(classExpression, vg, entry.getKey(), type);
+          handleRecursivelyRestrictions(classExpression, vg, entry.getKey(), type, eqivalentTo);
         }
-        
+
       });
     }
   }
@@ -194,6 +200,40 @@ public class RestrictionGraphDataHandler {
       Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(owlClass).iterator();
       handleGraph(axiomsIterator, owlClass.getIRI(), vg.getRoot(), vg, GraphNodeType.EXTERNAL);
     });
+    return vg;
+  }
+
+  public Set<OWLEquivalentClassesAxiom> getClassesAxioms(OWLClass clazz, OWLOntology ontology) {
+    Set<OWLEquivalentClassesAxiom> result = new HashSet<>();
+    result = ontology.equivalentClassesAxioms(clazz).collect(Collectors.toSet());
+    return result;
+  }
+
+  public OntologyGraph handleEquivalentClassesAxiomGraph(OWLClass clazz, OntologyGraph vg, OWLOntology ontology) {
+
+    Set<OWLEquivalentClassesAxiom> result = new HashSet<>();
+    result = getClassesAxioms(clazz, ontology);
+
+    GraphNode root = vg.getRoot();
+    for (OWLEquivalentClassesAxiom owlEquivalentClassesAxiom : result) {
+      LOG.debug("Equivalent Classes Axiom " + owlEquivalentClassesAxiom.toString());
+
+      OWLEquivalentClassesAxiom eca = owlEquivalentClassesAxiom.getAxiomWithoutAnnotations();
+      LOG.debug("eca: {}", eca.toString());
+      Map<GraphNode, Set<OWLClassExpression>> qrestrictions = eca
+          .accept(ontologyVisitors.superClassAxiom(vg, vg.getRoot(), GraphNodeType.INTERNAL, true));
+
+      if (qrestrictions != null && !qrestrictions.isEmpty()) {
+        for (Map.Entry<GraphNode, Set<OWLClassExpression>> entry : qrestrictions.entrySet()) {
+          for (OWLClassExpression classExpression : entry.getValue()) {
+            LOG.debug("Class expression {} ", classExpression.toString());
+
+            handleRecursivelyRestrictions(classExpression, vg, entry.getKey(), GraphNodeType.INTERNAL, true);
+          }
+        }
+      }
+    }
+    vg.setRoot(root);
     return vg;
   }
 
