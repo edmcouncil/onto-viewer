@@ -7,11 +7,9 @@
         </div>
       </div>
     </div>
-        <a href="../../../../../../../fibo_viewer_config.xml"></a>
     <div class="col-md-9 px-2" style="height: 100%">
 
       <div class="card">
-        <a href="../../../../../../../fibo_viewer_config.xml"></a>
         <div class="card-body" style="height: 100%">
           <c:choose>
             <c:when test="${details_display}">
