@@ -38,7 +38,6 @@ public class TaxonomyElementRenderTag extends SimpleTagSupport {
   public void doTag()
       throws JspException, IOException {
 
-  
     renderTaxonomyElement(element);
 
   }
@@ -49,13 +48,9 @@ public class TaxonomyElementRenderTag extends SimpleTagSupport {
   }
 
   private void renderTaxonomyElement(OwlTaxonomyElementImpl property) throws IOException {
-    String link = null;
-    String val = null;
-      String otv1 = property.getIri();
-    String otv2 = property.getLabel();
+    String link = property.getIri();;
+    String val = property.getLabel();;
 
-    link = property.getIri().equals(WeaselOwlType.IRI) ? property.getIri() : property.getLabel();
-    val = property.getLabel().equals(WeaselOwlType.STRING) ? property.getIri() : property.getLabel();
     String result = wrapToLink(link, val);
 
     renderElement(result);

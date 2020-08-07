@@ -12,6 +12,10 @@ public class ErrorResult {
   public ErrorResult() {
   }
 
+  public ErrorResult(String msg) {
+    message = msg;
+  }
+
   public String getMessage() {
     return message;
   }
