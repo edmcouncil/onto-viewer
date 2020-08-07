@@ -6,6 +6,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringIt
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -60,56 +61,47 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   public boolean isOntologyLocationSet() {
     return configuration.containsKey(ConfigKeys.ONTOLOGY_URL)
-        || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)
-        || configuration.containsKey(ConfigKeys.ONTOLOGY_DIR);
+            || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)
+            || configuration.containsKey(ConfigKeys.ONTOLOGY_DIR);
   }
 
-  public boolean isOntologyLocationURL() {
-    return configuration.containsKey(ConfigKeys.ONTOLOGY_URL);
+  public Map<String, Set<String>> getOntologyLocation() {
+    Map<String, Set<String>> result = new LinkedHashMap<>();
+    getOntologyPath(result);
+    getOntologyUrl(result);
+    getOntologyDir(result);
+
+    return result;
   }
 
-  public boolean isOntologyLocationPath() {
-    return configuration.containsKey(ConfigKeys.ONTOLOGY_PATH);
-  }
-
-  public boolean isOntologyLocationDir() {
-    return configuration.containsKey(ConfigKeys.ONTOLOGY_DIR);
-  }
-
-  private String getURLOntology() {
-    Set<ConfigItem> elements = configuration.getOrDefault(ConfigKeys.ONTOLOGY_URL, new HashSet<>(0));
-    for (ConfigItem element : elements) {
-      return element.toString();
+  private void getOntologyPath(Map<String, Set<String>> result) {
+    if (configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)) {
+      Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_PATH, new HashSet<>());
+      configuration.get(ConfigKeys.ONTOLOGY_PATH).forEach((configItem) -> {
+        item.add(configItem.toString());
+      });
+      result.put(ConfigKeys.ONTOLOGY_PATH, item);
     }
-    return null;
   }
 
-  private String getOntologyDirectory() {
-    Set<ConfigItem> elements = configuration.getOrDefault(ConfigKeys.ONTOLOGY_DIR, new HashSet<>(0));
-    for (ConfigItem element : elements) {
-      return element.toString();
+  private void getOntologyDir(Map<String, Set<String>> result) {
+    if (configuration.containsKey(ConfigKeys.ONTOLOGY_DIR)) {
+      Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_DIR, new HashSet<>());
+      configuration.get(ConfigKeys.ONTOLOGY_DIR).forEach((configItem) -> {
+        item.add(configItem.toString());
+      });
+      result.put(ConfigKeys.ONTOLOGY_DIR, item);
     }
-    return null;
   }
 
-  public String getOntologyLocation() {
-    String url = getURLOntology();
-    if (url != null) {
-      return url;
+  private void getOntologyUrl(Map<String, Set<String>> result) {
+    if (configuration.containsKey(ConfigKeys.ONTOLOGY_URL)) {
+      Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_URL, new HashSet<>());
+      configuration.get(ConfigKeys.ONTOLOGY_URL).forEach((configItem) -> {
+        item.add(configItem.toString());
+      });
+      result.put(ConfigKeys.ONTOLOGY_URL, item);
     }
-    String path = getPathOntology();
-    if (path != null) {
-      return path;
-    }
-    return getOntologyDirectory();
-  }
-
-  private String getPathOntology() {
-    Set<ConfigItem> elements = configuration.getOrDefault(ConfigKeys.ONTOLOGY_PATH, new HashSet<>(0));
-    for (ConfigItem element : elements) {
-      return element.toString();
-    }
-    return null;
   }
 
   //TODO: Change this method name..
@@ -189,10 +181,10 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.IGNORE_TO_DISPLAYING, new HashSet<>());
     Set<String> result = new HashSet<>();
     values.stream()
-        .map((value) -> (StringItem) value)
-        .forEachOrdered((cse) -> {
-          result.add(cse.toString());
-        });
+            .map((value) -> (StringItem) value)
+            .forEachOrdered((cse) -> {
+              result.add(cse.toString());
+            });
 
     return result;
   }
@@ -202,10 +194,10 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.USER_DEFAULT_NAME_LIST, new HashSet<>());
     Set<DefaultLabelItem> result = new HashSet<>();
     values.stream()
-        .map((value) -> (DefaultLabelItem) value)
-        .forEachOrdered((cse) -> {
-          result.add(cse);
-        });
+            .map((value) -> (DefaultLabelItem) value)
+            .forEachOrdered((cse) -> {
+              result.add(cse);
+            });
 
     return result;
   }

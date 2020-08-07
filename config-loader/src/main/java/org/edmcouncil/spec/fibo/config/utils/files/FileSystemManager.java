@@ -38,16 +38,16 @@ public class FileSystemManager {
       case "user.home":
         userHomeProperty = System.getProperty("user.home");
         userHomeDir = Paths.get(userHomeProperty);
-        LOG.info("User home dir is '{}'.", userHomeDir);
+        LOG.trace("User home dir is '{}'.", userHomeDir);
         userHomeDir = userHomeDir.resolve(WEASEL_DEFAULT_HOME_DIR_NAME);
         break;
       case "*":
         userHomeDir = Paths.get("");
-        LOG.info("Working directory is '{}'.", userHomeDir.toAbsolutePath());
+        LOG.trace("Working directory is '{}'.", userHomeDir.toAbsolutePath());
         break;
       default:
         userHomeDir = Paths.get(userHomeProperty);
-        LOG.info("Application working directory is '{}'.", userHomeDir);
+        LOG.trace("Application working directory is '{}'.", userHomeDir);
         break;
     }
     return userHomeDir;
@@ -88,6 +88,14 @@ public class FileSystemManager {
       Path homeDir = getviewerHomeDir();
       return createDirIfNotExists(homeDir).resolve(path);
     }
+  }
+
+  public Path getPathToApiKey() {
+    return getviewerHomeDir().resolve("api.key");
+  }
+
+  public Path getPathToUpdateHistory() {
+    return getviewerHomeDir().resolve("updateHistory.json");
   }
 
 }

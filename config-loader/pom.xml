@@ -4,11 +4,11 @@
   <parent>
     <groupId>org.edmcouncil.spec</groupId>
     <artifactId>fibo</artifactId>
-    <version>v0.1.1-beta</version>
+    <version>v0.3.0-beta</version>
   </parent>
   <artifactId>config-loader</artifactId>
   <packaging>jar</packaging>
-  <version>v0.1.1-beta</version>
+  <version>v0.3.0-beta</version>
   
   <name>Fibo-Config-Loader</name>
     <dependencies>

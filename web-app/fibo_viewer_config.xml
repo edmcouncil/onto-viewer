@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
 
-  <!-- To load an ontology from the internet, enter the URL between the <ontologyURL> tags -->
-  <!-- To load an ontology from a folder, enter the path address with application between <ontologyPath> tags or enter the file name  -->
-  <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
-  <ontology>
-    <!--<ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/2019Q3/AboutFIBOProd.ttl</ontologyURL>
-    <ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>
-    <ontologyPath>AboutFIBODev.ttl</ontologyPath>-->
-    <ontologyDir>ontologies</ontologyDir>
-  </ontology>
+    <!-- To load an ontology from the internet, enter the URL between the <ontologyURL> tags -->
+    <!-- To load an ontology from a folder, enter the path address with application between <ontologyPath> tags or enter the file name  -->
+    <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
+    <ontology>
+        <!--<ontologyURL>https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/</ontologyURL>
+        <ontologyPath>C:\Users\user\.weasel\AboutFIBOProd.rdf</ontologyPath>
+        <ontologyPath>AboutFIBODev.ttl</ontologyPath>-->
+        <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/latest/AboutFIBODev/</ontologyURL>
+        <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/master/latest/MetadataFIBO</ontologyURL>
+        <ontologyDir>ontologies</ontologyDir>
+        <ontologyDir>staticOntologies</ontologyDir>
+    </ontology>
+
   
   <ignoreToDisplaying>
     <ignore>@viewer.axiom.SubObjectPropertyOf</ignore>
