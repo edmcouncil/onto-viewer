@@ -6,6 +6,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringIt
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -65,10 +66,10 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public Map<String, Set<String>> getOntologyLocation() {
-    Map<String, Set<String>> result = new HashMap<>();
+    Map<String, Set<String>> result = new LinkedHashMap<>();
+    getOntologyPath(result);
     getOntologyUrl(result);
     getOntologyDir(result);
-    getOntologyPath(result);
 
     return result;
   }
