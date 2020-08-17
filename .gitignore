@@ -199,3 +199,4 @@ nbactions.xml
 **/nb-configuration.xml
 **/api.key
 **/updateHistory.json
+/web-app/fiboMapper/fibo/**
