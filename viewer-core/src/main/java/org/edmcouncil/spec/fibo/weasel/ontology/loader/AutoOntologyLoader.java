@@ -29,6 +29,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 import uk.ac.manchester.cs.owl.owlapi.OWLImportsDeclarationImpl;
+/**
+ * 
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
+ * @author Michal Daniel (michal.daniel@makolab.com)
+ */
 
 public class AutoOntologyLoader {
 

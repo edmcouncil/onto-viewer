@@ -48,11 +48,9 @@ public class TaxonomyElementRenderTag extends SimpleTagSupport {
   }
 
   private void renderTaxonomyElement(OwlTaxonomyElementImpl property) throws IOException {
-    String link = null;
-    String val = null;
+    String link = property.getIri();;
+    String val = property.getLabel();;
 
-    link = property.getIri();
-    val = property.getLabel();
     String result = wrapToLink(link, val);
 
     renderElement(result);

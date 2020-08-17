@@ -191,6 +191,7 @@ dist/
 nbdist/
 .nb-gradle/
 nbactions.xml
+**/nb-configuration.xml
 
 # End of https://www.gitignore.io/api/java,eclipse,netbeans,intellij,java-web
 /weasel/nbproject/

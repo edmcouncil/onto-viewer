@@ -6,6 +6,8 @@ import org.edmcouncil.spec.fibo.config.configuration.model.searcher.SearcherFiel
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
+ *
  */
 public class TextDbItem {
 
@@ -17,9 +19,9 @@ public class TextDbItem {
   }
   //TODO: BOST fields map
 
-  public void addValue(String type, String val) {
+  public void addValue(String type, String val, String lang) {
     //TODO: null checking
-    value.add(new Item(type, val));
+    value.add(new Item(type, val, lang));
   }
 
   public Set<Item> getValue() {
@@ -61,8 +63,8 @@ public class TextDbItem {
 
     return result;
   }
-  
-  public boolean isEmpty(){
+
+  public boolean isEmpty() {
     return value.isEmpty();
   }
 
@@ -70,10 +72,16 @@ public class TextDbItem {
 
     private final String type;
     private final String value;
+    private final String lang;
 
-    public Item(String type, String val) {
+    public Item(String type, String value, String lang) {
       this.type = type;
-      this.value = val;
+      this.value = value;
+      this.lang = lang;
+    }
+
+    public String getLang() {
+      return lang;
     }
 
     public String getType() {

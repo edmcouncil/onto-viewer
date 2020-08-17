@@ -126,7 +126,13 @@ public class TextSearcherDb {
         LOG.trace("Find property: {}", propertyIri);
         Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
         if (opt.isPresent()) {
-          tdi.addValue(propertyIri, opt.get().getLiteral());
+          String lang = opt.get().getLang();
+          if (appConfig.getViewerCoreConfig().isForceLabelLang()) {
+            if (lang == null || !lang.equals(appConfig.getViewerCoreConfig().getLabelLang())) {
+              return;
+            }
+          }
+          tdi.addValue(propertyIri, opt.get().getLiteral(), lang);
           LOG.trace("Literal value: {}", opt.get().getLiteral());
         }
       }
@@ -313,7 +319,8 @@ public class TextSearcherDb {
 
     return tsc;
   }
-  public void clearAndSetDb(Map<String, TextDbItem> newDb){
+
+  public void clearAndSetDb(Map<String, TextDbItem> newDb) {
     db.clear();
     db = newDb;
   }
