@@ -104,6 +104,17 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
     }
   }
 
+  public Set<String> getOntologyMapper() {
+    Set<String> result = new LinkedHashSet<>();
+    if (configuration.containsKey(ConfigKeys.ONTOLOGY_MAPPER)) {
+      configuration.get(ConfigKeys.ONTOLOGY_MAPPER).forEach((configItem) -> {
+        result.add(configItem.toString());
+      });
+    }
+
+    return result;
+  }
+
   //TODO: Change this method name..
   /**
    *

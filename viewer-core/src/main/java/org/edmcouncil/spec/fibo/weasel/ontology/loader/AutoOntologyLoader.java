@@ -17,14 +17,12 @@ import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.loader.mapper.SimpleOntologyMapperCreator;
 import org.edmcouncil.spec.fibo.weasel.ontology.loader.mapper.VersionIriMapper;
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.AddAxiom;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLImportsDeclaration;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.model.parameters.ChangeApplied;
 import org.semanticweb.owlapi.util.AutoIRIMapper;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.slf4j.Logger;
@@ -45,11 +43,26 @@ public class AutoOntologyLoader {
     this.config = viewerCoreConfiguration;
   }
 
+  private void loadMappersToOntologyManager(OWLOntologyManager manager, Set<String> listOfMappersDirectory) throws IOException, ParserConfigurationException, XPathExpressionException, SAXException {
+    for (String mapperStringPath : listOfMappersDirectory) {
+      LOG.debug("Prepare Mapper for directory: {}", mapperStringPath);
+      Path mapperPath = fsm.getPathToOntologyFile(mapperStringPath);
+      AutoIRIMapper autoIRIMapper = new AutoIRIMapper(mapperPath.toAbsolutePath().toFile(), true);
+      autoIRIMapper.setFileExtensions(supportedExtensions);
+      autoIRIMapper.update();
+      VersionIriMapper versionIriMapper = new VersionIriMapper(mapperPath.toAbsolutePath());
+      versionIriMapper.mapOntologyVersion(autoIRIMapper);
+      manager.getIRIMappers().add(autoIRIMapper, versionIriMapper);
+    }
+  }
+
   public OWLOntology load() throws OWLOntologyCreationException, IOException, ParserConfigurationException, ParserConfigurationException, XPathExpressionException, XPathExpressionException, SAXException {
     Set<IRI> irisToLoad = new HashSet<>();
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
     OWLOntology onto = manager.createOntology();
     Map<String, Set<String>> ontologyLocation = config.getOntologyLocation();
+
+    loadMappersToOntologyManager(manager, config.getOntologyMapper());
 
     for (Map.Entry<String, Set<String>> entry : ontologyLocation.entrySet()) {
       switch (entry.getKey()) {
