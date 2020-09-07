@@ -23,12 +23,14 @@ public class FileSystemManager {
   private final String workingDir;
   private final String viewerConfigFileName;
   private final String defaultOntologyFileName;
+  private final String configPath;
 
   @Autowired
   public FileSystemManager(AppProperties appProperties) {
     workingDir = appProperties.getDefaultHomePath();
     viewerConfigFileName = appProperties.getViewerConfigFileName();
     defaultOntologyFileName = appProperties.getDefaultOntologyFileName();
+    configPath = appProperties.getConfigPath();
   }
 
   public Path getviewerHomeDir() {
@@ -90,4 +92,13 @@ public class FileSystemManager {
     }
   }
 
+  public Path getPathToConfigFile() throws IOException {
+    Path path = Paths.get(configPath);
+    if (path.isAbsolute()) {
+      return path;
+    } else {
+      Path homeDir = getviewerHomeDir();
+      return createDirIfNotExists(homeDir).resolve(configPath);
+    }
+  }
 }

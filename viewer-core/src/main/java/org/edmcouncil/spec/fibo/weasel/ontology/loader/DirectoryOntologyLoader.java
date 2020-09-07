@@ -32,7 +32,7 @@ class DirectoryOntologyLoader implements OntologyLoader {
 
   @Override
   public OWLOntology loadOntology(String path) throws IOException, OWLOntologyCreationException {
-    Path dirPath = fsm.getPathToOntologyFile(path);
+    Path dirPath = fsm.getPathToConfigFile();
 
     LOG.debug("Path to directory is '{}'", dirPath);
 
