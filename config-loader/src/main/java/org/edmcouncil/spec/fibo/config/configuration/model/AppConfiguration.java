@@ -2,10 +2,7 @@ package org.edmcouncil.spec.fibo.config.configuration.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.fibo.config.configuration.loader.ConfigLoader;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.ViewerCoreConfiguration;
@@ -44,7 +41,6 @@ public class AppConfiguration {
       configFilePath = fileSystemManager.getPathToConfigFile();
 
       LOG.debug("Path to Configs Directory : {}", configFilePath.toAbsolutePath().toString());
-      // File inputConfigFile = configFilePath.toFile();
       LOG.debug("Load config");
       LOG.debug("List Files : {}", configFilePath.toFile().listFiles().toString());
       for (File file : configFilePath.toFile().listFiles()) {

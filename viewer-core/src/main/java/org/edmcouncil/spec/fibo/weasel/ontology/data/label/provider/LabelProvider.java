@@ -38,19 +38,26 @@ public class LabelProvider {
 
   private static final Logger LOG = LoggerFactory.getLogger(LabelProvider.class);
 
-  private final Map<String, String> previouslyUsedLabels = new HashMap<>();
+  private Map<String, String> previouslyUsedLabels = new HashMap<>();
 
   @Autowired
   private OntologyManager ontology;
-  private final Boolean forceLabelLang;
-  private final String labelLang;
-  private final Boolean useLabels;
-  private final MissingLanguageItem.Action missingLanguageAction;
-  private final Priority groupLabelPriority;
-  private final Set<DefaultLabelItem> defaultUserLabels;
+  private Boolean forceLabelLang;
+  private String labelLang;
+  private Boolean useLabels;
+  private MissingLanguageItem.Action missingLanguageAction;
+  private Priority groupLabelPriority;
+  private Set<DefaultLabelItem> defaultUserLabels;
 
   @Inject
   public LabelProvider(AppConfiguration config) {
+    loadConfig(config);
+
+    previouslyUsedLabels = getDefaultLabels();
+
+  }
+
+  public void loadConfig(AppConfiguration config) {
     ViewerCoreConfiguration weaselConfig = config.getViewerCoreConfig();
     this.forceLabelLang = weaselConfig.isForceLabelLang();
     this.labelLang = weaselConfig.getLabelLang();
@@ -58,25 +65,23 @@ public class LabelProvider {
     this.missingLanguageAction = weaselConfig.getMissingLanguageAction();
     this.groupLabelPriority = weaselConfig.getGroupLabelPriority();
     this.defaultUserLabels = weaselConfig.getDefaultLabels();
-
-    loadDefaultLabels();
-
   }
 
   /**
    * Load default labels from configuration and default labels defined in application
    */
-  private void loadDefaultLabels() {
+  public Map<String, String> getDefaultLabels() {
     DefaultAppLabels defAppLabels = DefaultLabelsFactory.createDefaultAppLabels();
-
+    Map<String, String> tmp = new HashMap<>();
     for (Map.Entry<IRI, String> entry : defAppLabels.getLabels().entrySet()) {
-      previouslyUsedLabels.put(entry.getKey().toString(), entry.getValue());
+      tmp.put(entry.getKey().toString(), entry.getValue());
     }
     if (useLabels && groupLabelPriority == Priority.USER_DEFINED) {
       defaultUserLabels.forEach((defaultLabel) -> {
-        previouslyUsedLabels.put(defaultLabel.getIri(), defaultLabel.getLabel());
+        tmp.put(defaultLabel.getIri(), defaultLabel.getLabel());
       });
     }
+    return tmp;
   }
 
   public String getLabelOrDefaultFragment(OWLEntity entity) {
@@ -93,18 +98,18 @@ public class LabelProvider {
     Map<String, String> labels = new HashMap<>();
     if (useLabels) {
       EntitySearcher.getAnnotations(entity, ontology.getOntology(), factory.getRDFSLabel())
-          .collect(Collectors.toSet())
-          .stream()
-          .filter((annotation) -> (annotation.getValue().isLiteral()))
-          .forEachOrdered((annotation) -> {
+              .collect(Collectors.toSet())
+              .stream()
+              .filter((annotation) -> (annotation.getValue().isLiteral()))
+              .forEachOrdered((annotation) -> {
 
-            String label = annotation.annotationValue().asLiteral().get().getLiteral();
+                String label = annotation.annotationValue().asLiteral().get().getLiteral();
 
-            String lang = annotation.annotationValue().asLiteral().get().getLang();
+                String lang = annotation.annotationValue().asLiteral().get().getLang();
 
-            labelProcessing(lang, labels, label, entity.getIRI());
+                labelProcessing(lang, labels, label, entity.getIRI());
 
-          });
+              });
     }
     String labelResult = null;
     if (labels.isEmpty()) {
@@ -122,9 +127,9 @@ public class LabelProvider {
       labelResult = getTheRightLabel(labels, entity.getIRI());
     } else {
       labelResult = labels.entrySet()
-          .stream()
-          .findFirst()
-          .get().getKey();
+              .stream()
+              .findFirst()
+              .get().getKey();
     }
     previouslyUsedLabels.put(entity.getIRI().toString(), labelResult);
     return labelResult;
@@ -135,20 +140,20 @@ public class LabelProvider {
    */
   private String getTheRightLabel(Map<String, String> labels, IRI entityIri) {
     Optional<String> optionalLab = labels.entrySet()
-        .stream()
-        .filter(p -> p.getValue().equals(labelLang))
-        .map(m -> {
-          return m.getKey();
-        })
-        .findFirst();
+            .stream()
+            .filter(p -> p.getValue().equals(labelLang))
+            .map(m -> {
+              return m.getKey();
+            })
+            .findFirst();
     if (!optionalLab.isPresent()) {
       LOG.debug("[Label Extractor]: Entity has more than one label but noone have a language");
 
       if (missingLanguageAction == MissingLanguageItem.Action.FIRST) {
         String missingLab = labels.entrySet()
-            .stream()
-            .findFirst()
-            .get().getKey();
+                .stream()
+                .findFirst()
+                .get().getKey();
         LOG.debug("[Label Extractor]: Return an first element of label list: {}", missingLab);
         return missingLab;
 
@@ -167,18 +172,18 @@ public class LabelProvider {
 
         labels.put(label, lang);
         LOG.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
-            label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
+                label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
 
       } else {
         LOG.debug("[Label Extractor]: REJECTED label: '{}' @ '{}' for element with IRI: '{}', "
-            + "Reason: Language is not present.",
-            label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
+                + "Reason: Language is not present.",
+                label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
       }
 
     } else {
       labels.put(label, lang);
       LOG.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
-          label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
+              label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
     }
   }
 
@@ -191,7 +196,7 @@ public class LabelProvider {
     }
 
     OWLEntity entity = ontology.getOntology().entitiesInSignature(iri).findFirst().orElse(
-        ontology.getOntology().getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
+            ontology.getOntology().getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
     if (iri.toString().endsWith("/")) {
       //it's ontology, we have to get the label from another way
       return getOntologyLabelOrDefaultFragment(iri);
@@ -224,10 +229,15 @@ public class LabelProvider {
       labelResult = getTheRightLabel(labels, iri);
     } else {
       labelResult = labels.entrySet()
-          .stream()
-          .findFirst()
-          .get().getKey();
+              .stream()
+              .findFirst()
+              .get().getKey();
     }
     return labelResult;
+  }
+
+  public void clearAndSet(Map<String, String> defaultLabels) {
+    defaultLabels.clear();
+    this.previouslyUsedLabels = defaultLabels;
   }
 }
