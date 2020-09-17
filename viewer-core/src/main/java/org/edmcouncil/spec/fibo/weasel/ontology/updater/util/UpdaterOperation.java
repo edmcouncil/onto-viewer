@@ -37,4 +37,11 @@ public class UpdaterOperation {
     return job;
   }
 
+  public static UpdateJob setJobStatusToInterrupt(UpdateJob job, String msg) {
+    job.setStatus(UpdateJobStatus.INTERRUPT_IN_PROGRESS);
+    job.setMsg(msg);
+    LOG.debug(job.toString());
+    return job;
+  }
+
 }

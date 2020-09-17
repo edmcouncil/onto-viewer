@@ -24,40 +24,25 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Controller
-@RequestMapping(value = {"/", "/index", "module"})
-public class ModuleController {
+@RequestMapping(value = {"/api/module"})
+public class ModuleApiController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ModuleController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ModuleApiController.class);
 
   @Autowired
   private DetailsManager ontologyManager;
   @Autowired
   private UpdateBlocker blocker;
 
-  @GetMapping
-  public String getModulesMeta(
-          @RequestParam(value = "meta", required = false) String query,
-          Model model) {
-    LOG.debug("[REQ] GET: module /");
-
+  @GetMapping("/module")
+  public ResponseEntity getAllModulesDataAsJson() {
+    LOG.debug("[REQ] GET : api / module");
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
-      ModelBuilder mb = new ModelBuilder(model);
-      mb.emptyQuery();
-      model = mb.getModel();
-      return "error_503";
+      return new ResponseEntity<>("503 Service Unavailable", HttpStatus.SERVICE_UNAVAILABLE);
     }
-
     List<FiboModule> modules = ontologyManager.getAllModulesData();
-    ModelBuilder mb = new ModelBuilder(model);
-
-    mb.setResult(null).isGrouped(true);
-
-    mb.emptyQuery().modelTree(modules);
-
-    model = mb.getModel();
-
-    return "module";
+    return ResponseEntity.ok(modules);
   }
 
 }

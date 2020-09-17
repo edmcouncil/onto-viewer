@@ -57,19 +57,16 @@ public class TextSearcherDb {
 
   }
 
-  /**
-   * Initialize database.
-   */
+  // Load config
   @PostConstruct
   public void init() {
 
     this.conf = checkAndLoadConfig(appConfig.getViewerCoreConfig().getTextSearcherConfig());
 
     //TODO: move this into configuration, default is only label to search
-    LOG.info("Start initialize TextSearcherDB");
-    db = loadDefaultData(om.getOntology());
-
-    LOG.info("End of initialize TextSearcherDB");
+    //LOG.info("Start initialize TextSearcherDB");
+    //db = loadDefaultData(om.getOntology());
+    //LOG.info("End of initialize TextSearcherDB");
   }
 
   public TextSearcherConfig checkAndLoadConfig(TextSearcherConfig config) {
@@ -321,7 +318,9 @@ public class TextSearcherDb {
   }
 
   public void clearAndSetDb(Map<String, TextDbItem> newDb) {
-    db.clear();
+    if (db != null) {
+      db.clear();
+    }
     db = newDb;
   }
 }

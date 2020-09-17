@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## Unreleased [0.0.3]
+### Added
+- reload the ontology and all used resources in the application when the request arrives 
+
+### Changed
+
+### Removed
+
+
 ## [0.2.0] - 2020-06-02
 ### Added
 - handle dataproperties annotaions

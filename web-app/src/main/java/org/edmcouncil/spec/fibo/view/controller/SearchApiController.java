@@ -7,6 +7,7 @@ import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
@@ -29,15 +30,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Controller
-@RequestMapping("/search")
-public class SearchController {
+@RequestMapping("/api/search")
+public class SearchApiController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(SearchController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SearchApiController.class);
 
   @Autowired
   private DetailsManager dataManager;
@@ -55,64 +60,45 @@ public class SearchController {
   private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 20;
   private static final Integer DEFAULT_RESULT_PAGE = 1;
 
-  @PostMapping
-  public ModelAndView redirectSearch(@Valid @ModelAttribute("queryValue") Query query) {
-    Map<String, Object> model = new HashMap<>();
-    model.put("query", query.getValue());
-    ModelAndView mv = new ModelAndView("redirect:/search", model);
-    return mv;
-  }
-
-  @GetMapping
-  public String search(@RequestParam("query") String query,
+  @PostMapping(value = {"", "/max/{max}", "/page/{page}", "/max/{max}/page/{page}"})
+  public <SearcherResult> ResponseEntity searchJson(
+          @RequestBody String query,
           Model model,
-          @RequestParam(value = "max", required = false, defaultValue = "25") Integer max,
-          @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+          @PathVariable Optional<Integer> max,
+          @PathVariable Optional<Integer> page
+  ) {
 
-    LOG.info("[REQ] GET : search ? query = {{}}", query);
-    //check blocker
+    LOG.info("[REQ] POST : api / search / max / {{}} / page /{{}} | RequestBody = {{}}", query);
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
-      ModelBuilder mb = new ModelBuilder(model);
-      mb.emptyQuery();
-      model = mb.getModel();
-      return "error_503";
-
+      return new ResponseEntity<>("503 Service Unavailable", HttpStatus.SERVICE_UNAVAILABLE);
     }
-
-    Query q = new Query();
-    q.setValue(query);
-    ModelBuilder modelBuilder = modelFactory.getInstance(model);
-    List<FiboModule> modules = dataManager.getAllModulesData();
-    boolean isGrouped = config.getViewerCoreConfig().isGrouped();
-
     SearcherResult result = null;
     try {
+
       if (UrlChecker.isUrl(query)) {
         LOG.info("URL detected, search specyfic element");
-        result = ontologySearcher.search(query, 0);
-        modelBuilder.emptyQuery();
+        result = (SearcherResult) ontologySearcher.search(query, 0);
       } else {
+        Integer maxResults = max.isPresent() ? max.get() : DEFAULT_MAX_SEARCH_RESULT_COUNT;
+        Integer currentPage = page.isPresent() ? page.get() : DEFAULT_RESULT_PAGE;
         LOG.info("String detected, search elements with given label");
-        modelBuilder.setQuery(query);
-        result = textSearchService.search(query, max, page);
+        result = (SearcherResult) textSearchService.search(query, maxResults, currentPage);
       }
+
     } catch (ViewerException ex) {
-      LOG.info("Handle ViewerException. Message: '{}'", ex.getMessage());
-      LOG.trace(Arrays.toString(ex.getStackTrace()));
-      ErrorResult er = new ErrorResult();
-      er.setExMessage(ex.getMessage());
-      er.setMessage("Element Not Found.");
-      modelBuilder.emptyQuery();
-      modelBuilder.error(er);
-      return "error";
+      return getError(ex);
     }
 
-    modelBuilder
-            .setResult(result)
-            .isGrouped(isGrouped)
-            .modelTree(modules);
+    return ResponseEntity.ok(result);
+  }
 
-    return "search";
+  private ResponseEntity getError(ViewerException ex) {
+    LOG.info("Handle NotFoundElementInOntologyException. Message: '{}'", ex.getMessage());
+    LOG.trace(Arrays.toString(ex.getStackTrace()));
+    ErrorResult er = new ErrorResult();
+    er.setExMessage(ex.getMessage());
+    er.setMessage("Element Not Found.");
+    return ResponseEntity.badRequest().body(er);
   }
 }

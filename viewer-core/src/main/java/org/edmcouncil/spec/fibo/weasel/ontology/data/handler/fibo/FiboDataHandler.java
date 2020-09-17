@@ -81,6 +81,7 @@ public class FiboDataHandler {
 
   private Map<String, OntoFiboMaturityLevel> maturityLevels = new HashMap<>();
 
+  /*
   @PostConstruct
   public void init() {
     LOG.debug("[INIT FIBO Data Handler] Start initialize data handler");
@@ -95,7 +96,7 @@ public class FiboDataHandler {
     LOG.debug("[INIT FIBO Data Handler] Finish initialize Handler");
 
   }
-
+*/
   public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OWLOntology ontology, OwlListDetails details) {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
@@ -255,7 +256,7 @@ public class FiboDataHandler {
     return rootModulesIris;
   }
 
-  private void loadAllOntologyResources(OWLOntology ontology) {
+  public Map<String, OntologyResources> loadAllOntologyResources(OWLOntology ontology) {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     Map<String, OntologyResources> allResources = new HashMap<>();
 
@@ -271,9 +272,13 @@ public class FiboDataHandler {
         }
       }
     });
-    resources = allResources;
+    return allResources;
   }
 
+  public void setOntologyResources(Map<String, OntologyResources> resources) {
+    this.resources = resources;
+  }
+  
   private OntologyResources extractOntologyResources(OWLOntology selectedOntology) {
     OntologyResources ontoResources = new OntologyResources();
     Optional<IRI> opt = selectedOntology.getOntologyID().getOntologyIRI();

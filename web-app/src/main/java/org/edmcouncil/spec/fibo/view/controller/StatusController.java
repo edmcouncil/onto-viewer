@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Controller
+@Deprecated
 @RequestMapping(value = {"/status"})
 public class StatusController {
 

@@ -15,6 +15,8 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
@@ -34,8 +36,8 @@ public class OntologyManager {
   @Autowired
   private FileSystemManager fileSystemManager;
 
-  @PostConstruct
-  public void init() {
+  
+ /* public void init() {
     LOG.info("Configuration loaded ? : {}", appConfiguration != null
             || !appConfiguration.getViewerCoreConfig().isEmpty());
     LOG.info("File system manager created ? : {}", fileSystemManager != null);
@@ -58,7 +60,8 @@ public class OntologyManager {
     } catch (SAXException ex) {
       LOG.error("[ERROR]: Cannot load ontology, sax exception. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
     }
-  }
+     
+  }*/
 
   public OWLOntology getOntology() {
     return ontology;
