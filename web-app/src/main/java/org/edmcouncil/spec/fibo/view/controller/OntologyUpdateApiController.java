@@ -59,7 +59,7 @@ public class OntologyUpdateApiController {
   @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity startUpdateKeyInHeader(
           @RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
-          @RequestParam(value = "apiKey", required = false) String apiKeyParam) {
+          @RequestParam(value = "ApiKey", required = false) String apiKeyParam) {
     LOG.debug("[REQ] PUT : /api/update ");
     String key = "";
     if (apiKeyHeader != null) {
@@ -78,7 +78,7 @@ public class OntologyUpdateApiController {
   @ResponseBody
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity getUpdateStatus(@RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
-          @RequestParam(value = "apiKey", required = false) String apiKeyParam,
+          @RequestParam(value = "ApiKey", required = false) String apiKeyParam,
           @RequestParam(value = "updateId", required = true) String updateId) {
     String key = "";
     if (apiKeyHeader != null) {
