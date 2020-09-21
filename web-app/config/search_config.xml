@@ -7,6 +7,10 @@
         <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
         <fieldBoost>1.0</fieldBoost>
       </hintField>
+       <hintField>
+        <fieldIri>http://www.w3.org/2004/02/skos/core#prefLabel</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </hintField>
       <hintField>
         <fieldIri>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</fieldIri>
         <fieldBoost>1.0</fieldBoost>
@@ -17,6 +21,11 @@
     <searchFields>
       <searchField>
         <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
+        <fieldBoost>1.0</fieldBoost>
+      </searchField>
+      
+        <searchField>
+        <fieldIri>http://www.w3.org/2004/02/skos/core#prefLabel</fieldIri>
         <fieldBoost>1.0</fieldBoost>
       </searchField>
       
