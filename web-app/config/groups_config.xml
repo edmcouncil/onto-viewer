@@ -12,6 +12,7 @@
     <group>
       <groupName>Glossary</groupName>
       <groupItem>http://www.w3.org/2000/01/rdf-schema#label</groupItem>
+      <groupItem>http://www.w3.org/2004/02/skos/core#prefLabel</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</groupItem>
