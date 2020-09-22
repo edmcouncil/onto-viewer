@@ -52,7 +52,7 @@ public class SearchController {
   @Autowired
   private UpdateBlocker blocker;
 
-  private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 20;
+  private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 25;
   private static final Integer DEFAULT_RESULT_PAGE = 1;
 
   @PostMapping

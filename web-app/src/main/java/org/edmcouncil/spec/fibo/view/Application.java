@@ -15,8 +15,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan(basePackages = { 
   "org.edmcouncil.spec.fibo.view", 
   "org.edmcouncil.spec.fibo.weasel",
-  "org.edmcouncil.spec.fibo.config",
-  "org.edmcouncil.spec.fibo.updater"
+  "org.edmcouncil.spec.fibo.config"
 })
 public class Application {
 

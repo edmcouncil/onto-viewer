@@ -3,7 +3,6 @@ package org.edmcouncil.spec.fibo.weasel.ontology.updater;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
@@ -39,8 +38,8 @@ public class Updater {
   private UpdateBlocker blocker;
   @Autowired
   private FiboDataHandler fiboDataHandler;
-  private Map<String, UpdateJob> jobs = new HashMap<>();
-  
+  private final Map<String, UpdateJob> jobs = new HashMap<>();
+
   private static final String interruptMessage = "Interrupts this update. New update request.";
 
   @EventListener(ApplicationReadyEvent.class)
@@ -51,21 +50,21 @@ public class Updater {
 
   public void update(UpdateJob job) {
     jobs.put(job.getId(), job);
-    
+
     interruptOtherWaitingJobs();
     interruptWorkingJob();
-    
+
     UpdaterThread t = new UpdaterThread(config,
-            ontologyManager,
-            fileSystemManager,
-            labelProvider,
-            textSearcherDb,
-            blocker,
-            fiboDataHandler,
-            job) {
+        ontologyManager,
+        fileSystemManager,
+        labelProvider,
+        textSearcherDb,
+        blocker,
+        fiboDataHandler,
+        job) {
     };
     t.start();
-    
+
   }
 
   public UpdateJob getJobWithId(String id) {
@@ -79,25 +78,27 @@ public class Updater {
       }
     }
     return jobs.values()
-            .stream()
-            .max(Comparator.comparing(UpdateJob::getId))
-            .orElse(null);
+        .stream()
+        .max(Comparator.comparing(UpdateJob::getId))
+        .orElse(null);
   }
 
   private void interruptOtherWaitingJobs() {
-    for (UpdateJob value : jobs.values()) {
-      if(value.getId().equals(String.valueOf(0))) continue;
-      if(value.getStatus()==UpdateJobStatus.WAITING)
-        UpdaterOperation.setJobStatusToError(value, interruptMessage);
-    }
+    jobs.values().stream()
+        .filter((value) -> !(value.getId().equals(String.valueOf(0))))
+        .filter((value) -> (value.getStatus() == UpdateJobStatus.WAITING))
+        .forEachOrdered((value) -> {
+          UpdaterOperation.setJobStatusToError(value, interruptMessage);
+        });
   }
-  
+
   private void interruptWorkingJob() {
-    for (UpdateJob value : jobs.values()) {
-      if(value.getId().equals(String.valueOf(0))) continue;
-      if(value.getStatus()==UpdateJobStatus.IN_PROGRESS)
-        UpdaterOperation.setJobStatusToInterrupt(value, interruptMessage);
-    }
+    jobs.values().stream()
+        .filter((value) -> !(value.getId().equals(String.valueOf(0))))
+        .filter((value) -> (value.getStatus() == UpdateJobStatus.IN_PROGRESS))
+        .forEachOrdered((value) -> {
+          UpdaterOperation.setJobStatusToInterrupt(value, interruptMessage);
+        });
   }
-  
+
 }

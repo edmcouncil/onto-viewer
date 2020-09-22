@@ -1,9 +1,7 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.loader.mapper;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Iterator;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;

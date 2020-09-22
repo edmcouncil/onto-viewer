@@ -1,34 +1,19 @@
 package org.edmcouncil.spec.fibo.view.controller;
 
 import java.util.Arrays;
-import org.edmcouncil.spec.fibo.view.model.Query;
 import org.edmcouncil.spec.fibo.view.service.OntologySearcherService;
-import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import javax.validation.Valid;
-import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.view.service.TextSearchService;
-import org.edmcouncil.spec.fibo.view.util.ModelBuilderFactory;
 import org.edmcouncil.spec.fibo.view.util.UrlChecker;
 import org.edmcouncil.spec.fibo.weasel.exception.ViewerException;
-import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
-import org.edmcouncil.spec.fibo.weasel.ontology.DetailsManager;
-import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.fibo.weasel.ontology.updater.UpdateBlocker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,15 +30,10 @@ public class SearchApiController {
   private static final Logger LOG = LoggerFactory.getLogger(SearchApiController.class);
 
   @Autowired
-  private DetailsManager dataManager;
-  @Autowired
-  private ModelBuilderFactory modelFactory;
-  @Autowired
   private TextSearchService textSearchService;
   @Autowired
   private OntologySearcherService ontologySearcher;
-  @Autowired
-  private AppConfiguration config;
+
   @Autowired
   private UpdateBlocker blocker;
 

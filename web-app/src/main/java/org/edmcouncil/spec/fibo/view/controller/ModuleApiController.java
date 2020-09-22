@@ -17,8 +17,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.updater.UpdateBlocker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -34,7 +33,7 @@ public class ModuleApiController {
   @Autowired
   private UpdateBlocker blocker;
 
-  @GetMapping("/module")
+  @GetMapping
   public ResponseEntity getAllModulesDataAsJson() {
     LOG.debug("[REQ] GET : api / module");
     if (!blocker.isInitializeAppDone()) {
