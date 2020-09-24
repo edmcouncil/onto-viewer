@@ -237,7 +237,7 @@ public class LabelProvider {
   }
 
   public void clearAndSet(Map<String, String> defaultLabels) {
-    defaultLabels.clear();
+    this.previouslyUsedLabels.clear();
     this.previouslyUsedLabels = defaultLabels;
   }
 }

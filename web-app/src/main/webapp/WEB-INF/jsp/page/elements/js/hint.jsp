@@ -1,4 +1,6 @@
 
+<script type="text/javascript">
+
 function showHint(event) {
   var x = event.target.value;
 
@@ -24,7 +26,7 @@ function showHint(event) {
 
 function autocomplete() {
   $text = $("#search-query").val();
-  $path = '/hint';
+  $path = '${pageContext.request.contextPath}/api/hint';
   $.ajax({
     url: $path,
     dataType: 'json',
@@ -86,3 +88,6 @@ function autocompleteNavigation(event) {
 
   $($focusID).focus();
 }
+
+
+</script>
