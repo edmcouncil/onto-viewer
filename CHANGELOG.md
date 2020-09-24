@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-**## Unreleased [0.0.3] - 2020-09-07
+**## Unreleased [0.3.0] 
 **### Changed**
 - rebuilding the configuration file and its loader
 - splitting the configuration file into 5 files
