@@ -212,7 +212,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
     return result;
   }
 
-private void renderDirectedSubclasses(PropertyValue property) throws IOException {
+  private void renderDirectedSubclasses(PropertyValue property) throws IOException {
     OwlDirectedSubClassesProperty subclassProperty = (OwlDirectedSubClassesProperty) property;
     PairImpl value = subclassProperty.getValue();
     String link = wrapIri((String) value.getIri(), (String) value.getLabel());
@@ -232,6 +232,5 @@ private void renderDirectedSubclasses(PropertyValue property) throws IOException
     String link = wrapIri((String) value.getIri(), (String) value.getLabel());
     renderProperty(link);
   }
-
 
 }

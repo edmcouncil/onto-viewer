@@ -1,3 +1,13 @@
+<c:choose>
+    <c:when test="${empty pageContext.request.contextPath}">
+       <c:set var = "context" value = "*"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var = "context" value = "${pageContext.request.contextPath}"/>
+    </c:otherwise>
+</c:choose>
+
+
 <div class="container-fluid">
   <div class="row px-3 py-3">
     <div class="col-md-3 px-2" style="height: 100%">

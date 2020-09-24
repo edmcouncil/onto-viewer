@@ -4,9 +4,7 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
-import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyElementImpl;
-import org.edmcouncil.spec.fibo.weasel.model.taxonomy.OwlTaxonomyValue;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -48,8 +46,8 @@ public class TaxonomyElementRenderTag extends SimpleTagSupport {
   }
 
   private void renderTaxonomyElement(OwlTaxonomyElementImpl property) throws IOException {
-    String link = property.getIri();;
-    String val = property.getLabel();;
+    String link = property.getIri();
+    String val = property.getLabel();
 
     String result = wrapToLink(link, val);
 

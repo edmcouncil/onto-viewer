@@ -6,6 +6,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -23,14 +24,14 @@ public class TreeRenderTag extends SimpleTagSupport {
   private static final String SPAN_WRAPPER_CLEAN_MATCH_PATTERN = "<span class=\"font-weight-bold\">%s</span>";
   private static final String UL_NESTED = "<ul class=\"nested\">";
   private static final String UL_NESTED_ACTIVE = "<ul class=\"nested active\">";
-  private static final String MATURITY_INDICATOR_PATTERN="<i class=\"%sIndicator\"></i>";
+  private static final String MATURITY_INDICATOR_PATTERN = "<i class=\"%sIndicator\"></i>";
 
   private String elementWrapper;
   private String searchPath;
   private FiboModule element;
   private List<String> elementLocation;
-  private String contextPath = System.getProperty("server.servlet.context-path")!=null?
-      System.getProperty("server.servlet.context-path"):"";
+  private String contextPath;
+
 
   @Override
   public void doTag()
@@ -72,6 +73,14 @@ public class TreeRenderTag extends SimpleTagSupport {
     this.elementLocation = elementLocation;
   }
 
+  public String getContextPath() {
+    return contextPath;
+  }
+
+  public void setContextPath(String contextPath) {
+    this.contextPath = contextPath;
+  }
+  
   private void renderElement(String toRender) throws IOException {
     JspWriter out = getJspContext().getOut();
     out.println(toRender);
@@ -105,7 +114,7 @@ public class TreeRenderTag extends SimpleTagSupport {
     renderElement(text);
     renderElement(String.format(MATURITY_INDICATOR_PATTERN, property.getMaturityLevel().getLabel()));
     renderElement(result);
-    
+
     if (fmList != null && fmList.size() > 0) {
 
       if (elementLocation != null && elementLocation.contains(link)) {
@@ -136,7 +145,7 @@ public class TreeRenderTag extends SimpleTagSupport {
 
   private String parseSearchPath(String link, String val) {
     String result;
-    String tmpSearchPath = contextPath.concat(searchPath.equals("*") ? "" : searchPath);
+    String tmpSearchPath = searchPath.equals("*") ? "" : searchPath;
     result = String.format(URL_SEARCH_QUERY_PATTERN, tmpSearchPath, link, val);
     return result;
   }

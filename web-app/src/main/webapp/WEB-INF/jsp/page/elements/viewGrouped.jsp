@@ -1,5 +1,5 @@
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var = "context" value = "*"/>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>     
+
 <c:set var = "releaseLabel" value = "release"/>
 
 <div class="mb-3 px-3">

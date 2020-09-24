@@ -5,7 +5,7 @@
 <ul id="myUL">
   <c:forEach items="${modelTree}" var="domainElement">
     <li>
-    <weasel:RenderTree element="${domainElement}" searchPath="*" elementLocation="${locationInModules}"/>
+    <weasel:RenderTree element="${domainElement}" searchPath="${context}" elementLocation="${locationInModules}"/>
     </li>
   </c:forEach>
 </ul>
