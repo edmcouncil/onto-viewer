@@ -37,19 +37,19 @@ public class OwlFiboModuleProperty implements PropertyValue<PairImpl<String, Str
   }
 
   public String getIri() {
-    return value.getValueB();
+    return value.getIri();
   }
 
   public String getName() {
-    return value.getValueB();
+    return value.getIri();
   }
 
   public void setIri(String s) {
-    value.setValueB(s);
+    value.setIri(s);
   }
 
   public void setName(String s) {
-    value.setValueA(s);
+    value.setLabel(s);
   }
 
 }

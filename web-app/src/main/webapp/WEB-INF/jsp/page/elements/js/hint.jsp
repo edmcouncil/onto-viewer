@@ -1,4 +1,6 @@
 
+<script type="text/javascript">
+
 function showHint(event) {
   var x = event.target.value;
 
@@ -24,7 +26,7 @@ function showHint(event) {
 
 function autocomplete() {
   $text = $("#search-query").val();
-  $path = '/hint';
+  $path = '${pageContext.request.contextPath}/api/hint';
   $.ajax({
     url: $path,
     dataType: 'json',
@@ -49,7 +51,7 @@ function showAutocompletes(autocomplates) {
   //<a class="dropdown-item" href="#">Action</a>
   var count = 0;
   $.each(autocomplates, function (index, object) {
-  $inner += "<a id=\"ac_" + index + "\" class=\"dropdown-item\" onkeyup=\"autocompleteNavigation(event)\" href=\"search?query=" + object.iri + "\">" + object.label + "</a>";
+  $inner += "<a id=\"ac_" + index + "\" class=\"dropdown-item\" onkeyup=\"autocompleteNavigation(event)\" href=\"search?query=" + object.iri.replace('#', "%23") + "\">" + object.label + "</a>";
     count ++;
   });
 
@@ -86,3 +88,6 @@ function autocompleteNavigation(event) {
 
   $($focusID).focus();
 }
+
+
+</script>

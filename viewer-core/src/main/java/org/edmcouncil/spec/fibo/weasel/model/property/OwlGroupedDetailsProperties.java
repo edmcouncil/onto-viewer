@@ -18,6 +18,7 @@ import org.edmcouncil.spec.fibo.weasel.comparator.ComparatorWithPriority;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  * @param <T>
  */
 public class OwlGroupedDetailsProperties<T> {
@@ -71,8 +72,9 @@ public class OwlGroupedDetailsProperties<T> {
     });
     properties = result;*/
   }
+
   //TODO: The same as up
-   public void sort(Set<ConfigItem> groups) {
+  public void sort(Set<ConfigItem> groups) {
 
   }
 
@@ -104,8 +106,6 @@ public class OwlGroupedDetailsProperties<T> {
     }
     return true;
   }
-
- 
 
   public void sort(Set<ConfigItem> groups, ViewerCoreConfiguration cfg) {
 

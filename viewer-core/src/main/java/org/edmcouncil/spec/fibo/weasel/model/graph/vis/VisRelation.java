@@ -14,6 +14,15 @@ public class VisRelation {
   private String optional;
   private String type;
   private String iri;
+  private Boolean equivalentTo;
+
+  public Boolean getEquivalentTo() {
+    return equivalentTo;
+  }
+
+  public void setEquivalentTo(Boolean equivalentTo) {
+    this.equivalentTo = equivalentTo;
+  }
 
   public int getFrom() {
     return from;

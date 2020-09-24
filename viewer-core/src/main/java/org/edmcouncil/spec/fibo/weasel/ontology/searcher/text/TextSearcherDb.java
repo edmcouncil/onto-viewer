@@ -57,56 +57,60 @@ public class TextSearcherDb {
 
   }
 
-  /**
-   * Initialize database.
-   */
+  // Load config
   @PostConstruct
   public void init() {
 
-    this.conf = appConfig.getViewerCoreConfig().getTextSearcherConfig();
-
-    if (conf == null) {
-      loadDefaultConfiguration();
-    } else {
-      loadConfiguration(conf);
-    }
+    this.conf = checkAndLoadConfig(appConfig.getViewerCoreConfig().getTextSearcherConfig());
 
     //TODO: move this into configuration, default is only label to search
-    LOG.info("Start initialize TextSearcherDB");
-    db = new HashMap<>();
-    OWLOntology onto = om.getOntology();
+    //LOG.info("Start initialize TextSearcherDB");
+    //db = loadDefaultData(om.getOntology());
+    //LOG.info("End of initialize TextSearcherDB");
+  }
+
+  public TextSearcherConfig checkAndLoadConfig(TextSearcherConfig config) {
+    if (config == null) {
+      return loadDefaultConfiguration();
+    } else {
+      return loadConfiguration(config);
+    }
+  }
+
+  public Map<String, TextDbItem> loadDefaultData(OWLOntology onto) {
+    Map<String, TextDbItem> tmp = new HashMap<>();
 
     Stream<OWLEntity> entities = onto.signature();
 
     entities.collect(Collectors.toSet()).forEach((owlEntity) -> {
-      collectEntityData(owlEntity, onto);
+      collectEntityData(owlEntity, onto, tmp);
     });
-    
-    for (OWLOntology owlOntology : om.getOntology().getOWLOntologyManager().ontologies().collect(Collectors.toSet())) {
-      collectOntologyData(owlOntology, onto);
-    }
 
-    LOG.info("End of initialize TextSearcherDB");
+    for (OWLOntology owlOntology : onto.getOWLOntologyManager().ontologies().collect(Collectors.toSet())) {
+      collectOntologyData(owlOntology, onto, tmp);
+    }
+    return tmp;
   }
 
-  private void collectEntityData(OWLEntity owlEntity, OWLOntology onto) {
+  private void collectEntityData(OWLEntity owlEntity, OWLOntology onto, Map<String, TextDbItem> newDb) {
     Stream<OWLAnnotation> annotations = EntitySearcher.getAnnotations(owlEntity, onto);
     String entityIri = owlEntity.getIRI().toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
 
     if (!tdi.isEmpty()) {
-      db.put(entityIri, tdi);
+      newDb.put(entityIri, tdi);
     }
   }
-  private void collectOntologyData(OWLOntology owlOntology, OWLOntology onto) {
+
+  private void collectOntologyData(OWLOntology owlOntology, OWLOntology onto, Map<String, TextDbItem> tmp) {
     Stream<OWLAnnotation> annotations = owlOntology.annotations();
     String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create("")).toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
 
     if (!tdi.isEmpty()) {
-      db.put(entityIri, tdi);
+      tmp.put(entityIri, tdi);
     }
   }
 
@@ -115,11 +119,17 @@ public class TextSearcherDb {
     annotations.collect(Collectors.toSet()).forEach((annotation) -> {
       String propertyIri = annotation.getProperty().getIRI().toString();
       if (conf.hasHintFieldWithIri(propertyIri)
-          || conf.hasSearchFieldWithIri(propertyIri)) {
+              || conf.hasSearchFieldWithIri(propertyIri)) {
         LOG.trace("Find property: {}", propertyIri);
         Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
         if (opt.isPresent()) {
-          tdi.addValue(propertyIri, opt.get().getLiteral());
+          String lang = opt.get().getLang();
+          if (appConfig.getViewerCoreConfig().isForceLabelLang()) {
+            if (lang == null || !lang.equals(appConfig.getViewerCoreConfig().getLabelLang())) {
+              return;
+            }
+          }
+          tdi.addValue(propertyIri, opt.get().getLiteral(), lang);
           LOG.trace("Literal value: {}", opt.get().getLiteral());
         }
       }
@@ -162,7 +172,7 @@ public class TextSearcherDb {
 
   private void sortHints(List<HintItem> result) {
     Collections.sort(result, Comparator.comparing(HintItem::getRelevancy).reversed()
-        .thenComparing(HintItem::getLabel).reversed());
+            .thenComparing(HintItem::getLabel).reversed());
     Collections.reverse(result);
   }
 
@@ -196,7 +206,7 @@ public class TextSearcherDb {
     if (startIndex > countOfResults) {
       return result;
     }
-    
+
     Integer endIndex = (currentPage - 1) * maxResults + maxResults;
     endIndex = endIndex > countOfResults ? countOfResults : endIndex;
 
@@ -214,7 +224,7 @@ public class TextSearcherDb {
 
   private void sortSearchResults(List<SearchItem> listResult) {
     Collections.sort(listResult, Comparator.comparing(SearchItem::getRelevancy).reversed()
-        .thenComparing(SearchItem::getDescription).reversed());
+            .thenComparing(SearchItem::getDescription).reversed());
     Collections.reverse(listResult);
   }
 
@@ -258,7 +268,7 @@ public class TextSearcherDb {
 
   }
 
-  private void loadConfiguration(TextSearcherConfig tsc) {
+  private TextSearcherConfig loadConfiguration(TextSearcherConfig tsc) {
 
     if (!tsc.isCompleted()) {
       if (tsc.getHintFields().isEmpty()) {
@@ -284,10 +294,10 @@ public class TextSearcherDb {
         tsc.addSearchDescription(DEFINITION_IRI);
       }
     }
-    this.conf = tsc;
+    return tsc;
   }
 
-  private void loadDefaultConfiguration() {
+  private TextSearcherConfig loadDefaultConfiguration() {
 
     TextSearcherConfig tsc = new TextSearcherConfig();
     tsc.setHintThreshold(HINT_THRESHOLD);
@@ -304,6 +314,13 @@ public class TextSearcherDb {
 
     tsc.addSearchDescription(DEFINITION_IRI);
 
-    this.conf = tsc;
+    return tsc;
+  }
+
+  public void clearAndSetDb(Map<String, TextDbItem> newDb) {
+    if (db != null) {
+      db.clear();
+    }
+    db = newDb;
   }
 }

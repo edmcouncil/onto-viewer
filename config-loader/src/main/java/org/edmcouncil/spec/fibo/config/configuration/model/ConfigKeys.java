@@ -22,6 +22,7 @@ public class ConfigKeys {
   public static final String ONTOLOGY_URL = "ontologyURL";
   public static final String ONTOLOGY_PATH = "ontologyPath";
   public static final String ONTOLOGY_DIR = "ontologyDir";
+  public static final String ONTOLOGY_MAPPER = "ontologyMapper";
 
   //uri / iri
   public static final String SCOPE_IRI = "scopeIri";

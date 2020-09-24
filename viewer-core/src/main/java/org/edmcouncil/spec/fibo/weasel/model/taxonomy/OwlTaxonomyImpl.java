@@ -51,7 +51,7 @@ public class OwlTaxonomyImpl implements OwlTaxonomy<OwlTaxonomyElementImpl> {
     for (List<OwlTaxonomyElementImpl> list : value) {
       sb.append("\t");
       for (OwlTaxonomyElementImpl el : list) {
-        sb.append(el.getValueA().getValue()).append(" > ");
+        sb.append(el.getIri()).append(" > ");
       }
       sb.append("\n");
     }

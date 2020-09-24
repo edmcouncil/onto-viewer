@@ -1,18 +1,14 @@
 package org.edmcouncil.spec.fibo.view.controller;
 
-import java.util.Arrays;
 import java.util.List;
-import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.ontology.DetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.edmcouncil.spec.fibo.view.util.ModelBuilder;
-import org.edmcouncil.spec.fibo.weasel.exception.NotFoundElementInOntologyException;
-import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.ontology.updater.UpdateBlocker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
@@ -29,19 +25,23 @@ public class ModuleController {
 
   @Autowired
   private DetailsManager ontologyManager;
-
-  @GetMapping("/json")
-  public ResponseEntity<List<FiboModule>> getAllModulesDataAsJson() {
-    LOG.debug("[REQ] GET : module / json");
-    List<FiboModule> modules = ontologyManager.getAllModulesData();
-    return ResponseEntity.ok(modules);
-  }
+  @Autowired
+  private UpdateBlocker blocker;
 
   @GetMapping
   public String getModulesMeta(
-      @RequestParam(value = "meta", required = false) String query,
-      Model model) {
+          @RequestParam(value = "meta", required = false) String query,
+          Model model) {
     LOG.debug("[REQ] GET: module /");
+
+    if (!blocker.isInitializeAppDone()) {
+      LOG.debug("Application initialization has not completed");
+      ModelBuilder mb = new ModelBuilder(model);
+      mb.emptyQuery();
+      model = mb.getModel();
+      return "error_503";
+    }
+
     List<FiboModule> modules = ontologyManager.getAllModulesData();
     ModelBuilder mb = new ModelBuilder(model);
 

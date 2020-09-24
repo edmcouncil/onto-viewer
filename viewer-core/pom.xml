@@ -7,10 +7,10 @@
   <parent>
     <groupId>org.edmcouncil.spec</groupId>
     <artifactId>fibo</artifactId>
-    <version>v0.1.1-beta</version>
+    <version>v0.3.0-beta</version>
   </parent>
   <artifactId>viewer-core</artifactId>
-  <version>v0.1.1-beta</version>
+  <version>v0.3.0-beta</version>
   <packaging>jar</packaging>
 
   <name>Fibo-Viewer-Core</name>
@@ -33,7 +33,7 @@
     <dependency>
       <groupId>net.sourceforge.owlapi</groupId>
       <artifactId>owlapi-distribution</artifactId>
-      <version>5.1.13</version>
+      <version>5.1.16</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

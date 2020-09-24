@@ -3,6 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.model.graph;
 /**
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public class GraphNode extends GraphElement {
 
@@ -42,8 +43,5 @@ public class GraphNode extends GraphElement {
   public String toString() {
     return "{" + "cardinality=" + cardinality + " " + super.toString();
   }
-
-
-
 
 }

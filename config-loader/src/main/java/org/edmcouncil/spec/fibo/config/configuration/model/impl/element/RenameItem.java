@@ -7,19 +7,19 @@ package org.edmcouncil.spec.fibo.config.configuration.model.impl.element;
 public class RenameItem extends PairItem {
 
   public String getOldName() {
-    return super.getValueA();
+    return super.getLabel();
   }
 
   public void setOldName(String oldName) {
-    super.setValueA(oldName);
+    super.setLabel(oldName);
   }
 
   public String getNewName() {
-    return super.getValueB();
+    return super.getIri();
   }
 
   public void setNewName(String newName) {
-    super.setValueB(newName);
+    super.setIri(newName);
   }
 
   @Override

@@ -18,8 +18,8 @@
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="${pageContext.request.contextPath}/js/header.js"></script>
-<script src="${pageContext.request.contextPath}/js/hint.js"></script>
 <script type="text/javascript" src="https://unpkg.com/vis-network@6.4.4/dist/vis-network.min.js"></script>
+<jsp:directive.include file="js/header.jsp" />
+<jsp:directive.include file="js/hint.jsp" />
 
 
