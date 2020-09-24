@@ -1,7 +1,6 @@
 package org.edmcouncil.spec.fibo.view.util.custom.jsp.tag;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -30,6 +29,8 @@ public class TreeRenderTag extends SimpleTagSupport {
   private String searchPath;
   private FiboModule element;
   private List<String> elementLocation;
+  private String contextPath = System.getProperty("server.servlet.context-path")!=null?
+      System.getProperty("server.servlet.context-path"):"";
 
   @Override
   public void doTag()
@@ -135,7 +136,7 @@ public class TreeRenderTag extends SimpleTagSupport {
 
   private String parseSearchPath(String link, String val) {
     String result;
-    String tmpSearchPath = searchPath.equals("*") ? "" : searchPath;
+    String tmpSearchPath = contextPath.concat(searchPath.equals("*") ? "" : searchPath);
     result = String.format(URL_SEARCH_QUERY_PATTERN, tmpSearchPath, link, val);
     return result;
   }
@@ -167,7 +168,8 @@ public class TreeRenderTag extends SimpleTagSupport {
   }
 
   private String wrapSpanCleanMatch(String result) {
-    result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
+    result = String.format(SPAN_WRAPPER_CLEAN_PATTERN, result);
+    //result = String.format(SPAN_WRAPPER_CLEAN_MATCH_PATTERN, result);
     return result;
   }
 
