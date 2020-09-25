@@ -4,6 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <%@ taglib prefix="templateTree" tagdir="/WEB-INF/tags" %> 
 
+<c:choose>
+    <c:when test="${empty pageContext.request.contextPath}">
+       <c:set var = "context" value = "*"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var = "context" value = "${pageContext.request.contextPath}"/>
+    </c:otherwise>
+</c:choose>
+
 <!DOCTYPE HTML>
 <html>
 

@@ -1,7 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "weasel" uri = "tags/propertyRender.tld"%>
-
+<c:choose>
+    <c:when test="${empty pageContext.request.contextPath}">
+       <c:set var = "context" value = "*"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var = "context" value = "${pageContext.request.contextPath}"/>
+    </c:otherwise>
+</c:choose>
 <!DOCTYPE HTML>
 <html>
 

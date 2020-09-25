@@ -25,7 +25,7 @@
           <h5>The application is currently being initialized. Please wait a few minutes</h5>
         </div>
         <div class="row">
-          <a href="index">Go to home page</a>
+          <a href="${pageContext.request.contextPath}/index">Go to home page</a>
         </div>
       </div>            
     </div>

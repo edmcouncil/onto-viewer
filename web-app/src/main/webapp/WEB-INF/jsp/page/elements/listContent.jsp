@@ -63,7 +63,7 @@
               </c:when>
               <c:otherwise>
                 <li class="page-item">
-                  <a class="page-link" href="search?query=${result.query}&page=${result.page-1}" aria-label="Previous">
+                  <a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=${result.page-1}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
@@ -83,7 +83,7 @@
                           <li class="page-item active"><a class="page-link" href="#">${index}</a></li>
                         </c:when>
                         <c:otherwise>
-                          <li class="page-item"><a class="page-link" href="search?query=${result.query}&page=${index}">${index}</a></li>
+                          <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=${index}">${index}</a></li>
                         </c:otherwise>
                       </c:choose>
                     </c:forEach>
@@ -92,7 +92,7 @@
 
                   </c:when>
                   <c:when test="${result.page >= result.maxPage-3}">
-                    <li class="page-item"><a class="page-link" href="search?query=${result.query}&page=1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=1">1</a></li>
                     <li class="page-item active"><span href="#" class="mx-1">...</span></li>
 
 
@@ -102,7 +102,7 @@
                           <li class="page-item active"><a class="page-link" href="#">${index}</a></li>
                         </c:when>
                         <c:otherwise>
-                          <li class="page-item"><a class="page-link" href="search?query=${result.query}&page=${index}">${index}</a></li>
+                          <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=${index}">${index}</a></li>
                         </c:otherwise>
                       </c:choose>
                     </c:forEach>
@@ -110,15 +110,15 @@
                   </c:when>
                   <c:otherwise>
 
-                    <li class="page-item"><a class="page-link" href="search?query=${result.query}&page=1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=1">1</a></li>
                     <li class="page-item active"><span href="#" class="mx-1">...</span></li>
 
-                    <li class="page-item"><a class="page-link" href="search?query=${result.query}&page=${result.page-1}">${result.page-1}</a></li>
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=${result.page-1}">${result.page-1}</a></li>
                     <li class="page-item active"><a class="page-link" href="#">${result.page}</a></li>
-                    <li class="page-item"><a class="page-link" href="search?query=${result.query}&page=${result.page+1}">${result.page+1}</a></li>
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=${result.page+1}">${result.page+1}</a></li>
 
                     <li class="page-item active"><span href="#" class="mx-1">...</span></li>
-                    <li class="page-item"><a class="page-link" href="search?query=${result.query}&page=${result.maxPage}">${result.maxPage}</a></li>
+                    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=${result.maxPage}">${result.maxPage}</a></li>
 
                   </c:otherwise>
                 </c:choose>
@@ -131,7 +131,7 @@
                       <li class="page-item active"><a class="page-link" href="#">${index}</a></li>
                     </c:when>
                     <c:otherwise>
-                      <li class="page-item"><a class="page-link" href="search?query=${result.query}&page=${index}">${index}</a></li>
+                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}search?query=${result.query}&page=${index}">${index}</a></li>
                     </c:otherwise>
                   </c:choose>
                 </c:forEach>
