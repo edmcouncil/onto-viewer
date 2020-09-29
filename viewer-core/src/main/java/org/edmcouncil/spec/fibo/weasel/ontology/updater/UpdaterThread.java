@@ -4,6 +4,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.updater.util.UpdaterOperation;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
@@ -14,6 +15,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.loader.AutoOntologyLoader;
+import org.edmcouncil.spec.fibo.weasel.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextDbItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextSearcherDb;
 import org.edmcouncil.spec.fibo.weasel.ontology.updater.model.InterruptUpdate;
@@ -27,10 +29,10 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 public abstract class UpdaterThread extends Thread implements Thread.UncaughtExceptionHandler {
-  
+
   private static final Logger LOG = LoggerFactory.getLogger(UpdaterThread.class);
   private static final String interruptMessage = "Interrupts this update. New update request.";
-  
+
   private AppConfiguration config;
   private OntologyManager ontologyManager;
   private FileSystemManager fileSystemManager;
@@ -39,8 +41,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private UpdateBlocker blocker;
   private UpdateJob job;
   private FiboDataHandler fiboDataHandler;
-  
-  public UpdaterThread(AppConfiguration config, OntologyManager ontologyManager, FileSystemManager fileSystemManager, LabelProvider labelProvider, TextSearcherDb textSearcherDb, UpdateBlocker blocker, FiboDataHandler fiboDataHandler, UpdateJob job) {
+  private ScopeIriOntology scopeIriOntology;
+
+  public UpdaterThread(AppConfiguration config, OntologyManager ontologyManager, FileSystemManager fileSystemManager, LabelProvider labelProvider, TextSearcherDb textSearcherDb, UpdateBlocker blocker, FiboDataHandler fiboDataHandler, UpdateJob job, ScopeIriOntology scopeIriOntology) {
     this.config = config;
     this.ontologyManager = ontologyManager;
     this.fileSystemManager = fileSystemManager;
@@ -49,15 +52,16 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.blocker = blocker;
     this.job = job;
     this.fiboDataHandler = fiboDataHandler;
+    this.scopeIriOntology = scopeIriOntology;
     this.setName("UpdateThread-" + job.getId());
   }
-  
+
   @Override
   public void run() {
     while (true) {
       if (blocker.isUpdateNow()) {
         try {
-          
+
           if (isInterrupt()) {
             UpdaterOperation.setJobStatusToError(job, interruptMessage);
             this.interrupt();
@@ -77,24 +81,24 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         blocker.setUpdateNow(Boolean.TRUE);
         break;
       }
-      
+
     }
     try {
       if (isInterrupt()) {
         throw new InterruptUpdate();
       }
-      
+
       job = UpdaterOperation.setJobStatusToInProgress(job);
-      
+
       OWLOntology ontology = null;
       String msgError = null;
-      
+
       LOG.info("Configuration loaded ? : {}", config != null
-              || !config.getViewerCoreConfig().isEmpty());
+          || !config.getViewerCoreConfig().isEmpty());
       LOG.info("File system manager created ? : {}", fileSystemManager != null);
-      
+
       ViewerCoreConfiguration viewerCoreConfiguration = config.getViewerCoreConfig();
-      
+
       if (isInterrupt()) {
         throw new InterruptUpdate();
       }
@@ -120,7 +124,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         msgError = ex.getMessage();
         LOG.error("[ERROR]: Cannot load ontology, sax exception. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
       }
-      
+
       if (msgError != null) {
         LOG.error("[ERROR]: Cannot update, id {}", job.getId());
         job = UpdaterOperation.setJobStatusToError(job, msgError);
@@ -131,41 +135,44 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         throw new InterruptUpdate();
       }
 
+      Set<String> scopes = scopeIriOntology.getScopeIri(ontology);
+
       //get default labels
       Map<String, String> defaultLabels = labelProvider.getDefaultLabels();
 
       //get default text searcher db
       Map<String, TextDbItem> textSearcherDbDefaultData = textSearcherDb.loadDefaultData(ontology);
-      
-      
-      
+
       if (isInterrupt()) {
         throw new InterruptUpdate();
       }
 
       //block resourcess when swaping
       blocker.setBlockerStatus(Boolean.TRUE);
-      
+
+      scopeIriOntology.setScopes(scopes);
+
       ontologyManager.updateOntology(ontology);
-      
+
       labelProvider.clearAndSet(defaultLabels);
-      
+
       textSearcherDb.clearAndSetDb(textSearcherDbDefaultData);
-      
+
       //load ontology resource must be here, fibo data handler use label provider
       Map<String, OntologyResources> fiboOntologyResourcess = fiboDataHandler.loadAllOntologyResources(ontology);
+
       fiboDataHandler.setOntologyResources(fiboOntologyResourcess);
-      
+
       blocker.setBlockerStatus(Boolean.FALSE);
-      
+
       job = UpdaterOperation.setJobStatusToDone(job);
-      
+
       blocker.setUpdateNow(Boolean.FALSE);
-      
+
       if (job.getId().equals(String.valueOf(0))) {
         blocker.setInitializeAppDone(Boolean.TRUE);
       }
-      
+
     } catch (InterruptUpdate ex) {
       LOG.error("{}", ex.getStackTrace());
       UpdaterOperation.setJobStatusToError(job, interruptMessage);
@@ -179,23 +186,23 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       this.interrupt();
     }
   }
-  
+
   @Override
   public void uncaughtException(Thread t, Throwable e) {
-    
+
     UpdaterOperation.setJobStatusToError(job, e.getMessage());
     LOG.error(e.getStackTrace().toString());
     blocker.setUpdateNow(Boolean.FALSE);
-    
+
   }
-  
+
   public UpdateJob getJob() {
     return job;
   }
-  
+
   private Boolean isInterrupt() {
     return job.getStatus() == UpdateJobStatus.ERROR
-            || job.getStatus() == UpdateJobStatus.INTERRUPT_IN_PROGRESS;
+        || job.getStatus() == UpdateJobStatus.INTERRUPT_IN_PROGRESS;
   }
-  
+
 }
