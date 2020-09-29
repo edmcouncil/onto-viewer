@@ -15,6 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * This class is resposible for automatic generation of scope IRI. ScopeIRI helps application can
+ * recognize which links are from the ontology and which should be generated outside. Many
+ * ontologies have more than one scope and the ontology scope should be generated automatically from
+ * the IRI loaded ontologies.
+ *
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
@@ -26,6 +31,12 @@ public class ScopeIriOntology {
   private AppConfiguration appConfiguration;
   private Set<String> scopes = new HashSet<String>();
 
+  /**
+   * This method return scopes IRI of ontology.
+   *
+   * @param ontology This is a loaded ontology.
+   * @return scopesOntologies These are the IRI scopes of the ontology.
+   */
   public Set<String> getScopeIri(OWLOntology ontology) {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
 
