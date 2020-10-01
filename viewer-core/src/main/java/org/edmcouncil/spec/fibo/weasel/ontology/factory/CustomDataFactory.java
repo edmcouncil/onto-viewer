@@ -3,6 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.factory;
 import org.edmcouncil.spec.fibo.weasel.model.OwlSimpleProperty;
 import org.edmcouncil.spec.fibo.weasel.model.WeaselOwlType;
 import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationIri;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.slf4j.Logger;
@@ -23,12 +24,12 @@ public class CustomDataFactory {
   private LabelProvider labelExtractor;
 
   /**
-   * 
+   *
    * @param iri IRI element for which we create annotationIRI
    * @return AnnotationIri contains iri and label
    */
   public OwlAnnotationIri createAnnotationIri(String iri) {
-    LOG.debug("[Custom Data Factory] Create annotation for iri: {}", iri);
+    LOG.debug("[Custom Data Factory] Create annotation for IRI: {}", iri);
 
     OwlAnnotationIri owlAnnotationIri = new OwlAnnotationIri();
     OwlSimpleProperty osp = new OwlSimpleProperty();
@@ -38,4 +39,15 @@ public class CustomDataFactory {
     owlAnnotationIri.setType(WeaselOwlType.IRI);
     return owlAnnotationIri;
   }
+
+  public OwlAnnotationPropertyValue createAnnotationAnyUri(String iri) {
+    LOG.debug("[Custom Data Factory] Create annotation for URI: {}", iri);
+
+    OwlAnnotationPropertyValue val = new OwlAnnotationPropertyValue();
+    val.setType(WeaselOwlType.ANY_URI);
+    val.setValue(iri);
+
+    return val;
+  }
+
 }

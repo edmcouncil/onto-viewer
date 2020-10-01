@@ -8,6 +8,7 @@ import org.edmcouncil.spec.fibo.config.utils.files.FileSystemManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.fibo.weasel.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextSearcherDb;
 import org.edmcouncil.spec.fibo.weasel.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.fibo.weasel.ontology.updater.model.UpdateJobStatus;
@@ -39,6 +40,8 @@ public class Updater {
   @Autowired
   private FiboDataHandler fiboDataHandler;
   private final Map<String, UpdateJob> jobs = new HashMap<>();
+  @Autowired
+  private ScopeIriOntology scopeIriOntology;
 
   private static final String interruptMessage = "Interrupts this update. New update request.";
 
@@ -61,7 +64,8 @@ public class Updater {
         textSearcherDb,
         blocker,
         fiboDataHandler,
-        job) {
+        job,
+        scopeIriOntology) {
     };
     t.start();
 

@@ -17,6 +17,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.OntoFiboMaturityLevel;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboMaturityLevelFactory;
+import org.edmcouncil.spec.fibo.weasel.ontology.scope.ScopeIriOntology;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -47,6 +48,8 @@ public class AnnotationsDataHandler {
   private CustomDataFactory customDataFactory;
   @Autowired
   private AppConfiguration appConfig;
+  @Autowired
+  private ScopeIriOntology scopeIriOntology;
 
   /**
    * @param iri IRI element with annotations to capture
@@ -75,9 +78,16 @@ public class AnnotationsDataHandler {
       opv.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
-        opv = customDataFactory.createAnnotationIri(value);
+        LOG.debug("Value opv: {}", opv.getType());
+        if (scopeIriOntology.scopeIri(value)) {
+          opv = customDataFactory.createAnnotationIri(value);
+
+        } else {
+          opv = customDataFactory.createAnnotationAnyUri(value);
+        }
 
       } else if (next.getValue().isLiteral()) {
+        LOG.debug("Value opv: {}", opv.getType());
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
           value = asLiteral.get().getLiteral();
@@ -129,8 +139,12 @@ public class AnnotationsDataHandler {
       opv.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
+        if (scopeIriOntology.scopeIri(value)) {
+          opv = customDataFactory.createAnnotationIri(value);
 
-        opv = customDataFactory.createAnnotationIri(value);
+        } else {
+          opv = customDataFactory.createAnnotationAnyUri(value);
+        }
 
         if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
           OwlAnnotationIri oai = (OwlAnnotationIri) opv;
@@ -167,7 +181,7 @@ public class AnnotationsDataHandler {
 
       result.addProperty(propertyiri.toString(), opv);
     }
-    
+
     return result;
   }
 
@@ -175,18 +189,21 @@ public class AnnotationsDataHandler {
   private void checkUriAsIri(PropertyValue opv, String value) {
     //TODO: Change this to more pretty solution
     if (opv.getType() == WeaselOwlType.ANY_URI) {
-      ViewerCoreConfiguration weaselConfiguration = (ViewerCoreConfiguration) appConfig.getViewerCoreConfig();
-      if (weaselConfiguration.isUriIri(value)) {
+
+      if (scopeIriOntology.scopeIri(value)) {
         opv.setType(WeaselOwlType.IRI);
+
+      } else {
+        opv.setType(WeaselOwlType.ANY_URI);
       }
     }
   }
 
   /**
-   * 
+   *
    * @param iri an IRI element used to extract the maturity level
    * @param o ontology with element for given iri
-   * @return 
+   * @return
    */
   public OntoFiboMaturityLevel getMaturityLevelForOntology(IRI iri, OWLOntology o) {
 

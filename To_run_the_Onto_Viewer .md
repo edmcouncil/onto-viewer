@@ -1,6 +1,7 @@
 ﻿
 
 
+
 **
 
 ## To run the Onto-Viewer application locally compile from sources:
@@ -15,7 +16,7 @@
 
  3. Add the selected ontology in the format .ttl, .rdf, .owl in \fibo-viewer\web-app\fiboMapper.
 
- 4. In the \ fibo-viewer\web-app\config\ontology_config.xml configuration file, add a URL between the `<ontologyURL>` `</ontologyURL>` tags (where the ontology will be downloaded from) and add a URI between the `<scopeIri>` `</scopeIri>` tags, which will be treated as an IRI.
+ 4. In the \ fibo-viewer\web-app\config\ontology_config.xml configuration file, add a URL between the `<ontologyURL>` `</ontologyURL>` tags (where the ontology will be downloaded from). If there are problems with the operation of the links, add a URI between the `<scopeIri>` `</scopeIri>` tags.
 
  5. Then run the code in any program that provides effective programming tools, e.g. NetBeans, IntelliJ IDEA, etc.
 
@@ -31,7 +32,7 @@
  1. Download the file "fibo_viewer_relase.zip" from the latest version.
  2. Unpack the file.
  3. Add the selected ontology in .ttl, .rdf, .owl format in the ontologies directory.
- 4. In the ontology_config.xml configuration file, add a URL between the <ontologyURL></ontologyURL> tags (where the ontology will be downloaded from) and add a URI between the <scopeIri> </scopeIri> tags, which will be treated as an IRI.
+ 4. In the \ fibo-viewer\web-app\config\ontology_config.xml configuration file, add a URL between the `<ontologyURL>` `</ontologyURL>` tags (where the ontology will be downloaded from). If there are problems with the operation of the links, add a URI between the `<scopeIri>` `</scopeIri>` tags.
  5. At the operating system command prompt, run the following command in the folder with the latest version:
      **java -jar app-v-LAST_VERSION_NUMBER.war** for example **java -jar app-v-0.1.0.war.**
 
