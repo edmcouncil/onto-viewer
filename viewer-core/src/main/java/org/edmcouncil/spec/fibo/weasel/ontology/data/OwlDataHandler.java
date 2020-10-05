@@ -273,9 +273,9 @@ public class OwlDataHandler {
           OwlAxiomPropertyValue axiomProperty = (OwlAxiomPropertyValue) property;
           IRI sci = extractSubElementIri(axiomProperty, objIri);
          //LOG.debug("Taxonomy{}", taxonomy.toString());
-//          if (sci == null) {
-//            continue;
-//          }
+          if (sci == null) {
+            continue;
+          }
 
           OWLEntity entity = createEntity(ontology, sci, type);
 
@@ -475,13 +475,13 @@ public class OwlDataHandler {
           splited[i] = textToReplace;
 
           String eIri = next.getIRI().toString();
-          if (cfg.isUriIri(eIri)) {
+          //if (cfg.isUriIri(eIri)) {
             parseToIri(eIri, opv, key, splited, i, splited[i]);
-            break;
-          } else {
-            parseUrl(eIri, splited, i);
-            break;
-          }
+            //break;
+          ///} else {
+          //  parseUrl(eIri, splited, i);
+          //  break;
+         // }
 
         }
 
@@ -506,11 +506,11 @@ public class OwlDataHandler {
           String generatedKey = String.format(argPattern, j);
           String key = generatedKey;
 
-          if (cfg.isUriIri(probablyUrl)) {
+         // if (cfg.isUriIri(probablyUrl)) {
             parseToIri(probablyUrl, opv, key, splited, j, generatedKey);
-          } else {
-            parseUrl(probablyUrl, splited, j);
-          }
+         // } else {
+         //   parseUrl(probablyUrl, splited, j);
+         // }
         }
       }
     }
