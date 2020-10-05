@@ -61,8 +61,8 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   public boolean isOntologyLocationSet() {
     return configuration.containsKey(ConfigKeys.ONTOLOGY_URL)
-            || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)
-            || configuration.containsKey(ConfigKeys.ONTOLOGY_DIR);
+        || configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)
+        || configuration.containsKey(ConfigKeys.ONTOLOGY_DIR);
   }
 
   public Map<String, Set<String>> getOntologyLocation() {
@@ -192,10 +192,10 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.IGNORE_TO_DISPLAYING, new HashSet<>());
     Set<String> result = new HashSet<>();
     values.stream()
-            .map((value) -> (StringItem) value)
-            .forEachOrdered((cse) -> {
-              result.add(cse.toString());
-            });
+        .map((value) -> (StringItem) value)
+        .forEachOrdered((cse) -> {
+          result.add(cse.toString());
+        });
 
     return result;
   }
@@ -205,10 +205,10 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
     Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.USER_DEFAULT_NAME_LIST, new HashSet<>());
     Set<DefaultLabelItem> result = new HashSet<>();
     values.stream()
-            .map((value) -> (DefaultLabelItem) value)
-            .forEachOrdered((cse) -> {
-              result.add(cse);
-            });
+        .map((value) -> (DefaultLabelItem) value)
+        .forEachOrdered((cse) -> {
+          result.add(cse);
+        });
 
     return result;
   }
@@ -231,6 +231,16 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
       return tsc;
     }
     return null;
+  }
+
+  public Set<String> getScope() {
+    Set<ConfigItem> scopeIri = configuration.getOrDefault(ConfigKeys.SCOPE_IRI, new HashSet<>());
+    Set<String> result = new HashSet<String>();
+    for (ConfigItem configElement : scopeIri) {
+      StringItem element = (StringItem) configElement;
+      result.add(element.toString());
+    }
+    return result;
   }
 
 }

@@ -3,6 +3,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.data;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.AnnotationsDataHandler;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
@@ -44,6 +45,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.IndividualDataHandl
 import org.edmcouncil.spec.fibo.weasel.ontology.data.handler.fibo.OntoFiboMaturityLevel;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.factory.ViewerIdentifierFactory;
+import org.edmcouncil.spec.fibo.weasel.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
 import org.edmcouncil.spec.fibo.weasel.utils.UrlChecker;
@@ -86,6 +88,8 @@ public class OwlDataHandler {
   private OwlUtils owlUtils;
   @Autowired
   private AppConfiguration config;
+  @Autowired
+  private ScopeIriOntology scopeIriOntology;
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
@@ -150,6 +154,7 @@ public class OwlDataHandler {
   }
 
   private List<PropertyValue> getSubclasses(OwlDetailsProperties<PropertyValue> axioms) {
+    LOG.debug("Axiom of subclasses {}", axioms.toString());
     List<PropertyValue> subclasses = axioms
         .getProperties()
         .getOrDefault(subClassOfIriString, new ArrayList<>(0));
@@ -161,6 +166,7 @@ public class OwlDataHandler {
         .stream()
         .filter((pv) -> (pv.getType().equals(WeaselOwlType.TAXONOMY)))
         .collect(Collectors.toList());
+    LOG.debug("TaxElements: {}", taxElements.toString());
     return taxElements;
   }
 
@@ -271,8 +277,8 @@ public class OwlDataHandler {
       for (PropertyValue property : subElements) {
         if (property.getType().equals(WeaselOwlType.TAXONOMY)) {
           OwlAxiomPropertyValue axiomProperty = (OwlAxiomPropertyValue) property;
+          LOG.debug("Axiom Property {}", axiomProperty.toString());
           IRI sci = extractSubElementIri(axiomProperty, objIri);
-         //LOG.debug("Taxonomy{}", taxonomy.toString());
           if (sci == null) {
             continue;
           }
@@ -288,7 +294,7 @@ public class OwlDataHandler {
           String label = labelExtractor.getLabelOrDefaultFragment(objIri);
           //OwlTaxonomyValue val1 = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
 
-       //   OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
+          //   OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
           OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(objIri.getIRIString(), label);
 
           if (subCLassTax.getValue().size() > 0) {
@@ -362,7 +368,10 @@ public class OwlDataHandler {
   }
 
   private IRI extractSubElementIri(OwlAxiomPropertyValue axiomProperty, IRI objIri) {
+    LOG.debug("Axiom Property SubElementIri {}", axiomProperty.toString());
+    LOG.debug("Axiom Property entityMaping {}", axiomProperty.getEntityMaping());
     for (Map.Entry<String, OwlAxiomPropertyEntity> entry : axiomProperty.getEntityMaping().entrySet()) {
+      LOG.debug("Axiom Property entry element {}", entry.toString());
       if (!entry.getValue().getIri().equals(objIri.getIRIString())) {
         return IRI.create(entry.getValue().getIri());
       }
@@ -383,6 +392,7 @@ public class OwlDataHandler {
     while (axiomsIterator.hasNext()) {
       T axiom = axiomsIterator.next();
       String value = rendering.render(axiom);
+      LOG.debug("NotRenderedAxioms: {}", axiom.toString());
 
       value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
 
@@ -424,6 +434,7 @@ public class OwlDataHandler {
     String[] splited = renderedVal.split(" ");
     String openingParenthesis = "(";
     String closingParenthesis = ")";
+    String comma = ",";
     Iterator<OWLEntity> iterator = axiom.signature().iterator();
     ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
 
@@ -436,6 +447,7 @@ public class OwlDataHandler {
       String key = null;
 
       LOG.trace("OWL Entity: {}", next.toStringID());
+      LOG.trace("OWL Entity splited: {}", Arrays.asList(splited));
 
       for (int i = 0; i < splited.length; i++) {
         String string = splited[i].trim();
@@ -445,6 +457,8 @@ public class OwlDataHandler {
         int countOpeningParenthesis = StringUtils.countLetter(string, '(');
         Boolean hasClosingParenthesis = string.length() > 1 ? string.endsWith(closingParenthesis) : false;
         int countClosingParenthesis = StringUtils.countLetter(string, ')');
+        Boolean hasComma = string.length() > 1 ? string.contains(",") : false;
+        int countComma = StringUtils.countLetter(string, ',');
         if (hasOpeningParenthesis) {
           String newString = string.substring(countOpeningParenthesis);
           LOG.trace("Old string: '{}', new string '{}', count opening parenthesis '{}'", string,
@@ -460,6 +474,14 @@ public class OwlDataHandler {
 
           string = newString;
         }
+        if (hasComma) {
+          String newString = string.substring(0, string.length() - countComma);
+          LOG.trace("Old string: '{}', new string '{}', count comma '{}'", string,
+              newString,
+              countComma);
+
+          string = newString;
+        }
         if (string.equals(eSignature)) {
           String generatedKey = String.format(argPattern, i);
           key = generatedKey;
@@ -472,16 +494,21 @@ public class OwlDataHandler {
             String postfix = String.join("", Collections.nCopies(countClosingParenthesis, closingParenthesis));
             textToReplace = textToReplace + postfix;
           }
+          if (hasComma) {
+            String postfix = String.join("", Collections.nCopies(countComma, comma));
+            textToReplace = textToReplace + postfix;
+          }
           splited[i] = textToReplace;
 
           String eIri = next.getIRI().toString();
-          //if (cfg.isUriIri(eIri)) {
-            parseToIri(eIri, opv, key, splited, i, splited[i]);
-            //break;
-          ///} else {
-          //  parseUrl(eIri, splited, i);
-          //  break;
-         // }
+
+          if (scopeIriOntology.scopeIri(eIri)){
+          parseToIri(eIri, opv, key, splited, i, splited[i]);
+            break;
+           } else {
+             parseUrl(eIri, splited, i);
+             break;
+            }
 
         }
 
@@ -506,11 +533,11 @@ public class OwlDataHandler {
           String generatedKey = String.format(argPattern, j);
           String key = generatedKey;
 
-         // if (cfg.isUriIri(probablyUrl)) {
+          if (scopeIriOntology.scopeIri(probablyUrl)) {
             parseToIri(probablyUrl, opv, key, splited, j, generatedKey);
-         // } else {
-         //   parseUrl(probablyUrl, splited, j);
-         // }
+          } else {
+            parseUrl(probablyUrl, splited, j);
+          }
         }
       }
     }
@@ -533,6 +560,7 @@ public class OwlDataHandler {
 
   private String fixRenderedValue(String value, String iriFragment, String splitFragment, Boolean fixRenderedIri) {
     String[] split = value.split(" ");
+    LOG.debug("Split fixRenderedValue: {}", Arrays.asList(split));
     if (split[1].equals("SubClassOf")) {
       split[0] = "";
       split[1] = "";
@@ -763,16 +791,17 @@ public class OwlDataHandler {
   }
 
   public OwlListDetails handleOntologyMetadata(IRI iri, OWLOntology ontology) {
-
     OwlListDetails wd = new OwlListDetails();
     OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontology, wd);
     if (metadata != null && metadata.getProperties().keySet().size() > 0) {
+
       wd.addAllProperties(metadata);
+      wd.setIri(iri.toString());
+      wd.setLabel(labelExtractor.getLabelOrDefaultFragment(iri));
+      wd.setLocationInModules(fiboDataHandler.getElementLocationInModules(iri.toString(), ontology));
+      return wd;
     }
-    wd.setIri(iri.toString());
-    wd.setLabel(labelExtractor.getLabelOrDefaultFragment(iri));
-    wd.setLocationInModules(fiboDataHandler.getElementLocationInModules(iri.toString(), ontology));
-    return wd;
+    return null;
 
   }
 
