@@ -155,6 +155,7 @@ public class OntologyVisitors {
       @Override
       public OWLRestriction doDefault(Object object) {
         LOG.debug("Unsupported axiom: " + object);
+        LOG.debug("Unsupported axiom type: " + object.getClass().getName());
         return null;
       }
 
@@ -181,14 +182,11 @@ public class OntologyVisitors {
         vg.setRoot(blankNode);
 
         for (OWLClassExpression owlClassExpression : axiomConjunct) {
-          LOG.debug("Conjuct axioms {}", owlClassExpression.toString());
           LOG.debug("getClassExpressionType {}", owlClassExpression.getClassExpressionType());
 
           ClassExpressionType objectType = owlClassExpression.getClassExpressionType();
           switch (objectType) {
             case OWL_CLASS:
-              //  OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
-
               String iri = null;
               iri = extractStringObject(owlClassExpression, iri);
 
@@ -209,6 +207,7 @@ public class OntologyVisitors {
               break;
 
             default:
+              LOG.debug("Object type {}, Expression {}", objectType, owlClassExpression);
               addValue(returnedVal, blankNode, owlClassExpression);
 
           }
@@ -522,15 +521,18 @@ public class OntologyVisitors {
       @Override
       public Map<GraphNode, Set<OWLClassExpression>> visit(OWLObjectUnionOf axiom) {
         LOG.debug("visit OWLObjectUnionOf: {}", axiom.toString());
-        String propertyIri = null;
-        propertyIri = "";
+        String propertyIri = "";
+        LOG.debug("object type: {}", axiom.getClassExpressionType().toString());
         ClassExpressionType objectType = axiom.getClassExpressionType();
+
         Map<GraphNode, Set<OWLClassExpression>> returnedVal = new HashMap<>();
         if (node.getLabel().equals(DEFAULT_BLANK_NODE_LABEL)) {
           switch (objectType) {
             case OWL_CLASS:
+              LOG.debug("OWL_CLASS: {}", axiom.getObjectComplementOf().toString());
               OWLClassExpression expression = axiom.getObjectComplementOf();
               String object = null;
+
               object = extractStringObject(expression, object);
 
               GraphNode endNode = new GraphNode(vg.nextId());
@@ -578,14 +580,11 @@ public class OntologyVisitors {
             case OBJECT_UNION_OF:
 
               GraphNode unionRootNode = node;
-              //unionRootNode.setType(type);
-              //unionRootNode.setIri(propertyIri);
               unionRootNode.setLabel("or");
               /**
                * GraphRelation orRel = new GraphRelation(vg.nextId()); orRel.setStart(node);
                * orRel.setEnd(unionRootNode); vg.addNode(unionRootNode); vg.addRelation(orRel);
                */
-
               for (OWLEntity owlEntity : axiom.signature().collect(Collectors.toList())) {
                 LOG.debug("OWLObjectUnionOf axiom with owl entity {}", owlEntity);
                 GraphNode unionNode = new GraphNode(vg.nextId());
@@ -609,7 +608,7 @@ public class OntologyVisitors {
         } else {
           LOG.debug("node label is not a default label: {}", node.getLabel());
           //create OR blank node
-
+          LOG.debug("Object Type: {}", objectType);
           GraphNode blankNode = new GraphNode(vg.nextId());
           blankNode.setType(type);
           blankNode.setLabel("or");
@@ -623,7 +622,87 @@ public class OntologyVisitors {
           vg.addRelation(relSomeVal);
 
           for (OWLClassExpression classExpression : axiom.getOperandsAsList()) {
-            addValue(returnedVal, blankNode, classExpression);
+            ClassExpressionType cet = classExpression.getClassExpressionType();
+            switch (cet) {
+              case OWL_CLASS:
+                LOG.debug("OWL_CLASS expression: {}", classExpression);
+                OWLClassExpression expression = classExpression;
+                String object = null;
+        
+                object = extractStringObject(expression, object);
+
+                GraphNode endNode = new GraphNode(vg.nextId());
+                endNode.setIri(object);
+                endNode.setType(type);
+                String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
+
+                endNode.setLabel(label);
+
+                GraphRelation rel = new GraphRelation(vg.nextId());
+                rel.setIri(propertyIri);
+                rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+                rel.setStart(blankNode);
+                rel.setEnd(endNode);
+                rel.setEndNodeType(type);
+                vg.addNode(endNode);
+                vg.addRelation(rel);
+                break;
+
+              case OBJECT_SOME_VALUES_FROM:
+              case OBJECT_EXACT_CARDINALITY:
+              case OBJECT_MIN_CARDINALITY:
+              case OBJECT_MAX_CARDINALITY:
+              case DATA_MIN_CARDINALITY:
+              case DATA_MAX_CARDINALITY:
+              case OBJECT_ALL_VALUES_FROM:
+
+                GraphNode blankNode2 = new GraphNode(vg.nextId());
+                blankNode2.setType(type);
+                blankNode2.setLabel(DEFAULT_BLANK_NODE_LABEL);
+                blankNode2.setIri(THING_IRI);
+                GraphRelation relSomeVal2 = new GraphRelation(vg.nextId());
+                relSomeVal2.setIri(propertyIri);
+                relSomeVal2.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+                relSomeVal2.setStart(blankNode);
+                relSomeVal2.setEnd(blankNode2);
+                relSomeVal2.setOptional(true);
+                relSomeVal2.setEndNodeType(type);
+                vg.addNode(blankNode2);
+                vg.addRelation(relSomeVal2);
+                vg.setRoot(blankNode2);
+
+                addValue(returnedVal, blankNode2, classExpression);
+                break;
+              case OBJECT_UNION_OF:
+
+                GraphNode unionRootNode = blankNode;
+               
+                unionRootNode.setLabel("or");
+                
+                LOG.debug("Object Union Of case before for: {}", axiom);
+                for (OWLEntity owlEntity : classExpression.signature().collect(Collectors.toList())) {
+                  LOG.debug("OWLObjectUnionOf axiom with owl entity {}", owlEntity);
+                  GraphNode unionNode = new GraphNode(vg.nextId());
+                  unionNode.setLabel(labelExtractor.getLabelOrDefaultFragment(owlEntity));
+                  unionNode.setIri(owlEntity.getIRI().toString());
+                  unionNode.setType(type);
+
+                  GraphRelation unionRel = new GraphRelation(vg.nextId());
+                  unionRel.setStart(unionRootNode);
+                  unionRel.setEnd(unionNode);
+                  unionRel.setEndNodeType(type);
+                  vg.addNode(unionNode);
+                  vg.addRelation(unionRel);
+                }
+
+                break;
+              default:
+                LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
+                LOG.debug("OWLExpression {}", classExpression);
+                addValue(returnedVal, blankNode, classExpression);
+                LOG.debug("Added value: {}", returnedVal);
+
+            }
           }
         }
         return returnedVal;
@@ -887,6 +966,7 @@ public class OntologyVisitors {
 
   private final String extractStringObject(OWLClassExpression expression, String object) {
     for (OWLEntity oWLEntity : expression.signature().collect(Collectors.toList())) {
+      LOG.debug("extract String Object: {}", oWLEntity);
       object = oWLEntity.toStringID();
     }
     return object;
