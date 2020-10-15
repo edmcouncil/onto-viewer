@@ -75,7 +75,7 @@ public class Updater {
     return jobs.get(id);
   }
 
-  public UpdateJob currentInProgress() {
+  public UpdateJob currentInProgressOrLast() {
     for (UpdateJob value : jobs.values()) {
       if (value.getStatus() == UpdateJobStatus.IN_PROGRESS) {
         return value;

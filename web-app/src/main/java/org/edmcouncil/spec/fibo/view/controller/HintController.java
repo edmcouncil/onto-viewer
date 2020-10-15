@@ -11,11 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -33,14 +35,18 @@ public class HintController {
   @Autowired
   private UpdateBlocker blocker;
 
-  @PostMapping(value = {"", "/max/{max}"})
+  @PostMapping(value = {"", "/max/{max}"}, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity getHints(
       @RequestBody String query,
       @PathVariable Optional<Integer> max) {
+      //@RequestHeader(value = "Accept", required = true) String acceptHeader) {
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
       return new ResponseEntity<>("503 Service Unavailable", HttpStatus.SERVICE_UNAVAILABLE);
     }
+//    if(!acceptHeader.contains("application/json")){
+//      return ResponseEntity.badRequest().body("Incorrect or missing header. Accept: "+acceptHeader);
+//    }
     Integer maxHintCount = max.isPresent() ? max.get() : DEFAULT_MAX_HINT_RESULT_COUNT;
     LOG.debug("[REQ] POST hint | query =  {{}}  | max = {{}}", query, maxHintCount);
 
@@ -50,8 +56,7 @@ public class HintController {
     }
 
     List<HintItem> result = textSearch.getHints(query, maxHintCount);
-
-    //return list of hint result
+    
     return ResponseEntity.ok(result);
   }
 

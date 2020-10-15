@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.fibo.view.controller;
 
+import java.util.Optional;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.view.service.ApiKeyService;
 import org.edmcouncil.spec.fibo.view.service.OntologyUpdateService;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,10 +35,16 @@ public class OntologyUpdateApiController {
   @Autowired
   private OntologyUpdateService updateService;
 
-  @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity startUpdateKeyInHeader(
-          @RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
-          @RequestParam(value = "ApiKey", required = false) String apiKeyParam) {
+      @RequestHeader(value = "Accept", required = true) String acceptHeader,
+      @RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
+      @RequestParam(value = "ApiKey", required = false) String apiKeyParam) {
+
+    if (!acceptHeader.contains("application/json")) {
+      return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
+    }
+
     LOG.debug("[REQ] PUT : /api/update ");
     String key = "";
     if (apiKeyHeader != null) {
@@ -53,10 +61,14 @@ public class OntologyUpdateApiController {
   }
 
   @ResponseBody
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = {"", "/{updateId}"}, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity getUpdateStatus(@RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
-          @RequestParam(value = "ApiKey", required = false) String apiKeyParam,
-          @RequestParam(value = "updateId", required = true) String updateId) {
+      @RequestParam(value = "ApiKey", required = false) String apiKeyParam,
+      @PathVariable Optional<String> updateId,
+      @RequestHeader(value = "Accept", required = true) String acceptHeader) {
+    if (!acceptHeader.contains("application/json")) {
+      return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
+    }
     String key = "";
     if (apiKeyHeader != null) {
       key = apiKeyHeader;
@@ -68,7 +80,17 @@ public class OntologyUpdateApiController {
       LOG.debug(notValidApiKeyMessage);
       return ResponseEntity.badRequest().body(new ErrorResult(notValidApiKeyMessage));
     }
-    UpdateJob uj = updateService.getUpdateStatus(updateId);
+
+    String uid = null;
+    if (updateId.isPresent()) {
+      uid = updateId.get();
+    }
+    UpdateJob uj = updateService.getUpdateStatus(uid);
+
+    if (uj == null) {
+      return ResponseEntity.notFound().build();
+    }
+
     return ResponseEntity.ok(uj);
   }
 }

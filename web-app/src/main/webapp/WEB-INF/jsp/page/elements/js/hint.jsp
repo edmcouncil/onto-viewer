@@ -30,8 +30,11 @@ function autocomplete() {
   $.ajax({
     url: $path,
     dataType: 'json',
+    accepts: {
+        json: 'application/json'
+    },
     data: $text,
-    contentType: 'application/json',
+    contentType: 'text/plain',
     type: 'POST'
   })
           .done(function (results) {

@@ -24,7 +24,7 @@ public class OntologyUpdateService {
 
   public UpdateJob getUpdateStatus(String updateId) {
     if(updateId == null){
-      return updater.currentInProgress();
+      return updater.currentInProgressOrLast();
     }
     return updater.getJobWithId(updateId);
   }
