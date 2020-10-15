@@ -1,11 +1,6 @@
+
 # Changelog
 All notable changes to this project will be documented in this file.
-
-**## Unreleased [0.3.0] 
-**### Changed**
-- rebuilding the configuration file and its loader
-- splitting the configuration file into 5 files
-
 
 ## Unreleased [0.3.0]
 ### Added
@@ -15,6 +10,12 @@ All notable changes to this project will be documented in this file.
 - rest api mapping - more information about it in */api-doc/rest_changes_0_3_0.md*
 - used AutoOntologyLoader for more efficient ontology loading, now we can add mapper directory with ontologies and these ontologies will not be downloaded from the network when imported in ontology or defined in configuration file in ```<ontologyUrl>...</ontologyUrl>``` tags
 - status controller now has @Deprecated, and will be deleted in future release, please use ```viewer-adress/actuator/health``` insted that ```viewer-adress/status```
+- rebuilding the configuration file and its loader
+- splitting the configuration file into 5 files
+- So far, the IRI scope has been defined in the configuration. Many ontologies have more than one scope and it is counterintuitive to complete this field. To skip this step, the ontology scope is generated automatically from the IRI loaded ontologies.
+- Fixed problem with redirecting a links to another pages.
+- Incorrect graph display has been fixed. The restrictions with "or" are correctly displayed in the graph.
+
 
 
 ## [0.2.0] - 2020-06-02
