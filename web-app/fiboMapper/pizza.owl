@@ -1,0 +1,4333 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.co-ode.org/ontologies/pizza"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.co-ode.org/ontologies/pizza"
+     versionIRI="http://www.co-ode.org/ontologies/pizza/2.0.0">
+    <Prefix name="" IRI="http://www.co-ode.org/ontologies/pizza/pizza.owl#"/>
+    <Prefix name="dc" IRI="http://purl.org/dc/elements/1.1/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="skos" IRI="http://www.w3.org/2004/02/skos/core#"/>
+    <Prefix name="pizza" IRI="http://www.co-ode.org/ontologies/pizza/pizza.owl#"/>
+    <Prefix name="terms" IRI="http://purl.org/dc/terms/"/>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dc:description"/>
+        <Literal xml:lang="en">An ontology about pizzas and their toppings.
+
+This is an example ontology that contains all constructs required for the various versions of the Pizza Tutorial run by Manchester University (see http://owl.cs.manchester.ac.uk/publications/talks-and-tutorials/protg-owl-tutorial).</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dc:title"/>
+        <Literal xml:lang="en">pizza</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="terms:contributor"/>
+        <Literal>Alan Rector</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="terms:contributor"/>
+        <Literal>Chris Wroe</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="terms:contributor"/>
+        <Literal>Matthew Horridge</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="terms:contributor"/>
+        <Literal>Nick Drummond</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="terms:contributor"/>
+        <Literal>Robert Stevens</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="terms:license"/>
+        <Literal>Creative Commons Attribution 3.0 (CC BY 3.0)</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="terms:provenance"/>
+        <Literal xml:lang="en">v2.0 Added new annotations to the ontology using standard/well-know annotation properties
+
+v1.5. Removed protege.owl import and references. Made ontology URI date-independent
+
+v1.4. Added Food class (used in domain/range of hasIngredient), Added several hasCountryOfOrigin restrictions on pizzas, Made hasTopping invers functional</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <Literal>pizza</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="owl:versionInfo"/>
+        <Literal>2.0</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="/pizza.owl#American"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#AnchoviesTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#ArtichokeTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#AsparagusTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Cajun"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#CajunSpiceTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#CaperTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Caprina"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#CheeseyPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#CheeseyVegetableTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#ChickenTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Country"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#DeepPanBase"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#DomainConcept"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#FishTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Food"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#FourCheesesTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#FruitTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#FruttiDiMare"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#GarlicTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#GoatsCheeseTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#GorgonzolaTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#GreenPepperTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#HamTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#HerbSpiceTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Hot"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#HotGreenPepperTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#HotSpicedBeefTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#IceCream"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#InterestingPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#JalapenoPepperTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#LaReine"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#LeekTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Margherita"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#MeatTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#MeatyPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Medium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Mild"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#MixedSeafoodTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#MozzarellaTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Mushroom"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#MushroomTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Napoletana"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#NonVegetarianPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#NutTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#OliveTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#OnionTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#ParmaHamTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Parmense"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#ParmesanTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PeperonataTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PepperTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PetitPoisTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PineKernels"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Pizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PizzaBase"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PrawnsTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#QuattroFormaggi"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#RealItalianPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#RedOnionTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#RocketTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Rosa"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#RosemaryTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SauceTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Siciliana"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SlicedTomatoTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Soho"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Spiciness"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SpicyPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SpicyPizzaEquivalent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SpicyTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SpinachTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SultanaTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SundriedTomatoTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#SweetPepperTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#ThinAndCrispyBase"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#ThinAndCrispyPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#TobascoPepperSauce"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#TomatoTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#UnclosedPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#ValuePartition"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#VegetarianPizza"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#VegetarianPizzaEquivalent1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#VegetarianPizzaEquivalent2"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#VegetarianTopping"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/pizza.owl#Veneziana"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/pizza.owl#hasBase"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/pizza.owl#hasCountryOfOrigin"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/pizza.owl#hasIngredient"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/pizza.owl#isBaseOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/pizza.owl#isIngredientOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/pizza.owl#isToppingOf"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="/pizza.owl#America"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="/pizza.owl#England"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="/pizza.owl#France"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="/pizza.owl#Germany"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="/pizza.owl#Italy"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:description"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dc:title"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="terms:contributor"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="terms:license"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="terms:provenance"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#CheeseyPizza"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+                <Class IRI="/pizza.owl#CheeseTopping"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#Country"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#DomainConcept"/>
+            <ObjectOneOf>
+                <NamedIndividual IRI="/pizza.owl#America"/>
+                <NamedIndividual IRI="/pizza.owl#England"/>
+                <NamedIndividual IRI="/pizza.owl#France"/>
+                <NamedIndividual IRI="/pizza.owl#Germany"/>
+                <NamedIndividual IRI="/pizza.owl#Italy"/>
+            </ObjectOneOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#InterestingPizza"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectMinCardinality cardinality="3">
+                <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            </ObjectMinCardinality>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#MeatyPizza"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+                <Class IRI="/pizza.owl#MeatTopping"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#NonVegetarianPizza"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectComplementOf>
+                <Class IRI="/pizza.owl#VegetarianPizza"/>
+            </ObjectComplementOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#RealItalianPizza"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="/pizza.owl#hasCountryOfOrigin"/>
+                <NamedIndividual IRI="/pizza.owl#Italy"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#Spiciness"/>
+        <ObjectUnionOf>
+            <Class IRI="/pizza.owl#Hot"/>
+            <Class IRI="/pizza.owl#Medium"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectUnionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#SpicyPizza"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+                <Class IRI="/pizza.owl#SpicyTopping"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#SpicyPizzaEquivalent"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+                <ObjectIntersectionOf>
+                    <Class IRI="/pizza.owl#PizzaTopping"/>
+                    <ObjectSomeValuesFrom>
+                        <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+                        <Class IRI="/pizza.owl#Hot"/>
+                    </ObjectSomeValuesFrom>
+                </ObjectIntersectionOf>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#SpicyTopping"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#PizzaTopping"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+                <Class IRI="/pizza.owl#Hot"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#ThinAndCrispyPizza"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="/pizza.owl#hasBase"/>
+                <Class IRI="/pizza.owl#ThinAndCrispyBase"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#VegetarianPizza"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectComplementOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+                    <Class IRI="/pizza.owl#FishTopping"/>
+                </ObjectSomeValuesFrom>
+            </ObjectComplementOf>
+            <ObjectComplementOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+                    <Class IRI="/pizza.owl#MeatTopping"/>
+                </ObjectSomeValuesFrom>
+            </ObjectComplementOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#VegetarianPizzaEquivalent1"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+                <Class IRI="/pizza.owl#VegetarianTopping"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#VegetarianPizzaEquivalent2"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#Pizza"/>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+                <ObjectUnionOf>
+                    <Class IRI="/pizza.owl#CheeseTopping"/>
+                    <Class IRI="/pizza.owl#FruitTopping"/>
+                    <Class IRI="/pizza.owl#HerbSpiceTopping"/>
+                    <Class IRI="/pizza.owl#NutTopping"/>
+                    <Class IRI="/pizza.owl#SauceTopping"/>
+                    <Class IRI="/pizza.owl#VegetableTopping"/>
+                </ObjectUnionOf>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/pizza.owl#VegetarianTopping"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/pizza.owl#PizzaTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#CheeseTopping"/>
+                <Class IRI="/pizza.owl#FruitTopping"/>
+                <Class IRI="/pizza.owl#HerbSpiceTopping"/>
+                <Class IRI="/pizza.owl#NutTopping"/>
+                <Class IRI="/pizza.owl#SauceTopping"/>
+                <Class IRI="/pizza.owl#VegetableTopping"/>
+            </ObjectUnionOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#American"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#American"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#American"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#American"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#American"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#American"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="/pizza.owl#hasCountryOfOrigin"/>
+            <NamedIndividual IRI="/pizza.owl#America"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#HotGreenPepperTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#JalapenoPepperTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#HotGreenPepperTopping"/>
+                <Class IRI="/pizza.owl#JalapenoPepperTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="/pizza.owl#hasCountryOfOrigin"/>
+            <NamedIndividual IRI="/pizza.owl#America"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AnchoviesTopping"/>
+        <Class IRI="/pizza.owl#FishTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ArtichokeTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ArtichokeTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AsparagusTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#AsparagusTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OnionTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PeperonataTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PrawnsTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TobascoPepperSauce"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#OnionTopping"/>
+                <Class IRI="/pizza.owl#PeperonataTopping"/>
+                <Class IRI="/pizza.owl#PrawnsTopping"/>
+                <Class IRI="/pizza.owl#TobascoPepperSauce"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#CajunSpiceTopping"/>
+        <Class IRI="/pizza.owl#HerbSpiceTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#CajunSpiceTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Hot"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#CaperTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#CaperTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#AnchoviesTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#CaperTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#HamTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PeperonataTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#AnchoviesTopping"/>
+                <Class IRI="/pizza.owl#CaperTopping"/>
+                <Class IRI="/pizza.owl#HamTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#PeperonataTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Caprina"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Caprina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#GoatsCheeseTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Caprina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Caprina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#SundriedTomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Caprina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Caprina"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#GoatsCheeseTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#SundriedTomatoTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#CheeseyVegetableTopping"/>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#CheeseyVegetableTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ChickenTopping"/>
+        <Class IRI="/pizza.owl#MeatTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ChickenTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#DeepPanBase"/>
+        <Class IRI="/pizza.owl#PizzaBase"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#GarlicTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#ParmesanTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#SpinachTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#GarlicTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#ParmesanTopping"/>
+                <Class IRI="/pizza.owl#SpinachTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FishTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FishTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Food"/>
+        <Class IRI="/pizza.owl#DomainConcept"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourCheesesTopping"/>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourCheesesTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#AnchoviesTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#CaperTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MushroomTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#AnchoviesTopping"/>
+                <Class IRI="/pizza.owl#CaperTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#MushroomTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FruitTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FruttiDiMare"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FruttiDiMare"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#GarlicTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FruttiDiMare"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MixedSeafoodTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FruttiDiMare"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#FruttiDiMare"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#GarlicTopping"/>
+                <Class IRI="/pizza.owl#MixedSeafoodTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#GarlicTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#GarlicTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Medium"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#LeekTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MushroomTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PeperonataTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PetitPoisTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#SlicedTomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#LeekTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#MushroomTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#PeperonataTopping"/>
+                <Class IRI="/pizza.owl#PetitPoisTopping"/>
+                <Class IRI="/pizza.owl#SlicedTomatoTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#GoatsCheeseTopping"/>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#GoatsCheeseTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#GorgonzolaTopping"/>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#GorgonzolaTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#GreenPepperTopping"/>
+        <Class IRI="/pizza.owl#PepperTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#HamTopping"/>
+        <Class IRI="/pizza.owl#MeatTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#HerbSpiceTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Hot"/>
+        <Class IRI="/pizza.owl#Spiciness"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#HotGreenPepperTopping"/>
+        <Class IRI="/pizza.owl#GreenPepperTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#HotGreenPepperTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Hot"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#HotSpicedBeefTopping"/>
+        <Class IRI="/pizza.owl#MeatTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#HotSpicedBeefTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Hot"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#IceCream"/>
+        <Class IRI="/pizza.owl#Food"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#IceCream"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#FruitTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#JalapenoPepperTopping"/>
+        <Class IRI="/pizza.owl#PepperTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#JalapenoPepperTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Hot"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LaReine"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LaReine"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#HamTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LaReine"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LaReine"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MushroomTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LaReine"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LaReine"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LaReine"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#HamTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#MushroomTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LeekTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#LeekTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Margherita"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Margherita"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Margherita"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Margherita"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#MeatTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Medium"/>
+        <Class IRI="/pizza.owl#Spiciness"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Mild"/>
+        <Class IRI="/pizza.owl#Spiciness"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#MixedSeafoodTopping"/>
+        <Class IRI="/pizza.owl#FishTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="/pizza.owl#hasCountryOfOrigin"/>
+            <NamedIndividual IRI="/pizza.owl#Italy"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Mushroom"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Mushroom"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Mushroom"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MushroomTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Mushroom"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Mushroom"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#MushroomTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#MushroomTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#MushroomTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+        <Class IRI="/pizza.owl#Pizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#AnchoviesTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#CaperTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#AnchoviesTopping"/>
+                <Class IRI="/pizza.owl#CaperTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="/pizza.owl#hasCountryOfOrigin"/>
+            <NamedIndividual IRI="/pizza.owl#Italy"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#NutTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#NutTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#OliveTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#OliveTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#OnionTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#OnionTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Medium"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ParmaHamTopping"/>
+        <Class IRI="/pizza.owl#HamTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ParmaHamTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Parmense"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Parmense"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#AsparagusTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Parmense"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#HamTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Parmense"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Parmense"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#ParmesanTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Parmense"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Parmense"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#AsparagusTopping"/>
+                <Class IRI="/pizza.owl#HamTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#ParmesanTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ParmesanTopping"/>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ParmesanTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PeperonataTopping"/>
+        <Class IRI="/pizza.owl#PepperTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PeperonataTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Medium"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+        <Class IRI="/pizza.owl#MeatTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Medium"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PepperTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PetitPoisTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PetitPoisTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PineKernels"/>
+        <Class IRI="/pizza.owl#NutTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Pizza"/>
+        <Class IRI="/pizza.owl#Food"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Pizza"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasBase"/>
+            <Class IRI="/pizza.owl#PizzaBase"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PizzaBase"/>
+        <Class IRI="/pizza.owl#Food"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+        <Class IRI="/pizza.owl#Food"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#CajunSpiceTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#ChickenTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#GarlicTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#RedOnionTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#SweetPepperTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#CajunSpiceTopping"/>
+                <Class IRI="/pizza.owl#ChickenTopping"/>
+                <Class IRI="/pizza.owl#GarlicTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#RedOnionTopping"/>
+                <Class IRI="/pizza.owl#SweetPepperTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PrawnsTopping"/>
+        <Class IRI="/pizza.owl#FishTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#LeekTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#ParmesanTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#RosemaryTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#LeekTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#ParmesanTopping"/>
+                <Class IRI="/pizza.owl#RosemaryTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#QuattroFormaggi"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#QuattroFormaggi"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#FourCheesesTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#QuattroFormaggi"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#QuattroFormaggi"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#FourCheesesTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#RealItalianPizza"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasBase"/>
+            <Class IRI="/pizza.owl#ThinAndCrispyBase"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#RedOnionTopping"/>
+        <Class IRI="/pizza.owl#OnionTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#RocketTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#RocketTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Medium"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Rosa"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Rosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#GorgonzolaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Rosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Rosa"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Rosa"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#GorgonzolaTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#RosemaryTopping"/>
+        <Class IRI="/pizza.owl#HerbSpiceTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#RosemaryTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SauceTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#AnchoviesTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#ArtichokeTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#GarlicTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#HamTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#AnchoviesTopping"/>
+                <Class IRI="/pizza.owl#ArtichokeTopping"/>
+                <Class IRI="/pizza.owl#GarlicTopping"/>
+                <Class IRI="/pizza.owl#HamTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SlicedTomatoTopping"/>
+        <Class IRI="/pizza.owl#TomatoTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SlicedTomatoTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#GreenPepperTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#HotSpicedBeefTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OnionTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#GreenPepperTopping"/>
+                <Class IRI="/pizza.owl#HotSpicedBeefTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#OnionTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Soho"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Soho"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#GarlicTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Soho"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Soho"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Soho"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#ParmesanTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Soho"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#RocketTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Soho"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Soho"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#GarlicTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#ParmesanTopping"/>
+                <Class IRI="/pizza.owl#RocketTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Spiciness"/>
+        <Class IRI="/pizza.owl#ValuePartition"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SpinachTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SpinachTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SultanaTopping"/>
+        <Class IRI="/pizza.owl#FruitTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SultanaTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Medium"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SundriedTomatoTopping"/>
+        <Class IRI="/pizza.owl#TomatoTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SundriedTomatoTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SweetPepperTopping"/>
+        <Class IRI="/pizza.owl#PepperTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#SweetPepperTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#ThinAndCrispyBase"/>
+        <Class IRI="/pizza.owl#PizzaBase"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#TobascoPepperSauce"/>
+        <Class IRI="/pizza.owl#SauceTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#TobascoPepperSauce"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Hot"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#TomatoTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#TomatoTopping"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+            <Class IRI="/pizza.owl#Mild"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#UnclosedPizza"/>
+        <Class IRI="/pizza.owl#Pizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#UnclosedPizza"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <Class IRI="/pizza.owl#NamedPizza"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#CaperTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OliveTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#OnionTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#PineKernels"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#SultanaTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <Class IRI="/pizza.owl#TomatoTopping"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+            <ObjectUnionOf>
+                <Class IRI="/pizza.owl#CaperTopping"/>
+                <Class IRI="/pizza.owl#MozzarellaTopping"/>
+                <Class IRI="/pizza.owl#OliveTopping"/>
+                <Class IRI="/pizza.owl#OnionTopping"/>
+                <Class IRI="/pizza.owl#PineKernels"/>
+                <Class IRI="/pizza.owl#SultanaTopping"/>
+                <Class IRI="/pizza.owl#TomatoTopping"/>
+            </ObjectUnionOf>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/pizza.owl#Veneziana"/>
+        <ObjectHasValue>
+            <ObjectProperty IRI="/pizza.owl#hasCountryOfOrigin"/>
+            <NamedIndividual IRI="/pizza.owl#Italy"/>
+        </ObjectHasValue>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#American"/>
+        <Class IRI="/pizza.owl#AmericanHot"/>
+        <Class IRI="/pizza.owl#Cajun"/>
+        <Class IRI="/pizza.owl#Capricciosa"/>
+        <Class IRI="/pizza.owl#Caprina"/>
+        <Class IRI="/pizza.owl#Fiorentina"/>
+        <Class IRI="/pizza.owl#FourSeasons"/>
+        <Class IRI="/pizza.owl#FruttiDiMare"/>
+        <Class IRI="/pizza.owl#Giardiniera"/>
+        <Class IRI="/pizza.owl#LaReine"/>
+        <Class IRI="/pizza.owl#Margherita"/>
+        <Class IRI="/pizza.owl#Mushroom"/>
+        <Class IRI="/pizza.owl#Napoletana"/>
+        <Class IRI="/pizza.owl#Parmense"/>
+        <Class IRI="/pizza.owl#PolloAdAstra"/>
+        <Class IRI="/pizza.owl#PrinceCarlo"/>
+        <Class IRI="/pizza.owl#QuattroFormaggi"/>
+        <Class IRI="/pizza.owl#Rosa"/>
+        <Class IRI="/pizza.owl#Siciliana"/>
+        <Class IRI="/pizza.owl#SloppyGiuseppe"/>
+        <Class IRI="/pizza.owl#Soho"/>
+        <Class IRI="/pizza.owl#UnclosedPizza"/>
+        <Class IRI="/pizza.owl#Veneziana"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#AnchoviesTopping"/>
+        <Class IRI="/pizza.owl#MixedSeafoodTopping"/>
+        <Class IRI="/pizza.owl#PrawnsTopping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#ArtichokeTopping"/>
+        <Class IRI="/pizza.owl#AsparagusTopping"/>
+        <Class IRI="/pizza.owl#CaperTopping"/>
+        <Class IRI="/pizza.owl#GarlicTopping"/>
+        <Class IRI="/pizza.owl#LeekTopping"/>
+        <Class IRI="/pizza.owl#MushroomTopping"/>
+        <Class IRI="/pizza.owl#OliveTopping"/>
+        <Class IRI="/pizza.owl#OnionTopping"/>
+        <Class IRI="/pizza.owl#PepperTopping"/>
+        <Class IRI="/pizza.owl#PetitPoisTopping"/>
+        <Class IRI="/pizza.owl#RocketTopping"/>
+        <Class IRI="/pizza.owl#SpinachTopping"/>
+        <Class IRI="/pizza.owl#TomatoTopping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#CajunSpiceTopping"/>
+        <Class IRI="/pizza.owl#RosemaryTopping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#CheeseTopping"/>
+        <Class IRI="/pizza.owl#FishTopping"/>
+        <Class IRI="/pizza.owl#FruitTopping"/>
+        <Class IRI="/pizza.owl#HerbSpiceTopping"/>
+        <Class IRI="/pizza.owl#MeatTopping"/>
+        <Class IRI="/pizza.owl#NutTopping"/>
+        <Class IRI="/pizza.owl#SauceTopping"/>
+        <Class IRI="/pizza.owl#VegetableTopping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#ChickenTopping"/>
+        <Class IRI="/pizza.owl#HamTopping"/>
+        <Class IRI="/pizza.owl#HotSpicedBeefTopping"/>
+        <Class IRI="/pizza.owl#PeperoniSausageTopping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#DeepPanBase"/>
+        <Class IRI="/pizza.owl#ThinAndCrispyBase"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#DomainConcept"/>
+        <Class IRI="/pizza.owl#ValuePartition"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#FourCheesesTopping"/>
+        <Class IRI="/pizza.owl#GoatsCheeseTopping"/>
+        <Class IRI="/pizza.owl#GorgonzolaTopping"/>
+        <Class IRI="/pizza.owl#MozzarellaTopping"/>
+        <Class IRI="/pizza.owl#ParmesanTopping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#GreenPepperTopping"/>
+        <Class IRI="/pizza.owl#JalapenoPepperTopping"/>
+        <Class IRI="/pizza.owl#PeperonataTopping"/>
+        <Class IRI="/pizza.owl#SweetPepperTopping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#Hot"/>
+        <Class IRI="/pizza.owl#Medium"/>
+        <Class IRI="/pizza.owl#Mild"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#IceCream"/>
+        <Class IRI="/pizza.owl#Pizza"/>
+        <Class IRI="/pizza.owl#PizzaBase"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#NonVegetarianPizza"/>
+        <Class IRI="/pizza.owl#VegetarianPizza"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/pizza.owl#SlicedTomatoTopping"/>
+        <Class IRI="/pizza.owl#SundriedTomatoTopping"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="/pizza.owl#Country"/>
+        <NamedIndividual IRI="/pizza.owl#America"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="/pizza.owl#America"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="/pizza.owl#Country"/>
+        <NamedIndividual IRI="/pizza.owl#England"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="/pizza.owl#England"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="/pizza.owl#Country"/>
+        <NamedIndividual IRI="/pizza.owl#France"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="/pizza.owl#France"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="/pizza.owl#Country"/>
+        <NamedIndividual IRI="/pizza.owl#Germany"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="/pizza.owl#Germany"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="/pizza.owl#Country"/>
+        <NamedIndividual IRI="/pizza.owl#Italy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <NamedIndividual IRI="/pizza.owl#Italy"/>
+    </ClassAssertion>
+    <DifferentIndividuals>
+        <NamedIndividual IRI="/pizza.owl#America"/>
+        <NamedIndividual IRI="/pizza.owl#England"/>
+        <NamedIndividual IRI="/pizza.owl#France"/>
+        <NamedIndividual IRI="/pizza.owl#Germany"/>
+        <NamedIndividual IRI="/pizza.owl#Italy"/>
+    </DifferentIndividuals>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/pizza.owl#hasBase"/>
+        <ObjectProperty IRI="/pizza.owl#hasIngredient"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+        <ObjectProperty IRI="/pizza.owl#hasIngredient"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/pizza.owl#isBaseOf"/>
+        <ObjectProperty IRI="/pizza.owl#isIngredientOf"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/pizza.owl#isToppingOf"/>
+        <ObjectProperty IRI="/pizza.owl#isIngredientOf"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="/pizza.owl#hasBase"/>
+        <ObjectProperty IRI="/pizza.owl#isBaseOf"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="/pizza.owl#hasIngredient"/>
+        <ObjectProperty IRI="/pizza.owl#isIngredientOf"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+        <ObjectProperty IRI="/pizza.owl#isToppingOf"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#hasBase"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#isBaseOf"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#isToppingOf"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#hasBase"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#isBaseOf"/>
+    </InverseFunctionalObjectProperty>
+    <TransitiveObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#hasIngredient"/>
+    </TransitiveObjectProperty>
+    <TransitiveObjectProperty>
+        <ObjectProperty IRI="/pizza.owl#isIngredientOf"/>
+    </TransitiveObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/pizza.owl#hasBase"/>
+        <Class IRI="/pizza.owl#Pizza"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/pizza.owl#hasIngredient"/>
+        <Class IRI="/pizza.owl#Food"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+        <Class IRI="/pizza.owl#Pizza"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/pizza.owl#hasBase"/>
+        <Class IRI="/pizza.owl#PizzaBase"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/pizza.owl#hasIngredient"/>
+        <Class IRI="/pizza.owl#Food"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/pizza.owl#hasSpiciness"/>
+        <Class IRI="/pizza.owl#Spiciness"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/pizza.owl#hasTopping"/>
+        <Class IRI="/pizza.owl#PizzaTopping"/>
+    </ObjectPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#American</IRI>
+        <Literal xml:lang="en">American</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#American</IRI>
+        <Literal xml:lang="pt">Americana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#American</IRI>
+        <Literal xml:lang="en">American</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#American</IRI>
+        <Literal xml:lang="en">American Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#American</IRI>
+        <Literal xml:lang="en">American</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#AmericanHot</IRI>
+        <Literal xml:lang="en">AmericanHot</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#AmericanHot</IRI>
+        <Literal xml:lang="pt">AmericanaPicante</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#AmericanHot</IRI>
+        <Literal xml:lang="en">American Hot</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#AmericanHot</IRI>
+        <Literal xml:lang="en">American Hot Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#AmericanHot</IRI>
+        <Literal xml:lang="en">American Hot</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#AnchoviesTopping</IRI>
+        <Literal xml:lang="en">AnchoviesTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#AnchoviesTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeAnchovies</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#AnchoviesTopping</IRI>
+        <Literal xml:lang="en">Anchovies</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ArtichokeTopping</IRI>
+        <Literal xml:lang="en">ArtichokeTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ArtichokeTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeArtichoke</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#ArtichokeTopping</IRI>
+        <Literal xml:lang="en">Artichoke</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#AsparagusTopping</IRI>
+        <Literal xml:lang="en">AsparagusTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#AsparagusTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeAspargos</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#AsparagusTopping</IRI>
+        <Literal xml:lang="en">Asparagus</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Cajun</IRI>
+        <Literal xml:lang="en">Cajun</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Cajun</IRI>
+        <Literal xml:lang="pt">Cajun</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Cajun</IRI>
+        <Literal xml:lang="en">Cajun</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Cajun</IRI>
+        <Literal xml:lang="en">Cajun Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Cajun</IRI>
+        <Literal xml:lang="en">Cajun</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CajunSpiceTopping</IRI>
+        <Literal xml:lang="en">CajunSpiceTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CajunSpiceTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCajun</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#CajunSpiceTopping</IRI>
+        <Literal xml:lang="en">Cajun Spice</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CaperTopping</IRI>
+        <Literal xml:lang="en">CaperTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CaperTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCaper</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#CaperTopping</IRI>
+        <Literal xml:lang="en">Caper</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Capricciosa</IRI>
+        <Literal xml:lang="en">Capricciosa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Capricciosa</IRI>
+        <Literal xml:lang="pt">Capricciosa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Capricciosa</IRI>
+        <Literal xml:lang="en">Capricciosa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Capricciosa</IRI>
+        <Literal xml:lang="en">Capricciosa Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Capricciosa</IRI>
+        <Literal xml:lang="en">Capricciosa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Caprina</IRI>
+        <Literal xml:lang="en">Caprina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Caprina</IRI>
+        <Literal xml:lang="pt">Caprina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Caprina</IRI>
+        <Literal xml:lang="en">Caprina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Caprina</IRI>
+        <Literal xml:lang="en">Caprina Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Caprina</IRI>
+        <Literal xml:lang="en">Caprina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CheeseTopping</IRI>
+        <Literal xml:lang="en">CheeseTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CheeseTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeQueijo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#CheeseTopping</IRI>
+        <Literal xml:lang="en">Cheese</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CheeseyPizza</IRI>
+        <Literal xml:lang="en">CheesyPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CheeseyPizza</IRI>
+        <Literal xml:lang="pt">PizzaComQueijo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>/pizza.owl#CheeseyPizza</IRI>
+        <Literal xml:lang="en">Any pizza that has at least 1 cheese topping.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#CheeseyPizza</IRI>
+        <Literal xml:lang="en">Cheesy Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#CheeseyVegetableTopping</IRI>
+        <Literal xml:lang="en">This class will be unsatisfiable. This is because we have given it 2 disjoint parents, which means it could never have any instances (as nothing can be both a CheeseTopping and a VegetableTopping). NB Called ProbeInconsistentTopping in the ProtegeOWL Tutorial.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CheeseyVegetableTopping</IRI>
+        <Literal xml:lang="en">CheesyVegetableTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#CheeseyVegetableTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeQueijoComVegetais</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ChickenTopping</IRI>
+        <Literal xml:lang="en">ChickenTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ChickenTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeFrango</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#ChickenTopping</IRI>
+        <Literal xml:lang="en">Chicken</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#Country</IRI>
+        <Literal xml:lang="en">A class that is equivalent to the set of individuals that are described in the enumeration - ie Countries can only be either America, England, France, Germany or Italy and nothing else. Note that these individuals have been asserted to be allDifferent from each other.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Country</IRI>
+        <Literal xml:lang="en">Country</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Country</IRI>
+        <Literal xml:lang="pt">Pais</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Country</IRI>
+        <Literal xml:lang="en">Country</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#DeepPanBase</IRI>
+        <Literal xml:lang="pt">BaseEspessa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#DeepPanBase</IRI>
+        <Literal xml:lang="en">DeepPanBase</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#DeepPanBase</IRI>
+        <Literal xml:lang="en">Deep Pan Base</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#DomainConcept</IRI>
+        <Literal xml:lang="en">DomainThing</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#DomainConcept</IRI>
+        <Literal xml:lang="en">Domain Thing</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Fiorentina</IRI>
+        <Literal xml:lang="en">Fiorentina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Fiorentina</IRI>
+        <Literal xml:lang="pt">Fiorentina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Fiorentina</IRI>
+        <Literal xml:lang="en">Fiorentina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Fiorentina</IRI>
+        <Literal xml:lang="en">Fiorentina Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Fiorentina</IRI>
+        <Literal xml:lang="en">Fiorentina</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FishTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDePeixe</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FishTopping</IRI>
+        <Literal xml:lang="en">SeafoodTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#FishTopping</IRI>
+        <Literal xml:lang="en">Seafood</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Food</IRI>
+        <Literal xml:lang="en">Food</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Food</IRI>
+        <Literal xml:lang="en">Food</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FourCheesesTopping</IRI>
+        <Literal xml:lang="pt">CoberturaQuatroQueijos</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FourCheesesTopping</IRI>
+        <Literal xml:lang="en">FourCheesesTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#FourCheesesTopping</IRI>
+        <Literal xml:lang="en">Four Cheeses</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FourSeasons</IRI>
+        <Literal xml:lang="en">FourSeasons</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FourSeasons</IRI>
+        <Literal xml:lang="pt">QuatroQueijos</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#FourSeasons</IRI>
+        <Literal xml:lang="en">Four Seasons</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#FourSeasons</IRI>
+        <Literal xml:lang="en">Four Seasons Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#FourSeasons</IRI>
+        <Literal xml:lang="en">Four Seasons</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FruitTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeFrutas</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FruitTopping</IRI>
+        <Literal xml:lang="en">FruitTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#FruitTopping</IRI>
+        <Literal xml:lang="en">Fruit</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FruttiDiMare</IRI>
+        <Literal xml:lang="pt">FrutosDoMar</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#FruttiDiMare</IRI>
+        <Literal xml:lang="en">FruttiDiMare</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#FruttiDiMare</IRI>
+        <Literal xml:lang="en">Frutti Di Mare</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#FruttiDiMare</IRI>
+        <Literal xml:lang="en">Frutti Di Mare Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#FruttiDiMare</IRI>
+        <Literal xml:lang="en">Frutti Di Mare</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#GarlicTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeAlho</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#GarlicTopping</IRI>
+        <Literal xml:lang="en">GarlicTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#GarlicTopping</IRI>
+        <Literal xml:lang="en">Garlic</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Giardiniera</IRI>
+        <Literal xml:lang="en">Giardiniera</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Giardiniera</IRI>
+        <Literal xml:lang="pt">Giardiniera</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Giardiniera</IRI>
+        <Literal xml:lang="en">Giardiniera</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Giardiniera</IRI>
+        <Literal xml:lang="en">Giardiniera Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Giardiniera</IRI>
+        <Literal xml:lang="en">Giardiniera</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#GoatsCheeseTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeQueijoDeCabra</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#GoatsCheeseTopping</IRI>
+        <Literal xml:lang="en">GoatsCheeseTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#GoatsCheeseTopping</IRI>
+        <Literal xml:lang="en">Goats Cheese</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#GorgonzolaTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeGorgonzola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#GorgonzolaTopping</IRI>
+        <Literal xml:lang="en">GorgonzolaTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#GorgonzolaTopping</IRI>
+        <Literal xml:lang="en">Gorgonzola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#GreenPepperTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDePimentaoVerde</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#GreenPepperTopping</IRI>
+        <Literal xml:lang="en">GreenPepperTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#GreenPepperTopping</IRI>
+        <Literal xml:lang="en">Green Pepper</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#HamTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDePresunto</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#HamTopping</IRI>
+        <Literal xml:lang="en">HamTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#HamTopping</IRI>
+        <Literal xml:lang="en">Ham</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#HerbSpiceTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeErvas</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#HerbSpiceTopping</IRI>
+        <Literal xml:lang="en">HerbSpiceTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#HerbSpiceTopping</IRI>
+        <Literal xml:lang="en">Herb Spice</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Hot</IRI>
+        <Literal xml:lang="en">Hot</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Hot</IRI>
+        <Literal xml:lang="pt">Picante</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Hot</IRI>
+        <Literal xml:lang="en">Hot</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#HotGreenPepperTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDePimentaoVerdePicante</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#HotGreenPepperTopping</IRI>
+        <Literal xml:lang="en">HotGreenPepperTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#HotGreenPepperTopping</IRI>
+        <Literal xml:lang="en">Hot Green Pepper</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#HotSpicedBeefTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeBifePicante</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#HotSpicedBeefTopping</IRI>
+        <Literal xml:lang="en">HotSpicedBeefTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#HotSpicedBeefTopping</IRI>
+        <Literal xml:lang="en">Hot Spiced Beef</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#IceCream</IRI>
+        <Literal xml:lang="en">A class to demonstrate mistakes made with setting a property domain. The property hasTopping has a domain of Pizza. This means that the reasoner can infer that all individuals using the hasTopping property must be of type Pizza. Because of the restriction on this class, all members of IceCream must use the hasTopping property, and therefore must also be members of Pizza. However, Pizza and IceCream are disjoint, so this causes an inconsistency. If they were not disjoint, IceCream would be inferred to be a subclass of Pizza.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#IceCream</IRI>
+        <Literal xml:lang="en">IceCream</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#IceCream</IRI>
+        <Literal xml:lang="pt">Sorvete</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#IceCream</IRI>
+        <Literal xml:lang="en">Ice Cream</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#InterestingPizza</IRI>
+        <Literal xml:lang="en">InterestingPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#InterestingPizza</IRI>
+        <Literal xml:lang="pt">PizzaInteressante</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>/pizza.owl#InterestingPizza</IRI>
+        <Literal xml:lang="en">Any pizza that has at least 3 toppings. Note that this is a cardinality constraint on the hasTopping property and NOT a qualified cardinality constraint (QCR). A QCR would specify from which class the members in this relationship must be. eg has at least 3 toppings from PizzaTopping. This is currently not supported in OWL.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#InterestingPizza</IRI>
+        <Literal xml:lang="en">Interesting Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#JalapenoPepperTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeJalapeno</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#JalapenoPepperTopping</IRI>
+        <Literal xml:lang="en">JalapenoPepperTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#JalapenoPepperTopping</IRI>
+        <Literal xml:lang="en">Jalapeno Pepper</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#LaReine</IRI>
+        <Literal xml:lang="en">LaReine</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#LaReine</IRI>
+        <Literal xml:lang="pt">LaReine</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#LaReine</IRI>
+        <Literal xml:lang="en">La Reine</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#LaReine</IRI>
+        <Literal xml:lang="en">La Reine Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#LaReine</IRI>
+        <Literal xml:lang="en">La Reine</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#LeekTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeLeek</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#LeekTopping</IRI>
+        <Literal xml:lang="en">LeekTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#LeekTopping</IRI>
+        <Literal xml:lang="en">Leek</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Margherita</IRI>
+        <Literal xml:lang="en">Margherita</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Margherita</IRI>
+        <Literal xml:lang="pt">Margherita</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Margherita</IRI>
+        <Literal xml:lang="en">Margherita</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Margherita</IRI>
+        <Literal xml:lang="en">Margherita Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Margherita</IRI>
+        <Literal xml:lang="en">Margherita</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MeatTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCarne</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MeatTopping</IRI>
+        <Literal xml:lang="en">MeatTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#MeatTopping</IRI>
+        <Literal xml:lang="en">Meat</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MeatyPizza</IRI>
+        <Literal xml:lang="en">MeatyPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MeatyPizza</IRI>
+        <Literal xml:lang="pt">PizzaDeCarne</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>/pizza.owl#MeatyPizza</IRI>
+        <Literal xml:lang="en">Any pizza that has at least one meat topping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#MeatyPizza</IRI>
+        <Literal xml:lang="en">Meaty Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Medium</IRI>
+        <Literal xml:lang="pt">Media</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Medium</IRI>
+        <Literal xml:lang="en">Medium</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Medium</IRI>
+        <Literal xml:lang="en">Medium</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Mild</IRI>
+        <Literal xml:lang="en">Mild</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Mild</IRI>
+        <Literal xml:lang="pt">NaoPicante</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Mild</IRI>
+        <Literal xml:lang="en">Mild</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MixedSeafoodTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeFrutosDoMarMistos</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MixedSeafoodTopping</IRI>
+        <Literal xml:lang="en">MixedSeafoodTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#MixedSeafoodTopping</IRI>
+        <Literal xml:lang="en">Mixed Seafood</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MozzarellaTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeMozzarella</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MozzarellaTopping</IRI>
+        <Literal xml:lang="en">MozzarellaTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#MozzarellaTopping</IRI>
+        <Literal xml:lang="en">Mozzarella</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Mushroom</IRI>
+        <Literal xml:lang="pt">Cogumelo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Mushroom</IRI>
+        <Literal xml:lang="en">Mushroom</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Mushroom</IRI>
+        <Literal xml:lang="en">Mushroom</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Mushroom</IRI>
+        <Literal xml:lang="en">Mushroom Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Mushroom</IRI>
+        <Literal xml:lang="en">Mushroom</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MushroomTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCogumelo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#MushroomTopping</IRI>
+        <Literal xml:lang="en">MushroomTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#MushroomTopping</IRI>
+        <Literal xml:lang="en">Mushroom</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#NamedPizza</IRI>
+        <Literal xml:lang="en">A pizza that can be found on a pizza menu</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#NamedPizza</IRI>
+        <Literal xml:lang="pt">PizzaComUmNome</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Napoletana</IRI>
+        <Literal xml:lang="en">Napoletana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Napoletana</IRI>
+        <Literal xml:lang="pt">Napoletana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Napoletana</IRI>
+        <Literal xml:lang="en">Napoletana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Napoletana</IRI>
+        <Literal xml:lang="en">Napoletana Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Napoletana</IRI>
+        <Literal xml:lang="en">Napoletana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#NonVegetarianPizza</IRI>
+        <Literal xml:lang="en">NonVegetarianPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#NonVegetarianPizza</IRI>
+        <Literal xml:lang="pt">PizzaNaoVegetariana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>/pizza.owl#NonVegetarianPizza</IRI>
+        <Literal xml:lang="en">Any Pizza that is not a VegetarianPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#NonVegetarianPizza</IRI>
+        <Literal xml:lang="en">Non Vegetarian Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#NutTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCastanha</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#NutTopping</IRI>
+        <Literal xml:lang="en">NutTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#NutTopping</IRI>
+        <Literal xml:lang="en">Nut</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#OliveTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeAzeitona</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#OliveTopping</IRI>
+        <Literal xml:lang="en">OliveTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#OliveTopping</IRI>
+        <Literal xml:lang="en">Olive</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#OnionTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCebola</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#OnionTopping</IRI>
+        <Literal xml:lang="en">OnionTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#OnionTopping</IRI>
+        <Literal xml:lang="en">Onion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ParmaHamTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDePrezuntoParma</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ParmaHamTopping</IRI>
+        <Literal xml:lang="en">ParmaHamTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#ParmaHamTopping</IRI>
+        <Literal xml:lang="en">Parma Ham</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Parmense</IRI>
+        <Literal xml:lang="en">Parmense</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Parmense</IRI>
+        <Literal xml:lang="pt">Parmense</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Parmense</IRI>
+        <Literal xml:lang="en">Parmese</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Parmense</IRI>
+        <Literal xml:lang="en">Parmese Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Parmense</IRI>
+        <Literal xml:lang="en">Parmense</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ParmesanTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeParmesao</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ParmesanTopping</IRI>
+        <Literal xml:lang="en">ParmezanTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#ParmesanTopping</IRI>
+        <Literal xml:lang="en">Parmezan</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PeperonataTopping</IRI>
+        <Literal xml:lang="pt">CoberturaPeperonata</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PeperonataTopping</IRI>
+        <Literal xml:lang="en">PeperonataTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PeperonataTopping</IRI>
+        <Literal xml:lang="en">Peperonata</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PeperoniSausageTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCalabreza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PeperoniSausageTopping</IRI>
+        <Literal xml:lang="en">PeperoniSausageTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PeperoniSausageTopping</IRI>
+        <Literal xml:lang="en">Peperoni Sausage</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PepperTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDePimentao</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PepperTopping</IRI>
+        <Literal xml:lang="en">PepperTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PepperTopping</IRI>
+        <Literal xml:lang="en">Pepper</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PetitPoisTopping</IRI>
+        <Literal xml:lang="pt">CoberturaPetitPois</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PetitPoisTopping</IRI>
+        <Literal xml:lang="en">PetitPoisTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PetitPoisTopping</IRI>
+        <Literal xml:lang="en">Petit Pois</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PineKernels</IRI>
+        <Literal xml:lang="pt">CoberturaPineKernels</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PineKernels</IRI>
+        <Literal xml:lang="en">PineKernelTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PineKernels</IRI>
+        <Literal xml:lang="en">Pine Kernel</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Pizza</IRI>
+        <Literal xml:lang="en">Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>/pizza.owl#Pizza</IRI>
+        <IRI>https://en.wikipedia.org/wiki/Pizza</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Pizza</IRI>
+        <Literal xml:lang="en">Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PizzaBase</IRI>
+        <Literal xml:lang="pt">BaseDaPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PizzaBase</IRI>
+        <Literal xml:lang="en">PizzaBase</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PizzaBase</IRI>
+        <Literal xml:lang="en">Pizza Base</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PizzaTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDaPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PizzaTopping</IRI>
+        <Literal xml:lang="en">PizzaTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PizzaTopping</IRI>
+        <Literal xml:lang="en">Pizza Topping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PolloAdAstra</IRI>
+        <Literal xml:lang="en">PolloAdAstra</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PolloAdAstra</IRI>
+        <Literal xml:lang="pt">PolloAdAstra</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#PolloAdAstra</IRI>
+        <Literal xml:lang="en">Pollo Ad Astra</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#PolloAdAstra</IRI>
+        <Literal xml:lang="en">Pollo Ad Astra Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PolloAdAstra</IRI>
+        <Literal xml:lang="en">Pollo Ad Astra</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PrawnsTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCamarao</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PrawnsTopping</IRI>
+        <Literal xml:lang="en">PrawnsTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PrawnsTopping</IRI>
+        <Literal xml:lang="en">Prawns</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PrinceCarlo</IRI>
+        <Literal xml:lang="pt">CoberturaPrinceCarlo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#PrinceCarlo</IRI>
+        <Literal xml:lang="en">PrinceCarlo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#PrinceCarlo</IRI>
+        <Literal xml:lang="en">Prince Carlo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#PrinceCarlo</IRI>
+        <Literal xml:lang="en">Prince Carlo Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#PrinceCarlo</IRI>
+        <Literal xml:lang="en">Prince Carlo</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#QuattroFormaggi</IRI>
+        <Literal xml:lang="pt">QuatroQueijos</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#QuattroFormaggi</IRI>
+        <Literal xml:lang="en">QuattroFormaggi</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#QuattroFormaggi</IRI>
+        <Literal xml:lang="en">Quattro Formaggi</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#QuattroFormaggi</IRI>
+        <Literal xml:lang="en">Quattro Formaggi Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#QuattroFormaggi</IRI>
+        <Literal xml:lang="en">Quattro Formaggi</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#RealItalianPizza</IRI>
+        <Literal xml:lang="pt">PizzaItalianaReal</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#RealItalianPizza</IRI>
+        <Literal xml:lang="en">RealItalianPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>/pizza.owl#RealItalianPizza</IRI>
+        <Literal xml:lang="en">Any Pizza that has the country of origin, Italy.  RealItalianPizzas must also only have ThinAndCrispy bases.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#RealItalianPizza</IRI>
+        <Literal xml:lang="en">Real Italian Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#RedOnionTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeCebolaVermelha</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#RedOnionTopping</IRI>
+        <Literal xml:lang="en">RedOnionTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#RedOnionTopping</IRI>
+        <Literal xml:lang="en">Red Onion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#RocketTopping</IRI>
+        <Literal xml:lang="pt">CoberturaRocket</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#RocketTopping</IRI>
+        <Literal xml:lang="en">RocketTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#RocketTopping</IRI>
+        <Literal xml:lang="en">Rocket</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Rosa</IRI>
+        <Literal xml:lang="en">Rosa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Rosa</IRI>
+        <Literal xml:lang="pt">Rosa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Rosa</IRI>
+        <Literal xml:lang="en">Rosa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Rosa</IRI>
+        <Literal xml:lang="en">Rosa Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Rosa</IRI>
+        <Literal xml:lang="en">Rosa</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#RosemaryTopping</IRI>
+        <Literal xml:lang="pt">CoberturaRosemary</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#RosemaryTopping</IRI>
+        <Literal xml:lang="en">RosemaryTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#RosemaryTopping</IRI>
+        <Literal xml:lang="en">Rosemary</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SauceTopping</IRI>
+        <Literal xml:lang="pt">CoberturaEmMolho</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SauceTopping</IRI>
+        <Literal xml:lang="en">SauceTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SauceTopping</IRI>
+        <Literal xml:lang="en">Sauce</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Siciliana</IRI>
+        <Literal xml:lang="en">Siciliana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Siciliana</IRI>
+        <Literal xml:lang="pt">Siciliana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Siciliana</IRI>
+        <Literal xml:lang="en">Siciliana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Siciliana</IRI>
+        <Literal xml:lang="en">Siciliana Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Siciliana</IRI>
+        <Literal xml:lang="en">Siciliana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SlicedTomatoTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeTomateFatiado</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SlicedTomatoTopping</IRI>
+        <Literal xml:lang="en">SlicedTomatoTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SlicedTomatoTopping</IRI>
+        <Literal xml:lang="en">Sliced Tomato</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SloppyGiuseppe</IRI>
+        <Literal xml:lang="en">SloppyGiuseppe</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SloppyGiuseppe</IRI>
+        <Literal xml:lang="pt">SloppyGiuseppe</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#SloppyGiuseppe</IRI>
+        <Literal xml:lang="en">Sloppy Giuseppe</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#SloppyGiuseppe</IRI>
+        <Literal xml:lang="en">Sloppy Giuseppe Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SloppyGiuseppe</IRI>
+        <Literal xml:lang="en">Sloppy Giuseppe</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Soho</IRI>
+        <Literal xml:lang="en">Soho</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Soho</IRI>
+        <Literal xml:lang="pt">Soho</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Soho</IRI>
+        <Literal xml:lang="en">Soho</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Soho</IRI>
+        <Literal xml:lang="en">Soho Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Soho</IRI>
+        <Literal xml:lang="en">Soho</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#Spiciness</IRI>
+        <Literal xml:lang="en">A ValuePartition that describes only values from Hot, Medium or Mild. NB Subclasses can themselves be divided up into further partitions.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Spiciness</IRI>
+        <Literal xml:lang="en">Spiciness</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Spiciness</IRI>
+        <Literal xml:lang="pt">Tempero</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Spiciness</IRI>
+        <Literal xml:lang="en">Spiciness</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SpicyPizza</IRI>
+        <Literal xml:lang="pt">PizzaTemperada</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SpicyPizza</IRI>
+        <Literal xml:lang="en">SpicyPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>/pizza.owl#SpicyPizza</IRI>
+        <Literal xml:lang="en">Any pizza that has a spicy topping is a SpicyPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SpicyPizza</IRI>
+        <Literal xml:lang="en">Spicy Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#SpicyPizzaEquivalent</IRI>
+        <Literal xml:lang="en">An alternative definition for the SpicyPizza which does away with needing a definition of SpicyTopping and uses a slightly more complicated restriction: Pizzas that have at least one topping that is both a PizzaTopping and has spiciness hot are members of this class.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SpicyPizzaEquivalent</IRI>
+        <Literal xml:lang="pt">PizzaTemperadaEquivalente</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SpicyPizzaEquivalent</IRI>
+        <Literal xml:lang="en">SpicyPizzaEquivalent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SpicyPizzaEquivalent</IRI>
+        <Literal xml:lang="en">Spicy Pizza Equivalent</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SpicyTopping</IRI>
+        <Literal xml:lang="pt">CoberturaTemperada</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SpicyTopping</IRI>
+        <Literal xml:lang="en">SpicyTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>/pizza.owl#SpicyTopping</IRI>
+        <Literal xml:lang="en">Any pizza topping that has spiciness Hot</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SpicyTopping</IRI>
+        <Literal xml:lang="en">Spicy</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SpinachTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeEspinafre</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SpinachTopping</IRI>
+        <Literal xml:lang="en">SpinachTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SpinachTopping</IRI>
+        <Literal xml:lang="en">Spinach</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SultanaTopping</IRI>
+        <Literal xml:lang="pt">CoberturaSultana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SultanaTopping</IRI>
+        <Literal xml:lang="en">SultanaTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SultanaTopping</IRI>
+        <Literal xml:lang="en">Sultana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SundriedTomatoTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeTomateRessecadoAoSol</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SundriedTomatoTopping</IRI>
+        <Literal xml:lang="en">SundriedTomatoTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SundriedTomatoTopping</IRI>
+        <Literal xml:lang="en">Sundried Tomato</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SweetPepperTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDePimentaoDoce</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#SweetPepperTopping</IRI>
+        <Literal xml:lang="en">SweetPepperTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#SweetPepperTopping</IRI>
+        <Literal xml:lang="en">Sweet Pepper</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ThinAndCrispyBase</IRI>
+        <Literal xml:lang="pt">BaseFinaEQuebradica</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ThinAndCrispyBase</IRI>
+        <Literal xml:lang="en">ThinAndCrispyBase</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#ThinAndCrispyBase</IRI>
+        <Literal xml:lang="en">Thin And Crispy Base</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ThinAndCrispyPizza</IRI>
+        <Literal xml:lang="en">ThinAndCrispyPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#ThinAndCrispyPizza</IRI>
+        <Literal xml:lang="en">Thin And Crispy Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#TobascoPepperSauce</IRI>
+        <Literal xml:lang="pt">MolhoTobascoPepper</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#TobascoPepperSauce</IRI>
+        <Literal xml:lang="en">TobascoPepperSauceTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#TobascoPepperSauce</IRI>
+        <Literal xml:lang="en">Tobasco Pepper Sauce</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#TomatoTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeTomate</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#TomatoTopping</IRI>
+        <Literal xml:lang="en">TomatoTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#TomatoTopping</IRI>
+        <Literal xml:lang="en">Tomato</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#UnclosedPizza</IRI>
+        <Literal>An unclosed Pizza cannot be inferred to be either a VegetarianPizza or a NonVegetarianPizza, because it might have other toppings.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#UnclosedPizza</IRI>
+        <Literal xml:lang="pt">PizzaAberta</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#UnclosedPizza</IRI>
+        <Literal xml:lang="en">UnclosedPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#UnclosedPizza</IRI>
+        <Literal xml:lang="en">Unclosed Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#ValuePartition</IRI>
+        <Literal>A ValuePartition is a pattern that describes a restricted set of classes from which a property can be associated. The parent class is used in restrictions, and the covering axiom means that only members of the subclasses may be used as values. The possible subclasses cannot be extended without updating the ValuePartition class.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ValuePartition</IRI>
+        <Literal xml:lang="pt">ValorDaParticao</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#ValuePartition</IRI>
+        <Literal xml:lang="en">ValuePartition</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#ValuePartition</IRI>
+        <Literal xml:lang="en">Value Partition</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetableTopping</IRI>
+        <Literal xml:lang="pt">CoberturaDeVegetais</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetableTopping</IRI>
+        <Literal xml:lang="en">VegetableTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#VegetableTopping</IRI>
+        <Literal xml:lang="en">Vegetable Topping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetarianPizza</IRI>
+        <Literal xml:lang="pt">PizzaVegetariana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetarianPizza</IRI>
+        <Literal xml:lang="en">VegetarianPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>/pizza.owl#VegetarianPizza</IRI>
+        <Literal xml:lang="en">Any pizza that does not have fish topping and does not have meat topping is a VegetarianPizza. Note that instances of this class do not need to have any toppings at all.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#VegetarianPizza</IRI>
+        <Literal xml:lang="en">Vegetarian Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#VegetarianPizzaEquivalent1</IRI>
+        <Literal xml:lang="en">Any pizza that only has vegetarian toppings or no toppings is a VegetarianPizzaEquiv1. Should be inferred to be equivalent to VegetarianPizzaEquiv2.  Not equivalent to VegetarianPizza because PizzaTopping is not covering</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetarianPizzaEquivalent1</IRI>
+        <Literal xml:lang="pt">PizzaVegetarianaEquivalente1</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetarianPizzaEquivalent1</IRI>
+        <Literal xml:lang="en">VegetarianPizza1</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#VegetarianPizzaEquivalent1</IRI>
+        <Literal xml:lang="en">Vegetarian Pizza1</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#VegetarianPizzaEquivalent2</IRI>
+        <Literal xml:lang="en">An alternative to VegetarianPizzaEquiv1 that does not require a definition of VegetarianTopping. Perhaps more difficult to maintain. Not equivalent to VegetarianPizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetarianPizzaEquivalent2</IRI>
+        <Literal xml:lang="pt">PizzaVegetarianaEquivalente2</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetarianPizzaEquivalent2</IRI>
+        <Literal xml:lang="en">VegetarianPizza2</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#VegetarianPizzaEquivalent2</IRI>
+        <Literal xml:lang="en">Vegetarian Pizza2</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#VegetarianTopping</IRI>
+        <Literal xml:lang="en">An example of a covering axiom. VegetarianTopping is equivalent to the union of all toppings in the given axiom. VegetarianToppings can only be Cheese or Vegetable or....etc.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetarianTopping</IRI>
+        <Literal xml:lang="pt">CoberturaVegetariana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#VegetarianTopping</IRI>
+        <Literal xml:lang="en">VegetarianTopping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#VegetarianTopping</IRI>
+        <Literal xml:lang="en">Vegetarian Topping</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Veneziana</IRI>
+        <Literal xml:lang="en">Veneziana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>/pizza.owl#Veneziana</IRI>
+        <Literal xml:lang="pt">Veneziana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Veneziana</IRI>
+        <Literal xml:lang="en">Veneziana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:altLabel"/>
+        <IRI>/pizza.owl#Veneziana</IRI>
+        <Literal xml:lang="en">Veneziana Pizza</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>/pizza.owl#Veneziana</IRI>
+        <Literal xml:lang="en">Veneziana</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#hasIngredient</IRI>
+        <Literal xml:lang="en">NB Transitive - the ingredients of ingredients are ingredients of the whole</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#hasSpiciness</IRI>
+        <Literal xml:lang="en">A property created to be used with the ValuePartition - Spiciness.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#hasTopping</IRI>
+        <Literal xml:lang="en">Note that hasTopping is inverse functional because isToppingOf is functional</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#isIngredientOf</IRI>
+        <Literal xml:lang="en">The inverse property tree to hasIngredient - all subproperties and attributes of the properties should reflect those under hasIngredient.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>/pizza.owl#isToppingOf</IRI>
+        <Literal xml:lang="en">Any given instance of topping should only be added to a single pizza (no cheap half-measures on our pizzas)</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
