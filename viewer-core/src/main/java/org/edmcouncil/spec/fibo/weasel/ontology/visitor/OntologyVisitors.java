@@ -80,7 +80,7 @@ public class OntologyVisitors {
   }
 
   public final OWLObjectVisitorEx<Map<GraphNode, Set<ExpressionReturnedClass>>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type, Boolean not) {
-    return superClassAxiom(vg, node, type, not);
+    return superClassAxiom(vg, node, type, false, false);
   }
 
   public final OWLObjectVisitorEx<Map<GraphNode, Set<ExpressionReturnedClass>>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type, Boolean equivalentTo, Boolean not) {
