@@ -160,7 +160,7 @@ public class RestrictionGraphDataHandler {
         if (qrestrictions != null && !qrestrictions.isEmpty()) {
           for (Map.Entry<GraphNode, Set<ExpressionReturnedClass>> entry : qrestrictions.entrySet()) {
             for (ExpressionReturnedClass classExpression : entry.getValue()) {
-              handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), type, false, false);
+              handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), type, false, classExpression.getNot());
             }
           }
         }
@@ -191,7 +191,7 @@ public class RestrictionGraphDataHandler {
     if (expressionsMap != null && !expressionsMap.isEmpty()) {
       expressionsMap.entrySet().forEach((entry) -> {
         for (ExpressionReturnedClass classExpression : entry.getValue()) {
-          handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), type, eqivalentTo, not);
+          handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), type, eqivalentTo, classExpression.getNot());
         }
 
       });
