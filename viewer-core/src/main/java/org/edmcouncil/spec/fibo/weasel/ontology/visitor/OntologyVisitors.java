@@ -104,7 +104,6 @@ public class OntologyVisitors {
             GraphNode endNode = new GraphNode(vg.nextId());
             endNode.setIri(iri);
             endNode.setType(type);
-            // LOG.debug("lejbelek: {}", getPrepareLabel(labelExtractor, iri, Boolean.TRUE).toString());
             String label = getPrepareLabel(labelExtractor, iri, not);
             endNode.setLabel(label);
             endNode.setType(type);
