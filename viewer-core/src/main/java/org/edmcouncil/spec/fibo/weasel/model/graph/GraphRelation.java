@@ -13,6 +13,7 @@ public class GraphRelation extends GraphElement {
   private GraphNodeType endNodeType;
   private Boolean equivalentTo = false;
 
+
   public GraphRelation(int id) {
     super(id);
   }
@@ -56,10 +57,11 @@ public class GraphRelation extends GraphElement {
   public void setEquivalentTo(Boolean equivalentTo) {
     this.equivalentTo = equivalentTo;
   }
-
+  
   @Override
   public String toString() {
     return "{" + "start=" + start + ", end=" + end + " " + super.toString();
   }
+
 
 }

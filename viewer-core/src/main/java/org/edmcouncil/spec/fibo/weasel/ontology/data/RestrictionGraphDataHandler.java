@@ -9,6 +9,7 @@ import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.OntologyGraph;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.fibo.weasel.ontology.visitor.ExpressionReturnedClass;
 import org.edmcouncil.spec.fibo.weasel.ontology.visitor.OntologyVisitors;
 import org.edmcouncil.spec.fibo.weasel.utils.OwlUtils;
 import org.semanticweb.owlapi.model.AxiomType;
@@ -23,6 +24,7 @@ import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectComplementOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -31,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import uk.ac.manchester.cs.owl.owlapi.OWLClassExpressionImpl;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -151,13 +154,13 @@ public class RestrictionGraphDataHandler {
       if (isRestriction && axiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
         OWLSubClassOfAxiom axiomEl = axiom.accept(ontologyVisitors.getAxiomElement(elementIri));
 
-        Map<GraphNode, Set<OWLClassExpression>> qrestrictions = axiomEl.getSuperClass()
-            .accept(ontologyVisitors.superClassAxiom(vg, root, type));
+        Map<GraphNode, Set<ExpressionReturnedClass>> qrestrictions = axiomEl.getSuperClass()
+            .accept(ontologyVisitors.superClassAxiom(vg, root, type, Boolean.FALSE));
 
         if (qrestrictions != null && !qrestrictions.isEmpty()) {
-          for (Map.Entry<GraphNode, Set<OWLClassExpression>> entry : qrestrictions.entrySet()) {
-            for (OWLClassExpression classExpression : entry.getValue()) {
-              handleRecursivelyRestrictions(classExpression, vg, entry.getKey(), type, false);
+          for (Map.Entry<GraphNode, Set<ExpressionReturnedClass>> entry : qrestrictions.entrySet()) {
+            for (ExpressionReturnedClass classExpression : entry.getValue()) {
+              handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), type, false, classExpression.getNot());
             }
           }
         }
@@ -172,7 +175,8 @@ public class RestrictionGraphDataHandler {
       OntologyGraph vg,
       GraphNode root,
       GraphNodeType type,
-      Boolean eqivalentTo
+      Boolean eqivalentTo,
+      Boolean not
   ) {
 
     LOG.debug("[Expression] Process expression: {}", expression.toString());
@@ -181,13 +185,13 @@ public class RestrictionGraphDataHandler {
       return;
     }
 
-    Map<GraphNode, Set<OWLClassExpression>> expressionsMap = expression
-        .accept(ontologyVisitors.superClassAxiom(vg, root, type, eqivalentTo));
+    Map<GraphNode, Set<ExpressionReturnedClass>> expressionsMap = expression
+        .accept(ontologyVisitors.superClassAxiom(vg, root, type, eqivalentTo, not));
 
     if (expressionsMap != null && !expressionsMap.isEmpty()) {
       expressionsMap.entrySet().forEach((entry) -> {
-        for (OWLClassExpression classExpression : entry.getValue()) {
-          handleRecursivelyRestrictions(classExpression, vg, entry.getKey(), type, eqivalentTo);
+        for (ExpressionReturnedClass classExpression : entry.getValue()) {
+          handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), type, eqivalentTo, classExpression.getNot());
         }
 
       });
@@ -220,15 +224,15 @@ public class RestrictionGraphDataHandler {
 
       OWLEquivalentClassesAxiom eca = owlEquivalentClassesAxiom.getAxiomWithoutAnnotations();
       LOG.debug("eca: {}", eca.toString());
-      Map<GraphNode, Set<OWLClassExpression>> qrestrictions = eca
-          .accept(ontologyVisitors.superClassAxiom(vg, vg.getRoot(), GraphNodeType.INTERNAL, true));
+      Map<GraphNode, Set<ExpressionReturnedClass>> qrestrictions = eca
+          .accept(ontologyVisitors.superClassAxiom(vg, vg.getRoot(), GraphNodeType.INTERNAL, true, false));
 
       if (qrestrictions != null && !qrestrictions.isEmpty()) {
-        for (Map.Entry<GraphNode, Set<OWLClassExpression>> entry : qrestrictions.entrySet()) {
-          for (OWLClassExpression classExpression : entry.getValue()) {
+        for (Map.Entry<GraphNode, Set<ExpressionReturnedClass>> entry : qrestrictions.entrySet()) {
+          for (ExpressionReturnedClass classExpression : entry.getValue()) {
             LOG.debug("Class expression {} ", classExpression.toString());
 
-            handleRecursivelyRestrictions(classExpression, vg, entry.getKey(), GraphNodeType.INTERNAL, true);
+            handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), GraphNodeType.INTERNAL, true, false);
           }
         }
       }
