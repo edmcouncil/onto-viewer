@@ -54,7 +54,7 @@ function showAutocompletes(autocomplates) {
   //<a class="dropdown-item" href="#">Action</a>
   var count = 0;
   $.each(autocomplates, function (index, object) {
-  $inner += "<a id=\"ac_" + index + "\" class=\"dropdown-item\" onkeyup=\"autocompleteNavigation(event)\" href=\"search?query=" + object.iri.replace('#', "%23") + "\">" + object.label + "</a>";
+  $inner += "<a id=\"ac_" + index + "\" class=\"dropdown-item\" data-toggle=\"tooltip\" data-placement=\"left\" onkeyup=\"autocompleteNavigation(event)\" href=\"search?query=" + object.iri.replace('#', "%23") + "\" title=\"" + object.iri.replace('#', "%23") + "\">" + object.label + "</a>";
     count ++;
   });
 

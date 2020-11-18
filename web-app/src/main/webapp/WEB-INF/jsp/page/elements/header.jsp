@@ -3,7 +3,7 @@
     <div class="col-6">
       <div class="row">
         <h3 class="font-weight-bold">
-          <a href="${pageContext.request.contextPath}/index" class="custom-header-text">FIBO Viewer</a>
+          <a href="${pageContext.request.contextPath}/index" class="custom-header-text">ONTO Viewer</a>
         </h3>
         <h5 class="ml-3 mt-2"> <span class="text-white">${version}</span> </h5>
       </div>
@@ -31,4 +31,9 @@
       </div>
     </div>
   </div>
+  <script>
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
 </header>

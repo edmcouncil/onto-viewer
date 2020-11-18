@@ -165,6 +165,11 @@ public class OntologyVisitors {
         Map<GraphNode, Set<OWLClassExpression>> returnedVal = new HashMap<>();
         Set<OWLClassExpression> axiomConjunct = axiom.conjunctSet().collect(Collectors.toSet());
 
+        if (couldAndRelationBeShorter(axiomConjunct)) {
+          LOG.debug("And Relation Can Be Shorter!");
+          addValue(returnedVal, node, axiomConjunct.stream().findAny().orElse(null));
+          return returnedVal;
+        }
         GraphNode blankNode = new GraphNode(vg.nextId());
         blankNode.setType(type);
         blankNode.setIri(THING_IRI);
@@ -628,7 +633,7 @@ public class OntologyVisitors {
                 LOG.debug("OWL_CLASS expression: {}", classExpression);
                 OWLClassExpression expression = classExpression;
                 String object = null;
-        
+
                 object = extractStringObject(expression, object);
 
                 GraphNode endNode = new GraphNode(vg.nextId());
@@ -676,9 +681,9 @@ public class OntologyVisitors {
               case OBJECT_UNION_OF:
 
                 GraphNode unionRootNode = blankNode;
-               
+
                 unionRootNode.setLabel("or");
-                
+
                 LOG.debug("Object Union Of case before for: {}", axiom);
                 for (OWLEntity owlEntity : classExpression.signature().collect(Collectors.toList())) {
                   LOG.debug("OWLObjectUnionOf axiom with owl entity {}", owlEntity);
@@ -870,7 +875,27 @@ public class OntologyVisitors {
         }
         return returnedVal;
       }
+
     };
+  }
+
+  private boolean couldAndRelationBeShorter(Set<OWLClassExpression> expressions) {
+    boolean hasMin = Boolean.FALSE, hasMax = Boolean.FALSE;
+
+    if (expressions == null || expressions.size() != 2) {
+      return false;
+    }
+    for (OWLClassExpression expression : expressions) {
+      ClassExpressionType type = expression.getClassExpressionType();
+      LOG.debug("Check expression: {}, type: {}", expression, type);
+      if (type == ClassExpressionType.OBJECT_MAX_CARDINALITY || type == ClassExpressionType.DATA_MAX_CARDINALITY) {
+        hasMax = Boolean.TRUE;
+      }
+      if (type == ClassExpressionType.OBJECT_MIN_CARDINALITY || type == ClassExpressionType.DATA_MIN_CARDINALITY) {
+        hasMin = Boolean.TRUE;
+      }
+    }
+    return hasMin == Boolean.TRUE && hasMax == Boolean.TRUE;
   }
 
   public final OWLAxiomVisitorEx<GraphNode> individualCompleteGraphNode(OntologyGraph vg, GraphNode node, GraphNodeType type) {
