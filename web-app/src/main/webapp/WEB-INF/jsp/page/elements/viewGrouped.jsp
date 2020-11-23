@@ -74,7 +74,7 @@
           </c:when>
           <c:otherwise>
             <br />
-            <ul>
+            <ul class="styleCircle">
               <c:forEach var="details" items="${entry.value}">
                 <weasel:Render property="${details}" elementWrapper="li" searchPath="${context}"/>
               </c:forEach>

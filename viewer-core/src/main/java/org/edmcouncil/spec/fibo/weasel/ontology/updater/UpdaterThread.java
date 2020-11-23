@@ -162,6 +162,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       Map<String, OntologyResources> fiboOntologyResourcess = fiboDataHandler.loadAllOntologyResources(ontology);
 
       fiboDataHandler.setOntologyResources(fiboOntologyResourcess);
+      fiboDataHandler.clearAndSetNewModules(ontology);
 
       blocker.setBlockerStatus(Boolean.FALSE);
 
@@ -174,7 +175,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       }
 
     } catch (InterruptUpdate ex) {
-      LOG.error("{}", ex.getStackTrace());
+      LOG.error("{}",ex.getStackTrace());
       UpdaterOperation.setJobStatusToError(job, interruptMessage);
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();

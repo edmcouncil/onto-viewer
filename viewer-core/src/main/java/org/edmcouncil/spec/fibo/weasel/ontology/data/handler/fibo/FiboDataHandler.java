@@ -79,24 +79,7 @@ public class FiboDataHandler {
 
   private Map<String, OntologyResources> resources = null;
 
-  private Map<String, OntoFiboMaturityLevel> maturityLevels = new HashMap<>();
-
-  /*
-  @PostConstruct
-  public void init() {
-    LOG.debug("[INIT FIBO Data Handler] Start initialize data handler");
-    OWLOntology onto = ontoManager.getOntology();
-
-    LOG.debug("[INIT FIBO Data Handler] Ontology resourcess ...");
-    loadAllOntologyResources(onto);
-
-    LOG.debug("[INIT FIBO Data Handler] Modules data ...");
-    getAllModulesData(onto);
-
-    LOG.debug("[INIT FIBO Data Handler] Finish initialize Handler");
-
-  }
-*/
+  //private Map<String, OntoFiboMaturityLevel> maturityLevels = new HashMap<>();
   public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OWLOntology ontology, OwlListDetails details) {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
@@ -278,7 +261,7 @@ public class FiboDataHandler {
   public void setOntologyResources(Map<String, OntologyResources> resources) {
     this.resources = resources;
   }
-  
+
   private OntologyResources extractOntologyResources(OWLOntology selectedOntology) {
     OntologyResources ontoResources = new OntologyResources();
     Optional<IRI> opt = selectedOntology.getOntologyID().getOntologyIRI();
@@ -555,6 +538,14 @@ public class FiboDataHandler {
       return FiboMaturityLevelFactory.prodDev;
     }
 
+  }
+
+  public void clearAndSetNewModules(OWLOntology ontology) {
+    if (modules != null) {
+      modules.clear();
+      modules = null;
+    }
+    getAllModulesData(ontology);
   }
 
 }

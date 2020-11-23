@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScopeIriOntology {
 
-  private static final Logger LOG = LoggerFactory.getLogger(UpdaterThread.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ScopeIriOntology.class);
 
   @Autowired
   private AppConfiguration appConfiguration;

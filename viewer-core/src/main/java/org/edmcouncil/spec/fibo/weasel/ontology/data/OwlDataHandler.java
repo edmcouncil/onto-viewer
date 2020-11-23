@@ -95,6 +95,8 @@ public class OwlDataHandler {
 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
+  private final String subObjectPropertyOfIriString = ViewerIdentifierFactory
+      .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUB_OBJECT_PROPERTY.getName());
 
   {
     /*static block*/
@@ -445,8 +447,7 @@ public class OwlDataHandler {
       String eSignature = rendering.render(next);
       eSignature = fixRenderedIri && iriFragment.equals(eSignature) ? splitFragment : eSignature;
       String key = null;
-
-      LOG.trace("OWL Entity: {}", next.toStringID());
+      LOG.debug("Processing Item: {}", next);
       LOG.trace("OWL Entity splited: {}", Arrays.asList(splited));
 
       for (int i = 0; i < splited.length; i++) {
@@ -483,6 +484,7 @@ public class OwlDataHandler {
           string = newString;
         }
         if (string.equals(eSignature)) {
+          LOG.trace("Find match for processing item {}", string);
           String generatedKey = String.format(argPattern, i);
           key = generatedKey;
           String textToReplace = generatedKey;
@@ -498,17 +500,18 @@ public class OwlDataHandler {
             String postfix = String.join("", Collections.nCopies(countComma, comma));
             textToReplace = textToReplace + postfix;
           }
+          LOG.trace("Prepared text: {} for: {}", textToReplace, splited[i]);
           splited[i] = textToReplace;
 
           String eIri = next.getIRI().toString();
 
-          if (scopeIriOntology.scopeIri(eIri)){
-          parseToIri(eIri, opv, key, splited, i, splited[i]);
-            break;
-           } else {
-             parseUrl(eIri, splited, i);
-             break;
-            }
+          if (scopeIriOntology.scopeIri(eIri)) {
+            parseToIri(eIri, opv, key, splited, i, splited[i]);
+            //break;
+          } else {
+            parseUrlAxiom(eIri, splited, i, hasOpeningParenthesis, countOpeningParenthesis, hasClosingParenthesis, countClosingParenthesis, hasComma, countComma);
+            //break;
+          }
 
         }
 
@@ -629,10 +632,10 @@ public class OwlDataHandler {
         List<PropertyValue> subElements = getSuperElements(dataProperty, ontology, WeaselOwlType.AXIOM_OBJECT_PROPERTY);
         OwlTaxonomyImpl taxonomy = extractTaxonomy(subElements, iri, ontology, WeaselOwlType.AXIOM_OBJECT_PROPERTY);
         taxonomy.sort();
-
+        subElements = subElements.stream().filter((pv) -> (!pv.getType().equals(WeaselOwlType.TAXONOMY))).collect(Collectors.toList());
         OwlDetailsProperties<PropertyValue> annotations
             = handleAnnotations(dataProperty.getIRI(), ontology, resultDetails);
-
+        axioms.getProperties().put(subObjectPropertyOfIriString, subElements);
         resultDetails.addAllProperties(axioms);
         resultDetails.addAllProperties(annotations);
         resultDetails.setTaxonomy(taxonomy);
@@ -870,6 +873,27 @@ public class OwlDataHandler {
    */
   public OntoFiboMaturityLevel getMaturityLevel(String iriString, OWLOntology ontology) {
     return fiboDataHandler.getMaturityLevelForElement(iriString, ontology);
+  }
+
+  private void parseUrlAxiom(String eIri, String[] splited, int i, Boolean hasOpeningParenthesis, int countOpeningParenthesis, Boolean hasClosingParenthesis, int countClosingParenthesis, Boolean hasComma, int countComma) {
+    String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(eIri));
+
+    String textToReplace = label;
+
+    if (hasOpeningParenthesis) {
+      String prefix = String.join("", Collections.nCopies(countOpeningParenthesis, "("));
+      textToReplace = prefix + textToReplace;
+    }
+    if (hasClosingParenthesis) {
+      String postfix = String.join("", Collections.nCopies(countClosingParenthesis, ")"));
+      textToReplace = textToReplace + postfix;
+    }
+    if (hasComma) {
+      String postfix = String.join("", Collections.nCopies(countComma, ","));
+      textToReplace = textToReplace + postfix;
+    }
+    splited[i] = textToReplace;
+
   }
 
 }
