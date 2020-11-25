@@ -10,6 +10,7 @@ public class GraphNode extends GraphElement {
   private int cardinality;
   private boolean optional;
   private GraphNodeType type;
+  private GraphRelation incommingRelation;
 
   public boolean isOptional() {
     return optional;
@@ -42,6 +43,14 @@ public class GraphNode extends GraphElement {
   @Override
   public String toString() {
     return "{" + "cardinality=" + cardinality + " " + super.toString();
+  }
+
+  public void setIncommingRelation(GraphRelation rel) {
+    this.incommingRelation = rel;
+  }
+
+  public GraphRelation getIncommingRelation() {
+    return incommingRelation;
   }
 
 }

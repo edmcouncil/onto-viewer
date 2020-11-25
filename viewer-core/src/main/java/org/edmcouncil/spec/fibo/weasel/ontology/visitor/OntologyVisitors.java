@@ -80,7 +80,7 @@ public class OntologyVisitors {
   }
 
   public final OWLObjectVisitorEx<Map<GraphNode, Set<ExpressionReturnedClass>>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type, Boolean not) {
-    return superClassAxiom(vg, node, type, false,false);
+    return superClassAxiom(vg, node, type, false, false);
   }
 
   public final OWLObjectVisitorEx<Map<GraphNode, Set<ExpressionReturnedClass>>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type, Boolean equivalentTo, Boolean not) {
@@ -113,6 +113,10 @@ public class OntologyVisitors {
             rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
             rel.setStart(node);
             rel.setEnd(endNode);
+            endNode.setIncommingRelation(rel);
+            if (node.getIncommingRelation() != null) {
+              rel.setOptional(node.getIncommingRelation().isOptional());
+            }
             rel.setEndNodeType(type);
             vg.addNode(endNode);
             vg.addRelation(rel);
@@ -127,17 +131,21 @@ public class OntologyVisitors {
           case DATA_MIN_CARDINALITY:
           case DATA_MAX_CARDINALITY:
           case OBJECT_UNION_OF:
-          
+
             GraphNode blankNode = new GraphNode(vg.nextId());
             blankNode.setType(type);
             blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
             blankNode.setIri(THING_IRI);
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
+            blankNode.setIncommingRelation(relSomeVal);
             relSomeVal.setIri(propertyIri);
             relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
             relSomeVal.setStart(node);
             relSomeVal.setEnd(blankNode);
             relSomeVal.setEndNodeType(type);
+            if (node.getIncommingRelation() != null) {
+              relSomeVal.setOptional(node.getIncommingRelation().isOptional());
+            }
             vg.addNode(blankNode);
             vg.addRelation(relSomeVal);
             vg.setRoot(blankNode);
@@ -180,6 +188,10 @@ public class OntologyVisitors {
             endNode.setType(type);
 
             GraphRelation rel = new GraphRelation(vg.nextId());
+            endNode.setIncommingRelation(rel);
+            if (node.getIncommingRelation() != null) {
+              rel.setOptional(node.getIncommingRelation().isOptional());
+            }
             rel.setIri(propertyIri);
 
             rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
@@ -240,6 +252,10 @@ public class OntologyVisitors {
         relSomeVal.setEnd(blankNode);
         relSomeVal.setEndNodeType(type);
         relSomeVal.setEquivalentTo(equivalentTo);
+        blankNode.setIncommingRelation(relSomeVal);
+        if (node.getIncommingRelation() != null) {
+          relSomeVal.setOptional(node.getIncommingRelation().isOptional());
+        }
         vg.addNode(blankNode);
         vg.addRelation(relSomeVal);
         vg.setRoot(blankNode);
@@ -265,6 +281,10 @@ public class OntologyVisitors {
               rel.setStart(blankNode);
               rel.setEnd(endNode);
               rel.setEndNodeType(type);
+              endNode.setIncommingRelation(rel);
+              if (blankNode.getIncommingRelation() != null) {
+                rel.setOptional(blankNode.getIncommingRelation().isOptional());
+              }
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -332,6 +352,10 @@ public class OntologyVisitors {
               rel.setStart(node);
               rel.setEnd(endNode);
               rel.setEndNodeType(type);
+              endNode.setIncommingRelation(rel);
+              if (node.getIncommingRelation() != null) {
+                rel.setOptional(node.getIncommingRelation().isOptional());
+              }
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -355,10 +379,14 @@ public class OntologyVisitors {
               relSomeVal.setStart(node);
               relSomeVal.setEnd(blankNode);
               relSomeVal.setEndNodeType(type);
+              blankNode.setIncommingRelation(relSomeVal);
+              if (node.getIncommingRelation() != null) {
+                relSomeVal.setOptional(node.getIncommingRelation().isOptional());
+              }
               vg.addNode(blankNode);
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
-              vg.setRoot(blankNode);
+
               addValue(returnedVal, blankNode, axiom.getFiller());
               break;
 
@@ -390,6 +418,7 @@ public class OntologyVisitors {
 
             String label = getPrepareLabel(labelExtractor, iri, not);
             endNode.setLabel(label);
+            endNode.setOptional(true);
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
@@ -398,6 +427,10 @@ public class OntologyVisitors {
             rel.setEnd(endNode);
             rel.setEndNodeType(type);
             rel.setOptional(true);
+            endNode.setIncommingRelation(rel);
+            if (node.getIncommingRelation() != null) {
+              node.getIncommingRelation().setOptional(true);
+            }
             vg.addNode(endNode);
             vg.addRelation(rel);
 
@@ -417,14 +450,18 @@ public class OntologyVisitors {
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
             relSomeVal.setIri(propertyIri);
             blankNode.setIri(THING_IRI);
+            blankNode.setOptional(true);
+            blankNode.setIncommingRelation(relSomeVal);
             relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
             relSomeVal.setStart(node);
             relSomeVal.setEnd(blankNode);
             relSomeVal.setEndNodeType(type);
             relSomeVal.setOptional(true);
+            if (node.getIncommingRelation() != null) {
+              node.getIncommingRelation().setOptional(true);
+            }
             vg.addNode(blankNode);
             vg.addRelation(relSomeVal);
-            vg.setRoot(blankNode);
             vg.setRoot(blankNode);
             addValue(returnedVal, blankNode, axiom.getFiller());
             break;
@@ -457,6 +494,11 @@ public class OntologyVisitors {
             rel.setStart(node);
             rel.setEnd(endNode);
             rel.setEndNodeType(type);
+            rel.setOptional(node.isOptional());
+            endNode.setIncommingRelation(rel);
+            if (node.getIncommingRelation() != null) {
+              rel.setOptional(node.getIncommingRelation().isOptional());
+            }
             vg.addNode(endNode);
             vg.addRelation(rel);
 
@@ -492,6 +534,11 @@ public class OntologyVisitors {
             rel.setStart(node);
             rel.setEnd(endNode);
             rel.setEndNodeType(type);
+            //rel.setOptional(node.isOptional());
+            endNode.setIncommingRelation(rel);
+            if (node.getIncommingRelation() != null) {
+              rel.setOptional(node.getIncommingRelation().isOptional());
+            }
             vg.addNode(endNode);
             vg.addRelation(rel);
 
@@ -537,7 +584,11 @@ public class OntologyVisitors {
               rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
               rel.setStart(node);
               rel.setEnd(endNode);
+              endNode.setIncommingRelation(rel);
               rel.setOptional(isOptional);
+              if (isOptional && node.getIncommingRelation() != null) {
+                node.getIncommingRelation().setOptional(isOptional);
+              }
               rel.setEndNodeType(type);
               vg.addNode(endNode);
               vg.addRelation(rel);
@@ -560,6 +611,10 @@ public class OntologyVisitors {
               relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
               relSomeVal.setStart(node);
               relSomeVal.setEnd(blankNode);
+              blankNode.setIncommingRelation(relSomeVal);
+              if (isOptional && node.getIncommingRelation() != null) {
+                node.getIncommingRelation().setOptional(isOptional);
+              }
               relSomeVal.setOptional(isOptional);
               relSomeVal.setEndNodeType(type);
               vg.addNode(blankNode);
@@ -606,6 +661,11 @@ public class OntologyVisitors {
               rel.setStart(node);
               rel.setEnd(endNode);
               rel.setEndNodeType(type);
+              endNode.setIncommingRelation(rel);
+              if (node.getIncommingRelation() != null) {
+                node.getIncommingRelation().setOptional(true);
+              }
+              rel.setOptional(true);
               vg.addNode(endNode);
               vg.addRelation(rel);
               break;
@@ -622,6 +682,7 @@ public class OntologyVisitors {
               blankNode.setType(type);
               blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
               blankNode.setIri(THING_IRI);
+              //blankNode.setOptional(true);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
               relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
@@ -629,6 +690,10 @@ public class OntologyVisitors {
               relSomeVal.setEnd(blankNode);
               relSomeVal.setOptional(true);
               relSomeVal.setEndNodeType(type);
+              blankNode.setIncommingRelation(relSomeVal);
+              if (node.getIncommingRelation() != null) {
+                node.getIncommingRelation().setOptional(true);
+              }
               vg.addNode(blankNode);
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
@@ -652,6 +717,11 @@ public class OntologyVisitors {
                 unionRel.setStart(unionRootNode);
                 unionRel.setEnd(unionNode);
                 unionRel.setEndNodeType(type);
+                unionNode.setIncommingRelation(unionRel);
+                if (node.getIncommingRelation() != null) {
+                  unionRel.setOptional(unionRootNode.getIncommingRelation().isOptional());
+                }
+
                 vg.addNode(unionNode);
                 vg.addRelation(unionRel);
               }
@@ -668,11 +738,16 @@ public class OntologyVisitors {
           blankNode.setType(type);
           blankNode.setLabel("or");
           blankNode.setIri(THING_IRI);
+          blankNode.setOptional(true);
           GraphRelation relSomeVal = new GraphRelation(vg.nextId());
           relSomeVal.setStart(node);
           relSomeVal.setEnd(blankNode);
           relSomeVal.setOptional(true);
           relSomeVal.setEndNodeType(type);
+          blankNode.setIncommingRelation(relSomeVal);
+          if (node.getIncommingRelation() != null) {
+            node.getIncommingRelation().setOptional(true);
+          }
           vg.addNode(blankNode);
           vg.addRelation(relSomeVal);
 
@@ -699,6 +774,11 @@ public class OntologyVisitors {
                 rel.setStart(blankNode);
                 rel.setEnd(endNode);
                 rel.setEndNodeType(type);
+                rel.setOptional(true);
+                endNode.setIncommingRelation(rel);
+                if (blankNode.getIncommingRelation() != null) {
+                  blankNode.getIncommingRelation().setOptional(true);
+                }
                 vg.addNode(endNode);
                 vg.addRelation(rel);
                 break;
@@ -722,6 +802,10 @@ public class OntologyVisitors {
                 relSomeVal2.setEnd(blankNode2);
                 relSomeVal2.setOptional(true);
                 relSomeVal2.setEndNodeType(type);
+                blankNode2.setIncommingRelation(relSomeVal2);
+                if (blankNode.getIncommingRelation() != null) {
+                  blankNode.getIncommingRelation().setOptional(true);
+                }
                 vg.addNode(blankNode2);
                 vg.addRelation(relSomeVal2);
                 vg.setRoot(blankNode2);
@@ -746,6 +830,10 @@ public class OntologyVisitors {
                   unionRel.setStart(unionRootNode);
                   unionRel.setEnd(unionNode);
                   unionRel.setEndNodeType(type);
+                  unionNode.setIncommingRelation(unionRel);
+                  if (node.getIncommingRelation() != null) {
+                    unionRel.setOptional(unionRootNode.getIncommingRelation().isOptional());
+                  }
                   vg.addNode(unionNode);
                   vg.addRelation(unionRel);
                 }
@@ -798,6 +886,10 @@ public class OntologyVisitors {
               rel.setEnd(endNode);
               rel.setOptional(isOptional);
               rel.setEndNodeType(type);
+              endNode.setIncommingRelation(rel);
+              if (isOptional && node.getIncommingRelation() != null) {
+                node.getIncommingRelation().setOptional(true);
+              }
               vg.addNode(endNode);
               vg.addRelation(rel);
               break;
@@ -820,6 +912,10 @@ public class OntologyVisitors {
               relSomeVal.setEnd(blankNode);
               relSomeVal.setOptional(isOptional);
               relSomeVal.setEndNodeType(type);
+              blankNode.setIncommingRelation(relSomeVal);
+              if (isOptional && node.getIncommingRelation() != null) {
+                node.getIncommingRelation().setOptional(true);
+              }
               vg.addNode(blankNode);
               vg.addRelation(relSomeVal);
               vg.setRoot(blankNode);
@@ -845,7 +941,6 @@ public class OntologyVisitors {
         String propertyIri = null;
         propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         DataRangeType objectType = axiom.getFiller().getDataRangeType();
-        //Map<GraphNode, Set<OWLClassExpression>> returnedVal = new HashMap<>();
 
         for (int i = 0; i < cardinality; i++) {
 
@@ -867,6 +962,10 @@ public class OntologyVisitors {
               rel.setEnd(endNode);
               rel.setOptional(isOptional);
               rel.setEndNodeType(type);
+              endNode.setIncommingRelation(rel);
+              if (isOptional && node.getIncommingRelation() != null) {
+                node.getIncommingRelation().setOptional(true);
+              }
               vg.addNode(endNode);
               vg.addRelation(rel);
 
@@ -911,6 +1010,10 @@ public class OntologyVisitors {
               rel.setEnd(endNode);
               rel.setOptional(isOptional);
               rel.setEndNodeType(type);
+              endNode.setIncommingRelation(rel);
+              if (isOptional && node.getIncommingRelation() != null) {
+                node.getIncommingRelation().setOptional(true);
+              }
               vg.addNode(endNode);
               vg.addRelation(rel);
 
