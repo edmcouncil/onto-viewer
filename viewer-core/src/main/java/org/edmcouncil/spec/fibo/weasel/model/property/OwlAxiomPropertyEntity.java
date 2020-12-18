@@ -24,4 +24,11 @@ public class OwlAxiomPropertyEntity {
     this.label = label;
   }
 
+  @Override
+  public String toString() {
+    return "OwlAxiomPropertyEntity{" + "iri=" + iri + ", label=" + label + '}';
+  }
+
+  
+  
 }

@@ -1,13 +1,21 @@
 package org.edmcouncil.spec.fibo.weasel.utils;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataHandler;
 import org.edmcouncil.spec.fibo.weasel.ontology.visitor.OntologyVisitors;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLClassExpression;
+import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.search.EntitySearcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +25,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class OwlUtils {
+
+  private static final Logger LOG = LoggerFactory.getLogger(OwlDataHandler.class);
 
   @Autowired
   private OntologyVisitors ontologyVisitors;
@@ -29,22 +39,22 @@ public class OwlUtils {
     return isRestriction;
   }
 
+  
   public Set<OWLClass> getSuperClasses(OWLClass clazz, OWLOntology ontology) {
     Set<OWLClass> result = new HashSet<>();
-
-    ontology.subClassAxiomsForSubClass(clazz)
-        .collect(Collectors.toSet())
-        .stream()
-        .filter((axiom) -> (axiom.getSubClass().getClassExpressionType() == ClassExpressionType.OWL_CLASS
-        && axiom.getSuperClass().getClassExpressionType() == ClassExpressionType.OWL_CLASS)).forEachOrdered((axiom) -> {
-      OWLClass owlClass = axiom.getSuperClass().asOWLClass();
-      if (axiom.getSubClass().equals(clazz)) {
-        result.add(owlClass);
-        result.addAll(getSuperClasses(owlClass, ontology));
+    List<OWLClassExpression> subClasses = EntitySearcher.getSuperClasses(clazz, ontology).collect(Collectors.toList());
+    for (OWLClassExpression subClass : subClasses) {
+      LOG.debug("getSuperClasses -> subClass {}", subClass);
+      Optional<OWLEntity> e = subClass.signature().findFirst();
+      LOG.debug("\tgetSuperClasses -> enity iri {}", e.get().getIRI());
+      if (subClass.getClassExpressionType() == ClassExpressionType.OWL_CLASS) { 
+        result.add(e.get().asOWLClass());
+        result.addAll(getSuperClasses(e.get().asOWLClass(), ontology));
       }
-    });
 
+    }
     return result;
+
   }
 
 }
