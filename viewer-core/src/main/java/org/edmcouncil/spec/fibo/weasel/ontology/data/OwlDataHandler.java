@@ -321,9 +321,7 @@ public class OwlDataHandler {
           OwlAxiomPropertyValue axiomProperty = (OwlAxiomPropertyValue) property;
           LOG.debug("Axiom Property {}", axiomProperty.toString());
           IRI sci = extractSubElementIri(axiomProperty, objIri);
-          // if (sci == null){
-          //   continue;
-          //  }
+
           LOG.debug("extractSubElementIri: {}", extractSubElementIri(axiomProperty, objIri));
           OWLEntity entity = createEntity(ontology, sci, type);
 
@@ -336,8 +334,7 @@ public class OwlDataHandler {
           OwlTaxonomyImpl subCLassTax = extractTaxonomy(subTax, entity.getIRI(), ontology, type);
 
           String label = labelExtractor.getLabelOrDefaultFragment(objIri);
-          //OwlTaxonomyValue val1 = new OwlTaxonomyValue(WeaselOwlType.STRING, label);
-          //OwlTaxonomyValue val2 = new OwlTaxonomyValue(WeaselOwlType.IRI, objIri.getIRIString());
+          
           OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(objIri.getIRIString(), label);
 
           if (subCLassTax.getValue().size() > 0) {
@@ -722,46 +719,6 @@ public class OwlDataHandler {
     return resultProperties;
   }
 
-//  private List<PropertyValue> getSuperClasses(OWLOntology ontology, AxiomType<OWLSubClassOfAxiom> subType, OWLEntity entity) {
-//    List<PropertyValue> result = new LinkedList<>();
-//    ontology.axioms(subType)
-//        // .collect(Collectors.toList())
-//        //  .stream()
-//        .filter((subClasse)
-//            -> (subClasse.getSuperClass() instanceof OWLClass
-//        && subClasse.getSubClass() instanceof OWLClass))
-//        .forEachOrdered((subClasse) -> {
-//
-//          OWLClass superClazz = (OWLClass) subClasse.getSuperClass();
-//          OWLClass subClazz = (OWLClass) subClasse.getSubClass();
-//
-//          LOG.debug("Equals getIRI {} {}", subClazz.getIRI(), entity.getIRI());
-//          if (subClazz.getIRI().equals(entity.getIRI())) {
-//
-//            IRI subClazzIri = subClazz.getIRI();
-//            IRI superClazzIri = superClazz.getIRI();
-//            LOG.debug("IRI subClass: {}", subClazz.getIRI());
-//            LOG.debug("IRI superClass: {}", superClazz.getIRI());
-//
-//            OwlAxiomPropertyValue pv = new OwlAxiomPropertyValue();
-//            pv.setType(WeaselOwlType.TAXONOMY);
-//            OwlAxiomPropertyEntity entitySubClass = new OwlAxiomPropertyEntity();
-//            OwlAxiomPropertyEntity entitySuperClass = new OwlAxiomPropertyEntity();
-//            entitySubClass.setIri(subClazzIri.getIRIString());
-//            entitySubClass.setLabel(labelExtractor.getLabelOrDefaultFragment(subClazzIri));
-//            entitySuperClass.setIri(superClazzIri.getIRIString());
-//            entitySuperClass.setLabel(labelExtractor.getLabelOrDefaultFragment(superClazzIri));
-//
-//            pv.setType(WeaselOwlType.TAXONOMY);
-//            pv.addEntityValues(StringUtils.getFragment(subClazzIri), entitySubClass);
-//            pv.addEntityValues(StringUtils.getFragment(superClazzIri), entitySuperClass);
-//
-//            pv.setValue(rendering.render(subClasse));
-//            result.add(pv);
-//          }
-//        });
-//    return result;
-//  }
   /**
    * This method is used to display SubClassOf
    *

@@ -39,31 +39,17 @@ public class OwlUtils {
     return isRestriction;
   }
 
+  
   public Set<OWLClass> getSuperClasses(OWLClass clazz, OWLOntology ontology) {
     Set<OWLClass> result = new HashSet<>();
-
-//    ontology.subClassAxiomsForSubClass(clazz)
-//        .collect(Collectors.toSet())
-//        .stream()
-//        .filter((axiom) -> (axiom.getSubClass().getClassExpressionType() == ClassExpressionType.OWL_CLASS
-//        && axiom.getSuperClass().getClassExpressionType() == ClassExpressionType.OWL_CLASS)).forEachOrdered((axiom) -> {
-//      OWLClass owlClass = axiom.getSuperClass().asOWLClass();
-//      if (axiom.getSubClass().equals(clazz)) {
-//        result.add(owlClass);
-//        result.addAll(getSuperClasses(owlClass, ontology));
-//      }
-//    });
-//
-//    return result;
     List<OWLClassExpression> subClasses = EntitySearcher.getSuperClasses(clazz, ontology).collect(Collectors.toList());
-
-    //for (Map.Entry<String, OwlAxiomPropertyEntity> entry : axiomProperty.getEntityMaping().entrySet()) {
     for (OWLClassExpression subClass : subClasses) {
       LOG.debug("getSuperClasses -> subClass {}", subClass);
       Optional<OWLEntity> e = subClass.signature().findFirst();
       LOG.debug("\tgetSuperClasses -> enity iri {}", e.get().getIRI());
-      if (subClass.getClassExpressionType() == ClassExpressionType.OWL_CLASS) {
+      if (subClass.getClassExpressionType() == ClassExpressionType.OWL_CLASS) { 
         result.add(e.get().asOWLClass());
+        result.addAll(getSuperClasses(e.get().asOWLClass(), ontology));
       }
 
     }
