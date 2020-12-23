@@ -39,7 +39,13 @@ public class OwlUtils {
     return isRestriction;
   }
 
-  
+  /**
+   * The method collects all subclasses of the given class, excluding direct classes.
+   *
+   * @param clazz Clazz are all SubClasses of given class.
+   * @param ontology This is a loaded ontology.
+   * @return All subclasses;
+   */
   public Set<OWLClass> getSuperClasses(OWLClass clazz, OWLOntology ontology) {
     Set<OWLClass> result = new HashSet<>();
     List<OWLClassExpression> subClasses = EntitySearcher.getSuperClasses(clazz, ontology).collect(Collectors.toList());
@@ -47,7 +53,7 @@ public class OwlUtils {
       LOG.debug("getSuperClasses -> subClass {}", subClass);
       Optional<OWLEntity> e = subClass.signature().findFirst();
       LOG.debug("\tgetSuperClasses -> enity iri {}", e.get().getIRI());
-      if (subClass.getClassExpressionType() == ClassExpressionType.OWL_CLASS) { 
+      if (subClass.getClassExpressionType() == ClassExpressionType.OWL_CLASS) {
         result.add(e.get().asOWLClass());
         result.addAll(getSuperClasses(e.get().asOWLClass(), ontology));
       }
