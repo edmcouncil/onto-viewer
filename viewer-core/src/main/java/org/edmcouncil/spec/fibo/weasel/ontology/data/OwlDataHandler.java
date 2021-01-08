@@ -60,6 +60,7 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLProperty;
@@ -94,6 +95,8 @@ public class OwlDataHandler {
   private AppConfiguration config;
   @Autowired
   private ScopeIriOntology scopeIriOntology;
+  @Autowired
+  private RestrictionGraphDataHandler restrictionGraphDataHandler;
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
@@ -129,10 +132,9 @@ public class OwlDataHandler {
         List<PropertyValue> subclasses = getSubclasses(axioms);
 
         //List<PropertyValue> taxElements = extracttTaxonomyElements(subclasses);
-        
         List<PropertyValue> subclasses2 = getSubclasses(clazz, ontology);
         List<PropertyValue> taxElements2 = extracttTaxonomyElements(subclasses2);
-        
+
         OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, clazz);
 
@@ -334,7 +336,7 @@ public class OwlDataHandler {
           OwlTaxonomyImpl subCLassTax = extractTaxonomy(subTax, entity.getIRI(), ontology, type);
 
           String label = labelExtractor.getLabelOrDefaultFragment(objIri);
-          
+
           OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(objIri.getIRIString(), label);
 
           if (subCLassTax.getValue().size() > 0) {
@@ -723,8 +725,8 @@ public class OwlDataHandler {
    * This method is used to display SubClassOf
    *
    * @param ontology This is a loaded ontology.
-   * @param clazz Clazz are all properties of Inherited Axioms.
-   * @return properties of Inherited Axioms.
+   * @param clazz Clazz are all properties of direct Subclasses.
+   * @return Properties of direct Subclasses.
    */
   public OwlDetailsProperties<PropertyValue> handleDirectSubclasses(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
@@ -749,8 +751,8 @@ public class OwlDataHandler {
    * This method is used to display Particular Individual
    *
    * @param ontology This is a loaded ontology.
-   * @param clazz Clazz are all properties of Inherited Axioms.
-   * @return properties of Inherited Axioms.
+   * @param clazz Clazz are all Instances.
+   * @return All instances of a given class;
    */
   private OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = individualDataHandler.handleClassIndividuals(ontology, clazz);
@@ -762,22 +764,34 @@ public class OwlDataHandler {
    * This method is used to handle Inherited Axioms
    *
    * @param ontology Paramter which loaded ontology.
-   * @param clazz Class are all properties of Inherited Axioms.
-   * @return properties of Inherited Axioms.
+   * @param clazz Clazz are all properties of Inherited Axioms.
+   * @return Properties of Inherited Axioms.
    */
   private OwlDetailsProperties<PropertyValue> handleInheritedAxioms(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     String subClassOfKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "SubClassOf");
+    String equivalentClassKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "EquivalentClasses");
+
     Set<OWLClass> rset = owlUtils.getSuperClasses(clazz, ontology);
 
     rset.stream()
         .map((c) -> handleAxioms(c, ontology))
         .forEachOrdered((handleAxioms) -> {
+
           for (Map.Entry<String, List<PropertyValue>> entry : handleAxioms.getProperties().entrySet()) {
 
-            if (entry.getKey().equals(subClassOfKey)) {
+            if (entry.getKey().equals(subClassOfKey) || entry.getKey().equals(equivalentClassKey)) {
               for (PropertyValue propertyValue : entry.getValue()) {
                 if (propertyValue.getType() != WeaselOwlType.TAXONOMY) {
+
+                  if (entry.getKey().equals(equivalentClassKey)) {
+                    OwlAxiomPropertyValue opv = (OwlAxiomPropertyValue) propertyValue;
+                    String val = opv.getValue();
+                    String[] values = val.split(" ");
+                    values[0] = values[1] = "";
+                    val = String.join(" ", values);
+                    opv.setValue(val);
+                  }
                   String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
                       WeaselOwlType.ANONYMOUS_ANCESTOR.name().toLowerCase());
                   result.addProperty(key, propertyValue);
