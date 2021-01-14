@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.swing.text.StyledEditorKit;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNode;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphNodeType;
 import org.edmcouncil.spec.fibo.weasel.model.graph.GraphRelation;
@@ -110,7 +109,11 @@ public class OntologyVisitors {
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
-            rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+
+            String labelPostfix = " (1..*)";
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
+
             rel.setStart(node);
             rel.setEnd(endNode);
             endNode.setIncommingRelation(rel);
@@ -194,7 +197,10 @@ public class OntologyVisitors {
             }
             rel.setIri(propertyIri);
 
-            rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+            String labelPostfix = " (1..*)";
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
+
             rel.setStart(node);
             rel.setEnd(endNode);
             rel.setEndNodeType(type);
@@ -277,7 +283,9 @@ public class OntologyVisitors {
               endNode.setLabel(label);
 
               GraphRelation rel = new GraphRelation(vg.nextId());
-
+              String labelPostfix = " (1..*)";
+              String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(iri));
+              rel.setLabel(relLabel + labelPostfix);
               rel.setStart(blankNode);
               rel.setEnd(endNode);
               rel.setEndNodeType(type);
@@ -332,68 +340,76 @@ public class OntologyVisitors {
         propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
 
-        for (int i = 0; i < cardinality; i++) {
-          switch (objectType) {
-            case OWL_CLASS:
-              OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
-              String iri = null;
-              iri = extractStringObject(expression, iri);
+      
+        switch (objectType) {
+          case OWL_CLASS:
+            OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
+            String iri = null;
+            iri = extractStringObject(expression, iri);
 
-              GraphNode endNode = new GraphNode(vg.nextId());
-              endNode.setIri(iri);
-              endNode.setType(type);
-              String label = getPrepareLabel(labelExtractor, iri, not);
-              String labelPostfix = cardinality > 1 ? " (" + (i + 1) + ")" : "";
-              endNode.setLabel(label + labelPostfix);
+            GraphNode endNode = new GraphNode(vg.nextId());
+            endNode.setIri(iri);
+            endNode.setType(type);
+            String label = getPrepareLabel(labelExtractor, iri, not);
 
-              GraphRelation rel = new GraphRelation(vg.nextId());
-              rel.setIri(propertyIri);
-              rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-              rel.setStart(node);
-              rel.setEnd(endNode);
-              rel.setEndNodeType(type);
-              endNode.setIncommingRelation(rel);
-              if (node.getIncommingRelation() != null) {
-                rel.setOptional(node.getIncommingRelation().isOptional());
-              }
-              vg.addNode(endNode);
-              vg.addRelation(rel);
+            String labelPostfix = " (1..1)";
+            endNode.setLabel(label + labelPostfix);
 
-              break;
+            GraphRelation rel = new GraphRelation(vg.nextId());
+            rel.setIri(propertyIri);
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
 
-            case OBJECT_SOME_VALUES_FROM:
-            case OBJECT_EXACT_CARDINALITY:
-            case OBJECT_MIN_CARDINALITY:
-            case OBJECT_MAX_CARDINALITY:
-            case DATA_MIN_CARDINALITY:
-            case DATA_MAX_CARDINALITY:
-            case OBJECT_ALL_VALUES_FROM:
-            case OBJECT_UNION_OF:
-              GraphNode blankNode = new GraphNode(vg.nextId());
-              blankNode.setType(type);
-              blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
-              blankNode.setIri(THING_IRI);
-              GraphRelation relSomeVal = new GraphRelation(vg.nextId());
-              relSomeVal.setIri(propertyIri);
-              relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-              relSomeVal.setStart(node);
-              relSomeVal.setEnd(blankNode);
-              relSomeVal.setEndNodeType(type);
-              blankNode.setIncommingRelation(relSomeVal);
-              if (node.getIncommingRelation() != null) {
-                relSomeVal.setOptional(node.getIncommingRelation().isOptional());
-              }
-              vg.addNode(blankNode);
-              vg.addRelation(relSomeVal);
-              vg.setRoot(blankNode);
+            rel.setStart(node);
+            rel.setEnd(endNode);
+            rel.setEndNodeType(type);
+            endNode.setIncommingRelation(rel);
+            if (node.getIncommingRelation() != null) {
+              rel.setOptional(node.getIncommingRelation().isOptional());
+            }
+            vg.addNode(endNode);
+            vg.addRelation(rel);
 
-              addValue(returnedVal, blankNode, axiom.getFiller());
-              break;
+            break;
 
-            default:
-              LOG.debug("Unsupported switch case (ObjectType): " + objectType);
+          case OBJECT_SOME_VALUES_FROM:
+          case OBJECT_EXACT_CARDINALITY:
+          case OBJECT_MIN_CARDINALITY:
+          case OBJECT_MAX_CARDINALITY:
+          case DATA_MIN_CARDINALITY:
+          case DATA_MAX_CARDINALITY:
+          case OBJECT_ALL_VALUES_FROM:
+          case OBJECT_UNION_OF:
+            GraphNode blankNode = new GraphNode(vg.nextId());
+            blankNode.setType(type);
+            blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
+            blankNode.setIri(THING_IRI);
+            GraphRelation relSomeVal = new GraphRelation(vg.nextId());
+            relSomeVal.setIri(propertyIri);
 
-          }
+            String labelPostfix2 = " (1..1)";
+            
+            String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            relSomeVal.setLabel(relLabel2 + labelPostfix2);
+
+            relSomeVal.setStart(node);
+            relSomeVal.setEnd(blankNode);
+            relSomeVal.setEndNodeType(type);
+            blankNode.setIncommingRelation(relSomeVal);
+            if (node.getIncommingRelation() != null) {
+              relSomeVal.setOptional(node.getIncommingRelation().isOptional());
+            }
+            vg.addNode(blankNode);
+            vg.addRelation(relSomeVal);
+            vg.setRoot(blankNode);
+
+            addValue(returnedVal, blankNode, axiom.getFiller());
+            break;
+
+          default:
+            LOG.debug("Unsupported switch case (ObjectType): " + objectType);
+
+        
         }
         return returnedVal;
       }
@@ -422,7 +438,12 @@ public class OntologyVisitors {
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
-            rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+
+            String labelPostfix = " (1..1)";
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
+
+           
             rel.setStart(node);
             rel.setEnd(endNode);
             rel.setEndNodeType(type);
@@ -452,7 +473,13 @@ public class OntologyVisitors {
             blankNode.setIri(THING_IRI);
             blankNode.setOptional(true);
             blankNode.setIncommingRelation(relSomeVal);
-            relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+            
+            String labelPostfix2 = "(1..*)";
+            String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            relSomeVal.setLabel(relLabel2 + labelPostfix2);
+
+            
+        
             relSomeVal.setStart(node);
             relSomeVal.setEnd(blankNode);
             relSomeVal.setEndNodeType(type);
@@ -490,7 +517,11 @@ public class OntologyVisitors {
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
-            rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+            String labelPostfix = " (1..*)";
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
+
+          
             rel.setStart(node);
             rel.setEnd(endNode);
             rel.setEndNodeType(type);
@@ -530,7 +561,11 @@ public class OntologyVisitors {
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
-            rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+
+            String labelPostfix = " (1..1)";
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
+
             rel.setStart(node);
             rel.setEnd(endNode);
             rel.setEndNodeType(type);
@@ -556,78 +591,86 @@ public class OntologyVisitors {
         LOG.debug("visit OWLObjectMinCardinality: {}", axiom.toString());
         int cardinality = axiom.getCardinality();
         boolean isOptional = cardinality == 0;
-        cardinality = cardinality == 0 ? 1 : cardinality;
+      
 
         String propertyIri = null;
         propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
 
-        for (int i = 0; i < cardinality; i++) {
-          switch (objectType) {
-            case OWL_CLASS:
-              OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
-              String object = null;
-              object = extractStringObject(expression, object);
+      
+        switch (objectType) {
+          case OWL_CLASS:
+            OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
+            String object = null;
+            object = extractStringObject(expression, object);
 
-              GraphNode endNode = new GraphNode(vg.nextId());
-              endNode.setIri(object);
-              endNode.setType(type);
-              if (cardinality == 0) {
-                endNode.setOptional(true);
-              }
-              String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
-              String labelPostfix = cardinality > 1 ? " (" + (i + 1) + ")" : "";
-              endNode.setLabel(label + labelPostfix);
+            GraphNode endNode = new GraphNode(vg.nextId());
+            endNode.setIri(object);
+            endNode.setType(type);
+            if (cardinality == 0) {
+              endNode.setOptional(true);
+            }
+            String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
 
-              GraphRelation rel = new GraphRelation(vg.nextId());
-              rel.setIri(propertyIri);
-              rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-              rel.setStart(node);
-              rel.setEnd(endNode);
-              endNode.setIncommingRelation(rel);
-              rel.setOptional(isOptional);
-              if (isOptional && node.getIncommingRelation() != null) {
-                node.getIncommingRelation().setOptional(isOptional);
-              }
-              rel.setEndNodeType(type);
-              vg.addNode(endNode);
-              vg.addRelation(rel);
-              break;
+           
+            endNode.setLabel(label);
 
-            case OBJECT_SOME_VALUES_FROM:
-            case OBJECT_EXACT_CARDINALITY:
-            case OBJECT_MIN_CARDINALITY:
-            case OBJECT_MAX_CARDINALITY:
-            case DATA_MIN_CARDINALITY:
-            case DATA_MAX_CARDINALITY:
-            case OBJECT_ALL_VALUES_FROM:
-            case OBJECT_UNION_OF:
-              GraphNode blankNode = new GraphNode(vg.nextId());
-              blankNode.setType(type);
-              blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
-              blankNode.setIri(THING_IRI);
-              GraphRelation relSomeVal = new GraphRelation(vg.nextId());
-              relSomeVal.setIri(propertyIri);
-              relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-              relSomeVal.setStart(node);
-              relSomeVal.setEnd(blankNode);
-              blankNode.setIncommingRelation(relSomeVal);
-              if (isOptional && node.getIncommingRelation() != null) {
-                node.getIncommingRelation().setOptional(isOptional);
-              }
-              relSomeVal.setOptional(isOptional);
-              relSomeVal.setEndNodeType(type);
-              vg.addNode(blankNode);
-              vg.addRelation(relSomeVal);
-              vg.setRoot(blankNode);
+            GraphRelation rel = new GraphRelation(vg.nextId());
+            rel.setIri(propertyIri);
+            String labelPostfix = " (0..*)";
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
 
-              addValue(returnedVal, blankNode, axiom.getFiller());
-              break;
+            rel.setStart(node);
+            rel.setEnd(endNode);
+            endNode.setIncommingRelation(rel);
+            rel.setOptional(isOptional);
+            if (isOptional && node.getIncommingRelation() != null) {
+              node.getIncommingRelation().setOptional(isOptional);
+            }
+            rel.setEndNodeType(type);
+            vg.addNode(endNode);
+            vg.addRelation(rel);
+            break;
 
-            default:
-              LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
+          case OBJECT_SOME_VALUES_FROM:
+          case OBJECT_EXACT_CARDINALITY:
+          case OBJECT_MIN_CARDINALITY:
+          case OBJECT_MAX_CARDINALITY:
+          case DATA_MIN_CARDINALITY:
+          case DATA_MAX_CARDINALITY:
+          case OBJECT_ALL_VALUES_FROM:
+          case OBJECT_UNION_OF:
+            GraphNode blankNode = new GraphNode(vg.nextId());
+            blankNode.setType(type);
+            blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
+            blankNode.setIri(THING_IRI);
+            GraphRelation relSomeVal = new GraphRelation(vg.nextId());
+            relSomeVal.setIri(propertyIri);
 
-          }
+            String labelPostfix2 = " (0..*)";
+            String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            relSomeVal.setLabel(relLabel2 + labelPostfix2);
+
+            relSomeVal.setStart(node);
+            relSomeVal.setEnd(blankNode);
+            blankNode.setIncommingRelation(relSomeVal);
+            if (isOptional && node.getIncommingRelation() != null) {
+              node.getIncommingRelation().setOptional(isOptional);
+            }
+            relSomeVal.setOptional(isOptional);
+            relSomeVal.setEndNodeType(type);
+            vg.addNode(blankNode);
+            vg.addRelation(relSomeVal);
+            vg.setRoot(blankNode);
+
+            addValue(returnedVal, blankNode, axiom.getFiller());
+            break;
+
+          default:
+            LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
+
+        
         }
         return returnedVal;
       }
@@ -657,7 +700,12 @@ public class OntologyVisitors {
 
               GraphRelation rel = new GraphRelation(vg.nextId());
               rel.setIri(propertyIri);
-              rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+
+              String labelPostfix = " (1..*)";
+              String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+              rel.setLabel(relLabel + labelPostfix);
+
+            
               rel.setStart(node);
               rel.setEnd(endNode);
               rel.setEndNodeType(type);
@@ -685,7 +733,12 @@ public class OntologyVisitors {
               //blankNode.setOptional(true);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
-              relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+
+              String labelPostfix2 = " (1..*)";
+              String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+              relSomeVal.setLabel(relLabel2 + labelPostfix2);
+
+          
               relSomeVal.setStart(node);
               relSomeVal.setEnd(blankNode);
               relSomeVal.setOptional(true);
@@ -716,6 +769,7 @@ public class OntologyVisitors {
                 GraphRelation unionRel = new GraphRelation(vg.nextId());
                 unionRel.setStart(unionRootNode);
                 unionRel.setEnd(unionNode);
+                
                 unionRel.setEndNodeType(type);
                 unionNode.setIncommingRelation(unionRel);
                 if (node.getIncommingRelation() != null) {
@@ -770,7 +824,12 @@ public class OntologyVisitors {
 
                 GraphRelation rel = new GraphRelation(vg.nextId());
                 rel.setIri(propertyIri);
-                rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+
+                String labelPostfix = "(1..*)";
+                String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+                rel.setLabel(relLabel + labelPostfix);
+
+               
                 rel.setStart(blankNode);
                 rel.setEnd(endNode);
                 rel.setEndNodeType(type);
@@ -797,7 +856,12 @@ public class OntologyVisitors {
                 blankNode2.setIri(THING_IRI);
                 GraphRelation relSomeVal2 = new GraphRelation(vg.nextId());
                 relSomeVal2.setIri(propertyIri);
-                relSomeVal2.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+
+                String labelPostfix2 = " (1..*)";
+                String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+                relSomeVal2.setLabel(relLabel2 + labelPostfix2);
+
+                
                 relSomeVal2.setStart(blankNode);
                 relSomeVal2.setEnd(blankNode2);
                 relSomeVal2.setOptional(true);
@@ -816,7 +880,7 @@ public class OntologyVisitors {
 
                 GraphNode unionRootNode = blankNode;
 
-                unionRootNode.setLabel("or");
+                unionRootNode.setLabel(" or");
 
                 LOG.debug("Object Union Of case before for: {}", axiom);
                 for (OWLEntity owlEntity : classExpression.signature().collect(Collectors.toList())) {
@@ -828,7 +892,7 @@ public class OntologyVisitors {
 
                   GraphRelation unionRel = new GraphRelation(vg.nextId());
                   unionRel.setStart(unionRootNode);
-                  unionRel.setEnd(unionNode);
+                  unionRel.setEnd(unionNode);               
                   unionRel.setEndNodeType(type);
                   unionNode.setIncommingRelation(unionRel);
                   if (node.getIncommingRelation() != null) {
@@ -856,77 +920,84 @@ public class OntologyVisitors {
         LOG.debug("visit OWLObjectMaxCardinality: {}", axiom.toString());
         int cardinality = axiom.getCardinality();
         boolean isOptional = cardinality == 1;
-        cardinality = cardinality == 0 ? 1 : cardinality;
+       
 
         String propertyIri = null;
         propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         ClassExpressionType objectType = axiom.getFiller().getClassExpressionType();
 
-        for (int i = 0; i < cardinality; i++) {
-          switch (objectType) {
-            case OWL_CLASS:
-              OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
-              String object = null;
-              object = extractStringObject(expression, object);
+       
+        switch (objectType) {
+          case OWL_CLASS:
+            OWLClassExpression expression = axiom.getFiller().getObjectComplementOf();
+            String object = null;
+            object = extractStringObject(expression, object);
 
-              GraphNode endNode = new GraphNode(vg.nextId());
-              endNode.setIri(object);
-              endNode.setType(type);
-              if (cardinality == 0) {
-                endNode.setOptional(true);
-              }
-              String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
-              String labelPostfix = cardinality > 1 ? " (" + (i + 1) + ")" : "";
-              endNode.setLabel(label + labelPostfix);
+            GraphNode endNode = new GraphNode(vg.nextId());
+            endNode.setIri(object);
+            endNode.setType(type);
+            if (cardinality == 0) {
+              endNode.setOptional(true);
+            }
+            String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(object));
 
-              GraphRelation rel = new GraphRelation(vg.nextId());
-              rel.setIri(propertyIri);
-              rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-              rel.setStart(node);
-              rel.setEnd(endNode);
-              rel.setOptional(isOptional);
-              rel.setEndNodeType(type);
-              endNode.setIncommingRelation(rel);
-              if (isOptional && node.getIncommingRelation() != null) {
-                node.getIncommingRelation().setOptional(true);
-              }
-              vg.addNode(endNode);
-              vg.addRelation(rel);
-              break;
+            endNode.setLabel(label);
 
-            case OBJECT_SOME_VALUES_FROM:
-            case OBJECT_EXACT_CARDINALITY:
-            case OBJECT_MIN_CARDINALITY:
-            case OBJECT_MAX_CARDINALITY:
-            case DATA_MIN_CARDINALITY:
-            case DATA_MAX_CARDINALITY:
-            case OBJECT_ALL_VALUES_FROM:
-              GraphNode blankNode = new GraphNode(vg.nextId());
-              blankNode.setType(type);
-              blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
-              blankNode.setIri(THING_IRI);
-              GraphRelation relSomeVal = new GraphRelation(vg.nextId());
-              relSomeVal.setIri(propertyIri);
-              relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-              relSomeVal.setStart(node);
-              relSomeVal.setEnd(blankNode);
-              relSomeVal.setOptional(isOptional);
-              relSomeVal.setEndNodeType(type);
-              blankNode.setIncommingRelation(relSomeVal);
-              if (isOptional && node.getIncommingRelation() != null) {
-                node.getIncommingRelation().setOptional(true);
-              }
-              vg.addNode(blankNode);
-              vg.addRelation(relSomeVal);
-              vg.setRoot(blankNode);
-              vg.setRoot(blankNode);
-              addValue(returnedVal, blankNode, axiom.getFiller());
-              break;
+            GraphRelation rel = new GraphRelation(vg.nextId());
+            String labelPostfix = " (1..*)";
+            rel.setIri(propertyIri);
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
+            rel.setStart(node);
+            rel.setEnd(endNode);
+            rel.setOptional(isOptional);
+            rel.setEndNodeType(type);
+            endNode.setIncommingRelation(rel);
+            if (isOptional && node.getIncommingRelation() != null) {
+              node.getIncommingRelation().setOptional(true);
+            }
+            vg.addNode(endNode);
+            vg.addRelation(rel);
+            break;
 
-            default:
-              LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
+          case OBJECT_SOME_VALUES_FROM:
+          case OBJECT_EXACT_CARDINALITY:
+          case OBJECT_MIN_CARDINALITY:
+          case OBJECT_MAX_CARDINALITY:
+          case DATA_MIN_CARDINALITY:
+          case DATA_MAX_CARDINALITY:
+          case OBJECT_ALL_VALUES_FROM:
+            GraphNode blankNode = new GraphNode(vg.nextId());
+            blankNode.setType(type);
+            blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
+            blankNode.setIri(THING_IRI);
+            GraphRelation relSomeVal = new GraphRelation(vg.nextId());
+            relSomeVal.setIri(propertyIri);
 
-          }
+            String labelPostfix2 = " (1..*)";
+            String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            relSomeVal.setLabel(relLabel2 + labelPostfix2);
+
+          
+            relSomeVal.setStart(node);
+            relSomeVal.setEnd(blankNode);
+            relSomeVal.setOptional(isOptional);
+            relSomeVal.setEndNodeType(type);
+            blankNode.setIncommingRelation(relSomeVal);
+            if (isOptional && node.getIncommingRelation() != null) {
+              node.getIncommingRelation().setOptional(true);
+            }
+            vg.addNode(blankNode);
+            vg.addRelation(relSomeVal);
+            vg.setRoot(blankNode);
+            vg.setRoot(blankNode);
+            addValue(returnedVal, blankNode, axiom.getFiller());
+            break;
+
+          default:
+            LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
+
+        
         }
         return returnedVal;
       }
@@ -936,44 +1007,45 @@ public class OntologyVisitors {
         LOG.debug("visit OWLDataMaxCardnality: {}", axiom.toString());
         int cardinality = axiom.getCardinality();
         boolean isOptional = cardinality == 1;
-        cardinality = cardinality == 0 ? 1 : cardinality;
+      
 
         String propertyIri = null;
         propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         DataRangeType objectType = axiom.getFiller().getDataRangeType();
 
-        for (int i = 0; i < cardinality; i++) {
+ 
+        switch (objectType) {
+          case DATATYPE:
+            IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
 
-          switch (objectType) {
-            case DATATYPE:
-              IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
+            GraphNode endNode = new GraphNode(vg.nextId());
+            endNode.setIri(datatypeIri.toString());
+            endNode.setType(type);
+            String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
+           
 
-              GraphNode endNode = new GraphNode(vg.nextId());
-              endNode.setIri(datatypeIri.toString());
-              endNode.setType(type);
-              String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
-              String labelPostfix = cardinality > 1 ? " (" + (i + 1) + ")" : "";
+            endNode.setLabel(label);
+            GraphRelation rel = new GraphRelation(vg.nextId());
+            rel.setIri(propertyIri);
+            String labelPostfix = " (1..*)";
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
+            rel.setStart(node);
+            rel.setEnd(endNode);
+            rel.setOptional(isOptional);
+            rel.setEndNodeType(type);
+            endNode.setIncommingRelation(rel);
+            if (isOptional && node.getIncommingRelation() != null) {
+              node.getIncommingRelation().setOptional(true);
+            }
+            vg.addNode(endNode);
+            vg.addRelation(rel);
 
-              endNode.setLabel(label + labelPostfix);
-              GraphRelation rel = new GraphRelation(vg.nextId());
-              rel.setIri(propertyIri);
-              rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-              rel.setStart(node);
-              rel.setEnd(endNode);
-              rel.setOptional(isOptional);
-              rel.setEndNodeType(type);
-              endNode.setIncommingRelation(rel);
-              if (isOptional && node.getIncommingRelation() != null) {
-                node.getIncommingRelation().setOptional(true);
-              }
-              vg.addNode(endNode);
-              vg.addRelation(rel);
+            return null;
 
-              return null;
-
-            default:
-              LOG.debug("Unsupported switch case (DataRangeType): {}", objectType);
-          }
+          default:
+            LOG.debug("Unsupported switch case (DataRangeType): {}", objectType);
+         
 
         }
         return returnedVal;
@@ -984,46 +1056,47 @@ public class OntologyVisitors {
         LOG.debug("visit OWLDataMinCardinality: {}", axiom.toString());
         int cardinality = axiom.getCardinality();
         boolean isOptional = cardinality == 0;
-        cardinality = cardinality == 0 ? 1 : cardinality;
+       
 
         String propertyIri = null;
         propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         DataRangeType objectType = axiom.getFiller().getDataRangeType();
 
-        for (int i = 0; i < cardinality; i++) {
+       
+        switch (objectType) {
+          case DATATYPE:
+            IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
 
-          switch (objectType) {
-            case DATATYPE:
-              IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
+            GraphNode endNode = new GraphNode(vg.nextId());
+            endNode.setIri(datatypeIri.toString());
+            endNode.setType(type);
+            String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
+           
+            String labelPostfix = " (0..*)";
+            endNode.setLabel(label + labelPostfix);
 
-              GraphNode endNode = new GraphNode(vg.nextId());
-              endNode.setIri(datatypeIri.toString());
-              endNode.setType(type);
-              String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
-              String labelPostfix = cardinality > 1 ? " (" + (i + 1) + ")" : "";
-              endNode.setLabel(label + labelPostfix);
+            GraphRelation rel = new GraphRelation(vg.nextId());
+            rel.setIri(propertyIri);
+            String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel + labelPostfix);
+            rel.setStart(node);
+            rel.setEnd(endNode);
+            rel.setOptional(isOptional);
+            rel.setEndNodeType(type);
+            endNode.setIncommingRelation(rel);
+            if (isOptional && node.getIncommingRelation() != null) {
+              node.getIncommingRelation().setOptional(true);
+            }
+            vg.addNode(endNode);
+            vg.addRelation(rel);
 
-              GraphRelation rel = new GraphRelation(vg.nextId());
-              rel.setIri(propertyIri);
-              rel.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
-              rel.setStart(node);
-              rel.setEnd(endNode);
-              rel.setOptional(isOptional);
-              rel.setEndNodeType(type);
-              endNode.setIncommingRelation(rel);
-              if (isOptional && node.getIncommingRelation() != null) {
-                node.getIncommingRelation().setOptional(true);
-              }
-              vg.addNode(endNode);
-              vg.addRelation(rel);
+            return null;
 
-              return null;
-
-            default:
-              LOG.debug("Unsupported switch case (DataRangeType): {}", objectType);
-          }
-
+          default:
+            LOG.debug("Unsupported switch case (DataRangeType): {}", objectType);
         }
+
+     
         return returnedVal;
       }
 
@@ -1119,7 +1192,7 @@ public class OntologyVisitors {
           GraphNode endNode = new GraphNode(vg.nextId());
           endNode.setIri(iri);
           endNode.setType(type);
-          //String label = labelExtractor.getLabelOrDefaultFragment(owlClass.getIRI());
+         
           String label = getPrepareLabel(labelExtractor, iri, Boolean.FALSE);
           endNode.setLabel(label);
           endNode.setType(type);

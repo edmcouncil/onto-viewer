@@ -2,7 +2,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## Unreleased [0.3.0]
+## [0.3.1] - 2021-01-11
+###Added
+- Add 'equivalent to' type to the handle Inherited Axioms method PR-64
+
+## [0.3.0] - 2020-12-16
 ### Added
 - reload the ontology and all used resources in the application when the update request arrives 
 
