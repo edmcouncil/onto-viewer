@@ -2,7 +2,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## Unreleased [0.3.0]
+## [0.3.2] - 2021-01-19
+###Added
+- Displaying 'cardinality' for relations in the graph.
+- Added a double arrow to display restrictions with 'or' in the graphs with 'equivalentTo' type's.
+
+## [0.3.1] - 2021-01-11
+###Added
+- Add 'equivalent to' type to the handle Inherited Axioms method PR-64
+
+## [0.3.0] - 2020-12-16
 ### Added
 - reload the ontology and all used resources in the application when the update request arrives 
 

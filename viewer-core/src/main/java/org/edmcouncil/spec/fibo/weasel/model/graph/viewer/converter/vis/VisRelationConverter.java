@@ -21,7 +21,8 @@ public class VisRelationConverter {
         String outIri = iriDto.replaceAll("#", "%23");
         result.setIri(outIri);
 
-        result.setOptional((gr.isOptional() ? "optional" : "non_optional"));
+        String optional = (gr.isOptional() ? "optional" : "non_optional");
+        result.setOptional(optional);
         result.setDashes(gr.isOptional());
         
         String jLabel = gr.getLabel();
@@ -32,6 +33,8 @@ public class VisRelationConverter {
         result.setType(typeVariable);
          result.setEquivalentTo(gr.getEquivalentTo());
     if (gr.getEquivalentTo()) {
+      result.setOptional("non_optional"); 
+      result.setDashes(false);
       result.setArrows("to;from");
     }
         return result;
