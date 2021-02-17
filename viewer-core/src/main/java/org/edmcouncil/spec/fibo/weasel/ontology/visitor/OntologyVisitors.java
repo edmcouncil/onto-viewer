@@ -52,6 +52,7 @@ public class OntologyVisitors {
   private static final String THING_IRI = "http://www.w3.org/2002/07/owl#Thing";
   private static final Logger LOG = LoggerFactory.getLogger(OntologyVisitors.class);
   private static final String DEFAULT_BLANK_NODE_LABEL = "Thing";
+  private static final String POSTFIX_FORMAT = " (%s..%s)";
 
   @Autowired
   private LabelProvider labelExtractor;
@@ -79,7 +80,7 @@ public class OntologyVisitors {
   }
 
   public final OWLObjectVisitorEx<Map<GraphNode, Set<ExpressionReturnedClass>>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type, Boolean not) {
-    return superClassAxiom(vg, node, type, false, false);
+    return superClassAxiom(vg, node, type, false, not);
   }
 
   public final OWLObjectVisitorEx<Map<GraphNode, Set<ExpressionReturnedClass>>> superClassAxiom(OntologyGraph vg, GraphNode node, GraphNodeType type, Boolean equivalentTo, Boolean not) {
@@ -127,14 +128,15 @@ public class OntologyVisitors {
             return null;
 
           case OBJECT_ALL_VALUES_FROM:
-          case OBJECT_SOME_VALUES_FROM:
+          // case OBJECT_SOME_VALUES_FROM:
           case OBJECT_EXACT_CARDINALITY:
           case OBJECT_MIN_CARDINALITY:
           case OBJECT_MAX_CARDINALITY:
           case DATA_MIN_CARDINALITY:
           case DATA_MAX_CARDINALITY:
-          case OBJECT_UNION_OF:
+          case OBJECT_INTERSECTION_OF:
 
+          case OBJECT_UNION_OF:
             GraphNode blankNode = new GraphNode(vg.nextId());
             blankNode.setType(type);
             blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
@@ -152,16 +154,17 @@ public class OntologyVisitors {
             vg.addNode(blankNode);
             vg.addRelation(relSomeVal);
             vg.setRoot(blankNode);
-            LOG.debug("Union of {}", someValuesFromAxiom.toString());
-            addValue(returnedVal, blankNode, someValuesFromAxiom.getFiller());
+            LOG.debug("{}->{}", objectType.toString(), someValuesFromAxiom.toString());
+            addValue(returnedVal, node, someValuesFromAxiom.getFiller());
+            return returnedVal;
+          default:
+            addValue(returnedVal, node, someValuesFromAxiom.getFiller());
             return returnedVal;
 
-          default:
-            LOG.debug("Unsupported expression type {}", objectType);
-            break;
+          // break;
         }
 
-        return null;
+        //  return null;
       }
 
       @Override
@@ -218,7 +221,7 @@ public class OntologyVisitors {
           case DATA_MAX_CARDINALITY:
           case OBJECT_UNION_OF:
 
-            addValueWithNot(returnedVal, node, axiom.getOperand(), true);
+            addValueWithNotAndEquivalent(returnedVal, node, axiom.getOperand(), false, true);
             return returnedVal;
 
           default:
@@ -253,7 +256,15 @@ public class OntologyVisitors {
         blankNode.setLabel("and");
         GraphRelation relSomeVal = new GraphRelation(vg.nextId());
         relSomeVal.setIri(DEFAULT_BLANK_NODE_LABEL);
-
+//        String relIri = null;
+//              relIri = extractStringObject(axiom, relIri);
+//         OWLClassExpression firstLabel = axiomConjunct.stream().findFirst().orElse(null);
+//         LOG.debug("OntologyVisitors -> firstLabel {}", firstLabel.toString());
+//        if (relIri != null) {
+//         String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(relIri));
+//         relSomeVal.setLabel(label);
+//         relSomeVal.setIri(relIri);
+//        }
         relSomeVal.setStart(node);
         relSomeVal.setEnd(blankNode);
         relSomeVal.setEndNodeType(type);
@@ -325,7 +336,7 @@ public class OntologyVisitors {
           if (classExprssionSignature.size() == 1 && isTheSameIri) {
             continue;
           }
-          addValue(returnedVal, node, owlClassExpression);
+          addValueWithNotAndEquivalent(returnedVal, node, owlClassExpression, Boolean.TRUE, Boolean.FALSE);
         }
 
         return returnedVal;
@@ -350,9 +361,8 @@ public class OntologyVisitors {
             endNode.setIri(iri);
             endNode.setType(type);
             String label = getPrepareLabel(labelExtractor, iri, not);
-
-            String labelPostfix = " (1..1)";
-            endNode.setLabel(label + labelPostfix);
+            endNode.setLabel(label);
+            String labelPostfix = String.format(POSTFIX_FORMAT, cardinality, cardinality);//" (1..1)";
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
@@ -540,6 +550,7 @@ public class OntologyVisitors {
       public Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLDataExactCardinality axiom) {
         LOG.debug("visit OWLDataExactCardinality: {}", axiom.toString());
         String propertyIri = null;
+        int cardinality = axiom.getCardinality();
         propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
         DataRangeType objectType = axiom.getFiller().getDataRangeType();
 
@@ -556,7 +567,7 @@ public class OntologyVisitors {
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
 
-            String labelPostfix = " (1..1)";
+            String labelPostfix = String.format(POSTFIX_FORMAT, cardinality, cardinality);
             String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
             rel.setLabel(relLabel + labelPostfix);
 
@@ -608,7 +619,7 @@ public class OntologyVisitors {
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
-            String labelPostfix = " (0..*)";
+            String labelPostfix = String.format(POSTFIX_FORMAT, cardinality, "*");
             String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
             rel.setLabel(relLabel + labelPostfix);
 
@@ -672,7 +683,7 @@ public class OntologyVisitors {
         LOG.debug("object type: {}", axiom.getClassExpressionType().toString());
         ClassExpressionType objectType = axiom.getClassExpressionType();
 
-        if (node.getLabel().equals(DEFAULT_BLANK_NODE_LABEL)) {
+        if (node.getLabel().equals(DEFAULT_BLANK_NODE_LABEL) || node.getLabel().equals("or")) {
           switch (objectType) {
             case OWL_CLASS:
               LOG.debug("OWL_CLASS: {}", axiom.getObjectComplementOf().toString());
@@ -717,11 +728,10 @@ public class OntologyVisitors {
               GraphNode blankNode = new GraphNode(vg.nextId());
               blankNode.setType(type);
               blankNode.setLabel(DEFAULT_BLANK_NODE_LABEL);
-              blankNode.setIri(THING_IRI);              
+              blankNode.setIri(THING_IRI);
               GraphRelation relSomeVal = new GraphRelation(vg.nextId());
               relSomeVal.setIri(propertyIri);
 
-           
               String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
               relSomeVal.setLabel(relLabel2);
               relSomeVal.setEquivalentTo(equivalentTo);
@@ -811,7 +821,7 @@ public class OntologyVisitors {
 
                 GraphRelation rel = new GraphRelation(vg.nextId());
                 rel.setIri(propertyIri);
-             
+
                 String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
                 rel.setLabel(relLabel);
                 rel.setStart(blankNode);
@@ -821,11 +831,11 @@ public class OntologyVisitors {
                 endNode.setIncommingRelation(rel);
                 if (blankNode.getIncommingRelation() != null) {
                   blankNode.getIncommingRelation().setOptional(true);
-                }              
-                   if (equivalentTo) {
-                rel.setOptional(false);
-              }
-                   
+                }
+                if (equivalentTo) {
+                  rel.setOptional(false);
+                }
+
                 vg.addNode(endNode);
                 vg.addRelation(rel);
                 break;
@@ -837,30 +847,36 @@ public class OntologyVisitors {
               case DATA_MIN_CARDINALITY:
               case DATA_MAX_CARDINALITY:
               case OBJECT_ALL_VALUES_FROM:
+                GraphNode add = null;
+                if (relSomeVal.getLabel() != null && !relSomeVal.getLabel().trim().equals("")) {
+                  GraphNode blankNode2 = new GraphNode(vg.nextId());
+                  blankNode2.setType(type);
+                  blankNode2.setLabel(DEFAULT_BLANK_NODE_LABEL);
+                  blankNode2.setIri(THING_IRI);
+                  GraphRelation relSomeVal2 = new GraphRelation(vg.nextId());
+                  relSomeVal2.setIri(propertyIri);
 
-                GraphNode blankNode2 = new GraphNode(vg.nextId());
-                blankNode2.setType(type);
-                blankNode2.setLabel(DEFAULT_BLANK_NODE_LABEL);
-                blankNode2.setIri(THING_IRI);
-                GraphRelation relSomeVal2 = new GraphRelation(vg.nextId());
-                relSomeVal2.setIri(propertyIri);
-              
-                String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
-                relSomeVal2.setLabel(relLabel2);
+                  String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+                  relSomeVal2.setLabel(relLabel2);
 
-                relSomeVal2.setStart(blankNode);
-                relSomeVal2.setEnd(blankNode2);
-                relSomeVal2.setOptional(true);
-                relSomeVal2.setEndNodeType(type);
-                blankNode2.setIncommingRelation(relSomeVal2);
-                if (blankNode.getIncommingRelation() != null) {
-                  blankNode.getIncommingRelation().setOptional(true);
+                  relSomeVal2.setStart(blankNode);
+                  relSomeVal2.setEnd(blankNode2);
+                  relSomeVal2.setOptional(true);
+                  relSomeVal2.setEndNodeType(type);
+                  blankNode2.setIncommingRelation(relSomeVal2);
+                  if (blankNode.getIncommingRelation() != null) {
+                    blankNode.getIncommingRelation().setOptional(true);
+                  }
+                  vg.addNode(blankNode2);
+                  vg.addRelation(relSomeVal2);
+                  vg.setRoot(blankNode2);
+                  add = blankNode2;
+                } else {
+                  add = blankNode;
+
                 }
-                vg.addNode(blankNode2);
-                vg.addRelation(relSomeVal2);
-                vg.setRoot(blankNode2);
 
-                addValue(returnedVal, blankNode2, classExpression);
+                addValue(returnedVal, add, classExpression);
                 break;
               case OBJECT_UNION_OF:
 
@@ -928,7 +944,8 @@ public class OntologyVisitors {
             endNode.setLabel(label);
 
             GraphRelation rel = new GraphRelation(vg.nextId());
-            String labelPostfix = " (1..*)";
+
+            String labelPostfix = String.format(POSTFIX_FORMAT, "0", cardinality); //" (1..*)";
             rel.setIri(propertyIri);
             String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
             rel.setLabel(relLabel + labelPostfix);
@@ -958,7 +975,7 @@ public class OntologyVisitors {
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
             relSomeVal.setIri(propertyIri);
 
-            String labelPostfix2 = " (1..*)";
+            String labelPostfix2 = String.format(POSTFIX_FORMAT, cardinality, "*");
             String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
             relSomeVal.setLabel(relLabel2 + labelPostfix2);
 
@@ -1006,9 +1023,11 @@ public class OntologyVisitors {
             endNode.setLabel(label);
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
-            String labelPostfix = " (1..*)";
+
+            String labelPostfix = String.format(POSTFIX_FORMAT, "0", cardinality);
             String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
             rel.setLabel(relLabel + labelPostfix);
+
             rel.setStart(node);
             rel.setEnd(endNode);
             rel.setOptional(isOptional);
@@ -1048,12 +1067,13 @@ public class OntologyVisitors {
             endNode.setType(type);
             String label = labelExtractor.getLabelOrDefaultFragment(datatypeIri);
 
-            String labelPostfix = " (0..*)";
-            endNode.setLabel(label + labelPostfix);
+            endNode.setLabel(label);
 
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
+            String labelPostfix = String.format(POSTFIX_FORMAT, cardinality, "*");
             String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+
             rel.setLabel(relLabel + labelPostfix);
             rel.setStart(node);
             rel.setEnd(endNode);
@@ -1198,14 +1218,15 @@ public class OntologyVisitors {
   }
 
   private void addValue(Map<GraphNode, Set<ExpressionReturnedClass>> map, GraphNode node, OWLClassExpression expression) {
-    addValueWithNot(map, node, expression, Boolean.FALSE);
+    addValueWithNotAndEquivalent(map, node, expression, Boolean.FALSE, Boolean.FALSE);
   }
 
-  private void addValueWithNot(Map<GraphNode, Set<ExpressionReturnedClass>> map, GraphNode node, OWLClassExpression expression, Boolean not) {
+  private void addValueWithNotAndEquivalent(Map<GraphNode, Set<ExpressionReturnedClass>> map, GraphNode node, OWLClassExpression expression, Boolean equivalent, Boolean not) {
     Set<ExpressionReturnedClass> values = map.getOrDefault(node, new HashSet<>());
     ExpressionReturnedClass expressionClass = new ExpressionReturnedClass();
     expressionClass.setOwlClassExpression(expression);
     expressionClass.setNot(not);
+    expressionClass.setEquivalent(equivalent);
     values.add(expressionClass);
     map.put(node, values);
 
