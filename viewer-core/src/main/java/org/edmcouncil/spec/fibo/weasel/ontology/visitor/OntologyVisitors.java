@@ -128,7 +128,6 @@ public class OntologyVisitors {
             return null;
 
           case OBJECT_ALL_VALUES_FROM:
-          // case OBJECT_SOME_VALUES_FROM:
           case OBJECT_EXACT_CARDINALITY:
           case OBJECT_MIN_CARDINALITY:
           case OBJECT_MAX_CARDINALITY:
@@ -161,10 +160,8 @@ public class OntologyVisitors {
             addValue(returnedVal, node, someValuesFromAxiom.getFiller());
             return returnedVal;
 
-          // break;
         }
 
-        //  return null;
       }
 
       @Override
@@ -256,6 +253,7 @@ public class OntologyVisitors {
         blankNode.setLabel("and");
         GraphRelation relSomeVal = new GraphRelation(vg.nextId());
         relSomeVal.setIri(DEFAULT_BLANK_NODE_LABEL);
+
 //        String relIri = null;
 //              relIri = extractStringObject(axiom, relIri);
 //         OWLClassExpression firstLabel = axiomConjunct.stream().findFirst().orElse(null);
@@ -650,7 +648,10 @@ public class OntologyVisitors {
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
             relSomeVal.setIri(propertyIri);
 
-            String labelPostfix2 = " (0..*)";
+//            String labelPostfix2 = " (0..*)";
+//            String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+//            relSomeVal.setLabel(relLabel2 + labelPostfix2);
+            String labelPostfix2 = String.format(POSTFIX_FORMAT, cardinality, "*");
             String relLabel2 = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
             relSomeVal.setLabel(relLabel2 + labelPostfix2);
 
@@ -849,6 +850,7 @@ public class OntologyVisitors {
               case OBJECT_ALL_VALUES_FROM:
                 GraphNode add = null;
                 if (relSomeVal.getLabel() != null && !relSomeVal.getLabel().trim().equals("")) {
+
                   GraphNode blankNode2 = new GraphNode(vg.nextId());
                   blankNode2.setType(type);
                   blankNode2.setLabel(DEFAULT_BLANK_NODE_LABEL);
