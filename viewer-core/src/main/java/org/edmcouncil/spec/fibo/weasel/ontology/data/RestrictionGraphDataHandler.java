@@ -114,7 +114,7 @@ public class RestrictionGraphDataHandler {
 
     OntologyGraph vg = handleGraph(axiomsIterator, obj.getIRI());
     vg = handleInheritedAxiomsGraph(obj, vg, ontology);
-    vg = handleEquivalentClassesAxiomGraph(obj, vg, ontology);
+  //  vg = handleEquivalentClassesAxiomGraph(obj, vg, ontology);
     return vg;
   }
 
