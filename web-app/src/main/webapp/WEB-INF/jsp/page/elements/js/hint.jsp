@@ -4,7 +4,7 @@
 function showHint(event) {
   var x = event.target.value;
 
-  if (x.length < 3) {
+  if (x.length < 1) {
     $("#autocomplete").removeClass("show");
     return;
   }
