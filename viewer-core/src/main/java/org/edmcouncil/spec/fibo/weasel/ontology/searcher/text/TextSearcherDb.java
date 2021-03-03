@@ -16,6 +16,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.searcher.SearcherField;
 import org.edmcouncil.spec.fibo.config.configuration.model.searcher.TextSearcherConfig;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.hint.HintItem;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
 public class TextSearcherDb {
@@ -50,6 +52,8 @@ public class TextSearcherDb {
   private TextSearcherConfig conf;
   @Autowired
   private AppConfiguration appConfig;
+  @Autowired
+  private LabelProvider labelProvider;
 
   @Inject
   public TextSearcherDb(OntologyManager om) {
@@ -94,13 +98,16 @@ public class TextSearcherDb {
 
   private void collectEntityData(OWLEntity owlEntity, OWLOntology onto, Map<String, TextDbItem> newDb) {
     Stream<OWLAnnotation> annotations = EntitySearcher.getAnnotations(owlEntity, onto);
+
     String entityIri = owlEntity.getIRI().toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
+    tdi.addValue("@viewer.iri.fragment", StringUtils.getFragment(entityIri), null);
 
     if (!tdi.isEmpty()) {
       newDb.put(entityIri, tdi);
     }
+
   }
 
   private void collectOntologyData(OWLOntology owlOntology, OWLOntology onto, Map<String, TextDbItem> tmp) {
@@ -119,7 +126,7 @@ public class TextSearcherDb {
     annotations.collect(Collectors.toSet()).forEach((annotation) -> {
       String propertyIri = annotation.getProperty().getIRI().toString();
       if (conf.hasHintFieldWithIri(propertyIri)
-              || conf.hasSearchFieldWithIri(propertyIri)) {
+          || conf.hasSearchFieldWithIri(propertyIri)) {
         LOG.trace("Find property: {}", propertyIri);
         Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
         if (opt.isPresent()) {
@@ -172,7 +179,7 @@ public class TextSearcherDb {
 
   private void sortHints(List<HintItem> result) {
     Collections.sort(result, Comparator.comparing(HintItem::getRelevancy).reversed()
-            .thenComparing(HintItem::getLabel).reversed());
+        .thenComparing(HintItem::getLabel).reversed());
     Collections.reverse(result);
   }
 
@@ -224,7 +231,7 @@ public class TextSearcherDb {
 
   private void sortSearchResults(List<SearchItem> listResult) {
     Collections.sort(listResult, Comparator.comparing(SearchItem::getRelevancy).reversed()
-            .thenComparing(SearchItem::getDescription).reversed());
+        .thenComparing(SearchItem::getDescription).reversed());
     Collections.reverse(listResult);
   }
 
