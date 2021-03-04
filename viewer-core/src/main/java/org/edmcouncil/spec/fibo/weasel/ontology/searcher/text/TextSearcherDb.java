@@ -44,6 +44,7 @@ public class TextSearcherDb {
 
   private static final String LABEL_IRI = "http://www.w3.org/2000/01/rdf-schema#label";
   private static final String DEFINITION_IRI = "http://www.w3.org/2004/02/skos/core#definition";
+  private static final String IRI_FRAGMENT = "@viewer.iri.fragment";
 
   private final Double HINT_THRESHOLD = 0.0d;
   private final Double RESULT_THRESHOLD = 0.0d;
@@ -102,7 +103,7 @@ public class TextSearcherDb {
     String entityIri = owlEntity.getIRI().toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
-    tdi.addValue("@viewer.iri.fragment", StringUtils.getFragment(entityIri), null);
+    tdi.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
 
     if (!tdi.isEmpty()) {
       newDb.put(entityIri, tdi);
@@ -115,6 +116,7 @@ public class TextSearcherDb {
     String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create("")).toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
+    tdi.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
 
     if (!tdi.isEmpty()) {
       tmp.put(entityIri, tdi);
@@ -160,7 +162,11 @@ public class TextSearcherDb {
         HintItem hi = new HintItem();
         hi.setIri(record.getKey());
         hi.setRelevancy(relevancy);
-        hi.setLabel(getValue(record.getKey(), LABEL_IRI));
+        String hintLabel = getValue(record.getKey(), LABEL_IRI);
+        if (hintLabel == null) {
+          hintLabel = getValue(record.getKey(), IRI_FRAGMENT);
+        }
+        hi.setLabel(hintLabel);
         result.add(hi);
       }
     }
@@ -239,7 +245,12 @@ public class TextSearcherDb {
     SearchItem si = new SearchItem();
     si.setIri(record.getKey());
     si.setRelevancy(relevancy);
+
     String label = getValue(record.getKey(), LABEL_IRI);
+    if (label == null) {
+      label = getValue(record.getKey(), IRI_FRAGMENT);
+    }
+
     String description = getDescription(record);
     si.setLabel(label);
     si.setDescription(StringUtils.cutString(description, 150, true));
@@ -290,7 +301,14 @@ public class TextSearcherDb {
         sf = new SearcherField();
         sf.setIri(DEFINITION_IRI);
         tsc.addSearchField(sf);
+        
+       sf = new SearcherField();
+        sf.setIri(IRI_FRAGMENT);
+        tsc.addSearchField(sf);
+        
       }
+      
+      
       if (tsc.getHintThreshold() == null) {
         tsc.setHintThreshold(HINT_THRESHOLD);
       }
@@ -317,6 +335,11 @@ public class TextSearcherDb {
 
     sf = new SearcherField();
     sf.setIri(DEFINITION_IRI);
+    tsc.addSearchField(sf);
+    
+    
+    sf = new SearcherField();
+    sf.setIri(IRI_FRAGMENT);
     tsc.addSearchField(sf);
 
     tsc.addSearchDescription(DEFINITION_IRI);
