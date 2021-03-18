@@ -16,6 +16,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.searcher.SearcherField;
 import org.edmcouncil.spec.fibo.config.configuration.model.searcher.TextSearcherConfig;
 import org.edmcouncil.spec.fibo.weasel.ontology.OntologyManager;
+import org.edmcouncil.spec.fibo.weasel.ontology.data.label.provider.LabelProvider;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.hint.HintItem;
 import org.edmcouncil.spec.fibo.weasel.utils.StringUtils;
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
 public class TextSearcherDb {
@@ -42,6 +44,7 @@ public class TextSearcherDb {
 
   private static final String LABEL_IRI = "http://www.w3.org/2000/01/rdf-schema#label";
   private static final String DEFINITION_IRI = "http://www.w3.org/2004/02/skos/core#definition";
+  private static final String IRI_FRAGMENT = "@viewer.iri.fragment";
 
   private final Double HINT_THRESHOLD = 0.0d;
   private final Double RESULT_THRESHOLD = 0.0d;
@@ -50,6 +53,8 @@ public class TextSearcherDb {
   private TextSearcherConfig conf;
   @Autowired
   private AppConfiguration appConfig;
+  @Autowired
+  private LabelProvider labelProvider;
 
   @Inject
   public TextSearcherDb(OntologyManager om) {
@@ -94,13 +99,16 @@ public class TextSearcherDb {
 
   private void collectEntityData(OWLEntity owlEntity, OWLOntology onto, Map<String, TextDbItem> newDb) {
     Stream<OWLAnnotation> annotations = EntitySearcher.getAnnotations(owlEntity, onto);
+
     String entityIri = owlEntity.getIRI().toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
+    tdi.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
 
     if (!tdi.isEmpty()) {
       newDb.put(entityIri, tdi);
     }
+
   }
 
   private void collectOntologyData(OWLOntology owlOntology, OWLOntology onto, Map<String, TextDbItem> tmp) {
@@ -108,6 +116,7 @@ public class TextSearcherDb {
     String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create("")).toString();
     LOG.trace("Entity IRI: {}", entityIri);
     TextDbItem tdi = collectValues(annotations);
+    tdi.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
 
     if (!tdi.isEmpty()) {
       tmp.put(entityIri, tdi);
@@ -119,7 +128,7 @@ public class TextSearcherDb {
     annotations.collect(Collectors.toSet()).forEach((annotation) -> {
       String propertyIri = annotation.getProperty().getIRI().toString();
       if (conf.hasHintFieldWithIri(propertyIri)
-              || conf.hasSearchFieldWithIri(propertyIri)) {
+          || conf.hasSearchFieldWithIri(propertyIri)) {
         LOG.trace("Find property: {}", propertyIri);
         Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
         if (opt.isPresent()) {
@@ -153,7 +162,11 @@ public class TextSearcherDb {
         HintItem hi = new HintItem();
         hi.setIri(record.getKey());
         hi.setRelevancy(relevancy);
-        hi.setLabel(getValue(record.getKey(), LABEL_IRI));
+        String hintLabel = getValue(record.getKey(), LABEL_IRI);
+        if (hintLabel == null) {
+          hintLabel = getValue(record.getKey(), IRI_FRAGMENT);
+        }
+        hi.setLabel(hintLabel);
         result.add(hi);
       }
     }
@@ -172,7 +185,7 @@ public class TextSearcherDb {
 
   private void sortHints(List<HintItem> result) {
     Collections.sort(result, Comparator.comparing(HintItem::getRelevancy).reversed()
-            .thenComparing(HintItem::getLabel).reversed());
+        .thenComparing(HintItem::getLabel).reversed());
     Collections.reverse(result);
   }
 
@@ -224,7 +237,7 @@ public class TextSearcherDb {
 
   private void sortSearchResults(List<SearchItem> listResult) {
     Collections.sort(listResult, Comparator.comparing(SearchItem::getRelevancy).reversed()
-            .thenComparing(SearchItem::getDescription).reversed());
+        .thenComparing(SearchItem::getDescription).reversed());
     Collections.reverse(listResult);
   }
 
@@ -232,7 +245,12 @@ public class TextSearcherDb {
     SearchItem si = new SearchItem();
     si.setIri(record.getKey());
     si.setRelevancy(relevancy);
+
     String label = getValue(record.getKey(), LABEL_IRI);
+    if (label == null) {
+      label = getValue(record.getKey(), IRI_FRAGMENT);
+    }
+
     String description = getDescription(record);
     si.setLabel(label);
     si.setDescription(StringUtils.cutString(description, 150, true));
@@ -283,7 +301,14 @@ public class TextSearcherDb {
         sf = new SearcherField();
         sf.setIri(DEFINITION_IRI);
         tsc.addSearchField(sf);
+        
+       sf = new SearcherField();
+        sf.setIri(IRI_FRAGMENT);
+        tsc.addSearchField(sf);
+        
       }
+      
+      
       if (tsc.getHintThreshold() == null) {
         tsc.setHintThreshold(HINT_THRESHOLD);
       }
@@ -310,6 +335,11 @@ public class TextSearcherDb {
 
     sf = new SearcherField();
     sf.setIri(DEFINITION_IRI);
+    tsc.addSearchField(sf);
+    
+    
+    sf = new SearcherField();
+    sf.setIri(IRI_FRAGMENT);
     tsc.addSearchField(sf);
 
     tsc.addSearchDescription(DEFINITION_IRI);

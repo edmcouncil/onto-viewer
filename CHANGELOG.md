@@ -2,7 +2,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [0.3.2] - 2021-01-19
+## [0.4.0] -
+###Added
+- Search by using class names and definitions in hints and search bar.
+
+## [0.3.2] - 2021-02-19
 ###Added
 - Displaying 'cardinality' for relations in the graph.
 - Added a double arrow to display restrictions with 'or' in the graphs with 'equivalentTo' type's.
