@@ -39,5 +39,4 @@ public class ListResult extends SearcherResult<List<SearchItem>> {
   public Integer getMaxPage() {
     return maxPage;
   }
-
 }

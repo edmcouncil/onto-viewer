@@ -97,6 +97,8 @@ local.properties
 .idea/**/gradle.xml
 .idea/**/libraries
 
+.gradle/
+
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
@@ -104,6 +106,9 @@ local.properties
 # .idea/modules.xml
 # .idea/*.iml
 # .idea/modules
+
+.idea/
+*.iml
 
 # CMake
 cmake-build-*/
@@ -200,3 +205,8 @@ nbactions.xml
 **/api.key
 **/updateHistory.json
 /web-app/fiboMapper/fibo/**
+
+
+# Protege
+catalog-v001.xml
+
