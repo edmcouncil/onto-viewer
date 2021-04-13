@@ -26,5 +26,4 @@ public class StatusController {
     status.setVersion(System.getProperty("build.version"));
     return ResponseEntity.ok(status);
   }
-
 }
