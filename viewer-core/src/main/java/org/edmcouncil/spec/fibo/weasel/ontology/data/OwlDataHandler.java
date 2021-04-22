@@ -994,7 +994,9 @@ public class OwlDataHandler {
     }
 
     result.sortPropertiesInAlphabeticalOrder();
-
+    return result;
+  } 
+  
   private String parseRenderedString(OwlAxiomPropertyValue opv) {
     String result = opv.getValue();
     for (Map.Entry<String, OwlAxiomPropertyEntity> entry : opv.getEntityMaping().entrySet()) {
