@@ -70,6 +70,10 @@ public class PropertyRenderTag extends SimpleTagSupport {
       case MODULES:
         renderModules(property);
         break;
+
+      case USAGE_CLASSES:
+        renderDirectedSubclasses(property);
+        break;
     }
 
   }
