@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [0.4.0] -
 ###Added
 - Search by using class names and definitions in hints and search bar.
+- Add usage info for classes and object property
 
 ## [0.3.2] - 2021-02-19
 ###Added

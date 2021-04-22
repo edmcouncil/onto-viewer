@@ -22,6 +22,7 @@ public class DefaultAppLabels {
   public static final String DEF_EXT_OBJECT_PROPERTIES = "external object properties";
   public static final String DEF_INT_OBJECT_PROPERTIES = "internal object properties";
   public static final String DEF_DIRECT_SUBCLASSES = "Direct subclasses";
+  public static final String DEF_USAGE_CLASSES = "Usage of classes";
   public static final String DEF_INSTANCES = "Instances/individuals";
   public static final String DEF_ANONYMOUS_ANCESTOR = "IS-A restrictions inherited from superclasses";
 

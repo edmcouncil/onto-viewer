@@ -4,6 +4,7 @@ import org.edmcouncil.spec.fibo.weasel.model.details.OwlListDetails;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.ConfigKeys;
@@ -13,7 +14,9 @@ import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.fibo.weasel.model.PropertyValue;
 import org.edmcouncil.spec.fibo.weasel.model.details.OwlDetails;
+import org.edmcouncil.spec.fibo.weasel.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataHandler;
+import org.edmcouncil.spec.fibo.weasel.ontology.generator.DescriptionGenerator;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
@@ -42,6 +45,8 @@ public class DetailsManager {
   private AppConfiguration config;
   @Autowired
   private ChangerIriToLabel changerIriToLabel;
+  @Autowired
+  private DescriptionGenerator descriptionGenerator;
 
   public OWLOntology getOntology() {
     return ontologyManager.getOntology();
@@ -101,7 +106,7 @@ public class DetailsManager {
       ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
       if (cfg.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, cfg);
-
+        addGeneratedDescription(newResult);
         return (T) newResult;
       } else {
         sortResults(result);
@@ -176,5 +181,17 @@ public class DetailsManager {
 
   public List<FiboModule> getAllModulesData() {
     return dataHandler.getAllModulesData(ontologyManager.getOntology());
+  }
+
+  private void addGeneratedDescription(OwlGroupedDetails groupedDetails) {
+    Optional<List<OwlAnnotationPropertyValue>> description =
+        descriptionGenerator.prepareDescriptionString(groupedDetails);
+
+    description.ifPresent(descriptionValueList ->
+        descriptionValueList.forEach(descriptionValue ->
+            groupedDetails.addProperty(
+                "Glossary",
+                "generated description",
+                descriptionValue)));
   }
 }

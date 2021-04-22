@@ -49,6 +49,7 @@
     
     <group>
       <groupName>Ontological characteristic</groupName>
+      <groupItem>@viewer.function.usage_classes</groupItem>
       <groupItem>@viewer.function.direct_subclasses</groupItem>
       <groupItem>@viewer.function.instances</groupItem>
       <groupItem>@viewer.axiom.EquivalentClasses</groupItem>
