@@ -69,7 +69,7 @@ public class DescriptionGenerator {
           part = part.trim();
           OwlAnnotationPropertyValue descriptionVaLue = new OwlAnnotationPropertyValue();
           descriptionVaLue.setValue(part);
-          descriptionVaLue.setType(WeaselOwlType.OTHER);
+          descriptionVaLue.setType(WeaselOwlType.STRING);
           return descriptionVaLue;
         })
         .collect(Collectors.toList());
