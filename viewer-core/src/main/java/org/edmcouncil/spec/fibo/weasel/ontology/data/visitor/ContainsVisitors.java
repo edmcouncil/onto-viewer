@@ -1,4 +1,5 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.data.visitor;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.fibo.weasel.ontology.data.OwlDataHandler;
@@ -56,7 +57,6 @@ public class ContainsVisitors {
         OWLClassExpression oce = ax.getRange();
         Set<OWLEntity> es = oce.signature().collect(Collectors.toSet());
 
-      
         for (OWLEntity owlEntity : es) {
           LOG.debug("ContainsVisitors -> owl entity iri {}", owlEntity.getIRI());
           if (owlEntity.getIRI().equals(iri)) {

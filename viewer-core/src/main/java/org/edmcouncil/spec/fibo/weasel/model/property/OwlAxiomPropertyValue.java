@@ -9,6 +9,7 @@ import java.util.Map;
 public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
 
   private final Map<String, OwlAxiomPropertyEntity> entityMaping;
+  private int lastId;
 
   public OwlAxiomPropertyValue() {
     super();
@@ -21,6 +22,14 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
 
   public Map<String, OwlAxiomPropertyEntity> getEntityMaping() {
     return this.entityMaping;
+  }
+
+  public int getLastId() {
+    return this.lastId;
+  }
+
+  public void setLastId(int lastId) {
+    this.lastId = lastId;
   }
 
 }
