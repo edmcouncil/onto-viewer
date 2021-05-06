@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY dct "http://purl.org/dc/terms/" >
+    <!ENTITY skos "http://www.w3.org/2004/02/skos/core#" >
+    <!ENTITY sm "http://www.omg.org/techprocess/ab/SpecificationMetadata/" >
+    <!ENTITY lcc-lr "https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/" >
+    <!ENTITY lcc-cr "https://www.omg.org/spec/LCC/Countries/CountryRepresentation/" >
+]>
+
+<rdf:RDF xml:base="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:dct="http://purl.org/dc/terms/"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+     xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+     xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
+
+
+    <owl:Ontology rdf:about="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/">
+        <rdfs:label>Country and Subdivision Representation Ontology</rdfs:label>
+
+
+    <!-- Curation and Rights Metadata for the LCC Country and Subdivision Representation Ontology -->
+
+        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2019 Object Management Group, Inc.</sm:copyright>
+        <sm:copyright>Copyright (c) 2015-2019 Adaptive Inc.</sm:copyright>
+        <sm:copyright>Copyright (c) 2015-2019 Thematix Partners LLC</sm:copyright>
+        <sm:copyright>Copyright (c) 2015-2017 Unisys</sm:copyright>
+        <dct:license rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/MITLicense"/>
+
+
+    <!-- Ontology/File-Level Metadata for the LCC Country and Subdivision Representation Ontology -->
+
+        <sm:filename rdf:datatype="&xsd;string">CountryRepresentation.rdf</sm:filename>
+        <sm:fileAbbreviation rdf:datatype="&xsd;string">lcc-cr</sm:fileAbbreviation>
+        <owl:versionIRI rdf:resource="https://www.omg.org/spec/LCC/20190201/Countries/CountryRepresentation/"/>
+        <sm:fileAbstract rdf:datatype="&xsd;string">The purpose of the Country Representation ontology, based on ISO 3166 and other representations of geographic regions and countries, such as the ISO Online Browsing Platform, UN M49 Region codes, SWIFT registry, UN FAO and CIA World Factbook, FIPA and International Olympics codes for countries, and GeoNames, is to provide a systematic description of the vocabulary used for country and geopolitical entity representation (based strictly on requirements for business applications, not broader geographic or political uses). A few additional properties to support geophysical coordinates, identified in the UN FAO and CIA World Factbook as well as from the well-known GeoNames ontology, have been added, but extensions to support other coding systems, such as the FAOSTAT code, have not been included.
+
+ISO 3166 provides widely, though not universally, applicable coded representations of names of countries, dependencies, and other areas of particular geopolitical interest and their subdivisions.
+ - ISO 3166-1 (Country codes) establishes codes that represent the current names of countries, dependencies, and other areas of particular geopolitical interest, on the basis of lists of country names obtained from the United Nations.
+ - ISO 3166-2 (Country subdivision code) establishes a code that represents the names of the principal administrative divisions, or similar areas, of the countries, etc. included in the ISO 3166-1.
+ - ISO 3166-3 (Code for formerly used names of countries) establishes a code that represents non-current country names, i.e., the country names deleted from ISO 3166 since its first publication in 1974.
+ 
+The United Nations Standard Country or Area Codes for Statistical Use (M49), described at https://unstats.un.org/unsd/methodology/m49/, provides further regional classification for countries by continent, region within a continent, and sub-regions within regions that are widely used as well, and so this ontology is designed to support the M49 code set as well.  M49 reuses the ISO 3166 codes for countries and some regions, and augments that with additional, broader regional codes.
+
+This ontology provides a reference model to support the first two parts of ISO 3166, along with the other coding systems mentioned above.</sm:fileAbstract>
+
+        <sm:relatedSpecification rdf:datatype="&xsd;string">ISO 3166-1 Codes for the representation of names of countries and their subdivisions- Part 1: Country codes, Second edition, 2006-11-15</sm:relatedSpecification>
+        <sm:relatedSpecification rdf:datatype="&xsd;string">ISO 3166-2 Codes for the representation of names of countries and their subdivisions- Part 2: Country subdivision code, First edition, 1998-12-15</sm:relatedSpecification>
+        <sm:relatedSpecification rdf:datatype="&xsd;string">ISO 3166-3 Codes for the representation of names of countries and their subdivisions- Part 3: Code for formerly used names of countries, First edition, 1998-03-01</sm:relatedSpecification>
+        <sm:relatedSpecification rdf:datatype="&xsd;string">Food and Agriculture Organization of the United Nations, see http://www.fao.org/countryprofiles/en/</sm:relatedSpecification>
+        <sm:relatedSpecification rdf:datatype="&xsd;string">Society for Worldwide Interbank Financial Telecommunication (SWIFT) Online Directories, see http://www.swift.com/bsl/index.faces</sm:relatedSpecification>
+        <sm:relatedSpecification rdf:datatype="&xsd;string">CIA World Factbook, see https://www.cia.gov/library/publications/the-world-factbook/</sm:relatedSpecification>
+        <sm:relatedSpecification rdf:datatype="&xsd;string">International Olympic Committee list of national committees and their representation, see https://www.olympic.org/national-olympic-committees</sm:relatedSpecification>
+
+        <skos:changeNote rdf:datatype="&xsd;string">The http://www.omg.org/spec/LCC/20151101/Countries/CountryRepresentation.rdf version of this ontology has been revised to reflect the issues addressed by the LCC 1.0 FTF report. This includes generalizing the ontology to accommodate country and region coding systems in addition to the ISO 3166 codes, providing some flexibility to use this ontology as the schema to support integration and use of other systems.  Such coding systems might include governmental and corporate distinctions from the codes published by the U.N. and standardized by ISO, or reflect domain-specific codes such as the International Olympic Committee, International Federation of Association Football (FIFA), or other international or national sporting organizations. The structure of the ontologies representing the codes themselves has been revised to support an ontology per country for the subdivision codes, so that users can leverage only those they need rather than having to load close to five thousand individuals for applications requiring a small subset of that number. Generation of the country and subdivision ontologies is entirely automated to facilitate change management going forward.</skos:changeNote>
+        <skos:changeNote rdf:datatype="&xsd;string">The http://www.omg.org/spec/LCC/20171801/Countries/CountryRepresentation.rdf version of this ontology was revised loosen the range constraints on the hasName properties to enable use of language tags, as stated in the LCC 1.1 RTF report.</skos:changeNote>
+        <sm:dependsOn rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/</sm:dependsOn>
+
+        <sm:contentLanguage rdf:datatype="&xsd;anyURI">http://www.w3.org/standards/techs/owl#w3c_all</sm:contentLanguage>
+        <sm:contentLanguage rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/ODM/</sm:contentLanguage>
+
+        <rdfs:seeAlso rdf:resource="https://www.omg.org/spec/LCC/AboutLCC/"/>
+        <rdfs:seeAlso rdf:resource="https://www.omg.org/spec/LCC/Countries/AboutCountries/"/>
+
+        <owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
+
+    </owl:Ontology>
+    
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:ObjectProperty rdf:about="&lcc-cr;classifies">
+        <rdfs:label>classifies</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">arranges in categories according to shared characteristics</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="&lcc-cr;hasPart">
+        <rdfs:label>has part</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">indicates any portion of something, regardless of whether the portion itself is attached to the remainder or detached; cognitively salient or arbitrarily demarcated; self-connected or disconnected; homogeneous or gerrymandered; material or immaterial; extended or unextended; spatial or temporal</skos:definition>
+        <sm:directSource rdf:datatype="&xsd;string">Stanford Encyclopedia of Philosophy at http://plato.stanford.edu/entries/mereology/</sm:directSource>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&lcc-cr;hasSubregion">
+        <rdfs:label>has subregion</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">relates a geographic region to another geographic region that is a designated subregion of it</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-cr;hasPart"/>
+        <rdfs:domain rdf:resource="&lcc-cr;GeographicRegion"/>
+        <rdfs:range rdf:resource="&lcc-cr;GeographicRegion"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&lcc-cr;isClassifiedBy">
+        <rdfs:label>is classified by</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">indicates the classifier used to characterize something</skos:definition>
+        <owl:inverseOf rdf:resource="&lcc-cr;classifies"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="&lcc-cr;isPartOf">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:label>is a part of</rdfs:label>
+        <sm:directSource rdf:datatype="&xsd;string">Stanford Encyclopedia of Philosophy at http://plato.stanford.edu/entries/mereology/</sm:directSource>
+        <skos:definition rdf:datatype="&xsd;string">relates something to another thing that it is some component or portion of, regardless of how that whole-part relationship is manifested, i.e., attached to the remainder or detached; cognitively salient or arbitrarily demarcated; self-connected or disconnected; homogeneous or gerrymandered; material or immaterial; extended or unextended; spatial or temporal; the most generic part relation, reflexive, asymmetric, and transitive</skos:definition>
+        <owl:inverseOf rdf:resource="&lcc-cr;hasPart"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&lcc-cr;isSubregionOf">
+        <rdfs:label>is a subregion of</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">relates a geographic region to another geographic region that it is a part of</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-cr;isPartOf"/>
+        <rdfs:domain rdf:resource="&lcc-cr;GeographicRegion"/>
+        <rdfs:range rdf:resource="&lcc-cr;GeographicRegion"/>
+        <owl:inverseOf rdf:resource="&lcc-cr;hasSubregion"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&lcc-cr;isUsedBy">
+        <rdfs:label>is used by</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">is employed in the process of accomplishing something</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="&lcc-cr;uses">
+        <rdfs:label>uses</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">employs as a means of accomplishing some task or achieving some result</skos:definition>
+        <owl:inverseOf rdf:resource="&lcc-cr;isUsedBy"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&lcc-cr;usesAdministrativeLanguage">
+        <rdfs:label>uses administrative language</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">relates a country or geopolitical entity to an administrative language that entity uses for international communications</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-cr;uses"/>
+        <rdfs:domain rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+        <rdfs:range rdf:resource="&lcc-lr;Language"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:ObjectProperty>
+        
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasEnglishFullName">
+        <rdfs:label>has English full name</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the full name, if different from the short form of the country name, in lower case</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-lr;hasEnglishName"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasEnglishShortName">
+        <rdfs:label>has English short name</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the short form of the country name, in English</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-lr;hasEnglishName"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasEnglishShortNameInCapitals">
+        <rdfs:label>has English short name in capitals</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the short form of the country name, in English (capitals)</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-lr;hasEnglishName"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasFrenchFullName">
+        <rdfs:label>has French full name</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the full name, if different from the short form of the country name, in lower case</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-lr;hasFrenchName"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasFrenchShortName">
+        <rdfs:label>has French short name</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the short form of the country name, in French</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-lr;hasFrenchName"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasFrenchShortNameInCapitals">
+        <rdfs:label>has French short name in capitals</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the short form of the country name, in French (capitals)</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-lr;hasFrenchName"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasLatitude">
+        <rdfs:label>has latitude</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the angle formed by the intersection of a line perpendicular to the Earth's surface at a point and the plane of the Equator</skos:definition>
+        <skos:note rdf:datatype="&xsd;string">Points north of the Equator have positive latitude values, while points south have negative values. Latitude values range from minus 90 to plus 90 degrees. Lines of latitude are also called parallels because a particular value of latitude forms a circle parallel to the Equator.</skos:note>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="&xsd;decimal"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:maxInclusive rdf:datatype="&xsd;decimal">90</xsd:maxInclusive>
+                    </rdf:Description>
+                    <rdf:Description>
+                        <xsd:minInclusive rdf:datatype="&xsd;decimal">-90</xsd:minInclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <dct:source rdf:resource="http://edndoc.esri.com/arcsde/9.1/general_topics/what_coord_sys.htm"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasLocalShortName">
+        <rdfs:label>has local short name</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the local, regional, cultural, or indigenous short form of the country name</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-lr;hasName"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasLongitude">
+        <rdfs:label>has longitude</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">the angle between a plane that passes through the point and the North and South poles, and a reference plane</skos:definition>
+        <skos:note rdf:datatype="&xsd;string">The reference plane is known as the prime meridian. The most common prime meridian passes through Greenwich, United Kingdom. Other examples of prime meridians in use pass through Paris and Bogota. Longitude values range from minus 180 to plus 180 degrees.</skos:note>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="&xsd;decimal"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:maxInclusive rdf:datatype="&xsd;decimal">180</xsd:maxInclusive>
+                    </rdf:Description>
+                    <rdf:Description>
+                        <xsd:minInclusive rdf:datatype="&xsd;decimal">-180</xsd:minInclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </rdfs:range>
+        <dct:source rdf:resource="http://edndoc.esri.com/arcsde/9.1/general_topics/what_coord_sys.htm"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasMaximumLatitude">
+        <rdfs:label>has maximum latitude</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">a maximum latitude with respect to a range</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-cr;hasLatitude"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasMaximumLongitude">
+        <rdfs:label>has maximum longitude</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">a maximum longitude with respect to a range</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-cr;hasLongitude"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasMinimumLatitude">
+        <rdfs:label>has minimum latitude</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">a minimum latitude with respect to a range</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-cr;hasLatitude"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasMinimumLongitude">
+        <rdfs:label>has minimum longitude</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">a minimum longitude with respect to a range</skos:definition>
+        <rdfs:subPropertyOf rdf:resource="&lcc-cr;hasLongitude"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasNumericRegionCode">
+        <rdfs:label>has numeric region code</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">a three-digit numeric code assigned to a region according to some code set</skos:definition>
+        <skos:note rdf:datatype="&xsd;string">For certain territories that do not have an alternate designation (i.e. country or country subdivision code in ISO 3166), the corresponding numeric code may have four digits.</skos:note>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;hasRemarks">
+        <rdfs:label>has remarks</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">remarks, such as other widely-used country names, names of geographically separated territories covered by the coding system, and so forth</skos:definition>
+        <rdfs:domain rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&lcc-cr;isIndependent">
+        <rdfs:label>is independent</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">indicates whether a geopolitical entity stands alone or is part of another country</skos:definition>
+        <rdfs:domain rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+        <rdfs:range rdf:resource="&xsd;boolean"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:DatatypeProperty>
+    
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->    
+
+    <owl:Class rdf:about="&lcc-cr;Alpha2Code">
+        <rdfs:label>alpha-2 code</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+        <skos:definition rdf:datatype="&xsd;string">a digraph representing a country or geographic region</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&lcc-cr;Alpha3Code">
+        <rdfs:label>alpha-3 code</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-cr;GeographicRegionIdentifier"/>
+        <skos:definition rdf:datatype="&xsd;string">a trigraph representing a country or geographic region</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+        
+    <owl:Class rdf:about="&lcc-cr;CoordinateSystem">
+        <rdfs:label>coordinate system</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-lr;Arrangement"/>
+        <skos:definition rdf:datatype="&xsd;string">a system that uses one or more numbers, or coordinates, to uniquely determine the position of a point or other geometric element on a planar or spherical surface</skos:definition>
+        <skos:note rdf:datatype="&xsd;string">Without a concise definition of the coordinate system used to represent a point, it is difficult to change to a new coordinate system. Changing coordinate systems is required when integrating data from different sources into a common coordinate system.</skos:note>
+        <dct:source rdf:resource="http://edndoc.esri.com/arcsde/9.1/general_topics/what_coord_sys.htm"/>
+        <dct:source rdf:resource="https://en.wikipedia.org/wiki/Coordinate_system"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&lcc-cr;Country">
+        <rdfs:label>country</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;hasEnglishShortName"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;hasFrenchShortNameInCapitals"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;hasEnglishShortNameInCapitals"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;hasFrenchShortName"/>
+                <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;hasEnglishFullName"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;hasFrenchFullName"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;usesAdministrativeLanguage"/>
+                <owl:allValuesFrom rdf:resource="&lcc-lr;Language"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;isIndependent"/>
+                <owl:onDataRange rdf:resource="&xsd;boolean"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition rdf:datatype="&xsd;string">a geopolitical entity representing a country or dependent territory</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&lcc-cr;CountrySubdivision">
+        <rdfs:label>country subdivision</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;isClassifiedBy"/>
+                <owl:someValuesFrom rdf:resource="&lcc-cr;GeographicRegionKind"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition rdf:datatype="&xsd;string">a geopolitical entity, typically a division of a country, dependency, or other area of special geopolitical interest related to a country or other geopolitical entity</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&lcc-cr;GeographicCoordinateSystem">
+        <rdfs:label>geographic coordinate system</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-cr;CoordinateSystem"/>
+        <skos:definition rdf:datatype="&xsd;string">a three-dimensional reference system that locates points on the Earth's surface</skos:definition>
+        <skos:note rdf:datatype="&xsd;string">The unit of measure is usually decimal degrees. A point has two coordinate values, latitude and longitude. Latitude and longitude measure angles.</skos:note>
+        <skos:example rdf:datatype="&xsd;string">The three most widely used systems for indicating point locations in the United States are (1) latitude and longitude [and optionally elevation], (2) Universal Transverse Mercator (UTM) system, and (3) State Plane Coordinate Systems (SPCS).</skos:example>
+        <dct:source rdf:resource="http://edndoc.esri.com/arcsde/9.1/general_topics/what_coord_sys.htm"/>
+        <dct:source rdf:resource="https://pubs.usgs.gov/circ/1983/0878b/report.pdf"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&lcc-cr;GeographicRegion">
+        <rdfs:label>geographic region</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-cr;Location"/>
+        <skos:definition rdf:datatype="&xsd;string">an area, especially part of a country or the world having definable characteristics but not always fixed boundaries</skos:definition>
+        <dct:source rdf:resource="https://en.oxforddictionaries.com/definition/region"/>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&lcc-cr;GeographicRegionIdentifier">
+        <rdfs:label>geographic region identifier</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-lr;CodeElement"/>
+        <rdfs:subClassOf rdf:resource="&lcc-lr;Identifier"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-lr;hasTag"/>
+                <owl:onDataRange rdf:resource="&xsd;string"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-lr;denotes"/>
+                <owl:allValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-lr;identifies"/>
+                <owl:allValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition rdf:datatype="&xsd;string">a string of letters assigned to a country or other geographic region for the purpose of uniquely representing it</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&lcc-cr;GeographicRegionKind">
+        <rdfs:label>kind of geographic region</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-lr;Arrangement"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lcc-cr;classifies"/>
+                <owl:allValuesFrom rdf:resource="&lcc-cr;GeographicRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <skos:definition rdf:datatype="&xsd;string">a classification scheme for geographic regions, including but not limited to subdivisions of a geopolitical entity, (noting that there may be more than one kind for a given country or other entity)</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>    
+
+    <owl:Class rdf:about="&lcc-cr;GeopoliticalEntity">
+        <rdfs:label>geopolitical entity</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-cr;GeographicRegion"/>
+        <skos:definition rdf:datatype="&xsd;string">any country, federal province, city or other administrative unit that represents a geophysical location and has some political identity</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="&lcc-cr;Location">
+        <rdfs:label>location</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">a place or position in time and/or space, including virtual place</skos:definition>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&lcc-cr;Territory">
+        <rdfs:label>territory</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&lcc-cr;GeopoliticalEntity"/>
+        <skos:definition rdf:datatype="&xsd;string">a geopolitical entity, typically considered an area of special geopolitical interest, related to a country or other geopolitical entity</skos:definition>
+        <skos:note rdf:datatype="&xsd;string">Certain territories are included in the ISO 3166-2 code set without an alpha 2 or alpha 3 code.  In these cases, the numeric code for the subregion may have more than 3 characters in their corresponding numeric region codes.</skos:note>
+        <rdfs:isDefinedBy rdf:resource="&lcc-cr;"/>
+    </owl:Class>
+    
+</rdf:RDF>

@@ -7,7 +7,6 @@ import org.edmcouncil.spec.fibo.weasel.ontology.DetailsManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.ViewerSearcher;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.result.ResultFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,11 +16,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class OntologySearcher implements ViewerSearcher {
 
-  @Autowired
-  private DetailsManager detailsManager;
+  private final DetailsManager detailsManager;
+
+  public OntologySearcher(DetailsManager detailsManager) {
+    this.detailsManager = detailsManager;
+  }
 
   public SearcherResult search(String query, Integer max) throws NotFoundElementInOntologyException {
-
     OwlDetails owd = detailsManager.getDetailsByIri(query);
 
     return ResultFactory.createDetailsResult(owd);
@@ -33,5 +34,4 @@ public class OntologySearcher implements ViewerSearcher {
 
     return ResultFactory.createDetailsResult(owd);
   }
-
 }

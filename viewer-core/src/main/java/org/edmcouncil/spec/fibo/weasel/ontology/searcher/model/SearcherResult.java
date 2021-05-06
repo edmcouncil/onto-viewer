@@ -1,16 +1,15 @@
 package org.edmcouncil.spec.fibo.weasel.ontology.searcher.model;
 
 /**
- *
- * @author Michał Daniel (michal.daniel@makolab.com)
  * @param <T> Type of result
+ * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public abstract class SearcherResult<T> {
 
   private final Type type;
   private final T result;
 
-  public SearcherResult(Type type, T result) {
+  SearcherResult(Type type, T result) {
     this.type = type;
     this.result = result;
   }
@@ -23,7 +22,7 @@ public abstract class SearcherResult<T> {
     return result;
   }
 
-  public static enum Type {
+  public enum Type {
     list, details
   }
 }
