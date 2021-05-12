@@ -1047,6 +1047,10 @@ public class OwlDataHandler {
 
       LOG.debug("Generated big axiom: {}", sb.toString());
       sb = new StringBuilder();
+      
+       String fullRenderedString = parseRenderedString(opv);
+          opv.setFullRenderedString(fullRenderedString);
+      
       result.addProperty(key, opv);
     }
 
@@ -1108,6 +1112,10 @@ public class OwlDataHandler {
 
       LOG.debug("Generated big axiom: {}", sbo.toString());
       sbo = new StringBuilder();
+      
+       String fullRenderedString = parseRenderedString(opv);
+          opv.setFullRenderedString(fullRenderedString);
+      
       result.addProperty(key, opv);
     }
 
@@ -1168,8 +1176,13 @@ public class OwlDataHandler {
 
       LOG.debug("Generated big axiom: {}", sbd.toString());
       sbd = new StringBuilder();
+          String fullRenderedString = parseRenderedString(opv);
+          opv.setFullRenderedString(fullRenderedString);
+      
       result.addProperty(key, opv);
     }
+    
+    
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
@@ -1177,7 +1190,7 @@ public class OwlDataHandler {
   private String parseRenderedString(OwlAxiomPropertyValue opv) {
     String result = opv.getValue();
     for (Map.Entry<String, OwlAxiomPropertyEntity> entry : opv.getEntityMaping().entrySet()) {
-      LOG.debug("parseRenderedString: {}", opv.getEntityMaping().entrySet());
+      LOG.debug("parseRenderedString: {}", entry.toString());
       String key = entry.getKey();
       if (!key.contains("arg")) {
         continue;
