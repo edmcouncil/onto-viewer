@@ -625,7 +625,7 @@ public class OwlDataHandler {
     }
 
     checkAndParseUriInLiteral(splited, argPattern, opv);
-    
+
     String value = String.join(" ", splited).trim();
 
     LOG.debug("[Data Handler] Prepared value for axiom : {}", value);
@@ -982,7 +982,6 @@ public class OwlDataHandler {
 
   }
 
-
   private OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz, OWLOntology ontology) {
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
@@ -1171,18 +1170,22 @@ public class OwlDataHandler {
       sbd = new StringBuilder();
       result.addProperty(key, opv);
     }
-    
     result.sortPropertiesInAlphabeticalOrder();
+    return result;
+  }
 
   private String parseRenderedString(OwlAxiomPropertyValue opv) {
     String result = opv.getValue();
     for (Map.Entry<String, OwlAxiomPropertyEntity> entry : opv.getEntityMaping().entrySet()) {
+      LOG.debug("parseRenderedString: {}", opv.getEntityMaping().entrySet());
       String key = entry.getKey();
       if (!key.contains("arg")) {
         continue;
       }
       String replecment = entry.getValue().getLabel();
+      LOG.debug("replecment: {}",replecment.toString() );
       result = result.replaceAll(key, replecment);
+      LOG.debug("result: {}", result.toString());
     }
 
     return result;
