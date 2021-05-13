@@ -445,26 +445,6 @@ public class OwlDataHandler {
       String key = axiom.getAxiomType().getName();
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, ignoredToDisplay, key);
-//      value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
-//
-//      String key = axiom.getAxiomType().getName();
-//      key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
-//      if (ignoredToDisplay.contains(key)) {
-//        continue;
-//      }
-//      OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
-//      opv.setValue(value);
-//
-//      opv.setType(WeaselOwlType.AXIOM);
-//      LOG.debug("[Data Handler] Find Axiom \"{}\" with type \"{}\"", value, key);
-//      Boolean isRestriction = owlUtils.isRestriction(axiom);
-//
-//      if (!isRestriction && axiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
-//        LOG.trace("[Data Handler] Find non restriction SubClassOf");
-//        opv.setType(WeaselOwlType.TAXONOMY);
-//      }
-//
-//      processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, opv, value);
       if (opv == null) {
         continue;
       }
@@ -522,7 +502,6 @@ public class OwlDataHandler {
     processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, opv, value, startCountingArgs);
 
     return opv;
-
   }
 
   //TODO: refactor this method
@@ -1047,10 +1026,10 @@ public class OwlDataHandler {
 
       LOG.debug("Generated big axiom: {}", sb.toString());
       sb = new StringBuilder();
-      
-       String fullRenderedString = parseRenderedString(opv);
-          opv.setFullRenderedString(fullRenderedString);
-      
+
+      String fullRenderedString = parseRenderedString(opv);
+      opv.setFullRenderedString(fullRenderedString);
+
       result.addProperty(key, opv);
     }
 
@@ -1112,10 +1091,10 @@ public class OwlDataHandler {
 
       LOG.debug("Generated big axiom: {}", sbo.toString());
       sbo = new StringBuilder();
-      
-       String fullRenderedString = parseRenderedString(opv);
-          opv.setFullRenderedString(fullRenderedString);
-      
+
+      String fullRenderedString = parseRenderedString(opv);
+      opv.setFullRenderedString(fullRenderedString);
+
       result.addProperty(key, opv);
     }
 
@@ -1176,13 +1155,12 @@ public class OwlDataHandler {
 
       LOG.debug("Generated big axiom: {}", sbd.toString());
       sbd = new StringBuilder();
-          String fullRenderedString = parseRenderedString(opv);
-          opv.setFullRenderedString(fullRenderedString);
-      
+      String fullRenderedString = parseRenderedString(opv);
+      opv.setFullRenderedString(fullRenderedString);
+
       result.addProperty(key, opv);
     }
-    
-    
+
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
@@ -1196,7 +1174,7 @@ public class OwlDataHandler {
         continue;
       }
       String replecment = entry.getValue().getLabel();
-      LOG.debug("replecment: {}",replecment.toString() );
+      LOG.debug("replecment: {}", replecment.toString());
       result = result.replaceAll(key, replecment);
       LOG.debug("result: {}", result.toString());
     }
