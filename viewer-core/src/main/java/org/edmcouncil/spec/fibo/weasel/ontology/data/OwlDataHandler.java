@@ -147,7 +147,7 @@ public class OwlDataHandler {
 
         OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(ontology, clazz);
         OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, clazz);
-        OwlDetailsProperties<PropertyValue> usage = extractUsageForClasses(clazz, ontology);
+        //OwlDetailsProperties<PropertyValue> usage = extractUsageForClasses(clazz, ontology);
 
         OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
         OntologyGraph vg = new OntologyGraph();
@@ -165,7 +165,7 @@ public class OwlDataHandler {
             = handleAnnotations(clazz.getIRI(), ontology, resultDetails);
 
         //  setResultValues(resultDetails, tax, axioms, annotations, directSubclasses, individuals, inheritedAxioms, vg, usage, subclasses);
-        setResultValues(resultDetails, tax, axioms, annotations, directSubclasses, individuals, inheritedAxioms, usage, vg, subclasses);
+        setResultValues(resultDetails, tax, axioms, annotations, directSubclasses, individuals, inheritedAxioms, new OwlDetailsProperties<PropertyValue>(), vg, subclasses);
       }
     }
     return resultDetails;
@@ -1185,7 +1185,7 @@ public class OwlDataHandler {
     
     result.sortPropertiesInAlphabeticalOrder();
     return result;
-  }
+  } 
 
   private String parseRenderedString(OwlAxiomPropertyValue opv) {
     String result = opv.getValue();

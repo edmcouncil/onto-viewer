@@ -144,8 +144,8 @@ class DescriptionGeneratorTest {
     var expectedResult = prepareExpectedResult(
         List.of(
             "Legal entity is a kind of superTest1.\n" +
-                "- Legal entity may have address that is physical address.\n" +
-                "- Legal entity is recognized in some jurisdiction."));
+                "- Legal entity is recognized in some jurisdiction.\n" +
+                "- Legal entity may have address that is physical address."));
 
     var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
 
@@ -183,8 +183,8 @@ class DescriptionGeneratorTest {
     var expectedResult = prepareExpectedResult(
         List.of(
             "Legal entity is a kind of superTest1.\n" +
-                "- Legal entity is organized in exactly 1 jurisdiction.\n" +
-                "- Legal entity has some goal.",
+                "- Legal entity has some goal.\n" +
+                "- Legal entity is organized in exactly 1 jurisdiction.",
             "- Legal entity is recognized in some jurisdiction."));
 
     var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
@@ -276,6 +276,62 @@ class DescriptionGeneratorTest {
     assertThat(actualResult.get(), equalTo(expectedResult));
   }
 
+  @Test
+  void shouldReturnStringWithSortedRestrictions() {
+    var groupedDetails = prepareGroupedDetails(
+        "legal entity",
+        List.of(List.of("superTest1", "test")));
+    groupedDetails.addProperty(
+        ONTOLOGICAL_CHARACTERISTIC_LABEL,
+        IS_A_RESTRICTIONS_LABEL,
+        preparePropertyValue(
+            "/arg1/ some /arg2/",
+            new OwlEntity("isRecognizedIn", "is recognized in"),
+            new OwlEntity("zurisdiction", "zurisdiction")));
+    groupedDetails.addProperty(
+        ONTOLOGICAL_CHARACTERISTIC_LABEL,
+        IS_A_RESTRICTIONS_LABEL,
+        preparePropertyValue(
+            "/arg1/ min 0 /arg2/",
+            new OwlEntity("hasAddress", "has address"),
+            new OwlEntity("physicalAddress", "physical address")));
+    groupedDetails.addProperty(
+        ONTOLOGICAL_CHARACTERISTIC_LABEL,
+        IS_A_RESTRICTIONS_LABEL,
+        preparePropertyValue(
+            "/arg1/ some /arg2/",
+            new OwlEntity("isRecognizedIn", "is recognized in"),
+            new OwlEntity("jurisdiction", "jurisdiction")));
+    groupedDetails.addProperty(
+        ONTOLOGICAL_CHARACTERISTIC_LABEL,
+        IS_A_RESTRICTIONS_LABEL,
+        preparePropertyValue(
+            "/arg1/ some /arg2/",
+            new OwlEntity("hasAddress", "has address"),
+            new OwlEntity("virtualAddress", "virtual address")));
+    groupedDetails.addProperty(
+        ONTOLOGICAL_CHARACTERISTIC_LABEL,
+        IS_A_RESTRICTIONS_INHERITED_LABEL,
+        preparePropertyValue(
+            "/arg1/ min 0 /arg2/",
+            new OwlEntity("hasAddress", "has address"),
+            new OwlEntity("physicalAddress", "physical address")));
+
+    var expectedResult = prepareExpectedResult(
+        List.of(
+            "Legal entity is a kind of superTest1.\n" +
+                "- Legal entity has some address that is virtual address.\n" +
+                "- Legal entity is recognized in some jurisdiction.\n" +
+                "- Legal entity is recognized in some zurisdiction.\n" +
+                "- Legal entity may have address that is physical address.",
+            "- Legal entity may have address that is physical address."));
+
+    var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
+
+    assertTrue(actualResult.isPresent());
+    assertThat(actualResult.get(), equalTo(expectedResult));
+  }
+
   private OwlGroupedDetails prepareGroupedDetails(String label, List<List<String>> rawTaxonomies) {
     var groupedDetails = new OwlGroupedDetails();
     groupedDetails.setLabel(label);
@@ -300,7 +356,7 @@ class DescriptionGeneratorTest {
         .stream().map(rawPropertyValue -> {
           var expectedResult = new OwlAnnotationPropertyValue();
           expectedResult.setValue(rawPropertyValue);
-          expectedResult.setType(WeaselOwlType.OTHER);
+          expectedResult.setType(WeaselOwlType.STRING);
           return expectedResult;
         })
         .collect(Collectors.toList());
