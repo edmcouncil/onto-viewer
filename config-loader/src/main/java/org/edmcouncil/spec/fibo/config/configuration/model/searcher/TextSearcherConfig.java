@@ -17,6 +17,8 @@ public class TextSearcherConfig implements ConfigItem {
   private final Set<SearcherField> searchFields;
   private Double searchThreshold;
   private final List<String> searchDescription;
+  private Double hintMaxLevensteinDistance;
+  private Double searchMaxLevensteinDistance;
 
   public TextSearcherConfig() {
     hintFields = new HashSet<>();
@@ -63,24 +65,40 @@ public class TextSearcherConfig implements ConfigItem {
   public Set<SearcherField> getSearchFields() {
     return searchFields;
   }
-  
-  public Boolean hasHintFieldWithIri(String iri){
+
+  public Double getHintMaxLevensteinDistance() {
+    return hintMaxLevensteinDistance;
+  }
+
+  public void setHintMaxLevensteinDistance(Double hintMaxLevensteinDistance) {
+    this.hintMaxLevensteinDistance = hintMaxLevensteinDistance;
+  }
+
+  public Double getSearchMaxLevensteinDistance() {
+    return searchMaxLevensteinDistance;
+  }
+
+  public void setSearchMaxLevensteinDistance(Double searchMaxLevensteinDistance) {
+    this.searchMaxLevensteinDistance = searchMaxLevensteinDistance;
+  }
+
+  public Boolean hasHintFieldWithIri(String iri) {
     for (SearcherField hintField : hintFields) {
-      if(hintField.getIri().equals(iri)){
+      if (hintField.getIri().equals(iri)) {
         return Boolean.TRUE;
       }
     }
     return Boolean.FALSE;
   }
-  public Boolean hasSearchFieldWithIri(String iri){
+
+  public Boolean hasSearchFieldWithIri(String iri) {
     for (SearcherField searcherField : searchFields) {
-      if(searcherField.getIri().equals(iri)){
+      if (searcherField.getIri().equals(iri)) {
         return Boolean.TRUE;
       }
     }
     return Boolean.FALSE;
   }
-  
 
   @Override
   public ConfigItemType getType() {
@@ -90,7 +108,9 @@ public class TextSearcherConfig implements ConfigItem {
   public boolean isCompleted() {
     return !hintFields.isEmpty() && !searchFields.isEmpty()
         && hintThreshold != null && searchThreshold != null
-        && searchDescription != null;
+        && searchDescription != null
+        && hintMaxLevensteinDistance != null
+        && searchMaxLevensteinDistance != null;
   }
 
   @Override
@@ -99,7 +119,9 @@ public class TextSearcherConfig implements ConfigItem {
         + ", hintThreshold=" + hintThreshold
         + ", searchFields=" + searchFields
         + ", searchThreshold=" + searchThreshold
-        + ", searchDescription=" + searchDescription + '}';
+        + ", searchDescription=" + searchDescription
+        + ", hintMaxLevensteinDistance=" + hintMaxLevensteinDistance
+        + ", searchMaxLevensteinDistance=" + searchMaxLevensteinDistance + '}';
   }
 
 }
