@@ -4,8 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [0.4.0] -
 ###Added
-- Search by using class names and definitions in hints and search bar.
-- Add usage info for classes and object property
+- Search by using class names and definitions in hints and search bar
+- Added usage info for classes and object property
+- Added Levenstein distance in search
 
 ## [0.3.2] - 2021-02-19
 ###Added

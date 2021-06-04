@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.edmcouncil.spec.fibo.config.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.fibo.config.configuration.model.searcher.SearcherField;
 import org.edmcouncil.spec.fibo.config.configuration.model.searcher.TextSearcherConfig;
@@ -170,6 +171,31 @@ public class TextSearcherDb {
         result.add(hi);
       }
     }
+    if (result.isEmpty()) {
+      for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
+
+        double distance = record.getValue().computeLevensteinDistance(text, conf.getHintFields());
+        LOG.debug("TextSearcherDb -> Distance {} between {} and {}", distance, text, record.getKey());
+
+        if (distance <= conf.getHintMaxLevensteinDistance() && distance > 0.0d) {
+
+          HintItem hi = new HintItem();
+          hi.setIri(record.getKey());
+          hi.setRelevancy(distance);
+
+          String hintLabel = getValue(record.getKey(), LABEL_IRI);
+          if (hintLabel == null) {
+
+            hintLabel = getValue(record.getKey(), IRI_FRAGMENT);
+          }
+          hi.setLabel(hintLabel);
+          result.add(hi);
+        }
+
+      }
+
+    }
+
     sortHints(result);
 
     result = cutHintResults(result, maxHintCount);
@@ -209,6 +235,17 @@ public class TextSearcherDb {
         SearchItem si = getPreparedSearchResultItem(record, relevancy);
         listResult.add(si);
       }
+    }
+
+    if (listResult.isEmpty()) {
+      for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
+        Double relevancy = record.getValue().computeLevensteinDistance(text, conf.getSearchFields());
+        if (relevancy < conf.getSearchMaxLevensteinDistance()) {
+          SearchItem si = getPreparedSearchResultItem(record, relevancy);
+          listResult.add(si);
+        }
+      }
+
     }
 
     int countOfResults = listResult.size();
@@ -301,14 +338,13 @@ public class TextSearcherDb {
         sf = new SearcherField();
         sf.setIri(DEFINITION_IRI);
         tsc.addSearchField(sf);
-        
-       sf = new SearcherField();
+
+        sf = new SearcherField();
         sf.setIri(IRI_FRAGMENT);
         tsc.addSearchField(sf);
-        
+
       }
-      
-      
+
       if (tsc.getHintThreshold() == null) {
         tsc.setHintThreshold(HINT_THRESHOLD);
       }
@@ -336,8 +372,7 @@ public class TextSearcherDb {
     sf = new SearcherField();
     sf.setIri(DEFINITION_IRI);
     tsc.addSearchField(sf);
-    
-    
+
     sf = new SearcherField();
     sf.setIri(IRI_FRAGMENT);
     tsc.addSearchField(sf);
