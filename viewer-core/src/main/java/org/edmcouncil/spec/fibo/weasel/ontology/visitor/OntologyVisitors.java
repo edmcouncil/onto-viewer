@@ -19,6 +19,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataExactCardinality;
+import org.semanticweb.owlapi.model.OWLDataHasValue;
 import org.semanticweb.owlapi.model.OWLDataMaxCardinality;
 import org.semanticweb.owlapi.model.OWLDataMinCardinality;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
@@ -120,7 +121,7 @@ public class OntologyVisitors {
             endNode.setIncommingRelation(rel);
             if (node.getIncommingRelation() != null) {
               rel.setOptional(node.getIncommingRelation().isOptional());
-            }
+            } else rel.setOptional(false);
             rel.setEndNodeType(type);
             vg.addNode(endNode);
             vg.addRelation(rel);
@@ -143,20 +144,23 @@ public class OntologyVisitors {
             GraphRelation relSomeVal = new GraphRelation(vg.nextId());
             blankNode.setIncommingRelation(relSomeVal);
             relSomeVal.setIri(propertyIri);
-            relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)));
+            String labelPostfix2 = " (1..*)";
+            relSomeVal.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri)) + labelPostfix2);
             relSomeVal.setStart(node);
             relSomeVal.setEnd(blankNode);
             relSomeVal.setEndNodeType(type);
-            if (node.getIncommingRelation() != null) {
-              relSomeVal.setOptional(node.getIncommingRelation().isOptional());
-            }
+//            if (node.getIncommingRelation() != null) {
+//              relSomeVal.setOptional(node.getIncommingRelation().isOptional());
+//            }
+            relSomeVal.setOptional(false);
             vg.addNode(blankNode);
             vg.addRelation(relSomeVal);
             vg.setRoot(blankNode);
             LOG.debug("{}->{}", objectType.toString(), someValuesFromAxiom.toString());
-            addValue(returnedVal, node, someValuesFromAxiom.getFiller());
+            addValue(returnedVal, blankNode, someValuesFromAxiom.getFiller());
             return returnedVal;
           default:
+               LOG.debug("Unsupported expression type in somevaluesfrom {}", objectType);
             addValue(returnedVal, node, someValuesFromAxiom.getFiller());
             return returnedVal;
 
@@ -236,6 +240,42 @@ public class OntologyVisitors {
         LOG.debug("Unsupported axiom type: " + object.getClass().getName());
         return null;
       }
+      
+       @Override
+      public Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLDataHasValue axiom) {
+        LOG.debug("visit OWLDataHasValue");
+        
+        String xsdBooleanIri  = "http://www.w3.org/2001/XMLSchema#boolean";
+        String val = axiom.getFiller().getLiteral();
+        
+        
+        GraphNode endNode = new GraphNode(vg.nextId());
+            endNode.setIri(xsdBooleanIri);
+            endNode.setType(type);
+            endNode.setLabel(val);
+            endNode.setType(type);
+
+        String propertyIri =  OwlDataExtractor.extractAxiomPropertyIri(axiom);
+        
+        GraphRelation rel = new GraphRelation(vg.nextId());
+            endNode.setIncommingRelation(rel);
+            if (node.getIncommingRelation() != null) {
+              rel.setOptional(node.getIncommingRelation().isOptional());
+            }
+            rel.setIri(propertyIri);
+        
+        String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
+            rel.setLabel(relLabel);
+
+            rel.setStart(node);
+            rel.setEnd(endNode);
+            rel.setEndNodeType(type);
+            vg.addNode(endNode);
+            vg.addRelation(rel);
+        
+        return null;
+        
+      }
 
       @Override
       public Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLObjectIntersectionOf axiom) {
@@ -247,7 +287,11 @@ public class OntologyVisitors {
           addValue(returnedVal, node, axiomConjunct.stream().findAny().orElse(null));
           return returnedVal;
         }
-        GraphNode blankNode = new GraphNode(vg.nextId());
+        GraphNode blankNode = null;
+        if(node.getLabel().equals(DEFAULT_BLANK_NODE_LABEL)) blankNode = node;
+        else blankNode = new GraphNode(vg.nextId());
+            
+        
         blankNode.setType(type);
         blankNode.setIri(THING_IRI);
         blankNode.setLabel("and");
@@ -263,6 +307,9 @@ public class OntologyVisitors {
 //         relSomeVal.setLabel(label);
 //         relSomeVal.setIri(relIri);
 //        }
+
+
+if(blankNode.getId()!=node.getId()){
         relSomeVal.setStart(node);
         relSomeVal.setEnd(blankNode);
         relSomeVal.setEndNodeType(type);
@@ -275,7 +322,7 @@ public class OntologyVisitors {
         vg.addRelation(relSomeVal);
         vg.setRoot(blankNode);
         vg.setRoot(blankNode);
-
+    }
         for (OWLClassExpression owlClassExpression : axiomConjunct) {
           LOG.debug("getClassExpressionType {}", owlClassExpression.getClassExpressionType());
 
@@ -293,8 +340,8 @@ public class OntologyVisitors {
 
               GraphRelation rel = new GraphRelation(vg.nextId());
               String labelPostfix = " (1..*)";
-              String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(iri));
-              rel.setLabel(relLabel + labelPostfix);
+              //String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(iri));
+              //rel.setLabel( labelPostfix);
               rel.setStart(blankNode);
               rel.setEnd(endNode);
               rel.setEndNodeType(type);
@@ -445,7 +492,7 @@ public class OntologyVisitors {
             GraphRelation rel = new GraphRelation(vg.nextId());
             rel.setIri(propertyIri);
 
-            String labelPostfix = " (1..1)";
+            String labelPostfix = " (0..*)";
             String relLabel = labelExtractor.getLabelOrDefaultFragment(IRI.create(propertyIri));
             rel.setLabel(relLabel + labelPostfix);
 
@@ -454,9 +501,13 @@ public class OntologyVisitors {
             rel.setEndNodeType(type);
             rel.setOptional(true);
             endNode.setIncommingRelation(rel);
-            if (node.getIncommingRelation() != null) {
-              node.getIncommingRelation().setOptional(true);
-            }
+            
+            rel.setOptional(true);
+            endNode.setOptional(true);
+            
+            //if (node.getIncommingRelation() != null) {
+              //node.getIncommingRelation().setOptional(true);
+            //}
             vg.addNode(endNode);
             vg.addRelation(rel);
 
@@ -640,6 +691,7 @@ public class OntologyVisitors {
           case DATA_MIN_CARDINALITY:
           case DATA_MAX_CARDINALITY:
           case OBJECT_ALL_VALUES_FROM:
+          case OBJECT_INTERSECTION_OF:
           case OBJECT_UNION_OF:
             GraphNode blankNode = new GraphNode(vg.nextId());
             blankNode.setType(type);
@@ -668,9 +720,11 @@ public class OntologyVisitors {
             vg.setRoot(blankNode);
 
             addValue(returnedVal, blankNode, axiom.getFiller());
-            break;
-
+            break;          
+            
+            
           default:
+              addValue(returnedVal, node, axiom.getFiller());
             LOG.debug("Unsupported switch case (ObjectType): {}", objectType);
 
         }
@@ -800,10 +854,15 @@ public class OntologyVisitors {
           if (node.getIncommingRelation() != null) {
             node.getIncommingRelation().setOptional(true);
           }
+          vg.setRoot(blankNode);
           vg.addNode(blankNode);
           vg.addRelation(relSomeVal);
 
           for (OWLClassExpression classExpression : axiom.getOperandsAsList()) {
+              
+              addValue(returnedVal, vg.getRoot(), classExpression);
+              
+              /*
             ClassExpressionType cet = classExpression.getClassExpressionType();
             switch (cet) {
               case OWL_CLASS:
@@ -878,7 +937,7 @@ public class OntologyVisitors {
 
                 }
 
-                addValue(returnedVal, add, classExpression);
+                addValue(returnedVal, vg.getRoot(), classExpression);
                 break;
               case OBJECT_UNION_OF:
 
@@ -914,6 +973,12 @@ public class OntologyVisitors {
                 LOG.debug("Added value: {}", returnedVal);
 
             }
+            
+            
+            
+            
+            
+            */
           }
         }
         return returnedVal;
