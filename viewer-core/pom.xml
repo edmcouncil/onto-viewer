@@ -62,5 +62,11 @@
       <version>2.8.5</version>
       <type>jar</type>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>1.9</version>
+      <type>jar</type>
+    </dependency>
   </dependencies>
 </project>

@@ -51,5 +51,6 @@ public class ConfigKeys {
   public static final String SEARCH_DESCRIPTIONS = "searchDescriptions";
   public static final String FIELD_IRI = "fieldIri";
   public static final String FIELD_BOOST = "fieldBoost";
-
+  public static final String HINT_LEVENSTEIN_DISTANCE = "hintLevensteinDistance";
+  public static final String SEARCH_LEVENSTEIN_DISTANCE = "searchLevensteinDistance";
 }

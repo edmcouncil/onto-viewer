@@ -114,7 +114,7 @@ public class RestrictionGraphDataHandler {
 
     OntologyGraph vg = handleGraph(axiomsIterator, obj.getIRI());
     vg = handleInheritedAxiomsGraph(obj, vg, ontology);
-  //  vg = handleEquivalentClassesAxiomGraph(obj, vg, ontology);
+    //  vg = handleEquivalentClassesAxiomGraph(obj, vg, ontology);
     return vg;
   }
 
@@ -226,7 +226,7 @@ public class RestrictionGraphDataHandler {
       LOG.debug("eca: {}", eca.toString());
       Map<GraphNode, Set<ExpressionReturnedClass>> qrestrictions = eca
           .accept(ontologyVisitors.superClassAxiom(vg, vg.getRoot(), GraphNodeType.INTERNAL, true, false));
-   //   Boolean isFirstEquivalentMarked = false;
+      //   Boolean isFirstEquivalentMarked = false;
 
       if (qrestrictions != null && !qrestrictions.isEmpty()) {
         for (Map.Entry<GraphNode, Set<ExpressionReturnedClass>> entry : qrestrictions.entrySet()) {
@@ -235,13 +235,11 @@ public class RestrictionGraphDataHandler {
             LOG.debug("handleEquivalentClassesAxiomGraph -> entryGetKey {}", entry.getKey());
 
             handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), GraphNodeType.INTERNAL, classExpression.getEquivalent(), false);
-           
 
 //            if (isFirstEquivalentMarked == false) {
 //              isFirstEquivalentMarked = true;
 //
 //            }
-
           }
         }
       }

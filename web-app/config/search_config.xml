@@ -32,6 +32,8 @@
     </hintFields>
     <hintThreshold>0.0</hintThreshold>
     
+    <hintLevensteinDistance>3.0</hintLevensteinDistance>
+    
     <searchFields>
       <searchField>
         <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
@@ -87,6 +89,9 @@
       
     </searchFields>
     <searchThreshold>0.0</searchThreshold>
+    
+    <searchLevensteinDistance>3.0</searchLevensteinDistance>
+    
     <searchDescriptions>
       <searchDescription>http://www.w3.org/2004/02/skos/core#definition</searchDescription>
       <searchDescription>http://purl.org/dc/terms/abstract</searchDescription>
