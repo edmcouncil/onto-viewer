@@ -240,7 +240,7 @@ public class TextSearcherDb {
     if (listResult.isEmpty()) {
       for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
         Double relevancy = record.getValue().computeLevensteinDistance(text, conf.getSearchFields());
-        if (relevancy < conf.getSearchMaxLevensteinDistance()) {
+        if (relevancy <= conf.getSearchMaxLevensteinDistance()) {
           SearchItem si = getPreparedSearchResultItem(record, relevancy);
           listResult.add(si);
         }
