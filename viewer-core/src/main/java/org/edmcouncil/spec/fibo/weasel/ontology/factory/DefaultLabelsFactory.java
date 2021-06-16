@@ -50,6 +50,15 @@ public class DefaultLabelsFactory {
 
     iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.USAGE_CLASSES.toString().toLowerCase());
     result.addLabel(iri, DefaultAppLabels.DEF_USAGE_CLASSES);
+    
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.DIRECT_SUB_OBJECT_PROPERTY.toString().toLowerCase());
+    result.addLabel(iri, DefaultAppLabels.DEF_DIRECT_SUB_OBJECT_PROPERTY);
+    
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.DIRECT_SUB_ANNOTATION_PROPERTY.toString().toLowerCase());
+    result.addLabel(iri, DefaultAppLabels.DEF_DIRECT_SUB_ANNOTATION_PROPERTY);
+    
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.DIRECT_SUB_DATA_PROPERTY.toString().toLowerCase());
+    result.addLabel(iri, DefaultAppLabels.DEF_DIRECT_SUB_DATA_PROPERTY);
 
     return result;
 
