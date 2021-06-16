@@ -50,6 +50,9 @@
     <group>
       <groupName>Ontological characteristic</groupName>
       <groupItem>@viewer.function.usage_classes</groupItem>
+      <groupItem>@viewer.function.direct_sub_data_property</groupItem>
+      <groupItem>@viewer.function.direct_sub_object_property</groupItem>
+      <groupItem>@viewer.function.direct_sub_annotation_property</groupItem>
       <groupItem>@viewer.function.direct_subclasses</groupItem>
       <groupItem>@viewer.function.instances</groupItem>
       <groupItem>@viewer.axiom.EquivalentClasses</groupItem>

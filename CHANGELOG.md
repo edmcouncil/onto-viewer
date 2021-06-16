@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Search by using class names and definitions in hints and search bar
 - Added usage info for classes and object property
 - Added Levenstein distance in search
+- Displaying direct sub-properties 
 
 ## [0.3.2] - 2021-02-19
 ###Added
