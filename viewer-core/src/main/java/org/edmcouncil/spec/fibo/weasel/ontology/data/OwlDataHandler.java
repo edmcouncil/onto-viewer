@@ -832,6 +832,14 @@ public class OwlDataHandler {
     return result;
   }
   
+  /**
+   * This method is used to display SubProperty
+   *
+   * @param ontology This is a loaded ontology.
+   * @param obj Obj are all properties of direct subObjectProperty.
+   * @return Properties of direct subObjectProperty.
+   */
+  
   public OwlDetailsProperties<PropertyValue> handleDirectSubObjectProperty(OWLOntology ontology, OWLObjectProperty obj) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     
@@ -858,6 +866,14 @@ public class OwlDataHandler {
     return result;
   }
   
+  
+  /**
+   * This method is used to display SubProperty
+   *
+   * @param ontology This is a loaded ontology.
+   * @param annotationProperty AnnotationProperty are all properties of direct subAnnotationProperty.
+   * @return Properties of direct subAnnotationProperty.
+   */ 
   public OwlDetailsProperties<PropertyValue> handleDirectSubAnnotationProperty(OWLOntology ontology, OWLAnnotationProperty annotationProperty) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -883,43 +899,25 @@ public class OwlDataHandler {
     return result;
   }
   
-//  public OwlDetailsProperties<PropertyValue> handleDirectSubDataProperty(OWLOntology ontology, OWLDataProperty odj) {
-//    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-//    
-//   // Iterator<OWLSubDataPropertyOfAxiom> iterator = ontology.dataSubPropertyAxiomsForSuperProperty(odj).iterator();
-//     Iterator<OWLDataProperty> iterator = EntitySearcher.getSubProperties(odj, ontology).iterator(); 
-//   
-//    while (iterator.hasNext()) {
-//      LOG.debug("OwlDataHandler -> handleDirectSubDataProperty {}", iterator.hasNext());
-//      OWLDataProperty next = iterator.next();
-//      
-//      IRI iri = next.getIRI();
-//   
-//      
-//      OwlDirectedSubClassesProperty r = new OwlDirectedSubClassesProperty();
-//      
-//      r.setType(WeaselOwlType.DIRECT_SUBCLASSES);
-//      r.setValue(new PairImpl(labelExtractor.getLabelOrDefaultFragment(iri), iri.toString()));
-//      
-//      String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
-//          WeaselOwlType.DIRECT_SUB_DATA_PROPERTY.name().toLowerCase());
-//      result.addProperty(key, r);
-//    }
-//    result.sortPropertiesInAlphabeticalOrder();
-//    return result;
-//  }
-
-   public OwlDetailsProperties<PropertyValue> handleDirectSubDataProperty(OWLOntology ontology, OWLDataProperty odj) {
+   /**
+   * This method is used to display SubProperty
+   *
+   * @param ontology This is a loaded ontology.
+   * @param odj Odj are all properties of direct subDataProperty.
+   * @return Properties of direct subDataProperty.
+   */ 
+  
+  public OwlDetailsProperties<PropertyValue> handleDirectSubDataProperty(OWLOntology ontology, OWLDataProperty odj) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     
-   Iterator<OWLSubDataPropertyOfAxiom> iterator = ontology.dataSubPropertyAxiomsForSuperProperty(odj).iterator();
-    // Iterator<OWLDataProperty> iterator = EntitySearcher.getSubProperties(odj, ontology).iterator(); 
+   // Iterator<OWLSubDataPropertyOfAxiom> iterator = ontology.dataSubPropertyAxiomsForSuperProperty(odj).iterator();
+     Iterator<OWLDataProperty> iterator = EntitySearcher.getSubProperties(odj, ontology).iterator(); 
    
     while (iterator.hasNext()) {
       LOG.debug("OwlDataHandler -> handleDirectSubDataProperty {}", iterator.hasNext());
-      OWLSubDataPropertyOfAxiom next = iterator.next();
+      OWLDataProperty next = iterator.next();
       
-      IRI iri = next.getSubProperty().asOWLDataProperty().getIRI();
+      IRI iri = next.getIRI();
    
       
       OwlDirectedSubClassesProperty r = new OwlDirectedSubClassesProperty();
@@ -934,7 +932,7 @@ public class OwlDataHandler {
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
-  
+
   
   /**
    * This method is used to display Particular Individual
