@@ -43,8 +43,6 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
     this.config = configuration;
   }
 
- 
-
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
     switch (qName) {
@@ -172,7 +170,12 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
         config.addCongigElement(key, tsc);
         tsc = null;
         break;
-
+      case ConfigKeys.HINT_LEVENSTEIN_DISTANCE:
+        tsc.setHintMaxLevensteinDistance(Double.valueOf(val));
+        break;
+      case ConfigKeys.SEARCH_LEVENSTEIN_DISTANCE:
+        tsc.setSearchMaxLevensteinDistance(Double.valueOf(val));
+        break;
     }
   }
 

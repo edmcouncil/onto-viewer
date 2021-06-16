@@ -2,6 +2,7 @@ package org.edmcouncil.spec.fibo.weasel.ontology.searcher.text;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.edmcouncil.spec.fibo.config.configuration.model.searcher.SearcherField;
 
 /**
@@ -13,6 +14,7 @@ public class TextDbItem {
 
   private final Set<Item> value;
   private static final Double BASE_BOST = 10.0d;
+  private static final LevenshteinDistance levenshteinDistance = LevenshteinDistance.getDefaultInstance();
 
   public TextDbItem() {
     value = new HashSet<>();
@@ -57,6 +59,24 @@ public class TextDbItem {
             tmpVal = ((double) text.length() / item.value.length()) * BASE_BOST * field.getBoost();
           }
           result = tmpVal > result ? tmpVal : result;
+        }
+      }
+    }
+
+    return result;
+  }
+
+  Double computeLevensteinDistance(String text, Set<SearcherField> fields) {
+    Double result = Double.MAX_VALUE ;
+    // String sText = text.toLowerCase();
+    for (SearcherField field : fields) {
+      if (!field.getBoost().equals(0.0d)) {
+        for (Item item : value) {
+          Double tmpVal = Double.MAX_VALUE;
+          if (item.type.equals(field.getIri())) {
+            tmpVal = ((double) levenshteinDistance.apply(text, item.getValue()));
+          }
+          result = tmpVal < result ? tmpVal : result;
         }
       }
     }
