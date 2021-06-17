@@ -25,13 +25,13 @@
   <logger name="org.edmcouncil.spec.fibo" level="TRACE" additivity="false">
     <appender-ref ref="STDOUT" />
   </logger>
-  <logger name="org.semanticweb.owlapi" level="TRACE" additivity="false">
+  <logger name="org.semanticweb.owlapi" level="DEBUG" additivity="false">
     <appender-ref ref="STDOUT" />
   </logger>
   <logger name="org.semanticweb.owlapi.utilities.Injector" level="INFO" additivity="false">
     <appender-ref ref="STDOUT" />
   </logger>
-  <logger name="uk.ac.manchester.cs.owl.owlapi." level="TRACE" additivity="false">
+  <logger name="uk.ac.manchester.cs.owl.owlapi." level="DEBUG" additivity="false">
     <appender-ref ref="STDOUT" />
   </logger>
   <root level="INFO" additivity="false">
