@@ -3,10 +3,19 @@
   <searchConfig>
     
     
+    <!-- The file describes the fields that are taken into account for hints and searches.
+    Only the defined fields in this file are taken into account -->
     
+    
+    <!-- refers to hints -->
     <hintFields>
+      
+      <!-- refers to single field -->
       <hintField>
-        <fieldIri>http://www.w3.org/2004/02/skos/core#definition</fieldIri>
+        <!-- Definition of single iri that relates to a specific resource field  -->
+        <fieldIri>http://www.w3.org/2004/02/skos/core#definition</fieldIri>       
+        <!-- A multiplier that modifies the relevance of a field
+        Below 1 decrease weight above  1 increase  -->
         <fieldBoost>1.0</fieldBoost>
       </hintField>  
       <hintField>
@@ -30,13 +39,26 @@
         <fieldBoost>1.0</fieldBoost>
       </hintField>
     </hintFields>
+    
+    <!-- Minimum weight that qualifies to appear in hints -->
     <hintThreshold>0.0</hintThreshold>
     
+    
+    <!-- Maximum difference from levenstein distance, qualifies to appear in hints. 
+    The condition for running Levenstein's algorithm is the absence of basic results. -->
     <hintLevensteinDistance>3.0</hintLevensteinDistance>
     
+    <!-- refers to advanced search -->
     <searchFields>
+      
+      <!-- refers to single field -->
       <searchField>
+        
+        <!-- Definition of single iri that relates to a specific resource field  -->
         <fieldIri>http://www.w3.org/2000/01/rdf-schema#label</fieldIri>
+        
+        <!-- A multiplier that modifies the relevance of a field
+        Below 1 decrease weight above  1 increase  -->
         <fieldBoost>1.0</fieldBoost>
       </searchField>
       
@@ -88,10 +110,15 @@
       
       
     </searchFields>
+    <!-- Minimum weight that qualifies to appear in search -->
     <searchThreshold>0.0</searchThreshold>
     
+     <!-- Maximum difference from levenstein distance, qualifies to appear in search. 
+    The condition for running Levenstein's algorithm is the absence of basic results. -->
     <searchLevensteinDistance>3.0</searchLevensteinDistance>
     
+    
+    <!-- Defined fields to be displayed as description in advanced search -->
     <searchDescriptions>
       <searchDescription>http://www.w3.org/2004/02/skos/core#definition</searchDescription>
       <searchDescription>http://purl.org/dc/terms/abstract</searchDescription>

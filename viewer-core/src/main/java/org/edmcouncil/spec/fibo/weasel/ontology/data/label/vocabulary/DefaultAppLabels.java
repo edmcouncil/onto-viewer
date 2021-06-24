@@ -25,6 +25,9 @@ public class DefaultAppLabels {
   public static final String DEF_USAGE_CLASSES = "Usage";
   public static final String DEF_INSTANCES = "Instances/individuals";
   public static final String DEF_ANONYMOUS_ANCESTOR = "IS-A restrictions inherited from superclasses";
+  public static final String DEF_DIRECT_SUB_OBJECT_PROPERTY = "Direct subObjectProperty";
+  public static final String DEF_DIRECT_SUB_ANNOTATION_PROPERTY = "Direct subAnnotationProperty";
+  public static final String DEF_DIRECT_SUB_DATA_PROPERTY = "Direct subDataProperty";
 
   private final Map<IRI, String> labels = new HashMap<>();
 

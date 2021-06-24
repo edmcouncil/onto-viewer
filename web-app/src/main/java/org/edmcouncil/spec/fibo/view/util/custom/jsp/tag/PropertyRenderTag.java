@@ -74,6 +74,18 @@ public class PropertyRenderTag extends SimpleTagSupport {
       case USAGE_CLASSES:
         renderDirectedSubclasses(property);
         break;
+
+      case DIRECT_SUB_OBJECT_PROPERTY:
+        renderDirectedSubclasses(property);
+        break;
+
+      case DIRECT_SUB_ANNOTATION_PROPERTY:
+        renderDirectedSubclasses(property);
+        break;
+
+      case DIRECT_SUB_DATA_PROPERTY:
+        renderDirectedSubclasses(property);
+        break;
     }
 
   }
