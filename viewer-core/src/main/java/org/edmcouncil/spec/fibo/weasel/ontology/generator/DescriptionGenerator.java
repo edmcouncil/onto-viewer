@@ -66,10 +66,10 @@ public class DescriptionGenerator {
   private List<OwlAnnotationPropertyValue> prepareListOfPropertyValues(String description) {
     return Arrays.stream(description.split(SPLIT_DELIMITER))
         .map(part -> {
-          part = part.trim();
+          part = sortGeneratedDescription(part).trim();
           OwlAnnotationPropertyValue descriptionVaLue = new OwlAnnotationPropertyValue();
           descriptionVaLue.setValue(part);
-          descriptionVaLue.setType(WeaselOwlType.OTHER);
+          descriptionVaLue.setType(WeaselOwlType.STRING);
           return descriptionVaLue;
         })
         .collect(Collectors.toList());
@@ -114,6 +114,23 @@ public class DescriptionGenerator {
       result = result.replace(entry.getKey(), entry.getValue());
     }
     return result;
+  }
+
+  private String sortGeneratedDescription(String description) {
+    // Sentence with 'is a kind of` and 'Inherited...' should always be at the beginning
+    if (description.contains("is a kind of") || description.contains("Inherited from the ancestor classes:")) {
+      var splitted = description.split("\n");
+      var firstPart = splitted[0];
+      var rest = Arrays.copyOfRange(splitted, 1, splitted.length);
+      var restSorted = Arrays.stream(rest)
+          .sorted()
+          .collect(joining("\n"));
+      return firstPart + "\n" + restSorted;
+    } else {
+      return Arrays.stream(description.split("\n"))
+          .sorted()
+          .collect(Collectors.joining("\n"));
+    }
   }
 
   private void appendRestrictions(Map<String, List<PropertyValue>> ontologicalCharacteristics,
@@ -266,7 +283,6 @@ public class DescriptionGenerator {
       return firstArgument;
     }
   }
-
 
   private String improveReadabilityOfRestrictions(String restrictionsString) {
     return Arrays.stream(restrictionsString.split("\n"))
