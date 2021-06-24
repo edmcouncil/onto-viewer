@@ -170,8 +170,7 @@ public class OwlDataHandler {
 
         OwlDetailsProperties<PropertyValue> annotations
             = handleAnnotations(clazz.getIRI(), ontology, resultDetails);
-
-        //  setResultValues(resultDetails, tax, axioms, annotations, directSubclasses, individuals, inheritedAxioms, vg, usage, subclasses);
+        
         setResultValues(resultDetails, tax, axioms, annotations, directSubclasses, individuals, inheritedAxioms, usage, vg, subclasses);
       }
     }
@@ -458,26 +457,6 @@ public class OwlDataHandler {
       String key = axiom.getAxiomType().getName();
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, ignoredToDisplay, key);
-//      value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
-//
-//      String key = axiom.getAxiomType().getName();
-//      key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
-//      if (ignoredToDisplay.contains(key)) {
-//        continue;
-//      }
-//      OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
-//      opv.setValue(value);
-//
-//      opv.setType(WeaselOwlType.AXIOM);
-//      LOG.debug("[Data Handler] Find Axiom \"{}\" with type \"{}\"", value, key);
-//      Boolean isRestriction = owlUtils.isRestriction(axiom);
-//
-//      if (!isRestriction && axiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
-//        LOG.trace("[Data Handler] Find non restriction SubClassOf");
-//        opv.setType(WeaselOwlType.TAXONOMY);
-//      }
-//
-//      processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, opv, value);
       if (opv == null) {
         continue;
       }
@@ -535,7 +514,6 @@ public class OwlDataHandler {
     processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, opv, value, startCountingArgs);
 
     return opv;
-
   }
 
   //TODO: refactor this method
