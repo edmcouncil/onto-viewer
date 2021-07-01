@@ -49,38 +49,4 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
     return fullRenderedString == null ? entityMaping.toString() : fullRenderedString;
   }
 
-//  @Override
-//  public int hashCode() {
-//    int hash = 7;
-//   // hash = 73 * hash + Objects.hashCode(this.entityMaping);
-//    hash = 73 * hash + Objects.hashCode(this.fullRenderedString);
-//    return hash;
-//  }
-//
-//  @Override
-//  public boolean equals(Object obj) {
-//    if (this == obj) {
-//      return true;
-//    }
-//    if (obj == null) {
-//      return false;
-//    }
-//    if (getClass() != obj.getClass()) {
-//      return false;
-//    }
-//    final OwlAxiomPropertyValue other = (OwlAxiomPropertyValue) obj;
-////    if (this.lastId != other.lastId) {
-////      return false;
-////    }
-//    if (!Objects.equals(this.fullRenderedString, other.fullRenderedString)) {
-//      return false;
-//    }
-////    if (!Objects.equals(this.entityMaping, other.entityMaping)) {
-////      return false;
-////    }
-//    return true;
-//  }
-
-  
-  
 }
