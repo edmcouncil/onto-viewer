@@ -4,6 +4,7 @@ import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.BooleanI
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.fibo.config.configuration.model.impl.element.LabelPriority;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -224,11 +225,10 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public TextSearcherConfig getTextSearcherConfig() {
-    Set<ConfigItem> values = configuration.get(ConfigKeys.TEXT_SEARCH_CONFIG);
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.TEXT_SEARCH_CONFIG, Collections.emptySet());
 
     for (ConfigItem value : values) {
-      TextSearcherConfig tsc = (TextSearcherConfig) value;
-      return tsc;
+      return (TextSearcherConfig) value;
     }
     return null;
   }
