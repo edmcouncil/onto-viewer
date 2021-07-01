@@ -171,8 +171,7 @@ public class OwlDataHandler {
 
         OwlDetailsProperties<PropertyValue> annotations
             = handleAnnotations(clazz.getIRI(), ontology, resultDetails);
-
-        //  setResultValues(resultDetails, tax, axioms, annotations, directSubclasses, individuals, inheritedAxioms, vg, usage, subclasses);
+        
         setResultValues(resultDetails, tax, axioms, annotations, directSubclasses, individuals, inheritedAxioms, usage, vg, subclasses);
       }
     }
@@ -459,7 +458,9 @@ public class OwlDataHandler {
       LOG.debug("NotRenderedAxioms: {}", axiom.toString());
       String key = axiom.getAxiomType().getName();
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
+
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, ignoredToDisplay, key, start, true);
+
 
       if (opv == null) {
         continue;
@@ -520,7 +521,6 @@ public class OwlDataHandler {
     processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, opv, value, startCountingArgs);
 
     return opv;
-
   }
 
   //TODO: refactor this method
