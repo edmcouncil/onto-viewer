@@ -20,44 +20,41 @@ public class AppConfiguration {
 
   private static final Logger LOG = LoggerFactory.getLogger(AppConfiguration.class);
 
-  @Autowired
-  private FileSystemManager fileSystemManager;
-  private ViewerCoreConfiguration viewerCoreConfig;
-  private final FileSystemManager fsm;
+  private final FileSystemManager fileSystemManager;
 
-  public AppConfiguration(FileSystemManager fsm) {
-    this.fsm = fsm;
+  private ViewerCoreConfiguration viewerCoreConfig;
+
+  public AppConfiguration(FileSystemManager fileSystemManager) {
+    this.fileSystemManager = fileSystemManager;
   }
 
   @PostConstruct
   public void init() {
     LOG.debug("Start loading configuration.");
 
-    ConfigLoader cl = new ConfigLoader();
-    Path configFilePath = null;
+    var configLoader = new ConfigLoader();
+    Path configFilePath;
 
     try {
-
       configFilePath = fileSystemManager.getPathToConfigFile();
 
-      LOG.debug("Path to Configs Directory : {}", configFilePath.toAbsolutePath().toString());
+      LOG.debug("Path to Configs Directory : {}", configFilePath.toAbsolutePath());
       LOG.debug("Load config");
       LOG.debug("List Files : {}", configFilePath.toFile().listFiles().toString());
       for (File file : configFilePath.toFile().listFiles()) {
-        LOG.debug("Path to ConfigFile : {}", file.toPath().toString());
+        LOG.debug("Path to ConfigFile : {}", file.toPath());
         if (file.isFile()) {
-
-          cl.loadWeaselConfiguration(file.toPath());
+          configLoader.loadWeaselConfiguration(file.toPath());
         }
       }
 
-      this.viewerCoreConfig = cl.getConfiguration();
+      this.viewerCoreConfig = configLoader.getConfiguration();
 
     } catch (IOException ex) {
       LOG.error("[ERROR] IOException while loading config file");
     }
 
-    this.viewerCoreConfig = cl.getConfiguration();
+    this.viewerCoreConfig = configLoader.getConfiguration();
 
     if (!viewerCoreConfig.isEmpty()) {
       LOG.debug("Configuration: ");

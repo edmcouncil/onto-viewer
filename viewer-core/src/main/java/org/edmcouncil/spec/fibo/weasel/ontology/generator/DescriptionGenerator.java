@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Service
 public class DescriptionGenerator {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DescriptionGenerator.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DescriptionGenerator.class);
 
   static final String IS_A_RESTRICTIONS_LABEL = "IS-A restrictions";
   static final String IS_A_RESTRICTIONS_INHERITED_LABEL = "IS-A restrictions inherited from superclasses";
@@ -37,6 +37,9 @@ public class DescriptionGenerator {
   private static final String PROPERTY_PATTERN = "/arg\\d+/( .* )/arg\\d+/";
   private static final Map<String, String> REPLACEMENTS = new HashMap<>();
   private static final String SPLIT_DELIMITER = "SPLIT_HERE";
+  private static final String INHERITED_DESCRIPTIONS_LABEL = "Inherited descriptions:";
+  private static final String OWN_DESCRIPTIONS_LABEL = "Own descriptions:";
+  private static final String IS_A_KIND_OF_LABEL = "is a kind of";
 
   static {
     REPLACEMENTS.put("[", "");
@@ -78,24 +81,27 @@ public class DescriptionGenerator {
   private String prepareDescriptionString(String label,
                                           OwlTaxonomyImpl taxonomy,
                                           Map<String, List<PropertyValue>> ontologicalCharacteristics) {
-    GeneratorManager manager = new GeneratorManager(label);
+    var manager = new GeneratorManager(label);
 
     var superClasses = getSuperClasses(taxonomy);
+    var kindOfDescription = OWN_DESCRIPTIONS_LABEL + "\n";
     if (!superClasses.isEmpty()) {
-      manager.getSb().append(capitalize(label)).append(" is a kind of ").append(superClasses).append(".\n");
+      kindOfDescription += String.format("- %s is a kind of %s.%n", capitalize(label), superClasses);
     }
 
     appendRestrictions(
         ontologicalCharacteristics,
         manager,
         IS_A_RESTRICTIONS_LABEL,
-        "");
+        kindOfDescription,
+        true);
     manager.getSb().append(SPLIT_DELIMITER);
     appendRestrictions(
         ontologicalCharacteristics,
         manager,
         IS_A_RESTRICTIONS_INHERITED_LABEL,
-        "Inherited from the ancestor classes:\n");
+        INHERITED_DESCRIPTIONS_LABEL + "\n",
+        false);
 
     return cleanAndPolishGeneratedDescription(manager.getSb());
   }
@@ -117,30 +123,48 @@ public class DescriptionGenerator {
   }
 
   private String sortGeneratedDescription(String description) {
-    // Sentence with 'is a kind of` and 'Inherited...' should always be at the beginning
-    if (description.contains("is a kind of") || description.contains("Inherited from the ancestor classes:")) {
-      var splitted = description.split("\n");
-      var firstPart = splitted[0];
-      var rest = Arrays.copyOfRange(splitted, 1, splitted.length);
-      var restSorted = Arrays.stream(rest)
-          .sorted()
-          .collect(joining("\n"));
-      return firstPart + "\n" + restSorted;
-    } else {
-      return Arrays.stream(description.split("\n"))
-          .sorted()
-          .collect(Collectors.joining("\n"));
-    }
+    // Sentence containing 'Own descriptions', 'Inherited descriptions', and 'is a kind of` should always be at the
+    // beginning. 'Own descriptions' goes before 'is a kind of'.
+    return Arrays.stream(description.split("\n"))
+        .sorted((s1, s2) -> {
+          if (s1.contains(INHERITED_DESCRIPTIONS_LABEL)) {
+            return -1;
+          } else if (s2.contains(INHERITED_DESCRIPTIONS_LABEL)) {
+            return 1;
+          }
+          if (s1.contains(OWN_DESCRIPTIONS_LABEL)) {
+            return -1;
+          } else if (s2.contains(OWN_DESCRIPTIONS_LABEL)) {
+            return 1;
+          }
+          if (s1.contains(IS_A_KIND_OF_LABEL)) {
+            if (s2.contains(OWN_DESCRIPTIONS_LABEL)) {
+              return 1;
+            } else {
+              return -1;
+            }
+          }
+          if (s2.contains(IS_A_KIND_OF_LABEL)) {
+            if (s1.contains(OWN_DESCRIPTIONS_LABEL)) {
+              return -1;
+            } else {
+              return 1;
+            }
+          }
+          return s1.compareTo(s2);
+        })
+        .collect(Collectors.joining("\n"));
   }
 
   private void appendRestrictions(Map<String, List<PropertyValue>> ontologicalCharacteristics,
                                   GeneratorManager manager,
                                   String groupRestrictionsName,
-                                  String toAppendBefore) {
+                                  String toAppendBefore,
+                                  boolean appendWhenEmpty) {
 
     List<PropertyValue> propertyValues = ontologicalCharacteristics.getOrDefault(groupRestrictionsName, emptyList());
 
-    if (propertyValues.size() > 1) {
+    if (appendWhenEmpty || propertyValues.size() > 1) {
       manager.getSb().append(toAppendBefore);
     }
 
@@ -158,7 +182,7 @@ public class DescriptionGenerator {
             handlePropertyWithFourArguments(manager, axiomProperty, propertyPattern);
           }
         } catch (GeneratorException ex) {
-          LOG.warn("Exception thrown while processing property '{}'. Details: {}", axiomProperty, ex.getMessage());
+          LOGGER.warn("Exception thrown while processing property '{}'. Details: {}", axiomProperty, ex.getMessage());
         }
       }
     }
@@ -169,8 +193,8 @@ public class DescriptionGenerator {
                                               String propertyPattern) throws GeneratorException {
     Map<String, OwlAxiomPropertyEntity> entityMapping = property.getEntityMaping();
 
-    String firstArgumentId = propertyPattern.substring(0, propertyPattern.indexOf(" "));
-    String secondArgumentId = propertyPattern.substring(propertyPattern.lastIndexOf(" ") + 1);
+    var firstArgumentId = propertyPattern.substring(0, propertyPattern.indexOf(" "));
+    var secondArgumentId = propertyPattern.substring(propertyPattern.lastIndexOf(" ") + 1);
 
     if (entityMapping.containsKey(firstArgumentId) && entityMapping.containsKey(secondArgumentId)) {
       String firstArgument = entityMapping.get(firstArgumentId).getLabel();
@@ -202,7 +226,7 @@ public class DescriptionGenerator {
       }
       manager.getSb().append(".\n");
     } else {
-      LOG.debug("Entity mapping for property '{}' doesn't contains arguments '{}' or '{}'. Entity mapping: {}",
+      LOGGER.debug("Entity mapping for property '{}' doesn't contains arguments '{}' or '{}'. Entity mapping: {}",
           property.getValue(), firstArgumentId, secondArgumentId, entityMapping);
     }
   }
