@@ -2,7 +2,6 @@ package org.edmcouncil.spec.fibo.weasel.model.property;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
