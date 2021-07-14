@@ -9,6 +9,9 @@ All notable changes to this project will be documented in this file.
 - Added Levenstein distance in search
 - Displaying direct sub-properties 
 
+### Changed
+- Group inherited restrictions by the class they are coming from
+
 ## [0.3.2] - 2021-02-19
 ###Added
 - Displaying 'cardinality' for relations in the graph.
