@@ -25,7 +25,6 @@ public class FileSystemManager {
   private final String defaultOntologyFileName;
   private final String configPath;
 
-  @Autowired
   public FileSystemManager(AppProperties appProperties) {
     workingDir = appProperties.getDefaultHomePath();
     viewerConfigFileName = appProperties.getViewerConfigFileName();
@@ -33,8 +32,8 @@ public class FileSystemManager {
     configPath = appProperties.getConfigPath();
   }
 
-  public Path getviewerHomeDir() {
-    Path userHomeDir = null;
+  public Path getViewerHomeDir() {
+    Path userHomeDir;
     String userHomeProperty = null;
     switch (workingDir) {
       case "user.home":
@@ -66,43 +65,42 @@ public class FileSystemManager {
     try {
       Files.createDirectory(dirPath);
     } catch (IOException ex) {
-      String msg = String.format("Unable to create a dir '%s'.", dirPath);
+      var msg = String.format("Unable to create a dir '%s'.", dirPath);
       throw new IOException(msg, ex);
     }
   }
 
   public Path getDefaultPathToOntologyFile() throws IOException {
-    Path homeDir = getviewerHomeDir();
+    Path homeDir = getViewerHomeDir();
     return createDirIfNotExists(homeDir).resolve(defaultOntologyFileName);
   }
 
   public Path getPathToOntologyFile(String pathString) throws IOException {
-    Path path = Paths.get(pathString);
+    var path = Paths.get(pathString);
     if (path.isAbsolute()) {
       return path;
-
     } else {
-      Path homeDir = getviewerHomeDir();
+      Path homeDir = getViewerHomeDir();
       return createDirIfNotExists(homeDir).resolve(path);
     }
   }
 
   public Path getPathToConfigFile() throws IOException {
-    Path path = Paths.get(configPath);
+    var path = Paths.get(configPath);
     if (path.isAbsolute()) {
       return path;
     } else {
-      Path homeDir = getviewerHomeDir();
-      return createDirIfNotExists(homeDir).resolve(configPath);
+      var homePath = getViewerHomeDir();
+      var configDirPath = createDirIfNotExists(homePath).resolve(configPath);
+      return createDirIfNotExists(configDirPath);
     }
   }
 
   public Path getPathToApiKey() {
-    return getviewerHomeDir().resolve("api.key");
+    return getViewerHomeDir().resolve("api.key");
   }
 
   public Path getPathToUpdateHistory() {
-    return getviewerHomeDir().resolve("updateHistory.json");
+    return getViewerHomeDir().resolve("updateHistory.json");
   }
-
 }

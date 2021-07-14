@@ -36,7 +36,7 @@ class DescriptionGeneratorTest {
         List.of(List.of("superTest1", "test")));
 
     var expectedResult =
-        prepareExpectedResult(List.of("Test label is a kind of superTest1."));
+        prepareExpectedResult(List.of("Own descriptions:\n- Test label is a kind of superTest1."));
 
     var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
 
@@ -53,7 +53,7 @@ class DescriptionGeneratorTest {
             List.of("superTest2", "test")));
 
     var expectedResult =
-        prepareExpectedResult(List.of("Test label is a kind of superTest1, superTest2."));
+        prepareExpectedResult(List.of("Own descriptions:\n- Test label is a kind of superTest1, superTest2."));
 
     var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
 
@@ -71,7 +71,8 @@ class DescriptionGeneratorTest {
             List.of("superTest3", "test")));
 
     var expectedResult =
-        prepareExpectedResult(List.of("Test label is a kind of superTest1, superTest2, superTest3."));
+        prepareExpectedResult(
+            List.of("Own descriptions:\n- Test label is a kind of superTest1, superTest2, superTest3."));
 
     var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
 
@@ -90,7 +91,7 @@ class DescriptionGeneratorTest {
 
     var expectedResult =
         prepareExpectedResult(
-            List.of("Test label is a kind of superTest1, superTest2."));
+            List.of("Own descriptions:\n- Test label is a kind of superTest1, superTest2."));
 
     var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
 
@@ -112,7 +113,8 @@ class DescriptionGeneratorTest {
             new OwlEntity("physicalAddress", "physical address")));
 
     var expectedResult = prepareExpectedResult(
-        List.of("Test label is a kind of superTest1.\n" +
+        List.of("Own descriptions:\n" +
+            "- Test label is a kind of superTest1.\n" +
             "- Test label may have address that is physical address."));
 
     var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
@@ -143,7 +145,8 @@ class DescriptionGeneratorTest {
 
     var expectedResult = prepareExpectedResult(
         List.of(
-            "Legal entity is a kind of superTest1.\n" +
+            "Own descriptions:\n" +
+                "- Legal entity is a kind of superTest1.\n" +
                 "- Legal entity is recognized in some jurisdiction.\n" +
                 "- Legal entity may have address that is physical address."));
 
@@ -182,7 +185,8 @@ class DescriptionGeneratorTest {
 
     var expectedResult = prepareExpectedResult(
         List.of(
-            "Legal entity is a kind of superTest1.\n" +
+            "Own descriptions:\n" +
+                "- Legal entity is a kind of superTest1.\n" +
                 "- Legal entity has some goal.\n" +
                 "- Legal entity is organized in exactly 1 jurisdiction.",
             "- Legal entity is recognized in some jurisdiction."));
@@ -215,7 +219,8 @@ class DescriptionGeneratorTest {
 
     var expectedResult = prepareExpectedResult(
         List.of(
-            "Legal entity is a kind of superTest1.\n" +
+            "Own descriptions:\n" +
+                "- Legal entity is a kind of superTest1.\n" +
                 "- Legal entity has some goal.",
             "- Legal entity has some part that is organization."));
 
@@ -242,7 +247,8 @@ class DescriptionGeneratorTest {
 
     var expectedResult = prepareExpectedResult(
         List.of(
-            "Legal entity is a kind of superTest1.\n" +
+            "Own descriptions:\n" +
+                "- Legal entity is a kind of superTest1.\n" +
                 "- Legal entity has some originating service provider that is financial service provider and is " +
                 "identified by some Nationwide Mortgage Licensing."));
 
@@ -267,7 +273,8 @@ class DescriptionGeneratorTest {
 
     var expectedResult = prepareExpectedResult(
         List.of(
-            "Legal entity is a kind of superTest1.\n" +
+            "Own descriptions:\n" +
+                "- Legal entity is a kind of superTest1.\n" +
                 "- Legal entity may be governed by some organization covering agreement."));
 
     var actualResult = descriptionGenerator.prepareDescriptionString(groupedDetails);
@@ -319,7 +326,8 @@ class DescriptionGeneratorTest {
 
     var expectedResult = prepareExpectedResult(
         List.of(
-            "Legal entity is a kind of superTest1.\n" +
+            "Own descriptions:\n" +
+                "- Legal entity is a kind of superTest1.\n" +
                 "- Legal entity has some address that is virtual address.\n" +
                 "- Legal entity is recognized in some jurisdiction.\n" +
                 "- Legal entity is recognized in some zurisdiction.\n" +
