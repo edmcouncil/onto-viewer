@@ -101,16 +101,14 @@
 
               return connEdges.length > 0 || node.id === 1;
             }
-
-
           });
 
-
+          });
+          
           var data = {
             nodes: nodeView,
             edges: edgesView
           };
-
 
           var options = {
             "edges": {
@@ -119,7 +117,6 @@
                 "forceDirection": "none",
                 "roundness": 0.15
               }
-
             },
             "physics": {
               "forceAtlas2Based": {
