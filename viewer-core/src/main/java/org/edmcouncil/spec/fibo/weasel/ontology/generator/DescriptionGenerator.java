@@ -40,6 +40,7 @@ public class DescriptionGenerator {
   private static final String INHERITED_DESCRIPTIONS_LABEL = "Inherited descriptions:";
   private static final String OWN_DESCRIPTIONS_LABEL = "Own descriptions:";
   private static final String IS_A_KIND_OF_LABEL = "is a kind of";
+  private static final String EMPTY_RESULT_INDICATOR = OWN_DESCRIPTIONS_LABEL + "\n" + SPLIT_DELIMITER;
 
   static {
     REPLACEMENTS.put("[", "");
@@ -54,7 +55,7 @@ public class DescriptionGenerator {
     Map<String, List<PropertyValue>> ontologicalCharacteristics =
         groupedDetails.getProperties().getOrDefault(ONTOLOGICAL_CHARACTERISTIC_LABEL, Collections.emptyMap());
 
-    String description = prepareDescriptionString(
+    var description = prepareDescriptionString(
         groupedDetails.getLabel(),
         (OwlTaxonomyImpl) groupedDetails.getTaxonomy(),
         ontologicalCharacteristics);
@@ -70,7 +71,7 @@ public class DescriptionGenerator {
     return Arrays.stream(description.split(SPLIT_DELIMITER))
         .map(part -> {
           part = sortGeneratedDescription(part).trim();
-          OwlAnnotationPropertyValue descriptionVaLue = new OwlAnnotationPropertyValue();
+          var descriptionVaLue = new OwlAnnotationPropertyValue();
           descriptionVaLue.setValue(part);
           descriptionVaLue.setType(WeaselOwlType.STRING);
           return descriptionVaLue;
@@ -108,6 +109,10 @@ public class DescriptionGenerator {
 
   private String cleanAndPolishGeneratedDescription(StringBuilder sb) {
     String result = sb.toString().trim();
+
+    if (EMPTY_RESULT_INDICATOR.equals(result)) {
+      return "";
+    }
 
     result = improveGeneratedDescription(result);
     result = improveReadabilityOfRestrictions(result);
