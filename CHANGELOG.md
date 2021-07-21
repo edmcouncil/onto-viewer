@@ -13,6 +13,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Fixed and rebuild all visitors which generate graphs
 
+### Changed
+- Group inherited restrictions by the class they are coming from
+
 ## [0.3.2] - 2021-02-19
 ### Added
 - Displaying 'cardinality' for relations in the graph.
