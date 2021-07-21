@@ -64,11 +64,11 @@ public class OntologyStatsManager {
             OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazzOpt.get());
             if (indi.getProperties().isEmpty()) {
                 //--noDomain
-                String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noDomain");
+                String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
                 stats.put(id, 0);
                 labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-                //--noModule
-                id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noModule");
+                //--numberOfModule
+                id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
                 stats.put(id, 0);
                 labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
             }
@@ -82,51 +82,51 @@ public class OntologyStatsManager {
                         modulesIriSet.add(elIri);
                     });
             List<String> rootModulesIris = fiboDataHandler.getRootModulesIris(modulesIriSet, ontology);
-            //--noDomain
-            String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noDomain");
+            //--numberOfDomain
+            String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
             stats.put(id, rootModulesIris.size());
             labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-            //--noModule
-            id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noModule");
+            //--numberOfModule
+            id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
             stats.put(id, modulesIriSet.size() - rootModulesIris.size());
             labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
         } else {
-            //--noDomain
-                String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noDomain");
+            //--numberOfDomain
+                String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
                 stats.put(id, 0);
                 labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-                //--noModule
-                id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noModule");
+                //--numberOfModule
+                id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
                 stats.put(id, 0);
                 labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
         }
 
-        //--noClass
-        String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noClass");
+        //--numberOfClass
+        String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfClass");
         stats.put(id, ontology.classesInSignature().count());
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--noObjectProperty
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noObjectProperty");
+        //--numberOfObjectProperty
+        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfObjectProperty");
         stats.put(id, ontology.objectPropertiesInSignature().count());
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--noDataPropertyy
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noDataProperty");
+        //--numberOfDataPropertyy
+        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDataProperty");
         stats.put(id, ontology.dataPropertiesInSignature().count());
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--noOAnnotationProperty
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noAnnotationProperty");
+        //--numberOfOAnnotationProperty
+        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfAnnotationProperty");
         stats.put(id, ontology.annotationPropertiesInSignature().count());
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--noIndividuals
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noIndividuals");
+        //--numberOfIndividuals
+        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfIndividuals");
         stats.put(id, ontology.individualsInSignature().count());
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--noAxiom
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noAxiom");
+        //--numberOfAxiom
+        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfAxiom");
         stats.put(id, ontology.axioms().count());
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--noDatatype
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noDatatype");
+        //--numberOfDatatype
+        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDatatype");
         stats.put(id, ontology.datatypesInSignature().count());
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
 
@@ -135,8 +135,8 @@ public class OntologyStatsManager {
         manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
             ontologies.add(owlOntology);
         });
-        //--noDatatype
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "noOntologies");
+        //--numberOfDatatype
+        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfOntologies");
         stats.put(id, ontologies.size());
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
 

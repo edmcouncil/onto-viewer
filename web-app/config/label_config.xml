@@ -193,52 +193,52 @@
         </userDefinedName>  
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noDomain</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfDomain</resourceIriToName>
           <resourceIriName>number of domains</resourceIriName>
         </userDefinedName>  
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noModule</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfModule</resourceIriToName>
           <resourceIriName>number of modules</resourceIriName>
         </userDefinedName>  
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noClass</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfClass</resourceIriToName>
           <resourceIriName>number of classes</resourceIriName>
         </userDefinedName>
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noObjectProperty</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfObjectProperty</resourceIriToName>
           <resourceIriName>number of object properties</resourceIriName>
         </userDefinedName>
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noDataProperty</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfDataProperty</resourceIriToName>
           <resourceIriName>number of data properties</resourceIriName>
         </userDefinedName>
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noAnnotationProperty</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfAnnotationProperty</resourceIriToName>
           <resourceIriName>number of annotation properties</resourceIriName>
         </userDefinedName>
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noIndividuals</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfIndividuals</resourceIriToName>
           <resourceIriName>number of individuals</resourceIriName>
         </userDefinedName>
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noAxiom</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfAxiom</resourceIriToName>
           <resourceIriName>number of axioms</resourceIriName>
         </userDefinedName>
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noDatatype</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfDatatype</resourceIriToName>
           <resourceIriName>number of datatypes</resourceIriName>
         </userDefinedName>
         
         <userDefinedName>
-          <resourceIriToName>@viewer.stats.noOntologies</resourceIriToName>
+          <resourceIriToName>@viewer.stats.numberOfOntologies</resourceIriToName>
           <resourceIriName>number of ontologies</resourceIriName>
         </userDefinedName>
         
