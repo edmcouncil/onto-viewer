@@ -120,9 +120,23 @@
                             edgesView.refresh();
                         }));
                     const edgesView = new vis.DataView(edges, {filter: edgesFilter});
-                    var data = {
-                        nodes: nodes,
-                        edges: edgesView
+                  
+                  
+                    var nodeView = new vis.DataView(nodes, {
+                      filter: function (node) {
+                        connEdges = edgesView.get({
+                          filter: function (edge) {
+                            return(
+                                    (edge.to === node.id) || (edge.from === node.id));
+                          }});
+
+                        return connEdges.length > 0 || node.id === 1;
+                      }
+                    });
+
+                   var data = {
+                      nodes: nodeView,
+                      edges: edgesView
                     };
                     var options = {
                         "edges": {
@@ -241,8 +255,6 @@
 
                 </script>
             </div>
-
         </div>
-
     </div>
 </div>
