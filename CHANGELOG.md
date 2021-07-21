@@ -3,22 +3,26 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.4.0] -
-###Added
+### Added
 - Search by using class names and definitions in hints and search bar
 - Added usage info for classes and object property
 - Added Levenstein distance in search
 - Displaying direct sub-properties 
+- Showing simple ontology stats, ex. number of domains, modules ontologies, properties...
+
+### Changed
+- Fixed and rebuild all visitors which generate graphs
 
 ### Changed
 - Group inherited restrictions by the class they are coming from
 
 ## [0.3.2] - 2021-02-19
-###Added
+### Added
 - Displaying 'cardinality' for relations in the graph.
 - Added a double arrow to display restrictions with 'or' in the graphs with 'equivalentTo' type's.
 
 ## [0.3.1] - 2021-01-11
-###Added
+### Added
 - Add 'equivalent to' type to the handle Inherited Axioms method PR-64
 
 ## [0.3.0] - 2020-12-16

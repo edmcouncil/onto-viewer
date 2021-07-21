@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Controller
-@RequestMapping(value = {"/", "/index", "module"})
+@RequestMapping(value = {"module"})
 public class ModuleController {
 
   private static final Logger LOG = LoggerFactory.getLogger(ModuleController.class);

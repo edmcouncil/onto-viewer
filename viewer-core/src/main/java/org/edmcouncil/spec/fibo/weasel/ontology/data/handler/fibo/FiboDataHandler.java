@@ -220,7 +220,7 @@ public class FiboDataHandler {
     return FiboMaturityLevelFactory.empty();
   }
 
-  private List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
+  public List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
     Map<String, Integer> referenceCount = new LinkedHashMap<>();
     modulesIriSet.forEach((mIri) -> {
       Set<String> hasPartModules = getHasPartElements(IRI.create(mIri), ontology);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.edmcouncil.spec.fibo.view.model.ErrorResult;
 import org.edmcouncil.spec.fibo.weasel.model.module.FiboModule;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.model.SearcherResult;
+import org.edmcouncil.spec.fibo.weasel.ontology.stats.OntologyStatsMapped;
 
 import org.springframework.ui.Model;
 
@@ -53,6 +54,11 @@ public class ModelBuilder {
 
   public ModelBuilder modelTree(List<FiboModule> modules) {
     model.addAttribute("modelTree", modules);
+    return this;
+  }
+  
+  public ModelBuilder stats(OntologyStatsMapped s) {
+    model.addAttribute("stats", s);
     return this;
   }
 

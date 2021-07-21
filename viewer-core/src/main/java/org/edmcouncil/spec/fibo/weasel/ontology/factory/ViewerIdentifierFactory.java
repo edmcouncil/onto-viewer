@@ -13,7 +13,7 @@ public class ViewerIdentifierFactory {
   }
 
   public enum Type {
-    internal, external, axiom, function
+    internal, external, axiom, function, stats
   }
 
   /**

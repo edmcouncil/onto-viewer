@@ -187,3 +187,22 @@
  	- DONE 
 	- ERROR
 	- INTERRUPT_IN_PROGRESS
+
+## 7. Simple stats
+
+* **Request type:** GET
+
+ - **Endpoint**:
+
+	 > /api/stats
+
+ - **Description**: Return a simple ontology stats.
+ - **Data**: 
+
+	 - none
+
+ - **Returned value(json)**:
+
+> {"stats":{"@viewer.stats.noDomain":10,... },
+> "labels":{"@viewer.stats.noDomain":"number of domains",...}}
+> 
