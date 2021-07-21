@@ -190,7 +190,58 @@
         <userDefinedName>
           <resourceIriToName>@viewer.external.annotationProperty</resourceIriToName>
           <resourceIriName>external annotation property</resourceIriName>
-        </userDefinedName>    
+        </userDefinedName>  
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noDomain</resourceIriToName>
+          <resourceIriName>number of domains</resourceIriName>
+        </userDefinedName>  
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noModule</resourceIriToName>
+          <resourceIriName>number of modules</resourceIriName>
+        </userDefinedName>  
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noClass</resourceIriToName>
+          <resourceIriName>number of classes</resourceIriName>
+        </userDefinedName>
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noObjectProperty</resourceIriToName>
+          <resourceIriName>number of object properties</resourceIriName>
+        </userDefinedName>
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noDataProperty</resourceIriToName>
+          <resourceIriName>number of data properties</resourceIriName>
+        </userDefinedName>
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noAnnotationProperty</resourceIriToName>
+          <resourceIriName>number of annotation properties</resourceIriName>
+        </userDefinedName>
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noIndividuals</resourceIriToName>
+          <resourceIriName>number of individuals</resourceIriName>
+        </userDefinedName>
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noAxiom</resourceIriToName>
+          <resourceIriName>number of axioms</resourceIriName>
+        </userDefinedName>
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noDatatype</resourceIriToName>
+          <resourceIriName>number of datatypes</resourceIriName>
+        </userDefinedName>
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.stats.noOntologies</resourceIriToName>
+          <resourceIriName>number of ontologies</resourceIriName>
+        </userDefinedName>
+        
       </userDefaultNameList>
     
     </labelConfig>

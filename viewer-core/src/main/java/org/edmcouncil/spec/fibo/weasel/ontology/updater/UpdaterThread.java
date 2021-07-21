@@ -18,6 +18,7 @@ import org.edmcouncil.spec.fibo.weasel.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.fibo.weasel.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextDbItem;
 import org.edmcouncil.spec.fibo.weasel.ontology.searcher.text.TextSearcherDb;
+import org.edmcouncil.spec.fibo.weasel.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.fibo.weasel.ontology.updater.model.InterruptUpdate;
 import org.edmcouncil.spec.fibo.weasel.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.fibo.weasel.ontology.updater.model.UpdateJobStatus;
@@ -42,8 +43,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private UpdateJob job;
   private FiboDataHandler fiboDataHandler;
   private ScopeIriOntology scopeIriOntology;
+  private OntologyStatsManager ontologyStatsManager;
 
-  public UpdaterThread(AppConfiguration config, OntologyManager ontologyManager, FileSystemManager fileSystemManager, LabelProvider labelProvider, TextSearcherDb textSearcherDb, UpdateBlocker blocker, FiboDataHandler fiboDataHandler, UpdateJob job, ScopeIriOntology scopeIriOntology) {
+  public UpdaterThread(AppConfiguration config, OntologyManager ontologyManager, FileSystemManager fileSystemManager, LabelProvider labelProvider, TextSearcherDb textSearcherDb, UpdateBlocker blocker, FiboDataHandler fiboDataHandler, UpdateJob job, ScopeIriOntology scopeIriOntology, OntologyStatsManager osm) {
     this.config = config;
     this.ontologyManager = ontologyManager;
     this.fileSystemManager = fileSystemManager;
@@ -53,6 +55,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.job = job;
     this.fiboDataHandler = fiboDataHandler;
     this.scopeIriOntology = scopeIriOntology;
+    this.ontologyStatsManager = osm;
     this.setName("UpdateThread-" + job.getId());
   }
 
@@ -163,6 +166,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       fiboDataHandler.setOntologyResources(fiboOntologyResourcess);
       fiboDataHandler.clearAndSetNewModules(ontology);
+      
+      ontologyStatsManager.clear();
+      ontologyStatsManager.generateStats(ontology);
 
       blocker.setBlockerStatus(Boolean.FALSE);
 
