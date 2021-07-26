@@ -8,7 +8,6 @@
     <groupId>org.edmcouncil.spec</groupId>
     <artifactId>onto-viewer-parent</artifactId>
     <version>0.4.0</version>
-    <relativePath />
   </parent>
 
   <artifactId>onto-viewer-web-app</artifactId>
