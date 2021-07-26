@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+    <!-- To load an ontology from the internet, enter the URL between the <ontologyURL> tags -->
+    <!-- To load an ontology from a folder, enter the path address with application between <ontologyPath> tags or enter the file name  -->
+    <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
+    <ontology>
+        <ontologyDir>integration_tests/ontologies</ontologyDir>
+    </ontology>
+</properties>

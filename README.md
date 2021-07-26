@@ -1,11 +1,8 @@
 <img src="https://spec.edmcouncil.org/fibo/htmlpages/master/latest/img/logo.66a988fe.png" width="150" align="right"/>
 
-
-
-
 # FIBO Viewer
 
-FIBO Viewer is an open-source project that is hosted by EDM Council. The project started in May 2019. FIBO Viewer is a JAVA application that is specifically designed to access both the FIBO structure and its content in the easiest possible way. FIBO Viewer servers both as a web application and REST API.
+FIBO Viewer is an open-source project that is hosted by EDM Council. The project started in May 2019. FIBO Viewer is a Java application that is specifically designed to access both the FIBO structure and its content in the easiest possible way. FIBO Viewer servers both as a web application and REST API.
 
 
 ## FIBO website
@@ -33,6 +30,15 @@ java -jar app-v-0.1.0.war
 
 # Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+
+# Development
+
+To run integration tests, use the following command:
+
+```shell
+mvn -P integration-tests verify
+```
 
 
 # License
