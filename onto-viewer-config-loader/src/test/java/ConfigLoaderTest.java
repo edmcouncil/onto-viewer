@@ -36,6 +36,7 @@ public class ConfigLoaderTest {
 
   @BeforeAll
   public static void setUpClass() throws Exception {
+
   }
 
   @AfterAll
