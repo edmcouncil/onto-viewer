@@ -12,6 +12,15 @@ public class DefaultLabelItem implements ConfigItem {
   private String iri;
   private String label;
 
+  public DefaultLabelItem(String iri, String label) {
+    this.iri = iri;
+    this.label = label;
+  }
+
+  public DefaultLabelItem() {
+  }
+
+  
   public String getIri() {
     return iri;
   }
