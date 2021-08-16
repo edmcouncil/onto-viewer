@@ -76,52 +76,44 @@ class ConfigLoaderTest {
   }
 
   @Test
-  void testLabelPriorityFromConfig() throws Exception {
-    var testConfig = this.testViewerCoreConfig;
-    LabelPriority.Priority labelPriority = testConfig.getLabelPriority();
-    LabelPriority.Priority expectedValue = LabelPriority.Priority.USER_DEFINED;
-    assertEquals(labelPriority, expectedValue);
+  void testLabelPriorityFromConfig(){
+    LabelPriority.Priority actualResult = this.testViewerCoreConfig.getLabelPriority();
+    LabelPriority.Priority expectedResult = LabelPriority.Priority.USER_DEFINED;
+    assertEquals( expectedResult, actualResult);
   }
 
   @Test
-  void testOntologyPathFromConfig() throws Exception {
-    var testConfig = this.testViewerCoreConfig;
-    Map<String, Set<String>> testOntologyLocation = testConfig.getOntologyLocation();
-    Set<String> expectedValue = Collections.singleton("integration_tests/ontologies");
+  void testOntologyPathFromConfig(){
+    Map< String, Set<String>> testOntologyLocation = this.testViewerCoreConfig.getOntologyLocation();
+    Set<String> expectedResult = Collections.singleton("integration_tests/ontologies");
 
     assertTrue(testOntologyLocation.containsKey(ConfigKeys.ONTOLOGY_DIR));
     assertFalse(testOntologyLocation.containsKey(ConfigKeys.ONTOLOGY_PATH));
     assertFalse(testOntologyLocation.containsKey(ConfigKeys.ONTOLOGY_URL));
-    assertEquals(testOntologyLocation.get(ConfigKeys.ONTOLOGY_DIR), expectedValue);
+    assertEquals(testOntologyLocation.get(ConfigKeys.ONTOLOGY_DIR), expectedResult);
   }
 
   @Test
-  void testUseLabelsFromConfig() throws Exception {
-    var testConfig = this.testViewerCoreConfig;
-    boolean testUseLabel = testConfig.useLabels();
+  void testUseLabelsFromConfig(){
+    boolean testUseLabel =this.testViewerCoreConfig.useLabels();
     assertTrue(testUseLabel);
   }
 
   @Test
-  void testForceLabelLangFromConfig() throws Exception {
-    var testConfig = this.testViewerCoreConfig;
-    boolean forceLabelLang = testConfig.isForceLabelLang();
+  void testForceLabelLangFromConfig(){
+    boolean forceLabelLang = this.testViewerCoreConfig.isForceLabelLang();
     assertFalse(forceLabelLang);
   }
 
   @Test
-  void testIsUriIriFromConfig() throws Exception {
-    var testConfig = this.testViewerCoreConfig;
-    boolean isUriIri = testConfig.isUriIri(ConfigKeys.URI_NAMESPACE);
+  void testIsUriIriFromConfig(){
+    boolean isUriIri = this.testViewerCoreConfig.isUriIri(ConfigKeys.URI_NAMESPACE);
     assertFalse(isUriIri);
   }
 
   @Test
-  void testGetDefaultLabelsFromConfig() throws Exception {
-
-    var testConfig = this.testViewerCoreConfig;
-
-    Set<DefaultLabelItem> actualResult = testConfig.getDefaultLabels();
+  void testGetDefaultLabelsFromConfig(){
+    Set<DefaultLabelItem> actualResult = this.testViewerCoreConfig.getDefaultLabels();
     Set<DefaultLabelItem> expectedResult = new HashSet<>();
 
     expectedResult.add(new DefaultLabelItem("http://www.w3.org/2000/01/rdf-schema#Literal", "literal"));
@@ -134,44 +126,41 @@ class ConfigLoaderTest {
     expectedResult.add(new DefaultLabelItem("http://www.w3.org/2004/02/skos/core#definition", "definition"));
     expectedResult.add(new DefaultLabelItem("@viewer.external.annotationProperty", "external annotation property"));
 
-    CollectionUtils.containsAny(actualResult, expectedResult);
+    CollectionUtils.containsAny(expectedResult, actualResult);
   }
 
   @Test
-  void testIgnoredElementsFromConfig() throws Exception {
-    var testConfig = this.testViewerCoreConfig;
-    Set<String> ignoredElements = testConfig.getIgnoredElements();
-    Set<String> expectedValue = new HashSet<>();
-    expectedValue.add("@viewer.axiom.SubObjectPropertyOf");
-    expectedValue.add("http://www.w3.org/2000/01/rdf-schema#isDefinedBy");
-    expectedValue.add("http://spec.edmcouncil.org/owlnames#definition");
-    expectedValue.add("http://spec.edmcouncil.org/owlnames#label");
-    expectedValue.add("http://spec.edmcouncil.org/owlnames#synonym");
-    expectedValue.add("http://spec.edmcouncil.org/owlnames#example");
-    expectedValue.add("http://spec.edmcouncil.org/owlnames#explanatoryNote");
+  void testIgnoredElementsFromConfig(){
+    Set<String> actualResult = this.testViewerCoreConfig.getIgnoredElements();
+    Set<String> expectedResult = new HashSet<>();
+    expectedResult.add("@viewer.axiom.SubObjectPropertyOf");
+    expectedResult.add("http://www.w3.org/2000/01/rdf-schema#isDefinedBy");
+    expectedResult.add("http://spec.edmcouncil.org/owlnames#definition");
+    expectedResult.add("http://spec.edmcouncil.org/owlnames#label");
+    expectedResult.add("http://spec.edmcouncil.org/owlnames#synonym");
+    expectedResult.add("http://spec.edmcouncil.org/owlnames#example");
+    expectedResult.add("http://spec.edmcouncil.org/owlnames#explanatoryNote");
 
-    assertEquals(ignoredElements, expectedValue);
+    assertEquals(expectedResult, actualResult);
   }
 
   @Test
-  void testMissingLanguageActionFromConfig() throws Exception {
-    var testConfig = this.testViewerCoreConfig;
-    MissingLanguageItem.Action missingLanguageAction = testConfig.getMissingLanguageAction();
-    MissingLanguageItem.Action expectedValue = MissingLanguageItem.Action.FIRST;
-    assertEquals(missingLanguageAction, expectedValue);
+  void testMissingLanguageActionFromConfig(){
+    MissingLanguageItem.Action actualResult = this.testViewerCoreConfig.getMissingLanguageAction();
+    MissingLanguageItem.Action expectedResult = MissingLanguageItem.Action.FIRST;
+    assertEquals(expectedResult, actualResult);
   }
 
   @Test
-  void testGetConfigValFromConfig() throws Exception {
-    var testConfig = this.testViewerCoreConfig;
-    Set<ConfigItem> getConfigVal = testConfig.getConfigVal(ConfigKeys.ONTOLOGY_DIR);
-    Set<ConfigItem> expectedValue = Collections.singleton(new StringItem("integration_tests/ontologies"));
-    assertEquals(getConfigVal, expectedValue);
+  void testGetConfigValFromConfig(){
+    Set<ConfigItem> actualResult = this.testViewerCoreConfig.getConfigVal(ConfigKeys.ONTOLOGY_DIR);
+    Set<ConfigItem> expectedResult = Collections.singleton(new StringItem("integration_tests/ontologies"));
+    assertEquals(expectedResult, actualResult);
 
-    Set<ConfigItem> getConfigValPath = testConfig.getConfigVal(ConfigKeys.ONTOLOGY_PATH);
+    Set<ConfigItem> getConfigValPath = this.testViewerCoreConfig.getConfigVal(ConfigKeys.ONTOLOGY_PATH);
     assertNull(getConfigValPath);
 
-    Set<ConfigItem> getConfigValUrl = testConfig.getConfigVal(ConfigKeys.ONTOLOGY_URL);
+    Set<ConfigItem> getConfigValUrl = this.testViewerCoreConfig.getConfigVal(ConfigKeys.ONTOLOGY_URL);
     assertNull(getConfigValUrl);
   }
 
@@ -180,7 +169,7 @@ class ConfigLoaderTest {
     if (configLocationPath == null) {
       fail("Unable to find config test files.");
     }
-    var configLocation = Path.of(configLocationPath.getPath());
+    var configLocation = Path.of(configLocationPath.toURI());
     Files.copy(
         configLocation.resolve(configFileName),
         tempDir.resolve(configFileName));
