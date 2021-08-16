@@ -190,14 +190,13 @@ public class FiboDataHandler {
     if (ontologyIri != null) {
       return getMaturityLevelFromOntology(IRI.create(ontologyIri), ontology);
     }
-    return null;
+   return new OntoFiboMaturityLevel("", ""); 
   }
 
   private OntoFiboMaturityLevel getMaturityLevelFromOntology(IRI iri, OWLOntology ontology) {
 
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     for (OWLOntology o : manager.ontologies().collect(Collectors.toSet())) {
-
       if (o.getOntologyID().getOntologyIRI().isPresent()) {
         if (o.getOntologyID().getOntologyIRI().get().equals(iri)) {
           LOG.debug("Entities Count ");
