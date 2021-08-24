@@ -32,6 +32,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -190,7 +191,8 @@ public class FiboDataHandler {
     if (ontologyIri != null) {
       return getMaturityLevelFromOntology(IRI.create(ontologyIri), ontology);
     }
-   return new OntoFiboMaturityLevel("", ""); 
+    // return new OntoFiboMaturityLevel("", ""); 
+    return null;
   }
 
   private OntoFiboMaturityLevel getMaturityLevelFromOntology(IRI iri, OWLOntology ontology) {
@@ -306,6 +308,15 @@ public class FiboDataHandler {
         .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.dataProperty), c));
 
     selectedOntology.objectPropertiesInSignature()
+        .map(c -> {
+          String istring = c.getIRI().toString();
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
+          return pv;
+        })
+        .forEachOrdered(c -> ontoResources
+        .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.objectProperty), c));
+
+    selectedOntology.datatypesInSignature()
         .map(c -> {
           String istring = c.getIRI().toString();
           OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
