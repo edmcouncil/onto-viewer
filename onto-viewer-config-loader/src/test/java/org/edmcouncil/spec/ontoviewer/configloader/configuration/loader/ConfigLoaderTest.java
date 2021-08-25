@@ -1,10 +1,11 @@
+package org.edmcouncil.spec.ontoviewer.configloader.configuration.loader;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.loader.ConfigLoader;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
@@ -26,8 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
- * @author Patrycja Miazek (patrycja.miazek@makolab.com) 
+ * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 class ConfigLoaderTest {
 
@@ -76,15 +76,15 @@ class ConfigLoaderTest {
   }
 
   @Test
-  void testLabelPriorityFromConfig(){
+  void testLabelPriorityFromConfig() {
     LabelPriority.Priority actualResult = this.testViewerCoreConfig.getLabelPriority();
     LabelPriority.Priority expectedResult = LabelPriority.Priority.USER_DEFINED;
-    assertEquals( expectedResult, actualResult);
+    assertEquals(expectedResult, actualResult);
   }
 
   @Test
-  void testOntologyPathFromConfig(){
-    Map< String, Set<String>> testOntologyLocation = this.testViewerCoreConfig.getOntologyLocation();
+  void testOntologyPathFromConfig() {
+    Map<String, Set<String>> testOntologyLocation = this.testViewerCoreConfig.getOntologyLocation();
     Set<String> expectedResult = Collections.singleton("integration_tests/ontologies");
 
     assertTrue(testOntologyLocation.containsKey(ConfigKeys.ONTOLOGY_DIR));
@@ -94,25 +94,25 @@ class ConfigLoaderTest {
   }
 
   @Test
-  void testUseLabelsFromConfig(){
-    boolean testUseLabel =this.testViewerCoreConfig.useLabels();
+  void testUseLabelsFromConfig() {
+    boolean testUseLabel = this.testViewerCoreConfig.useLabels();
     assertTrue(testUseLabel);
   }
 
   @Test
-  void testForceLabelLangFromConfig(){
+  void testForceLabelLangFromConfig() {
     boolean forceLabelLang = this.testViewerCoreConfig.isForceLabelLang();
     assertFalse(forceLabelLang);
   }
 
   @Test
-  void testIsUriIriFromConfig(){
+  void testIsUriIriFromConfig() {
     boolean isUriIri = this.testViewerCoreConfig.isUriIri(ConfigKeys.URI_NAMESPACE);
     assertFalse(isUriIri);
   }
 
   @Test
-  void testGetDefaultLabelsFromConfig(){
+  void testGetDefaultLabelsFromConfig() {
     Set<DefaultLabelItem> actualResult = this.testViewerCoreConfig.getDefaultLabels();
     Set<DefaultLabelItem> expectedResult = new HashSet<>();
 
@@ -126,11 +126,11 @@ class ConfigLoaderTest {
     expectedResult.add(new DefaultLabelItem("http://www.w3.org/2004/02/skos/core#definition", "definition"));
     expectedResult.add(new DefaultLabelItem("@viewer.external.annotationProperty", "external annotation property"));
 
-    CollectionUtils.containsAny(expectedResult, actualResult);
+    assertTrue(CollectionUtils.containsAny(expectedResult, actualResult));
   }
 
   @Test
-  void testIgnoredElementsFromConfig(){
+  void testIgnoredElementsFromConfig() {
     Set<String> actualResult = this.testViewerCoreConfig.getIgnoredElements();
     Set<String> expectedResult = new HashSet<>();
     expectedResult.add("@viewer.axiom.SubObjectPropertyOf");
@@ -145,14 +145,14 @@ class ConfigLoaderTest {
   }
 
   @Test
-  void testMissingLanguageActionFromConfig(){
+  void testMissingLanguageActionFromConfig() {
     MissingLanguageItem.Action actualResult = this.testViewerCoreConfig.getMissingLanguageAction();
     MissingLanguageItem.Action expectedResult = MissingLanguageItem.Action.FIRST;
     assertEquals(expectedResult, actualResult);
   }
 
   @Test
-  void testGetConfigValFromConfig(){
+  void testGetConfigValFromConfig() {
     Set<ConfigItem> actualResult = this.testViewerCoreConfig.getConfigVal(ConfigKeys.ONTOLOGY_DIR);
     Set<ConfigItem> expectedResult = Collections.singleton(new StringItem("integration_tests/ontologies"));
     assertEquals(expectedResult, actualResult);
