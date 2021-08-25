@@ -326,6 +326,15 @@ public class FiboDataHandler {
                 individual
             ));
 
+    selectedOntology.datatypesInSignature()
+        .map(c -> {
+          String istring = c.getIRI().toString();
+          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
+          return pv;
+        })
+        .forEachOrdered(c -> ontoResources
+        .addElement(selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.objectProperty), c));
+
     ontoResources.sortInAlphabeticalOrder();
 
     return ontoResources;
