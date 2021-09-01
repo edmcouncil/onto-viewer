@@ -14,7 +14,6 @@ public class OwlDetails {
 
   private String label;
   private String iri;
-  private String type;
   private String qName = "";
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
@@ -61,14 +60,6 @@ public class OwlDetails {
     this.locationInModules = locationInModules;
   }
 
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
   public void setTaxonomy(OwlTaxonomy tax) {
     this.taxonomy = tax;
   }
@@ -91,7 +82,6 @@ public class OwlDetails {
     hash = 59 * hash + Objects.hashCode(this.label);
     hash = 59 * hash + Objects.hashCode(this.qName);
     hash = 59 * hash + Objects.hashCode(this.iri);
-    hash = 59 * hash + Objects.hashCode(this.type);
     hash = 59 * hash + Objects.hashCode(this.taxonomy);
     return hash;
   }
@@ -112,9 +102,6 @@ public class OwlDetails {
       return false;
     }
     if (!Objects.equals(this.iri, other.iri)) {
-      return false;
-    }
-    if (!Objects.equals(this.type, other.type)) {
       return false;
     }
     if (!Objects.equals(this.taxonomy, other.taxonomy)) {
