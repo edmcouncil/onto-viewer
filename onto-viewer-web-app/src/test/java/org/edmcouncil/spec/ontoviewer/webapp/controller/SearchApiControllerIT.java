@@ -85,10 +85,9 @@ class SearchApiControllerIT extends BaseControllerIT {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.length()", is(2)))
         .andExpect(jsonPath("$.type", is(SearcherResult.Type.details.name())))
-        .andExpect(jsonPath("$.result.length()", is(9)))
+        .andExpect(jsonPath("$.result.length()", is(8)))
         .andExpect(jsonPath("$.result.label", is("business license")))
         .andExpect(jsonPath("$.result.iri", is(query)))
-        .andExpect(jsonPath("$.result.type", is(nullValue()))) // TODO: This shouldn't return null
         .andExpect(jsonPath("$.result.qName", is("QName: fibo-be-le-lp:BusinessLicense")))
         .andExpect(jsonPath("$.result.taxonomy.value[0].length()", is(5)))
         .andExpect(jsonPath("$.result.maturityLevel.label", is("release")))
