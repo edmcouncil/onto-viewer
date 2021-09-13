@@ -180,9 +180,11 @@ public class DescriptionGenerator {
 
                 String propertyPattern = axiomProperty.getValue().trim();
                 LOGGER.info("entity mapping size" + entityMapping.size());
+                LOGGER.info("axiom property value trim" + axiomProperty.getValue().trim());
+
                 try {
-                   // if (entityMapping.size() == 2) {
-                        handleProperty(manager, axiomProperty, propertyPattern);
+                    // if (entityMapping.size() == 2) {
+                    handleProperty(manager, axiomProperty, propertyPattern);
                     //} else if (entityMapping.size() == 4) {
                     //    handlePropertyWithFourArguments(manager, axiomProperty, propertyPattern);
                     //}
@@ -203,23 +205,26 @@ public class DescriptionGenerator {
         for (String entityId : mappingKeys) {
             editedPattern = editedPattern.replace(entityId, entityMapping.get(entityId).getLabel());
         }
-
-         manager.getSb()
+        manager.getSb()
                 .append("- ")
                 .append(capitalize(manager.getLabel()))
                 .append(" ");
 
         var firstArgument = entityMapping.get(mappingKeys.get(0)).getLabel();
         if (firstArgument.startsWith("has")) {
-            var centerOfPattern = extractCenterOfComplexPattern(propertyPattern);
-            manager.getSb()
-                    .append("has")
-                    .append(centerOfPattern)
-                    .append(extractPartAfterFirstSpace(firstArgument))
-                    .append(" that is ")
-                    .append(editedPattern.substring(editedPattern.indexOf(centerOfPattern) + centerOfPattern.length()));
+            try {
+                var centerOfPattern = extractCenterOfComplexPattern(propertyPattern);
+                manager.getSb()
+                        .append("has")
+                        .append(centerOfPattern)
+                        .append(extractPartAfterFirstSpace(firstArgument))
+                        .append(" that is ")
+                        .append((editedPattern.substring(editedPattern.indexOf(centerOfPattern) + centerOfPattern.length())).replaceFirst("<br />-", " ").replaceAll("<br />-", ", "));
+            } catch (Exception e) {
+                manager.getSb().append(editedPattern.replaceFirst("<br />-", " ").replaceAll("<br />-", ", "));
+            }
         } else {
-            manager.getSb().append(editedPattern);
+            manager.getSb().append(editedPattern.replaceFirst("<br />-", " ").replaceAll("<br />-", ", "));
         }
         manager.getSb().append(".\n");
 
