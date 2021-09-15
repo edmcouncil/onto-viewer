@@ -210,3 +210,6 @@ nbactions.xml
 # Protege
 catalog-v001.xml
 
+
+# Onto-Viewer
+docker/runtime/

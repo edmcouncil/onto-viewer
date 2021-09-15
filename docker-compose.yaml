@@ -1,0 +1,41 @@
+# For this docker-compose.yaml file to work, the following folder outline is required:
+#
+#   aRootDir/
+#     onto-viewer/            (https://github.com/edmcouncil/onto-viewer)
+#       docker-compose.yaml   <- this file
+#         ...
+#     html-pages/             (https://github.com/edmcouncil/html-pages)
+#       ...
+
+version: "3.8"
+
+services:
+  onto-viewer-server:
+    container_name: onto-viewer-server
+    build:
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    ports:
+      - "6101:8080"
+    volumes:
+      - ./docker/init-onto-viewer.sh:/opt/fibo/init-onto-viewer.sh
+      - .:/opt/fibo/src
+      - ./docker/runtime/server:/opt/fibo/app_home
+    networks:
+      - default
+
+  onto-viewer-web:
+    container_name: onto-viewer-web
+    build:
+      context: ../html-pages/fibo
+      dockerfile: ../Dockerfile
+    ports:
+      - "6201:8080"
+    volumes:
+      - ../html-pages/fibo:/project
+      - ./docker/web/vue.config.js:/project/vue.config.js
+      - /project/node_modules
+    depends_on:
+      - onto-viewer-server
+    networks:
+      - default

@@ -19,13 +19,13 @@ public class FileSystemManager {
 
   private static final Logger LOG = LoggerFactory.getLogger(FileSystemManager.class);
 
-  private final String workingDir;
+  private final String defaultHomePath;
   private final String viewerConfigFileName;
   private final String defaultOntologyFileName;
   private final String configPath;
 
   public FileSystemManager(AppProperties appProperties) {
-    workingDir = appProperties.getDefaultHomePath();
+    defaultHomePath = appProperties.getDefaultHomePath();
     viewerConfigFileName = appProperties.getViewerConfigFileName();
     defaultOntologyFileName = appProperties.getDefaultOntologyFileName();
     configPath = appProperties.getConfigPath();
@@ -33,10 +33,9 @@ public class FileSystemManager {
 
   public Path getViewerHomeDir() {
     Path userHomeDir;
-    String userHomeProperty = null;
-    switch (workingDir) {
+    switch (defaultHomePath) {
       case "user.home":
-        userHomeProperty = System.getProperty("user.home");
+        String userHomeProperty = System.getProperty("user.home");
         userHomeDir = Paths.get(userHomeProperty);
         LOG.trace("User home dir is '{}'.", userHomeDir);
         userHomeDir = userHomeDir.resolve(WEASEL_DEFAULT_HOME_DIR_NAME);
@@ -46,10 +45,13 @@ public class FileSystemManager {
         LOG.trace("Working directory is '{}'.", userHomeDir.toAbsolutePath());
         break;
       default:
-        userHomeDir = Paths.get(userHomeProperty);
-        LOG.trace("Application working directory is '{}'.", userHomeDir);
+        userHomeDir = Paths.get(defaultHomePath);
+        LOG.debug(
+            "Application working directory determined on 'app.defaultHomePath' from the property file: {}",
+            defaultHomePath);
         break;
     }
+    LOG.debug("Application home directory is '{}'.", userHomeDir);
     return userHomeDir;
   }
 
