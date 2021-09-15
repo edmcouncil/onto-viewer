@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class UpdateBlocker {
 
   private Boolean initializeAppDone = false;
-  private Boolean block;
+  private Boolean block = false;
   private Boolean updateNow = false;
 
   public Boolean isInitializeAppDone() {

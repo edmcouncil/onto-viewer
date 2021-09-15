@@ -205,4 +205,35 @@
 
 > {"stats":{"@viewer.stats.noDomain":10,... },
 > "labels":{"@viewer.stats.noDomain":"number of domains",...}}
-> 
+
+## 8. Custom Health check
+
+* **Request type:** GET
+
+ - **Endpoint**:
+
+	 > /actuator/health/
+
+ - **Description**: Return custom health check with additional information about initialization and update.
+ - **Data**: 
+
+	 - none
+
+ - **Returned value(json)**:
+
+> {   "status": "UP",   "components": {
+>     "custom": {
+>       "status": "UP",
+>       "details": {
+>         "blocked": false,
+>         "initialization done": true,
+>         "update now": false
+>       }}}}
+
+
+ - **Details fields description:**
+	- "initialization done" - Initialization done is when the application is started and loaded for the first time.
+	- "update now" - Update now is when the ontology is updated.
+	- "blocked" - The block is when the resources are replaced with new ones during the update.
+
+  
