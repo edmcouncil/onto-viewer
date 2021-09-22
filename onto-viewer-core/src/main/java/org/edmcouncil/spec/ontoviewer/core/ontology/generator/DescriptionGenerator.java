@@ -168,7 +168,6 @@ public class DescriptionGenerator {
             boolean appendWhenEmpty) {
 
         List<PropertyValue> propertyValues = ontologicalCharacteristics.getOrDefault(groupRestrictionsName, emptyList());
-        LOGGER.info(" append restricton" + propertyValues.toString());
         if (appendWhenEmpty || propertyValues.size() > 0) {
             manager.getSb().append(toAppendBefore);
         }
@@ -179,15 +178,8 @@ public class DescriptionGenerator {
                 Map<String, OwlAxiomPropertyEntity> entityMapping = axiomProperty.getEntityMaping();
 
                 String propertyPattern = axiomProperty.getValue().trim();
-                LOGGER.info("entity mapping size" + entityMapping.size());
-                LOGGER.info("axiom property value trim" + axiomProperty.getValue().trim());
-
                 try {
-                    // if (entityMapping.size() == 2) {
                     handleProperty(manager, axiomProperty, propertyPattern);
-                    //} else if (entityMapping.size() == 4) {
-                    //    handlePropertyWithFourArguments(manager, axiomProperty, propertyPattern);
-                    //}
                 } catch (GeneratorException ex) {
                     LOGGER.warn("Exception thrown while processing property '{}'. Details: {}", axiomProperty, ex.getMessage());
                 }
@@ -209,7 +201,10 @@ public class DescriptionGenerator {
                 .append("- ")
                 .append(capitalize(manager.getLabel()))
                 .append(" ");
-
+        var replaceToNothing = entityMapping.getOrDefault("%arg00%", new OwlAxiomPropertyEntity()).getLabel();
+        if(replaceToNothing !=null) {
+           editedPattern = editedPattern.replaceFirst(replaceToNothing, "");
+        }
         var firstArgument = entityMapping.get(mappingKeys.get(0)).getLabel();
         if (firstArgument.startsWith("has")) {
             try {
