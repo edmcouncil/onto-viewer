@@ -284,7 +284,7 @@ public class DescriptionGenerator {
                     .replaceFirst(" by ", " by some");
         } else if (restriction.contains("at least 0")) {
             // X 'is' Y 'at least 0' Z   ->   X 'may be' Y Z
-            return restriction.replaceFirst("is", "may be")
+            return restriction.replaceFirst(" is ", " may be ")
                     .replaceFirst("at least 0", "")
                     .replaceFirst(" by ", " by some");
         } else {
