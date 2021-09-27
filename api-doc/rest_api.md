@@ -232,8 +232,8 @@
 
 
  - **Details fields description:**
-	- "initialization done" - Initialization done is when the application is started and loaded for the first time.
-	- "update now" - Update now is when the ontology is updated.
-	- "blocked" - The block is when the resources are replaced with new ones during the update.
+	- "INITIALIZATION_DONE" - Initialization done is when the application is started and loaded for the first time.
+	- "UPDATE_ONTOLOGY_IN_PROGRESS" - Update now is when the ontology is updated.
+	- "BLOCKED" - The block is when the resources are replaced with new ones during the update.
 
   

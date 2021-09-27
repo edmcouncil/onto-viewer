@@ -14,8 +14,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomHealthIndicator implements HealthIndicator {
 
-  @Autowired
-  private UpdateBlocker updateBlocker;
+  private final UpdateBlocker updateBlocker;
+
+  public CustomHealthIndicator(UpdateBlocker updateBlocker) {
+    this.updateBlocker = updateBlocker;
+  }
 
   @Override
   public Health getHealth(boolean includeDetails) {
@@ -29,12 +32,17 @@ public class CustomHealthIndicator implements HealthIndicator {
 
   private Health check() {
     Map<String, Boolean> details = new HashMap<>();
-
-    details.put("initialization done", updateBlocker.isInitializeAppDone());
-    details.put("update now", updateBlocker.isUpdateNow());
-    details.put("blocked", updateBlocker.isBlocked()); 
-    
+    try {
+      details.put(HealthDetailsField.INITIALIZATION_DONE.name(), updateBlocker.isInitializeAppDone());
+      details.put(HealthDetailsField.UPDATE_ONTOLOGY_IN_PROGRESS.name(), updateBlocker.isUpdateNow());
+      details.put(HealthDetailsField.BLOCKED.name(), updateBlocker.isBlocked());
+    } catch (Exception e) {
+      return Health.down(e).build();
+    }
     return Health.up().withDetails(details).build();
   }
-  
+
+  public UpdateBlocker getUpdateBlocker() {
+    return updateBlocker;
+  }
 }
