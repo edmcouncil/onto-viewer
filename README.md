@@ -61,7 +61,9 @@ Then, from the `onto-viewer/` folder run the following command to start the appl
 docker-compose up -d
 ```
 
-Please mind that it takes a while to start applications depending on how many ontologies you provided.
+Please note that it takes a while to start applications depending on how many ontologies you provided.
+
+After all ontologies are loaded, the viewer will be accessible from http://localhost:6201/.
 
 To stop the applications run:
 
