@@ -13,6 +13,8 @@ FIBO Viewer is integrated with FIBO website. It resolves the FIBO IRIs. See e.g.
 
 # How to run FIBO Viewer
 
+## Running locally
+
 To run the FIBO Viewer locally: 
 
 * Download the file named "fibo\_viewer\_relase.zip" from the [latest release](https://github.com/edmcouncil/fibo-viewer/releases). 
@@ -27,6 +29,46 @@ e.g.,
 ```
 java -jar app-v-0.1.0.war
 ```
+
+
+## Running in Docker
+
+To run the application using Docker you have to install Docker and docker-compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker-compose see [here](https://docs.docker.com/compose/install/). 
+
+Assuming you have installed both Docker and docker-compose, to run the FIBO Viewer application together with its front-end on your local machine, please make sure that you have the following folder setup:
+
+```
+root-dir/
+    onto-viewer/                 (https://github.com/edmcouncil/onto-viewer)
+        docker/
+            runtime/
+                server/
+                    config/      <- config files go here
+                        ...
+                    ontologies/  <- ontologies go here
+                        ...
+        docker-compose.yaml
+        ...
+    html-pages/                  (https://github.com/edmcouncil/html-pages)
+        ...
+```
+
+where `root-dir` is any folder on your local machine.  In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files.  You can find samples of these files in the `onto-viewer/onto-viewer-web-app` folder.  Note that the `onto-viewer/docker/runtime/` folder is excluded from Git, so you can freely put there any file you want.
+
+Then, from the `onto-viewer/` folder run the following command to start the applications:
+
+```
+docker-compose up -d
+```
+
+Please mind that it takes a while to start applications depending on how many ontologies you provided.
+
+To stop the applications run:
+
+```
+docker-compose down
+```
+
 
 # Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
