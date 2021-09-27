@@ -1,19 +1,21 @@
 package org.edmcouncil.spec.ontoviewer.webapp.service;
 
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
-import org.edmcouncil.spec.ontoviewer.webapp.util.ApiKeyGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.webapp.util.ApiKeyGenerator;
+import org.springframework.stereotype.Component;
 
 @Component
 public class FileService {
 
-  @Autowired
-  private FileSystemManager fileSystemManager;
+  private final FileSystemManager fileSystemManager;
+
+  public FileService(FileSystemManager fileSystemManager) {
+    this.fileSystemManager = fileSystemManager;
+  }
 
   public String getApiKeyFromFile() throws IOException {
     String result;
@@ -27,5 +29,4 @@ public class FileService {
     }
     return result;
   }
-
 }

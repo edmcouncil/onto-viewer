@@ -14,14 +14,14 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableAsync
 @ServletComponentScan
-@ComponentScan(basePackages = { 
-  "org.edmcouncil.spec.ontoviewer.core",
-  "org.edmcouncil.spec.ontoviewer.configloader",
-  "org.edmcouncil.spec.ontoviewer.webapp"
+@ComponentScan(basePackages = {
+    "org.edmcouncil.spec.ontoviewer.core",
+    "org.edmcouncil.spec.ontoviewer.configloader",
+    "org.edmcouncil.spec.ontoviewer.webapp"
 })
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 }
