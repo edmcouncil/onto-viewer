@@ -4,7 +4,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.OwlSimpleProperty;
 import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

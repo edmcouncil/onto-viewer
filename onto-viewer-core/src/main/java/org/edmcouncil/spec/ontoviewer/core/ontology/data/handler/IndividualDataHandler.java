@@ -8,7 +8,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;

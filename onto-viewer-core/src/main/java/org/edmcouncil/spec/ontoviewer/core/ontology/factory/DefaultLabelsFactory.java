@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.factory;
 
 import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.vocabulary.DefaultAppLabels;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.DefaultAppLabels;
 
 /**
  * Factory create default application labels for embeded functions and ontology resourcess.

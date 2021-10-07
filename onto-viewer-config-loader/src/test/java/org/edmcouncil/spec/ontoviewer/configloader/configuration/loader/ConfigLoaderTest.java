@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.DefaultLabelItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.MissingLanguageItem;
@@ -31,7 +31,7 @@ import java.util.Set;
  */
 class ConfigLoaderTest {
 
-  private ViewerCoreConfiguration testViewerCoreConfig;
+  private CoreConfiguration testViewerCoreConfig;
 
   @TempDir
   Path tempDir;
@@ -153,14 +153,14 @@ class ConfigLoaderTest {
 
   @Test
   void testGetConfigValFromConfig() {
-    Set<ConfigItem> actualResult = this.testViewerCoreConfig.getConfigVal(ConfigKeys.ONTOLOGY_DIR);
+    Set<ConfigItem> actualResult = this.testViewerCoreConfig.getValue(ConfigKeys.ONTOLOGY_DIR);
     Set<ConfigItem> expectedResult = Collections.singleton(new StringItem("integration_tests/ontologies"));
     assertEquals(expectedResult, actualResult);
 
-    Set<ConfigItem> getConfigValPath = this.testViewerCoreConfig.getConfigVal(ConfigKeys.ONTOLOGY_PATH);
+    Set<ConfigItem> getConfigValPath = this.testViewerCoreConfig.getValue(ConfigKeys.ONTOLOGY_PATH);
     assertNull(getConfigValPath);
 
-    Set<ConfigItem> getConfigValUrl = this.testViewerCoreConfig.getConfigVal(ConfigKeys.ONTOLOGY_URL);
+    Set<ConfigItem> getConfigValUrl = this.testViewerCoreConfig.getValue(ConfigKeys.ONTOLOGY_URL);
     assertNull(getConfigValUrl);
   }
 

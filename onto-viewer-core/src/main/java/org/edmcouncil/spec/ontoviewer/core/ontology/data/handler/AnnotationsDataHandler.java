@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
@@ -46,7 +46,7 @@ public class AnnotationsDataHandler {
   @Autowired
   private CustomDataFactory customDataFactory;
   @Autowired
-  private AppConfiguration appConfig;
+  private ConfigurationService appConfig;
   @Autowired
   private ScopeIriOntology scopeIriOntology;
 
@@ -58,7 +58,7 @@ public class AnnotationsDataHandler {
    */
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology, OwlListDetails details) {
 
-    Set<String> ignoredToDisplay = appConfig.getViewerCoreConfig().getIgnoredElements();
+    Set<String> ignoredToDisplay = appConfig.getCoreConfiguration().getIgnoredElements();
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
@@ -123,7 +123,7 @@ public class AnnotationsDataHandler {
    */
   public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology, OwlListDetails details) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-    Set<String> ignoredToDisplay = appConfig.getViewerCoreConfig().getIgnoredElements();
+    Set<String> ignoredToDisplay = appConfig.getCoreConfiguration().getIgnoredElements();
     for (OWLAnnotation next : annotations.collect(Collectors.toSet())) {
       IRI propertyiri = next.getProperty().getIRI();
 

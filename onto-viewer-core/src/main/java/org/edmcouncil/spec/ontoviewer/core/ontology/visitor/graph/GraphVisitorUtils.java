@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNode;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.ExpressionReturnedClass;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.IRI;

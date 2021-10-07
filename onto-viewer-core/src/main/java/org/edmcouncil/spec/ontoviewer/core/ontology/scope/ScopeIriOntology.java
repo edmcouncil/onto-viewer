@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -27,7 +27,7 @@ public class ScopeIriOntology {
   private static final Logger LOG = LoggerFactory.getLogger(ScopeIriOntology.class);
 
   @Autowired
-  private AppConfiguration appConfiguration;
+  private ConfigurationService appConfiguration;
   private Set<String> scopes = new HashSet<String>();
 
   /**

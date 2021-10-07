@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.mapper.SimpleOntologyMapperCreator;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.mapper.VersionIriMapper;
@@ -40,10 +40,10 @@ public class AutoOntologyLoader {
   private static final Logger LOG = LoggerFactory.getLogger(AutoOntologyLoader.class);
 
   private FileSystemManager fsm;
-  private ViewerCoreConfiguration config;
+  private CoreConfiguration config;
   static List<String> supportedExtensions = Arrays.asList(".rdf", ".owl");
 
-  public AutoOntologyLoader(FileSystemManager fsm, ViewerCoreConfiguration viewerCoreConfiguration) {
+  public AutoOntologyLoader(FileSystemManager fsm, CoreConfiguration viewerCoreConfiguration) {
     this.fsm = fsm;
     this.config = viewerCoreConfiguration;
   }
@@ -61,7 +61,7 @@ public class AutoOntologyLoader {
     }
   }
 
-  public OWLOntology load() throws OWLOntologyCreationException, IOException, ParserConfigurationException, ParserConfigurationException, XPathExpressionException, XPathExpressionException, SAXException {
+  public OWLOntology load() throws OWLOntologyCreationException, IOException, ParserConfigurationException, XPathExpressionException, SAXException {
     Set<IRI> irisToLoad = new HashSet<>();
     OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
     OWLOntology onto = manager.createOntology();

@@ -3,7 +3,7 @@ package org.edmcouncil.spec.ontoviewer.core.changer;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlGroupedDetailsProperties;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

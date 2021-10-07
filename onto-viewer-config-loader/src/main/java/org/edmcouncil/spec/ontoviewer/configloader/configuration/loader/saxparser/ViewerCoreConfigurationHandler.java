@@ -9,7 +9,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.elem
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.RenameItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.DefaultLabelItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.SearcherField;
@@ -29,7 +29,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(ViewerCoreConfigurationHandler.class);
 
-  private ViewerCoreConfiguration config = new ViewerCoreConfiguration();
+  private CoreConfiguration config = new CoreConfiguration();
   String key = null;
   String val = null;
 
@@ -39,7 +39,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
   TextSearcherConfig tsc = null;
   SearcherField sf = null;
 
-  public ViewerCoreConfigurationHandler(ViewerCoreConfiguration configuration) {
+  public ViewerCoreConfigurationHandler(CoreConfiguration configuration) {
     this.config = configuration;
   }
 
@@ -93,12 +93,12 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.LABEL_LANG:
         if (!val.trim().isEmpty()) {
           ConfigItem configEl = new StringItem(val);
-          config.addCongigElement(key, configEl);
+          config.addConfigElement(key, configEl);
           configEl = null;
         }
         break;
       case ConfigKeys.GROUP:
-        config.addCongigElement(key, cge);
+        config.addConfigElement(key, cge);
         break;
       case ConfigKeys.GROUP_NAME:
         cge.setName(val);
@@ -111,7 +111,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_PATH:
       case ConfigKeys.ONTOLOGY_MAPPER:
         StringItem ontologyPath = new StringItem(val);
-        config.addCongigElement(key, ontologyPath);
+        config.addConfigElement(key, ontologyPath);
         ontologyPath = null;
         break;
       case ConfigKeys.DISPLAY_LABEL:
@@ -119,21 +119,21 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
         BooleanItem cbe = new BooleanItem();
         cbe.setType(ConfigItemType.BOOLEAN);
         cbe.setValue(Boolean.valueOf(val));
-        config.addCongigElement(key, cbe);
+        config.addConfigElement(key, cbe);
         cbe = null;
         break;
       case ConfigKeys.LABEL_PRIORITY:
         LabelPriority cpe = new LabelPriority();
         cpe.setType(ConfigItemType.PRIORITY);
         cpe.setValue(LabelPriority.Priority.valueOf(val));
-        config.addCongigElement(key, cpe);
+        config.addConfigElement(key, cpe);
         cpe = null;
         break;
       case ConfigKeys.MISSING_LANGUAGE_ACTION:
         MissingLanguageItem cmle = new MissingLanguageItem();
         cmle.setType(ConfigItemType.MISSING_LANGUAGE_ACTION);
         cmle.setValue(MissingLanguageItem.Action.valueOf(val));
-        config.addCongigElement(key, cmle);
+        config.addConfigElement(key, cmle);
         cmle = null;
         break;
       case ConfigKeys.RESOURCE_IRI_TO_NAME:
@@ -143,7 +143,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
         dli.setLabel(val);
         break;
       case ConfigKeys.USER_DEFINED_NAME:
-        config.addCongigElement(key, dli);
+        config.addConfigElement(key, dli);
         break;
       case ConfigKeys.HINT_FIELD:
         tsc.addHintField(sf);
@@ -167,7 +167,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
         tsc.addSearchDescription(val);
         break;
       case ConfigKeys.TEXT_SEARCH_CONFIG:
-        config.addCongigElement(key, tsc);
+        config.addConfigElement(key, tsc);
         tsc = null;
         break;
       case ConfigKeys.HINT_LEVENSTEIN_DISTANCE:
@@ -184,7 +184,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
     val = new String(ch, start, length);
   }
 
-  public ViewerCoreConfiguration getConfiguration() {
+  public CoreConfiguration getConfiguration() {
 
     return this.config;
   }

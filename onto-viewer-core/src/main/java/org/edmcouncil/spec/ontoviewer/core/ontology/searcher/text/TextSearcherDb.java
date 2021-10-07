@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.SearcherField;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.hint.HintItem;
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
@@ -52,7 +52,7 @@ public class TextSearcherDb {
   private OntologyManager om;
   private TextSearcherConfig conf;
   @Autowired
-  private AppConfiguration appConfig;
+  private ConfigurationService appConfig;
   @Autowired
   private LabelProvider labelProvider;
 
@@ -66,7 +66,7 @@ public class TextSearcherDb {
   @PostConstruct
   public void init() {
 
-    this.conf = checkAndLoadConfig(appConfig.getViewerCoreConfig().getTextSearcherConfig());
+    this.conf = checkAndLoadConfig(appConfig.getCoreConfiguration().getTextSearcherConfig());
 
     //TODO: move this into configuration, default is only label to search
     //LOG.info("Start initialize TextSearcherDB");
@@ -133,8 +133,8 @@ public class TextSearcherDb {
         Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
         if (opt.isPresent()) {
           String lang = opt.get().getLang();
-          if (appConfig.getViewerCoreConfig().isForceLabelLang()) {
-            if (lang == null || !lang.equals(appConfig.getViewerCoreConfig().getLabelLang())) {
+          if (appConfig.getCoreConfiguration().isForceLabelLang()) {
+            if (lang == null || !lang.equals(appConfig.getCoreConfiguration().getLabelLang())) {
               return;
             }
           }

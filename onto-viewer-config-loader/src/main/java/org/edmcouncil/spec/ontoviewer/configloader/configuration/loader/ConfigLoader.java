@@ -7,7 +7,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.loader.saxparser.ViewerCoreConfigurationHandler;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -19,10 +19,10 @@ public class ConfigLoader {
 
   private static final Logger LOG = LoggerFactory.getLogger(ConfigLoader.class);
 
-  ViewerCoreConfiguration configuration;
+  CoreConfiguration configuration;
 
   public ConfigLoader() {
-    this.configuration = new ViewerCoreConfiguration();
+    this.configuration = new CoreConfiguration();
   }
 
   public void loadWeaselConfiguration(Path weaselConfigFile) {
@@ -48,7 +48,7 @@ public class ConfigLoader {
     return;
   }
 
-  public ViewerCoreConfiguration getConfiguration() {
+  public CoreConfiguration getConfiguration() {
     return configuration;
   }
   

@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
@@ -26,7 +26,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -63,7 +63,7 @@ public class FiboDataHandler {
   @Autowired
   private IndividualDataHandler individualDataHandler;
   @Autowired
-  private AppConfiguration configuration;
+  private ConfigurationService configuration;
   @Autowired
   private CustomDataFactory customDataFactory;
   @Autowired
@@ -371,6 +371,13 @@ public class FiboDataHandler {
       result.add(s);
     }
     return result;
+  }
+
+  public void populateOntologyResources(OWLOntology ontology) {
+    // TODO: Make loadAllOntologyResources and setOntologyResources private and use this method
+    //       instead
+    var ontologyResources = loadAllOntologyResources(ontology);
+    setOntologyResources(ontologyResources);
   }
 
   private void completeResourceKeys() {

@@ -36,9 +36,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.OntologyGraph;
@@ -46,7 +46,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDirectedSubClassesProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.utils.OwlUtils;
@@ -95,7 +95,7 @@ public class OwlDataHandler {
   @Autowired
   private OwlUtils owlUtils;
   @Autowired
-  private AppConfiguration config;
+  private ConfigurationService config;
   @Autowired
   private ScopeIriOntology scopeIriOntology;
   @Autowired
@@ -129,7 +129,7 @@ public class OwlDataHandler {
       OWLClass clazz = classesIterator.next();
 
       if (clazz.getIRI().equals(iri)) {
-        LOG.debug("[Data Handler] Find OWL class wih IRI: {}", iri.toString());
+        LOG.debug("[Data Handler] Find OWL class wih IRI: {}", iri);
 
         String label = labelExtractor.getLabelOrDefaultFragment(clazz);
 
@@ -438,7 +438,7 @@ public class OwlDataHandler {
     String splitFragment = StringUtils.getFragment(elementIri);
     Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-    Set<String> ignoredToDisplay = config.getViewerCoreConfig().getIgnoredElements();
+    Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
     int start = 0;
     while (axiomsIterator.hasNext()) {
 
@@ -530,7 +530,7 @@ public class OwlDataHandler {
     String closingParenthesis = ")";
     String comma = ",";
     Iterator<OWLEntity> iterator = axiom.signature().iterator();
-    ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
+    CoreConfiguration cfg = config.getCoreConfiguration();
 
     LOG.trace("Rendered Val: {}", renderedVal);
 
@@ -625,7 +625,7 @@ public class OwlDataHandler {
   }
 
   private void checkAndParseUriInLiteral(String[] splited, String argPattern, OwlAxiomPropertyValue opv) {
-    ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
+    CoreConfiguration cfg = config.getCoreConfiguration();
     for (int j = 0; j < splited.length; j++) {
       String str = splited[j].trim();
       if (str.startsWith("<") && str.endsWith(">")) {
@@ -1157,7 +1157,7 @@ public class OwlDataHandler {
       String splitFragment = StringUtils.getFragment(iri);
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      Set<String> ignoredToDisplay = config.getViewerCoreConfig().getIgnoredElements();
+      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
 
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, ignoredToDisplay, key, start, false);
       start = opv.getLastId() + 1;
@@ -1221,7 +1221,7 @@ public class OwlDataHandler {
       String splitFragment = StringUtils.getFragment(rangeEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      Set<String> ignoredToDisplay = config.getViewerCoreConfig().getIgnoredElements();
+      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
 
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, ignoredToDisplay, key, startR, false);
       startR = opv.getLastId() + 1;
@@ -1284,7 +1284,7 @@ public class OwlDataHandler {
       String splitFragment = StringUtils.getFragment(domainEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      Set<String> ignoredToDisplay = config.getViewerCoreConfig().getIgnoredElements();
+      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
 
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, ignoredToDisplay, key, startD, false);
       startD = opv.getLastId() + 1;

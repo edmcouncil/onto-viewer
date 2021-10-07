@@ -1,6 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResult;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
@@ -47,7 +47,7 @@ public class SearchController {
   @Autowired
   private OntologySearcherService ontologySearcher;
   @Autowired
-  private AppConfiguration config;
+  private ConfigurationService config;
   @Autowired
   private UpdateBlocker blocker;
 
@@ -83,7 +83,7 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
-    boolean isGrouped = config.getViewerCoreConfig().isGrouped();
+    boolean isGrouped = config.getCoreConfiguration().isGrouped();
 
     SearcherResult result = null;
     try {
