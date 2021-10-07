@@ -1,12 +1,13 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
-import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResult;
-import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
-import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
-import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
+import java.util.Optional;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
+import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
+import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
+import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -26,7 +25,7 @@ import java.util.Optional;
 @RequestMapping("/api/search")
 public class SearchApiController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(SearchApiController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SearchApiController.class);
 
   private final TextSearchService textSearchService;
   private final OntologySearcherService ontologySearcher;
@@ -36,8 +35,8 @@ public class SearchApiController {
   private static final Integer DEFAULT_RESULT_PAGE = 1;
 
   public SearchApiController(TextSearchService textSearchService,
-                             OntologySearcherService ontologySearcher,
-                             UpdateBlocker blocker) {
+      OntologySearcherService ontologySearcher,
+      UpdateBlocker blocker) {
     this.textSearchService = textSearchService;
     this.ontologySearcher = ontologySearcher;
     this.blocker = blocker;
@@ -48,10 +47,11 @@ public class SearchApiController {
       @RequestBody String query,
       @PathVariable Optional<Integer> max,
       @PathVariable Optional<Integer> page) {
-    LOG.info("[REQ] POST : api / search / max / {{}} / page /{{}} | RequestBody = {{}}", query, max, page);
+    LOGGER.info("[REQ] POST : api / search / max / {{}} / page /{{}} | RequestBody = {{}}", query,
+        max, page);
 
     if (!blocker.isInitializeAppDone()) {
-      LOG.debug("Application initialization has not completed");
+      LOGGER.debug("Application initialization has not completed");
       return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
     }
 
@@ -59,11 +59,11 @@ public class SearchApiController {
     try {
 
       if (UrlChecker.isUrl(query)) {
-        LOG.info("URL detected - searching for specific element.");
+        LOGGER.info("URL detected - searching for specific element.");
 
         result = ontologySearcher.search(query, 0);
       } else {
-        LOG.info("String detected - searching for elements with the given label.");
+        LOGGER.info("String detected - searching for elements with the given label.");
 
         Integer maxResults = max.orElse(DEFAULT_MAX_SEARCH_RESULT_COUNT);
         Integer currentPage = page.orElse(DEFAULT_RESULT_PAGE);
@@ -78,11 +78,9 @@ public class SearchApiController {
   }
 
   private ResponseEntity getError(ViewerException ex) {
-    LOG.info("Handle NotFoundElementInOntologyException. Message: '{}'", ex.getMessage());
-    LOG.trace(Arrays.toString(ex.getStackTrace()));
-    ErrorResult er = new ErrorResult();
-    er.setExMessage(ex.getMessage());
-    er.setMessage("Element Not Found.");
-    return ResponseEntity.badRequest().body(er);
+    LOGGER.info("Handle NotFoundElementInOntologyException. Message: '{}'", ex.getMessage());
+
+    return ResponseEntity.badRequest().body(
+        new ErrorResponse("Element Not Found.", ex.getMessage()));
   }
 }

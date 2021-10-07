@@ -2,7 +2,7 @@ package org.edmcouncil.spec.ontoviewer.webapp.util;
 
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import java.util.List;
-import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsMapped;
@@ -67,7 +67,7 @@ public class ModelBuilder {
     return this;
   }
 
-  public ModelBuilder error(ErrorResult er) {
+  public ModelBuilder error(ErrorResponse er) {
     model.addAttribute("error", er);
     return this;
   }

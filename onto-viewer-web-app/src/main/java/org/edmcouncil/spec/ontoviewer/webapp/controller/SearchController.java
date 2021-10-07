@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
-import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
 import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
@@ -99,11 +99,8 @@ public class SearchController {
     } catch (ViewerException ex) {
       LOG.info("Handle ViewerException. Message: '{}'", ex.getMessage());
       LOG.trace(Arrays.toString(ex.getStackTrace()));
-      ErrorResult er = new ErrorResult();
-      er.setExMessage(ex.getMessage());
-      er.setMessage("Element Not Found.");
       modelBuilder.emptyQuery();
-      modelBuilder.error(er);
+      modelBuilder.error(new ErrorResponse("Element Not Found.", ex.getMessage()));
       return "error";
     }
 
