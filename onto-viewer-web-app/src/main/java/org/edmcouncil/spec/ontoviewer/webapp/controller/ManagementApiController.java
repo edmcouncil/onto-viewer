@@ -11,11 +11,9 @@ import org.edmcouncil.spec.ontoviewer.webapp.service.ApplicationManagementServic
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = {"/api/management"})
 public class ManagementApiController {
 
   private final ApiKeyService apiKeyService;
@@ -27,7 +25,7 @@ public class ManagementApiController {
     this.applicationManagementService = applicationManagementService;
   }
 
-  @PutMapping("/stop")
+  @PutMapping("/api/")
   public ResponseEntity<BaseResponse> stopApplication(
       @RequestHeader(value = RequestConstants.X_API_KEY) String apiKeyHeader) {
 
