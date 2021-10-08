@@ -73,14 +73,17 @@ public class OntologyStatsManager {
                 labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
             }
 
-            Set<String> modulesIriSet = new HashSet<>();
+              Set<String> modulesIriSet = new HashSet<>();
+      try {
+        indi.getProperties().get(instanceKey).stream()
+            .map((propertyValue) -> (OwlListElementIndividualProperty) propertyValue)
+            .map((individProperty) -> (String) individProperty.getValue().getIri())
+            .forEachOrdered((elIri) -> {
+              modulesIriSet.add(elIri);
+            });
+      } catch (Exception e) {
+      }
 
-            indi.getProperties().get(instanceKey).stream()
-                    .map((propertyValue) -> (OwlListElementIndividualProperty) propertyValue)
-                    .map((individProperty) -> (String) individProperty.getValue().getIri())
-                    .forEachOrdered((elIri) -> {
-                        modulesIriSet.add(elIri);
-                    });
             List<String> rootModulesIris = fiboDataHandler.getRootModulesIris(modulesIriSet, ontology);
             //--numberOfDomain
             String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
