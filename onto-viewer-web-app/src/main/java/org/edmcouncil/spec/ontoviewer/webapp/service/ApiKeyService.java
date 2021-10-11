@@ -4,7 +4,6 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,10 +11,13 @@ public class ApiKeyService {
 
   private static final Logger LOG = LoggerFactory.getLogger(ApiKeyService.class);
 
+  private final FileService fileService;
+
   private String apiKey = null;
 
-  @Autowired
-  private FileService fileService;
+  public ApiKeyService(FileService fileService) {
+    this.fileService = fileService;
+  }
 
   @PostConstruct
   public void init() {
@@ -26,7 +28,7 @@ public class ApiKeyService {
     }
   }
 
-  public Boolean validateApiKey(String keyToCheck) {
+  public boolean validateApiKey(String keyToCheck) {
     return apiKey.equals(keyToCheck);
   }
 }
