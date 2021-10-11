@@ -40,12 +40,10 @@ public class OntologyUpdateApiController {
       @RequestHeader(value = "Accept", required = true) String acceptHeader,
       @RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
       @RequestParam(value = "ApiKey", required = false) String apiKeyParam) {
-
-    if (!acceptHeader.contains("application/json")) {
+    if (!acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)) {
       return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
     }
 
-    LOG.debug("[REQ] PUT : /api/update ");
     String key = "";
     if (apiKeyHeader != null) {
       key = apiKeyHeader;
@@ -66,7 +64,7 @@ public class OntologyUpdateApiController {
       @RequestParam(value = "ApiKey", required = false) String apiKeyParam,
       @PathVariable Optional<String> updateId,
       @RequestHeader(value = "Accept", required = true) String acceptHeader) {
-    if (!acceptHeader.contains("application/json")) {
+    if (!acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)) {
       return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
     }
     String key = "";
@@ -75,7 +73,7 @@ public class OntologyUpdateApiController {
     } else if (apiKeyParam != null) {
       key = apiKeyParam;
     }
-    LOG.debug("[REQ] GET : /api/update/ ");
+
     if (!keyService.validateApiKey(key)) {
       LOG.debug(notValidApiKeyMessage);
       return ResponseEntity.badRequest().body(new ErrorResult(notValidApiKeyMessage));

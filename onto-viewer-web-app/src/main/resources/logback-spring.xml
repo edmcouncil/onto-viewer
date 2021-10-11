@@ -34,6 +34,9 @@
   <logger name="uk.ac.manchester.cs.owl.owlapi." level="DEBUG" additivity="false">
     <appender-ref ref="STDOUT" />
   </logger>
+  <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter">
+    <level value="DEBUG" />
+  </logger>
   <root level="INFO" additivity="false">
     <appender-ref ref="STDOUT" />
     <springProfile name="application">

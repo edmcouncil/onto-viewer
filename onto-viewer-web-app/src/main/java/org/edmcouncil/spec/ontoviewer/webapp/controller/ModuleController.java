@@ -32,8 +32,6 @@ public class ModuleController {
   public String getModulesMeta(
           @RequestParam(value = "meta", required = false) String query,
           Model model) {
-    LOG.debug("[REQ] GET: module /");
-
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
       ModelBuilder mb = new ModelBuilder(model);
