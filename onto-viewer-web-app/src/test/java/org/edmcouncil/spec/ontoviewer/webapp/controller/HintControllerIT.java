@@ -22,7 +22,7 @@ class HintControllerIT extends BaseControllerIT {
 
     this.mockMvc.perform(post("/api/hint").content(query))
         .andExpect(status().isOk())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.length()", is(1)))
         .andExpect(jsonPath("$[0].label", is("business entity")));
   }
@@ -34,7 +34,7 @@ class HintControllerIT extends BaseControllerIT {
     this.mockMvc.perform(post("/api/hint").content(query))
         .andDo(print())
         .andExpect(status().isOk())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.length()", is(13)))
         .andExpect(jsonPath("$[0].iri", is("http://purl.org/dc/terms/license")));
   }
@@ -47,7 +47,7 @@ class HintControllerIT extends BaseControllerIT {
     this.mockMvc.perform(post("/api/hint/max/" + max).content(query))
         .andDo(print())
         .andExpect(status().isOk())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.length()", is(5)))
         .andExpect(jsonPath("$[0].iri", is("http://purl.org/dc/terms/license")));
   }
@@ -64,6 +64,6 @@ class HintControllerIT extends BaseControllerIT {
 
     this.mockMvc.perform(post("/api/hint").content(query))
         .andExpect(status().isBadRequest())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 }

@@ -3,10 +3,10 @@ package org.edmcouncil.spec.ontoviewer.webapp.controller;
 import static org.edmcouncil.spec.ontoviewer.webapp.common.RequestConstants.API_KEY_NOT_VALID_MESSAGE;
 
 import java.util.Optional;
+import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.service.ApiKeyService;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologyUpdateService;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -43,12 +43,10 @@ public class OntologyUpdateApiController {
       @RequestHeader(value = "Accept", required = true) String acceptHeader,
       @RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
       @RequestParam(value = "ApiKey", required = false) String apiKeyParam) {
-
-    if (!acceptHeader.contains("application/json")) {
+    if (!acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)) {
       return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
     }
 
-    LOGGER.debug("[REQ] PUT : /api/update ");
     String key = "";
     if (apiKeyHeader != null) {
       key = apiKeyHeader;
@@ -70,7 +68,7 @@ public class OntologyUpdateApiController {
       @RequestParam(value = "ApiKey", required = false) String apiKeyParam,
       @PathVariable Optional<String> updateId,
       @RequestHeader(value = "Accept", required = true) String acceptHeader) {
-    if (!acceptHeader.contains("application/json")) {
+    if (!acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)) {
       return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
     }
     String key = "";
@@ -79,7 +77,7 @@ public class OntologyUpdateApiController {
     } else if (apiKeyParam != null) {
       key = apiKeyParam;
     }
-    LOGGER.debug("[REQ] GET : /api/update/ ");
+
     if (!keyService.validateApiKey(key)) {
       LOGGER.debug(API_KEY_NOT_VALID_MESSAGE);
       return ResponseEntity.badRequest().body(

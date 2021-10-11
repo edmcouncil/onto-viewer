@@ -47,9 +47,6 @@ public class SearchApiController {
       @RequestBody String query,
       @PathVariable Optional<Integer> max,
       @PathVariable Optional<Integer> page) {
-    LOGGER.info("[REQ] POST : api / search / max / {{}} / page /{{}} | RequestBody = {{}}", query,
-        max, page);
-
     if (!blocker.isInitializeAppDone()) {
       LOGGER.debug("Application initialization has not completed");
       return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
@@ -57,7 +54,6 @@ public class SearchApiController {
 
     SearcherResult result;
     try {
-
       if (UrlChecker.isUrl(query)) {
         LOGGER.info("URL detected - searching for specific element.");
 
