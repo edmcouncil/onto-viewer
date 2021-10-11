@@ -1,18 +1,20 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
-import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResult;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
+import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
 import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilder;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilderFactory;
 import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
-import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
-import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -67,16 +65,12 @@ public class SearchController {
           Model model,
           @RequestParam(value = "max", required = false, defaultValue = "25") Integer max,
           @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
-
-    LOG.info("[REQ] GET : search ? query = {{}}", query);
-    //check blocker
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
       ModelBuilder mb = new ModelBuilder(model);
       mb.emptyQuery();
       model = mb.getModel();
       return "error_503";
-
     }
 
     Query q = new Query();
@@ -99,11 +93,8 @@ public class SearchController {
     } catch (ViewerException ex) {
       LOG.info("Handle ViewerException. Message: '{}'", ex.getMessage());
       LOG.trace(Arrays.toString(ex.getStackTrace()));
-      ErrorResult er = new ErrorResult();
-      er.setExMessage(ex.getMessage());
-      er.setMessage("Element Not Found.");
       modelBuilder.emptyQuery();
-      modelBuilder.error(er);
+      modelBuilder.error(new ErrorResponse("Element Not Found.", ex.getMessage()));
       return "error";
     }
 

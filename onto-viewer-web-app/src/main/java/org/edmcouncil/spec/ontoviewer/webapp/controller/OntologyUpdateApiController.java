@@ -1,13 +1,14 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
+import static org.edmcouncil.spec.ontoviewer.webapp.common.RequestConstants.API_KEY_NOT_VALID_MESSAGE;
+
 import java.util.Optional;
-import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
+import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.service.ApiKeyService;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologyUpdateService;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,26 +27,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = {"/api/update"})
 public class OntologyUpdateApiController {
 
-  private static final Logger LOG = LoggerFactory.getLogger(OntologyUpdateApiController.class);
-  private static final String notValidApiKeyMessage = "ApiKey is not valid for this instance.";
+  private static final Logger LOGGER = LoggerFactory.getLogger(OntologyUpdateApiController.class);
 
-  @Autowired
-  private ApiKeyService keyService;
+  private final ApiKeyService keyService;
+  private final OntologyUpdateService updateService;
 
-  @Autowired
-  private OntologyUpdateService updateService;
+  public OntologyUpdateApiController(ApiKeyService keyService,
+      OntologyUpdateService updateService) {
+    this.keyService = keyService;
+    this.updateService = updateService;
+  }
 
   @PutMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity startUpdateKeyInHeader(
       @RequestHeader(value = "Accept", required = true) String acceptHeader,
       @RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
       @RequestParam(value = "ApiKey", required = false) String apiKeyParam) {
-
-    if (!acceptHeader.contains("application/json")) {
+    if (!acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)) {
       return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
     }
 
-    LOG.debug("[REQ] PUT : /api/update ");
     String key = "";
     if (apiKeyHeader != null) {
       key = apiKeyHeader;
@@ -53,8 +54,9 @@ public class OntologyUpdateApiController {
       key = apiKeyParam;
     }
     if (!keyService.validateApiKey(key)) {
-      LOG.debug(notValidApiKeyMessage);
-      return ResponseEntity.badRequest().body(new ErrorResult(notValidApiKeyMessage));
+      LOGGER.debug(API_KEY_NOT_VALID_MESSAGE);
+      return ResponseEntity.badRequest().body(
+          new ErrorResponse(API_KEY_NOT_VALID_MESSAGE, null));
     }
     UpdateJob uj = updateService.startUpdate();
     return ResponseEntity.ok(uj);
@@ -66,7 +68,7 @@ public class OntologyUpdateApiController {
       @RequestParam(value = "ApiKey", required = false) String apiKeyParam,
       @PathVariable Optional<String> updateId,
       @RequestHeader(value = "Accept", required = true) String acceptHeader) {
-    if (!acceptHeader.contains("application/json")) {
+    if (!acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)) {
       return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
     }
     String key = "";
@@ -75,10 +77,11 @@ public class OntologyUpdateApiController {
     } else if (apiKeyParam != null) {
       key = apiKeyParam;
     }
-    LOG.debug("[REQ] GET : /api/update/ ");
+
     if (!keyService.validateApiKey(key)) {
-      LOG.debug(notValidApiKeyMessage);
-      return ResponseEntity.badRequest().body(new ErrorResult(notValidApiKeyMessage));
+      LOGGER.debug(API_KEY_NOT_VALID_MESSAGE);
+      return ResponseEntity.badRequest().body(
+          new ErrorResponse(API_KEY_NOT_VALID_MESSAGE, null));
     }
 
     String uid = null;

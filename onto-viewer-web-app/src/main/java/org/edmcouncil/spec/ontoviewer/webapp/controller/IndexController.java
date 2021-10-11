@@ -36,8 +36,6 @@ public class IndexController {
     public String getIndex(
             @RequestParam(value = "meta", required = false) String query,
             Model model) {
-        LOG.debug("[REQ] GET: index");
-
         if (!blocker.isInitializeAppDone()) {
             LOG.debug("Application initialization has not completed");
             ModelBuilder mb = new ModelBuilder(model);

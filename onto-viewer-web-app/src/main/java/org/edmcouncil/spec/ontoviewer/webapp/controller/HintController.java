@@ -36,7 +36,7 @@ public class HintController {
     this.blocker = blocker;
   }
 
-  @PostMapping(value = {"", "/max/{max}"}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  @PostMapping(value = {"", "/max/{max}"}, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<List<HintItem>> getHints(
       @RequestBody String query,
       @PathVariable Optional<Integer> max) {
@@ -46,7 +46,6 @@ public class HintController {
     }
 
     Integer maxHintCount = max.orElse(DEFAULT_MAX_HINT_RESULT_COUNT);
-    LOG.debug("[REQ] POST hint | query =  {{}}  | max = {{}}", query, maxHintCount);
 
     if (UrlChecker.isUrl(query)) {
       return ResponseEntity.badRequest().body(new ArrayList<>(0));

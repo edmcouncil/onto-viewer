@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
+import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -27,8 +27,6 @@ public class StatsApiController {
 
   @GetMapping
   public ResponseEntity getAllModulesDataAsJson() {
-    LOG.debug("[REQ] GET : api / stats");
-
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
       return new ResponseEntity<>("503 Service Unavailable", HttpStatus.SERVICE_UNAVAILABLE);

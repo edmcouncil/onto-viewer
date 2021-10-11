@@ -30,8 +30,6 @@ public class ModuleApiController {
 
   @GetMapping
   public ResponseEntity<List<FiboModule>> getAllModulesDataAsJson() {
-    LOG.debug("[REQ] GET : api / module");
-
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
       return ResponseEntity.internalServerError().build();
