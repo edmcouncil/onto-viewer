@@ -10,6 +10,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHa
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
+import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
 import org.slf4j.Logger;
@@ -43,10 +44,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     LOGGER.debug("Raw command line arguments: {}", Arrays.toString(args));
     var commandLineOptionsHandler = new CommandLineOptionsHandler();
     var commandLineOptions = commandLineOptionsHandler.parseArgs(args);
-
-    configurationService.getCoreConfiguration().addConfigElement(
-        ConfigKeys.ONTOLOGY_PATH,
-        new StringItem(commandLineOptions.getOption(OptionDefinition.INPUT)));
+    populateConfiguration(commandLineOptions);
 
     loadOntology();
 
@@ -54,6 +52,17 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
     var outputPath = Path.of(commandLineOptions.getOption(OptionDefinition.OUTPUT));
     new CsvWriter().write(outputPath, ontologyTableData);
+  }
+
+  private void populateConfiguration(CommandLineOptions commandLineOptions) {
+    var configuration = configurationService.getCoreConfiguration();
+    configuration.addConfigElement(
+        ConfigKeys.ONTOLOGY_PATH,
+        new StringItem(commandLineOptions.getOption(OptionDefinition.INPUT)));
+    configuration.addConfigElement(
+        OptionDefinition.FILTER_PATTERN.argName(),
+        new StringItem(commandLineOptions.getOption(OptionDefinition.FILTER_PATTERN)));
+
   }
 
   private void loadOntology() throws OntoViewerToolkitException {

@@ -48,6 +48,8 @@ public class CommandLineOptionsHandler {
       if (parsedOptions.hasOption(optionDefinition.argName())) {
         var optionValue = parsedOptions.getOptionValue(optionDefinition.argName());
         commandLineOptions.addOption(optionDefinition, optionValue);
+      } else if (optionDefinition.isNotRequired()) {
+        commandLineOptions.addOption(optionDefinition, optionDefinition.defaultValue());
       } else {
         var message = String.format(
             "Required command line option '%s' was not set.",

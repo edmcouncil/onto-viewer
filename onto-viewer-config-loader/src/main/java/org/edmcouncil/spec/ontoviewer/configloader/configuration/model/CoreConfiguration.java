@@ -1,5 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
+import java.util.Objects;
+import java.util.Optional;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.MissingLanguageItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
@@ -147,7 +149,8 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public Boolean isForceLabelLang() {
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.FORCE_LABEL_LANG, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.FORCE_LABEL_LANG,
+        new HashSet<>());
 
     for (ConfigItem value : values) {
       BooleanItem cbe = (BooleanItem) value;
@@ -249,4 +252,12 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     return result;
   }
 
+  public Optional<String> getSingleStringValue(String key) {
+    var value = getValue(key);
+    if (value.isEmpty()) {
+      return Optional.empty();
+    }
+
+    return value.stream().map(Object::toString).findFirst();
+  }
 }

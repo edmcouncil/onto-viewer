@@ -1,8 +1,10 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.model;
 
 public enum EntityType {
+  DATA_PROPERTY("DataProperty"),
   CLASS("Class"),
-  INDIVIDUAL("Individual");
+  INDIVIDUAL("Individual"),
+  OBJECT_PROPERTY("ObjectProperty");
 
   private final String displayName;
 
