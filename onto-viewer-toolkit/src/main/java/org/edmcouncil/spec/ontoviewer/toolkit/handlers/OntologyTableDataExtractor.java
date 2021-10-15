@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.handlers;
 
 import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.CLASS;
+import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.DATATYPE;
 import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.DATA_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.INDIVIDUAL;
 import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.OBJECT_PROPERTY;
@@ -9,6 +10,7 @@ import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -57,6 +59,9 @@ public class OntologyTableDataExtractor {
     result.addAll(getEntities(ontology.individualsInSignature(INCLUDED), INDIVIDUAL));
     result.addAll(getEntities(ontology.objectPropertiesInSignature(INCLUDED), OBJECT_PROPERTY));
     result.addAll(getEntities(ontology.dataPropertiesInSignature(INCLUDED), DATA_PROPERTY));
+    result.addAll(getEntities(ontology.datatypesInSignature(INCLUDED), DATATYPE));
+
+    sortExtractedEntities(result);
 
     return result;
   }
@@ -69,12 +74,13 @@ public class OntologyTableDataExtractor {
         .orElse("");
 
     return entities
+        .parallel()
         .filter(owlClass -> owlClass.getIRI().toString().contains(filterPattern))
         .map(owlClass -> {
           try {
             return detailsManager.getDetailsByIri(owlClass.getIRI().toString());
           } catch (NotFoundElementInOntologyException e) {
-            LOGGER.warn("OWL Class '{}' not found.", owlClass.getIRI());
+            LOGGER.warn("OWL Entity '{}' not found.", owlClass.getIRI());
             return null;
           }
         })
@@ -130,5 +136,9 @@ public class OntologyTableDataExtractor {
     } else {
       return UNKNOWN_ONTOLOGY;
     }
+  }
+
+  private void sortExtractedEntities(List<EntityData> result) {
+    result.sort(Comparator.comparing(EntityData::getTermLabel));
   }
 }

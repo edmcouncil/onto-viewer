@@ -1,13 +1,16 @@
 package org.edmcouncil.spec.ontoviewer.toolkit;
 
+import com.google.common.base.Stopwatch;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
+import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
@@ -41,6 +44,8 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
+    var stopwatch = Stopwatch.createStarted();
+
     LOGGER.debug("Raw command line arguments: {}", Arrays.toString(args));
     var commandLineOptionsHandler = new CommandLineOptionsHandler();
     var commandLineOptions = commandLineOptionsHandler.parseArgs(args);
@@ -52,6 +57,9 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
     var outputPath = Path.of(commandLineOptions.getOption(OptionDefinition.OUTPUT));
     new CsvWriter().write(outputPath, ontologyTableData);
+
+    stopwatch.stop();
+    LOGGER.debug("Application finished task in {} seconds.", stopwatch.elapsed(TimeUnit.SECONDS));
   }
 
   private void populateConfiguration(CommandLineOptions commandLineOptions) {
@@ -62,7 +70,6 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     configuration.addConfigElement(
         OptionDefinition.FILTER_PATTERN.argName(),
         new StringItem(commandLineOptions.getOption(OptionDefinition.FILTER_PATTERN)));
-
   }
 
   private void loadOntology() throws OntoViewerToolkitException {

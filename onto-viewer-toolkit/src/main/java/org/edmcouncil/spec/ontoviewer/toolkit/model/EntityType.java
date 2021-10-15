@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.toolkit.model;
 
 public enum EntityType {
   DATA_PROPERTY("DataProperty"),
+  DATATYPE("Datatype"),
   CLASS("Class"),
   INDIVIDUAL("Individual"),
   OBJECT_PROPERTY("ObjectProperty");

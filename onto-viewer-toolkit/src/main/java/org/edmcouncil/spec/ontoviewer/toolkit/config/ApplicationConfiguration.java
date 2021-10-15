@@ -12,7 +12,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataH
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.Updater;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

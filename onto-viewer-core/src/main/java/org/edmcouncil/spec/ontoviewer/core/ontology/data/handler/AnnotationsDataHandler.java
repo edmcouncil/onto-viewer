@@ -106,7 +106,7 @@ public class AnnotationsDataHandler {
           }
         }
       }
-      LOG.info("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\" ", opv, propertyiri.toString());
+      LOG.debug("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\" ", opv, propertyiri.toString());
 
       result.addProperty(propertyiri.toString(), opv);
     }
@@ -176,7 +176,7 @@ public class AnnotationsDataHandler {
           }
         }
       }
-      LOG.info("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", opv, propertyiri.toString());
+      LOG.debug("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", opv, propertyiri.toString());
 
       result.addProperty(propertyiri.toString(), opv);
     }

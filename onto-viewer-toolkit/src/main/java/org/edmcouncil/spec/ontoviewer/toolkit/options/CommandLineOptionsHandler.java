@@ -5,7 +5,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.edmcouncil.spec.ontoviewer.toolkit.OntoViewerToolkitException;
+import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
 
 public class CommandLineOptionsHandler {
 

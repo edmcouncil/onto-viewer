@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.toolkit;
+package org.edmcouncil.spec.ontoviewer.toolkit.exception;
 
 public class OntoViewerToolkitException extends Exception {
 
