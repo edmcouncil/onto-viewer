@@ -443,19 +443,15 @@ public class OwlDataHandler {
     while (axiomsIterator.hasNext()) {
 
       T axiom = axiomsIterator.next();
-
-      LOG.debug("NotRenderedAxioms: {}", axiom.toString());
       String key = axiom.getAxiomType().getName();
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, ignoredToDisplay, key, start, true);
 
-
       if (opv == null) {
         continue;
       }
       start = opv.getLastId();
-
       result.addProperty(key, opv);
     }
     result.sortPropertiesInAlphabeticalOrder();
@@ -481,9 +477,7 @@ public class OwlDataHandler {
       Set<String> ignoredToDisplay,
       String key,
       int startCountingArgs,
-
       boolean bypassClass
-
   ) {
 
     String value = rendering.render(axiom);
@@ -498,8 +492,8 @@ public class OwlDataHandler {
       return null;
     }
     OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
-    opv.setValue(value);
 
+    opv.setValue(value);
     opv.setType(WeaselOwlType.AXIOM);
     LOG.debug("[Data Handler] Find Axiom \"{}\" with type \"{}\"", value, key);
     Boolean isRestriction = owlUtils.isRestriction(axiom);
@@ -595,19 +589,12 @@ public class OwlDataHandler {
             String postfix = String.join("", Collections.nCopies(countComma, comma));
             textToReplace = textToReplace + postfix;
           }
-          LOG.trace("Prepared text: {} for: {}", textToReplace, splited[fixedIValue]);
           splited[fixedIValue] = textToReplace;
 
           String eIri = next.getIRI().toString();
+          LOG.info("Name getIri: {}", eIri);
 
-          if (scopeIriOntology.scopeIri(eIri)) {
-            parseToIri(eIri, opv, key, splited, fixedIValue, splited[fixedIValue]);
-            //break;
-          } else {
-            parseUrlAxiom(eIri, splited, fixedIValue, hasOpeningParenthesis, countOpeningParenthesis, hasClosingParenthesis, countClosingParenthesis, hasComma, countComma);
-            //break;
-          }
-
+          parseToIri(argPattern, opv, key, splited, fixedIValue, generatedKey, eIri, countOpeningParenthesis, countClosingParenthesis, countComma);
         }
         opv.setLastId(i);
       }
@@ -636,7 +623,8 @@ public class OwlDataHandler {
           String key = generatedKey;
 
           if (scopeIriOntology.scopeIri(probablyUrl)) {
-            parseToIri(probablyUrl, opv, key, splited, j, generatedKey);
+            //Brace checking is not needed here, so the arguments are 0.
+            parseToIri(probablyUrl, opv, key, splited, j, generatedKey, str, 0, 0, 0);
           } else {
             parseUrl(probablyUrl, splited, j);
           }
@@ -650,15 +638,30 @@ public class OwlDataHandler {
     splited[j] = label;
   }
 
-  private void parseToIri(String probablyUrl, OwlAxiomPropertyValue opv, String key, String[] splited, int j, String generatedKey) {
+  private void parseToIri(String probablyUrl, OwlAxiomPropertyValue opv, String key, String[] splited, int j, String generatedKey, String eIri, int countOpeningParenthesis, int countClosingParenthesis, int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
-    axiomPropertyEntity.setIri(probablyUrl);
-    LOG.debug("Probably URL {}", probablyUrl);
-    String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(probablyUrl));
+    axiomPropertyEntity.setIri(eIri);
+    LOG.debug("Probably eiri {}", eIri);
+    String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(eIri));
     axiomPropertyEntity.setLabel(label);
     opv.addEntityValues(key, axiomPropertyEntity);
-
     splited[j] = generatedKey;
+
+    String textToReplace = generatedKey;
+
+    if (countOpeningParenthesis > 0) {
+      String prefix = String.join("", Collections.nCopies(countOpeningParenthesis, "("));
+      textToReplace = prefix + textToReplace;
+    }
+    if (countClosingParenthesis > 0) {
+      String postfix = String.join("", Collections.nCopies(countClosingParenthesis, ")"));
+      textToReplace = textToReplace + postfix;
+    }
+    if (countComma > 0) {
+      String postfix = String.join("", Collections.nCopies(countComma, ","));
+      textToReplace = textToReplace + postfix;
+    }
+    splited[j] = textToReplace;
   }
 
   private String fixRenderedValue(String value, String iriFragment, String splitFragment, Boolean fixRenderedIri) {
@@ -939,8 +942,6 @@ public class OwlDataHandler {
 //   * @param clazz Clazz are all properties of Inherited Axioms.
 //   * @return Class and properties of Inherited Axioms.
 //   */
-
-  
   private OwlDetailsProperties<PropertyValue> handleInheritedAxioms(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     String subClassOfKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, "SubClassOf");
@@ -950,7 +951,7 @@ public class OwlDataHandler {
 
     Set<OWLClass> rset = owlUtils.getSuperClasses(clazz, ontology);
     Map<IRI, Set<OwlAxiomPropertyValue>> values = new HashMap<>();
-    
+
     rset.stream()
         .forEachOrdered((c) -> {
           OwlDetailsProperties<PropertyValue> handleAxioms = handleAxioms(c, ontology);
@@ -987,7 +988,7 @@ public class OwlDataHandler {
     for (Map.Entry<IRI, Set<OwlAxiomPropertyValue>> entry : values.entrySet()) {
       OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
 
-      sb.append("%arg00%").append(" <br />"); 
+      sb.append("%arg00%").append(" <br />");
 
       int i = 0;
       for (OwlAxiomPropertyValue owlAxiomPropertyValue : entry.getValue()) {
@@ -1108,27 +1109,6 @@ public class OwlDataHandler {
    */
   public OntoFiboMaturityLevel getMaturityLevel(String iriString, OWLOntology ontology) {
     return fiboDataHandler.getMaturityLevelForElement(iriString, ontology);
-  }
-
-  private void parseUrlAxiom(String eIri, String[] splited, int i, Boolean hasOpeningParenthesis, int countOpeningParenthesis, Boolean hasClosingParenthesis, int countClosingParenthesis, Boolean hasComma, int countComma) {
-    String label = labelExtractor.getLabelOrDefaultFragment(IRI.create(eIri));
-
-    String textToReplace = label;
-
-    if (hasOpeningParenthesis) {
-      String prefix = String.join("", Collections.nCopies(countOpeningParenthesis, "("));
-      textToReplace = prefix + textToReplace;
-    }
-    if (hasClosingParenthesis) {
-      String postfix = String.join("", Collections.nCopies(countClosingParenthesis, ")"));
-      textToReplace = textToReplace + postfix;
-    }
-    if (hasComma) {
-      String postfix = String.join("", Collections.nCopies(countComma, ","));
-      textToReplace = textToReplace + postfix;
-    }
-    splited[i] = textToReplace;
-
   }
 
   private OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz, OWLOntology ontology) {
