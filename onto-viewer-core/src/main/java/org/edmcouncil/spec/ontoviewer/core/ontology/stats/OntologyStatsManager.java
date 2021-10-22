@@ -32,131 +32,135 @@ import org.springframework.stereotype.Component;
 @Component
 public class OntologyStatsManager {
 
-    private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
-    private static final String instanceKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
-    private static final Logger LOG = LoggerFactory.getLogger(OntologyStatsManager.class);
+  private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
+  private static final String instanceKey = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
+  private static final Logger LOG = LoggerFactory.getLogger(OntologyStatsManager.class);
 
-    @Autowired
-    private FiboDataHandler fiboDataHandler;
-    @Autowired
-    private IndividualDataHandler individualDataHandler;
-    @Autowired
-    private LabelProvider labelProvider;
+  @Autowired
+  private FiboDataHandler fiboDataHandler;
+  @Autowired
+  private IndividualDataHandler individualDataHandler;
+  @Autowired
+  private LabelProvider labelProvider;
 
-    private OntologyStatsMapped ontologyStatsMapped;
+  private OntologyStatsMapped ontologyStatsMapped;
 
-    public OntologyStatsMapped getOntologyStats() {
-        return ontologyStatsMapped;
+  public OntologyStatsMapped getOntologyStats() {
+    return ontologyStatsMapped;
+  }
+
+  public void clear() {
+    ontologyStatsMapped = new OntologyStatsMapped();
+  }
+
+  public void generateStats(OWLOntology ontology) {
+    Optional<OWLClass> clazzOpt = getModuleClazz(ontology);
+
+    Map<String, Number> stats = new LinkedHashMap<>();
+    Map<String, String> labels = new LinkedHashMap<>();
+
+    if (clazzOpt.isPresent()) {
+
+      OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazzOpt.get());
+      if (indi.getProperties().isEmpty()) {
+        //--noDomain
+        String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
+        stats.put(id, 0);
+        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+        //--numberOfModule
+        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
+        stats.put(id, 0);
+        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+      }
+
+      Set<String> modulesIriSet = new HashSet<>();
+      try {
+        indi.getProperties().get(instanceKey).stream()
+            .map((propertyValue) -> (OwlListElementIndividualProperty) propertyValue)
+            .map((individualProperty) -> (String) individualProperty.getValue().getIri())
+            .forEachOrdered((elIri) -> {
+              modulesIriSet.add(elIri);
+            });
+      } catch (NullPointerException e) {
+        LOG.info("The ontology has not modules defined");
+      }
+
+      List<String> rootModulesIris = fiboDataHandler.getRootModulesIris(modulesIriSet, ontology);
+      //--numberOfDomain
+      String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
+      stats.put(id, rootModulesIris.size());
+      labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+      //--numberOfModule
+      id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
+      stats.put(id, modulesIriSet.size() - rootModulesIris.size());
+      labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+    } else {
+      //--numberOfDomain
+      String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
+      stats.put(id, 0);
+      labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+      //--numberOfModule
+      id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
+      stats.put(id, 0);
+      labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
     }
 
-    public void clear() {
-        ontologyStatsMapped = new OntologyStatsMapped();
-    }
+    //--numberOfClass
+    String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfClass");
+    stats.put(id, ontology.classesInSignature().count());
+    labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+    //--numberOfObjectProperty
+    id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfObjectProperty");
+    stats.put(id, ontology.objectPropertiesInSignature().count());
+    labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+    //--numberOfDataPropertyy
+    id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDataProperty");
+    stats.put(id, ontology.dataPropertiesInSignature().count());
+    labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+    //--numberOfOAnnotationProperty
+    id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfAnnotationProperty");
+    stats.put(id, ontology.annotationPropertiesInSignature().count());
+    labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+    //--numberOfIndividuals
+    id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfIndividuals");
+    stats.put(id, ontology.individualsInSignature().count());
+    labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+    //--numberOfAxiom
+    id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfAxiom");
+    stats.put(id, ontology.axioms().count());
+    labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
+    //--numberOfDatatype
+    id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDatatype");
+    stats.put(id, ontology.datatypesInSignature().count());
+    labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
 
-    public void generateStats(OWLOntology ontology) {
-        Optional<OWLClass> clazzOpt = getModuleClazz(ontology);
+    Set<OWLOntology> ontologies = new HashSet<>();
+    OWLOntologyManager manager = ontology.getOWLOntologyManager();
+    manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
+      ontologies.add(owlOntology);
+    });
+    //--numberOfDatatype
+    id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfOntologies");
+    stats.put(id, ontologies.size());
+    labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
 
-        Map<String, Number> stats = new LinkedHashMap<>();
-        Map<String, String> labels = new LinkedHashMap<>();
+    LOG.debug(stats.toString());
+    OntologyStatsMapped osm = new OntologyStatsMapped();
+    osm.setLabels(labels);
+    osm.setStats(stats);
 
-        if (clazzOpt.isPresent()) {
+    ontologyStatsMapped = osm;
 
-            OwlDetailsProperties<PropertyValue> indi = individualDataHandler.handleClassIndividuals(ontology, clazzOpt.get());
-            if (indi.getProperties().isEmpty()) {
-                //--noDomain
-                String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
-                stats.put(id, 0);
-                labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-                //--numberOfModule
-                id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
-                stats.put(id, 0);
-                labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-            }
+  }
 
-            Set<String> modulesIriSet = new HashSet<>();
-
-            indi.getProperties().get(instanceKey).stream()
-                    .map((propertyValue) -> (OwlListElementIndividualProperty) propertyValue)
-                    .map((individProperty) -> (String) individProperty.getValue().getIri())
-                    .forEachOrdered((elIri) -> {
-                        modulesIriSet.add(elIri);
-                    });
-            List<String> rootModulesIris = fiboDataHandler.getRootModulesIris(modulesIriSet, ontology);
-            //--numberOfDomain
-            String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
-            stats.put(id, rootModulesIris.size());
-            labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-            //--numberOfModule
-            id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
-            stats.put(id, modulesIriSet.size() - rootModulesIris.size());
-            labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        } else {
-            //--numberOfDomain
-                String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
-                stats.put(id, 0);
-                labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-                //--numberOfModule
-                id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfModule");
-                stats.put(id, 0);
-                labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        }
-
-        //--numberOfClass
-        String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfClass");
-        stats.put(id, ontology.classesInSignature().count());
-        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--numberOfObjectProperty
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfObjectProperty");
-        stats.put(id, ontology.objectPropertiesInSignature().count());
-        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--numberOfDataPropertyy
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDataProperty");
-        stats.put(id, ontology.dataPropertiesInSignature().count());
-        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--numberOfOAnnotationProperty
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfAnnotationProperty");
-        stats.put(id, ontology.annotationPropertiesInSignature().count());
-        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--numberOfIndividuals
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfIndividuals");
-        stats.put(id, ontology.individualsInSignature().count());
-        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--numberOfAxiom
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfAxiom");
-        stats.put(id, ontology.axioms().count());
-        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-        //--numberOfDatatype
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDatatype");
-        stats.put(id, ontology.datatypesInSignature().count());
-        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-
-        Set<OWLOntology> ontologies = new HashSet<>();
-        OWLOntologyManager manager = ontology.getOWLOntologyManager();
-        manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
-            ontologies.add(owlOntology);
-        });
-        //--numberOfDatatype
-        id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfOntologies");
-        stats.put(id, ontologies.size());
-        labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
-
-        LOG.debug(stats.toString());
-        OntologyStatsMapped osm = new OntologyStatsMapped();
-        osm.setLabels(labels);
-        osm.setStats(stats);
-        
-        ontologyStatsMapped = osm;
-
-    }
-
-    private Optional<OWLClass> getModuleClazz(OWLOntology ontology) {
-        List<FiboModule> result = new LinkedList<>();
-        IRI moduleIri = IRI.create(MODULE_IRI);
-        Optional<OWLClass> clazzOpt = ontology
-                .classesInSignature()
-                .filter(c -> c.getIRI().equals(moduleIri))
-                .findFirst();
-        return clazzOpt;
-    }
+  private Optional<OWLClass> getModuleClazz(OWLOntology ontology) {
+    List<FiboModule> result = new LinkedList<>();
+    IRI moduleIri = IRI.create(MODULE_IRI);
+    Optional<OWLClass> clazzOpt = ontology
+        .classesInSignature()
+        .filter(c -> c.getIRI().equals(moduleIri))
+        .findFirst();
+    return clazzOpt;
+  }
 
 }

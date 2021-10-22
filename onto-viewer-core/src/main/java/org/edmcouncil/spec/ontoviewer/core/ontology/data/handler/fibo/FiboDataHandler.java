@@ -80,21 +80,28 @@ public class FiboDataHandler {
 
   //private Map<String, OntoFiboMaturityLevel> maturityLevels = new HashMap<>();
   public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OWLOntology ontology, OwlListDetails details) {
+
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
+
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
 
       if (!onto.getOntologyID().getOntologyIRI().isPresent()) {
         continue;
       }
 
-      if (onto.getOntologyID().getOntologyIRI().get().equals(iri)) {
+      if (onto.getOntologyID().getOntologyIRI().get().equals(iri)
+          || onto.getOntologyID().getOntologyIRI().get().equals(IRI.create(iri.getIRIString().substring(0, iri.getIRIString().length() - 1)))) {
+
+        IRI ontoIri = onto.getOntologyID().getOntologyIRI().get();
         annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations(), ontology, details);
 
-        OntologyResources ors = getOntologyResources(iri.toString(), ontology);
-        for (Map.Entry<String, List<PropertyValue>> entry : ors.getResources().entrySet()) {
-          for (PropertyValue propertyValue : entry.getValue()) {
-            annotations.addProperty(entry.getKey(), propertyValue);
+        OntologyResources ontologyResources = getOntologyResources(ontoIri.toString(), ontology);
+        if (ontologyResources != null) {
+          for (Map.Entry<String, List<PropertyValue>> entry : ontologyResources.getResources().entrySet()) {
+            for (PropertyValue propertyValue : entry.getValue()) {
+              annotations.addProperty(entry.getKey(), propertyValue);
+            }
           }
         }
         details.setMaturityLevel(getMaturityLevelFromOntology(iri, onto));
@@ -317,14 +324,14 @@ public class FiboDataHandler {
 
     selectedOntology.individualsInSignature()
         .map(individual -> customDataFactory.createAnnotationIri(individual.getIRI().toString()))
-        .forEachOrdered(individual ->
-            ontoResources.addElement(
-                selectResourceIriString(
-                    individual,
-                    ontologyIri,
-                    ViewerIdentifierFactory.Element.instance),
-                individual
-            ));
+        .forEachOrdered(individual
+            -> ontoResources.addElement(
+            selectResourceIriString(
+                individual,
+                ontologyIri,
+                ViewerIdentifierFactory.Element.instance),
+            individual
+        ));
 
     selectedOntology.datatypesInSignature()
         .map(c -> {
