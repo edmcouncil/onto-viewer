@@ -26,7 +26,7 @@ public class CommandLineOntologyLoader {
     this.coreConfiguration = coreConfiguration;
   }
 
-  public OWLOntology load() throws Exception {
+  public OWLOntology load() throws OWLOntologyCreationException {
     var owlOntologyManager = OWLManager.createOWLOntologyManager();
 
     var ontologyIrisToLoad = new HashSet<IRI>();
@@ -49,11 +49,8 @@ public class CommandLineOntologyLoader {
         }
         case ConfigKeys.ONTOLOGY_PATH: {
           var documentIris = ontologyLocation.getValue().stream()
-              .map(rawPath -> {
-                var path = Path.of(rawPath);
-                path = path.isAbsolute() ? path : Path.of(System.getProperty("user.dir"));
-                return IRI.create(path.toFile());
-              }).collect(Collectors.toSet());
+              .map(rawPath -> IRI.create(Path.of(rawPath).toFile()))
+              .collect(Collectors.toSet());
           ontologyIrisToLoad.addAll(documentIris);
 
           break;
@@ -86,11 +83,6 @@ public class CommandLineOntologyLoader {
       var addImport = new AddImport(umbrellaOntology, importDeclaration);
       umbrellaOntology.applyChange(addImport);
     }
-
-    umbrellaOntology = ontologyManager.createOntology(
-        IRI.create(""),
-        umbrellaOntology.imports(),
-        false);
 
     return umbrellaOntology;
   }

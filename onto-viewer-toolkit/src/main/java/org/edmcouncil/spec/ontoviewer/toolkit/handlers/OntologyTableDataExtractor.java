@@ -1,5 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.handlers;
 
+import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.INHERITED_DESCRIPTIONS_LABEL;
+import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.OWN_DESCRIPTIONS_LABEL;
 import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.CLASS;
 import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.DATATYPE;
 import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.DATA_PROPERTY;
@@ -24,10 +26,12 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
 import org.edmcouncil.spec.ontoviewer.toolkit.model.EntityData;
 import org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLNamedObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,18 +41,22 @@ import org.springframework.stereotype.Service;
 public class OntologyTableDataExtractor {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(OntologyTableDataExtractor.class);
+  private static final String EQUIVALENT_TO = "EquivalentTo";
   private static final String ONTOLOGY_IRI_GROUP_NAME = "ontologyIri";
   private static final Pattern ONTOLOGY_IRI_PATTERN =
-      Pattern.compile(".*\\/(?<ontologyIri>\\w+)\\/\\w+$");
-  private static final String UNKNOWN_ONTOLOGY = "UNKNOWN";
+      Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
+  private static final String UNKNOWN_LABEL = "UNKNOWN";
 
   private final ConfigurationService configurationService;
   private final DetailsManager detailsManager;
+  private final LabelProvider labelProvider;
 
   public OntologyTableDataExtractor(ConfigurationService configurationService,
-      DetailsManager detailsManager) {
+      DetailsManager detailsManager,
+      LabelProvider labelProvider) {
     this.configurationService = configurationService;
     this.detailsManager = detailsManager;
+    this.labelProvider = labelProvider;
   }
 
   public List<EntityData> extractEntityData() {
@@ -60,6 +68,8 @@ public class OntologyTableDataExtractor {
     result.addAll(getEntities(ontology.objectPropertiesInSignature(INCLUDED), OBJECT_PROPERTY));
     result.addAll(getEntities(ontology.dataPropertiesInSignature(INCLUDED), DATA_PROPERTY));
     result.addAll(getEntities(ontology.datatypesInSignature(INCLUDED), DATATYPE));
+
+    LOGGER.debug("Found {} entities.", result.size());
 
     sortExtractedEntities(result);
 
@@ -75,7 +85,7 @@ public class OntologyTableDataExtractor {
 
     return entities
         .parallel()
-        .filter(owlClass -> owlClass.getIRI().toString().contains(filterPattern))
+        .filter(owlEntity -> owlEntity.getIRI().toString().contains(filterPattern))
         .map(owlClass -> {
           try {
             return detailsManager.getDetailsByIri(owlClass.getIRI().toString());
@@ -96,16 +106,20 @@ public class OntologyTableDataExtractor {
       var properties = groupedOwlDetails.getProperties();
 
       var entityData = new EntityData();
-      entityData.setTermLabel(groupedOwlDetails.getLabel());
-      entityData.setTypeLabel(entityType.getDisplayName());
-      entityData.setOntology(getOntologyName(owlDetails.getIri()));
-      entityData.setSynonyms(getProperty(properties, GroupsPropertyKey.SYNONYM));
-      entityData.setDefinition(getProperty(properties, GroupsPropertyKey.DEFINITION));
+      entityData.setTermLabel(cleanString(groupedOwlDetails.getLabel()));
+      entityData.setTypeLabel(cleanString(entityType.getDisplayName()));
+      entityData.setOntology(cleanString(getOntologyName(groupedOwlDetails.getIri())));
+      entityData.setSynonyms(cleanString(getProperty(properties, GroupsPropertyKey.SYNONYM)));
+      entityData.setDefinition(cleanString(getProperty(properties, GroupsPropertyKey.DEFINITION)));
       entityData.setGeneratedDefinition(
-          getProperty(properties, GroupsPropertyKey.GENERATED_DESCRIPTION));
-      entityData.setExamples(getProperty(properties, GroupsPropertyKey.EXAMPLE));
-      entityData.setExplanations(getProperty(properties, GroupsPropertyKey.EXPLANATORY_NOTE));
-      entityData.setMaturity(owlDetails.getMaturityLevel().getLabel());
+          cleanString(
+              cleanGeneratedDescription(
+                  entityData.getTermLabel(),
+                  getProperty(properties, GroupsPropertyKey.GENERATED_DESCRIPTION))));
+      entityData.setExamples(cleanString(getProperty(properties, GroupsPropertyKey.EXAMPLE)));
+      entityData.setExplanations(
+          cleanString(getProperty(properties, GroupsPropertyKey.EXPLANATORY_NOTE)));
+      entityData.setMaturity(cleanString(getMaturityLevel(groupedOwlDetails)));
       return entityData;
     } else {
       throw new OntoViewerToolkitRuntimeException(
@@ -129,13 +143,43 @@ public class OntologyTableDataExtractor {
     }
   }
 
+  private String getMaturityLevel(OwlGroupedDetails owlDetails) {
+    var maturityLevel = owlDetails.getMaturityLevel();
+    if (maturityLevel != null && maturityLevel.getLabel() != null) {
+      return maturityLevel.getLabel();
+    }
+
+    return UNKNOWN_LABEL;
+  }
+
+  private String cleanString(String text) {
+    return text.replaceAll("\\s+", " ");
+  }
+
+  private String cleanGeneratedDescription(String term, String text) {
+    var cleanedText = text.replace("- ", " ")
+        .replace(INHERITED_DESCRIPTIONS_LABEL, " ")
+        .replace(OWN_DESCRIPTIONS_LABEL, " ")
+        .replace(EQUIVALENT_TO, "")
+        .trim();
+    // We replace term's label with 'It' but not for the first occurrence
+    if (cleanedText.toLowerCase().startsWith(term.toLowerCase())) {
+      var startingLabel = term.substring(0, 1).toUpperCase() + term.substring(1);
+      cleanedText = cleanedText.replaceAll(startingLabel, "It")
+          .replaceFirst("It", startingLabel);
+    }
+    return cleanedText;
+  }
+
   private String getOntologyName(String iri) {
     var matcher = ONTOLOGY_IRI_PATTERN.matcher(iri);
+
     if (matcher.matches()) {
-      return matcher.group(ONTOLOGY_IRI_GROUP_NAME);
-    } else {
-      return UNKNOWN_ONTOLOGY;
+      var ontologyIri = matcher.group(ONTOLOGY_IRI_GROUP_NAME);
+      return labelProvider.getLabelOrDefaultFragment(IRI.create(ontologyIri));
     }
+
+    return "<" + iri + ">";
   }
 
   private void sortExtractedEntities(List<EntityData> result) {

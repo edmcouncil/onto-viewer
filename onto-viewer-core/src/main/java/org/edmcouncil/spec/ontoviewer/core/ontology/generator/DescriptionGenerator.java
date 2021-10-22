@@ -27,6 +27,9 @@ import java.util.stream.Collectors;
 @Service
 public class DescriptionGenerator {
 
+    public static final String INHERITED_DESCRIPTIONS_LABEL = "Inherited descriptions:";
+    public static final String OWN_DESCRIPTIONS_LABEL = "Own descriptions:";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(DescriptionGenerator.class);
 
     static final String IS_A_RESTRICTIONS_LABEL = "IS-A restrictions";
@@ -37,8 +40,6 @@ public class DescriptionGenerator {
     private static final String PROPERTY_PATTERN = "/arg\\d+/( .* )/arg\\d+/";
     private static final Map<String, String> REPLACEMENTS = new HashMap<>();
     private static final String SPLIT_DELIMITER = "SPLIT_HERE";
-    private static final String INHERITED_DESCRIPTIONS_LABEL = "Inherited descriptions:";
-    private static final String OWN_DESCRIPTIONS_LABEL = "Own descriptions:";
     private static final String IS_A_KIND_OF_LABEL = "is a kind of";
     private static final String EMPTY_RESULT_INDICATOR = OWN_DESCRIPTIONS_LABEL + "\n" + SPLIT_DELIMITER;
 

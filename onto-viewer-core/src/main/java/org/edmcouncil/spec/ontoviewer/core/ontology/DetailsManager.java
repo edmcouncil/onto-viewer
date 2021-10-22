@@ -1,31 +1,32 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology;
 
-import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
+import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
-import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.core.changer.ChangerIriToLabel;
+import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlDetails;
+import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
+import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
+import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator;
-import org.edmcouncil.spec.ontoviewer.core.changer.ChangerIriToLabel;
-import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -37,16 +38,21 @@ public class DetailsManager {
   private static final Logger LOG = LoggerFactory.getLogger(DetailsManager.class);
   private static final String DEFAULT_GROUP_NAME = "other";
 
-  @Autowired
-  private OntologyManager ontologyManager;
-  @Autowired
-  private OwlDataHandler dataHandler;
-  @Autowired
-  private ConfigurationService config;
-  @Autowired
-  private ChangerIriToLabel changerIriToLabel;
-  @Autowired
-  private DescriptionGenerator descriptionGenerator;
+  private final OntologyManager ontologyManager;
+  private final OwlDataHandler dataHandler;
+  private final ConfigurationService config;
+  private final ChangerIriToLabel changerIriToLabel;
+  private final DescriptionGenerator descriptionGenerator;
+
+  public DetailsManager(OntologyManager ontologyManager, OwlDataHandler dataHandler,
+      ConfigurationService config, ChangerIriToLabel changerIriToLabel,
+      DescriptionGenerator descriptionGenerator) {
+    this.ontologyManager = ontologyManager;
+    this.dataHandler = dataHandler;
+    this.config = config;
+    this.changerIriToLabel = changerIriToLabel;
+    this.descriptionGenerator = descriptionGenerator;
+  }
 
   public OWLOntology getOntology() {
     return ontologyManager.getOntology();
@@ -60,17 +66,18 @@ public class DetailsManager {
     if (iriString.endsWith("/")) {
       result = dataHandler.handleOntologyMetadata(iri, getOntology());
     } else {
-      if (ontologyManager.getOntology().containsClassInSignature(iri)) {
+      if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
         result = dataHandler.handleParticularClass(iri, getOntology());
-      } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri)) {
+      } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri, INCLUDED)) {
         result = dataHandler.handleParticularDataProperty(iri, getOntology());
-      } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri)) {
+      } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri, INCLUDED)) {
         result = dataHandler.handleParticularObjectProperty(iri, getOntology());
-      } else if (ontologyManager.getOntology().containsIndividualInSignature(iri)) {
+      } else if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
         result = dataHandler.handleParticularIndividual(iri, getOntology());
-      } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri)) {
+      } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri, INCLUDED)) {
         result = dataHandler.handleParticularDatatype(iri, getOntology());
-      } else if (ontologyManager.getOntology().containsAnnotationPropertyInSignature(iri)) {
+      } else if (ontologyManager.getOntology()
+          .containsAnnotationPropertyInSignature(iri, INCLUDED)) {
         result = dataHandler.handleParticularAnnotationProperty(iri, getOntology());
       }
 

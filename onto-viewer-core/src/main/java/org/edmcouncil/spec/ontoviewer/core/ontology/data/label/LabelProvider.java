@@ -19,6 +19,7 @@ import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.parameters.Imports;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,15 +61,14 @@ public class LabelProvider {
   }
 
   public String getLabelOrDefaultFragment(IRI iri) {
+    var ontology = ontologyManager.getOntology();
+
     if (previouslyUsedLabels.containsKey(iri.toString())) {
-      String label = previouslyUsedLabels.get(iri.toString());
-      LOGGER.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label,
-          iri);
-      return label;
+      return previouslyUsedLabels.get(iri.toString());
     }
 
-    OWLEntity entity = ontologyManager.getOntology().entitiesInSignature(iri).findFirst().orElse(
-        ontologyManager.getOntology().getOWLOntologyManager().getOWLDataFactory()
+    OWLEntity entity = ontology.entitiesInSignature(iri, Imports.INCLUDED).findFirst().orElse(
+        ontology.getOWLOntologyManager().getOWLDataFactory()
             .getOWLEntity(EntityType.CLASS, iri));
     if (iri.toString().endsWith("/")) {
       //it's ontology, we have to get the label from another way
@@ -97,9 +97,11 @@ public class LabelProvider {
     if (entity == null) {
       return null;
     }
+
     if (previouslyUsedLabels.containsKey(entity.getIRI().toString())) {
       String label = previouslyUsedLabels.get(entity.getIRI().toString());
-      LOGGER.debug("[Label Extractor]: Previously used label : '{}', for entity : '{}'", label,
+      LOGGER.debug("[Label Extractor] Previously used label: '{}', for entity: '{}'",
+          label,
           entity.getIRI().toString());
       return label;
     }
@@ -107,18 +109,15 @@ public class LabelProvider {
     OWLDataFactory factory = new OWLDataFactoryImpl();
     Map<String, String> labels = new HashMap<>();
     if (useLabels) {
-      EntitySearcher.getAnnotations(entity, ontologyManager.getOntology(), factory.getRDFSLabel())
-          .collect(Collectors.toSet())
-          .stream()
-          .filter((annotation) -> (annotation.getValue().isLiteral()))
-          .forEachOrdered((annotation) -> {
-
+      var ontologies = ontologyManager.getOntologyWithImports();
+      EntitySearcher.getAnnotations(entity, ontologies, factory.getRDFSLabel())
+          .filter(annotation -> (annotation.getValue().isLiteral()))
+          .forEachOrdered(annotation -> {
             String label = annotation.annotationValue().asLiteral().get().getLiteral();
 
             String lang = annotation.annotationValue().asLiteral().get().getLang();
 
             labelProcessing(lang, labels, label, entity.getIRI());
-
           });
     }
     String labelResult = null;

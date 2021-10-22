@@ -1,9 +1,8 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.options;
 
 public enum OptionDefinition {
-  INPUT("input", true, true, "path to the input ontology", null),
-  OUTPUT("output", true, true,
-      "path where the result will be saved", null),
+  DATA("data", true, true, "path to the input ontology(ies)"),
+  OUTPUT("output", true, true, "path where the result will be saved"),
   FILTER_PATTERN("filter-pattern", true, false,
       "string that should be within entity's IRI to include it", "");
 
@@ -12,6 +11,10 @@ public enum OptionDefinition {
   private final boolean required;
   private final String description;
   private final String defaultValue;
+
+  OptionDefinition(String argName, boolean hasArg, boolean required, String description) {
+    this(argName, hasArg, required, description, null);
+  }
 
   OptionDefinition(String argName, boolean hasArg, boolean required, String description,
       String defaultValue) {

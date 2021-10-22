@@ -12,21 +12,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
+import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.model.onto.OntologyResources;
-import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
+import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -63,13 +61,9 @@ public class FiboDataHandler {
   @Autowired
   private IndividualDataHandler individualDataHandler;
   @Autowired
-  private ConfigurationService configuration;
-  @Autowired
   private CustomDataFactory customDataFactory;
   @Autowired
   private LabelProvider labelExtractor;
-  @Autowired
-  private OntologyManager ontoManager;
 
   private String resourceInternal;
   private String resourceExternal;
@@ -194,22 +188,17 @@ public class FiboDataHandler {
   }
 
   private OntoFiboMaturityLevel getMaturityLevelFromOntology(IRI iri, OWLOntology ontology) {
-
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     for (OWLOntology o : manager.ontologies().collect(Collectors.toSet())) {
-
       if (o.getOntologyID().getOntologyIRI().isPresent()) {
         if (o.getOntologyID().getOntologyIRI().get().equals(iri)) {
-          LOG.debug("Entities Count ");
           for (OWLAnnotation annotation : o.annotationsAsList()) {
-            if (annotation.annotationValue().isIRI()) {
-              LOG.debug("Annotation for property {}", annotation.getProperty().toString());
-              if (annotation.getProperty().getIRI().equals(MATURITY_LEVEL_IRI)) {
-                LOG.debug("Annotation value {}", annotation.annotationValue().asIRI().toString());
+            if (annotation.getProperty().getIRI().equals(MATURITY_LEVEL_IRI) ||
+                annotation.annotationValue().isIRI() ||
+                annotation.annotationValue().asIRI().isPresent()) {
                 String irii = annotation.annotationValue().asIRI().get().toString();
                 String labell = labelExtractor.getLabelOrDefaultFragment(IRI.create(irii));
                 return FiboMaturityLevelFactory.create(labell, irii);
-              }
             }
           }
         }
@@ -271,7 +260,7 @@ public class FiboDataHandler {
       opt = selectedOntology.getOntologyID().getDefaultDocumentIRI();
       if (opt.isPresent()) {
         ontologyIri = opt.get();
-        LOG.debug("IRI for this ontology doesn't exist, use Default Document IRI {}", ontologyIri.toString());
+        LOG.debug("IRI for this ontology doesn't exist, use Default Document IRI {}", ontologyIri);
       } else {
         LOG.debug("Ontology doesn't have any iri to present... Ontology ID: {}", selectedOntology.getOntologyID().toString());
         return null;

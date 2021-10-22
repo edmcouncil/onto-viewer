@@ -11,11 +11,13 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
+import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
+import org.semanticweb.owlapi.model.parameters.Imports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -46,7 +48,9 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   public void run(String... args) throws Exception {
     var stopwatch = Stopwatch.createStarted();
 
-    LOGGER.debug("Raw command line arguments: {}", Arrays.toString(args));
+    if (LOGGER.isDebugEnabled()) {
+      LOGGER.debug("Raw command line arguments: {}", Arrays.toString(args));
+    }
     var commandLineOptionsHandler = new CommandLineOptionsHandler();
     var commandLineOptions = commandLineOptionsHandler.parseArgs(args);
     populateConfiguration(commandLineOptions);
@@ -55,7 +59,10 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
     var ontologyTableData = ontologyTableDataExtractor.extractEntityData();
 
-    var outputPath = Path.of(commandLineOptions.getOption(OptionDefinition.OUTPUT));
+    var optionOutputPath = commandLineOptions.getOption(OptionDefinition.OUTPUT)
+        .orElseThrow(() ->
+            new OntoViewerToolkitRuntimeException("There is no option for output path set."));
+    var outputPath = Path.of(optionOutputPath);
     new CsvWriter().write(outputPath, ontologyTableData);
 
     stopwatch.stop();
@@ -64,12 +71,17 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private void populateConfiguration(CommandLineOptions commandLineOptions) {
     var configuration = configurationService.getCoreConfiguration();
-    configuration.addConfigElement(
-        ConfigKeys.ONTOLOGY_PATH,
-        new StringItem(commandLineOptions.getOption(OptionDefinition.INPUT)));
+
+    for (String ontologyPath : commandLineOptions.getOptions(OptionDefinition.DATA)) {
+      configuration.addConfigElement(
+          ConfigKeys.ONTOLOGY_PATH,
+          new StringItem(ontologyPath));
+    }
+
+    var filterPattern = commandLineOptions.getOption(OptionDefinition.FILTER_PATTERN).orElse("");
     configuration.addConfigElement(
         OptionDefinition.FILTER_PATTERN.argName(),
-        new StringItem(commandLineOptions.getOption(OptionDefinition.FILTER_PATTERN)));
+        new StringItem(filterPattern));
   }
 
   private void loadOntology() throws OntoViewerToolkitException {
@@ -77,7 +89,9 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       var ontologyLoader = new CommandLineOntologyLoader(
           configurationService.getCoreConfiguration());
       var loadedOntology = ontologyLoader.load();
-      LOGGER.debug("Loaded ontology contains {} axioms.", loadedOntology.getAxiomCount());
+      LOGGER.debug("Loaded ontology contains {} axioms.",
+          loadedOntology.getAxiomCount(Imports.INCLUDED));
+
       ontologyManager.updateOntology(loadedOntology);
       fiboDataHandler.populateOntologyResources(loadedOntology);
     } catch (Exception ex) {

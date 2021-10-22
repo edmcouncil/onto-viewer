@@ -1,5 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
+import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
+
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
@@ -12,10 +14,10 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
-import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturityLevelFactory;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
@@ -27,7 +29,6 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,31 +40,37 @@ public class AnnotationsDataHandler {
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final IRI COMMENT_IRI = IRI.create("http://www.w3.org/2000/01/rdf-schema#comment");
   private final String FIBO_QNAME = "QName:";
-  private final IRI HAS_MATURITY_LEVEL_IRI = IRI.create("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel");
+  private final IRI HAS_MATURITY_LEVEL_IRI = IRI.create(
+      "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel");
 
-  @Autowired
-  private OwlDataExtractor dataExtractor;
-  @Autowired
-  private CustomDataFactory customDataFactory;
-  @Autowired
-  private ConfigurationService appConfig;
-  @Autowired
-  private ScopeIriOntology scopeIriOntology;
+  private final OwlDataExtractor dataExtractor;
+  private final CustomDataFactory customDataFactory;
+  private final ConfigurationService appConfig;
+  private final ScopeIriOntology scopeIriOntology;
+
+  public AnnotationsDataHandler(OwlDataExtractor dataExtractor, CustomDataFactory customDataFactory,
+      ConfigurationService appConfig, ScopeIriOntology scopeIriOntology) {
+    this.dataExtractor = dataExtractor;
+    this.customDataFactory = customDataFactory;
+    this.appConfig = appConfig;
+    this.scopeIriOntology = scopeIriOntology;
+  }
 
   /**
-   * @param iri IRI element with annotations to capture
+   * @param iri      IRI element with annotations to capture
    * @param ontology Loaded ontology
-   * @param details <i>QName</i> will be set for this object if found
+   * @param details  <i>QName</i> will be set for this object if found
    * @return Processed annotations
    */
-  public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri, OWLOntology ontology, OwlListDetails details) {
-
+  public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri,
+      OWLOntology ontology,
+      OwlListDetails details) {
     Set<String> ignoredToDisplay = appConfig.getCoreConfiguration().getIgnoredElements();
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
-    Iterator<OWLAnnotationAssertionAxiom> annotationAssertionAxiom
-        = ontology.annotationAssertionAxioms(iri).iterator();
+    Iterator<OWLAnnotationAssertionAxiom> annotationAssertionAxiom =
+        ontology.annotationAssertionAxioms(iri, INCLUDED).iterator();
     while (annotationAssertionAxiom.hasNext()) {
       OWLAnnotationAssertionAxiom next = annotationAssertionAxiom.next();
       IRI propertyiri = next.getProperty().getIRI();
@@ -80,13 +87,11 @@ public class AnnotationsDataHandler {
         LOG.debug("Value opv: {}", opv.getType());
         if (scopeIriOntology.scopeIri(value)) {
           opv = customDataFactory.createAnnotationIri(value);
-
         } else {
           opv = customDataFactory.createAnnotationAnyUri(value);
         }
 
       } else if (next.getValue().isLiteral()) {
-        LOG.debug("Value opv: {}", opv.getType());
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
           value = asLiteral.get().getLiteral();
@@ -106,7 +111,9 @@ public class AnnotationsDataHandler {
           }
         }
       }
-      LOG.debug("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\" ", opv, propertyiri.toString());
+      LOG.debug("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\" ",
+          opv,
+          propertyiri);
 
       result.addProperty(propertyiri.toString(), opv);
     }
@@ -115,13 +122,13 @@ public class AnnotationsDataHandler {
   }
 
   /**
-   *
    * @param annotations Stream of OWL annotations
-   * @param ontology Loaded ontology
-   * @param details <i>QName</i> will be set for this object if found
+   * @param ontology    Loaded ontology
+   * @param details     <i>QName</i> will be set for this object if found
    * @return Processed annotations
    */
-  public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(Stream<OWLAnnotation> annotations, OWLOntology ontology, OwlListDetails details) {
+  public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(
+      Stream<OWLAnnotation> annotations, OWLOntology ontology, OwlListDetails details) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     Set<String> ignoredToDisplay = appConfig.getCoreConfiguration().getIgnoredElements();
     for (OWLAnnotation next : annotations.collect(Collectors.toSet())) {
@@ -147,7 +154,8 @@ public class AnnotationsDataHandler {
 
         if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
           OwlAnnotationIri oai = (OwlAnnotationIri) opv;
-          OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
+          OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(),
+              oai.getValue().getIri());
           details.setMaturityLevel(fml);
           LOG.debug(fml.toString());
         }
@@ -169,14 +177,16 @@ public class AnnotationsDataHandler {
             opv = customDataFactory.createAnnotationIri(value);
             if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
               OwlAnnotationIri oai = (OwlAnnotationIri) opv;
-              OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
+              OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(),
+                  oai.getValue().getIri());
               details.setMaturityLevel(fml);
               LOG.debug(fml.toString());
             }
           }
         }
       }
-      LOG.debug("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", opv, propertyiri.toString());
+      LOG.debug("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", opv,
+          propertyiri);
 
       result.addProperty(propertyiri.toString(), opv);
     }
@@ -199,13 +209,12 @@ public class AnnotationsDataHandler {
   }
 
   /**
-   *
    * @param iri an IRI element used to extract the maturity level
-   * @param o ontology with element for given iri
+   * @param o   ontology with element for given iri
    * @return
    */
   public OntoFiboMaturityLevel getMaturityLevelForOntology(IRI iri, OWLOntology o) {
-
+    // TODO
     OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
 
     Stream<OWLAnnotation> annotations = EntitySearcher
@@ -213,7 +222,8 @@ public class AnnotationsDataHandler {
             dataFactory.getOWLAnnotationProperty(HAS_MATURITY_LEVEL_IRI));
 
     for (OWLAnnotation object : annotations.collect(Collectors.toSet())) {
-      OwlAnnotationIri oai = customDataFactory.createAnnotationIri(object.getValue().asIRI().get().toString());
+      OwlAnnotationIri oai = customDataFactory.createAnnotationIri(
+          object.getValue().asIRI().get().toString());
       return FiboMaturityLevelFactory.create(oai.getValue().getLabel(), oai.getValue().getIri());
     }
 

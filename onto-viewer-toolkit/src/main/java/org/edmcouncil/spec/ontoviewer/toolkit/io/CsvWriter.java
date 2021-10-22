@@ -47,13 +47,13 @@ public class CsvWriter {
     var result = new ArrayList<String>();
     result.add(entityData.getTermLabel());
     result.add(entityData.getTypeLabel());
-    result.add(entityData.getOntology()); // ?Ontology
-    result.add(entityData.getSynonyms()); // ?Synonyms
-    result.add(entityData.getDefinition()); // ?Definition
-    result.add(entityData.getGeneratedDefinition()); // ?GeneratedDefinition
-    result.add(entityData.getExamples()); // ?Examples
-    result.add(entityData.getExplanations()); // ?Explanations
-    result.add(entityData.getMaturity()); // ?Maturity
+    result.add(entityData.getOntology());
+    result.add(entityData.getSynonyms());
+    result.add(entityData.getDefinition());
+    result.add(entityData.getGeneratedDefinition());
+    result.add(entityData.getExamples());
+    result.add(entityData.getExplanations());
+    result.add(entityData.getMaturity());
     return result;
   }
 }
