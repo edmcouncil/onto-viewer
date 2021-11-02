@@ -1,8 +1,8 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.Files;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.loader.ConfigLoader;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
@@ -15,6 +15,7 @@ public class FileBasedConfigurationService implements ConfigurationService {
   private static final Logger LOGGER = LoggerFactory.getLogger(FileBasedConfigurationService.class);
 
   private final FileSystemManager fileSystemManager;
+
   private CoreConfiguration coreConfiguration;
 
   public FileBasedConfigurationService(FileSystemManager fileSystemManager) {
@@ -23,51 +24,33 @@ public class FileBasedConfigurationService implements ConfigurationService {
 
   @PostConstruct
   public void init() {
-    LOGGER.debug("Start loading configuration.");
+    LOGGER.debug("Loading configuration...");
 
     var configLoader = new ConfigLoader();
-    Path configFilePath;
 
     try {
-      configFilePath = fileSystemManager.getPathToConfigFile();
+      var configFilePath = fileSystemManager.getPathToConfigFile();
 
-      LOGGER.debug("Path to Configs Directory : {}", configFilePath.toAbsolutePath());
-      LOGGER.debug("Load config");
-      LOGGER.debug("List Files : {}", configFilePath.toFile().listFiles().toString());
-      for (File file : configFilePath.toFile().listFiles()) {
-        LOGGER.debug("Path to ConfigFile : {}", file.toPath());
-        if (file.isFile()) {
-          configLoader.loadWeaselConfiguration(file.toPath());
-        }
+      LOGGER.debug("Path to config directory: {}", configFilePath.toAbsolutePath());
+      if (!Files.isDirectory(configFilePath)) {
+        throw new IllegalStateException(
+            String.format("Config file path '%s' is not a directory.", configFilePath));
       }
 
-      this.coreConfiguration = configLoader.getConfiguration();
-
+      try (var paths = Files.list(configFilePath)) {
+        for (var path : paths.collect(Collectors.toList())) {
+          LOGGER.debug("Adding configuration from file '{}'.", path);
+          if (Files.isRegularFile(path)) {
+            configLoader.loadWeaselConfiguration(path);
+          }
+        }
+      }
     } catch (IOException ex) {
-      LOGGER.error("[ERROR] IOException while loading config file");
+      LOGGER.error("Exception thrown while loading config files", ex);
     }
 
     this.coreConfiguration = configLoader.getConfiguration();
-
-    if (!coreConfiguration.isEmpty()) {
-      LOGGER.debug("Configuration: ");
-      coreConfiguration.getConfiguration()
-          .entrySet()
-          .stream()
-          .map((entry) -> {
-            LOGGER.debug("\t{}", entry.getKey());
-            return entry;
-          }).forEachOrdered((entry) -> {
-            entry.getValue()
-                .stream()
-                .map((object) -> object.toString())
-                .forEachOrdered((s) -> {
-                  LOGGER.debug("\t\t{}", s);
-                });
-          });
-    } else {
-      LOGGER.debug("Use default weasel configuration");
-    }
+    this.coreConfiguration.logConfigurationDebugInfo();
   }
 
   @Override

@@ -5,9 +5,9 @@ package org.edmcouncil.spec.ontoviewer.core.model;
  */
 public interface PropertyValue<T> {
 
-  WeaselOwlType getType();
+  OwlType getType();
 
-  void setType(WeaselOwlType type);
+  void setType(OwlType type);
 
   T getValue();
 

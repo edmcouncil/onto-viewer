@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.factory;
 
 import org.edmcouncil.spec.ontoviewer.core.model.OwlSimpleProperty;
-import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -36,7 +36,7 @@ public class CustomDataFactory {
     osp.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(iri)));
     osp.setIri(iri);
     owlAnnotationIri.setValue(osp);
-    owlAnnotationIri.setType(WeaselOwlType.IRI);
+    owlAnnotationIri.setType(OwlType.IRI);
     return owlAnnotationIri;
   }
 
@@ -44,7 +44,7 @@ public class CustomDataFactory {
     LOG.debug("[Custom Data Factory] Create annotation for URI: {}", iri);
 
     OwlAnnotationPropertyValue val = new OwlAnnotationPropertyValue();
-    val.setType(WeaselOwlType.ANY_URI);
+    val.setType(OwlType.ANY_URI);
     val.setValue(iri);
 
     return val;

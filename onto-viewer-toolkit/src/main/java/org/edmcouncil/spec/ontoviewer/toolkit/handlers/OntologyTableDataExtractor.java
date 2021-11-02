@@ -84,13 +84,13 @@ public class OntologyTableDataExtractor {
         .orElse("");
 
     return entities
-        .parallel()
+//        .parallel()
         .filter(owlEntity -> owlEntity.getIRI().toString().contains(filterPattern))
-        .map(owlClass -> {
+        .map(owlEntity -> {
           try {
-            return detailsManager.getDetailsByIri(owlClass.getIRI().toString());
+            return detailsManager.getDetailsByIri(owlEntity.getIRI().toString());
           } catch (NotFoundElementInOntologyException e) {
-            LOGGER.warn("OWL Entity '{}' not found.", owlClass.getIRI());
+            LOGGER.warn("OWL Entity '{}' not found.", owlEntity.getIRI());
             return null;
           }
         })
@@ -153,6 +153,9 @@ public class OntologyTableDataExtractor {
   }
 
   private String cleanString(String text) {
+    if (text == null) {
+      return UNKNOWN_LABEL;
+    }
     return text.replaceAll("\\s+", " ");
   }
 

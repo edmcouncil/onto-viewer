@@ -1,26 +1,29 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
-import java.util.Objects;
-import java.util.Optional;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.MissingLanguageItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.DefaultLabelItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.MissingLanguageItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(CoreConfiguration.class);
 
   private Map<String, Set<ConfigItem>> configuration;
   private static final String DEFAULT_LANG = "en";
@@ -82,9 +85,8 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
   private void getOntologyPath(Map<String, Set<String>> result) {
     if (configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)) {
       Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_PATH, new HashSet<>());
-      configuration.get(ConfigKeys.ONTOLOGY_PATH).forEach((configItem) -> {
-        item.add(configItem.toString());
-      });
+      configuration.get(ConfigKeys.ONTOLOGY_PATH)
+          .forEach(configItem -> item.add(configItem.toString()));
       result.put(ConfigKeys.ONTOLOGY_PATH, item);
     }
   }
@@ -209,8 +211,8 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public Set<DefaultLabelItem> getDefaultLabels() {
-
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.USER_DEFAULT_NAME_LIST,
+    Set<ConfigItem> values = configuration.getOrDefault(
+        ConfigKeys.USER_DEFAULT_NAME_LIST,
         new HashSet<>());
     Set<DefaultLabelItem> result = new HashSet<>();
     values.stream()
@@ -244,7 +246,7 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   public Set<String> getScope() {
     Set<ConfigItem> scopeIri = configuration.getOrDefault(ConfigKeys.SCOPE_IRI, new HashSet<>());
-    Set<String> result = new HashSet<String>();
+    Set<String> result = new HashSet<>();
     for (ConfigItem configElement : scopeIri) {
       StringItem element = (StringItem) configElement;
       result.add(element.toString());
@@ -259,5 +261,17 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     }
 
     return value.stream().map(Object::toString).findFirst();
+  }
+
+  public void logConfigurationDebugInfo() {
+    if (configuration.isEmpty()) {
+      LOGGER.debug("Configuration is empty.");
+    } else {
+      LOGGER.debug("Configuration debug info:");
+      getConfiguration().forEach((key, value) -> {
+        LOGGER.debug("\tEntry '{}':", key);
+        LOGGER.debug("\t\t- {}", value);
+      });
+    }
   }
 }

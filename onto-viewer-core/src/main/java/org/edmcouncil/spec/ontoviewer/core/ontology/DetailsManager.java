@@ -12,7 +12,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKey
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
-import org.edmcouncil.spec.ontoviewer.core.changer.ChangerIriToLabel;
+import org.edmcouncil.spec.ontoviewer.core.service.ChangerIriToLabelService;
 import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlDetails;
@@ -35,22 +35,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class DetailsManager {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DetailsManager.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DetailsManager.class);
   private static final String DEFAULT_GROUP_NAME = "other";
 
   private final OntologyManager ontologyManager;
   private final OwlDataHandler dataHandler;
-  private final ConfigurationService config;
-  private final ChangerIriToLabel changerIriToLabel;
+  private final ConfigurationService configurationService;
+  private final ChangerIriToLabelService changerIriToLabelService;
   private final DescriptionGenerator descriptionGenerator;
 
   public DetailsManager(OntologyManager ontologyManager, OwlDataHandler dataHandler,
-      ConfigurationService config, ChangerIriToLabel changerIriToLabel,
+      ConfigurationService configurationService, ChangerIriToLabelService changerIriToLabelService,
       DescriptionGenerator descriptionGenerator) {
     this.ontologyManager = ontologyManager;
     this.dataHandler = dataHandler;
-    this.config = config;
-    this.changerIriToLabel = changerIriToLabel;
+    this.configurationService = configurationService;
+    this.changerIriToLabelService = changerIriToLabelService;
     this.descriptionGenerator = descriptionGenerator;
   }
 
@@ -82,7 +82,7 @@ public class DetailsManager {
       }
 
       if (result != null) {
-        result.setMaturityLevel(dataHandler.getMaturityLevel(iriString, getOntology()));
+        result.setMaturityLevel(dataHandler.getMaturityLevel(iriString));
       }
     }
 
@@ -99,8 +99,8 @@ public class DetailsManager {
             iriString,
             ontologyManager.getOntology()));
 
-    if (config.getCoreConfiguration().isNotEmpty()) {
-      CoreConfiguration coreConfiguration = config.getCoreConfiguration();
+    if (configurationService.getCoreConfiguration().isNotEmpty()) {
+      CoreConfiguration coreConfiguration = configurationService.getCoreConfiguration();
       if (coreConfiguration.isGrouped()) {
         OwlGroupedDetails newResult = groupDetails(result, coreConfiguration);
         addGeneratedDescription(newResult);
@@ -117,9 +117,10 @@ public class DetailsManager {
     return dataHandler.getAllModulesData(ontologyManager.getOntology());
   }
 
-  private OwlGroupedDetails groupDetails(OwlListDetails owlDetails, CoreConfiguration cfg) {
-    OwlGroupedDetails groupedDetails = new OwlGroupedDetails();
-    Set<ConfigItem> groups = cfg.getConfiguration().get(ConfigKeys.GROUPS);
+  private OwlGroupedDetails groupDetails(OwlListDetails owlDetails,
+      CoreConfiguration configuration) {
+    var groupedDetails = new OwlGroupedDetails();
+    var groups = configuration.getConfiguration().get(ConfigKeys.GROUPS);
 
     for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
       String propertyKey = entry.getKey();
@@ -137,18 +138,12 @@ public class DetailsManager {
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
     groupedDetails.setMaturityLevel(owlDetails.getMaturityLevel());
+    groupedDetails.sortProperties(groups, configuration);
 
-    groupedDetails.sortProperties(groups, cfg);
+    // first must be sorted next we need to change keys
+    groupedDetails = changerIriToLabelService.changeIriKeysInGroupedDetails(groupedDetails);
 
-    //first must be sorted next we need to change keys
-    groupedDetails = changerIriToLabel.changeIriKeysInGroupedDetails(groupedDetails);
-
-    for (Map.Entry<String, Map<String, List<PropertyValue>>> entry : groupedDetails.getProperties()
-        .entrySet()) {
-      LOG.debug(entry.toString());
-    }
-
-    owlDetails.release();
+    // owlDetails.release(); // TODO: Remove
 
     return groupedDetails;
   }
@@ -170,8 +165,7 @@ public class DetailsManager {
   }
 
   private void sortResults(OwlListDetails result) {
-    Set set = config.getCoreConfiguration()
-        .getValue(ConfigKeys.PRIORITY_LIST);
+    var set = configurationService.getCoreConfiguration().getValue(ConfigKeys.PRIORITY_LIST);
     if (set == null) {
       return;
     }

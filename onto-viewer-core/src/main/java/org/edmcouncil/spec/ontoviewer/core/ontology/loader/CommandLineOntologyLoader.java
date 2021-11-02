@@ -10,6 +10,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfi
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -68,10 +69,16 @@ public class CommandLineOntologyLoader {
   private OWLOntology loadOntologiesFromIris(
       OWLOntologyManager ontologyManager,
       Set<IRI> ontologyIrisToLoad) throws OWLOntologyCreationException {
+    ontologyManager.getOntologyLoaderConfiguration()
+        .setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+
     var umbrellaOntology = ontologyManager.createOntology();
 
     for (IRI ontologyIri : ontologyIrisToLoad) {
+      LOGGER.debug("Loading ontology from IRI '{}'...", ontologyIri);
+
       var currentOntology = ontologyManager.loadOntology(ontologyIri);
+//      var currentOntology = ontologyManager.loadOntologyFromOntologyDocument(ontologyIri);
 
       LOGGER.debug("Loaded '{}' ontology with {} axioms.",
           ontologyIri,

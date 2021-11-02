@@ -77,6 +77,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
           ConfigKeys.ONTOLOGY_PATH,
           new StringItem(ontologyPath));
     }
+    LOGGER.debug("Using ontology paths: {}", configuration.getOntologyLocation().values());
 
     var filterPattern = commandLineOptions.getOption(OptionDefinition.FILTER_PATTERN).orElse("");
     configuration.addConfigElement(

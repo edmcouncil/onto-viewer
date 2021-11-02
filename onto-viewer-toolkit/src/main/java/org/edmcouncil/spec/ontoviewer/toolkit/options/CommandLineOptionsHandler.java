@@ -46,8 +46,8 @@ public class CommandLineOptionsHandler {
 
     for (OptionDefinition optionDefinition : OptionDefinition.values()) {
       if (parsedOptions.hasOption(optionDefinition.argName())) {
-        var optionValue = parsedOptions.getOptionValue(optionDefinition.argName());
-        commandLineOptions.setOption(optionDefinition, optionValue);
+        var optionValues = parsedOptions.getOptionValues(optionDefinition.argName());
+        commandLineOptions.setOption(optionDefinition, optionValues);
       } else if (optionDefinition.isNotRequired()) {
         commandLineOptions.setOption(optionDefinition, optionDefinition.defaultValue());
       } else {

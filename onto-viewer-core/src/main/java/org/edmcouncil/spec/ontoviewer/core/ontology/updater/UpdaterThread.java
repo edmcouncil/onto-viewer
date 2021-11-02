@@ -141,7 +141,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       Set<String> scopes = scopeIriOntology.getScopeIri(ontology);
 
       //get default labels
-      Map<String, String> defaultLabels = labelProvider.getDefaultLabels();
+      // TODO: We take default labels only to put them in label provider a few lines down...
+//      Map<String, String> defaultLabels = labelProvider.getDefaultLabels();
 
       //get default text searcher db
       Map<String, TextDbItem> textSearcherDbDefaultData = textSearcherDb.loadDefaultData(ontology);
@@ -157,14 +158,14 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       ontologyManager.updateOntology(ontology);
 
-      labelProvider.clearAndSet(defaultLabels);
+      // TODO: See comment on #144
+//      labelProvider.clearAndSet(defaultLabels);
 
       textSearcherDb.clearAndSetDb(textSearcherDbDefaultData);
 
       //load ontology resource must be here, fibo data handler use label provider
-      Map<String, OntologyResources> fiboOntologyResourcess = fiboDataHandler.loadAllOntologyResources(ontology);
+      fiboDataHandler.populateOntologyResources(ontology);
 
-      fiboDataHandler.setOntologyResources(fiboOntologyResourcess);
       fiboDataHandler.clearAndSetNewModules(ontology);
       
       ontologyStatsManager.clear();

@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class OntologyManager {
 
   private OWLOntology ontology;
+  private Set<OWLOntology> ontologies;
 
   public OWLOntology getOntology() {
     return ontology;
@@ -22,8 +24,10 @@ public class OntologyManager {
   }
 
   public Stream<OWLOntology> getOntologyWithImports() {
-    var ontologies = ontology.imports().collect(Collectors.toSet());
-    ontologies.add(ontology);
-    return ontologies.stream();
+    if (this.ontologies == null) {
+      this.ontologies = ontology.imports().collect(Collectors.toSet());
+      this.ontologies.add(ontology);
+    }
+    return this.ontologies.stream();
   }
 }

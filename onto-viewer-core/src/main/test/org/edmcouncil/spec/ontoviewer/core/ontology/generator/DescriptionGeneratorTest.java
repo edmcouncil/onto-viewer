@@ -3,7 +3,7 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.generator;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
@@ -361,7 +361,7 @@ class DescriptionGeneratorTest {
         .stream().map(rawPropertyValue -> {
           var expectedResult = new OwlAnnotationPropertyValue();
           expectedResult.setValue(rawPropertyValue);
-          expectedResult.setType(WeaselOwlType.STRING);
+          expectedResult.setType(OwlType.STRING);
           return expectedResult;
         })
         .collect(Collectors.toList());
@@ -369,7 +369,7 @@ class DescriptionGeneratorTest {
 
   private OwlAxiomPropertyValue preparePropertyValue(String propertyValue, OwlEntity... entities) {
     var property = new OwlAxiomPropertyValue();
-    property.setType(WeaselOwlType.AXIOM);
+    property.setType(OwlType.AXIOM);
     property.setValue(propertyValue);
     for (int i = 0; i < entities.length; i++) {
       OwlEntity entity = entities[i];

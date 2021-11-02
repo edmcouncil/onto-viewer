@@ -26,9 +26,7 @@ public class ScopeIriOntology {
 
   private static final Logger LOG = LoggerFactory.getLogger(ScopeIriOntology.class);
 
-  @Autowired
-  private ConfigurationService appConfiguration;
-  private Set<String> scopes = new HashSet<String>();
+  private Set<String> scopes = new HashSet<>();
 
   /**
    * This method return scopes IRI of ontology.

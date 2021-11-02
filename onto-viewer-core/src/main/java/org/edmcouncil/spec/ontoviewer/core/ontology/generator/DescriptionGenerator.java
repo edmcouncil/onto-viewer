@@ -4,7 +4,7 @@ import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.joining;
 import static org.springframework.util.StringUtils.capitalize;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
-import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
@@ -74,7 +74,7 @@ public class DescriptionGenerator {
                     part = sortGeneratedDescription(part).trim();
                     var descriptionVaLue = new OwlAnnotationPropertyValue();
                     descriptionVaLue.setValue(part);
-                    descriptionVaLue.setType(WeaselOwlType.STRING);
+                    descriptionVaLue.setType(OwlType.STRING);
                     return descriptionVaLue;
                 })
                 .collect(Collectors.toList());

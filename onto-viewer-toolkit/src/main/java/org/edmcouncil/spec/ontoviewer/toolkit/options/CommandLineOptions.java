@@ -13,6 +13,10 @@ public class CommandLineOptions {
     options.put(optionDefinition, List.of(optionValue));
   }
 
+  public void setOption(OptionDefinition optionDefinition, String[] optionValues) {
+    options.put(optionDefinition, List.of(optionValues));
+  }
+
   public Optional<String> getOption(OptionDefinition optionDefinition) {
     var values = options.get(optionDefinition);
     if (!values.isEmpty()) {

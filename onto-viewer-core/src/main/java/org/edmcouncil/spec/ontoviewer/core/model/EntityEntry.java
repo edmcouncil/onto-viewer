@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.model;
 
 import java.util.Optional;
+import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.semanticweb.owlapi.model.OWLEntity;
 
 public class EntityEntry {
@@ -19,11 +20,17 @@ public class EntityEntry {
     return entity;
   }
 
-  public <T extends OWLEntity> T getEntityAs(Class<T> type) {
-    try {
-      return (T) entity.orElseThrow(() -> new IllegalStateException("Entity is not present."));
-    } catch (ClassCastException ex) {
-      throw new IllegalStateException("Unable to cast entity to type " + type.getName());
+  public <T extends OWLEntity> T getEntityAs(Class<T> type) throws OntoViewerException {
+    var entityObject = entity.orElseThrow(
+        () -> new IllegalStateException("Entity is not present."));
+    if (type.isAssignableFrom(entityObject.getClass())) {
+      return type.cast(entityObject);
+    } else {
+      var entityIri = entity.map(owlEntity -> owlEntity.getIRI().toString())
+          .orElse("<empty>");
+      var message = String.format("Unable to cast '%s' entity (of type %s) to type %s.",
+          entityIri, entityObject.getClass(), type.getName());
+      throw new OntoViewerException(message);
     }
   }
 }

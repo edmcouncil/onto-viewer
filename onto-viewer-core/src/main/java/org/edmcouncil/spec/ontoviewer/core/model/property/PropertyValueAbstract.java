@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.model.property;
 
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
-import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import java.util.Objects;
 
 /**
@@ -9,16 +9,16 @@ import java.util.Objects;
  */
 public abstract class PropertyValueAbstract<T> implements PropertyValue<T> {
 
-  private WeaselOwlType type;
+  private OwlType type;
   private T value;
   
   @Override
-  public WeaselOwlType getType() {
+  public OwlType getType() {
     return this.type;
   }
 
   @Override
-  public void setType(WeaselOwlType type) {
+  public void setType(OwlType type) {
     this.type = type;
   }
 

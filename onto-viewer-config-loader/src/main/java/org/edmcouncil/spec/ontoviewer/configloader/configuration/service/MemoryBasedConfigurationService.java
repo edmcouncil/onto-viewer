@@ -83,6 +83,7 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
     glossary.addElement(new StringItem("http://www.w3.org/2004/02/skos/core#definition"));
     glossary.addElement(new StringItem("http://www.w3.org/2004/02/skos/core#example"));
     glossary.addElement(new StringItem("http://www.w3.org/2004/02/skos/core#editorialNote"));
+    glossary.addElement(new StringItem("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote"));
     configuration.addConfigElement(ConfigKeys.GROUPS, glossary);
 
     configuration.addConfigElement(ConfigKeys.GROUPS,
@@ -94,8 +95,6 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
         populateConfiguration(
             GroupsPropertyKey.THIS_ONTOLOGY_CONTAINS,
             THIS_ONTOLOGY_CONTAINS_PROPERTIES));
-
-    // TODO: Add more default options
   }
 
   private GroupsItem populateConfiguration(GroupsPropertyKey key, Set<String> properties) {
