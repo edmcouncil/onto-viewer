@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
@@ -116,15 +117,25 @@ class ConfigLoaderTest {
     Set<DefaultLabelItem> actualResult = this.testViewerCoreConfig.getDefaultLabels();
     Set<DefaultLabelItem> expectedResult = new HashSet<>();
 
-    expectedResult.add(new DefaultLabelItem("http://www.w3.org/2000/01/rdf-schema#Literal", "literal"));
+    expectedResult.add(
+        new DefaultLabelItem("http://www.w3.org/2000/01/rdf-schema#Literal", "literal"));
     expectedResult.add(new DefaultLabelItem("http://www.w3.org/2001/XMLSchema#string", "string"));
-    expectedResult.add(new DefaultLabelItem("http://www.omg.org/techprocess/ab/SpecificationMetadata/fileAbbreviation", "file abbreviation"));
-    expectedResult.add(new DefaultLabelItem("http://www.omg.org/techprocess/ab/SpecificationMetadata/filename", "file name"));
-    expectedResult.add(new DefaultLabelItem("@viewer.axiom.EquivalentClasses", "Equivalent classes (necessary and sufficient criteria)"));
-    expectedResult.add(new DefaultLabelItem("@viewer.axiom.DataPropertyAssertion", "Data property assertion"));
-    expectedResult.add(new DefaultLabelItem("@viewer.axiom.DataPropertyRange", "Data property range"));
-    expectedResult.add(new DefaultLabelItem("http://www.w3.org/2004/02/skos/core#definition", "definition"));
-    expectedResult.add(new DefaultLabelItem("@viewer.external.annotationProperty", "external annotation property"));
+    expectedResult.add(new DefaultLabelItem(
+        "http://www.omg.org/techprocess/ab/SpecificationMetadata/fileAbbreviation",
+        "file abbreviation"));
+    expectedResult.add(
+        new DefaultLabelItem("http://www.omg.org/techprocess/ab/SpecificationMetadata/filename",
+            "file name"));
+    expectedResult.add(new DefaultLabelItem("@viewer.axiom.EquivalentClasses",
+        "Equivalent classes (necessary and sufficient criteria)"));
+    expectedResult.add(
+        new DefaultLabelItem("@viewer.axiom.DataPropertyAssertion", "Data property assertion"));
+    expectedResult.add(
+        new DefaultLabelItem("@viewer.axiom.DataPropertyRange", "Data property range"));
+    expectedResult.add(
+        new DefaultLabelItem("http://www.w3.org/2004/02/skos/core#definition", "definition"));
+    expectedResult.add(new DefaultLabelItem("@viewer.external.annotationProperty",
+        "external annotation property"));
 
     assertTrue(CollectionUtils.containsAny(expectedResult, actualResult));
   }
@@ -154,7 +165,8 @@ class ConfigLoaderTest {
   @Test
   void testGetConfigValFromConfig() {
     Set<ConfigItem> actualResult = this.testViewerCoreConfig.getValue(ConfigKeys.ONTOLOGY_DIR);
-    Set<ConfigItem> expectedResult = Collections.singleton(new StringItem("integration_tests/ontologies"));
+    Set<ConfigItem> expectedResult = Collections.singleton(
+        new StringItem("integration_tests/ontologies"));
     assertEquals(expectedResult, actualResult);
 
     Set<ConfigItem> getConfigValPath = this.testViewerCoreConfig.getValue(ConfigKeys.ONTOLOGY_PATH);

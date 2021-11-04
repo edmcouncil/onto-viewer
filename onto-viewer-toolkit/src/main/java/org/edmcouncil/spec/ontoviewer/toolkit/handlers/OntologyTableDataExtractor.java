@@ -84,7 +84,7 @@ public class OntologyTableDataExtractor {
         .orElse("");
 
     return entities
-//        .parallel()
+        .parallel()
         .filter(owlEntity -> owlEntity.getIRI().toString().contains(filterPattern))
         .map(owlEntity -> {
           try {

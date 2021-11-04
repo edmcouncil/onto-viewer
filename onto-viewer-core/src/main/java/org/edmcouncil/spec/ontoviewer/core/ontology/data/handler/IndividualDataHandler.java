@@ -42,17 +42,18 @@ public class IndividualDataHandler {
       OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
-    ontology.importsClosure().forEach(currentOntology -> {
-      Set<OWLNamedIndividual> individualList = getInstancesByClass(currentOntology, clazz);
-      for (OWLNamedIndividual namedIndividual : individualList) {
+    Set<OWLNamedIndividual> listOfIndividuals = ontology.importsClosure()
+        .flatMap(currentOntology -> getInstancesByClass(currentOntology, clazz).stream())
+        .collect(Collectors.toSet());
+
+    for (OWLNamedIndividual namedIndividual : listOfIndividuals) {
         OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
         s.setType(OwlType.INSTANCES);
         String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual);
         s.setValue(new PairImpl(label, namedIndividual.getIRI().toString()));
         result.addProperty(instanceKey, s);
         namedIndividual.getEntityType();
-      }
-    });
+    }
 
     return result;
   }

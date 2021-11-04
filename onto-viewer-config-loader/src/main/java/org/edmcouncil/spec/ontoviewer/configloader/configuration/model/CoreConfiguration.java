@@ -1,5 +1,11 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.INDIVIDUALS_ENABLED;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.LOCATION_IN_MODULES_ENABLED;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_GRAPH_ENABLED;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_HANDLING;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.USAGE_ENABLED;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -273,5 +279,24 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
         LOGGER.debug("\t\t- {}", value);
       });
     }
+  }
+
+  public KeyValueMapConfigItem getOntologyHandling() {
+    if (!configuration.containsKey(ONTOLOGY_HANDLING)) {
+      var properties = new HashMap<String, Object>();
+      var defaultOntologyHandling = new KeyValueMapConfigItem(properties);
+      addConfigElement(ONTOLOGY_HANDLING, defaultOntologyHandling);
+    }
+
+    var ontologyHandlingConfig = (KeyValueMapConfigItem) configuration.get(ONTOLOGY_HANDLING)
+        .stream().findFirst()
+        .orElse(new KeyValueMapConfigItem(new HashMap<>()));
+
+    ontologyHandlingConfig.putIfAbsent(LOCATION_IN_MODULES_ENABLED, true);
+    ontologyHandlingConfig.putIfAbsent(USAGE_ENABLED, true);
+    ontologyHandlingConfig.putIfAbsent(ONTOLOGY_GRAPH_ENABLED, true);
+    ontologyHandlingConfig.putIfAbsent(INDIVIDUALS_ENABLED, true);
+
+    return ontologyHandlingConfig;
   }
 }

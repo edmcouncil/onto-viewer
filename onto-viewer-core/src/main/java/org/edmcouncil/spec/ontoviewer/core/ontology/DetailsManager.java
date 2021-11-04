@@ -94,10 +94,12 @@ public class DetailsManager {
     result.setIri(iriString);
 
     // Path to element in modules
-    result.setLocationInModules(
-        dataHandler.getElementLocationInModules(
-            iriString,
-            ontologyManager.getOntology()));
+    if (getSetting(ConfigKeys.LOCATION_IN_MODULES_ENABLED)) {
+      result.setLocationInModules(
+          dataHandler.getElementLocationInModules(
+              iriString,
+              ontologyManager.getOntology()));
+    }
 
     if (configurationService.getCoreConfiguration().isNotEmpty()) {
       CoreConfiguration coreConfiguration = configurationService.getCoreConfiguration();
@@ -183,5 +185,9 @@ public class DetailsManager {
                 "Glossary",
                 "generated description",
                 descriptionValue)));
+  }
+
+  private boolean getSetting(String key) {
+    return (boolean) configurationService.getCoreConfiguration().getOntologyHandling().get(key);
   }
 }

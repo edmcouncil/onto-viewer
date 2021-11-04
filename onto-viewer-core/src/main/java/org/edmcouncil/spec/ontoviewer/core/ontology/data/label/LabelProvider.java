@@ -96,14 +96,6 @@ public class LabelProvider {
       return null;
     }
 
-    if (previouslyUsedLabels.containsKey(entity.getIRI().toString())) {
-      String label = previouslyUsedLabels.get(entity.getIRI().toString());
-      LOGGER.debug("[Label Extractor] Previously used label: '{}', for entity: '{}'",
-          label,
-          entity.getIRI().toString());
-      return label;
-    }
-
     OWLDataFactory factory = new OWLDataFactoryImpl();
     Map<String, String> labels = new HashMap<>();
     if (useLabels) {

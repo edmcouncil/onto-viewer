@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
@@ -117,6 +118,8 @@ public class OwlDataHandler {
   private EntitiesCacheService entitiesCacheService;
   @Autowired
   private OntologyManager ontologyManager;
+  @Autowired
+  private ConfigurationService configurationService;
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
@@ -149,16 +152,25 @@ public class OwlDataHandler {
         List<PropertyValue> taxElements2 = extractTaxonomyElements(subclasses2);
 
         OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(owlClass);
-        OwlDetailsProperties<PropertyValue> individuals = handleInstances(ontology, owlClass);
-        OwlDetailsProperties<PropertyValue> usage = extractUsageForClasses(owlClass, ontology);
+        OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
+        if (getSetting(ConfigKeys.INDIVIDUALS_ENABLED)) {
+          individuals = handleInstances(ontology, owlClass);
+        }
 
-        OwlDetailsProperties<PropertyValue> inheritedAxioms = new OwlDetailsProperties<>();
+        OwlDetailsProperties<PropertyValue> usage = new OwlDetailsProperties<>();
+        if (getSetting(ConfigKeys.USAGE_ENABLED)) {
+          usage = extractUsageForClasses(owlClass, ontology);
+        }
+
+        OwlDetailsProperties<PropertyValue> inheritedAxioms =
+            handleInheritedAxioms(ontology, owlClass);
 
         OntologyGraph ontologyGraph = new OntologyGraph();
-        // 'Nothing' has all restrictions, we don't want to display that.
-        if (!classIri.equals(OWLRDFVocabulary.OWL_NOTHING.getIRI())) {
-          inheritedAxioms = handleInheritedAxioms(ontology, owlClass);
-          ontologyGraph = graphDataHandler.handleGraph(owlClass, ontology);
+        if (getSetting(ConfigKeys.ONTOLOGY_GRAPH_ENABLED)) {
+          // 'Nothing' has all restrictions, we don't want to display that.
+          if (!classIri.equals(OWLRDFVocabulary.OWL_NOTHING.getIRI())) {
+            ontologyGraph = graphDataHandler.handleGraph(owlClass, ontology);
+          }
         }
 
         subclasses = filterSubclasses(subclasses);
@@ -318,9 +330,7 @@ public class OwlDataHandler {
     return handleAxioms(axiomsIterator, obj.getIRI());
   }
 
-  private OwlDetailsProperties<PropertyValue> handleAxioms(
-      OWLClass obj,
-      OWLOntology ontology) {
+  private OwlDetailsProperties<PropertyValue> handleAxioms(OWLClass obj, OWLOntology ontology) {
     Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handleAxioms(axiomsIterator, obj.getIRI());
   }
@@ -340,16 +350,12 @@ public class OwlDataHandler {
       for (PropertyValue property : subElements) {
         if (property.getType().equals(OwlType.TAXONOMY)) {
           OwlAxiomPropertyValue axiomProperty = (OwlAxiomPropertyValue) property;
-          LOG.debug("Axiom Property {}", axiomProperty.toString());
+          LOG.debug("Axiom Property {}", axiomProperty);
           IRI sci = extractSubElementIri(axiomProperty, objIri);
 
           LOG.debug("extractSubElementIri: {}", extractSubElementIri(axiomProperty, objIri));
           OWLEntity entity = createEntity(ontology, sci, type);
 
-          LOG.debug("createEntity: {}", createEntity(ontology, sci, type));
-
-          LOG.trace("\t{} Sub Element Of {}", StringUtils.getFragment(objIri),
-              StringUtils.getFragment(entity.getIRI()));
           List<PropertyValue> subTax = getSuperElements(entity, ontology, type);
 
           OwlTaxonomyImpl subCLassTax = extractTaxonomy(subTax, entity.getIRI(), ontology, type);
@@ -793,15 +799,15 @@ public class OwlDataHandler {
         return getSubclasses(entity.asOWLClass());
       case AXIOM_DATA_PROPERTY:
         prop = entity.asOWLDataProperty();
-        propertyStream = EntitySearcher.getSuperProperties(prop, ontology);
+        propertyStream = EntitySearcher.getSuperProperties(prop, ontology.importsClosure());
         break;
       case AXIOM_OBJECT_PROPERTY:
         prop = entity.asOWLObjectProperty();
-        propertyStream = EntitySearcher.getSuperProperties(prop, ontology);
+        propertyStream = EntitySearcher.getSuperProperties(prop, ontology.importsClosure());
         break;
       case AXIOM_ANNOTATION_PROPERTY:
         prop = entity.asOWLAnnotationProperty();
-        propertyStream = EntitySearcher.getSuperProperties(prop, ontology);
+        propertyStream = EntitySearcher.getSuperProperties(prop, ontology.importsClosure());
         break;
 
     }
@@ -873,13 +879,11 @@ public class OwlDataHandler {
       OWLObjectProperty obj) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
-    Iterator<OWLSubObjectPropertyOfAxiom> iterator = ontology.objectSubPropertyAxiomsForSuperProperty(
-        obj).iterator();
+    var subObjectPropertyAxioms = ontology.importsClosure()
+        .flatMap(currentOntology -> currentOntology.objectSubPropertyAxiomsForSuperProperty(obj))
+        .collect(Collectors.toSet());
 
-    while (iterator.hasNext()) {
-      LOG.debug("OwlDataHandler -> handleDirectSubObjectProperty {}", iterator.hasNext());
-      OWLSubObjectPropertyOfAxiom next = iterator.next();
-
+    for (OWLSubObjectPropertyOfAxiom next : subObjectPropertyAxioms) {
       IRI iri = next.getSubProperty().asOWLObjectProperty().getIRI();
       LOG.debug("OwlDataHandler -> handleDirectSubObjectProperty2 {}", iri.toString());
 
@@ -888,11 +892,12 @@ public class OwlDataHandler {
       r.setType(OwlType.DIRECT_SUBCLASSES);
       r.setValue(new PairImpl(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
 
-      LOG.debug("OwlDataHandler -> handleDirectSubObjectProperty3 {}", r.toString());
+      LOG.debug("OwlDataHandler -> handleDirectSubObjectProperty3 {}", r);
       String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
           OwlType.DIRECT_SUB_OBJECT_PROPERTY.name().toLowerCase());
       result.addProperty(key, r);
     }
+
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
@@ -974,8 +979,8 @@ public class OwlDataHandler {
    */
   private OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology,
       OWLClass clazz) {
-    OwlDetailsProperties<PropertyValue> result = individualDataHandler.handleClassIndividuals(
-        ontology, clazz);
+    OwlDetailsProperties<PropertyValue> result =
+        individualDataHandler.handleClassIndividuals(ontology, clazz);
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
@@ -1425,5 +1430,9 @@ public class OwlDataHandler {
 
     return result;
 
+  }
+
+  private boolean getSetting(String key) {
+    return (boolean) configurationService.getCoreConfiguration().getOntologyHandling().get(key);
   }
 }

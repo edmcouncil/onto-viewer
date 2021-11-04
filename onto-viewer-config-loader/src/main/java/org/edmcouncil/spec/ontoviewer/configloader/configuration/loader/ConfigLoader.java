@@ -25,13 +25,11 @@ public class ConfigLoader {
     this.configuration = new CoreConfiguration();
   }
 
-  public void loadWeaselConfiguration(Path weaselConfigFile) {
-
+  public void loadWeaselConfiguration(Path ontoViewerConfigurationPath) {
     SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
     try {
-      File configFile = weaselConfigFile.toFile();
+      File configFile = ontoViewerConfigurationPath.toFile();
       if (!configFile.exists()) {
-
         LOG.debug("Configuration file not exist, use default empty configuration.");
         return;
       }
@@ -40,17 +38,12 @@ public class ConfigLoader {
       saxParser.parse(configFile, handler);
 
       configuration = handler.getConfiguration();
-
     } catch (ParserConfigurationException | SAXException | IOException e) {
       LOG.error("Exception while loading configuration: {}", e.getMessage());
     }
-
-    return;
   }
 
   public CoreConfiguration getConfiguration() {
     return configuration;
   }
-  
-  
 }

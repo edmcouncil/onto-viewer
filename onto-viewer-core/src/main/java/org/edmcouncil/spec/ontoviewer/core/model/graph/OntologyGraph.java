@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class OntologyGraph {
@@ -14,9 +13,7 @@ public class OntologyGraph {
   private GraphNode root;
   private int lastId = 0;
 
-
   public OntologyGraph() {
-
     this.nodes = new HashSet<>();
     this.relations = new HashSet<>();
   }
@@ -66,7 +63,6 @@ public class OntologyGraph {
 
   @Override
   public String toString() {
-
     StringBuilder sb = new StringBuilder();
     sb.append("ViewerGraph \n");
     if (relations != null) {
@@ -90,9 +86,7 @@ public class OntologyGraph {
     return sb.toString();
   }
 
-
   public boolean isEmpty() {
     return nodes.isEmpty() && relations.isEmpty();
   }
-
 }

@@ -1,12 +1,15 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.GroupType;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.GroupsPropertyKey;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.KeyValueMapConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
@@ -74,12 +77,12 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
     configuration.addConfigElement(ConfigKeys.DISPLAY_LABEL, new BooleanItem(true));
     configuration.addConfigElement(ConfigKeys.FORCE_LABEL_LANG, new BooleanItem(false));
     configuration.addConfigElement(ConfigKeys.LABEL_LANG, new StringItem("en"));
+    configuration.addConfigElement(ConfigKeys.ONTOLOGY_HANDLING, prepareOntologyHandlingConfig());
 
     var glossary = new GroupsItem();
     glossary.setName(GroupsPropertyKey.GLOSSARY.getKey());
     glossary.setGroupType(GroupType.DEFAULT);
-    glossary.addElement(new StringItem(
-        "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym"));
+    glossary.addElement(new StringItem("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym"));
     glossary.addElement(new StringItem("http://www.w3.org/2004/02/skos/core#definition"));
     glossary.addElement(new StringItem("http://www.w3.org/2004/02/skos/core#example"));
     glossary.addElement(new StringItem("http://www.w3.org/2004/02/skos/core#editorialNote"));
@@ -95,6 +98,15 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
         populateConfiguration(
             GroupsPropertyKey.THIS_ONTOLOGY_CONTAINS,
             THIS_ONTOLOGY_CONTAINS_PROPERTIES));
+  }
+
+  private ConfigItem prepareOntologyHandlingConfig() {
+    var properties = new HashMap<String, Object>();
+    properties.put(ConfigKeys.LOCATION_IN_MODULES_ENABLED, false);
+    properties.put(ConfigKeys.USAGE_ENABLED, false);
+    properties.put(ConfigKeys.ONTOLOGY_GRAPH_ENABLED, false);
+    properties.put(ConfigKeys.INDIVIDUALS_ENABLED, false);
+    return new KeyValueMapConfigItem(properties);
   }
 
   private GroupsItem populateConfiguration(GroupsPropertyKey key, Set<String> properties) {
