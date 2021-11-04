@@ -53,8 +53,7 @@ public class RestrictionGraphDataHandler {
   public OntologyGraph handleGraph(
       OWLNamedIndividual obj,
       OWLOntology ontology) {
-
-    Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj).iterator();
+    Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj, Imports.INCLUDED).iterator();
 
     IRI elementIri = obj.getIRI();
     GraphNode root = null;
