@@ -41,7 +41,7 @@ public class LabelProvider {
   private Map<String, String> previouslyUsedLabels = new HashMap<>();
 
   @Autowired
-  private OntologyManager ontology;
+  private OntologyManager ontologyManager;
   private Boolean forceLabelLang;
   private String labelLang;
   private Boolean useLabels;
@@ -114,7 +114,7 @@ public class LabelProvider {
     OWLDataFactory factory = new OWLDataFactoryImpl();
     Map<String, String> labels = new HashMap<>();
     if (useLabels) {
-      EntitySearcher.getAnnotations(entity, ontology.getOntology(), factory.getRDFSLabel())
+      EntitySearcher.getAnnotations(entity, ontologyManager.getOntology(), factory.getRDFSLabel())
           .collect(Collectors.toSet())
           .stream()
           .filter((annotation) -> (annotation.getValue().isLiteral()))
@@ -189,18 +189,16 @@ public class LabelProvider {
 
         labels.put(label, lang);
         LOG.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
-            label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
-
+            label, lang.isEmpty() ? "no-lang" : lang, entityIri);
       } else {
         LOG.debug("[Label Extractor]: REJECTED label: '{}' @ '{}' for element with IRI: '{}', "
             + "Reason: Language is not present.",
-            label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
+            label, lang.isEmpty() ? "no-lang" : lang, entityIri);
       }
-
     } else {
       labels.put(label, lang);
       LOG.debug("[Label Extractor]: Extract label: '{}' @ '{}' for element with IRI: '{}'",
-          label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
+          label, lang.isEmpty() ? "no-lang" : lang, entityIri);
     }
   }
 
@@ -212,10 +210,9 @@ public class LabelProvider {
       return label;
     }
 
-    OWLEntity entity = ontology.getOntology().entitiesInSignature(iri).findFirst().orElse(
-        ontology.getOntology().getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
+    OWLEntity entity = ontologyManager.getOntology().entitiesInSignature(iri).findFirst().orElse(ontologyManager.getOntology().getOWLOntologyManager().getOWLDataFactory().getOWLEntity(EntityType.CLASS, iri));
     if (iri.toString().endsWith("/")) {
-      //it's ontology, we have to get the label from another way
+      //it's ontologyManager, we have to get the label from another way
       return getOntologyLabelOrDefaultFragment(iri);
     }
     return getLabelOrDefaultFragment(entity);
@@ -223,7 +220,7 @@ public class LabelProvider {
 
   private String getOntologyLabelOrDefaultFragment(IRI iri) {
     Map<String, String> labels = new HashMap<>();
-    OWLOntologyManager manager = ontology.getOntology().getOWLOntologyManager();
+    OWLOntologyManager manager = ontologyManager.getOntology().getOWLOntologyManager();
     OWLDataFactory df = OWLManager.getOWLDataFactory();
     for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
       Optional<IRI> opt = onto.getOntologyID().getOntologyIRI();
@@ -259,6 +256,6 @@ public class LabelProvider {
   }
 
   void setOntologyManager(OntologyManager ontologyManager) {
-  this.ontology = ontologyManager;
+    this.ontologyManager = ontologyManager;
   }
 }
