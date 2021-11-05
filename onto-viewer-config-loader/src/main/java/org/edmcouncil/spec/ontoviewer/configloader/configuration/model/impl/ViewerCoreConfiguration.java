@@ -40,7 +40,7 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
     return configuration != null ? configuration.get(cfName) : null;
   }
 
-  public void addCongigElement(String key, ConfigItem val) {
+  public void addConfigElement(String key, ConfigItem val) {
     if (configuration == null) {
       configuration = new HashMap<>();
     }
