@@ -192,9 +192,10 @@ public class OwlDataHandler {
   }
 
   private List<PropertyValue> filterSubclasses(List<PropertyValue> subclasses) {
-    return subclasses.stream()
-        .filter(propertyValue -> (!propertyValue.getType().equals(OwlType.TAXONOMY)))
+    List<PropertyValue> result = subclasses.stream()
+        .filter((pv) -> (!pv.getType().equals(OwlType.TAXONOMY)))
         .collect(Collectors.toList());
+    return result;
   }
 
   private List<PropertyValue> getSubclasses(OwlDetailsProperties<PropertyValue> axioms) {
@@ -430,7 +431,6 @@ public class OwlDataHandler {
   }
 
   private OWLEntity createEntity(OWLOntology ontology, IRI sci, OwlType type) {
-
     switch (type) {
       case AXIOM_CLASS:
         return ontology.getOWLOntologyManager().getOWLDataFactory().getOWLClass(sci);
@@ -484,7 +484,6 @@ public class OwlDataHandler {
         continue;
       }
       start = opv.getLastId();
-
       result.addProperty(key, opv);
     }
     result.sortPropertiesInAlphabeticalOrder();
@@ -625,14 +624,8 @@ public class OwlDataHandler {
 
           String eIri = next.getIRI().toString();
 
-          if (scopeIriOntology.scopeIri(eIri)) {
-            parseToIri(eIri, opv, key, splitted, fixedIValue, splitted[fixedIValue]);
-          } else {
-            parseUrlAxiom(eIri, splitted, fixedIValue, hasOpeningParenthesis,
-                countOpeningParenthesis, hasClosingParenthesis, countClosingParenthesis, hasComma,
-                countComma);
-          }
-
+          parseToIri(argPattern, opv, key, splitted, fixedIValue, generatedKey, eIri,
+              countOpeningParenthesis, countClosingParenthesis, countComma);
         }
         opv.setLastId(i);
       }
@@ -651,7 +644,6 @@ public class OwlDataHandler {
 
   private void checkAndParseUriInLiteral(String[] splited, String argPattern,
       OwlAxiomPropertyValue opv) {
-    CoreConfiguration cfg = config.getCoreConfiguration();
     for (int j = 0; j < splited.length; j++) {
       String str = splited[j].trim();
       if (str.startsWith("<") && str.endsWith(">")) {
@@ -662,7 +654,8 @@ public class OwlDataHandler {
           String key = generatedKey;
 
           if (scopeIriOntology.scopeIri(probablyUrl)) {
-            parseToIri(probablyUrl, opv, key, splited, j, generatedKey);
+            //Brace checking is not needed here, so the arguments are 0.
+            parseToIri(probablyUrl, opv, key, splited, j, generatedKey, str, 0, 0, 0);
           } else {
             parseUrl(probablyUrl, splited, j);
           }
@@ -677,15 +670,31 @@ public class OwlDataHandler {
   }
 
   private void parseToIri(String probablyUrl, OwlAxiomPropertyValue opv, String key,
-      String[] splited, int j, String generatedKey) {
+      String[] splited, int j, String generatedKey, String eIri, int countOpeningParenthesis,
+      int countClosingParenthesis, int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
-    axiomPropertyEntity.setIri(probablyUrl);
-    LOG.debug("Probably URL {}", probablyUrl);
-    String label = labelProvider.getLabelOrDefaultFragment(IRI.create(probablyUrl));
+    axiomPropertyEntity.setIri(eIri);
+    LOG.debug("Probably eiri {}", eIri);
+    String label = labelProvider.getLabelOrDefaultFragment(IRI.create(eIri));
     axiomPropertyEntity.setLabel(label);
     opv.addEntityValues(key, axiomPropertyEntity);
-
     splited[j] = generatedKey;
+
+    String textToReplace = generatedKey;
+
+    if (countOpeningParenthesis > 0) {
+      String prefix = String.join("", Collections.nCopies(countOpeningParenthesis, "("));
+      textToReplace = prefix + textToReplace;
+    }
+    if (countClosingParenthesis > 0) {
+      String postfix = String.join("", Collections.nCopies(countClosingParenthesis, ")"));
+      textToReplace = textToReplace + postfix;
+    }
+    if (countComma > 0) {
+      String postfix = String.join("", Collections.nCopies(countComma, ","));
+      textToReplace = textToReplace + postfix;
+    }
+    splited[j] = textToReplace;
   }
 
   private String fixRenderedValue(String value, String iriFragment, String splitFragment,
@@ -1267,7 +1276,7 @@ public class OwlDataHandler {
       opv.setValue(sb.toString());
       opv.setType(OwlType.AXIOM);
 
-      LOG.debug("Generated big axiom: {}", sb.toString());
+      LOG.debug("Generated big axiom: {}", sb);
       sb = new StringBuilder();
 
       String fullRenderedString = parseRenderedString(opv);
@@ -1279,7 +1288,8 @@ public class OwlDataHandler {
     //Range of ObjectProperty--------------------------------
     Map<IRI, List<OwlAxiomPropertyValue>> valuesO = new HashMap<>();
     ontology.importsClosure().forEach(currentOntology -> {
-      Set<OWLObjectPropertyRangeAxiom> ops = currentOntology.axioms(AxiomType.OBJECT_PROPERTY_RANGE)
+      Set<OWLObjectPropertyRangeAxiom> ops = currentOntology.axioms(
+              AxiomType.OBJECT_PROPERTY_RANGE)
           .filter(el -> el.accept(containsVisitors.visitorObjectProperty(clazz.getIRI())))
           .collect(Collectors.toSet());
 

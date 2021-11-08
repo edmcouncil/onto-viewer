@@ -111,28 +111,25 @@ public class LabelProvider {
           });
     }
     String labelResult = null;
-    if (labels.isEmpty()) {
-      if (groupLabelPriority == Priority.EXTRACTED) {
-        labelResult = StringUtils.getFragment(entity.getIRI());
-      } else {
-        for (DefaultLabelItem defaultUserLabel : defaultUserLabels) {
-          if (defaultUserLabel.getIri().equals(entity.getIRI().toString())) {
-            labelResult = defaultUserLabel.getLabel();
-            break;
-          }
-        }
-
-        if (labelResult == null) {
-          labelResult = StringUtils.getFragment(entity.getIRI());
+    if (groupLabelPriority == Priority.USER_DEFINED) {
+      for (DefaultLabelItem defaultUserLabel : defaultUserLabels) {
+        if (defaultUserLabel.getIri().equals(entity.getIRI().toString())) {
+          labelResult = defaultUserLabel.getLabel();
         }
       }
-    } else if (labels.size() > 1) {
-      labelResult = getTheRightLabel(labels, entity.getIRI());
-    } else {
-      labelResult = labels.entrySet()
-          .stream()
-          .findFirst()
-          .get().getKey();
+    }
+
+    if (labelResult == null) {
+      if (labels.size() == 1) {
+        labelResult = labels.entrySet()
+            .stream()
+            .findFirst()
+            .get().getKey();
+      } else if (labels.size() > 1) {
+        labelResult = getTheRightLabel(labels, entity.getIRI());
+      } else {
+        labelResult = StringUtils.getFragment(entity.getIRI());
+      }
     }
     previouslyUsedLabels.put(entity.getIRI().toString(), labelResult);
     return labelResult;

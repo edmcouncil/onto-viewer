@@ -129,7 +129,6 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   //TODO: Change this method name..
-
   /**
    * @param uri - String representation of URI
    * @return True if it finds representation in the configuration, otherwise false.
@@ -298,5 +297,11 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     ontologyHandlingConfig.putIfAbsent(INDIVIDUALS_ENABLED, true);
 
     return ontologyHandlingConfig;
+  }
+
+  public void setConfigElement(String key, ConfigItem value) {
+    var configSet = new HashSet<ConfigItem>();
+    configSet.add(value);
+    configuration.put(key, configSet);
   }
 }
