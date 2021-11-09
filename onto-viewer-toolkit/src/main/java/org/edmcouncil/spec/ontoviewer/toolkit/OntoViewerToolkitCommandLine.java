@@ -3,6 +3,7 @@ package org.edmcouncil.spec.ontoviewer.toolkit;
 import com.google.common.base.Stopwatch;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
@@ -49,6 +50,12 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     var stopwatch = Stopwatch.createStarted();
 
     if (LOGGER.isDebugEnabled()) {
+      StringBuilder sb = new StringBuilder();
+      for (Map.Entry<Object, Object> entry : System.getProperties().entrySet()) {
+        sb.append("'").append(entry.getKey()).append("' = '").append(entry.getValue())
+            .append("', ");
+      }
+      LOGGER.debug("System properties: {}", sb);
       LOGGER.debug("Raw command line arguments: {}", Arrays.toString(args));
     }
     var commandLineOptionsHandler = new CommandLineOptionsHandler();
