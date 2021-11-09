@@ -22,6 +22,8 @@ import org.semanticweb.owlapi.model.parameters.Imports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.env.MapPropertySource;
+import org.springframework.core.env.StandardEnvironment;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -33,16 +35,19 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   private final OntologyManager ontologyManager;
   private final FiboDataHandler fiboDataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
+  private final StandardEnvironment environment;
 
   public OntoViewerToolkitCommandLine(
       ConfigurationService configurationService,
       OntologyManager ontologyManager,
       FiboDataHandler fiboDataHandler,
-      OntologyTableDataExtractor ontologyTableDataExtractor) {
+      OntologyTableDataExtractor ontologyTableDataExtractor,
+      StandardEnvironment environment) {
     this.configurationService = configurationService;
     this.ontologyManager = ontologyManager;
     this.fiboDataHandler = fiboDataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
+    this.environment = environment;
   }
 
   @Override
@@ -50,12 +55,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     var stopwatch = Stopwatch.createStarted();
 
     if (LOGGER.isDebugEnabled()) {
-      StringBuilder sb = new StringBuilder();
-      for (Map.Entry<Object, Object> entry : System.getProperties().entrySet()) {
-        sb.append("'").append(entry.getKey()).append("' = '").append(entry.getValue())
-            .append("', ");
-      }
-      LOGGER.debug("System properties: {}", sb);
+      logSystemAndSpringProperties();
       LOGGER.debug("Raw command line arguments: {}", Arrays.toString(args));
     }
     var commandLineOptionsHandler = new CommandLineOptionsHandler();
@@ -108,5 +108,19 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
           ex.getMessage());
       throw new OntoViewerToolkitException(message, ex);
     }
+  }
+
+  private void logSystemAndSpringProperties() {
+    environment.getPropertySources().forEach(propertySource -> {
+      if (propertySource instanceof MapPropertySource) {
+        var mapPropertySource = (MapPropertySource) propertySource;
+        var stringBuilder = new StringBuilder();
+        for (Map.Entry<String, Object> entry : mapPropertySource.getSource().entrySet()) {
+          stringBuilder.append("'").append(entry.getKey()).append("' = '").append(entry.getValue())
+              .append("', ");
+        }
+        LOGGER.debug("Property source '{}' content: {}", propertySource.getName(), stringBuilder);
+      }
+    });
   }
 }

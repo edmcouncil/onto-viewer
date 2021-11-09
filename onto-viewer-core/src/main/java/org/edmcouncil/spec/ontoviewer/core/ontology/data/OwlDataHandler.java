@@ -141,7 +141,7 @@ public class OwlDataHandler {
     var entityEntry = entitiesCacheService.getEntityEntry(classIri, OwlType.CLASS);
 
     try {
-      if (entityEntry.isPresent()) {
+      if (entityEntry != null && entityEntry.isPresent()) {
         var owlClass = entityEntry.getEntityAs(OWLClass.class);
 
         resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(owlClass));
@@ -183,6 +183,9 @@ public class OwlDataHandler {
 
         setResultValues(resultDetails, taxonomy, axioms, annotations, directSubclasses, individuals,
             inheritedAxioms, usage, ontologyGraph, subclasses);
+      } else {
+        LOG.warn("Entity with IRI '{}' not found (is NULL or not present: {}).",
+            classIri, entityEntry);
       }
     } catch (OntoViewerException ex) {
       LOG.warn("Unable to handle class " + classIri + ". Details: " + ex.getMessage(), ex);
