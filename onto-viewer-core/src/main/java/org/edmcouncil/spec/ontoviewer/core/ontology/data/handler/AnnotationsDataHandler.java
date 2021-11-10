@@ -95,10 +95,8 @@ public class AnnotationsDataHandler {
             details.setqName(value);
             continue;
           }
-
           String lang = asLiteral.get().getLang();
-          value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
-
+          value = lang.isEmpty() ? value : value.concat(" @").concat(lang);
           checkUriAsIri(opv, value);
           opv.setValue(value);
           if (opv.getType() == WeaselOwlType.IRI) {
