@@ -196,7 +196,8 @@ public class RestrictionGraphDataHandler {
 
   private OntologyGraph handleInheritedAxiomsGraph(OWLClass clazz, OntologyGraph vg,
       OWLOntology ontology) {
-    owlUtils.getSuperClasses(clazz, ontology).forEach((owlClass) -> {
+    Set<OWLClassExpression> alreadySeen = new HashSet<>();
+    owlUtils.getSuperClasses(clazz, ontology, alreadySeen).forEach((owlClass) -> {
       Iterator<OWLClassAxiom> axiomsIterator =
           ontology.axioms(owlClass, Imports.INCLUDED).iterator();
       handleGraph(axiomsIterator, owlClass.getIRI(), vg.getRoot(), vg, GraphNodeType.EXTERNAL);

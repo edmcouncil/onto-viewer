@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Component
@@ -43,27 +42,30 @@ public class OwlUtils {
   /**
    * The method collects all subclasses of the given class, excluding direct classes.
    *
-   * @param clazz Clazz are all SubClasses of given class.
+   * @param clazz    Clazz are all SubClasses of given class.
    * @param ontology This is a loaded ontology.
    * @return All subclasses;
    */
-  public Set<OWLClass> getSuperClasses(OWLClass clazz, OWLOntology ontology) {
+  public Set<OWLClass> getSuperClasses(OWLClass clazz, OWLOntology ontology,
+      Set<OWLClassExpression> alreadySeen) {
     Set<OWLClass> result = new HashSet<>();
     List<OWLClassExpression> subClasses =
         EntitySearcher.getSuperClasses(clazz, ontology.importsClosure())
             .collect(Collectors.toList());
-    for (OWLClassExpression subClass : subClasses) {
-      LOG.debug("getSuperClasses -> subClass {}", subClass);
-      Optional<OWLEntity> e = subClass.signature().findFirst();
-      LOG.debug("\tgetSuperClasses -> enity iri {}", e.get().getIRI());
-      if (subClass.getClassExpressionType() == ClassExpressionType.OWL_CLASS) {
-        result.add(e.get().asOWLClass());
-        result.addAll(getSuperClasses(e.get().asOWLClass(), ontology));
+    for (OWLClassExpression subClassExpression : subClasses) {
+      if (!alreadySeen.contains(subClassExpression)) {
+        alreadySeen.add(subClassExpression);
+        LOG.debug("getSuperClasses -> subClass {}", subClassExpression);
+        if (subClassExpression.getClassExpressionType() == ClassExpressionType.OWL_CLASS) {
+          OWLClass subClass = subClassExpression.signature().findFirst().orElseThrow().asOWLClass();
+          if (!result.contains(subClass)) {
+            result.add(subClass);
+            result.addAll(getSuperClasses(subClass, ontology, alreadySeen));
+          }
+        }
       }
-
     }
+
     return result;
-
   }
-
 }

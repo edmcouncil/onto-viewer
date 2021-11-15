@@ -55,9 +55,9 @@ public class DescriptionGenerator {
 
   public Optional<List<OwlAnnotationPropertyValue>> prepareDescriptionString(
       OwlGroupedDetails groupedDetails) {
-    Map<String, List<PropertyValue>> ontologicalCharacteristics
-        = groupedDetails.getProperties()
-        .getOrDefault(ONTOLOGICAL_CHARACTERISTIC_LABEL, Collections.emptyMap());
+    Map<String, List<PropertyValue>> ontologicalCharacteristics =
+        groupedDetails.getProperties()
+            .getOrDefault(ONTOLOGICAL_CHARACTERISTIC_LABEL, Collections.emptyMap());
 
     var description = prepareDescriptionString(
         groupedDetails.getLabel(),
@@ -174,9 +174,10 @@ public class DescriptionGenerator {
 
     List<PropertyValue> propertyValues = ontologicalCharacteristics.getOrDefault(
         groupRestrictionsName, emptyList());
-    if (appendWhenEmpty || propertyValues.size() > 0) {
+    if (appendWhenEmpty || !propertyValues.isEmpty()) {
       manager.getSb().append(toAppendBefore);
     }
+    propertyValues = propertyValues.stream().distinct().collect(Collectors.toList());
 
     for (PropertyValue property : propertyValues) {
       if (property instanceof OwlAxiomPropertyValue) {

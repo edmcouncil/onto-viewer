@@ -47,5 +47,4 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
   public String toString() {
     return fullRenderedString == null ? entityMaping.toString() : fullRenderedString;
   }
-
 }
