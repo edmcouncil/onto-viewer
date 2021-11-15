@@ -99,7 +99,7 @@ public class AnnotationsDataHandler {
           }
 
           String lang = asLiteral.get().getLang();
-          value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
+          value = lang.isEmpty() ? value : value.concat(" @").concat(lang);
 
           checkUriAsIri(annotationPropertyValue, value);
           annotationPropertyValue.setValue(value);
