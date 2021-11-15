@@ -54,7 +54,7 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     }
 
     // MAYBE: merge
-    Set<ConfigItem> valueSet = configuration.getOrDefault(key, new HashSet<>());
+    Set<ConfigItem> valueSet = configuration.getOrDefault(key, new LinkedHashSet<>());
     valueSet.add(value);
     configuration.put(key, valueSet);
   }
@@ -300,7 +300,7 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public void setConfigElement(String key, ConfigItem value) {
-    var configSet = new HashSet<ConfigItem>();
+    var configSet = new LinkedHashSet<ConfigItem>();
     configSet.add(value);
     configuration.put(key, configSet);
   }
