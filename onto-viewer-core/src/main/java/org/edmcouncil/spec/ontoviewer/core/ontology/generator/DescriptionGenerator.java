@@ -49,8 +49,8 @@ public class DescriptionGenerator {
     REPLACEMENTS.put("]", "");
     REPLACEMENTS.put("(", "");
     REPLACEMENTS.put(")", "");
-    REPLACEMENTS.put("min", "at least");
-    REPLACEMENTS.put("max", "at most");
+    REPLACEMENTS.put(" min ", " at least ");
+    REPLACEMENTS.put(" max ", " at most ");
   }
 
   public Optional<List<OwlAnnotationPropertyValue>> prepareDescriptionString(

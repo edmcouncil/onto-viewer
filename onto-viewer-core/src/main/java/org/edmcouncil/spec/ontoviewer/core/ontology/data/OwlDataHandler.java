@@ -237,13 +237,14 @@ public class OwlDataHandler {
       result.add(axiomPropertyValue);
     }
 
-    return result;
+    return result.stream().distinct().collect(Collectors.toList());
   }
 
   private List<PropertyValue> extractTaxonomyElements(List<PropertyValue> subclasses) {
     return subclasses
         .stream()
         .filter(pv -> (pv.getType().equals(OwlType.TAXONOMY)))
+        .distinct()
         .collect(Collectors.toList());
   }
 
@@ -350,32 +351,32 @@ public class OwlDataHandler {
 
   private OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, IRI objIri,
       OWLOntology ontology, OwlType type) {
-    Set<IRI> alreadySeen = new HashSet<>();
-    return extractTaxonomy(subElements, objIri, ontology, type, alreadySeen);
+    return extractTaxonomy(subElements, objIri, ontology, type, 0);
   }
 
   private OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, IRI objIri,
-      OWLOntology ontology, OwlType type, Set<IRI> alreadySeen) {
+      OWLOntology ontology, OwlType type, int depth) {
     OwlTaxonomyImpl taxonomy = new OwlTaxonomyImpl();
     if (!subElements.isEmpty()) {
       for (PropertyValue property : subElements) {
+        // TODO: Replace this hack with proper handling of circular taxonomies etc.
+        if (depth > 40) {
+          LOG.debug("Depth > 40 for extracting taxonomy for objIri {} (type: {}) "
+              + "and current taxonomy: {}", objIri, type, taxonomy);
+          continue;
+        }
+
         if (property.getType().equals(OwlType.TAXONOMY)) {
           OwlAxiomPropertyValue axiomProperty = (OwlAxiomPropertyValue) property;
           LOG.debug("Axiom Property {}", axiomProperty);
           IRI subElementIri = extractSubElementIri(axiomProperty, objIri);
 
-          if (alreadySeen.contains(subElementIri)) {
-            continue;
-          }
-          alreadySeen.add(objIri);
-
-          LOG.debug("extractSubElementIri: {}", extractSubElementIri(axiomProperty, objIri));
           OWLEntity entity = createEntity(ontology, subElementIri, type);
 
           List<PropertyValue> subTax = getSuperElements(entity, ontology, type);
 
           OwlTaxonomyImpl subCLassTax =
-              extractTaxonomy(subTax, entity.getIRI(), ontology, type, alreadySeen);
+              extractTaxonomy(subTax, entity.getIRI(), ontology, type, depth++);
 
           String label = labelProvider.getLabelOrDefaultFragment(objIri);
 
