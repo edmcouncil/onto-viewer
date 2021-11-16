@@ -182,7 +182,11 @@ public class DescriptionGenerator {
     for (PropertyValue property : propertyValues) {
       if (property instanceof OwlAxiomPropertyValue) {
         OwlAxiomPropertyValue axiomProperty = (OwlAxiomPropertyValue) property;
-        Map<String, OwlAxiomPropertyEntity> entityMapping = axiomProperty.getEntityMaping();
+
+        if (axiomProperty.getType() == OwlType.TAXONOMY) {
+          // We don't want to generate descriptions from super- and subclasses.
+          continue;
+        }
 
         String propertyPattern = axiomProperty.getValue().trim();
         try {
