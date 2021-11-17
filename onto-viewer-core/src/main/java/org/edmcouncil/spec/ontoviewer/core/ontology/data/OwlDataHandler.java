@@ -104,6 +104,7 @@ public class OwlDataHandler {
   private ContainsVisitors containsVisitors;
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
+  private final Set<String> unwantedTypes = new HashSet<>();
 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
@@ -117,6 +118,9 @@ public class OwlDataHandler {
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#Thing");
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topObjectProperty");
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topDataProperty");
+
+    unwantedTypes.add("^^anyURI");
+    unwantedTypes.add("^^dateTime");
   }
 
   public OwlListDetails handleParticularClass(IRI iri, OWLOntology ontology) {
@@ -481,13 +485,14 @@ public class OwlDataHandler {
   ) {
 
     String value = rendering.render(axiom);
+    LOG.debug("rendering value: {}", value);
+    for (String unwantedType : unwantedTypes) {
+      value = value.replace(unwantedType, "");
+    }
 
     if (bypassClass == true) {
       value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
     }
-
-    //String key = axiom.getAxiomType().getName();
-    // key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
     if (ignoredToDisplay.contains(key)) {
       return null;
     }
@@ -524,7 +529,6 @@ public class OwlDataHandler {
     String closingParenthesis = ")";
     String comma = ",";
     Iterator<OWLEntity> iterator = axiom.signature().iterator();
-    ViewerCoreConfiguration cfg = config.getViewerCoreConfig();
 
     LOG.trace("Rendered Val: {}", renderedVal);
 
@@ -972,7 +976,7 @@ public class OwlDataHandler {
                   }
                   OwlAxiomPropertyValue opv = (OwlAxiomPropertyValue) propertyValue;
 
-                  Set<OwlAxiomPropertyValue> owlAxiomPropertyValues = values.getOrDefault(c.getIRI(), new  LinkedHashSet<>());
+                  Set<OwlAxiomPropertyValue> owlAxiomPropertyValues = values.getOrDefault(c.getIRI(), new LinkedHashSet<>());
                   owlAxiomPropertyValues.add(opv);
                   values.put(c.getIRI(), owlAxiomPropertyValues);
 
