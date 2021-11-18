@@ -1232,41 +1232,42 @@ public class OwlDataHandler {
     //Usage OWLClass--------------------------------------------------------------------------
 
     Map<IRI, List<OwlAxiomPropertyValue>> values = new HashMap<>();
+    Set<OWLSubClassOfAxiom> axioms = new HashSet<>();
     ontology.importsClosure().forEach(currentOntology -> {
-      Set<OWLSubClassOfAxiom> s = currentOntology.axioms(AxiomType.SUBCLASS_OF)
-          .filter(el ->
-              el.accept(containsVisitors.visitor(clazz.getIRI()))
-                  .booleanValue() == Boolean.TRUE)
-          .collect(Collectors.toSet());
-      int start = 0;
-      for (OWLSubClassOfAxiom axiom : s) {
-        LOG.debug("OwlDataHandler -> extractUsage {}", axiom.toString());
-        LOG.debug("OwlDataHandler -> extractUsageAx {}", axiom.getSubClass());
-
-        IRI iri = axiom.getSubClass().asOWLClass().getIRI();
-        if (iri.equals(clazz.getIRI())) {
-          continue;
-        }
-
-        String iriFragment = iri.getFragment();
-        String splitFragment = StringUtils.getFragment(iri);
-        Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
-
-        Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
-
-        OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(
-            axiom,
-            iriFragment,
-            splitFragment,
-            fixRenderedIri,
-            ignoredToDisplay, key, start, false);
-        start = opv.getLastId() + 1;
-        List<OwlAxiomPropertyValue> ll = values.getOrDefault(iri, new LinkedList());
-        ll.add(opv);
-
-        values.put(iri, ll);
-      }
+      axioms.addAll(
+          currentOntology.axioms(AxiomType.SUBCLASS_OF)
+              .filter(el -> el.accept(containsVisitors.visitor(clazz.getIRI())))
+              .collect(Collectors.toSet()));
     });
+
+    int start = 0;
+    for (OWLSubClassOfAxiom axiom : axioms) {
+      LOG.debug("OwlDataHandler -> extractUsage {}", axiom.toString());
+      LOG.debug("OwlDataHandler -> extractUsageAx {}", axiom.getSubClass());
+
+      IRI iri = axiom.getSubClass().asOWLClass().getIRI();
+      if (iri.equals(clazz.getIRI())) {
+        continue;
+      }
+
+      String iriFragment = iri.getFragment();
+      String splitFragment = StringUtils.getFragment(iri);
+      Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
+
+      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
+
+      OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(
+          axiom,
+          iriFragment,
+          splitFragment,
+          fixRenderedIri,
+          ignoredToDisplay, key, start, false);
+      start = opv.getLastId() + 1;
+      List<OwlAxiomPropertyValue> ll = values.getOrDefault(iri, new LinkedList());
+      ll.add(opv);
+
+      values.put(iri, ll);
+    }
 
     StringBuilder sb = new StringBuilder();
 
@@ -1280,9 +1281,9 @@ public class OwlDataHandler {
         if (i < entry.getValue().size()) {
           sb.append("<br />");
         }
-        for (Map.Entry<String, OwlAxiomPropertyEntity> maping : owlAxiomPropertyValue.getEntityMaping()
-            .entrySet()) {
-          opv.addEntityValues(maping.getKey(), maping.getValue());
+        for (Map.Entry<String, OwlAxiomPropertyEntity> mapping :
+            owlAxiomPropertyValue.getEntityMaping().entrySet()) {
+          opv.addEntityValues(mapping.getKey(), mapping.getValue());
         }
       }
       OwlAxiomPropertyEntity prop = new OwlAxiomPropertyEntity();
@@ -1304,38 +1305,38 @@ public class OwlDataHandler {
 
     //Range of ObjectProperty--------------------------------
     Map<IRI, List<OwlAxiomPropertyValue>> valuesO = new HashMap<>();
+    Set<OWLObjectPropertyRangeAxiom> ops = new HashSet<>();
     ontology.importsClosure().forEach(currentOntology -> {
-      Set<OWLObjectPropertyRangeAxiom> ops = currentOntology.axioms(
-              AxiomType.OBJECT_PROPERTY_RANGE)
+      ops.addAll(currentOntology.axioms(AxiomType.OBJECT_PROPERTY_RANGE)
           .filter(el -> el.accept(containsVisitors.visitorObjectProperty(clazz.getIRI())))
-          .collect(Collectors.toSet());
-
-      int startR = 0;
-
-      LOG.debug("How many range is found for x : {}", ops.size());
-
-      for (OWLObjectPropertyRangeAxiom axiom : ops) {
-        OWLEntity rangeEntity = axiom.signature()
-            .filter(e -> !e.getIRI()
-                .equals(clazz.getIRI()))
-            .findFirst().get();
-        LOG.debug("OwlDataHandler -> extractUsageRangeAxiom {}", rangeEntity.getIRI());
-
-        String iriFragment = rangeEntity.getIRI().toString();
-        String splitFragment = StringUtils.getFragment(rangeEntity.getIRI().toString());
-        Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
-
-        Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
-
-        OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
-            fixRenderedIri, ignoredToDisplay, key, startR, false);
-        startR = opv.getLastId() + 1;
-        List<OwlAxiomPropertyValue> ll = valuesO.getOrDefault(rangeEntity, new LinkedList<>());
-        ll.add(opv);
-
-        valuesO.put(rangeEntity.getIRI(), ll);
-      }
+          .collect(Collectors.toSet()));
     });
+
+    int startR = 0;
+
+    LOG.debug("How many range is found for x : {}", ops.size());
+
+    for (OWLObjectPropertyRangeAxiom axiom : ops) {
+      OWLEntity rangeEntity = axiom.signature()
+          .filter(e -> !e.getIRI()
+              .equals(clazz.getIRI()))
+          .findFirst().get();
+      LOG.debug("OwlDataHandler -> extractUsageRangeAxiom {}", rangeEntity.getIRI());
+
+      String iriFragment = rangeEntity.getIRI().toString();
+      String splitFragment = StringUtils.getFragment(rangeEntity.getIRI().toString());
+      Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
+
+      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
+
+      OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
+          fixRenderedIri, ignoredToDisplay, key, startR, false);
+      startR = opv.getLastId() + 1;
+      List<OwlAxiomPropertyValue> ll = valuesO.getOrDefault(rangeEntity, new LinkedList<>());
+      ll.add(opv);
+
+      valuesO.put(rangeEntity.getIRI(), ll);
+    }
 
     StringBuilder sbo = new StringBuilder();
 
@@ -1373,35 +1374,36 @@ public class OwlDataHandler {
 
     //Domain of ObjectProperty-----------------------------------------------------
     Map<IRI, List<OwlAxiomPropertyValue>> valuesD = new HashMap<>();
+    Set<OWLObjectPropertyDomainAxiom> opd = new HashSet<>();
     ontology.importsClosure().forEach(currentOntology -> {
-      Set<OWLObjectPropertyDomainAxiom> opd = currentOntology
-          .axioms(AxiomType.OBJECT_PROPERTY_DOMAIN)
-          .filter(el -> el.accept(containsVisitors.visitorObjectProperty(clazz.getIRI())))
-          .collect(Collectors.toSet());
-      int startD = 0;
-
-      for (OWLObjectPropertyDomainAxiom axiom : opd) {
-        OWLEntity domainEntity
-            = axiom.signature()
-            .filter(e -> !e.getIRI().equals(clazz.getIRI()))
-            .findFirst().get();
-        LOG.debug("OwlDataHandler -> extractUsageObjectDomainAxiom {}", domainEntity.getIRI());
-
-        String iriFragment = domainEntity.getIRI().toString();
-        String splitFragment = StringUtils.getFragment(domainEntity.getIRI().toString());
-        Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
-
-        Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
-
-        OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
-            fixRenderedIri, ignoredToDisplay, key, startD, false);
-        startD = opv.getLastId() + 1;
-        List<OwlAxiomPropertyValue> ll = valuesD.getOrDefault(domainEntity, new LinkedList());
-        ll.add(opv);
-
-        valuesD.put(domainEntity.getIRI(), ll);
-      }
+      opd.addAll(
+          currentOntology.axioms(AxiomType.OBJECT_PROPERTY_DOMAIN)
+              .filter(el -> el.accept(containsVisitors.visitorObjectProperty(clazz.getIRI())))
+              .collect(Collectors.toSet()));
     });
+    int startD = 0;
+
+    for (OWLObjectPropertyDomainAxiom axiom : opd) {
+      OWLEntity domainEntity
+          = axiom.signature()
+          .filter(e -> !e.getIRI().equals(clazz.getIRI()))
+          .findFirst().get();
+      LOG.debug("OwlDataHandler -> extractUsageObjectDomainAxiom {}", domainEntity.getIRI());
+
+      String iriFragment = domainEntity.getIRI().toString();
+      String splitFragment = StringUtils.getFragment(domainEntity.getIRI().toString());
+      Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
+
+      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
+
+      OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
+          fixRenderedIri, ignoredToDisplay, key, startD, false);
+      startD = opv.getLastId() + 1;
+      List<OwlAxiomPropertyValue> ll = valuesD.getOrDefault(domainEntity, new LinkedList());
+      ll.add(opv);
+
+      valuesD.put(domainEntity.getIRI(), ll);
+    }
 
     StringBuilder sbd = new StringBuilder();
 
