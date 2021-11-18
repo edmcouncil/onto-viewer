@@ -181,6 +181,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         blocker.setInitializeAppDone(Boolean.TRUE);
       }
 
+      LOG.info("Application has started successfully.");
     } catch (InterruptUpdate ex) {
       LOG.error("{}",ex.getStackTrace());
       UpdaterOperation.setJobStatusToError(job, interruptMessage);

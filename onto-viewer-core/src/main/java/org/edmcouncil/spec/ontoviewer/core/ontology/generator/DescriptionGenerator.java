@@ -47,10 +47,12 @@ public class DescriptionGenerator {
   static {
     REPLACEMENTS.put("[", "");
     REPLACEMENTS.put("]", "");
-    REPLACEMENTS.put("(", "");
+    REPLACEMENTS.put("(", " that ");
     REPLACEMENTS.put(")", "");
     REPLACEMENTS.put(" min ", " at least ");
     REPLACEMENTS.put(" max ", " at most ");
+    REPLACEMENTS.put(" 0 ", " zero ");
+    REPLACEMENTS.put(" 1 ", " one ");
   }
 
   public Optional<List<OwlAnnotationPropertyValue>> prepareDescriptionString(
@@ -121,6 +123,9 @@ public class DescriptionGenerator {
 
     result = improveGeneratedDescription(result);
     result = improveReadabilityOfRestrictions(result);
+
+    // Removing duplicated spaces
+    result = result.replaceAll("[ \t]+", " ");
 
     return result;
   }
@@ -300,13 +305,11 @@ public class DescriptionGenerator {
   private static String improveReadabilityOfRestriction(String restriction) {
     if (restriction.contains("has at least 0")) {
       // X 'has at least 0' Y   ->   X 'may have' Y
-      return restriction.replace("has at least 0", "may have")
-          .replaceFirst(" by ", " by some");
+      return restriction.replace("has at least 0", "may have");
     } else if (restriction.contains("at least 0")) {
       // X 'is' Y 'at least 0' Z   ->   X 'may be' Y Z
       return restriction.replaceFirst(" is ", " may be ")
-          .replaceFirst("at least 0", "")
-          .replaceFirst(" by ", " by some");
+          .replaceFirst("at least 0", "");
     } else {
       return restriction;
     }
