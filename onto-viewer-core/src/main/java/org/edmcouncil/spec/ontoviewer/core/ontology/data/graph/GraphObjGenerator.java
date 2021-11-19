@@ -4,7 +4,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNode;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNodeType;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphRelation;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.OntologyGraph;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

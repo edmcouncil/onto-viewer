@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlGroupedDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
@@ -18,9 +18,7 @@ public class OwlGroupedDetails extends OwlDetails {
   private OwlGroupedDetailsProperties<PropertyValue> properties;
 
   public OwlGroupedDetails() {
-    if (properties == null) {
-      properties = new OwlGroupedDetailsProperties<>();
-    }
+    properties = new OwlGroupedDetailsProperties<>();
   }
 
   public Map<String, Map<String, List<PropertyValue>>> getProperties() {
@@ -71,8 +69,7 @@ public class OwlGroupedDetails extends OwlDetails {
 
   }
 
-  public void sortProperties(Set<ConfigItem> groups, ViewerCoreConfiguration cfg) {
+  public void sortProperties(Set<ConfigItem> groups, CoreConfiguration cfg) {
     properties.sort(groups, cfg);
   }
-
 }

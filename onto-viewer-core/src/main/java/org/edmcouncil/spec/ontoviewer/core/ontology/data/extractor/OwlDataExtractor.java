@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor;
 
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
@@ -14,20 +14,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class OwlDataExtractor {
 
-  public WeaselOwlType extractAnnotationType(OWLAnnotationAssertionAxiom next) {
+  public OwlType extractAnnotationType(OWLAnnotationAssertionAxiom next) {
     if (next.getValue().isIRI()) {
-      return WeaselOwlType.IRI;
+      return OwlType.IRI;
     } else if (next.getValue().isLiteral()) {
       String datatype = next.getValue().asLiteral().get().getDatatype().toString();
       //TODO: move this strings to list and use contains
       if (datatype.equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
           || datatype.equals("http://www.w3.org/2001/XMLSchema#string")) {
-        return WeaselOwlType.STRING;
+        return OwlType.STRING;
       } else if (datatype.equals("xsd:anyURI")) {
-        return WeaselOwlType.ANY_URI;
+        return OwlType.ANY_URI;
       }
     }
-    return WeaselOwlType.OTHER;
+    return OwlType.OTHER;
   }
 
   /**
@@ -36,20 +36,20 @@ public class OwlDataExtractor {
    * @param next
    * @return
    */
-  public WeaselOwlType extractAnnotationType(OWLAnnotation next) {
+  public OwlType extractAnnotationType(OWLAnnotation next) {
     if (next.getValue().isIRI()) {
-      return WeaselOwlType.IRI;
+      return OwlType.IRI;
     } else if (next.getValue().isLiteral()) {
       String datatype = next.getValue().asLiteral().get().getDatatype().toString();
       //TODO: move this strings to list and use contains
       if (datatype.equals("http://www.w3.org/1999/02/22-rdf-syntax-ns#langString")
           || datatype.equals("http://www.w3.org/2001/XMLSchema#string")) {
-        return WeaselOwlType.STRING;
+        return OwlType.STRING;
       } else if (datatype.equals("xsd:anyURI")) {
-        return WeaselOwlType.ANY_URI;
+        return OwlType.ANY_URI;
       }
     }
-    return WeaselOwlType.OTHER;
+    return OwlType.OTHER;
   }
 
   public String extractAnyUriToString(String anyUri) {

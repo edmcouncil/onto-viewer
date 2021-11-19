@@ -1,33 +1,41 @@
-package org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl;
+package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.MissingLanguageItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.INDIVIDUALS_ENABLED;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.LOCATION_IN_MODULES_ENABLED;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_GRAPH_ENABLED;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_HANDLING;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.USAGE_ENABLED;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configuration;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.DefaultLabelItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.MissingLanguageItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
-public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
+public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(CoreConfiguration.class);
 
   private Map<String, Set<ConfigItem>> configuration;
   private static final String DEFAULT_LANG = "en";
 
-  public ViewerCoreConfiguration() {
-    configuration = new HashMap<>();
+  public CoreConfiguration() {
+    this.configuration = new HashMap<>();
   }
 
   @Override
@@ -36,24 +44,29 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   @Override
-  public Set<ConfigItem> getConfigVal(String cfName) {
-    return configuration != null ? configuration.get(cfName) : null;
+  public Set<ConfigItem> getValue(String key) {
+    return this.configuration != null ? configuration.get(key) : null;
   }
 
-  public void addConfigElement(String key, ConfigItem val) {
+  public void addConfigElement(String key, ConfigItem value) {
     if (configuration == null) {
       configuration = new HashMap<>();
     }
 
-    Set valList = configuration.get(key);
-    valList = valList == null ? new LinkedHashSet() : valList;
-    valList.add(val);
-    configuration.put(key, valList);
+    // MAYBE: merge
+    Set<ConfigItem> valueSet = configuration.getOrDefault(key, new LinkedHashSet<>());
+    valueSet.add(value);
+    configuration.put(key, valueSet);
   }
 
   @Override
   public boolean isEmpty() {
     return configuration == null || configuration.isEmpty();
+  }
+
+  @Override
+  public boolean isNotEmpty() {
+    return !isEmpty();
   }
 
   public boolean isGrouped() {
@@ -78,9 +91,8 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
   private void getOntologyPath(Map<String, Set<String>> result) {
     if (configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)) {
       Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_PATH, new HashSet<>());
-      configuration.get(ConfigKeys.ONTOLOGY_PATH).forEach((configItem) -> {
-        item.add(configItem.toString());
-      });
+      configuration.get(ConfigKeys.ONTOLOGY_PATH)
+          .forEach(configItem -> item.add(configItem.toString()));
       result.put(ConfigKeys.ONTOLOGY_PATH, item);
     }
   }
@@ -118,7 +130,6 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   //TODO: Change this method name..
   /**
-   *
    * @param uri - String representation of URI
    * @return True if it finds representation in the configuration, otherwise false.
    */
@@ -145,7 +156,8 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public Boolean isForceLabelLang() {
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.FORCE_LABEL_LANG, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.FORCE_LABEL_LANG,
+        new HashSet<>());
 
     for (ConfigItem value : values) {
       BooleanItem cbe = (BooleanItem) value;
@@ -178,7 +190,8 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public MissingLanguageItem.Action getMissingLanguageAction() {
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.MISSING_LANGUAGE_ACTION, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.MISSING_LANGUAGE_ACTION,
+        new HashSet<>());
 
     for (ConfigItem value : values) {
       MissingLanguageItem cpe = (MissingLanguageItem) value;
@@ -190,7 +203,8 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   public Set<String> getIgnoredElements() {
 
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.IGNORE_TO_DISPLAYING, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.IGNORE_TO_DISPLAYING,
+        new HashSet<>());
     Set<String> result = new HashSet<>();
     values.stream()
         .map((value) -> (StringItem) value)
@@ -202,8 +216,9 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public Set<DefaultLabelItem> getDefaultLabels() {
-
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.USER_DEFAULT_NAME_LIST, new HashSet<>());
+    Set<ConfigItem> values = configuration.getOrDefault(
+        ConfigKeys.USER_DEFAULT_NAME_LIST,
+        new HashSet<>());
     Set<DefaultLabelItem> result = new HashSet<>();
     values.stream()
         .map((value) -> (DefaultLabelItem) value)
@@ -225,7 +240,8 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   public TextSearcherConfig getTextSearcherConfig() {
-    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.TEXT_SEARCH_CONFIG, Collections.emptySet());
+    Set<ConfigItem> values = configuration.getOrDefault(ConfigKeys.TEXT_SEARCH_CONFIG,
+        Collections.emptySet());
 
     for (ConfigItem value : values) {
       return (TextSearcherConfig) value;
@@ -235,7 +251,7 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   public Set<String> getScope() {
     Set<ConfigItem> scopeIri = configuration.getOrDefault(ConfigKeys.SCOPE_IRI, new HashSet<>());
-    Set<String> result = new HashSet<String>();
+    Set<String> result = new HashSet<>();
     for (ConfigItem configElement : scopeIri) {
       StringItem element = (StringItem) configElement;
       result.add(element.toString());
@@ -243,4 +259,49 @@ public class ViewerCoreConfiguration implements Configuration<Set<ConfigItem>> {
     return result;
   }
 
+  public Optional<String> getSingleStringValue(String key) {
+    var value = getValue(key);
+    if (value.isEmpty()) {
+      return Optional.empty();
+    }
+
+    return value.stream().map(Object::toString).findFirst();
+  }
+
+  public void logConfigurationDebugInfo() {
+    if (configuration.isEmpty()) {
+      LOGGER.debug("Configuration is empty.");
+    } else {
+      LOGGER.debug("Configuration debug info:");
+      getConfiguration().forEach((key, value) -> {
+        LOGGER.debug("\tEntry '{}':", key);
+        LOGGER.debug("\t\t- {}", value);
+      });
+    }
+  }
+
+  public KeyValueMapConfigItem getOntologyHandling() {
+    if (!configuration.containsKey(ONTOLOGY_HANDLING)) {
+      var properties = new HashMap<String, Object>();
+      var defaultOntologyHandling = new KeyValueMapConfigItem(properties);
+      addConfigElement(ONTOLOGY_HANDLING, defaultOntologyHandling);
+    }
+
+    var ontologyHandlingConfig = (KeyValueMapConfigItem) configuration.get(ONTOLOGY_HANDLING)
+        .stream().findFirst()
+        .orElse(new KeyValueMapConfigItem(new HashMap<>()));
+
+    ontologyHandlingConfig.putIfAbsent(LOCATION_IN_MODULES_ENABLED, true);
+    ontologyHandlingConfig.putIfAbsent(USAGE_ENABLED, true);
+    ontologyHandlingConfig.putIfAbsent(ONTOLOGY_GRAPH_ENABLED, true);
+    ontologyHandlingConfig.putIfAbsent(INDIVIDUALS_ENABLED, true);
+
+    return ontologyHandlingConfig;
+  }
+
+  public void setConfigElement(String key, ConfigItem value) {
+    var configSet = new LinkedHashSet<ConfigItem>();
+    configSet.add(value);
+    configuration.put(key, configSet);
+  }
 }

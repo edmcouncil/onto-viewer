@@ -13,30 +13,24 @@
       <groupName>Glossary</groupName>
       <groupItem>http://www.w3.org/2000/01/rdf-schema#label</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#prefLabel</groupItem>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel
-      </groupItem>
+      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</groupItem>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation
-      </groupItem>
+      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#definition</groupItem>
       <groupItem>http://spec.edmcouncil.org/owlnames#mdDefinition</groupItem>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/definitionOrigin
-      </groupItem>
+      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/definitionOrigin</groupItem>
       <groupItem>http://purl.org/dc/terms/source</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/directSource</groupItem>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/adaptedFrom
-      </groupItem>
+      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/adaptedFrom</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#example</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#scopeNote</groupItem>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/usageNote
-      </groupItem>
+      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/usageNote</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#editorialNote</groupItem>
       <groupItem>http://purl.org/dc/terms/title</groupItem>
       <groupItem>http://purl.org/dc/terms/abstract</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/keyword</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/fileAbstract</groupItem>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote
-      </groupItem>
+      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote</groupItem>
     </group>
 
     <group>

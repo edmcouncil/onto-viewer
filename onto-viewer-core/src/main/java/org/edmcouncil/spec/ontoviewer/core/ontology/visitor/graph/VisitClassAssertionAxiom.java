@@ -6,7 +6,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNodeType;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphRelation;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.OntologyGraph;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.graph.GraphObjGenerator;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.slf4j.Logger;

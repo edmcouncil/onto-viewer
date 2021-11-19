@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
@@ -47,7 +47,7 @@ public class SearchController {
   @Autowired
   private OntologySearcherService ontologySearcher;
   @Autowired
-  private AppConfiguration config;
+  private ConfigurationService config;
   @Autowired
   private UpdateBlocker blocker;
 
@@ -79,7 +79,7 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
-    boolean isGrouped = config.getViewerCoreConfig().isGrouped();
+    boolean isGrouped = config.getCoreConfiguration().isGrouped();
 
     SearcherResult result = null;
     try {

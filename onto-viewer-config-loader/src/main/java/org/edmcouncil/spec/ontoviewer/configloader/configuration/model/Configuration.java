@@ -3,14 +3,16 @@ package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 import java.util.Map;
 
 /**
- * @author Michał Daniel (michal.daniel@makolab.com)
  * @param <T> is a type using to storage element in map.
+ * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public interface Configuration<T> {
 
   Map<String, T> getConfiguration();
 
-  T getConfigVal(String cfName);
-  
+  T getValue(String key);
+
   boolean isEmpty();
+
+  boolean isNotEmpty();
 }

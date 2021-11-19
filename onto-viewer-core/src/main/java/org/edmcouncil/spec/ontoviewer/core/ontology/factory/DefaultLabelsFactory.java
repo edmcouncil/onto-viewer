@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.factory;
 
-import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.vocabulary.DefaultAppLabels;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.DefaultAppLabels;
 
 /**
  * Factory create default application labels for embeded functions and ontology resourcess.
@@ -39,25 +39,25 @@ public class DefaultLabelsFactory {
     iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal, ViewerIdentifierFactory.Element.instance);
     result.addLabel(iri, DefaultAppLabels.DEF_INT_INSTANCES);
 
-    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.DIRECT_SUBCLASSES.toString().toLowerCase());
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, OwlType.DIRECT_SUBCLASSES.toString().toLowerCase());
     result.addLabel(iri, DefaultAppLabels.DEF_DIRECT_SUBCLASSES);
 
-    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, OwlType.INSTANCES.name().toLowerCase());
     result.addLabel(iri, DefaultAppLabels.DEF_INSTANCES);
 
-    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.ANONYMOUS_ANCESTOR.name().toLowerCase());
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, OwlType.ANONYMOUS_ANCESTOR.name().toLowerCase());
     result.addLabel(iri, DefaultAppLabels.DEF_ANONYMOUS_ANCESTOR);
 
-    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.USAGE_CLASSES.toString().toLowerCase());
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, OwlType.USAGE_CLASSES.toString().toLowerCase());
     result.addLabel(iri, DefaultAppLabels.DEF_USAGE_CLASSES);
     
-    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.DIRECT_SUB_OBJECT_PROPERTY.toString().toLowerCase());
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, OwlType.DIRECT_SUB_OBJECT_PROPERTY.toString().toLowerCase());
     result.addLabel(iri, DefaultAppLabels.DEF_DIRECT_SUB_OBJECT_PROPERTY);
     
-    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.DIRECT_SUB_ANNOTATION_PROPERTY.toString().toLowerCase());
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, OwlType.DIRECT_SUB_ANNOTATION_PROPERTY.toString().toLowerCase());
     result.addLabel(iri, DefaultAppLabels.DEF_DIRECT_SUB_ANNOTATION_PROPERTY);
     
-    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.DIRECT_SUB_DATA_PROPERTY.toString().toLowerCase());
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function, OwlType.DIRECT_SUB_DATA_PROPERTY.toString().toLowerCase());
     result.addLabel(iri, DefaultAppLabels.DEF_DIRECT_SUB_DATA_PROPERTY);
 
     return result;

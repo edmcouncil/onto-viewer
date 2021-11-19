@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.data.label.vocabulary;
+package org.edmcouncil.spec.ontoviewer.core.ontology.data.label;
 
 import java.util.HashMap;
 import java.util.Map;
