@@ -1,9 +1,11 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data;
 
+import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_ANNOTATION_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_CLASS;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_DATA_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_OBJECT_PROPERTY;
+import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.TAXONOMY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 import java.util.ArrayList;
@@ -498,7 +500,9 @@ public class OwlDataHandler {
         continue;
       }
       start = opv.getLastId();
-      result.addProperty(key, opv);
+      if (!key.equals(subClassOfIriString) || !opv.getType().equals(TAXONOMY)) {
+        result.addProperty(key, opv);
+      }
     }
     result.sortPropertiesInAlphabeticalOrder();
     return result;
