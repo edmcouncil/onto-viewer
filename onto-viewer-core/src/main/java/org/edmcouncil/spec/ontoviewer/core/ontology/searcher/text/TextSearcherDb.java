@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text;
 
-import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.ExtendedResult;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -8,15 +7,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.SearcherField;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.ExtendedResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.hint.HintItem;
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
@@ -25,10 +26,10 @@ import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.parameters.Imports;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -48,30 +49,25 @@ public class TextSearcherDb {
 
   private final Double HINT_THRESHOLD = 0.0d;
   private final Double RESULT_THRESHOLD = 0.0d;
-  @Autowired
-  private OntologyManager om;
+
+  private final OntologyManager ontologyManager;
+  private final ConfigurationService appConfig;
+  private final LabelProvider labelProvider;
+
   private TextSearcherConfig conf;
-  @Autowired
-  private AppConfiguration appConfig;
-  @Autowired
-  private LabelProvider labelProvider;
 
   @Inject
-  public TextSearcherDb(OntologyManager om) {
-    this.om = om;
+  public TextSearcherDb(OntologyManager ontologyManager, ConfigurationService appConfig,
+      LabelProvider labelProvider) {
+    this.ontologyManager = ontologyManager;
 
+    this.appConfig = appConfig;
+    this.labelProvider = labelProvider;
   }
 
-  // Load config
   @PostConstruct
   public void init() {
-
-    this.conf = checkAndLoadConfig(appConfig.getViewerCoreConfig().getTextSearcherConfig());
-
-    //TODO: move this into configuration, default is only label to search
-    //LOG.info("Start initialize TextSearcherDB");
-    //db = loadDefaultData(om.getOntology());
-    //LOG.info("End of initialize TextSearcherDB");
+    this.conf = checkAndLoadConfig(appConfig.getCoreConfiguration().getTextSearcherConfig());
   }
 
   public TextSearcherConfig checkAndLoadConfig(TextSearcherConfig config) {
@@ -85,37 +81,44 @@ public class TextSearcherDb {
   public Map<String, TextDbItem> loadDefaultData(OWLOntology onto) {
     Map<String, TextDbItem> tmp = new HashMap<>();
 
-    Stream<OWLEntity> entities = onto.signature();
+    onto.signature(Imports.INCLUDED)
+        .forEach(owlEntity -> collectEntityData(owlEntity, onto, tmp));
 
-    entities.collect(Collectors.toSet()).forEach((owlEntity) -> {
-      collectEntityData(owlEntity, onto, tmp);
-    });
+    onto.importsClosure().forEach(ontology -> collectOntologyData(ontology, tmp));
 
-    for (OWLOntology owlOntology : onto.getOWLOntologyManager().ontologies().collect(Collectors.toSet())) {
-      collectOntologyData(owlOntology, onto, tmp);
-    }
     return tmp;
   }
 
-  private void collectEntityData(OWLEntity owlEntity, OWLOntology onto, Map<String, TextDbItem> newDb) {
-    Stream<OWLAnnotation> annotations = EntitySearcher.getAnnotations(owlEntity, onto);
-
+  private void collectEntityData(OWLEntity owlEntity, OWLOntology onto,
+      Map<String, TextDbItem> newDb) {
     String entityIri = owlEntity.getIRI().toString();
-    LOG.trace("Entity IRI: {}", entityIri);
-    TextDbItem tdi = collectValues(annotations);
-    tdi.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
 
-    if (!tdi.isEmpty()) {
-      newDb.put(entityIri, tdi);
+    onto.importsClosure().forEach(ontology -> {
+      var annotations = EntitySearcher
+          .getAnnotations(owlEntity, ontology)
+          .collect(Collectors.toSet());
+
+      if (!annotations.isEmpty()) {
+        var textDbItem = collectValues(annotations);
+        textDbItem.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
+        newDb.put(entityIri, textDbItem);
+      }
+    });
+
+    if (!newDb.containsKey(entityIri)) {
+      var textDbItem = new TextDbItem();
+      textDbItem.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
+      newDb.put(entityIri, textDbItem);
     }
-
   }
 
-  private void collectOntologyData(OWLOntology owlOntology, OWLOntology onto, Map<String, TextDbItem> tmp) {
-    Stream<OWLAnnotation> annotations = owlOntology.annotations();
-    String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create("")).toString();
-    LOG.trace("Entity IRI: {}", entityIri);
+  private void collectOntologyData(OWLOntology owlOntology, Map<String, TextDbItem> tmp) {
+    var annotations = owlOntology.annotations().collect(Collectors.toSet());
     TextDbItem tdi = collectValues(annotations);
+
+    String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create(""))
+        .toString();
+    LOG.trace("Entity IRI: {}", entityIri);
     tdi.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
 
     if (!tdi.isEmpty()) {
@@ -123,23 +126,22 @@ public class TextSearcherDb {
     }
   }
 
-  private TextDbItem collectValues(Stream<OWLAnnotation> annotations) {
+  private TextDbItem collectValues(Set<OWLAnnotation> annotations) {
     TextDbItem tdi = new TextDbItem();
-    annotations.collect(Collectors.toSet()).forEach((annotation) -> {
+    annotations.forEach(annotation -> {
       String propertyIri = annotation.getProperty().getIRI().toString();
-      if (conf.hasHintFieldWithIri(propertyIri)
-          || conf.hasSearchFieldWithIri(propertyIri)) {
+      if (conf.hasHintFieldWithIri(propertyIri) || conf.hasSearchFieldWithIri(propertyIri)) {
         LOG.trace("Find property: {}", propertyIri);
-        Optional<OWLLiteral> opt = annotation.annotationValue().literalValue();
-        if (opt.isPresent()) {
-          String lang = opt.get().getLang();
-          if (appConfig.getViewerCoreConfig().isForceLabelLang()) {
-            if (lang == null || !lang.equals(appConfig.getViewerCoreConfig().getLabelLang())) {
+        Optional<OWLLiteral> literalOptional = annotation.annotationValue().literalValue();
+        if (literalOptional.isPresent()) {
+          String lang = literalOptional.get().getLang();
+          if (appConfig.getCoreConfiguration().isForceLabelLang()) {
+            if (lang == null || !lang.equals(appConfig.getCoreConfiguration().getLabelLang())) {
               return;
             }
           }
-          tdi.addValue(propertyIri, opt.get().getLiteral(), lang);
-          LOG.trace("Literal value: {}", opt.get().getLiteral());
+          tdi.addValue(propertyIri, literalOptional.get().getLiteral(), lang);
+          LOG.trace("Literal value: {}", literalOptional.get().getLiteral());
         }
       }
     });
@@ -174,7 +176,8 @@ public class TextSearcherDb {
       for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
 
         double distance = record.getValue().computeLevensteinDistance(text, conf.getHintFields());
-        LOG.debug("TextSearcherDb -> Distance {} between {} and {}", distance, text, record.getKey());
+        LOG.debug("TextSearcherDb -> Distance {} between {} and {}", distance, text,
+            record.getKey());
 
         if (distance <= conf.getHintMaxLevensteinDistance() && distance > 0.0d) {
 
@@ -238,7 +241,8 @@ public class TextSearcherDb {
 
     if (listResult.isEmpty()) {
       for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
-        Double relevancy = record.getValue().computeLevensteinDistance(text, conf.getSearchFields());
+        Double relevancy = record.getValue()
+            .computeLevensteinDistance(text, conf.getSearchFields());
         if (relevancy <= conf.getSearchMaxLevensteinDistance()) {
           SearchItem si = getPreparedSearchResultItem(record, relevancy);
           listResult.add(si);
@@ -277,7 +281,8 @@ public class TextSearcherDb {
     Collections.reverse(listResult);
   }
 
-  private SearchItem getPreparedSearchResultItem(Map.Entry<String, TextDbItem> record, Double relevancy) {
+  private SearchItem getPreparedSearchResultItem(Map.Entry<String, TextDbItem> record,
+      Double relevancy) {
     SearchItem si = new SearchItem();
     si.setIri(record.getKey());
     si.setRelevancy(relevancy);

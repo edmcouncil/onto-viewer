@@ -8,7 +8,7 @@ INSTALL_DIR="$INIT_DIR/install_dir"
 cp -r src/ "$INSTALL_DIR"
 if [ -d "$INSTALL_DIR" ]; then
   cd "$INSTALL_DIR"
-  mvn package
+  mvn clean package
 else
   echo "$INSTALL_DIR hasn't been created. Exiting..."
   exit 1

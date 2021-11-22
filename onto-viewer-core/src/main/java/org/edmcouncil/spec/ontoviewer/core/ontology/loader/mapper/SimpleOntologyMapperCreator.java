@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
@@ -24,6 +25,11 @@ public class SimpleOntologyMapperCreator {
 
   public static SimpleIRIMapper create(IRI ontologyIRI, IRI documentIRI) {
     return new SimpleIRIMapper(ontologyIRI, documentIRI);
+  }
+
+  public static Set<SimpleIRIMapper> createAboutMapper(IRI documentIri)
+      throws XPathException, IOException, ParserConfigurationException, SAXException {
+    return createAboutMapper(new File(documentIri.toURI()));
   }
 
   public static Set<SimpleIRIMapper> createAboutMapper(File f) throws ParserConfigurationException, XPathExpressionException, SAXException, IOException {

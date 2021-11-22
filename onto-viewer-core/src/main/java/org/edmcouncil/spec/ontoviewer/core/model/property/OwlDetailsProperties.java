@@ -36,7 +36,26 @@ public class OwlDetailsProperties<T> {
       propertiesList = new LinkedList<>();
     }
 
-    propertiesList.add(property);
+    boolean notYetAdded = true;
+    if (property instanceof OwlAxiomPropertyValue) {
+      var propertyAsOwlAxiom = (OwlAxiomPropertyValue) property;
+
+      for (T currentProperty : propertiesList) {
+        if (currentProperty instanceof OwlAxiomPropertyValue) {
+          var owlAxiomPropertyValue = (OwlAxiomPropertyValue) currentProperty;
+          if (propertyAsOwlAxiom.getFullRenderedString().equals(
+              owlAxiomPropertyValue.getFullRenderedString())) {
+            notYetAdded = false;
+            break;
+          }
+        }
+      }
+    }
+
+    if (notYetAdded) {
+      propertiesList.add(property);
+    }
+
     properties.put(key, propertiesList);
   }
 

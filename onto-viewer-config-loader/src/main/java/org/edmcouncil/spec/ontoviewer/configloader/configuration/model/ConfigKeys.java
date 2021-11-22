@@ -53,4 +53,11 @@ public class ConfigKeys {
   public static final String FIELD_BOOST = "fieldBoost";
   public static final String HINT_LEVENSTEIN_DISTANCE = "hintLevensteinDistance";
   public static final String SEARCH_LEVENSTEIN_DISTANCE = "searchLevensteinDistance";
+
+  // Ontology handling
+  public static final String ONTOLOGY_HANDLING = "ontologyHandling";
+  public static final String LOCATION_IN_MODULES_ENABLED = "locationInModulesEnabled";
+  public static final String USAGE_ENABLED = "usageEnabled";
+  public static final String ONTOLOGY_GRAPH_ENABLED = "ontologyGraphEnabled";
+  public static final String INDIVIDUALS_ENABLED = "individualsEnabled";
 }

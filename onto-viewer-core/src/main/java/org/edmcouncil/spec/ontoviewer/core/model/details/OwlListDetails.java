@@ -16,9 +16,7 @@ public class OwlListDetails extends OwlDetails {
   private OwlDetailsProperties<PropertyValue> properties;
 
   public OwlListDetails() {
-    if (properties == null) {
-      properties = new OwlDetailsProperties<>();
-    }
+    this.properties = new OwlDetailsProperties<>();
   }
 
   public Map<String, List<PropertyValue>> getProperties() {
@@ -43,6 +41,10 @@ public class OwlListDetails extends OwlDetails {
         properties.addProperty(entry.getKey(), propertyValue);
       });
     });
+  }
+
+  public void release() {
+    properties.release();
   }
 
   @Override
@@ -70,9 +72,4 @@ public class OwlListDetails extends OwlDetails {
     }
     return true;
   }
-
-  public void release() {
-    properties.release();
-  }
-
 }

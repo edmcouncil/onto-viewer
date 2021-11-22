@@ -9,13 +9,15 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.AppConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItemType;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -32,25 +34,24 @@ public class ForceLabelLangTest extends BasicOntologyLoader {
   Path tempDir;
 
   private LabelProvider labelProviderTest;
-  private AppConfiguration config;
-  private ViewerCoreConfiguration viewerCoreConfigurationTest;
+  private CoreConfiguration viewerCoreConfigurationTest;
 
   @BeforeEach
-  public void setUp() throws URISyntaxException, IOException, OWLOntologyCreationException, ParserConfigurationException, XPathExpressionException, SAXException {
-    ViewerCoreConfiguration viewerCoreConfiguration = new ViewerCoreConfiguration();
-    OntologyManager ontologyManager = prepareOntology(tempDir);
-    
+  public void setUp() throws URISyntaxException, IOException, OWLOntologyCreationException {
+    var configurationService = new MemoryBasedConfigurationService();
+    var viewerCoreConfiguration = configurationService.getCoreConfiguration();
+
     //English is the default language, so there is no need to test it.
     StringItem labelLang = new StringItem("pl");
-    viewerCoreConfiguration.addConfigElement(ConfigKeys.LABEL_LANG, labelLang);
+    viewerCoreConfiguration.setConfigElement(ConfigKeys.LABEL_LANG, labelLang);
 
     BooleanItem forceLabelLang = new BooleanItem();
     forceLabelLang.setType(ConfigItemType.BOOLEAN);
     forceLabelLang.setValue(Boolean.valueOf(true));
-    viewerCoreConfiguration.addConfigElement(ConfigKeys.FORCE_LABEL_LANG, forceLabelLang);
+    viewerCoreConfiguration.setConfigElement(ConfigKeys.FORCE_LABEL_LANG, forceLabelLang);
 
-    labelProviderTest = new LabelProvider(viewerCoreConfiguration);
-    labelProviderTest.setOntologyManager(ontologyManager);
+    var ontologyManager = prepareOntology(tempDir);
+    labelProviderTest = new LabelProvider(configurationService, ontologyManager);
   }
 
   @Test

@@ -6,7 +6,7 @@ import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNode;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNodeType;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.OntologyGraph;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitClassAssertionAxiom;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitDataExactCardinality;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitDataHasValue;

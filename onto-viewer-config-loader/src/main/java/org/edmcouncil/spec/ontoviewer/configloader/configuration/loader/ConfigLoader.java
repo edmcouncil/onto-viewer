@@ -7,7 +7,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.loader.saxparser.ViewerCoreConfigurationHandler;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -19,19 +19,17 @@ public class ConfigLoader {
 
   private static final Logger LOG = LoggerFactory.getLogger(ConfigLoader.class);
 
-  ViewerCoreConfiguration configuration;
+  CoreConfiguration configuration;
 
   public ConfigLoader() {
-    this.configuration = new ViewerCoreConfiguration();
+    this.configuration = new CoreConfiguration();
   }
 
-  public void loadWeaselConfiguration(Path weaselConfigFile) {
-
+  public void loadWeaselConfiguration(Path ontoViewerConfigurationPath) {
     SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
     try {
-      File configFile = weaselConfigFile.toFile();
+      File configFile = ontoViewerConfigurationPath.toFile();
       if (!configFile.exists()) {
-
         LOG.debug("Configuration file not exist, use default empty configuration.");
         return;
       }
@@ -40,17 +38,12 @@ public class ConfigLoader {
       saxParser.parse(configFile, handler);
 
       configuration = handler.getConfiguration();
-
     } catch (ParserConfigurationException | SAXException | IOException e) {
       LOG.error("Exception while loading configuration: {}", e.getMessage());
     }
-
-    return;
   }
 
-  public ViewerCoreConfiguration getConfiguration() {
+  public CoreConfiguration getConfiguration() {
     return configuration;
   }
-  
-  
 }

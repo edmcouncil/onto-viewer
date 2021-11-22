@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNode;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNodeType;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.OntologyGraph;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.ExpressionReturnedClass;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.OntologyVisitors;
 import org.edmcouncil.spec.ontoviewer.core.utils.OwlUtils;
@@ -28,6 +28,7 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.semanticweb.owlapi.model.parameters.Imports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +53,7 @@ public class RestrictionGraphDataHandler {
   public OntologyGraph handleGraph(
       OWLNamedIndividual obj,
       OWLOntology ontology) {
-
-    Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj).iterator();
+    Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj, Imports.INCLUDED).iterator();
 
     IRI elementIri = obj.getIRI();
     GraphNode root = null;
@@ -104,11 +104,8 @@ public class RestrictionGraphDataHandler {
     return handleGraph(axiomsIterator, obj.getIRI());
   }
 
-  public OntologyGraph handleGraph(
-      OWLClass obj,
-      OWLOntology ontology) {
-
-    Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj).iterator();
+  public OntologyGraph handleGraph(OWLClass obj, OWLOntology ontology) {
+    Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj, Imports.INCLUDED).iterator();
 
     OntologyGraph vg = handleGraph(axiomsIterator, obj.getIRI());
     vg = handleInheritedAxiomsGraph(obj, vg, ontology);
@@ -197,10 +194,12 @@ public class RestrictionGraphDataHandler {
     }
   }
 
-  private OntologyGraph handleInheritedAxiomsGraph(OWLClass clazz, OntologyGraph vg, OWLOntology ontology) {
-
-    owlUtils.getSuperClasses(clazz, ontology).forEach((owlClass) -> {
-      Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(owlClass).iterator();
+  private OntologyGraph handleInheritedAxiomsGraph(OWLClass clazz, OntologyGraph vg,
+      OWLOntology ontology) {
+    Set<OWLClassExpression> alreadySeen = new HashSet<>();
+    owlUtils.getSuperClasses(clazz, ontology, alreadySeen).forEach((owlClass) -> {
+      Iterator<OWLClassAxiom> axiomsIterator =
+          ontology.axioms(owlClass, Imports.INCLUDED).iterator();
       handleGraph(axiomsIterator, owlClass.getIRI(), vg.getRoot(), vg, GraphNodeType.EXTERNAL);
     });
     return vg;
@@ -208,14 +207,15 @@ public class RestrictionGraphDataHandler {
 
   public Set<OWLEquivalentClassesAxiom> getClassesAxioms(OWLClass clazz, OWLOntology ontology) {
     Set<OWLEquivalentClassesAxiom> result = new HashSet<>();
-    result = ontology.equivalentClassesAxioms(clazz).collect(Collectors.toSet());
+    ontology.importsClosure().forEach(currentOntology -> {
+      result.addAll(ontology.equivalentClassesAxioms(clazz).collect(Collectors.toSet()));
+    });
     return result;
   }
 
-  public OntologyGraph handleEquivalentClassesAxiomGraph(OWLClass clazz, OntologyGraph vg, OWLOntology ontology) {
-
-    Set<OWLEquivalentClassesAxiom> result = new HashSet<>();
-    result = getClassesAxioms(clazz, ontology);
+  public OntologyGraph handleEquivalentClassesAxiomGraph(OWLClass clazz, OntologyGraph vg,
+      OWLOntology ontology) {
+    Set<OWLEquivalentClassesAxiom> result = getClassesAxioms(clazz, ontology);
 
     GraphNode root = vg.getRoot();
     for (OWLEquivalentClassesAxiom owlEquivalentClassesAxiom : result) {

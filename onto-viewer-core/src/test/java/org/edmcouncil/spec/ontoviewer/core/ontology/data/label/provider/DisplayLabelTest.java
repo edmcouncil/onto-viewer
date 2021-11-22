@@ -2,24 +2,24 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItemType;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.xml.sax.SAXException;
 
 /**
  * @author patrycja.miazek (patrycja.miazek@makolab.com)
@@ -32,17 +32,13 @@ public class DisplayLabelTest extends BasicOntologyLoader {
   private LabelProvider labelProviderTest;
 
   @BeforeEach
-  public void setUp() throws URISyntaxException, IOException, OWLOntologyCreationException, ParserConfigurationException, XPathExpressionException, SAXException {
-    ViewerCoreConfiguration viewerCoreConfiguration = new ViewerCoreConfiguration();
+  public void setUp() throws URISyntaxException, IOException, OWLOntologyCreationException {
+    var configurationService = new MemoryBasedConfigurationService();
+    var configuration = configurationService.getCoreConfiguration();
+    configuration.setConfigElement(ConfigKeys.DISPLAY_LABEL, new BooleanItem(false));
 
     OntologyManager ontologyManager = prepareOntology(tempDir);
-    BooleanItem displayLabel = new BooleanItem();
-    displayLabel.setType(ConfigItemType.BOOLEAN);
-    displayLabel.setValue(false);
-    viewerCoreConfiguration.addConfigElement(ConfigKeys.DISPLAY_LABEL, displayLabel);
-
-    labelProviderTest = new LabelProvider(viewerCoreConfiguration);
-    labelProviderTest.setOntologyManager(ontologyManager);
+    labelProviderTest = new LabelProvider(configurationService, ontologyManager);
   }
 
   @Test

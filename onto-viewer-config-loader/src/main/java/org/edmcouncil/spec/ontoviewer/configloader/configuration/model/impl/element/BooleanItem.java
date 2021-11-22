@@ -9,6 +9,13 @@ public class BooleanItem extends ConfigItemAbstract {
 
   private Boolean value;
 
+  public BooleanItem() {
+  }
+
+  public BooleanItem(Boolean value) {
+    this.value = value;
+  }
+
   public Boolean getValue() {
     return value;
   }
@@ -21,5 +28,4 @@ public class BooleanItem extends ConfigItemAbstract {
   public String toString() {
     return value.toString();
   }
-
 }

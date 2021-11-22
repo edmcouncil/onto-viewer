@@ -8,6 +8,14 @@ public class OwlAxiomPropertyEntity {
   private String iri;
   private String label;
 
+  public OwlAxiomPropertyEntity() {
+  }
+
+  public OwlAxiomPropertyEntity(String iri, String label) {
+    this.iri = iri;
+    this.label = label;
+  }
+
   public String getIri() {
     return iri;
   }
@@ -28,7 +36,4 @@ public class OwlAxiomPropertyEntity {
   public String toString() {
     return "OwlAxiomPropertyEntity{" + "iri=" + iri + ", label=" + label + '}';
   }
-
-  
-  
 }

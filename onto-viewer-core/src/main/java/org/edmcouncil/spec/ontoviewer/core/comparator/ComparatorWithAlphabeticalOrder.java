@@ -22,6 +22,7 @@ public class ComparatorWithAlphabeticalOrder {
       }
       String txt1 = obj1.toString().toLowerCase();
       String txt2 = obj2.toString().toLowerCase();
+      // TODO: This is never true; fix or remove it
       if (obj1.getClass().getName().equals(obj2.getClass().getName().equals("OwlAxiomPropertyValue"))) {
         txt1 = ((OwlAxiomPropertyValue)obj1).getFullRenderedString().toLowerCase();
         txt2 = ((OwlAxiomPropertyValue)obj2).getFullRenderedString().toLowerCase();

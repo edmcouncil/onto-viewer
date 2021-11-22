@@ -2,26 +2,25 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.xml.sax.SAXException;
 
 /**
  * @author patrycja.miazek (patrycja.miazek@makolab.com)
  */
-public class DefaultSettingsTest extends BasicOntologyLoader{
+public class DefaultSettingsTest extends BasicOntologyLoader {
 
   @TempDir
   Path tempDir;
@@ -29,14 +28,12 @@ public class DefaultSettingsTest extends BasicOntologyLoader{
   private LabelProvider labelProviderTest;
 
   @BeforeEach
-  public void setUp() throws URISyntaxException, IOException, OWLOntologyCreationException, ParserConfigurationException, XPathExpressionException, SAXException {
+  public void setUp() throws IOException, OWLOntologyCreationException, URISyntaxException {
+    var configurationService = new MemoryBasedConfigurationService();
     OntologyManager ontologyManager = prepareOntology(tempDir);
-    
-    ViewerCoreConfiguration viewerCoreConfiguration = new ViewerCoreConfiguration();
-    labelProviderTest = new LabelProvider(viewerCoreConfiguration);
-    labelProviderTest.setOntologyManager(ontologyManager);
+    labelProviderTest = new LabelProvider(configurationService, ontologyManager);
   }
-  
+
   @Test
   public void getLabelOrDefaultFragmentTest() {
     if (labelProviderTest == null) {

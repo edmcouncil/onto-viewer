@@ -12,7 +12,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.ViewerCoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.core.comparator.ComparatorWithPriority;
 
@@ -107,7 +107,7 @@ public class OwlGroupedDetailsProperties<T> {
     return true;
   }
 
-  public void sort(Set<ConfigItem> groups, ViewerCoreConfiguration cfg) {
+  public void sort(Set<ConfigItem> groups, CoreConfiguration cfg) {
 
     Map<String, Map<String, List<T>>> sortedResults = new LinkedHashMap<>();
 

@@ -2,14 +2,14 @@ package org.edmcouncil.spec.ontoviewer.core.model.property;
 
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
-import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class OwlFiboModuleProperty implements PropertyValue<PairImpl<String, String>> {
 
-  private WeaselOwlType type;
+  private OwlType type;
   private PairImpl<String, String> value;
 
   public OwlFiboModuleProperty() {
@@ -17,12 +17,12 @@ public class OwlFiboModuleProperty implements PropertyValue<PairImpl<String, Str
   }
 
   @Override
-  public WeaselOwlType getType() {
+  public OwlType getType() {
     return this.type;
   }
 
   @Override
-  public void setType(WeaselOwlType type) {
+  public void setType(OwlType type) {
     this.type = type;
   }
 

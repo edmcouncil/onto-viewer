@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
-import org.edmcouncil.spec.ontoviewer.core.model.WeaselOwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.provider.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -26,7 +26,7 @@ public class IndividualDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(IndividualDataHandler.class);
   private static final String instanceKey = ViewerIdentifierFactory
-      .createId(ViewerIdentifierFactory.Type.function, WeaselOwlType.INSTANCES.name().toLowerCase());
+      .createId(ViewerIdentifierFactory.Type.function, OwlType.INSTANCES.name().toLowerCase());
 
   @Autowired
   private LabelProvider labelExtractor;
@@ -38,34 +38,38 @@ public class IndividualDataHandler {
    * @param clazz
    * @return
    */
-  public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology, OWLClass clazz) {
+  public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology,
+      OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
-    Set<OWLNamedIndividual> individualList = getInstancesByClass(ontology, clazz);
-    for (OWLNamedIndividual namedIndividual : individualList) {
-      OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
-      s.setType(WeaselOwlType.INSTANCES);
-      String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual);
-      s.setValue(new PairImpl(label, namedIndividual.getIRI().toString()));
-      result.addProperty(instanceKey, s);
-      namedIndividual.getEntityType();
+    Set<OWLNamedIndividual> listOfIndividuals = ontology.importsClosure()
+        .flatMap(currentOntology -> getInstancesByClass(currentOntology, clazz).stream())
+        .collect(Collectors.toSet());
+
+    for (OWLNamedIndividual namedIndividual : listOfIndividuals) {
+        OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
+        s.setType(OwlType.INSTANCES);
+        String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual);
+        s.setValue(new PairImpl(label, namedIndividual.getIRI().toString()));
+        result.addProperty(instanceKey, s);
+        namedIndividual.getEntityType();
     }
+
     return result;
   }
 
   private Set<OWLNamedIndividual> getInstancesByClass(OWLOntology ontology, OWLClass clazz) {
-
     Set<OWLNamedIndividual> result = new HashSet<>();
-    ontology.individualsInSignature().collect(Collectors.toSet()).forEach((individual) -> {
-      ontology.classAssertionAxioms(individual).collect(Collectors.toSet())
-          .stream()
-          .filter((classAssertion) -> (classAssertion.containsEntityInSignature(clazz)))
-          .forEachOrdered((_item) -> {
-            result.add(individual);
-          });
-    });
+
+    for (var currentOntology : ontology.importsClosure().collect(Collectors.toSet())) {
+      currentOntology.individualsInSignature().collect(Collectors.toSet()).forEach((individual) -> {
+        currentOntology.classAssertionAxioms(individual).collect(Collectors.toSet())
+            .stream()
+            .filter(classAssertion -> (classAssertion.containsEntityInSignature(clazz)))
+            .forEach(_item -> result.add(individual));
+      });
+    }
 
     return result;
   }
-
 }
