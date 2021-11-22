@@ -124,6 +124,7 @@ public class OwlDataHandler {
   private ConfigurationService configurationService;
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
+  private final Set<String> unwantedTypes = new HashSet<>();
 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
@@ -135,6 +136,9 @@ public class OwlDataHandler {
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#Thing");
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topObjectProperty");
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topDataProperty");
+
+    unwantedTypes.add("^^anyURI");
+    unwantedTypes.add("^^dateTime");
   }
 
   public OwlListDetails handleParticularClass(IRI classIri, OWLOntology ontology) {
@@ -531,11 +535,14 @@ public class OwlDataHandler {
       boolean bypassClass
   ) {
     String value = rendering.render(axiom);
+    LOG.debug("rendering value: {}", value);
+    for (String unwantedType : unwantedTypes) {
+      value = value.replace(unwantedType, "");
+    }
 
     if (bypassClass) {
       value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
     }
-
     if (ignoredToDisplay.contains(key)) {
       return null;
     }
@@ -569,8 +576,6 @@ public class OwlDataHandler {
     String closingParenthesis = ")";
     String comma = ",";
     Iterator<OWLEntity> iterator = axiom.signature().iterator();
-    CoreConfiguration cfg = config.getCoreConfiguration();
-
     LOG.trace("Rendered Val: {}", renderedVal);
 
     while (iterator.hasNext()) {
@@ -1063,6 +1068,7 @@ public class OwlDataHandler {
 
                   Set<OwlAxiomPropertyValue> owlAxiomPropertyValues = values.getOrDefault(
                       c.getIRI(), new LinkedHashSet<>());
+
                   owlAxiomPropertyValues.add(opv);
                   values.put(c.getIRI(), owlAxiomPropertyValues);
 
