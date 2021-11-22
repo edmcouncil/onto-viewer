@@ -63,7 +63,7 @@ docker-compose up -d
 
 Please note that it takes a while to start applications depending on how many ontologies you provided.
 
-After all ontologies are loaded, the viewer will be accessible from http://localhost:6201/.
+After all ontologies are loaded, the FIBO viewer will be accessible from http://localhost:6201/fibo/ontology.
 
 To stop the applications run:
 
