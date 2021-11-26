@@ -60,8 +60,9 @@ Then, from the `onto-viewer/` folder run the following command to start the appl
 ```
 docker-compose up -d
 ```
+To list applications that have started, use ```docker-compose ps```.
 
-Please note that it takes a while to start applications depending on how many ontologies you provided.
+Please note that it takes a while to for all services to start depending on how many ontologies you provided.
 
 After all ontologies are loaded, the FIBO viewer will be accessible from http://localhost:6201/fibo/ontology.
 
