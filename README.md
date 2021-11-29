@@ -64,7 +64,7 @@ To list applications that have started, use ```docker-compose ps```.
 
 Please note that it takes a while to for all services to start depending on how many ontologies you provided.
 
-After all ontologies are loaded, the FIBO viewer will be accessible from http://localhost:6201/fibo/ontology.
+After all ontologies are loaded, the FIBO viewer will be accessible from http://localhost:6201/fibo/ontology. The view that will served by the module [onto-viewer-web-app](https://github.com/edmcouncil/onto-viewer/tree/develop/onto-viewer-web-app) (and not by [html-pages app](https://github.com/edmcouncil/html-pages)).
 
 To stop the applications run:
 
