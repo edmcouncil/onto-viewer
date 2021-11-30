@@ -1,6 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.webapp.service;
 
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.Updater;
+import org.edmcouncil.spec.ontoviewer.webapp.boot.Updater;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdateJobGenerator;
 import org.slf4j.Logger;

@@ -54,6 +54,10 @@ public class ConfigKeys {
   public static final String FIELD_BOOST = "fieldBoost";
   public static final String HINT_LEVENSTEIN_DISTANCE = "hintLevensteinDistance";
   public static final String SEARCH_LEVENSTEIN_DISTANCE = "searchLevensteinDistance";
+  public static final String FIND_PROPERTY = "findProperty";
+  public static final String FIND_PROPERTY_LABEL = "label";
+  public static final String FIND_PROPERTY_IRI = "iri";
+  public static final String FIND_PROPERTY_IDENTIFIER = "identifier";
 
   // Ontology handling
   public static final String ONTOLOGY_HANDLING = "ontologyHandling";
@@ -61,4 +65,6 @@ public class ConfigKeys {
   public static final String USAGE_ENABLED = "usageEnabled";
   public static final String ONTOLOGY_GRAPH_ENABLED = "ontologyGraphEnabled";
   public static final String INDIVIDUALS_ENABLED = "individualsEnabled";
+  public static final String FUZZY_DISTANCE = "fuzzyDistance";
+  public static final String REINDEX_ON_START = "reindexOnStart";
 }

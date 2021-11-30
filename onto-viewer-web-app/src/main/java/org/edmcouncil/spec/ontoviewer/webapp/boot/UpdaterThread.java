@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.updater;
+package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import java.io.IOException;
@@ -10,7 +10,6 @@ import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
-import org.edmcouncil.spec.ontoviewer.core.model.onto.OntologyResources;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -22,6 +21,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.InterruptUpdate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
+import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.UnloadableImportException;
@@ -44,8 +44,13 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private FiboDataHandler fiboDataHandler;
   private ScopeIriOntology scopeIriOntology;
   private OntologyStatsManager ontologyStatsManager;
+  private LuceneSearcher luceneSearcher;
 
-  public UpdaterThread(ConfigurationService config, OntologyManager ontologyManager, FileSystemManager fileSystemManager, LabelProvider labelProvider, TextSearcherDb textSearcherDb, UpdateBlocker blocker, FiboDataHandler fiboDataHandler, UpdateJob job, ScopeIriOntology scopeIriOntology, OntologyStatsManager osm) {
+  public UpdaterThread(ConfigurationService config, OntologyManager ontologyManager,
+      FileSystemManager fileSystemManager, LabelProvider labelProvider,
+      TextSearcherDb textSearcherDb, UpdateBlocker blocker, FiboDataHandler fiboDataHandler,
+      UpdateJob job, ScopeIriOntology scopeIriOntology, OntologyStatsManager osm,
+      LuceneSearcher luceneSearcher) {
     this.config = config;
     this.ontologyManager = ontologyManager;
     this.fileSystemManager = fileSystemManager;
@@ -56,6 +61,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.fiboDataHandler = fiboDataHandler;
     this.scopeIriOntology = scopeIriOntology;
     this.ontologyStatsManager = osm;
+    this.luceneSearcher = luceneSearcher;
     this.setName("UpdateThread-" + job.getId());
   }
 
@@ -140,13 +146,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       Set<String> scopes = scopeIriOntology.getScopeIri(ontology);
 
-      //get default labels
-      // TODO: We take default labels only to put them in label provider a few lines down...
-//      Map<String, String> defaultLabels = labelProvider.getDefaultLabels();
-
-      //get default text searcher db
-      Map<String, TextDbItem> textSearcherDbDefaultData = textSearcherDb.loadDefaultData(ontology);
-
       if (isInterrupt()) {
         throw new InterruptUpdate();
       }
@@ -158,10 +157,11 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       ontologyManager.updateOntology(ontology);
 
-      // TODO: See comment on #144
-//      labelProvider.clearAndSet(defaultLabels);
-
+      //get default text searcher db
+      Map<String, TextDbItem> textSearcherDbDefaultData = textSearcherDb.loadDefaultData(ontology);
       textSearcherDb.clearAndSetDb(textSearcherDbDefaultData);
+
+      luceneSearcher.populateIndex();
 
       //load ontology resource must be here, fibo data handler use label provider
       fiboDataHandler.populateOntologyResources(ontology);

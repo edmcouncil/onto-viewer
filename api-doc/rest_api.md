@@ -3,15 +3,15 @@
  - **Request type:** POST
  - **Endpoint**:
 
-	 > /api/hint 
+     > /api/hint 
 
-	 > /api/hint/max/**{max}**
+     > /api/hint/max/**{max}**
 
  - **Description**: Return hint list for given text 
  - **Data**: 
 
-	 - ***Request body  (required)*** – to this text will be returned hints, 
-	 - **max (optional)** – max hint count, default is set to 20 
+     - ***Request body  (required)*** – to this text will be returned hints, 
+     - **max (optional)** – max hint count, default is set to 20 
 
  - **Returned value(json)**:
 
@@ -20,17 +20,18 @@
 > 	 "label": "entity", "relevancy": 6.6 }, 
 > 	  (…) ]
 
-   ## 2. Search Details
+
+## 2. Search Details
 
  - **Request type:** POST
  - **Endpoint**:
 
-	 > /api/search 
+     > /api/search 
 
  - **Description**: Return a details about resource from given iri
  - **Data**: 
 
-	 - ***Request body (required)*** – resource iri 
+     - ***Request body (required)*** – resource iri 
 
  - **Returned value(json)**:
 
@@ -49,6 +50,7 @@
 > "properties": { **(…)** } 
 > }
 > }
+
 
 ## 3. Text search
 
@@ -236,4 +238,87 @@
 	- "UPDATE_ONTOLOGY_IN_PROGRESS" - Update now is when the ontology is updated.
 	- "BLOCKED" - The block is when the resources are replaced with new ones during the update.
 
-  
+
+## 9. Find search
+
+### /api/find (GET)
+
+#### Request Parameters
+  - **term** - required
+    - Term to find entities by. 
+  - **mode** - optional, permissible values: [`basic`, `advance`], default: `basic`
+  - **findProperties** - optional
+    - List of properties to search within,  
+
+#### Description
+
+Return a list of search results that match the `term`.  There are two modes: `basic` and `advance`.
+
+- In the `basic` mode `term` is looked for within RDFS label annotation property and all its subannotations.  You don't have to specify the `mode` parameter (but you may, if you want), because the `basic` mode is the default one.
+
+  Here is a sample basic request: `<host_and_port>/api/find?term=check`
+
+- In the `advance`  mode a client sends a list of find properties that are then used to search for entities.  These properties are sent with the `findProperties` request parameter, and their identifiers should be delimited with a dot (`.`).  For example, this is a correct list of properties that may be sent by a client: `rdfs_label.skos_definition.purl_description`.  The list of find properties can be obtained from `/api/find/properties` (see below).
+
+  Here is a sample advance request: `<host_and_port>/api/find?term=check&mode=advance&findProperties=skos_label.skos_definition`
+
+#### Example Response
+
+```json
+[
+  {
+    "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/Mortgage",
+    "type": "CLASS",
+    "label": "mortgage",
+    "highlight": "<B>mortgage</B>",
+    "score": 2.9687047004699707
+  },
+  {
+    "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/ReverseMortgage",
+    "type": "CLASS",
+    "label": "reverse mortgage",
+    "highlight": "A reverse <B>mortgage</B> and an open end loan both have a credit limit.",
+    "score": 2.458970069885254
+  },
+  {
+    "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/MortgageLoanPurpose-MortgageModification",
+    "type": "INDIVIDUAL",
+    "label": "mortgage modification",
+    "highlight": "<B>mortgage</B> modification",
+    "score": 2.3639402389526367
+  }
+]
+```
+
+
+### /api/find/properties (GET)
+
+#### Request Parameters
+
+None
+
+#### Description
+
+Return the list of find properties supported by the application.  These properties may be used in the advance mode for searching specifically within them.
+
+#### Example Response
+
+```json
+[
+  {
+    "label": "RDFS Label",
+    "identifier": "rdfs_label",
+    "iri": "http://www.w3.org/2000/01/rdf-schema#label"
+  },
+  {
+    "label": "SKOS Definition",
+    "identifier": "skos_definition",
+    "iri": "http://www.w3.org/2004/02/skos/core#definition"
+  },
+  {
+    "label": "FIBO Explanatory Note",
+    "identifier": "fibo_explanatoryNote",
+    "iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote"
+  }
+]
+```

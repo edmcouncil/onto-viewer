@@ -12,7 +12,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataH
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.Updater;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -33,10 +32,7 @@ import org.springframework.context.annotation.Import;
     RestrictionGraphDataHandler.class,
 })
 @ComponentScan(
-    value = "org.edmcouncil.spec.ontoviewer.core",
-    excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = Updater.class)
-    }
+    value = "org.edmcouncil.spec.ontoviewer.core"
 )
 public class ApplicationConfiguration {
 

@@ -3,7 +3,7 @@ package org.edmcouncil.spec.ontoviewer.webapp.controller;
 import java.util.Optional;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
 import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
