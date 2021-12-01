@@ -4,6 +4,7 @@ import com.google.common.base.Stopwatch;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
@@ -13,10 +14,13 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHa
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
+import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyConsistencyChecker;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
+import org.edmcouncil.spec.ontoviewer.toolkit.io.TextWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
+import org.edmcouncil.spec.ontoviewer.toolkit.options.Goal;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
 import org.semanticweb.owlapi.model.parameters.Imports;
 import org.slf4j.Logger;
@@ -35,6 +39,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   private final OntologyManager ontologyManager;
   private final FiboDataHandler fiboDataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
+  private final OntologyConsistencyChecker ontologyConsistencyChecker;
   private final StandardEnvironment environment;
 
   public OntoViewerToolkitCommandLine(
@@ -42,11 +47,13 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       OntologyManager ontologyManager,
       FiboDataHandler fiboDataHandler,
       OntologyTableDataExtractor ontologyTableDataExtractor,
+      OntologyConsistencyChecker ontologyConsistencyChecker,
       StandardEnvironment environment) {
     this.configurationService = configurationService;
     this.ontologyManager = ontologyManager;
     this.fiboDataHandler = fiboDataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
+    this.ontologyConsistencyChecker = ontologyConsistencyChecker;
     this.environment = environment;
   }
 
@@ -62,15 +69,40 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     var commandLineOptions = commandLineOptionsHandler.parseArgs(args);
     populateConfiguration(commandLineOptions);
 
+    var goal = resolveGoal();
+
     loadOntology();
 
-    var ontologyTableData = ontologyTableDataExtractor.extractEntityData();
+    LOGGER.info("Running goal '{}'...", goal.getName());
 
-    var optionOutputPath = commandLineOptions.getOption(OptionDefinition.OUTPUT)
-        .orElseThrow(() ->
-            new OntoViewerToolkitRuntimeException("There is no option for output path set."));
-    var outputPath = Path.of(optionOutputPath);
-    new CsvWriter().write(outputPath, ontologyTableData);
+    switch (goal) {
+      case CONSISTENCY_CHECK: {
+        var consistencyResult = ontologyConsistencyChecker.checkOntologyConsistency();
+
+        var optionOutputPath = commandLineOptions.getOption(OptionDefinition.OUTPUT)
+            .orElseThrow(() ->
+                new OntoViewerToolkitRuntimeException("There is no option for output path set."));
+        var outputPath = Path.of(optionOutputPath);
+        new TextWriter().write(outputPath, consistencyResult);
+
+        break;
+      }
+      case EXTRACT_DATA: {
+        var ontologyTableData = ontologyTableDataExtractor.extractEntityData();
+
+        var optionOutputPath = commandLineOptions.getOption(OptionDefinition.OUTPUT)
+            .orElseThrow(() ->
+                new OntoViewerToolkitRuntimeException("There is no option for output path set."));
+        var outputPath = Path.of(optionOutputPath);
+        new CsvWriter().write(outputPath, ontologyTableData);
+
+        break;
+      }
+      default:
+        var message = String.format("Goal '%s' not recognized. Should not happen.", goal.getName());
+        LOGGER.error(message);
+        System.exit(1);
+    }
 
     stopwatch.stop();
     LOGGER.debug("Application finished task in {} seconds.", stopwatch.elapsed(TimeUnit.SECONDS));
@@ -90,6 +122,22 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     configuration.addConfigElement(
         OptionDefinition.FILTER_PATTERN.argName(),
         new StringItem(filterPattern));
+
+    var goal = commandLineOptions.getOption(OptionDefinition.GOAL).or(() -> {
+      LOGGER.error("Unable to detect correct goal.");
+      System.exit(1);
+      return Optional.empty();
+    });
+    configuration.addConfigElement(
+        OptionDefinition.GOAL.argName(),
+        new StringItem(goal.get()));
+  }
+
+  private Goal resolveGoal() {
+    var goal = configurationService.getCoreConfiguration()
+        .getSingleStringValue(OptionDefinition.GOAL.argName())
+        .orElseThrow(IllegalArgumentException::new);
+    return Goal.byName(goal);
   }
 
   private void loadOntology() throws OntoViewerToolkitException {
