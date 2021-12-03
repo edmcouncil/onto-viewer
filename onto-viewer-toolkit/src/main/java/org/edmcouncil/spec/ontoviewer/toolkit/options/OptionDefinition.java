@@ -2,9 +2,11 @@ package org.edmcouncil.spec.ontoviewer.toolkit.options;
 
 public enum OptionDefinition {
   DATA("data", true, true, "path to the input ontology(ies)"),
-  OUTPUT("output", true, true, "path where the result will be saved"),
+  OUTPUT("output", true, false, "path where the result will be saved", ""),
   FILTER_PATTERN("filter-pattern", true, false,
-      "string that should be within entity's IRI to include it", "");
+      "string that should be within entity's IRI to include it", ""),
+  GOAL("goal", true, false,
+      "specify which goal should be executed by toolkit", Goal.EXTRACT_DATA.getName());
 
   private final String argName;
   private final boolean hasArg;
