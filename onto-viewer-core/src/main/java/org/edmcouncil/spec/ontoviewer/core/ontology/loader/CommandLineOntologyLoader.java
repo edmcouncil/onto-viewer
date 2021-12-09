@@ -1,6 +1,9 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.loader;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -12,8 +15,11 @@ import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyAlreadyExistsException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyDocumentAlreadyExistsException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +36,10 @@ public class CommandLineOntologyLoader {
   public OWLOntology load() throws OWLOntologyCreationException {
     var owlOntologyManager = OWLManager.createOWLOntologyManager();
 
+    setOntologyMapping(owlOntologyManager);
+
     var ontologyIrisToLoad = new HashSet<IRI>();
+    var ontologyMappings = new HashMap<String, String>();
 
     var ontologyLocations = coreConfiguration.getOntologyLocation();
     for (Map.Entry<String, Set<String>> ontologyLocation : ontologyLocations.entrySet()) {
@@ -54,6 +63,10 @@ public class CommandLineOntologyLoader {
               .collect(Collectors.toSet());
           ontologyIrisToLoad.addAll(documentIris);
 
+          var mappings = documentIris.stream()
+              .collect(Collectors.toMap(IRI::toString, IRI::toString));
+          ontologyMappings.putAll(mappings);
+
           break;
         }
         default:
@@ -63,7 +76,26 @@ public class CommandLineOntologyLoader {
       }
     }
 
+    ontologyMappings.forEach((documentIri, fileIri) -> {
+      if (Files.exists(Path.of(fileIri))) {
+        owlOntologyManager.getIRIMappers()
+            .add(new SimpleIRIMapper(IRI.create(documentIri), IRI.create(fileIri)));
+      } else {
+        LOGGER.warn("File ('{}') that should map to an ontology ('{}') doesn't exist.",
+            documentIri, fileIri);
+      }
+    });
+
     return loadOntologiesFromIris(owlOntologyManager, ontologyIrisToLoad);
+  }
+
+  private void setOntologyMapping(OWLOntologyManager owlOntologyManager) {
+    var ontologyMapping = coreConfiguration.getOntologyMapping();
+    ontologyMapping.forEach((ontologyIri, ontologyPath) ->
+        owlOntologyManager.getIRIMappers().add(
+            new SimpleIRIMapper(
+                IRI.create(ontologyIri),
+                IRI.create(new File(ontologyPath.toString())))));
   }
 
   private OWLOntology loadOntologiesFromIris(
@@ -77,18 +109,21 @@ public class CommandLineOntologyLoader {
     for (IRI ontologyIri : ontologyIrisToLoad) {
       LOGGER.debug("Loading ontology from IRI '{}'...", ontologyIri);
 
-      var currentOntology = ontologyManager.loadOntology(ontologyIri);
-//      var currentOntology = ontologyManager.loadOntologyFromOntologyDocument(ontologyIri);
+      try {
+        var currentOntology = ontologyManager.loadOntology(ontologyIri);
 
-      LOGGER.debug("Loaded '{}' ontology with {} axioms.",
-          ontologyIri,
-          currentOntology.getLogicalAxiomCount());
+        LOGGER.debug("Loaded '{}' ontology with {} axioms.",
+            ontologyIri,
+            currentOntology.getLogicalAxiomCount());
 
-      var importDeclaration =
-          ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
+        var importDeclaration =
+            ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
 
-      var addImport = new AddImport(umbrellaOntology, importDeclaration);
-      umbrellaOntology.applyChange(addImport);
+        var addImport = new AddImport(umbrellaOntology, importDeclaration);
+        umbrellaOntology.applyChange(addImport);
+      } catch (OWLOntologyAlreadyExistsException | OWLOntologyDocumentAlreadyExistsException ex) {
+        LOGGER.warn(String.format("Ontology '%s' has already been loaded.", ontologyIri));
+      }
     }
 
     return umbrellaOntology;
