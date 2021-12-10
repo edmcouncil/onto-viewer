@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.loader;
 
+import com.google.common.collect.Streams;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,6 +9,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -39,7 +43,7 @@ public class CommandLineOntologyLoader {
     setOntologyMapping(owlOntologyManager);
 
     var ontologyIrisToLoad = new HashSet<IRI>();
-    var ontologyMappings = new HashMap<String, String>();
+    var ontologyMappings = new HashMap<IRI, String>();
 
     var ontologyLocations = coreConfiguration.getOntologyLocation();
     for (Map.Entry<String, Set<String>> ontologyLocation : ontologyLocations.entrySet()) {
@@ -63,8 +67,10 @@ public class CommandLineOntologyLoader {
               .collect(Collectors.toSet());
           ontologyIrisToLoad.addAll(documentIris);
 
-          var mappings = documentIris.stream()
-              .collect(Collectors.toMap(IRI::toString, IRI::toString));
+          var mappings = Streams.zip(documentIris.stream(),
+                  ontologyLocation.getValue().stream(),
+                  ImmutablePair::new)
+              .collect(Collectors.toMap(pair -> pair.left, pair -> pair.right));
           ontologyMappings.putAll(mappings);
 
           break;
@@ -79,7 +85,7 @@ public class CommandLineOntologyLoader {
     ontologyMappings.forEach((documentIri, fileIri) -> {
       if (Files.exists(Path.of(fileIri))) {
         owlOntologyManager.getIRIMappers()
-            .add(new SimpleIRIMapper(IRI.create(documentIri), IRI.create(fileIri)));
+            .add(new SimpleIRIMapper(documentIri, IRI.create(new File(fileIri))));
       } else {
         LOGGER.warn("File ('{}') that should map to an ontology ('{}') doesn't exist.",
             documentIri, fileIri);
