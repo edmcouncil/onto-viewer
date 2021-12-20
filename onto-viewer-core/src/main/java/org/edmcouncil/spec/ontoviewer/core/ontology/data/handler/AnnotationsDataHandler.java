@@ -153,7 +153,7 @@ public class AnnotationsDataHandler {
         if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
           OwlAnnotationIri oai = (OwlAnnotationIri) opv;
           OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(),
-              oai.getValue().getIri());
+              oai.getValue().getIri(), getIconForMaturityLevel(oai.getValue().getLabel()));
           details.setMaturityLevel(fml);
           LOG.debug(fml.toString());
         }
@@ -176,7 +176,7 @@ public class AnnotationsDataHandler {
             if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
               OwlAnnotationIri oai = (OwlAnnotationIri) opv;
               OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(),
-                  oai.getValue().getIri());
+                  oai.getValue().getIri(), getIconForMaturityLevel(oai.getValue().getLabel()));
               details.setMaturityLevel(fml);
               LOG.debug(fml.toString());
             }
@@ -205,4 +205,19 @@ public class AnnotationsDataHandler {
       }
     }
   }
+  
+  public String getIconForMaturityLevel(String label) {
+        LOG.error("label: {}",label.toString());
+        switch (label) {
+            case "relase":
+                return "relase";
+            case "provisional":
+            case "informative":
+                return "develop";
+            default:
+                return "";
+        }
+    }
+
+  
 }

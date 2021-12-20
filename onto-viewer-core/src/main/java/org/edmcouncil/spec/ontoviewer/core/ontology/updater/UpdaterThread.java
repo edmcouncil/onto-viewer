@@ -165,7 +165,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
             fiboDataHandler.populateOntologyResources(ontology);
 
             fiboDataHandler.clearAndSetNewModules(ontology);
-            fiboDataHandler.getFiboOntologyHandler().generateMaturityLevelForModules(fiboDataHandler.getModules());
+            fiboDataHandler.getFiboOntologyHandler().setModulesTree(fiboDataHandler.getModules());
             ontologyStatsManager.clear();
             ontologyStatsManager.generateStats(ontology);
 

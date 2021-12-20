@@ -9,10 +9,12 @@ public class OntoFiboMaturityLevel {
 
     private String label;
     private String iri;
+    private String icon;
 
-    OntoFiboMaturityLevel(String label, String iri) {
+    OntoFiboMaturityLevel(String label, String iri, String icon) {
         this.label = label;
         this.iri = iri;
+        this.icon = icon;
     }
 
     public String getLabel() {
@@ -31,9 +33,17 @@ public class OntoFiboMaturityLevel {
         this.iri = iri;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     @Override
     public String toString() {
-        return "FiboMaturityLevel{" + "label=" + label + ", iri=" + iri + '}';
+        return "OntoFiboMaturityLevel{" + "label=" + label + ", iri=" + iri + ", icon=" + icon + '}';
     }
 
     @Override
@@ -41,6 +51,7 @@ public class OntoFiboMaturityLevel {
         int hash = 7;
         hash = 83 * hash + Objects.hashCode(this.label);
         hash = 83 * hash + Objects.hashCode(this.iri);
+        hash = 83 * hash + Objects.hashCode(this.icon);
         return hash;
     }
 
@@ -60,6 +71,9 @@ public class OntoFiboMaturityLevel {
             return false;
         }
         if (!Objects.equals(this.iri, other.iri)) {
+            return false;
+        }
+        if (!Objects.equals(this.icon, other.icon)) {
             return false;
         }
         return true;

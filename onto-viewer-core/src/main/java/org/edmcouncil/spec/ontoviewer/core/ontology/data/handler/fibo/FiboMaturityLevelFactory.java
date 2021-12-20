@@ -11,16 +11,16 @@ public class FiboMaturityLevelFactory {
     public static FiboMaturityLevel dev = new AppFiboMaturityLevel("dev"); 
     public static FiboMaturityLevel prodDev = new AppFiboMaturityLevel("prodDev"); 
 
-  public static OntoFiboMaturityLevel create(String label, IRI iri) {
-    return create(label, iri.toString());
+  public static OntoFiboMaturityLevel create(String label, IRI iri, String icon) {
+    return create(label, iri.toString(), icon);
   }
 
-  public static OntoFiboMaturityLevel create(String label, String iri) {
-    return new OntoFiboMaturityLevel(label, iri);
+  public static OntoFiboMaturityLevel create(String label, String iri, String icon) {
+    return new OntoFiboMaturityLevel(label, iri, icon);
   }
 
   public static OntoFiboMaturityLevel empty() {
-    return create("", "");
+    return create("", "", "");
   }
   public static FiboMaturityLevel emptyAppFiboMaturityLabel() {
     return  new AppFiboMaturityLevel("");
