@@ -2,7 +2,6 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,14 +18,11 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturi
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
-import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +36,12 @@ public class AnnotationsDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final IRI COMMENT_IRI = OWLRDFVocabulary.RDFS_COMMENT.getIRI();
+  private static final String RELEASE_LABEL = "release";
+  private static final String PROVISIONAL_LABEL = "provisional";
+  private static final String INFORMATIVE_LABEL = "informative" ;
+  private static final String RELEASE_ICON = "release" ;
+  private static final String DEVELOP_ICON = "develop" ;
+  
   private final String FIBO_QNAME = "QName:";
   private final IRI HAS_MATURITY_LEVEL_IRI = IRI.create(
       "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel");
@@ -207,13 +209,12 @@ public class AnnotationsDataHandler {
   }
   
   public String getIconForMaturityLevel(String label) {
-        LOG.error("label: {}",label.toString());
         switch (label) {
-            case "relase":
-                return "relase";
-            case "provisional":
-            case "informative":
-                return "develop";
+            case RELEASE_LABEL:
+                return RELEASE_ICON;
+            case PROVISIONAL_LABEL:
+            case INFORMATIVE_LABEL:
+                return DEVELOP_ICON;
             default:
                 return "";
         }

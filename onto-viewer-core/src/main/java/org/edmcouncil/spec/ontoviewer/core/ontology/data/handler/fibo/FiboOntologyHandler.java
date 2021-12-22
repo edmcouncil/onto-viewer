@@ -15,8 +15,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,7 +26,13 @@ public class FiboOntologyHandler {
     private static final String ONTOLOGY_IRI_GROUP_NAME = "ontologyIri";
     private static final Pattern ONTOLOGY_IRI_PATTERN
             = Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
-
+    private static final String PROD = "prod";
+    private static final String PROD_DEV = "dev";
+    private static final String DEV  = "prodDev";
+    private static final String PROD_ICON  = "release";
+    private static final String PROD_DEV_ICON  = "mixed";
+    private static final String DEV_ICON  = "develop";
+    
     private final OntologyManager ontologyManager;
     private final LabelProvider labelProvider;
     private final AnnotationsDataHandler annotationsDataHandler;
@@ -146,12 +150,12 @@ public class FiboOntologyHandler {
 
  private OntoFiboMaturityLevel generateModuleMaturity(FiboModule fiboModule) {
         switch (fiboModule.getMaturityLevel().getLabel()) {
-            case "prod":
-                return FiboMaturityLevelFactory.create("", "","release");
-            case "prodDev":
-                return FiboMaturityLevelFactory.create("", "","mixed");
-            case "dev":
-                return FiboMaturityLevelFactory.create("", "","develop");
+            case PROD:
+                return FiboMaturityLevelFactory.create("", "",PROD_ICON);
+            case PROD_DEV:
+                return FiboMaturityLevelFactory.create("", "",PROD_DEV_ICON);
+            case DEV:
+                return FiboMaturityLevelFactory.create("", "",DEV_ICON);
         }
         return FiboMaturityLevelFactory.empty();
     }
