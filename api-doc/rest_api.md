@@ -85,6 +85,7 @@
 > "**query**": "swap", 
 > "**page**": 1, 
 > "**hasMore**": true, 
+> "**totalResult**":, 
 > "**maxPage**": 15 }
 
 ## 4. Modules

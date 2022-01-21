@@ -18,8 +18,4 @@ public class KeyValueMapConfigItem extends ConfigItemAbstract {
   public void putIfAbsent(String key, Object value) {
     properties.putIfAbsent(key, value);
   }
-
-  public Map<String, Object> getProperties() {
-    return properties;
-  }
 }

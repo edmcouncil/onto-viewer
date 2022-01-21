@@ -1,14 +1,13 @@
 package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
@@ -21,6 +20,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.InterruptUpdate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
+import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -76,7 +76,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
             this.interrupt();
             return;
           }
-          String msg = String.format("UpdateJob with id: %s waiting to end other updates", job.getId());
+          String msg = String.format("UpdateJob with id: %s waiting to end other updates",
+              job.getId());
           UpdaterOperation.setJobStatusToWaiting(job, msg);
           LOG.debug(msg);
           //Wait for one sec so it doesn't print too fast
@@ -115,23 +116,33 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       //download ontology file/files
       //load ontology to var
       try {
-        AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager, viewerCoreConfiguration);
+        AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager,
+            viewerCoreConfiguration);
         ontology = loader.load();
       } catch (OWLOntologyCreationException ex) {
         msgError = ex.getMessage();
-        LOG.error("[ERROR]: Error when creating ontology. Stoping application. Exception: {} \n Message: {}", ex.getStackTrace(), ex.getMessage());
+        LOG.error(
+            "[ERROR]: Error when creating ontology. Stoping application. Exception: {} \n Message: {}",
+            ex.getStackTrace(), ex.getMessage());
       } catch (IOException ex) {
         msgError = ex.getMessage();
-        LOG.error("[ERROR]: Cannot load ontology. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
+        LOG.error("[ERROR]: Cannot load ontology. Stoping application. Stack Trace: {}",
+            Arrays.toString(ex.getStackTrace()));
       } catch (ParserConfigurationException ex) {
         msgError = ex.getMessage();
-        LOG.error("[ERROR]: Cannot load ontology, parser exception. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
+        LOG.error(
+            "[ERROR]: Cannot load ontology, parser exception. Stoping application. Stack Trace: {}",
+            Arrays.toString(ex.getStackTrace()));
       } catch (XPathExpressionException ex) {
         msgError = ex.getMessage();
-        LOG.error("[ERROR]: Cannot load ontology, xpath expression exception. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
+        LOG.error(
+            "[ERROR]: Cannot load ontology, xpath expression exception. Stoping application. Stack Trace: {}",
+            Arrays.toString(ex.getStackTrace()));
       } catch (SAXException ex) {
         msgError = ex.getMessage();
-        LOG.error("[ERROR]: Cannot load ontology, sax exception. Stoping application. Stack Trace: {}", Arrays.toString(ex.getStackTrace()));
+        LOG.error(
+            "[ERROR]: Cannot load ontology, sax exception. Stoping application. Stack Trace: {}",
+            Arrays.toString(ex.getStackTrace()));
       }
 
       if (msgError != null) {
@@ -167,7 +178,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       fiboDataHandler.populateOntologyResources(ontology);
 
       fiboDataHandler.clearAndSetNewModules(ontology);
-      
+      fiboDataHandler.getFiboOntologyHandler().setModulesTree(fiboDataHandler.getModules());
       ontologyStatsManager.clear();
       ontologyStatsManager.generateStats(ontology);
 
@@ -183,7 +194,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       LOG.info("Application has started successfully.");
     } catch (InterruptUpdate ex) {
-      LOG.error("{}",ex.getStackTrace());
+      LOG.error("{}", ex.getStackTrace());
       UpdaterOperation.setJobStatusToError(job, interruptMessage);
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
