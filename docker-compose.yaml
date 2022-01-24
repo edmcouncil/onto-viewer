@@ -20,6 +20,7 @@ services:
     volumes:
       - ./docker/init-onto-viewer.sh:/opt/fibo/init-onto-viewer.sh
       - .:/opt/fibo/src
+      - ./docker/runtime/.m2:/opt/fibo/.m2
       - ./docker/runtime/server:/opt/fibo/app_home
     networks:
       - default

@@ -287,8 +287,8 @@ public class LuceneSearcher {
       for (Document document : documents) {
         var updateTerm = new Term(IRI_FIELD, document.getField(IRI_FIELD).stringValue());
         indexWriter.updateDocument(updateTerm, document);
-        indexWriter.commit();
       }
+      indexWriter.commit();
 
       LOGGER.info("Successfully indexed {} documents.", documents.size());
     } catch (IOException ex) {
