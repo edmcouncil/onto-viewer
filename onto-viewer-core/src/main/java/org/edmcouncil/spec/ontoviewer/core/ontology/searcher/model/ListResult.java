@@ -39,4 +39,9 @@ public class ListResult extends SearcherResult<List<SearchItem>> {
   public Integer getMaxPage() {
     return maxPage;
   }
+
+    @Override
+    public String toString() {
+        return "{" + "query=" + query + ", page=" + page + ", hasMore=" + hasMore + ", maxPage=" + maxPage + ", result=" + super.getResult();
+    }
 }

@@ -80,17 +80,23 @@ public class SearchController {
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
     boolean isGrouped = config.getCoreConfiguration().isGrouped();
-
+    long startTimestamp = System.currentTimeMillis();
     SearcherResult result = null;
     try {
       if (UrlChecker.isUrl(query)) {
-        LOG.info("URL detected, search specyfic element");
+        LOG.info("URL detected: '{}'", query);
         result = ontologySearcher.search(query, 0);
-        modelBuilder.emptyQuery();
+        
+        long endTimestamp = System.currentTimeMillis();
+     LOG.info("URL detected: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp, result);
+     
+        modelBuilder.emptyQuery(); 
       } else {
-        LOG.info("String detected, search elements with given label");
+       // LOG.info("String detected, search elements with given label");
         modelBuilder.setQuery(query);
         result = textSearchService.search(query, max, page);
+        long endTimestamp = System.currentTimeMillis();
+        LOG.info("String detected: '{}' (query time: '{}' ms), max: '{}', page '{}', result '{}'", query, endTimestamp - startTimestamp, max, page, result);
       }
     } catch (ViewerException ex) {
       LOG.info("Handle ViewerException. Message: '{}'", ex.getMessage());

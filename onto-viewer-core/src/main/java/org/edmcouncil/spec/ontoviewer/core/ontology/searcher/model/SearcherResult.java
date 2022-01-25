@@ -25,4 +25,9 @@ public abstract class SearcherResult<T> {
   public enum Type {
     list, details
   }
+
+    @Override
+    public String toString() {
+        return "{" + "type=" + type + ", result=" + result + '}';
+    }
 }

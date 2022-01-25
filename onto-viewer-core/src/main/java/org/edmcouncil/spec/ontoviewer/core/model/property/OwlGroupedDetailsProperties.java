@@ -150,4 +150,8 @@ public class OwlGroupedDetailsProperties<T> {
     properties = sortedResults;
   }
 
+    @Override
+    public String toString() {
+        return "{" + "taxonomy=" + taxonomy + ", properties=" + properties + '}';
+    }
 }

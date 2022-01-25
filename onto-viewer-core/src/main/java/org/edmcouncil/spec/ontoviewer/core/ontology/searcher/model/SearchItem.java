@@ -43,4 +43,8 @@ public class SearchItem {
     this.description = description;
   }
 
+    @Override
+    public String toString() {
+        return "{" + "iri=" + iri + ", label=" + label + ", relevancy=" + relevancy + '}';
+    }
 }

@@ -44,7 +44,7 @@ public class HintController {
       LOG.debug("Application initialization has not completed");
       return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
     }
-
+    long startTimestamp = System.currentTimeMillis();
     Integer maxHintCount = max.orElse(DEFAULT_MAX_HINT_RESULT_COUNT);
 
     if (UrlChecker.isUrl(query)) {
@@ -52,7 +52,9 @@ public class HintController {
     }
 
     List<HintItem> result = textSearch.getHints(query, maxHintCount);
-    
+     long endTimestamp = System.currentTimeMillis();
+     LOG.info("For hints: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp, result);
+
     return ResponseEntity.ok(result);
   }
 }
