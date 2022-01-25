@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.webapp.model;
 
+import java.util.List;
 import java.util.StringJoiner;
 
 public class FindResult {
@@ -7,14 +8,15 @@ public class FindResult {
   private final String iri;
   private final String type;
   private final String label;
-  private final String highlight;
+  private final List<Highlight> highlights;
   private final double score;
 
-  public FindResult(String iri, String type, String label, String highlight, double score) {
+  public FindResult(String iri, String type, String label, List<Highlight> highlights,
+      double score) {
     this.iri = iri;
     this.type = type;
     this.label = label;
-    this.highlight = highlight;
+    this.highlights = highlights;
     this.score = score;
   }
 
@@ -30,8 +32,8 @@ public class FindResult {
     return label;
   }
 
-  public String getHighlight() {
-    return highlight;
+  public List<Highlight> getHighlights() {
+    return highlights;
   }
 
   public double getScore() {
@@ -44,7 +46,7 @@ public class FindResult {
         .add("iri='" + iri + "'")
         .add("type='" + type + "'")
         .add("label='" + label + "'")
-        .add("highlight='" + highlight + "'")
+        .add("highlights='" + highlights + "'")
         .add("score='" + score + "'")
         .toString();
   }

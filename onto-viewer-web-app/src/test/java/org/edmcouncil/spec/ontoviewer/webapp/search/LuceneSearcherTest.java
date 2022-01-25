@@ -4,9 +4,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.io.FileUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.loader.saxparser.ViewerCoreConfigurationHandler;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
@@ -16,6 +19,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryB
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -28,13 +32,14 @@ class LuceneSearcherTest {
 
   private LuceneSearcher luceneSearcher;
 
-  @TempDir
-  Path homePath;
+  private Path tempHomePath;
 
   @BeforeEach
-  void setUp() throws OWLException {
+  void setUp() throws OWLException, IOException {
+    tempHomePath = Files.createTempDirectory("onto-viewer-tests");
+
     var appProperties = new AppProperties();
-    appProperties.setDefaultHomePath(homePath.toString());
+    appProperties.setDefaultHomePath(tempHomePath.toString());
     appProperties.setSearch(Map.of("reindexOnStart", "true"));
     var configurationService = new MemoryBasedConfigurationService();
 
@@ -44,6 +49,11 @@ class LuceneSearcherTest {
         appProperties, fileSystemManager, ontologyManager, configurationService);
     this.luceneSearcher.init();
     this.luceneSearcher.populateIndex();
+  }
+
+  @AfterEach
+  void tearDown() throws IOException {
+    FileUtils.deleteDirectory(tempHomePath.toFile());
   }
 
   private OntologyManager prepareOntologyManager() throws OWLException {
@@ -107,7 +117,8 @@ class LuceneSearcherTest {
     var actualResult = luceneSearcher.search("reverse");
 
     assertThat(actualResult.size(), equalTo(1));
-    assertThat(actualResult.get(0).getHighlight(), equalTo("<B>reverse</B> mortgage"));
+    assertThat(actualResult.get(0).getHighlights().get(0).getHighlightedText(),
+        equalTo("<B>reverse</B> mortgage"));
   }
 
   // Advance search

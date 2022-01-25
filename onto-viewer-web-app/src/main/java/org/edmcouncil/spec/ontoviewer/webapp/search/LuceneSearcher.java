@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
@@ -47,6 +48,7 @@ import org.edmcouncil.spec.ontoviewer.core.exception.RequestHandlingException;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.Highlight;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLDataFactory;
@@ -65,6 +67,7 @@ public class LuceneSearcher {
   private static final String TYPE_FIELD = "type";
   private static final String QUERY_FIELD_DELIMITER = " OR ";
   private static final int DEFAULT_FUZZY_DISTANCE = 2;
+  private static final String UNKNOWN_NAME = "UNKNOWN";
 
   static {
     IRI_TO_SHORT_ID.put(RDFS.NAMESPACE, "rdfs");
@@ -85,9 +88,10 @@ public class LuceneSearcher {
   private Path indexPath;
   private IndexWriterConfig indexWriterConfig;
   private Set<OWLAnnotationProperty> allSearchProperties;
-  private Set<String> allFieldNames;
   private Set<String> basicFieldNames;
-  private Map<String, FindProperty> findPropertiesMap = new HashMap<>();
+  private Map<String, FindProperty> identifierToFindPropertyMap = new HashMap<>();
+  private Map<String, String> iriToToFindPropertyNameMap = new HashMap<>();
+  private Map<String, OWLAnnotationProperty> fieldNameToAnnotationPropertyMap = new HashMap<>();
   private String rdfsLabelFieldName;
 
   public LuceneSearcher(AppProperties appProperties, FileSystemManager fileSystemManager,
@@ -141,8 +145,12 @@ public class LuceneSearcher {
         .collect(Collectors.toSet());
 
     var configuredFindProperties = getFindProperties();
-    findPropertiesMap = configuredFindProperties.stream()
+    // Create map from findProperty.identifier to findProperty
+    identifierToFindPropertyMap = configuredFindProperties.stream()
         .collect(Collectors.toMap(FindProperty::getIdentifier, findProperty -> findProperty));
+    // Create map from findProperty.iri to findProperty.identifier
+    iriToToFindPropertyNameMap = configuredFindProperties.stream()
+        .collect(Collectors.toMap(FindProperty::getIri, FindProperty::getIdentifier));
 
     var findAnnotationProperties = configuredFindProperties.stream().map(findProperty ->
         dataFactory.getOWLAnnotationProperty(findProperty.getIri())
@@ -151,10 +159,10 @@ public class LuceneSearcher {
     allSearchProperties = new HashSet<>();
     allSearchProperties.addAll(rdfsLabelAndItsSubAnnotations);
     allSearchProperties.addAll(findAnnotationProperties);
+    // Create map getFieldName(searchProperty) to OWLAnnotationProperty
+    fieldNameToAnnotationPropertyMap = allSearchProperties.stream()
+        .collect(Collectors.toMap(this::getFieldName, Function.identity()));
 
-    allFieldNames = allSearchProperties.stream()
-        .map(this::getFieldName)
-        .collect(Collectors.toSet());
     rdfsLabelFieldName = getFieldName(dataFactory.getRDFSLabel());
 
     boolean shouldReindexOnStart;
@@ -186,7 +194,7 @@ public class LuceneSearcher {
       var queryParser = new QueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
       var parsedQuery = queryParser.parse(prepareQueryString(query));
 
-      return searchWithQuery(parsedQuery);
+      return searchWithQuery(parsedQuery, basicFieldNames);
     } catch (IOException | ParseException ex) {
       var errorMessage = String.format(
           "Error occurred when handling search request. Details: %s.", ex.getMessage());
@@ -201,7 +209,13 @@ public class LuceneSearcher {
       var queryParser = new QueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
       var parsedQuery = queryParser.parse(prepareQueryString(query, findProperties));
 
-      return searchWithQuery(parsedQuery);
+      var fieldOfInterest = findProperties.stream()
+          .map(fieldPropertyIdentifier -> {
+            var findProperty = identifierToFindPropertyMap.get(fieldPropertyIdentifier);
+            return getFieldName(dataFactory.getOWLAnnotationProperty(findProperty.getIri()));
+          }).collect(Collectors.toSet());
+
+      return searchWithQuery(parsedQuery, fieldOfInterest);
     } catch (IOException | ParseException ex) {
       var errorMessage = String.format(
           "Error occurred when handling advance search request. Details: %s", ex.getMessage());
@@ -215,7 +229,8 @@ public class LuceneSearcher {
     return getTextSearcherConfig().getFindProperties();
   }
 
-  private List<FindResult> searchWithQuery(Query query) throws IOException {
+  private List<FindResult> searchWithQuery(Query query, Set<String> fieldOfInterest)
+      throws IOException {
     try (var indexReader = DirectoryReader.open(indexDirectory)) {
       var indexSearcher = new IndexSearcher(indexReader);
       var queryScorer = new QueryScorer(query);
@@ -237,24 +252,35 @@ public class LuceneSearcher {
         if (rdfsLabelField != null) {
           printableLabel = rdfsLabelField.stringValue();
         }
-        var highlight = getHighlight(highlighter, luceneDocument);
+        var highlights = getHighlights(highlighter, luceneDocument, fieldOfInterest);
 
-        findResults.add(new FindResult(iri, type, printableLabel, highlight, score));
+        findResults.add(new FindResult(iri, type, printableLabel, highlights, score));
       }
 
       return findResults;
     }
   }
 
-  private String getHighlight(Highlighter highlighter, Document document) {
-    for (String fieldName : allFieldNames) {
+  private List<Highlight> getHighlights(Highlighter highlighter, Document document,
+      Set<String> fieldsOfInterest) {
+    List<Highlight> highlights = new ArrayList<>();
+
+    for (String fieldName : fieldsOfInterest) {
       try {
         var field = document.getField(fieldName);
         if (field != null) {
-          var bestFragment = highlighter.getBestFragment(analyzer, fieldName, field.stringValue());
-          if (bestFragment != null) {
-            return bestFragment;
+          var highlightedText =
+              highlighter.getBestFragment(analyzer, fieldName, field.stringValue());
+          var annotationProperty = fieldNameToAnnotationPropertyMap.get(fieldName);
+          if (annotationProperty == null) {
+            LOGGER.warn("Unable to find annotation property by fieldName '{}'.", fieldName);
+            continue;
           }
+          var fieldIdentifier =
+              iriToToFindPropertyNameMap.getOrDefault(
+                  annotationProperty.getIRI().toString(),
+                  UNKNOWN_NAME);
+          highlights.add(new Highlight(fieldIdentifier, highlightedText));
         }
       } catch (IOException | InvalidTokenOffsetsException ex) {
         LOGGER.warn(
@@ -263,7 +289,7 @@ public class LuceneSearcher {
       }
     }
 
-    return null;
+    return highlights;
   }
 
   private void indexEntities(IndexWriter indexWriter) {
@@ -347,7 +373,7 @@ public class LuceneSearcher {
 
     return findProperties.stream()
         .map(findPropertyIdentifier -> {
-          var findProperty = findPropertiesMap.get(findPropertyIdentifier);
+          var findProperty = identifierToFindPropertyMap.get(findPropertyIdentifier);
           return getFieldName(dataFactory.getOWLAnnotationProperty(findProperty.getIri()));
         })
         .map(fieldName -> String.format("%s:%s", fieldName, termWithFuzzing))
