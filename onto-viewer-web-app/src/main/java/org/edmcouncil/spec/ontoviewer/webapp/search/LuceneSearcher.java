@@ -374,6 +374,11 @@ public class LuceneSearcher {
     return findProperties.stream()
         .map(findPropertyIdentifier -> {
           var findProperty = identifierToFindPropertyMap.get(findPropertyIdentifier);
+          if (findProperty == null) {
+            var message = String.format(
+                "Find property '%s' is not defined in the application.", findPropertyIdentifier);
+            throw new IllegalArgumentException(message);
+          }
           return getFieldName(dataFactory.getOWLAnnotationProperty(findProperty.getIri()));
         })
         .map(fieldName -> String.format("%s:%s", fieldName, termWithFuzzing))
