@@ -37,7 +37,7 @@
   <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter">
     <level value="DEBUG" />
   </logger>
-  <root level="debug" additivity="false">
+  <root level="INFO" additivity="false">
     <appender-ref ref="STDOUT" />
     <springProfile name="application">
       <appender-ref ref="FILE" />
