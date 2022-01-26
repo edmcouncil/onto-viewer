@@ -16,6 +16,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.ExtendedResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearchItem;
@@ -53,16 +54,18 @@ public class TextSearcherDb {
   private final OntologyManager ontologyManager;
   private final ConfigurationService appConfig;
   private final LabelProvider labelProvider;
-
+  private final OwlDataHandler owlDataHandler;
+ 
   private TextSearcherConfig conf;
 
   @Inject
   public TextSearcherDb(OntologyManager ontologyManager, ConfigurationService appConfig,
-      LabelProvider labelProvider) {
+      LabelProvider labelProvider, OwlDataHandler owlDataHandler) {
     this.ontologyManager = ontologyManager;
 
     this.appConfig = appConfig;
     this.labelProvider = labelProvider;
+    this.owlDataHandler = owlDataHandler;
   }
 
   @PostConstruct
@@ -234,7 +237,7 @@ public class TextSearcherDb {
     for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
       Double relevancy = record.getValue().computeSearchRelevancy(text, conf.getSearchFields());
       if (relevancy > conf.getSearchThreshold()) {
-        SearchItem si = getPreparedSearchResultItem(record, relevancy);
+        SearchItem si = getPreparedSearchResultItem(record, relevancy);        
         listResult.add(si);
       }
     }
@@ -271,7 +274,7 @@ public class TextSearcherDb {
     result.setQuery(text);
     result.setHasMorePage(countOfResults > endIndex);
     result.setMaxPage(countOfResults / maxResults + (countOfResults % maxResults != 0 ? 1 : 0));
-
+    result.setTotalResult(countOfResults);
     return result;
   }
 
@@ -291,7 +294,8 @@ public class TextSearcherDb {
     if (label == null) {
       label = getValue(record.getKey(), IRI_FRAGMENT);
     }
-
+    
+    si.setMaturityLevel(owlDataHandler.getMaturityLevel(si.getIri()));
     String description = getDescription(record);
     si.setLabel(label);
     si.setDescription(StringUtils.cutString(description, 150, true));
@@ -324,7 +328,6 @@ public class TextSearcherDb {
     }
     LOG.debug("Data doesn't find in database.");
     return null;
-
   }
 
   private TextSearcherConfig loadConfiguration(TextSearcherConfig tsc) {

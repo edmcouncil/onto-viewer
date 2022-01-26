@@ -14,6 +14,8 @@ public class ExtendedResult {
     private boolean hasMorePage;
     private String query;
     private Integer maxPage;
+    private Integer totalResult;
+
 
     public ExtendedResult() {
         result = new ArrayList<>(0);
@@ -59,8 +61,17 @@ public class ExtendedResult {
         return maxPage;
     }
 
+    public Integer getTotalResult() {
+        return totalResult;
+    }
+
+    public void setTotalResult(Integer i) {
+        this.totalResult = i;
+    }
+  
     @Override
     public String toString() {
         return "{" + "result=" + result + ", page=" + page + ", hasMorePage=" + hasMorePage + ", query=" + query + ", maxPage=" + maxPage + '}';
     }
+
 }
