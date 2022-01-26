@@ -1149,7 +1149,7 @@ public class OwlDataHandler {
   public OwlListDetails handleParticularDatatype(IRI iri, OWLOntology ontology) {
     OwlListDetails resultDetails = new OwlListDetails();
 
-    var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.DATATYPE);
+    var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.DATA_TYPE);
 
     try {
       if (entityEntry.isPresent()) {

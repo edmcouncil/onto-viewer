@@ -40,11 +40,13 @@
       <groupItem>@viewer.internal.objectProperty</groupItem>      
       <groupItem>@viewer.external.objectProperty</groupItem>    
       <groupItem>@viewer.internal.dataProperty</groupItem>
-      <groupItem>@viewer.external.dataProperty</groupItem>    
+      <groupItem>@viewer.external.dataProperty</groupItem>   
       <groupItem>@viewer.internal.instance</groupItem>
       <groupItem>@viewer.external.instance</groupItem>    
       <groupItem>@viewer.internal.annotationProperty</groupItem>
       <groupItem>@viewer.external.annotationProperty</groupItem>  
+      <groupItem>@viewer.internal.dataType</groupItem>
+      <groupItem>@viewer.external.dataType</groupItem> 
     </group> 
     
     <group>
