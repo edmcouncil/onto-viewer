@@ -261,7 +261,7 @@ Return a list of search results that match the `term`.  There are two modes: `ba
 
 - In the `advance`  mode a client sends a list of find properties that are then used to search for entities.  These properties are sent with the `findProperties` request parameter, and their identifiers should be delimited with a dot (`.`).  For example, this is a correct list of properties that may be sent by a client: `rdfs_label.skos_definition.purl_description`.  The list of find properties can be obtained from `/api/find/properties` (see below).
 
-  Here is a sample advance request: `<host_and_port>/api/find?term=check&mode=advance&findProperties=skos_label.skos_definition`
+  Here is a sample advance request: `<host_and_port>/api/find?term=check&mode=advance&findProperties=rdfs_label.skos_definition`
 
 #### Example Response
 
