@@ -1,12 +1,18 @@
 package org.edmcouncil.spec.ontoviewer.toolkit;
 
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MAPPING_MAP;
+import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_MAPPING;
+
 import com.google.common.base.Stopwatch;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.KeyValueMapConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
@@ -18,6 +24,8 @@ import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyConsistencyChecke
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.TextWriter;
+import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.OntologyCatalogParser;
+import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.Uri;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.Goal;
@@ -62,6 +70,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     var stopwatch = Stopwatch.createStarted();
 
     if (LOGGER.isDebugEnabled()) {
+      LOGGER.debug("Current working directory: {}", System.getProperty("user.dir"));
       logSystemAndSpringProperties();
       LOGGER.debug("Raw command line arguments: {}", Arrays.toString(args));
     }
@@ -110,6 +119,37 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private void populateConfiguration(CommandLineOptions commandLineOptions) {
     var configuration = configurationService.getCoreConfiguration();
+    
+    var ontologyMappingOption = commandLineOptions.getOption(ONTOLOGY_MAPPING);
+    if (ontologyMappingOption.isPresent()) {
+      var ontologyMappingPath = ontologyMappingOption.get();
+      if (!ontologyMappingPath.isBlank()) {
+        try {
+          var catalog = new OntologyCatalogParser().readOntologyMapping(ontologyMappingPath);
+          var ontologyMappingParentPath = Path.of(ontologyMappingPath).getParent();
+
+          var mappings = new HashMap<String, Object>();
+          for (Uri mapping : catalog.getUri()) {
+            var ontologyPath = Path.of(mapping.getUri());
+            if (!ontologyPath.isAbsolute()) {
+              ontologyPath = ontologyMappingParentPath.resolve(ontologyPath).normalize();
+            }
+            if (Files.exists(ontologyPath)) {
+              mappings.put(mapping.getName(), ontologyPath.toString());
+            } else {
+              LOGGER.warn("File ('{}') that should map to an ontology ('{}') doesn't exist.",
+                  ontologyPath, mapping.getName());
+            }
+          }
+          var properties = new KeyValueMapConfigItem(mappings);
+          configuration.addConfigElement(ONTOLOGY_MAPPING_MAP, properties);
+        } catch (OntoViewerToolkitException ex) {
+          var message = String.format("Error while handling ontology mapping from path '%s'. "
+              + "Details: %s", ontologyMappingPath, ex.getMessage());
+          LOGGER.warn(message, ex);
+        }
+      }
+    }
 
     for (String ontologyPath : commandLineOptions.getOptions(OptionDefinition.DATA)) {
       configuration.addConfigElement(
