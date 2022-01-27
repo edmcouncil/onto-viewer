@@ -28,7 +28,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
-import org.edmcouncil.spec.ontoviewer.toolkit.model.EntityData;
+import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.EntityData;
 import org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
 import org.semanticweb.owlapi.model.IRI;
