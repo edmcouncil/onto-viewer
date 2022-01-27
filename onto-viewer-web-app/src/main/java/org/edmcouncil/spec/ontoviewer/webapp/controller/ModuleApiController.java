@@ -2,7 +2,7 @@ package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

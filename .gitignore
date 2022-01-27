@@ -213,6 +213,7 @@ catalog-v001.xml
 
 # Onto-Viewer
 docker/runtime/
+lucene_index/
 
 # Mac
 .DS_Store

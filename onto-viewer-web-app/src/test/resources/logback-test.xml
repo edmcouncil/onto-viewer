@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yy-MM-dd HH:mm:ss} [%19.19thread] %-5level %-4line %-42logger{38}: %msg%n</pattern>
+    </encoder>
+  </appender>
+  <logger name="org.edmcouncil.spec.fibo" level="WARN" additivity="false">
+    <appender-ref ref="STDOUT" />
+  </logger>
+  <logger name="org.semanticweb.owlapi" level="INFO" additivity="false">
+    <appender-ref ref="STDOUT" />
+  </logger>
+  <root level="INFO" additivity="false">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>

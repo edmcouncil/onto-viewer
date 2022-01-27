@@ -6,7 +6,9 @@ public enum OptionDefinition {
   FILTER_PATTERN("filter-pattern", true, false,
       "string that should be within entity's IRI to include it", ""),
   GOAL("goal", true, false,
-      "specify which goal should be executed by toolkit", Goal.EXTRACT_DATA.getName());
+    "specify which goal should be executed by toolkit", Goal.EXTRACT_DATA.getName()),
+  ONTOLOGY_MAPPING("ontology-mapping", true, false,
+      "path to the catalog file with ontology mapping", "");
 
   private final String argName;
   private final boolean hasArg;
