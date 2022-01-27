@@ -20,10 +20,14 @@ import javax.annotation.PreDestroy;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Store;
+import org.apache.lucene.document.FieldType;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexOptions;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -85,6 +89,8 @@ public class LuceneSearcher {
 
   private StandardAnalyzer analyzer;
   private FSDirectory indexDirectory;
+  private IndexReader indexReader;
+  private IndexSearcher indexSearcher;
   private Path indexPath;
   private IndexWriterConfig indexWriterConfig;
   private Set<OWLAnnotationProperty> allSearchProperties;
@@ -122,6 +128,7 @@ public class LuceneSearcher {
   @PreDestroy
   void close() {
     try {
+      this.indexReader.close();
       this.indexDirectory.close();
     } catch (IOException ex) {
       LOGGER.error("Unable to close index while destroying {}. Details: {}",
@@ -189,12 +196,12 @@ public class LuceneSearcher {
     }
   }
 
-  public List<FindResult> search(String query) {
+  public List<FindResult> search(String query, boolean useHighlighting) {
     try {
       var queryParser = new QueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
       var parsedQuery = queryParser.parse(prepareQueryString(query));
 
-      return searchWithQuery(parsedQuery, basicFieldNames);
+      return searchWithQuery(parsedQuery, basicFieldNames, useHighlighting);
     } catch (IOException | ParseException ex) {
       var errorMessage = String.format(
           "Error occurred when handling search request. Details: %s.", ex.getMessage());
@@ -204,7 +211,8 @@ public class LuceneSearcher {
     }
   }
 
-  public List<FindResult> searchAdvance(String query, List<String> findProperties) {
+  public List<FindResult> searchAdvance(String query, List<String> findProperties,
+      boolean useHighlighting) {
     try {
       var queryParser = new QueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
       var parsedQuery = queryParser.parse(prepareQueryString(query, findProperties));
@@ -215,7 +223,7 @@ public class LuceneSearcher {
             return getFieldName(dataFactory.getOWLAnnotationProperty(findProperty.getIri()));
           }).collect(Collectors.toSet());
 
-      return searchWithQuery(parsedQuery, fieldOfInterest);
+      return searchWithQuery(parsedQuery, fieldOfInterest, useHighlighting);
     } catch (IOException | ParseException ex) {
       var errorMessage = String.format(
           "Error occurred when handling advance search request. Details: %s", ex.getMessage());
@@ -229,36 +237,46 @@ public class LuceneSearcher {
     return getTextSearcherConfig().getFindProperties();
   }
 
-  private List<FindResult> searchWithQuery(Query query, Set<String> fieldOfInterest)
-      throws IOException {
-    try (var indexReader = DirectoryReader.open(indexDirectory)) {
-      var indexSearcher = new IndexSearcher(indexReader);
-      var queryScorer = new QueryScorer(query);
-      var highlighter = new Highlighter(queryScorer);
-      var fragmenter = new SimpleSpanFragmenter(queryScorer);
-      highlighter.setTextFragmenter(fragmenter);
+  private List<FindResult> searchWithQuery(Query query, Set<String> fieldOfInterest,
+      boolean useHighlighting) throws IOException {
+    var searcher = getIndexSearcher();
+    var queryScorer = new QueryScorer(query);
+    var highlighter = new Highlighter(queryScorer);
+    var fragmenter = new SimpleSpanFragmenter(queryScorer);
+    highlighter.setTextFragmenter(fragmenter);
 
-      var findResults = new ArrayList<FindResult>();
+    var findResults = new ArrayList<FindResult>();
 
-      var topDocs = indexSearcher.search(query, 10000);
-      for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
-        var luceneDocument = indexSearcher.doc(scoreDoc.doc);
-        var score = scoreDoc.score;
-        var iri = luceneDocument.getField(IRI_FIELD).stringValue();
-        var type = luceneDocument.getField(TYPE_FIELD).stringValue();
+    var topDocs = searcher.search(query, 1000);
+    for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
+      var luceneDocument = searcher.doc(scoreDoc.doc);
+      var score = scoreDoc.score;
+      var iri = luceneDocument.getField(IRI_FIELD).stringValue();
+      var type = luceneDocument.getField(TYPE_FIELD).stringValue();
 
-        var rdfsLabelField = luceneDocument.getField(rdfsLabelFieldName);
-        String printableLabel = null;
-        if (rdfsLabelField != null) {
-          printableLabel = rdfsLabelField.stringValue();
-        }
-        var highlights = getHighlights(highlighter, luceneDocument, fieldOfInterest);
-
-        findResults.add(new FindResult(iri, type, printableLabel, highlights, score));
+      var rdfsLabelField = luceneDocument.getField(rdfsLabelFieldName);
+      String printableLabel = null;
+      if (rdfsLabelField != null) {
+        printableLabel = rdfsLabelField.stringValue();
       }
 
-      return findResults;
+      List<Highlight> highlights = new ArrayList<>();
+      if (useHighlighting) {
+        highlights = getHighlights(highlighter, luceneDocument, fieldOfInterest);
+      }
+
+      findResults.add(new FindResult(iri, type, printableLabel, highlights, score));
     }
+
+    return findResults;
+  }
+
+  private IndexSearcher getIndexSearcher() throws IOException {
+    if (this.indexReader == null || this.indexSearcher == null) {
+      this.indexReader = DirectoryReader.open(indexDirectory);
+      this.indexSearcher = new IndexSearcher(indexReader);
+    }
+    return this.indexSearcher;
   }
 
   private List<Highlight> getHighlights(Highlighter highlighter, Document document,
@@ -271,16 +289,18 @@ public class LuceneSearcher {
         if (field != null) {
           var highlightedText =
               highlighter.getBestFragment(analyzer, fieldName, field.stringValue());
-          var annotationProperty = fieldNameToAnnotationPropertyMap.get(fieldName);
-          if (annotationProperty == null) {
-            LOGGER.warn("Unable to find annotation property by fieldName '{}'.", fieldName);
-            continue;
+          if (highlightedText != null) {
+            var annotationProperty = fieldNameToAnnotationPropertyMap.get(fieldName);
+            if (annotationProperty == null) {
+              LOGGER.warn("Unable to find annotation property by fieldName '{}'.", fieldName);
+              continue;
+            }
+            var fieldIdentifier =
+                iriToToFindPropertyNameMap.getOrDefault(
+                    annotationProperty.getIRI().toString(),
+                    UNKNOWN_NAME);
+            highlights.add(new Highlight(fieldIdentifier, highlightedText));
           }
-          var fieldIdentifier =
-              iriToToFindPropertyNameMap.getOrDefault(
-                  annotationProperty.getIRI().toString(),
-                  UNKNOWN_NAME);
-          highlights.add(new Highlight(fieldIdentifier, highlightedText));
         }
       } catch (IOException | InvalidTokenOffsetsException ex) {
         LOGGER.warn(
@@ -333,12 +353,20 @@ public class LuceneSearcher {
 
             owlAnnotations.forEach(annotationProperty -> {
               var annotationValue = annotationProperty.getValue();
-              annotationValue.asLiteral().ifPresent(owlLiteral ->
-                  document.add(
-                      new TextField(
-                          getFieldName(owlAnnotationProperty),
-                          owlLiteral.getLiteral(),
-                          Store.YES)));
+              annotationValue.asLiteral().ifPresent(owlLiteral -> {
+                var offsetsType = new FieldType(TextField.TYPE_STORED);
+                offsetsType.setIndexOptions(
+                    IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+                offsetsType.setStoreTermVectors(true);
+                offsetsType.setStoreTermVectorOffsets(true);
+                offsetsType.setStoreTermVectorPositions(true);
+                offsetsType.setStoreTermVectorPayloads(true);
+                document.add(
+                    new Field(
+                        getFieldName(owlAnnotationProperty),
+                        owlLiteral.getLiteral(),
+                        offsetsType));
+              });
             });
           });
 

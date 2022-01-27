@@ -245,11 +245,10 @@
 ### /api/find (GET)
 
 #### Request Parameters
-  - **term** - required
-    - Term to find entities by. 
-  - **mode** - optional, permissible values: [`basic`, `advance`], default: `basic`
-  - **findProperties** - optional
-    - List of properties to search within,  
+  - **term** - required; term to find entities by
+  - **mode** - optional; permissible values: [`basic`, `advance`], default: `basic`
+  - **findProperties** - optional; list of properties to search within
+  - **useHighlighting** - optional, true by default; if true, returns results with highlightings
 
 #### Description
 

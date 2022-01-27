@@ -10,19 +10,14 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.loader.saxparser.ViewerCoreConfigurationHandler;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLException;
 
@@ -74,7 +69,7 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnTheBestMatchForSpecificTerm() {
-    var actualResult = luceneSearcher.search("mortgage");
+    var actualResult = luceneSearcher.search("mortgage", true);
 
     assertThat(actualResult.size(), equalTo(3));
     assertThat(actualResult.get(0).getIri(), equalTo("http://www.example.com/Mortgage"));
@@ -82,7 +77,7 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnTheBestMatchForSpecificMultiWordsTerm() {
-    var actualResult = luceneSearcher.search("sponsored loan");
+    var actualResult = luceneSearcher.search("sponsored loan", true);
 
     assertThat(actualResult.size(), equalTo(1));
     assertThat(actualResult.get(0).getIri(),
@@ -91,7 +86,7 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnTheBestMatchForWhenSearchingWithinRdfsLabelSubAnnotation() {
-    var actualResult = luceneSearcher.search("government");
+    var actualResult = luceneSearcher.search("government", true);
 
     assertThat(actualResult.size(), equalTo(1));
     assertThat(actualResult.get(0).getIri(),
@@ -100,40 +95,57 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnResultsWhenFuzzyMatchExists() {
-    var actualResult = luceneSearcher.search("mortgagee");
+    var actualResult = luceneSearcher.search("mortgagee", true);
 
     assertThat(actualResult.size(), equalTo(3));
   }
 
   @Test
   void shouldReturnEmptyResultsWhenThereIsNoMatch() {
-    var actualResult = luceneSearcher.search("foobarbaz");
+    var actualResult = luceneSearcher.search("foobarbaz", true);
 
     assertTrue(actualResult.isEmpty());
   }
 
   @Test
   void shouldReturnCorrectHighlightForSearchResult() {
-    var actualResult = luceneSearcher.search("reverse");
+    var actualResult = luceneSearcher.search("reverse", true);
 
     assertThat(actualResult.size(), equalTo(1));
     assertThat(actualResult.get(0).getHighlights().get(0).getHighlightedText(),
         equalTo("<B>reverse</B> mortgage"));
   }
 
+  @Test
+  void shouldReturnTheBestMatchForSpecificTermWithoutHighlighting() {
+    var actualResult = luceneSearcher.search("reverse", false);
+
+    assertThat(actualResult.size(), equalTo(1));
+    assertTrue(actualResult.get(0).getHighlights().isEmpty());
+  }
+
   // Advance search
   @Test
   void shouldReturnTheBestMatchForSpecificTermWithAdvanceMode() {
     var properties = List.of("rdfs_label", "skos_definition");
-    var actualResult = luceneSearcher.searchAdvance("contract", properties);
+    var actualResult = luceneSearcher.searchAdvance("contract", properties, true);
 
     assertThat(actualResult.size(), equalTo(2));
   }
 
   @Test
+  void shouldReturnTheBestMatchForSpecificTermWithAdvanceModeWithoutHighlighting() {
+    var properties = List.of("rdfs_label", "skos_definition");
+    var actualResult = luceneSearcher.searchAdvance("contract", properties, false);
+
+    assertThat(actualResult.size(), equalTo(2));
+    assertTrue(actualResult.get(0).getHighlights().isEmpty());
+  }
+
+  @Test
   void shouldReturnEmptyResultWhenTermDoesNotOccurForSpecificTermWithAdvanceMode() {
     var properties = List.of("rdfs_label");
-    var actualResult = luceneSearcher.searchAdvance("contract", properties);
+    var actualResult = luceneSearcher.searchAdvance("contract", properties, true);
 
     assertThat(actualResult.size(), equalTo(0));
   }

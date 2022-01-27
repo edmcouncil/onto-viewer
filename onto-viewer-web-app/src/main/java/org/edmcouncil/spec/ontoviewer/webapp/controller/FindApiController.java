@@ -26,17 +26,18 @@ public class FindApiController extends BaseController {
   @GetMapping
   public List<FindResult> findByTerm(@RequestParam String term,
       @RequestParam(required = false, defaultValue = "basic") String mode,
-      @RequestParam(required = false, defaultValue = "") String findProperties) {
+      @RequestParam(required = false, defaultValue = "") String findProperties,
+      @RequestParam(required = false, defaultValue = "true") boolean useHighlighting) {
     checkIfApplicationIsReady();
 
     var modeEnum = FindMode.getMode(mode);
 
     if (modeEnum == null || FindMode.BASIC == modeEnum) {
-      return luceneSearcher.search(term);
+      return luceneSearcher.search(term, useHighlighting);
     } else if (FindMode.ADVANCE == modeEnum) {
       if (!findProperties.isBlank()) {
         var findPropertiesList = Arrays.asList(findProperties.split("\\."));
-        return luceneSearcher.searchAdvance(term, findPropertiesList);
+        return luceneSearcher.searchAdvance(term, findPropertiesList, useHighlighting);
       } else {
         throw new IllegalArgumentException("findProperties parameter mustn't be empty.");
       }
