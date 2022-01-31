@@ -5,9 +5,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+
+import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.hint.HintItem;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +30,8 @@ class HintControllerTest {
   private UpdateBlocker updateBlocker;
   @MockBean
   private TextSearchService textSearch;
+  @MockBean
+  private LuceneSearcher luceneSearcher;
 
   @Test
   void shouldReturn200WhenAppIsInitialized() {

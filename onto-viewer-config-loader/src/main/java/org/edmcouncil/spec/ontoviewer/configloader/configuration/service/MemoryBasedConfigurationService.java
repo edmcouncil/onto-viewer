@@ -1,23 +1,28 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.GroupType;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.GroupsPropertyKey;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.KeyValueMapConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
 
 public class MemoryBasedConfigurationService implements ConfigurationService {
 
   private static final Set<String> THIS_ONTOLOGY_CONTAINS_PROPERTIES = new HashSet<>();
   private static final Set<String> ONTOLOGICAL_CHARACTERISTIC_PROPERTIES = new HashSet<>();
+  private static final List<FindProperty> FIND_PROPERTIES = new ArrayList<>();
 
   static {
     THIS_ONTOLOGY_CONTAINS_PROPERTIES.addAll(
@@ -66,6 +71,23 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
             "@viewer.axiom.InverseObjectProperties",
             "http://purl.org/dc/terms/hasPart",
             "http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn"));
+
+    FIND_PROPERTIES.addAll(
+        Arrays.asList(
+            new FindProperty("RDFS Label", "rdfs_label", "http://www.w3.org/2000/01/rdf-schema#label"),
+            new FindProperty("SKOS Definition", "skos_definition", "http://www.w3.org/2004/02/skos/core#definition"),
+            new FindProperty("FIBO Explanatory Note", "fibo_explanatoryNote", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote"),
+            new FindProperty("SKOS Note", "skos_note", "http://www.w3.org/2004/02/skos/core#note"),
+            new FindProperty("FIBO Abbreviation", "fibo_abbreviation", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation"),
+            new FindProperty("FIBO Common Designation", "fibo_commonDesignation", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/commonDesignation"),
+            new FindProperty("PURL Description", "purl_description", "http://purl.org/dc/terms/description"),
+            new FindProperty("FIBO Synonym", "fibo_synonym", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym"),
+            new FindProperty("FIBO Preferred Designation", "fibo_preferredDesignation", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/preferredDesignation"),
+            new FindProperty("SKOS Example", "skos_example", "http://www.w3.org/2004/02/skos/core#example"),
+            new FindProperty("FIBO Usage Note", "fibo_usageNote", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/usageNote"),
+            new FindProperty("SKOS Scope Note", "skos_scopeNote", "http://www.w3.org/2004/02/skos/core#scopeNote"),
+            new FindProperty("FIBO Symbol", "fibo_symbol", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/symbol"),
+            new FindProperty("SKOS Alt Label", "skos_altLabel", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/definitionOrigin")));
   }
 
   private final CoreConfiguration configuration;
@@ -80,6 +102,7 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
     configuration.addConfigElement(ConfigKeys.FORCE_LABEL_LANG, new BooleanItem(false));
     configuration.addConfigElement(ConfigKeys.LABEL_LANG, new StringItem("en"));
     configuration.addConfigElement(ConfigKeys.ONTOLOGY_HANDLING, prepareOntologyHandlingConfig());
+    configuration.addConfigElement(ConfigKeys.TEXT_SEARCH_CONFIG, prepareTextSearchConfig());
 
     var glossary = new GroupsItem();
     glossary.setName(GroupsPropertyKey.GLOSSARY.getKey());
@@ -100,6 +123,12 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
         populateConfiguration(
             GroupsPropertyKey.THIS_ONTOLOGY_CONTAINS,
             THIS_ONTOLOGY_CONTAINS_PROPERTIES));
+  }
+
+  private ConfigItem prepareTextSearchConfig() {
+    var textSearcherConfig = new TextSearcherConfig();
+    FIND_PROPERTIES.forEach(textSearcherConfig::addFindProperty);
+    return textSearcherConfig;
   }
 
   private ConfigItem prepareOntologyHandlingConfig() {

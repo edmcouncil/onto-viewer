@@ -2,8 +2,7 @@ package org.edmcouncil.spec.ontoviewer.webapp.actuator;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;

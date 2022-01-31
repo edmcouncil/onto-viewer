@@ -6,8 +6,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -15,6 +18,8 @@ class HintControllerIT extends BaseControllerIT {
 
   @Autowired
   private MockMvc mockMvc;
+  @MockBean
+  private LuceneSearcher luceneSearcher;
 
   @Test
   void shouldReturn200WithOneResult() throws Exception {

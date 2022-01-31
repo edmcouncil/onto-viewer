@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.updater;
+package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ public class UpdateBlocker {
   private boolean block = false;
   private boolean updateNow = false;
 
-  public Boolean isInitializeAppDone() {
+  public boolean isInitializeAppDone() {
     return initializeAppDone;
   }
 
