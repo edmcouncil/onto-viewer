@@ -5,19 +5,22 @@ import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.hint.HintItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextSearcher;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-@Component
-public class TextSearchService   {
+@Service
+public class TextSearchService {
 
-  @Autowired
-  private TextSearcher searcher;
+  private final TextSearcher searcher;
 
-  public SearcherResult search(String query, Integer maxValues, Integer currentPage) throws ViewerException {
+  public TextSearchService(TextSearcher searcher) {
+    this.searcher = searcher;
+  }
+
+  public SearcherResult search(String query, Integer maxValues, Integer currentPage)
+      throws ViewerException {
     return searcher.search(query, maxValues, currentPage);
   }
 

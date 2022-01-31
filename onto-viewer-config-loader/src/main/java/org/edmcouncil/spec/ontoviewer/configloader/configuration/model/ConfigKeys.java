@@ -23,7 +23,7 @@ public class ConfigKeys {
   public static final String ONTOLOGY_PATH = "ontologyPath";
   public static final String ONTOLOGY_DIR = "ontologyDir";
   public static final String ONTOLOGY_MAPPER = "ontologyMapper";
-
+  public static final String ONTOLOGY_MAPPING_MAP = "ontologyMapping";
   //uri / iri
   public static final String SCOPE_IRI = "scopeIri";
   public static final String URI_NAMESPACE = "uriNamespace";
@@ -53,6 +53,10 @@ public class ConfigKeys {
   public static final String FIELD_BOOST = "fieldBoost";
   public static final String HINT_LEVENSTEIN_DISTANCE = "hintLevensteinDistance";
   public static final String SEARCH_LEVENSTEIN_DISTANCE = "searchLevensteinDistance";
+  public static final String FIND_PROPERTY = "findProperty";
+  public static final String FIND_PROPERTY_LABEL = "label";
+  public static final String FIND_PROPERTY_IRI = "iri";
+  public static final String FIND_PROPERTY_IDENTIFIER = "identifier";
 
   // Ontology handling
   public static final String ONTOLOGY_HANDLING = "ontologyHandling";
@@ -60,4 +64,6 @@ public class ConfigKeys {
   public static final String USAGE_ENABLED = "usageEnabled";
   public static final String ONTOLOGY_GRAPH_ENABLED = "ontologyGraphEnabled";
   public static final String INDIVIDUALS_ENABLED = "individualsEnabled";
+  public static final String FUZZY_DISTANCE = "fuzzyDistance";
+  public static final String REINDEX_ON_START = "reindexOnStart";
 }

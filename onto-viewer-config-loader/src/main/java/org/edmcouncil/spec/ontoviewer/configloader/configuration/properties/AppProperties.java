@@ -1,8 +1,8 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.properties;
 
+import java.util.Map;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Component
-@PropertySources({
-  @PropertySource("classpath:application.properties")
-})
+@PropertySource("classpath:application.properties")
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
 
@@ -20,6 +18,7 @@ public class AppProperties {
   private String viewerConfigFileName;
   private String defaultOntologyFileName;
   private String configPath;
+  private Map<String, Object> search;
 
   public String getConfigPath() {
     return configPath;
@@ -53,4 +52,11 @@ public class AppProperties {
     this.defaultOntologyFileName = defaultOntologyFileName;
   }
 
+  public Map<String, Object> getSearch() {
+    return this.search;
+  }
+
+  public void setSearch(Map<String, Object> search) {
+    this.search = search;
+  }
 }

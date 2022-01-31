@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.updater;
+package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,6 +15,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdateJobGenerator;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
+import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ import org.springframework.stereotype.Component;
 public class Updater {
 
     private static final Logger LOG = LoggerFactory.getLogger(Updater.class);
+
+    private final Map<String, UpdateJob> jobs = new HashMap<>();
+
     @Autowired
     private ConfigurationService config;
     @Autowired
@@ -40,11 +44,12 @@ public class Updater {
     private UpdateBlocker blocker;
     @Autowired
     private FiboDataHandler fiboDataHandler;
-    private final Map<String, UpdateJob> jobs = new HashMap<>();
     @Autowired
     private ScopeIriOntology scopeIriOntology;
     @Autowired
     private OntologyStatsManager ontologyStatsManager;
+    @Autowired
+    private LuceneSearcher luceneSearcher;
 
     private static final String interruptMessage = "Interrupts this update. New update request.";
 
@@ -69,7 +74,8 @@ public class Updater {
                 fiboDataHandler,
                 job,
                 scopeIriOntology,
-                ontologyStatsManager) {
+                ontologyStatsManager,
+                luceneSearcher) {
         };
         t.start();
 

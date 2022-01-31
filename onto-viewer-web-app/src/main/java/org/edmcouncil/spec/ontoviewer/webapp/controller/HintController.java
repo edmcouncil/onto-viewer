@@ -3,7 +3,7 @@ package org.edmcouncil.spec.ontoviewer.webapp.controller;
 import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
 import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.hint.HintItem;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

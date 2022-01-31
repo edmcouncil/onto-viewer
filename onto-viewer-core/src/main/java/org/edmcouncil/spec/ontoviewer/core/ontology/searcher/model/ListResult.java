@@ -11,7 +11,7 @@ public class ListResult extends SearcherResult<List<SearchItem>> {
     private Integer page;
     private Boolean hasMore;
     private Integer maxPage;
-    private Integer totalResut;
+    private Integer totalResult;
 
     public ListResult(Type type, List<SearchItem> result) {
         super(type, result);
@@ -23,7 +23,7 @@ public class ListResult extends SearcherResult<List<SearchItem>> {
         this.page = result.getPage();
         this.hasMore = result.hasMorePage();
         this.maxPage = result.getMaxPage();
-        this.totalResut = result.getTotalResult();
+        this.totalResult = result.getTotalResult();
     }
 
     public String getQuery() {
@@ -42,8 +42,8 @@ public class ListResult extends SearcherResult<List<SearchItem>> {
         return maxPage;
     }
 
-    public Integer getTotalResut() {
-        return totalResut;
+    public Integer getTotalResult() {
+        return totalResult;
     }
   
    @Override

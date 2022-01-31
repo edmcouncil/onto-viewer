@@ -3,6 +3,7 @@ package org.edmcouncil.spec.ontoviewer.configloader.configuration.loader.saxpars
 import java.util.HashMap;
 import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItemType;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.GroupType;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.KeyValueMapConfigItem;
@@ -43,6 +44,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
   DefaultLabelItem dli = null;
   TextSearcherConfig tsc = null;
   SearcherField sf = null;
+  FindProperty findProperty = null;
 
   public ViewerCoreConfigurationHandler(CoreConfiguration configuration) {
     this.configuration = configuration;
@@ -89,6 +91,9 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_GRAPH_ENABLED:
       case ConfigKeys.INDIVIDUALS_ENABLED:
         this.key = qName;
+        break;
+      case ConfigKeys.FIND_PROPERTY:
+        this.findProperty = new FindProperty();
         break;
     }
   }
@@ -186,6 +191,12 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.SEARCH_LEVENSTEIN_DISTANCE:
         tsc.setSearchMaxLevensteinDistance(Double.valueOf(val));
         break;
+      case ConfigKeys.FUZZY_DISTANCE:
+        tsc.setFuzzyDistance(Integer.parseInt(val));
+        break;
+      case ConfigKeys.REINDEX_ON_START:
+        tsc.setReindexOnStart(Boolean.parseBoolean(val));
+        break;
       case ConfigKeys.ONTOLOGY_HANDLING:
         var configItem = new KeyValueMapConfigItem(ontologyHandling);
         configuration.addConfigElement(ConfigKeys.ONTOLOGY_HANDLING, configItem);
@@ -196,6 +207,18 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.INDIVIDUALS_ENABLED:
         var booleanValue = Boolean.valueOf(val);
         ontologyHandling.put(key, booleanValue);
+        break;
+      case ConfigKeys.FIND_PROPERTY:
+        tsc.addFindProperty(findProperty);
+        break;
+      case ConfigKeys.FIND_PROPERTY_IRI:
+        findProperty.setIri(val);
+        break;
+      case ConfigKeys.FIND_PROPERTY_LABEL:
+        findProperty.setLabel(val);
+        break;
+      case ConfigKeys.FIND_PROPERTY_IDENTIFIER:
+        findProperty.setIdentifier(val);
         break;
     }
   }

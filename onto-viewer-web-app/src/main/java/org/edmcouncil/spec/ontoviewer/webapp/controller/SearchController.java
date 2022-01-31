@@ -9,7 +9,7 @@ import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
-import org.edmcouncil.spec.ontoviewer.core.ontology.updater.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;

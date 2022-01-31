@@ -51,7 +51,6 @@ public class FileSystemManager {
             defaultHomePath);
         break;
     }
-    LOG.debug("Application home directory is '{}'.", userHomeDir);
     return userHomeDir;
   }
 

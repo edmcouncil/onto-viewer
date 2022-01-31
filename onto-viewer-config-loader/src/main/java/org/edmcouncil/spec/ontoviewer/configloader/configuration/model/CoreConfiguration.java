@@ -14,6 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MAPPING_MAP;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.DefaultLabelItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority;
@@ -88,6 +89,19 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     return result;
   }
 
+  
+  public Map<String, Object> getOntologyMapping() {
+    var ontologyMappingSet = configuration.get(ONTOLOGY_MAPPING_MAP);
+    if (ontologyMappingSet != null && !ontologyMappingSet.isEmpty()) {
+      var configItem = ontologyMappingSet.stream().findFirst().get();
+      if (configItem instanceof KeyValueMapConfigItem) {
+        var keyValueConfigItem = (KeyValueMapConfigItem) configItem;
+        return keyValueConfigItem.getProperties();
+      }
+    }
+    return new HashMap<>();
+  }
+  
   private void getOntologyPath(Map<String, Set<String>> result) {
     if (configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)) {
       Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_PATH, new HashSet<>());
