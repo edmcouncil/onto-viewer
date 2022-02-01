@@ -19,6 +19,8 @@ public class DefaultAppLabels {
   public static final String DEF_INT_INSTANCES = "internal instances";
   public static final String DEF_EXT_DATA_PROPERTIES = "external data properties";
   public static final String DEF_INT_DATA_PROPERTIES = "internal data properties";
+  public static final String DEF_EXT_DATA_TYPE = "external datatype";
+  public static final String DEF_INT_DATA_TYPE = "internal datatype";
   public static final String DEF_EXT_OBJECT_PROPERTIES = "external object properties";
   public static final String DEF_INT_OBJECT_PROPERTIES = "internal object properties";
   public static final String DEF_DIRECT_SUBCLASSES = "Direct subclasses";

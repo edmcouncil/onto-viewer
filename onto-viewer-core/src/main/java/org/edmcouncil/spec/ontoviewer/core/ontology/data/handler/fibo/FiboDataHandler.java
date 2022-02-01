@@ -326,7 +326,7 @@ public class FiboDataHandler {
                 })
                 .forEachOrdered(c -> ontoResources
                 .addElement(selectResourceIriString(c, ontologyIri,
-                        ViewerIdentifierFactory.Element.objectProperty), c));
+                        ViewerIdentifierFactory.Element.dataType), c));
 
         ontoResources.sortInAlphabeticalOrder();
 
