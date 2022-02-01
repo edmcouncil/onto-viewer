@@ -33,6 +33,8 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
             "@viewer.external.objectProperty",
             "@viewer.internal.dataProperty",
             "@viewer.external.dataProperty",
+            "@viewer.internal.dataType",
+            "@viewer.external.dataType",
             "@viewer.internal.instance",
             "@viewer.external.instance",
             "@viewer.internal.annotationProperty",

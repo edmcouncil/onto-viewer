@@ -26,6 +26,12 @@ public class DefaultLabelsFactory {
 
     iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal, ViewerIdentifierFactory.Element.dataProperty);
     result.addLabel(iri, DefaultAppLabels.DEF_INT_DATA_PROPERTIES);
+    
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external, ViewerIdentifierFactory.Element.dataType);
+    result.addLabel(iri, DefaultAppLabels.DEF_EXT_DATA_TYPE);
+
+    iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal, ViewerIdentifierFactory.Element.dataType);
+    result.addLabel(iri, DefaultAppLabels.DEF_INT_DATA_TYPE);
 
     iri = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external, ViewerIdentifierFactory.Element.objectProperty);
     result.addLabel(iri, DefaultAppLabels.DEF_EXT_OBJECT_PROPERTIES);

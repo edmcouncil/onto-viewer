@@ -9,7 +9,7 @@ public class ViewerIdentifierFactory {
   private static final String IRI_FORMAT = "@viewer.%s.%s";
 
   public enum Element {
-    clazz, dataProperty, objectProperty, instance, empty, annotationProperty
+    clazz, dataProperty, objectProperty, instance, empty, annotationProperty, dataType
   }
 
   public enum Type {

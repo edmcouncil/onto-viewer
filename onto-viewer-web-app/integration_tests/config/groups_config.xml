@@ -41,6 +41,8 @@
       <groupItem>@viewer.external.objectProperty</groupItem>
       <groupItem>@viewer.internal.dataProperty</groupItem>
       <groupItem>@viewer.external.dataProperty</groupItem>
+      <groupItem>@viewer.internal.datatype</groupItem>
+      <groupItem>@viewer.external.datatype</groupItem>
       <groupItem>@viewer.internal.instance</groupItem>
       <groupItem>@viewer.external.instance</groupItem>
       <groupItem>@viewer.internal.annotationProperty</groupItem>
