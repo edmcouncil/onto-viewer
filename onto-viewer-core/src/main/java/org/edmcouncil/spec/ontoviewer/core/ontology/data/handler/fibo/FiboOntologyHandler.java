@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo;
 
 import static org.edmcouncil.spec.ontoviewer.core.FiboVocabulary.HAS_MATURITY_LEVEL;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -39,7 +40,7 @@ public class FiboOntologyHandler {
 
     // Cache for ontologies' maturity level
     private Map<IRI, OntoFiboMaturityLevel> maturityLevels = new ConcurrentHashMap<>();
-    private List<FiboModule> modules;
+    private List<FiboModule> modules = Collections.emptyList();
 
     public FiboOntologyHandler(OntologyManager ontologyManager,
             LabelProvider labelProvider, AnnotationsDataHandler annotationsDataHandler) {
