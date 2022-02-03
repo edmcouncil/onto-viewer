@@ -26,8 +26,8 @@ public abstract class SearcherResult<T> {
     list, details
   }
 
-    @Override
-    public String toString() {
-        return "{" + "type=" + type + ", result=" + result + '}';
-    }
+  @Override
+  public String toString() {
+    return "{" + "type=" + type + "," + result + '}';
+  }
 }

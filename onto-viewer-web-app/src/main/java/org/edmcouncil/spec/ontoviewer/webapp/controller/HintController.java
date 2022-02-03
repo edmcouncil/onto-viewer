@@ -38,8 +38,8 @@ public class HintController {
 
   @PostMapping(value = {"", "/max/{max}"}, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<List<HintItem>> getHints(
-      @RequestBody String query,
-      @PathVariable Optional<Integer> max) {
+          @RequestBody String query,
+          @PathVariable Optional<Integer> max) {
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
       return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
@@ -52,8 +52,8 @@ public class HintController {
     }
 
     List<HintItem> result = textSearch.getHints(query, maxHintCount);
-     long endTimestamp = System.currentTimeMillis();
-     LOG.info("For hints: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp, result);
+    long endTimestamp = System.currentTimeMillis();
+    LOG.info("For query: '{}' (query time: '{}' ms) hints are:\n {}", query, endTimestamp - startTimestamp, result);
 
     return ResponseEntity.ok(result);
   }

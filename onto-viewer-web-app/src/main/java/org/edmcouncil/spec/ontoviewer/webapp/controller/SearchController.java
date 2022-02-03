@@ -86,13 +86,12 @@ public class SearchController {
       if (UrlChecker.isUrl(query)) {
         LOG.info("URL detected: '{}'", query);
         result = ontologySearcher.search(query, 0);
-        
+
         long endTimestamp = System.currentTimeMillis();
-     LOG.info("URL detected: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp, result);
-     
-        modelBuilder.emptyQuery(); 
+        LOG.info("URL detected: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp, result);
+
+        modelBuilder.emptyQuery();
       } else {
-       // LOG.info("String detected, search elements with given label");
         modelBuilder.setQuery(query);
         result = textSearchService.search(query, max, page);
         long endTimestamp = System.currentTimeMillis();

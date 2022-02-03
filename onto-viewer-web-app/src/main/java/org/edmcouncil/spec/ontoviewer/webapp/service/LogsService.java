@@ -31,7 +31,7 @@ public class LogsService {
         this.fileSystemManager = fileSystemManager;
     }
 
-    public List<String> getLogs(int numberOfLines, String date) throws FileNotFoundException, IOException {
+    public List<String> getLogs(String date) throws FileNotFoundException, IOException {
         Path logsDirectoryPath = fileSystemManager.getViewerHomeDir().resolve("logs");
         Path logFilePath = null;
 
