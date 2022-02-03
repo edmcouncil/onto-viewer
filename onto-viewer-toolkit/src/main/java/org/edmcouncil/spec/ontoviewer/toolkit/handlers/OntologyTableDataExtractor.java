@@ -10,12 +10,16 @@ import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.OBJECT_PRO
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,7 +36,7 @@ import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.EntityData;
 import org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLNamedObject;
+import org.semanticweb.owlapi.model.OWLEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -61,13 +65,32 @@ public class OntologyTableDataExtractor {
 
   public List<EntityData> extractEntityData() {
     var result = new ArrayList<EntityData>();
-
     var ontology = detailsManager.getOntology();
-    result.addAll(getEntities(ontology.classesInSignature(INCLUDED), CLASS));
-    result.addAll(getEntities(ontology.individualsInSignature(INCLUDED), INDIVIDUAL));
-    result.addAll(getEntities(ontology.objectPropertiesInSignature(INCLUDED), OBJECT_PROPERTY));
-    result.addAll(getEntities(ontology.dataPropertiesInSignature(INCLUDED), DATA_PROPERTY));
-    result.addAll(getEntities(ontology.datatypesInSignature(INCLUDED), DATATYPE));
+
+    var executorService = Executors.newFixedThreadPool(5);
+
+    List<Callable<List<EntityData>>> tasks = new ArrayList<>();
+    tasks.add(() -> getEntities(ontology.classesInSignature(INCLUDED), CLASS));
+    tasks.add(() -> getEntities(ontology.individualsInSignature(INCLUDED), INDIVIDUAL));
+    tasks.add(() -> getEntities(ontology.objectPropertiesInSignature(INCLUDED), OBJECT_PROPERTY));
+    tasks.add(() -> getEntities(ontology.dataPropertiesInSignature(INCLUDED), DATA_PROPERTY));
+    tasks.add(() -> getEntities(ontology.datatypesInSignature(INCLUDED), DATATYPE));
+
+    try {
+      var futures = executorService.invokeAll(tasks);
+      executorService.shutdown();
+      var succeeded = executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+      if (!succeeded) {
+        throw new IllegalStateException(
+            "Executor service was not able to gather all entities in the given time. Aborting...");
+      }
+
+      for (Future<List<EntityData>> future : futures) {
+        result.addAll(future.get());
+      }
+    } catch (Exception ex) {
+      LOGGER.error("Error occurred while getting all entities. Details: " + ex.getMessage(), ex);
+    }
 
     LOGGER.debug("Found {} entities.", result.size());
 
@@ -76,27 +99,35 @@ public class OntologyTableDataExtractor {
     return result;
   }
 
-  private Collection<? extends EntityData> getEntities(
-      Stream<? extends OWLNamedObject> entities,
+  private List<EntityData> getEntities(
+      Stream<? extends OWLEntity> entities,
       EntityType type) {
     var filterPattern = configurationService.getCoreConfiguration()
         .getSingleStringValue(OptionDefinition.FILTER_PATTERN.argName())
         .orElse("");
 
-    return entities
+    var notFoundEntitiesCounter = new AtomicInteger(0);
+
+    var entityData = entities
         .parallel()
         .filter(owlEntity -> owlEntity.getIRI().toString().contains(filterPattern))
         .map(owlEntity -> {
           try {
-            return detailsManager.getDetailsByIri(owlEntity.getIRI().toString());
+            return detailsManager.getEntityDetails(owlEntity);
           } catch (NotFoundElementInOntologyException e) {
             LOGGER.warn("OWL Entity '{}' not found.", owlEntity.getIRI());
+            notFoundEntitiesCounter.getAndIncrement();
             return null;
           }
         })
         .filter(Objects::nonNull)
         .map(owlDetails -> mapToEntityData(owlDetails, type))
         .collect(Collectors.toList());
+
+    LOGGER.info("Found {} entities of type {} and was not able to found {} entities.",
+        entityData.size(), type, notFoundEntitiesCounter.get());
+
+    return entityData;
   }
 
   private EntityData mapToEntityData(OwlDetails owlDetails, EntityType entityType)
