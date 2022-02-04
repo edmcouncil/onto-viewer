@@ -52,7 +52,6 @@ public class SearchItem {
 
   public OntoFiboMaturityLevel getMaturityLevel() {
     return maturityLevel;
-
   }
 
   @Override
