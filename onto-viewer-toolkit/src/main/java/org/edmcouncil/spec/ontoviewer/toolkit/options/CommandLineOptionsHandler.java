@@ -9,6 +9,8 @@ import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitExcepti
 
 public class CommandLineOptionsHandler {
 
+  public static final String OPTION_PRESENT = "<present>";
+
   public CommandLineOptions parseArgs(String[] args) throws OntoViewerToolkitException {
     var optionSettings = prepareOptions();
 
@@ -40,21 +42,19 @@ public class CommandLineOptionsHandler {
     return options;
   }
 
-  private CommandLineOptions mapParsedOptions(CommandLine parsedOptions)
-      throws OntoViewerToolkitException {
+  private CommandLineOptions mapParsedOptions(CommandLine parsedOptions) {
     var commandLineOptions = new CommandLineOptions();
 
     for (OptionDefinition optionDefinition : OptionDefinition.values()) {
       if (parsedOptions.hasOption(optionDefinition.argName())) {
         var optionValues = parsedOptions.getOptionValues(optionDefinition.argName());
-        commandLineOptions.setOption(optionDefinition, optionValues);
-      } else if (optionDefinition.isNotRequired()) {
+        if (optionValues != null) {
+          commandLineOptions.setOption(optionDefinition, optionValues);
+        } else {
+          commandLineOptions.setOption(optionDefinition, OPTION_PRESENT);
+        }
+      } else if (optionDefinition.isNotRequired() && optionDefinition.hasDefaultValue()) {
         commandLineOptions.setOption(optionDefinition, optionDefinition.defaultValue());
-      } else {
-        var message = String.format(
-            "Required command line option '%s' was not set.",
-            optionDefinition.argName());
-        throw new OntoViewerToolkitException(message);
       }
     }
 

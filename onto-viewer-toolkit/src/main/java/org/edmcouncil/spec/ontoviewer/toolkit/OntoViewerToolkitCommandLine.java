@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.toolkit;
 
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MAPPING_MAP;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_MAPPING;
+import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.VERSION;
 
 import com.google.common.base.Stopwatch;
 import java.nio.file.Files;
@@ -18,6 +19,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.Configu
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
+import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyConsistencyChecker;
@@ -49,6 +51,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
   private final OntologyConsistencyChecker ontologyConsistencyChecker;
   private final StandardEnvironment environment;
+  private final ApplicationConfigProperties applicationConfigProperties;
 
   public OntoViewerToolkitCommandLine(
       ConfigurationService configurationService,
@@ -56,13 +59,15 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       FiboDataHandler fiboDataHandler,
       OntologyTableDataExtractor ontologyTableDataExtractor,
       OntologyConsistencyChecker ontologyConsistencyChecker,
-      StandardEnvironment environment) {
+      StandardEnvironment environment,
+      ApplicationConfigProperties applicationConfigProperties) {
     this.configurationService = configurationService;
     this.ontologyManager = ontologyManager;
     this.fiboDataHandler = fiboDataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
     this.ontologyConsistencyChecker = ontologyConsistencyChecker;
     this.environment = environment;
+    this.applicationConfigProperties = applicationConfigProperties;
   }
 
   @Override
@@ -76,14 +81,18 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     }
     var commandLineOptionsHandler = new CommandLineOptionsHandler();
     var commandLineOptions = commandLineOptionsHandler.parseArgs(args);
+
+    var versionOption = commandLineOptions.getOption(VERSION);
+    if (versionOption.isPresent()) {
+      System.out.println(getApplicationInfo());
+      System.exit(0);
+    }
+
     populateConfiguration(commandLineOptions);
-
-    var goal = resolveGoal();
-
     loadOntology();
 
+    var goal = resolveGoal();
     LOGGER.info("Running goal '{}'...", goal.getName());
-
     switch (goal) {
       case CONSISTENCY_CHECK: {
         var consistencyResult = ontologyConsistencyChecker.checkOntologyConsistency();
@@ -151,10 +160,13 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       }
     }
 
-    for (String ontologyPath : commandLineOptions.getOptions(OptionDefinition.DATA)) {
-      configuration.addConfigElement(
-          ConfigKeys.ONTOLOGY_PATH,
-          new StringItem(ontologyPath));
+    var ontologyPathOptions = commandLineOptions.getOptions(OptionDefinition.DATA);
+    if (ontologyPathOptions != null) {
+      for (String ontologyPath : ontologyPathOptions) {
+        configuration.addConfigElement(
+            ConfigKeys.ONTOLOGY_PATH,
+            new StringItem(ontologyPath));
+      }
     }
     LOGGER.debug("Using ontology paths: {}", configuration.getOntologyLocation().values());
 
@@ -210,5 +222,12 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
         LOGGER.debug("Property source '{}' content: {}", propertySource.getName(), stringBuilder);
       }
     });
+  }
+
+  private String getApplicationInfo() {
+    var applicationName = applicationConfigProperties.getApplicationName();
+    var applicationVersion = applicationConfigProperties.getApplicationVersion();
+    var commitId = applicationConfigProperties.getCommitId();
+    return String.format("%s %s (%s)", applicationName, applicationVersion, commitId);
   }
 }
