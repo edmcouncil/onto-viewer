@@ -110,4 +110,8 @@ public class OwlDetails {
     return true;
   }
 
+    @Override
+    public String toString() {
+        return "{" + "label=" + label + ", iri=" + iri + '}';
+    }
 }

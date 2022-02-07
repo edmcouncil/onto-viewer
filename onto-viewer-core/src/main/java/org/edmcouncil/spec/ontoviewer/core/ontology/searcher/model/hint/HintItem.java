@@ -33,5 +33,9 @@ public class HintItem {
   public void setLabel(String label) {
     this.label = label;
   }
-  
+
+    @Override
+    public String toString() {
+        return "{" + "iri=" + iri + ", label=" + label + ", relevancy=" + relevancy + '}';
+    }
 }

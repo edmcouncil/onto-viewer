@@ -31,6 +31,6 @@ public class StatsApiController {
       LOG.debug("Application initialization has not completed");
       return new ResponseEntity<>("503 Service Unavailable", HttpStatus.SERVICE_UNAVAILABLE);
     }
-    return ResponseEntity.ok(ontologyStatsManager.getOntologyStats());
+    return ResponseEntity.ok(ontologyStatsManager.getOntologyStats());    
   }
 }

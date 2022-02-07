@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/search")
 public class SearchApiController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(SearchApiController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SearchApiController.class);
 
   private final TextSearchService textSearchService;
   private final OntologySearcherService ontologySearcher;
@@ -35,8 +35,8 @@ public class SearchApiController {
   private static final Integer DEFAULT_RESULT_PAGE = 1;
 
   public SearchApiController(TextSearchService textSearchService,
-      OntologySearcherService ontologySearcher,
-      UpdateBlocker blocker) {
+          OntologySearcherService ontologySearcher,
+          UpdateBlocker blocker) {
     this.textSearchService = textSearchService;
     this.ontologySearcher = ontologySearcher;
     this.blocker = blocker;
@@ -44,26 +44,27 @@ public class SearchApiController {
 
   @PostMapping(value = {"", "/max/{max}", "/page/{page}", "/max/{max}/page/{page}"})
   public ResponseEntity<SearcherResult> searchJson(
-      @RequestBody String query,
-      @PathVariable Optional<Integer> max,
-      @PathVariable Optional<Integer> page) {
+          @RequestBody String query,
+          @PathVariable Optional<Integer> max,
+          @PathVariable Optional<Integer> page) {
     if (!blocker.isInitializeAppDone()) {
-      LOGGER.debug("Application initialization has not completed");
+      LOG.debug("Application initialization has not completed");
       return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
     }
+    long startTimestamp = System.currentTimeMillis();
 
     SearcherResult result;
     try {
       if (UrlChecker.isUrl(query)) {
-        LOGGER.info("URL detected - searching for specific element.");
-
         result = ontologySearcher.search(query, 0);
+        long endTimestamp = System.currentTimeMillis();
+        LOG.info("For query: '{}' (query time: '{}' ms) {}", query, endTimestamp - startTimestamp);
       } else {
-        LOGGER.info("String detected - searching for elements with the given label.");
-
         Integer maxResults = max.orElse(DEFAULT_MAX_SEARCH_RESULT_COUNT);
         Integer currentPage = page.orElse(DEFAULT_RESULT_PAGE);
         result = textSearchService.search(query, maxResults, currentPage);
+        long endTimestamp = System.currentTimeMillis();
+        LOG.info("For query: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp, result);
       }
 
     } catch (ViewerException ex) {
@@ -74,9 +75,9 @@ public class SearchApiController {
   }
 
   private ResponseEntity getError(ViewerException ex) {
-    LOGGER.info("Handle NotFoundElementInOntologyException. Message: '{}'", ex.getMessage());
+    LOG.info("Handle NotFoundElementInOntologyException. Message: '{}'", ex.getMessage());
 
     return ResponseEntity.badRequest().body(
-        new ErrorResponse("Element Not Found.", ex.getMessage()));
+            new ErrorResponse("Element Not Found.", ex.getMessage()));
   }
 }
