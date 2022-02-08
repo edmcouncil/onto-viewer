@@ -15,8 +15,9 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 @Import({
@@ -39,5 +40,14 @@ public class ApplicationConfiguration {
   @Bean
   public ConfigurationService getConfigurationService() {
     return new MemoryBasedConfigurationService();
+  }
+
+  @Bean
+  public PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+    var propsConfig = new PropertySourcesPlaceholderConfigurer();
+    propsConfig.setLocation(new ClassPathResource("git.properties"));
+    propsConfig.setIgnoreResourceNotFound(true);
+    propsConfig.setIgnoreUnresolvablePlaceholders(true);
+    return propsConfig;
   }
 }

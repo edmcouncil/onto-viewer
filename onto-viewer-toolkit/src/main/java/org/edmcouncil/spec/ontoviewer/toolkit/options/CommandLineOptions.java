@@ -19,7 +19,7 @@ public class CommandLineOptions {
 
   public Optional<String> getOption(OptionDefinition optionDefinition) {
     var values = options.get(optionDefinition);
-    if (!values.isEmpty()) {
+    if (values != null && !values.isEmpty()) {
       return Optional.of(values.get(0));
     }
     return Optional.empty();
