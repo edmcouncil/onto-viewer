@@ -116,15 +116,15 @@ public class DetailsManager {
       result = dataHandler.handleOntologyMetadata(iri, getOntology());
     } else {
       if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularClass(iri, getOntology());
+        result = dataHandler.handleParticularClass(iri);
       } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularDataProperty(iri, getOntology());
+        result = dataHandler.handleParticularDataProperty(iri);
       } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularObjectProperty(iri, getOntology());
+        result = dataHandler.handleParticularObjectProperty(iri);
       } else if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularIndividual(iri, getOntology());
+        result = dataHandler.handleParticularIndividual(iri);
       } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularDatatype(iri, getOntology());
+        result = dataHandler.handleParticularDatatype(iri);
       } else if (ontologyManager.getOntology()
           .containsAnnotationPropertyInSignature(iri, INCLUDED)) {
         result = dataHandler.handleParticularAnnotationProperty(iri, getOntology());
