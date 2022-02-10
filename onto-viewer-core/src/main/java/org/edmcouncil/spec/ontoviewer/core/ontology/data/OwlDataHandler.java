@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data;
 
-import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_ANNOTATION_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_CLASS;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_DATA_PROPERTY;
@@ -23,7 +22,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
@@ -141,7 +139,60 @@ public class OwlDataHandler {
     unwantedTypes.add("^^dateTime");
   }
 
-  public OwlListDetails handleParticularClass(IRI classIri, OWLOntology ontology) {
+  public OwlListDetails handleParticularClass(OWLClass owlClass) {
+    var ontology = ontologyManager.getOntology();
+    var classIri = owlClass.getIRI();
+    var resultDetails = new OwlListDetails();
+
+    try {
+      resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(owlClass));
+
+      OwlDetailsProperties<PropertyValue> axioms = handleAxioms(owlClass, ontology);
+      List<PropertyValue> subclasses = getSubclasses(axioms);
+      List<PropertyValue> subclasses2 = getSubclasses(owlClass);
+      List<PropertyValue> taxElements2 = extractTaxonomyElements(subclasses2);
+
+      OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(owlClass);
+      OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
+      if (getSetting(ConfigKeys.INDIVIDUALS_ENABLED)) {
+        individuals = handleInstances(ontology, owlClass);
+      }
+
+      OwlDetailsProperties<PropertyValue> usage = new OwlDetailsProperties<>();
+      if (getSetting(ConfigKeys.USAGE_ENABLED)) {
+        usage = extractUsageForClasses(owlClass, ontology);
+      }
+
+      OwlDetailsProperties<PropertyValue> inheritedAxioms =
+          handleInheritedAxioms(ontology, owlClass);
+
+      OntologyGraph ontologyGraph = new OntologyGraph();
+      if (getSetting(ConfigKeys.ONTOLOGY_GRAPH_ENABLED)) {
+        // 'Nothing' has all restrictions, we don't want to display that.
+        if (!owlClass.getIRI().equals(OWLRDFVocabulary.OWL_NOTHING.getIRI())) {
+          ontologyGraph = graphDataHandler.handleGraph(owlClass, ontology);
+        }
+      }
+
+      subclasses = filterSubclasses(subclasses);
+
+      OwlTaxonomyImpl taxonomy = extractTaxonomy(taxElements2, owlClass.getIRI(), ontology,
+          AXIOM_CLASS);
+      taxonomy.sort();
+
+      OwlDetailsProperties<PropertyValue> annotations =
+          handleAnnotations(owlClass.getIRI(), ontology, resultDetails);
+
+      setResultValues(resultDetails, taxonomy, axioms, annotations, directSubclasses, individuals,
+          inheritedAxioms, usage, ontologyGraph, subclasses);
+    } catch (Exception ex) {
+      LOG.warn("Unable to handle class " + classIri + ". Details: " + ex.getMessage(), ex);
+    }
+
+    return resultDetails;
+  }
+
+  public OwlListDetails handleParticularClass(IRI classIri) {
     var resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(classIri, OwlType.CLASS);
@@ -150,51 +201,13 @@ public class OwlDataHandler {
       if (entityEntry != null && entityEntry.isPresent()) {
         var owlClass = entityEntry.getEntityAs(OWLClass.class);
 
-        resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(owlClass));
-
-        OwlDetailsProperties<PropertyValue> axioms = handleAxioms(owlClass, ontology);
-        List<PropertyValue> subclasses = getSubclasses(axioms);
-        List<PropertyValue> subclasses2 = getSubclasses(owlClass);
-        List<PropertyValue> taxElements2 = extractTaxonomyElements(subclasses2);
-
-        OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(owlClass);
-        OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
-        if (getSetting(ConfigKeys.INDIVIDUALS_ENABLED)) {
-          individuals = handleInstances(ontology, owlClass);
-        }
-
-        OwlDetailsProperties<PropertyValue> usage = new OwlDetailsProperties<>();
-        if (getSetting(ConfigKeys.USAGE_ENABLED)) {
-          usage = extractUsageForClasses(owlClass, ontology);
-        }
-
-        OwlDetailsProperties<PropertyValue> inheritedAxioms =
-            handleInheritedAxioms(ontology, owlClass);
-
-        OntologyGraph ontologyGraph = new OntologyGraph();
-        if (getSetting(ConfigKeys.ONTOLOGY_GRAPH_ENABLED)) {
-          // 'Nothing' has all restrictions, we don't want to display that.
-          if (!classIri.equals(OWLRDFVocabulary.OWL_NOTHING.getIRI())) {
-            ontologyGraph = graphDataHandler.handleGraph(owlClass, ontology);
-          }
-        }
-
-        subclasses = filterSubclasses(subclasses);
-
-        OwlTaxonomyImpl taxonomy = extractTaxonomy(taxElements2, classIri, ontology, AXIOM_CLASS);
-        taxonomy.sort();
-
-        OwlDetailsProperties<PropertyValue> annotations =
-            handleAnnotations(owlClass.getIRI(), ontology, resultDetails);
-
-        setResultValues(resultDetails, taxonomy, axioms, annotations, directSubclasses, individuals,
-            inheritedAxioms, usage, ontologyGraph, subclasses);
+        resultDetails = handleParticularClass(owlClass);
       } else {
         LOG.warn("Entity with IRI '{}' not found (is NULL or not present: {}).",
             classIri, entityEntry);
       }
     } catch (OntoViewerException ex) {
-      LOG.warn("Unable to handle class " + classIri + ". Details: " + ex.getMessage(), ex);
+      LOG.warn("Unable to handle class {}. Details: {}", classIri, ex.getMessage(), ex);
     }
 
     return resultDetails;
@@ -283,7 +296,36 @@ public class OwlDataHandler {
     }
   }
 
-  public OwlListDetails handleParticularIndividual(IRI iri, OWLOntology ontology) {
+  public OwlListDetails handleParticularIndividual(OWLNamedIndividual individual) {
+    var ontology = ontologyManager.getOntology();
+    var iri = individual.getIRI();
+
+    var resultDetails = new OwlListDetails();
+
+    try {
+      resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(individual.getIRI()));
+
+      OwlDetailsProperties<PropertyValue> axioms = handleAxioms(individual, ontology);
+
+      OwlDetailsProperties<PropertyValue> annotations =
+          handleAnnotations(individual.getIRI(), ontology, resultDetails);
+      OntologyGraph ontologyGraph = graphDataHandler.handleGraph(individual, ontology);
+      if (ontologyGraph.isEmpty()) {
+        resultDetails.setGraph(null);
+      } else {
+        VisGraph vgj = new ViewerGraphFactory().convertToVisGraph(ontologyGraph);
+        resultDetails.setGraph(vgj);
+      }
+      resultDetails.addAllProperties(axioms);
+      resultDetails.addAllProperties(annotations);
+    } catch (Exception ex) {
+      LOG.warn("Unable to handle individual " + iri + ". Details: " + ex.getMessage(), ex);
+    }
+
+    return resultDetails;
+  }
+
+  public OwlListDetails handleParticularIndividual(IRI iri) {
     OwlListDetails resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.INDIVIDUAL);
@@ -292,24 +334,10 @@ public class OwlDataHandler {
       if (entityEntry.isPresent()) {
         var individual = entityEntry.getEntityAs(OWLNamedIndividual.class);
 
-        resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(individual.getIRI()));
-
-        OwlDetailsProperties<PropertyValue> axioms = handleAxioms(individual, ontology);
-
-        OwlDetailsProperties<PropertyValue> annotations =
-            handleAnnotations(individual.getIRI(), ontology, resultDetails);
-        OntologyGraph ontologyGraph = graphDataHandler.handleGraph(individual, ontology);
-        if (ontologyGraph.isEmpty()) {
-          resultDetails.setGraph(null);
-        } else {
-          VisGraph vgj = new ViewerGraphFactory().convertToVisGraph(ontologyGraph);
-          resultDetails.setGraph(vgj);
-        }
-        resultDetails.addAllProperties(axioms);
-        resultDetails.addAllProperties(annotations);
+        resultDetails = handleParticularIndividual(individual);
       }
     } catch (OntoViewerException ex) {
-      LOG.warn("Unable to handle individual " + iri + ". Details: " + ex.getMessage(), ex);
+      LOG.warn("Unable to handle individual {}. Details: {}", iri, ex.getMessage(), ex);
     }
 
     return resultDetails;
@@ -745,7 +773,7 @@ public class OwlDataHandler {
     return value;
   }
 
-  public OwlListDetails handleParticularDataProperty(IRI iri, OWLOntology ontology) {
+  public OwlListDetails handleParticularDataProperty(IRI iri) {
     OwlListDetails resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.DATA_PROPERTY);
@@ -754,34 +782,48 @@ public class OwlDataHandler {
       if (entityEntry.isPresent()) {
         var dataProperty = entityEntry.getEntityAs(OWLDataProperty.class);
 
-        resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(dataProperty.getIRI()));
-
-        OwlDetailsProperties<PropertyValue> axioms = handleAxioms(dataProperty, ontology);
-        OwlDetailsProperties<PropertyValue> directSubDataProperty = handleDirectSubDataProperty(
-            ontology, dataProperty);
-
-        List<PropertyValue> subElements =
-            getSuperElements(dataProperty, ontology, AXIOM_DATA_PROPERTY);
-        OwlTaxonomyImpl taxonomy =
-            extractTaxonomy(subElements, iri, ontology, AXIOM_DATA_PROPERTY);
-        taxonomy.sort();
-
-        OwlDetailsProperties<PropertyValue> annotations =
-            handleAnnotations(dataProperty.getIRI(), ontology, resultDetails);
-
-        resultDetails.addAllProperties(axioms);
-        resultDetails.addAllProperties(annotations);
-        resultDetails.addAllProperties(directSubDataProperty);
-        resultDetails.setTaxonomy(taxonomy);
+        resultDetails = handleParticularDataProperty(dataProperty);
       }
     } catch (OntoViewerException ex) {
-      LOG.warn("Unable to handle data property " + iri + ". Details: " + ex.getMessage());
+      LOG.warn("Unable to handle data property {}. Details: {}", iri, ex.getMessage());
     }
 
     return resultDetails;
   }
 
-  public OwlListDetails handleParticularObjectProperty(IRI iri, OWLOntology ontology) {
+  public OwlListDetails handleParticularDataProperty(OWLDataProperty dataProperty) {
+    var ontology = ontologyManager.getOntology();
+    var resultDetails = new OwlListDetails();
+    var iri = dataProperty.getIRI();
+
+    try {
+      resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(dataProperty.getIRI()));
+
+      OwlDetailsProperties<PropertyValue> axioms = handleAxioms(dataProperty, ontology);
+      OwlDetailsProperties<PropertyValue> directSubDataProperty = handleDirectSubDataProperty(
+          ontology, dataProperty);
+
+      List<PropertyValue> subElements =
+          getSuperElements(dataProperty, ontology, AXIOM_DATA_PROPERTY);
+      OwlTaxonomyImpl taxonomy =
+          extractTaxonomy(subElements, iri, ontology, AXIOM_DATA_PROPERTY);
+      taxonomy.sort();
+
+      OwlDetailsProperties<PropertyValue> annotations =
+          handleAnnotations(dataProperty.getIRI(), ontology, resultDetails);
+
+      resultDetails.addAllProperties(axioms);
+      resultDetails.addAllProperties(annotations);
+      resultDetails.addAllProperties(directSubDataProperty);
+      resultDetails.setTaxonomy(taxonomy);
+    } catch (Exception ex) {
+      LOG.warn("Unable to handle data property {}. Details: {}", iri, ex.getMessage());
+    }
+
+    return resultDetails;
+  }
+
+  public OwlListDetails handleParticularObjectProperty(IRI iri) {
     OwlListDetails resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.OBJECT_PROPERTY);
@@ -790,34 +832,48 @@ public class OwlDataHandler {
       if (entityEntry.isPresent()) {
         var objectProperty = entityEntry.getEntityAs(OWLObjectProperty.class);
 
-        resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(objectProperty.getIRI()));
-
-        OwlDetailsProperties<PropertyValue> axioms = handleAxioms(objectProperty, ontology);
-        OwlDetailsProperties<PropertyValue> directSubObjectProperty =
-            handleDirectSubObjectProperty(ontology, objectProperty);
-
-        List<PropertyValue> subElements =
-            getSuperElements(objectProperty, ontology, AXIOM_OBJECT_PROPERTY);
-        OwlTaxonomyImpl taxonomy =
-            extractTaxonomy(subElements, iri, ontology, AXIOM_OBJECT_PROPERTY);
-        taxonomy.sort();
-
-        subElements = subElements.stream()
-            .filter(pv -> (!pv.getType().equals(OwlType.TAXONOMY)))
-            .collect(Collectors.toList());
-
-        OwlDetailsProperties<PropertyValue> annotations =
-            handleAnnotations(objectProperty.getIRI(), ontology, resultDetails);
-
-        for (PropertyValue subElement : subElements) {
-          axioms.addProperty(subObjectPropertyOfIriString, subElement);
-        }
-        resultDetails.addAllProperties(axioms);
-        resultDetails.addAllProperties(annotations);
-        resultDetails.addAllProperties(directSubObjectProperty);
-        resultDetails.setTaxonomy(taxonomy);
+        resultDetails = handleParticularObjectProperty(objectProperty);
       }
     } catch (OntoViewerException ex) {
+      LOG.warn("Unable to handle object property {}. Details: {}", iri, ex.getMessage());
+    }
+
+    return resultDetails;
+  }
+
+  public OwlListDetails handleParticularObjectProperty(OWLObjectProperty objectProperty) {
+    var ontology = ontologyManager.getOntology();
+    var iri = objectProperty.getIRI();
+    var resultDetails = new OwlListDetails();
+
+    try {
+      resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(objectProperty.getIRI()));
+
+      OwlDetailsProperties<PropertyValue> axioms = handleAxioms(objectProperty, ontology);
+      OwlDetailsProperties<PropertyValue> directSubObjectProperty =
+          handleDirectSubObjectProperty(ontology, objectProperty);
+
+      List<PropertyValue> subElements =
+          getSuperElements(objectProperty, ontology, AXIOM_OBJECT_PROPERTY);
+      OwlTaxonomyImpl taxonomy =
+          extractTaxonomy(subElements, iri, ontology, AXIOM_OBJECT_PROPERTY);
+      taxonomy.sort();
+
+      subElements = subElements.stream()
+          .filter(pv -> (!pv.getType().equals(OwlType.TAXONOMY)))
+          .collect(Collectors.toList());
+
+      OwlDetailsProperties<PropertyValue> annotations =
+          handleAnnotations(objectProperty.getIRI(), ontology, resultDetails);
+
+      for (PropertyValue subElement : subElements) {
+        axioms.addProperty(subObjectPropertyOfIriString, subElement);
+      }
+      resultDetails.addAllProperties(axioms);
+      resultDetails.addAllProperties(annotations);
+      resultDetails.addAllProperties(directSubObjectProperty);
+      resultDetails.setTaxonomy(taxonomy);
+    } catch (Exception ex) {
       LOG.warn("Unable to handle object property " + iri + ". Details: " + ex.getMessage());
     }
 
@@ -1146,7 +1202,7 @@ public class OwlDataHandler {
     return fiboDataHandler.getElementLocationInModules(iriString, ontology);
   }
 
-  public OwlListDetails handleParticularDatatype(IRI iri, OWLOntology ontology) {
+  public OwlListDetails handleParticularDatatype(IRI iri) {
     OwlListDetails resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.DATATYPE);
@@ -1155,12 +1211,25 @@ public class OwlDataHandler {
       if (entityEntry.isPresent()) {
         var datatype = entityEntry.getEntityAs(OWLDatatype.class);
 
-        resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
-        resultDetails.addAllProperties(
-            handleAnnotations(datatype.getIRI(), ontology, resultDetails));
+        resultDetails = handleParticularDatatype(datatype);
       }
     } catch (OntoViewerException ex) {
-      LOG.warn("Unable to handle datatype " + iri + ". Details: " + ex.getMessage());
+      LOG.warn("Unable to handle datatype {}. Details: {}", iri, ex.getMessage());
+    }
+
+    return resultDetails;
+  }
+
+  public OwlListDetails handleParticularDatatype(OWLDatatype datatype) {
+    var ontology = ontologyManager.getOntology();
+    var resultDetails = new OwlListDetails();
+    var iri = datatype.getIRI();
+
+    try {
+      resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
+      resultDetails.addAllProperties(handleAnnotations(iri, ontology, resultDetails));
+    } catch (Exception ex) {
+      LOG.warn("Unable to handle datatype {}. Details: {}", iri, ex.getMessage());
     }
 
     return resultDetails;
@@ -1200,7 +1269,7 @@ public class OwlDataHandler {
         }
       }
     } catch (OntoViewerException ex) {
-      LOG.warn("Unable to handle annotation property " + iri + ". Details: " + ex.getMessage());
+      LOG.warn("Unable to handle annotation property {}. Details: {}", iri, ex.getMessage());
     }
 
     return resultDetails;
