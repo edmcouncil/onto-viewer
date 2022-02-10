@@ -183,7 +183,7 @@ public class LabelProvider {
 
       } else {
         LOGGER.debug("[Label Extractor]: REJECTED label: '{}' @ '{}' for element with IRI: '{}', "
-                + "Reason: Language is not present.",
+            + "Reason: Language is not present.",
             label, lang.isEmpty() ? "no-lang" : lang, entityIri.toString());
       }
 
