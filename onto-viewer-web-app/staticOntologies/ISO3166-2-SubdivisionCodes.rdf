@@ -21,7 +21,7 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:dct="http://purl.org/dc/terms/"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
+     xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
      xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
      xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
      xmlns:lcc-3166-1="https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"
@@ -34,19 +34,19 @@ xmlns:sm="http://www.omg.org/techprocess/ab/SpecificationMetadata/"
 
     <!-- Curation and Rights Metadata for the LCC ISO 3166-2 Subdivision Codes Ontology -->
 
-        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2017 Object Management Group, Inc.
-Copyright (c) 2015-2017 Adaptive Inc.
-Copyright (c) 2015-2017 Thematix Partners LLC
-Copyright (c) 2015-2017 Unisys
-</sm:copyright>
-        <dct:license rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/MITLicense"/>
+        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2021 Object Management Group, Inc.</sm:copyright>
+        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2020 Adaptive Inc.</sm:copyright>
+        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2021 agnos.ai UK Ltd.</sm:copyright>
+        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2021 Thematix Partners LLC</sm:copyright>
+        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2017 Unisys</sm:copyright>
+        <dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 
 
     <!-- Ontology/File-Level Metadata for the LCC ISO 3166-2 Subdivision Codes Ontology -->
 
         <sm:filename rdf:datatype="&xsd;string">ISO3166-2-SubdivisionCodes.rdf</sm:filename>
         <sm:fileAbbreviation rdf:datatype="&xsd;string">lcc-3166-2</sm:fileAbbreviation>
-        <owl:versionIRI rdf:resource="https://www.omg.org/spec/LCC/20190201/Countries/ISO3166-2-SubdivisionCodes/"/>
+        <owl:versionIRI rdf:resource="https://www.omg.org/spec/LCC/20211101/Countries/ISO3166-2-SubdivisionCodes/"/>
         <sm:fileAbstract rdf:datatype="&xsd;string">This ontology defines the code set relevant to representation of subdivisions of countries, as required to support the ISO 3166-2 subdivision codes. The codes for each country are defined by country in subordinate, regional ontologies.</sm:fileAbstract>
 
         <skos:changeNote rdf:datatype="&xsd;string">The http://www.omg.org/spec/LCC/20151101/Countries/ISO3166-2-SubdivisionCodes/ version of this ontology was modified per the resolutions included in the LCC 1.0 FTF report. The subdivision codes and related metadata contained herein are current as of the July 2017 revision to the online code set.</skos:changeNote>

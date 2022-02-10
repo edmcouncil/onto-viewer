@@ -30,29 +30,29 @@
 
       <!-- Curation and Rights Metadata for the LCC ISO 639-1  Language Codes Ontology -->
       
-        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2019 Object Management Group, Inc.</sm:copyright>
-        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2019 Adaptive Inc.</sm:copyright>
-        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2019 Thematix Partners LLC</sm:copyright>
-        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2017 Unisys</sm:copyright>
-        <dct:license rdf:resource="http://opensource.org/licenses/MIT"/>
+        <sm:copyright rdf:datatype="&xsd;string">Copyright (c) 2015-2021 Object Management Group, Inc.</sm:copyright>
+        <sm:copyright>Copyright (c) 2015-2019 Adaptive Inc.</sm:copyright>
+		<sm:copyright>Copyright (c) 2019-2021 agnos.ai</sm:copyright>
+        <sm:copyright>Copyright (c) 2015-2021 Thematix Partners LLC</sm:copyright>
+        <sm:copyright>Copyright (c) 2015-2017 Unisys</sm:copyright>
+		<dct:license rdf:datatype="&xsd;anyURI">http://opensource.org/licenses/MIT</dct:license>
 
 
       <!-- Ontology/File-Level Metadata for the LCC ISO 639-1 Language Codes Ontology -->
       
         <sm:filename rdf:datatype="&xsd;string">ISO639-1-LanguageCodes.rdf</sm:filename>
         <sm:fileAbbreviation rdf:datatype="&xsd;string">lcc-639-1</sm:fileAbbreviation>
-        <owl:versionIRI rdf:resource="https://www.omg.org/spec/LCC/20190201/Languages/ISO639-1-LanguageCodes/"/>
+        <owl:versionIRI rdf:resource="https://www.omg.org/spec/LCC/20211101/Languages/ISO639-1-LanguageCodes/"/>
         <sm:fileAbstract rdf:datatype="&xsd;string">This ontology represents the subset of the ISO 639 standard that provides the language names and actual codes for ISO 639-1.</sm:fileAbstract>
-
+		<sm:contentLanguage rdf:datatype="&xsd;anyURI">https://www.w3.org/TR/owl2-quick-reference/</sm:contentLanguage>
         <skos:changeNote rdf:datatype="&xsd;string">The http://www.omg.org/spec/LCC/20151101/Languages/ISO639-1-LanguageCodes.rdf version of this ontology has been revised to reflect the issues addressed by the LCC 1.0 FTF report.  The codes themselves are current as of 31 July 2017, based on the US Library of Congress site.</skos:changeNote>
-        <skos:changeNote rdf:datatype="&xsd;string">The https://www.omg.org/spec/LCC/20190201/Languages/ISO639-2-LanguageCodes.rdf version of this ontology is current as of 14 February 2019, based on the US Library of Congress site.</skos:changeNote>        
+        <skos:changeNote rdf:datatype="&xsd;string">The https://www.omg.org/spec/LCC/20190201/Languages/ISO639-2-LanguageCodes.rdf version of this ontology is current as of 14 February 2019, based on the US Library of Congress site.</skos:changeNote> 
+        <skos:changeNote rdf:datatype="&xsd;string">The https://www.omg.org/spec/LCC/20211101/Languages/ISO639-2-LanguageCodes.rdf version of this ontology has been revised to incorporate recently published Library of Congress links to their URIs for the language codes, minor revisions to metadata about the languages to be in sync with the LoC site, and is current as of 29 October 2021.</skos:changeNote>        		
         <sm:dependsOn rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/</sm:dependsOn>
-      
-        <sm:contentLanguage rdf:datatype="&xsd;anyURI">http://www.w3.org/standards/techs/owl#w3c_all</sm:contentLanguage>
-        <sm:contentLanguage rdf:datatype="&xsd;anyURI">http://www.omg.org/spec/ODM/</sm:contentLanguage>
 
         <rdfs:seeAlso rdf:resource="https://www.omg.org/spec/LCC/AboutLCC/"/>
         <rdfs:seeAlso rdf:resource="https://www.omg.org/spec/LCC/Languages/AboutLanguages/"/>
+		<rdfs:seeAlso rdf:resource="https://id.loc.gov/vocabulary/iso639-1.html"/>
         <rdfs:seeAlso rdf:resource="http://www.loc.gov/standards/iso639-2/php/code_list.php/"/>
 
         <owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
@@ -73,6 +73,7 @@
         <rdfs:label>ISO 639-1 code set</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">the set of language identifiers that make up the ISO 639-1 specification</skos:definition>
         <rdfs:seeAlso rdf:datatype="&xsd;anyURI">http://www.infoterm.info/standardization/iso_639_1_2002.php</rdfs:seeAlso>
+		<rdfs:seeAlso rdf:datatype="&xsd;anyURI">https://id.loc.gov/vocabulary/iso639-1.html</rdfs:seeAlso>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -541,7 +542,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;fa">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>fa</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Farsi; Persian</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Persian</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">fa</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Persian"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Persian"/>
@@ -615,7 +616,7 @@
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="&lcc-639-1;ga_1">
+    <owl:NamedIndividual rdf:about="&lcc-639-1;ga">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>ga</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">language identifier for Irish</skos:definition>
@@ -631,8 +632,8 @@
         <rdfs:label>gd</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">language identifier for Gaelic; Scottish Gaelic</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">gd</lcc-lr:hasTag>
-        <lcc-lr:denotes rdf:resource="&lcc-639-1;ScottishGaelic"/>
-        <lcc-lr:identifies rdf:resource="&lcc-639-1;ScottishGaelic"/>
+        <lcc-lr:denotes rdf:resource="&lcc-639-1;Gaelic"/>
+        <lcc-lr:identifies rdf:resource="&lcc-639-1;Gaelic"/>
         <lcc-lr:isMemberOf rdf:resource="&lcc-639-1;ISO639-1-CodeSet"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
@@ -972,7 +973,7 @@
         <rdfs:label>kl</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">language identifier for Greenlandic; Kalaallisut</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">kl</lcc-lr:hasTag>
-        <lcc-lr:denotes rdf:resource="&lcc-639-1;Georgian"/>
+        <lcc-lr:denotes rdf:resource="&lcc-639-1;Kalaallisut"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Kalaallisut"/>
         <lcc-lr:isMemberOf rdf:resource="&lcc-639-1;ISO639-1-CodeSet"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
@@ -981,7 +982,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;km">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>km</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Khmer; Cambodian</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Central Khmer</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">km</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;CentralKhmer"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;CentralKhmer"/>
@@ -1069,7 +1070,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;ky">
        <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
        <rdfs:label>ky</rdfs:label>
-       <skos:definition rdf:datatype="&xsd;string">language identifier for Kyrgyz; Kirghiz</skos:definition>
+       <skos:definition rdf:datatype="&xsd;string">language identifier for Kirghiz; Kyrgyz</skos:definition>
        <lcc-lr:hasTag rdf:datatype="&xsd;string">ky</lcc-lr:hasTag>
        <lcc-lr:denotes rdf:resource="&lcc-639-1;Kirghiz"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Kirghiz"/>
@@ -1101,7 +1102,7 @@
 
     <owl:NamedIndividual rdf:about="&lcc-639-1;lg">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Luganda; Ganda</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Ganda</skos:definition>
         <rdfs:label>lg</rdfs:label>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">lg</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Ganda"/>
@@ -1135,7 +1136,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;lo">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>lo</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Laotian; Lao</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Lao</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">lo</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Lao"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Lao"/>
@@ -1278,7 +1279,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;my">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>my</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Myanmar; Burmese</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Burmese</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">my</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Burmese"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Burmese"/>
@@ -1401,8 +1402,8 @@
         <rdfs:label>ny</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">language identifier for Chichewa; Chewa; Nyanja</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">ny</lcc-lr:hasTag>
-        <lcc-lr:denotes rdf:resource="&lcc-639-1;Nyanja"/>
-        <lcc-lr:identifies rdf:resource="&lcc-639-1;Nyanja"/>
+        <lcc-lr:denotes rdf:resource="&lcc-639-1;Chichewa"/>
+        <lcc-lr:identifies rdf:resource="&lcc-639-1;Chichewa"/>
         <lcc-lr:isMemberOf rdf:resource="&lcc-639-1;ISO639-1-CodeSet"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
@@ -1432,7 +1433,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;om">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>om</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Oromo; Afan Oromo; Galla</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Oromo</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">om</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Oromo"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Oromo"/>
@@ -1465,7 +1466,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;pa">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>pa</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Punjabi; Panjabi</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Panjabi; Punjabi</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">pa</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Panjabi"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Panjabi"/>
@@ -1542,7 +1543,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;rn">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>rn</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Kirundi; Rundi</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Rundi</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">rn</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Rundi"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Rundi"/>
@@ -1630,7 +1631,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;sg">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>sg</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Sango; Sangho</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Sango</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">sg</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Sango"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Sango"/>
@@ -1641,7 +1642,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;si">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>si</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Sinhala; Sinhalese; Singhalese</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Sinhala; Sinhalese</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">si</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Sinhala"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Sinhala"/>
@@ -1729,7 +1730,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;ss">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>ss</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Swazi; Swati; Siswati</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Swati</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">ss</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Swati"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Swati"/>
@@ -1773,7 +1774,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;sw">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>sw</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Swahili; Kiswahili</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Swahili</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">sw</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Swahili"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Swahili"/>
@@ -1861,7 +1862,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;tn">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>tn</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Setswana; Tswana</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Tswana</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">tn</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Tswana"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Tswana"/>
@@ -1938,7 +1939,7 @@
     <owl:NamedIndividual rdf:about="&lcc-639-1;ug">
         <rdf:type rdf:resource="&lcc-lr;Alpha2Code"/>
         <rdfs:label>ug</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">language identifier for Uighur</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">language identifier for Uighur; Uyghur</skos:definition>
         <lcc-lr:hasTag rdf:datatype="&xsd;string">ug</lcc-lr:hasTag>
         <lcc-lr:denotes rdf:resource="&lcc-639-1;Uighur"/>
         <lcc-lr:identifies rdf:resource="&lcc-639-1;Uighur"/>
@@ -2105,12 +2106,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Abkhazian</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Abkhazian language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Abkhaz</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Abkhazian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">abkhaze</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">abkhazien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Abchasisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Abchasisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">apṕsua bysžwa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ab"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2121,8 +2121,9 @@
         <skos:definition rdf:datatype="&xsd;string">Afar language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Afar</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">afar</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Danakil-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Danakil-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">afar</lcc-lr:hasIndigenousName>
+        <owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/aa"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2133,8 +2134,9 @@
         <skos:definition rdf:datatype="&xsd;string">Afrikaans language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Afrikaans</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">afrikaans</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Afrikaans</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Afrikaans</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Afrikaans</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/af"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2145,8 +2147,9 @@
         <skos:definition rdf:datatype="&xsd;string">Akan language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Akan</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">akan</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Akan</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Akan-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">akana</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ak"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2157,8 +2160,9 @@
         <skos:definition rdf:datatype="&xsd;string">Albanian languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Albanian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">albanais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Albanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Albanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">shqip</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sq"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2169,8 +2173,9 @@
         <skos:definition rdf:datatype="&xsd;string">Amharic language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Amharic</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">amharique</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Amharisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Amharisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">amarinja</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/am"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2181,8 +2186,9 @@
         <skos:definition rdf:datatype="&xsd;string">Arabic language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Arabic</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">arabe</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Arabisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Arabisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">'arabiy</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ar"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2193,7 +2199,8 @@
         <skos:definition rdf:datatype="&xsd;string">Aragonese language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Aragonese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">aragonais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Aragonesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Aragonesisch</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/an"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2204,8 +2211,9 @@
         <skos:definition rdf:datatype="&xsd;string">Armenian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Armenian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">arménien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Armenisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Armenisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">hayeren lezow</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/hy"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2216,8 +2224,9 @@
         <skos:definition rdf:datatype="&xsd;string">Assamese language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Assamese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">assamais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Assamesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Assamesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">asamī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/as"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2227,11 +2236,10 @@
       <rdfs:label>Avaric</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Avaric language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Avaric</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Avar</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Avarish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">avar</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Awarisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Awarisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">avar mac‡</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/av"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2239,10 +2247,11 @@
         <rdf:type rdf:resource="&lcc-lr;IndividualLanguage"/>
         <rdf:type rdf:resource="&lcc-lr;AncientLanguage"/>
         <rdfs:label>Avestan</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">Avestan     language</skos:definition>
+        <skos:definition rdf:datatype="&xsd;string">Avestan language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Avestan</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">avestique</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Avestisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Avestisch</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ae"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2253,8 +2262,9 @@
         <skos:definition rdf:datatype="&xsd;string">Aymara language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Aymara</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">aymara</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Aymará-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Aymará-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">aymara</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ay"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2265,9 +2275,9 @@
         <skos:definition rdf:datatype="&xsd;string">Azerbaijani language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Azerbaijani</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">azéri</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">azerbaïdjanais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Aserbeidschanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Aserbeidschanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">azǝrbaycan dil</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/az"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2278,8 +2288,9 @@
         <skos:definition rdf:datatype="&xsd;string">Bambara language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Bambara</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">bambara</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Bambara-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Bambara-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bambankan</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/bm"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2290,9 +2301,9 @@
         <skos:definition rdf:datatype="&xsd;string">Bashkir language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Bashkir</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">bachkir</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">bashkir</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Baschkirisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Baschkirisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bašǩort</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ba"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2303,9 +2314,10 @@
         <skos:definition rdf:datatype="&xsd;string">Basque language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Basque</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">basque</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Baskisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Baskisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">euskara</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">euskera</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/eu"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2316,8 +2328,9 @@
         <skos:definition rdf:datatype="&xsd;string">Belarusian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Belarusian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">biélorusse</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Weißrussisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Weißrussisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">belaruskaâ mova</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/be"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2326,11 +2339,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Bengali</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Bengali language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Bangla</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Bengali</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">bengali</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Bengali</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Bengali</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bāṅlā</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/bn"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2339,8 +2352,9 @@
         <rdfs:label>Bihari languages</rdfs:label>
         <lcc-lr:hasEnglishName xml:lang="en">Bihari languages</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">langues biharis</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Bihari (Andere)</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Bihari (Andere)</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bihārī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/bh"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2351,9 +2365,9 @@
         <skos:definition rdf:datatype="&xsd;string">Bislama language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Bislama</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">bichlamar</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">bislama</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Beach-la-mar</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Beach-la-mar</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bislama</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/bi"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2364,8 +2378,9 @@
         <skos:definition rdf:datatype="&xsd;string">Bosnian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Bosnian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">bosniaque</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Bosnisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Bosnisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bosanski (jezik)</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/bs"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2376,8 +2391,9 @@
         <skos:definition rdf:datatype="&xsd;string">Breton language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Breton</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">breton</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Bretonisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Bretonisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Brezhoneg</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/br"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2388,8 +2404,9 @@
         <skos:definition rdf:datatype="&xsd;string">Bulgarian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Bulgarian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">bulgare</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Bulgarisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Bulgarisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">b"lgarski ezik</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/bg"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2399,10 +2416,10 @@
         <rdfs:label>Burmese</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Burmese language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Burmese</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Myanmar</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">birman</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Birmanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Birmanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">myanmasa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/my"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2415,8 +2432,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Valencian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">catalan</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">valencien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Katalanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Katalanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">català</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ca"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2427,7 +2445,8 @@
         <skos:definition rdf:datatype="&xsd;string">Chamorro language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Chamorro</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">chamorro</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Chamorro-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Chamorro-Sprache</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ch"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2438,9 +2457,10 @@
         <skos:definition rdf:datatype="&xsd;string">Chechen language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Chechen</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tchétchène</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tschetschenisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tschetschenisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">nohčijn mott</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">noxçiyn mott</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ce"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2451,8 +2471,9 @@
         <skos:definition rdf:datatype="&xsd;string">Chinese languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Chinese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">chinois</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Chinesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Chinesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">zhongwen</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/zh"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2470,8 +2491,9 @@
         <lcc-lr:hasFrenchName xml:lang="fr">slavon liturgique</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">vieux bulgare</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">vieux slave</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kirchenslawisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kirchenslawisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">cerkovno-slavânskij</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/cu"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2482,8 +2504,9 @@
         <skos:definition rdf:datatype="&xsd;string">Chuvash language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Chuvash</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tchouvache</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tschuwaschisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tschuwaschisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">čǎvaš čělhi</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/cv"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2494,8 +2517,9 @@
         <skos:definition rdf:datatype="&xsd;string">Cornish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Cornish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">cornique</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kornisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kornisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Kernewek</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/kw"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2506,8 +2530,9 @@
         <skos:definition rdf:datatype="&xsd;string">Corsican language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Corsican</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">corse</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Korsisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Korsisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">corsu</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/co"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2518,8 +2543,9 @@
         <skos:definition rdf:datatype="&xsd;string">Cree languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Cree</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">cree</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Cree-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Cree-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">nêhiyawa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/cr"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2530,8 +2556,9 @@
         <skos:definition rdf:datatype="&xsd;string">Croatian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Croatian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">croate</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kroatisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kroatisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">hrvatski jezik</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/hr"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2542,8 +2569,9 @@
         <skos:definition rdf:datatype="&xsd;string">Czech language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Czech</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tchèque</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tschechisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tschechisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">český jazyk</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/cs"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2554,8 +2582,9 @@
         <skos:definition rdf:datatype="&xsd;string">Danish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Danish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">danois</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Dänisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Dänisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">dansk</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/da"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2568,8 +2597,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Divehi</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Maldivian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">maldivien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Maledivisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Maledivisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">dhivehi</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/dv"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2582,8 +2612,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Flemish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">néerlandais</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">flamand</lcc-lr:hasFrenchName>  
-        <lcc-lr:hasGermanName xml:lang="ge">Niederländisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Niederländisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Nederlands</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/nl"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2592,13 +2623,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Dzongkha</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Dzongkha language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Bhutani</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Butanese</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Dzongkha</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">bhoutani</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">dzongkha</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Dzongkha</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Dzongkha</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">dzongkha</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/dz"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2609,8 +2638,9 @@
         <skos:definition rdf:datatype="&xsd;string">English language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">English</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">anglais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Englisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Englisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">English</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/en"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2621,8 +2651,9 @@
         <skos:definition rdf:datatype="&xsd;string">Esperanto language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Esperanto</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">espéranto</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Esperanto</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Esperanto</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">esperanto</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/eo"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2633,8 +2664,9 @@
         <skos:definition rdf:datatype="&xsd;string">Estonian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Estonian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">estonien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Estnisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Estnisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">eesti keel</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/et"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2645,8 +2677,9 @@
         <skos:definition rdf:datatype="&xsd;string">Ewe language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Ewe</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">éwé</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ewe-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ewe-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">eve</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ee"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2655,11 +2688,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Faroese</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Faroese language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Faeroese</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Faroese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">féroïen</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Färöisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Färöisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">føroyskt</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/fo"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2670,8 +2703,9 @@
         <skos:definition rdf:datatype="&xsd;string">Fijian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Fijian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">fidjien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Fidschi-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Fidschi-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Na Vosa Vakaviti</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/fj"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2682,9 +2716,10 @@
         <skos:definition rdf:datatype="&xsd;string">Finnish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Finnish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">finnois</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Finnisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Finnisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">suomen kieli</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">suomi</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/fi"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2695,8 +2730,9 @@
         <skos:definition rdf:datatype="&xsd;string">French language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">French</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">français</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Französisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Französisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">français</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/fr"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2705,12 +2741,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Western Frisian</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Western Frisian language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Frisian</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Western Frisian</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">frison</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">frison occidental</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Friesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Friesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">frysk</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/fy"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2719,14 +2754,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Fulah</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Fulah languages</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Fula</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Fulah</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Fulani</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Fulfulde</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Peul</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">peul</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ful</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ful</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">fulfulde</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ff"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2736,10 +2768,10 @@
         <rdfs:label>Galician</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Galician; Gallegan language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Galician</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Gallegan</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">galicien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Galicisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Galicisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">galego</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/gl"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2749,11 +2781,10 @@
         <rdfs:label>Ganda</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Ganda language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Ganda</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Luganda</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ganda</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">louganda</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ganda-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ganda-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">luganda</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/lg"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2764,8 +2795,9 @@
         <skos:definition rdf:datatype="&xsd;string">Georgian language</skos:definition>
         <lcc-lr:hasFrenchName xml:lang="fr">géorgien</lcc-lr:hasFrenchName>
         <lcc-lr:hasEnglishName xml:lang="en">Georgian</lcc-lr:hasEnglishName>
-        <lcc-lr:hasGermanName xml:lang="ge">Georgisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Georgisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">k'art'uli ena</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ka"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2776,8 +2808,9 @@
         <skos:definition rdf:datatype="&xsd;string">German language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">German</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">allemand</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Deutsch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Deutsch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Deutsch</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/de"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2786,10 +2819,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Modern Greek</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Modern Greek (post 1453-) language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Modern Greek</lcc-lr:hasEnglishName>
+        <lcc-lr:hasEnglishName xml:lang="en">Greek, Modern (1453-)</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">grec moderne (après 1453)</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Neugriechisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Neugriechisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">elliniká</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/el"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2800,8 +2834,9 @@
         <skos:definition rdf:datatype="&xsd;string">Guarani language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Guarani</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">guarani</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Guaraní-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Guaraní-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">guarani</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/gn"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2812,9 +2847,9 @@
         <skos:definition rdf:datatype="&xsd;string">Gujarati language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Gujarati</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">goudjrati</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">gujarati</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Gujarati-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Gujarati-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">gujarātī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/gu"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2827,7 +2862,8 @@
         <lcc-lr:hasEnglishName xml:lang="en">Haitian Creole</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">créole haïtien</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">haïtien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Haïtien (Haiti-Kreolisch)</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Haïtien (Haiti-Kreolisch)</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ht"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2838,8 +2874,9 @@
         <skos:definition rdf:datatype="&xsd;string">Hausa language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Hausa</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">haoussa</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Haussa-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Haussa-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">hausa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ha"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2850,8 +2887,9 @@
         <skos:definition rdf:datatype="&xsd;string">Hebrew language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Hebrew</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">hébreu</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Hebräisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Hebräisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">ivrit</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/he"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2862,8 +2900,9 @@
         <skos:definition rdf:datatype="&xsd;string">Herero language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Herero</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">herero</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Herero-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Herero-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">otshiherero</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/hz"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2874,8 +2913,9 @@
         <skos:definition rdf:datatype="&xsd;string">Hindi language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Hindi</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">hindi</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Hindi</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Hindi</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">hindī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/hi"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2886,8 +2926,9 @@
         <skos:definition rdf:datatype="&xsd;string">Hiri Motu language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Hiri Motu</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">hiri motu</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Hiri-Motu</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Hiri-Motu</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Hiri Motu</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ho"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2898,8 +2939,9 @@
         <skos:definition rdf:datatype="&xsd;string">Hungarian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Hungarian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">hongrois</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ungarisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ungarisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">magyar nyelv</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/hu"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2910,8 +2952,9 @@
         <skos:definition rdf:datatype="&xsd;string">Icelandic language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Icelandic</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">islandais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Isländisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Isländisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">íslenska</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/is"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2922,8 +2965,9 @@
         <skos:definition rdf:datatype="&xsd;string">Ido language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Ido</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ido</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ido</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ido</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">ido </lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/io"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2934,8 +2978,9 @@
         <skos:definition rdf:datatype="&xsd;string">Igbo language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Igbo</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">igbo</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ibo-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ibo-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">igbo</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ig"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2946,8 +2991,9 @@
         <skos:definition rdf:datatype="&xsd;string">Indonesian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Indonesian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">indonésien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Bahasa Indonesia</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Bahasa Indonesia</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bahasa Indonesia</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/id"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2958,8 +3004,9 @@
         <skos:definition rdf:datatype="&xsd;string">Interlingua (International Auxiliary Language Association) language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Interlingua (International Auxiliary Language Association)</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">interlingua (langue auxiliaire internationale)</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Interlingua</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Interlingua</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">interlingua</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ia"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2971,8 +3018,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Interlingue</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Occidental</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">interlingue</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Interlingue</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Interlingue</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">interlingue</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ie"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2983,8 +3031,9 @@
         <skos:definition rdf:datatype="&xsd;string">Inuktitut language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Inuktitut</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">inuktitut</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Inuktitut</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Inuktitut</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">inuktitut</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/iu"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -2995,8 +3044,9 @@
         <skos:definition rdf:datatype="&xsd;string">Inupiaq language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Inupiaq</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">inupiaq</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Inupik</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Inupik</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">inupiaq</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ik"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3007,8 +3057,9 @@
         <skos:definition rdf:datatype="&xsd;string">Irish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Irish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">irlandais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Irisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Irisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Gaeilge</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ga"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3019,8 +3070,9 @@
         <skos:definition rdf:datatype="&xsd;string">Italian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Italian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">italien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Italienisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Italienisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">italiano</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/it"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3031,9 +3083,10 @@
         <skos:definition rdf:datatype="&xsd;string">Japanese language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Japanese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">japonais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Japanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Japanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">nihongo</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">nippongo</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ja"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3044,8 +3097,9 @@
         <skos:definition rdf:datatype="&xsd;string">Javanese language</skos:definition>
         <lcc-lr:hasFrenchName xml:lang="fr">javanais</lcc-lr:hasFrenchName>
         <lcc-lr:hasEnglishName xml:lang="en">Javanese</lcc-lr:hasEnglishName>
-        <lcc-lr:hasGermanName xml:lang="ge">Javanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Javanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bahasa Jawa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/jv"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3057,8 +3111,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Kalaallisut</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Greenlandic</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">groenlandais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Grönländisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Grönländisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">kalaallisut</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/kl"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3069,8 +3124,9 @@
         <skos:definition rdf:datatype="&xsd;string">Kannada language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Kannada</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kannada</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kannada</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kannada</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">kannaḍa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/kn"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3081,8 +3137,9 @@
         <skos:definition rdf:datatype="&xsd;string">Kanuri language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Kanuri</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kanouri</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kanuri-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kanuri-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">kanuri</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/kr"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3093,8 +3150,9 @@
         <skos:definition rdf:datatype="&xsd;string">Kashmiri language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Kashmiri</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kashmiri</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kaschmiri</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kaschmiri</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">kaśmīrī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ks"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3105,8 +3163,9 @@
         <skos:definition rdf:datatype="&xsd;string">Kazakh language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Kazakh</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kazakh</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kasachisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kasachisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">ķazaķ (tili)</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/kk"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3116,11 +3175,10 @@
         <rdfs:label>Central Khmer</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Central Khmer language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Central Khmer</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Cambodian</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">cambodgien</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">khmer central</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kambodschanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kambodschanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">khmêr</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/km"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3132,8 +3190,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Kikuyu</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Gikuyu</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kikuyu</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kikuyu-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kikuyu-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Gikuyu</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ki"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3143,11 +3202,10 @@
         <rdfs:label>Kinyarwanda</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Kinyarwanda language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Kinyarwanda</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Rwanda</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kinyarwanda</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">rwanda</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Rwanda-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Rwanda-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">kinyarwanda</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/rw"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3158,9 +3216,10 @@
         <skos:definition rdf:datatype="&xsd;string">Kirghiz language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Kirghiz</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Kyrgyz</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">kirghize</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kirgisisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasFrenchName xml:lang="fr">kirghiz</lcc-lr:hasFrenchName>
+        <lcc-lr:hasGermanName xml:lang="de">Kirgisisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">kyrgyz tili</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ky"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3171,8 +3230,9 @@
         <skos:definition rdf:datatype="&xsd;string">Komi language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Komi</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">komi</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Komi-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Komi-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">komi kyv</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/kv"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3183,8 +3243,9 @@
         <skos:definition rdf:datatype="&xsd;string">Kongo languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Kongo</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kongo</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kongo-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kongo-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">kikongo</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/kg"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3195,9 +3256,10 @@
         <skos:definition rdf:datatype="&xsd;string">Korean language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Korean</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">coréen</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Koreanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Koreanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">choson-o</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">hanguk-o</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ko"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3210,8 +3272,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Kwanyama</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kuanyama</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">kwanyama</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kwanyama-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kwanyama-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">oshikwanyama</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/kj"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3222,8 +3285,9 @@
         <skos:definition rdf:datatype="&xsd;string">Kurdish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Kurdish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">kurde</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kurdisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kurdisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">zimany kurdy</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ku"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3233,11 +3297,10 @@
         <rdfs:label>Lao</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Lao language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Lao</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Laotian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">lao</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">laotien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Laotisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Laotisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">pha xa lao</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/lo"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3248,8 +3311,9 @@
         <skos:definition rdf:datatype="&xsd;string">Latin language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Latin</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">latin</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Latein</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Latein</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">lingua latina</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/la"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3260,8 +3324,9 @@
         <skos:definition rdf:datatype="&xsd;string">Latvian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Latvian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">letton</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Lettisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Lettisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">latviešu valoda</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/lv"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3274,7 +3339,8 @@
         <lcc-lr:hasEnglishName xml:lang="en">Limburger</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Limburgish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">limbourgeois</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Limburgisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Limburgisch</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/li"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3285,8 +3351,9 @@
         <skos:definition rdf:datatype="&xsd;string">Lingala language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Lingala</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">lingala</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Lingala</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Lingala</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">lingala</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ln"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3297,8 +3364,9 @@
         <skos:definition rdf:datatype="&xsd;string">Lithuanian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Lithuanian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">lituanien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Litauisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Litauisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">lietuvių kalba</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/lt"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3309,8 +3377,9 @@
         <skos:definition rdf:datatype="&xsd;string">Luba-Katanga language</skos:definition>
         <lcc-lr:hasFrenchName xml:lang="fr">luba-katanga</lcc-lr:hasFrenchName>
         <lcc-lr:hasEnglishName xml:lang="en">Luba-Katanga</lcc-lr:hasEnglishName>
-        <lcc-lr:hasGermanName xml:lang="ge">Luba-Katanga-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Luba-Katanga-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">tshiluba</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/lu"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3322,8 +3391,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Luxembourgish</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Letzeburgesch</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">luxembourgeois</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Luxemburgisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Luxemburgisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">lëtzebuergesch</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/lb"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3334,8 +3404,9 @@
         <skos:definition rdf:datatype="&xsd;string">Macedonian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Macedonian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">macédonien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Makedonisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Makedonisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">makedonski</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/mk"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3346,8 +3417,9 @@
         <skos:definition rdf:datatype="&xsd;string">Malagasy languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Malagasy</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">malgache</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Malagassi-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Malagassi-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">malagasy</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/mg"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3358,8 +3430,9 @@
         <skos:definition rdf:datatype="&xsd;string">Malay macrolanguage</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Malay (macrolanguage)</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">malais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Malaiisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Malaiisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bahasa Malaysia</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ms"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3370,8 +3443,9 @@
         <skos:definition rdf:datatype="&xsd;string">Malayalam language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Malayalam</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">malayalam</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Malayalam</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Malayalam</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">malayāḷaṁ</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ml"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3382,8 +3456,9 @@
         <skos:definition rdf:datatype="&xsd;string">Maltese language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Maltese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">maltais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Maltesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Maltesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">il-Malti</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/mt"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3395,8 +3470,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Manx</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">mannois</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">manx</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Manx</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Manx</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Gaelg</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/gv"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3407,8 +3483,9 @@
         <skos:definition rdf:datatype="&xsd;string">Maori language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Maori</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">maori</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Maori-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Maori-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">māori</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/mi"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3419,8 +3496,9 @@
         <skos:definition rdf:datatype="&xsd;string">Marathi language</skos:definition>
         <lcc-lr:hasFrenchName xml:lang="fr">marathe</lcc-lr:hasFrenchName>
         <lcc-lr:hasEnglishName xml:lang="en">Marathi</lcc-lr:hasEnglishName>
-        <lcc-lr:hasGermanName xml:lang="ge">Marathi</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Marathi</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">marāṭī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/mr"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3431,8 +3509,9 @@
         <skos:definition rdf:datatype="&xsd;string">Marshallese language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Marshallese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">marshall</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Marschallesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Marschallesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">M̧ajeł</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/mh"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3443,8 +3522,9 @@
         <skos:definition rdf:datatype="&xsd;string">Mongolian languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Mongolian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">mongol</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Mongolisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Mongolisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">mongol</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/mn"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3454,9 +3534,10 @@
         <rdfs:label>Nauru</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Nauru language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Nauru</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">nauri</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Nauruanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasFrenchName xml:lang="fr">nauruan</lcc-lr:hasFrenchName>
+        <lcc-lr:hasGermanName xml:lang="de">Nauruanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">nauru</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/na"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3469,7 +3550,8 @@
         <lcc-lr:hasEnglishName xml:lang="en">Navajo</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">navaho</lcc-lr:hasFrenchName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">diné bizaad</lcc-lr:hasIndigenousName>
-        <lcc-lr:hasGermanName xml:lang="ge">Navajo-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Navajo-Sprache</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/nv"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3479,9 +3561,11 @@
         <rdfs:label>North Ndebele</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">North Ndebele language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">North Ndebele</lcc-lr:hasEnglishName>
+		<lcc-lr:hasEnglishName xml:lang="en">Ndebele, North</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ndébélé du Nord</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ndebele-Sprache (Simbabwe)</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ndebele-Sprache (Simbabwe)</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">isiNdebele</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/nd"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3491,9 +3575,11 @@
         <rdfs:label>South Ndebele</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">South Ndebele language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">South Ndebele</lcc-lr:hasEnglishName>
+		<lcc-lr:hasEnglishName xml:lang="en">Ndebele, South</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ndébélé du Sud</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ndebele-Sprache (Transvaal)</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ndebele-Sprache (Transvaal)</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">isiNdebele</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/nr"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3504,8 +3590,9 @@
         <skos:definition rdf:datatype="&xsd;string">Ndonga language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Ndonga</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ndonga</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ndonga</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ndonga</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">oshindonga</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ng"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3516,8 +3603,9 @@
         <skos:definition rdf:datatype="&xsd;string">Nepali language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Nepali</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">népalais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Nepali</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Nepali</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">nepālī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ne"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3528,8 +3616,9 @@
         <skos:definition rdf:datatype="&xsd;string">Norwegian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Norwegian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">norvégien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Norwegisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Norwegisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">norsk</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/no"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3539,9 +3628,11 @@
         <rdfs:label>Norwegian Bokmal</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Norwegian Bokmal language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Norwegian Bokmål</lcc-lr:hasEnglishName>
+		<lcc-lr:hasEnglishName xml:lang="en">Bokmål, Norwegian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">norvégien bokmål</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Bokmål</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Bokmål</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bokmål</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/nb"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3551,27 +3642,35 @@
         <rdfs:label>Norwegian Nynorsk</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Norwegian Nynorsk language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Norwegian Nynorsk</lcc-lr:hasEnglishName>
+		<lcc-lr:hasEnglishName xml:lang="en">Nynorsk, Norwegian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">norvégien nynorsk</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Nynorsk</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Nynorsk</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">nynorsk</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/nn"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="&lcc-639-1;Nyanja">
+    <owl:NamedIndividual rdf:about="&lcc-639-1;Chichewa">
         <rdf:type rdf:resource="&lcc-lr;IndividualLanguage"/>
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
-        <rdfs:label>Nyanja</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">Nyanja language</skos:definition>
+        <rdfs:label>Chichewa</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">Chichewa language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Chewa</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Chichewa</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Nyanja</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">chewa</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">chichewa</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">nyanja</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Nyanja-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Nyanja-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">tshichewa</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">tshinyanja</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ny"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
+    </owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&lcc-639-1;Nyanja">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:sameAs rdf:resource="&lcc-639-1;Chichewa"/>
     </owl:NamedIndividual>
 
     <owl:NamedIndividual rdf:about="&lcc-639-1;Occitan">
@@ -3581,8 +3680,9 @@
         <skos:definition rdf:datatype="&xsd;string">Occitan (post 1500) language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Occitan (post 1500)</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">occitan (après 1500)</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Okzitanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Okzitanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">occitan</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/oc"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3593,9 +3693,10 @@
         <skos:definition rdf:datatype="&xsd;string">Ojibwa languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Ojibwa</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ojibwa</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ojibwa-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ojibwa-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">chippewa</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">ojibwe</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/oj"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3606,8 +3707,9 @@
         <rdfs:label>Oriya</rdfs:label>
         <lcc-lr:hasEnglishName xml:lang="en">Oriya</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">oriya</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Oriya-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Oriya-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">oṛiā</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/or"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3616,14 +3718,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Oromo</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Oromo languages</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Afan Oromo</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Galla</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Oromo</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">galla</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">afan oromo</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">oromo</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Galla-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Galla-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">(afan) oromo</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/om"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3635,8 +3734,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Ossetian</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Ossetic</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ossète</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ossetisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ossetisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">iron avzæg</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/os"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3647,8 +3747,9 @@
         <skos:definition rdf:datatype="&xsd;string">Pali language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Pali</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">pali</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Pali</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Pali</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">pāli bhāsa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/pi"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3659,11 +3760,10 @@
         <skos:definition rdf:datatype="&xsd;string">Panjabi language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Panjabi</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Punjabi</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">panjabi</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">pendjabi</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">punjabi</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Pandschabi-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Pandschabi-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">paṁjābī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/pa"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3672,12 +3772,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Persian</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Persian languages</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Farsi</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Persian</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">farsi</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">persan</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Persisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Persisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">fârsy</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/fa"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3688,8 +3787,9 @@
         <skos:definition rdf:datatype="&xsd;string">Polish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Polish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">polonais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Polnisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Polnisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">(język) polski</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/pl"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3700,8 +3800,9 @@
         <skos:definition rdf:datatype="&xsd;string">Portuguese language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Portuguese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">portugais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Portugiesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Portugiesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">português</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/pt"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3713,8 +3814,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Pashto</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Pushto</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">pachto</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Paschtu</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Paschtu</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">pashto</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ps"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3726,8 +3828,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Quechua</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">quechua</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">quichua</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Quechua-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Quechua-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">qhëtshwa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/qu"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3741,9 +3844,10 @@
         <lcc-lr:hasEnglishName xml:lang="en">Moldovan</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">roumain</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">moldave</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Rumänisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Rumänisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">(limba) română</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">(limba) moldoveanǎ</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ro"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3754,8 +3858,9 @@
         <skos:definition rdf:datatype="&xsd;string">Romansh language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Romansh</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">romanche</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Rätoromanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Rätoromanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">romontsch</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/rm"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3764,11 +3869,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Rundi</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Rundi language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Kirundi</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Rundi</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">kirundi</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Rundi-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasFrenchName xml:lang="fr">rundi</lcc-lr:hasFrenchName>
+        <lcc-lr:hasGermanName xml:lang="de">Rundi-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">kirundi</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/rn"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3779,8 +3884,9 @@
         <skos:definition rdf:datatype="&xsd;string">Russian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Russian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">russe</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Russisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Russisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">russkij (âzyk)</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ru"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3791,8 +3897,9 @@
         <skos:definition rdf:datatype="&xsd;string">Northern Sami language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Northern Sami</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">sami du Nord</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Nordsaamisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Nordsaamisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">davvisámegiella</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/se"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3803,8 +3910,9 @@
         <skos:definition rdf:datatype="&xsd;string">Samoan language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Samoan</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">samoan</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Samoanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Samoanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">samoa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sm"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3813,11 +3921,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Sango</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Sango language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Sangho</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Sango</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">sango</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Sango-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Sango-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">sango</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sg"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3828,8 +3936,9 @@
         <skos:definition rdf:datatype="&xsd;string">Sanskrit language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Sanskrit</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">sanskrit</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Sanskrit</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Sanskrit</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">saṁskr̥tam</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sa"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3840,23 +3949,30 @@
         <skos:definition rdf:datatype="&xsd;string">Sardinian languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Sardinian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">sarde</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Sardisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Sardisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">sardu</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sc"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
-    <owl:NamedIndividual rdf:about="&lcc-639-1;ScottishGaelic">
+    <owl:NamedIndividual rdf:about="&lcc-639-1;Gaelic">
         <rdf:type rdf:resource="&lcc-lr;IndividualLanguage"/>
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
-        <rdfs:label>Scottish Gaelic</rdfs:label>
-        <skos:definition rdf:datatype="&xsd;string">Scottish Gaelic language</skos:definition>
+        <rdfs:label>Gaelic</rdfs:label>
+        <skos:definition rdf:datatype="&xsd;string">Gaelic language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Gaelic</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Scottish Gaelic</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">gaélique</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">gaélique écossais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Gälisch-Schottisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Gälisch-Schottisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Gàidhlig</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/gd"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
+    </owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&lcc-639-1;ScottishGaelic">
+		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
+		<owl:sameAs rdf:resource="&lcc-639-1;Gaelic"/>
     </owl:NamedIndividual>
 
     <owl:NamedIndividual rdf:about="&lcc-639-1;Serbian">
@@ -3866,8 +3982,9 @@
         <skos:definition rdf:datatype="&xsd;string">Serbian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Serbian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">serbe</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Serbisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Serbisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">srpski (jezik)</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sr"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3878,8 +3995,9 @@
         <skos:definition rdf:datatype="&xsd;string">Shona language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Shona</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">shona</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Schona-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Schona-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">chiShona</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sn"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3891,7 +4009,8 @@
         <lcc-lr:hasEnglishName xml:lang="en">Sichuan Yi</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Nuosu</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">yi de Sichuan</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Lalo-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Lalo-Sprache</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ii"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3902,8 +4021,9 @@
         <skos:definition rdf:datatype="&xsd;string">Sindhi language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Sindhi</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">sindhi</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Sindhi-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Sindhi-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">sindhī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sd"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3912,12 +4032,12 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Sinhala</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Sinhala; Sinhalese language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Singhalese</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Sinhala</lcc-lr:hasEnglishName>
+        <lcc-lr:hasEnglishName xml:lang="en">Sinhalese</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Sinhala</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">singhalais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Singhalesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Singhalesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">siṁhala</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/si"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3928,8 +4048,9 @@
         <skos:definition rdf:datatype="&xsd;string">Slovak language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Slovak</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">slovaque</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Slowakisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Slowakisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">slovenský (jazyk)</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sk"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3940,8 +4061,9 @@
         <skos:definition rdf:datatype="&xsd;string">Slovenian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Slovenian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">slovène</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Slowenisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Slowenisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">slovenski (jezik)</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sl"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3952,8 +4074,9 @@
         <skos:definition rdf:datatype="&xsd;string">Somali language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Somali</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">somali</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Somali</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Somali</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">soomaali</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/so"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3962,12 +4085,12 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Southern Sotho</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Southern Sotho language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Sesotho</lcc-lr:hasEnglishName>
+        <lcc-lr:hasEnglishName xml:lang="en">Sotho, Southern</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Southern Sotho</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">sesotho</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">sotho du Sud</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Süd-Sotho-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Süd-Sotho-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Sesotho</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/st"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3980,9 +4103,10 @@
         <lcc-lr:hasEnglishName xml:lang="en">Spanish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">castillan</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">espagnol</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Spanisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Spanisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">castellano</lcc-lr:hasIndigenousName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">español</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/es"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -3993,8 +4117,9 @@
         <skos:definition rdf:datatype="&xsd;string">Sundanese languaage</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Sundanese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">soundanais</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Sundanesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Sundanesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bahasa Sunda</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/su"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4003,11 +4128,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Swahili</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Swahili macrolanguage</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Kiswahili</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Swahili (macrolanguage)</lcc-lr:hasEnglishName>
+        <lcc-lr:hasEnglishName xml:lang="en">Swahili</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">swahili</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Swahili</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Swahili</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Kiswahili</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sw"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4016,14 +4141,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Swati</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Swati language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Siswati</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Swati</lcc-lr:hasEnglishName>
-        <lcc-lr:hasEnglishName xml:lang="en">Swazi</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">siswati</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">swati</lcc-lr:hasFrenchName>
-        <lcc-lr:hasFrenchName xml:lang="fr">swazi</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Swasi-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Swasi-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">siSwati</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ss"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4034,8 +4156,9 @@
         <skos:definition rdf:datatype="&xsd;string">Swedish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Swedish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">suédois</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Schwedisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Schwedisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">svenska</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/sv"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4045,10 +4168,10 @@
         <rdfs:label>Tagalog</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Tagalog language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tagalog</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">tagal</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">tagalog</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tagalog</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tagalog</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">tagalog</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/tl"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4059,7 +4182,8 @@
         <skos:definition rdf:datatype="&xsd;string">Tahitian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tahitian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tahitien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tahitisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tahitisch</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ty"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4070,8 +4194,9 @@
         <skos:definition rdf:datatype="&xsd;string">Tajik language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tajik</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tadjik</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tadschikisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tadschikisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">toçikī</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/tg"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4081,10 +4206,10 @@
         <rdfs:label>Tamil</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Tamil language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tamil</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">tamil</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">tamoul</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tamil</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tamil</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">tamiḻ</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ta"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4095,8 +4220,9 @@
         <skos:definition rdf:datatype="&xsd;string">Tatar language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tatar</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tatar</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tatarisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tatarisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">tatar tele</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/tt"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4107,8 +4233,9 @@
         <skos:definition rdf:datatype="&xsd;string">Telugu language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Telugu</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">télougou</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Telugu-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Telugu-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">telugu</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/te"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4119,8 +4246,9 @@
         <skos:definition rdf:datatype="&xsd;string">Thai language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Thai</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">thaï</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Thailändisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Thailändisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">thai</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/th"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4131,8 +4259,9 @@
         <skos:definition rdf:datatype="&xsd;string">Tibetan language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tibetan</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tibétain</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tibetisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tibetisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">bod skad</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/bo"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4143,8 +4272,9 @@
         <skos:definition rdf:datatype="&xsd;string">Tigrinya language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tigrinya</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tigrigna</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tigrinja-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tigrinja-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">tigriña</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ti"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4155,8 +4285,9 @@
         <skos:definition rdf:datatype="&xsd;string">Tonga (Tonga Islands) language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tonga (Tonga Islands)</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tonga (îles Tonga)</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tongaisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tongaisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">tonga</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/to"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4167,8 +4298,9 @@
         <skos:definition rdf:datatype="&xsd;string">Tsonga language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Tsonga</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">tsonga</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tsonga-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tsonga-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Xitsonga</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ts"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4177,12 +4309,11 @@
         <rdf:type rdf:resource="&lcc-lr;LivingLanguage"/>
         <rdfs:label>Tswana</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Tswana language</skos:definition>
-        <lcc-lr:hasEnglishName xml:lang="en">Setswana</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Tswana</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">setchwana</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">tswana</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Tswana-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Tswana-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Setswana</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/tn"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4193,8 +4324,9 @@
         <skos:definition rdf:datatype="&xsd;string">Turkish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Turkish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">turc</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Türkisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Türkisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">türkçe</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/tr"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4205,7 +4337,8 @@
         <skos:definition rdf:datatype="&xsd;string">Turkmen language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Turkmen</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">turkmène</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Turkmenisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Turkmenisch</lcc-lr:hasGermanName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/tk"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4216,8 +4349,9 @@
         <skos:definition rdf:datatype="&xsd;string">Twi language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Twi</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">twi</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Twi-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Twi-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">twi</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/tw"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4229,8 +4363,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Uighur</lcc-lr:hasEnglishName>
         <lcc-lr:hasEnglishName xml:lang="en">Uyghur</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ouïgour</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Uigurisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Uigurisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">oyghurqǝ</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ug"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4241,8 +4376,9 @@
         <skos:definition rdf:datatype="&xsd;string">Ukrainian language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Ukrainian</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ukrainien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Ukrainisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Ukrainisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">ukraïns'ka mova</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/uk"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4253,8 +4389,9 @@
         <skos:definition rdf:datatype="&xsd;string">Urdu language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Urdu</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ourdou</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Urdu</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Urdu</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">urdū</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ur"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4265,8 +4402,9 @@
         <skos:definition rdf:datatype="&xsd;string">Uzbek languages</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Uzbek</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">ouszbek</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Usbekisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Usbekisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">oʻzbek tili</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/uz"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4277,8 +4415,9 @@
         <skos:definition rdf:datatype="&xsd;string">Venda language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Venda</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">venda</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Venda-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Venda-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Tshivenḓa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/ve"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4289,8 +4428,9 @@
         <skos:definition rdf:datatype="&xsd;string">Vietnamese language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Vietnamese</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">vietnamien</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Vietnamesisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Vietnamesisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Tiếng Việt Nam</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/vi"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4301,8 +4441,9 @@
         <skos:definition rdf:datatype="&xsd;string">Volapuk language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Volapük</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">volapük</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Volapük</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Volapük</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">volapük</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/vo"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4313,8 +4454,9 @@
         <skos:definition rdf:datatype="&xsd;string">Walloon language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Walloon</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">wallon</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Wallonisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Wallonisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">wallon</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/wa"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4325,8 +4467,9 @@
         <skos:definition rdf:datatype="&xsd;string">Welsh language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Welsh</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">gallois</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Kymrisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Kymrisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Cymraeg</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/cy"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4337,8 +4480,9 @@
         <skos:definition rdf:datatype="&xsd;string">Wolof language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Wolof</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">wolof</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Wolof-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Wolof-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">wolof</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/wo"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4349,8 +4493,9 @@
         <skos:definition rdf:datatype="&xsd;string">Xhosa language</skos:definition>
         <lcc-lr:hasFrenchName xml:lang="fr">xhosa</lcc-lr:hasFrenchName>
         <lcc-lr:hasEnglishName xml:lang="en">Xhosa</lcc-lr:hasEnglishName>
-        <lcc-lr:hasGermanName xml:lang="ge">Xhosa-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Xhosa-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">isiXhosa</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/xh"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4361,8 +4506,9 @@
         <skos:definition rdf:datatype="&xsd;string">Yiddish language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Yiddish</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">yiddish</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Jiddisch</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Jiddisch</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">yidiš</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/yi"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4372,9 +4518,10 @@
         <rdfs:label>Yoruba</rdfs:label>
         <skos:definition rdf:datatype="&xsd;string">Yoruba language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Yoruba</lcc-lr:hasEnglishName>
-        <lcc-lr:hasFrenchName xml:lang="fr">yorouba</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Yoruba-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasFrenchName xml:lang="fr">yoruba</lcc-lr:hasFrenchName>
+        <lcc-lr:hasGermanName xml:lang="de">Yoruba-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">Yorùbá</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/yo"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4387,8 +4534,9 @@
         <lcc-lr:hasEnglishName xml:lang="en">Zhuang</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">chuang</lcc-lr:hasFrenchName>
         <lcc-lr:hasFrenchName xml:lang="fr">zhuang</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Zhuang</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Zhuang</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">cuengh</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/za"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
@@ -4399,8 +4547,9 @@
         <skos:definition rdf:datatype="&xsd;string">Zulu language</skos:definition>
         <lcc-lr:hasEnglishName xml:lang="en">Zulu</lcc-lr:hasEnglishName>
         <lcc-lr:hasFrenchName xml:lang="fr">zoulou</lcc-lr:hasFrenchName>
-        <lcc-lr:hasGermanName xml:lang="ge">Zulu-Sprache</lcc-lr:hasGermanName>
+        <lcc-lr:hasGermanName xml:lang="de">Zulu-Sprache</lcc-lr:hasGermanName>
         <lcc-lr:hasIndigenousName rdf:datatype="&xsd;string">isiZulu</lcc-lr:hasIndigenousName>
+		<owl:sameAs rdf:resource="https://id.loc.gov/vocabulary/iso639-1/zu"/>
         <rdfs:isDefinedBy rdf:resource="&lcc-639-1;"/>
     </owl:NamedIndividual>
 
