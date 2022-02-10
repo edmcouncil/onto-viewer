@@ -80,7 +80,6 @@ public class AnnotationsDataHandler {
         continue;
       }
       String value = annotationAssertion.annotationValue().toString(); // TODO
-
       PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValue();
       annotationPropertyValue.setType(dataExtractor.extractAnnotationType(annotationAssertion));
 
@@ -123,7 +122,6 @@ public class AnnotationsDataHandler {
 
   /**
    * @param annotations Stream of OWL annotations
-   * @param ontology    Loaded ontology
    * @param details     <i>QName</i> will be set for this object if found
    * @return Processed annotations
    */
