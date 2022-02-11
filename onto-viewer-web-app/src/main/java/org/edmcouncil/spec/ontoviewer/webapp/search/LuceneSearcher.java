@@ -92,7 +92,6 @@ public class LuceneSearcher {
   private IndexReader indexReader;
   private IndexSearcher indexSearcher;
   private Path indexPath;
-  private IndexWriterConfig indexWriterConfig;
   private Set<OWLAnnotationProperty> allSearchProperties;
   private Set<String> basicFieldNames;
   private Map<String, FindProperty> identifierToFindPropertyMap = new HashMap<>();
@@ -122,14 +121,19 @@ public class LuceneSearcher {
   void init() {
     this.indexPath = fileSystemManager.getViewerHomeDir().resolve(LUCENE_INDEX_NAME);
     this.analyzer = new StandardAnalyzer();
-    this.indexWriterConfig = new IndexWriterConfig(analyzer).setOpenMode(OpenMode.CREATE_OR_APPEND);
   }
 
   @PreDestroy
   void close() {
     try {
-      this.indexReader.close();
-      this.indexDirectory.close();
+      if (this.indexReader != null) {
+        this.indexReader.close();
+        this.indexReader = null;
+      }
+      if (this.indexDirectory != null) {
+        this.indexDirectory.close();
+        this.indexDirectory = null;
+      }
     } catch (IOException ex) {
       LOGGER.error("Unable to close index while destroying {}. Details: {}",
           this.getClass().getName(),
@@ -140,6 +144,8 @@ public class LuceneSearcher {
 
   public void populateIndex() {
     LOGGER.info("Starting to populate the Lucene index located on path '{}'...", indexPath);
+
+    close();  // Close any open objects if there are ones
 
     Set<OWLAnnotationProperty> rdfsLabelAndItsSubAnnotations = EntitySearcher.getSubProperties(
             dataFactory.getRDFSLabel(),
@@ -188,9 +194,16 @@ public class LuceneSearcher {
         FileUtils.deleteDirectory(indexPath.toFile());
       }
 
-      indexDirectory = FSDirectory.open(indexPath);
-      var indexWriter = new IndexWriter(indexDirectory, indexWriterConfig);
-      indexEntities(indexWriter);
+      var indexWriterConfig =
+          new IndexWriterConfig(analyzer)
+              .setOpenMode(OpenMode.CREATE_OR_APPEND);
+
+      try (
+          var indexDirectory = FSDirectory.open(indexPath);
+          var indexWriter = new IndexWriter(indexDirectory, indexWriterConfig)
+      ) {
+        indexEntities(indexWriter);
+      }
     } catch (IOException ex) {
       LOGGER.error("Exception thrown while indexing entities. Details: {}", ex.getMessage(), ex);
     }
@@ -273,6 +286,7 @@ public class LuceneSearcher {
 
   private IndexSearcher getIndexSearcher() throws IOException {
     if (this.indexReader == null || this.indexSearcher == null) {
+      this.indexDirectory = FSDirectory.open(indexPath);
       this.indexReader = DirectoryReader.open(indexDirectory);
       this.indexSearcher = new IndexSearcher(indexReader);
     }
