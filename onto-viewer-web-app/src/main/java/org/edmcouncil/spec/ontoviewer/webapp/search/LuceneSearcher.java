@@ -128,9 +128,11 @@ public class LuceneSearcher {
     try {
       if (this.indexReader != null) {
         this.indexReader.close();
+        this.indexReader = null;
       }
       if (this.indexDirectory != null) {
         this.indexDirectory.close();
+        this.indexDirectory = null;
       }
     } catch (IOException ex) {
       LOGGER.error("Unable to close index while destroying {}. Details: {}",
