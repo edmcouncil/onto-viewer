@@ -1193,8 +1193,8 @@ public class OwlDataHandler {
 
   }
 
-  public List<FiboModule> getAllModulesData(OWLOntology ontology) {
-    return fiboDataHandler.getAllModulesData(ontology);
+  public List<FiboModule> getAllModules() {
+    return fiboDataHandler.getAllModules();
   }
 
   public List<String> getElementLocationInModules(String iriString, OWLOntology ontology) {

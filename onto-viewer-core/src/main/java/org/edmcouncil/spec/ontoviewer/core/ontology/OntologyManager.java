@@ -1,8 +1,11 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Component;
 public class OntologyManager {
 
   private OWLOntology ontology;
+  private Map<IRI, IRI> iriToPathMapping = new HashMap<>();
   private Set<OWLOntology> ontologies;
 
   public OWLOntology getOntology() {
@@ -29,5 +33,13 @@ public class OntologyManager {
       this.ontologies.add(ontology);
     }
     return this.ontologies.stream();
+  }
+
+  public Map<IRI, IRI> getIriToPathMapping() {
+    return iriToPathMapping;
+  }
+
+  public void setIriToPathMapping(Map<IRI, IRI> iriToPathMapping) {
+    this.iriToPathMapping = iriToPathMapping;
   }
 }

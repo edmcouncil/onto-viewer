@@ -2,7 +2,9 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.loader.mapper;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -26,10 +28,15 @@ public class VersionIriMapper extends CommonBaseIRIMapper {
   private static final Logger LOG = LoggerFactory.getLogger(VersionIriMapper.class);
   
   private Path dirPath;
+  private Map<IRI, IRI> irisMap = new HashMap<>();
   
   public VersionIriMapper(Path dirPath) {
     super(IRI.create(dirPath.toUri()));
     this.dirPath = dirPath;
+  }
+
+  public Map<IRI, IRI> getIriMap() {
+    return irisMap;
   }
   
   public void mapOntologyVersion(AutoIRIMapper autoIRIMapper) throws ParserConfigurationException, XPathExpressionException, SAXException, IOException {
@@ -62,11 +69,12 @@ public class VersionIriMapper extends CommonBaseIRIMapper {
       Object result = expr.evaluate(doc, XPathConstants.NODESET);
       NodeList nodes = (NodeList) result;
       for (int i = 0; i < nodes.getLength(); i++) {
-        //LOG.debug("[{}]:[{}]", IRI.create(nodes.item(i).getNodeValue()), autoIRIMapper.getDocumentIRI(iri).toURI().toString());
-        super.addMapping(IRI.create(nodes.item(i).getNodeValue()), autoIRIMapper.getDocumentIRI(iri).toURI().toString());
+        var iriKey = IRI.create(nodes.item(i).getNodeValue());
+        var iriValue = autoIRIMapper.getDocumentIRI(iri);
+        super.addMapping(iriKey, iriValue.toURI().toString());
+        irisMap.put(iriKey, iri);
       }
     }
-    
   }
 
   public void mapOntologyFileVersion(Path path) throws ParserConfigurationException, XPathExpressionException, SAXException, IOException {
@@ -100,7 +108,5 @@ public class VersionIriMapper extends CommonBaseIRIMapper {
     for (int i = 0; i < nodes.getLength(); i++) {
       super.addMapping(IRI.create(nodes.item(i).getNodeValue()), path.toAbsolutePath().toString());
     }
-    
   }
-  
 }

@@ -165,7 +165,7 @@ public class DetailsManager {
   }
 
   public List<FiboModule> getAllModulesData() {
-    return dataHandler.getAllModulesData(ontologyManager.getOntology());
+    return dataHandler.getAllModules();
   }
 
   private OwlGroupedDetails groupDetails(OwlListDetails owlDetails,

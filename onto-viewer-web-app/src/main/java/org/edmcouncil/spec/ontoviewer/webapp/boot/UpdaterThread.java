@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,6 +23,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.UnloadableImportException;
@@ -101,6 +103,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       job = UpdaterOperation.setJobStatusToInProgress(job);
 
       OWLOntology ontology = null;
+      Map<IRI, IRI> iriToPathMapping = new HashMap<>();
       String msgError = null;
 
       LOG.info("Configuration loaded ? : {}", config != null
@@ -118,7 +121,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       try {
         AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager,
             viewerCoreConfiguration);
-        ontology = loader.load();
+        var loadedOntologyData = loader.load();
+        ontology = loadedOntologyData.getOntology();
+        iriToPathMapping = loadedOntologyData.getIriToPathMapping();
       } catch (OWLOntologyCreationException ex) {
         msgError = ex.getMessage();
         LOG.error(
@@ -167,6 +172,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       scopeIriOntology.setScopes(scopes);
 
       ontologyManager.updateOntology(ontology);
+      ontologyManager.setIriToPathMapping(iriToPathMapping);
 
       //get default text searcher db
       Map<String, TextDbItem> textSearcherDbDefaultData = textSearcherDb.loadDefaultData(ontology);
@@ -177,8 +183,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       //load ontology resource must be here, fibo data handler use label provider
       fiboDataHandler.populateOntologyResources(ontology);
 
-      fiboDataHandler.clearAndSetNewModules(ontology);
-      fiboDataHandler.getFiboOntologyHandler().setModulesTree(fiboDataHandler.getModules());
+      fiboDataHandler.getFiboOntologyHandler().setModulesTree(fiboDataHandler.getAllModules()); // TODO: Seems not right
       ontologyStatsManager.clear();
       ontologyStatsManager.generateStats(ontology);
 

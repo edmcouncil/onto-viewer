@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -46,14 +47,16 @@ public class AutoOntologyLoader {
     this.coreConfiguration = viewerCoreConfiguration;
   }
 
-  public OWLOntology load() throws OWLOntologyCreationException, IOException,
+  public LoadedOntologyData load() throws OWLOntologyCreationException, IOException,
       ParserConfigurationException, XPathExpressionException, SAXException {
     Set<IRI> irisToLoad = new HashSet<>();
     var manager = OWLManager.createOWLOntologyManager();
 
     loadMappersToOntologyManager(manager, coreConfiguration.getOntologyMapper());
 
+    Map<IRI, IRI> ontologiesIrisToPaths = new HashMap<>();
     Map<String, Set<String>> ontologyLocations = coreConfiguration.getOntologyLocation();
+
     for (Map.Entry<String, Set<String>> ontologyLocationEntry : ontologyLocations.entrySet()) {
       switch (ontologyLocationEntry.getKey()) {
         case ConfigKeys.ONTOLOGY_DIR:
@@ -68,6 +71,11 @@ public class AutoOntologyLoader {
             versionIriMapper.mapOntologyVersion(autoIRIMapper);
             manager.getIRIMappers().add(autoIRIMapper, versionIriMapper);
             irisToLoad.addAll(autoIRIMapper.getOntologyIRIs());
+
+            var ontologyIRIs = autoIRIMapper.getOntologyIRIs();
+            for (IRI ontologyIri : ontologyIRIs) {
+              ontologiesIrisToPaths.put(ontologyIri, autoIRIMapper.getDocumentIRI(ontologyIri));
+            }
           }
 
           break;
@@ -92,7 +100,7 @@ public class AutoOntologyLoader {
     }
 
     LOGGER.debug("From configuration {} mappings has been read.", manager.getIRIMappers().size());
-    return loadOntologiesFromIRIs(manager, irisToLoad);
+    return new LoadedOntologyData(loadOntologiesFromIRIs(manager, irisToLoad), ontologiesIrisToPaths);
   }
 
   private void loadMappersToOntologyManager(OWLOntologyManager manager,
@@ -130,5 +138,24 @@ public class AutoOntologyLoader {
     }
 
     return umbrellaOntology;
+  }
+
+  public static class LoadedOntologyData {
+
+    private final OWLOntology ontology;
+    private final Map<IRI, IRI> iriToPathMapping;
+
+    public LoadedOntologyData(OWLOntology ontology, Map<IRI, IRI> iriToPathMapping) {
+      this.ontology = ontology;
+      this.iriToPathMapping = iriToPathMapping;
+    }
+
+    public OWLOntology getOntology() {
+      return ontology;
+    }
+
+    public Map<IRI, IRI> getIriToPathMapping() {
+      return iriToPathMapping;
+    }
   }
 }
