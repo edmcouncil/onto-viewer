@@ -316,9 +316,9 @@ public class LuceneSearcher {
             highlights.add(new Highlight(fieldIdentifier, highlightedText));
           }
         }
-      } catch (IOException | InvalidTokenOffsetsException ex) {
+      } catch (IOException | InvalidTokenOffsetsException | IllegalArgumentException ex) {
         LOGGER.warn(
-            "Exception thrown while getting highlighting for document {} for field {}. Details: {}",
+            "Exception thrown for field {} while getting highlighting for document {}. Details: {}",
             document, fieldName, ex.getMessage(), ex);
       }
     }
