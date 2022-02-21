@@ -128,9 +128,11 @@ public class LuceneSearcher {
     try {
       if (this.indexReader != null) {
         this.indexReader.close();
+        this.indexReader = null;
       }
       if (this.indexDirectory != null) {
         this.indexDirectory.close();
+        this.indexDirectory = null;
       }
     } catch (IOException ex) {
       LOGGER.error("Unable to close index while destroying {}. Details: {}",
@@ -314,9 +316,9 @@ public class LuceneSearcher {
             highlights.add(new Highlight(fieldIdentifier, highlightedText));
           }
         }
-      } catch (IOException | InvalidTokenOffsetsException ex) {
+      } catch (IOException | InvalidTokenOffsetsException | IllegalArgumentException ex) {
         LOGGER.warn(
-            "Exception thrown while getting highlighting for document {} for field {}. Details: {}",
+            "Exception thrown for field {} while getting highlighting for document {}. Details: {}",
             document, fieldName, ex.getMessage(), ex);
       }
     }
