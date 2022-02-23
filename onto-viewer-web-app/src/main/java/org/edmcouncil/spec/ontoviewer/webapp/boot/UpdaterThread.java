@@ -13,6 +13,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextDbItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextSearcherDb;
@@ -115,9 +116,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       //download ontology file/files
       //load ontology to var
+      AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager,
+          viewerCoreConfiguration);
       try {
-        AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager,
-            viewerCoreConfiguration);
         ontology = loader.load();
       } catch (OWLOntologyCreationException ex) {
         msgError = ex.getMessage();
@@ -154,7 +155,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       if (isInterrupt()) {
         throw new InterruptUpdate();
       }
-
+      
+      Set<MissingImport> missingImports = loader.getMissingImportListenerImpl().getNotImportUri();
+      
       Set<String> scopes = scopeIriOntology.getScopeIri(ontology);
 
       if (isInterrupt()) {
@@ -167,6 +170,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       scopeIriOntology.setScopes(scopes);
 
       ontologyManager.updateOntology(ontology);
+      
+      ontologyManager.setMissingImports(missingImports);
 
       //get default text searcher db
       Map<String, TextDbItem> textSearcherDbDefaultData = textSearcherDb.loadDefaultData(ontology);
