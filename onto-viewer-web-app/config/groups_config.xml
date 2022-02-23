@@ -78,6 +78,7 @@
       <groupItem>@viewer.axiom.AnnotationPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.AnnotationPropertyRangeOf</groupItem>
       <groupItem>@viewer.axiom.InverseObjectProperties</groupItem>
+      <groupItem>http://www.w3.org/2002/07/owl#deprecated</groupItem>
       <groupItem>http://purl.org/dc/terms/hasPart</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn</groupItem>
     </group>
