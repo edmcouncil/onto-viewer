@@ -15,13 +15,16 @@ import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.mapper.SimpleOntologyMapperCreator;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.mapper.VersionIriMapper;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.util.AutoIRIMapper;
 import org.slf4j.Logger;
@@ -31,7 +34,6 @@ import org.xml.sax.SAXException;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  * @author Michal Daniel (michal.daniel@makolab.com)
  */
-
 public class AutoOntologyLoader {
 
   private static final Logger LOGGER = getLogger(AutoOntologyLoader.class);
@@ -39,11 +41,13 @@ public class AutoOntologyLoader {
 
   private final FileSystemManager fileSystemManager;
   private final CoreConfiguration coreConfiguration;
+  private final MissingImportListenerImpl missingImportListenerImpl;
 
   public AutoOntologyLoader(FileSystemManager fileSystemManager,
       CoreConfiguration viewerCoreConfiguration) {
     this.fileSystemManager = fileSystemManager;
     this.coreConfiguration = viewerCoreConfiguration;
+    this.missingImportListenerImpl = new MissingImportListenerImpl();
   }
 
   public OWLOntology load() throws OWLOntologyCreationException, IOException,
@@ -114,6 +118,11 @@ public class AutoOntologyLoader {
       throws OWLOntologyCreationException {
     var umbrellaOntology = ontologyManager.createOntology();
 
+    OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+    config = config.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+    ontologyManager.setOntologyLoaderConfiguration(config);
+    ontologyManager.addMissingImportListener(missingImportListenerImpl);
+
     for (IRI ontologyIri : iris) {
       var currentOntology = ontologyManager.loadOntology(ontologyIri);
 
@@ -121,14 +130,18 @@ public class AutoOntologyLoader {
           ontologyIri,
           currentOntology.getLogicalAxiomCount());
 
-      var importDeclaration =
-          ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
+      var importDeclaration
+          = ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
 
       var addImport = new AddImport(umbrellaOntology, importDeclaration);
       umbrellaOntology.applyDirectChange(addImport);
       ontologyManager.makeLoadImportRequest(importDeclaration);
     }
-
+    LOGGER.info("Missing imports: {}", missingImportListenerImpl.getNotImportUri().toString());
     return umbrellaOntology;
+  }
+
+  public MissingImportListenerImpl getMissingImportListenerImpl() {
+    return missingImportListenerImpl;
   }
 }
