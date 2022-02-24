@@ -223,6 +223,7 @@ Detailed fields description:
 - "INITIALIZATION_DONE" - `true` means that the application is initialized and ready to serve data.
 - "UPDATE_ONTOLOGY_IN_PROGRESS" - `true` means that ontologies are being updated right now and the application may work incorrectly until the update is done.
 - "BLOCKED" - `true` means that the resources are being replaced with new ones and the application won't serve data right now.
+- "MISSING_IMPORTS" - contains the iri and the cause of the unimported ontology.
 
 #### Example Response
 

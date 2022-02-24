@@ -14,6 +14,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextDbItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextSearcherDb;
@@ -93,8 +94,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         blocker.setUpdateNow(Boolean.TRUE);
         break;
       }
-
     }
+
     try {
       if (isInterrupt()) {
         throw new InterruptUpdate();
@@ -106,8 +107,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       Map<IRI, IRI> iriToPathMapping = new HashMap<>();
       String msgError = null;
 
-      LOG.info("Configuration loaded ? : {}", config != null
-          || !config.getCoreConfiguration().isEmpty());
+      LOG.info("Configuration loaded ? : {}", config != null || !config.getCoreConfiguration().isEmpty());
       LOG.info("File system manager created ? : {}", fileSystemManager != null);
 
       CoreConfiguration viewerCoreConfiguration = config.getCoreConfiguration();
@@ -118,9 +118,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       //download ontology file/files
       //load ontology to var
+      AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager, viewerCoreConfiguration);
       try {
-        AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager,
-            viewerCoreConfiguration);
         var loadedOntologyData = loader.load();
         ontology = loadedOntologyData.getOntology();
         iriToPathMapping = loadedOntologyData.getIriToPathMapping();
@@ -160,6 +159,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         throw new InterruptUpdate();
       }
 
+      Set<MissingImport> missingImports = loader.getMissingImportListenerImpl().getNotImportUri();
+
       Set<String> scopes = scopeIriOntology.getScopeIri(ontology);
 
       if (isInterrupt()) {
@@ -172,6 +173,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       scopeIriOntology.setScopes(scopes);
 
       ontologyManager.updateOntology(ontology);
+
+      ontologyManager.setMissingImports(missingImports);
       ontologyManager.setIriToPathMapping(iriToPathMapping);
 
       //get default text searcher db
@@ -218,7 +221,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     UpdaterOperation.setJobStatusToError(job, e.getMessage());
     LOG.error(e.getStackTrace().toString());
     blocker.setUpdateNow(Boolean.FALSE);
-
   }
 
   public UpdateJob getJob() {
@@ -229,5 +231,4 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     return job.getStatus() == UpdateJobStatus.ERROR
         || job.getStatus() == UpdateJobStatus.INTERRUPT_IN_PROGRESS;
   }
-
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.semanticweb.owlapi.model.IRI;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class OntologyManager {
   private OWLOntology ontology;
   private Map<IRI, IRI> iriToPathMapping = new HashMap<>();
   private Set<OWLOntology> ontologies;
+  private Set<MissingImport> missingImports;
 
   public OWLOntology getOntology() {
     return ontology;
@@ -41,5 +43,13 @@ public class OntologyManager {
 
   public void setIriToPathMapping(Map<IRI, IRI> iriToPathMapping) {
     this.iriToPathMapping = iriToPathMapping;
+  }
+
+  public Set<MissingImport> getMissingImports() {
+    return missingImports;
+  }
+
+  public void setMissingImports(Set<MissingImport> missingImports) {
+    this.missingImports = missingImports;
   }
 }
