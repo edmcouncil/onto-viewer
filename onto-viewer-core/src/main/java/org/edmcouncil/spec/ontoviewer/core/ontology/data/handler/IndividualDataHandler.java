@@ -15,7 +15,6 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,8 +27,11 @@ public class IndividualDataHandler {
   private static final String instanceKey = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.function, OwlType.INSTANCES.name().toLowerCase());
 
-  @Autowired
-  private LabelProvider labelExtractor;
+  private final LabelProvider labelExtractor;
+
+  public IndividualDataHandler(LabelProvider labelExtractor) {
+    this.labelExtractor = labelExtractor;
+  }
 
   /**
    * Handle all individual for OWLClass given on parameter.

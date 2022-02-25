@@ -71,7 +71,6 @@ public class FiboOntologyHandler {
 
     public void setModulesTree(List<FiboModule> modules) {
         this.modules = modules;
-
     }
 
     public OntoFiboMaturityLevel getMaturityLevelForOntology(IRI ontologyIri) {
