@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -97,12 +96,7 @@ public class ModuleHandler {
         }
       }
 
-      if (this.modules.isEmpty()) {
-        // If there wasn't any modules, we create a list of modules based on ontologies that were imported in the
-        // application
-        this.modules = generateModules();
-        this.modules.forEach(this::checkAndCompleteMaturityLevel);
-      }
+      this.modules = addMissingModules(modules);
     }
 
     return modules;
@@ -221,13 +215,19 @@ public class ModuleHandler {
     }
   }
 
-  private List<FiboModule> generateModules() {
-    return ontologyManager.getOntologyWithImports()
+  private List<FiboModule> addMissingModules(List<FiboModule> modules) {
+    var newModules = ontologyManager.getOntologyWithImports()
         .filter(owlOntology -> {
           var ontologyIriOptional = owlOntology.getOntologyID().getOntologyIRI();
           if (ontologyIriOptional.isPresent()) {
             var ontologyIri = ontologyIriOptional.get();
-            return ontologyManager.getIriToPathMapping().get(ontologyIri) != null;
+
+            var ontologyLoadedDirectly = ontologyManager.getIriToPathMapping().get(ontologyIri) != null;
+
+            if (ontologyLoadedDirectly) {
+              return checkIfNotAddedYet(modules, ontologyIri);
+            }
+            return false;
           }
           return false;
         })
@@ -242,10 +242,32 @@ public class ModuleHandler {
           module.setMaturityLevel(
               chooseTheRightVersion(
                   fiboOntologyHandler.getMaturityLevelForOntology(ontologyIri)));
+          if ("".equals(module.getMaturityLevel().getLabel())) {
+            module.setMaturityLevel(FiboMaturityLevelFactory.dev);
+          }
           return module;
         })
         .filter(fiboModule -> !fiboModule.getLabel().isEmpty())
         .sorted()
         .collect(Collectors.toList());
+
+    modules.addAll(newModules);
+
+    return modules;
+  }
+
+  private boolean checkIfNotAddedYet(List<FiboModule> modules, IRI ontologyIri) {
+    for (FiboModule module : modules) {
+      if (module.getIri().equals(ontologyIri.toString())) {
+        return false;
+      }
+
+      var notAddedYet = checkIfNotAddedYet(module.getSubModule(), ontologyIri);
+      if (notAddedYet) {
+        return true;
+      }
+    }
+
+    return true;
   }
 }

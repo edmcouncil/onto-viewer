@@ -10,6 +10,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -123,14 +124,14 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         var loadedOntologyData = loader.load();
         ontology = loadedOntologyData.getOntology();
         iriToPathMapping = loadedOntologyData.getIriToPathMapping();
-      } catch (OWLOntologyCreationException ex) {
+      } catch (OWLOntologyCreationException | OntoViewerException ex) {
         msgError = ex.getMessage();
         LOG.error(
-            "[ERROR]: Error when creating ontology. Stoping application. Exception: {} \n Message: {}",
+            "[ERROR]: Error when creating ontology. Stopping application. Exception: {} \n Message: {}",
             ex.getStackTrace(), ex.getMessage());
       } catch (IOException ex) {
         msgError = ex.getMessage();
-        LOG.error("[ERROR]: Cannot load ontology. Stoping application. Stack Trace: {}",
+        LOG.error("[ERROR]: Cannot load ontology. Stopping application. Stack Trace: {}",
             Arrays.toString(ex.getStackTrace()));
       } catch (ParserConfigurationException ex) {
         msgError = ex.getMessage();
