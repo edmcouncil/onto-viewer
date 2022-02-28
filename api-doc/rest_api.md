@@ -390,7 +390,9 @@ Return the list of find properties supported by the application.  These properti
 
 ###  /api/missingImports (GET)
 
-#### Return the iri and the cause of the unimported ontology.
+#### Description
+
+Return the iri and the cause of the unimported ontology.
 
 #### Example Response
 
