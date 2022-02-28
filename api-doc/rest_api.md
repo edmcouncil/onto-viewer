@@ -388,24 +388,32 @@ Return the list of find properties supported by the application.  These properti
 
 ## 11. Missing Imports
 
-* **Request type:** GET
+###  /api/missingImports (GET)
 
- - **Endpoint**:
+#### Return the iri and the cause of the unimported ontology.
 
-	 > /api/missingImports
+#### Example Response
 
- - **Description**: Return the iri and the cause of the unimported ontology..
- 
- - **Returned value**:
 ```json
- [
-	{
-		"iri": "https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/",
-		"cause": "OWLOntologyCreationIOException: java.io.FileNotFoundException: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"
-	},
-	{
-		"iri": "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/",
-		"cause": "OWLOntologyCreationIOException: java.io.FileNotFoundException: https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
-	}
+
+[
+
+{
+
+"iri": "https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/",
+
+"cause": "OWLOntologyCreationIOException: java.io.FileNotFoundException: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"
+
+},
+
+{
+
+"iri": "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/",
+
+"cause": "OWLOntologyCreationIOException: java.io.FileNotFoundException: https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
+
+}
+
 ]
+
 ```
