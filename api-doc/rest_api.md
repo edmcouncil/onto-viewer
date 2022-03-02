@@ -223,7 +223,6 @@ Detailed fields description:
 - "INITIALIZATION_DONE" - `true` means that the application is initialized and ready to serve data.
 - "UPDATE_ONTOLOGY_IN_PROGRESS" - `true` means that ontologies are being updated right now and the application may work incorrectly until the update is done.
 - "BLOCKED" - `true` means that the resources are being replaced with new ones and the application won't serve data right now.
-- "MISSING_IMPORTS" - contains the iri and the cause of the unimported ontology.
 
 #### Example Response
 
@@ -384,5 +383,28 @@ Return the list of find properties supported by the application.  These properti
     "identifier": "fibo_explanatoryNote",
     "iri": "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote"
   }
+]
+```
+
+## 11. Missing Imports
+
+###  /api/missingImports (GET)
+
+#### Description
+
+Return the iri and the cause of the unimported ontology.
+
+#### Example Response
+
+```json
+[
+   {
+   "iri": "https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/",
+   "cause": "OWLOntologyCreationIOException: java.io.FileNotFoundException: https://www.omg.org/spec/LCC/Countries/ISO3166-1-CountryCodes/"
+   },
+   {
+   "iri": "https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/",
+   "cause": "OWLOntologyCreationIOException: java.io.FileNotFoundException: https://www.omg.org/spec/LCC/Languages/ISO639-1-LanguageCodes/"
+   }
 ]
 ```
