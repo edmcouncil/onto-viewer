@@ -92,7 +92,11 @@ class ModuleHandlerTest {
         owlDataExtractor, customDataFactory, configurationService, scopeIriOntology);
     var fiboOntologyHandler = new FiboOntologyHandler(ontologyManager, labelProvider, annotationsDataHandler);
 
-    return new ModuleHandler(ontologyManager, individualDataHandler, labelProvider, fiboOntologyHandler);
+    return new ModuleHandler(ontologyManager,
+        individualDataHandler,
+        labelProvider,
+        fiboOntologyHandler,
+        configurationService);
   }
 
   private OntologyManager getOntologyManager(String ontologyPath) {

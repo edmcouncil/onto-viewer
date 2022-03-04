@@ -68,7 +68,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.LABEL_PRIORITY:
       case ConfigKeys.MISSING_LANGUAGE_ACTION:
       case ConfigKeys.USER_DEFAULT_NAME_LIST:
-
+      case ConfigKeys.ONTOLOGY_MODULE_TO_IGNORE:
         this.key = qName;
         break;
       case ConfigKeys.GROUP:
@@ -106,6 +106,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.IGNORED_ELEMENT:
       case ConfigKeys.URI_NAMESPACE:
       case ConfigKeys.LABEL_LANG:
+      case ConfigKeys.ONTOLOGY_MODULE_TO_IGNORE:
         if (!val.trim().isEmpty()) {
           ConfigItem configEl = new StringItem(val);
           configuration.addConfigElement(key, configEl);

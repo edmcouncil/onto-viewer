@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
@@ -49,22 +50,30 @@ public class ModuleHandler {
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
   private final FiboOntologyHandler fiboOntologyHandler;
-
   private final OWLAnnotationProperty hasPartAnnotation;
+
+  private Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
+  private List<FiboModule> modules;
 
   public ModuleHandler(OntologyManager ontologyManager,
       IndividualDataHandler individualDataHandler,
       LabelProvider labelProvider,
-      FiboOntologyHandler fiboOntologyHandler) {
+      FiboOntologyHandler fiboOntologyHandler,
+      ConfigurationService configurationService) {
     this.ontologyManager = ontologyManager;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
     this.fiboOntologyHandler = fiboOntologyHandler;
 
+    this.ontologiesToIgnoreWhenGeneratingModules =
+        configurationService.getCoreConfiguration()
+            .getOntologiesToIgnoreWhenGeneratingModules()
+            .stream()
+            .map(IRI::create)
+            .collect(Collectors.toSet());
+
     this.hasPartAnnotation = OWLManager.getOWLDataFactory().getOWLAnnotationProperty(IRI.create(HAS_PART_IRI));
   }
-
-  private List<FiboModule> modules;
 
   public List<FiboModule> getModules() {
     if (modules == null) {
@@ -96,7 +105,7 @@ public class ModuleHandler {
         }
       }
 
-      this.modules = addMissingModules(modules);
+      addMissingModules(modules);
     }
 
     return modules;
@@ -215,7 +224,9 @@ public class ModuleHandler {
     }
   }
 
-  private List<FiboModule> addMissingModules(List<FiboModule> modules) {
+  private void addMissingModules(List<FiboModule> modules) {
+    Set<String> modulesIris = gatherModulesIris(modules);
+
     var newModules = ontologyManager.getOntologyWithImports()
         .filter(owlOntology -> {
           var ontologyIriOptional = owlOntology.getOntologyID().getOntologyIRI();
@@ -225,7 +236,7 @@ public class ModuleHandler {
             var ontologyLoadedDirectly = ontologyManager.getIriToPathMapping().get(ontologyIri) != null;
 
             if (ontologyLoadedDirectly) {
-              return checkIfNotAddedYet(modules, ontologyIri);
+              return checkIfShouldAddModuleForOntology(modulesIris, ontologyIri);
             }
             return false;
           }
@@ -243,7 +254,7 @@ public class ModuleHandler {
               chooseTheRightVersion(
                   fiboOntologyHandler.getMaturityLevelForOntology(ontologyIri)));
           if ("".equals(module.getMaturityLevel().getLabel())) {
-            module.setMaturityLevel(FiboMaturityLevelFactory.dev);
+            module.setMaturityLevel(FiboMaturityLevelFactory.INFO);
           }
           return module;
         })
@@ -252,22 +263,21 @@ public class ModuleHandler {
         .collect(Collectors.toList());
 
     modules.addAll(newModules);
-
-    return modules;
   }
 
-  private boolean checkIfNotAddedYet(List<FiboModule> modules, IRI ontologyIri) {
-    for (FiboModule module : modules) {
-      if (module.getIri().equals(ontologyIri.toString())) {
-        return false;
-      }
-
-      var notAddedYet = checkIfNotAddedYet(module.getSubModule(), ontologyIri);
-      if (notAddedYet) {
-        return true;
-      }
+  private boolean checkIfShouldAddModuleForOntology(Set<String> modulesIris, IRI ontologyIri) {
+    if (ontologiesToIgnoreWhenGeneratingModules.contains(ontologyIri)) {
+      return false;
     }
+    return !modulesIris.contains(ontologyIri.toString());
+  }
 
-    return true;
+  private Set<String> gatherModulesIris(List<FiboModule> modules) {
+    Set<String> iris = new HashSet<>();
+    for (FiboModule module : modules) {
+      iris.add(module.getIri());
+      iris.addAll(gatherModulesIris(module.getSubModule()));
+    }
+    return iris;
   }
 }
