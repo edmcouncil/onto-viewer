@@ -70,6 +70,7 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
             "@viewer.axiom.AnnotationPropertyRangeOf",
             "@viewer.axiom.InverseObjectProperties",
             "http://purl.org/dc/terms/hasPart",
+            "http://www.w3.org/2002/07/owl#deprecated",
             "http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn"));
 
     FIND_PROPERTIES.addAll(

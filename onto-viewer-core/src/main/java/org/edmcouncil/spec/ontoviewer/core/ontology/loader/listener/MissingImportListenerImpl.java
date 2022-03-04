@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author patrycja.miazek (patrycja.miazek@makolab.)
+ * @author patrycja.miazek (patrycja.miazek@makolab.com)
  */
 @Component
 public class MissingImportListenerImpl implements MissingImportListener {
