@@ -148,10 +148,9 @@ public class AutoOntologyLoader {
         umbrellaOntology.applyDirectChange(addImport);
         ontologyManager.makeLoadImportRequest(importDeclaration);
       } catch (Exception ex) {
-        var message = String.format("Exception occurred while loading ontology with IRI '%s'. Details: %s",
-            ontologyIri, ex.getMessage());
-        LOGGER.error(message);
-        throw new OntoViewerException(message, ex);
+        var message = String.format("Exception occurred while loading ontology with IRI '%s'. Cause: %s (%s)",
+            ontologyIri, ex.getCause(), ex.getMessage());
+        LOGGER.warn(message);
       }
     }
     LOGGER.info("Missing imports: {}", missingImportListenerImpl.getNotImportUri().toString());
