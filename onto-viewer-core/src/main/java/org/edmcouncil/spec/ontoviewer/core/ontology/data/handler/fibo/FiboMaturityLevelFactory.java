@@ -6,10 +6,11 @@ import org.semanticweb.owlapi.model.IRI;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class FiboMaturityLevelFactory {
-    
-    public static FiboMaturityLevel prod = new AppFiboMaturityLevel("prod"); 
-    public static FiboMaturityLevel dev = new AppFiboMaturityLevel("dev"); 
-    public static FiboMaturityLevel prodDev = new AppFiboMaturityLevel("prodDev"); 
+
+  public static FiboMaturityLevel prod = new AppFiboMaturityLevel("prod");
+  public static FiboMaturityLevel dev = new AppFiboMaturityLevel("dev");
+  public static FiboMaturityLevel prodDev = new AppFiboMaturityLevel("prodDev");
+  public static FiboMaturityLevel INFO = new AppFiboMaturityLevel("info");
 
   public static OntoFiboMaturityLevel create(String label, IRI iri, String icon) {
     return create(label, iri.toString(), icon);
@@ -22,7 +23,8 @@ public class FiboMaturityLevelFactory {
   public static OntoFiboMaturityLevel empty() {
     return create("", "", "");
   }
+
   public static FiboMaturityLevel emptyAppFiboMaturityLabel() {
-    return  new AppFiboMaturityLevel("");
+    return new AppFiboMaturityLevel("");
   }
 }
