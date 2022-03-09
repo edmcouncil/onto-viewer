@@ -57,11 +57,15 @@ public class LabelProvider {
 
   public String getLabelOrDefaultFragment(IRI iri) {
     var ontology = ontologyManager.getOntology();
-
+    /* I dont know why but some input iri's has '<' on start and '>' on end
+    This is not correct, so I am replacing it here with 
+    iri without these characters */
+    if(iri.toString().contains("<") && iri.toString().contains(">")){
+        iri = IRI.create(iri.toString().replace("<", "").replace(">", ""));
+    }
     if (previouslyUsedLabels.containsKey(iri.toString())) {
       return previouslyUsedLabels.get(iri.toString());
     }
-
     OWLEntity entity = ontology.entitiesInSignature(iri, Imports.INCLUDED)
         .findFirst()
         .orElse(
