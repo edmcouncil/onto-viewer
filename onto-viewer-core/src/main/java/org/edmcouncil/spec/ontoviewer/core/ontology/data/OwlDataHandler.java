@@ -615,9 +615,7 @@ public class OwlDataHandler {
       LOG.trace("OWL Entity splitted: {}", Arrays.asList(splitted));
 
       for (int i = startCountingArgs; i < startCountingArgs + splitted.length; i++) {
-          
         int fixedIValue = i - startCountingArgs;
-        
         String string = splitted[fixedIValue].trim();
         LOG.trace("Splitted string i: '{}', str: '{}'", fixedIValue, string);
         //more than 1 because when it's 1, it's a number
