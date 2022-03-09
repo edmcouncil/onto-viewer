@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MODULE_TO_IGNORE;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.INDIVIDUALS_ENABLED;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.LOCATION_IN_MODULES_ENABLED;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_GRAPH_ENABLED;
@@ -15,6 +16,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MAPPING_MAP;
+
+import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.DefaultLabelItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority;
@@ -317,5 +320,15 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     var configSet = new LinkedHashSet<ConfigItem>();
     configSet.add(value);
     configuration.put(key, configSet);
+  }
+
+  public Set<String> getOntologiesToIgnoreWhenGeneratingModules() {
+    Set<ConfigItem> defaultOntologiesToIgnore = Set.of(new StringItem("http://www.w3.org/2002/07/owl"));
+
+    return configuration.getOrDefault(ONTOLOGY_MODULE_TO_IGNORE, defaultOntologiesToIgnore)
+        .stream()
+        .map(StringItem.class::cast)
+        .map(StringItem::toString)
+        .collect(Collectors.toSet());
   }
 }

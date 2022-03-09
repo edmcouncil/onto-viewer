@@ -1,12 +1,13 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class AppFiboMaturityLevel implements FiboMaturityLevel{
 
     String label;
 
-    AppFiboMaturityLevel(String str) {
+    public AppFiboMaturityLevel(String str) {
         this.label = str;
     }
 
@@ -17,6 +18,13 @@ public class AppFiboMaturityLevel implements FiboMaturityLevel{
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", AppFiboMaturityLevel.class.getSimpleName() + "[", "]")
+            .add("label='" + label + "'")
+            .toString();
     }
 
     @Override

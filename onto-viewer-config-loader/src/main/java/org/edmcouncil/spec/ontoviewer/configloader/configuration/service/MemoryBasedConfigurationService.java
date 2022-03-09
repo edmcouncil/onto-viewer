@@ -97,6 +97,7 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
   public CoreConfiguration getCoreConfiguration() {
     return this.configuration;
   }
+
   public MemoryBasedConfigurationService() {
     configuration = new CoreConfiguration();
     configuration.addConfigElement(ConfigKeys.DISPLAY_LABEL, new BooleanItem(true));

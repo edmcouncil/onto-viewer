@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.mapper.SimpleOntologyMapperCreator;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.mapper.VersionIriMapper;
@@ -34,6 +36,7 @@ import org.xml.sax.SAXException;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  * @author Michal Daniel (michal.daniel@makolab.com)
  */
+
 public class AutoOntologyLoader {
 
   private static final Logger LOGGER = getLogger(AutoOntologyLoader.class);
@@ -50,14 +53,16 @@ public class AutoOntologyLoader {
     this.missingImportListenerImpl = new MissingImportListenerImpl();
   }
 
-  public OWLOntology load() throws OWLOntologyCreationException, IOException,
-      ParserConfigurationException, XPathExpressionException, SAXException {
+  public LoadedOntologyData load() throws OWLOntologyCreationException, IOException,
+      ParserConfigurationException, XPathExpressionException, SAXException, OntoViewerException {
     Set<IRI> irisToLoad = new HashSet<>();
     var manager = OWLManager.createOWLOntologyManager();
 
     loadMappersToOntologyManager(manager, coreConfiguration.getOntologyMapper());
 
+    Map<IRI, IRI> ontologiesIrisToPaths = new HashMap<>();
     Map<String, Set<String>> ontologyLocations = coreConfiguration.getOntologyLocation();
+
     for (Map.Entry<String, Set<String>> ontologyLocationEntry : ontologyLocations.entrySet()) {
       switch (ontologyLocationEntry.getKey()) {
         case ConfigKeys.ONTOLOGY_DIR:
@@ -72,6 +77,11 @@ public class AutoOntologyLoader {
             versionIriMapper.mapOntologyVersion(autoIRIMapper);
             manager.getIRIMappers().add(autoIRIMapper, versionIriMapper);
             irisToLoad.addAll(autoIRIMapper.getOntologyIRIs());
+
+            var ontologyIRIs = autoIRIMapper.getOntologyIRIs();
+            for (IRI ontologyIri : ontologyIRIs) {
+              ontologiesIrisToPaths.put(ontologyIri, autoIRIMapper.getDocumentIRI(ontologyIri));
+            }
           }
 
           break;
@@ -96,7 +106,7 @@ public class AutoOntologyLoader {
     }
 
     LOGGER.debug("From configuration {} mappings has been read.", manager.getIRIMappers().size());
-    return loadOntologiesFromIRIs(manager, irisToLoad);
+    return new LoadedOntologyData(loadOntologiesFromIRIs(manager, irisToLoad), ontologiesIrisToPaths);
   }
 
   private void loadMappersToOntologyManager(OWLOntologyManager manager,
@@ -115,7 +125,7 @@ public class AutoOntologyLoader {
   }
 
   private OWLOntology loadOntologiesFromIRIs(OWLOntologyManager ontologyManager, Set<IRI> iris)
-      throws OWLOntologyCreationException {
+      throws OWLOntologyCreationException, OntoViewerException {
     var umbrellaOntology = ontologyManager.createOntology();
 
     OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
@@ -124,18 +134,24 @@ public class AutoOntologyLoader {
     ontologyManager.addMissingImportListener(missingImportListenerImpl);
 
     for (IRI ontologyIri : iris) {
-      var currentOntology = ontologyManager.loadOntology(ontologyIri);
+      try {
+        var currentOntology = ontologyManager.loadOntology(ontologyIri);
 
-      LOGGER.debug("Loaded '{}' ontology with {} axioms.",
-          ontologyIri,
-          currentOntology.getLogicalAxiomCount());
+        LOGGER.debug("Loaded '{}' ontology with {} axioms.",
+            ontologyIri,
+            currentOntology.getLogicalAxiomCount());
 
-      var importDeclaration
-          = ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
+        var importDeclaration
+            = ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
 
-      var addImport = new AddImport(umbrellaOntology, importDeclaration);
-      umbrellaOntology.applyDirectChange(addImport);
-      ontologyManager.makeLoadImportRequest(importDeclaration);
+        var addImport = new AddImport(umbrellaOntology, importDeclaration);
+        umbrellaOntology.applyDirectChange(addImport);
+        ontologyManager.makeLoadImportRequest(importDeclaration);
+      } catch (Exception ex) {
+        var message = String.format("Exception occurred while loading ontology with IRI '%s'. Cause: %s (%s)",
+            ontologyIri, ex.getCause(), ex.getMessage());
+        LOGGER.warn(message);
+      }
     }
     LOGGER.info("Missing imports: {}", missingImportListenerImpl.getNotImportUri().toString());
     return umbrellaOntology;
@@ -143,5 +159,24 @@ public class AutoOntologyLoader {
 
   public MissingImportListenerImpl getMissingImportListenerImpl() {
     return missingImportListenerImpl;
+  }
+
+  public static class LoadedOntologyData {
+
+    private final OWLOntology ontology;
+    private final Map<IRI, IRI> iriToPathMapping;
+
+    public LoadedOntologyData(OWLOntology ontology, Map<IRI, IRI> iriToPathMapping) {
+      this.ontology = ontology;
+      this.iriToPathMapping = iriToPathMapping;
+    }
+
+    public OWLOntology getOntology() {
+      return ontology;
+    }
+
+    public Map<IRI, IRI> getIriToPathMapping() {
+      return iriToPathMapping;
+    }
   }
 }
