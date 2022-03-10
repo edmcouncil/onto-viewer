@@ -31,6 +31,7 @@
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/keyword</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/fileAbstract</groupItem> 
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote</groupItem>
+      <groupItem>http://purl.org/dc/terms/description</groupItem>
     </group>
 
     <group>
