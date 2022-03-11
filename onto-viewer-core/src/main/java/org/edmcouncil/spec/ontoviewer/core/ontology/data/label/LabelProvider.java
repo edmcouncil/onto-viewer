@@ -57,11 +57,9 @@ public class LabelProvider {
 
   public String getLabelOrDefaultFragment(IRI iri) {
     var ontology = ontologyManager.getOntology();
-
     if (previouslyUsedLabels.containsKey(iri.toString())) {
       return previouslyUsedLabels.get(iri.toString());
     }
-
     OWLEntity entity = ontology.entitiesInSignature(iri, Imports.INCLUDED)
         .findFirst()
         .orElse(

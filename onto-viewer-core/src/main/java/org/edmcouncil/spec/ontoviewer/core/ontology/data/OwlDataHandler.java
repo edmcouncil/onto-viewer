@@ -563,7 +563,7 @@ public class OwlDataHandler {
       boolean bypassClass
   ) {
     String value = rendering.render(axiom);
-    LOG.debug("rendering value: {}", value);
+    LOG.debug("Rendered default value: {}", value);
     for (String unwantedType : unwantedTypes) {
       value = value.replace(unwantedType, "");
     }
@@ -615,9 +615,7 @@ public class OwlDataHandler {
       LOG.trace("OWL Entity splitted: {}", Arrays.asList(splitted));
 
       for (int i = startCountingArgs; i < startCountingArgs + splitted.length; i++) {
-
         int fixedIValue = i - startCountingArgs;
-
         String string = splitted[fixedIValue].trim();
         LOG.trace("Splitted string i: '{}', str: '{}'", fixedIValue, string);
         //more than 1 because when it's 1, it's a number
@@ -653,7 +651,7 @@ public class OwlDataHandler {
         }
         if (string.equals(eSignature)) {
           LOG.trace("Find match for processing item {}", string);
-          String generatedKey = String.format(argPattern, i);
+          String generatedKey = String.format(argPattern, fixedIValue);
           key = generatedKey;
           String textToReplace = generatedKey;
           if (hasOpeningParenthesis) {
@@ -672,7 +670,6 @@ public class OwlDataHandler {
           }
           LOG.trace("Prepared text: {} for: {}", textToReplace, splitted[fixedIValue]);
           splitted[fixedIValue] = textToReplace;
-
           String eIri = next.getIRI().toString();
 
           parseToIri(argPattern, opv, key, splitted, fixedIValue, generatedKey, eIri,
@@ -697,10 +694,12 @@ public class OwlDataHandler {
       OwlAxiomPropertyValue opv) {
     for (int j = 0; j < splited.length; j++) {
       String str = splited[j].trim();
+      String probablyUrl = splited[j].trim();
       if (str.startsWith("<") && str.endsWith(">")) {
         int length = str.length();
-        String probablyUrl = str.substring(1, length - 1);
-        if (UrlChecker.isUrl(probablyUrl)) {
+         probablyUrl = str.substring(1, length - 1);
+      }
+      if (UrlChecker.isUrl(probablyUrl)) {
           String generatedKey = String.format(argPattern, j);
           String key = generatedKey;
 
@@ -711,7 +710,6 @@ public class OwlDataHandler {
             parseUrl(probablyUrl, splited, j);
           }
         }
-      }
     }
   }
 
@@ -724,6 +722,12 @@ public class OwlDataHandler {
       String[] splited, int j, String generatedKey, String eIri, int countOpeningParenthesis,
       int countClosingParenthesis, int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
+    /* I dont know why but some input iri's has '<' on start and '>' on end
+    This is not correct, so I am replacing it here with 
+    iri without these characters */
+    if(eIri.contains("<") && eIri.contains(">")){
+        eIri = eIri.toString().replace("<", "").replace(">", "");
+    }
     axiomPropertyEntity.setIri(eIri);
     LOG.debug("Probably eiri {}", eIri);
     String label = labelProvider.getLabelOrDefaultFragment(IRI.create(eIri));
@@ -752,7 +756,9 @@ public class OwlDataHandler {
       Boolean fixRenderedIri) {
     String[] split = value.split(" ");
     LOG.debug("Split fixRenderedValue: {}", Arrays.asList(split));
-    if (split[1].equals("SubClassOf")) {
+    if (split[1].equals("SubClassOf")  
+        || split[1].equals("Domain")  
+        || split[1].equals("Range")) {
       split[0] = "";
       split[1] = "";
     }
