@@ -14,23 +14,14 @@ public class StringUtils {
 
   public static String getFragment(IRI iri) {
     String iriString = iri.toString();
-    return getFragment(iriString);
+    if (iriString.contains(AXIOM_PATTERN)) {
+      return iriString.substring(iriString.lastIndexOf(".") + 1);
+    }
+    return iri.getFragment();
   }
-  
 
   public static String getFragment(String iri) {
-    if (iri.contains(AXIOM_PATTERN)) {
-      return iri.substring(iri.lastIndexOf(".")+1);
-    }
-    String[] splitIri = iri.split("/");
-    String lastElement = splitIri[splitIri.length - 1];
-    if (iri.endsWith("/")) {
-      return lastElement;
-    } else if (lastElement.contains("#")) {
-      return lastElement.substring(lastElement.indexOf("#") + 1);
-    } else {
-      return lastElement;
-    }
+    return getFragment(IRI.create(iri));
   }
 
   public static int countLetter(String string, char letter) {
@@ -65,7 +56,7 @@ public class StringUtils {
         return sb.insert(actualLength, "...").substring(0, actualLength + 3);
       } else {
         int endIndex = sb.indexOf(" ", actualLength);
-        if(endIndex == -1 ){
+        if (endIndex == -1) {
           return string;
         }
         endIndex = endIndex >= sb.length() ? sb.length() : endIndex;
