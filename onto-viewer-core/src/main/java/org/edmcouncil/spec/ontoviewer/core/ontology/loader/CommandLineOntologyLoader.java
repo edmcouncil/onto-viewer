@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
@@ -18,6 +19,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyAlreadyExistsException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyDocumentAlreadyExistsException;
+import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.slf4j.Logger;
@@ -28,15 +30,17 @@ public class CommandLineOntologyLoader {
   private static final Logger LOGGER = LoggerFactory.getLogger(CommandLineOntologyLoader.class);
 
   private final CoreConfiguration coreConfiguration;
+  private final MissingImportListenerImpl missingImportListenerImpl;
 
   public CommandLineOntologyLoader(CoreConfiguration coreConfiguration) {
     this.coreConfiguration = coreConfiguration;
+    this.missingImportListenerImpl = new MissingImportListenerImpl();
   }
 
   public OWLOntology load() throws OWLOntologyCreationException {
     var owlOntologyManager = OWLManager.createOWLOntologyManager();
 
-     setOntologyMapping(owlOntologyManager);
+    setOntologyMapping(owlOntologyManager);
     
     var ontologyIrisToLoad = new HashSet<IRI>();
 
@@ -90,7 +94,7 @@ public class CommandLineOntologyLoader {
     return loadOntologiesFromIris(owlOntologyManager, ontologyIrisToLoad);
   }
 
-    private void setOntologyMapping(OWLOntologyManager owlOntologyManager) {
+  private void setOntologyMapping(OWLOntologyManager owlOntologyManager) {
     var ontologyMapping = coreConfiguration.getOntologyMapping();
     ontologyMapping.forEach((ontologyIri, ontologyPath) ->
         owlOntologyManager.getIRIMappers().add(
@@ -98,29 +102,29 @@ public class CommandLineOntologyLoader {
                 IRI.create(ontologyIri),
                 IRI.create(new File(ontologyPath.toString())))));
   }
-    
-  private OWLOntology loadOntologiesFromIris(
-      OWLOntologyManager ontologyManager,
-      Set<IRI> ontologyIrisToLoad) throws OWLOntologyCreationException {
-    ontologyManager.getOntologyLoaderConfiguration()
-        .setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+
+  private OWLOntology loadOntologiesFromIris(OWLOntologyManager ontologyManager, Set<IRI> ontologyIrisToLoad)
+      throws OWLOntologyCreationException {
+    var loaderConfiguration = new OWLOntologyLoaderConfiguration();
+    loaderConfiguration = loaderConfiguration.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
+    ontologyManager.setOntologyLoaderConfiguration(loaderConfiguration);
+    ontologyManager.addMissingImportListener(missingImportListenerImpl);
 
     var umbrellaOntology = ontologyManager.createOntology();
 
     for (IRI ontologyIri : ontologyIrisToLoad) {
       LOGGER.debug("Loading ontology from IRI '{}'...", ontologyIri);
 
-        try {
+      try {
         var currentOntology = ontologyManager.loadOntology(ontologyIri);
 
-       LOGGER.debug("Loaded '{}' ontology with {} axioms.",
+        LOGGER.debug("Loaded '{}' ontology with {} axioms.",
             ontologyIri,
             currentOntology.getLogicalAxiomCount());
 
-      var importDeclaration =
-            ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
+        var importDeclaration = ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
 
-      var addImport = new AddImport(umbrellaOntology, importDeclaration);
+        var addImport = new AddImport(umbrellaOntology, importDeclaration);
         umbrellaOntology.applyChange(addImport);
       } catch (OWLOntologyAlreadyExistsException | OWLOntologyDocumentAlreadyExistsException ex) {
         LOGGER.warn(String.format("Ontology '%s' has already been loaded.", ontologyIri));

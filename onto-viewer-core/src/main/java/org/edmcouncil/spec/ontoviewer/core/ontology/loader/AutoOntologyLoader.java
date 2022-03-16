@@ -125,7 +125,7 @@ public class AutoOntologyLoader {
   }
 
   private OWLOntology loadOntologiesFromIRIs(OWLOntologyManager ontologyManager, Set<IRI> iris)
-      throws OWLOntologyCreationException, OntoViewerException {
+      throws OWLOntologyCreationException {
     var umbrellaOntology = ontologyManager.createOntology();
 
     OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
