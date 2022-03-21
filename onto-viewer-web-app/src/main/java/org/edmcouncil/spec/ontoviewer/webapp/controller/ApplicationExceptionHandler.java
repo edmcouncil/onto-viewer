@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
 import org.edmcouncil.spec.ontoviewer.core.exception.ApplicationNotInitializedException;
+import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.ontoviewer.core.exception.RequestHandlingException;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,13 @@ public class ApplicationExceptionHandler {
         "Incorrect argument was sent.",
         exception.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(value = NotFoundElementInOntologyException.class)
+  ResponseEntity<ErrorResponse> handleNotFoundElementInOntology(NotFoundElementInOntologyException exception) {
+    var errorResponse = new ErrorResponse(
+        "Element not found.",
+        exception.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
   }
 }

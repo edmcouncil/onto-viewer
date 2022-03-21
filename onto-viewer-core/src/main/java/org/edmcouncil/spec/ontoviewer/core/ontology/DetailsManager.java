@@ -11,6 +11,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigIte
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
@@ -39,6 +40,7 @@ public class DetailsManager {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(DetailsManager.class);
   private static final String DEFAULT_GROUP_NAME = "other";
+  private static final String NOT_FOUND_ENTITY_MESSAGE = "Not found element with IRI: %s";
 
   private final OntologyManager ontologyManager;
   private final OwlDataHandler dataHandler;
@@ -79,8 +81,7 @@ public class DetailsManager {
     }
 
     if (result == null) {
-      throw new NotFoundElementInOntologyException(
-          "Not found element in ontology with IRI: " + entityIri.toString());
+      throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_ENTITY_MESSAGE, entityIri.toString()));
     }
 
     result.setIri(entityIri.toString());
@@ -89,8 +90,7 @@ public class DetailsManager {
     if (getSetting(ConfigKeys.LOCATION_IN_MODULES_ENABLED)) {
       result.setLocationInModules(
           dataHandler.getElementLocationInModules(
-              entityIri.getIRIString(),
-              ontologyManager.getOntology()));
+              entityIri.getIRIString()));
     }
 
     if (configurationService.getCoreConfiguration().isNotEmpty()) {
@@ -109,45 +109,43 @@ public class DetailsManager {
 
   public OwlDetails getDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
     IRI iri = IRI.create(iriString);
-    OwlListDetails result = null;
+    OwlListDetails result;
 
     // If '/' is at the end of the URL, we extract the ontology metadata
     if (iriString.endsWith("/")) {
-      result = dataHandler.handleOntologyMetadata(iri, getOntology());
+      result = dataHandler.handleOntologyMetadata(iri);
     } else {
-      if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularClass(iri);
-      } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularDataProperty(iri);
-      } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularObjectProperty(iri);
-      } else if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularIndividual(iri);
-      } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularDatatype(iri);
-      } else if (ontologyManager.getOntology()
-          .containsAnnotationPropertyInSignature(iri, INCLUDED)) {
-        result = dataHandler.handleParticularAnnotationProperty(iri, getOntology());
-      }
-
-      if (result != null) {
-        result.setMaturityLevel(dataHandler.getMaturityLevel(iriString));
-      }
+      result = getEntityListDetails(iri);
     }
 
     if (result == null) {
-      throw new NotFoundElementInOntologyException(
-          "Not found element in ontology with IRI: " + iriString);
+      throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_ENTITY_MESSAGE, iriString));
     }
 
-    result.setIri(iriString);
+    return setGroupedDetailsIfEnabled(iriString, result);
+  }
 
-    // Path to element in modules
+  public List<FiboModule> getAllModulesData() {
+    return dataHandler.getAllModules();
+  }
+
+  public OwlDetails getEntityDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
+    IRI iri = IRI.create(iriString);
+    OwlListDetails resultDetails = dataHandler.handleOntologyMetadata(iri);
+    if (resultDetails == null) {
+      resultDetails = getEntityListDetails(iri);
+
+      if (resultDetails == null) {
+        throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_ENTITY_MESSAGE, iri));
+      }
+    }
+
+    return setGroupedDetailsIfEnabled(iriString, resultDetails);
+  }
+
+  private OwlDetails setGroupedDetailsIfEnabled(String iriString, OwlListDetails result) {
     if (getSetting(ConfigKeys.LOCATION_IN_MODULES_ENABLED)) {
-      result.setLocationInModules(
-          dataHandler.getElementLocationInModules(
-              iriString,
-              ontologyManager.getOntology()));
+      result.setLocationInModules(dataHandler.getElementLocationInModules(iriString));
     }
 
     if (configurationService.getCoreConfiguration().isNotEmpty()) {
@@ -164,8 +162,29 @@ public class DetailsManager {
     return result;
   }
 
-  public List<FiboModule> getAllModulesData() {
-    return dataHandler.getAllModules();
+  private OwlListDetails getEntityListDetails(IRI iri) {
+    OwlListDetails result = null;
+
+    if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
+      result = dataHandler.handleParticularClass(iri);
+    } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri, INCLUDED)) {
+      result = dataHandler.handleParticularDataProperty(iri);
+    } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri, INCLUDED)) {
+      result = dataHandler.handleParticularObjectProperty(iri);
+      } else if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
+      result = dataHandler.handleParticularIndividual(iri);
+    } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri, INCLUDED)) {
+      result = dataHandler.handleParticularDatatype(iri);
+    } else if (ontologyManager.getOntology().containsAnnotationPropertyInSignature(iri, INCLUDED)) {
+      result = dataHandler.handleParticularAnnotationProperty(iri, getOntology());
+    }
+
+    if (result != null) {
+      result.setIri(iri.toString());
+      result.setMaturityLevel(dataHandler.getMaturityLevel(iri.toString()));
+    }
+
+    return result;
   }
 
   private OwlGroupedDetails groupDetails(OwlListDetails owlDetails,
@@ -199,19 +218,18 @@ public class DetailsManager {
   }
 
   private String getGroupName(Set<ConfigItem> groups, String propertyKey) {
-    String result = null;
     if (propertyKey == null || propertyKey.isEmpty()) {
-      return result;
+      return null;
     }
     for (ConfigItem g : groups) {
       GroupsItem group = (GroupsItem) g;
-      if (group.getElements() != null && group.getElements().size() > 0) {
+      if (group.getElements() != null && !group.getElements().isEmpty()) {
         if (group.contains(propertyKey)) {
           return group.getName();
         }
       }
     }
-    return result;
+    return null;
   }
 
   private void sortResults(OwlListDetails result) {
@@ -219,7 +237,7 @@ public class DetailsManager {
     if (set == null) {
       return;
     }
-    List prioritySortList = new LinkedList();
+    List<StringItem> prioritySortList = new LinkedList<>();
     result.sortProperties(prioritySortList);
   }
 

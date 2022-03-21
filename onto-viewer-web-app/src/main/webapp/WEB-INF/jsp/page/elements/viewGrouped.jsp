@@ -6,7 +6,7 @@
   <c:if test="${not empty clazz.maturityLevel && not empty clazz.maturityLevel.label && clazz.maturityLevel.label ne releaseLabel}">
     <div class="row ml-0 pl-0">
       <div class="alert alert-warning col-12" role="alert">
-        This resource is on <i><b>${clazz.maturityLevel.label}</b></i> maturity level. Read more about <a class="alert-link" href="search?query=${clazz.maturityLevel.iri}">${clazz.maturityLevel.label}</a>.  
+        This resource is on <i><b>${clazz.maturityLevel.label}</b></i> maturity level. Read more about <a class="alert-link" href="entity?iri=${clazz.maturityLevel.iri}">${clazz.maturityLevel.label}</a>.
       </div>
     </div>
   </c:if>
