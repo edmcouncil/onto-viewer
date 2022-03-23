@@ -6,6 +6,7 @@ import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_DATA_PROPE
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_OBJECT_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.TAXONOMY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
+import com.github.jsonldjava.shaded.com.google.common.collect.ImmutableSet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -123,7 +124,8 @@ public class OwlDataHandler {
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
-
+  private final Set<String> SUBJECTS_TO_HIDE =  ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "InverseOf");
+ 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
   private final String subObjectPropertyOfIriString = ViewerIdentifierFactory
@@ -756,9 +758,7 @@ public class OwlDataHandler {
       Boolean fixRenderedIri) {
     String[] split = value.split(" ");
     LOG.debug("Split fixRenderedValue: {}", Arrays.asList(split));
-    if (split[1].equals("SubClassOf")  
-        || split[1].equals("Domain")  
-        || split[1].equals("Range")) {
+    if (SUBJECTS_TO_HIDE.contains(split[1])) {
       split[0] = "";
       split[1] = "";
     }
