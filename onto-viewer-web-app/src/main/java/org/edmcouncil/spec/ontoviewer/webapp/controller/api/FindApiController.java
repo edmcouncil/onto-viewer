@@ -1,9 +1,10 @@
-package org.edmcouncil.spec.ontoviewer.webapp.controller;
+package org.edmcouncil.spec.ontoviewer.webapp.controller.api;
 
 import java.util.Arrays;
 import java.util.List;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.controller.BaseController;
 import org.edmcouncil.spec.ontoviewer.webapp.model.FindMode;
 import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;

@@ -22,7 +22,7 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   private static final String DEFAULT_WRAPPER = "span";
   private static final String URL_PATTERN = "<a href=\"%s\">%s</a>";
-  private static final String URL_SEARCH_QUERY_PATTERN = "<a href=\"%s/search?query=%s\">%s</a>";
+  private static final String URL_SEARCH_QUERY_PATTERN = "<a href=\"%s/entity?iri=%s\">%s</a>";
   private static final String WRAPPER_PATTERN = "<%1$s> %2$s </%1$s>";
 
   private String elementWrapper;

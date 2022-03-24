@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.webapp.controller;
+package org.edmcouncil.spec.ontoviewer.webapp.controller.view;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
+import org.edmcouncil.spec.ontoviewer.core.service.EntityService;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
@@ -50,6 +51,8 @@ public class SearchController {
   private ConfigurationService config;
   @Autowired
   private UpdateBlocker blocker;
+  @Autowired
+  private EntityService entityService;
 
   private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 25;
   private static final Integer DEFAULT_RESULT_PAGE = 1;

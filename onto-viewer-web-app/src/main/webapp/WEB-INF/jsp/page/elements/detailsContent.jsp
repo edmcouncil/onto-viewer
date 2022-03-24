@@ -190,7 +190,7 @@
                             console.log(sNode);
                             nodes.forEach(function (entry) {
                                 if (entry.id === sNode) {
-                                    window.location.href = "${pageContext.request.contextPath}/search?query=" + entry.iri;
+                                    window.location.href = "${pageContext.request.contextPath}/entity?iri=" + entry.iri;
                                     //localStorage.setItem("selectElementIri", );
                                 }
                             });
@@ -199,7 +199,7 @@
                             console.log(sEgde);
                             edgesView.forEach(function (entry) {
                                 if (entry.id === sEgde) {
-                                    window.location.href = "${pageContext.request.contextPath}/search?query=" + entry.iri;
+                                    window.location.href = "${pageContext.request.contextPath}/entity?iri=" + entry.iri;
                                 }
                             });
                         }
