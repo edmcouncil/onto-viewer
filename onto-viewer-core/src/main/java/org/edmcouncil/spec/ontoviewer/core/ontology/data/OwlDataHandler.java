@@ -1182,30 +1182,26 @@ public class OwlDataHandler {
     return result;
   }
 
-  public OwlListDetails handleOntologyMetadata(IRI iri, OWLOntology ontology) {
-    OwlListDetails wd = new OwlListDetails();
-    OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri,
-        ontology, wd);
-    if (metadata != null && metadata.getProperties().keySet().size() > 0) {
-
-      wd.addAllProperties(metadata);
-      wd.setIri(iri.toString());
-      wd.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
-      wd.setLocationInModules(
-          fiboDataHandler.getElementLocationInModules(iri.toString(), ontology));
-      return wd;
+  public OwlListDetails handleOntologyMetadata(IRI iri) {
+    OwlListDetails ontologyDetails = new OwlListDetails();
+    OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontologyDetails);
+    if (metadata != null && !metadata.getProperties().keySet().isEmpty()) {
+      ontologyDetails.addAllProperties(metadata);
+      ontologyDetails.setIri(iri.toString());
+      ontologyDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
+      ontologyDetails.setLocationInModules(fiboDataHandler.getElementLocationInModules(iri.toString()));
+      return ontologyDetails;
     }
     return null;
-
   }
 
   public List<FiboModule> getAllModules() {
     return fiboDataHandler.getAllModules();
   }
 
-  public List<String> getElementLocationInModules(String iriString, OWLOntology ontology) {
+  public List<String> getElementLocationInModules(String iriString) {
     LOG.debug("[Data Handler] Handle location for element {}", iriString);
-    return fiboDataHandler.getElementLocationInModules(iriString, ontology);
+    return fiboDataHandler.getElementLocationInModules(iriString);
   }
 
   public OwlListDetails handleParticularDatatype(IRI iri) {
