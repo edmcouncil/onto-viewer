@@ -119,12 +119,12 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       //download ontology file/files
       //load ontology to var
-      AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager, viewerCoreConfiguration);
+      AutoOntologyLoader loader = new AutoOntologyLoader(viewerCoreConfiguration);
       try {
         var loadedOntologyData = loader.load();
         ontology = loadedOntologyData.getOntology();
         iriToPathMapping = loadedOntologyData.getIriToPathMapping();
-      } catch (OWLOntologyCreationException | OntoViewerException ex) {
+      } catch (OWLOntologyCreationException ex) {
         msgError = ex.getMessage();
         LOG.error(
             "[ERROR]: Error when creating ontology. Stopping application. Exception: {} \n Message: {}",
@@ -132,21 +132,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       } catch (IOException ex) {
         msgError = ex.getMessage();
         LOG.error("[ERROR]: Cannot load ontology. Stopping application. Stack Trace: {}",
-            Arrays.toString(ex.getStackTrace()));
-      } catch (ParserConfigurationException ex) {
-        msgError = ex.getMessage();
-        LOG.error(
-            "[ERROR]: Cannot load ontology, parser exception. Stoping application. Stack Trace: {}",
-            Arrays.toString(ex.getStackTrace()));
-      } catch (XPathExpressionException ex) {
-        msgError = ex.getMessage();
-        LOG.error(
-            "[ERROR]: Cannot load ontology, xpath expression exception. Stoping application. Stack Trace: {}",
-            Arrays.toString(ex.getStackTrace()));
-      } catch (SAXException ex) {
-        msgError = ex.getMessage();
-        LOG.error(
-            "[ERROR]: Cannot load ontology, sax exception. Stoping application. Stack Trace: {}",
             Arrays.toString(ex.getStackTrace()));
       }
 
