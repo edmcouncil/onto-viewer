@@ -5,6 +5,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -97,12 +98,16 @@ public class AutoOntologyLoader {
 
     ontologyIrisToLoad
         .forEach(ontologyIri -> {
-          if (Files.exists(Path.of(ontologyIri.toString()))) {
-            owlOntologyManager
-                .getIRIMappers()
-                .add(new SimpleIRIMapper(ontologyIri, IRI.create(new File(ontologyIri.toString()))));
-          } else {
-            LOGGER.warn("File '{}' that should map to an ontology doesn't exist.", ontologyIri);
+          try {
+            if (Files.exists(Path.of(ontologyIri.toString()))) {
+              owlOntologyManager
+                  .getIRIMappers()
+                  .add(new SimpleIRIMapper(ontologyIri, IRI.create(new File(ontologyIri.toString()))));
+            } else {
+              LOGGER.warn("File '{}' that should map to an ontology doesn't exist.", ontologyIri);
+            }
+          } catch (InvalidPathException e) {
+            owlOntologyManager.getIRIMappers().add(new SimpleIRIMapper(ontologyIri, ontologyIri));
           }
         });
 
@@ -115,9 +120,9 @@ public class AutoOntologyLoader {
     var ontologyMapping = coreConfiguration.getOntologyMapping();
     ontologyMapping.forEach((ontologyIri, ontologyPath)
         -> manager.getIRIMappers().add(
-        new SimpleIRIMapper(
-            IRI.create(ontologyIri),
-            IRI.create(new File(ontologyPath.toString())))));
+            new SimpleIRIMapper(
+                IRI.create(ontologyIri),
+                IRI.create(new File(ontologyPath.toString())))));
   }
 
   private OWLOntology loadOntologiesFromIris(OWLOntologyManager ontologyManager,
@@ -167,7 +172,7 @@ public class AutoOntologyLoader {
       return;
     }
 
-    try (var pathsStream = Files.walk(ontologiesDirPath)) {
+    try ( var pathsStream = Files.walk(ontologiesDirPath)) {
       var paths = pathsStream.collect(Collectors.toSet());
 
       for (Path path : paths) {
