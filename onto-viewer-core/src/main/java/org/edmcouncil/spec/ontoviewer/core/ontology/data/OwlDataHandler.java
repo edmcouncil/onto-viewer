@@ -526,7 +526,7 @@ public class OwlDataHandler {
 
       String key = axiom.getAxiomType().getName();
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
-
+      
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
           fixRenderedIri, ignoredToDisplay, key, start, true);
 
@@ -653,7 +653,7 @@ public class OwlDataHandler {
         }
         if (string.equals(eSignature)) {
           LOG.trace("Find match for processing item {}", string);
-          String generatedKey = String.format(argPattern, fixedIValue);
+          String generatedKey = String.format(argPattern, i);
           key = generatedKey;
           String textToReplace = generatedKey;
           if (hasOpeningParenthesis) {
