@@ -616,8 +616,8 @@ public class OwlDataHandler {
       LOG.debug("Processing Item: {}", next);
       LOG.trace("OWL Entity splitted: {}", Arrays.asList(splitted));
 
-      for (int i = startCountingArgs; i < startCountingArgs + splitted.length; i++) {
-        int fixedIValue = i - startCountingArgs;
+      for (int countingArg = startCountingArgs; countingArg < startCountingArgs + splitted.length; countingArg++) {
+        int fixedIValue = countingArg - startCountingArgs;
         String string = splitted[fixedIValue].trim();
         LOG.trace("Splitted string i: '{}', str: '{}'", fixedIValue, string);
         //more than 1 because when it's 1, it's a number
@@ -653,7 +653,7 @@ public class OwlDataHandler {
         }
         if (string.equals(eSignature)) {
           LOG.trace("Find match for processing item {}", string);
-          String generatedKey = String.format(argPattern, i);
+          String generatedKey = String.format(argPattern, countingArg);
           key = generatedKey;
           String textToReplace = generatedKey;
           if (hasOpeningParenthesis) {
@@ -677,7 +677,7 @@ public class OwlDataHandler {
           parseToIri(argPattern, opv, key, splitted, fixedIValue, generatedKey, eIri,
               countOpeningParenthesis, countClosingParenthesis, countComma);
         }
-        opv.setLastId(i);
+        opv.setLastId(countingArg);
       }
     }
 
