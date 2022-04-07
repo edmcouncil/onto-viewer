@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -105,12 +106,16 @@ public class OntologyTableDataExtractor {
     var filterPattern = configurationService.getCoreConfiguration()
         .getSingleStringValue(OptionDefinition.FILTER_PATTERN.argName())
         .orElse("");
+    var filterPatternRegex = Pattern.compile(filterPattern);
 
     var notFoundEntitiesCounter = new AtomicInteger(0);
 
     var entityData = entities
         .parallel()
-        .filter(owlEntity -> owlEntity.getIRI().toString().contains(filterPattern))
+        .filter(owlEntity -> {
+          var matcher = filterPatternRegex.matcher(owlEntity.getIRI().toString());
+          return matcher.find();
+        })
         .map(owlEntity -> {
           try {
             return detailsManager.getEntityDetails(owlEntity);
@@ -198,6 +203,9 @@ public class OntologyTableDataExtractor {
         .trim();
     // We replace term's label with 'It' but not for the first occurrence
     if (cleanedText.toLowerCase().startsWith(term.toLowerCase())) {
+      if (term.isBlank()) {
+        return cleanedText;
+      }
       var startingLabel = term.substring(0, 1).toUpperCase() + term.substring(1);
       cleanedText = cleanedText.replaceAll(startingLabel, "It")
           .replaceFirst("It", startingLabel);
