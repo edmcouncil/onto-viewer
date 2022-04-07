@@ -7,11 +7,13 @@ import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Co
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_HANDLING;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.USAGE_ENABLED;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -142,6 +144,14 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
       });
     }
 
+    return result;
+  }
+
+  public List<String> getOntologyCatalogPaths() {
+    List<String> result = new ArrayList<>();
+    if (configuration.containsKey(ConfigKeys.ONTOLOGY_CATALOG_PATH)) {
+      configuration.get(ConfigKeys.ONTOLOGY_CATALOG_PATH).forEach(configItem -> result.add(configItem.toString()));
+    }
     return result;
   }
 

@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.toolkit.mapping.model;
+package org.edmcouncil.spec.ontoviewer.core.mapping.model;
 
 import java.util.List;
 import org.simpleframework.xml.Attribute;

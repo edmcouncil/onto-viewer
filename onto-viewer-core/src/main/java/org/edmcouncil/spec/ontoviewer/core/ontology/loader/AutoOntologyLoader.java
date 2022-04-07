@@ -16,6 +16,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
+import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
+import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
@@ -118,6 +121,36 @@ public class AutoOntologyLoader {
 
   private void loadMappersToOntologyManager(OWLOntologyManager manager) {
     var ontologyMapping = coreConfiguration.getOntologyMapping();
+
+    var ontologyCatalogPaths = coreConfiguration.getOntologyCatalogPaths();
+    ontologyCatalogPaths.forEach(ontologyCatalogPath -> {
+      try {
+        if (!Path.of(ontologyCatalogPath).isAbsolute()) {
+          ontologyCatalogPath = fileSystemManager.getViewerHomeDir().resolve(ontologyCatalogPath).toString();
+        }
+
+        LOGGER.info(">>>>>> {}", Path.of(ontologyCatalogPath).toAbsolutePath());
+        var catalog = new OntologyCatalogParser().readOntologyMapping(ontologyCatalogPath);
+        var ontologyMappingParentPath = Path.of(ontologyCatalogPath).getParent();
+
+        for (Uri mapping : catalog.getUri()) {
+          var ontologyPath = Path.of(mapping.getUri());
+          if (!ontologyPath.isAbsolute()) {
+            ontologyPath = ontologyMappingParentPath.resolve(ontologyPath).normalize();
+          }
+          if (Files.exists(ontologyPath)) {
+            ontologyMapping.put(mapping.getName(), ontologyPath.toString());
+          } else {
+            LOGGER.warn("File ('{}') that should map to an ontology ('{}') doesn't exist.",
+                ontologyPath, mapping.getName());
+          }
+        }
+      } catch (OntoViewerException ex) {
+        LOGGER.warn("Exception thrown while loading ontology mappings from ontology catalog path '{}'. Details: {}",
+            ontologyCatalogPath, ex.getMessage(), ex);
+      }
+    });
+
     ontologyMapping.forEach((ontologyIri, ontologyPath)
         -> manager.getIRIMappers().add(
             new SimpleIRIMapper(

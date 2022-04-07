@@ -62,6 +62,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_PATH:
       case ConfigKeys.ONTOLOGY_DIR:
       case ConfigKeys.ONTOLOGY_MAPPER:
+      case ConfigKeys.ONTOLOGY_CATALOG_PATH:
       case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
       case ConfigKeys.LABEL_LANG:
@@ -126,6 +127,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_DIR:
       case ConfigKeys.ONTOLOGY_PATH:
       case ConfigKeys.ONTOLOGY_MAPPER:
+      case ConfigKeys.ONTOLOGY_CATALOG_PATH:
         StringItem ontologyPath = new StringItem(val);
         configuration.addConfigElement(key, ontologyPath);
         ontologyPath = null;

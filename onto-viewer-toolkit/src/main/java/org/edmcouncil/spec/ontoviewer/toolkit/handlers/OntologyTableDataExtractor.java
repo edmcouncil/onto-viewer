@@ -2,11 +2,11 @@ package org.edmcouncil.spec.ontoviewer.toolkit.handlers;
 
 import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.INHERITED_DESCRIPTIONS_LABEL;
 import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.OWN_DESCRIPTIONS_LABEL;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.CLASS;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.DATATYPE;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.DATA_PROPERTY;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.INDIVIDUAL;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.OBJECT_PROPERTY;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.CLASS;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.DATATYPE;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.DATA_PROPERTY;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.INDIVIDUAL;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 import java.util.ArrayList;
@@ -32,8 +32,8 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
-import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.EntityData;
-import org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType;
+import org.edmcouncil.spec.ontoviewer.core.mapping.model.EntityData;
+import org.edmcouncil.spec.ontoviewer.core.mapping.EntityType;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLEntity;
