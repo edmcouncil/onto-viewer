@@ -1,16 +1,11 @@
 package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
-import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -31,7 +26,6 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.UnloadableImportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
 
 public abstract class UpdaterThread extends Thread implements Thread.UncaughtExceptionHandler {
 
@@ -119,35 +113,16 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       //download ontology file/files
       //load ontology to var
-      AutoOntologyLoader loader = new AutoOntologyLoader(fileSystemManager, viewerCoreConfiguration);
+      AutoOntologyLoader loader = new AutoOntologyLoader(viewerCoreConfiguration, fileSystemManager);
       try {
         var loadedOntologyData = loader.load();
         ontology = loadedOntologyData.getOntology();
         iriToPathMapping = loadedOntologyData.getIriToPathMapping();
-      } catch (OWLOntologyCreationException | OntoViewerException ex) {
+      } catch (OWLOntologyCreationException ex) {
         msgError = ex.getMessage();
         LOG.error(
             "[ERROR]: Error when creating ontology. Stopping application. Exception: {} \n Message: {}",
             ex.getStackTrace(), ex.getMessage());
-      } catch (IOException ex) {
-        msgError = ex.getMessage();
-        LOG.error("[ERROR]: Cannot load ontology. Stopping application. Stack Trace: {}",
-            Arrays.toString(ex.getStackTrace()));
-      } catch (ParserConfigurationException ex) {
-        msgError = ex.getMessage();
-        LOG.error(
-            "[ERROR]: Cannot load ontology, parser exception. Stoping application. Stack Trace: {}",
-            Arrays.toString(ex.getStackTrace()));
-      } catch (XPathExpressionException ex) {
-        msgError = ex.getMessage();
-        LOG.error(
-            "[ERROR]: Cannot load ontology, xpath expression exception. Stoping application. Stack Trace: {}",
-            Arrays.toString(ex.getStackTrace()));
-      } catch (SAXException ex) {
-        msgError = ex.getMessage();
-        LOG.error(
-            "[ERROR]: Cannot load ontology, sax exception. Stoping application. Stack Trace: {}",
-            Arrays.toString(ex.getStackTrace()));
       }
 
       if (msgError != null) {

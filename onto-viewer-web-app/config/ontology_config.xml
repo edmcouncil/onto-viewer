@@ -7,7 +7,7 @@
   <ontology>
  
     <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/</ontologyURL>
-    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</ontologyURL>
+    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</ontologyURL> 
     <!--<ontologyURL>https://spec.edmcouncil.org/auto/ontology/AboutAUTODev/</ontologyURL>-->
     <ontologyDir>ontologies</ontologyDir>
     <ontologyDir>staticOntologies</ontologyDir>
