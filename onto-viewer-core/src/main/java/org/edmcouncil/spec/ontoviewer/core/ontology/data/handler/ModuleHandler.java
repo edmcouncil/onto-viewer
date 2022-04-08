@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
@@ -48,6 +47,8 @@ public class ModuleHandler {
   private static final String INSTANCE_KEY = ViewerIdentifierFactory.createId(
       ViewerIdentifierFactory.Type.function,
       OwlType.INSTANCES.name().toLowerCase());
+  private static final Pattern URL_PATTERN =
+      Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 
   private final OntologyManager ontologyManager;
   private final IndividualDataHandler individualDataHandler;
@@ -283,11 +284,14 @@ public class ModuleHandler {
 
     var ontologyPath = ontologyManager.getIriToPathMapping().get(ontologyIri);
     if (ontologyPath != null) {
-      var ontologyFileName = Path.of(ontologyPath.toString()).getFileName();
-      for (Pattern pattern : ontologyModuleFilenameIgnorePatterns) {
-        var match = pattern.matcher(ontologyFileName.toString());
-        if (match.find()) {
-          return false;
+      var urlPatternMatch = URL_PATTERN.matcher(ontologyPath);
+      if (!urlPatternMatch.find()) {
+        var ontologyFileName = Path.of(ontologyPath.toString()).getFileName();
+        for (Pattern pattern : ontologyModuleFilenameIgnorePatterns) {
+          var match = pattern.matcher(ontologyFileName.toString());
+          if (match.find()) {
+            return false;
+          }
         }
       }
     }
