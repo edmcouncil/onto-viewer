@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.toolkit.mapping.model;
+package org.edmcouncil.spec.ontoviewer.core.mapping.model;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
@@ -6,7 +6,7 @@ import org.simpleframework.xml.Root;
 @Root
 public class Uri {
 
-  @Attribute
+  @Attribute(required = false)
   private String id;
 
   @Attribute

@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.toolkit.model;
+package org.edmcouncil.spec.ontoviewer.core.mapping;
 
 public enum EntityType {
   DATA_PROPERTY("Data Property"),

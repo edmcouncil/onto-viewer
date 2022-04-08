@@ -62,6 +62,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_PATH:
       case ConfigKeys.ONTOLOGY_DIR:
       case ConfigKeys.ONTOLOGY_MAPPER:
+      case ConfigKeys.ONTOLOGY_CATALOG_PATH:
       case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
       case ConfigKeys.LABEL_LANG:
@@ -69,6 +70,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.MISSING_LANGUAGE_ACTION:
       case ConfigKeys.USER_DEFAULT_NAME_LIST:
       case ConfigKeys.ONTOLOGY_MODULE_TO_IGNORE:
+      case ConfigKeys.ONTOLOGY_MODULE_IGNORE_PATTERN:
         this.key = qName;
         break;
       case ConfigKeys.GROUP:
@@ -126,6 +128,8 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_DIR:
       case ConfigKeys.ONTOLOGY_PATH:
       case ConfigKeys.ONTOLOGY_MAPPER:
+      case ConfigKeys.ONTOLOGY_CATALOG_PATH:
+      case ConfigKeys.ONTOLOGY_MODULE_IGNORE_PATTERN:
         StringItem ontologyPath = new StringItem(val);
         configuration.addConfigElement(key, ontologyPath);
         ontologyPath = null;

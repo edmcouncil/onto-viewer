@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
-import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.EntityData;
+import org.edmcouncil.spec.ontoviewer.core.mapping.model.EntityData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
