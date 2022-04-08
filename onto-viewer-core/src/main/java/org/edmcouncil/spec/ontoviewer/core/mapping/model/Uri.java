@@ -6,7 +6,7 @@ import org.simpleframework.xml.Root;
 @Root
 public class Uri {
 
-  @Attribute
+  @Attribute(required = false)
   private String id;
 
   @Attribute

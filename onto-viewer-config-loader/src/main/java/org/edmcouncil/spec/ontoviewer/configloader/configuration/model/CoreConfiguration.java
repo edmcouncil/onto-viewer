@@ -1,6 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MODULE_FILENAME_IGNORE_PATTERN;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MODULE_IGNORE_PATTERN;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MODULE_TO_IGNORE;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.INDIVIDUALS_ENABLED;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.LOCATION_IN_MODULES_ENABLED;
@@ -345,11 +345,11 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
         .collect(Collectors.toSet());
   }
 
-  public Set<String> getOntologyModuleFilenameIgnorePatterns() {
+  public Set<String> getOntologyModuleIgnorePatterns() {
     Set<ConfigItem> defaultOntologyModuleFilenameIgnorePatterns = Collections.emptySet();
 
     return configuration.getOrDefault(
-            ONTOLOGY_MODULE_FILENAME_IGNORE_PATTERN,
+            ONTOLOGY_MODULE_IGNORE_PATTERN,
             defaultOntologyModuleFilenameIgnorePatterns)
         .stream()
         .map(StringItem.class::cast)

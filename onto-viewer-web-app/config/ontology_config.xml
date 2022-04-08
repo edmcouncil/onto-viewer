@@ -15,8 +15,9 @@
     <ontologyCatalogPath>ontologies/catalog-v001.xml</ontologyCatalogPath>
   </ontology>
 
-  <ontologyModuleFilenameIgnorePattern>^(About|Metadata).*</ontologyModuleFilenameIgnorePattern>
-  
+  <ontologyModuleIgnorePattern>^(About|Metadata).*</ontologyModuleIgnorePattern>
+  <ontologyModuleIgnorePattern>http.*(About|Metadata).*</ontologyModuleIgnorePattern>
+
   <scopeIri>
     <!--<uriNamespace>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</uriNamespace>
     <uriNamespace>http://schema.org/</uriNamespace>

@@ -55,7 +55,7 @@ public class ModuleHandler {
   private final LabelProvider labelProvider;
   private final FiboOntologyHandler fiboOntologyHandler;
   private final Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
-  private final Set<Pattern> ontologyModuleFilenameIgnorePatterns;
+  private final Set<Pattern> ontologyModuleIgnorePatterns;
   private final OWLAnnotationProperty hasPartAnnotation;
 
   private List<FiboModule> modules;
@@ -77,9 +77,9 @@ public class ModuleHandler {
             .map(IRI::create)
             .collect(Collectors.toSet());
 
-    this.ontologyModuleFilenameIgnorePatterns =
+    this.ontologyModuleIgnorePatterns =
         configurationService.getCoreConfiguration()
-            .getOntologyModuleFilenameIgnorePatterns()
+            .getOntologyModuleIgnorePatterns()
             .stream()
             .map(Pattern::compile)
             .collect(Collectors.toSet());
@@ -285,9 +285,16 @@ public class ModuleHandler {
     var ontologyPath = ontologyManager.getIriToPathMapping().get(ontologyIri);
     if (ontologyPath != null) {
       var urlPatternMatch = URL_PATTERN.matcher(ontologyPath);
-      if (!urlPatternMatch.find()) {
+      if (urlPatternMatch.find()) {
+        for (Pattern pattern : ontologyModuleIgnorePatterns) {
+          var match = pattern.matcher(ontologyPath.toString());
+          if (match.find()) {
+            return false;
+          }
+        }
+      } else {
         var ontologyFileName = Path.of(ontologyPath.toString()).getFileName();
-        for (Pattern pattern : ontologyModuleFilenameIgnorePatterns) {
+        for (Pattern pattern : ontologyModuleIgnorePatterns) {
           var match = pattern.matcher(ontologyFileName.toString());
           if (match.find()) {
             return false;
