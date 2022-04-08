@@ -68,4 +68,5 @@ public class ConfigKeys {
   public static final String FUZZY_DISTANCE = "fuzzyDistance";
   public static final String REINDEX_ON_START = "reindexOnStart";
   public static final String ONTOLOGY_MODULE_TO_IGNORE = "ontologyModuleToIgnore";
+  public static final String ONTOLOGY_MODULE_FILENAME_IGNORE_PATTERN = "ontologyModuleFilenameIgnorePattern";
 }

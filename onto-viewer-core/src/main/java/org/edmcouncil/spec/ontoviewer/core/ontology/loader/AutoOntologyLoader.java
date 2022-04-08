@@ -129,7 +129,6 @@ public class AutoOntologyLoader {
           ontologyCatalogPath = fileSystemManager.getViewerHomeDir().resolve(ontologyCatalogPath).toString();
         }
 
-        LOGGER.info(">>>>>> {}", Path.of(ontologyCatalogPath).toAbsolutePath());
         var catalog = new OntologyCatalogParser().readOntologyMapping(ontologyCatalogPath);
         var ontologyMappingParentPath = Path.of(ontologyCatalogPath).getParent();
 

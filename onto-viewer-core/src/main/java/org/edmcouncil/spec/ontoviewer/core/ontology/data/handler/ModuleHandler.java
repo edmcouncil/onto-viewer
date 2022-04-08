@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,6 +10,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
@@ -50,9 +53,10 @@ public class ModuleHandler {
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
   private final FiboOntologyHandler fiboOntologyHandler;
+  private final Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
+  private final Set<Pattern> ontologyModuleFilenameIgnorePatterns;
   private final OWLAnnotationProperty hasPartAnnotation;
 
-  private Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
   private List<FiboModule> modules;
 
   public ModuleHandler(OntologyManager ontologyManager,
@@ -70,6 +74,13 @@ public class ModuleHandler {
             .getOntologiesToIgnoreWhenGeneratingModules()
             .stream()
             .map(IRI::create)
+            .collect(Collectors.toSet());
+
+    this.ontologyModuleFilenameIgnorePatterns =
+        configurationService.getCoreConfiguration()
+            .getOntologyModuleFilenameIgnorePatterns()
+            .stream()
+            .map(Pattern::compile)
             .collect(Collectors.toSet());
 
     this.hasPartAnnotation = OWLManager.getOWLDataFactory().getOWLAnnotationProperty(IRI.create(HAS_PART_IRI));
@@ -269,6 +280,18 @@ public class ModuleHandler {
     if (ontologiesToIgnoreWhenGeneratingModules.contains(ontologyIri)) {
       return false;
     }
+
+    var ontologyPath = ontologyManager.getIriToPathMapping().get(ontologyIri);
+    if (ontologyPath != null) {
+      var ontologyFileName = Path.of(ontologyPath.toString()).getFileName();
+      for (Pattern pattern : ontologyModuleFilenameIgnorePatterns) {
+        var match = pattern.matcher(ontologyFileName.toString());
+        if (match.find()) {
+          return false;
+        }
+      }
+    }
+
     return !modulesIris.contains(ontologyIri.toString());
   }
 

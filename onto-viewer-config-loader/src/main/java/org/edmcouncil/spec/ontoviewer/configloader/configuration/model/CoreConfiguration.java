@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MODULE_FILENAME_IGNORE_PATTERN;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MODULE_TO_IGNORE;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.INDIVIDUALS_ENABLED;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.LOCATION_IN_MODULES_ENABLED;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MAPPING_MAP;
 
 import java.util.stream.Collectors;
@@ -94,7 +96,7 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     return result;
   }
 
-  
+
   public Map<String, Object> getOntologyMapping() {
     var ontologyMappingSet = configuration.get(ONTOLOGY_MAPPING_MAP);
     if (ontologyMappingSet != null && !ontologyMappingSet.isEmpty()) {
@@ -106,7 +108,7 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     }
     return new HashMap<>();
   }
-  
+
   private void getOntologyPath(Map<String, Set<String>> result) {
     if (configuration.containsKey(ConfigKeys.ONTOLOGY_PATH)) {
       Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_PATH, new HashSet<>());
@@ -156,6 +158,7 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
   }
 
   //TODO: Change this method name..
+
   /**
    * @param uri - String representation of URI
    * @return True if it finds representation in the configuration, otherwise false.
@@ -336,6 +339,18 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
     Set<ConfigItem> defaultOntologiesToIgnore = Set.of(new StringItem("http://www.w3.org/2002/07/owl"));
 
     return configuration.getOrDefault(ONTOLOGY_MODULE_TO_IGNORE, defaultOntologiesToIgnore)
+        .stream()
+        .map(StringItem.class::cast)
+        .map(StringItem::toString)
+        .collect(Collectors.toSet());
+  }
+
+  public Set<String> getOntologyModuleFilenameIgnorePatterns() {
+    Set<ConfigItem> defaultOntologyModuleFilenameIgnorePatterns = Collections.emptySet();
+
+    return configuration.getOrDefault(
+            ONTOLOGY_MODULE_FILENAME_IGNORE_PATTERN,
+            defaultOntologyModuleFilenameIgnorePatterns)
         .stream()
         .map(StringItem.class::cast)
         .map(StringItem::toString)
