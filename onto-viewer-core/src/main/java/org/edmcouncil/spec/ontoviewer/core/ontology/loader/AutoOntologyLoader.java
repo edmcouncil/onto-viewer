@@ -138,7 +138,7 @@ public class AutoOntologyLoader {
             ontologyPath = ontologyMappingParentPath.resolve(ontologyPath).normalize();
           }
           if (Files.exists(ontologyPath)) {
-            ontologyMapping.put(mapping.getName(), ontologyPath.toString());
+            ontologyMapping.put(ontologyPath.toString(), ontologyPath.toString());
           } else {
             LOGGER.warn("File ('{}') that should map to an ontology ('{}') doesn't exist.",
                 ontologyPath, mapping.getName());
