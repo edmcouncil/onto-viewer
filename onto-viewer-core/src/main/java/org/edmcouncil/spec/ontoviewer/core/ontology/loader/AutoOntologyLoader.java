@@ -236,10 +236,14 @@ public class AutoOntologyLoader {
 
         ontologyLoadingProblems.add(new OntologyLoadingProblem(ontologySource, ex.getMessage(), ex.getClass()));
       } catch( OWLOntologyDocumentAlreadyExistsException ex) {
-        ontologyIrisToPaths.put(ex.getOntologyDocumentIRI(), ontologySource.getAsIri());
 
         // TODO
-        // getOntologyIriFromDocumentIri(ontologyMappings);
+        var ontologyIri = getOntologyIriFromDocumentIri(ontologyMappings, ex.getOntologyDocumentIRI());
+        if (ontologyIri != null) {
+          ontologyIrisToPaths.put(ontologyIri, ex.getOntologyDocumentIRI());
+        } else {
+          ontologyIrisToPaths.put(ex.getOntologyDocumentIRI(), ontologySource.getAsIri());
+        }
 
         ontologyLoadingProblems.add(new OntologyLoadingProblem(ontologySource, ex.getMessage(), ex.getClass()));
       } catch (Exception ex) {
@@ -252,6 +256,16 @@ public class AutoOntologyLoader {
     LOGGER.info("Missing imports: {}", missingImportListenerImpl.getNotImportUri());
     LOGGER.info("Ontology loading problems that occurred: {}", ontologyLoadingProblems);
     return umbrellaOntology;
+  }
+
+  private IRI getOntologyIriFromDocumentIri(List<OntologyMapping> ontologyMappings, IRI ontologyDocumentIri) {
+    var ontologyDocumentPath = Path.of(ontologyDocumentIri.toString().replaceAll("^file:", ""));
+    for (OntologyMapping ontologyMapping : ontologyMappings) {
+      if (ontologyMapping.getPath().equals(ontologyDocumentPath)) {
+        return ontologyMapping.getIri();
+      }
+    }
+    return null;
   }
 
   public MissingImportListenerImpl getMissingImportListenerImpl() {
