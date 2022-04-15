@@ -235,9 +235,7 @@ public class AutoOntologyLoader {
         ontologyIrisToPaths.put(ontologyIri, ontologySource.getAsIri());
 
         ontologyLoadingProblems.add(new OntologyLoadingProblem(ontologySource, ex.getMessage(), ex.getClass()));
-      } catch( OWLOntologyDocumentAlreadyExistsException ex) {
-
-        // TODO
+      } catch (OWLOntologyDocumentAlreadyExistsException ex) {
         var ontologyIri = getOntologyIriFromDocumentIri(ontologyMappings, ex.getOntologyDocumentIRI());
         if (ontologyIri != null) {
           ontologyIrisToPaths.put(ontologyIri, ex.getOntologyDocumentIRI());
@@ -259,7 +257,9 @@ public class AutoOntologyLoader {
   }
 
   private IRI getOntologyIriFromDocumentIri(List<OntologyMapping> ontologyMappings, IRI ontologyDocumentIri) {
-    var ontologyDocumentPath = Path.of(ontologyDocumentIri.toString().replaceAll("^file:", ""));
+    var ontologyDocumentPath = Path.of(ontologyDocumentIri.toString()
+        .replaceAll("file:\\/.:^file:/", "")
+        .replaceAll("^file:", ""));
     for (OntologyMapping ontologyMapping : ontologyMappings) {
       if (ontologyMapping.getPath().equals(ontologyDocumentPath)) {
         return ontologyMapping.getIri();
