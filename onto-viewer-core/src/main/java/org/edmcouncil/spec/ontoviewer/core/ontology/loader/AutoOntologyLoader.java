@@ -258,7 +258,7 @@ public class AutoOntologyLoader {
 
   private IRI getOntologyIriFromDocumentIri(List<OntologyMapping> ontologyMappings, IRI ontologyDocumentIri) {
     var ontologyDocumentPath = Path.of(ontologyDocumentIri.toString()
-        .replaceAll("file:\\/.:^file:/", "")
+        .replaceAll("file:\\/.:", "")
         .replaceAll("^file:", ""));
     for (OntologyMapping ontologyMapping : ontologyMappings) {
       if (ontologyMapping.getPath().equals(ontologyDocumentPath)) {
