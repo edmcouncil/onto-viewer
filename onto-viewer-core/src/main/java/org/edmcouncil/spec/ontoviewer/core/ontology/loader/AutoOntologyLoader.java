@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.apache.commons.io.FilenameUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
@@ -257,9 +258,14 @@ public class AutoOntologyLoader {
   }
 
   private IRI getOntologyIriFromDocumentIri(List<OntologyMapping> ontologyMappings, IRI ontologyDocumentIri) {
-    var ontologyDocumentPath = Path.of(ontologyDocumentIri.toString()
-        .replaceAll("file:\\/.:", "")
-        .replaceAll("^file:", ""));
+    // The first branch of the following if handles Windows' paths
+    Path ontologyDocumentPath;
+    if (Pattern.compile("^file:\\/.:").matcher(ontologyDocumentIri.toString()).find()) {
+      ontologyDocumentPath = Path.of(ontologyDocumentIri.toString().replaceAll("^file:\\/", ""));
+    } else {
+      ontologyDocumentPath = Path.of(ontologyDocumentIri.toString().replaceAll("^file:", ""));
+    }
+
     for (OntologyMapping ontologyMapping : ontologyMappings) {
       if (ontologyMapping.getPath().equals(ontologyDocumentPath)) {
         return ontologyMapping.getIri();
