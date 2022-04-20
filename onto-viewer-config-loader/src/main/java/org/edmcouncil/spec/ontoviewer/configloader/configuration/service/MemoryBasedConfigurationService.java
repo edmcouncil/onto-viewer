@@ -69,6 +69,7 @@ public class MemoryBasedConfigurationService implements ConfigurationService {
             "@viewer.axiom.AnnotationPropertyDomain",
             "@viewer.axiom.AnnotationPropertyRangeOf",
             "@viewer.axiom.InverseObjectProperties",
+            "@viewer.axiom.TransitiveObjectProperty",
             "http://purl.org/dc/terms/hasPart",
             "http://www.w3.org/2002/07/owl#deprecated",
             "http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn"));

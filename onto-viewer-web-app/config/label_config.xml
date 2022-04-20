@@ -126,6 +126,11 @@
           <resourceIriToName>@viewer.axiom.InverseObjectProperties</resourceIriToName>
           <resourceIriName>Inverse object properties</resourceIriName>
         </userDefinedName>
+        
+        <userDefinedName>
+          <resourceIriToName>@viewer.axiom.TransitiveObjectProperty</resourceIriToName>
+          <resourceIriName>Transitive object property</resourceIriName>
+        </userDefinedName>
 
         <userDefinedName>
           <resourceIriToName>@viewer.axiom.FunctionalObjectProperty</resourceIriToName>
