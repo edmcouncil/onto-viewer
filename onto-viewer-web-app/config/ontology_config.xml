@@ -15,7 +15,7 @@
     <ontologyCatalogPath>ontologies/catalog-v001.xml</ontologyCatalogPath>
   </ontology>
 
-  <ontologyModuleIgnorePattern>^(About|Metadata).*</ontologyModuleIgnorePattern>
+  <ontologyModuleIgnorePattern>^(About\sFIBO|AboutIDMP|Metadata).*</ontologyModuleIgnorePattern>
   <ontologyModuleIgnorePattern>http.*(About|Metadata).*</ontologyModuleIgnorePattern>
 
   <scopeIri>
