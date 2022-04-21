@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -25,6 +24,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboOntolo
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
+import org.edmcouncil.spec.ontoviewer.core.utils.PathUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
@@ -293,7 +293,8 @@ public class ModuleHandler {
           }
         }
       } else {
-        var ontologyFileName = Path.of(ontologyPath.toString()).getFileName();
+        var ontologyPathWithoutFilePrefix = PathUtils.getPathWithoutFilePrefix(ontologyPath.toString());
+        var ontologyFileName = ontologyPathWithoutFilePrefix.getFileName();
         for (Pattern pattern : ontologyModuleIgnorePatterns) {
           var match = pattern.matcher(ontologyFileName.toString());
           if (match.find()) {
