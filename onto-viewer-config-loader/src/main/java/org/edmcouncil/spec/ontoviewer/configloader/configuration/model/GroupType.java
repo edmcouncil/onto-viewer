@@ -7,5 +7,6 @@ package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public enum GroupType {
-  DEFAULT, DIRECT_SUBCLASSES, INSTANCES, ANONYMOUS_ANCESTOR, USAGE_CLASSES, DIRECT_SUB_OBJECT_PROPERTY
+  DEFAULT, DIRECT_SUBCLASSES, INSTANCES, ANONYMOUS_ANCESTOR, USAGE_CLASSES, DIRECT_SUB_OBJECT_PROPERTY,
+  TRANSITIVE_OBJECT_PROPERTY
 }

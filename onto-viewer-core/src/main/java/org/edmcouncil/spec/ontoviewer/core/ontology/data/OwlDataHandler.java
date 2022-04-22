@@ -124,7 +124,7 @@ public class OwlDataHandler {
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
-  private final Set<String> SUBJECTS_TO_HIDE =  ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "InverseOf");
+  private final Set<String> SUBJECTS_TO_HIDE =  ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "InverseOf", "Transitive:");
  
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
