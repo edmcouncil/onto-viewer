@@ -17,7 +17,11 @@ public class StringUtils {
     if (iriString.contains(AXIOM_PATTERN)) {
       return iriString.substring(iriString.lastIndexOf(".") + 1);
     }
-    return iri.getFragment();
+    String iriFragment = iri.getFragment();
+    if (iriFragment.isEmpty() || iriFragment.isBlank()) {
+      return iriString.substring(iriString.lastIndexOf("/") + 1).replace("#", "");
+    }
+    return iriFragment;
   }
 
   public static String getFragment(String iri) {

@@ -17,7 +17,8 @@
 
   <ontologyModuleIgnorePattern>^(About|Metadata).*</ontologyModuleIgnorePattern>
   <ontologyModuleIgnorePattern>http.*(About|Metadata).*</ontologyModuleIgnorePattern>
-
+  <ontologyModuleIgnorePattern>^(rdf-schema|rdf-syntax-ns).*</ontologyModuleIgnorePattern>
+ 
   <scopeIri>
     <!--<uriNamespace>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</uriNamespace>
     <uriNamespace>http://schema.org/</uriNamespace>
