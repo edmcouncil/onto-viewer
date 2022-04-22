@@ -4,6 +4,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -279,7 +280,7 @@ public class AutoOntologyLoader {
       return;
     }
 
-    try (var pathsStream = Files.walk(ontologiesDirPath)) {
+    try (var pathsStream = Files.walk(ontologiesDirPath, FileVisitOption.FOLLOW_LINKS)) {
       var paths = pathsStream.collect(Collectors.toSet());
 
       for (Path path : paths) {
