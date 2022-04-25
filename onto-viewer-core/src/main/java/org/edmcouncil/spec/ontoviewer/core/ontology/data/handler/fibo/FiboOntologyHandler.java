@@ -28,11 +28,11 @@ public class FiboOntologyHandler {
     private static final Pattern ONTOLOGY_IRI_PATTERN
             = Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
     private static final String PROD = "prod";
-    private static final String PROD_DEV = "dev";
-    private static final String DEV  = "prodDev";
-    private static final String PROD_ICON  = "release";
-    private static final String PROD_DEV_ICON  = "mixed";
-    private static final String DEV_ICON  = "develop";
+    private static final String PROD_DEV = "prodDev";
+    private static final String DEV  = "dev";
+    private static final String PROD_ICON  = "prod";
+    private static final String PROD_DEV_ICON  = "prodDev";
+    private static final String DEV_ICON  = "dev";
     
     private final OntologyManager ontologyManager;
     private final LabelProvider labelProvider;
