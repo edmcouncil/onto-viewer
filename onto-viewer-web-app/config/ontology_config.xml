@@ -17,7 +17,10 @@
 
   <ontologyModuleIgnorePattern>^(About|Metadata).*</ontologyModuleIgnorePattern>
   <ontologyModuleIgnorePattern>http.*(About|Metadata).*</ontologyModuleIgnorePattern>
-  <ontologyModuleIgnorePattern>^(rdf-schema|rdf-syntax-ns).*</ontologyModuleIgnorePattern>
+  
+  <ontologyModuleToIgnore>http://www.w3.org/2000/01/rdf-schema#</ontologyModuleToIgnore>
+  <ontologyModuleToIgnore>http://www.w3.org/1999/02/22-rdf-syntax-ns#</ontologyModuleToIgnore>
+  <ontologyModuleToIgnore>http://www.w3.org/2002/07/owl</ontologyModuleToIgnore>
  
   <scopeIri>
     <!--<uriNamespace>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</uriNamespace>
