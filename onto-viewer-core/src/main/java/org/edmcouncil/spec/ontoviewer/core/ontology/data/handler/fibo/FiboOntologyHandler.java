@@ -28,10 +28,11 @@ public class FiboOntologyHandler {
     private static final Pattern ONTOLOGY_IRI_PATTERN
             = Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
     private static final String PROD = "prod";
-    private static final String PROD_DEV = "prodDev";
+    private static final String PROD_DEV_MIXED = "prodDev";
     private static final String DEV  = "dev";
+    
     private static final String PROD_ICON  = "prod";
-    private static final String PROD_DEV_ICON  = "prodDev";
+    private static final String PROD_DEV_MIXED_ICON   = "prod_and_dev_mixed";
     private static final String DEV_ICON  = "dev";
     
     private final OntologyManager ontologyManager;
@@ -152,8 +153,8 @@ public class FiboOntologyHandler {
         switch (fiboModule.getMaturityLevel().getLabel()) {
             case PROD:
                 return FiboMaturityLevelFactory.create("", "",PROD_ICON);
-            case PROD_DEV:
-                return FiboMaturityLevelFactory.create("", "",PROD_DEV_ICON);
+            case PROD_DEV_MIXED:
+                return FiboMaturityLevelFactory.create("", "",PROD_DEV_MIXED_ICON );
             case DEV:
                 return FiboMaturityLevelFactory.create("", "",DEV_ICON);
         }
