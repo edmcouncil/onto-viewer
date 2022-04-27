@@ -189,11 +189,11 @@ public class ModuleHandler {
 
   private MaturityLevel chooseTheRightVersion(OntoMaturityLevel maturityLevelFromOntology) {
     if (maturityLevelFromOntology.getIri().equals(RELEASE_IRI)) {
-      return MaturityLevelFactory.prod;
+      return MaturityLevelFactory.PROD;
     } else if (maturityLevelFromOntology.getIri().equals("")) {
       return MaturityLevelFactory.emptyAppFiboMaturityLabel();
     } else {
-      return MaturityLevelFactory.dev;
+      return MaturityLevelFactory.DEV;
     }
   }
 
@@ -216,11 +216,11 @@ public class ModuleHandler {
     int devCount = 0;
 
     for (MaturityLevel level : levels) {
-      if (level.equals(MaturityLevelFactory.prodDev)) {
+      if (level.equals(MaturityLevelFactory.PROD_DEV_MIXED)) {
         return level;
-      } else if (level.equals(MaturityLevelFactory.prod)) {
+      } else if (level.equals(MaturityLevelFactory.PROD)) {
         prodCount++;
-      } else if (level.equals(MaturityLevelFactory.dev)) {
+      } else if (level.equals(MaturityLevelFactory.DEV)) {
         devCount++;
       }
     }
@@ -228,11 +228,11 @@ public class ModuleHandler {
     LOGGER.trace("Version select, prodCount: {}, devCount: {}, size: {}", prodCount, devCount, levels.size());
 
     if (prodCount == levels.size()) {
-      return MaturityLevelFactory.prod;
+      return MaturityLevelFactory.PROD;
     } else if (devCount == levels.size()) {
-      return MaturityLevelFactory.dev;
+      return MaturityLevelFactory.DEV;
     } else {
-      return MaturityLevelFactory.prodDev;
+      return MaturityLevelFactory.PROD_DEV_MIXED;
     }
   }
 

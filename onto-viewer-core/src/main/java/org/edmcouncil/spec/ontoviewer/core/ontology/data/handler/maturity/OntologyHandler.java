@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.concurrent.locks.LockingVisitors;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
@@ -16,6 +17,8 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,12 +26,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OntologyHandler {
+  private static final Logger LOG = LoggerFactory.getLogger(OntologyHandler.class);
+    
 
     private static final String ONTOLOGY_IRI_GROUP_NAME = "ontologyIri";
     private static final Pattern ONTOLOGY_IRI_PATTERN
             = Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
     private static final String PROD = "prod";
-    private static final String PROD_DEV_MIXED = "prodDev";
+    private static final String PROD_DEV_MIXED = "prod_and_dev_mixed";
     private static final String DEV  = "dev";
     
     private static final String PROD_ICON  = "prod";
@@ -43,6 +48,7 @@ public class OntologyHandler {
     private Map<IRI, OntoMaturityLevel> maturityLevels = new ConcurrentHashMap<>();
     private List<FiboModule> modules = Collections.emptyList();
 
+    
     public OntologyHandler(OntologyManager ontologyManager,
             LabelProvider labelProvider, AnnotationsDataHandler annotationsDataHandler) {
         this.ontologyManager = ontologyManager;
@@ -61,11 +67,11 @@ public class OntologyHandler {
     public OntoMaturityLevel getMaturityLevelForElement(String entityIri) {
         String ontologyIri = getOntologyIri(entityIri);
         if (ontologyIri != null) {
-            OntoMaturityLevel ontoFiboMaturityLevel = getMaturityLevelForOntology(IRI.create(ontologyIri));
-            if (ontoFiboMaturityLevel.getIri().isEmpty() && ontoFiboMaturityLevel.getLabel().isEmpty()) {
-                ontoFiboMaturityLevel = generateMaturityLevelForModules(entityIri);
+            OntoMaturityLevel ontoMaturityLevel = getMaturityLevelForOntology(IRI.create(ontologyIri));
+            if (ontoMaturityLevel.getIri().isEmpty() && ontoMaturityLevel.getLabel().isEmpty()) {
+                ontoMaturityLevel = generateMaturityLevelForModules(entityIri);
             }
-            return ontoFiboMaturityLevel;
+            return ontoMaturityLevel;
         }
         return MaturityLevelFactory.empty();
     }
@@ -95,7 +101,6 @@ public class OntologyHandler {
             OWLOntology ontology,
             IRI ontologyIri) {
         var currentOntologyIri = ontology.getOntologyID().getOntologyIRI();
-
         if (currentOntologyIri.isPresent() && currentOntologyIri.get().equals(ontologyIri)) {
             for (OWLAnnotation annotation : ontology.annotationsAsList()) {
                 var annotationValue = annotation.annotationValue();
@@ -104,9 +109,8 @@ public class OntologyHandler {
                         && annotationValue.isIRI()
                         && annotationValue.asIRI().isPresent()) {
                     String annotationIri = annotationValue.asIRI().get().toString();
-                    String ontologyLabel = labelProvider.getLabelOrDefaultFragment(IRI.create(annotationIri));
-
-                 return Optional.of(MaturityLevelFactory.create(ontologyLabel, annotationIri, annotationsDataHandler.getIconForMaturityLevel(ontologyLabel)));
+                    String label = labelProvider.getLabelOrDefaultFragment(IRI.create(annotationIri));
+                 return Optional.of(MaturityLevelFactory.create(label, annotationIri, annotationsDataHandler.getIconForMaturityLevel(label)));
                 }
             }
         }

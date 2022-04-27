@@ -7,9 +7,9 @@ import org.semanticweb.owlapi.model.IRI;
  */
 public class MaturityLevelFactory {
 
-  public static MaturityLevel prod = new AppMaturityLevel("prod");
-  public static MaturityLevel dev = new AppMaturityLevel("dev");
-  public static MaturityLevel prodDev = new AppMaturityLevel("prodDev");
+  public static MaturityLevel PROD = new AppMaturityLevel("prod");
+  public static MaturityLevel DEV = new AppMaturityLevel("dev");
+  public static MaturityLevel PROD_DEV_MIXED = new AppMaturityLevel("prod_and_dev_mixed");
   public static MaturityLevel INFO = new AppMaturityLevel("info");
 
   public static OntoMaturityLevel create(String label, IRI iri, String icon) {

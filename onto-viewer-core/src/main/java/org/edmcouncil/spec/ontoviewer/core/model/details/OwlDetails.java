@@ -68,8 +68,8 @@ public class OwlDetails {
     return this.taxonomy;
   }
 
-  public void setMaturityLevel(OntoMaturityLevel fml) {
-    this.maturityLevel = fml;
+  public void setMaturityLevel(OntoMaturityLevel ontoMaturityLevel) {
+    this.maturityLevel = ontoMaturityLevel;
   }
 
   public OntoMaturityLevel getMaturityLevel() {
