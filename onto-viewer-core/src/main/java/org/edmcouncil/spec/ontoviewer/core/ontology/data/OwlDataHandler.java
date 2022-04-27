@@ -124,8 +124,9 @@ public class OwlDataHandler {
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
-  private final Set<String> SUBJECTS_TO_HIDE =  ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "InverseOf", "Transitive:");
- 
+  private final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "Transitive:");
+  private final String INVERSE_OF_SUBJECT = "InverseOf";
+
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
   private final String subObjectPropertyOfIriString = ViewerIdentifierFactory
@@ -526,7 +527,7 @@ public class OwlDataHandler {
 
       String key = axiom.getAxiomType().getName();
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
-      
+
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
           fixRenderedIri, ignoredToDisplay, key, start, true);
 
@@ -699,19 +700,19 @@ public class OwlDataHandler {
       String probablyUrl = splited[j].trim();
       if (str.startsWith("<") && str.endsWith(">")) {
         int length = str.length();
-         probablyUrl = str.substring(1, length - 1);
+        probablyUrl = str.substring(1, length - 1);
       }
       if (UrlChecker.isUrl(probablyUrl)) {
-          String generatedKey = String.format(argPattern, j);
-          String key = generatedKey;
+        String generatedKey = String.format(argPattern, j);
+        String key = generatedKey;
 
-          if (scopeIriOntology.scopeIri(probablyUrl)) {
-            //Brace checking is not needed here, so the arguments are 0.
-            parseToIri(probablyUrl, opv, key, splited, j, generatedKey, str, 0, 0, 0);
-          } else {
-            parseUrl(probablyUrl, splited, j);
-          }
+        if (scopeIriOntology.scopeIri(probablyUrl)) {
+          //Brace checking is not needed here, so the arguments are 0.
+          parseToIri(probablyUrl, opv, key, splited, j, generatedKey, str, 0, 0, 0);
+        } else {
+          parseUrl(probablyUrl, splited, j);
         }
+      }
     }
   }
 
@@ -728,7 +729,7 @@ public class OwlDataHandler {
     This is not correct, so I am replacing it here with 
     iri without these characters */
     if(eIri.contains("<") && eIri.contains(">")){
-        eIri = eIri.toString().replace("<", "").replace(">", "");
+      eIri = eIri.toString().replace("<", "").replace(">", "");
     }
     axiomPropertyEntity.setIri(eIri);
     LOG.debug("Probably eiri {}", eIri);
@@ -758,6 +759,15 @@ public class OwlDataHandler {
       Boolean fixRenderedIri) {
     String[] split = value.split(" ");
     LOG.debug("Split fixRenderedValue: {}", Arrays.asList(split));
+    if (INVERSE_OF_SUBJECT.equals(split[1])) {
+      if (split[0].equals(iriFragment)) {
+        split[0] = "";
+        split[1] = "";
+      } else {
+        split[1] = "";
+        split[2] = "";
+      }
+    }
     if (SUBJECTS_TO_HIDE.contains(split[1])) {
       split[0] = "";
       split[1] = "";
@@ -1088,8 +1098,6 @@ public class OwlDataHandler {
 //   * @param clazz Clazz are all properties of Inherited Axioms.
 //   * @return Class and properties of Inherited Axioms.
 //   */
-
-
   private OwlDetailsProperties<PropertyValue> handleInheritedAxioms(OWLOntology ontology,
       OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
@@ -1400,7 +1408,7 @@ public class OwlDataHandler {
     for (OWLObjectPropertyRangeAxiom axiom : ops) {
       OWLEntity rangeEntity = axiom.signature()
           .filter(e -> !e.getIRI()
-              .equals(clazz.getIRI()))
+          .equals(clazz.getIRI()))
           .findFirst().get();
       LOG.debug("OwlDataHandler -> extractUsageRangeAxiom {}", rangeEntity.getIRI());
 
@@ -1467,8 +1475,8 @@ public class OwlDataHandler {
     for (OWLObjectPropertyDomainAxiom axiom : opd) {
       OWLEntity domainEntity
           = axiom.signature()
-          .filter(e -> !e.getIRI().equals(clazz.getIRI()))
-          .findFirst().get();
+              .filter(e -> !e.getIRI().equals(clazz.getIRI()))
+              .findFirst().get();
       LOG.debug("OwlDataHandler -> extractUsageObjectDomainAxiom {}", domainEntity.getIRI());
 
       String iriFragment = domainEntity.getIRI().toString();
