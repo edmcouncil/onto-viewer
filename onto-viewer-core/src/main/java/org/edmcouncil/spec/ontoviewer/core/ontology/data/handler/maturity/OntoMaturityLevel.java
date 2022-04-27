@@ -1,17 +1,17 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo;
+package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity;
 
 import java.util.Objects;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class OntoFiboMaturityLevel {
+public class OntoMaturityLevel {
 
     private String label;
     private String iri;
     private String icon;
 
-    OntoFiboMaturityLevel(String label, String iri, String icon) {
+    OntoMaturityLevel(String label, String iri, String icon) {
         this.label = label;
         this.iri = iri;
         this.icon = icon;
@@ -66,7 +66,7 @@ public class OntoFiboMaturityLevel {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OntoFiboMaturityLevel other = (OntoFiboMaturityLevel) obj;
+        final OntoMaturityLevel other = (OntoMaturityLevel) obj;
         if (!Objects.equals(this.label, other.label)) {
             return false;
         }

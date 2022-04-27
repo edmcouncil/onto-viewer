@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 
 /**
  * Class will be used to storage data about fibo modules.
@@ -16,12 +16,12 @@ public class FiboModule implements Comparable<FiboModule> {
   private String iri;
   private String label;
   private List<FiboModule> subModule;
-  private FiboMaturityLevel maturityLevel = null;
+  private MaturityLevel maturityLevel = null;
 
   public FiboModule() {
   }
 
-  public FiboModule(String iri, String label, List<FiboModule> subModule, FiboMaturityLevel maturityLevel) {
+  public FiboModule(String iri, String label, List<FiboModule> subModule, MaturityLevel maturityLevel) {
     this.iri = iri;
     this.label = label;
     this.subModule = subModule;
@@ -52,11 +52,11 @@ public class FiboModule implements Comparable<FiboModule> {
     this.subModule = subModule;
   }
 
-  public FiboMaturityLevel getMaturityLevel() {
+  public MaturityLevel getMaturityLevel() {
     return maturityLevel;
   }
 
-  public void setMaturityLevel(FiboMaturityLevel maturityLevel) {
+  public void setMaturityLevel(MaturityLevel maturityLevel) {
     this.maturityLevel = maturityLevel;
   }
 

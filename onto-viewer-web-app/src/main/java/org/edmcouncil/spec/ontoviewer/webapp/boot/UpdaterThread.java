@@ -7,7 +7,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfi
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
@@ -39,14 +39,14 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private TextSearcherDb textSearcherDb;
   private UpdateBlocker blocker;
   private UpdateJob job;
-  private FiboDataHandler fiboDataHandler;
+  private DataHandler fiboDataHandler;
   private ScopeIriOntology scopeIriOntology;
   private OntologyStatsManager ontologyStatsManager;
   private LuceneSearcher luceneSearcher;
 
   public UpdaterThread(ConfigurationService config, OntologyManager ontologyManager,
       FileSystemManager fileSystemManager, LabelProvider labelProvider,
-      TextSearcherDb textSearcherDb, UpdateBlocker blocker, FiboDataHandler fiboDataHandler,
+      TextSearcherDb textSearcherDb, UpdateBlocker blocker, DataHandler fiboDataHandler,
       UpdateJob job, ScopeIriOntology scopeIriOntology, OntologyStatsManager osm,
       LuceneSearcher luceneSearcher) {
     this.config = config;

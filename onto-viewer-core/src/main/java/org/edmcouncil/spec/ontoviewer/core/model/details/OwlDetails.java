@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlTaxonomy;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.vis.VisGraph;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
 
 /**
  *
@@ -26,7 +26,7 @@ public class OwlDetails {
   public void setGraph(VisGraph graph) {
     this.graph = graph;
   }
-  private OntoFiboMaturityLevel maturityLevel;
+  private OntoMaturityLevel maturityLevel;
 
   public String getLabel() {
     return label;
@@ -68,11 +68,11 @@ public class OwlDetails {
     return this.taxonomy;
   }
 
-  public void setMaturityLevel(OntoFiboMaturityLevel fml) {
+  public void setMaturityLevel(OntoMaturityLevel fml) {
     this.maturityLevel = fml;
   }
 
-  public OntoFiboMaturityLevel getMaturityLevel() {
+  public OntoMaturityLevel getMaturityLevel() {
     return maturityLevel;
   }
 

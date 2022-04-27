@@ -6,7 +6,7 @@ import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextSearcherDb;
@@ -43,7 +43,7 @@ public class Updater {
     @Autowired
     private UpdateBlocker blocker;
     @Autowired
-    private FiboDataHandler fiboDataHandler;
+    private DataHandler fiboDataHandler;
     @Autowired
     private ScopeIriOntology scopeIriOntology;
     @Autowired

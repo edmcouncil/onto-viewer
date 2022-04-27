@@ -14,8 +14,8 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturityLevelFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.semanticweb.owlapi.model.IRI;
@@ -152,7 +152,7 @@ public class AnnotationsDataHandler {
 
         if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
           OwlAnnotationIri oai = (OwlAnnotationIri) opv;
-          OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(),
+          OntoMaturityLevel fml = MaturityLevelFactory.create(oai.getValue().getLabel(),
               oai.getValue().getIri(), getIconForMaturityLevel(oai.getValue().getLabel()));
           details.setMaturityLevel(fml);
           LOG.debug(fml.toString());
@@ -175,7 +175,7 @@ public class AnnotationsDataHandler {
             opv = customDataFactory.createAnnotationIri(value);
             if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
               OwlAnnotationIri oai = (OwlAnnotationIri) opv;
-              OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(),
+              OntoMaturityLevel fml = MaturityLevelFactory.create(oai.getValue().getLabel(),
                   oai.getValue().getIri(), getIconForMaturityLevel(oai.getValue().getLabel()));
               details.setMaturityLevel(fml);
               LOG.debug(fml.toString());

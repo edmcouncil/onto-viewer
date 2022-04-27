@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo;
+package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity;
 
 import static org.edmcouncil.spec.ontoviewer.core.FiboVocabulary.HAS_MATURITY_LEVEL;
 
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Service
-public class FiboOntologyHandler {
+public class OntologyHandler {
 
     private static final String ONTOLOGY_IRI_GROUP_NAME = "ontologyIri";
     private static final Pattern ONTOLOGY_IRI_PATTERN
@@ -40,10 +40,10 @@ public class FiboOntologyHandler {
     private final AnnotationsDataHandler annotationsDataHandler;
 
     // Cache for ontologies' maturity level
-    private Map<IRI, OntoFiboMaturityLevel> maturityLevels = new ConcurrentHashMap<>();
+    private Map<IRI, OntoMaturityLevel> maturityLevels = new ConcurrentHashMap<>();
     private List<FiboModule> modules = Collections.emptyList();
 
-    public FiboOntologyHandler(OntologyManager ontologyManager,
+    public OntologyHandler(OntologyManager ontologyManager,
             LabelProvider labelProvider, AnnotationsDataHandler annotationsDataHandler) {
         this.ontologyManager = ontologyManager;
         this.labelProvider = labelProvider;
@@ -58,23 +58,23 @@ public class FiboOntologyHandler {
      * @param entityIri IRI of element
      * @return extracted fibo maturity level
      */
-    public OntoFiboMaturityLevel getMaturityLevelForElement(String entityIri) {
+    public OntoMaturityLevel getMaturityLevelForElement(String entityIri) {
         String ontologyIri = getOntologyIri(entityIri);
         if (ontologyIri != null) {
-            OntoFiboMaturityLevel ontoFiboMaturityLevel = getMaturityLevelForOntology(IRI.create(ontologyIri));
+            OntoMaturityLevel ontoFiboMaturityLevel = getMaturityLevelForOntology(IRI.create(ontologyIri));
             if (ontoFiboMaturityLevel.getIri().isEmpty() && ontoFiboMaturityLevel.getLabel().isEmpty()) {
                 ontoFiboMaturityLevel = generateMaturityLevelForModules(entityIri);
             }
             return ontoFiboMaturityLevel;
         }
-        return FiboMaturityLevelFactory.empty();
+        return MaturityLevelFactory.empty();
     }
 
     public void setModulesTree(List<FiboModule> modules) {
         this.modules = modules;
     }
 
-    public OntoFiboMaturityLevel getMaturityLevelForOntology(IRI ontologyIri) {
+    public OntoMaturityLevel getMaturityLevelForOntology(IRI ontologyIri) {
         if (!maturityLevels.containsKey(ontologyIri)) {
 
             var ontologies = ontologyManager.getOntologyWithImports().collect(Collectors.toSet());
@@ -88,10 +88,10 @@ public class FiboOntologyHandler {
             }
         }
 
-        return maturityLevels.getOrDefault(ontologyIri, FiboMaturityLevelFactory.empty());
+        return maturityLevels.getOrDefault(ontologyIri, MaturityLevelFactory.empty());
     }
 
-    private Optional<OntoFiboMaturityLevel> getMaturityLevelForParticularOntology(
+    private Optional<OntoMaturityLevel> getMaturityLevelForParticularOntology(
             OWLOntology ontology,
             IRI ontologyIri) {
         var currentOntologyIri = ontology.getOntologyID().getOntologyIRI();
@@ -106,7 +106,7 @@ public class FiboOntologyHandler {
                     String annotationIri = annotationValue.asIRI().get().toString();
                     String ontologyLabel = labelProvider.getLabelOrDefaultFragment(IRI.create(annotationIri));
 
-                 return Optional.of(FiboMaturityLevelFactory.create(ontologyLabel, annotationIri, annotationsDataHandler.getIconForMaturityLevel(ontologyLabel)));
+                 return Optional.of(MaturityLevelFactory.create(ontologyLabel, annotationIri, annotationsDataHandler.getIconForMaturityLevel(ontologyLabel)));
                 }
             }
         }
@@ -124,19 +124,19 @@ public class FiboOntologyHandler {
         return elementIri;
     }
 
-    public OntoFiboMaturityLevel generateMaturityLevelForModules(String iri) {
-        OntoFiboMaturityLevel result = null;
+    public OntoMaturityLevel generateMaturityLevelForModules(String iri) {
+        OntoMaturityLevel result = null;
         for (FiboModule fiboModule : modules) {
             result = generateMaturityLevelForModules(fiboModule, iri);
             if (result != null) {
                 break;
             }
         }
-        return result != null ? result : FiboMaturityLevelFactory.empty();
+        return result != null ? result : MaturityLevelFactory.empty();
     }
 
-    private OntoFiboMaturityLevel generateMaturityLevelForModules(FiboModule fiboModule, String iri) {
-        OntoFiboMaturityLevel result = null;
+    private OntoMaturityLevel generateMaturityLevelForModules(FiboModule fiboModule, String iri) {
+        OntoMaturityLevel result = null;
         if (fiboModule.getIri().equals(iri)) {
             return generateModuleMaturity(fiboModule);
         }
@@ -149,15 +149,15 @@ public class FiboOntologyHandler {
         return result;
     }
 
- private OntoFiboMaturityLevel generateModuleMaturity(FiboModule fiboModule) {
+ private OntoMaturityLevel generateModuleMaturity(FiboModule fiboModule) {
         switch (fiboModule.getMaturityLevel().getLabel()) {
             case PROD:
-                return FiboMaturityLevelFactory.create("", "",PROD_ICON);
+                return MaturityLevelFactory.create("", "",PROD_ICON);
             case PROD_DEV_MIXED:
-                return FiboMaturityLevelFactory.create("", "",PROD_DEV_MIXED_ICON );
+                return MaturityLevelFactory.create("", "",PROD_DEV_MIXED_ICON );
             case DEV:
-                return FiboMaturityLevelFactory.create("", "",DEV_ICON);
+                return MaturityLevelFactory.create("", "",DEV_ICON);
         }
-        return FiboMaturityLevelFactory.empty();
+        return MaturityLevelFactory.empty();
     }
 }
