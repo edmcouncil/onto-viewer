@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.toolkit.mapping.model;
+package org.edmcouncil.spec.ontoviewer.core.mapping.model;
 
 public class EntityData {
 

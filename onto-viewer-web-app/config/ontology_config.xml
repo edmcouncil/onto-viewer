@@ -7,13 +7,17 @@
   <ontology>
  
     <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/</ontologyURL>
-    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</ontologyURL>
+    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</ontologyURL> 
     <!--<ontologyURL>https://spec.edmcouncil.org/auto/ontology/AboutAUTODev/</ontologyURL>-->
     <ontologyDir>ontologies</ontologyDir>
     <ontologyDir>staticOntologies</ontologyDir>
     <ontologyMapper>fiboMapper</ontologyMapper>
+    <ontologyCatalogPath>ontologies/catalog-v001.xml</ontologyCatalogPath>
   </ontology>
-  
+
+  <ontologyModuleIgnorePattern>^(About|Metadata).*</ontologyModuleIgnorePattern>
+  <ontologyModuleIgnorePattern>http.*(About|Metadata).*</ontologyModuleIgnorePattern>
+
   <scopeIri>
     <!--<uriNamespace>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</uriNamespace>
     <uriNamespace>http://schema.org/</uriNamespace>

@@ -107,6 +107,7 @@
       <groupItem>http://www.w3.org/2004/02/skos/core#historyNote</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/relatedSpecification</groupItem>
       <groupItem>http://purl.org/dc/terms/hasVersion</groupItem>
+      <groupItem>http://purl.org/dc/terms/references</groupItem>
     </group>
   </groups>
 </config>

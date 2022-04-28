@@ -18,6 +18,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.model.onto.OntologyResources;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
+import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
@@ -50,6 +51,7 @@ public class FiboDataHandler {
   private final CustomDataFactory customDataFactory;
   private final FiboOntologyHandler fiboOntologyHandler;
   private final ModuleHandler moduleHandler;
+  private final OntologyManager ontologyManager;
 
   private String resourceInternal;
   private String resourceExternal;
@@ -59,15 +61,17 @@ public class FiboDataHandler {
   public FiboDataHandler(AnnotationsDataHandler annotationsDataHandler,
       CustomDataFactory customDataFactory,
       FiboOntologyHandler fiboOntologyHandler,
-      ModuleHandler moduleHandler) {
+      ModuleHandler moduleHandler,
+      OntologyManager ontologyManager) {
     this.annotationsDataHandler = annotationsDataHandler;
     this.customDataFactory = customDataFactory;
     this.fiboOntologyHandler = fiboOntologyHandler;
     this.moduleHandler = moduleHandler;
+    this.ontologyManager = ontologyManager;
   }
 
-  public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OWLOntology ontology,
-      OwlListDetails details) {
+  public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OwlListDetails details) {
+    OWLOntology ontology = ontologyManager.getOntology();
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
 
@@ -286,7 +290,8 @@ public class FiboDataHandler {
         : ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external, element);
   }
 
-  public List<String> getElementLocationInModules(String elementIri, OWLOntology ontology) {
+  public List<String> getElementLocationInModules(String elementIri) {
+    OWLOntology ontology = ontologyManager.getOntology();
     List<String> result = new LinkedList<>();
     if (resources == null) {
       loadAllOntologyResources(ontology);

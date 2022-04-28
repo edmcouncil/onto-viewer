@@ -15,6 +15,7 @@
       <groupItem>http://www.w3.org/2004/02/skos/core#prefLabel</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</groupItem>
+      <groupItem>https://www.omg.org/spec/Commons/AnnotationVocabulary/synonym</groupItem>               
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/abbreviation</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#definition</groupItem>
       <groupItem>http://spec.edmcouncil.org/owlnames#mdDefinition</groupItem>
@@ -25,12 +26,15 @@
       <groupItem>http://www.w3.org/2004/02/skos/core#example</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#scopeNote</groupItem>
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/usageNote</groupItem>
+      <groupItem>https://www.omg.org/spec/Commons/AnnotationVocabulary/usageNote</groupItem>
       <groupItem>http://www.w3.org/2004/02/skos/core#editorialNote</groupItem>
       <groupItem>http://purl.org/dc/terms/title</groupItem>
       <groupItem>http://purl.org/dc/terms/abstract</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/keyword</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/fileAbstract</groupItem> 
       <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote</groupItem>
+      <groupItem>https://www.omg.org/spec/Commons/AnnotationVocabulary/explanatoryNote</groupItem>
+      <groupItem>http://purl.org/dc/terms/description</groupItem>
     </group>
 
     <group>
@@ -78,6 +82,7 @@
       <groupItem>@viewer.axiom.AnnotationPropertyDomain</groupItem>
       <groupItem>@viewer.axiom.AnnotationPropertyRangeOf</groupItem>
       <groupItem>@viewer.axiom.InverseObjectProperties</groupItem>
+      <groupItem>@viewer.axiom.TransitiveObjectProperty</groupItem>
       <groupItem>http://www.w3.org/2002/07/owl#deprecated</groupItem>
       <groupItem>http://purl.org/dc/terms/hasPart</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/dependsOn</groupItem>
@@ -88,6 +93,7 @@
       <groupItem>http://purl.org/dc/terms/creator</groupItem>
       <groupItem>http://purl.org/dc/terms/license</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright</groupItem>
+      <groupItem>https://www.omg.org/spec/Commons/AnnotationVocabulary/copyright</groupItem>
       <groupItem>http://purl.org/dc/terms/contributor</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/contributor</groupItem>
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/moduleAbbreviation</groupItem>         
@@ -103,6 +109,12 @@
       <groupItem>http://www.w3.org/2004/02/skos/core#historyNote</groupItem> 
       <groupItem>http://www.omg.org/techprocess/ab/SpecificationMetadata/relatedSpecification</groupItem>                  
       <groupItem>http://purl.org/dc/terms/hasVersion</groupItem>                  
+      <groupItem>http://purl.org/dc/terms/references</groupItem>                  
+      <groupItem>http://purl.org/dc/terms/modified</groupItem>                  
+      <groupItem>http://purl.org/dc/terms/rightsHolder</groupItem>                  
+      <groupItem>http://www.w3.org/2002/07/owl#versionInfo</groupItem>                  
+      <groupItem>http://purl.org/dc/terms/date</groupItem>  
+      <groupItem>https://spec.edmcouncil.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/isEncodedAs</groupItem>                
     </group>   
     
   </groups>

@@ -16,6 +16,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKey
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.KeyValueMapConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
@@ -26,8 +27,8 @@ import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyConsistencyChecke
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.TextWriter;
-import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.OntologyCatalogParser;
-import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.Uri;
+import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
+import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.Goal;
@@ -152,7 +153,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
           }
           var properties = new KeyValueMapConfigItem(mappings);
           configuration.addConfigElement(ONTOLOGY_MAPPING_MAP, properties);
-        } catch (OntoViewerToolkitException ex) {
+        } catch (OntoViewerException ex) {
           var message = String.format("Error while handling ontology mapping from path '%s'. "
               + "Details: %s", ontologyMappingPath, ex.getMessage());
           LOGGER.warn(message, ex);

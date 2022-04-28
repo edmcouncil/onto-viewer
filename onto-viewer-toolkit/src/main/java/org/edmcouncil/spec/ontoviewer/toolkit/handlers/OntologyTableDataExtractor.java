@@ -2,11 +2,11 @@ package org.edmcouncil.spec.ontoviewer.toolkit.handlers;
 
 import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.INHERITED_DESCRIPTIONS_LABEL;
 import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.OWN_DESCRIPTIONS_LABEL;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.CLASS;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.DATATYPE;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.DATA_PROPERTY;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.INDIVIDUAL;
-import static org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType.OBJECT_PROPERTY;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.CLASS;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.DATATYPE;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.DATA_PROPERTY;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.INDIVIDUAL;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,8 +33,8 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
-import org.edmcouncil.spec.ontoviewer.toolkit.mapping.model.EntityData;
-import org.edmcouncil.spec.ontoviewer.toolkit.model.EntityType;
+import org.edmcouncil.spec.ontoviewer.core.mapping.model.EntityData;
+import org.edmcouncil.spec.ontoviewer.core.mapping.EntityType;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLEntity;
@@ -105,12 +106,16 @@ public class OntologyTableDataExtractor {
     var filterPattern = configurationService.getCoreConfiguration()
         .getSingleStringValue(OptionDefinition.FILTER_PATTERN.argName())
         .orElse("");
+    var filterPatternRegex = Pattern.compile(filterPattern);
 
     var notFoundEntitiesCounter = new AtomicInteger(0);
 
     var entityData = entities
         .parallel()
-        .filter(owlEntity -> owlEntity.getIRI().toString().contains(filterPattern))
+        .filter(owlEntity -> {
+          var matcher = filterPatternRegex.matcher(owlEntity.getIRI().toString());
+          return matcher.find();
+        })
         .map(owlEntity -> {
           try {
             return detailsManager.getEntityDetails(owlEntity);
@@ -198,6 +203,9 @@ public class OntologyTableDataExtractor {
         .trim();
     // We replace term's label with 'It' but not for the first occurrence
     if (cleanedText.toLowerCase().startsWith(term.toLowerCase())) {
+      if (term.isBlank()) {
+        return cleanedText;
+      }
       var startingLabel = term.substring(0, 1).toUpperCase() + term.substring(1);
       cleanedText = cleanedText.replaceAll(startingLabel, "It")
           .replaceFirst("It", startingLabel);

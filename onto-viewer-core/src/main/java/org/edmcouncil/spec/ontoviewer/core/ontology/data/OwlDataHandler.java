@@ -6,6 +6,7 @@ import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_DATA_PROPE
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_OBJECT_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.TAXONOMY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
+import com.github.jsonldjava.shaded.com.google.common.collect.ImmutableSet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -123,7 +124,8 @@ public class OwlDataHandler {
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
-
+  private final Set<String> SUBJECTS_TO_HIDE =  ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "InverseOf", "Transitive:");
+ 
   private final String subClassOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
   private final String subObjectPropertyOfIriString = ViewerIdentifierFactory
@@ -524,7 +526,7 @@ public class OwlDataHandler {
 
       String key = axiom.getAxiomType().getName();
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
-
+      
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
           fixRenderedIri, ignoredToDisplay, key, start, true);
 
@@ -563,7 +565,7 @@ public class OwlDataHandler {
       boolean bypassClass
   ) {
     String value = rendering.render(axiom);
-    LOG.debug("rendering value: {}", value);
+    LOG.debug("Rendered default value: {}", value);
     for (String unwantedType : unwantedTypes) {
       value = value.replace(unwantedType, "");
     }
@@ -614,10 +616,8 @@ public class OwlDataHandler {
       LOG.debug("Processing Item: {}", next);
       LOG.trace("OWL Entity splitted: {}", Arrays.asList(splitted));
 
-      for (int i = startCountingArgs; i < startCountingArgs + splitted.length; i++) {
-
-        int fixedIValue = i - startCountingArgs;
-
+      for (int countingArg = startCountingArgs; countingArg < startCountingArgs + splitted.length; countingArg++) {
+        int fixedIValue = countingArg - startCountingArgs;
         String string = splitted[fixedIValue].trim();
         LOG.trace("Splitted string i: '{}', str: '{}'", fixedIValue, string);
         //more than 1 because when it's 1, it's a number
@@ -653,7 +653,7 @@ public class OwlDataHandler {
         }
         if (string.equals(eSignature)) {
           LOG.trace("Find match for processing item {}", string);
-          String generatedKey = String.format(argPattern, i);
+          String generatedKey = String.format(argPattern, countingArg);
           key = generatedKey;
           String textToReplace = generatedKey;
           if (hasOpeningParenthesis) {
@@ -672,13 +672,12 @@ public class OwlDataHandler {
           }
           LOG.trace("Prepared text: {} for: {}", textToReplace, splitted[fixedIValue]);
           splitted[fixedIValue] = textToReplace;
-
           String eIri = next.getIRI().toString();
 
           parseToIri(argPattern, opv, key, splitted, fixedIValue, generatedKey, eIri,
               countOpeningParenthesis, countClosingParenthesis, countComma);
         }
-        opv.setLastId(i);
+        opv.setLastId(countingArg);
       }
     }
 
@@ -697,10 +696,12 @@ public class OwlDataHandler {
       OwlAxiomPropertyValue opv) {
     for (int j = 0; j < splited.length; j++) {
       String str = splited[j].trim();
+      String probablyUrl = splited[j].trim();
       if (str.startsWith("<") && str.endsWith(">")) {
         int length = str.length();
-        String probablyUrl = str.substring(1, length - 1);
-        if (UrlChecker.isUrl(probablyUrl)) {
+         probablyUrl = str.substring(1, length - 1);
+      }
+      if (UrlChecker.isUrl(probablyUrl)) {
           String generatedKey = String.format(argPattern, j);
           String key = generatedKey;
 
@@ -711,7 +712,6 @@ public class OwlDataHandler {
             parseUrl(probablyUrl, splited, j);
           }
         }
-      }
     }
   }
 
@@ -724,6 +724,12 @@ public class OwlDataHandler {
       String[] splited, int j, String generatedKey, String eIri, int countOpeningParenthesis,
       int countClosingParenthesis, int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
+    /* I dont know why but some input iri's has '<' on start and '>' on end
+    This is not correct, so I am replacing it here with 
+    iri without these characters */
+    if(eIri.contains("<") && eIri.contains(">")){
+        eIri = eIri.toString().replace("<", "").replace(">", "");
+    }
     axiomPropertyEntity.setIri(eIri);
     LOG.debug("Probably eiri {}", eIri);
     String label = labelProvider.getLabelOrDefaultFragment(IRI.create(eIri));
@@ -752,7 +758,7 @@ public class OwlDataHandler {
       Boolean fixRenderedIri) {
     String[] split = value.split(" ");
     LOG.debug("Split fixRenderedValue: {}", Arrays.asList(split));
-    if (split[1].equals("SubClassOf")) {
+    if (SUBJECTS_TO_HIDE.contains(split[1])) {
       split[0] = "";
       split[1] = "";
     }
@@ -1176,30 +1182,26 @@ public class OwlDataHandler {
     return result;
   }
 
-  public OwlListDetails handleOntologyMetadata(IRI iri, OWLOntology ontology) {
-    OwlListDetails wd = new OwlListDetails();
-    OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri,
-        ontology, wd);
-    if (metadata != null && metadata.getProperties().keySet().size() > 0) {
-
-      wd.addAllProperties(metadata);
-      wd.setIri(iri.toString());
-      wd.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
-      wd.setLocationInModules(
-          fiboDataHandler.getElementLocationInModules(iri.toString(), ontology));
-      return wd;
+  public OwlListDetails handleOntologyMetadata(IRI iri) {
+    OwlListDetails ontologyDetails = new OwlListDetails();
+    OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontologyDetails);
+    if (metadata != null && !metadata.getProperties().keySet().isEmpty()) {
+      ontologyDetails.addAllProperties(metadata);
+      ontologyDetails.setIri(iri.toString());
+      ontologyDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
+      ontologyDetails.setLocationInModules(fiboDataHandler.getElementLocationInModules(iri.toString()));
+      return ontologyDetails;
     }
     return null;
-
   }
 
   public List<FiboModule> getAllModules() {
     return fiboDataHandler.getAllModules();
   }
 
-  public List<String> getElementLocationInModules(String iriString, OWLOntology ontology) {
+  public List<String> getElementLocationInModules(String iriString) {
     LOG.debug("[Data Handler] Handle location for element {}", iriString);
-    return fiboDataHandler.getElementLocationInModules(iriString, ontology);
+    return fiboDataHandler.getElementLocationInModules(iriString);
   }
 
   public OwlListDetails handleParticularDatatype(IRI iri) {

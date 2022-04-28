@@ -1,9 +1,11 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.searcher.result;
 
+import java.util.List;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlDetails;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.DetailsResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.ExtendedResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.ListResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
 
 /**
@@ -11,13 +13,14 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResul
  */
 public class ResultFactory {
 
-  public static SearcherResult createSearchResult(ExtendedResult result) {
+  private ResultFactory() {
+  }
 
+  public static SearcherResult<List<SearchItem>> createSearchResult(ExtendedResult result) {
     return new ListResult(SearcherResult.Type.list, result);
   }
 
-  public static SearcherResult createDetailsResult(OwlDetails result) {
-    return new DetailsResult(SearcherResult.Type.details, result);
+  public static <T extends OwlDetails> SearcherResult<T> createDetailsResult(T result) {
+    return new DetailsResult<>(SearcherResult.Type.details, result);
   }
-  
 }
