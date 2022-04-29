@@ -9,9 +9,8 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryB
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.AppFiboMaturityLevel;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturityLevel;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboOntologyHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.AppMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
@@ -19,12 +18,13 @@ import org.junit.jupiter.api.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 
 class ModuleHandlerTest {
 
   private static final String ROOT_IRI = "http://www.example.com/modules#";
-  private static final FiboMaturityLevel DEV_MATURITY_LEVEL = new AppFiboMaturityLevel("dev");
-  private static final FiboMaturityLevel PROD_MATURITY_LEVEL = new AppFiboMaturityLevel("prod");
+  private static final MaturityLevel DEV_MATURITY_LEVEL = new AppMaturityLevel("dev");
+  private static final MaturityLevel PROD_MATURITY_LEVEL = new AppMaturityLevel("prod");
 
   @Test
   void shouldReturnListOfModulesDefinedInOntology() {
@@ -90,7 +90,7 @@ class ModuleHandlerTest {
     var scopeIriOntology = new ScopeIriOntology();
     var annotationsDataHandler = new AnnotationsDataHandler(
         owlDataExtractor, customDataFactory, configurationService, scopeIriOntology);
-    var fiboOntologyHandler = new FiboOntologyHandler(ontologyManager, labelProvider, annotationsDataHandler);
+    var fiboOntologyHandler = new OntologyHandler(ontologyManager, labelProvider, annotationsDataHandler);
 
     return new ModuleHandler(ontologyManager,
         individualDataHandler,
@@ -117,7 +117,7 @@ class ModuleHandlerTest {
     }
   }
 
-  private FiboModule createModule(String name, List<FiboModule> subModules, FiboMaturityLevel maturityLevel) {
+  private FiboModule createModule(String name, List<FiboModule> subModules, MaturityLevel maturityLevel) {
     return new FiboModule(ROOT_IRI + name, name, subModules, maturityLevel);
   }
 }

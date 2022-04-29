@@ -1,6 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model;
 
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
 
 /**
  *
@@ -12,7 +12,7 @@ public class SearchItem {
   private String label;
   private String description;
   private double relevancy;
-  private OntoFiboMaturityLevel maturityLevel;
+  private OntoMaturityLevel maturityLevel;
 
   public String getIri() {
     return iri;
@@ -46,11 +46,11 @@ public class SearchItem {
     this.description = description;
   }
 
-  public void setMaturityLevel(OntoFiboMaturityLevel maturityLevel) {
+  public void setMaturityLevel(OntoMaturityLevel maturityLevel) {
     this.maturityLevel = maturityLevel;
   }
 
-  public OntoFiboMaturityLevel getMaturityLevel() {
+  public OntoMaturityLevel getMaturityLevel() {
     return maturityLevel;
   }
 

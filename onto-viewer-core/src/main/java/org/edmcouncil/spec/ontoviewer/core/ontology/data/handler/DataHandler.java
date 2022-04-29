@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo;
+package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,6 +21,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -43,13 +44,13 @@ import org.springframework.stereotype.Component;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 @Component
-public class FiboDataHandler {
+public class DataHandler {
 
-  private static final Logger LOG = LoggerFactory.getLogger(FiboDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DataHandler.class);
 
   private final AnnotationsDataHandler annotationsDataHandler;
   private final CustomDataFactory customDataFactory;
-  private final FiboOntologyHandler fiboOntologyHandler;
+  private final OntologyHandler fiboOntologyHandler;
   private final ModuleHandler moduleHandler;
   private final OntologyManager ontologyManager;
 
@@ -58,9 +59,9 @@ public class FiboDataHandler {
 
   private Map<String, OntologyResources> resources = null;
 
-  public FiboDataHandler(AnnotationsDataHandler annotationsDataHandler,
+  public DataHandler(AnnotationsDataHandler annotationsDataHandler,
       CustomDataFactory customDataFactory,
-      FiboOntologyHandler fiboOntologyHandler,
+      OntologyHandler fiboOntologyHandler,
       ModuleHandler moduleHandler,
       OntologyManager ontologyManager) {
     this.annotationsDataHandler = annotationsDataHandler;
@@ -371,7 +372,7 @@ public class FiboDataHandler {
     return false;
   }
 
-  public FiboOntologyHandler getFiboOntologyHandler() {
+  public OntologyHandler getFiboOntologyHandler() {
     return fiboOntologyHandler;
   }
 }

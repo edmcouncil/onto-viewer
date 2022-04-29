@@ -142,7 +142,7 @@ h3>b{
   color: #e78747 !important;
 }
 
-.prodDevIndicator {
+.prod_and_dev_mixedIndicator {
   height: 0.9em;
   width: 0.9em;
   background: linear-gradient(90deg, rgba(0,153,87,1) 50%, rgba(255,190,0,1) 50%);
