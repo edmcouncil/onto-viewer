@@ -725,9 +725,6 @@ public class OwlDataHandler {
       String[] splited, int j, String generatedKey, String iriString, int countOpeningParenthesis,
       int countClosingParenthesis, int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
-    /* I dont know why but some input iri's has '<' on start and '>' on end
-    This is not correct, so I am replacing it here with 
-    iri without these characters */
     if(iriString.contains("<") && iriString.contains(">")){
       iriString = iriString.toString().replace("<", "").replace(">", "");
     }
