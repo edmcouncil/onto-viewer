@@ -124,7 +124,7 @@ public class OwlDataHandler {
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
-  private final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "Transitive:");
+  private final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "Functional:","Transitive:", "Symmetric:", "Asymmetric", "Reflexive", "Irreflexive");
   private final String INVERSE_OF_SUBJECT = "InverseOf";
 
   private final String subClassOfIriString = ViewerIdentifierFactory
@@ -722,18 +722,18 @@ public class OwlDataHandler {
   }
 
   private void parseToIri(String probablyUrl, OwlAxiomPropertyValue opv, String key,
-      String[] splited, int j, String generatedKey, String eIri, int countOpeningParenthesis,
+      String[] splited, int j, String generatedKey, String iriString, int countOpeningParenthesis,
       int countClosingParenthesis, int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
     /* I dont know why but some input iri's has '<' on start and '>' on end
     This is not correct, so I am replacing it here with 
     iri without these characters */
-    if(eIri.contains("<") && eIri.contains(">")){
-      eIri = eIri.toString().replace("<", "").replace(">", "");
+    if(iriString.contains("<") && iriString.contains(">")){
+      iriString = iriString.toString().replace("<", "").replace(">", "");
     }
-    axiomPropertyEntity.setIri(eIri);
-    LOG.debug("Probably eiri {}", eIri);
-    String label = labelProvider.getLabelOrDefaultFragment(IRI.create(eIri));
+    axiomPropertyEntity.setIri(iriString);
+    LOG.debug("Probably iriString {}", iriString);
+    String label = labelProvider.getLabelOrDefaultFragment(IRI.create(iriString));
     axiomPropertyEntity.setLabel(label);
     opv.addEntityValues(key, axiomPropertyEntity);
     splited[j] = generatedKey;
@@ -755,38 +755,41 @@ public class OwlDataHandler {
     splited[j] = textToReplace;
   }
 
-  private String fixRenderedValue(String value, String iriFragment, String splitFragment,
+  private String fixRenderedValue(String axiomString, String iriFragment, String splitFragment,
       Boolean fixRenderedIri) {
-    String[] split = value.split(" ");
-    LOG.debug("Split fixRenderedValue: {}", Arrays.asList(split));
-    if (INVERSE_OF_SUBJECT.equals(split[1])) {
-      if (split[0].equals(iriFragment)) {
-        split[0] = "";
-        split[1] = "";
+    String[] axiomParts = axiomString.split(" ");
+    LOG.debug("Split fixRenderedValue: {}", Arrays.asList(axiomParts));
+    Boolean axiomIsInverseOf = INVERSE_OF_SUBJECT.contains(axiomParts[1]);
+    Boolean axiomSubject = axiomParts[0].contains(iriFragment);
+
+    if (axiomIsInverseOf) {
+      if (axiomSubject) {
+        axiomParts[0] = "";
+        axiomParts[1] = "";
       } else {
-        split[1] = "";
-        split[2] = "";
+        axiomParts[1] = "";
+        axiomParts[2] = "";
       }
     }
-    if (SUBJECTS_TO_HIDE.contains(split[1])) {
-      split[0] = "";
-      split[1] = "";
+    if (SUBJECTS_TO_HIDE.contains(axiomParts[1])) {
+      axiomParts[0] = "";
+      axiomParts[1] = "";
     }
     if (fixRenderedIri) {
       int iriFragmentIndex = -1;
-      for (int i = 0; i < split.length; i++) {
-        String sString = split[i];
-        if (iriFragment.equals(sString)) {
+      for (int i = 0; i < axiomParts.length; i++) {
+        String sString = axiomParts[i];
+        if (iriFragment.contains(sString)) {
           iriFragmentIndex = i;
           break;
         }
       }
       if (iriFragmentIndex != -1) {
-        split[iriFragmentIndex] = splitFragment;
+        axiomParts[iriFragmentIndex] = splitFragment;
       }
     }
-    value = String.join(" ", split);
-    return value;
+    axiomString = String.join(" ", axiomParts);
+    return axiomString;
   }
 
   public OwlListDetails handleParticularDataProperty(IRI iri) {
@@ -1407,7 +1410,7 @@ public class OwlDataHandler {
 
     for (OWLObjectPropertyRangeAxiom axiom : ops) {
       OWLEntity rangeEntity = axiom.signature()
-          .filter(e -> !e.getIRI()
+          .filter(entity -> !entity.getIRI()
           .equals(clazz.getIRI()))
           .findFirst().get();
       LOG.debug("OwlDataHandler -> extractUsageRangeAxiom {}", rangeEntity.getIRI());
