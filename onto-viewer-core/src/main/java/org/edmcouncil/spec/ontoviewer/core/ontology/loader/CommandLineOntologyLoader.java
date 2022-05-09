@@ -5,11 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
@@ -29,11 +26,11 @@ public class CommandLineOntologyLoader {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CommandLineOntologyLoader.class);
 
-  private final CoreConfiguration coreConfiguration;
+  private final ConfigurationData configurationData;
   private final MissingImportListenerImpl missingImportListenerImpl;
 
-  public CommandLineOntologyLoader(CoreConfiguration coreConfiguration) {
-    this.coreConfiguration = coreConfiguration;
+  public CommandLineOntologyLoader(ConfigurationData configurationData) {
+    this.configurationData = configurationData;
     this.missingImportListenerImpl = new MissingImportListenerImpl();
   }
 
@@ -43,42 +40,18 @@ public class CommandLineOntologyLoader {
     setOntologyMapping(owlOntologyManager);
     
     var ontologyIrisToLoad = new HashSet<IRI>();
-
     var ontologyMappings = new HashMap<String, String>();
     
-    var ontologyLocations = coreConfiguration.getOntologyLocation();
-    for (Map.Entry<String, Set<String>> ontologyLocation : ontologyLocations.entrySet()) {
-      switch (ontologyLocation.getKey()) {
-        case ConfigKeys.ONTOLOGY_DIR: {
-          LOGGER.warn("Loading by ontology dir not implemented!");
+    var ontologyLocations = configurationData.getOntologiesConfig().getPaths();
+    for (String ontologyLocation : ontologyLocations) {
+      ontologyIrisToLoad.add(IRI.create(Path.of(ontologyLocation).toFile()));
 
-          break;
-        }
-        case ConfigKeys.ONTOLOGY_URL: {
-          var ontologyIris = ontologyLocation.getValue().stream()
-              .map(IRI::create)
-              .collect(Collectors.toSet());
-          ontologyIrisToLoad.addAll(ontologyIris);
+      ontologyMappings.put(ontologyLocation, ontologyLocation);
+    }
 
-          break;
-        }
-        case ConfigKeys.ONTOLOGY_PATH: {
-          var documentIris = ontologyLocation.getValue().stream()
-              .map(rawPath -> IRI.create(Path.of(rawPath).toFile()))
-              .collect(Collectors.toSet());
-          ontologyIrisToLoad.addAll(documentIris);
-          
-          var mappings = documentIris.stream()
-              .collect(Collectors.toMap(IRI::toString, IRI::toString));
-          ontologyMappings.putAll(mappings);
-          
-          break;
-        }
-        default:
-          LOGGER.warn("Unknown key '{}' for ontology location, value: {}",
-              ontologyLocation.getKey(),
-              ontologyLocation.getValue());
-      }
+    var ontologyUrls = configurationData.getOntologiesConfig().getUrls();
+    for (String ontologyUrl : ontologyUrls) {
+      ontologyIrisToLoad.add(IRI.create(ontologyUrl));
     }
 
     ontologyMappings.forEach((documentIri, fileIri) -> {
@@ -95,12 +68,12 @@ public class CommandLineOntologyLoader {
   }
 
   private void setOntologyMapping(OWLOntologyManager owlOntologyManager) {
-    var ontologyMapping = coreConfiguration.getOntologyMapping();
+    var ontologyMapping = configurationData.getOntologiesConfig().getOntologyMappings();
     ontologyMapping.forEach((ontologyIri, ontologyPath) ->
         owlOntologyManager.getIRIMappers().add(
             new SimpleIRIMapper(
                 IRI.create(ontologyIri),
-                IRI.create(new File(ontologyPath.toString())))));
+                IRI.create(new File(ontologyPath)))));
   }
 
   private OWLOntology loadOntologiesFromIris(OWLOntologyManager ontologyManager, Set<IRI> ontologyIrisToLoad)

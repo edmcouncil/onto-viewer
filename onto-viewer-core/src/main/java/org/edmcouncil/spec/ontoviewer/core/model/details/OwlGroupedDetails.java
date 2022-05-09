@@ -3,12 +3,8 @@ package org.edmcouncil.spec.ontoviewer.core.model.details;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlGroupedDetailsProperties;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -24,17 +20,13 @@ public class OwlGroupedDetails extends OwlDetails {
   public Map<String, Map<String, List<PropertyValue>>> getProperties() {
     return properties.getProperties();
   }
-  
-  public void setProperties(OwlGroupedDetailsProperties<PropertyValue> prop){
+
+  public void setProperties(OwlGroupedDetailsProperties<PropertyValue> prop) {
     this.properties = prop;
   }
 
   public void addProperty(String groupKey, String propertyKey, PropertyValue property) {
     properties.addProperty(groupKey, propertyKey, property);
-  }
-
-  public void sortProperties(List<StringItem> priorityList) {
-    properties.sort(priorityList);
   }
 
   @Override
@@ -64,12 +56,7 @@ public class OwlGroupedDetails extends OwlDetails {
     return true;
   }
 
-  public void sortProperties(Set<ConfigItem> groups) {
+  public void sortProperties(Map<String, List<String>> groups) {
     properties.sort(groups);
-
-  }
-
-  public void sortProperties(Set<ConfigItem> groups, CoreConfiguration cfg) {
-    properties.sort(groups, cfg);
   }
 }

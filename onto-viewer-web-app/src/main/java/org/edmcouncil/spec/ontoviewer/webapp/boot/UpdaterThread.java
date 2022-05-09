@@ -3,12 +3,11 @@ package org.edmcouncil.spec.ontoviewer.webapp.boot;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
@@ -30,12 +29,10 @@ import org.slf4j.LoggerFactory;
 public abstract class UpdaterThread extends Thread implements Thread.UncaughtExceptionHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(UpdaterThread.class);
-  private static final String interruptMessage = "Interrupts this update. New update request.";
+  private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
-  private ConfigurationService config;
   private OntologyManager ontologyManager;
   private FileSystemManager fileSystemManager;
-  private LabelProvider labelProvider;
   private TextSearcherDb textSearcherDb;
   private UpdateBlocker blocker;
   private UpdateJob job;
@@ -43,16 +40,20 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private ScopeIriOntology scopeIriOntology;
   private OntologyStatsManager ontologyStatsManager;
   private LuceneSearcher luceneSearcher;
+  private ApplicationConfigurationService applicationConfigurationService;
 
-  public UpdaterThread(ConfigurationService config, OntologyManager ontologyManager,
-      FileSystemManager fileSystemManager, LabelProvider labelProvider,
-      TextSearcherDb textSearcherDb, UpdateBlocker blocker, FiboDataHandler fiboDataHandler,
-      UpdateJob job, ScopeIriOntology scopeIriOntology, OntologyStatsManager osm,
-      LuceneSearcher luceneSearcher) {
-    this.config = config;
+  public UpdaterThread(OntologyManager ontologyManager,
+      FileSystemManager fileSystemManager,
+      TextSearcherDb textSearcherDb,
+      UpdateBlocker blocker,
+      FiboDataHandler fiboDataHandler,
+      UpdateJob job,
+      ScopeIriOntology scopeIriOntology,
+      OntologyStatsManager osm,
+      LuceneSearcher luceneSearcher,
+      ApplicationConfigurationService applicationConfigurationService) {
     this.ontologyManager = ontologyManager;
     this.fileSystemManager = fileSystemManager;
-    this.labelProvider = labelProvider;
     this.textSearcherDb = textSearcherDb;
     this.blocker = blocker;
     this.job = job;
@@ -60,6 +61,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.scopeIriOntology = scopeIriOntology;
     this.ontologyStatsManager = osm;
     this.luceneSearcher = luceneSearcher;
+    this.applicationConfigurationService = applicationConfigurationService;
     this.setName("UpdateThread-" + job.getId());
   }
 
@@ -70,7 +72,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         try {
 
           if (isInterrupt()) {
-            UpdaterOperation.setJobStatusToError(job, interruptMessage);
+            UpdaterOperation.setJobStatusToError(job, INTERRUPT_MESSAGE);
             this.interrupt();
             return;
           }
@@ -102,10 +104,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       Map<IRI, IRI> iriToPathMapping = new HashMap<>();
       String msgError = null;
 
-      LOG.info("Configuration loaded ? : {}", config != null || !config.getCoreConfiguration().isEmpty());
       LOG.info("File system manager created ? : {}", fileSystemManager != null);
 
-      CoreConfiguration viewerCoreConfiguration = config.getCoreConfiguration();
+      ConfigurationData configurationData = applicationConfigurationService.getConfigurationData();
 
       if (isInterrupt()) {
         throw new InterruptUpdate();
@@ -113,7 +114,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       //download ontology file/files
       //load ontology to var
-      AutoOntologyLoader loader = new AutoOntologyLoader(viewerCoreConfiguration, fileSystemManager);
+      AutoOntologyLoader loader = new AutoOntologyLoader(configurationData, fileSystemManager);
       try {
         var loadedOntologyData = loader.load();
         ontology = loadedOntologyData.getOntology();
@@ -179,10 +180,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       LOG.info("Application has started successfully.");
     } catch (InterruptUpdate ex) {
       LOG.error("{}", ex.getStackTrace());
-      UpdaterOperation.setJobStatusToError(job, interruptMessage);
+      UpdaterOperation.setJobStatusToError(job, INTERRUPT_MESSAGE);
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
-      return;
     } catch (NullPointerException | UnloadableImportException ex) {
       ex.printStackTrace();
       UpdaterOperation.setJobStatusToError(job, ex.getMessage());
@@ -193,7 +193,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
   @Override
   public void uncaughtException(Thread t, Throwable e) {
-
     UpdaterOperation.setJobStatusToError(job, e.getMessage());
     LOG.error(e.getStackTrace().toString());
     blocker.setUpdateNow(Boolean.FALSE);

@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
@@ -64,22 +64,24 @@ public class ModuleHandler {
       IndividualDataHandler individualDataHandler,
       LabelProvider labelProvider,
       FiboOntologyHandler fiboOntologyHandler,
-      ConfigurationService configurationService) {
+      ApplicationConfigurationService applicationConfigurationService) {
     this.ontologyManager = ontologyManager;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
     this.fiboOntologyHandler = fiboOntologyHandler;
 
     this.ontologiesToIgnoreWhenGeneratingModules =
-        configurationService.getCoreConfiguration()
-            .getOntologiesToIgnoreWhenGeneratingModules()
+        applicationConfigurationService.getConfigurationData()
+            .getOntologiesConfig()
+            .getModuleToIgnore()
             .stream()
             .map(IRI::create)
             .collect(Collectors.toSet());
 
     this.ontologyModuleIgnorePatterns =
-        configurationService.getCoreConfiguration()
-            .getOntologyModuleIgnorePatterns()
+        applicationConfigurationService.getConfigurationData()
+            .getOntologiesConfig()
+            .getModuleIgnorePatterns()
             .stream()
             .map(Pattern::compile)
             .collect(Collectors.toSet());

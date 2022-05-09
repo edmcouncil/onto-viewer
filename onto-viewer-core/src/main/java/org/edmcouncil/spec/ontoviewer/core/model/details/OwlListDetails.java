@@ -5,7 +5,6 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyV
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 
 /**
@@ -31,7 +30,7 @@ public class OwlListDetails extends OwlDetails {
     properties.addProperty(key, property);
   }
 
-  public void sortProperties(List<StringItem> priorityList) {
+  public void sortProperties(List<String> priorityList) {
     properties.sort(priorityList);
   }
 

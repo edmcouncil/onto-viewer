@@ -1,14 +1,14 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.label;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.DefaultLabelItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.LabelPriority.Priority;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.MissingLanguageItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.LabelPriority;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.MissingLanguageAction;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.UserDefaultName;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.DefaultLabelsFactory;
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
@@ -34,20 +34,21 @@ public class LabelProvider {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LabelProvider.class);
 
-  private final ConfigurationService configurationService;
+  private final ApplicationConfigurationService applicationConfigurationService;
   private final OntologyManager ontologyManager;
 
   // TODO: ?Already used? some kind of cache?
   private Map<String, String> previouslyUsedLabels;
   private boolean forceLabelLang;
   private String labelLang;
-  private boolean useLabels;
-  private MissingLanguageItem.Action missingLanguageAction;
-  private Priority groupLabelPriority;
-  private Set<DefaultLabelItem> defaultUserLabels;
+  private boolean shouldDisplayLabel;
+  private MissingLanguageAction missingLanguageAction;
+  private LabelPriority labelPriority;
+  private List<UserDefaultName> userDefaultNames;
 
-  public LabelProvider(ConfigurationService configurationService, OntologyManager ontologyManager) {
-    this.configurationService = configurationService;
+  public LabelProvider(ApplicationConfigurationService applicationConfigurationService,
+      OntologyManager ontologyManager) {
+    this.applicationConfigurationService = applicationConfigurationService;
     this.ontologyManager = ontologyManager;
 
     this.previouslyUsedLabels = getDefaultLabels();
@@ -82,9 +83,8 @@ public class LabelProvider {
     for (Map.Entry<IRI, String> entry : defAppLabels.getLabels().entrySet()) {
       tmp.put(entry.getKey().toString(), entry.getValue());
     }
-    if (useLabels && groupLabelPriority == Priority.USER_DEFINED) {
-      defaultUserLabels.forEach(defaultLabel ->
-          tmp.put(defaultLabel.getIri(), defaultLabel.getLabel()));
+    if (shouldDisplayLabel && labelPriority == LabelPriority.USER_DEFINED) {
+      userDefaultNames.forEach(defaultLabel -> tmp.put(defaultLabel.getId(), defaultLabel.getName()));
     }
     return tmp;
   }
@@ -96,7 +96,7 @@ public class LabelProvider {
 
     OWLDataFactory factory = new OWLDataFactoryImpl();
     Map<String, String> labels = new HashMap<>();
-    if (useLabels) {
+    if (shouldDisplayLabel) {
       var ontologies = ontologyManager.getOntologyWithImports();
       EntitySearcher.getAnnotations(entity, ontologies, factory.getRDFSLabel())
           .filter(annotation -> (annotation.getValue().isLiteral()))
@@ -109,10 +109,10 @@ public class LabelProvider {
           });
     }
     String labelResult = null;
-    if (groupLabelPriority == Priority.USER_DEFINED) {
-      for (DefaultLabelItem defaultUserLabel : defaultUserLabels) {
-        if (defaultUserLabel.getIri().equals(entity.getIRI().toString())) {
-          labelResult = defaultUserLabel.getLabel();
+    if (labelPriority == LabelPriority.USER_DEFINED) {
+      for (UserDefaultName userDefaultName : userDefaultNames) {
+        if (userDefaultName.getId().equals(entity.getIRI().toString())) {
+          labelResult = userDefaultName.getName();
         }
       }
     }
@@ -134,13 +134,14 @@ public class LabelProvider {
   }
 
   private void loadConfig() {
-    var applicationConfiguration = configurationService.getCoreConfiguration();
+    var applicationConfiguration =
+        applicationConfigurationService.getConfigurationData().getLabelConfig();
     this.forceLabelLang = applicationConfiguration.isForceLabelLang();
     this.labelLang = applicationConfiguration.getLabelLang();
-    this.useLabels = applicationConfiguration.useLabels();
+    this.shouldDisplayLabel = applicationConfiguration.isDisplayLabel();
     this.missingLanguageAction = applicationConfiguration.getMissingLanguageAction();
-    this.groupLabelPriority = applicationConfiguration.getGroupLabelPriority();
-    this.defaultUserLabels = applicationConfiguration.getDefaultLabels();
+    this.labelPriority = applicationConfiguration.getLabelPriority();
+    this.userDefaultNames = applicationConfiguration.getDefaultNames();
   }
 
   private String getTheRightLabel(Map<String, String> labels, IRI entityIri) {
@@ -153,7 +154,7 @@ public class LabelProvider {
     if (optionalLab.isEmpty()) {
       LOGGER.debug("[Label Extractor]: Entity has more than one label but noone have a language");
 
-      if (missingLanguageAction == MissingLanguageItem.Action.FIRST) {
+      if (missingLanguageAction == MissingLanguageAction.FIRST) {
         String missingLab = labels.entrySet()
             .stream()
             .findFirst()
@@ -161,7 +162,7 @@ public class LabelProvider {
         LOGGER.debug("[Label Extractor]: Return an first element of label list: {}", missingLab);
         return missingLab;
 
-      } else if (missingLanguageAction == MissingLanguageItem.Action.FRAGMENT) {
+      } else if (missingLanguageAction == MissingLanguageAction.FRAGMENT) {
 
         return StringUtils.getFragment(entityIri);
       }

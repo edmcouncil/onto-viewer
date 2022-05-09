@@ -43,10 +43,10 @@ import org.apache.lucene.search.highlight.QueryScorer;
 import org.apache.lucene.search.highlight.SimpleSpanFragmenter;
 import org.apache.lucene.store.FSDirectory;
 import org.eclipse.rdf4j.model.vocabulary.RDFS;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.exception.RequestHandlingException;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
@@ -83,7 +83,7 @@ public class LuceneSearcher {
   private final FileSystemManager fileSystemManager;
   private final OntologyManager ontologyManager;
   private final OWLDataFactory dataFactory;
-  private final ConfigurationService configurationService;
+  private final ApplicationConfigurationService applicationConfigurationService;
 
   private int fuzzyDistance;
 
@@ -99,13 +99,15 @@ public class LuceneSearcher {
   private Map<String, OWLAnnotationProperty> fieldNameToAnnotationPropertyMap = new HashMap<>();
   private String rdfsLabelFieldName;
 
-  public LuceneSearcher(AppProperties appProperties, FileSystemManager fileSystemManager,
-      OntologyManager ontologyManager, ConfigurationService configurationService) {
+  public LuceneSearcher(AppProperties appProperties,
+      FileSystemManager fileSystemManager,
+      OntologyManager ontologyManager,
+      ApplicationConfigurationService applicationConfigurationService) {
     this.appProperties = appProperties;
     this.fileSystemManager = fileSystemManager;
     this.ontologyManager = ontologyManager;
     this.dataFactory = OWLManager.getOWLDataFactory();
-    this.configurationService = configurationService;
+    this.applicationConfigurationService = applicationConfigurationService;
 
     this.fuzzyDistance = getTextSearcherConfig().getFuzzyDistance();
     if (this.fuzzyDistance == -1) {
@@ -178,25 +180,15 @@ public class LuceneSearcher {
 
     rdfsLabelFieldName = getFieldName(dataFactory.getRDFSLabel());
 
-    boolean shouldReindexOnStart;
+    boolean shouldReindexOnStart = getTextSearcherConfig().isReindexOnStart();;
     try {
-      if (getTextSearcherConfig().isReindexOnStart() != null) {
-        shouldReindexOnStart = getTextSearcherConfig().isReindexOnStart();
-      } else {
-        shouldReindexOnStart = Boolean.parseBoolean(getSearchProperty("reindexOnStart", false));
-        LOGGER.info(
-            "'reindexOnStart' not set in the configuration. Using application property value '{}'.",
-            shouldReindexOnStart);
-      }
       if (shouldReindexOnStart) {
         LOGGER.info("Search configuration property 'reindexOnStart' is on. "
             + "Deleting the old index directory.");
         FileUtils.deleteDirectory(indexPath.toFile());
       }
 
-      var indexWriterConfig =
-          new IndexWriterConfig(analyzer)
-              .setOpenMode(OpenMode.CREATE_OR_APPEND);
+      var indexWriterConfig = new IndexWriterConfig(analyzer).setOpenMode(OpenMode.CREATE_OR_APPEND);
 
       try (
           var indexDirectory = FSDirectory.open(indexPath);
@@ -431,7 +423,7 @@ public class LuceneSearcher {
     return appProperties.getSearch().getOrDefault(name, defaultValue).toString();
   }
 
-  private TextSearcherConfig getTextSearcherConfig() {
-    return configurationService.getCoreConfiguration().getTextSearcherConfig();
+  private SearchConfig getTextSearcherConfig() {
+    return applicationConfigurationService.getConfigurationData().getSearchConfig();
   }
 }

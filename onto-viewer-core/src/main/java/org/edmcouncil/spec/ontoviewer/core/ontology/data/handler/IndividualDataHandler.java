@@ -3,7 +3,7 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
@@ -52,7 +52,7 @@ public class IndividualDataHandler {
         OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
         s.setType(OwlType.INSTANCES);
         String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual);
-        s.setValue(new PairImpl(label, namedIndividual.getIRI().toString()));
+        s.setValue(new Pair(label, namedIndividual.getIRI().toString()));
         result.addProperty(instanceKey, s);
         namedIndividual.getEntityType();
     }

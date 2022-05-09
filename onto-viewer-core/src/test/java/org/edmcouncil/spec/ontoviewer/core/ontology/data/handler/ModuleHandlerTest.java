@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.Map;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFileBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.BaseTest;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.AppFiboMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturityLevel;
@@ -20,7 +21,7 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-class ModuleHandlerTest {
+class ModuleHandlerTest extends BaseTest {
 
   private static final String ROOT_IRI = "http://www.example.com/modules#";
   private static final FiboMaturityLevel DEV_MATURITY_LEVEL = new AppFiboMaturityLevel("dev");
@@ -76,7 +77,8 @@ class ModuleHandlerTest {
   }
 
   private ModuleHandler prepareModuleHandler(String ontologyPath) {
-    var configurationService = new MemoryBasedConfigurationService();
+    var configurationService = new YamlFileBasedConfigurationService(prepareFileSystem());
+    configurationService.init();
 
     var ontologyManager = getOntologyManager(ontologyPath);
     ontologyManager.setIriToPathMapping(
@@ -88,8 +90,7 @@ class ModuleHandlerTest {
     var labelProvider = new LabelProvider(configurationService, ontologyManager);
     var individualDataHandler = new IndividualDataHandler(labelProvider);
     var scopeIriOntology = new ScopeIriOntology();
-    var annotationsDataHandler = new AnnotationsDataHandler(
-        owlDataExtractor, customDataFactory, configurationService, scopeIriOntology);
+    var annotationsDataHandler = new AnnotationsDataHandler(owlDataExtractor, customDataFactory, scopeIriOntology);
     var fiboOntologyHandler = new FiboOntologyHandler(ontologyManager, labelProvider, annotationsDataHandler);
 
     return new ModuleHandler(ontologyManager,

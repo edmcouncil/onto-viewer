@@ -2,7 +2,7 @@ package org.edmcouncil.spec.ontoviewer.webapp.controller.view;
 
 import java.util.Arrays;
 import java.util.List;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
@@ -29,18 +29,18 @@ public class EntityController {
   private final EntityService entityService;
   private final ModelBuilderFactory modelBuilderFactory;
   private final ModuleHandler moduleHandler;
-  private final ConfigurationService configurationService;
+  private final ApplicationConfigurationService applicationConfigurationService;
 
   public EntityController(UpdateBlocker updateBlocker,
       EntityService entityService,
       ModelBuilderFactory modelBuilderFactory,
       ModuleHandler moduleHandler,
-      ConfigurationService configurationService) {
+      ApplicationConfigurationService applicationConfigurationService) {
     this.updateBlocker = updateBlocker;
     this.entityService = entityService;
     this.modelBuilderFactory = modelBuilderFactory;
     this.moduleHandler = moduleHandler;
-    this.configurationService = configurationService;
+    this.applicationConfigurationService = applicationConfigurationService;
   }
 
   @GetMapping("entity")
@@ -56,7 +56,7 @@ public class EntityController {
     q.setValue(iri);
     ModelBuilder modelBuilder = modelBuilderFactory.getInstance(model);
     List<FiboModule> modules = moduleHandler.getModules();
-    boolean isGrouped = configurationService.getCoreConfiguration().isGrouped();
+    boolean isGrouped = applicationConfigurationService.hasConfiguredGroups();
     long startTimestamp = System.currentTimeMillis();
     SearcherResult result = null;
 

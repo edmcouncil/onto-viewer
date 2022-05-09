@@ -6,14 +6,10 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
 import org.edmcouncil.spec.ontoviewer.core.comparator.ComparatorWithPriority;
 
 /**
@@ -59,25 +55,6 @@ public class OwlGroupedDetailsProperties<T> {
     return properties;
   }
 
-  //TODO: Check where we used that and do something with this.. this is very ugly..
-  public void sort(List<StringItem> priotityList) {
-
-    /*Comparator<String> comparator = ComparatorWithPriority.get(priotityList);
-    SortedSet<String> keys = new TreeSet<>(comparator);
-    keys.addAll(properties.keySet());
-
-    Map<String, List<T>> result = new LinkedHashMap<>();
-    keys.forEach((key) -> {
-      result.put(key, properties.get(key));
-    });
-    properties = result;*/
-  }
-
-  //TODO: The same as up
-  public void sort(Set<ConfigItem> groups) {
-
-  }
-
   @Override
   public int hashCode() {
     int hash = 5;
@@ -107,22 +84,20 @@ public class OwlGroupedDetailsProperties<T> {
     return true;
   }
 
-  public void sort(Set<ConfigItem> groups, CoreConfiguration cfg) {
-
+  public void sort(Map<String, List<String>> groups) {
     Map<String, Map<String, List<T>>> sortedResults = new LinkedHashMap<>();
 
     Map<String, List<T>> others = properties.get("other");
 
-    for (ConfigItem g : groups) {
-      GroupsItem group = (GroupsItem) g;
-      Map<String, List<T>> prop = properties.get(group.getName());
+    for (Entry<String, List<String>> groupEntry : groups.entrySet()) {
+      Map<String, List<T>> prop = properties.get(groupEntry.getKey());
       if (prop == null) {
         continue;
       }
 
-      Map<String, List<T>> newprop = new LinkedHashMap();
+      Map<String, List<T>> newprop = new LinkedHashMap<>();
 
-      List<StringItem> priotityList = new LinkedList(group.getElements());
+      List<String> priotityList = new LinkedList<>(groupEntry.getValue());
       Comparator<String> comparator = ComparatorWithPriority.get(priotityList);
       SortedSet<String> keys = new TreeSet<>(comparator);
       keys.addAll(prop.keySet());
@@ -131,7 +106,7 @@ public class OwlGroupedDetailsProperties<T> {
         newprop.put(key, prop.get(key));
       });
 
-      sortedResults.put(group.getName(), newprop);
+      sortedResults.put(groupEntry.getKey(), newprop);
     }
 
     if (others != null) {

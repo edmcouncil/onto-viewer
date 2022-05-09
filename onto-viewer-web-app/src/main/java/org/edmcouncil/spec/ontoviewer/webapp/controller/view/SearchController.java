@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
@@ -48,7 +48,7 @@ public class SearchController {
   @Autowired
   private OntologySearcherService ontologySearcher;
   @Autowired
-  private ConfigurationService config;
+  private ApplicationConfigurationService applicationConfigurationService;
   @Autowired
   private UpdateBlocker blocker;
   @Autowired
@@ -67,9 +67,9 @@ public class SearchController {
 
   @GetMapping
   public String search(@RequestParam("query") String query,
-          Model model,
-          @RequestParam(value = "max", required = false, defaultValue = "25") Integer max,
-          @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+      Model model,
+      @RequestParam(value = "max", required = false, defaultValue = "25") Integer max,
+      @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
       ModelBuilder mb = new ModelBuilder(model);
@@ -82,7 +82,7 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
-    boolean isGrouped = config.getCoreConfiguration().isGrouped();
+    boolean isGrouped = applicationConfigurationService.hasConfiguredGroups();
     long startTimestamp = System.currentTimeMillis();
     SearcherResult result = null;
     try {
@@ -91,14 +91,16 @@ public class SearchController {
         result = ontologySearcher.search(query, 0);
 
         long endTimestamp = System.currentTimeMillis();
-        LOG.info("URL detected: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp, result);
+        LOG.info("URL detected: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp,
+            result);
 
         modelBuilder.emptyQuery();
       } else {
         modelBuilder.setQuery(query);
         result = textSearchService.search(query, max, page);
         long endTimestamp = System.currentTimeMillis();
-        LOG.info("String detected: '{}' (query time: '{}' ms), max: '{}', page '{}', result '{}'", query, endTimestamp - startTimestamp, max, page, result);
+        LOG.info("String detected: '{}' (query time: '{}' ms), max: '{}', page '{}', result '{}'", query,
+            endTimestamp - startTimestamp, max, page, result);
       }
     } catch (ViewerException ex) {
       LOG.info("Handle ViewerException. Message: '{}'", ex.getMessage());
@@ -109,9 +111,9 @@ public class SearchController {
     }
 
     modelBuilder
-            .setResult(result)
-            .isGrouped(isGrouped)
-            .modelTree(modules);
+        .setResult(result)
+        .isGrouped(isGrouped)
+        .modelTree(modules);
 
     return "search";
   }

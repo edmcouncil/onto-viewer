@@ -9,12 +9,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.SearcherField;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.searcher.TextSearcherConfig;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -52,28 +52,31 @@ public class TextSearcherDb {
   private final Double RESULT_THRESHOLD = 0.0d;
 
   private final OntologyManager ontologyManager;
-  private final ConfigurationService appConfig;
   private final LabelProvider labelProvider;
   private final OwlDataHandler owlDataHandler;
+  private final ApplicationConfigurationService applicationConfigurationService;
  
-  private TextSearcherConfig conf;
+  private TextSearcherConfig textSearcherConfig;
 
   @Inject
-  public TextSearcherDb(OntologyManager ontologyManager, ConfigurationService appConfig,
-      LabelProvider labelProvider, OwlDataHandler owlDataHandler) {
+  public TextSearcherDb(OntologyManager ontologyManager,
+      ApplicationConfigurationService applicationConfigurationService,
+      LabelProvider labelProvider,
+      OwlDataHandler owlDataHandler) {
     this.ontologyManager = ontologyManager;
 
-    this.appConfig = appConfig;
+    this.applicationConfigurationService = applicationConfigurationService;
     this.labelProvider = labelProvider;
     this.owlDataHandler = owlDataHandler;
   }
 
   @PostConstruct
   public void init() {
-    this.conf = checkAndLoadConfig(appConfig.getCoreConfiguration().getTextSearcherConfig());
+    var searchConfig = applicationConfigurationService.getConfigurationData().getSearchConfig();
+    this.textSearcherConfig = checkAndLoadConfig(searchConfig);
   }
 
-  public TextSearcherConfig checkAndLoadConfig(TextSearcherConfig config) {
+  public TextSearcherConfig checkAndLoadConfig(SearchConfig config) {
     if (config == null) {
       return loadDefaultConfiguration();
     } else {
@@ -133,13 +136,14 @@ public class TextSearcherDb {
     TextDbItem tdi = new TextDbItem();
     annotations.forEach(annotation -> {
       String propertyIri = annotation.getProperty().getIRI().toString();
-      if (conf.hasHintFieldWithIri(propertyIri) || conf.hasSearchFieldWithIri(propertyIri)) {
+      if (textSearcherConfig.hasHintFieldWithIri(propertyIri) || textSearcherConfig.hasSearchFieldWithIri(propertyIri)) {
         LOG.trace("Find property: {}", propertyIri);
         Optional<OWLLiteral> literalOptional = annotation.annotationValue().literalValue();
         if (literalOptional.isPresent()) {
           String lang = literalOptional.get().getLang();
-          if (appConfig.getCoreConfiguration().isForceLabelLang()) {
-            if (lang == null || !lang.equals(appConfig.getCoreConfiguration().getLabelLang())) {
+          if (applicationConfigurationService.getConfigurationData().getLabelConfig().isForceLabelLang()) {
+            if (lang == null ||
+                !lang.equals(applicationConfigurationService.getConfigurationData().getLabelConfig().getLabelLang())) {
               return;
             }
           }
@@ -162,8 +166,8 @@ public class TextSearcherDb {
     List<HintItem> result = new LinkedList<>();
 
     for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
-      Double relevancy = record.getValue().computeHintRelevancy(text, conf.getHintFields());
-      if (relevancy > conf.getHintThreshold()) {
+      Double relevancy = record.getValue().computeHintRelevancy(text, textSearcherConfig.getHintFields());
+      if (relevancy > textSearcherConfig.getHintThreshold()) {
         HintItem hi = new HintItem();
         hi.setIri(record.getKey());
         hi.setRelevancy(relevancy);
@@ -178,11 +182,11 @@ public class TextSearcherDb {
     if (result.isEmpty()) {
       for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
 
-        double distance = record.getValue().computeLevensteinDistance(text, conf.getHintFields());
+        double distance = record.getValue().computeLevensteinDistance(text, textSearcherConfig.getHintFields());
         LOG.debug("TextSearcherDb -> Distance {} between {} and {}", distance, text,
             record.getKey());
 
-        if (distance <= conf.getHintMaxLevensteinDistance() && distance > 0.0d) {
+        if (distance <= textSearcherConfig.getHintMaxLevensteinDistance() && distance > 0.0d) {
 
           HintItem hi = new HintItem();
           hi.setIri(record.getKey());
@@ -235,8 +239,8 @@ public class TextSearcherDb {
     List<SearchItem> listResult = new LinkedList<>();
 
     for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
-      Double relevancy = record.getValue().computeSearchRelevancy(text, conf.getSearchFields());
-      if (relevancy > conf.getSearchThreshold()) {
+      Double relevancy = record.getValue().computeSearchRelevancy(text, textSearcherConfig.getSearchFields());
+      if (relevancy > textSearcherConfig.getSearchThreshold()) {
         SearchItem si = getPreparedSearchResultItem(record, relevancy);        
         listResult.add(si);
       }
@@ -245,8 +249,8 @@ public class TextSearcherDb {
     if (listResult.isEmpty()) {
       for (Map.Entry<String, TextDbItem> record : db.entrySet()) {
         Double relevancy = record.getValue()
-            .computeLevensteinDistance(text, conf.getSearchFields());
-        if (relevancy <= conf.getSearchMaxLevensteinDistance()) {
+            .computeLevensteinDistance(text, textSearcherConfig.getSearchFields());
+        if (relevancy <= textSearcherConfig.getSearchMaxLevensteinDistance()) {
           SearchItem si = getPreparedSearchResultItem(record, relevancy);
           listResult.add(si);
         }
@@ -305,7 +309,7 @@ public class TextSearcherDb {
   private String getDescription(Map.Entry<String, TextDbItem> record) {
     String description = null;
     LOG.debug("Look at record description: {}", record.getKey());
-    for (String key : conf.getSearchDescriptions()) {
+    for (String key : textSearcherConfig.getSearchDescriptions()) {
       description = getValue(record.getKey(), key);
       LOG.debug("Description for property {} : {}", key, description);
       if (description != null) {
@@ -316,7 +320,7 @@ public class TextSearcherDb {
   }
 
   private String getValue(String recordID, String recordProperty) {
-    if (!conf.hasSearchFieldWithIri(recordProperty) && !db.containsKey(recordID)) {
+    if (!textSearcherConfig.hasSearchFieldWithIri(recordProperty) && !db.containsKey(recordID)) {
       LOG.debug("Data doesn't present in structures.");
       return null;
     }
@@ -330,39 +334,39 @@ public class TextSearcherDb {
     return null;
   }
 
-  private TextSearcherConfig loadConfiguration(TextSearcherConfig tsc) {
-
-    if (!tsc.isCompleted()) {
-      if (tsc.getHintFields().isEmpty()) {
-        SearcherField sf = new SearcherField();
-        sf.setIri(LABEL_IRI);
-        tsc.addHintField(sf);
-      }
-      if (tsc.getSearchFields().isEmpty()) {
-        SearcherField sf = new SearcherField();
-        sf.setIri(LABEL_IRI);
-        tsc.addSearchField(sf);
-        sf = new SearcherField();
-        sf.setIri(DEFINITION_IRI);
-        tsc.addSearchField(sf);
-
-        sf = new SearcherField();
-        sf.setIri(IRI_FRAGMENT);
-        tsc.addSearchField(sf);
-
-      }
-
-      if (tsc.getHintThreshold() == null) {
-        tsc.setHintThreshold(HINT_THRESHOLD);
-      }
-      if (tsc.getSearchThreshold() == null) {
-        tsc.setHintThreshold(RESULT_THRESHOLD);
-      }
-      if (tsc.getSearchDescriptions().isEmpty()) {
-        tsc.addSearchDescription(DEFINITION_IRI);
-      }
-    }
-    return tsc;
+  private TextSearcherConfig loadConfiguration(SearchConfig searchConfig) {
+    TextSearcherConfig textSearcherConfig = new TextSearcherConfig();
+//    if (!textSearcherConfig.isCompleted()) {
+//      if (textSearcherConfig.getHintFields().isEmpty()) {
+//        SearcherField sf = new SearcherField();
+//        sf.setIri(LABEL_IRI);
+//        searchConfig.addHintField(sf);
+//      }
+//      if (searchConfig.getSearchFields().isEmpty()) {
+//        SearcherField sf = new SearcherField();
+//        sf.setIri(LABEL_IRI);
+//        searchConfig.addSearchField(sf);
+//        sf = new SearcherField();
+//        sf.setIri(DEFINITION_IRI);
+//        searchConfig.addSearchField(sf);
+//
+//        sf = new SearcherField();
+//        sf.setIri(IRI_FRAGMENT);
+//        searchConfig.addSearchField(sf);
+//
+//      }
+//
+//      if (searchConfig.getHintThreshold() == null) {
+//        searchConfig.setHintThreshold(HINT_THRESHOLD);
+//      }
+//      if (searchConfig.getSearchThreshold() == null) {
+//        searchConfig.setHintThreshold(RESULT_THRESHOLD);
+//      }
+//      if (searchConfig.getSearchDescriptions().isEmpty()) {
+//        searchConfig.addSearchDescription(DEFINITION_IRI);
+//      }
+//    }
+    return textSearcherConfig;
   }
 
   private TextSearcherConfig loadDefaultConfiguration() {

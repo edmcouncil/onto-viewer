@@ -1,12 +1,12 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.handlers;
 
-import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.INHERITED_DESCRIPTIONS_LABEL;
-import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.OWN_DESCRIPTIONS_LABEL;
 import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.CLASS;
 import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.DATATYPE;
 import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.DATA_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.INDIVIDUAL;
 import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.OBJECT_PROPERTY;
+import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.INHERITED_DESCRIPTIONS_LABEL;
+import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.OWN_DESCRIPTIONS_LABEL;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 import java.util.ArrayList;
@@ -20,22 +20,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.GroupsPropertyKey;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
+import org.edmcouncil.spec.ontoviewer.core.mapping.EntityType;
+import org.edmcouncil.spec.ontoviewer.core.mapping.model.EntityData;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
-import org.edmcouncil.spec.ontoviewer.core.mapping.model.EntityData;
-import org.edmcouncil.spec.ontoviewer.core.mapping.EntityType;
-import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.slf4j.Logger;
@@ -52,14 +50,14 @@ public class OntologyTableDataExtractor {
       Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
   private static final String UNKNOWN_LABEL = "UNKNOWN";
 
-  private final ConfigurationService configurationService;
+  private final ApplicationConfigurationService applicationConfigurationService;
   private final DetailsManager detailsManager;
   private final LabelProvider labelProvider;
 
-  public OntologyTableDataExtractor(ConfigurationService configurationService,
+  public OntologyTableDataExtractor(ApplicationConfigurationService applicationConfigurationService,
       DetailsManager detailsManager,
       LabelProvider labelProvider) {
-    this.configurationService = configurationService;
+    this.applicationConfigurationService = applicationConfigurationService;
     this.detailsManager = detailsManager;
     this.labelProvider = labelProvider;
   }
@@ -103,9 +101,12 @@ public class OntologyTableDataExtractor {
   private List<EntityData> getEntities(
       Stream<? extends OWLEntity> entities,
       EntityType type) {
-    var filterPattern = configurationService.getCoreConfiguration()
-        .getSingleStringValue(OptionDefinition.FILTER_PATTERN.argName())
-        .orElse("");
+    var filterPattern = applicationConfigurationService.getConfigurationData()
+        .getToolkitConfig()
+        .getFilterPattern();
+    if (filterPattern == null) {
+      filterPattern = "";
+    }
     var filterPatternRegex = Pattern.compile(filterPattern);
 
     var notFoundEntitiesCounter = new AtomicInteger(0);

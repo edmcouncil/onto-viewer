@@ -1,0 +1,11 @@
+ontologies:
+  source:
+    - url: http://example.com
+    - path: foo/bar/my_dir
+    - path: foo/my_ontology.rdf
+  catalog_path:
+    - ontologies/catalog-v001.xml
+  module_ignore_pattern:
+    - '^(About|Metadata).*'
+  module_to_ignore:
+    - 'http://example.com/ontology'

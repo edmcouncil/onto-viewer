@@ -1,0 +1,14 @@
+search_config:
+  search_descriptions:
+    - http://www.w3.org/2004/02/skos/core#definition
+    - http://purl.org/dc/terms/abstract
+    - http://purl.org/dc/terms/concrete
+  fuzzy_distance: 5
+  reindex_on_start: false
+  find_properties:
+    - label: RDFS Label
+      identifier: rdfs_label
+      iri: http://www.w3.org/2000/01/rdf-schema#label
+    - label: SKOS Definition
+      identifier: skos_definition
+      iri: http://www.w3.org/2004/02/skos/core#definition
