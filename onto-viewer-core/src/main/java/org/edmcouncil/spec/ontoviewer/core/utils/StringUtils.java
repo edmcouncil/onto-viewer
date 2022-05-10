@@ -1,5 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.IRI;
 
@@ -7,6 +9,15 @@ import org.semanticweb.owlapi.model.IRI;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class StringUtils {
+
+  private static final Pattern IRI_FRAGMENT_AFTER_HASH_PATTERN
+      = Pattern.compile("[#][A-Za-z0-9]+");
+
+  private static final Pattern IRI_FRAGMENT_BEFORE_HASH_PATTERN
+      = Pattern.compile("[/][A-Za-z0-9]+[#]");
+
+  private static final Pattern IRI_FRAGMENT_PATTERN
+      = Pattern.compile("[A-Za-z0-9]+");
 
   private static final String AXIOM_PATTERN = ViewerIdentifierFactory.createId(
       ViewerIdentifierFactory.Type.axiom,
@@ -17,11 +28,21 @@ public class StringUtils {
     if (iriString.contains(AXIOM_PATTERN)) {
       return iriString.substring(iriString.lastIndexOf(".") + 1);
     }
-    String iriFragment = iri.getFragment();
-    if (iriFragment.isEmpty() || iriFragment.isBlank()) {
-      return iriString.substring(iriString.lastIndexOf("/") + 1).replace("#", "");
+    String result = null;
+    if (iriString.endsWith("#")) {
+      Matcher matcher = IRI_FRAGMENT_BEFORE_HASH_PATTERN.matcher(iriString);
+      while (matcher.find()) {
+        String match = matcher.group();
+        result = IRI_FRAGMENT_PATTERN.matcher(match).group();
+      }
+    } else {
+      Matcher matcher = IRI_FRAGMENT_AFTER_HASH_PATTERN.matcher(iriString);
+      while (matcher.find()) {
+        String match = matcher.group();
+        result = IRI_FRAGMENT_PATTERN.matcher(match).group();
+      }
     }
-    return iriFragment;
+    return result;
   }
 
   public static String getFragment(String iri) {
