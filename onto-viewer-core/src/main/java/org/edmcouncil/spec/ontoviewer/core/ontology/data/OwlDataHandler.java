@@ -602,8 +602,10 @@ public class OwlDataHandler {
       int startCountingArgs) {
     String argPattern = "/arg%s/";
     String[] splitted = renderedVal.split(" ");
-    String openingParenthesis = "(";
-    String closingParenthesis = ")";
+    String openingBrackets = "(";
+    String closingBrackets = ")";
+    String openingCurlyBrackets = "{";
+    String closingCurlyBrackets = "}";
     String comma = ",";
     Iterator<OWLEntity> iterator = axiom.signature().iterator();
     LOG.trace("Rendered Val: {}", renderedVal);
@@ -621,25 +623,49 @@ public class OwlDataHandler {
         String string = splitted[fixedIValue].trim();
         LOG.trace("Splitted string i: '{}', str: '{}'", fixedIValue, string);
         //more than 1 because when it's 1, it's a number
-        Boolean hasOpeningParenthesis = string.length() > 1 ? string.contains("(") : false;
-        int countOpeningParenthesis = StringUtils.countLetter(string, '(');
-        Boolean hasClosingParenthesis =
-            string.length() > 1 ? string.endsWith(closingParenthesis) : false;
-        int countClosingParenthesis = StringUtils.countLetter(string, ')');
+        Boolean hasOpeningBrackets = string.length() > 1 ? string.contains("(") : false;
+        int countOpeningBrackets = StringUtils.countLetter(string, '(');
+        
+        Boolean hasClosingBrackets =
+            string.length() > 1 ? string.endsWith(closingBrackets) : false;
+        int countClosingBrackets = StringUtils.countLetter(string, ')');
+        
+        Boolean hasOpeningCurlyBrackets = string.length() > 1 ? string.contains("{") : false;
+        int countOpeningCurlyBrackets = StringUtils.countLetter(string, '{');
+        
+         Boolean hasClosingCurlyBrackets = string.length() > 1 ? string.contains("}") : false;
+        int countClosingCurlyBrackets = StringUtils.countLetter(string, '}');
+        
         Boolean hasComma = string.length() > 1 ? string.contains(",") : false;
         int countComma = StringUtils.countLetter(string, ',');
-        if (hasOpeningParenthesis) {
-          String newString = string.substring(countOpeningParenthesis);
+        
+        if (hasOpeningBrackets) {
+          String newString = string.substring(countOpeningBrackets);
           LOG.trace("Old string: '{}', new string '{}', count opening parenthesis '{}'", string,
               newString,
-              countOpeningParenthesis);
+              countOpeningBrackets);
           string = newString;
         }
-        if (hasClosingParenthesis) {
-          String newString = string.substring(0, string.length() - countClosingParenthesis);
+        if (hasClosingBrackets) {
+          String newString = string.substring(0, string.length() - countClosingBrackets);
           LOG.trace("Old string: '{}', new string '{}', count closing parenthesis '{}'", string,
               newString,
-              countClosingParenthesis);
+              countClosingBrackets);
+
+          string = newString;
+        }
+        if (hasOpeningCurlyBrackets) {
+          String newString = string.substring(countOpeningCurlyBrackets);
+          LOG.trace("Old string: '{}', new string '{}', count opening curly brackets '{}'", string,
+              newString,
+              countOpeningCurlyBrackets);
+          string = newString;
+        }
+        if (hasClosingCurlyBrackets) {
+          String newString = string.substring(0, string.length() - countClosingCurlyBrackets);
+          LOG.trace("Old string: '{}', new string '{}', count closing curly brackets '{}'", string,
+              newString,
+              countClosingCurlyBrackets);
 
           string = newString;
         }
@@ -656,14 +682,24 @@ public class OwlDataHandler {
           String generatedKey = String.format(argPattern, countingArg);
           key = generatedKey;
           String textToReplace = generatedKey;
-          if (hasOpeningParenthesis) {
+          if (hasOpeningBrackets) {
             String prefix = String.join("",
-                Collections.nCopies(countOpeningParenthesis, openingParenthesis));
+                Collections.nCopies(countOpeningBrackets, openingBrackets));
             textToReplace = prefix + textToReplace;
           }
-          if (hasClosingParenthesis) {
+          if (hasClosingBrackets) {
             String postfix = String.join("",
-                Collections.nCopies(countClosingParenthesis, closingParenthesis));
+                Collections.nCopies(countClosingBrackets, closingBrackets));
+            textToReplace = textToReplace + postfix;
+          }
+               if (hasOpeningCurlyBrackets) {
+            String prefix = String.join("",
+                Collections.nCopies(countOpeningCurlyBrackets, openingCurlyBrackets));
+            textToReplace = prefix + textToReplace;
+          }
+          if (hasClosingCurlyBrackets) {
+            String postfix = String.join("",
+                Collections.nCopies(countClosingCurlyBrackets, closingCurlyBrackets));
             textToReplace = textToReplace + postfix;
           }
           if (hasComma) {
@@ -675,7 +711,7 @@ public class OwlDataHandler {
           String eIri = next.getIRI().toString();
 
           parseToIri(argPattern, opv, key, splitted, fixedIValue, generatedKey, eIri,
-              countOpeningParenthesis, countClosingParenthesis, countComma);
+              countOpeningBrackets, countClosingBrackets, countComma);
         }
         opv.setLastId(countingArg);
       }
