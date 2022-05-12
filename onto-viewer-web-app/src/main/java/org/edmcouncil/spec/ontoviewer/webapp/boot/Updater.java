@@ -8,7 +8,6 @@ import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
-import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextSearcherDb;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
@@ -29,8 +28,6 @@ public class Updater {
   private OntologyManager ontologyManager;
   @Autowired
   private FileSystemManager fileSystemManager;
-  @Autowired
-  private TextSearcherDb textSearcherDb;
   @Autowired
   private UpdateBlocker blocker;
   @Autowired
@@ -61,7 +58,6 @@ public class Updater {
     UpdaterThread t = new UpdaterThread(
         ontologyManager,
         fileSystemManager,
-        textSearcherDb,
         blocker,
         fiboDataHandler,
         job,

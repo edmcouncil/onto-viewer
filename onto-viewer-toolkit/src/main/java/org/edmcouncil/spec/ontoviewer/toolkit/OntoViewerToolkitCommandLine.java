@@ -59,7 +59,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       StandardEnvironment environment,
       ApplicationConfigProperties applicationConfigProperties) {
     this.applicationConfigurationService = applicationConfigurationService;
-    // We don't need default paths configuration in OV Toolkit
+    // We don't need the default paths configuration in OV Toolkit
     applicationConfigurationService.getConfigurationData().getOntologiesConfig().getPaths().clear();
 
     this.ontologyManager = ontologyManager;
@@ -128,7 +128,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private void populateConfiguration(CommandLineOptions commandLineOptions) {
     var configurationData = applicationConfigurationService.getConfigurationData();
-    
+
     var ontologyMappingOption = commandLineOptions.getOption(ONTOLOGY_MAPPING);
     if (ontologyMappingOption.isPresent()) {
       var ontologyMappingPath = ontologyMappingOption.get();

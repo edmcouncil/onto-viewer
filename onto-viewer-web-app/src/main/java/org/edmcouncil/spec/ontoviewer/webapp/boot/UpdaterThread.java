@@ -11,8 +11,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
-import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextDbItem;
-import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextSearcherDb;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.InterruptUpdate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
@@ -33,7 +31,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
   private final OntologyManager ontologyManager;
   private final FileSystemManager fileSystemManager;
-  private final TextSearcherDb textSearcherDb;
   private final UpdateBlocker blocker;
   private final DataHandler dataHandler;
   private final ScopeIriOntology scopeIriOntology;
@@ -44,7 +41,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
   protected UpdaterThread(OntologyManager ontologyManager,
       FileSystemManager fileSystemManager,
-      TextSearcherDb textSearcherDb,
       UpdateBlocker blocker,
       DataHandler dataHandler,
       UpdateJob job,
@@ -54,7 +50,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       ApplicationConfigurationService applicationConfigurationService) {
     this.ontologyManager = ontologyManager;
     this.fileSystemManager = fileSystemManager;
-    this.textSearcherDb = textSearcherDb;
     this.blocker = blocker;
     this.job = job;
     this.dataHandler = dataHandler;
@@ -152,10 +147,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       ontologyManager.setMissingImports(missingImports);
       ontologyManager.setIriToPathMapping(iriToPathMapping);
-
-      //get default text searcher db
-      Map<String, TextDbItem> textSearcherDbDefaultData = textSearcherDb.loadDefaultData(ontology);
-      textSearcherDb.clearAndSetDb(textSearcherDbDefaultData);
 
       luceneSearcher.populateIndex();
 

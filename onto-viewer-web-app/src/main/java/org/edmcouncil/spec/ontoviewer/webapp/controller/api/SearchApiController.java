@@ -6,7 +6,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResul
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
-import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
 import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,26 +26,20 @@ public class SearchApiController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(SearchApiController.class);
 
-  private final TextSearchService textSearchService;
   private final OntologySearcherService ontologySearcher;
   private final UpdateBlocker blocker;
 
   private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 20;
-  private static final Integer DEFAULT_RESULT_PAGE = 1;
 
-  public SearchApiController(TextSearchService textSearchService,
-      OntologySearcherService ontologySearcher,
-      UpdateBlocker blocker) {
-    this.textSearchService = textSearchService;
-    this.ontologySearcher = ontologySearcher;
+  public SearchApiController(OntologySearcherService ontologySearcherService, UpdateBlocker blocker) {
+    this.ontologySearcher = ontologySearcherService;
     this.blocker = blocker;
   }
 
-  @PostMapping(value = {"", "/max/{max}", "/page/{page}", "/max/{max}/page/{page}"})
+  @PostMapping(value = {"", "/max/{max}", "/max/{max}"})
   public ResponseEntity<SearcherResult> searchJson(
       @RequestBody String query,
-      @PathVariable Optional<Integer> max,
-      @PathVariable Optional<Integer> page) {
+      @PathVariable Optional<Integer> max) {
     if (!blocker.isInitializeAppDone()) {
       LOGGER.debug("Application initialization has not completed");
       return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
@@ -63,8 +56,7 @@ public class SearchApiController {
         LOGGER.info("For query: '{}' (query time: '{}' ms) {}", query, endTimestamp - startTimestamp, result);
       } else {
         Integer maxResults = max.orElse(DEFAULT_MAX_SEARCH_RESULT_COUNT);
-        Integer currentPage = page.orElse(DEFAULT_RESULT_PAGE);
-        result = textSearchService.search(query, maxResults, currentPage);
+        result = ontologySearcher.search(query, maxResults);
         long endTimestamp = System.currentTimeMillis();
         LOGGER.info("For query: '{}' (query time: '{}' ms) result is:\n {}",
             query, endTimestamp - startTimestamp, result);

@@ -7,4 +7,5 @@
 <suppressions>
   <suppress checks="SummaryJavadoc" files="."/>
   <suppress checks="MissingJavadocMethod" files="."/>
+  <suppress checks="VariableDeclarationUsageDistance" files="."/>
 </suppressions>

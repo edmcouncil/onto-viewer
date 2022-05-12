@@ -14,7 +14,6 @@ import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
-import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilder;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilderFactory;
 import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
@@ -44,8 +43,6 @@ public class SearchController {
   @Autowired
   private ModelBuilderFactory modelFactory;
   @Autowired
-  private TextSearchService textSearchService;
-  @Autowired
   private OntologySearcherService ontologySearcher;
   @Autowired
   private ApplicationConfigurationService applicationConfigurationService;
@@ -53,9 +50,6 @@ public class SearchController {
   private UpdateBlocker blocker;
   @Autowired
   private EntityService entityService;
-
-  private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 25;
-  private static final Integer DEFAULT_RESULT_PAGE = 1;
 
   @PostMapping
   public ModelAndView redirectSearch(@ModelAttribute("queryValue") Query query) {
@@ -97,7 +91,7 @@ public class SearchController {
         modelBuilder.emptyQuery();
       } else {
         modelBuilder.setQuery(query);
-        result = textSearchService.search(query, max, page);
+        result = ontologySearcher.search(query, max);
         long endTimestamp = System.currentTimeMillis();
         LOG.info("String detected: '{}' (query time: '{}' ms), max: '{}', page '{}', result '{}'", query,
             endTimestamp - startTimestamp, max, page, result);
