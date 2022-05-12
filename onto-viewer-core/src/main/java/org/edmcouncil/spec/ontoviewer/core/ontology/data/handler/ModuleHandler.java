@@ -18,10 +18,10 @@ import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturityLevel;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturityLevelFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboOntologyHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.utils.PathUtils;
@@ -53,7 +53,7 @@ public class ModuleHandler {
   private final OntologyManager ontologyManager;
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
-  private final FiboOntologyHandler fiboOntologyHandler;
+  private final OntologyHandler ontologyHandler;
   private final Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
   private final Set<Pattern> ontologyModuleIgnorePatterns;
   private final OWLAnnotationProperty hasPartAnnotation;
@@ -63,12 +63,12 @@ public class ModuleHandler {
   public ModuleHandler(OntologyManager ontologyManager,
       IndividualDataHandler individualDataHandler,
       LabelProvider labelProvider,
-      FiboOntologyHandler fiboOntologyHandler,
+      OntologyHandler ontologyHandler,
       ApplicationConfigurationService applicationConfigurationService) {
     this.ontologyManager = ontologyManager;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
-    this.fiboOntologyHandler = fiboOntologyHandler;
+    this.ontologyHandler = ontologyHandler;
 
     this.ontologiesToIgnoreWhenGeneratingModules =
         applicationConfigurationService.getConfigurationData()
@@ -109,7 +109,7 @@ public class ModuleHandler {
           Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
               .stream()
               .map(OwlListElementIndividualProperty.class::cast)
-              .map(individualProperty -> individualProperty.getValue().getIri().toString())
+              .map(individualProperty -> individualProperty.getValue().getIri())
               .collect(Collectors.toSet());
 
           List<String> rootModulesIris = getRootModulesIris(modulesIris);
@@ -160,7 +160,7 @@ public class ModuleHandler {
           module.setLabel(labelProvider.getLabelOrDefaultFragment(IRI.create(moduleIri)));
           module.setMaturityLevel(
               chooseTheRightVersion(
-                  fiboOntologyHandler.getMaturityLevelForOntology(IRI.create(moduleIri))));
+                  ontologyHandler.getMaturityLevelForOntology(IRI.create(moduleIri))));
           module.setSubModule(getSubModules(moduleIri));
           return module;
         })
@@ -189,13 +189,13 @@ public class ModuleHandler {
         .collect(Collectors.toSet());
   }
 
-  private FiboMaturityLevel chooseTheRightVersion(OntoFiboMaturityLevel maturityLevelFromOntology) {
+  private MaturityLevel chooseTheRightVersion(OntoMaturityLevel maturityLevelFromOntology) {
     if (maturityLevelFromOntology.getIri().equals(RELEASE_IRI)) {
-      return FiboMaturityLevelFactory.prod;
+      return MaturityLevelFactory.PROD;
     } else if (maturityLevelFromOntology.getIri().equals("")) {
-      return FiboMaturityLevelFactory.emptyAppFiboMaturityLabel();
+      return MaturityLevelFactory.emptyAppFiboMaturityLabel();
     } else {
-      return FiboMaturityLevelFactory.dev;
+      return MaturityLevelFactory.DEV;
     }
   }
 
@@ -204,7 +204,7 @@ public class ModuleHandler {
       return;
     }
 
-    Set<FiboMaturityLevel> levels = new HashSet<>();
+    Set<MaturityLevel> levels = new HashSet<>();
     for (FiboModule subModule : module.getSubModule()) {
       checkAndCompleteMaturityLevel(subModule);
       levels.add(subModule.getMaturityLevel());
@@ -213,16 +213,16 @@ public class ModuleHandler {
     module.setMaturityLevel(chooseTheRightVersion(levels));
   }
 
-  private FiboMaturityLevel chooseTheRightVersion(Set<FiboMaturityLevel> levels) {
+  private MaturityLevel chooseTheRightVersion(Set<MaturityLevel> levels) {
     int prodCount = 0;
     int devCount = 0;
 
-    for (FiboMaturityLevel level : levels) {
-      if (level.equals(FiboMaturityLevelFactory.prodDev)) {
+    for (MaturityLevel level : levels) {
+      if (level.equals(MaturityLevelFactory.PROD_DEV_MIXED)) {
         return level;
-      } else if (level.equals(FiboMaturityLevelFactory.prod)) {
+      } else if (level.equals(MaturityLevelFactory.PROD)) {
         prodCount++;
-      } else if (level.equals(FiboMaturityLevelFactory.dev)) {
+      } else if (level.equals(MaturityLevelFactory.DEV)) {
         devCount++;
       }
     }
@@ -230,11 +230,11 @@ public class ModuleHandler {
     LOGGER.trace("Version select, prodCount: {}, devCount: {}, size: {}", prodCount, devCount, levels.size());
 
     if (prodCount == levels.size()) {
-      return FiboMaturityLevelFactory.prod;
+      return MaturityLevelFactory.PROD;
     } else if (devCount == levels.size()) {
-      return FiboMaturityLevelFactory.dev;
+      return MaturityLevelFactory.DEV;
     } else {
-      return FiboMaturityLevelFactory.prodDev;
+      return MaturityLevelFactory.PROD_DEV_MIXED;
     }
   }
 
@@ -266,9 +266,9 @@ public class ModuleHandler {
           module.setSubModule(new ArrayList<>());
           module.setMaturityLevel(
               chooseTheRightVersion(
-                  fiboOntologyHandler.getMaturityLevelForOntology(ontologyIri)));
+                  ontologyHandler.getMaturityLevelForOntology(ontologyIri)));
           if ("".equals(module.getMaturityLevel().getLabel())) {
-            module.setMaturityLevel(FiboMaturityLevelFactory.INFO);
+            module.setMaturityLevel(MaturityLevelFactory.INFO);
           }
           return module;
         })

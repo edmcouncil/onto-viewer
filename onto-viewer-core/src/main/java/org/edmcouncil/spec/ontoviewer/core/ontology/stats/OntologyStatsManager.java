@@ -12,7 +12,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.IRI;
@@ -35,13 +35,13 @@ public class OntologyStatsManager {
       ViewerIdentifierFactory.Type.function, OwlType.INSTANCES.name().toLowerCase());
   private static final Logger LOG = LoggerFactory.getLogger(OntologyStatsManager.class);
 
-  private final FiboDataHandler fiboDataHandler;
+  private final DataHandler fiboDataHandler;
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
 
   private OntologyStatsMapped ontologyStatsMapped;
 
-  public OntologyStatsManager(FiboDataHandler fiboDataHandler,
+  public OntologyStatsManager(DataHandler fiboDataHandler,
       IndividualDataHandler individualDataHandler,
       LabelProvider labelProvider) {
     this.fiboDataHandler = fiboDataHandler;

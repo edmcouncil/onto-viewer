@@ -6,7 +6,7 @@ import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.text.TextSearcherDb;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
@@ -15,8 +15,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatu
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdateJobGenerator;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -24,8 +22,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Updater {
-
-  private static final Logger LOG = LoggerFactory.getLogger(Updater.class);
 
   private final Map<String, UpdateJob> jobs = new HashMap<>();
 
@@ -38,7 +34,7 @@ public class Updater {
   @Autowired
   private UpdateBlocker blocker;
   @Autowired
-  private FiboDataHandler fiboDataHandler;
+  private DataHandler fiboDataHandler;
   @Autowired
   private ScopeIriOntology scopeIriOntology;
   @Autowired
@@ -48,7 +44,7 @@ public class Updater {
   @Autowired
   private ApplicationConfigurationService applicationConfigurationService;
 
-  private static final String interruptMessage = "Interrupts this update. New update request.";
+  private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
   @EventListener(ApplicationReadyEvent.class)
   public void afterStart() {
@@ -98,18 +94,13 @@ public class Updater {
     jobs.values().stream()
         .filter((value) -> !(value.getId().equals(String.valueOf(0))))
         .filter((value) -> (value.getStatus() == UpdateJobStatus.WAITING))
-        .forEachOrdered((value) -> {
-          UpdaterOperation.setJobStatusToError(value, interruptMessage);
-        });
+        .forEachOrdered((value) -> UpdaterOperation.setJobStatusToError(value, INTERRUPT_MESSAGE));
   }
 
   private void interruptWorkingJob() {
     jobs.values().stream()
         .filter((value) -> !(value.getId().equals(String.valueOf(0))))
         .filter((value) -> (value.getStatus() == UpdateJobStatus.IN_PROGRESS))
-        .forEachOrdered((value) -> {
-          UpdaterOperation.setJobStatusToInterrupt(value, interruptMessage);
-        });
+        .forEachOrdered((value) -> UpdaterOperation.setJobStatusToInterrupt(value, INTERRUPT_MESSAGE));
   }
-
 }

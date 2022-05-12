@@ -41,9 +41,9 @@ import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboOntologyHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.visitor.ContainsVisitors;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -95,9 +95,9 @@ public class OwlDataHandler {
 
   private final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
   @Autowired
-  private FiboDataHandler fiboDataHandler;
+  private DataHandler fiboDataHandler;
   @Autowired
-  private FiboOntologyHandler fiboOntologyHandler;
+  private OntologyHandler fiboOntologyHandler;
   @Autowired
   private AnnotationsDataHandler annotationsDataHandler;
   @Autowired
@@ -1269,7 +1269,7 @@ public class OwlDataHandler {
     return resultDetails;
   }
 
-  public OntoFiboMaturityLevel getMaturityLevel(String iriString) {
+  public OntoMaturityLevel getMaturityLevel(String iriString) {
     return fiboOntologyHandler.getMaturityLevelForElement(iriString);
   }
 

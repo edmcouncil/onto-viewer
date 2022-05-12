@@ -12,8 +12,8 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboMaturityLevelFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.OntoFiboMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.semanticweb.owlapi.model.IRI;
@@ -125,22 +125,22 @@ public class AnnotationsDataHandler {
 
       String value = next.annotationValue().toString();
 
-      PropertyValue opv = new OwlAnnotationPropertyValue();
+      PropertyValue propertyValue = new OwlAnnotationPropertyValue();
       OwlType extractAnnotationType = dataExtractor.extractAnnotationType(next);
-      opv.setType(extractAnnotationType);
+      propertyValue.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
         if (scopeIriOntology.scopeIri(value)) {
-          opv = customDataFactory.createAnnotationIri(value);
+          propertyValue = customDataFactory.createAnnotationIri(value);
 
         } else {
-          opv = customDataFactory.createAnnotationAnyUri(value);
+          propertyValue = customDataFactory.createAnnotationAnyUri(value);
         }
 
         if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
-          OwlAnnotationIri oai = (OwlAnnotationIri) opv;
-          OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(),
-              oai.getValue().getIri(), getIconForMaturityLevel(oai.getValue().getLabel()));
+          OwlAnnotationIri annotationIRI = (OwlAnnotationIri) propertyValue;
+          OntoMaturityLevel fml = MaturityLevelFactory.create(annotationIRI.getValue().getLabel(),
+              annotationIRI.getValue().getIri(), getIconForMaturityLevel(annotationIRI.getValue().getLabel()));
           details.setMaturityLevel(fml);
           LOG.debug(fml.toString());
         }
@@ -156,24 +156,24 @@ public class AnnotationsDataHandler {
 
           String lang = asLiteral.get().getLang();
           value = lang.isEmpty() ? value : value.concat(" [").concat(lang).concat("]");
-          opv.setValue(value);
-          checkUriAsIri(opv, value);
-          if (opv.getType() == OwlType.IRI) {
-            opv = customDataFactory.createAnnotationIri(value);
+          propertyValue.setValue(value);
+          checkUriAsIri(propertyValue, value);
+          if (propertyValue.getType() == OwlType.IRI) {
+            propertyValue = customDataFactory.createAnnotationIri(value);
             if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
-              OwlAnnotationIri oai = (OwlAnnotationIri) opv;
-              OntoFiboMaturityLevel fml = FiboMaturityLevelFactory.create(oai.getValue().getLabel(),
-                  oai.getValue().getIri(), getIconForMaturityLevel(oai.getValue().getLabel()));
-              details.setMaturityLevel(fml);
-              LOG.debug(fml.toString());
+              OwlAnnotationIri annotationIRI = (OwlAnnotationIri) propertyValue;
+              OntoMaturityLevel maturityLevel = MaturityLevelFactory.create(annotationIRI.getValue().getLabel(),
+                  annotationIRI.getValue().getIri(), getIconForMaturityLevel(annotationIRI.getValue().getLabel()));
+              details.setMaturityLevel(maturityLevel);
+              LOG.debug(maturityLevel.toString());
             }
           }
         }
       }
-      LOG.debug("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", opv,
+      LOG.debug("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", propertyValue,
           propertyiri);
 
-      result.addProperty(propertyiri.toString(), opv);
+      result.addProperty(propertyiri.toString(), propertyValue);
     }
 
     return result;
