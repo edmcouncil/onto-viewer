@@ -30,7 +30,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   private final FileSystemManager fileSystemManager;
 
-  @Value("${app.config.ontologies.catalog_path}")
+  @Value("${app.config.ontologies.catalog_path:}")
   private String catalogPath;
   private ConfigurationData configurationData;
 

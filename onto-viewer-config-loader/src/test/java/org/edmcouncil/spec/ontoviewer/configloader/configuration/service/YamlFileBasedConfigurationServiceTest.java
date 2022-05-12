@@ -35,7 +35,7 @@ class YamlFileBasedConfigurationServiceTest {
 
     // Groups Config
     assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
-    assertEquals(4, configurationData.getGroupsConfig().getGroups().size());
+    assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
     assertTrue(configurationData.getLabelConfig().isDisplayLabel());
@@ -101,7 +101,7 @@ class YamlFileBasedConfigurationServiceTest {
 
     // Groups Config
     assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
-    assertEquals(4, configurationData.getGroupsConfig().getGroups().size());
+    assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
     assertFalse(configurationData.getLabelConfig().isDisplayLabel());
@@ -132,7 +132,7 @@ class YamlFileBasedConfigurationServiceTest {
 
     // Groups Config
     assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
-    assertEquals(4, configurationData.getGroupsConfig().getGroups().size());
+    assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
     assertTrue(configurationData.getLabelConfig().isDisplayLabel());
@@ -169,7 +169,7 @@ class YamlFileBasedConfigurationServiceTest {
 
     // Groups Config
     assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
-    assertEquals(4, configurationData.getGroupsConfig().getGroups().size());
+    assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
     assertTrue(configurationData.getLabelConfig().isDisplayLabel());
