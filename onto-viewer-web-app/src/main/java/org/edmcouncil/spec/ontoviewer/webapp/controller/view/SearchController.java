@@ -4,15 +4,22 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.ListResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult.Type;
 import org.edmcouncil.spec.ontoviewer.core.service.EntityService;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.Highlight;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
+import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilder;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilderFactory;
@@ -50,6 +57,8 @@ public class SearchController {
   private UpdateBlocker blocker;
   @Autowired
   private EntityService entityService;
+  @Autowired
+  private LuceneSearcher luceneSearcher;
 
   @PostMapping
   public ModelAndView redirectSearch(@ModelAttribute("queryValue") Query query) {
@@ -91,7 +100,21 @@ public class SearchController {
         modelBuilder.emptyQuery();
       } else {
         modelBuilder.setQuery(query);
-        result = ontologySearcher.search(query, max);
+        List<FindResult> findResults = luceneSearcher.search(query, true);
+        List<SearchItem> searchResults = findResults.stream()
+            .map(findResult -> {
+              var searchItem = new SearchItem();
+              searchItem.setIri(findResult.getIri());
+              searchItem.setLabel(findResult.getLabel());
+              searchItem.setDescription(findResult.getHighlights().stream()
+                  .map(Highlight::getHighlightedText)
+                  .collect(Collectors.joining(" ")));
+              searchItem.setRelevancy(findResult.getScore());
+              return searchItem;
+            })
+            .collect(Collectors.toList());
+        result = new ListResult(Type.list, searchResults);
+
         long endTimestamp = System.currentTimeMillis();
         LOG.info("String detected: '{}' (query time: '{}' ms), max: '{}', page '{}', result '{}'", query,
             endTimestamp - startTimestamp, max, page, result);

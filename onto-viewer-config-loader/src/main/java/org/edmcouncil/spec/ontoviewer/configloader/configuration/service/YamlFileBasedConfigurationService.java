@@ -21,6 +21,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.yaml.snakeyaml.Yaml;
 
 public class YamlFileBasedConfigurationService extends AbstractYamlConfigurationService {
@@ -29,6 +30,8 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   private final FileSystemManager fileSystemManager;
 
+  @Value("${app.config.ontologies.catalog_path}")
+  private String catalogPath;
   private ConfigurationData configurationData;
 
   public YamlFileBasedConfigurationService(FileSystemManager fileSystemManager) {
@@ -110,6 +113,11 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
           case ONTOLOGIES: {
             OntologiesConfig ontologiesConfig = handleOntologies(configEntryValue);
             configurationDataCandidate.setOntologiesConfig(ontologiesConfig);
+
+            if (catalogPath != null && !catalogPath.isBlank()) {
+              ontologiesConfig.getCatalogPaths().clear();
+              ontologiesConfig.getCatalogPaths().add(catalogPath);
+            }
             break;
           }
           default:

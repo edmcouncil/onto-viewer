@@ -131,16 +131,6 @@ public class AutoOntologyLoader {
   private List<OntologyMapping> loadMappersToOntologyManager() {
     List<OntologyMapping> ontologyMappings = new ArrayList<>();
 
-    // TODO
-//    configurationData.getOntologyMapping()
-//        .forEach((iriString, path) ->
-//            ontologyMappings.add(
-//                new OntologyMapping(
-//                    IRI.create(iriString),
-//                    Path.of(path.toString()),
-//                    path.toString(),
-//                    MappingSource.CONFIGURATION)));
-
     var ontologyCatalogPaths = configurationData.getOntologiesConfig().getCatalogPaths();
     ontologyCatalogPaths.forEach(ontologyCatalogPath -> {
       try {

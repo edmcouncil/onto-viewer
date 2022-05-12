@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -234,7 +235,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   }
 
   protected Map<String, List<String>> mapToMapOfList(List<?> rawGroupsList) {
-    Map<String, List<String>> groupsMap = new HashMap<>();
+    Map<String, List<String>> groupsMap = new LinkedHashMap<>();
 
     @SuppressWarnings("unchecked")
     var rawGroupsMap = (List<Map<String, Object>>) rawGroupsList;
