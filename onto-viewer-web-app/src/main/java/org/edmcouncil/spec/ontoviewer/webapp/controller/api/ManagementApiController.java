@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.webapp.controller;
+package org.edmcouncil.spec.ontoviewer.webapp.controller.api;
 
 import static org.edmcouncil.spec.ontoviewer.webapp.common.RequestConstants.API_KEY_NOT_VALID_MESSAGE;
 import static org.edmcouncil.spec.ontoviewer.webapp.common.RequestConstants.SUCCESS_RESPONSE;

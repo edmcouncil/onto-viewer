@@ -16,7 +16,7 @@ import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
@@ -44,7 +44,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private final ApplicationConfigurationService applicationConfigurationService;
   private final OntologyManager ontologyManager;
-  private final FiboDataHandler fiboDataHandler;
+  private final DataHandler fiboDataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
   private final OntologyConsistencyChecker ontologyConsistencyChecker;
   private final StandardEnvironment environment;
@@ -53,7 +53,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   public OntoViewerToolkitCommandLine(
       ApplicationConfigurationService applicationConfigurationService,
       OntologyManager ontologyManager,
-      FiboDataHandler fiboDataHandler,
+      DataHandler dataHandler,
       OntologyTableDataExtractor ontologyTableDataExtractor,
       OntologyConsistencyChecker ontologyConsistencyChecker,
       StandardEnvironment environment,
@@ -63,7 +63,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     applicationConfigurationService.getConfigurationData().getOntologiesConfig().getPaths().clear();
 
     this.ontologyManager = ontologyManager;
-    this.fiboDataHandler = fiboDataHandler;
+    this.fiboDataHandler = dataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
     this.ontologyConsistencyChecker = ontologyConsistencyChecker;
     this.environment = environment;
