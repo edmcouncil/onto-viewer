@@ -14,7 +14,7 @@ public class StringUtils {
       ViewerIdentifierFactory.Type.axiom,
       ViewerIdentifierFactory.Element.empty);
 
-  public static String getFragment(IRI iri) {
+  public static String getIdentifier(IRI iri) {
     String iriString = iri.toString();
     if (iriString.contains(AXIOM_PATTERN)) {
       return iriString.substring(iriString.lastIndexOf(".") + 1);
@@ -27,7 +27,7 @@ public class StringUtils {
   }
 
   public static String getFragment(String iri) {
-    return getFragment(IRI.create(iri));
+    return getIdentifier(IRI.create(iri));
   }
 
   public static int countLetter(String string, char letter) {
