@@ -16,9 +16,9 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKey
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.KeyValueMapConfigItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
@@ -29,6 +29,7 @@ import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.TextWriter;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.Goal;
@@ -48,27 +49,30 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private final ConfigurationService configurationService;
   private final OntologyManager ontologyManager;
-  private final FiboDataHandler fiboDataHandler;
+  private final DataHandler dataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
   private final OntologyConsistencyChecker ontologyConsistencyChecker;
   private final StandardEnvironment environment;
   private final ApplicationConfigProperties applicationConfigProperties;
+  private final FileSystemManager fileSystemManager;
 
   public OntoViewerToolkitCommandLine(
       ConfigurationService configurationService,
       OntologyManager ontologyManager,
-      FiboDataHandler fiboDataHandler,
+      DataHandler dataHandler,
       OntologyTableDataExtractor ontologyTableDataExtractor,
       OntologyConsistencyChecker ontologyConsistencyChecker,
       StandardEnvironment environment,
-      ApplicationConfigProperties applicationConfigProperties) {
+      ApplicationConfigProperties applicationConfigProperties,
+      FileSystemManager fileSystemManager) {
     this.configurationService = configurationService;
     this.ontologyManager = ontologyManager;
-    this.fiboDataHandler = fiboDataHandler;
+    this.dataHandler = dataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
     this.ontologyConsistencyChecker = ontologyConsistencyChecker;
     this.environment = environment;
     this.applicationConfigProperties = applicationConfigProperties;
+    this.fileSystemManager = fileSystemManager;
   }
 
   @Override
@@ -196,13 +200,13 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   private void loadOntology() throws OntoViewerToolkitException {
     try {
       var ontologyLoader = new CommandLineOntologyLoader(
-          configurationService.getCoreConfiguration());
+          configurationService.getCoreConfiguration(), fileSystemManager);
       var loadedOntology = ontologyLoader.load();
       LOGGER.debug("Loaded ontology contains {} axioms.",
           loadedOntology.getAxiomCount(Imports.INCLUDED));
 
       ontologyManager.updateOntology(loadedOntology);
-      fiboDataHandler.populateOntologyResources(loadedOntology);
+      dataHandler.populateOntologyResources(loadedOntology);
     } catch (Exception ex) {
       var message = String.format(
           "Exception occurred while loading ontology. Details: %s",

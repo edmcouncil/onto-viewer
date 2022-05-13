@@ -565,9 +565,9 @@ public class OwlDataHandler {
       boolean bypassClass
   ) {
     String value = rendering.render(axiom);
-    LOG.debug("Rendered default value: {}", value);
+    LOG.info("Rendered default value: {}", value);
     for (String unwantedType : unwantedTypes) {
-      value = value.replace(unwantedType, "");
+      value = value.replaceAll(unwantedType, "");
     }
 
     if (bypassClass) {
