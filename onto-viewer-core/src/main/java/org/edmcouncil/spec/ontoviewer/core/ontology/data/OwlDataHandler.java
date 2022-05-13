@@ -1405,7 +1405,7 @@ public class OwlDataHandler {
       LOG.debug("OwlDataHandler -> extractUsageRangeAxiom {}", rangeEntity.getIRI());
 
       String iriFragment = rangeEntity.getIRI().toString();
-      String splitFragment = StringUtils.getFragment(rangeEntity.getIRI().toString());
+      String splitFragment = StringUtils.getIdentifier(rangeEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
       Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
@@ -1472,7 +1472,7 @@ public class OwlDataHandler {
       LOG.debug("OwlDataHandler -> extractUsageObjectDomainAxiom {}", domainEntity.getIRI());
 
       String iriFragment = domainEntity.getIRI().toString();
-      String splitFragment = StringUtils.getFragment(domainEntity.getIRI().toString());
+      String splitFragment = StringUtils.getIdentifier(domainEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
       Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();

@@ -24,8 +24,8 @@ public class StringUtils {
     return iriFragment;
   }
 
-  public static String getFragment(String iri) {
-    return getIdentifier(IRI.create(iri));
+  public static String getIdentifier(String iri) {
+    return StringUtils.getIdentifier(IRI.create(iri));
   }
 
   public static int countLetter(String string, char letter) {
