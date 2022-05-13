@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
-import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -29,6 +28,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
 
 public abstract class UpdaterThread extends Thread implements Thread.UncaughtExceptionHandler {
 

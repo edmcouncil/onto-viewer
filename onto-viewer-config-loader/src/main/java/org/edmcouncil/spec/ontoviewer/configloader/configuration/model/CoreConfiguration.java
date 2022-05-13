@@ -301,10 +301,9 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   public Optional<String> getSingleStringValue(String key) {
     var value = getValue(key);
-    if (value.isEmpty()) {
+    if (value == null || value.isEmpty()) {
       return Optional.empty();
     }
-
     return value.stream().map(Object::toString).findFirst();
   }
 
