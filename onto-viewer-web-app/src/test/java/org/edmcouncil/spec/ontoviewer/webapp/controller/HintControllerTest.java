@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import org.edmcouncil.spec.ontoviewer.core.exception.ApplicationNotInitializedException;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.controller.api.HintController;
 import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.junit.jupiter.api.Test;

@@ -1,14 +1,15 @@
-package org.edmcouncil.spec.ontoviewer.webapp.controller;
+package org.edmcouncil.spec.ontoviewer.webapp.controller.api;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
+import org.edmcouncil.spec.ontoviewer.webapp.controller.BaseControllerIT;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,16 +21,13 @@ class SearchApiControllerIT extends BaseControllerIT {
   private MockMvc mockMvc;
 
   @Test
-  void shouldReturn200EmptyListWhenThereAreNotAnyMatchingEntities() throws Exception {
+  void shouldReturn200WhenThereAreNotAnyMatchingEntities() throws Exception {
     var query = "somerandomrubbish";
 
     this.mockMvc.perform(post("/api/search").content(query))
         .andDo(print())
         .andExpect(status().isOk())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(6)))
-        .andExpect(jsonPath("$.type", is("list")))
-        .andExpect(jsonPath("$.result.length()", is(0)));
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test
@@ -40,13 +38,12 @@ class SearchApiControllerIT extends BaseControllerIT {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(6)))
+        .andExpect(jsonPath("$.length()", is(7)))
         .andExpect(jsonPath("$.type", is("list")))
-        .andExpect(jsonPath("$.page", is(1)))
-        .andExpect(jsonPath("$.hasMore", is(false)))
-        .andExpect(jsonPath("$.maxPage", is(1)))
-        .andExpect(jsonPath("$.result.length()", is(13)))
-        .andExpect(jsonPath("$.result[0].iri", is("http://purl.org/dc/terms/license")));
+        .andExpect(jsonPath("$.result.length()", is(11)))
+        .andExpect(jsonPath(
+            "$.result[0].iri",
+            is("https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/License")));
   }
 
   @Test
@@ -57,12 +54,9 @@ class SearchApiControllerIT extends BaseControllerIT {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(6)))
+        .andExpect(jsonPath("$.length()", is(7)))
         .andExpect(jsonPath("$.type", is("list")))
-        .andExpect(jsonPath("$.page", is(1)))
-        .andExpect(jsonPath("$.hasMore", is(true)))
-        .andExpect(jsonPath("$.maxPage", is(2)))
-        .andExpect(jsonPath("$.result.length()", is(20)));
+        .andExpect(jsonPath("$.result.length()", is(6)));
   }
 
   @Test
@@ -73,7 +67,7 @@ class SearchApiControllerIT extends BaseControllerIT {
         .andDo(print())
         .andExpect(status().isBadRequest())
         .andExpect(jsonPath("$.message", containsString("Element Not Found")))
-        .andExpect(jsonPath("$.exMessage", is("Not found element in ontology with IRI: " + query)));
+        .andExpect(jsonPath("$.exMessage", is("Not found element with IRI: " + query)));
   }
 
   @Test
@@ -91,18 +85,7 @@ class SearchApiControllerIT extends BaseControllerIT {
         .andExpect(jsonPath("$.result.qName", is("QName: fibo-be-le-lp:BusinessLicense")))
         .andExpect(jsonPath("$.result.taxonomy.value[0].length()", is(5)))
         .andExpect(jsonPath("$.result.maturityLevel.label", is("release")))
-        .andExpect(jsonPath("$.result.properties.length()", is(2)))
-        .andExpect(jsonPath("$.result.properties.Glossary.label[0].value", is("business license")))
-        .andExpect(jsonPath(
-            "$.result.properties.Glossary.definition[0].value",
-            containsString("license that allows")))
-        .andExpect(jsonPath(
-            "$.result.properties['Ontological characteristic']['IS-A restrictions'].length()",
-            is(2)))
-        .andExpect(jsonPath(
-            "$.result.properties['Ontological characteristic']" +
-                "['IS-A restrictions inherited from superclasses'].length()",
-            is(2)));
+        .andExpect(jsonPath("$.result.properties.length()", is(4)));
   }
 
   @Test

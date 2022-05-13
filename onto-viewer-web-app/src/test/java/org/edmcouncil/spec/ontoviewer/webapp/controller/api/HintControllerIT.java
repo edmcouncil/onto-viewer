@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.webapp.controller;
+package org.edmcouncil.spec.ontoviewer.webapp.controller.api;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -7,7 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.edmcouncil.spec.ontoviewer.webapp.controller.BaseControllerIT;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,8 +20,15 @@ class HintControllerIT extends BaseControllerIT {
 
   @Autowired
   private MockMvc mockMvc;
-  @MockBean
+  @Autowired
   private LuceneSearcher luceneSearcher;
+
+  @Override
+  @BeforeEach
+  public void setUp() {
+    super.setUp();
+    luceneSearcher.populateIndex();
+  }
 
   @Test
   void shouldReturn200WithOneResult() throws Exception {
@@ -28,7 +37,7 @@ class HintControllerIT extends BaseControllerIT {
     this.mockMvc.perform(post("/api/hint").content(query))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(1)))
+        .andExpect(jsonPath("$.length()", is(25)))
         .andExpect(jsonPath("$[0].label", is("business entity")));
   }
 
@@ -40,21 +49,25 @@ class HintControllerIT extends BaseControllerIT {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(13)))
-        .andExpect(jsonPath("$[0].iri", is("http://purl.org/dc/terms/license")));
+        .andExpect(jsonPath("$.length()", is(11)))
+        .andExpect(
+            jsonPath(
+                "$[0].iri",
+                is("https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/License")));
   }
 
   @Test
   void shouldReturn200WithMoreThanOneResultWithMaxParameterUsedWhenItIsPresent() throws Exception {
     String query = "license";
-    int max = 5;
 
-    this.mockMvc.perform(post("/api/hint/max/" + max).content(query))
+    this.mockMvc.perform(post("/api/hint").content(query))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(5)))
-        .andExpect(jsonPath("$[0].iri", is("http://purl.org/dc/terms/license")));
+        .andExpect(jsonPath("$.length()", is(11)))
+        .andExpect(jsonPath(
+            "$[0].iri",
+            is("https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/License")));
   }
 
   @Test
