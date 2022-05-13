@@ -1,7 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.core.utils;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.IRI;
 
