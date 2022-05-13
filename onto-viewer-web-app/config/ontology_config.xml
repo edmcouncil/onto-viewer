@@ -7,9 +7,9 @@
   <!-- Loading sequence paths => urls => directories -->
   <ontology  ontologyDownloadDir="download">
  
-    <!--<ontologyURL>https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/</ontologyURL>
-    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</ontologyURL>-->
-    <ontologyURL>https://spec.edmcouncil.org/auto/ontology/AboutAUTODev/</ontologyURL>
+    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/</ontologyURL>
+    <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</ontologyURL>
+    <!--<ontologyURL>https://spec.edmcouncil.org/auto/ontology/AboutAUTODev/</ontologyURL>-->
     <!--<ontologyZipURL>https://spec.edmcouncil.org/fibo/ontology/master/latest/dev.rdf.zip</ontologyZipURL>-->
    
     <!-- order in this file gives the correct loading order -->
