@@ -10,15 +10,6 @@ import org.semanticweb.owlapi.model.IRI;
  */
 public class StringUtils {
 
-  private static final Pattern IRI_FRAGMENT_AFTER_HASH_PATTERN
-      = Pattern.compile("[#][A-Za-z0-9]+");
-
-  private static final Pattern IRI_FRAGMENT_BEFORE_HASH_PATTERN
-      = Pattern.compile("[/][A-Za-z0-9]+[#]");
-
-  private static final Pattern IRI_FRAGMENT_PATTERN
-      = Pattern.compile("[A-Za-z0-9]+");
-
   private static final String AXIOM_PATTERN = ViewerIdentifierFactory.createId(
       ViewerIdentifierFactory.Type.axiom,
       ViewerIdentifierFactory.Element.empty);
@@ -28,21 +19,11 @@ public class StringUtils {
     if (iriString.contains(AXIOM_PATTERN)) {
       return iriString.substring(iriString.lastIndexOf(".") + 1);
     }
-    String result = null;
-    if (iriString.endsWith("#")) {
-      Matcher matcher = IRI_FRAGMENT_BEFORE_HASH_PATTERN.matcher(iriString);
-      while (matcher.find()) {
-        String match = matcher.group();
-        result = IRI_FRAGMENT_PATTERN.matcher(match).group();
-      }
-    } else {
-      Matcher matcher = IRI_FRAGMENT_AFTER_HASH_PATTERN.matcher(iriString);
-      while (matcher.find()) {
-        String match = matcher.group();
-        result = IRI_FRAGMENT_PATTERN.matcher(match).group();
-      }
+    String iriFragment = iri.getFragment();
+    if (iriFragment.isEmpty() || iriFragment.isBlank()) {
+      return iriString;
     }
-    return result;
+    return iriFragment;
   }
 
   public static String getFragment(String iri) {
