@@ -31,6 +31,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
+import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
@@ -180,7 +181,7 @@ public class LuceneSearcher {
 
     rdfsLabelFieldName = getFieldName(dataFactory.getRDFSLabel());
 
-    boolean shouldReindexOnStart = getTextSearcherConfig().isReindexOnStart();;
+    boolean shouldReindexOnStart = getTextSearcherConfig().isReindexOnStart();
     try {
       if (shouldReindexOnStart) {
         LOGGER.info("Search configuration property 'reindexOnStart' is on. "
@@ -263,6 +264,13 @@ public class LuceneSearcher {
       String printableLabel = null;
       if (rdfsLabelField != null) {
         printableLabel = rdfsLabelField.stringValue();
+      }
+      for (String fieldName : basicFieldNames) {
+        var field = luceneDocument.getField(fieldName);
+        if (field != null) {
+          printableLabel = field.stringValue();
+          break;
+        }
       }
 
       List<Highlight> highlights = new ArrayList<>();

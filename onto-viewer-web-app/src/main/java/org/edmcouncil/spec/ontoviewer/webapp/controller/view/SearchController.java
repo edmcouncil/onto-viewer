@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
@@ -106,9 +107,8 @@ public class SearchController {
               var searchItem = new SearchItem();
               searchItem.setIri(findResult.getIri());
               searchItem.setLabel(findResult.getLabel());
-              searchItem.setDescription(findResult.getHighlights().stream()
-                  .map(Highlight::getHighlightedText)
-                  .collect(Collectors.joining(" ")));
+              var firstHighlight = findResult.getHighlights().stream().findFirst();
+              searchItem.setDescription(firstHighlight.isPresent() ? firstHighlight.get().getHighlightedText() : "");
               searchItem.setRelevancy(findResult.getScore());
               return searchItem;
             })

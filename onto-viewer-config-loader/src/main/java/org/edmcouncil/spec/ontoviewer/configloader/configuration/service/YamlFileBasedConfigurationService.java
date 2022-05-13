@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.service;
 
+import static org.apache.commons.io.FilenameUtils.getExtension;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.byName;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ import org.yaml.snakeyaml.Yaml;
 public class YamlFileBasedConfigurationService extends AbstractYamlConfigurationService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(YamlFileBasedConfigurationService.class);
+  private static final Set<String> SUPPORTED_EXTENSIONS = Set.of("yaml", "yml");
 
   private final FileSystemManager fileSystemManager;
 
@@ -53,9 +55,17 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
         try (Stream<Path> configFilePathsStream = Files.walk(configPath, FileVisitOption.FOLLOW_LINKS)) {
           Set<Path> configFilePaths = configFilePathsStream.collect(Collectors.toSet());
           for (Path configFilePath : configFilePaths) {
-            if (Files.isRegularFile(configFilePath)) {
-              String configContent = Files.readString(configFilePath);
-              sb.append(configContent).append("\n");
+            if (configFilePath.toString().contains(".")) {
+              if (Files.isRegularFile(configFilePath)
+                  && SUPPORTED_EXTENSIONS.contains(getExtension(configFilePath.toString()))) {
+                String configContent = Files.readString(configFilePath);
+                sb.append(configContent).append("\n");
+              } else {
+                LOGGER.warn("Config path '{}' is not a regular file or doesn't end with '{}'.",
+                    configFilePath, SUPPORTED_EXTENSIONS);
+              }
+            } else {
+              LOGGER.warn("Config path '{}' doesn't end with a file extension.", configFilePath);
             }
           }
         }
