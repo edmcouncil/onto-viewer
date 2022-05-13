@@ -10,7 +10,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
@@ -31,13 +34,20 @@ public class CommandLineOntologyLoader {
 
   private final CoreConfiguration coreConfiguration;
   private final MissingImportListenerImpl missingImportListenerImpl;
+  private final FileSystemManager fileSystemManager;
 
-  public CommandLineOntologyLoader(CoreConfiguration coreConfiguration) {
+  public CommandLineOntologyLoader(CoreConfiguration coreConfiguration, FileSystemManager fileSystemManager) {
     this.coreConfiguration = coreConfiguration;
     this.missingImportListenerImpl = new MissingImportListenerImpl();
+    this.fileSystemManager = fileSystemManager;
   }
 
   public OWLOntology load() throws OWLOntologyCreationException {
+    
+    ViewerZipFilesOperations viewerZipFilesOperations = new ViewerZipFilesOperations();
+    Set<MissingImport> missingImports = viewerZipFilesOperations.prepareZipToLoad(coreConfiguration, fileSystemManager);
+    this.missingImportListenerImpl.addAll(missingImports);
+    
     var owlOntologyManager = OWLManager.createOWLOntologyManager();
 
     setOntologyMapping(owlOntologyManager);

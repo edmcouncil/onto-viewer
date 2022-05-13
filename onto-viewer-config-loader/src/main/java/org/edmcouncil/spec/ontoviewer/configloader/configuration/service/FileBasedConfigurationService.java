@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.loader.ConfigLoader;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,18 +16,20 @@ public class FileBasedConfigurationService implements ConfigurationService {
   private static final Logger LOGGER = LoggerFactory.getLogger(FileBasedConfigurationService.class);
 
   private final FileSystemManager fileSystemManager;
+  private final AppProperties appProperties;
 
   private CoreConfiguration coreConfiguration;
 
-  public FileBasedConfigurationService(FileSystemManager fileSystemManager) {
+  public FileBasedConfigurationService(FileSystemManager fileSystemManager, AppProperties appProperties) {
     this.fileSystemManager = fileSystemManager;
+    this.appProperties = appProperties;
   }
 
   @PostConstruct
   public void init() {
     LOGGER.debug("Loading configuration...");
 
-    var configLoader = new ConfigLoader();
+    var configLoader = new ConfigLoader(appProperties);
 
     try {
       var configFilePath = fileSystemManager.getPathToConfigFile();
@@ -41,7 +44,7 @@ public class FileBasedConfigurationService implements ConfigurationService {
         for (var path : paths.collect(Collectors.toList())) {
           LOGGER.debug("Adding configuration from file '{}'.", path);
           if (Files.isRegularFile(path)) {
-            configLoader.loadWeaselConfiguration(path);
+            configLoader.loadViewerConfiguration(path);
           }
         }
       }

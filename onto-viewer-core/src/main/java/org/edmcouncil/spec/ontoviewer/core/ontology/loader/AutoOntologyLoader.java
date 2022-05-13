@@ -16,17 +16,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.apache.commons.io.FilenameUtils;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
-import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
-import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
-import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
-import org.edmcouncil.spec.ontoviewer.core.ontology.loader.OntologyMapping.MappingSource;
-import org.edmcouncil.spec.ontoviewer.core.ontology.loader.OntologySource.SourceType;
-import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
-import org.edmcouncil.spec.ontoviewer.core.utils.PathUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
@@ -39,6 +30,18 @@ import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.slf4j.Logger;
+
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
+import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
+import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.OntologyMapping.MappingSource;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.OntologySource.SourceType;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
+import org.edmcouncil.spec.ontoviewer.core.utils.PathUtils;
+
 
 /**
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
@@ -253,7 +256,7 @@ public class AutoOntologyLoader {
         ontologyLoadingProblems.add(new OntologyLoadingProblem(ontologySource, ex.getMessage(), ex.getClass()));
       }
     }
-    LOGGER.info("Missing imports: {}", missingImportListenerImpl.getNotImportUri());
+
     LOGGER.info("Ontology loading problems that occurred: {}", ontologyLoadingProblems);
     return umbrellaOntology;
   }

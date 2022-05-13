@@ -1,8 +1,17 @@
 package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+import org.semanticweb.owlapi.model.UnloadableImportException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
@@ -20,16 +29,10 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
-import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.UnloadableImportException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class UpdaterThread extends Thread implements Thread.UncaughtExceptionHandler {
 
-  private static final Logger LOG = LoggerFactory.getLogger(UpdaterThread.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(UpdaterThread.class);
   private static final String interruptMessage = "Interrupts this update. New update request.";
 
   private ConfigurationService config;
@@ -77,7 +80,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
           String msg = String.format("UpdateJob with id: %s waiting to end other updates",
               job.getId());
           UpdaterOperation.setJobStatusToWaiting(job, msg);
-          LOG.debug(msg);
+          LOGGER.debug(msg);
           //Wait for one sec so it doesn't print too fast
           Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -102,16 +105,18 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       Map<IRI, IRI> iriToPathMapping = new HashMap<>();
       String msgError = null;
 
-      LOG.info("Configuration loaded ? : {}", config != null || !config.getCoreConfiguration().isEmpty());
-      LOG.info("File system manager created ? : {}", fileSystemManager != null);
+      LOGGER.info("Configuration loaded ? : {}", config != null || !config.getCoreConfiguration().isEmpty());
+      LOGGER.info("File system manager created ? : {}", fileSystemManager != null);
 
       CoreConfiguration viewerCoreConfiguration = config.getCoreConfiguration();
 
       if (isInterrupt()) {
         throw new InterruptUpdate();
       }
+      //ZIP Support 
+      ViewerZipFilesOperations viewerZipFilesOperations = new ViewerZipFilesOperations();
+      Set<MissingImport> missingImports = viewerZipFilesOperations.prepareZipToLoad(viewerCoreConfiguration, fileSystemManager);
 
-      //download ontology file/files
       //load ontology to var
       AutoOntologyLoader loader = new AutoOntologyLoader(viewerCoreConfiguration, fileSystemManager);
       try {
@@ -120,13 +125,13 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         iriToPathMapping = loadedOntologyData.getIriToPathMapping();
       } catch (OWLOntologyCreationException ex) {
         msgError = ex.getMessage();
-        LOG.error(
+        LOGGER.error(
             "[ERROR]: Error when creating ontology. Stopping application. Exception: {} \n Message: {}",
             ex.getStackTrace(), ex.getMessage());
       }
 
       if (msgError != null) {
-        LOG.error("[ERROR]: Cannot update, id {}", job.getId());
+        LOGGER.error("[ERROR]: Cannot update, id {}", job.getId());
         job = UpdaterOperation.setJobStatusToError(job, msgError);
         blocker.setUpdateNow(Boolean.FALSE);
         return;
@@ -135,8 +140,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         throw new InterruptUpdate();
       }
 
-      Set<MissingImport> missingImports = loader.getMissingImportListenerImpl().getNotImportUri();
-
+      missingImports.addAll(loader.getMissingImportListenerImpl().getNotImportUri());
+      LOGGER.info("Missing imports: {}", missingImports);
       Set<String> scopes = scopeIriOntology.getScopeIri(ontology);
 
       if (isInterrupt()) {
@@ -176,9 +181,9 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
         blocker.setInitializeAppDone(Boolean.TRUE);
       }
 
-      LOG.info("Application has started successfully.");
+      LOGGER.info("Application has started successfully.");
     } catch (InterruptUpdate ex) {
-      LOG.error("{}", ex.getStackTrace());
+      LOGGER.error("{}", ex.getStackTrace());
       UpdaterOperation.setJobStatusToError(job, interruptMessage);
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
@@ -188,14 +193,14 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       UpdaterOperation.setJobStatusToError(job, ex.getMessage());
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
-    }
+    } 
   }
 
   @Override
   public void uncaughtException(Thread t, Throwable e) {
 
     UpdaterOperation.setJobStatusToError(job, e.getMessage());
-    LOG.error(e.getStackTrace().toString());
+    LOGGER.error(e.getStackTrace().toString());
     blocker.setUpdateNow(Boolean.FALSE);
   }
 

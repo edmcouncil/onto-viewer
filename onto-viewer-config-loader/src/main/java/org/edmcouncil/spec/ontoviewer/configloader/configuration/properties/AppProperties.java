@@ -18,6 +18,8 @@ public class AppProperties {
   private String viewerConfigFileName;
   private String defaultOntologyFileName;
   private String configPath;
+  private String[] zipURL;
+  private String[] ontologyCatalogPaths;
   private Map<String, Object> search;
 
   public String getConfigPath() {
@@ -59,4 +61,21 @@ public class AppProperties {
   public void setSearch(Map<String, Object> search) {
     this.search = search;
   }
+
+  public String[] getZipURL() {
+    return zipURL;
+  }
+
+  public void setZipURL(String[] ZipURL) {
+    this.zipURL = ZipURL;
+  }
+
+  public String[] getOntologyCatalogPaths() {
+    return ontologyCatalogPaths;
+  }
+
+  public void setOntologyCatalogPaths(String[] ontologyCatalogPaths) {
+    this.ontologyCatalogPaths = ontologyCatalogPaths;
+  }
+ 
 }

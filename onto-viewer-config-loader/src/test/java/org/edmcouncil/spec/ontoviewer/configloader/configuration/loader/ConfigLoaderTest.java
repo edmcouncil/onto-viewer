@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 
 /**
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
@@ -50,11 +51,11 @@ class ConfigLoaderTest {
       prepareConfigFiles(configFileName);
     }
 
-    var configLoader = new ConfigLoader();
+    var configLoader = new ConfigLoader(new AppProperties());
     try {
       Files.list(tempDir)
           .filter(Files::isRegularFile)
-          .forEach(configLoader::loadWeaselConfiguration);
+          .forEach(configLoader::loadViewerConfiguration);
 
       this.testViewerCoreConfig = configLoader.getConfiguration();
     } catch (Exception e) {

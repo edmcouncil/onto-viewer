@@ -120,7 +120,7 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
 
   private void getOntologyDir(Map<String, Set<String>> result) {
     if (configuration.containsKey(ConfigKeys.ONTOLOGY_DIR)) {
-      Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_DIR, new HashSet<>());
+      Set<String> item = result.getOrDefault(ConfigKeys.ONTOLOGY_DIR, new LinkedHashSet<>());
       configuration.get(ConfigKeys.ONTOLOGY_DIR).forEach((configItem) -> {
         item.add(configItem.toString());
       });
@@ -136,6 +136,16 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
       });
       result.put(ConfigKeys.ONTOLOGY_URL, item);
     }
+  }
+  
+  public  Set<String> getOntologyZipUrl() {
+    Set<String> result = new LinkedHashSet<>();
+    if (configuration.containsKey(ConfigKeys.ONTOLOGY_ZIP_URL)) {
+      configuration.get(ConfigKeys.ONTOLOGY_ZIP_URL).forEach((configItem) -> {
+        result.add(configItem.toString());
+      });
+    }
+    return result;
   }
 
   public Set<String> getOntologyMapper() {
@@ -355,5 +365,10 @@ public class CoreConfiguration implements Configuration<Set<ConfigItem>> {
         .map(StringItem.class::cast)
         .map(StringItem::toString)
         .collect(Collectors.toSet());
+  }
+  
+  public Optional<String> getOntologyDownloadDir() {
+    return getSingleStringValue(ConfigKeys.ONTOLOGY_DOWNLOAD_DIR);
+
   }
 }

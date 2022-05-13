@@ -5,6 +5,9 @@ package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
 public class ConfigKeys {
+  
+  public static final String ONTOLOGY_ROOT = "ontology";
+  public static final String ONTOLOGY_DOWNLOAD_DIR = "ontologyDownloadDir";
 
   public static final String PRIORITY_LIST = "priorityList";
   public static final String PRIORITY_LIST_ELEMENT = "priority";
@@ -25,6 +28,7 @@ public class ConfigKeys {
   public static final String ONTOLOGY_MAPPER = "ontologyMapper";
   public static final String ONTOLOGY_MAPPING_MAP = "ontologyMapping";
   public static final String ONTOLOGY_CATALOG_PATH = "ontologyCatalogPath";
+  public static final String ONTOLOGY_ZIP_URL = "ontologyZipURL";
   //uri / iri
   public static final String SCOPE_IRI = "scopeIri";
   public static final String URI_NAMESPACE = "uriNamespace";

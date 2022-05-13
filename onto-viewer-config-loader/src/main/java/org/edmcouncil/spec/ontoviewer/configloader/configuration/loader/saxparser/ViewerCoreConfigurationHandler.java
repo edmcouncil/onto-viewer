@@ -53,6 +53,12 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes) {
     switch (qName) {
+      case ConfigKeys.ONTOLOGY_ROOT:
+        int attributeLength = attributes.getLength();
+        if(attributeLength>0 && attributes.getQName(0).equals(ConfigKeys.ONTOLOGY_DOWNLOAD_DIR)) {
+          configuration.addConfigElement(ConfigKeys.ONTOLOGY_DOWNLOAD_DIR, new StringItem(attributes.getValue(0)));
+        }
+        break;
       case ConfigKeys.PRIORITY_LIST:
       case ConfigKeys.IGNORE_TO_DISPLAYING:
       case ConfigKeys.IGNORE_TO_LINKING:
@@ -63,6 +69,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_DIR:
       case ConfigKeys.ONTOLOGY_MAPPER:
       case ConfigKeys.ONTOLOGY_CATALOG_PATH:
+      case ConfigKeys.ONTOLOGY_ZIP_URL:
       case ConfigKeys.DISPLAY_LABEL:
       case ConfigKeys.FORCE_LABEL_LANG:
       case ConfigKeys.LABEL_LANG:
@@ -130,6 +137,7 @@ public class ViewerCoreConfigurationHandler extends DefaultHandler {
       case ConfigKeys.ONTOLOGY_MAPPER:
       case ConfigKeys.ONTOLOGY_CATALOG_PATH:
       case ConfigKeys.ONTOLOGY_MODULE_IGNORE_PATTERN:
+      case ConfigKeys.ONTOLOGY_ZIP_URL:
         StringItem ontologyPath = new StringItem(val);
         configuration.addConfigElement(key, ontologyPath);
         ontologyPath = null;
