@@ -5,14 +5,10 @@ import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.Set;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.GroupsItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlDetails;
@@ -42,18 +38,20 @@ public class DetailsManager {
   private static final String DEFAULT_GROUP_NAME = "other";
   private static final String NOT_FOUND_ENTITY_MESSAGE = "Not found element with IRI: %s";
 
+  private final ApplicationConfigurationService applicationConfigurationService;
   private final OntologyManager ontologyManager;
   private final OwlDataHandler dataHandler;
-  private final ConfigurationService configurationService;
   private final ChangerIriToLabelService changerIriToLabelService;
   private final DescriptionGenerator descriptionGenerator;
 
-  public DetailsManager(OntologyManager ontologyManager, OwlDataHandler dataHandler,
-      ConfigurationService configurationService, ChangerIriToLabelService changerIriToLabelService,
+  public DetailsManager(ApplicationConfigurationService applicationConfigurationService,
+      OntologyManager ontologyManager,
+      OwlDataHandler dataHandler,
+      ChangerIriToLabelService changerIriToLabelService,
       DescriptionGenerator descriptionGenerator) {
+    this.applicationConfigurationService = applicationConfigurationService;
     this.ontologyManager = ontologyManager;
     this.dataHandler = dataHandler;
-    this.configurationService = configurationService;
     this.changerIriToLabelService = changerIriToLabelService;
     this.descriptionGenerator = descriptionGenerator;
   }
@@ -87,21 +85,22 @@ public class DetailsManager {
     result.setIri(entityIri.toString());
 
     // Path to element in modules
-    if (getSetting(ConfigKeys.LOCATION_IN_MODULES_ENABLED)) {
+    var locationInModulesEnabled = applicationConfigurationService.getConfigurationData()
+        .getToolkitConfig()
+        .isLocationInModulesEnabled();
+    if (locationInModulesEnabled) {
       result.setLocationInModules(
           dataHandler.getElementLocationInModules(
               entityIri.getIRIString()));
     }
 
-    if (configurationService.getCoreConfiguration().isNotEmpty()) {
-      CoreConfiguration coreConfiguration = configurationService.getCoreConfiguration();
-      if (coreConfiguration.isGrouped()) {
-        OwlGroupedDetails newResult = groupDetails(result, coreConfiguration);
-        addGeneratedDescription(newResult);
-        return newResult;
-      } else {
-        sortResults(result);
-      }
+    ConfigurationData coreConfiguration = applicationConfigurationService.getConfigurationData();
+    if (applicationConfigurationService.hasConfiguredGroups()) {
+      OwlGroupedDetails newResult = groupDetails(result, coreConfiguration);
+      addGeneratedDescription(newResult);
+      return newResult;
+    } else {
+      sortResults(result);
     }
 
     return result;
@@ -144,19 +143,20 @@ public class DetailsManager {
   }
 
   private OwlDetails setGroupedDetailsIfEnabled(String iriString, OwlListDetails result) {
-    if (getSetting(ConfigKeys.LOCATION_IN_MODULES_ENABLED)) {
+    var locationInModulesEnabled = applicationConfigurationService.getConfigurationData()
+        .getToolkitConfig()
+        .isLocationInModulesEnabled();
+    if (locationInModulesEnabled) {
       result.setLocationInModules(dataHandler.getElementLocationInModules(iriString));
     }
 
-    if (configurationService.getCoreConfiguration().isNotEmpty()) {
-      CoreConfiguration coreConfiguration = configurationService.getCoreConfiguration();
-      if (coreConfiguration.isGrouped()) {
-        OwlGroupedDetails newResult = groupDetails(result, coreConfiguration);
-        addGeneratedDescription(newResult);
-        return newResult;
-      } else {
-        sortResults(result);
-      }
+    ConfigurationData configurationData = applicationConfigurationService.getConfigurationData();
+    if (applicationConfigurationService.hasConfiguredGroups()) {
+      OwlGroupedDetails newResult = groupDetails(result, configurationData);
+      addGeneratedDescription(newResult);
+      return newResult;
+    } else {
+      sortResults(result);
     }
 
     return result;
@@ -187,10 +187,9 @@ public class DetailsManager {
     return result;
   }
 
-  private OwlGroupedDetails groupDetails(OwlListDetails owlDetails,
-      CoreConfiguration configuration) {
+  private OwlGroupedDetails groupDetails(OwlListDetails owlDetails, ConfigurationData configurationData) {
     var groupedDetails = new OwlGroupedDetails();
-    var groups = configuration.getConfiguration().get(ConfigKeys.GROUPS);
+    var groups = configurationData.getGroupsConfig().getGroups();
 
     for (Map.Entry<String, List<PropertyValue>> entry : owlDetails.getProperties().entrySet()) {
       String propertyKey = entry.getKey();
@@ -208,7 +207,7 @@ public class DetailsManager {
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
     groupedDetails.setMaturityLevel(owlDetails.getMaturityLevel());
-    groupedDetails.sortProperties(groups, configuration);
+    groupedDetails.sortProperties(groups);
 
     // first must be sorted next we need to change keys
     groupedDetails = changerIriToLabelService.changeIriKeysInGroupedDetails(groupedDetails);
@@ -217,27 +216,28 @@ public class DetailsManager {
     return groupedDetails;
   }
 
-  private String getGroupName(Set<ConfigItem> groups, String propertyKey) {
+  private String getGroupName(Map<String, List<String>> groups, String propertyKey) {
+    // TODO: groups as set of strings?
     if (propertyKey == null || propertyKey.isEmpty()) {
       return null;
     }
-    for (ConfigItem g : groups) {
-      GroupsItem group = (GroupsItem) g;
-      if (group.getElements() != null && !group.getElements().isEmpty()) {
-        if (group.contains(propertyKey)) {
-          return group.getName();
-        }
+
+    for (Entry<String, List<String>> groupEntry : groups.entrySet()) {
+      if (groupEntry.getValue() != null && groupEntry.getValue().contains(propertyKey)) {
+        return groupEntry.getKey();
       }
     }
+
     return null;
   }
 
   private void sortResults(OwlListDetails result) {
-    var set = configurationService.getCoreConfiguration().getValue(ConfigKeys.PRIORITY_LIST);
-    if (set == null) {
+    var priorityList =
+        applicationConfigurationService.getConfigurationData().getGroupsConfig().getPriorityList();
+    if (priorityList == null) {
       return;
     }
-    List<StringItem> prioritySortList = new LinkedList<>();
+    List<String> prioritySortList = new LinkedList<>();
     result.sortProperties(prioritySortList);
   }
 
@@ -251,9 +251,5 @@ public class DetailsManager {
         "Glossary",
         "generated description",
         descriptionValue)));
-  }
-
-  private boolean getSetting(String key) {
-    return (boolean) configurationService.getCoreConfiguration().getOntologyHandling().get(key);
   }
 }

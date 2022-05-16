@@ -17,8 +17,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.io.FilenameUtils;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.CoreConfiguration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
@@ -49,12 +49,12 @@ public class AutoOntologyLoader {
   private static final Logger LOGGER = getLogger(AutoOntologyLoader.class);
   private static final Set<String> SUPPORTED_EXTENSIONS = Set.of("rdf", "owl", "ttl");
 
-  private final CoreConfiguration coreConfiguration;
+  private final ConfigurationData configurationData;
   private final FileSystemManager fileSystemManager;
   private final MissingImportListenerImpl missingImportListenerImpl;
 
-  public AutoOntologyLoader(CoreConfiguration viewerCoreConfiguration, FileSystemManager fileSystemManager) {
-    this.coreConfiguration = viewerCoreConfiguration;
+  public AutoOntologyLoader(ConfigurationData configurationData, FileSystemManager fileSystemManager) {
+    this.configurationData = configurationData;
     this.fileSystemManager = fileSystemManager;
     this.missingImportListenerImpl = new MissingImportListenerImpl();
   }
@@ -105,44 +105,24 @@ public class AutoOntologyLoader {
   private Set<OntologySource> prepareOntologySources() {
     Set<OntologySource> ontologyIrisToLoad = new HashSet<>();
 
-    for (Map.Entry<String, Set<String>> ontologyLocation : coreConfiguration.getOntologyLocation().entrySet()) {
-      switch (ontologyLocation.getKey()) {
-        case ConfigKeys.ONTOLOGY_DIR: {
-          for (String dir : ontologyLocation.getValue()) {
-            Path directoryPath = Path.of(dir);
+    OntologiesConfig ontologiesConfig = configurationData.getOntologiesConfig();
+    for (String ontologyPathString : ontologiesConfig.getPaths()) {
+      Path ontologyPath = Path.of(ontologyPathString);
 
-            if (!directoryPath.isAbsolute()) {
-              // If the provided directory path is not absolute, we want to resolve it based on the app's home dir
-              directoryPath = fileSystemManager.getViewerHomeDir().resolve(directoryPath);
-            }
-
-            if (Files.isDirectory(directoryPath)) {
-              mappingDirectory(directoryPath, ontologyIrisToLoad);
-            } else {
-              LOGGER.warn("Expected '{}' to be a directory but it isn't.", directoryPath);
-            }
-          }
-          break;
-        }
-        case ConfigKeys.ONTOLOGY_URL: {
-          var ontologyIris = ontologyLocation.getValue().stream()
-              .map(IRI::create)
-              .collect(Collectors.toSet());
-
-          ontologyIris.forEach(iri -> ontologyIrisToLoad.add(new OntologySource(iri.toString(), SourceType.URL)));
-          break;
-        }
-        case ConfigKeys.ONTOLOGY_PATH: {
-          var documentIris = new HashSet<>(ontologyLocation.getValue());
-
-          documentIris.forEach(iri -> ontologyIrisToLoad.add(new OntologySource(iri, SourceType.FILE)));
-          break;
-        }
-        default:
-          LOGGER.warn("Unknown key '{}' for ontology location, value: {}",
-              ontologyLocation.getKey(),
-              ontologyLocation.getValue());
+      if (!ontologyPath.isAbsolute()) {
+        // If the provided directory path is not absolute, we want to resolve it based on the app's home dir
+        ontologyPath = fileSystemManager.getViewerHomeDir().resolve(ontologyPath);
       }
+
+      if (Files.isDirectory(ontologyPath)) {
+        mappingDirectory(ontologyPath, ontologyIrisToLoad);
+      } else {
+        ontologyIrisToLoad.add(new OntologySource(ontologyPath.toString(), SourceType.FILE));
+      }
+    }
+
+    for (String ontologyUrl : ontologiesConfig.getUrls()) {
+      ontologyIrisToLoad.add(new OntologySource(ontologyUrl, SourceType.URL));
     }
 
     return ontologyIrisToLoad;
@@ -151,16 +131,7 @@ public class AutoOntologyLoader {
   private List<OntologyMapping> loadMappersToOntologyManager() {
     List<OntologyMapping> ontologyMappings = new ArrayList<>();
 
-    coreConfiguration.getOntologyMapping()
-        .forEach((iriString, path) ->
-            ontologyMappings.add(
-                new OntologyMapping(
-                    IRI.create(iriString),
-                    Path.of(path.toString()),
-                    path.toString(),
-                    MappingSource.CONFIGURATION)));
-
-    var ontologyCatalogPaths = coreConfiguration.getOntologyCatalogPaths();
+    var ontologyCatalogPaths = configurationData.getOntologiesConfig().getCatalogPaths();
     ontologyCatalogPaths.forEach(ontologyCatalogPath -> {
       try {
         if (!Path.of(ontologyCatalogPath).isAbsolute()) {

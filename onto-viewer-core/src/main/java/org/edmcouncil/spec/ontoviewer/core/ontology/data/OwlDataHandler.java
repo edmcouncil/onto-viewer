@@ -6,8 +6,8 @@ import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_DATA_PROPE
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_OBJECT_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.TAXONOMY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
-import com.github.jsonldjava.shaded.com.google.common.collect.ImmutableSet;
 
+import com.github.jsonldjava.shaded.com.google.common.collect.ImmutableSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,9 +22,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
@@ -110,7 +109,7 @@ public class OwlDataHandler {
   @Autowired
   private OwlUtils owlUtils;
   @Autowired
-  private ConfigurationService config;
+  private ApplicationConfigurationService applicationConfigurationService;
   @Autowired
   private ScopeIriOntology scopeIriOntology;
   @Autowired
@@ -119,8 +118,6 @@ public class OwlDataHandler {
   private EntitiesCacheService entitiesCacheService;
   @Autowired
   private OntologyManager ontologyManager;
-  @Autowired
-  private ConfigurationService configurationService;
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
@@ -143,6 +140,8 @@ public class OwlDataHandler {
   }
 
   public OwlListDetails handleParticularClass(OWLClass owlClass) {
+    var configurationData = applicationConfigurationService.getConfigurationData();
+
     var ontology = ontologyManager.getOntology();
     var classIri = owlClass.getIRI();
     var resultDetails = new OwlListDetails();
@@ -157,12 +156,12 @@ public class OwlDataHandler {
 
       OwlDetailsProperties<PropertyValue> directSubclasses = handleDirectSubclasses(owlClass);
       OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
-      if (getSetting(ConfigKeys.INDIVIDUALS_ENABLED)) {
+      if (configurationData.getToolkitConfig().isIndividualsEnabled()) {
         individuals = handleInstances(ontology, owlClass);
       }
 
       OwlDetailsProperties<PropertyValue> usage = new OwlDetailsProperties<>();
-      if (getSetting(ConfigKeys.USAGE_ENABLED)) {
+      if (configurationData.getToolkitConfig().isUsageEnabled()) {
         usage = extractUsageForClasses(owlClass, ontology);
       }
 
@@ -170,7 +169,7 @@ public class OwlDataHandler {
           handleInheritedAxioms(ontology, owlClass);
 
       OntologyGraph ontologyGraph = new OntologyGraph();
-      if (getSetting(ConfigKeys.ONTOLOGY_GRAPH_ENABLED)) {
+      if (configurationData.getToolkitConfig().isOntologyGraphEnabled()) {
         // 'Nothing' has all restrictions, we don't want to display that.
         if (!owlClass.getIRI().equals(OWLRDFVocabulary.OWL_NOTHING.getIRI())) {
           ontologyGraph = graphDataHandler.handleGraph(owlClass, ontology);
@@ -189,7 +188,7 @@ public class OwlDataHandler {
       setResultValues(resultDetails, taxonomy, axioms, annotations, directSubclasses, individuals,
           inheritedAxioms, usage, ontologyGraph, subclasses);
     } catch (Exception ex) {
-      LOG.warn("Unable to handle class " + classIri + ". Details: " + ex.getMessage(), ex);
+      LOG.warn("Unable to handle class {}. Details: {}", classIri, ex.getMessage(), ex);
     }
 
     return resultDetails;
@@ -519,7 +518,6 @@ public class OwlDataHandler {
     String splitFragment = StringUtils.getIdentifier(elementIri);
     Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-    Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
     int start = 0;
 
     while (axiomsIterator.hasNext()) {
@@ -529,7 +527,7 @@ public class OwlDataHandler {
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
-          fixRenderedIri, ignoredToDisplay, key, start, true);
+          fixRenderedIri, key, start, true);
 
       if (opv == null) {
         continue;
@@ -548,11 +546,9 @@ public class OwlDataHandler {
       String iriFragment,
       String splitFragment,
       Boolean fixRenderedIri,
-      Set<String> ignoredToDisplay,
       String key
   ) {
-    return prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri,
-        ignoredToDisplay, key, 0, true);
+    return prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, key, 0, true);
   }
 
   private <T extends OWLAxiom> OwlAxiomPropertyValue prepareAxiomPropertyValue(
@@ -560,7 +556,6 @@ public class OwlDataHandler {
       String iriFragment,
       String splitFragment,
       Boolean fixRenderedIri,
-      Set<String> ignoredToDisplay,
       String key,
       int startCountingArgs,
       boolean bypassClass
@@ -573,9 +568,6 @@ public class OwlDataHandler {
 
     if (bypassClass) {
       value = fixRenderedValue(value, iriFragment, splitFragment, fixRenderedIri);
-    }
-    if (ignoredToDisplay.contains(key)) {
-      return null;
     }
     OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue();
     axiomPropertyValue.setValue(value);
@@ -962,7 +954,7 @@ public class OwlDataHandler {
         OwlDirectedSubClassesProperty subClassProperty = new OwlDirectedSubClassesProperty();
         subClassProperty.setType(OwlType.DIRECT_SUBCLASSES);
         subClassProperty.setValue(
-            new PairImpl(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
+            new Pair(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
         String key = ViewerIdentifierFactory.createId(
             ViewerIdentifierFactory.Type.function,
             OwlType.DIRECT_SUBCLASSES.name().toLowerCase());
@@ -996,7 +988,7 @@ public class OwlDataHandler {
       OwlDirectedSubClassesProperty r = new OwlDirectedSubClassesProperty();
 
       r.setType(OwlType.DIRECT_SUBCLASSES);
-      r.setValue(new PairImpl(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
+      r.setValue(new Pair(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
 
       LOG.debug("OwlDataHandler -> handleDirectSubObjectProperty3 {}", r);
       String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
@@ -1033,7 +1025,7 @@ public class OwlDataHandler {
       OwlDirectedSubClassesProperty r = new OwlDirectedSubClassesProperty();
 
       r.setType(OwlType.DIRECT_SUBCLASSES);
-      r.setValue(new PairImpl(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
+      r.setValue(new Pair(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
 
       String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
           OwlType.DIRECT_SUB_ANNOTATION_PROPERTY.name().toLowerCase());
@@ -1066,7 +1058,7 @@ public class OwlDataHandler {
       OwlDirectedSubClassesProperty r = new OwlDirectedSubClassesProperty();
 
       r.setType(OwlType.DIRECT_SUBCLASSES);
-      r.setValue(new PairImpl(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
+      r.setValue(new Pair(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
 
       String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
           OwlType.DIRECT_SUB_DATA_PROPERTY.name().toLowerCase());
@@ -1343,16 +1335,14 @@ public class OwlDataHandler {
       String splitFragment = StringUtils.getIdentifier(iri);
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
-
       OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(
           axiom,
           iriFragment,
           splitFragment,
           fixRenderedIri,
-          ignoredToDisplay, key, start, false);
+          key, start, false);
       start = opv.getLastId() + 1;
-      List<OwlAxiomPropertyValue> ll = values.getOrDefault(iri, new LinkedList());
+      List<OwlAxiomPropertyValue> ll = values.getOrDefault(iri, new LinkedList<>());
       ll.add(opv);
 
       values.put(iri, ll);
@@ -1416,10 +1406,8 @@ public class OwlDataHandler {
       String splitFragment = StringUtils.getIdentifier(rangeEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
-
-      OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
-          fixRenderedIri, ignoredToDisplay, key, startR, false);
+      OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, key,
+          startR, false);
       startR = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = valuesO.getOrDefault(rangeEntity, new LinkedList<>());
       ll.add(opv);
@@ -1483,10 +1471,8 @@ public class OwlDataHandler {
       String splitFragment = StringUtils.getIdentifier(domainEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
-
-      OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
-          fixRenderedIri, ignoredToDisplay, key, startD, false);
+      OwlAxiomPropertyValue opv = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, key,
+          startD, false);
       startD = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = valuesD.getOrDefault(domainEntity, new LinkedList());
       ll.add(opv);
@@ -1550,7 +1536,9 @@ public class OwlDataHandler {
 
   }
 
+  // TODO: Remove
   private boolean getSetting(String key) {
-    return (boolean) configurationService.getCoreConfiguration().getOntologyHandling().get(key);
+//    return (boolean) configurationService.getCoreConfiguration().getOntologyHandling().get(key);
+    return false;
   }
 }

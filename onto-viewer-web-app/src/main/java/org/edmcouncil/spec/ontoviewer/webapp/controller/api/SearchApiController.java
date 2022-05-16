@@ -1,12 +1,18 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller.api;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.ListResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult.Type;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
-import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
 import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,26 +33,21 @@ public class SearchApiController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(SearchApiController.class);
 
-  private final TextSearchService textSearchService;
+  private final LuceneSearcher luceneSearcher;
   private final OntologySearcherService ontologySearcher;
   private final UpdateBlocker blocker;
 
   private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 20;
-  private static final Integer DEFAULT_RESULT_PAGE = 1;
 
-  public SearchApiController(TextSearchService textSearchService,
-      OntologySearcherService ontologySearcher,
+  public SearchApiController(LuceneSearcher luceneSearcher, OntologySearcherService ontologySearcherService,
       UpdateBlocker blocker) {
-    this.textSearchService = textSearchService;
-    this.ontologySearcher = ontologySearcher;
+    this.luceneSearcher = luceneSearcher;
+    this.ontologySearcher = ontologySearcherService;
     this.blocker = blocker;
   }
 
-  @PostMapping(value = {"", "/max/{max}", "/page/{page}", "/max/{max}/page/{page}"})
-  public ResponseEntity<SearcherResult> searchJson(
-      @RequestBody String query,
-      @PathVariable Optional<Integer> max,
-      @PathVariable Optional<Integer> page) {
+  @PostMapping(value = "")
+  public ResponseEntity<SearcherResult> searchJson(@RequestBody String query) {
     if (!blocker.isInitializeAppDone()) {
       LOGGER.debug("Application initialization has not completed");
       return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
@@ -62,9 +63,20 @@ public class SearchApiController {
         long endTimestamp = System.currentTimeMillis();
         LOGGER.info("For query: '{}' (query time: '{}' ms) {}", query, endTimestamp - startTimestamp, result);
       } else {
-        Integer maxResults = max.orElse(DEFAULT_MAX_SEARCH_RESULT_COUNT);
-        Integer currentPage = page.orElse(DEFAULT_RESULT_PAGE);
-        result = textSearchService.search(query, maxResults, currentPage);
+        List<FindResult> findResults = luceneSearcher.search(query, true);
+        List<SearchItem> searchResults = findResults.stream()
+            .map(findResult -> {
+              var searchItem = new SearchItem();
+              searchItem.setIri(findResult.getIri());
+              searchItem.setLabel(findResult.getLabel());
+              var firstHighlight = findResult.getHighlights().stream().findFirst();
+              searchItem.setDescription(firstHighlight.isPresent() ? firstHighlight.get().getHighlightedText() : "");
+              searchItem.setRelevancy(findResult.getScore());
+              return searchItem;
+            })
+            .collect(Collectors.toList());
+        result = new ListResult(Type.list, searchResults);
+
         long endTimestamp = System.currentTimeMillis();
         LOGGER.info("For query: '{}' (query time: '{}' ms) result is:\n {}",
             query, endTimestamp - startTimestamp, result);

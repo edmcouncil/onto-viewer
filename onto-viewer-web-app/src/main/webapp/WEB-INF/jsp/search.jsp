@@ -12,7 +12,6 @@
 </c:choose>
 <!DOCTYPE HTML>
 <html>
-
   <head>
     <jsp:directive.include file="page/elements/head.jsp" />
   </head>
@@ -20,7 +19,6 @@
     <jsp:directive.include file="page/elements/header.jsp" />
 
     <button onclick="topFunction()" id="goToTopBtn" title="Go to top">Top</button>
-
 
     <c:set var = "detailsString" value = "details"/>
     <c:choose>
@@ -31,7 +29,6 @@
       <c:otherwise>
         <jsp:directive.include file="page/elements/listContent.jsp" />
       </c:otherwise>
-
     </c:choose>
 
 

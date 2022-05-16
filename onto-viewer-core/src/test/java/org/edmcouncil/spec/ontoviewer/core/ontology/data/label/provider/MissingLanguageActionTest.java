@@ -5,55 +5,36 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigItemType;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.BooleanItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.MissingLanguageItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.MissingLanguageAction;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFileBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.BaseTest;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 /**
  * @author patrycja.miazek (patrycja.miazek@makolab.com)
  */
-public class MissingLanguageActionTest extends BasicOntologyLoader {
-
-  @TempDir
-  Path tempDir;
+class MissingLanguageActionTest extends BaseTest {
 
   private LabelProvider labelProviderTest;
 
   @BeforeEach
   public void setUp() throws URISyntaxException, IOException, OWLOntologyCreationException {
-    var configurationService = new MemoryBasedConfigurationService();
-    var viewerCoreConfiguration = configurationService.getCoreConfiguration();
+    var fileSystemManager = prepareFileSystem();
+    var configurationService = new YamlFileBasedConfigurationService(fileSystemManager);
+    configurationService.init();
 
-    OntologyManager ontologyManager = prepareOntology(tempDir);
+    configurationService.getConfigurationData().getLabelConfig().setLabelLang("pl");
+    configurationService.getConfigurationData().getLabelConfig().setForceLabelLang(false);
+    configurationService.getConfigurationData().getLabelConfig().setMissingLanguageAction(MissingLanguageAction.FIRST);
 
-    StringItem labelLang = new StringItem("pl");
-    viewerCoreConfiguration.setConfigElement(ConfigKeys.LABEL_LANG, labelLang);
-
-    BooleanItem forceLabelLang = new BooleanItem();
-    forceLabelLang.setType(ConfigItemType.BOOLEAN);
-    forceLabelLang.setValue(Boolean.FALSE);
-    viewerCoreConfiguration.setConfigElement(ConfigKeys.FORCE_LABEL_LANG, forceLabelLang);
-
-    MissingLanguageItem missingLanguageItem = new MissingLanguageItem();
-    missingLanguageItem.setType(ConfigItemType.MISSING_LANGUAGE_ACTION);
-    missingLanguageItem.setValue(MissingLanguageItem.Action.FIRST);
-    viewerCoreConfiguration.setConfigElement(
-        ConfigKeys.MISSING_LANGUAGE_ACTION,
-        missingLanguageItem);
-
+    OntologyManager ontologyManager = prepareOntology(tempHomeDir);
     labelProviderTest = new LabelProvider(configurationService, ontologyManager);
   }
 

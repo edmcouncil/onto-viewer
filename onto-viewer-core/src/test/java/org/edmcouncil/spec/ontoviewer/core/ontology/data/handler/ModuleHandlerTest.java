@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.Map;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFileBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.BaseTest;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.AppMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
@@ -18,9 +20,8 @@ import org.junit.jupiter.api.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 
-class ModuleHandlerTest {
+class ModuleHandlerTest extends BaseTest {
 
   private static final String ROOT_IRI = "http://www.example.com/modules#";
   private static final MaturityLevel DEV_MATURITY_LEVEL = new AppMaturityLevel("dev");
@@ -76,7 +77,8 @@ class ModuleHandlerTest {
   }
 
   private ModuleHandler prepareModuleHandler(String ontologyPath) {
-    var configurationService = new MemoryBasedConfigurationService();
+    var configurationService = new YamlFileBasedConfigurationService(prepareFileSystem());
+    configurationService.init();
 
     var ontologyManager = getOntologyManager(ontologyPath);
     ontologyManager.setIriToPathMapping(
@@ -88,14 +90,13 @@ class ModuleHandlerTest {
     var labelProvider = new LabelProvider(configurationService, ontologyManager);
     var individualDataHandler = new IndividualDataHandler(labelProvider);
     var scopeIriOntology = new ScopeIriOntology();
-    var annotationsDataHandler = new AnnotationsDataHandler(
-        owlDataExtractor, customDataFactory, configurationService, scopeIriOntology);
-    var fiboOntologyHandler = new OntologyHandler(ontologyManager, labelProvider, annotationsDataHandler);
+    var annotationsDataHandler = new AnnotationsDataHandler(owlDataExtractor, customDataFactory, scopeIriOntology);
+    var ontologyHandler = new OntologyHandler(ontologyManager, labelProvider, annotationsDataHandler);
 
     return new ModuleHandler(ontologyManager,
         individualDataHandler,
         labelProvider,
-        fiboOntologyHandler,
+        ontologyHandler,
         configurationService);
   }
 

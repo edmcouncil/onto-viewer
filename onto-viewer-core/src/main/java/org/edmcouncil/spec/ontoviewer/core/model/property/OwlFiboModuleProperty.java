@@ -1,19 +1,19 @@
 package org.edmcouncil.spec.ontoviewer.core.model.property;
 
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
-import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class OwlFiboModuleProperty implements PropertyValue<PairImpl<String, String>> {
+public class OwlFiboModuleProperty implements PropertyValue<Pair> {
 
   private OwlType type;
-  private PairImpl<String, String> value;
+  private Pair value;
 
   public OwlFiboModuleProperty() {
-    value = new PairImpl<>();
+    value = new Pair();
   }
 
   @Override
@@ -27,12 +27,12 @@ public class OwlFiboModuleProperty implements PropertyValue<PairImpl<String, Str
   }
 
   @Override
-  public PairImpl<String, String> getValue() {
+  public Pair getValue() {
     return this.value;
   }
 
   @Override
-  public void setValue(PairImpl<String, String> value) {
+  public void setValue(Pair value) {
     this.value = value;
   }
 
@@ -51,5 +51,4 @@ public class OwlFiboModuleProperty implements PropertyValue<PairImpl<String, Str
   public void setName(String s) {
     value.setLabel(s);
   }
-
 }

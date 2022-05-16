@@ -6,25 +6,23 @@ import java.util.Map;
  * @author Michal Daniel (michal.daniel@makolab.com)
  */
 public class OntologyStatsMapped {
-    private Map<String, Number> stats;
-    private Map<String, String> labels;
 
-    public Map<String, Number> getStats() {
-        return stats;
-    }
+  private Map<String, Number> stats;
+  private Map<String, String> labels;
 
-    public void setStats(Map<String, Number> stats) {
-        this.stats = stats;
-    }
+  public Map<String, Number> getStats() {
+    return stats;
+  }
 
-    public Map<String, String> getLabels() {
-        return labels;
-    }
+  public void setStats(Map<String, Number> stats) {
+    this.stats = stats;
+  }
 
-    public void setLabels(Map<String, String> labels) {
-        this.labels = labels;
-    }
-    
-    
-    
+  public Map<String, String> getLabels() {
+    return labels;
+  }
+
+  public void setLabels(Map<String, String> labels) {
+    this.labels = labels;
+  }
 }

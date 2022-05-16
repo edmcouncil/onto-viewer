@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
 import org.edmcouncil.spec.ontoviewer.core.comparator.ComparatorWithAlphabeticalOrder;
 import org.edmcouncil.spec.ontoviewer.core.comparator.ComparatorWithPriority;
 
@@ -75,15 +74,13 @@ public class OwlDetailsProperties<T> {
     return properties;
   }
 
-  public void sort(List<StringItem> priotityList) {
-    Comparator<String> comparator = ComparatorWithPriority.get(priotityList);
+  public void sort(List<String> priorityList) {
+    Comparator<String> comparator = ComparatorWithPriority.get(priorityList);
     SortedSet<String> keys = new TreeSet<>(comparator);
     keys.addAll(properties.keySet());
 
     Map<String, List<T>> result = new LinkedHashMap<>();
-    keys.forEach((key) -> {
-      result.put(key, properties.get(key));
-    });
+    keys.forEach((key) -> result.put(key, properties.get(key)));
     properties = result;
   }
 
@@ -132,5 +129,4 @@ public class OwlDetailsProperties<T> {
     taxonomy = null;
     properties = null;
   }
-
 }

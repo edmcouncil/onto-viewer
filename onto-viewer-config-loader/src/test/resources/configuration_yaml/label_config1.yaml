@@ -1,0 +1,9 @@
+label_config:
+  display_label: false
+  label_priority: USER_DEFINED
+  force_label_lang: true
+  label_lang: pl
+  missing_language_action: LAST
+  user_default_name_list:
+    - id: 'http://www.w3.org/2000/01/rdf-schema#Literal'
+      name: literal
