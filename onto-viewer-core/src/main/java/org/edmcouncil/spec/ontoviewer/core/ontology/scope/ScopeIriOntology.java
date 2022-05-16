@@ -4,20 +4,17 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * This class is resposible for automatic generation of scope IRI. ScopeIRI helps application can
- * recognize which links are from the ontology and which should be generated outside. Many
- * ontologies have more than one scope and the ontology scope should be generated automatically from
- * the IRI loaded ontologies.
+ * This class is resposible for automatic generation of scope IRI. ScopeIRI helps application can recognize which links
+ * are from the ontology and which should be generated outside. Many ontologies have more than one scope and the
+ * ontology scope should be generated automatically from the IRI loaded ontologies.
  *
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  */
@@ -38,7 +35,7 @@ public class ScopeIriOntology {
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
 
     Set<OWLOntology> ontologies = manager.ontologies().collect(Collectors.toSet());
-    Set<String> scopesOntologies = new HashSet<String>();
+    Set<String> scopesOntologies = new HashSet<>();
     for (OWLOntology onto : ontologies) {
       LOG.debug("Scope IRI ontology: {}", onto.getOntologyID());
       Optional<IRI> ontologyVersionIri = onto.getOntologyID().getVersionIRI();
@@ -60,7 +57,8 @@ public class ScopeIriOntology {
         }
       }
       if (!ontologyIri.isPresent() && !ontologyVersionIri.isPresent()) {
-        LOG.debug("One ontology does not have an iri defined (ontology iri is not defined): {} {}", !ontologyIri.isPresent(), !ontologyVersionIri.isPresent());
+        LOG.debug("One ontology does not have an iri defined (ontology iri is not defined): {} {}",
+            !ontologyIri.isPresent(), !ontologyVersionIri.isPresent());
         Optional<IRI> defaultDocumentIri = onto.getOntologyID().getDefaultDocumentIRI();
         if (defaultDocumentIri.isPresent()) {
           LOG.debug("Default document IRI is definied: {}", defaultDocumentIri.isPresent());
@@ -82,8 +80,8 @@ public class ScopeIriOntology {
 
   public Boolean scopeIri(String uri) {
     for (String scope : scopes) {
-  //    LOG.debug("Contains: {} -> {}", uri, scope);
-      if (uri.contains(scope.toString())) {
+      //    LOG.debug("Contains: {} -> {}", uri, scope);
+      if (uri.contains(scope)) {
         return Boolean.TRUE;
       }
     }

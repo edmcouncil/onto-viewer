@@ -2,9 +2,9 @@
 <script type="text/javascript">
 
 function showHint(event) {
-  var x = event.target.value;
+  var searchResults = event.target.value;
 
-  if (x.length < 1) {
+  if (searchResults.length < 1) {
     $("#autocomplete").removeClass("show");
     return;
   }
@@ -17,9 +17,8 @@ function showHint(event) {
     return;
   }
   if (event.key === "Spacebar" || event.key === ' ') {
-    $("#search-query").val(x + " ");
+    $("#search-query").val(searchResults + " ");
   }
-
 
   autocomplete();
 }
@@ -31,20 +30,20 @@ function autocomplete() {
     url: $path,
     dataType: 'json',
     accepts: {
-        json: 'application/json'
+      json: 'application/json'
     },
     data: $text,
     contentType: 'text/plain',
     type: 'POST'
   })
-          .done(function (results) {
-            console.log(results);
-            showAutocompletes(results);
-          })
-          .fail(function (response) {
-            console.log("cannot load autocomplete from server, " + response);
-            $("#autocomplete").removeClass("show");
-          });
+    .done(function (results) {
+      console.log(results);
+      showAutocompletes(results);
+    })
+    .fail(function (response) {
+      console.log("cannot load autocomplete from server, " + response);
+      $("#autocomplete").removeClass("show");
+    });
 }
 
 function showAutocompletes(autocomplates) {

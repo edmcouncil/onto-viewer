@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.toolkit;
 
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys.ONTOLOGY_MAPPING_MAP;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_MAPPING;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.VERSION;
 
@@ -12,13 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigKeys;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.KeyValueMapConfigItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.element.StringItem;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
+import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
+import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
@@ -27,8 +25,6 @@ import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyConsistencyChecke
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.TextWriter;
-import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
-import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.Goal;
@@ -46,25 +42,28 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(OntoViewerToolkitCommandLine.class);
 
-  private final ConfigurationService configurationService;
+  private final ApplicationConfigurationService applicationConfigurationService;
   private final OntologyManager ontologyManager;
-  private final FiboDataHandler fiboDataHandler;
+  private final DataHandler fiboDataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
   private final OntologyConsistencyChecker ontologyConsistencyChecker;
   private final StandardEnvironment environment;
   private final ApplicationConfigProperties applicationConfigProperties;
 
   public OntoViewerToolkitCommandLine(
-      ConfigurationService configurationService,
+      ApplicationConfigurationService applicationConfigurationService,
       OntologyManager ontologyManager,
-      FiboDataHandler fiboDataHandler,
+      DataHandler dataHandler,
       OntologyTableDataExtractor ontologyTableDataExtractor,
       OntologyConsistencyChecker ontologyConsistencyChecker,
       StandardEnvironment environment,
       ApplicationConfigProperties applicationConfigProperties) {
-    this.configurationService = configurationService;
+    this.applicationConfigurationService = applicationConfigurationService;
+    // We don't need the default paths configuration in OV Toolkit
+    applicationConfigurationService.getConfigurationData().getOntologiesConfig().getPaths().clear();
+
     this.ontologyManager = ontologyManager;
-    this.fiboDataHandler = fiboDataHandler;
+    this.fiboDataHandler = dataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
     this.ontologyConsistencyChecker = ontologyConsistencyChecker;
     this.environment = environment;
@@ -128,8 +127,8 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   }
 
   private void populateConfiguration(CommandLineOptions commandLineOptions) {
-    var configuration = configurationService.getCoreConfiguration();
-    
+    var configurationData = applicationConfigurationService.getConfigurationData();
+
     var ontologyMappingOption = commandLineOptions.getOption(ONTOLOGY_MAPPING);
     if (ontologyMappingOption.isPresent()) {
       var ontologyMappingPath = ontologyMappingOption.get();
@@ -138,7 +137,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
           var catalog = new OntologyCatalogParser().readOntologyMapping(ontologyMappingPath);
           var ontologyMappingParentPath = Path.of(ontologyMappingPath).getParent();
 
-          var mappings = new HashMap<String, Object>();
+          var mappings = new HashMap<String, String>();
           for (Uri mapping : catalog.getUri()) {
             var ontologyPath = Path.of(mapping.getUri());
             if (!ontologyPath.isAbsolute()) {
@@ -151,8 +150,8 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
                   ontologyPath, mapping.getName());
             }
           }
-          var properties = new KeyValueMapConfigItem(mappings);
-          configuration.addConfigElement(ONTOLOGY_MAPPING_MAP, properties);
+
+          configurationData.getOntologiesConfig().getOntologyMappings().putAll(mappings);
         } catch (OntoViewerException ex) {
           var message = String.format("Error while handling ontology mapping from path '%s'. "
               + "Details: %s", ontologyMappingPath, ex.getMessage());
@@ -163,40 +162,31 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
     var ontologyPathOptions = commandLineOptions.getOptions(OptionDefinition.DATA);
     if (ontologyPathOptions != null) {
-      for (String ontologyPath : ontologyPathOptions) {
-        configuration.addConfigElement(
-            ConfigKeys.ONTOLOGY_PATH,
-            new StringItem(ontologyPath));
-      }
+      configurationData.getOntologiesConfig().getPaths().addAll(ontologyPathOptions);
     }
-    LOGGER.debug("Using ontology paths: {}", configuration.getOntologyLocation().values());
+    LOGGER.debug("Using ontology paths: {}", configurationData.getOntologiesConfig().getPaths());
 
     var filterPattern = commandLineOptions.getOption(OptionDefinition.FILTER_PATTERN).orElse("");
-    configuration.addConfigElement(
-        OptionDefinition.FILTER_PATTERN.argName(),
-        new StringItem(filterPattern));
+    configurationData.getToolkitConfig().setFilterPattern(filterPattern);
 
     var goal = commandLineOptions.getOption(OptionDefinition.GOAL).or(() -> {
       LOGGER.error("Unable to detect correct goal.");
       System.exit(1);
       return Optional.empty();
     });
-    configuration.addConfigElement(
-        OptionDefinition.GOAL.argName(),
-        new StringItem(goal.get()));
+    configurationData.getToolkitConfig().setGoal(goal.get());
   }
 
   private Goal resolveGoal() {
-    var goal = configurationService.getCoreConfiguration()
-        .getSingleStringValue(OptionDefinition.GOAL.argName())
-        .orElseThrow(IllegalArgumentException::new);
+    var goal = applicationConfigurationService.getConfigurationData()
+        .getToolkitConfig()
+        .getGoal();
     return Goal.byName(goal);
   }
 
   private void loadOntology() throws OntoViewerToolkitException {
     try {
-      var ontologyLoader = new CommandLineOntologyLoader(
-          configurationService.getCoreConfiguration());
+      var ontologyLoader = new CommandLineOntologyLoader(applicationConfigurationService.getConfigurationData());
       var loadedOntology = ontologyLoader.load();
       LOGGER.debug("Loaded ontology contains {} axioms.",
           loadedOntology.getAxiomCount(Imports.INCLUDED));

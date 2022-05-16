@@ -22,14 +22,10 @@ class ModuleApiControllerIT extends BaseControllerIT {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.length()", is(1)))
+        .andExpect(jsonPath("$.length()", is(2)))
         .andExpect(jsonPath("$[0].iri", is("https://spec.edmcouncil.org/fibo/ontology/BE/MetadataBE/BEDomain")))
         .andExpect(jsonPath("$[0].label", is("Business Entities")))
         .andExpect(jsonPath("$[0].maturityLevel.label", is("prod")))
-        .andExpect(jsonPath("$[0].subModule.length()", is(9)))
-        .andExpect(jsonPath("$[0].subModule[0].label", is("Corporations")))
-        .andExpect(jsonPath("$[0].subModule[0].maturityLevel.label", is("prod")))
-        .andExpect(jsonPath("$[0].subModule[0].subModule[0].label", is("Corporations")))
-        .andExpect(jsonPath("$[0].subModule[0].subModule[0].subModule.length()", is(0)));
+        .andExpect(jsonPath("$[0].subModule.length()", is(9)));
   }
 }

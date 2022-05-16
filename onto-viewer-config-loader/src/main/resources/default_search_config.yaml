@@ -1,0 +1,25 @@
+search_config:
+  search_descriptions:
+    - http://www.w3.org/2004/02/skos/core#definition
+    - http://purl.org/dc/terms/abstract
+  fuzzy_distance: 3
+  reindex_on_start: true
+  find_properties:
+    - label: RDFS Label
+      identifier: rdfs_label
+      iri: http://www.w3.org/2000/01/rdf-schema#label
+    - label: SKOS Definition
+      identifier: skos_definition
+      iri: http://www.w3.org/2004/02/skos/core#definition
+    - label: SKOS Note
+      identifier: skos_note
+      iri: http://www.w3.org/2004/02/skos/core#note
+    - label: PURL Description
+      identifier: purl_description
+      iri: http://purl.org/dc/terms/description
+    - label: SKOS Example
+      identifier: skos_example
+      iri: http://www.w3.org/2004/02/skos/core#example
+    - label: SKOS Scope Note
+      identifier: skos_scopeNote
+      iri: http://www.w3.org/2004/02/skos/core#scopeNote
