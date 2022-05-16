@@ -37,8 +37,8 @@ public class AnnotationsDataHandler {
   private static final String RELEASE_LABEL = "release";
   private static final String PROVISIONAL_LABEL = "provisional";
   private static final String INFORMATIVE_LABEL = "informative";
-  private static final String RELEASE_ICON = "release";
-  private static final String DEVELOP_ICON = "develop";
+  private static final String RELEASE_ICON = "prod";
+  private static final String DEVELOP_ICON = "dev";
 
   private final String FIBO_QNAME = "QName:";
   private final IRI HAS_MATURITY_LEVEL_IRI = IRI.create(
