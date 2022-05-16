@@ -18,7 +18,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.impl.elem
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
@@ -48,7 +48,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private final ConfigurationService configurationService;
   private final OntologyManager ontologyManager;
-  private final FiboDataHandler fiboDataHandler;
+  private final DataHandler dataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
   private final OntologyConsistencyChecker ontologyConsistencyChecker;
   private final StandardEnvironment environment;
@@ -57,14 +57,14 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   public OntoViewerToolkitCommandLine(
       ConfigurationService configurationService,
       OntologyManager ontologyManager,
-      FiboDataHandler fiboDataHandler,
+      DataHandler dataHandler,
       OntologyTableDataExtractor ontologyTableDataExtractor,
       OntologyConsistencyChecker ontologyConsistencyChecker,
       StandardEnvironment environment,
       ApplicationConfigProperties applicationConfigProperties) {
     this.configurationService = configurationService;
     this.ontologyManager = ontologyManager;
-    this.fiboDataHandler = fiboDataHandler;
+    this.dataHandler = dataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
     this.ontologyConsistencyChecker = ontologyConsistencyChecker;
     this.environment = environment;
@@ -202,7 +202,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
           loadedOntology.getAxiomCount(Imports.INCLUDED));
 
       ontologyManager.updateOntology(loadedOntology);
-      fiboDataHandler.populateOntologyResources(loadedOntology);
+      dataHandler.populateOntologyResources(loadedOntology);
     } catch (Exception ex) {
       var message = String.format(
           "Exception occurred while loading ontology. Details: %s",

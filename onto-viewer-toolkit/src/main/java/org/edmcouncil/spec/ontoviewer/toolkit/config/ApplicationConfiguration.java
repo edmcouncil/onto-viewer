@@ -9,7 +9,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.RestrictionGraphDataHan
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ import org.springframework.core.io.ClassPathResource;
     AnnotationsDataHandler.class,
     CustomDataFactory.class,
     DetailsManager.class,
-    FiboDataHandler.class,
+    DataHandler.class,
     IndividualDataHandler.class,
     LabelProvider.class,
     OntologyManager.class,
