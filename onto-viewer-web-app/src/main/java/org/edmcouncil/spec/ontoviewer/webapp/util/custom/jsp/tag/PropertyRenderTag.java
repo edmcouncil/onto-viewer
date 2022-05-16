@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairImpl;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlSimpleProperty;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDirectedSubClassesProperty;
@@ -230,21 +230,21 @@ public class PropertyRenderTag extends SimpleTagSupport {
 
   private void renderDirectedSubclasses(PropertyValue property) throws IOException {
     OwlDirectedSubClassesProperty subclassProperty = (OwlDirectedSubClassesProperty) property;
-    PairImpl value = subclassProperty.getValue();
+    Pair value = subclassProperty.getValue();
     String link = wrapIri((String) value.getIri(), (String) value.getLabel());
     renderProperty(link);
   }
 
   private void renderInstances(PropertyValue property) throws IOException {
     OwlListElementIndividualProperty instanceProperty = (OwlListElementIndividualProperty) property;
-    PairImpl value = instanceProperty.getValue();
+    Pair value = instanceProperty.getValue();
     String link = wrapIri((String) value.getIri(), (String) value.getLabel());
     renderProperty(link);
   }
 
   private void renderModules(PropertyValue property) throws IOException {
     OwlFiboModuleProperty fiboModuleProperty = (OwlFiboModuleProperty) property;
-    PairImpl value = fiboModuleProperty.getValue();
+    Pair value = fiboModuleProperty.getValue();
     String link = wrapIri((String) value.getIri(), (String) value.getLabel());
     renderProperty(link);
   }

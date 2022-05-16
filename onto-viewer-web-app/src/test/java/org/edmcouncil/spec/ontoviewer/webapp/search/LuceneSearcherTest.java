@@ -12,7 +12,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFileBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.junit.jupiter.api.AfterEach;
@@ -35,13 +35,16 @@ class LuceneSearcherTest {
 
     var appProperties = new AppProperties();
     appProperties.setDefaultHomePath(tempHomePath.toString());
+    appProperties.setConfigPath("config");
     appProperties.setSearch(Map.of("reindexOnStart", "true"));
-    var configurationService = new MemoryBasedConfigurationService();
 
     var fileSystemManager = new FileSystemManager(appProperties);
+    var applicationConfigurationService = new YamlFileBasedConfigurationService(fileSystemManager);
+    applicationConfigurationService.init();
+
     var ontologyManager = prepareOntologyManager();
     this.luceneSearcher = new LuceneSearcher(
-        appProperties, fileSystemManager, ontologyManager, configurationService);
+        appProperties, fileSystemManager, ontologyManager, applicationConfigurationService);
     this.luceneSearcher.init();
     this.luceneSearcher.populateIndex();
   }
@@ -155,7 +158,7 @@ class LuceneSearcherTest {
   void shouldReturnListOfSupportedFindProperties() {
     var actualResult = luceneSearcher.getFindProperties();
 
-    assertThat(actualResult.size(), equalTo(14));
+    assertThat(actualResult.size(), equalTo(6));
     assertThat(actualResult.get(0), equalTo(
         new FindProperty(
             "RDFS Label",

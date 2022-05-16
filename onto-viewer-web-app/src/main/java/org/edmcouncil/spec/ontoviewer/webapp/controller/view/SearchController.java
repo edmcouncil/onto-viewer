@@ -4,17 +4,24 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.ListResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearchItem;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
+import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult.Type;
 import org.edmcouncil.spec.ontoviewer.core.service.EntityService;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.Highlight;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
+import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
-import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilder;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilderFactory;
 import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
@@ -44,18 +51,15 @@ public class SearchController {
   @Autowired
   private ModelBuilderFactory modelFactory;
   @Autowired
-  private TextSearchService textSearchService;
-  @Autowired
   private OntologySearcherService ontologySearcher;
   @Autowired
-  private ConfigurationService config;
+  private ApplicationConfigurationService applicationConfigurationService;
   @Autowired
   private UpdateBlocker blocker;
   @Autowired
   private EntityService entityService;
-
-  private static final Integer DEFAULT_MAX_SEARCH_RESULT_COUNT = 25;
-  private static final Integer DEFAULT_RESULT_PAGE = 1;
+  @Autowired
+  private LuceneSearcher luceneSearcher;
 
   @PostMapping
   public ModelAndView redirectSearch(@ModelAttribute("queryValue") Query query) {
@@ -67,9 +71,9 @@ public class SearchController {
 
   @GetMapping
   public String search(@RequestParam("query") String query,
-          Model model,
-          @RequestParam(value = "max", required = false, defaultValue = "25") Integer max,
-          @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+      Model model,
+      @RequestParam(value = "max", required = false, defaultValue = "25") Integer max,
+      @RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
     if (!blocker.isInitializeAppDone()) {
       LOG.debug("Application initialization has not completed");
       ModelBuilder mb = new ModelBuilder(model);
@@ -82,7 +86,7 @@ public class SearchController {
     q.setValue(query);
     ModelBuilder modelBuilder = modelFactory.getInstance(model);
     List<FiboModule> modules = dataManager.getAllModulesData();
-    boolean isGrouped = config.getCoreConfiguration().isGrouped();
+    boolean isGrouped = applicationConfigurationService.hasConfiguredGroups();
     long startTimestamp = System.currentTimeMillis();
     SearcherResult result = null;
     try {
@@ -91,14 +95,29 @@ public class SearchController {
         result = ontologySearcher.search(query, 0);
 
         long endTimestamp = System.currentTimeMillis();
-        LOG.info("URL detected: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp, result);
+        LOG.info("URL detected: '{}' (query time: '{}' ms) result is:\n {}", query, endTimestamp - startTimestamp,
+            result);
 
         modelBuilder.emptyQuery();
       } else {
         modelBuilder.setQuery(query);
-        result = textSearchService.search(query, max, page);
+        List<FindResult> findResults = luceneSearcher.search(query, true);
+        List<SearchItem> searchResults = findResults.stream()
+            .map(findResult -> {
+              var searchItem = new SearchItem();
+              searchItem.setIri(findResult.getIri());
+              searchItem.setLabel(findResult.getLabel());
+              var firstHighlight = findResult.getHighlights().stream().findFirst();
+              searchItem.setDescription(firstHighlight.isPresent() ? firstHighlight.get().getHighlightedText() : "");
+              searchItem.setRelevancy(findResult.getScore());
+              return searchItem;
+            })
+            .collect(Collectors.toList());
+        result = new ListResult(Type.list, searchResults);
+
         long endTimestamp = System.currentTimeMillis();
-        LOG.info("String detected: '{}' (query time: '{}' ms), max: '{}', page '{}', result '{}'", query, endTimestamp - startTimestamp, max, page, result);
+        LOG.info("String detected: '{}' (query time: '{}' ms), max: '{}', page '{}', result '{}'", query,
+            endTimestamp - startTimestamp, max, page, result);
       }
     } catch (ViewerException ex) {
       LOG.info("Handle ViewerException. Message: '{}'", ex.getMessage());
@@ -109,9 +128,9 @@ public class SearchController {
     }
 
     modelBuilder
-            .setResult(result)
-            .isGrouped(isGrouped)
-            .modelTree(modules);
+        .setResult(result)
+        .isGrouped(isGrouped)
+        .modelTree(modules);
 
     return "search";
   }

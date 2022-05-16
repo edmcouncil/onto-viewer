@@ -24,8 +24,7 @@ public class TextWriter {
           WRITE, CREATE, TRUNCATE_EXISTING);
     } catch (IOException ex) {
       LOGGER.error(
-          String.format("Exception thrown while writing consistency result '%s' " +
-                  "to the output path '%s'. Details: %s",
+          String.format("Exception thrown while writing consistency result '%s' to the output path '%s'. Details: %s",
               consistencyResult,
               outputPath,
               ex.getMessage()

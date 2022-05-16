@@ -11,16 +11,17 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.utils.PathUtils;
@@ -34,7 +35,6 @@ import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 
 @Service
 public class ModuleHandler {
@@ -53,7 +53,7 @@ public class ModuleHandler {
   private final OntologyManager ontologyManager;
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
-  private final OntologyHandler fiboOntologyHandler;
+  private final OntologyHandler ontologyHandler;
   private final Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
   private final Set<Pattern> ontologyModuleIgnorePatterns;
   private final OWLAnnotationProperty hasPartAnnotation;
@@ -63,23 +63,25 @@ public class ModuleHandler {
   public ModuleHandler(OntologyManager ontologyManager,
       IndividualDataHandler individualDataHandler,
       LabelProvider labelProvider,
-      OntologyHandler fiboOntologyHandler,
-      ConfigurationService configurationService) {
+      OntologyHandler ontologyHandler,
+      ApplicationConfigurationService applicationConfigurationService) {
     this.ontologyManager = ontologyManager;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
-    this.fiboOntologyHandler = fiboOntologyHandler;
+    this.ontologyHandler = ontologyHandler;
 
     this.ontologiesToIgnoreWhenGeneratingModules =
-        configurationService.getCoreConfiguration()
-            .getOntologiesToIgnoreWhenGeneratingModules()
+        applicationConfigurationService.getConfigurationData()
+            .getOntologiesConfig()
+            .getModuleToIgnore()
             .stream()
             .map(IRI::create)
             .collect(Collectors.toSet());
 
     this.ontologyModuleIgnorePatterns =
-        configurationService.getCoreConfiguration()
-            .getOntologyModuleIgnorePatterns()
+        applicationConfigurationService.getConfigurationData()
+            .getOntologiesConfig()
+            .getModuleIgnorePatterns()
             .stream()
             .map(Pattern::compile)
             .collect(Collectors.toSet());
@@ -107,7 +109,7 @@ public class ModuleHandler {
           Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
               .stream()
               .map(OwlListElementIndividualProperty.class::cast)
-              .map(individualProperty -> individualProperty.getValue().getIri().toString())
+              .map(individualProperty -> individualProperty.getValue().getIri())
               .collect(Collectors.toSet());
 
           List<String> rootModulesIris = getRootModulesIris(modulesIris);
@@ -158,7 +160,7 @@ public class ModuleHandler {
           module.setLabel(labelProvider.getLabelOrDefaultFragment(IRI.create(moduleIri)));
           module.setMaturityLevel(
               chooseTheRightVersion(
-                  fiboOntologyHandler.getMaturityLevelForOntology(IRI.create(moduleIri))));
+                  ontologyHandler.getMaturityLevelForOntology(IRI.create(moduleIri))));
           module.setSubModule(getSubModules(moduleIri));
           return module;
         })
@@ -264,7 +266,7 @@ public class ModuleHandler {
           module.setSubModule(new ArrayList<>());
           module.setMaturityLevel(
               chooseTheRightVersion(
-                  fiboOntologyHandler.getMaturityLevelForOntology(ontologyIri)));
+                  ontologyHandler.getMaturityLevelForOntology(ontologyIri)));
           if ("".equals(module.getMaturityLevel().getLabel())) {
             module.setMaturityLevel(MaturityLevelFactory.INFO);
           }

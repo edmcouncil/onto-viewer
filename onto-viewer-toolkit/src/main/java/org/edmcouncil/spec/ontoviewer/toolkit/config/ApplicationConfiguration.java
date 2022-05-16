@@ -1,15 +1,15 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.config;
 
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ConfigurationService;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.MemoryBasedConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlMemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.RestrictionGraphDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.fibo.FiboDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +23,8 @@ import org.springframework.core.io.ClassPathResource;
 @Import({
     AnnotationsDataHandler.class,
     CustomDataFactory.class,
+    DataHandler.class,
     DetailsManager.class,
-    FiboDataHandler.class,
     IndividualDataHandler.class,
     LabelProvider.class,
     OntologyManager.class,
@@ -38,8 +38,8 @@ import org.springframework.core.io.ClassPathResource;
 public class ApplicationConfiguration {
 
   @Bean
-  public ConfigurationService getConfigurationService() {
-    return new MemoryBasedConfigurationService();
+  public ApplicationConfigurationService getApplicationConfigurationService() {
+    return new YamlMemoryBasedConfigurationService();
   }
 
   @Bean

@@ -1,12 +1,11 @@
 package org.edmcouncil.spec.ontoviewer.webapp.util;
 
-import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import java.util.List;
-import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsMapped;
-
+import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
+import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import org.springframework.ui.Model;
 
 /**

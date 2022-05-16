@@ -2,23 +2,21 @@ package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
-import org.edmcouncil.spec.ontoviewer.webapp.service.TextSearchService;
-import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.hint.HintItem;
+import java.util.Collections;
+import java.util.List;
+import org.edmcouncil.spec.ontoviewer.core.exception.ApplicationNotInitializedException;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
+import org.edmcouncil.spec.ontoviewer.webapp.controller.api.HintController;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 class HintControllerTest {
@@ -29,8 +27,6 @@ class HintControllerTest {
   @MockBean
   private UpdateBlocker updateBlocker;
   @MockBean
-  private TextSearchService textSearch;
-  @MockBean
   private LuceneSearcher luceneSearcher;
 
   @Test
@@ -38,11 +34,10 @@ class HintControllerTest {
     String query = "test";
 
     when(updateBlocker.isInitializeAppDone()).thenReturn(true);
-    when(textSearch.getHints(eq(query), any())).thenReturn(prepareHints());
 
-    ResponseEntity<List<HintItem>> expectedResult = ResponseEntity.ok().body(Collections.emptyList());
+    ResponseEntity<List<FindResult>> expectedResult = ResponseEntity.ok().body(Collections.emptyList());
 
-    ResponseEntity<List<HintItem>> actualResult = hintController.getHints(query, Optional.empty());
+    ResponseEntity<List<FindResult>> actualResult = hintController.getHints(query);
 
     assertThat(actualResult, equalTo(expectedResult));
   }
@@ -53,14 +48,8 @@ class HintControllerTest {
 
     when(updateBlocker.isInitializeAppDone()).thenReturn(false);
 
-    ResponseEntity<List<HintItem>> expectedResult = ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
-
-    ResponseEntity<List<HintItem>> actualResult = hintController.getHints(query, Optional.empty());
-
-    assertThat(actualResult, equalTo(expectedResult));
-  }
-
-  private List<HintItem> prepareHints() {
-    return Collections.emptyList();
+    assertThrows(ApplicationNotInitializedException.class, () -> {
+      hintController.getHints(query);
+    });
   }
 }
