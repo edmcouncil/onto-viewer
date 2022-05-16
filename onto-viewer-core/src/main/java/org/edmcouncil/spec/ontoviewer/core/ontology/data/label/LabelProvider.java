@@ -126,7 +126,7 @@ public class LabelProvider {
       } else if (labels.size() > 1) {
         labelResult = getTheRightLabel(labels, entity.getIRI());
       } else {
-        labelResult = StringUtils.getFragment(entity.getIRI());
+        labelResult = StringUtils.getIdentifier(entity.getIRI());
       }
     }
     previouslyUsedLabels.put(entity.getIRI().toString(), labelResult);
@@ -163,7 +163,7 @@ public class LabelProvider {
 
       } else if (missingLanguageAction == MissingLanguageItem.Action.FRAGMENT) {
 
-        return StringUtils.getFragment(entityIri);
+        return StringUtils.getIdentifier(entityIri);
       }
 
     }
@@ -212,7 +212,7 @@ public class LabelProvider {
     }
     String labelResult = null;
     if (labels.isEmpty()) {
-      labelResult = StringUtils.getFragment(iri);
+      labelResult = StringUtils.getIdentifier(iri);
     } else if (labels.size() > 1) {
       labelResult = getTheRightLabel(labels, iri);
     } else {

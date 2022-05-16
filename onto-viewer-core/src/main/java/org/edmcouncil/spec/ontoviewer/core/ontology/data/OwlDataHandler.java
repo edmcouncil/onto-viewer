@@ -245,7 +245,7 @@ public class OwlDataHandler {
 
       var entityIri = entityOptional.get().getIRI();
 
-      String key = StringUtils.getFragment(entityIri);
+      String key = StringUtils.getIdentifier(entityIri);
 
       OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue();
       axiomPropertyValue.setType(OwlType.TAXONOMY);
@@ -428,7 +428,7 @@ public class OwlDataHandler {
         }
       }
     } else {
-      LOG.trace("\t\tEnd leaf on {}", StringUtils.getFragment(objIri));
+      LOG.trace("\t\tEnd leaf on {}", StringUtils.getIdentifier(objIri));
       String label = labelProvider.getLabelOrDefaultFragment(objIri);
 
       OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(objIri.getIRIString(), label);
@@ -515,7 +515,7 @@ public class OwlDataHandler {
       IRI elementIri) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     String iriFragment = elementIri.getFragment();
-    String splitFragment = StringUtils.getFragment(elementIri);
+    String splitFragment = StringUtils.getIdentifier(elementIri);
     Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
     Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
@@ -910,8 +910,8 @@ public class OwlDataHandler {
     List<PropertyValue> resultProperties = new LinkedList<>();
 
     for (OWLProperty owlProperty : propertyStream.collect(Collectors.toSet())) {
-      LOG.trace("{} Sub Property Of {}", StringUtils.getFragment(entity.getIRI()),
-          StringUtils.getFragment(owlProperty.getIRI()));
+      LOG.trace("{} Sub Property Of {}", StringUtils.getIdentifier(entity.getIRI()),
+          StringUtils.getIdentifier(owlProperty.getIRI()));
       IRI subClazzIri = entity.getIRI();
       IRI superClazzIri = owlProperty.getIRI();
 
@@ -1332,7 +1332,7 @@ public class OwlDataHandler {
       }
 
       String iriFragment = iri.getFragment();
-      String splitFragment = StringUtils.getFragment(iri);
+      String splitFragment = StringUtils.getIdentifier(iri);
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
       Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
@@ -1405,7 +1405,7 @@ public class OwlDataHandler {
       LOG.debug("OwlDataHandler -> extractUsageRangeAxiom {}", rangeEntity.getIRI());
 
       String iriFragment = rangeEntity.getIRI().toString();
-      String splitFragment = StringUtils.getFragment(rangeEntity.getIRI().toString());
+      String splitFragment = StringUtils.getIdentifier(rangeEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
       Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
@@ -1472,7 +1472,7 @@ public class OwlDataHandler {
       LOG.debug("OwlDataHandler -> extractUsageObjectDomainAxiom {}", domainEntity.getIRI());
 
       String iriFragment = domainEntity.getIRI().toString();
-      String splitFragment = StringUtils.getFragment(domainEntity.getIRI().toString());
+      String splitFragment = StringUtils.getIdentifier(domainEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
       Set<String> ignoredToDisplay = config.getCoreConfiguration().getIgnoredElements();
