@@ -4,9 +4,10 @@
   <!-- To load an ontology from the internet, enter the URL between the <ontologyURL> tags -->
   <!-- To load an ontology from a folder, enter the path address with application between <ontologyPath> tags or enter the file name  -->
   <!-- If no URL or path is provided, the program will load the ontology from the default folder -->
+
   <!-- Loading sequence paths => urls => directories -->
   <ontology  ontologyDownloadDir="download">
- 
+
     <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/MetadataFIBO/</ontologyURL>
     <ontologyURL>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</ontologyURL>
     <!--<ontologyURL>https://spec.edmcouncil.org/auto/ontology/AboutAUTODev/</ontologyURL>-->
@@ -16,13 +17,17 @@
     <ontologyDir>ontologies</ontologyDir>
     <ontologyDir>staticOntologies</ontologyDir>
     <ontologyDir>download</ontologyDir>
-    
+
     <ontologyCatalogPath>ontologies/catalog-v001.xml</ontologyCatalogPath>
   </ontology>
 
   <ontologyModuleIgnorePattern>^(About|Metadata).*</ontologyModuleIgnorePattern>
   <ontologyModuleIgnorePattern>http.*(About|Metadata).*</ontologyModuleIgnorePattern>
-
+  
+  <ontologyModuleToIgnore>http://www.w3.org/2000/01/rdf-schema#</ontologyModuleToIgnore>
+  <ontologyModuleToIgnore>http://www.w3.org/1999/02/22-rdf-syntax-ns#</ontologyModuleToIgnore>
+  <ontologyModuleToIgnore>http://www.w3.org/2002/07/owl</ontologyModuleToIgnore>
+ 
   <scopeIri>
     <!--<uriNamespace>https://spec.edmcouncil.org/fibo/ontology/AboutFIBODev/</uriNamespace>
     <uriNamespace>http://schema.org/</uriNamespace>

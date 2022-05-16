@@ -103,14 +103,14 @@ public class TextSearcherDb {
 
       if (!annotations.isEmpty()) {
         var textDbItem = collectValues(annotations);
-        textDbItem.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
+        textDbItem.addValue(IRI_FRAGMENT, StringUtils.getIdentifier(entityIri), null);
         newDb.put(entityIri, textDbItem);
       }
     });
 
     if (!newDb.containsKey(entityIri)) {
       var textDbItem = new TextDbItem();
-      textDbItem.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
+      textDbItem.addValue(IRI_FRAGMENT, StringUtils.getIdentifier(entityIri), null);
       newDb.put(entityIri, textDbItem);
     }
   }
@@ -122,7 +122,7 @@ public class TextSearcherDb {
     String entityIri = owlOntology.getOntologyID().getOntologyIRI().orElse(IRI.create(""))
         .toString();
     LOG.trace("Entity IRI: {}", entityIri);
-    tdi.addValue(IRI_FRAGMENT, StringUtils.getFragment(entityIri), null);
+    tdi.addValue(IRI_FRAGMENT, StringUtils.getIdentifier(entityIri), null);
 
     if (!tdi.isEmpty()) {
       tmp.put(entityIri, tdi);
