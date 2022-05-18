@@ -317,4 +317,8 @@ public class ModuleHandler {
     }
     return iris;
   }
+
+    void clearModules() {
+        this.modules = null;
+    }
 }
