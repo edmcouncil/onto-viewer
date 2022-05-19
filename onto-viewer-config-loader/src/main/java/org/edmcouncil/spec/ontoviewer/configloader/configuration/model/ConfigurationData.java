@@ -180,7 +180,7 @@ public class ConfigurationData {
     private final List<String> moduleIgnorePatterns;
     private final List<String> moduleToIgnore;
     private final Map<String, String> ontologyMappings;
-    private final boolean automaticCreationOfModules;
+    private boolean automaticCreationOfModules;
 
     public OntologiesConfig(List<String> urls,
         List<String> paths,
@@ -223,6 +223,10 @@ public class ConfigurationData {
 
     public boolean getAutomaticCreationOfModules() {
       return automaticCreationOfModules;
+    }
+
+    public void setAutomaticCreationOfModules(boolean automaticCreationOfModules) {
+      this.automaticCreationOfModules = automaticCreationOfModules;
     }
   }
 

@@ -26,7 +26,6 @@ class ModuleHandlerTest extends BaseTest {
   private static final String ROOT_IRI = "http://www.example.com/modules#";
   private static final MaturityLevel DEV_MATURITY_LEVEL = new AppMaturityLevel("dev");
   private static final MaturityLevel PROD_MATURITY_LEVEL = new AppMaturityLevel("prod");
-  private static final boolean automaticCreationOfModules = false;
 
   @Test
   void shouldReturnListOfModulesDefinedInOntology() {
@@ -63,8 +62,8 @@ class ModuleHandlerTest extends BaseTest {
 
   @Test
   void shouldReturnListOfModulesWhenNotDefinedInOntology() {
-    if (automaticCreationOfModules) {
-       var moduleHandler = prepareModuleHandler("/ontology/MortgageLoansWithoutImports.rdf");
+    
+    var moduleHandler = prepareModuleHandler("/ontology/MortgageLoansWithoutImports.rdf");
     var actualModules = moduleHandler.getModules();
     var expectedModules = List.of(
         new FiboModule("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
@@ -73,14 +72,16 @@ class ModuleHandlerTest extends BaseTest {
             DEV_MATURITY_LEVEL)
     );
     assertEquals(expectedModules, actualModules);
-    }
   }
 
   private ModuleHandler prepareModuleHandler(String ontologyPath) {
     var configurationService = new YamlFileBasedConfigurationService(prepareFileSystem());
     configurationService.init();
-
+    
     var ontologyManager = getOntologyManager(ontologyPath);
+    var configurationData = configurationService.getConfigurationData();
+    configurationData.getOntologiesConfig().setAutomaticCreationOfModules(true);
+    
     ontologyManager.setIriToPathMapping(
         Map.of(
             IRI.create("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/"),
