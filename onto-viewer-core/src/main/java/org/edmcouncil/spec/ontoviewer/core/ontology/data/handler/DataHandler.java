@@ -164,9 +164,7 @@ public class DataHandler {
     // TODO: Make loadAllOntologyResources and setOntologyResources private and use this method
     //       instead
     this.resources = loadAllOntologyResources(ontology);
-    this.moduleHandler.clearModules();
-    //if modules is empty is auto generated again while get
-    this.moduleHandler.getModules();
+    this.moduleHandler.updateModules();
   }
 
   private Map<String, OntologyResources> loadAllOntologyResources(OWLOntology ontology) {
