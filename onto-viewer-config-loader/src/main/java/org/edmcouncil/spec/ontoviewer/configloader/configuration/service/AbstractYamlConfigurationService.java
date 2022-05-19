@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.service;
 
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.CATALOG_PATH;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.AUTOMATIC_CREATION_OF_MODULES;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_LABEL;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.FIND_PROPERTIES;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.FORCE_LABEL_LANG;
@@ -61,6 +62,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   private static final boolean FORCE_LABEL_LANG_DEFAULT = false;
   private static final String LABEL_LANG_DEFAULT = "en";
   private static final String MISSING_LANGUAGE_ACTION_DEFAULT = "FIRST";
+  private static final boolean AUTOMATIC_CREATION_OF_MODULES_DEFULT = false;
 
   @Override
   public void init() {
@@ -230,8 +232,10 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     List<String> catalogPaths = getListOfStringsFromObject(ontologies.get(CATALOG_PATH.getLabel()));
     List<String> moduleIgnorePatterns = getListOfStringsFromObject(ontologies.get(MODULE_IGNORE_PATTERN.getLabel()));
     List<String> moduleToIgnore = getListOfStringsFromObject(ontologies.get(MODULE_TO_IGNORE.getLabel()));
+    boolean automaticCreationOfModules = 
+        getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()), AUTOMATIC_CREATION_OF_MODULES_DEFULT);
 
-    return new OntologiesConfig(urls, paths, catalogPaths, moduleIgnorePatterns, moduleToIgnore);
+    return new OntologiesConfig(urls, paths, catalogPaths, moduleIgnorePatterns, moduleToIgnore, automaticCreationOfModules);
   }
 
   protected Map<String, List<String>> mapToMapOfList(List<?> rawGroupsList) {

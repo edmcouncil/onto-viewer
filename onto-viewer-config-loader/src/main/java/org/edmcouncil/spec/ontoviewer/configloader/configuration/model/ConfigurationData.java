@@ -180,18 +180,21 @@ public class ConfigurationData {
     private final List<String> moduleIgnorePatterns;
     private final List<String> moduleToIgnore;
     private final Map<String, String> ontologyMappings;
+    private boolean automaticCreationOfModules;
 
     public OntologiesConfig(List<String> urls,
         List<String> paths,
         List<String> catalogPaths,
         List<String> moduleIgnorePatterns,
-        List<String> moduleToIgnore) {
+        List<String> moduleToIgnore,
+        boolean automaticCreationOfModules ) {
       this.urls = urls;
       this.paths = paths;
       this.catalogPaths = catalogPaths;
       this.moduleIgnorePatterns = moduleIgnorePatterns;
       this.moduleToIgnore = moduleToIgnore;
       this.ontologyMappings = new HashMap<>();
+      this.automaticCreationOfModules = automaticCreationOfModules;
     }
 
     public List<String> getUrls() {
@@ -216,6 +219,14 @@ public class ConfigurationData {
 
     public Map<String, String> getOntologyMappings() {
       return ontologyMappings;
+    }
+
+    public boolean getAutomaticCreationOfModules() {
+      return automaticCreationOfModules;
+    }
+
+    public void setAutomaticCreationOfModules(boolean automaticCreationOfModules) {
+      this.automaticCreationOfModules = automaticCreationOfModules;
     }
   }
 

@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
@@ -42,14 +43,14 @@ public class ModuleHandler {
   private static final Logger LOGGER = LoggerFactory.getLogger(ModuleHandler.class);
   private static final String HAS_PART_IRI = "http://purl.org/dc/terms/hasPart";
   private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
-  private static final String RELEASE_IRI =
-      "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release";
+  private static final String RELEASE_IRI
+      = "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release";
   private static final String INSTANCE_KEY = ViewerIdentifierFactory.createId(
       ViewerIdentifierFactory.Type.function,
       OwlType.INSTANCES.name().toLowerCase());
-  private static final Pattern URL_PATTERN =
-      Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-
+  private static final Pattern URL_PATTERN
+      = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+  private boolean automaticCreationOfModules = false;
   private final OntologyManager ontologyManager;
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
@@ -69,17 +70,19 @@ public class ModuleHandler {
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
     this.ontologyHandler = ontologyHandler;
-
-    this.ontologiesToIgnoreWhenGeneratingModules =
-        applicationConfigurationService.getConfigurationData()
+    this.automaticCreationOfModules = applicationConfigurationService.getConfigurationData()
+        .getOntologiesConfig()
+        .getAutomaticCreationOfModules();
+    this.ontologiesToIgnoreWhenGeneratingModules
+        = applicationConfigurationService.getConfigurationData()
             .getOntologiesConfig()
             .getModuleToIgnore()
             .stream()
             .map(IRI::create)
             .collect(Collectors.toSet());
 
-    this.ontologyModuleIgnorePatterns =
-        applicationConfigurationService.getConfigurationData()
+    this.ontologyModuleIgnorePatterns
+        = applicationConfigurationService.getConfigurationData()
             .getOntologiesConfig()
             .getModuleIgnorePatterns()
             .stream()
@@ -102,8 +105,8 @@ public class ModuleHandler {
           .findFirst();
 
       if (moduleClassOptional.isPresent()) {
-        OwlDetailsProperties<PropertyValue> moduleClass =
-            individualDataHandler.handleClassIndividuals(ontology, moduleClassOptional.get());
+        OwlDetailsProperties<PropertyValue> moduleClass
+            = individualDataHandler.handleClassIndividuals(ontology, moduleClassOptional.get());
 
         if (!moduleClass.getProperties().isEmpty()) {
           Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
@@ -118,10 +121,10 @@ public class ModuleHandler {
           this.modules.forEach(this::checkAndCompleteMaturityLevel);
         }
       }
-
-      addMissingModules(modules);
+      if (automaticCreationOfModules) {
+          addMissingModules(modules);
+      }
     }
-
     return modules;
   }
 

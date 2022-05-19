@@ -36,8 +36,8 @@ public enum ConfigurationKey {
   URL("url"),
   CATALOG_PATH("catalog_path"),
   MODULE_IGNORE_PATTERN("module_ignore_pattern"),
-  MODULE_TO_IGNORE("module_to_ignore");
-
+  MODULE_TO_IGNORE("module_to_ignore"),
+  AUTOMATIC_CREATION_OF_MODULES("automatic_creation_of_modules");
   private final String label;
 
   ConfigurationKey(String label) {
