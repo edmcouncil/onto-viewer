@@ -317,4 +317,10 @@ public class ModuleHandler {
     }
     return iris;
   }
+
+    void updateModules() {
+        this.modules = null;
+        //if modules is empty is auto generated again while get
+        getModules();
+    }
 }

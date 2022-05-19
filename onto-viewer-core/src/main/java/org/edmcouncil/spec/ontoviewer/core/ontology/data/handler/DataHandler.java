@@ -108,7 +108,7 @@ public class DataHandler {
   public List<FiboModule> getAllModules() {
     return moduleHandler.getModules();
   }
-
+  
   public List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
     Map<String, Integer> referenceCount = new LinkedHashMap<>();
     modulesIriSet.forEach((mIri) -> {
@@ -164,6 +164,7 @@ public class DataHandler {
     // TODO: Make loadAllOntologyResources and setOntologyResources private and use this method
     //       instead
     this.resources = loadAllOntologyResources(ontology);
+    this.moduleHandler.updateModules();
   }
 
   private Map<String, OntologyResources> loadAllOntologyResources(OWLOntology ontology) {
