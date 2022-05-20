@@ -26,4 +26,8 @@ public class MissingImportListenerImpl implements MissingImportListener {
   public Set<MissingImport> getNotImportUri() {
     return missingImports;
   }
+  
+  public void addAll(Set<MissingImport> missingImports){
+    this.missingImports.addAll(missingImports);
+  }
 }

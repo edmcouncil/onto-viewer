@@ -224,7 +224,6 @@ public class AutoOntologyLoader {
         ontologyLoadingProblems.add(new OntologyLoadingProblem(ontologySource, ex.getMessage(), ex.getClass()));
       }
     }
-    LOGGER.info("Missing imports: {}", missingImportListenerImpl.getNotImportUri());
     LOGGER.info("Ontology loading problems that occurred: {}", ontologyLoadingProblems);
     return umbrellaOntology;
   }

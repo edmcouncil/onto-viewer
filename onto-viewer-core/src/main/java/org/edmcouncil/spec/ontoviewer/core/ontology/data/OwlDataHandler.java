@@ -563,7 +563,7 @@ public class OwlDataHandler {
     String value = rendering.render(axiom);
     LOG.debug("Rendered default value: {}", value);
     for (String unwantedType : unwantedTypes) {
-      value = value.replace(unwantedType, "");
+      value = value.replaceAll(unwantedType, "");
     }
 
     if (bypassClass) {

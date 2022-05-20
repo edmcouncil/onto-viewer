@@ -62,6 +62,11 @@
       <artifactId>simple-xml</artifactId>
       <version>${simple-xml.version}</version>
     </dependency>
+    <dependency>
+      <groupId>net.lingala.zip4j</groupId>
+      <artifactId>zip4j</artifactId>
+      <version>2.10.0</version>
+    </dependency>
     <!-- Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
