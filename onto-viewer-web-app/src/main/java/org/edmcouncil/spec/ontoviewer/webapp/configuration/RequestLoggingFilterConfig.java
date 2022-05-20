@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.webapp.configuration;
 
-import java.util.function.Predicate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
@@ -16,9 +15,9 @@ public class RequestLoggingFilterConfig {
     loggingFilter.setIncludeQueryString(true);
     loggingFilter.setIncludePayload(true);
     loggingFilter.setMaxPayloadLength(10000);
-    loggingFilter.setHeaderPredicate(header -> !header.toLowerCase().equals("x-api-key"));
-    loggingFilter.setHeaderPredicate(header -> !header.toLowerCase().equals("authorization"));
-    loggingFilter.setHeaderPredicate(header -> !header.toLowerCase().equals("proxy-authorization"));
+    loggingFilter.setHeaderPredicate(header -> !header.toLowerCase().equals("x-api-key")
+        && !header.toLowerCase().equals("authorization")
+        && !header.toLowerCase().equals("proxy-authorization"));
 
     return loggingFilter;
   }
