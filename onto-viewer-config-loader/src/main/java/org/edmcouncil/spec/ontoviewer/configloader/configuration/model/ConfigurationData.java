@@ -181,10 +181,14 @@ public class ConfigurationData {
     private final List<String> moduleToIgnore;
     private final Map<String, String> ontologyMappings;
     private boolean automaticCreationOfModules;
+    private final List<String> downloadDirectory;
+    private final List<String> zipUrls;
 
     public OntologiesConfig(List<String> urls,
         List<String> paths,
         List<String> catalogPaths,
+        List<String> downloadDirectory,
+        List<String> zipUrls,
         List<String> moduleIgnorePatterns,
         List<String> moduleToIgnore,
         boolean automaticCreationOfModules ) {
@@ -195,6 +199,8 @@ public class ConfigurationData {
       this.moduleToIgnore = moduleToIgnore;
       this.ontologyMappings = new HashMap<>();
       this.automaticCreationOfModules = automaticCreationOfModules;
+      this.downloadDirectory = downloadDirectory;
+      this.zipUrls = zipUrls;
     }
 
     public List<String> getUrls() {
@@ -227,6 +233,14 @@ public class ConfigurationData {
 
     public void setAutomaticCreationOfModules(boolean automaticCreationOfModules) {
       this.automaticCreationOfModules = automaticCreationOfModules;
+    }
+
+    public List<String> getDownloadDirectory() {
+        return downloadDirectory;
+    }
+
+    public List<String> getZipUrls() {
+        return zipUrls;
     }
   }
 

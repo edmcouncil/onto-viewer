@@ -24,6 +24,7 @@ import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Co
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.SOURCE;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.USER_DEFAULT_NAME_LIST;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.byName;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DOWNLOAD_DIRECTORY;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -214,6 +215,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   protected OntologiesConfig handleOntologies(Map<String, Object> ontologies) {
     List<String> urls = new ArrayList<>();
     List<String> paths = new ArrayList<>();
+    List<String> zips = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
     var sources = (List<Map<String, String>>) ontologies.get(SOURCE.getLabel());
@@ -226,6 +228,8 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
             paths.add(sourceEntry.getValue());
           } else if (sourceEntryKey.equals(ConfigurationKey.URL.getLabel())) {
             urls.add(sourceEntry.getValue());
+          } else if (sourceEntryKey.equals(ConfigurationKey.ZIP.getLabel())) {
+            zips.add(sourceEntry.getValue());
           } else {
             LOGGER.warn("Unknown key '{}' with value '{}' in the ontologies source configuration.",
                 sourceEntry.getKey(), sourceEntry.getValue());
@@ -239,8 +243,9 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     List<String> moduleToIgnore = getListOfStringsFromObject(ontologies.get(MODULE_TO_IGNORE.getLabel()));
     boolean automaticCreationOfModules = 
         getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()), AUTOMATIC_CREATION_OF_MODULES_DEFULT);
-
-    return new OntologiesConfig(urls, paths, catalogPaths, moduleIgnorePatterns, moduleToIgnore, automaticCreationOfModules);
+     List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
+    
+    return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns, moduleToIgnore, automaticCreationOfModules);
   }
 
   protected Map<String, List<String>> mapToMapOfList(List<?> rawGroupsList) {

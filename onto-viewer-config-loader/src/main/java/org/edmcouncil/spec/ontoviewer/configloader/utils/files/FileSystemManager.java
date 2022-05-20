@@ -75,7 +75,7 @@ public class FileSystemManager {
     return createDirIfNotExists(homeDir).resolve(defaultOntologyFileName);
   }
 
-  public Path getPathToOntologyFile(String pathString) throws IOException {
+  public Path getPathToFile(String pathString) throws IOException {
     var path = Paths.get(pathString);
     if (path.isAbsolute()) {
       return path;
@@ -100,7 +100,4 @@ public class FileSystemManager {
     return getViewerHomeDir().resolve("api.key");
   }
 
-  public Path getPathToUpdateHistory() {
-    return getViewerHomeDir().resolve("updateHistory.json");
-  }
 }

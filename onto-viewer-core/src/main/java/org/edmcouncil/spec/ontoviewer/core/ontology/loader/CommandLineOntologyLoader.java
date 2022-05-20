@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
@@ -28,20 +31,29 @@ public class CommandLineOntologyLoader {
 
   private final ConfigurationData configurationData;
   private final MissingImportListenerImpl missingImportListenerImpl;
+  private final FileSystemManager fileSystemManager;
 
-  public CommandLineOntologyLoader(ConfigurationData configurationData) {
+  public CommandLineOntologyLoader(ConfigurationData configurationData,
+      FileSystemManager fileSystemManager) {
     this.configurationData = configurationData;
     this.missingImportListenerImpl = new MissingImportListenerImpl();
+    this.fileSystemManager = fileSystemManager;
   }
 
   public OWLOntology load() throws OWLOntologyCreationException {
+
+    ViewerZipFilesOperations viewerZipFilesOperations = new ViewerZipFilesOperations();
+    Set<MissingImport> missingImports = viewerZipFilesOperations
+        .prepareZipToLoad(configurationData, fileSystemManager);
+    this.missingImportListenerImpl.addAll(missingImports);
+    
     var owlOntologyManager = OWLManager.createOWLOntologyManager();
 
     setOntologyMapping(owlOntologyManager);
-    
+
     var ontologyIrisToLoad = new HashSet<IRI>();
     var ontologyMappings = new HashMap<String, String>();
-    
+
     var ontologyLocations = configurationData.getOntologiesConfig().getPaths();
     for (String ontologyLocation : ontologyLocations) {
       ontologyIrisToLoad.add(IRI.create(Path.of(ontologyLocation).toFile()));
@@ -63,14 +75,14 @@ public class CommandLineOntologyLoader {
             documentIri, fileIri);
       }
     });
-    
+
     return loadOntologiesFromIris(owlOntologyManager, ontologyIrisToLoad);
   }
 
   private void setOntologyMapping(OWLOntologyManager owlOntologyManager) {
     var ontologyMapping = configurationData.getOntologiesConfig().getOntologyMappings();
-    ontologyMapping.forEach((ontologyIri, ontologyPath) ->
-        owlOntologyManager.getIRIMappers().add(
+      ontologyMapping.forEach((ontologyIri, ontologyPath)
+        -> owlOntologyManager.getIRIMappers().add(
             new SimpleIRIMapper(
                 IRI.create(ontologyIri),
                 IRI.create(new File(ontologyPath)))));
