@@ -69,6 +69,11 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     // Default empty implementation
   }
 
+  @Override
+  public void reloadConfiguration() {
+
+  }
+
   protected ConfigurationData readDefaultConfiguration() {
     String defaultConfigContent = readDefaultConfigContent();
 

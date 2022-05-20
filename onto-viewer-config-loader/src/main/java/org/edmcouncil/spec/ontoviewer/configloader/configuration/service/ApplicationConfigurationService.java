@@ -9,4 +9,6 @@ public interface ApplicationConfigurationService {
   ConfigurationData getConfigurationData();
 
   boolean hasConfiguredGroups();
+
+  void reloadConfiguration();
 }
