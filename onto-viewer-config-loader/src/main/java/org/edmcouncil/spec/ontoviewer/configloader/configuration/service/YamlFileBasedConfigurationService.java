@@ -4,16 +4,21 @@ import static org.apache.commons.io.FilenameUtils.getExtension;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.byName;
 
 import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
+import org.apache.commons.io.IOUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.GroupsConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
@@ -24,12 +29,15 @@ import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
 public class YamlFileBasedConfigurationService extends AbstractYamlConfigurationService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(YamlFileBasedConfigurationService.class);
   private static final Set<String> SUPPORTED_EXTENSIONS = Set.of("yaml", "yml");
+  private static final Set<String> CONFIG_FILES_NAMES =
+      Set.of("groups_config.yaml", "label_config.yaml", "ontology_config.yaml", "search_config.yaml");
 
   private final FileSystemManager fileSystemManager;
 
@@ -39,6 +47,9 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   private String downloadDirectory;
   @Value("${app.config.ontologies.zip_url:}")
   private String[] zipUrl;
+  @Value("${app.config.updateUrl:}")
+  private String updateUrl;
+
   private ConfigurationData configurationData;
 
   public YamlFileBasedConfigurationService(FileSystemManager fileSystemManager) {
@@ -97,6 +108,70 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   public boolean hasConfiguredGroups() {
     return configurationData.getGroupsConfig().getGroups() != null
         && !configurationData.getGroupsConfig().getGroups().isEmpty();
+  }
+
+  @Override
+  public void reloadConfiguration() {
+    if (StringUtils.hasText(updateUrl)) {
+      String updateUrlPath = updateUrl;
+      if (!updateUrlPath.endsWith("/")) {
+        updateUrlPath += "/";
+      }
+
+      Map<String, String> configFileToUrl = new HashMap<>();
+      for (String configFileName : CONFIG_FILES_NAMES) {
+        configFileToUrl.put(configFileName, updateUrlPath + configFileName);
+      }
+
+      StringBuilder sb = new StringBuilder();
+      for (Entry<String, String> configEntry : configFileToUrl.entrySet()) {
+        var content = readConfigContent(configEntry);
+        if (content.isBlank()) {
+          content = readConfigForFileName(configEntry.getKey());
+        }
+        sb.append(content).append("\n");
+      }
+
+      var yaml = new Yaml();
+      Map<String, Object> configuration = yaml.load(sb.toString());
+
+      this.configurationData = populateConfiguration(configuration);
+    }
+  }
+
+  private String readConfigForFileName(String configFileName) {
+    Path configFilePath = Path.of(configFileName);
+    try {
+      configFilePath = fileSystemManager.getPathToConfigFile().resolve(configFileName);
+      return Files.readString(configFilePath);
+    } catch (IOException ex) {
+      LOGGER.warn("Exception thrown while reading config content from path '{}'. Details: {}",
+          configFilePath, ex.getMessage(), ex);
+    }
+    return "";
+  }
+
+  private String readConfigContent(Entry<String, String> configEntry) {
+    try {
+      var configContent = IOUtils.toString(new URL(configEntry.getValue()), StandardCharsets.UTF_8);
+      overrideConfigContent(configEntry.getKey(), configContent);
+    } catch (IOException ex) {
+      LOGGER.warn("Exception thrown while loading configuration from URL '{}'. Details: {}",
+          configEntry.getValue(), ex.getMessage(), ex);
+    }
+    return "";
+  }
+
+  private void overrideConfigContent(String configFileName, String configContent) {
+    try {
+      var configPath = fileSystemManager.getPathToConfigFile();
+      var configFilePath = configPath.resolve(configFileName);
+      Files.write(configFilePath,
+          configContent.getBytes(StandardCharsets.UTF_8),
+          StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+    } catch (IOException ex) {
+      LOGGER.warn("Exception thrown while overriding configuration file '{}' with a new content.", configFileName);
+    }
   }
 
   private ConfigurationData populateConfiguration(Map<String, Object> configuration) {

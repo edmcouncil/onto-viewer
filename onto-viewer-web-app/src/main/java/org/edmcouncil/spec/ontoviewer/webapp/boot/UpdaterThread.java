@@ -101,6 +101,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       LOGGER.info("File system manager created ? : {}", fileSystemManager != null);
 
+      applicationConfigurationService.reloadConfiguration();
       ConfigurationData configurationData = applicationConfigurationService.getConfigurationData();
 
       if (isInterrupt()) {
