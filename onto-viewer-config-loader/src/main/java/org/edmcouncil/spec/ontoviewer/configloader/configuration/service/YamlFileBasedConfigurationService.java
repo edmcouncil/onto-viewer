@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -34,6 +35,10 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   @Value("${app.config.ontologies.catalog_path:}")
   private String catalogPath;
+  @Value("${app.config.ontologies.download_directory:}")
+  private String downloadDirectory;
+  @Value("${app.config.ontologies.zip_url:}")
+  private String[] zipUrl;
   private ConfigurationData configurationData;
 
   public YamlFileBasedConfigurationService(FileSystemManager fileSystemManager) {
@@ -127,6 +132,14 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
             if (catalogPath != null && !catalogPath.isBlank()) {
               ontologiesConfig.getCatalogPaths().clear();
               ontologiesConfig.getCatalogPaths().add(catalogPath);
+            }
+            if (downloadDirectory != null && !downloadDirectory.isBlank()) {
+              ontologiesConfig.getDownloadDirectory().clear();
+              ontologiesConfig.getDownloadDirectory().add(downloadDirectory);
+            }
+            if (zipUrl != null && zipUrl.length>0) {
+              ontologiesConfig.getZipUrls().clear();
+              ontologiesConfig.getZipUrls().addAll(Arrays.asList(zipUrl));
             }
             break;
           }

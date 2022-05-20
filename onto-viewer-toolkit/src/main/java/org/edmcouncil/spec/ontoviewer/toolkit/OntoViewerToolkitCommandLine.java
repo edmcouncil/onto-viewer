@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
@@ -44,11 +45,12 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private final ApplicationConfigurationService applicationConfigurationService;
   private final OntologyManager ontologyManager;
-  private final DataHandler fiboDataHandler;
+  private final DataHandler dataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
   private final OntologyConsistencyChecker ontologyConsistencyChecker;
   private final StandardEnvironment environment;
   private final ApplicationConfigProperties applicationConfigProperties;
+  private final FileSystemManager fileSystemManager;
 
   public OntoViewerToolkitCommandLine(
       ApplicationConfigurationService applicationConfigurationService,
@@ -57,17 +59,19 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       OntologyTableDataExtractor ontologyTableDataExtractor,
       OntologyConsistencyChecker ontologyConsistencyChecker,
       StandardEnvironment environment,
-      ApplicationConfigProperties applicationConfigProperties) {
+      ApplicationConfigProperties applicationConfigProperties,
+      FileSystemManager fileSystemManager) {
     this.applicationConfigurationService = applicationConfigurationService;
     // We don't need the default paths configuration in OV Toolkit
     applicationConfigurationService.getConfigurationData().getOntologiesConfig().getPaths().clear();
 
     this.ontologyManager = ontologyManager;
-    this.fiboDataHandler = dataHandler;
+    this.dataHandler = dataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
     this.ontologyConsistencyChecker = ontologyConsistencyChecker;
     this.environment = environment;
     this.applicationConfigProperties = applicationConfigProperties;
+    this.fileSystemManager = fileSystemManager;
   }
 
   @Override
@@ -186,13 +190,15 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private void loadOntology() throws OntoViewerToolkitException {
     try {
-      var ontologyLoader = new CommandLineOntologyLoader(applicationConfigurationService.getConfigurationData());
+      var ontologyLoader = new CommandLineOntologyLoader(
+          applicationConfigurationService.getConfigurationData(), 
+          fileSystemManager);
       var loadedOntology = ontologyLoader.load();
       LOGGER.debug("Loaded ontology contains {} axioms.",
           loadedOntology.getAxiomCount(Imports.INCLUDED));
 
       ontologyManager.updateOntology(loadedOntology);
-      fiboDataHandler.populateOntologyResources(loadedOntology);
+      dataHandler.populateOntologyResources(loadedOntology);
     } catch (Exception ex) {
       var message = String.format(
           "Exception occurred while loading ontology. Details: %s",

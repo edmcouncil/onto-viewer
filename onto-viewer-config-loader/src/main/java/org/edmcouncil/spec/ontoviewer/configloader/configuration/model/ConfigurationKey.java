@@ -34,6 +34,8 @@ public enum ConfigurationKey {
   SOURCE("source"),
   PATH("path"),
   URL("url"),
+  ZIP("zip"),
+  DOWNLOAD_DIRECTORY("download_directory"),
   CATALOG_PATH("catalog_path"),
   MODULE_IGNORE_PATTERN("module_ignore_pattern"),
   MODULE_TO_IGNORE("module_to_ignore"),
