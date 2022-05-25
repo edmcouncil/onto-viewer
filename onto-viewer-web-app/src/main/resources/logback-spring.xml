@@ -43,9 +43,9 @@
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>
-  <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter">
-    <level value="DEBUG" />
-  </logger>
+    <logger name="org.edmcouncil.spec.ontoviewer.webapp.configuration.LoggingFilter">
+        <level value="DEBUG" />
+    </logger>
 </configuration>
 
 
