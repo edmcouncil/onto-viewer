@@ -12,8 +12,8 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.semanticweb.owlapi.model.IRI;
@@ -34,11 +34,6 @@ public class AnnotationsDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final IRI COMMENT_IRI = OWLRDFVocabulary.RDFS_COMMENT.getIRI();
-  private static final String RELEASE_LABEL = "release";
-  private static final String PROVISIONAL_LABEL = "provisional";
-  private static final String INFORMATIVE_LABEL = "informative";
-  private static final String RELEASE_ICON = "prod";
-  private static final String DEVELOP_ICON = "dev";
 
   private final String FIBO_QNAME = "QName:";
   private final IRI HAS_MATURITY_LEVEL_IRI = IRI.create(
@@ -137,14 +132,7 @@ public class AnnotationsDataHandler {
           propertyValue = customDataFactory.createAnnotationAnyUri(value);
         }
 
-        if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
-          OwlAnnotationIri annotationIRI = (OwlAnnotationIri) propertyValue;
-          OntoMaturityLevel fml = MaturityLevelFactory.create(annotationIRI.getValue().getLabel(),
-              annotationIRI.getValue().getIri(), getIconForMaturityLevel(annotationIRI.getValue().getLabel()));
-          details.setMaturityLevel(fml);
-          LOG.debug(fml.toString());
-        }
-
+        setMaturityLevel(details, propertyiri, (OwlAnnotationIri) propertyValue);
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
@@ -160,13 +148,7 @@ public class AnnotationsDataHandler {
           checkUriAsIri(propertyValue, value);
           if (propertyValue.getType() == OwlType.IRI) {
             propertyValue = customDataFactory.createAnnotationIri(value);
-            if (propertyiri.equals(HAS_MATURITY_LEVEL_IRI)) {
-              OwlAnnotationIri annotationIRI = (OwlAnnotationIri) propertyValue;
-              OntoMaturityLevel maturityLevel = MaturityLevelFactory.create(annotationIRI.getValue().getLabel(),
-                  annotationIRI.getValue().getIri(), getIconForMaturityLevel(annotationIRI.getValue().getLabel()));
-              details.setMaturityLevel(maturityLevel);
-              LOG.debug(maturityLevel.toString());
-            }
+            setMaturityLevel(details, propertyiri, (OwlAnnotationIri) propertyValue);
           }
         }
       }
@@ -179,31 +161,27 @@ public class AnnotationsDataHandler {
     return result;
   }
 
+  private void setMaturityLevel(OwlListDetails details, IRI propertyIri, OwlAnnotationIri propertyValue) {
+    if (propertyIri.equals(HAS_MATURITY_LEVEL_IRI)) {
+      OwlAnnotationIri annotationIRI = propertyValue;
+      Optional<MaturityLevel> maturityLevel = MaturityLevelFactory.getByIri(annotationIRI.getValue().getIri());
+      if (maturityLevel.isPresent()) {
+        details.setMaturityLevel(maturityLevel.get());
+      } else {
+        details.setMaturityLevel(MaturityLevelFactory.notSet());
+      }
+    }
+  }
+
   //TODO: change method name
   private void checkUriAsIri(PropertyValue opv, String value) {
     //TODO: Change this to more pretty solution
     if (opv.getType() == OwlType.ANY_URI) {
-
       if (scopeIriOntology.scopeIri(value)) {
         opv.setType(OwlType.IRI);
-
       } else {
         opv.setType(OwlType.ANY_URI);
       }
     }
   }
-
-  public String getIconForMaturityLevel(String label) {
-    switch (label) {
-      case RELEASE_LABEL:
-        return RELEASE_ICON;
-      case PROVISIONAL_LABEL:
-      case INFORMATIVE_LABEL:
-        return DEVELOP_ICON;
-      default:
-        return "";
-    }
-  }
-
-
 }

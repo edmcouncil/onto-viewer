@@ -1,12 +1,10 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller.api;
 
 import java.util.List;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.controller.BaseController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +25,10 @@ public class ModuleApiController extends BaseController {
   }
 
   @GetMapping
-  public ResponseEntity<List<FiboModule>> getAllModulesDataAsJson() {
+  public ResponseEntity<List<OntologyModule>> getAllModulesDataAsJson() {
     checkIfApplicationIsReady();
 
-    List<FiboModule> modules = ontologyManager.getAllModulesData();
+    List<OntologyModule> modules = ontologyManager.getAllModulesData();
     return ResponseEntity.ok(modules);
   }
 }

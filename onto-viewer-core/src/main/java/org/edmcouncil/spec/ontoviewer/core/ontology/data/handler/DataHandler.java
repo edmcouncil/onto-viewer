@@ -14,13 +14,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.onto.OntologyResources;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -105,7 +103,7 @@ public class DataHandler {
     return annotations;
   }
 
-  public List<FiboModule> getAllModules() {
+  public List<OntologyModule> getAllModules() {
     return moduleHandler.getModules();
   }
   
@@ -310,7 +308,7 @@ public class DataHandler {
 
     LOG.debug("Element found in ontology {}", ontologyIri);
     if (ontologyIri != null) {
-      for (FiboModule module : allModules) {
+      for (OntologyModule module : allModules) {
         if (trackingThePath(module, ontologyIri, result, elementIri)) {
           LOG.debug("[FIBO Data Handler] Location Path {}", Arrays.toString(result.toArray()));
           return result;
@@ -347,7 +345,7 @@ public class DataHandler {
     return ontologyIri;
   }
 
-  private Boolean trackingThePath(FiboModule node, String ontologyIri, List<String> track,
+  private Boolean trackingThePath(OntologyModule node, String ontologyIri, List<String> track,
       String elementIri) {
 
     if (node == null) {
@@ -364,7 +362,7 @@ public class DataHandler {
       return true;
     }
 
-    for (FiboModule child : node.getSubModule()) {
+    for (OntologyModule child : node.getSubModule()) {
       if (trackingThePath(child, ontologyIri, track, elementIri)) {
         track.add(0, node.getIri());
         return true;

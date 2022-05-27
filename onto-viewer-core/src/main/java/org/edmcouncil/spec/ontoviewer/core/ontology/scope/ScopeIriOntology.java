@@ -78,7 +78,7 @@ public class ScopeIriOntology {
     return scopesOntologies;
   }
 
-  public Boolean scopeIri(String uri) {
+  public boolean scopeIri(String uri) {
     for (String scope : scopes) {
       //    LOG.debug("Contains: {} -> {}", uri, scope);
       if (uri.contains(scope)) {

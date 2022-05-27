@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 
 /**
  *
@@ -27,7 +27,7 @@ public class TreeRenderTag extends SimpleTagSupport {
 
   private String elementWrapper;
   private String searchPath;
-  private FiboModule element;
+  private OntologyModule element;
   private List<String> elementLocation;
   private String contextPath;
 
@@ -56,11 +56,11 @@ public class TreeRenderTag extends SimpleTagSupport {
     this.searchPath = searchPath;
   }
 
-  public FiboModule getElement() {
+  public OntologyModule getElement() {
     return element;
   }
 
-  public void setElement(FiboModule element) {
+  public void setElement(OntologyModule element) {
     this.element = element;
   }
 
@@ -85,7 +85,7 @@ public class TreeRenderTag extends SimpleTagSupport {
     out.println(toRender);
   }
 
-  private void renderTreeElement(FiboModule property) throws IOException {
+  private void renderTreeElement(OntologyModule property) throws IOException {
     String link = null;
     String val = null;
     String emptyDisplayedVal = "";
@@ -93,7 +93,7 @@ public class TreeRenderTag extends SimpleTagSupport {
     val = property.getLabel();
     String result = wrapToLink(link, val);//"<i class='fas fa-file-export'></i>");
     renderElement("<li>");
-    List<FiboModule> fmList = property.getSubModule();
+    List<OntologyModule> fmList = property.getSubModule();
     String text = null;
     if (fmList != null && fmList.size() > 0) {
       if (elementLocation != null && elementLocation.contains(link)) {
@@ -121,8 +121,8 @@ public class TreeRenderTag extends SimpleTagSupport {
       } else {
         renderElement(UL_NESTED);
       }
-      for (FiboModule fiboModule : fmList) {
-        renderTreeElement(fiboModule);
+      for (OntologyModule ontologyModule : fmList) {
+        renderTreeElement(ontologyModule);
       }
       renderElement("</ul>");
     }

@@ -1,30 +1,44 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity;
 
-import org.semanticweb.owlapi.model.IRI;
+import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.NOT_SET;
+
+import java.util.EnumMap;
+import java.util.Optional;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class MaturityLevelFactory {
 
-  public static MaturityLevel PROD = new AppMaturityLevel("prod");
-  public static MaturityLevel DEV = new AppMaturityLevel("dev");
-  public static MaturityLevel PROD_DEV_MIXED = new AppMaturityLevel("prod_and_dev_mixed");
-  public static MaturityLevel INFO = new AppMaturityLevel("info");
-
-  public static OntoMaturityLevel create(String label, IRI iri, String icon) {
-    return create(label, iri.toString(), icon);
+  private MaturityLevelFactory() {
   }
 
-  public static OntoMaturityLevel create(String label, String iri, String icon) {
-    return new OntoMaturityLevel(label, iri, icon);
+  private static final EnumMap<MaturityLevelDefinition, MaturityLevel> MATURITY_LEVELS
+      = new EnumMap<>(MaturityLevelDefinition.class);
+
+  static {
+    for (MaturityLevelDefinition definition : MaturityLevelDefinition.values()) {
+      MATURITY_LEVELS.put(definition, createMaturityLevel(definition));
+    }
   }
 
-  public static OntoMaturityLevel empty() {
-    return create("", "", "");
+  public static MaturityLevel get(MaturityLevelDefinition maturityLevelDefinition) {
+    return MATURITY_LEVELS.get(maturityLevelDefinition);
   }
 
-  public static MaturityLevel emptyAppFiboMaturityLabel() {
-    return new AppMaturityLevel("");
+  public static MaturityLevel notSet() {
+    return MATURITY_LEVELS.get(NOT_SET);
+  }
+
+  private static MaturityLevel createMaturityLevel(MaturityLevelDefinition maturityLevelDefinition) {
+    return new MaturityLevel(maturityLevelDefinition.name(), maturityLevelDefinition.getIri());
+  }
+
+  public static Optional<MaturityLevel> getByIri(String maturityLevelIri) {
+    var maturityLevelDefinition = MaturityLevelDefinition.getByIri(maturityLevelIri);
+    if (maturityLevelDefinition.isEmpty()) {
+      return Optional.empty();
+    }
+    return Optional.of(MATURITY_LEVELS.get(maturityLevelDefinition.get()));
   }
 }

@@ -1,5 +1,10 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
+import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.INFORMATIVE;
+import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.NOT_SET;
+import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.PROVISIONAL;
+import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.RELEASE;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -11,17 +16,16 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -43,14 +47,12 @@ public class ModuleHandler {
   private static final Logger LOGGER = LoggerFactory.getLogger(ModuleHandler.class);
   private static final String HAS_PART_IRI = "http://purl.org/dc/terms/hasPart";
   private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
-  private static final String RELEASE_IRI
-      = "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release";
   private static final String INSTANCE_KEY = ViewerIdentifierFactory.createId(
       ViewerIdentifierFactory.Type.function,
       OwlType.INSTANCES.name().toLowerCase());
   private static final Pattern URL_PATTERN
       = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-  private boolean automaticCreationOfModules = false;
+  private final boolean automaticCreationOfModules;
   private final OntologyManager ontologyManager;
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
@@ -59,7 +61,7 @@ public class ModuleHandler {
   private final Set<Pattern> ontologyModuleIgnorePatterns;
   private final OWLAnnotationProperty hasPartAnnotation;
 
-  private List<FiboModule> modules;
+  private List<OntologyModule> modules;
 
   public ModuleHandler(OntologyManager ontologyManager,
       IndividualDataHandler individualDataHandler,
@@ -73,26 +75,26 @@ public class ModuleHandler {
     this.automaticCreationOfModules = applicationConfigurationService.getConfigurationData()
         .getOntologiesConfig()
         .getAutomaticCreationOfModules();
-    this.ontologiesToIgnoreWhenGeneratingModules
-        = applicationConfigurationService.getConfigurationData()
-            .getOntologiesConfig()
-            .getModuleToIgnore()
-            .stream()
-            .map(IRI::create)
-            .collect(Collectors.toSet());
+
+    this.ontologiesToIgnoreWhenGeneratingModules = applicationConfigurationService.getConfigurationData()
+        .getOntologiesConfig()
+        .getModuleToIgnore()
+        .stream()
+        .map(IRI::create)
+        .collect(Collectors.toSet());
 
     this.ontologyModuleIgnorePatterns
         = applicationConfigurationService.getConfigurationData()
-            .getOntologiesConfig()
-            .getModuleIgnorePatterns()
-            .stream()
-            .map(Pattern::compile)
-            .collect(Collectors.toSet());
+        .getOntologiesConfig()
+        .getModuleIgnorePatterns()
+        .stream()
+        .map(Pattern::compile)
+        .collect(Collectors.toSet());
 
     this.hasPartAnnotation = OWLManager.getOWLDataFactory().getOWLAnnotationProperty(IRI.create(HAS_PART_IRI));
   }
 
-  public List<FiboModule> getModules() {
+  public List<OntologyModule> getModules() {
     if (modules == null) {
       var ontology = ontologyManager.getOntology();
 
@@ -122,7 +124,7 @@ public class ModuleHandler {
         }
       }
       if (automaticCreationOfModules) {
-          addMissingModules(modules);
+        addMissingModules(modules);
       }
     }
     return modules;
@@ -149,21 +151,19 @@ public class ModuleHandler {
         .collect(Collectors.toList());
   }
 
-  private List<FiboModule> getSubModules(String moduleIri) {
+  private List<OntologyModule> getSubModules(String moduleIri) {
     Set<String> hasPartModules = getSubModules(IRI.create(moduleIri));
 
     return prepareModuleObjects(hasPartModules);
   }
 
-  private List<FiboModule> prepareModuleObjects(Collection<String> modulesIris) {
+  private List<OntologyModule> prepareModuleObjects(Collection<String> modulesIris) {
     return modulesIris.stream()
         .map(moduleIri -> {
-          FiboModule module = new FiboModule();
+          OntologyModule module = new OntologyModule();
           module.setIri(moduleIri);
           module.setLabel(labelProvider.getLabelOrDefaultFragment(IRI.create(moduleIri)));
-          module.setMaturityLevel(
-              chooseTheRightVersion(
-                  ontologyHandler.getMaturityLevelForOntology(IRI.create(moduleIri))));
+          module.setMaturityLevel(ontologyHandler.getMaturityLevelForOntology(IRI.create(moduleIri)));
           module.setSubModule(getSubModules(moduleIri));
           return module;
         })
@@ -192,56 +192,70 @@ public class ModuleHandler {
         .collect(Collectors.toSet());
   }
 
-  private MaturityLevel chooseTheRightVersion(OntoMaturityLevel maturityLevelFromOntology) {
-    if (maturityLevelFromOntology.getIri().equals(RELEASE_IRI)) {
-      return MaturityLevelFactory.PROD;
-    } else if (maturityLevelFromOntology.getIri().equals("")) {
-      return MaturityLevelFactory.emptyAppFiboMaturityLabel();
-    } else {
-      return MaturityLevelFactory.DEV;
-    }
-  }
-
-  private void checkAndCompleteMaturityLevel(FiboModule module) {
-    if (module.getMaturityLevel() != null && !module.getMaturityLevel().getLabel().equals("")) {
+  private void checkAndCompleteMaturityLevel(OntologyModule module) {
+    if (isMaturityLevelInSet(module.getMaturityLevel(), Set.of(PROVISIONAL, INFORMATIVE, RELEASE))) {
       return;
     }
 
     Set<MaturityLevel> levels = new HashSet<>();
-    for (FiboModule subModule : module.getSubModule()) {
+    for (OntologyModule subModule : module.getSubModule()) {
       checkAndCompleteMaturityLevel(subModule);
       levels.add(subModule.getMaturityLevel());
     }
 
-    module.setMaturityLevel(chooseTheRightVersion(levels));
+    module.setMaturityLevel(chooseMaturityLevel(levels));
   }
 
-  private MaturityLevel chooseTheRightVersion(Set<MaturityLevel> levels) {
-    int prodCount = 0;
-    int devCount = 0;
+  private boolean isMaturityLevelInSet(MaturityLevel maturityLevel, Set<MaturityLevelDefinition> maturityLevels) {
+    var maturityLevelOptional = MaturityLevelDefinition.getByIri(maturityLevel.getIri());
+    if (maturityLevelOptional.isPresent()) {
+      var maturityLevelDefinition = maturityLevelOptional.get();
+      return maturityLevels.contains(maturityLevelDefinition);
+    }
+
+    return false;
+  }
+
+  private MaturityLevel chooseMaturityLevel(Set<MaturityLevel> levels) {
+    int releaseCounter = 0;
+    int provisionalCounter = 0;
+    int informativeCounter = 0;
+    int notSetCounter = 0;
 
     for (MaturityLevel level : levels) {
-      if (level.equals(MaturityLevelFactory.PROD_DEV_MIXED)) {
+      if (level.equals(MaturityLevelFactory.get(MaturityLevelDefinition.MIXED))) {
         return level;
-      } else if (level.equals(MaturityLevelFactory.PROD)) {
-        prodCount++;
-      } else if (level.equals(MaturityLevelFactory.DEV)) {
-        devCount++;
+      } else if (level.equals(MaturityLevelFactory.get(MaturityLevelDefinition.RELEASE))) {
+        releaseCounter++;
+      } else if (level.equals(MaturityLevelFactory.get(MaturityLevelDefinition.INFORMATIVE))) {
+        informativeCounter++;
+      } else if (level.equals(MaturityLevelFactory.get(MaturityLevelDefinition.PROVISIONAL))) {
+        provisionalCounter++;
+      } else if (level.equals(MaturityLevelFactory.get(NOT_SET))) {
+        notSetCounter++;
       }
     }
 
-    LOGGER.trace("Version select, prodCount: {}, devCount: {}, size: {}", prodCount, devCount, levels.size());
+    LOGGER.trace("Version select, releaseCounter: {}, informativeCounter: {}, provisionalCounter: {}, size: {}",
+        releaseCounter, informativeCounter, provisionalCounter, levels.size());
 
-    if (prodCount == levels.size()) {
-      return MaturityLevelFactory.PROD;
-    } else if (devCount == levels.size()) {
-      return MaturityLevelFactory.DEV;
+    if (levels.isEmpty()) {
+      return MaturityLevelFactory.notSet();
+    }
+    if (releaseCounter == levels.size()) {
+      return MaturityLevelFactory.get(MaturityLevelDefinition.RELEASE);
+    } else if (informativeCounter == levels.size()) {
+      return MaturityLevelFactory.get(MaturityLevelDefinition.INFORMATIVE);
+    } else if (provisionalCounter == levels.size()) {
+      return MaturityLevelFactory.get(MaturityLevelDefinition.PROVISIONAL);
+    } else if (notSetCounter == levels.size()) {
+      return MaturityLevelFactory.get(NOT_SET);
     } else {
-      return MaturityLevelFactory.PROD_DEV_MIXED;
+      return MaturityLevelFactory.get(MaturityLevelDefinition.MIXED);
     }
   }
 
-  private void addMissingModules(List<FiboModule> modules) {
+  private void addMissingModules(List<OntologyModule> modules) {
     Set<String> modulesIris = gatherModulesIris(modules);
 
     var newModules = ontologyManager.getOntologyWithImports()
@@ -263,19 +277,17 @@ public class ModuleHandler {
           // We filtered out empty ontology IRI optional above
           var ontologyIri = owlOntology.getOntologyID().getOntologyIRI().get();
 
-          FiboModule module = new FiboModule();
+          OntologyModule module = new OntologyModule();
           module.setIri(ontologyIri.toString());
           module.setLabel(labelProvider.getLabelOrDefaultFragment(ontologyIri));
           module.setSubModule(new ArrayList<>());
-          module.setMaturityLevel(
-              chooseTheRightVersion(
-                  ontologyHandler.getMaturityLevelForOntology(ontologyIri)));
+          module.setMaturityLevel(ontologyHandler.getMaturityLevelForOntology(ontologyIri));
           if ("".equals(module.getMaturityLevel().getLabel())) {
-            module.setMaturityLevel(MaturityLevelFactory.INFO);
+            module.setMaturityLevel(MaturityLevelFactory.get(NOT_SET));
           }
           return module;
         })
-        .filter(fiboModule -> !fiboModule.getLabel().isEmpty())
+        .filter(ontologyModule -> !ontologyModule.getLabel().isEmpty())
         .sorted()
         .collect(Collectors.toList());
 
@@ -312,18 +324,18 @@ public class ModuleHandler {
     return !modulesIris.contains(ontologyIri.toString());
   }
 
-  private Set<String> gatherModulesIris(List<FiboModule> modules) {
+  private Set<String> gatherModulesIris(List<OntologyModule> modules) {
     Set<String> iris = new HashSet<>();
-    for (FiboModule module : modules) {
+    for (OntologyModule module : modules) {
       iris.add(module.getIri());
       iris.addAll(gatherModulesIris(module.getSubModule()));
     }
     return iris;
   }
 
-    void updateModules() {
-        this.modules = null;
-        //if modules is empty is auto generated again while get
-        getModules();
-    }
+  void updateModules() {
+    this.modules = null;
+    //if modules is empty is auto generated again while get
+    getModules();
+  }
 }

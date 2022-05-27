@@ -1,9 +1,9 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model;
 
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
+import java.util.StringJoiner;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 
 /**
- *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 public class SearchItem {
@@ -12,7 +12,7 @@ public class SearchItem {
   private String label;
   private String description;
   private double relevancy;
-  private OntoMaturityLevel maturityLevel;
+  private MaturityLevel maturityLevel;
 
   public String getIri() {
     return iri;
@@ -46,16 +46,22 @@ public class SearchItem {
     this.description = description;
   }
 
-  public void setMaturityLevel(OntoMaturityLevel maturityLevel) {
+  public void setMaturityLevel(MaturityLevel maturityLevel) {
     this.maturityLevel = maturityLevel;
   }
 
-  public OntoMaturityLevel getMaturityLevel() {
+  public MaturityLevel getMaturityLevel() {
     return maturityLevel;
   }
 
   @Override
   public String toString() {
-    return "{" + "iri=" + iri + ", label=" + label + ", relevancy=" + relevancy + '}';
+    return new StringJoiner(", ", SearchItem.class.getSimpleName() + "[", "]")
+        .add("iri='" + iri + "'")
+        .add("label='" + label + "'")
+        .add("description='" + description + "'")
+        .add("relevancy=" + relevancy)
+        .add("maturityLevel=" + maturityLevel)
+        .toString();
   }
 }

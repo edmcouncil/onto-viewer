@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Objects;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlTaxonomy;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.vis.VisGraph;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 
 /**
- *
  * Created by Michał Daniel (michal.mateusz.daniel@gmail.com)
  */
 public class OwlDetails {
@@ -18,6 +17,7 @@ public class OwlDetails {
   private OwlTaxonomy taxonomy;
   private List<String> locationInModules;
   private VisGraph graph;
+  private MaturityLevel maturityLevel;
 
   public VisGraph getGraph() {
     return graph;
@@ -26,7 +26,6 @@ public class OwlDetails {
   public void setGraph(VisGraph graph) {
     this.graph = graph;
   }
-  private OntoMaturityLevel maturityLevel;
 
   public String getLabel() {
     return label;
@@ -68,11 +67,11 @@ public class OwlDetails {
     return this.taxonomy;
   }
 
-  public void setMaturityLevel(OntoMaturityLevel ontoMaturityLevel) {
-    this.maturityLevel = ontoMaturityLevel;
+  public void setMaturityLevel(MaturityLevel maturityLevel) {
+    this.maturityLevel = maturityLevel;
   }
 
-  public OntoMaturityLevel getMaturityLevel() {
+  public MaturityLevel getMaturityLevel() {
     return maturityLevel;
   }
 
@@ -110,8 +109,8 @@ public class OwlDetails {
     return true;
   }
 
-    @Override
-    public String toString() {
-        return "{" + "label=" + label + ", iri=" + iri + '}';
-    }
+  @Override
+  public String toString() {
+    return "{" + "label=" + label + ", iri=" + iri + '}';
+  }
 }

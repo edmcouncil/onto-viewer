@@ -14,7 +14,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator;
@@ -124,7 +124,7 @@ public class DetailsManager {
     return setGroupedDetailsIfEnabled(iriString, result);
   }
 
-  public List<FiboModule> getAllModulesData() {
+  public List<OntologyModule> getAllModulesData() {
     return dataHandler.getAllModules();
   }
 

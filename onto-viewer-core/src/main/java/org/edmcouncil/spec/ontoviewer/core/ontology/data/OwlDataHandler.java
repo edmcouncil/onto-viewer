@@ -31,7 +31,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.OntologyGraph;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.viewer.ViewerGraphFactory;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.vis.VisGraph;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
@@ -42,8 +42,8 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntoMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.visitor.ContainsVisitors;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -1231,7 +1231,7 @@ public class OwlDataHandler {
     return null;
   }
 
-  public List<FiboModule> getAllModules() {
+  public List<OntologyModule> getAllModules() {
     return fiboDataHandler.getAllModules();
   }
 
@@ -1313,7 +1313,7 @@ public class OwlDataHandler {
     return resultDetails;
   }
 
-  public OntoMaturityLevel getMaturityLevel(String iriString) {
+  public MaturityLevel getMaturityLevel(String iriString) {
     return fiboOntologyHandler.getMaturityLevelForElement(iriString);
   }
 
@@ -1541,7 +1541,7 @@ public class OwlDataHandler {
       opv.setValue(sbd.toString());
       opv.setType(OwlType.AXIOM);
 
-      LOG.debug("Generated big axiom: {}", sbd.toString());
+      LOG.debug("Generated big axiom: {}", sbd);
       sbd = new StringBuilder();
       String fullRenderedString = parseRenderedString(opv);
       opv.setFullRenderedString(fullRenderedString);
@@ -1569,12 +1569,5 @@ public class OwlDataHandler {
     }
 
     return result;
-
-  }
-
-  // TODO: Remove
-  private boolean getSetting(String key) {
-//    return (boolean) configurationService.getCoreConfiguration().getOntologyHandling().get(key);
-    return false;
   }
 }
