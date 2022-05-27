@@ -1,7 +1,9 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.config;
 
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlMemoryBasedConfigurationService;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
@@ -12,6 +14,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -49,5 +52,11 @@ public class ApplicationConfiguration {
     propsConfig.setIgnoreResourceNotFound(true);
     propsConfig.setIgnoreUnresolvablePlaceholders(true);
     return propsConfig;
+  }
+
+  @Bean
+  public FileSystemManager getFileSystemManager() {
+    var appProperties = new AppProperties();
+    return new FileSystemManager(appProperties);
   }
 }
