@@ -132,7 +132,9 @@ public class AnnotationsDataHandler {
           propertyValue = customDataFactory.createAnnotationAnyUri(value);
         }
 
-        setMaturityLevel(details, propertyiri, (OwlAnnotationIri) propertyValue);
+        if (propertyValue instanceof OwlAnnotationIri) {
+          setMaturityLevel(details, propertyiri, (OwlAnnotationIri) propertyValue);
+        }
       } else if (next.getValue().isLiteral()) {
         Optional<OWLLiteral> asLiteral = next.getValue().asLiteral();
         if (asLiteral.isPresent()) {
@@ -148,7 +150,9 @@ public class AnnotationsDataHandler {
           checkUriAsIri(propertyValue, value);
           if (propertyValue.getType() == OwlType.IRI) {
             propertyValue = customDataFactory.createAnnotationIri(value);
-            setMaturityLevel(details, propertyiri, (OwlAnnotationIri) propertyValue);
+            if (propertyValue instanceof OwlAnnotationIri) {
+              setMaturityLevel(details, propertyiri, (OwlAnnotationIri) propertyValue);
+            }
           }
         }
       }
@@ -163,8 +167,8 @@ public class AnnotationsDataHandler {
 
   private void setMaturityLevel(OwlListDetails details, IRI propertyIri, OwlAnnotationIri propertyValue) {
     if (propertyIri.equals(HAS_MATURITY_LEVEL_IRI)) {
-      OwlAnnotationIri annotationIRI = propertyValue;
-      Optional<MaturityLevel> maturityLevel = MaturityLevelFactory.getByIri(annotationIRI.getValue().getIri());
+      OwlAnnotationIri annotationIri = propertyValue;
+      Optional<MaturityLevel> maturityLevel = MaturityLevelFactory.getByIri(annotationIri.getValue().getIri());
       if (maturityLevel.isPresent()) {
         details.setMaturityLevel(maturityLevel.get());
       } else {
