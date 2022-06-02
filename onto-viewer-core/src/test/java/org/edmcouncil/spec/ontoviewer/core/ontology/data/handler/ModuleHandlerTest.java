@@ -12,7 +12,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.BaseTest;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.junit.jupiter.api.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -128,12 +127,10 @@ class ModuleHandlerTest extends BaseTest {
             IRI.create("file://some_random_path.rdf")));
     var labelProvider = new LabelProvider(configurationService, ontologyManager);
     var individualDataHandler = new IndividualDataHandler(labelProvider);
-    var ontologyHandler = new OntologyHandler(ontologyManager);
 
     return new ModuleHandler(ontologyManager,
         individualDataHandler,
         labelProvider,
-        ontologyHandler,
         configurationService);
   }
 

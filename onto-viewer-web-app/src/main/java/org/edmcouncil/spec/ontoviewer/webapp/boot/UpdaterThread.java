@@ -162,7 +162,6 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       //load ontology resource must be here, data handler use label provider
       dataHandler.populateOntologyResources(ontology);
       
-      dataHandler.getFiboOntologyHandler().setModulesTree(dataHandler.getAllModules()); // TODO: Seems not right
       ontologyStatsManager.clear();
       ontologyStatsManager.generateStats(ontology);
 

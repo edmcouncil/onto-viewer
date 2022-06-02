@@ -40,10 +40,10 @@ import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyElementImpl
 import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.visitor.ContainsVisitors;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -95,9 +95,9 @@ public class OwlDataHandler {
 
   private final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
   @Autowired
-  private DataHandler fiboDataHandler;
+  private DataHandler dataHandler;
   @Autowired
-  private OntologyHandler fiboOntologyHandler;
+  private ModuleHandler moduleHandler;
   @Autowired
   private AnnotationsDataHandler annotationsDataHandler;
   @Autowired
@@ -121,7 +121,8 @@ public class OwlDataHandler {
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
-  private final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:", "Range:", "Functional:","Transitive:", "Symmetric:", "Asymmetric", "Reflexive", "Irreflexive");
+  private final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:",
+      "Range:", "Functional:", "Transitive:", "Symmetric:", "Asymmetric", "Reflexive", "Irreflexive");
   private final String INVERSE_OF_SUBJECT = "InverseOf";
 
   private final String subClassOfIriString = ViewerIdentifierFactory
@@ -618,20 +619,20 @@ public class OwlDataHandler {
         //more than 1 because when it's 1, it's a number
         Boolean hasOpeningBrackets = string.length() > 1 ? string.contains("(") : false;
         int countOpeningBrackets = StringUtils.countLetter(string, '(');
-        
+
         Boolean hasClosingBrackets =
             string.length() > 1 ? string.endsWith(closingBrackets) : false;
         int countClosingBrackets = StringUtils.countLetter(string, ')');
-        
+
         Boolean hasOpeningCurlyBrackets = string.length() > 1 ? string.contains("{") : false;
         int countOpeningCurlyBrackets = StringUtils.countLetter(string, '{');
-        
-         Boolean hasClosingCurlyBrackets = string.length() > 1 ? string.contains("}") : false;
+
+        Boolean hasClosingCurlyBrackets = string.length() > 1 ? string.contains("}") : false;
         int countClosingCurlyBrackets = StringUtils.countLetter(string, '}');
-        
+
         Boolean hasComma = string.length() > 1 ? string.contains(",") : false;
         int countComma = StringUtils.countLetter(string, ',');
-        
+
         if (hasOpeningBrackets) {
           String newString = string.substring(countOpeningBrackets);
           LOG.trace("Old string: '{}', new string '{}', count opening parenthesis '{}'", string,
@@ -685,7 +686,7 @@ public class OwlDataHandler {
                 Collections.nCopies(countClosingBrackets, closingBrackets));
             textToReplace = textToReplace + postfix;
           }
-               if (hasOpeningCurlyBrackets) {
+          if (hasOpeningCurlyBrackets) {
             String prefix = String.join("",
                 Collections.nCopies(countOpeningCurlyBrackets, openingCurlyBrackets));
             textToReplace = prefix + textToReplace;
@@ -753,7 +754,7 @@ public class OwlDataHandler {
       String[] splited, int j, String generatedKey, String iriString, int countOpeningParenthesis,
       int countClosingParenthesis, int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
-    if(iriString.contains("<") && iriString.contains(">")){
+    if (iriString.contains("<") && iriString.contains(">")) {
       iriString = iriString.toString().replace("<", "").replace(">", "");
     }
     axiomPropertyEntity.setIri(iriString);
@@ -1006,7 +1007,7 @@ public class OwlDataHandler {
    * This method is used to display sub-object property
    *
    * @param ontology This is a loaded ontology.
-   * @param obj      Obj are all properties of direct subObjectProperty.
+   * @param obj Obj are all properties of direct subObjectProperty.
    * @return Properties of direct subObjectProperty.
    */
   public OwlDetailsProperties<PropertyValue> handleDirectSubObjectProperty(OWLOntology ontology,
@@ -1039,9 +1040,8 @@ public class OwlDataHandler {
   /**
    * This method is used to display sub-annotation property
    *
-   * @param ontology           This is a loaded ontology.
-   * @param annotationProperty AnnotationProperty are all properties of direct
-   *                           subAnnotationProperty.
+   * @param ontology This is a loaded ontology.
+   * @param annotationProperty AnnotationProperty are all properties of direct subAnnotationProperty.
    * @return Properties of direct subAnnotationProperty.
    */
   public OwlDetailsProperties<PropertyValue> handleDirectSubAnnotationProperty(OWLOntology ontology,
@@ -1075,7 +1075,7 @@ public class OwlDataHandler {
    * This method is used to display sub-data property
    *
    * @param ontology This is a loaded ontology.
-   * @param odj      Odj are all properties of direct subDataProperty.
+   * @param odj Odj are all properties of direct subDataProperty.
    * @return Properties of direct subDataProperty.
    */
   public OwlDetailsProperties<PropertyValue> handleDirectSubDataProperty(OWLOntology ontology,
@@ -1108,7 +1108,7 @@ public class OwlDataHandler {
    * This method is used to display Particular Individual
    *
    * @param ontology This is a loaded ontology.
-   * @param clazz    Clazz are all Instances.
+   * @param clazz Clazz are all Instances.
    * @return All instances of a given class;
    */
   private OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology,
@@ -1119,7 +1119,7 @@ public class OwlDataHandler {
     return result;
   }
 
-//  /**
+  //  /**
 //   * This method is used to handle Inherited Axioms
 //   *
 //   * @param ontology Paramter which loaded ontology.
@@ -1220,24 +1220,24 @@ public class OwlDataHandler {
 
   public OwlListDetails handleOntologyMetadata(IRI iri) {
     OwlListDetails ontologyDetails = new OwlListDetails();
-    OwlDetailsProperties<PropertyValue> metadata = fiboDataHandler.handleFiboOntologyMetadata(iri, ontologyDetails);
+    OwlDetailsProperties<PropertyValue> metadata = dataHandler.handleOntologyMetadata(iri, ontologyDetails);
     if (metadata != null && !metadata.getProperties().keySet().isEmpty()) {
       ontologyDetails.addAllProperties(metadata);
       ontologyDetails.setIri(iri.toString());
       ontologyDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
-      ontologyDetails.setLocationInModules(fiboDataHandler.getElementLocationInModules(iri.toString()));
+      ontologyDetails.setLocationInModules(dataHandler.getElementLocationInModules(iri.toString()));
       return ontologyDetails;
     }
     return null;
   }
 
   public List<OntologyModule> getAllModules() {
-    return fiboDataHandler.getAllModules();
+    return dataHandler.getAllModules();
   }
 
   public List<String> getElementLocationInModules(String iriString) {
     LOG.debug("[Data Handler] Handle location for element {}", iriString);
-    return fiboDataHandler.getElementLocationInModules(iriString);
+    return dataHandler.getElementLocationInModules(iriString);
   }
 
   public OwlListDetails handleParticularDatatype(IRI iri) {
@@ -1313,8 +1313,8 @@ public class OwlDataHandler {
     return resultDetails;
   }
 
-  public MaturityLevel getMaturityLevel(String iriString) {
-    return fiboOntologyHandler.getMaturityLevelForElement(iriString);
+  public MaturityLevel getMaturityLevel(IRI iri) {
+    return moduleHandler.getMaturityLevelForElement(iri);
   }
 
   private void parseUrlAxiom(String eIri, String[] splited, int i, Boolean hasOpeningParenthesis,
@@ -1434,7 +1434,7 @@ public class OwlDataHandler {
     for (OWLObjectPropertyRangeAxiom axiom : ops) {
       OWLEntity rangeEntity = axiom.signature()
           .filter(entity -> !entity.getIRI()
-          .equals(clazz.getIRI()))
+              .equals(clazz.getIRI()))
           .findFirst().get();
       LOG.debug("OwlDataHandler -> extractUsageRangeAxiom {}", rangeEntity.getIRI());
 
@@ -1499,8 +1499,8 @@ public class OwlDataHandler {
     for (OWLObjectPropertyDomainAxiom axiom : opd) {
       OWLEntity domainEntity
           = axiom.signature()
-              .filter(e -> !e.getIRI().equals(clazz.getIRI()))
-              .findFirst().get();
+          .filter(e -> !e.getIRI().equals(clazz.getIRI()))
+          .findFirst().get();
       LOG.debug("OwlDataHandler -> extractUsageObjectDomainAxiom {}", domainEntity.getIRI());
 
       String iriFragment = domainEntity.getIRI().toString();
@@ -1563,9 +1563,9 @@ public class OwlDataHandler {
         continue;
       }
       String replecment = entry.getValue().getLabel();
-      LOG.debug("replecment: {}", replecment.toString());
+      LOG.debug("replecment: {}", replecment);
       result = result.replaceAll(key, replecment);
-      LOG.debug("result: {}", result.toString());
+      LOG.debug("result: {}", result);
     }
 
     return result;

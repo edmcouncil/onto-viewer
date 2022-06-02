@@ -181,7 +181,7 @@ public class DetailsManager {
 
     if (result != null) {
       result.setIri(iri.toString());
-      result.setMaturityLevel(dataHandler.getMaturityLevel(iri.toString()));
+      result.setMaturityLevel(dataHandler.getMaturityLevel(iri));
     }
 
     return result;
