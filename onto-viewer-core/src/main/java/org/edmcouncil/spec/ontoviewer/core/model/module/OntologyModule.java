@@ -11,17 +11,17 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.Maturi
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
-public class FiboModule implements Comparable<FiboModule> {
+public class OntologyModule implements Comparable<OntologyModule> {
 
   private String iri;
   private String label;
-  private List<FiboModule> subModule;
+  private List<OntologyModule> subModule;
   private MaturityLevel maturityLevel = null;
 
-  public FiboModule() {
+  public OntologyModule() {
   }
 
-  public FiboModule(String iri, String label, List<FiboModule> subModule, MaturityLevel maturityLevel) {
+  public OntologyModule(String iri, String label, List<OntologyModule> subModule, MaturityLevel maturityLevel) {
     this.iri = iri;
     this.label = label;
     this.subModule = subModule;
@@ -44,11 +44,11 @@ public class FiboModule implements Comparable<FiboModule> {
     this.label = label;
   }
 
-  public List<FiboModule> getSubModule() {
+  public List<OntologyModule> getSubModule() {
     return subModule;
   }
 
-  public void setSubModule(List<FiboModule> subModule) {
+  public void setSubModule(List<OntologyModule> subModule) {
     this.subModule = subModule;
   }
 
@@ -60,7 +60,7 @@ public class FiboModule implements Comparable<FiboModule> {
     this.maturityLevel = maturityLevel;
   }
 
-  public int compareTo(FiboModule o) {
+  public int compareTo(OntologyModule o) {
     return this.label.compareTo(o.getLabel());
   }
 
@@ -80,10 +80,10 @@ public class FiboModule implements Comparable<FiboModule> {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof FiboModule)) {
+    if (!(o instanceof OntologyModule)) {
       return false;
     }
-    FiboModule that = (FiboModule) o;
+    OntologyModule that = (OntologyModule) o;
     return Objects.equals(iri, that.iri) && Objects.equals(label, that.label)
         && Objects.equals(subModule, that.subModule) && Objects.equals(maturityLevel,
         that.maturityLevel);
@@ -96,7 +96,7 @@ public class FiboModule implements Comparable<FiboModule> {
 
   @Override
   public String toString() {
-    return new StringJoiner(", ", FiboModule.class.getSimpleName() + "[", "]")
+    return new StringJoiner(", ", OntologyModule.class.getSimpleName() + "[", "]")
         .add("iri='" + iri + "'")
         .add("label='" + label + "'")
         .add("subModule=" + subModule)

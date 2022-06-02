@@ -6,29 +6,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFileBasedConfigurationService;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.BaseTest;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.AppMaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
-import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
-import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.junit.jupiter.api.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 class ModuleHandlerTest extends BaseTest {
 
-  private static final String ROOT_IRI = "http://www.example.com/modules#";
-  private static final MaturityLevel DEV_MATURITY_LEVEL = new AppMaturityLevel("dev");
-  private static final MaturityLevel PROD_MATURITY_LEVEL = new AppMaturityLevel("prod");
+  private static final String ROOT_IRI = "http://www.example.com/modules/";
+  private static final MaturityLevel PROVISIONAL = MaturityLevelFactory.get(MaturityLevelDefinition.PROVISIONAL);
+  private static final MaturityLevel RELEASE = MaturityLevelFactory.get(MaturityLevelDefinition.RELEASE);
+  private static final MaturityLevel INFORMATIVE = MaturityLevelFactory.get(MaturityLevelDefinition.INFORMATIVE);
+  private static final MaturityLevel MIXED = MaturityLevelFactory.get(MaturityLevelDefinition.MIXED);
+  private static final MaturityLevel NOT_SET = MaturityLevelFactory.get(MaturityLevelDefinition.NOT_SET);
 
   @Test
-  void shouldReturnListOfModulesDefinedInOntology() {
+  void shouldReturnListOfModulesDefinedInOntologyWithoutMaturityLevel() {
     var moduleHandler = prepareModuleHandler("/ontology/modules.rdf");
 
     var actualModules = moduleHandler.getModules();
@@ -38,23 +39,62 @@ class ModuleHandlerTest extends BaseTest {
             List.of(
                 createModule("ModuleA_1",
                     List.of(
-                        createModule("ModuleA_1_a", emptyList(), PROD_MATURITY_LEVEL)
+                        createModule("ModuleA_1_a", emptyList(), NOT_SET)
                     ),
-                    PROD_MATURITY_LEVEL
+                    NOT_SET
                 ),
-                createModule("ModuleA_2", emptyList(), PROD_MATURITY_LEVEL),
-                createModule("ModuleA_3", emptyList(), PROD_MATURITY_LEVEL)
+                createModule("ModuleA_2", emptyList(), NOT_SET),
+                createModule("ModuleA_3", emptyList(), NOT_SET)
             ),
-            PROD_MATURITY_LEVEL
+            NOT_SET
         ),
         createModule("ModuleB",
             List.of(
-                createModule("ModuleB_1", emptyList(), PROD_MATURITY_LEVEL),
-                createModule("ModuleB_2", emptyList(), PROD_MATURITY_LEVEL)
+                createModule("ModuleB_1", emptyList(), NOT_SET),
+                createModule("ModuleB_2", emptyList(), NOT_SET)
             ),
-            PROD_MATURITY_LEVEL
+            NOT_SET
         ),
-        createModule("ModuleC", emptyList(), PROD_MATURITY_LEVEL)
+        createModule("ModuleC", emptyList(), NOT_SET)
+    );
+
+    assertEquals(expectedModules, actualModules);
+  }
+
+  @Test
+  void shouldReturnListOfModulesFromOntologyFiles() {
+    var moduleHandler = prepareModuleHandler(
+        "/ontology/modules/ModuleA.rdf",
+        "/ontology/modules/ModuleA_1.rdf",
+        "/ontology/modules/ModuleA_1_a.rdf",
+        "/ontology/modules/ModuleA_2.rdf",
+        "/ontology/modules/ModuleB.rdf",
+        "/ontology/modules/ModuleB_1.rdf",
+        "/ontology/modules/ModuleB_2.rdf",
+        "/ontology/modules/modules.rdf");
+
+    var actualModules = moduleHandler.getModules();
+
+    var expectedModules = List.of(
+        createModuleWithIriAsLabel("ModuleA/",
+            List.of(
+                createModuleWithIriAsLabel("ModuleA_1/",
+                    List.of(
+                        createModuleWithIriAsLabel("ModuleA_1_a/", emptyList(), PROVISIONAL)
+                    ),
+                    PROVISIONAL
+                ),
+                createModuleWithIriAsLabel("ModuleA_2/", emptyList(), INFORMATIVE)
+            ),
+            RELEASE
+        ),
+        createModuleWithIriAsLabel("ModuleB/",
+            List.of(
+                createModuleWithIriAsLabel("ModuleB_1/", emptyList(), PROVISIONAL),
+                createModuleWithIriAsLabel("ModuleB_2/", emptyList(), RELEASE)
+            ),
+            MIXED
+        )
     );
 
     assertEquals(expectedModules, actualModules);
@@ -62,64 +102,72 @@ class ModuleHandlerTest extends BaseTest {
 
   @Test
   void shouldReturnListOfModulesWhenNotDefinedInOntology() {
-    
     var moduleHandler = prepareModuleHandler("/ontology/MortgageLoansWithoutImports.rdf");
     var actualModules = moduleHandler.getModules();
     var expectedModules = List.of(
-        new FiboModule("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
+        new OntologyModule("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
             "MortgageLoans",
             emptyList(),
-            DEV_MATURITY_LEVEL)
+            PROVISIONAL)
     );
     assertEquals(expectedModules, actualModules);
   }
 
-  private ModuleHandler prepareModuleHandler(String ontologyPath) {
+  private ModuleHandler prepareModuleHandler(String... ontologyPaths) {
     var configurationService = new YamlFileBasedConfigurationService(prepareFileSystem());
     configurationService.init();
-    
-    var ontologyManager = getOntologyManager(ontologyPath);
+
+    var ontologyManager = getOntologyManager(ontologyPaths);
     var configurationData = configurationService.getConfigurationData();
     configurationData.getOntologiesConfig().setAutomaticCreationOfModules(true);
-    
+
     ontologyManager.setIriToPathMapping(
         Map.of(
             IRI.create("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/"),
             IRI.create("file://some_random_path.rdf")));
-    var owlDataExtractor = new OwlDataExtractor();
-    var customDataFactory = new CustomDataFactory();
     var labelProvider = new LabelProvider(configurationService, ontologyManager);
     var individualDataHandler = new IndividualDataHandler(labelProvider);
-    var scopeIriOntology = new ScopeIriOntology();
-    var annotationsDataHandler = new AnnotationsDataHandler(owlDataExtractor, customDataFactory, scopeIriOntology);
-    var ontologyHandler = new OntologyHandler(ontologyManager, labelProvider, annotationsDataHandler);
 
     return new ModuleHandler(ontologyManager,
         individualDataHandler,
         labelProvider,
-        ontologyHandler,
         configurationService);
   }
 
-  private OntologyManager getOntologyManager(String ontologyPath) {
+  private OntologyManager getOntologyManager(String... ontologyPaths) {
     try {
-      var exampleOntologyPath = getClass().getResourceAsStream(ontologyPath);
-      if (exampleOntologyPath == null) {
-        throw new IllegalStateException(
-            String.format("Example ontology in path '%s' not found.", ontologyPath));
-      }
       var owlOntologyManager = OWLManager.createOWLOntologyManager();
-      var ontology = owlOntologyManager.loadOntologyFromOntologyDocument(exampleOntologyPath);
+      var umbrellaOntology = owlOntologyManager.createOntology(IRI.create(ROOT_IRI));
+
+      for (String ontologyPath : ontologyPaths) {
+        var exampleOntologyPath = getClass().getResourceAsStream(ontologyPath);
+        if (exampleOntologyPath == null) {
+          throw new IllegalStateException(
+              String.format("Example ontology in path '%s' not found.", ontologyPath));
+        }
+        var ontology = owlOntologyManager.loadOntologyFromOntologyDocument(exampleOntologyPath);
+        var importDeclaration = owlOntologyManager
+            .getOWLDataFactory()
+            .getOWLImportsDeclaration(ontology.getOntologyID().getOntologyIRI().orElseThrow());
+
+        var addImport = new AddImport(umbrellaOntology, importDeclaration);
+        umbrellaOntology.applyDirectChange(addImport);
+      }
 
       var ontologyManager = new OntologyManager();
-      ontologyManager.updateOntology(ontology);
+      ontologyManager.updateOntology(umbrellaOntology);
       return ontologyManager;
     } catch (OWLOntologyCreationException ex) {
       throw new IllegalStateException(ex);
     }
   }
 
-  private FiboModule createModule(String name, List<FiboModule> subModules, MaturityLevel maturityLevel) {
-    return new FiboModule(ROOT_IRI + name, name, subModules, maturityLevel);
+  private OntologyModule createModule(String name, List<OntologyModule> subModules, MaturityLevel maturityLevel) {
+    return new OntologyModule(ROOT_IRI + name, name, subModules, maturityLevel);
+  }
+
+  private OntologyModule createModuleWithIriAsLabel(String name, List<OntologyModule> subModules,
+      MaturityLevel maturityLevel) {
+    return new OntologyModule(ROOT_IRI + name, ROOT_IRI + name, subModules, maturityLevel);
   }
 }

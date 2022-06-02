@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.ontoviewer.core.service.EntityService;
@@ -55,7 +55,7 @@ public class EntityController {
     Query q = new Query();
     q.setValue(iri);
     ModelBuilder modelBuilder = modelBuilderFactory.getInstance(model);
-    List<FiboModule> modules = moduleHandler.getModules();
+    List<OntologyModule> modules = moduleHandler.getModules();
     boolean isGrouped = applicationConfigurationService.hasConfiguredGroups();
     long startTimestamp = System.currentTimeMillis();
     SearcherResult result = null;

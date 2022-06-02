@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
 import java.util.List;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.webapp.util.ModelBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class ModuleController {
       return "error_503";
     }
 
-    List<FiboModule> modules = ontologyManager.getAllModulesData();
+    List<OntologyModule> modules = ontologyManager.getAllModulesData();
     ModelBuilder mb = new ModelBuilder(model);
 
     mb.setResult(null).isGrouped(true);

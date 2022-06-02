@@ -9,19 +9,17 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.onto.OntologyResources;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.OntologyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -50,7 +48,6 @@ public class DataHandler {
 
   private final AnnotationsDataHandler annotationsDataHandler;
   private final CustomDataFactory customDataFactory;
-  private final OntologyHandler fiboOntologyHandler;
   private final ModuleHandler moduleHandler;
   private final OntologyManager ontologyManager;
 
@@ -61,54 +58,49 @@ public class DataHandler {
 
   public DataHandler(AnnotationsDataHandler annotationsDataHandler,
       CustomDataFactory customDataFactory,
-      OntologyHandler fiboOntologyHandler,
       ModuleHandler moduleHandler,
       OntologyManager ontologyManager) {
     this.annotationsDataHandler = annotationsDataHandler;
     this.customDataFactory = customDataFactory;
-    this.fiboOntologyHandler = fiboOntologyHandler;
     this.moduleHandler = moduleHandler;
     this.ontologyManager = ontologyManager;
   }
 
-  public OwlDetailsProperties<PropertyValue> handleFiboOntologyMetadata(IRI iri, OwlListDetails details) {
+  public OwlDetailsProperties<PropertyValue> handleOntologyMetadata(IRI iri, OwlListDetails details) {
     OWLOntology ontology = ontologyManager.getOntology();
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
 
-    for (OWLOntology onto : manager.ontologies().collect(Collectors.toSet())) {
-      if (onto.getOntologyID().getOntologyIRI().isEmpty()) {
-        continue;
-      }
+    for (OWLOntology currentOntology : manager.ontologies().collect(Collectors.toSet())) {
+      var ontologyIriOptional = currentOntology.getOntologyID().getOntologyIRI();
+      if (ontologyIriOptional.isPresent()) {
+        var currentOntologyIri = ontologyIriOptional.get();
+        if (currentOntologyIri.equals(iri)
+            || currentOntologyIri.equals(
+            IRI.create(iri.getIRIString().substring(0, iri.getIRIString().length() - 1)))) {
+          annotations = annotationsDataHandler.handleOntologyAnnotations(currentOntology.annotations(), details);
 
-      if (onto.getOntologyID().getOntologyIRI().get().equals(iri)
-          || onto.getOntologyID().getOntologyIRI().get()
-          .equals(IRI.create(iri.getIRIString().substring(0, iri.getIRIString().length() - 1)))) {
-
-        IRI ontoIri = onto.getOntologyID().getOntologyIRI().get();
-        annotations = annotationsDataHandler.handleOntologyAnnotations(onto.annotations(), details);
-
-        OntologyResources ontologyResources = getOntologyResources(ontoIri.toString(), ontology);
-        if (ontologyResources != null) {
-          for (Map.Entry<String, List<PropertyValue>> entry : ontologyResources.getResources()
-              .entrySet()) {
-            for (PropertyValue propertyValue : entry.getValue()) {
-              annotations.addProperty(entry.getKey(), propertyValue);
+          OntologyResources ontologyResources = getOntologyResources(currentOntologyIri.toString(), ontology);
+          if (ontologyResources != null) {
+            for (Map.Entry<String, List<PropertyValue>> entry : ontologyResources.getResources().entrySet()) {
+              for (PropertyValue propertyValue : entry.getValue()) {
+                annotations.addProperty(entry.getKey(), propertyValue);
+              }
             }
           }
+          details.setMaturityLevel(moduleHandler.getMaturityLevelForModule(iri));
+          break;
         }
-        details.setMaturityLevel(fiboOntologyHandler.getMaturityLevelForElement(iri.toString()));
-        break;
       }
     }
 
     return annotations;
   }
 
-  public List<FiboModule> getAllModules() {
+  public List<OntologyModule> getAllModules() {
     return moduleHandler.getModules();
   }
-  
+
   public List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
     Map<String, Integer> referenceCount = new LinkedHashMap<>();
     modulesIriSet.forEach((mIri) -> {
@@ -120,10 +112,11 @@ public class DataHandler {
         referenceCount.put(partModule, c);
       });
     });
-    List<String> rootModulesIris = referenceCount.entrySet().stream()
-        .filter(r -> r.getValue() == 0).map(r -> r.getKey())
+    return referenceCount.entrySet()
+        .stream()
+        .filter(r -> r.getValue() == 0)
+        .map(Entry::getKey)
         .collect(Collectors.toList());
-    return rootModulesIris;
   }
 
   public OntologyResources getOntologyResources(String iri, OWLOntology ontology) {
@@ -310,7 +303,7 @@ public class DataHandler {
 
     LOG.debug("Element found in ontology {}", ontologyIri);
     if (ontologyIri != null) {
-      for (FiboModule module : allModules) {
+      for (OntologyModule module : allModules) {
         if (trackingThePath(module, ontologyIri, result, elementIri)) {
           LOG.debug("[FIBO Data Handler] Location Path {}", Arrays.toString(result.toArray()));
           return result;
@@ -347,7 +340,7 @@ public class DataHandler {
     return ontologyIri;
   }
 
-  private Boolean trackingThePath(FiboModule node, String ontologyIri, List<String> track,
+  private Boolean trackingThePath(OntologyModule node, String ontologyIri, List<String> track,
       String elementIri) {
 
     if (node == null) {
@@ -364,16 +357,12 @@ public class DataHandler {
       return true;
     }
 
-    for (FiboModule child : node.getSubModule()) {
+    for (OntologyModule child : node.getSubModule()) {
       if (trackingThePath(child, ontologyIri, track, elementIri)) {
         track.add(0, node.getIri());
         return true;
       }
     }
     return false;
-  }
-
-  public OntologyHandler getFiboOntologyHandler() {
-    return fiboOntologyHandler;
   }
 }

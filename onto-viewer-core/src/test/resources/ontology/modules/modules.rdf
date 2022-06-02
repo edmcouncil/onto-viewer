@@ -69,91 +69,70 @@
     
 
 
-    <!-- http://www.example.com/modules/ModuleA -->
+    <!-- http://www.example.com/modules#ModuleA -->
 
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA">
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA/">
         <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
-        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_1"/>
-        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_2"/>
-        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_3"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_1/"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_2/"/>
         <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.example.com/modules/ModuleA_1 -->
+    <!-- http://www.example.com/modules#ModuleA_1 -->
 
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_1">
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_1/">
         <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
-        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_1_a"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_1_a/"/>
         <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.example.com/modules/ModuleA_1_a -->
+    <!-- http://www.example.com/modules#ModuleA_1_a -->
 
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_1_a">
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_1_a/">
         <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
         <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.example.com/modules/ModuleA_2 -->
+    <!-- http://www.example.com/modules#ModuleA_2 -->
 
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_2">
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_2/">
         <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
         <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative"/>
-    </owl:NamedIndividual>
-    
+    </owl:NamedIndividual>    
 
 
-    <!-- http://www.example.com/modules/ModuleA_3 -->
+    <!-- http://www.example.com/modules#ModuleB -->
 
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_3">
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB/">
         <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
-        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.example.com/modules/ModuleB -->
-
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB">
-        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
-        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleB_1"/>
-        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleB_2"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleB_1/"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleB_2/"/>
         <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.example.com/modules/ModuleB_1 -->
+    <!-- http://www.example.com/modules#ModuleB_1 -->
 
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB_1">
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB_1/">
         <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
         <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.example.com/modules/ModuleB_2 -->
+    <!-- http://www.example.com/modules#ModuleB_2 -->
 
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB_2">
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB_2/">
         <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
         <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.example.com/modules/ModuleC -->
-
-    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleC">
-        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
-        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release"/>
-    </owl:NamedIndividual>
-    
+    </owl:NamedIndividual>   
 
 
     <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative -->

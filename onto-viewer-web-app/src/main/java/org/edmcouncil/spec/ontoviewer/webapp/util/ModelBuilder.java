@@ -1,7 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.webapp.util;
 
 import java.util.List;
-import org.edmcouncil.spec.ontoviewer.core.model.module.FiboModule;
+import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsMapped;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
@@ -51,7 +51,7 @@ public class ModelBuilder {
     return this;
   }
 
-  public ModelBuilder modelTree(List<FiboModule> modules) {
+  public ModelBuilder modelTree(List<OntologyModule> modules) {
     model.addAttribute("modelTree", modules);
     return this;
   }
