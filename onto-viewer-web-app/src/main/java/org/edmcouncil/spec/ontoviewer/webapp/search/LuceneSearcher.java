@@ -7,6 +7,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,10 +32,10 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
-import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.queryparser.complexPhrase.ComplexPhraseQueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
@@ -73,6 +74,8 @@ public class LuceneSearcher {
   private static final String QUERY_FIELD_DELIMITER = " OR ";
   private static final int DEFAULT_FUZZY_DISTANCE = 2;
   private static final String UNKNOWN_NAME = "UNKNOWN";
+  public static final Set<String> SPECIAL_CHARS
+      = Set.of("+", "-", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^", "\"", "~", "*", "?", ":", "\\", "/");
 
   static {
     IRI_TO_SHORT_ID.put(RDFS.NAMESPACE, "rdfs");
@@ -205,7 +208,8 @@ public class LuceneSearcher {
   public List<FindResult> search(String query, boolean useHighlighting) {
     try {
       var queryParser = new QueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
-      var parsedQuery = queryParser.parse(prepareQueryString(query));
+      var preparedQueryString = prepareQueryString(query);
+      var parsedQuery = queryParser.parse(preparedQueryString);
 
       return searchWithQuery(parsedQuery, basicFieldNames, useHighlighting);
     } catch (IOException | ParseException ex) {
@@ -217,11 +221,11 @@ public class LuceneSearcher {
     }
   }
 
-  public List<FindResult> searchAdvance(String query, List<String> findProperties,
-      boolean useHighlighting) {
+  public List<FindResult> searchAdvance(String query, List<String> findProperties, boolean useHighlighting) {
     try {
-      var queryParser = new QueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
-      var parsedQuery = queryParser.parse(prepareQueryString(query, findProperties));
+      var queryParser = new ComplexPhraseQueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
+      var preparedQueryString = prepareQueryString(query, findProperties);
+      var parsedQuery = queryParser.parse(preparedQueryString);
 
       var fieldOfInterest = findProperties.stream()
           .map(fieldPropertyIdentifier -> {
@@ -396,13 +400,17 @@ public class LuceneSearcher {
     var namespace = owlAnnotationProperty.getIRI().getNamespace();
     var fragment = owlAnnotationProperty.getIRI().getFragment();
     // We need to replace ':' because query parser isn't able to parse it correctly
-    var prefix = IRI_TO_SHORT_ID.computeIfAbsent(namespace, key -> key.replace(":", "_"));
+    var prefix = IRI_TO_SHORT_ID.computeIfAbsent(namespace,
+        key ->
+            key.replace(":", "_")
+                .replace("/", "_"));
     return String.format("%s#%s", prefix, fragment);
   }
 
   private String prepareQueryString(String term) {
     var fuzzyDelimiter = "~" + fuzzyDistance + " ";
-    var termWithFuzzing = String.join(fuzzyDelimiter, term.split("\\s+")).trim() + fuzzyDelimiter;
+    var escapedQuery = escapeQuery(term);
+    var termWithFuzzing = String.join(fuzzyDelimiter, escapedQuery.split("\\s+")).trim() + fuzzyDelimiter;
 
     return basicFieldNames.stream()
         .map(fieldName -> String.format("%s:%s", fieldName, termWithFuzzing))
@@ -411,7 +419,10 @@ public class LuceneSearcher {
 
   private String prepareQueryString(String query, List<String> findProperties) {
     var fuzzyDelimiter = "~" + fuzzyDistance + " ";
-    var termWithFuzzing = String.join(fuzzyDelimiter, query.split("\\s+")).trim() + fuzzyDelimiter;
+    var escapedQuery = escapeQuery(query);
+    var splittedQuery = Arrays.stream(escapedQuery.split("\\s+"))
+        .map(sq -> sq + fuzzyDelimiter)
+        .collect(Collectors.toList());
 
     return findProperties.stream()
         .map(findPropertyIdentifier -> {
@@ -423,8 +434,24 @@ public class LuceneSearcher {
           }
           return getFieldName(dataFactory.getOWLAnnotationProperty(findProperty.getIri()));
         })
-        .map(fieldName -> String.format("%s:%s", fieldName, termWithFuzzing))
-        .collect(Collectors.joining(QUERY_FIELD_DELIMITER));
+        .map(fieldName ->
+            splittedQuery.stream()
+                .map(sq -> String.format("%s:%s", fieldName, sq))
+                .collect(Collectors.joining(" ")))
+        .collect(Collectors.joining(" "));
+  }
+
+  private String escapeQuery(String query) {
+    var containsSpecialChars = SPECIAL_CHARS.stream().anyMatch(query::contains);
+    if (containsSpecialChars) {
+      String escapedQuery = query;
+      for (String specialChar : SPECIAL_CHARS) {
+        escapedQuery = escapedQuery.replace(specialChar, " ");
+      }
+      return escapedQuery;
+    } else {
+      return query;
+    }
   }
 
   private String getSearchProperty(String name, Object defaultValue) {
