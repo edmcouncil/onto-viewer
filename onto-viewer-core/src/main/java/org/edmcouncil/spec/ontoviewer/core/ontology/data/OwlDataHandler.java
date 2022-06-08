@@ -457,11 +457,6 @@ public class OwlDataHandler {
                 new OwlTaxonomyElementImpl("http://www.w3.org/2002/07/owl#topDataProperty", label));
             break;
           case AXIOM_ANNOTATION_PROPERTY:
-            label = labelProvider.getLabelOrDefaultFragment(
-                IRI.create("http://www.w3.org/2002/07/owl#topAnnotationProperty"));
-            currentTax.add(
-                new OwlTaxonomyElementImpl("http://www.w3.org/2002/07/owl#topAnnotationProperty",
-                    label));
             break;
           case AXIOM_NAMED_INDIVIDUAL:
             break;
