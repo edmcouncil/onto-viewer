@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.com/test1/"
+     xml:base="http://example.com/test1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:AnnotationVocabulary="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+     xmlns:AnnotationVocabulary1="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+    <owl:Ontology rdf:about="http://example.com/test1/">
+        <owl:versionIRI rdf:resource="http://example.com/test1/"/>
+        <rdfs:label>&apos;A&apos; Ontology</rdfs:label>
+        <AnnotationVocabulary1:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#definition -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#example -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#example"/>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote -->
+
+    <owl:AnnotationProperty rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote"/>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel -->
+
+    <owl:AnnotationProperty rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel"/>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym -->
+
+    <owl:AnnotationProperty rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym"/>
+    
+
+
+    <!-- https://www.omg.org/spec/Commons/AnnotationVocabulary/synonym -->
+
+    <owl:AnnotationProperty rdf:about="https://www.omg.org/spec/Commons/AnnotationVocabulary/synonym"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.com/test1/B1 -->
+
+    <owl:ObjectProperty rdf:about="http://example.com/test1/B1">
+        <rdfs:label>&apos;B1&apos; object property label</rdfs:label>
+        <skos:definition>&apos;B1&apos; definition</skos:definition>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.com/test1/C1 -->
+
+    <owl:DatatypeProperty rdf:about="http://example.com/test1/C1">
+        <rdfs:label>&apos;C1&apos; data property label</rdfs:label>
+        <skos:definition>&apos;C1&apos; definition</skos:definition>
+        <AnnotationVocabulary1:explanatoryNote>&apos;C1&apos; explanatory note</AnnotationVocabulary1:explanatoryNote>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.com/test1/A -->
+
+    <owl:Class rdf:about="http://example.com/test1/A">
+        <rdfs:label>A</rdfs:label>
+        <skos:definition>&apos;A&apos; definition</skos:definition>
+        <skos:example>&apos;A&apos; example</skos:example>
+        <AnnotationVocabulary1:explanatoryNote>&apos;A&apos; explanatory note</AnnotationVocabulary1:explanatoryNote>
+        <AnnotationVocabulary:synonym>&apos;A&apos; synonym</AnnotationVocabulary:synonym>
+    </owl:Class>
+    
+
+
+    <!-- http://www.omg.org/techprocess/ab/SpecificationMetadata/Module -->
+
+    <owl:Class rdf:about="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/MaturityLevel -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/MaturityLevel"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://example.com/test1/A1 -->
+
+    <owl:NamedIndividual rdf:about="http://example.com/test1/A1">
+        <rdf:type rdf:resource="http://example.com/test1/A"/>
+        <rdfs:label>A1</rdfs:label>
+        <skos:definition>&apos;A1&apos; definition</skos:definition>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://example.com/test1/Module -->
+
+    <owl:NamedIndividual rdf:about="http://example.com/test1/Module"/>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release -->
+
+    <owl:NamedIndividual rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/MaturityLevel"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

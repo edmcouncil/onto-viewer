@@ -4,7 +4,7 @@ public enum GroupsPropertyKey {
 
   DEFINITION("definition"),
   EXAMPLE("example"),
-  EXPLANATORY_NOTE("explanatory note"),
+  EXPLANATORY_NOTE("explanatoryNote"),
   GENERATED_DESCRIPTION("generated description"),
   GLOSSARY("Glossary"),
   ONTOLOGICAL_CHARACTERISTIC("Ontological characteristic"),
