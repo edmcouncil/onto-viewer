@@ -458,9 +458,9 @@ public class OwlDataHandler {
             break;
           case AXIOM_ANNOTATION_PROPERTY:
             label = labelProvider.getLabelOrDefaultFragment(
-                IRI.create("http://www.w3.org/2002/07/owl#topAnnotationProperty"));
+                IRI.create("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"));
             currentTax.add(
-                new OwlTaxonomyElementImpl("http://www.w3.org/2002/07/owl#topAnnotationProperty",
+                new OwlTaxonomyElementImpl("http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
                     label));
             break;
           case AXIOM_NAMED_INDIVIDUAL:
