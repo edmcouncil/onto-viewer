@@ -37,8 +37,6 @@ import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.RDFXMLDocumentFormat;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.parameters.Imports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,9 +103,10 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     }
 
     populateConfiguration(commandLineOptions);
-    loadOntology();
 
     var goal = resolveGoal();
+    loadOntology(goal);
+
     LOGGER.info("Running goal '{}'...", goal.getName());
     switch (goal) {
       case CONSISTENCY_CHECK: {
@@ -218,23 +217,29 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     return Goal.byName(goal);
   }
 
-  private void loadOntology() throws OntoViewerToolkitException {
+  private void loadOntology(Goal goal) throws OntoViewerToolkitException {
     try {
       var ontologyLoader = new CommandLineOntologyLoader(
-          applicationConfigurationService.getConfigurationData(), 
+          applicationConfigurationService.getConfigurationData(),
           fileSystemManager);
       var loadedOntology = ontologyLoader.load();
       LOGGER.debug("Loaded ontology contains {} axioms.",
           loadedOntology.getAxiomCount(Imports.INCLUDED));
 
       ontologyManager.updateOntology(loadedOntology);
-      dataHandler.populateOntologyResources(loadedOntology);
+      if (shouldPopulateOntologyResources(goal)) {
+        dataHandler.populateOntologyResources(loadedOntology);
+      }
     } catch (Exception ex) {
       var message = String.format(
           "Exception occurred while loading ontology. Details: %s",
           ex.getMessage());
       throw new OntoViewerToolkitException(message, ex);
     }
+  }
+
+  private boolean shouldPopulateOntologyResources(Goal goal) {
+    return goal != Goal.MERGE_IMPORTS;
   }
 
   private void logSystemAndSpringProperties() {

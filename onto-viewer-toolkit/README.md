@@ -31,7 +31,7 @@ java -jar onto-viewer-toolkit.jar \
     --data my-ontology1.rdf \
     --data my-ontology2.rdf \
     --filter-pattern foo \
-    --otology-mapping catalog-v001.xml \
+    --ontology-mapping catalog-v001.xml \
     --output extracted-data.csv
 ```
 
@@ -43,6 +43,6 @@ java -jar onto-viewer-toolkit.jar \
     --goal merge-imports \
     --data my-ontology.rdf \
     --ontology-iri 'http://example.com/my-merged-ontology/' \
-    --otology-mapping catalog-v001.xml \
+    --ontology-mapping catalog-v001.xml \
     --output my-merged-ontology.rdf
 ```
