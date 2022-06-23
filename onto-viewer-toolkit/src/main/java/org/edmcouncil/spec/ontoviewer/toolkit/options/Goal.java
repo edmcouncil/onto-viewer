@@ -3,7 +3,8 @@ package org.edmcouncil.spec.ontoviewer.toolkit.options;
 public enum Goal {
 
   CONSISTENCY_CHECK("consistency-check"),
-  EXTRACT_DATA("extract-data");
+  EXTRACT_DATA("extract-data"),
+  MERGE_IMPORTS("merge-imports");
 
   private final String name;
 
