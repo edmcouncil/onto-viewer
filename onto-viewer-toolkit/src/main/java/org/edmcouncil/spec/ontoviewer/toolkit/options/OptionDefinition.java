@@ -7,6 +7,7 @@ public enum OptionDefinition {
       "string that should be within entity's IRI to include it", ""),
   GOAL("goal", true, false,
     "specify which goal should be executed by toolkit", Goal.EXTRACT_DATA.getName()),
+  ONTOLOGY_IRI("ontology-iri", true, false, "new IRI for merged ontology"),
   ONTOLOGY_MAPPING("ontology-mapping", true, false,
       "path to the catalog file with ontology mapping", null),
   VERSION("version", false, false, "displays version info", null);

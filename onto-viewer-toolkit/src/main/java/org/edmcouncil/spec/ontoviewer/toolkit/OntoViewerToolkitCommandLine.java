@@ -1,9 +1,12 @@
 package org.edmcouncil.spec.ontoviewer.toolkit;
 
+import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_IRI;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_MAPPING;
+import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.OUTPUT;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.VERSION;
 
 import com.google.common.base.Stopwatch;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -23,6 +26,7 @@ import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyConsistencyChecker;
+import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyImportsMerger;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.TextWriter;
@@ -30,6 +34,9 @@ import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.Goal;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
+import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.formats.RDFXMLDocumentFormat;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.parameters.Imports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +55,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   private final DataHandler dataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
   private final OntologyConsistencyChecker ontologyConsistencyChecker;
+  private final OntologyImportsMerger ontologyImportsMerger;
   private final StandardEnvironment environment;
   private final ApplicationConfigProperties applicationConfigProperties;
   private final FileSystemManager fileSystemManager;
@@ -58,6 +66,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       DataHandler dataHandler,
       OntologyTableDataExtractor ontologyTableDataExtractor,
       OntologyConsistencyChecker ontologyConsistencyChecker,
+      OntologyImportsMerger ontologyImportsMerger,
       StandardEnvironment environment,
       ApplicationConfigProperties applicationConfigProperties,
       FileSystemManager fileSystemManager) {
@@ -69,6 +78,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     this.dataHandler = dataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
     this.ontologyConsistencyChecker = ontologyConsistencyChecker;
+    this.ontologyImportsMerger = ontologyImportsMerger;
     this.environment = environment;
     this.applicationConfigProperties = applicationConfigProperties;
     this.fileSystemManager = fileSystemManager;
@@ -93,9 +103,10 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     }
 
     populateConfiguration(commandLineOptions);
-    loadOntology();
 
     var goal = resolveGoal();
+    loadOntology(goal);
+
     LOGGER.info("Running goal '{}'...", goal.getName());
     switch (goal) {
       case CONSISTENCY_CHECK: {
@@ -122,6 +133,24 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
         break;
       }
+      case MERGE_IMPORTS:
+        var newOntologyIri = commandLineOptions.getOption(ONTOLOGY_IRI);
+        if (newOntologyIri.isEmpty()) {
+          throw new OntoViewerToolkitRuntimeException("'ontology-iri' for 'merge-imports' goal should be provided");
+        }
+        var mergedOntology = ontologyImportsMerger.mergeImportOntologies(newOntologyIri.get());
+        var owlOntologyManager = OWLManager.createOWLOntologyManager();
+        var outputOption = commandLineOptions.getOption(OUTPUT);
+        if (outputOption.isPresent()) {
+          owlOntologyManager.saveOntology(
+              mergedOntology,
+              new RDFXMLDocumentFormat(),
+              IRI.create(new File(outputOption.get())));
+        } else {
+          throw new OntoViewerToolkitRuntimeException("Error: 'output' argument is not present.");
+        }
+
+        break;
       default:
         var message = String.format("Goal '%s' not recognized. Should not happen.", goal.getName());
         LOGGER.error(message);
@@ -190,7 +219,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     return Goal.byName(goal);
   }
 
-  private void loadOntology() throws OntoViewerToolkitException {
+  private void loadOntology(Goal goal) throws OntoViewerToolkitException {
     try {
       var ontologyLoader = new CommandLineOntologyLoader(
           applicationConfigurationService.getConfigurationData(),
@@ -200,13 +229,19 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
           loadedOntology.getAxiomCount(Imports.INCLUDED));
 
       ontologyManager.updateOntology(loadedOntology);
-      dataHandler.populateOntologyResources(loadedOntology);
+      if (shouldPopulateOntologyResources(goal)) {
+        dataHandler.populateOntologyResources(loadedOntology);
+      }
     } catch (Exception ex) {
       var message = String.format(
           "Exception occurred while loading ontology. Details: %s",
           ex.getMessage());
       throw new OntoViewerToolkitException(message, ex);
     }
+  }
+
+  private boolean shouldPopulateOntologyResources(Goal goal) {
+    return goal != Goal.MERGE_IMPORTS;
   }
 
   private void logSystemAndSpringProperties() {
