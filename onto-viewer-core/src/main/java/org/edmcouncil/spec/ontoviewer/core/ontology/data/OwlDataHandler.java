@@ -42,6 +42,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.LicenseHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -118,7 +119,9 @@ public class OwlDataHandler {
   private EntitiesCacheService entitiesCacheService;
   @Autowired
   private OntologyManager ontologyManager;
-
+  @Autowired
+  private LicenseHandler licenseHandler;
+  
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
   private final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:",
@@ -176,9 +179,9 @@ public class OwlDataHandler {
           ontologyGraph = graphDataHandler.handleGraph(owlClass, ontology);
         }
       }
-
       subclasses = filterSubclasses(subclasses);
 
+      resultDetails.setLicense(licenseHandler.getLicense(classIri));
       OwlTaxonomyImpl taxonomy = extractTaxonomy(taxElements2, owlClass.getIRI(), ontology,
           AXIOM_CLASS);
       taxonomy.sort();
@@ -321,6 +324,7 @@ public class OwlDataHandler {
       }
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
+      resultDetails.setLicense(licenseHandler.getLicense(iri));   
     } catch (Exception ex) {
       LOG.warn("Unable to handle individual " + iri + ". Details: " + ex.getMessage(), ex);
     }
@@ -856,11 +860,12 @@ public class OwlDataHandler {
 
       OwlDetailsProperties<PropertyValue> annotations =
           handleAnnotations(dataProperty.getIRI(), ontology, resultDetails);
-
+      
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
       resultDetails.addAllProperties(directSubDataProperty);
       resultDetails.setTaxonomy(taxonomy);
+      resultDetails.setLicense(licenseHandler.getLicense(iri));
     } catch (Exception ex) {
       LOG.warn("Unable to handle data property {}. Details: {}", iri, ex.getMessage());
     }
@@ -918,6 +923,7 @@ public class OwlDataHandler {
       resultDetails.addAllProperties(annotations);
       resultDetails.addAllProperties(directSubObjectProperty);
       resultDetails.setTaxonomy(taxonomy);
+      resultDetails.setLicense(licenseHandler.getLicense(iri));
     } catch (Exception ex) {
       LOG.warn("Unable to handle object property " + iri + ". Details: " + ex.getMessage());
     }
@@ -1266,6 +1272,7 @@ public class OwlDataHandler {
     try {
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
       resultDetails.addAllProperties(handleAnnotations(iri, ontology, resultDetails));
+      resultDetails.setLicense(licenseHandler.getLicense(iri));
     } catch (Exception ex) {
       LOG.warn("Unable to handle datatype {}. Details: {}", iri, ex.getMessage());
     }
@@ -1299,11 +1306,12 @@ public class OwlDataHandler {
 
           OwlDetailsProperties<PropertyValue> annotations =
               handleAnnotations(annotationProperty.getIRI(), ontology, resultDetails);
-
+          
           resultDetails.addAllProperties(annotations);
           resultDetails.addAllProperties(directSubAnnotationProperty);
           resultDetails.addAllProperties(axioms);
           resultDetails.setTaxonomy(taxonomy);
+          resultDetails.setLicense(licenseHandler.getLicense(iri));
         }
       }
     } catch (OntoViewerException ex) {

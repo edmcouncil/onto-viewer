@@ -19,6 +19,7 @@ import org.edmcouncil.spec.ontoviewer.core.comparator.ComparatorWithPriority;
 public class OwlDetailsProperties<T> {
 
   private List taxonomy;
+  private String license;
   private Map<String, List<T>> properties;
 
   public OwlDetailsProperties() {
@@ -82,6 +83,14 @@ public class OwlDetailsProperties<T> {
     Map<String, List<T>> result = new LinkedHashMap<>();
     keys.forEach((key) -> result.put(key, properties.get(key)));
     properties = result;
+  }
+
+  public String getLicense() {
+    return license;
+  }
+
+  public void setLicense(String license) {
+    this.license = license;
   }
 
   @Override

@@ -50,20 +50,22 @@ public class DataHandler {
   private final CustomDataFactory customDataFactory;
   private final ModuleHandler moduleHandler;
   private final OntologyManager ontologyManager;
-
+  private final LicenseHandler licenseHandler;
+  
   private String resourceInternal;
   private String resourceExternal;
 
   private Map<String, OntologyResources> resources = null;
-
+  
   public DataHandler(AnnotationsDataHandler annotationsDataHandler,
       CustomDataFactory customDataFactory,
       ModuleHandler moduleHandler,
-      OntologyManager ontologyManager) {
+      OntologyManager ontologyManager, LicenseHandler licenseHandler) {
     this.annotationsDataHandler = annotationsDataHandler;
     this.customDataFactory = customDataFactory;
     this.moduleHandler = moduleHandler;
     this.ontologyManager = ontologyManager;
+    this.licenseHandler = licenseHandler;
   }
 
   public OwlDetailsProperties<PropertyValue> handleOntologyMetadata(IRI iri, OwlListDetails details) {
@@ -88,12 +90,12 @@ public class DataHandler {
               }
             }
           }
-          details.setMaturityLevel(moduleHandler.getMaturityLevelForModule(iri));
+          details.setLicense(licenseHandler.getLicense(currentOntologyIri, true));
+          details.setMaturityLevel(moduleHandler.getMaturityLevelForModule(currentOntologyIri));
           break;
         }
       }
     }
-
     return annotations;
   }
 
