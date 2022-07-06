@@ -154,9 +154,8 @@ public class DataHandler {
   }
 
   public void populateOntologyResources(OWLOntology ontology) {
-    // TODO: Make loadAllOntologyResources and setOntologyResources private and use this method
-    //       instead
-    this.resources = loadAllOntologyResources(ontology);
+    var ontologyResources = loadAllOntologyResources(ontology);
+    setOntologyResources(ontologyResources);
     this.moduleHandler.updateModules();
   }
 
@@ -365,4 +364,9 @@ public class DataHandler {
     }
     return false;
   }
+  
+  private void setOntologyResources(Map<String, OntologyResources> resources) {
+    this.resources = resources;
+  }
 }
+
