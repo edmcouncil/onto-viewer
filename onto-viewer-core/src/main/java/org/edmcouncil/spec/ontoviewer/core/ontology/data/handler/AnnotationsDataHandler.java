@@ -61,7 +61,8 @@ public class AnnotationsDataHandler {
       OwlListDetails details) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
-    var annotationAssertions = ontology.annotationAssertionAxioms(iri, INCLUDED)
+    var annotationAssertions = ontology
+        .annotationAssertionAxioms(iri, INCLUDED)
         .collect(Collectors.toSet());
     for (OWLAnnotationAssertionAxiom annotationAssertion : annotationAssertions) {
       IRI propertyIri = annotationAssertion.getProperty().getIRI();
