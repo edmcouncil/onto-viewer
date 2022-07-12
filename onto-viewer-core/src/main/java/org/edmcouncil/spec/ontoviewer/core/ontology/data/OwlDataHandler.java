@@ -82,7 +82,6 @@ import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -108,7 +107,7 @@ public class OwlDataHandler {
   private final ContainsVisitors containsVisitors;
   private final EntitiesCacheService entitiesCacheService;
   private final OntologyManager ontologyManager;
-  private LicenseHandler licenseHandler;
+  private final  LicenseHandler licenseHandler;
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
