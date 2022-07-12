@@ -17,6 +17,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator;
 import org.edmcouncil.spec.ontoviewer.core.service.ChangerIriToLabelService;
 import org.semanticweb.owlapi.model.EntityType;

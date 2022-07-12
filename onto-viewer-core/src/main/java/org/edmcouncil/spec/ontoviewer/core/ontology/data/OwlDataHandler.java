@@ -95,33 +95,21 @@ public class OwlDataHandler {
   private static final Logger LOG = LoggerFactory.getLogger(OwlDataHandler.class);
 
   private final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
-  @Autowired
-  private DataHandler dataHandler;
-  @Autowired
-  private ModuleHandler moduleHandler;
-  @Autowired
-  private AnnotationsDataHandler annotationsDataHandler;
-  @Autowired
-  private IndividualDataHandler individualDataHandler;
-  @Autowired
-  private LabelProvider labelProvider;
-  @Autowired
-  private RestrictionGraphDataHandler graphDataHandler;
-  @Autowired
-  private OwlUtils owlUtils;
-  @Autowired
-  private ApplicationConfigurationService applicationConfigurationService;
-  @Autowired
-  private ScopeIriOntology scopeIriOntology;
-  @Autowired
-  private ContainsVisitors containsVisitors;
-  @Autowired
-  private EntitiesCacheService entitiesCacheService;
-  @Autowired
-  private OntologyManager ontologyManager;
-  @Autowired
+
+  private final DataHandler dataHandler;
+  private final ModuleHandler moduleHandler;
+  private final AnnotationsDataHandler annotationsDataHandler;
+  private final IndividualDataHandler individualDataHandler;
+  private final LabelProvider labelProvider;
+  private final RestrictionGraphDataHandler graphDataHandler;
+  private final OwlUtils owlUtils;
+  private final ApplicationConfigurationService applicationConfigurationService;
+  private final ScopeIriOntology scopeIriOntology;
+  private final ContainsVisitors containsVisitors;
+  private final EntitiesCacheService entitiesCacheService;
+  private final OntologyManager ontologyManager;
   private LicenseHandler licenseHandler;
-  
+
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
   private final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range", "SubPropertyOf:",
@@ -134,13 +122,33 @@ public class OwlDataHandler {
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUB_OBJECT_PROPERTY.getName());
 
   {
-    /*static block*/
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#Thing");
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topObjectProperty");
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topDataProperty");
 
     unwantedTypes.add("^^anyURI");
     unwantedTypes.add("^^dateTime");
+  }
+
+  public OwlDataHandler(RestrictionGraphDataHandler graphDataHandler, DataHandler dataHandler,
+      ModuleHandler moduleHandler, AnnotationsDataHandler annotationsDataHandler,
+      IndividualDataHandler individualDataHandler, LabelProvider labelProvider, OwlUtils owlUtils,
+      ApplicationConfigurationService applicationConfigurationService, OntologyManager ontologyManager,
+      ScopeIriOntology scopeIriOntology, ContainsVisitors containsVisitors, EntitiesCacheService entitiesCacheService,
+      LicenseHandler licenseHandler) {
+    this.graphDataHandler = graphDataHandler;
+    this.dataHandler = dataHandler;
+    this.moduleHandler = moduleHandler;
+    this.annotationsDataHandler = annotationsDataHandler;
+    this.individualDataHandler = individualDataHandler;
+    this.labelProvider = labelProvider;
+    this.owlUtils = owlUtils;
+    this.applicationConfigurationService = applicationConfigurationService;
+    this.ontologyManager = ontologyManager;
+    this.scopeIriOntology = scopeIriOntology;
+    this.containsVisitors = containsVisitors;
+    this.entitiesCacheService = entitiesCacheService;
+    this.licenseHandler = licenseHandler;
   }
 
   public OwlListDetails handleParticularClass(OWLClass owlClass) {
@@ -544,16 +552,6 @@ public class OwlDataHandler {
     }
     result.sortPropertiesInAlphabeticalOrder();
     return result;
-  }
-
-  private <T extends OWLAxiom> OwlAxiomPropertyValue prepareAxiomPropertyValue(
-      T axiom,
-      String iriFragment,
-      String splitFragment,
-      Boolean fixRenderedIri,
-      String key
-  ) {
-    return prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, key, 0, true);
   }
 
   private <T extends OWLAxiom> OwlAxiomPropertyValue prepareAxiomPropertyValue(
@@ -1323,29 +1321,6 @@ public class OwlDataHandler {
 
   public MaturityLevel getMaturityLevel(IRI iri) {
     return moduleHandler.getMaturityLevelForElement(iri);
-  }
-
-  private void parseUrlAxiom(String eIri, String[] splited, int i, Boolean hasOpeningParenthesis,
-      int countOpeningParenthesis, Boolean hasClosingParenthesis, int countClosingParenthesis,
-      Boolean hasComma, int countComma) {
-    String label = labelProvider.getLabelOrDefaultFragment(IRI.create(eIri));
-
-    String textToReplace = label;
-
-    if (hasOpeningParenthesis) {
-      String prefix = String.join("", Collections.nCopies(countOpeningParenthesis, "("));
-      textToReplace = prefix + textToReplace;
-    }
-    if (hasClosingParenthesis) {
-      String postfix = String.join("", Collections.nCopies(countClosingParenthesis, ")"));
-      textToReplace = textToReplace + postfix;
-    }
-    if (hasComma) {
-      String postfix = String.join("", Collections.nCopies(countComma, ","));
-      textToReplace = textToReplace + postfix;
-    }
-    splited[i] = textToReplace;
-
   }
 
   private OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz,
