@@ -18,6 +18,7 @@ public class OwlDetails {
   private List<String> locationInModules;
   private VisGraph graph;
   private MaturityLevel maturityLevel;
+  private String license;
 
   public VisGraph getGraph() {
     return graph;
@@ -73,6 +74,14 @@ public class OwlDetails {
 
   public MaturityLevel getMaturityLevel() {
     return maturityLevel;
+  }
+
+  public String getLicense() {
+    return license;
+  }
+
+  public void setLicense(String license) {
+    this.license = license;
   }
 
   @Override

@@ -1,3 +1,4 @@
 ontologies:
   source:
     - path: ontologies
+  display_license: true

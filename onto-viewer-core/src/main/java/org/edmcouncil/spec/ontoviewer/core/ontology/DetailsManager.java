@@ -208,6 +208,7 @@ public class DetailsManager {
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
     groupedDetails.setMaturityLevel(owlDetails.getMaturityLevel());
+    groupedDetails.setLicense(owlDetails.getLicense());
     groupedDetails.sortProperties(groups);
 
     // first must be sorted next we need to change keys
