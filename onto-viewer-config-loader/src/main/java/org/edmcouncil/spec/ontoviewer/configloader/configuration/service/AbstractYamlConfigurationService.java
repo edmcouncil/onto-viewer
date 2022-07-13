@@ -43,6 +43,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_COPYRIGHT;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.LabelPriority;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.MissingLanguageAction;
@@ -66,6 +67,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   private static final String MISSING_LANGUAGE_ACTION_DEFAULT = "FIRST";
   private static final boolean AUTOMATIC_CREATION_OF_MODULES_DEFULT = false;
   private static final boolean DISPLAY_LICENSE_DEFAULT = true;
+  private static final boolean DISPLAY_COPYRIGHT_DEFAULT = true;
   
   @Override
   public void init() {
@@ -247,8 +249,10 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
         getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()), AUTOMATIC_CREATION_OF_MODULES_DEFULT);
      List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));  
     boolean displayLicense = getBooleanFromObject(ontologies.get(DISPLAY_LICENSE.getLabel()), DISPLAY_LICENSE_DEFAULT);
+    boolean displayCopyright = getBooleanFromObject(ontologies.get(DISPLAY_COPYRIGHT.getLabel()), DISPLAY_COPYRIGHT_DEFAULT);
      
-    return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns, moduleToIgnore, automaticCreationOfModules, displayLicense);
+    return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns,
+        moduleToIgnore, automaticCreationOfModules, displayLicense, displayCopyright);
   }
 
   protected Map<String, List<String>> mapToMapOfList(List<?> rawGroupsList) {
