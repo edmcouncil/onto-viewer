@@ -143,6 +143,7 @@ public class OntologyTableDataExtractor {
       var properties = groupedOwlDetails.getProperties();
 
       var entityData = new EntityData();
+      entityData.setIri(owlDetails.getIri());
       entityData.setTermLabel(cleanString(groupedOwlDetails.getLabel()));
       entityData.setTypeLabel(cleanString(entityType.getDisplayName()));
       entityData.setOntology(cleanString(getOntologyName(groupedOwlDetails.getIri())));
