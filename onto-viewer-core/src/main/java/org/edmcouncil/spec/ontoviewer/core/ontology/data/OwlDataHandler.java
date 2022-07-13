@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data;
 
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_ANNOTATION_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_CLASS;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_DATA_PROPERTY;
@@ -108,6 +109,7 @@ public class OwlDataHandler {
   private final EntitiesCacheService entitiesCacheService;
   private final OntologyManager ontologyManager;
   private final  LicenseHandler licenseHandler;
+  private final  CopyrightHandler copyrightHandler;
 
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
   private final Set<String> unwantedTypes = new HashSet<>();
@@ -134,7 +136,7 @@ public class OwlDataHandler {
       IndividualDataHandler individualDataHandler, LabelProvider labelProvider, OwlUtils owlUtils,
       ApplicationConfigurationService applicationConfigurationService, OntologyManager ontologyManager,
       ScopeIriOntology scopeIriOntology, ContainsVisitors containsVisitors, EntitiesCacheService entitiesCacheService,
-      LicenseHandler licenseHandler) {
+      LicenseHandler licenseHandler, CopyrightHandler copyrightHandler) {
     this.graphDataHandler = graphDataHandler;
     this.dataHandler = dataHandler;
     this.moduleHandler = moduleHandler;
@@ -148,6 +150,7 @@ public class OwlDataHandler {
     this.containsVisitors = containsVisitors;
     this.entitiesCacheService = entitiesCacheService;
     this.licenseHandler = licenseHandler;
+    this.copyrightHandler = copyrightHandler;
   }
 
   public OwlListDetails handleParticularClass(OWLClass owlClass) {
@@ -189,6 +192,7 @@ public class OwlDataHandler {
       subclasses = filterSubclasses(subclasses);
 
       resultDetails.setLicense(licenseHandler.getLicense(classIri));
+      resultDetails.setCopyright(copyrightHandler.getCopyright(classIri));
       OwlTaxonomyImpl taxonomy = extractTaxonomy(taxElements2, owlClass.getIRI(), ontology,
           AXIOM_CLASS);
       taxonomy.sort();
@@ -332,6 +336,7 @@ public class OwlDataHandler {
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
       resultDetails.setLicense(licenseHandler.getLicense(iri));   
+      resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
     } catch (Exception ex) {
       LOG.warn("Unable to handle individual " + iri + ". Details: " + ex.getMessage(), ex);
     }
@@ -863,6 +868,7 @@ public class OwlDataHandler {
       resultDetails.addAllProperties(directSubDataProperty);
       resultDetails.setTaxonomy(taxonomy);
       resultDetails.setLicense(licenseHandler.getLicense(iri));
+      resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
     } catch (Exception ex) {
       LOG.warn("Unable to handle data property {}. Details: {}", iri, ex.getMessage());
     }
@@ -921,6 +927,7 @@ public class OwlDataHandler {
       resultDetails.addAllProperties(directSubObjectProperty);
       resultDetails.setTaxonomy(taxonomy);
       resultDetails.setLicense(licenseHandler.getLicense(iri));
+      resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
     } catch (Exception ex) {
       LOG.warn("Unable to handle object property " + iri + ". Details: " + ex.getMessage());
     }
@@ -1270,6 +1277,7 @@ public class OwlDataHandler {
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
       resultDetails.addAllProperties(handleAnnotations(iri, ontology, resultDetails));
       resultDetails.setLicense(licenseHandler.getLicense(iri));
+      resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
     } catch (Exception ex) {
       LOG.warn("Unable to handle datatype {}. Details: {}", iri, ex.getMessage());
     }
@@ -1309,6 +1317,7 @@ public class OwlDataHandler {
           resultDetails.addAllProperties(axioms);
           resultDetails.setTaxonomy(taxonomy);
           resultDetails.setLicense(licenseHandler.getLicense(iri));
+          resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
         }
       }
     } catch (OntoViewerException ex) {

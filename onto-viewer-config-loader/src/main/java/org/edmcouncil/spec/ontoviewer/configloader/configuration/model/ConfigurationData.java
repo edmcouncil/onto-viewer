@@ -182,6 +182,7 @@ public class ConfigurationData {
     private final Map<String, String> ontologyMappings;
     private boolean automaticCreationOfModules;
     private boolean displayLicense;
+    private boolean displayCopyright;
     private final List<String> downloadDirectory;
     private final List<String> zipUrls;
 
@@ -193,7 +194,8 @@ public class ConfigurationData {
         List<String> moduleIgnorePatterns,
         List<String> moduleToIgnore,
         boolean automaticCreationOfModules,
-        boolean displayLicense) {
+        boolean displayLicense,
+        boolean displayCopyright) {
       this.urls = urls;
       this.paths = paths;
       this.catalogPaths = catalogPaths;
@@ -202,6 +204,7 @@ public class ConfigurationData {
       this.ontologyMappings = new HashMap<>();
       this.automaticCreationOfModules = automaticCreationOfModules;
       this.displayLicense = displayLicense;
+      this.displayCopyright = displayCopyright;
       this.downloadDirectory = downloadDirectory;
       this.zipUrls = zipUrls;
     }
@@ -246,6 +249,14 @@ public class ConfigurationData {
       this.displayLicense = displayLicense;
     }
 
+    public boolean isDisplayCopyright() {
+      return displayCopyright;
+    }
+    
+    public void setDisplayCopyright(boolean displayCopyright) {
+      this.displayCopyright = displayCopyright;
+    }
+    
     public List<String> getDownloadDirectory() {
         return downloadDirectory;
     }
