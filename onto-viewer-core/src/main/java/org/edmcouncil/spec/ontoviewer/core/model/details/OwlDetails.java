@@ -18,8 +18,6 @@ public class OwlDetails {
   private List<String> locationInModules;
   private VisGraph graph;
   private MaturityLevel maturityLevel;
-  private String license;
-  private String copyright;
 
   public VisGraph getGraph() {
     return graph;
@@ -77,22 +75,6 @@ public class OwlDetails {
     return maturityLevel;
   }
 
-  public String getLicense() {
-    return license;
-  }
-
-  public void setLicense(String license) {
-    this.license = license;
-  }
-
-  public String getCopyright() {
-    return copyright;
-  }
-
-  public void setCopyright(String copyright) {
-    this.copyright = copyright;
-  }
-  
   @Override
   public int hashCode() {
     int hash = 7;

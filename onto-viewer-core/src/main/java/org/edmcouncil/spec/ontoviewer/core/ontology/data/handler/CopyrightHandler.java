@@ -1,8 +1,16 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -12,65 +20,73 @@ import org.springframework.stereotype.Service;
 
 /**
  *
-  * @author patrycja.miazek (patrycja.miazek@makolab.com)
+ * @author patrycja.miazek (patrycja.miazek@makolab.com)
  */
 @Service
 public class CopyrightHandler {
 
-
   private final OntologyManager ontologyManager;
-  private final ApplicationConfigurationService applicationConfigurationService;
+  private final ApplicationConfig applicationConfig;
   private final ModuleHandler moduleHandler;
 
   public CopyrightHandler(OntologyManager ontologyManager, ApplicationConfigurationService applicationConfigurationService, ModuleHandler moduleHandler) {
     this.ontologyManager = ontologyManager;
-    this.applicationConfigurationService = applicationConfigurationService;
+    this.applicationConfig = applicationConfigurationService.getConfigurationData().getApplicationConfig();
     this.moduleHandler = moduleHandler;
   }
 
-  public String getCopyrightFromOntology(IRI ontologyIri) {
+  public OwlDetailsProperties<PropertyValue> getCopyrightFromOntology(IRI ontologyIri) {
+
+    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     OWLOntologyManager manager = ontologyManager.getOntology().getOWLOntologyManager();
+    Set<String> visitedOntologies = new HashSet<>();
 
     for (OWLOntology currentOntology : manager.ontologies().collect(Collectors.toSet())) {
       var ontologyIriOptional = currentOntology.getOntologyID().getOntologyIRI();
-
       if (ontologyIriOptional.isPresent()) {
         var currentOntologyIri = ontologyIriOptional.get();
+        var createIri = IRI.create(ontologyIri.getIRIString().substring(0, ontologyIri.getIRIString().length() - 1));
 
-        if (currentOntologyIri.equals(ontologyIri)
-            || currentOntologyIri.equals(
-                IRI.create(ontologyIri.getIRIString().substring(0, ontologyIri.getIRIString().length() - 1)))) {
-          Optional<OWLAnnotation> copyrightAnnotationOptional = currentOntology.annotations((annotation)
-              -> annotation.getProperty().getIRI().equals(IRI.create("http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright")))
-              .findFirst();
+        if ((currentOntologyIri.equals(ontologyIri)
+            || currentOntologyIri.equals(createIri))
+            && !visitedOntologies.contains(currentOntologyIri.toString())) {
 
-          if (copyrightAnnotationOptional.isPresent()) {
-            String copyright = copyrightAnnotationOptional.get().getValue().toString();
-            copyright = copyright.replace("\"^^xsd:string", "").replace("\"", "");
-            return copyright;
-          } else {
-            return null;
+          visitedOntologies.add(currentOntologyIri.toString());
+
+          for (OWLAnnotation annotation : currentOntology.annotations().toList()) {
+            for (String copyrightIri : applicationConfig.getCopyright()) {
+              if (copyrightIri.equals(annotation.getProperty().getIRI().toString())) {
+
+                String copyright = annotation.getValue().toString();
+                copyright = copyright.replace("\"^^xsd:string", "").replace("\"", "");
+                PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValue();
+                annotationPropertyValue.setType(OwlType.STRING);
+                annotationPropertyValue.setValue(copyright);
+                result.addProperty(copyrightIri, annotationPropertyValue);
+              }
+            }
           }
         }
       }
     }
-    return null;
+    return result;
   }
 
-  public String getCopyright(IRI entityIri) {
-    if (applicationConfigurationService.getConfigurationData().getOntologiesConfig().isDisplayCopyright()) {
+  public OwlDetailsProperties<PropertyValue> getCopyright(IRI entityIri) {
+    if (applicationConfig.isDisplayCopyright()) {
       IRI ontologyIri = moduleHandler.getOntologyIri(entityIri);
-      String copyright = getCopyrightFromOntology(ontologyIri);
+      OwlDetailsProperties<PropertyValue> copyright = getCopyrightFromOntology(ontologyIri);
       return copyright;
     }
     return null;
   }
 
-  public String getCopyright(IRI entityIri, boolean isOntology) {
-    if (isOntology && applicationConfigurationService.getConfigurationData().getOntologiesConfig().isDisplayCopyright()) {
-      return getCopyrightFromOntology(entityIri);
-    } else {
-      return getCopyright(entityIri);
+  public boolean isCopyrightExist(OwlDetailsProperties<PropertyValue> owlDetailsProperties) {
+    for (Map.Entry<String, List<PropertyValue>> entry : owlDetailsProperties.getProperties().entrySet()) {
+      if (applicationConfig.getCopyright().contains(entry.getKey())) {
+        return true;
+      }
     }
+    return false;
   }
 }

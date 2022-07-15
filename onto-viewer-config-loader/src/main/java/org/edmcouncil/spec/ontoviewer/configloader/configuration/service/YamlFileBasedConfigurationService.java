@@ -24,6 +24,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   private static final Logger LOGGER = LoggerFactory.getLogger(YamlFileBasedConfigurationService.class);
   private static final Set<String> SUPPORTED_EXTENSIONS = Set.of("yaml", "yml");
   private static final Set<String> CONFIG_FILES_NAMES =
-      Set.of("groups_config.yaml", "label_config.yaml", "ontology_config.yaml", "search_config.yaml");
+      Set.of("groups_config.yaml", "label_config.yaml", "ontology_config.yaml", "search_config.yaml", "application_config.yaml");
 
   private final FileSystemManager fileSystemManager;
 
@@ -198,6 +199,11 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
           case SEARCH_CONFIG: {
             SearchConfig searchConfig = handleSearchConfig(configEntryValue);
             configurationDataCandidate.setSearchConfig(searchConfig);
+            break;
+          }
+          case APPLICATION_CONFIG: {
+            ApplicationConfig applicationConfig = handleApplicationConfig(configEntryValue);
+            configurationDataCandidate.setApplicationConfig(applicationConfig);
             break;
           }
           case ONTOLOGIES: {
