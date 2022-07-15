@@ -17,7 +17,6 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator;
 import org.edmcouncil.spec.ontoviewer.core.service.ChangerIriToLabelService;
 import org.semanticweb.owlapi.model.EntityType;
@@ -94,6 +93,8 @@ public class DetailsManager {
           dataHandler.getElementLocationInModules(
               entityIri.getIRIString()));
     }
+
+    result.setMaturityLevel(dataHandler.getMaturityLevel(entityIri));
 
     ConfigurationData coreConfiguration = applicationConfigurationService.getConfigurationData();
     if (applicationConfigurationService.hasConfiguredGroups()) {
@@ -172,7 +173,7 @@ public class DetailsManager {
       result = dataHandler.handleParticularDataProperty(iri);
     } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri, INCLUDED)) {
       result = dataHandler.handleParticularObjectProperty(iri);
-      } else if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
+    } else if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
       result = dataHandler.handleParticularIndividual(iri);
     } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri, INCLUDED)) {
       result = dataHandler.handleParticularDatatype(iri);
@@ -213,7 +214,6 @@ public class DetailsManager {
     // first must be sorted next we need to change keys
     groupedDetails = changerIriToLabelService.changeIriKeysInGroupedDetails(groupedDetails);
 
-    // owlDetails.release(); // TODO: Remove
     return groupedDetails;
   }
 
