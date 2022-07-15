@@ -344,10 +344,10 @@ public class OwlDataHandler {
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
       
-      if (copyrightHandler.isCopyrightExist(annotations)) {
+      if (!copyrightHandler.isCopyrightExist(annotations)) {
         resultDetails.addAllProperties(copyrightHandler.getCopyright(iri));
       }
-      if (licenseHandler.isLicenseExist(annotations)) {
+      if (!licenseHandler.isLicenseExist(annotations)) {
         resultDetails.addAllProperties(licenseHandler.getLicense(iri));
       }
     } catch (Exception ex) {
