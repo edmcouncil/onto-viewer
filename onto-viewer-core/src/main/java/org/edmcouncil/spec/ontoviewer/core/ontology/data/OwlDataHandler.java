@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data;
 
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_ANNOTATION_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_CLASS;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_DATA_PROPERTY;
@@ -23,6 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
@@ -191,8 +191,6 @@ public class OwlDataHandler {
       }
       subclasses = filterSubclasses(subclasses);
 
-      resultDetails.setLicense(licenseHandler.getLicense(classIri));
-      resultDetails.setCopyright(copyrightHandler.getCopyright(classIri));
       OwlTaxonomyImpl taxonomy = extractTaxonomy(taxElements2, owlClass.getIRI(), ontology,
           AXIOM_CLASS);
       taxonomy.sort();
@@ -200,8 +198,11 @@ public class OwlDataHandler {
       OwlDetailsProperties<PropertyValue> annotations =
           handleAnnotations(owlClass.getIRI(), ontology, resultDetails);
 
+      var copyright = copyrightHandler.getCopyright(classIri);
+      var license = licenseHandler.getLicense(classIri);
+      
       setResultValues(resultDetails, taxonomy, axioms, annotations, directSubclasses, individuals,
-          inheritedAxioms, usage, ontologyGraph, subclasses);
+          inheritedAxioms, usage, ontologyGraph, subclasses, license, copyright);
     } catch (Exception ex) {
       LOG.warn("Unable to handle class {}. Details: {}", classIri, ex.getMessage(), ex);
     }
@@ -293,7 +294,10 @@ public class OwlDataHandler {
       OwlDetailsProperties<PropertyValue> inheritedAxioms,
       OwlDetailsProperties<PropertyValue> usage,
       OntologyGraph ontologyGraph,
-      List<PropertyValue> subclasses) {
+      List<PropertyValue> subclasses,
+      OwlDetailsProperties<PropertyValue> copyright,
+      OwlDetailsProperties<PropertyValue> license
+      ) {
     for (PropertyValue subclass : subclasses) {
       axioms.addProperty(subClassOfIriString, subclass);
     }
@@ -305,6 +309,8 @@ public class OwlDataHandler {
     resultDetails.addAllProperties(individuals);
     resultDetails.addAllProperties(inheritedAxioms);
     resultDetails.addAllProperties(usage);
+    resultDetails.addAllProperties(copyright);
+    resultDetails.addAllProperties(license);
     if (ontologyGraph.isEmpty()) {
       resultDetails.setGraph(null);
     } else {
@@ -313,6 +319,8 @@ public class OwlDataHandler {
     }
   }
 
+  
+  
   public OwlListDetails handleParticularIndividual(OWLNamedIndividual individual) {
     var ontology = ontologyManager.getOntology();
     var iri = individual.getIRI();
@@ -335,8 +343,13 @@ public class OwlDataHandler {
       }
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
-      resultDetails.setLicense(licenseHandler.getLicense(iri));   
-      resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
+      
+      if (!copyrightHandler.isCopyrightExist(annotations)) {
+        resultDetails.addAllProperties(copyrightHandler.getCopyright(iri));
+      }
+      if (!licenseHandler.isLicenseExist(annotations)) {
+        resultDetails.addAllProperties(licenseHandler.getLicense(iri));
+      }
     } catch (Exception ex) {
       LOG.warn("Unable to handle individual " + iri + ". Details: " + ex.getMessage(), ex);
     }
@@ -867,8 +880,8 @@ public class OwlDataHandler {
       resultDetails.addAllProperties(annotations);
       resultDetails.addAllProperties(directSubDataProperty);
       resultDetails.setTaxonomy(taxonomy);
-      resultDetails.setLicense(licenseHandler.getLicense(iri));
-      resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
+      resultDetails.addAllProperties(licenseHandler.getLicense(iri));
+      resultDetails.addAllProperties(copyrightHandler.getCopyright(iri));    
     } catch (Exception ex) {
       LOG.warn("Unable to handle data property {}. Details: {}", iri, ex.getMessage());
     }
@@ -926,8 +939,8 @@ public class OwlDataHandler {
       resultDetails.addAllProperties(annotations);
       resultDetails.addAllProperties(directSubObjectProperty);
       resultDetails.setTaxonomy(taxonomy);
-      resultDetails.setLicense(licenseHandler.getLicense(iri));
-      resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
+      resultDetails.addAllProperties(licenseHandler.getLicense(iri));
+      resultDetails.addAllProperties(copyrightHandler.getCopyright(iri));      
     } catch (Exception ex) {
       LOG.warn("Unable to handle object property " + iri + ". Details: " + ex.getMessage());
     }
@@ -1276,8 +1289,8 @@ public class OwlDataHandler {
     try {
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
       resultDetails.addAllProperties(handleAnnotations(iri, ontology, resultDetails));
-      resultDetails.setLicense(licenseHandler.getLicense(iri));
-      resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
+      resultDetails.addAllProperties(licenseHandler.getLicense(iri));
+      resultDetails.addAllProperties(copyrightHandler.getCopyright(iri));   
     } catch (Exception ex) {
       LOG.warn("Unable to handle datatype {}. Details: {}", iri, ex.getMessage());
     }
@@ -1316,8 +1329,8 @@ public class OwlDataHandler {
           resultDetails.addAllProperties(directSubAnnotationProperty);
           resultDetails.addAllProperties(axioms);
           resultDetails.setTaxonomy(taxonomy);
-          resultDetails.setLicense(licenseHandler.getLicense(iri));
-          resultDetails.setCopyright(copyrightHandler.getCopyright(iri));   
+          resultDetails.addAllProperties(licenseHandler.getLicense(iri));
+          resultDetails.addAllProperties(copyrightHandler.getCopyright(iri));   
         }
       }
     } catch (OntoViewerException ex) {

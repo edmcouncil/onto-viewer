@@ -1,5 +1,3 @@
 ontologies:
   source:
     - path: ontologies
-  display_license: true
-  display_copyright: true

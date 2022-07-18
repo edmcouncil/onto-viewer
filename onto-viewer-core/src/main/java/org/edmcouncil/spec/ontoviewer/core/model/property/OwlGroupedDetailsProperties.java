@@ -20,8 +20,6 @@ import org.edmcouncil.spec.ontoviewer.core.comparator.ComparatorWithPriority;
 public class OwlGroupedDetailsProperties<T> {
 
   private List taxonomy;
-  private String license;
-  private String copyright;
   private Map<String, Map<String, List<T>>> properties;
 
   public OwlGroupedDetailsProperties() {
@@ -55,22 +53,6 @@ public class OwlGroupedDetailsProperties<T> {
 
   public Map<String, Map<String, List<T>>> getProperties() {
     return properties;
-  }
-
-  public String getLicense() {
-    return license;
-  }
-
-  public void setLicense(String license) {
-    this.license = license;
-  }
-
-  public String getCopyright() {
-    return copyright;
-  }
-
-  public void setCopyright(String copyright) {
-    this.copyright = copyright;
   }
 
   @Override
