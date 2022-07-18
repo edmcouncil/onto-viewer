@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -37,6 +39,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.parameters.Imports;
@@ -155,6 +158,25 @@ public class ModuleHandler {
     return referenceCount.entrySet()
         .stream()
         .filter(moduleEntry -> moduleEntry.getValue() == 0)
+        .map(Entry::getKey)
+        .collect(Collectors.toList());
+  }
+
+  public List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
+    Map<String, Integer> referenceCount = new LinkedHashMap<>();
+    modulesIriSet.forEach(moduleIri -> {
+      Set<String> hasPartModules = getHasPartElements(IRI.create(moduleIri), ontology);
+      referenceCount.putIfAbsent(moduleIri, 0);
+      hasPartModules.forEach(partModule -> {
+        Integer c = referenceCount.getOrDefault(partModule, 0);
+        c++;
+        referenceCount.put(partModule, c);
+      });
+    });
+
+    return referenceCount.entrySet()
+        .stream()
+        .filter(r -> r.getValue() == 0)
         .map(Entry::getKey)
         .collect(Collectors.toList());
   }
@@ -435,5 +457,31 @@ public class ModuleHandler {
       ontologyModules.put(IRI.create(ontologyModule.getIri()), ontologyModule);
       addSubModules(ontologyModule.getSubModule(), ontologyModules);
     }
+  }
+
+  private Set<String> getHasPartElements(IRI iri, OWLOntology ontology) {
+    OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
+    Optional<OWLNamedIndividual> individual = ontology
+        .individualsInSignature(Imports.INCLUDED)
+        .filter(namedIndividual -> namedIndividual.getIRI().equals(iri))
+        .findFirst();
+    if (individual.isEmpty()) {
+      return new HashSet<>(0);
+    }
+    Iterator<OWLAnnotation> iteratorAnnotation = EntitySearcher
+        .getAnnotations(
+            individual.get(),
+            ontology.importsClosure(),
+            dataFactory.getOWLAnnotationProperty(IRI.create(HAS_PART_IRI)))
+        .iterator();
+
+    Set<String> result = new LinkedHashSet<>();
+    while (iteratorAnnotation.hasNext()) {
+      OWLAnnotation annotation = iteratorAnnotation.next();
+      String s = annotation.annotationValue().toString();
+      result.add(s);
+    }
+
+    return result;
   }
 }

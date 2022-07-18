@@ -230,7 +230,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
       ontologyManager.updateOntology(loadedOntology);
       if (shouldPopulateOntologyResources(goal)) {
-        dataHandler.populateOntologyResources(loadedOntology);
+        dataHandler.populateOntologyResources();
       }
     } catch (Exception ex) {
       var message = String.format(

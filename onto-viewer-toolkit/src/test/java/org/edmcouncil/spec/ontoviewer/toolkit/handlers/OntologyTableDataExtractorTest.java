@@ -56,7 +56,7 @@ class OntologyTableDataExtractorTest {
         "A is a kind of Thing.",
         "'A' example",
         "'A' explanatory note",
-        "UNKNOWN");
+        "NOT_SET");
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -75,7 +75,7 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "",
-        "UNKNOWN");
+        "NOT_SET");
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -94,7 +94,7 @@ class OntologyTableDataExtractorTest {
         "'B1' object property label is a kind of topObjectProperty.",
         "",
         "",
-        "UNKNOWN");
+        "NOT_SET");
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -113,7 +113,7 @@ class OntologyTableDataExtractorTest {
         "'C1' data property label is a kind of topDataProperty.",
         "",
         "'C1' explanatory note",
-        "UNKNOWN");
+        "NOT_SET");
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
