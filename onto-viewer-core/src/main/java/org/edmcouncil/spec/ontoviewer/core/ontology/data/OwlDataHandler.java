@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data;
 
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_ANNOTATION_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_CLASS;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_DATA_PROPERTY;
@@ -23,6 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;

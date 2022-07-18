@@ -86,7 +86,7 @@ public class DataHandler {
                 annotations.addProperty(entry.getKey(), propertyValue);
               }
             }
-          }         
+          }
           details.setMaturityLevel(moduleHandler.getMaturityLevelForModule(currentOntologyIri));
           break;
         }

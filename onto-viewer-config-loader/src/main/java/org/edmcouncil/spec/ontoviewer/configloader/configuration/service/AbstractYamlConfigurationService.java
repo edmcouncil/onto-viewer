@@ -26,6 +26,9 @@ import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Co
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.byName;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DOWNLOAD_DIRECTORY;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_LICENSE;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.COPYRIGHT;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_COPYRIGHT;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LICENSE;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -44,9 +47,6 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.COPYRIGHT;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_COPYRIGHT;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LICENSE;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.LabelPriority;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.MissingLanguageAction;
