@@ -1,17 +1,13 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
+import com.google.common.base.Stopwatch;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
@@ -22,15 +18,10 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLAnnotation;
-import org.semanticweb.owlapi.model.OWLDataFactory;
-import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.parameters.Imports;
-import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -44,17 +35,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataHandler {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DataHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DataHandler.class);
 
   private final AnnotationsDataHandler annotationsDataHandler;
   private final CustomDataFactory customDataFactory;
   private final ModuleHandler moduleHandler;
   private final OntologyManager ontologyManager;
-  private String resourceInternal;
-  private String resourceExternal;
 
-  private Map<String, OntologyResources> resources = null;
-  
+
+  private final Map<IRI, OntologyResources> resources = new HashMap<>();
+
+  private Map<IRI, IRI> entityIriToOntologyIriMap;
+
   public DataHandler(AnnotationsDataHandler annotationsDataHandler,
       CustomDataFactory customDataFactory,
       ModuleHandler moduleHandler,
@@ -79,7 +71,7 @@ public class DataHandler {
             IRI.create(iri.getIRIString().substring(0, iri.getIRIString().length() - 1)))) {
           annotations = annotationsDataHandler.handleOntologyAnnotations(currentOntology.annotations(), details);
 
-          OntologyResources ontologyResources = getOntologyResources(currentOntologyIri.toString(), ontology);
+          OntologyResources ontologyResources = getOntologyResources(currentOntologyIri);
           if (ontologyResources != null) {
             for (Map.Entry<String, List<PropertyValue>> entry : ontologyResources.getResources().entrySet()) {
               for (PropertyValue propertyValue : entry.getValue()) {
@@ -95,183 +87,144 @@ public class DataHandler {
     return annotations;
   }
 
-  public List<OntologyModule> getAllModules() {
-    return moduleHandler.getModules();
+  public void populateOntologyResources() {
+    LOGGER.info("Start populating ontology mapping of entity IRIs to ontology IRIs...");
+    var stopwatch = Stopwatch.createStarted();
+
+    this.entityIriToOntologyIriMap = populateEntityIriToOntologyIriMap();
+    this.moduleHandler.updateModules();
+
+    LOGGER.info("Finished populating mapping entity IRIs to ontology IRIs in {} seconds.",
+        stopwatch.elapsed(TimeUnit.SECONDS));
   }
 
-  public List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
-    Map<String, Integer> referenceCount = new LinkedHashMap<>();
-    modulesIriSet.forEach((mIri) -> {
-      Set<String> hasPartModules = getHasPartElements(IRI.create(mIri), ontology);
-      referenceCount.putIfAbsent(mIri, 0);
-      hasPartModules.forEach((partModule) -> {
-        Integer c = referenceCount.getOrDefault(partModule, 0);
-        c++;
-        referenceCount.put(partModule, c);
-      });
-    });
-    return referenceCount.entrySet()
-        .stream()
-        .filter(r -> r.getValue() == 0)
-        .map(Entry::getKey)
-        .collect(Collectors.toList());
-  }
+  public List<String> getElementLocationInModules(IRI elementIri) {
+    List<String> result = new LinkedList<>();
 
-  public OntologyResources getOntologyResources(String iri, OWLOntology ontology) {
-    if (resources == null) {
-      loadAllOntologyResources(ontology);
+    var allModules = moduleHandler.getModules();
+
+    if (allModules.isEmpty()) {
+      return result;
     }
 
-    return resources.get(iri);
-  }
+    IRI ontologyIri = findElementInOntology(elementIri);
+    ontologyIri = ontologyIri == null ? elementIri : ontologyIri;
 
-  public Set<String> getHasPartElements(IRI iri, OWLOntology ontology) {
-    OWLDataFactory dataFactory = OWLManager.getOWLDataFactory();
-    Optional<OWLNamedIndividual> individual = ontology
-        .individualsInSignature(Imports.INCLUDED)
-        .filter(c -> c.getIRI().equals(iri))
-        .findFirst();
-    if (individual.isEmpty()) {
-      return new HashSet<>(0);
-    }
-    Iterator<OWLAnnotation> iteratorAnnotation = EntitySearcher
-        .getAnnotations(
-            individual.get(),
-            ontology.importsClosure(),
-            dataFactory.getOWLAnnotationProperty(IRI.create("http://purl.org/dc/terms/hasPart")))
-        .iterator();
-
-    Set<String> result = new LinkedHashSet<>();
-    while (iteratorAnnotation.hasNext()) {
-      OWLAnnotation annotation = iteratorAnnotation.next();
-      String s = annotation.annotationValue().toString();
-      result.add(s);
+    LOGGER.debug("Element found in ontology {}", ontologyIri);
+    if (ontologyIri != null) {
+      for (OntologyModule module : allModules) {
+        if (trackingThePath(module, ontologyIri, result, elementIri)) {
+          LOGGER.debug("[Data Handler] Location Path {}", Arrays.toString(result.toArray()));
+          return result;
+        }
+      }
     }
 
     return result;
   }
 
-  public void populateOntologyResources(OWLOntology ontology) {
-    // TODO: Make loadAllOntologyResources and setOntologyResources private and use this method
-    //       instead
-    this.resources = loadAllOntologyResources(ontology);
-    this.moduleHandler.updateModules();
+  private OntologyResources getOntologyResources(IRI ontologyIri) {
+    if (!resources.containsKey(ontologyIri)) {
+      var owlOntologyOptional = ontologyManager.getOntologyWithImports()
+          .filter(owlOntology -> {
+            var owlOntologyIriOptional = owlOntology.getOntologyID().getOntologyIRI();
+            return owlOntologyIriOptional.map(iri -> iri.equals(ontologyIri)).orElse(false);
+          })
+          .findFirst();
+
+      if (owlOntologyOptional.isPresent()) {
+        var ontologyResources = extractOntologyResources(owlOntologyOptional.get());
+        resources.put(ontologyIri, ontologyResources);
+      } else {
+        resources.put(ontologyIri, new OntologyResources());
+      }
+    }
+    return resources.get(ontologyIri);
   }
 
-  private Map<String, OntologyResources> loadAllOntologyResources(OWLOntology ontology) {
-    OWLOntologyManager manager = ontology.getOWLOntologyManager();
-    Map<String, OntologyResources> allResources = new HashMap<>();
+  private Map<IRI, IRI> populateEntityIriToOntologyIriMap() {
+    Map<IRI, IRI> entityIriToOntologyIri = new HashMap<>();
 
-    completeResourceKeys();
+    ontologyManager.getOntologyWithImports()
+        .forEach(owlOntology -> {
+          var ontologyIriOptional = owlOntology.getOntologyID().getOntologyIRI();
 
-    manager.ontologies().collect(Collectors.toSet()).forEach((owlOntology) -> {
-      OntologyResources ontoResources = extractOntologyResources(owlOntology);
+          if (ontologyIriOptional.isPresent()) {
+            var ontologyIri = ontologyIriOptional.get();
 
-      if (ontoResources != null) {
-        String ontIri = owlOntology.getOntologyID().getOntologyIRI().get().toString();
-        if (!ontIri.equals("https://spec.edmcouncil.org/fibo/ontology")) {
-          allResources.put(ontIri, ontoResources);
-        }
-      }
-    });
-    return allResources;
+            owlOntology.signature(Imports.EXCLUDED)
+                .forEach(owlEntity -> {
+                  var entityIri = owlEntity.getIRI();
+                  entityIriToOntologyIri.put(entityIri, ontologyIri);
+                });
+          }
+        });
+
+    return entityIriToOntologyIri;
   }
 
   private OntologyResources extractOntologyResources(OWLOntology selectedOntology) {
-    OntologyResources ontoResources = new OntologyResources();
-    Optional<IRI> opt = selectedOntology.getOntologyID().getOntologyIRI();
+    OntologyResources ontologyResources = new OntologyResources();
+    Optional<IRI> ontologyIriOptional = selectedOntology.getOntologyID().getOntologyIRI();
     IRI ontologyIri;
-    if (opt.isPresent()) {
-      ontologyIri = opt.get();
+    if (ontologyIriOptional.isPresent()) {
+      ontologyIri = ontologyIriOptional.get();
     } else {
-      opt = selectedOntology.getOntologyID().getDefaultDocumentIRI();
-      if (opt.isPresent()) {
-        ontologyIri = opt.get();
-        LOG.debug("IRI for this ontology doesn't exist, use Default Document IRI {}", ontologyIri);
+      ontologyIriOptional = selectedOntology.getOntologyID().getDefaultDocumentIRI();
+      if (ontologyIriOptional.isPresent()) {
+        ontologyIri = ontologyIriOptional.get();
+        LOGGER.debug("IRI for this ontology doesn't exist, use Default Document IRI {}", ontologyIri);
       } else {
-        LOG.debug("Ontology doesn't have any iri to present... Ontology ID: {}",
-            selectedOntology.getOntologyID().toString());
+        LOGGER.debug("Ontology doesn't have any iri to present... Ontology ID: {}", selectedOntology.getOntologyID());
         return null;
       }
     }
 
     selectedOntology.annotationPropertiesInSignature()
-        .map(c -> {
-          String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
-          return pv;
-        })
-        .forEachOrdered(c -> ontoResources
-            .addElement(selectResourceIriString(c, ontologyIri,
-                ViewerIdentifierFactory.Element.annotationProperty), c));
+        .map(annotationProperty -> customDataFactory.createAnnotationIri(annotationProperty.getIRI().toString()))
+        .forEachOrdered(annotationIri ->
+            ontologyResources.addElement(
+                selectResourceIriString(annotationIri, ontologyIri, ViewerIdentifierFactory.Element.annotationProperty),
+                annotationIri));
 
     selectedOntology.classesInSignature()
-        .map(c -> {
-          String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
-          return pv;
-        })
-        .forEachOrdered(c -> ontoResources
-            .addElement(
-                selectResourceIriString(c, ontologyIri, ViewerIdentifierFactory.Element.clazz), c)
-        );
+        .map(clazz -> customDataFactory.createAnnotationIri(clazz.getIRI().toString()))
+        .forEachOrdered(clazzIri ->
+            ontologyResources.addElement(
+                selectResourceIriString(clazzIri, ontologyIri, ViewerIdentifierFactory.Element.clazz),
+                clazzIri));
 
     selectedOntology.dataPropertiesInSignature()
-        .map(c -> {
-          String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
-          return pv;
-        })
-        .forEachOrdered(c -> ontoResources
-            .addElement(selectResourceIriString(c, ontologyIri,
-                ViewerIdentifierFactory.Element.dataProperty), c));
+        .map(dataProperty -> customDataFactory.createAnnotationIri(dataProperty.getIRI().toString()))
+        .forEachOrdered(dataPropertyIri ->
+            ontologyResources.addElement(
+                selectResourceIriString(dataPropertyIri, ontologyIri, ViewerIdentifierFactory.Element.dataProperty),
+                dataPropertyIri));
 
     selectedOntology.objectPropertiesInSignature()
-        .map(c -> {
-          String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
-          return pv;
-        })
-        .forEachOrdered(c -> ontoResources
-            .addElement(selectResourceIriString(c, ontologyIri,
-                ViewerIdentifierFactory.Element.objectProperty), c));
+        .map(objectProperty -> customDataFactory.createAnnotationIri(objectProperty.getIRI().toString()))
+        .forEachOrdered(objectPropertyIri ->
+            ontologyResources.addElement(
+                selectResourceIriString(objectPropertyIri, ontologyIri, ViewerIdentifierFactory.Element.objectProperty),
+                objectPropertyIri));
 
     selectedOntology.individualsInSignature()
         .map(individual -> customDataFactory.createAnnotationIri(individual.getIRI().toString()))
-        .forEachOrdered(individual
-            -> ontoResources.addElement(
-            selectResourceIriString(
-                individual,
-                ontologyIri,
-                ViewerIdentifierFactory.Element.instance),
-            individual
-        ));
+        .forEachOrdered(individual ->
+            ontologyResources.addElement(
+                selectResourceIriString(individual, ontologyIri, ViewerIdentifierFactory.Element.instance),
+                individual));
 
     selectedOntology.datatypesInSignature()
-        .map(c -> {
-          String istring = c.getIRI().toString();
-          OwlAnnotationIri pv = customDataFactory.createAnnotationIri(istring);
-          return pv;
-        })
-        .forEachOrdered(c -> ontoResources
-            .addElement(selectResourceIriString(c, ontologyIri,
-                ViewerIdentifierFactory.Element.dataType), c));
+        .map(datatype -> customDataFactory.createAnnotationIri(datatype.getIRI().toString()))
+        .forEachOrdered(datatypeIri ->
+            ontologyResources.addElement(
+                selectResourceIriString(datatypeIri, ontologyIri, ViewerIdentifierFactory.Element.dataType),
+                datatypeIri));
 
-    ontoResources.sortInAlphabeticalOrder();
+    ontologyResources.sortInAlphabeticalOrder();
 
-    return ontoResources;
-  }
-
-  private void completeResourceKeys() {
-
-    resourceInternal = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.internal,
-        ViewerIdentifierFactory.Element.empty);
-    LOG.debug("Internal resource iri: {}", resourceInternal);
-
-    resourceExternal = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external,
-        ViewerIdentifierFactory.Element.empty);
-    LOG.debug("External resource iri: {}", resourceExternal);
-
+    return ontologyResources;
   }
 
   private String selectResourceIriString(OwlAnnotationIri c, IRI ontologyIri,
@@ -283,74 +236,21 @@ public class DataHandler {
         : ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.external, element);
   }
 
-  public List<String> getElementLocationInModules(String elementIri) {
-    OWLOntology ontology = ontologyManager.getOntology();
-    List<String> result = new LinkedList<>();
-    if (resources == null) {
-      loadAllOntologyResources(ontology);
-    }
-    var allModules = getAllModules();
-
-    if (allModules.isEmpty()) {
-      return result;
-    }
-
-    String ontologyIri = findElementInOntology(elementIri);
-
-    ontologyIri = ontologyIri == null ? elementIri : ontologyIri;
-
-    LOG.debug("Element found in ontology {}", ontologyIri);
-    if (ontologyIri != null) {
-      for (OntologyModule module : allModules) {
-        if (trackingThePath(module, ontologyIri, result, elementIri)) {
-          LOG.debug("[FIBO Data Handler] Location Path {}", Arrays.toString(result.toArray()));
-          return result;
-        }
-      }
-    }
-
-    return result;
+  private IRI findElementInOntology(IRI elementIri) {
+    return entityIriToOntologyIriMap.get(elementIri);
   }
 
-  /**
-   * @return ontology iri where the element is present
-   */
-  private String findElementInOntology(String elementIri) {
-    // https://spec.edmcouncil.org/fibo/ontology
-    String ontologyIri = null;
-    for (Map.Entry<String, OntologyResources> entry : resources.entrySet()) {
-      for (Map.Entry<String, List<PropertyValue>> entryResource : entry.getValue().getResources()
-          .entrySet()) {
-        if (entryResource.getKey().contains(resourceInternal)) {
-          for (PropertyValue propertyValue : entryResource.getValue()) {
-            OwlAnnotationIri annotation = (OwlAnnotationIri) propertyValue;
-            if (annotation.getValue().getIri().equals(elementIri)) {
-              if (elementIri.contains(entry.getKey())) {
-                ontologyIri = entry.getKey();
-                break;
-              }
-            }
-          }
-        }
-
-      }
-    }
-    return ontologyIri;
-  }
-
-  private Boolean trackingThePath(OntologyModule node, String ontologyIri, List<String> track,
-      String elementIri) {
-
+  private boolean trackingThePath(OntologyModule node, IRI ontologyIri, List<String> track, IRI elementIri) {
     if (node == null) {
       return false;
     }
 
-    if (node.getIri().equals(elementIri)) {
+    if (IRI.create(node.getIri()).equals(elementIri)) {
       track.add(node.getIri());
       return true;
     }
 
-    if (node.getIri().equals(ontologyIri)) {
+    if (node.getIri().equals(ontologyIri.toString())) {
       track.add(node.getIri());
       return true;
     }
@@ -361,6 +261,7 @@ public class DataHandler {
         return true;
       }
     }
+
     return false;
   }
 }

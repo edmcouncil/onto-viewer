@@ -160,7 +160,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       luceneSearcher.populateIndex();
 
       //load ontology resource must be here, data handler use label provider
-      dataHandler.populateOntologyResources(ontology);
+      dataHandler.populateOntologyResources();
       
       ontologyStatsManager.clear();
       ontologyStatsManager.generateStats(ontology);
