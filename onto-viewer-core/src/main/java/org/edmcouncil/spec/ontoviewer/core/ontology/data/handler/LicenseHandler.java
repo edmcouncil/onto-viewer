@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
@@ -53,7 +54,7 @@ public class LicenseHandler {
             && !visitedOntologies.contains(currentOntologyIri.toString())) {
           visitedOntologies.add(currentOntologyIri.toString());
 
-          for (OWLAnnotation annotation : currentOntology.annotations().toList()) {
+          for (OWLAnnotation annotation : currentOntology.annotations().collect(Collectors.toList())) {
 
             for (String licenseIri : applicationConfig.getLicense()) {
               if (licenseIri.equals(annotation.getProperty().getIRI().toString())) {

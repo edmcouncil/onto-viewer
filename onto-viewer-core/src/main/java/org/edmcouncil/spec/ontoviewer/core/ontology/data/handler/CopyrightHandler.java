@@ -53,7 +53,7 @@ public class CopyrightHandler {
 
           visitedOntologies.add(currentOntologyIri.toString());
 
-          for (OWLAnnotation annotation : currentOntology.annotations().toList()) {
+          for (OWLAnnotation annotation : currentOntology.annotations().collect(Collectors.toList())) {
             for (String copyrightIri : applicationConfig.getCopyright()) {
               if (copyrightIri.equals(annotation.getProperty().getIRI().toString())) {
 
