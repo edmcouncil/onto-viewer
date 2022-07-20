@@ -1248,19 +1248,19 @@ public class OwlDataHandler {
       ontologyDetails.addAllProperties(metadata);
       ontologyDetails.setIri(iri.toString());
       ontologyDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
-      ontologyDetails.setLocationInModules(dataHandler.getElementLocationInModules(iri.toString()));
+      ontologyDetails.setLocationInModules(dataHandler.getElementLocationInModules(iri));
       return ontologyDetails;
     }
     return null;
   }
 
   public List<OntologyModule> getAllModules() {
-    return dataHandler.getAllModules();
+    return moduleHandler.getModules();
   }
 
-  public List<String> getElementLocationInModules(String iriString) {
+  public List<String> getElementLocationInModules(String iriString) { // TODO use 'IRI'
     LOG.debug("[Data Handler] Handle location for element {}", iriString);
-    return dataHandler.getElementLocationInModules(iriString);
+    return dataHandler.getElementLocationInModules(IRI.create(iriString));
   }
 
   public OwlListDetails handleParticularDatatype(IRI iri) {

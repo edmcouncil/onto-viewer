@@ -13,6 +13,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.IRI;
@@ -31,20 +32,21 @@ import org.springframework.stereotype.Component;
 public class OntologyStatsManager {
 
   private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
-  private static final String instanceKey = ViewerIdentifierFactory.createId(
-      ViewerIdentifierFactory.Type.function, OwlType.INSTANCES.name().toLowerCase());
+  private static final String INSTANCE_KEY = ViewerIdentifierFactory.createId(
+      ViewerIdentifierFactory.Type.function,
+      OwlType.INSTANCES.name().toLowerCase());
   private static final Logger LOG = LoggerFactory.getLogger(OntologyStatsManager.class);
 
-  private final DataHandler fiboDataHandler;
+  private final ModuleHandler moduleHandler;
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
 
   private OntologyStatsMapped ontologyStatsMapped;
 
-  public OntologyStatsManager(DataHandler fiboDataHandler,
+  public OntologyStatsManager(ModuleHandler moduleHandler,
       IndividualDataHandler individualDataHandler,
       LabelProvider labelProvider) {
-    this.fiboDataHandler = fiboDataHandler;
+    this.moduleHandler = moduleHandler;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
   }
@@ -68,8 +70,7 @@ public class OntologyStatsManager {
           ontology, clazzOpt.get());
       if (indi.getProperties().isEmpty()) {
         //--noDomain
-        String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats,
-            "numberOfDomain");
+        String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
         stats.put(id, 0);
         labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
         //--numberOfModule
@@ -80,7 +81,7 @@ public class OntologyStatsManager {
 
       Set<String> modulesIriSet = new HashSet<>();
       try {
-        indi.getProperties().get(instanceKey).stream()
+        indi.getProperties().get(INSTANCE_KEY).stream()
             .map((propertyValue) -> (OwlListElementIndividualProperty) propertyValue)
             .map((individualProperty) -> (String) individualProperty.getValue().getIri())
             .forEachOrdered((elIri) -> {
@@ -90,7 +91,7 @@ public class OntologyStatsManager {
         LOG.info("The ontology has not modules defined");
       }
 
-      List<String> rootModulesIris = fiboDataHandler.getRootModulesIris(modulesIriSet, ontology);
+      List<String> rootModulesIris = moduleHandler.getRootModulesIris(modulesIriSet, ontology);
       //--numberOfDomain
       String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats,
           "numberOfDomain");
@@ -102,8 +103,7 @@ public class OntologyStatsManager {
       labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
     } else {
       //--numberOfDomain
-      String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats,
-          "numberOfDomain");
+      String id = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.stats, "numberOfDomain");
       stats.put(id, 0);
       labels.put(id, labelProvider.getLabelOrDefaultFragment(IRI.create(id)));
       //--numberOfModule

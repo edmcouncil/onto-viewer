@@ -8,7 +8,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,8 +19,11 @@ public class CustomDataFactory {
 
   private static final Logger LOG = LoggerFactory.getLogger(CustomDataFactory.class);
 
-  @Autowired
-  private LabelProvider labelExtractor;
+  private final LabelProvider labelExtractor;
+
+  public CustomDataFactory(LabelProvider labelExtractor) {
+    this.labelExtractor = labelExtractor;
+  }
 
   /**
    *
@@ -32,10 +34,10 @@ public class CustomDataFactory {
     LOG.debug("[Custom Data Factory] Create annotation for IRI: {}", iri);
 
     OwlAnnotationIri owlAnnotationIri = new OwlAnnotationIri();
-    OwlSimpleProperty osp = new OwlSimpleProperty();
-    osp.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(iri)));
-    osp.setIri(iri);
-    owlAnnotationIri.setValue(osp);
+    OwlSimpleProperty simpleProperty = new OwlSimpleProperty();
+    simpleProperty.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(iri)));
+    simpleProperty.setIri(iri);
+    owlAnnotationIri.setValue(simpleProperty);
     owlAnnotationIri.setType(OwlType.IRI);
     return owlAnnotationIri;
   }
@@ -43,11 +45,11 @@ public class CustomDataFactory {
   public OwlAnnotationPropertyValue createAnnotationAnyUri(String iri) {
     LOG.debug("[Custom Data Factory] Create annotation for URI: {}", iri);
 
-    OwlAnnotationPropertyValue val = new OwlAnnotationPropertyValue();
-    val.setType(OwlType.ANY_URI);
-    val.setValue(iri);
+    OwlAnnotationPropertyValue annotationPropertyValue = new OwlAnnotationPropertyValue();
+    annotationPropertyValue.setType(OwlType.ANY_URI);
+    annotationPropertyValue.setValue(iri);
 
-    return val;
+    return annotationPropertyValue;
   }
 
 }
