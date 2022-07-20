@@ -7,6 +7,8 @@ import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntime
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.model.OWLOntologyID;
+import org.semanticweb.owlapi.model.SetOntologyID;
 import org.semanticweb.owlapi.model.parameters.Imports;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,15 @@ public class OntologyImportsMerger {
     this.ontologyManager = ontologyManager;
   }
 
-  public OWLOntology mergeImportOntologies(String ontologyIri) {
+  public OWLOntology mergeImportOntologies(String ontologyIri, String ontologyVersionIri) {
     try {
       var owlOntologyManager = OWLManager.createOWLOntologyManager();
       var outputOntology = owlOntologyManager.createOntology(IRI.create(ontologyIri));
+
+      var changeOntologyId = new SetOntologyID(
+          outputOntology,
+          new OWLOntologyID(IRI.create(ontologyIri), IRI.create(ontologyVersionIri)));
+      owlOntologyManager.applyChange(changeOntologyId);
 
       var inputOntology = ontologyManager.getOntology();
       mergeOntologies(outputOntology, inputOntology.imports());

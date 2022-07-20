@@ -4,11 +4,11 @@
 
 OntoViewer Toolkit can be run with a few different goals that are described below.  For each goal, there are a few relevant arguments that can be passed to control the way a goal is run.  Some of these arguments are required, some of them are optional.   
 
-| Name                | Description                                                                                                                                                                                                                                                              | Relevant argument                                                                                  |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `consistency-check` | Check whether provided ontologies are consistent. The result of this goal is written to an `output` file with one of two values: `true`, `false`.                                                                                                                        | `data` (required), `output` (required)                                                             |
-| `extract-data`      | Create a CSV file with data from provided ontologies. This is the default goal. `filter-pattern` is used to filter out all entities that doesn't contain the given pattern within their IRIs.  `ontology-mapping` is a file created in the standard XML Catalogs format. | `data` (required), `output` (required), `filter-pattern` (optional), `ontology-mapping` (optional) |
-| `merge-imports`    | Merge ontologies with their imports and save them in RDF/XML format.  `ontology-iri` will be used as a new IRI for the merged ontology.                                                                                                                                  | `data` (required), `output` (required), `ontology-iri` (required), `ontology-mapping` (optional)   |
+| Name                | Description                                                                                                                                                                                                                                                                                        | Relevant argument                                                                                                                  |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `consistency-check` | Check whether provided ontologies are consistent. The result of this goal is written to an `output` file with one of two values: `true`, `false`.                                                                                                                                                  | `data` (required), `output` (required)                                                                                             |
+| `extract-data`      | Create a CSV file with data from provided ontologies. This is the default goal. `filter-pattern` is used to filter out all entities that doesn't contain the given pattern within their IRIs.  `ontology-mapping` is a file created in the standard XML Catalogs format.                           | `data` (required), `output` (required), `filter-pattern` (optional), `ontology-mapping` (optional)                                 |
+| `merge-imports`    | Merge ontologies with their imports and save them in RDF/XML format.  `ontology-iri` will be used as a new IRI for the merged ontology.  When `ontology-version-iri` option is provided, it is used as the new version IRI.  If it is not provided, the `ontology-iri` is used as the version IRI. | `data` (required), `output` (required), `ontology-iri` (required), `ontology-version-iri` (optional), `ontology-mapping` (optional) |
 
 
 ### Examples
@@ -38,11 +38,25 @@ java -jar onto-viewer-toolkit.jar \
 
 #### `merge-imports`
 
+Without new version IRI:
+
 ```bash
 java -jar onto-viewer-toolkit.jar \
     --goal merge-imports \
     --data my-ontology.rdf \
-    --ontology-iri 'http://example.com/my-merged-ontology/' \
+    --ontology-iri http://example.com/my-merged-ontology/ \
+    --ontology-mapping catalog-v001.xml \
+    --output my-merged-ontology.rdf
+```
+
+With new version IRI:
+
+```bash
+java -jar onto-viewer-toolkit.jar \
+    --goal merge-imports \
+    --data my-ontology.rdf \
+    --ontology-iri http://example.com/my-merged-ontology/ \
+    --ontology-version-iri http://example.com/my-merged-ontology/version1/ \
     --ontology-mapping catalog-v001.xml \
     --output my-merged-ontology.rdf
 ```

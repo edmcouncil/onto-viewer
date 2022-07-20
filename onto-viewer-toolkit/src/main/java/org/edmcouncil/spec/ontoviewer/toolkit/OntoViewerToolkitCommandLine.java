@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.toolkit;
 
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_IRI;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_MAPPING;
+import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_VERSION_IRI;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.OUTPUT;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.VERSION;
 
@@ -134,11 +135,20 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
         break;
       }
       case MERGE_IMPORTS:
-        var newOntologyIri = commandLineOptions.getOption(ONTOLOGY_IRI);
-        if (newOntologyIri.isEmpty()) {
+        var newOntologyIriOptional = commandLineOptions.getOption(ONTOLOGY_IRI);
+        if (newOntologyIriOptional.isEmpty()) {
           throw new OntoViewerToolkitRuntimeException("'ontology-iri' for 'merge-imports' goal should be provided");
         }
-        var mergedOntology = ontologyImportsMerger.mergeImportOntologies(newOntologyIri.get());
+        var newOntologyIri = newOntologyIriOptional.get();
+
+        var newOntologyVersionIri = newOntologyIri;
+        var newOntologyVersionIriOptional = commandLineOptions.getOption(ONTOLOGY_VERSION_IRI);
+        if (newOntologyVersionIriOptional.isPresent()) {
+          newOntologyVersionIri = newOntologyVersionIriOptional.get();
+        }
+
+        var mergedOntology = ontologyImportsMerger.mergeImportOntologies(newOntologyIri, newOntologyVersionIri);
+
         var owlOntologyManager = OWLManager.createOWLOntologyManager();
         var outputOption = commandLineOptions.getOption(OUTPUT);
         if (outputOption.isPresent()) {

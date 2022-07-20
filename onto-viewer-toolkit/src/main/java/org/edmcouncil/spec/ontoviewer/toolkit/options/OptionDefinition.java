@@ -10,6 +10,8 @@ public enum OptionDefinition {
   ONTOLOGY_IRI("ontology-iri", true, false, "new IRI for merged ontology"),
   ONTOLOGY_MAPPING("ontology-mapping", true, false,
       "path to the catalog file with ontology mapping", null),
+  ONTOLOGY_VERSION_IRI("ontology-version-iri", true, false, "new version IRI for merged ontology",
+      null),
   VERSION("version", false, false, "displays version info", null);
 
   private final String argName;
