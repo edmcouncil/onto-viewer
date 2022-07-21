@@ -25,6 +25,10 @@ import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Co
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.USER_DEFAULT_NAME_LIST;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.byName;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DOWNLOAD_DIRECTORY;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_LICENSE;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.COPYRIGHT;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_COPYRIGHT;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LICENSE;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -37,6 +41,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.GroupsConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
@@ -64,7 +69,9 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   private static final String LABEL_LANG_DEFAULT = "en";
   private static final String MISSING_LANGUAGE_ACTION_DEFAULT = "FIRST";
   private static final boolean AUTOMATIC_CREATION_OF_MODULES_DEFULT = false;
-
+  private static final boolean DISPLAY_LICENSE_DEFAULT = true;
+  private static final boolean DISPLAY_COPYRIGHT_DEFAULT = true;
+  
   @Override
   public void init() {
     // Default empty implementation
@@ -91,7 +98,6 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
           var groupsConfig = handleGroupsConfig((Map<String, Object>) entry.getValue());
           configuration.setGroupsConfig(groupsConfig);
           break;
-
         case LABEL_CONFIG:
           @SuppressWarnings("unchecked")
           var labelConfig = handleLabelConfig((Map<String, Object>) entry.getValue());
@@ -103,13 +109,17 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
           var searchConfig = handleSearchConfig((Map<String, Object>) entry.getValue());
           configuration.setSearchConfig(searchConfig);
           break;
-
+        case APPLICATION_CONFIG:
+          @SuppressWarnings("unchecked")
+          var applicationConfig = handleApplicationConfig((Map<String, Object>) entry.getValue());
+          configuration.setApplicationConfig(applicationConfig);
+          break;
         case ONTOLOGIES:
           @SuppressWarnings("unchecked")
           var ontologiesConfig = handleOntologies((Map<String, Object>) entry.getValue());
           configuration.setOntologiesConfig(ontologiesConfig);
           break;
-
+      
         default:
           LOGGER.warn("Unknown top-level configuration key {}.", configurationKey);
       }
@@ -152,7 +162,24 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
 
     return new GroupsConfig(priorityList, groups);
   }
+  
+  protected ApplicationConfig handleApplicationConfig(Map<String, Object> applicationConfig){
 
+    var licenseObject = applicationConfig.get(LICENSE.getLabel());
+    List<String> license = getListOfStringsFromObject(licenseObject);
+
+    var copyrightObject = applicationConfig.get(COPYRIGHT.getLabel());
+    List<String> copyright = getListOfStringsFromObject(copyrightObject);
+
+    var displayLicenseObject = applicationConfig.get(DISPLAY_LICENSE.getLabel());
+    boolean displayLicense = getBooleanFromObject(displayLicenseObject, DISPLAY_LICENSE_DEFAULT);
+
+    var displayCopyrightObject = applicationConfig.get(DISPLAY_COPYRIGHT.getLabel());
+    boolean displayCopyright = getBooleanFromObject(displayCopyrightObject, DISPLAY_COPYRIGHT_DEFAULT);
+
+    return new ApplicationConfig(license, copyright, displayLicense, displayCopyright);
+  }
+  
   protected LabelConfig handleLabelConfig(Map<String, Object> labelConfig) {
     var displayLabelObject = labelConfig.get(DISPLAY_LABEL.getLabel());
     boolean displayLabel = getBooleanFromObject(displayLabelObject, DISPLAY_LABEL_DEFAULT);
@@ -243,9 +270,10 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     List<String> moduleToIgnore = getListOfStringsFromObject(ontologies.get(MODULE_TO_IGNORE.getLabel()));
     boolean automaticCreationOfModules = 
         getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()), AUTOMATIC_CREATION_OF_MODULES_DEFULT);
-     List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
-    
-    return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns, moduleToIgnore, automaticCreationOfModules);
+     List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel())); 
+     
+    return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns,
+        moduleToIgnore, automaticCreationOfModules);
   }
 
   protected Map<String, List<String>> mapToMapOfList(List<?> rawGroupsList) {

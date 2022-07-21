@@ -266,7 +266,7 @@ public class ModuleHandler {
         iri -> MaturityLevelFactory.notSet());
   }
 
-  private IRI getOntologyIri(IRI elementIri) {
+  public IRI getOntologyIri(IRI elementIri) {
     var matcher = ONTOLOGY_IRI_PATTERN.matcher(elementIri);
 
     if (matcher.matches()) {

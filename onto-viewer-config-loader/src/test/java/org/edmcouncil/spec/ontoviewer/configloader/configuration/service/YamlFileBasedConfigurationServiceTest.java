@@ -53,6 +53,12 @@ class YamlFileBasedConfigurationServiceTest {
     assertEquals(3, configurationData.getSearchConfig().getFuzzyDistance());
     assertTrue(configurationData.getSearchConfig().isReindexOnStart());
     assertEquals(6, configurationData.getSearchConfig().getFindProperties().size());
+    
+    // Application Config
+    assertFalse(configurationData.getApplicationConfig().isDisplayCopyright());
+    assertFalse(configurationData.getApplicationConfig().isDisplayLicense());
+    assertEquals("http://purl.org/dc/terms/license", configurationData.getApplicationConfig().getLicense().get(0));
+    assertEquals("http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright", configurationData.getApplicationConfig().getCopyright().get(0));
   }
 
   @Test
@@ -88,6 +94,12 @@ class YamlFileBasedConfigurationServiceTest {
     assertEquals(3, configurationData.getSearchConfig().getFuzzyDistance());
     assertTrue(configurationData.getSearchConfig().isReindexOnStart());
     assertEquals(6, configurationData.getSearchConfig().getFindProperties().size());
+    
+    // Application Config
+    assertFalse(configurationData.getApplicationConfig().isDisplayCopyright());
+    assertFalse(configurationData.getApplicationConfig().isDisplayLicense());
+    assertEquals("http://purl.org/dc/terms/license", configurationData.getApplicationConfig().getLicense().get(0));
+    assertEquals("http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright", configurationData.getApplicationConfig().getCopyright().get(0));
   }
 
   @Test
@@ -119,6 +131,12 @@ class YamlFileBasedConfigurationServiceTest {
     assertEquals(3, configurationData.getSearchConfig().getFuzzyDistance());
     assertTrue(configurationData.getSearchConfig().isReindexOnStart());
     assertEquals(6, configurationData.getSearchConfig().getFindProperties().size());
+    
+    // Application Config
+    assertFalse(configurationData.getApplicationConfig().isDisplayCopyright());
+    assertFalse(configurationData.getApplicationConfig().isDisplayLicense());
+    assertEquals("http://purl.org/dc/terms/license", configurationData.getApplicationConfig().getLicense().get(0));
+    assertEquals("http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright", configurationData.getApplicationConfig().getCopyright().get(0));
   }
 
   @Test
@@ -156,6 +174,12 @@ class YamlFileBasedConfigurationServiceTest {
     assertEquals(3, configurationData.getSearchConfig().getFuzzyDistance());
     assertTrue(configurationData.getSearchConfig().isReindexOnStart());
     assertEquals(6, configurationData.getSearchConfig().getFindProperties().size());
+    
+    // Application Config
+    assertFalse(configurationData.getApplicationConfig().isDisplayCopyright());
+    assertFalse(configurationData.getApplicationConfig().isDisplayLicense());
+    assertEquals("http://purl.org/dc/terms/license", configurationData.getApplicationConfig().getLicense().get(0));
+    assertEquals("http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright", configurationData.getApplicationConfig().getCopyright().get(0));
   }
 
   @Test
@@ -189,6 +213,50 @@ class YamlFileBasedConfigurationServiceTest {
     assertEquals(5, searchConfig.getFuzzyDistance());
     assertFalse(searchConfig.isReindexOnStart());
     assertEquals(2, searchConfig.getFindProperties().size());
+   
+    // Application Config
+    assertFalse(configurationData.getApplicationConfig().isDisplayCopyright());
+    assertFalse(configurationData.getApplicationConfig().isDisplayLicense());
+    assertEquals("http://purl.org/dc/terms/license", configurationData.getApplicationConfig().getLicense().get(0));
+    assertEquals("http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright", configurationData.getApplicationConfig().getCopyright().get(0));
+  }
+  
+  @Test
+  void shouldHaveConfigMixedBothFromDefaultsAndCustomApplicationConfig() {
+    var fileSystemManager = prepareFileSystem();
+    prepareTestConfiguration("/configuration_yaml/application_config1.yaml");
+
+    var yamlConfigurationService = new YamlFileBasedConfigurationService(fileSystemManager);
+    yamlConfigurationService.init();
+    var configurationData = yamlConfigurationService.getConfigurationData();
+
+    // Groups Config
+    assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
+    assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
+
+    // Label Config
+    assertTrue(configurationData.getLabelConfig().isDisplayLabel());
+    assertEquals(LabelPriority.USER_DEFINED, configurationData.getLabelConfig().getLabelPriority());
+    assertFalse(configurationData.getLabelConfig().isForceLabelLang());
+    assertEquals("en", configurationData.getLabelConfig().getLabelLang());
+    assertEquals(MissingLanguageAction.FIRST, configurationData.getLabelConfig().getMissingLanguageAction());
+    assertEquals(44, configurationData.getLabelConfig().getDefaultNames().size());
+
+    // Ontology Config
+    assertEquals("ontologies", configurationData.getOntologiesConfig().getPaths().get(0));
+
+    // Search Config
+    assertEquals(2, configurationData.getSearchConfig().getSearchDescriptions().size());
+    assertEquals(3, configurationData.getSearchConfig().getFuzzyDistance());
+    assertTrue(configurationData.getSearchConfig().isReindexOnStart());
+    assertEquals(6, configurationData.getSearchConfig().getFindProperties().size());
+   
+    // Application Config
+    assertTrue(configurationData.getApplicationConfig().isDisplayCopyright());
+    assertTrue(configurationData.getApplicationConfig().isDisplayLicense());
+    assertEquals("http://purl.org/dc/terms/license", configurationData.getApplicationConfig().getLicense().get(0));
+    assertEquals("http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright", configurationData.getApplicationConfig().getCopyright().get(0));
+    assertEquals("https://www.omg.org/spec/Commons/AnnotationVocabulary/copyright", configurationData.getApplicationConfig().getCopyright().get(1));
   }
 
   private FileSystemManager prepareFileSystem() {

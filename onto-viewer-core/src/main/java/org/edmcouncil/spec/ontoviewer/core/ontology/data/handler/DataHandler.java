@@ -42,6 +42,7 @@ public class DataHandler {
   private final ModuleHandler moduleHandler;
   private final OntologyManager ontologyManager;
 
+
   private final Map<IRI, OntologyResources> resources = new HashMap<>();
 
   private Map<IRI, IRI> entityIriToOntologyIriMap;
@@ -78,12 +79,11 @@ public class DataHandler {
               }
             }
           }
-          details.setMaturityLevel(moduleHandler.getMaturityLevelForModule(iri));
+          details.setMaturityLevel(moduleHandler.getMaturityLevelForModule(currentOntologyIri));
           break;
         }
       }
     }
-
     return annotations;
   }
 

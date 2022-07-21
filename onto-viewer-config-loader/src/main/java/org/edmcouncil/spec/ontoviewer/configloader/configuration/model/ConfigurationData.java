@@ -10,6 +10,7 @@ public class ConfigurationData {
   private LabelConfig labelConfig;
   private SearchConfig searchConfig;
   private OntologiesConfig ontologiesConfig;
+  private ApplicationConfig applicationConfig;
   private ToolkitConfig toolkitConfig = new ToolkitConfig();
 
   public GroupsConfig getGroupsConfig() {
@@ -44,12 +45,51 @@ public class ConfigurationData {
     this.ontologiesConfig = ontologiesConfig;
   }
 
+  public ApplicationConfig getApplicationConfig() {
+    return applicationConfig;
+  }
+
+  public void setApplicationConfig(ApplicationConfig applicationConfig) {
+    this.applicationConfig = applicationConfig;
+  }
+
   public ToolkitConfig getToolkitConfig() {
     return toolkitConfig;
   }
 
   public void setToolkitConfig(ToolkitConfig toolkitConfig) {
     this.toolkitConfig = toolkitConfig;
+  }
+
+  public static class ApplicationConfig {
+
+    private final List<String> license;
+    private final List<String> copyright;
+    private final boolean displayLicense;
+    private final boolean displayCopyright;
+
+    public ApplicationConfig(List<String> license, List<String> copyright, boolean displayLicense, boolean displayCopyright) {
+      this.license = license;
+      this.copyright = copyright;
+      this.displayLicense = displayLicense;
+      this.displayCopyright = displayCopyright;
+    }
+
+    public List<String> getLicense() {
+      return license;
+    }
+
+    public List<String> getCopyright() {
+      return copyright;
+    }
+
+    public boolean isDisplayLicense() {
+      return displayLicense;
+    }
+
+    public boolean isDisplayCopyright() {
+      return displayCopyright;
+    }
   }
 
   public static class GroupsConfig {
@@ -191,7 +231,7 @@ public class ConfigurationData {
         List<String> zipUrls,
         List<String> moduleIgnorePatterns,
         List<String> moduleToIgnore,
-        boolean automaticCreationOfModules ) {
+        boolean automaticCreationOfModules) {
       this.urls = urls;
       this.paths = paths;
       this.catalogPaths = catalogPaths;
@@ -236,11 +276,11 @@ public class ConfigurationData {
     }
 
     public List<String> getDownloadDirectory() {
-        return downloadDirectory;
+      return downloadDirectory;
     }
 
     public List<String> getZipUrls() {
-        return zipUrls;
+      return zipUrls;
     }
   }
 

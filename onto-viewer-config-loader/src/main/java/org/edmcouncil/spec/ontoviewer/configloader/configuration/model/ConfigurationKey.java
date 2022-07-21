@@ -39,9 +39,16 @@ public enum ConfigurationKey {
   CATALOG_PATH("catalog_path"),
   MODULE_IGNORE_PATTERN("module_ignore_pattern"),
   MODULE_TO_IGNORE("module_to_ignore"),
-  AUTOMATIC_CREATION_OF_MODULES("automatic_creation_of_modules");
-  private final String label;
+  AUTOMATIC_CREATION_OF_MODULES("automatic_creation_of_modules"),
 
+  //ApplicationConfig
+  APPLICATION_CONFIG("application_config"),
+  LICENSE("license"),
+  COPYRIGHT("copyright"),
+  DISPLAY_LICENSE("display_license"),
+  DISPLAY_COPYRIGHT("display_copyright");
+  
+    private final String label;
   ConfigurationKey(String label) {
     this.label = label;
   }
