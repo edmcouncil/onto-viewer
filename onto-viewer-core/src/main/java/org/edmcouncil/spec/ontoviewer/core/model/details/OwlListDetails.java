@@ -35,6 +35,9 @@ public class OwlListDetails extends OwlDetails {
   }
 
   public void addAllProperties(OwlDetailsProperties<PropertyValue> axioms) {
+    if (axioms == null) {
+      return;
+    }
     axioms.getProperties().entrySet().forEach((entry) -> {
       entry.getValue().forEach((propertyValue) -> {
         properties.addProperty(entry.getKey(), propertyValue);
