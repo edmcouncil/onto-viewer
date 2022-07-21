@@ -1,6 +1,6 @@
 application_config:
-  display_license: true
-  display_copyright: true
+  display_license: false
+  display_copyright: false
   license: 
     - 'http://purl.org/dc/terms/license'
   copyright:

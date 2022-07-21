@@ -32,6 +32,7 @@ class LuceneSearcherTest {
   @BeforeEach
   void setUp() throws OWLException, IOException {
     tempHomePath = Files.createTempDirectory("onto-viewer-tests");
+    tempHomePath.toFile().deleteOnExit();
 
     var appProperties = new AppProperties();
     appProperties.setDefaultHomePath(tempHomePath.toString());
@@ -51,6 +52,8 @@ class LuceneSearcherTest {
 
   @AfterEach
   void tearDown() throws IOException {
+    luceneSearcher.close();
+
     FileUtils.deleteDirectory(tempHomePath.toFile());
   }
 

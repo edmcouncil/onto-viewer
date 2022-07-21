@@ -296,8 +296,7 @@ public class OwlDataHandler {
       OntologyGraph ontologyGraph,
       List<PropertyValue> subclasses,
       OwlDetailsProperties<PropertyValue> copyright,
-      OwlDetailsProperties<PropertyValue> license
-      ) {
+      OwlDetailsProperties<PropertyValue> license) {
     for (PropertyValue subclass : subclasses) {
       axioms.addProperty(subClassOfIriString, subclass);
     }
