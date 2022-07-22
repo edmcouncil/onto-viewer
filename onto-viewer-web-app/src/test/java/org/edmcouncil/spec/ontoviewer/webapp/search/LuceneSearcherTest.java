@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.webapp.search;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ import org.semanticweb.owlapi.model.OWLException;
 
 class LuceneSearcherTest {
 
+  private static final String EXAMPLE_ONTOLOGY_IRI = "http://www.example.com/";
   private static final String EXAMPLE_ONTOLOGY_PATH = "/ontology/search_example_ontology.rdf";
 
   private LuceneSearcher luceneSearcher;
@@ -78,7 +80,7 @@ class LuceneSearcherTest {
     var actualResult = luceneSearcher.search("mortgage", true);
 
     assertThat(actualResult.size(), equalTo(3));
-    assertThat(actualResult.get(0).getIri(), equalTo("http://www.example.com/Mortgage"));
+    assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "Mortgage"));
   }
 
   @Test
@@ -86,8 +88,7 @@ class LuceneSearcherTest {
     var actualResult = luceneSearcher.search("sponsored loan", true);
 
     assertThat(actualResult.size(), equalTo(1));
-    assertThat(actualResult.get(0).getIri(),
-        equalTo("http://www.example.com/GovernmentSponsoredLoan"));
+    assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "GovernmentSponsoredLoan"));
   }
 
   @Test
@@ -95,8 +96,14 @@ class LuceneSearcherTest {
     var actualResult = luceneSearcher.search("government", true);
 
     assertThat(actualResult.size(), equalTo(1));
-    assertThat(actualResult.get(0).getIri(),
-        equalTo("http://www.example.com/GovernmentSponsoredLoan"));
+    assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "GovernmentSponsoredLoan"));
+  }
+
+  @Test
+  void shouldNotReturnResultsForSkosDefinitionMatchWhenUsingBasicSearch() {
+    var actualResult = luceneSearcher.search("cei", true);
+
+    assertThat(actualResult.size(), equalTo(0));
   }
 
   @Test
@@ -104,6 +111,14 @@ class LuceneSearcherTest {
     var actualResult = luceneSearcher.search("mortgagee", true);
 
     assertThat(actualResult.size(), equalTo(3));
+  }
+
+  @Test
+  void shouldReturnResultsWhenFuzzyMatchExistsOnMultipleWords() {
+    var actualResult = luceneSearcher.search("revrese morttgagge", true);
+
+    assertThat(actualResult.size(), equalTo(3));
+    assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "ReverseMortgage"));
   }
 
   @Test
@@ -130,6 +145,14 @@ class LuceneSearcherTest {
     assertTrue(actualResult.get(0).getHighlights().isEmpty());
   }
 
+  @Test
+  void shouldReturnCorrectResultForQueryContainingDash() {
+    var actualResult = luceneSearcher.search("closed-end investment", false);
+
+    assertThat(actualResult.size(), equalTo(1));
+    assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "ClosedEndInvestment"));
+  }
+
   // Advance search
   @Test
   void shouldReturnTheBestMatchForSpecificTermWithAdvanceMode() {
@@ -149,13 +172,22 @@ class LuceneSearcherTest {
   }
 
   @Test
+  void shouldReturnResultForSkosDefinitionWithAdvancedModeWithHighlighting() {
+    var properties = List.of("rdfs_label", "skos_definition");
+    var actualResult = luceneSearcher.searchAdvance("CEInvestment", properties, true);
+
+    assertThat(actualResult.size(), equalTo(1));
+    assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "ClosedEndInvestment"));
+    assertFalse(actualResult.get(0).getHighlights().isEmpty());
+  }
+
+  @Test
   void shouldReturnEmptyResultWhenTermDoesNotOccurForSpecificTermWithAdvanceMode() {
     var properties = List.of("rdfs_label");
     var actualResult = luceneSearcher.searchAdvance("contract", properties, true);
 
     assertThat(actualResult.size(), equalTo(0));
   }
-
   // Find properties
   @Test
   void shouldReturnListOfSupportedFindProperties() {

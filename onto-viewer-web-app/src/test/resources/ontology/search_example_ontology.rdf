@@ -80,6 +80,15 @@
     
 
 
+    <!-- http://www.example.com/ClosedEndInvestment -->
+
+    <owl:Class rdf:about="http://www.example.com/ClosedEndInvestment">
+        <skos:definition>this is definiton for CEInvestment</skos:definition>
+        <skos:prefLabel>closed-end investment</skos:prefLabel>
+    </owl:Class>
+    
+
+
     <!-- http://www.example.com/GovernmentSponsoredLoan -->
 
     <owl:Class rdf:about="http://www.example.com/GovernmentSponsoredLoan">
