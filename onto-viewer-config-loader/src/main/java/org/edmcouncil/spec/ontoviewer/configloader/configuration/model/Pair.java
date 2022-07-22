@@ -31,4 +31,9 @@ public class Pair {
   public void setIri(String iri) {
     this.iri = iri;
   }
+
+  @Override
+  public String toString() {
+    return '{' + "label=" + label + ", iri=" + iri + '}';
+  }
 }
