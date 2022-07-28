@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -31,20 +32,29 @@ public class ViewerZipFilesOperations {
   public Set<MissingImport> prepareZipToLoad(ConfigurationData config, FileSystemManager fileSystemManager) {
     Set<MissingImport> missingImports = new LinkedHashSet<>();
     List<String> zipUrls = config.getOntologiesConfig().getZipUrls();
-    List<String> downloadDirectory = config.getOntologiesConfig().getDownloadDirectory();
+    List<String> downloadDirectories = config.getOntologiesConfig().getDownloadDirectory();
     LOGGER.trace("Ontology ZIP URLS : {}", zipUrls);
-    LOGGER.trace("Ontology Download Dir : {}", downloadDirectory);
+    LOGGER.trace("Ontology Download Dir : {}", downloadDirectories);
+    String downloadDirectory = downloadDirectories.stream().findFirst().get() ;
+   
+    try {
+      var downloadDirectoryPath = fileSystemManager.getPathToFile(downloadDirectory);
+      if (!downloadDirectoryPath.toFile().exists()) {
+        fileSystemManager.createDir(downloadDirectoryPath);
+      }
+    } catch (IOException ex) {
+    }
+
     //checking if zip files can be downloaded at all
     if(!zipUrls.isEmpty()
         && !downloadDirectory.isEmpty()){
-      String downloadDirectoryFirst = downloadDirectory.stream().findFirst().get();
       Path downloadDir = null;
       try {
-        downloadDir = fileSystemManager.getPathToFile(downloadDirectoryFirst);
+        downloadDir = fileSystemManager.getPathToFile(downloadDirectory);
       } catch (IOException e) {
         LOGGER.error(e.toString());
         MissingImport missingImport = new MissingImport();
-        missingImport.setIri(downloadDirectoryFirst);
+        missingImport.setIri(downloadDirectory);
         missingImport.setCause(e.toString());
         missingImports.add(missingImport);
       }
