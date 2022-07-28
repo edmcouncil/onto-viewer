@@ -19,6 +19,7 @@ import org.semanticweb.owlapi.model.parameters.Imports;
 class OntologyImportsMergerTest {
 
   private static final String NEW_ONTOLOGY_IRI = "http://example.com/New/";
+  private static final String NEW_ONTOLOGY_VERSION_IRI = "http://example.com/New/Version1/";
   private static final String UMBRELLA_ONTOLOGY_IRI = "http://example.com/Umbrella/";
   private static final String A_ONTOLOGY_IRI = "http://example.com/A/";
   private static final String B_ONTOLOGY_IRI = "http://example.com/B/";
@@ -42,7 +43,7 @@ class OntologyImportsMergerTest {
     var owlOntology = createOntologyWithImportedOntologies();
     ontologyManager.updateOntology(owlOntology);
 
-    var mergedOntology = ontologyImportsMerger.mergeImportOntologies(NEW_ONTOLOGY_IRI);
+    var mergedOntology = ontologyImportsMerger.mergeImportOntologies(NEW_ONTOLOGY_IRI, NEW_ONTOLOGY_VERSION_IRI);
 
     assertEquals(NEW_ONTOLOGY_IRI, mergedOntology.getOntologyID().getOntologyIRI().orElseThrow().toString());
     assertEquals(5, mergedOntology.classesInSignature(Imports.EXCLUDED).count());
@@ -53,7 +54,7 @@ class OntologyImportsMergerTest {
     var owlOntology = createOntologyWithImportedOntologiesWithAnnotations();
     ontologyManager.updateOntology(owlOntology);
 
-    var mergedOntology = ontologyImportsMerger.mergeImportOntologies(NEW_ONTOLOGY_IRI);
+    var mergedOntology = ontologyImportsMerger.mergeImportOntologies(NEW_ONTOLOGY_IRI, NEW_ONTOLOGY_VERSION_IRI);
 
     assertEquals(NEW_ONTOLOGY_IRI, mergedOntology.getOntologyID().getOntologyIRI().orElseThrow().toString());
     assertEquals(8, mergedOntology.classesInSignature(Imports.EXCLUDED).count());
@@ -65,7 +66,7 @@ class OntologyImportsMergerTest {
     var owlOntology = createOntologyWithNestedOntologies();
     ontologyManager.updateOntology(owlOntology);
 
-    var mergedOntology = ontologyImportsMerger.mergeImportOntologies(NEW_ONTOLOGY_IRI);
+    var mergedOntology = ontologyImportsMerger.mergeImportOntologies(NEW_ONTOLOGY_IRI, NEW_ONTOLOGY_VERSION_IRI);
 
     assertEquals(NEW_ONTOLOGY_IRI, mergedOntology.getOntologyID().getOntologyIRI().orElseThrow().toString());
     assertEquals(10, mergedOntology.classesInSignature(Imports.EXCLUDED).count());
