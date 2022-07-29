@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Level;
 
@@ -35,7 +36,7 @@ public class ViewerZipFilesOperations {
     List<String> downloadDirectories = config.getOntologiesConfig().getDownloadDirectory();
     LOGGER.trace("Ontology ZIP URLS : {}", zipUrls);
     LOGGER.trace("Ontology Download Dir : {}", downloadDirectories);
-    String downloadDirectory = downloadDirectories.stream().findFirst().get() ;
+    String downloadDirectory = downloadDirectories.stream().findFirst().orElse("");
    
     try {
       var downloadDirectoryPath = fileSystemManager.getPathToFile(downloadDirectory);
@@ -43,6 +44,7 @@ public class ViewerZipFilesOperations {
         fileSystemManager.createDir(downloadDirectoryPath);
       }
     } catch (IOException ex) {
+      LOGGER.info("The directory has not been created. Exception: {}", ex.toString());
     }
 
     //checking if zip files can be downloaded at all
