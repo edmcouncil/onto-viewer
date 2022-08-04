@@ -1,6 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
@@ -56,12 +56,12 @@ public class IndividualDataHandler {
         result.addProperty(instanceKey, s);
         namedIndividual.getEntityType();
     }
-
+    result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
 
   private Set<OWLNamedIndividual> getInstancesByClass(OWLOntology ontology, OWLClass clazz) {
-    Set<OWLNamedIndividual> result = new HashSet<>();
+    Set<OWLNamedIndividual> result = new LinkedHashSet<>();
 
     for (var currentOntology : ontology.importsClosure().collect(Collectors.toSet())) {
       currentOntology.individualsInSignature().collect(Collectors.toSet()).forEach((individual) -> {

@@ -2,7 +2,6 @@ package org.edmcouncil.spec.ontoviewer.core.model.property;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,12 +21,12 @@ public class OwlDetailsProperties<T> {
   private Map<String, List<T>> properties;
 
   public OwlDetailsProperties() {
-    properties = new HashMap<>();
+    properties = new LinkedHashMap<>();
   }
 
   public void addProperty(String key, T property) {
     if (this.properties == null) {
-      this.properties = new HashMap<>();
+      this.properties = new LinkedHashMap<>();
     }
 
     List<T> propertiesList = properties.get(key);
