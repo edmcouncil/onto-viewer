@@ -24,13 +24,13 @@ public class ComparatorWithAlphabeticalOrder {
       String txt1 = obj1.toString().toLowerCase();
       String txt2 = obj2.toString().toLowerCase();
 
-      if (obj1.getClass().getName().equals("OwlAxiomPropertyValue")
-          && obj2.getClass().getName().equals(obj2.getClass().getName())) {
+      if (obj1 instanceof OwlAxiomPropertyValue
+          && obj1.getClass().getName().equals(obj2.getClass().getName())) {
         txt1 = ((OwlAxiomPropertyValue) obj1).getFullRenderedString().toLowerCase();
         txt2 = ((OwlAxiomPropertyValue) obj2).getFullRenderedString().toLowerCase();
       }
-      if (obj1.getClass().getName().equals("OwlListElementIndividualProperty")
-          && obj2.getClass().getName().equals(obj2.getClass().getName())) {
+      if (obj1 instanceof OwlListElementIndividualProperty
+          && obj1.getClass().getName().equals(obj2.getClass().getName())) {
         txt1 = ((OwlListElementIndividualProperty) obj1).getValue().getLabel().toLowerCase();
         txt2 = ((OwlListElementIndividualProperty) obj2).getValue().getLabel().toLowerCase();
       }
