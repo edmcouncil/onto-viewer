@@ -3,8 +3,6 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.loader;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -13,13 +11,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.commons.io.FilenameUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
@@ -44,18 +42,17 @@ import org.slf4j.Logger;
  * @author Patrycja Miazek (patrycja.miazek@makolab.com)
  * @author Michal Daniel (michal.daniel@makolab.com)
  */
-public class AutoOntologyLoader {
+public class AutoOntologyLoader extends AbstractOntologyLoader {
 
   private static final Logger LOGGER = getLogger(AutoOntologyLoader.class);
-  private static final Set<String> SUPPORTED_EXTENSIONS = Set.of("rdf", "owl", "ttl");
 
   private final ConfigurationData configurationData;
-  private final FileSystemManager fileSystemManager;
+  private final FileSystemService fileSystemService;
   private final MissingImportListenerImpl missingImportListenerImpl;
 
-  public AutoOntologyLoader(ConfigurationData configurationData, FileSystemManager fileSystemManager) {
+  public AutoOntologyLoader(ConfigurationData configurationData, FileSystemService fileSystemService) {
     this.configurationData = configurationData;
-    this.fileSystemManager = fileSystemManager;
+    this.fileSystemService = fileSystemService;
     this.missingImportListenerImpl = new MissingImportListenerImpl();
   }
 
@@ -111,11 +108,11 @@ public class AutoOntologyLoader {
 
       if (!ontologyPath.isAbsolute()) {
         // If the provided directory path is not absolute, we want to resolve it based on the app's home dir
-        ontologyPath = fileSystemManager.getViewerHomeDir().resolve(ontologyPath);
+        ontologyPath = fileSystemService.getViewerHomeDir().resolve(ontologyPath);
       }
 
       if (Files.isDirectory(ontologyPath)) {
-        mappingDirectory(ontologyPath, ontologyIrisToLoad);
+        mappingDirectory(ontologyPath, ontologyIrisToLoad, ontologyPathString);
       } else {
         ontologyIrisToLoad.add(new OntologySource(ontologyPath.toString(), SourceType.FILE));
       }
@@ -135,7 +132,7 @@ public class AutoOntologyLoader {
     ontologyCatalogPaths.forEach(ontologyCatalogPath -> {
       try {
         if (!Path.of(ontologyCatalogPath).isAbsolute()) {
-          ontologyCatalogPath = fileSystemManager.getViewerHomeDir().resolve(ontologyCatalogPath).toString();
+          ontologyCatalogPath = fileSystemService.getViewerHomeDir().resolve(ontologyCatalogPath).toString();
         }
 
         var ontologyMappingParentPath = Path.of(ontologyCatalogPath).getParent();
@@ -242,55 +239,5 @@ public class AutoOntologyLoader {
 
   public MissingImportListenerImpl getMissingImportListenerImpl() {
     return missingImportListenerImpl;
-  }
-
-  private void mappingDirectory(Path ontologiesDirPath, Set<OntologySource> ontologySources) {
-    if (ontologiesDirPath == null || Files.notExists(ontologiesDirPath)) {
-      LOGGER.warn("Directory with path '{}' doesn't exist.", ontologiesDirPath);
-      return;
-    }
-
-    try (var pathsStream = Files.walk(ontologiesDirPath, FileVisitOption.FOLLOW_LINKS)) {
-      var paths = pathsStream.collect(Collectors.toSet());
-
-      for (Path path : paths) {
-        if (path.equals(ontologiesDirPath)) {
-          continue;
-        }
-
-        if (Files.isRegularFile(path)) {
-          String fileExtension = FilenameUtils.getExtension(path.toString());
-          if (SUPPORTED_EXTENSIONS.contains(fileExtension)) {
-            ontologySources.add(new OntologySource(path.toString(), SourceType.FILE));
-          } else {
-            LOGGER.debug("File with extension '{}' is not supported. Supported extensions: {}",
-                fileExtension, SUPPORTED_EXTENSIONS);
-          }
-        } else if (Files.isDirectory(path)) {
-          mappingDirectory(path, ontologySources);
-        }
-      }
-    } catch (IOException ex) {
-      LOGGER.error(String.format("Exception thrown while iterating through directory '%s'.", ontologiesDirPath));
-    }
-  }
-
-  public static class LoadedOntologyData {
-
-    private final OWLOntology ontology;
-    private final Map<IRI, IRI> iriToPathMapping;
-
-    public LoadedOntologyData(OWLOntology ontology, Map<IRI, IRI> iriToPathMapping) {
-      this.ontology = ontology;
-      this.iriToPathMapping = iriToPathMapping;
-    }
-
-    public OWLOntology getOntology() {
-      return ontology;
-    }
-
-    public Map<IRI, IRI> getIriToPathMapping() {
-      return iriToPathMapping;
-    }
   }
 }

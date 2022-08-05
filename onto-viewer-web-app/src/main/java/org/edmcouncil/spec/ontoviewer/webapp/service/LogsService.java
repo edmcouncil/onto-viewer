@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.apache.commons.validator.GenericValidator;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.webapp.controller.LogsApiController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,15 +25,15 @@ public class LogsService {
   private static final Logger LOG = LoggerFactory.getLogger(LogsApiController.class);
   private static final String DATE_FORMAT_STRING = "yyyy-MM-dd";
 
-  private final FileSystemManager fileSystemManager;
+  private final FileSystemService fileSystemService;
   private final DateFormat DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_STRING);
 
-  public LogsService(FileSystemManager fileSystemManager) {
-    this.fileSystemManager = fileSystemManager;
+  public LogsService(FileSystemService fileSystemService) {
+    this.fileSystemService = fileSystemService;
   }
 
   public List<String> getLogs(String date) throws FileNotFoundException, IOException {
-    Path logsDirectoryPath = fileSystemManager.getViewerHomeDir().resolve("logs");
+    Path logsDirectoryPath = fileSystemService.getViewerHomeDir().resolve("logs");
     Path logFilePath = null;
 
     Date localdate = new Date();

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Component
-public class FileSystemManager {
+public class FileSystemManager implements FileSystemService {
 
   private static final String WEASEL_DEFAULT_HOME_DIR_NAME = ".weasel";
 
@@ -31,6 +31,7 @@ public class FileSystemManager {
     configPath = appProperties.getConfigPath();
   }
 
+  @Override
   public Path getViewerHomeDir() {
     Path userHomeDir;
     switch (defaultHomePath) {
@@ -54,37 +55,13 @@ public class FileSystemManager {
     return userHomeDir;
   }
 
-  private Path createDirIfNotExists(Path dirToCreate) throws IOException {
-    if (Files.notExists(dirToCreate)) {
-      createDir(dirToCreate);
-    }
-    return dirToCreate;
-  }
-
-  public void createDir(Path dirPath) throws IOException {
-    try {
-      Files.createDirectory(dirPath);
-    } catch (IOException ex) {
-      var msg = String.format("Unable to create a dir '%s'.", dirPath);
-      throw new IOException(msg, ex);
-    }
-  }
-
+  @Override
   public Path getDefaultPathToOntologyFile() throws IOException {
     Path homeDir = getViewerHomeDir();
     return createDirIfNotExists(homeDir).resolve(defaultOntologyFileName);
   }
 
-  public Path getPathToFile(String pathString) throws IOException {
-    var path = Paths.get(pathString);
-    if (path.isAbsolute()) {
-      return path;
-    } else {
-      Path homeDir = getViewerHomeDir();
-      return createDirIfNotExists(homeDir).resolve(path);
-    }
-  }
-
+  @Override
   public Path getPathToConfigFile() throws IOException {
     var path = Paths.get(configPath);
     if (path.isAbsolute()) {
@@ -96,8 +73,8 @@ public class FileSystemManager {
     }
   }
 
+  @Override
   public Path getPathToApiKey() {
     return getViewerHomeDir().resolve("api.key");
   }
-
 }

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
@@ -27,11 +27,11 @@ public class Updater {
   @Autowired
   private OntologyManager ontologyManager;
   @Autowired
-  private FileSystemManager fileSystemManager;
+  private FileSystemService fileSystemService;
   @Autowired
   private UpdateBlocker blocker;
   @Autowired
-  private DataHandler fiboDataHandler;
+  private DataHandler dataHandler;
   @Autowired
   private ScopeIriOntology scopeIriOntology;
   @Autowired
@@ -57,9 +57,9 @@ public class Updater {
 
     UpdaterThread t = new UpdaterThread(
         ontologyManager,
-        fileSystemManager,
+        fileSystemService,
         blocker,
-        fiboDataHandler,
+        dataHandler,
         job,
         scopeIriOntology,
         ontologyStatsManager,

@@ -13,10 +13,19 @@ public class OntologySource {
   }
 
   private final String location;
+  private final String originalLocation;
   private final SourceType sourceType;
+  private IRI ontologyIri;
 
   public OntologySource(String location, SourceType sourceType) {
     this.location = location;
+    this.originalLocation = location;
+    this.sourceType = sourceType;
+  }
+
+  public OntologySource(String location, String originalLocation, SourceType sourceType) {
+    this.location = location;
+    this.originalLocation = originalLocation;
     this.sourceType = sourceType;
   }
 
@@ -24,8 +33,20 @@ public class OntologySource {
     return location;
   }
 
+  public String getOriginalLocation() {
+    return originalLocation;
+  }
+
   public SourceType getSourceType() {
     return sourceType;
+  }
+
+  public IRI getOntologyIri() {
+    return ontologyIri;
+  }
+
+  public void setOntologyIri(IRI ontologyIri) {
+    this.ontologyIri = ontologyIri;
   }
 
   public IRI getAsIri() {
@@ -53,11 +74,5 @@ public class OntologySource {
     return Objects.hash(location, sourceType);
   }
 
-  @Override
-  public String toString() {
-    return new StringJoiner(", ", OntologySource.class.getSimpleName() + "[", "]")
-        .add("location=" + location)
-        .add("sourceType=" + sourceType)
-        .toString();
-  }
+
 }

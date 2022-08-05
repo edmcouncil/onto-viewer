@@ -15,6 +15,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.LabelPrio
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.MissingLanguageAction;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -259,7 +260,7 @@ class YamlFileBasedConfigurationServiceTest {
     assertEquals("https://www.omg.org/spec/Commons/AnnotationVocabulary/copyright", configurationData.getApplicationConfig().getCopyright().get(1));
   }
 
-  private FileSystemManager prepareFileSystem() {
+  private FileSystemService prepareFileSystem() {
     Path configDir = homeDir.resolve(CONFIG_DIR).toAbsolutePath();
     try {
       Files.createDirectory(configDir);
