@@ -1,9 +1,8 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.config;
 
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlMemoryBasedConfigurationService;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
@@ -51,11 +50,5 @@ public class ApplicationConfiguration {
     propsConfig.setIgnoreResourceNotFound(true);
     propsConfig.setIgnoreUnresolvablePlaceholders(true);
     return propsConfig;
-  }
-
-  @Bean
-  public FileSystemManager getFileSystemManager() {
-    var appProperties = new AppProperties();
-    return new FileSystemManager(appProperties);
   }
 }

@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.junit.jupiter.api.io.TempDir;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -51,7 +52,7 @@ public abstract class BaseTest {
     return ontologyManager;
   }
 
-  protected FileSystemManager prepareFileSystem() {
+  protected FileSystemService prepareFileSystem() {
     Path configDir = tempHomeDir.resolve(CONFIG_DIR).toAbsolutePath();
     try {
       Files.createDirectory(configDir);

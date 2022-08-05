@@ -5,11 +5,12 @@ import java.util.Map;
 import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.InterruptUpdate;
@@ -17,7 +18,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
-import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -31,7 +31,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
   private final OntologyManager ontologyManager;
-  private final FileSystemManager fileSystemManager;
+  private final FileSystemService fileSystemService;
   private final UpdateBlocker blocker;
   private final DataHandler dataHandler;
   private final ScopeIriOntology scopeIriOntology;
@@ -41,7 +41,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private UpdateJob job;
 
   protected UpdaterThread(OntologyManager ontologyManager,
-      FileSystemManager fileSystemManager,
+      FileSystemService fileSystemService,
       UpdateBlocker blocker,
       DataHandler dataHandler,
       UpdateJob job,
@@ -50,7 +50,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       LuceneSearcher luceneSearcher,
       ApplicationConfigurationService applicationConfigurationService) {
     this.ontologyManager = ontologyManager;
-    this.fileSystemManager = fileSystemManager;
+    this.fileSystemService = fileSystemService;
     this.blocker = blocker;
     this.job = job;
     this.dataHandler = dataHandler;
@@ -99,7 +99,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       Map<IRI, IRI> iriToPathMapping = new HashMap<>();
       String msgError = null;
 
-      LOGGER.info("File system manager created ? : {}", fileSystemManager != null);
+      LOGGER.info("File system manager created ? : {}", fileSystemService != null);
 
       applicationConfigurationService.reloadConfiguration();
       ConfigurationData configurationData = applicationConfigurationService.getConfigurationData();
@@ -107,20 +107,20 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       if (isInterrupt()) {
         throw new InterruptUpdate();
       }
-      
-          //ZIP Support 
+
+      //ZIP Support
       ViewerZipFilesOperations viewerZipFilesOperations = new ViewerZipFilesOperations();
       Set<MissingImport> missingImports = viewerZipFilesOperations.prepareZipToLoad(
-          applicationConfigurationService.getConfigurationData(), 
-          fileSystemManager);
+          applicationConfigurationService.getConfigurationData(),
+          fileSystemService);
 
       //download ontology file/files
       //load ontology to var
-      AutoOntologyLoader loader = new AutoOntologyLoader(configurationData, fileSystemManager);
+      AutoOntologyLoader loader = new AutoOntologyLoader(configurationData, fileSystemService);
       try {
         var loadedOntologyData = loader.load();
         ontology = loadedOntologyData.getOntology();
-        iriToPathMapping = loadedOntologyData.getIriToPathMapping();
+        iriToPathMapping = loadedOntologyData.getIrisToPathsMapping();
       } catch (OWLOntologyCreationException ex) {
         msgError = ex.getMessage();
         LOGGER.error(
@@ -161,7 +161,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       //load ontology resource must be here, data handler use label provider
       dataHandler.populateOntologyResources();
-      
+
       ontologyStatsManager.clear();
       ontologyStatsManager.generateStats(ontology);
 
