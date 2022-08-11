@@ -74,5 +74,13 @@ public class OntologySource {
     return Objects.hash(location, sourceType);
   }
 
-
+  @Override
+  public String toString() {
+    return new StringJoiner(", ", OntologySource.class.getSimpleName() + "[", "]")
+        .add("location='" + location + "'")
+        .add("originalLocation='" + originalLocation + "'")
+        .add("sourceType=" + sourceType)
+        .add("ontologyIri=" + ontologyIri)
+        .toString();
+  }
 }
