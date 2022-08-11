@@ -185,6 +185,13 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
         try {
           var catalog = new OntologyCatalogParser().readOntologyMapping(ontologyMappingPath);
           var ontologyMappingParentPath = Path.of(ontologyMappingPath).getParent();
+          LOGGER.debug("For ontology mapping '{}' parent path is resolved to: {}",
+              ontologyMappingPath,
+              ontologyMappingParentPath);
+
+          if (Files.notExists(ontologyMappingParentPath)) {
+            LOGGER.warn("Ontology mapping parent path ('{}') doesn't exist.", ontologyMappingParentPath);
+          }
 
           var mappings = new HashMap<String, String>();
           for (Uri mapping : catalog.getUri()) {
