@@ -82,7 +82,7 @@ public class CommandLineOntologyLoader extends AbstractOntologyLoader {
       if (Files.isDirectory(ontologyPath)) {
         mappingDirectory(ontologyPath, ontologySources, ontologyPathString);
       } else {
-        ontologySources.add(new OntologySource(ontologyPath.toString(), SourceType.FILE));
+        ontologySources.add(new OntologySource(ontologyPath.toString(), ontologyPathString, SourceType.FILE));
       }
     }
 

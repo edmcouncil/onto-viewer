@@ -184,7 +184,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       if (!ontologyMappingPath.isBlank()) {
         try {
           var catalog = new OntologyCatalogParser().readOntologyMapping(ontologyMappingPath);
-          var ontologyMappingParentPath = Path.of(ontologyMappingPath).getParent();
+          var ontologyMappingParentPath = Path.of(ontologyMappingPath).toAbsolutePath().getParent();
           LOGGER.debug("For ontology mapping '{}' parent path is resolved to: {}",
               ontologyMappingPath,
               ontologyMappingParentPath);
