@@ -14,7 +14,15 @@ name: "CodeQL"
 on:
   workflow_dispatch:
   push:
+    paths-ignore:
+          - '**/*.md'
+          - '**/*.txt'
+          - '**/*.yaml'
   pull_request:
+    paths-ignore:
+        - '**/*.md'
+        - '**/*.txt'
+        - '**/*.yaml'
   schedule:
     - cron: '20 12 * * 2'
 
