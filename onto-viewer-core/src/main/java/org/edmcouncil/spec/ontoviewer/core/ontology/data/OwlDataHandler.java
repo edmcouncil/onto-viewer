@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
@@ -121,7 +122,6 @@ public class OwlDataHandler {
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUBCLASS_OF.getName());
   private final String subObjectPropertyOfIriString = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.axiom, AxiomType.SUB_OBJECT_PROPERTY.getName());
-
   {
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#Thing");
     unwantedEndOfLeafIri.add("http://www.w3.org/2002/07/owl#topObjectProperty");
@@ -200,9 +200,10 @@ public class OwlDataHandler {
 
       var copyright = copyrightHandler.getCopyright(classIri);
       var license = licenseHandler.getLicense(classIri);
-      
+
+      var qname = getQName(classIri) ;
       setResultValues(resultDetails, taxonomy, axioms, annotations, directSubclasses, individuals,
-          inheritedAxioms, usage, ontologyGraph, subclasses, license, copyright);
+          inheritedAxioms, usage, ontologyGraph, subclasses, license, copyright, qname);
     } catch (Exception ex) {
       LOG.warn("Unable to handle class {}. Details: {}", classIri, ex.getMessage(), ex);
     }
@@ -296,7 +297,8 @@ public class OwlDataHandler {
       OntologyGraph ontologyGraph,
       List<PropertyValue> subclasses,
       OwlDetailsProperties<PropertyValue> copyright,
-      OwlDetailsProperties<PropertyValue> license) {
+      OwlDetailsProperties<PropertyValue> license,
+      String qName) {
     for (PropertyValue subclass : subclasses) {
       axioms.addProperty(subClassOfIriString, subclass);
     }
@@ -310,6 +312,7 @@ public class OwlDataHandler {
     resultDetails.addAllProperties(usage);
     resultDetails.addAllProperties(copyright);
     resultDetails.addAllProperties(license);
+    resultDetails.setqName(qName);
     if (ontologyGraph.isEmpty()) {
       resultDetails.setGraph(null);
     } else {
@@ -342,7 +345,8 @@ public class OwlDataHandler {
       }
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
-      
+      var qname = getQName(iri) ;
+      resultDetails.setqName(qname);
       if (!copyrightHandler.isCopyrightExist(annotations)) {
         resultDetails.addAllProperties(copyrightHandler.getCopyright(iri));
       }
@@ -874,7 +878,8 @@ public class OwlDataHandler {
 
       OwlDetailsProperties<PropertyValue> annotations =
           handleAnnotations(dataProperty.getIRI(), ontology, resultDetails);
-      
+      var qname = getQName(iri) ;
+      resultDetails.setqName(qname);
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
       resultDetails.addAllProperties(directSubDataProperty);
@@ -934,6 +939,8 @@ public class OwlDataHandler {
       for (PropertyValue subElement : subElements) {
         axioms.addProperty(subObjectPropertyOfIriString, subElement);
       }
+      var qname = getQName(iri) ;
+      resultDetails.setqName(qname);
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
       resultDetails.addAllProperties(directSubObjectProperty);
@@ -1284,8 +1291,9 @@ public class OwlDataHandler {
     var ontology = ontologyManager.getOntology();
     var resultDetails = new OwlListDetails();
     var iri = datatype.getIRI();
-
+    var qname = getQName(iri) ;
     try {
+      resultDetails.setqName(qname);
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
       resultDetails.addAllProperties(handleAnnotations(iri, ontology, resultDetails));
       resultDetails.addAllProperties(licenseHandler.getLicense(iri));
@@ -1323,7 +1331,9 @@ public class OwlDataHandler {
 
           OwlDetailsProperties<PropertyValue> annotations =
               handleAnnotations(annotationProperty.getIRI(), ontology, resultDetails);
-          
+
+          var qname = getQName(iri) ;
+          resultDetails.setqName(qname);
           resultDetails.addAllProperties(annotations);
           resultDetails.addAllProperties(directSubAnnotationProperty);
           resultDetails.addAllProperties(axioms);
@@ -1572,5 +1582,27 @@ public class OwlDataHandler {
     }
 
     return result;
+  }
+
+  public String getQName(IRI classIri) {
+    IRI ontologyIri = moduleHandler.getOntologyIri(classIri);
+    if (applicationConfigurationService.getConfigurationData().getApplicationConfig().isDisplayQName()) {
+      for (OWLOntology currentOntology : ontologyManager.getOntology().getOWLOntologyManager().ontologies()
+          .collect(Collectors.toSet())) {
+        var ontologyIriOptional = currentOntology.getOntologyID().getOntologyIRI();
+        if (ontologyIriOptional.isPresent()) {
+          var currentOntologyIri = ontologyIriOptional.get();
+          if (currentOntologyIri.equals(ontologyIri)
+              || currentOntologyIri.equals(
+                  IRI.create(ontologyIri.getIRIString().substring(0, ontologyIri.getIRIString().length() - 1)))) {
+            String qNameOntology = dataHandler.getQnameOntology(currentOntology);
+            String iriFragment = StringUtils.getIdentifier(classIri);
+            String result = qNameOntology + iriFragment;
+            return result;
+          }
+        }
+      }
+    }
+    return null;
   }
 }
