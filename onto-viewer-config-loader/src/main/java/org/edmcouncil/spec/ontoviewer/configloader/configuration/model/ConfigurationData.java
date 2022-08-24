@@ -65,14 +65,16 @@ public class ConfigurationData {
 
     private final List<String> license;
     private final List<String> copyright;
+    private boolean displayQName;
     private final boolean displayLicense;
     private final boolean displayCopyright;
-
-    public ApplicationConfig(List<String> license, List<String> copyright, boolean displayLicense, boolean displayCopyright) {
+  
+    public ApplicationConfig(List<String> license, List<String> copyright, boolean displayLicense, boolean displayCopyright, boolean displayQName) {
       this.license = license;
       this.copyright = copyright;
       this.displayLicense = displayLicense;
       this.displayCopyright = displayCopyright;
+      this.displayQName = displayQName;
     }
 
     public List<String> getLicense() {
@@ -89,6 +91,14 @@ public class ConfigurationData {
 
     public boolean isDisplayCopyright() {
       return displayCopyright;
+    }
+
+    public boolean isDisplayQName() {
+      return displayQName;
+    }
+
+    public void setDisplayQName(boolean displayQName) {
+      this.displayQName = displayQName;
     }
   }
 
