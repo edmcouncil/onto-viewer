@@ -279,7 +279,13 @@ public class DataHandler {
         Map<String, String> map = format.asPrefixOWLDocumentFormat().getPrefixName2PrefixMap();
         for (Map.Entry<String, String> entry : map.entrySet()) {
           if (entry.getValue().equals(ontology.getOntologyID().getOntologyIRI().get().getIRIString())) {
-            return entry.getKey();
+            if (!entry.getKey().isEmpty()
+                && !entry.getKey().isBlank()
+                && !entry.getKey().strip().equals(":")) {
+              return entry.getKey();
+            } else {
+              return null;
+            }
           }
         }
       }

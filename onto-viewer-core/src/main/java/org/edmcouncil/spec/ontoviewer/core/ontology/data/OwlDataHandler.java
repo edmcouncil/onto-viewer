@@ -1596,6 +1596,9 @@ public class OwlDataHandler {
               || currentOntologyIri.equals(
                   IRI.create(ontologyIri.getIRIString().substring(0, ontologyIri.getIRIString().length() - 1)))) {
             String qNameOntology = dataHandler.getQnameOntology(currentOntology);
+            if (qNameOntology == null) {
+              return "";
+            }
             String iriFragment = StringUtils.getIdentifier(classIri);
             String result = qNameOntology + iriFragment;
             return result;
