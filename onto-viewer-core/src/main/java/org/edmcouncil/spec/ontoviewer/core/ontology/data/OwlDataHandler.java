@@ -200,8 +200,8 @@ public class OwlDataHandler {
 
       var copyright = copyrightHandler.getCopyright(classIri);
       var license = licenseHandler.getLicense(classIri);
-
       var qname = getQName(classIri) ;
+      
       setResultValues(resultDetails, taxonomy, axioms, annotations, directSubclasses, individuals,
           inheritedAxioms, usage, ontologyGraph, subclasses, license, copyright, qname);
     } catch (Exception ex) {

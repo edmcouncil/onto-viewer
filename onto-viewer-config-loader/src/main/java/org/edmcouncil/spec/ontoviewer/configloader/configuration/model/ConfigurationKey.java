@@ -41,7 +41,6 @@ public enum ConfigurationKey {
   APPLICATION_CONFIG("application_config"),
   LICENSE("license"),
   COPYRIGHT("copyright"),
-  QNAME("qname"),
   DISPLAY_LICENSE("display_license"),
   DISPLAY_COPYRIGHT("display_copyright"),
   DISPLAY_QNAME("display_qname");
