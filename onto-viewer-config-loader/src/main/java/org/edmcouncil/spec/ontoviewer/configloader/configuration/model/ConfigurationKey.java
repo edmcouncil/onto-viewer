@@ -37,6 +37,7 @@ public enum ConfigurationKey {
   MODULE_IGNORE_PATTERN("module_ignore_pattern"),
   MODULE_TO_IGNORE("module_to_ignore"),
   AUTOMATIC_CREATION_OF_MODULES("automatic_creation_of_modules"),
+  MODULE_CLASS_IRI("module_class_iri"),
   //ApplicationConfig
   APPLICATION_CONFIG("application_config"),
   LICENSE("license"),
