@@ -8,7 +8,6 @@ public enum ConfigurationKey {
   GROUPS("groups"),
   NAME("name"),
   ITEMS("items"),
-
   // Label Config
   LABEL_CONFIG("label_config"),
   DISPLAY_LABEL("display_label"),
@@ -18,7 +17,6 @@ public enum ConfigurationKey {
   MISSING_LANGUAGE_ACTION("missing_language_action"),
   USER_DEFAULT_NAME_LIST("user_default_name_list"),
   ID("id"),
-
   // Search Config
   SEARCH_CONFIG("search_config"),
   SEARCH_DESCRIPTIONS("search_descriptions"),
@@ -28,7 +26,6 @@ public enum ConfigurationKey {
   LABEL("label"),
   IDENTIFIER("identifier"),
   IRI("iri"),
-
   // Ontology Config
   ONTOLOGIES("ontologies"),
   SOURCE("source"),
@@ -40,15 +37,15 @@ public enum ConfigurationKey {
   MODULE_IGNORE_PATTERN("module_ignore_pattern"),
   MODULE_TO_IGNORE("module_to_ignore"),
   AUTOMATIC_CREATION_OF_MODULES("automatic_creation_of_modules"),
-
   //ApplicationConfig
   APPLICATION_CONFIG("application_config"),
   LICENSE("license"),
   COPYRIGHT("copyright"),
   DISPLAY_LICENSE("display_license"),
-  DISPLAY_COPYRIGHT("display_copyright");
-  
-    private final String label;
+  DISPLAY_COPYRIGHT("display_copyright"),
+  DISPLAY_QNAME("display_qname");
+
+  private final String label;
   ConfigurationKey(String label) {
     this.label = label;
   }

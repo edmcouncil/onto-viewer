@@ -1,4 +1,5 @@
 application_config:
+  display_qname: true
   display_license: false
   display_copyright: false
   license: 

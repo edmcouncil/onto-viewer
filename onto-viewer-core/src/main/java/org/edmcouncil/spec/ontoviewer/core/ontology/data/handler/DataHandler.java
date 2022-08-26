@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
@@ -19,6 +21,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLDocumentFormat;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.parameters.Imports;
@@ -41,7 +44,7 @@ public class DataHandler {
   private final CustomDataFactory customDataFactory;
   private final ModuleHandler moduleHandler;
   private final OntologyManager ontologyManager;
-
+  private final ApplicationConfig applicationConfig;
 
   private final Map<IRI, OntologyResources> resources = new HashMap<>();
 
@@ -50,11 +53,13 @@ public class DataHandler {
   public DataHandler(AnnotationsDataHandler annotationsDataHandler,
       CustomDataFactory customDataFactory,
       ModuleHandler moduleHandler,
-      OntologyManager ontologyManager) {
+      OntologyManager ontologyManager, 
+      ApplicationConfigurationService applicationConfigurationService) {
     this.annotationsDataHandler = annotationsDataHandler;
     this.customDataFactory = customDataFactory;
     this.moduleHandler = moduleHandler;
     this.ontologyManager = ontologyManager;
+    this.applicationConfig = applicationConfigurationService.getConfigurationData().getApplicationConfig();
   }
 
   public OwlDetailsProperties<PropertyValue> handleOntologyMetadata(IRI iri, OwlListDetails details) {
@@ -71,6 +76,8 @@ public class DataHandler {
             IRI.create(iri.getIRIString().substring(0, iri.getIRIString().length() - 1)))) {
           annotations = annotationsDataHandler.handleOntologyAnnotations(currentOntology.annotations(), details);
 
+        var qName = getQnameOntology(currentOntology);
+        details.setqName(qName);
           OntologyResources ontologyResources = getOntologyResources(currentOntologyIri);
           if (ontologyResources != null) {
             for (Map.Entry<String, List<PropertyValue>> entry : ontologyResources.getResources().entrySet()) {
@@ -263,5 +270,26 @@ public class DataHandler {
     }
 
     return false;
+  }
+
+  public String getQnameOntology(OWLOntology ontology) {
+    OWLDocumentFormat format = ontology.getFormat();
+    if (applicationConfig.isDisplayQName()) {
+      if (format.isPrefixOWLDocumentFormat()) {
+        Map<String, String> map = format.asPrefixOWLDocumentFormat().getPrefixName2PrefixMap();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+          if (entry.getValue().equals(ontology.getOntologyID().getOntologyIRI().get().getIRIString())) {
+            if (!entry.getKey().isEmpty()
+                && !entry.getKey().isBlank()
+                && !entry.getKey().strip().equals(":")) {
+              return entry.getKey();
+            } else {
+              return null;
+            }
+          }
+        }
+      }
+    }
+    return null;
   }
 }

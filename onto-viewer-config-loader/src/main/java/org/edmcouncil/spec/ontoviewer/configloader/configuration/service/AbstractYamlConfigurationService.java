@@ -29,6 +29,7 @@ import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Co
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.COPYRIGHT;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_COPYRIGHT;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LICENSE;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_QNAME;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -71,6 +72,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   private static final boolean AUTOMATIC_CREATION_OF_MODULES_DEFULT = false;
   private static final boolean DISPLAY_LICENSE_DEFAULT = true;
   private static final boolean DISPLAY_COPYRIGHT_DEFAULT = true;
+  private static final boolean DISPLAY_QNAME_DEFAULT = true;
   
   @Override
   public void init() {
@@ -177,7 +179,10 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     var displayCopyrightObject = applicationConfig.get(DISPLAY_COPYRIGHT.getLabel());
     boolean displayCopyright = getBooleanFromObject(displayCopyrightObject, DISPLAY_COPYRIGHT_DEFAULT);
 
-    return new ApplicationConfig(license, copyright, displayLicense, displayCopyright);
+    var displayQNameObject = applicationConfig.get(DISPLAY_QNAME.getLabel());
+    boolean displayQName = getBooleanFromObject(displayQNameObject, DISPLAY_QNAME_DEFAULT);
+
+    return new ApplicationConfig(license, copyright, displayLicense, displayCopyright, displayQName);
   }
   
   protected LabelConfig handleLabelConfig(Map<String, Object> labelConfig) {
