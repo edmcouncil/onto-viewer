@@ -27,6 +27,8 @@ public class OntologyManager {
 
   public void updateOntology(OWLOntology ont) {
     this.ontology = ont;
+    this.ontologies = ontology.imports().collect(Collectors.toSet());
+    this.ontologies.add(ontology);
   }
 
   public Stream<OWLOntology> getOntologyWithImports() {

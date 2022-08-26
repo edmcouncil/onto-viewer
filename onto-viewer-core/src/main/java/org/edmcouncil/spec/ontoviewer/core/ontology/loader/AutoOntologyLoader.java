@@ -61,6 +61,7 @@ public class AutoOntologyLoader {
 
   public LoadedOntologyData load() throws OWLOntologyCreationException {
     var owlOntologyManager = OWLManager.createOWLOntologyManager();
+    owlOntologyManager.clearOntologies();
 
     var ontologyMappings = loadMappersToOntologyManager();
     LOGGER.info("Using the following list of ontology mappings: {}", ontologyMappings);
