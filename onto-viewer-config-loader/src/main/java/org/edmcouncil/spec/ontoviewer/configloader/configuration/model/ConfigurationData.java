@@ -229,6 +229,7 @@ public class ConfigurationData {
     private boolean automaticCreationOfModules;
     private final List<String> downloadDirectory;
     private final List<String> zipUrls;
+    private final String moduleClassIri;
 
     public OntologiesConfig(List<String> urls,
         List<String> paths,
@@ -237,7 +238,8 @@ public class ConfigurationData {
         List<String> zipUrls,
         List<String> moduleIgnorePatterns,
         List<String> moduleToIgnore,
-        boolean automaticCreationOfModules) {
+        boolean automaticCreationOfModules,
+        String moduleClassIri) {
       this.urls = urls;
       this.paths = paths;
       this.catalogPaths = catalogPaths;
@@ -247,6 +249,7 @@ public class ConfigurationData {
       this.automaticCreationOfModules = automaticCreationOfModules;
       this.downloadDirectory = downloadDirectory;
       this.zipUrls = zipUrls;
+      this.moduleClassIri = moduleClassIri;
     }
 
     public List<String> getUrls() {
@@ -287,6 +290,10 @@ public class ConfigurationData {
 
     public List<String> getZipUrls() {
       return zipUrls;
+    }
+
+    public String getModuleClassIri() {
+      return moduleClassIri;
     }
   }
 

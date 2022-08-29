@@ -30,6 +30,7 @@ import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Co
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_COPYRIGHT;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LICENSE;
 import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_QNAME;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.MODULE_CLASS_IRI;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -73,7 +74,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   private static final boolean DISPLAY_LICENSE_DEFAULT = true;
   private static final boolean DISPLAY_COPYRIGHT_DEFAULT = true;
   private static final boolean DISPLAY_QNAME_DEFAULT = true;
-  
+
   @Override
   public void init() {
     // Default empty implementation
@@ -275,10 +276,11 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     List<String> moduleToIgnore = getListOfStringsFromObject(ontologies.get(MODULE_TO_IGNORE.getLabel()));
     boolean automaticCreationOfModules = 
         getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()), AUTOMATIC_CREATION_OF_MODULES_DEFULT);
-     List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel())); 
-     
+     List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
+     String moduleClassIri = getStringsFromObject(ontologies.get(MODULE_CLASS_IRI.getLabel()));
+
     return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns,
-        moduleToIgnore, automaticCreationOfModules);
+        moduleToIgnore, automaticCreationOfModules, moduleClassIri);
   }
 
   protected Map<String, List<String>> mapToMapOfList(List<?> rawGroupsList) {
@@ -383,5 +385,12 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     }
 
     return findProperties;
+  }
+
+  private String getStringsFromObject(Object stringAsObject) {
+    if (stringAsObject!=null) {
+      return stringAsObject.toString();
+    }
+    return null;
   }
 }

@@ -55,7 +55,6 @@ public class ModuleHandler {
   private static final String ONTOLOGY_IRI_GROUP_NAME = "ontologyIri";
   private static final Pattern ONTOLOGY_IRI_PATTERN = Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
   private static final String HAS_PART_IRI = "http://purl.org/dc/terms/hasPart";
-  private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
   private static final String INSTANCE_KEY = ViewerIdentifierFactory.createId(
       ViewerIdentifierFactory.Type.function,
       OwlType.INSTANCES.name().toLowerCase());
@@ -70,6 +69,7 @@ public class ModuleHandler {
   private final OWLAnnotationProperty hasPartAnnotation;
   // Cache for ontologies' maturity level
   private final Map<IRI, MaturityLevel> maturityLevelsCache = new ConcurrentHashMap<>();
+  private final String moduleClassIri;
 
   private List<OntologyModule> modules;
   private Map<IRI, OntologyModule> modulesMap;
@@ -101,6 +101,10 @@ public class ModuleHandler {
         .collect(Collectors.toSet());
 
     this.hasPartAnnotation = OWLManager.getOWLDataFactory().getOWLAnnotationProperty(IRI.create(HAS_PART_IRI));
+    this.moduleClassIri = applicationConfigurationService
+        .getConfigurationData()
+        .getOntologiesConfig()
+        .getModuleClassIri();
   }
 
   public List<OntologyModule> getModules() {
@@ -109,27 +113,29 @@ public class ModuleHandler {
 
       modules = new ArrayList<>();
 
-      IRI moduleIri = IRI.create(MODULE_IRI);
-      Optional<OWLClass> moduleClassOptional = ontology
-          .classesInSignature(Imports.INCLUDED)
-          .filter(c -> c.getIRI().equals(moduleIri))
-          .findFirst();
+      if (moduleClassIri != null) {
+        IRI moduleIri = IRI.create(moduleClassIri);
+        Optional<OWLClass> moduleClassOptional = ontology
+                .classesInSignature(Imports.INCLUDED)
+                .filter(c -> c.getIRI().equals(moduleIri))
+                .findFirst();
 
-      if (moduleClassOptional.isPresent()) {
-        OwlDetailsProperties<PropertyValue> moduleClass
-            = individualDataHandler.handleClassIndividuals(ontology, moduleClassOptional.get());
+        if (moduleClassOptional.isPresent()) {
+          OwlDetailsProperties<PropertyValue> moduleClass
+                  = individualDataHandler.handleClassIndividuals(ontology, moduleClassOptional.get());
 
-        if (!moduleClass.getProperties().isEmpty()) {
-          Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
-              .stream()
-              .map(OwlListElementIndividualProperty.class::cast)
-              .map(individualProperty -> individualProperty.getValue().getIri())
-              .collect(Collectors.toSet());
+          if (!moduleClass.getProperties().isEmpty()) {
+            Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
+                    .stream()
+                    .map(OwlListElementIndividualProperty.class::cast)
+                    .map(individualProperty -> individualProperty.getValue().getIri())
+                    .collect(Collectors.toSet());
 
-          List<String> rootModulesIris = getRootModulesIris(modulesIris);
+            List<String> rootModulesIris = getRootModulesIris(modulesIris);
 
-          this.modules = prepareModuleObjects(rootModulesIris);
-          this.modules.forEach(this::checkAndCompleteMaturityLevel);
+            this.modules = prepareModuleObjects(rootModulesIris);
+            this.modules.forEach(this::checkAndCompleteMaturityLevel);
+          }
         }
       }
       if (automaticCreationOfModules) {
