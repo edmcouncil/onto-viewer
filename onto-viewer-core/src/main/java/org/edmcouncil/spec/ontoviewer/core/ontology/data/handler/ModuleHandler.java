@@ -113,22 +113,23 @@ public class ModuleHandler {
 
       modules = new ArrayList<>();
 
+      if (moduleClassIri != null) {
         IRI moduleIri = IRI.create(moduleClassIri);
         Optional<OWLClass> moduleClassOptional = ontology
-            .classesInSignature(Imports.INCLUDED)
-            .filter(c -> c.getIRI().equals(moduleIri))
-            .findFirst();
+                .classesInSignature(Imports.INCLUDED)
+                .filter(c -> c.getIRI().equals(moduleIri))
+                .findFirst();
 
         if (moduleClassOptional.isPresent()) {
           OwlDetailsProperties<PropertyValue> moduleClass
-              = individualDataHandler.handleClassIndividuals(ontology, moduleClassOptional.get());
+                  = individualDataHandler.handleClassIndividuals(ontology, moduleClassOptional.get());
 
           if (!moduleClass.getProperties().isEmpty()) {
             Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
-                .stream()
-                .map(OwlListElementIndividualProperty.class::cast)
-                .map(individualProperty -> individualProperty.getValue().getIri())
-                .collect(Collectors.toSet());
+                    .stream()
+                    .map(OwlListElementIndividualProperty.class::cast)
+                    .map(individualProperty -> individualProperty.getValue().getIri())
+                    .collect(Collectors.toSet());
 
             List<String> rootModulesIris = getRootModulesIris(modulesIris);
 
@@ -136,6 +137,7 @@ public class ModuleHandler {
             this.modules.forEach(this::checkAndCompleteMaturityLevel);
           }
         }
+      }
       if (automaticCreationOfModules) {
         addMissingModules(modules);
       }

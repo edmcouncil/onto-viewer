@@ -74,8 +74,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   private static final boolean DISPLAY_LICENSE_DEFAULT = true;
   private static final boolean DISPLAY_COPYRIGHT_DEFAULT = true;
   private static final boolean DISPLAY_QNAME_DEFAULT = true;
-  private static final String MODULE_CLASS_IRI_DEFAULT = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
-  
+
   @Override
   public void init() {
     // Default empty implementation
@@ -277,8 +276,8 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     List<String> moduleToIgnore = getListOfStringsFromObject(ontologies.get(MODULE_TO_IGNORE.getLabel()));
     boolean automaticCreationOfModules = 
         getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()), AUTOMATIC_CREATION_OF_MODULES_DEFULT);
-     List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel())); 
-     String moduleClassIri = getStringsFromObject(ontologies.get(MODULE_CLASS_IRI.getLabel()), MODULE_CLASS_IRI_DEFAULT);
+     List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
+     String moduleClassIri = getStringsFromObject(ontologies.get(MODULE_CLASS_IRI.getLabel()));
 
     return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns,
         moduleToIgnore, automaticCreationOfModules, moduleClassIri);
@@ -388,10 +387,10 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     return findProperties;
   }
 
-  private String getStringsFromObject(Object stringAsObject, String defaultValue) {
+  private String getStringsFromObject(Object stringAsObject) {
     if (stringAsObject!=null) {
       return stringAsObject.toString();
     }
-    return defaultValue;
+    return null;
   }
 }
