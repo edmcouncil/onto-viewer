@@ -1,11 +1,16 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.handlers;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.AddOntologyAnnotation;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyID;
 import org.semanticweb.owlapi.model.SetOntologyID;
@@ -16,9 +21,12 @@ import org.springframework.stereotype.Service;
 public class OntologyImportsMerger {
 
   private final OntologyManager ontologyManager;
+  private final ApplicationConfigurationService applicationConfigurationService;
 
-  public OntologyImportsMerger(OntologyManager ontologyManager) {
+  public OntologyImportsMerger(OntologyManager ontologyManager,
+      ApplicationConfigurationService applicationConfigurationService) {
     this.ontologyManager = ontologyManager;
+    this.applicationConfigurationService = applicationConfigurationService;
   }
 
   public OWLOntology mergeImportOntologies(String ontologyIri, String ontologyVersionIri) {
@@ -34,6 +42,8 @@ public class OntologyImportsMerger {
       var inputOntology = ontologyManager.getOntology();
       mergeOntologies(outputOntology, inputOntology.imports());
 
+      addAnnotations(outputOntology);
+
       return outputOntology;
     } catch (Exception ex) {
       throw new OntoViewerToolkitRuntimeException(
@@ -48,5 +58,36 @@ public class OntologyImportsMerger {
           .getOWLOntologyManager()
           .addAxioms(outputOntology, ontology.axioms(Imports.INCLUDED));
     }
+  }
+
+  private void addAnnotations(OWLOntology outputOntology) {
+    Map<IRI, OWLOntology> iriToOntology = new HashMap<>();
+    ontologyManager.getOntologyWithImports().forEach(owlOntology -> {
+      var ontologyIriOptional = owlOntology.getOntologyID().getOntologyIRI();
+      ontologyIriOptional.ifPresent(iri -> iriToOntology.put(iri, owlOntology));
+    });
+
+    var configurationData = applicationConfigurationService.getConfigurationData();
+    for (String path : configurationData.getOntologiesConfig().getPaths()) {
+      addAnnotationForSpecificOntologyLocation(outputOntology, iriToOntology, path);
+    }
+    for (String url : configurationData.getOntologiesConfig().getUrls()) {
+      addAnnotationForSpecificOntologyLocation(outputOntology, iriToOntology, url);
+    }
+  }
+
+  private void addAnnotationForSpecificOntologyLocation(OWLOntology outputOntology, Map<IRI, OWLOntology> iriToOntology,
+      String location) {
+    var ontologyIri = ontologyManager.getLocationToIriMapping().get(location);
+    if (ontologyIri != null) {
+      var owlOntology = iriToOntology.get(ontologyIri);
+      owlOntology.annotations().forEach(owlAnnotation -> addOntologyAnnotation(outputOntology, owlAnnotation));
+    }
+  }
+
+  private void addOntologyAnnotation(OWLOntology outputOntology, OWLAnnotation owlAnnotation) {
+    var owlOntologyManager = outputOntology.getOWLOntologyManager();
+    var addOntologyAnnotation = new AddOntologyAnnotation(outputOntology, owlAnnotation);
+    owlOntologyManager.applyChange(addOntologyAnnotation);
   }
 }

@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.toolkit.handlers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlMemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,7 @@ class OntologyImportsMergerTest {
   @BeforeEach
   void setUp() {
     this.ontologyManager = new OntologyManager();
-    this.ontologyImportsMerger = new OntologyImportsMerger(ontologyManager);
+    this.ontologyImportsMerger = new OntologyImportsMerger(ontologyManager, new YamlMemoryBasedConfigurationService());
     this.dataFactory = OWLManager.getOWLDataFactory();
     this.owlOntologyManager = OWLManager.createOWLOntologyManager();
   }

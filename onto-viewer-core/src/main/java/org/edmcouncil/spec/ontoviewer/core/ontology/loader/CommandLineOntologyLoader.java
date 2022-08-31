@@ -5,9 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.OntologySource.SourceType;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
@@ -15,7 +17,6 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
-import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyAlreadyExistsException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyDocumentAlreadyExistsException;
@@ -25,71 +26,88 @@ import org.semanticweb.owlapi.util.SimpleIRIMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CommandLineOntologyLoader {
+public class CommandLineOntologyLoader extends AbstractOntologyLoader {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CommandLineOntologyLoader.class);
 
   private final ConfigurationData configurationData;
   private final MissingImportListenerImpl missingImportListenerImpl;
-  private final FileSystemManager fileSystemManager;
+  private final FileSystemService fileSystemService;
 
   public CommandLineOntologyLoader(ConfigurationData configurationData,
-      FileSystemManager fileSystemManager) {
+      FileSystemService fileSystemService) {
     this.configurationData = configurationData;
     this.missingImportListenerImpl = new MissingImportListenerImpl();
-    this.fileSystemManager = fileSystemManager;
+    this.fileSystemService = fileSystemService;
   }
 
-  public OWLOntology load() throws OWLOntologyCreationException {
-
+  public LoadedOntologyData load() throws OWLOntologyCreationException {
     ViewerZipFilesOperations viewerZipFilesOperations = new ViewerZipFilesOperations();
     Set<MissingImport> missingImports = viewerZipFilesOperations
-        .prepareZipToLoad(configurationData, fileSystemManager);
+        .prepareZipToLoad(configurationData, fileSystemService);
     this.missingImportListenerImpl.addAll(missingImports);
-    
+
     var owlOntologyManager = OWLManager.createOWLOntologyManager();
 
     setOntologyMapping(owlOntologyManager);
 
-    var ontologyIrisToLoad = new HashSet<IRI>();
-    var ontologyMappings = new HashMap<String, String>();
-
-    var ontologyLocations = configurationData.getOntologiesConfig().getPaths();
-    for (String ontologyLocation : ontologyLocations) {
-      ontologyIrisToLoad.add(IRI.create(Path.of(ontologyLocation).toFile()));
-
-      ontologyMappings.put(ontologyLocation, ontologyLocation);
-    }
-
-    var ontologyUrls = configurationData.getOntologiesConfig().getUrls();
-    for (String ontologyUrl : ontologyUrls) {
-      ontologyIrisToLoad.add(IRI.create(ontologyUrl));
-    }
-
-    ontologyMappings.forEach((documentIri, fileIri) -> {
-      if (Files.exists(Path.of(fileIri))) {
-        owlOntologyManager.getIRIMappers()
-            .add(new SimpleIRIMapper(IRI.create(documentIri), IRI.create(fileIri)));
-      } else {
-        LOGGER.warn("File ('{}') that should map to an ontology ('{}') doesn't exist.",
-            documentIri, fileIri);
+    var ontologySources = prepareOntologySources();
+    ontologySources.forEach(ontologySource -> {
+      if (ontologySource.getSourceType() == SourceType.FILE) {
+        if (Files.exists(Path.of(ontologySource.getLocation()))) {
+          owlOntologyManager.getIRIMappers()
+              .add(
+                  new SimpleIRIMapper(
+                      IRI.create(ontologySource.getLocation()),
+                      IRI.create(new File(ontologySource.getLocation()))));
+        }
       }
     });
 
-    return loadOntologiesFromIris(owlOntologyManager, ontologyIrisToLoad);
+    return loadOntologiesFromIris(owlOntologyManager, ontologySources);
+  }
+
+  private Set<OntologySource> prepareOntologySources() {
+    Set<OntologySource> ontologySources = new HashSet<>();
+
+    var ontologiesConfig = configurationData.getOntologiesConfig();
+    var ontologyPaths = ontologiesConfig.getPaths();
+    for (String ontologyPathString : ontologyPaths) {
+      Path ontologyPath = Path.of(ontologyPathString);
+
+      if (!ontologyPath.isAbsolute()) {
+        ontologyPath = ontologyPath.toAbsolutePath();
+      }
+
+      if (Files.isDirectory(ontologyPath)) {
+        mappingDirectory(ontologyPath, ontologySources, ontologyPathString);
+      } else {
+        ontologySources.add(new OntologySource(ontologyPath.toString(), ontologyPathString, SourceType.FILE));
+      }
+    }
+
+    for (String ontologyUrl : ontologiesConfig.getUrls()) {
+      ontologySources.add(new OntologySource(ontologyUrl, SourceType.URL));
+    }
+
+    return ontologySources;
   }
 
   private void setOntologyMapping(OWLOntologyManager owlOntologyManager) {
     var ontologyMapping = configurationData.getOntologiesConfig().getOntologyMappings();
-      ontologyMapping.forEach((ontologyIri, ontologyPath)
-        -> owlOntologyManager.getIRIMappers().add(
-            new SimpleIRIMapper(
-                IRI.create(ontologyIri),
-                IRI.create(new File(ontologyPath)))));
+    ontologyMapping
+        .forEach((ontologyIri, ontologyPath) ->
+            owlOntologyManager.getIRIMappers().add(
+                new SimpleIRIMapper(
+                    IRI.create(ontologyIri),
+                    IRI.create(new File(ontologyPath)))));
   }
 
-  private OWLOntology loadOntologiesFromIris(OWLOntologyManager ontologyManager, Set<IRI> ontologyIrisToLoad)
+  private LoadedOntologyData loadOntologiesFromIris(OWLOntologyManager ontologyManager, Set<OntologySource> ontologySources)
       throws OWLOntologyCreationException {
+    Map<IRI, IRI> ontologyIrisToPaths = new HashMap<>();
+    Map<String, IRI> ontologyPathsToIris = new HashMap<>();
+
     var loaderConfiguration = new OWLOntologyLoaderConfiguration();
     loaderConfiguration = loaderConfiguration.setMissingImportHandlingStrategy(MissingImportHandlingStrategy.SILENT);
     ontologyManager.setOntologyLoaderConfiguration(loaderConfiguration);
@@ -97,25 +115,30 @@ public class CommandLineOntologyLoader {
 
     var umbrellaOntology = ontologyManager.createOntology();
 
-    for (IRI ontologyIri : ontologyIrisToLoad) {
-      LOGGER.debug("Loading ontology from IRI '{}'...", ontologyIri);
+    for (OntologySource ontologySource : ontologySources) {
+      LOGGER.debug("Loading ontology from IRI '{}'...", ontologySource);
 
       try {
-        var currentOntology = ontologyManager.loadOntology(ontologyIri);
+        var currentOntology = ontologyManager.loadOntology(ontologySource.getAsIri());
+        var ontologyIri = currentOntology.getOntologyID().getOntologyIRI().orElse(ontologySource.getAsIri());
+        ontologyIrisToPaths.put(ontologyIri, ontologySource.getAsIri());
+        ontologyPathsToIris.put(ontologySource.getOriginalLocation(), ontologyIri);
 
         LOGGER.debug("Loaded '{}' ontology with {} axioms.",
-            ontologyIri,
+            ontologySource,
             currentOntology.getLogicalAxiomCount());
 
-        var importDeclaration = ontologyManager.getOWLDataFactory().getOWLImportsDeclaration(ontologyIri);
+        var importDeclaration = ontologyManager
+            .getOWLDataFactory()
+            .getOWLImportsDeclaration(ontologyIri);
 
         var addImport = new AddImport(umbrellaOntology, importDeclaration);
         umbrellaOntology.applyChange(addImport);
       } catch (OWLOntologyAlreadyExistsException | OWLOntologyDocumentAlreadyExistsException ex) {
-        LOGGER.warn(String.format("Ontology '%s' has already been loaded.", ontologyIri));
+        LOGGER.warn(String.format("Ontology '%s' has already been loaded.", ontologySource));
       }
     }
 
-    return umbrellaOntology;
+    return new LoadedOntologyData(umbrellaOntology, ontologyIrisToPaths, ontologyPathsToIris);
   }
 }

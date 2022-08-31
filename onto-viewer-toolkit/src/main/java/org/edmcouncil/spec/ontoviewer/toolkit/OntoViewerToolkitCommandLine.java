@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
@@ -59,7 +59,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   private final OntologyImportsMerger ontologyImportsMerger;
   private final StandardEnvironment environment;
   private final ApplicationConfigProperties applicationConfigProperties;
-  private final FileSystemManager fileSystemManager;
+  private final FileSystemService fileSystemService;
 
   public OntoViewerToolkitCommandLine(
       ApplicationConfigurationService applicationConfigurationService,
@@ -70,7 +70,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       OntologyImportsMerger ontologyImportsMerger,
       StandardEnvironment environment,
       ApplicationConfigProperties applicationConfigProperties,
-      FileSystemManager fileSystemManager) {
+      FileSystemService fileSystemService) {
     this.applicationConfigurationService = applicationConfigurationService;
     // We don't need the default paths configuration in OV Toolkit
     applicationConfigurationService.getConfigurationData().getOntologiesConfig().getPaths().clear();
@@ -82,7 +82,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     this.ontologyImportsMerger = ontologyImportsMerger;
     this.environment = environment;
     this.applicationConfigProperties = applicationConfigProperties;
-    this.fileSystemManager = fileSystemManager;
+    this.fileSystemService = fileSystemService;
   }
 
   @Override
@@ -147,15 +147,19 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
           newOntologyVersionIri = newOntologyVersionIriOptional.get();
         }
 
-        var mergedOntology = ontologyImportsMerger.mergeImportOntologies(newOntologyIri, newOntologyVersionIri);
+        var mergedOntology = ontologyImportsMerger.mergeImportOntologies(
+            newOntologyIri,
+            newOntologyVersionIri);
 
         var owlOntologyManager = OWLManager.createOWLOntologyManager();
         var outputOption = commandLineOptions.getOption(OUTPUT);
         if (outputOption.isPresent()) {
+          var output = outputOption.get();
+          LOGGER.info("Saving merged ontology to '{}'...", output);
           owlOntologyManager.saveOntology(
               mergedOntology,
               new RDFXMLDocumentFormat(),
-              IRI.create(new File(outputOption.get())));
+              IRI.create(new File(output)));
         } else {
           throw new OntoViewerToolkitRuntimeException("Error: 'output' argument is not present.");
         }
@@ -180,7 +184,14 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       if (!ontologyMappingPath.isBlank()) {
         try {
           var catalog = new OntologyCatalogParser().readOntologyMapping(ontologyMappingPath);
-          var ontologyMappingParentPath = Path.of(ontologyMappingPath).getParent();
+          var ontologyMappingParentPath = Path.of(ontologyMappingPath).toAbsolutePath().getParent();
+          LOGGER.debug("For ontology mapping '{}' parent path is resolved to: {}",
+              ontologyMappingPath,
+              ontologyMappingParentPath);
+
+          if (Files.notExists(ontologyMappingParentPath)) {
+            LOGGER.warn("Ontology mapping parent path ('{}') doesn't exist.", ontologyMappingParentPath);
+          }
 
           var mappings = new HashMap<String, String>();
           for (Uri mapping : catalog.getUri()) {
@@ -233,12 +244,13 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     try {
       var ontologyLoader = new CommandLineOntologyLoader(
           applicationConfigurationService.getConfigurationData(),
-          fileSystemManager);
-      var loadedOntology = ontologyLoader.load();
-      LOGGER.debug("Loaded ontology contains {} axioms.",
-          loadedOntology.getAxiomCount(Imports.INCLUDED));
+          fileSystemService);
+      var loadedOntologyData = ontologyLoader.load();
+      var loadedOntology = loadedOntologyData.getOntology();
+      LOGGER.debug("Loaded ontology contains {} axioms.", loadedOntology.getAxiomCount(Imports.INCLUDED));
 
       ontologyManager.updateOntology(loadedOntology);
+      ontologyManager.setLocationToIriMapping(loadedOntologyData.getPathsToIrisMapping());
       if (shouldPopulateOntologyResources(goal)) {
         dataHandler.populateOntologyResources();
       }

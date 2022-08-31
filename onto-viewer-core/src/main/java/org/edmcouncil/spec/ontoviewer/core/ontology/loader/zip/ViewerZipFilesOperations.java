@@ -7,19 +7,15 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Level;
-
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+import org.apache.commons.io.FileUtils;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.commons.io.FileUtils; 
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
-
 
 /**
  *
@@ -30,7 +26,7 @@ public class ViewerZipFilesOperations {
   private static final Logger LOGGER = LoggerFactory.getLogger(ViewerZipFilesOperations.class);
 
   @SuppressWarnings("null")
-  public Set<MissingImport> prepareZipToLoad(ConfigurationData config, FileSystemManager fileSystemManager) {
+  public Set<MissingImport> prepareZipToLoad(ConfigurationData config, FileSystemService fileSystemService) {
     Set<MissingImport> missingImports = new LinkedHashSet<>();
     List<String> zipUrls = config.getOntologiesConfig().getZipUrls();
     List<String> downloadDirectories = config.getOntologiesConfig().getDownloadDirectory();
@@ -39,9 +35,9 @@ public class ViewerZipFilesOperations {
     String downloadDirectory = downloadDirectories.stream().findFirst().orElse("");
    
     try {
-      var downloadDirectoryPath = fileSystemManager.getPathToFile(downloadDirectory);
+      var downloadDirectoryPath = fileSystemService.getPathToFile(downloadDirectory);
       if (!downloadDirectoryPath.toFile().exists()) {
-        fileSystemManager.createDir(downloadDirectoryPath);
+        fileSystemService.createDir(downloadDirectoryPath);
       }
     } catch (IOException ex) {
       LOGGER.info("The directory has not been created. Exception: {}", ex.toString());
@@ -52,7 +48,7 @@ public class ViewerZipFilesOperations {
         && !downloadDirectory.isEmpty()){
       Path downloadDir = null;
       try {
-        downloadDir = fileSystemManager.getPathToFile(downloadDirectory);
+        downloadDir = fileSystemService.getPathToFile(downloadDirectory);
       } catch (IOException e) {
         LOGGER.error(e.toString());
         MissingImport missingImport = new MissingImport();

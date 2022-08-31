@@ -20,13 +20,13 @@ import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import org.apache.commons.io.IOUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.GroupsConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +40,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   private static final Set<String> CONFIG_FILES_NAMES =
       Set.of("groups_config.yaml", "label_config.yaml", "ontology_config.yaml", "search_config.yaml", "application_config.yaml");
 
-  private final FileSystemManager fileSystemManager;
+  private final FileSystemService fileSystemService;
 
   @Value("${app.config.ontologies.catalog_path:}")
   private String catalogPath;
@@ -53,8 +53,8 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   private ConfigurationData configurationData;
 
-  public YamlFileBasedConfigurationService(FileSystemManager fileSystemManager) {
-    this.fileSystemManager = fileSystemManager;
+  public YamlFileBasedConfigurationService(FileSystemService fileSystemService) {
+    this.fileSystemService = fileSystemService;
   }
 
   @Override
@@ -63,7 +63,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     LOGGER.debug("Loading configuration from YAML file...");
 
     try {
-      var configPath = fileSystemManager.getPathToConfigFile();
+      var configPath = fileSystemService.getPathToConfigFile();
 
       LOGGER.debug("Configuration location: {} (isDirectory?={})", configPath, Files.isDirectory(configPath));
 
@@ -143,7 +143,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   private String readConfigForFileName(String configFileName) {
     Path configFilePath = Path.of(configFileName);
     try {
-      configFilePath = fileSystemManager.getPathToConfigFile().resolve(configFileName);
+      configFilePath = fileSystemService.getPathToConfigFile().resolve(configFileName);
       return Files.readString(configFilePath);
     } catch (IOException ex) {
       LOGGER.warn("Exception thrown while reading config content from path '{}'. Details: {}",
@@ -165,7 +165,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   private void overrideConfigContent(String configFileName, String configContent) {
     try {
-      var configPath = fileSystemManager.getPathToConfigFile();
+      var configPath = fileSystemService.getPathToConfigFile();
       var configFilePath = configPath.resolve(configFileName);
       Files.write(configFilePath,
           configContent.getBytes(StandardCharsets.UTF_8),

@@ -41,13 +41,13 @@ class LuceneSearcherTest {
     appProperties.setConfigPath("config");
     appProperties.setSearch(Map.of("reindexOnStart", "true"));
 
-    var fileSystemManager = new FileSystemManager(appProperties);
-    var applicationConfigurationService = new YamlFileBasedConfigurationService(fileSystemManager);
+    var fileSystemService = new FileSystemManager(appProperties);
+    var applicationConfigurationService = new YamlFileBasedConfigurationService(fileSystemService);
     applicationConfigurationService.init();
 
     var ontologyManager = prepareOntologyManager();
     this.luceneSearcher = new LuceneSearcher(
-        appProperties, fileSystemManager, ontologyManager, applicationConfigurationService);
+        appProperties, fileSystemService, ontologyManager, applicationConfigurationService);
     this.luceneSearcher.init();
     this.luceneSearcher.populateIndex();
   }

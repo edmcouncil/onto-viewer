@@ -49,7 +49,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
-import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.exception.RequestHandlingException;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
@@ -84,7 +84,7 @@ public class LuceneSearcher {
   }
 
   private final AppProperties appProperties;
-  private final FileSystemManager fileSystemManager;
+  private final FileSystemService fileSystemService;
   private final OntologyManager ontologyManager;
   private final OWLDataFactory dataFactory;
   private final ApplicationConfigurationService applicationConfigurationService;
@@ -104,11 +104,11 @@ public class LuceneSearcher {
   private String rdfsLabelFieldName;
 
   public LuceneSearcher(AppProperties appProperties,
-      FileSystemManager fileSystemManager,
+      FileSystemService fileSystemService,
       OntologyManager ontologyManager,
       ApplicationConfigurationService applicationConfigurationService) {
     this.appProperties = appProperties;
-    this.fileSystemManager = fileSystemManager;
+    this.fileSystemService = fileSystemService;
     this.ontologyManager = ontologyManager;
     this.dataFactory = OWLManager.getOWLDataFactory();
     this.applicationConfigurationService = applicationConfigurationService;
@@ -125,7 +125,7 @@ public class LuceneSearcher {
 
   @PostConstruct
   void init() {
-    this.indexPath = fileSystemManager.getViewerHomeDir().resolve(LUCENE_INDEX_NAME);
+    this.indexPath = fileSystemService.getViewerHomeDir().resolve(LUCENE_INDEX_NAME);
     this.analyzer = new StandardAnalyzer();
   }
 
