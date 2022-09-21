@@ -3,14 +3,15 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFileBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.BaseTest;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.junit.jupiter.api.Test;
@@ -22,11 +23,10 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 class ModuleHandlerTest extends BaseTest {
 
   private static final String ROOT_IRI = "http://www.example.com/modules/";
-  private static final MaturityLevel PROVISIONAL = MaturityLevelFactory.get(MaturityLevelDefinition.PROVISIONAL);
-  private static final MaturityLevel RELEASE = MaturityLevelFactory.get(MaturityLevelDefinition.RELEASE);
-  private static final MaturityLevel INFORMATIVE = MaturityLevelFactory.get(MaturityLevelDefinition.INFORMATIVE);
-  private static final MaturityLevel MIXED = MaturityLevelFactory.get(MaturityLevelDefinition.MIXED);
-  private static final MaturityLevel NOT_SET = MaturityLevelFactory.get(MaturityLevelDefinition.NOT_SET);
+
+  private static final MaturityLevel PROVISIONAL = new MaturityLevel("Provisional", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional");
+  private static final MaturityLevel RELEASE = new MaturityLevel("Release", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release");
+  private static final MaturityLevel INFORMATIVE = new MaturityLevel("Informative", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative");
 
   @Test
   void shouldReturnListOfModulesDefinedInOntologyWithoutMaturityLevel() {
@@ -39,23 +39,23 @@ class ModuleHandlerTest extends BaseTest {
             List.of(
                 createModule("ModuleA_1",
                     List.of(
-                        createModule("ModuleA_1_a", emptyList(), NOT_SET)
+                        createModule("ModuleA_1_a", emptyList(), MaturityLevelFactory.NOT_SET)
                     ),
-                    NOT_SET
+                    MaturityLevelFactory.NOT_SET
                 ),
-                createModule("ModuleA_2", emptyList(), NOT_SET),
-                createModule("ModuleA_3", emptyList(), NOT_SET)
+                createModule("ModuleA_2", emptyList(), MaturityLevelFactory.NOT_SET),
+                createModule("ModuleA_3", emptyList(), MaturityLevelFactory.NOT_SET)
             ),
-            NOT_SET
+            MaturityLevelFactory.NOT_SET
         ),
         createModule("ModuleB",
             List.of(
-                createModule("ModuleB_1", emptyList(), NOT_SET),
-                createModule("ModuleB_2", emptyList(), NOT_SET)
+                createModule("ModuleB_1", emptyList(), MaturityLevelFactory.NOT_SET),
+                createModule("ModuleB_2", emptyList(), MaturityLevelFactory.NOT_SET)
             ),
-            NOT_SET
+            MaturityLevelFactory.NOT_SET
         ),
-        createModule("ModuleC", emptyList(), NOT_SET)
+        createModule("ModuleC", emptyList(), MaturityLevelFactory.NOT_SET)
     );
 
     assertEquals(expectedModules, actualModules);
@@ -74,7 +74,8 @@ class ModuleHandlerTest extends BaseTest {
         "/ontology/modules/modules.rdf");
 
     var actualModules = moduleHandler.getModules();
-
+    var configurationService = new YamlFileBasedConfigurationService(prepareFileSystem());
+    configurationService.init();
     var expectedModules = List.of(
         createModuleWithIriAsLabel("ModuleA/",
             List.of(
@@ -82,18 +83,18 @@ class ModuleHandlerTest extends BaseTest {
                     List.of(
                         createModuleWithIriAsLabel("ModuleA_1_a/", emptyList(), PROVISIONAL)
                     ),
-                    PROVISIONAL
+                        PROVISIONAL
                 ),
                 createModuleWithIriAsLabel("ModuleA_2/", emptyList(), INFORMATIVE)
             ),
-            RELEASE
+               RELEASE
         ),
         createModuleWithIriAsLabel("ModuleB/",
             List.of(
                 createModuleWithIriAsLabel("ModuleB_1/", emptyList(), PROVISIONAL),
                 createModuleWithIriAsLabel("ModuleB_2/", emptyList(), RELEASE)
             ),
-            MIXED
+                MaturityLevelFactory.MIXED
         )
     );
 
@@ -105,10 +106,10 @@ class ModuleHandlerTest extends BaseTest {
     var moduleHandler = prepareModuleHandler("/ontology/MortgageLoansWithoutImports.rdf");
     var actualModules = moduleHandler.getModules();
     var expectedModules = List.of(
-        new OntologyModule("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
-            "MortgageLoans",
-            emptyList(),
-            PROVISIONAL)
+            new OntologyModule("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
+                    "MortgageLoans",
+                    emptyList(),
+                    PROVISIONAL)
     );
     assertEquals(expectedModules, actualModules);
   }
@@ -121,17 +122,25 @@ class ModuleHandlerTest extends BaseTest {
     var configurationData = configurationService.getConfigurationData();
     configurationData.getOntologiesConfig().setAutomaticCreationOfModules(true);
 
+    var configurationMaturity = configurationService.getConfigurationData();
+    List<Pair> definition = new ArrayList<>();
+    definition.add(new Pair("Release", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release"));
+    definition.add(new Pair("Provisional", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"));
+    definition.add(new Pair("Informative", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative"));
+
+    configurationMaturity.getOntologiesConfig().setMaturityLevelDefinition(definition);
+
     ontologyManager.setIriToPathMapping(
         Map.of(
             IRI.create("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/"),
             IRI.create("file://some_random_path.rdf")));
     var labelProvider = new LabelProvider(configurationService, ontologyManager);
     var individualDataHandler = new IndividualDataHandler(labelProvider);
-
+    var maturityLevelFactory = new MaturityLevelFactory(configurationService);
     return new ModuleHandler(ontologyManager,
         individualDataHandler,
         labelProvider,
-        configurationService);
+        configurationService, maturityLevelFactory);
   }
 
   private OntologyManager getOntologyManager(String... ontologyPaths) {

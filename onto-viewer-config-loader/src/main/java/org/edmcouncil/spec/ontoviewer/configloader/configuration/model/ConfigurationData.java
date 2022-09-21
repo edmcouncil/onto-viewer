@@ -230,6 +230,7 @@ public class ConfigurationData {
     private final List<String> downloadDirectory;
     private final List<String> zipUrls;
     private final String moduleClassIri;
+    private List<Pair> maturityLevelDefinition;
 
     public OntologiesConfig(List<String> urls,
         List<String> paths,
@@ -238,6 +239,7 @@ public class ConfigurationData {
         List<String> zipUrls,
         List<String> moduleIgnorePatterns,
         List<String> moduleToIgnore,
+        List<Pair> maturityLevelDefinition,
         boolean automaticCreationOfModules,
         String moduleClassIri) {
       this.urls = urls;
@@ -245,6 +247,7 @@ public class ConfigurationData {
       this.catalogPaths = catalogPaths;
       this.moduleIgnorePatterns = moduleIgnorePatterns;
       this.moduleToIgnore = moduleToIgnore;
+      this.maturityLevelDefinition = maturityLevelDefinition;
       this.ontologyMappings = new HashMap<>();
       this.automaticCreationOfModules = automaticCreationOfModules;
       this.downloadDirectory = downloadDirectory;
@@ -270,6 +273,14 @@ public class ConfigurationData {
 
     public List<String> getModuleToIgnore() {
       return moduleToIgnore;
+    }
+
+    public List<Pair> getMaturityLevelDefinition() {
+      return maturityLevelDefinition;
+    }
+
+    public void setMaturityLevelDefinition(List<Pair> maturityLevelDefinition) {
+      this.maturityLevelDefinition = maturityLevelDefinition;
     }
 
     public Map<String, String> getOntologyMappings() {
