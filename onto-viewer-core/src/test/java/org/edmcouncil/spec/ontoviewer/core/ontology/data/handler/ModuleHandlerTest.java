@@ -83,18 +83,18 @@ class ModuleHandlerTest extends BaseTest {
                     List.of(
                         createModuleWithIriAsLabel("ModuleA_1_a/", emptyList(), PROVISIONAL)
                     ),
-                        PROVISIONAL
+                    PROVISIONAL
                 ),
                 createModuleWithIriAsLabel("ModuleA_2/", emptyList(), INFORMATIVE)
             ),
-               RELEASE
+            RELEASE
         ),
         createModuleWithIriAsLabel("ModuleB/",
             List.of(
                 createModuleWithIriAsLabel("ModuleB_1/", emptyList(), PROVISIONAL),
                 createModuleWithIriAsLabel("ModuleB_2/", emptyList(), RELEASE)
             ),
-                MaturityLevelFactory.MIXED
+            MaturityLevelFactory.MIXED
         )
     );
 
@@ -106,10 +106,10 @@ class ModuleHandlerTest extends BaseTest {
     var moduleHandler = prepareModuleHandler("/ontology/MortgageLoansWithoutImports.rdf");
     var actualModules = moduleHandler.getModules();
     var expectedModules = List.of(
-            new OntologyModule("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
-                    "MortgageLoans",
-                    emptyList(),
-                    PROVISIONAL)
+        new OntologyModule("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
+            "MortgageLoans",
+            emptyList(),
+            PROVISIONAL)
     );
     assertEquals(expectedModules, actualModules);
   }

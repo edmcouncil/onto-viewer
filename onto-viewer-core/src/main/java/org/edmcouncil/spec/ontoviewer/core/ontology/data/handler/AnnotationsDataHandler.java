@@ -42,7 +42,7 @@ public class AnnotationsDataHandler {
   private final MaturityLevelFactory maturityLevelFactory;
 
   public AnnotationsDataHandler(OwlDataExtractor dataExtractor, CustomDataFactory customDataFactory,
-                                ScopeIriOntology scopeIriOntology, MaturityLevelFactory maturityLevelFactory) {
+      ScopeIriOntology scopeIriOntology, MaturityLevelFactory maturityLevelFactory) {
     this.dataExtractor = dataExtractor;
     this.customDataFactory = customDataFactory;
     this.scopeIriOntology = scopeIriOntology;
