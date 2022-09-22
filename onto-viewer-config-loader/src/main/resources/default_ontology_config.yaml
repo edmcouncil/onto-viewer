@@ -2,3 +2,10 @@ ontologies:
   source:
     - path: ontologies
   module_class_iri: 'http://www.omg.org/techprocess/ab/SpecificationMetadata/Module'
+  maturity_level_definition:
+    - iri: 'https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release'
+      label: 'Release'
+    - iri: 'https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional'
+      label: 'Provisional'
+    - iri: 'https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/Informative'
+      label: 'Informative'
