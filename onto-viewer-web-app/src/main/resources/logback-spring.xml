@@ -44,7 +44,7 @@
         <appender-ref ref="Console" />
     </logger>
     <logger name="org.edmcouncil.spec.ontoviewer.webapp.filter.LoggingFilter">
-        <level value="DEBUG" />
+        <level value="INFO" />
     </logger>
 </configuration>
 

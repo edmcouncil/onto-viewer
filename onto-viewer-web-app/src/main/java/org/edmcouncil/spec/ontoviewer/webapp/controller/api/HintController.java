@@ -1,10 +1,8 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller.api;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.controller.BaseController;
-import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResults;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.util.UrlChecker;
 import org.slf4j.Logger;
@@ -14,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,16 +32,28 @@ public class HintController extends BaseController {
   }
 
   @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<FindResult>> getHints(@RequestBody String query) {
+  public ResponseEntity<FindResults> getHints(@RequestBody String query,
+      @RequestParam(required = false, defaultValue = "1") String page) {
     checkIfApplicationIsReady();
 
     long startTimestamp = System.currentTimeMillis();
 
-    if (UrlChecker.isUrl(query)) {
-      return ResponseEntity.badRequest().body(new ArrayList<>(0));
+    int pageNumber = 1;
+    try {
+      pageNumber = Integer.parseInt(page);
+    } catch (NumberFormatException ex) {
+      throw new IllegalArgumentException(String.format("Page '%s' can't be parsed as number.", page));
     }
 
-    List<FindResult> findResults = luceneSearcher.search(query, false);
+    if (pageNumber < 1) {
+      throw new IllegalArgumentException(String.format("Page '%s' is lower than '1'.", page));
+    }
+
+    if (UrlChecker.isUrl(query)) {
+      return ResponseEntity.badRequest().body(FindResults.empty());
+    }
+
+    FindResults findResults = luceneSearcher.search(query, false, pageNumber);
     long endTimestamp = System.currentTimeMillis();
     LOG.info("For query: '{}' (query time: '{}' ms) hints are:\n {}",
         query, endTimestamp - startTimestamp, findResults);

@@ -2,13 +2,14 @@
 
 [Back to README](./README.md)
 
-#### /api/find (GET)
+### /api/find (GET)
 
 #### Request Parameters
   - **term** - required; term to find entities by
   - **mode** - optional; permissible values: [`basic`, `advance`], default: `basic`
   - **findProperties** - optional; list of properties to search within
   - **useHighlighting** - optional, true by default; if true, returns results with highlightings
+  - **page** - optional, `1` by default; indicates a result page that should be returned, must be >= `1` 
 
 #### Description
 
@@ -25,31 +26,38 @@ Return a list of search results that match the `term`.  There are two modes: `ba
 #### Example Response
 
 ```json
-[
-  {
-    "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/Mortgage",
-    "type": "CLASS",
-    "label": "mortgage",
-    "highlight": "<B>mortgage</B>",
-    "score": 2.9687047004699707
-  },
-  {
-    "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/ReverseMortgage",
-    "type": "CLASS",
-    "label": "reverse mortgage",
-    "highlight": "A reverse <B>mortgage</B> and an open end loan both have a credit limit.",
-    "score": 2.458970069885254
-  },
-  {
-    "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/MortgageLoanPurpose-MortgageModification",
-    "type": "INDIVIDUAL",
-    "label": "mortgage modification",
-    "highlight": "<B>mortgage</B> modification",
-    "score": 2.3639402389526367
-  }
-]
+{
+  "page": 1,
+  "pageSize": 20,
+  "totalHits": 3,
+  "results": [
+    {
+      "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/Mortgage",
+      "type": "CLASS",
+      "label": "mortgage",
+      "highlight": "<B>mortgage</B>",
+      "score": 2.9687047004699707
+    },
+    {
+      "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/ReverseMortgage",
+      "type": "CLASS",
+      "label": "reverse mortgage",
+      "highlight": "A reverse <B>mortgage</B> and an open end loan both have a credit limit.",
+      "score": 2.458970069885254
+    },
+    {
+      "iri": "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/MortgageLoanPurpose-MortgageModification",
+      "type": "INDIVIDUAL",
+      "label": "mortgage modification",
+      "highlight": "<B>mortgage</B> modification",
+      "score": 2.3639402389526367
+    }
+  ]
+}
 ```
-#### /api/find/properties (GET)
+
+
+### /api/find/properties (GET)
 
 #### Request Parameters
 
