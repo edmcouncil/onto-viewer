@@ -21,7 +21,6 @@ public class MaturityLevelFactory {
   public MaturityLevelFactory(ApplicationConfigurationService applicationConfigurationService) {
     for (Pair maturityLevel
         : applicationConfigurationService.getConfigurationData().getOntologiesConfig().getMaturityLevelDefinition()) {
-      LOG.info("Pair: {}", maturityLevel);
       this.maturityLevels.add(new MaturityLevel(maturityLevel.getLabel(), maturityLevel.getIri()));
     }
   }

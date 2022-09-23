@@ -333,7 +333,6 @@ public class ModuleHandler {
   private MaturityLevel chooseMaturityLevel(Set<MaturityLevel> levels) {
     Set<MaturityLevel> listOfUsedMaturityLevels = new HashSet<>();
     for (MaturityLevel level : levels) {
-      LOGGER.info("MaturityLevel {}", level);
       if (level.equals(maturityLevelFactory.mixed())) {
         return level;
       }
