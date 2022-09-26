@@ -36,18 +36,17 @@ public class AnnotationsDataHandler {
   private static final IRI COMMENT_IRI = OWLRDFVocabulary.RDFS_COMMENT.getIRI();
 
   private final String FIBO_QNAME = "QName:";
-  private final IRI HAS_MATURITY_LEVEL_IRI = IRI.create(
-      "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel");
-
   private final OwlDataExtractor dataExtractor;
   private final CustomDataFactory customDataFactory;
   private final ScopeIriOntology scopeIriOntology;
+  private final MaturityLevelFactory maturityLevelFactory;
 
   public AnnotationsDataHandler(OwlDataExtractor dataExtractor, CustomDataFactory customDataFactory,
-      ScopeIriOntology scopeIriOntology) {
+      ScopeIriOntology scopeIriOntology, MaturityLevelFactory maturityLevelFactory) {
     this.dataExtractor = dataExtractor;
     this.customDataFactory = customDataFactory;
     this.scopeIriOntology = scopeIriOntology;
+    this.maturityLevelFactory = maturityLevelFactory;
   }
 
   /**
@@ -167,13 +166,18 @@ public class AnnotationsDataHandler {
   }
 
   private void setMaturityLevel(OwlListDetails details, IRI propertyIri, OwlAnnotationIri propertyValue) {
-    if (propertyIri.equals(HAS_MATURITY_LEVEL_IRI)) {
-      OwlAnnotationIri annotationIri = propertyValue;
-      Optional<MaturityLevel> maturityLevel = MaturityLevelFactory.getByIri(annotationIri.getValue().getIri());
+    var levelString = maturityLevelFactory.getMaturityLevels()
+        .stream()
+        .map(maturityLevel -> maturityLevel.getIri())
+        .collect(Collectors.toSet());
+    if (!propertyValue.getValue().getIri().isEmpty()
+        && levelString.contains(propertyValue.getValue().getIri())) {
+      String annotationIri = propertyValue.getValue().getIri();
+      Optional<MaturityLevel> maturityLevel = maturityLevelFactory.getByIri(annotationIri);
       if (maturityLevel.isPresent()) {
         details.setMaturityLevel(maturityLevel.get());
       } else {
-        details.setMaturityLevel(MaturityLevelFactory.notSet());
+        details.setMaturityLevel(maturityLevelFactory.notSet());
       }
     }
   }

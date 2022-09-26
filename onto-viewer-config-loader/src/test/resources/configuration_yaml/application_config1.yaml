@@ -5,4 +5,4 @@ application_config:
     - 'http://purl.org/dc/terms/license'
   copyright:
     - 'http://www.omg.org/techprocess/ab/SpecificationMetadata/copyright'
-    - 'https://www.omg.org/spec/Commons/AnnotationVocabulary/copyright'  
+    - 'https://www.omg.org/spec/Commons/AnnotationVocabulary/copyright'

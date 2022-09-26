@@ -1,11 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
-import static org.edmcouncil.spec.ontoviewer.core.FiboVocabulary.HAS_MATURITY_LEVEL;
-import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.INFORMATIVE;
-import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.NOT_SET;
-import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.PROVISIONAL;
-import static org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition.RELEASE;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -29,7 +23,6 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelDefinition;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -70,14 +63,16 @@ public class ModuleHandler {
   // Cache for ontologies' maturity level
   private final Map<IRI, MaturityLevel> maturityLevelsCache = new ConcurrentHashMap<>();
   private final String moduleClassIri;
+  private final MaturityLevelFactory maturityLevelFactory;
 
   private List<OntologyModule> modules;
   private Map<IRI, OntologyModule> modulesMap;
 
   public ModuleHandler(OntologyManager ontologyManager,
-      IndividualDataHandler individualDataHandler,
-      LabelProvider labelProvider,
-      ApplicationConfigurationService applicationConfigurationService) {
+                       IndividualDataHandler individualDataHandler,
+                       LabelProvider labelProvider,
+                       ApplicationConfigurationService applicationConfigurationService,
+                       MaturityLevelFactory maturityLevelFactory) {
     this.ontologyManager = ontologyManager;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
@@ -99,6 +94,7 @@ public class ModuleHandler {
         .stream()
         .map(Pattern::compile)
         .collect(Collectors.toSet());
+    this.maturityLevelFactory = maturityLevelFactory;
 
     this.hasPartAnnotation = OWLManager.getOWLDataFactory().getOWLAnnotationProperty(IRI.create(HAS_PART_IRI));
     this.moduleClassIri = applicationConfigurationService
@@ -233,7 +229,7 @@ public class ModuleHandler {
     if (ontologyModule != null) {
       return ontologyModule.getMaturityLevel();
     }
-    return MaturityLevelFactory.notSet();
+    return maturityLevelFactory.notSet();
   }
 
   public MaturityLevel getMaturityLevelForElement(IRI entityIri) {
@@ -245,7 +241,7 @@ public class ModuleHandler {
     if (ontologyIri != null) {
       return getMaturityLevelForModule(ontologyIri);
     }
-    return MaturityLevelFactory.notSet();
+    return maturityLevelFactory.notSet();
   }
 
   void updateModules() {
@@ -269,7 +265,7 @@ public class ModuleHandler {
 
     return maturityLevelsCache.computeIfAbsent(
         ontologyIri,
-        iri -> MaturityLevelFactory.notSet());
+        iri -> maturityLevelFactory.notSet());
   }
 
   public IRI getOntologyIri(IRI elementIri) {
@@ -291,14 +287,18 @@ public class ModuleHandler {
       IRI ontologyIri) {
     var currentOntologyIri = ontology.getOntologyID().getOntologyIRI();
     if (currentOntologyIri.isPresent() && currentOntologyIri.get().equals(ontologyIri)) {
+      var levelString = maturityLevelFactory.getMaturityLevels()
+          .stream()
+          .map(maturityLevel -> maturityLevel.getIri())
+          .collect(Collectors.toSet());
       for (OWLAnnotation annotation : ontology.annotationsAsList()) {
         var annotationValue = annotation.annotationValue();
 
-        if (annotation.getProperty().getIRI().equals(HAS_MATURITY_LEVEL.getIri())
-            && annotationValue.isIRI()
-            && annotationValue.asIRI().isPresent()) {
+        if (annotationValue.isIRI()
+            && annotationValue.asIRI().isPresent()
+            && levelString.contains(annotationValue.asIRI().get().getIRIString())) {
           String annotationIri = annotationValue.asIRI().get().toString();
-          return MaturityLevelFactory.getByIri(annotationIri);
+          return maturityLevelFactory.getByIri(annotationIri);
         }
       }
     }
@@ -307,7 +307,7 @@ public class ModuleHandler {
   }
 
   private void checkAndCompleteMaturityLevel(OntologyModule module) {
-    if (isMaturityLevelInSet(module.getMaturityLevel(), Set.of(PROVISIONAL, INFORMATIVE, RELEASE))) {
+    if (isMaturityLevelInSet(module.getMaturityLevel(), maturityLevelFactory.getMaturityLevels())) {
       return;
     }
 
@@ -320,8 +320,8 @@ public class ModuleHandler {
     module.setMaturityLevel(chooseMaturityLevel(levels));
   }
 
-  private boolean isMaturityLevelInSet(MaturityLevel maturityLevel, Set<MaturityLevelDefinition> maturityLevels) {
-    var maturityLevelOptional = MaturityLevelDefinition.getByIri(maturityLevel.getIri());
+  private boolean isMaturityLevelInSet(MaturityLevel maturityLevel, List<MaturityLevel> maturityLevels) {
+    var maturityLevelOptional = maturityLevelFactory.getByIri(maturityLevel.getIri());
     if (maturityLevelOptional.isPresent()) {
       var maturityLevelDefinition = maturityLevelOptional.get();
       return maturityLevels.contains(maturityLevelDefinition);
@@ -331,41 +331,20 @@ public class ModuleHandler {
   }
 
   private MaturityLevel chooseMaturityLevel(Set<MaturityLevel> levels) {
-    int releaseCounter = 0;
-    int provisionalCounter = 0;
-    int informativeCounter = 0;
-    int notSetCounter = 0;
-
+    Set<MaturityLevel> listOfUsedMaturityLevels = new HashSet<>();
     for (MaturityLevel level : levels) {
-      if (level.equals(MaturityLevelFactory.get(MaturityLevelDefinition.MIXED))) {
+      if (level.equals(maturityLevelFactory.mixed())) {
         return level;
-      } else if (level.equals(MaturityLevelFactory.get(MaturityLevelDefinition.RELEASE))) {
-        releaseCounter++;
-      } else if (level.equals(MaturityLevelFactory.get(MaturityLevelDefinition.INFORMATIVE))) {
-        informativeCounter++;
-      } else if (level.equals(MaturityLevelFactory.get(MaturityLevelDefinition.PROVISIONAL))) {
-        provisionalCounter++;
-      } else if (level.equals(MaturityLevelFactory.get(NOT_SET))) {
-        notSetCounter++;
       }
+      listOfUsedMaturityLevels.add(level);
     }
-
-    LOGGER.trace("Version select, releaseCounter: {}, informativeCounter: {}, provisionalCounter: {}, size: {}",
-        releaseCounter, informativeCounter, provisionalCounter, levels.size());
-
     if (levels.isEmpty()) {
-      return MaturityLevelFactory.notSet();
+      return maturityLevelFactory.notSet();
     }
-    if (releaseCounter == levels.size()) {
-      return MaturityLevelFactory.get(MaturityLevelDefinition.RELEASE);
-    } else if (informativeCounter == levels.size()) {
-      return MaturityLevelFactory.get(MaturityLevelDefinition.INFORMATIVE);
-    } else if (provisionalCounter == levels.size()) {
-      return MaturityLevelFactory.get(MaturityLevelDefinition.PROVISIONAL);
-    } else if (notSetCounter == levels.size()) {
-      return MaturityLevelFactory.get(NOT_SET);
+    if (listOfUsedMaturityLevels.size() > 1) {
+      return maturityLevelFactory.mixed();
     } else {
-      return MaturityLevelFactory.get(MaturityLevelDefinition.MIXED);
+      return listOfUsedMaturityLevels.stream().findFirst().get();
     }
   }
 
@@ -397,7 +376,7 @@ public class ModuleHandler {
           module.setSubModule(new ArrayList<>());
           module.setMaturityLevel(getMaturityLevelForOntology(ontologyIri));
           if ("".equals(module.getMaturityLevel().getLabel())) {
-            module.setMaturityLevel(MaturityLevelFactory.get(NOT_SET));
+            module.setMaturityLevel(maturityLevelFactory.notSet());
           }
           return module;
         })

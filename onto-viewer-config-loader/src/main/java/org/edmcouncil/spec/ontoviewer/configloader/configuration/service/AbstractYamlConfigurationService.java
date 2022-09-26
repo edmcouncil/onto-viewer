@@ -1,36 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.service;
 
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.CATALOG_PATH;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.AUTOMATIC_CREATION_OF_MODULES;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_LABEL;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.FIND_PROPERTIES;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.FORCE_LABEL_LANG;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.FUZZY_DISTANCE;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.GROUPS;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.IDENTIFIER;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.IRI;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.ITEMS;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LABEL;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LABEL_LANG;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LABEL_PRIORITY;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.MISSING_LANGUAGE_ACTION;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.MODULE_IGNORE_PATTERN;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.MODULE_TO_IGNORE;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.NAME;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.PATH;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.PRIORITY_LIST;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.REINDEX_ON_START;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.SEARCH_DESCRIPTIONS;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.SOURCE;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.USER_DEFAULT_NAME_LIST;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.byName;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DOWNLOAD_DIRECTORY;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_LICENSE;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.COPYRIGHT;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_COPYRIGHT;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.LICENSE;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.DISPLAY_QNAME;
-import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.MODULE_CLASS_IRI;
+import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -42,17 +12,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.*;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.GroupsConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.LabelPriority;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.MissingLanguageAction;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.UserDefaultName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -278,9 +243,29 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
         getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()), AUTOMATIC_CREATION_OF_MODULES_DEFULT);
      List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
      String moduleClassIri = getStringsFromObject(ontologies.get(MODULE_CLASS_IRI.getLabel()));
+     List<Pair> maturityLevelDefinition = getMaturityLevelDefinitionNameList(ontologies.get(MATURITY_LEVEL_DEFINITION.getLabel()));
 
     return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns,
-        moduleToIgnore, automaticCreationOfModules, moduleClassIri);
+        moduleToIgnore, maturityLevelDefinition, automaticCreationOfModules, moduleClassIri);
+  }
+
+  protected List<Pair> getMaturityLevelDefinitionNameList(Object maturityLevelDefinitionNameList) {
+    List<Pair> maturityLevelDefinition = new ArrayList<>();
+
+    if (maturityLevelDefinitionNameList instanceof List) {
+      List<?> rawMaturityLevelDefinition = (List<?>) maturityLevelDefinitionNameList;
+      for (Object rawMaturityLevel : rawMaturityLevelDefinition) {
+        if (rawMaturityLevel instanceof Map) {
+          var maturityLevelDefinitionMap = (Map<String, Object>) rawMaturityLevel;
+          var label = maturityLevelDefinitionMap.get(ConfigurationKey.LABEL.getLabel());
+          var iri = maturityLevelDefinitionMap.get(IRI.getLabel());
+          if (label != null && iri != null) {
+            maturityLevelDefinition.add(new Pair(label.toString(), iri.toString()));
+          }
+        }
+      }
+    }
+    return maturityLevelDefinition;
   }
 
   protected Map<String, List<String>> mapToMapOfList(List<?> rawGroupsList) {

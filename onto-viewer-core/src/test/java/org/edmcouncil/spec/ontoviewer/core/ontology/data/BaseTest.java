@@ -55,7 +55,9 @@ public abstract class BaseTest {
   protected FileSystemService prepareFileSystem() {
     Path configDir = tempHomeDir.resolve(CONFIG_DIR).toAbsolutePath();
     try {
+      if(!Files.exists(configDir)){
       Files.createDirectory(configDir);
+      }
     } catch (IOException ex) {
       throw new IllegalStateException("Unable to create test config dir.", ex);
     }
