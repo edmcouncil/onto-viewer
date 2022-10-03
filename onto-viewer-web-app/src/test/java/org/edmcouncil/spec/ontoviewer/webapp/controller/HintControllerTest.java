@@ -3,14 +3,15 @@ package org.edmcouncil.spec.ontoviewer.webapp.controller;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import java.util.Collections;
-import java.util.List;
 import org.edmcouncil.spec.ontoviewer.core.exception.ApplicationNotInitializedException;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.controller.api.HintController;
-import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResults;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,11 @@ class HintControllerTest {
     String query = "test";
 
     when(updateBlocker.isInitializeAppDone()).thenReturn(true);
+    when(luceneSearcher.search(anyString(), anyBoolean(), anyInt())).thenReturn(FindResults.empty());
 
-    ResponseEntity<List<FindResult>> expectedResult = ResponseEntity.ok().body(Collections.emptyList());
+    ResponseEntity<FindResults> expectedResult = ResponseEntity.ok().body(FindResults.empty());
 
-    ResponseEntity<List<FindResult>> actualResult = hintController.getHints(query);
+    ResponseEntity<FindResults> actualResult = hintController.getHints(query, "1");
 
     assertThat(actualResult, equalTo(expectedResult));
   }
@@ -49,7 +51,7 @@ class HintControllerTest {
     when(updateBlocker.isInitializeAppDone()).thenReturn(false);
 
     assertThrows(ApplicationNotInitializedException.class, () -> {
-      hintController.getHints(query);
+      hintController.getHints(query, "1");
     });
   }
 }

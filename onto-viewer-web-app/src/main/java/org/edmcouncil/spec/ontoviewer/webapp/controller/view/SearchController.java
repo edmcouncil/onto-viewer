@@ -17,6 +17,7 @@ import org.edmcouncil.spec.ontoviewer.core.service.EntityService;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResults;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Query;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologySearcherService;
@@ -99,8 +100,8 @@ public class SearchController {
         modelBuilder.emptyQuery();
       } else {
         modelBuilder.setQuery(query);
-        List<FindResult> findResults = luceneSearcher.search(query, true);
-        List<SearchItem> searchResults = findResults.stream()
+        FindResults findResults = luceneSearcher.search(query, true, 1);  // TODO
+        List<SearchItem> searchResults = findResults.getResults().stream()
             .map(findResult -> {
               var searchItem = new SearchItem();
               searchItem.setIri(findResult.getIri());

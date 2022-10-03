@@ -54,6 +54,7 @@ import org.edmcouncil.spec.ontoviewer.core.exception.RequestHandlingException;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResults;
 import org.edmcouncil.spec.ontoviewer.webapp.model.Highlight;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
@@ -70,6 +71,7 @@ public class LuceneSearcher {
   private static final String LUCENE_INDEX_NAME = "lucene_index";
   private static final String IRI_FIELD = "iri";
   private static final Map<String, String> IRI_TO_SHORT_ID = new HashMap<>();
+  private static final int PAGE_SIZE = 20;
   private static final String TYPE_FIELD = "type";
   private static final String QUERY_FIELD_DELIMITER = " OR ";
   private static final int DEFAULT_FUZZY_DISTANCE = 2;
@@ -205,13 +207,13 @@ public class LuceneSearcher {
     }
   }
 
-  public List<FindResult> search(String query, boolean useHighlighting) {
+  public FindResults search(String query, boolean useHighlighting, int page) {
     try {
       var queryParser = new QueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
       var preparedQueryString = prepareQueryString(query);
       var parsedQuery = queryParser.parse(preparedQueryString);
 
-      return searchWithQuery(parsedQuery, basicFieldNames, useHighlighting);
+      return searchWithQuery(parsedQuery, basicFieldNames, useHighlighting, page);
     } catch (IOException | ParseException ex) {
       var errorMessage = String.format(
           "Error occurred when handling search request. Details: %s.", ex.getMessage());
@@ -221,7 +223,7 @@ public class LuceneSearcher {
     }
   }
 
-  public List<FindResult> searchAdvance(String query, List<String> findProperties, boolean useHighlighting) {
+  public FindResults searchAdvance(String query, List<String> findProperties, boolean useHighlighting, int page) {
     try {
       var queryParser = new ComplexPhraseQueryParser(getFieldName(dataFactory.getRDFSLabel()), analyzer);
       var preparedQueryString = prepareQueryString(query, findProperties);
@@ -233,7 +235,7 @@ public class LuceneSearcher {
             return getFieldName(dataFactory.getOWLAnnotationProperty(findProperty.getIri()));
           }).collect(Collectors.toSet());
 
-      return searchWithQuery(parsedQuery, fieldOfInterest, useHighlighting);
+      return searchWithQuery(parsedQuery, fieldOfInterest, useHighlighting, page);
     } catch (IOException | ParseException ex) {
       var errorMessage = String.format(
           "Error occurred when handling advance search request. Details: %s", ex.getMessage());
@@ -247,8 +249,10 @@ public class LuceneSearcher {
     return getTextSearcherConfig().getFindProperties();
   }
 
-  private List<FindResult> searchWithQuery(Query query, Set<String> fieldOfInterest,
-      boolean useHighlighting) throws IOException {
+  private FindResults searchWithQuery(Query query,
+      Set<String> fieldOfInterest,
+      boolean useHighlighting,
+      int page) throws IOException {
     var searcher = getIndexSearcher();
     var queryScorer = new QueryScorer(query);
     var highlighter = new Highlighter(queryScorer);
@@ -258,7 +262,18 @@ public class LuceneSearcher {
     var findResults = new ArrayList<FindResult>();
 
     var topDocs = searcher.search(query, 1000);
-    for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
+    var scoreDocs = topDocs.scoreDocs;
+    var totalHits = (int) topDocs.totalHits.value;
+
+    var pageStart = (page - 1) * PAGE_SIZE;
+    var pageEnd = Math.min(pageStart + PAGE_SIZE - 1, totalHits);
+    if (pageStart > totalHits) {
+      return new FindResults(page, PAGE_SIZE, totalHits, findResults);
+    }
+
+    scoreDocs = Arrays.copyOfRange(scoreDocs, pageStart, pageEnd);
+
+    for (ScoreDoc scoreDoc : scoreDocs) {
       var luceneDocument = searcher.doc(scoreDoc.doc);
       var score = scoreDoc.score;
       var iri = luceneDocument.getField(IRI_FIELD).stringValue();
@@ -285,7 +300,7 @@ public class LuceneSearcher {
       findResults.add(new FindResult(iri, type, printableLabel, highlights, score));
     }
 
-    return findResults;
+    return new FindResults(page, PAGE_SIZE, totalHits, findResults);
   }
 
   private IndexSearcher getIndexSearcher() throws IOException {

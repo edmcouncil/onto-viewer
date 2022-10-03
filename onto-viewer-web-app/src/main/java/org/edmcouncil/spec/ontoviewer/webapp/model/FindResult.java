@@ -11,8 +11,7 @@ public class FindResult {
   private final List<Highlight> highlights;
   private final double score;
 
-  public FindResult(String iri, String type, String label, List<Highlight> highlights,
-      double score) {
+  public FindResult(String iri, String type, String label, List<Highlight> highlights, double score) {
     this.iri = iri;
     this.type = type;
     this.label = label;

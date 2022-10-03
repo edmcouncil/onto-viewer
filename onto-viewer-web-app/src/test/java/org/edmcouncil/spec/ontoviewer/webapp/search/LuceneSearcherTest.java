@@ -16,6 +16,8 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppP
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFileBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResult;
+import org.edmcouncil.spec.ontoviewer.webapp.model.FindResults;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,7 +79,8 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnTheBestMatchForSpecificTerm() {
-    var actualResult = luceneSearcher.search("mortgage", true);
+      var actualFindResults = luceneSearcher.search("mortgage", true, 1);
+      var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(3));
     assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "Mortgage"));
@@ -85,7 +88,8 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnTheBestMatchForSpecificMultiWordsTerm() {
-    var actualResult = luceneSearcher.search("sponsored loan", true);
+    var actualFindResults = luceneSearcher.search("sponsored loan", true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(1));
     assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "GovernmentSponsoredLoan"));
@@ -93,7 +97,8 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnTheBestMatchForWhenSearchingWithinRdfsLabelSubAnnotation() {
-    var actualResult = luceneSearcher.search("government", true);
+    var actualFindResults = luceneSearcher.search("government", true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(1));
     assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "GovernmentSponsoredLoan"));
@@ -101,21 +106,24 @@ class LuceneSearcherTest {
 
   @Test
   void shouldNotReturnResultsForSkosDefinitionMatchWhenUsingBasicSearch() {
-    var actualResult = luceneSearcher.search("cei", true);
+    var actualFindResults = luceneSearcher.search("cei", true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(0));
   }
 
   @Test
   void shouldReturnResultsWhenFuzzyMatchExists() {
-    var actualResult = luceneSearcher.search("mortgagee", true);
+    var actualFindResults = luceneSearcher.search("mortgagee", true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(3));
   }
 
   @Test
   void shouldReturnResultsWhenFuzzyMatchExistsOnMultipleWords() {
-    var actualResult = luceneSearcher.search("revrese morttgagge", true);
+    var actualFindResults = luceneSearcher.search("revrese morttgagge", true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(3));
     assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "ReverseMortgage"));
@@ -123,14 +131,16 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnEmptyResultsWhenThereIsNoMatch() {
-    var actualResult = luceneSearcher.search("foobarbaz", true);
+    var actualFindResults = luceneSearcher.search("foobarbaz", true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertTrue(actualResult.isEmpty());
   }
 
   @Test
   void shouldReturnCorrectHighlightForSearchResult() {
-    var actualResult = luceneSearcher.search("reverse", true);
+    var actualFindResults = luceneSearcher.search("reverse", true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(1));
     assertThat(actualResult.get(0).getHighlights().get(0).getHighlightedText(),
@@ -139,7 +149,8 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnTheBestMatchForSpecificTermWithoutHighlighting() {
-    var actualResult = luceneSearcher.search("reverse", false);
+    var actualFindResults = luceneSearcher.search("reverse", false, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(1));
     assertTrue(actualResult.get(0).getHighlights().isEmpty());
@@ -147,7 +158,8 @@ class LuceneSearcherTest {
 
   @Test
   void shouldReturnCorrectResultForQueryContainingDash() {
-    var actualResult = luceneSearcher.search("closed-end investment", false);
+    var actualFindResults = luceneSearcher.search("closed-end investment", false, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(1));
     assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "ClosedEndInvestment"));
@@ -157,7 +169,8 @@ class LuceneSearcherTest {
   @Test
   void shouldReturnTheBestMatchForSpecificTermWithAdvanceMode() {
     var properties = List.of("rdfs_label", "skos_definition");
-    var actualResult = luceneSearcher.searchAdvance("contract", properties, true);
+    var actualFindResults = luceneSearcher.searchAdvance("contract", properties, true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(2));
   }
@@ -165,7 +178,8 @@ class LuceneSearcherTest {
   @Test
   void shouldReturnTheBestMatchForSpecificTermWithAdvanceModeWithoutHighlighting() {
     var properties = List.of("rdfs_label", "skos_definition");
-    var actualResult = luceneSearcher.searchAdvance("contract", properties, false);
+    var actualFindResults = luceneSearcher.searchAdvance("contract", properties, false, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(2));
     assertTrue(actualResult.get(0).getHighlights().isEmpty());
@@ -174,7 +188,8 @@ class LuceneSearcherTest {
   @Test
   void shouldReturnResultForSkosDefinitionWithAdvancedModeWithHighlighting() {
     var properties = List.of("rdfs_label", "skos_definition");
-    var actualResult = luceneSearcher.searchAdvance("CEInvestment", properties, true);
+    var actualFindResults = luceneSearcher.searchAdvance("CEInvestment", properties, true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(1));
     assertThat(actualResult.get(0).getIri(), equalTo(EXAMPLE_ONTOLOGY_IRI + "ClosedEndInvestment"));
@@ -184,10 +199,12 @@ class LuceneSearcherTest {
   @Test
   void shouldReturnEmptyResultWhenTermDoesNotOccurForSpecificTermWithAdvanceMode() {
     var properties = List.of("rdfs_label");
-    var actualResult = luceneSearcher.searchAdvance("contract", properties, true);
+    var actualFindResults = luceneSearcher.searchAdvance("contract", properties, true, 1);
+    var actualResult = actualFindResults.getResults();
 
     assertThat(actualResult.size(), equalTo(0));
   }
+
   // Find properties
   @Test
   void shouldReturnListOfSupportedFindProperties() {
