@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -31,7 +31,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class OntologyStatsManager {
 
-  private static final String MODULE_IRI = "http://www.omg.org/techprocess/ab/SpecificationMetadata/Module";
   private static final String INSTANCE_KEY = ViewerIdentifierFactory.createId(
       ViewerIdentifierFactory.Type.function,
       OwlType.INSTANCES.name().toLowerCase());
@@ -40,15 +39,21 @@ public class OntologyStatsManager {
   private final ModuleHandler moduleHandler;
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
+  private final String moduleClassIri;
 
   private OntologyStatsMapped ontologyStatsMapped;
 
   public OntologyStatsManager(ModuleHandler moduleHandler,
       IndividualDataHandler individualDataHandler,
-      LabelProvider labelProvider) {
+      LabelProvider labelProvider,
+      ApplicationConfigurationService applicationConfigurationService) {
     this.moduleHandler = moduleHandler;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
+    this.moduleClassIri = applicationConfigurationService
+        .getConfigurationData()
+        .getOntologiesConfig()
+        .getModuleClassIri();
   }
 
   public OntologyStatsMapped getOntologyStats() {
@@ -164,7 +169,7 @@ public class OntologyStatsManager {
   }
 
   private Optional<OWLClass> getModuleClazz(OWLOntology ontology) {
-    IRI moduleIri = IRI.create(MODULE_IRI);
+    IRI moduleIri = IRI.create(moduleClassIri);
     return ontology
         .classesInSignature(Imports.INCLUDED)
         .filter(c -> c.getIRI().equals(moduleIri))
