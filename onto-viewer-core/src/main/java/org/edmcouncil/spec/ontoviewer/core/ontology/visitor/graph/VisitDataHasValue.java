@@ -25,11 +25,11 @@ public class VisitDataHasValue {
 
         LOG.debug("visit OWLDataHasValue");
 
-        String xsdBooleanIri = "http://www.w3.org/2000/01/rdf-schema#Literal";
+        String xsdLiteralIri = "http://www.w3.org/2000/01/rdf-schema#Literal";
         String val = axiom.getFiller().getLiteral();
         GraphObjGenerator gog = new GraphObjGenerator(vg, labelProvider);
 
-        GraphNode endNode = gog.createNode(xsdBooleanIri, type, not);
+        GraphNode endNode = gog.createNode(xsdLiteralIri, type, not);
         endNode.setLabel(val);
 
         String propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
