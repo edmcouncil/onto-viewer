@@ -178,8 +178,7 @@ public class OntologyVisitors {
       @Override
       public Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLDataMinCardinality axiom) {
        return VisitDataMinCardinality.visit(axiom, returnedVal, vg, node, type, equivalentTo, not, labelProvider);
-      }
-      
+      }      
     };
   }
 

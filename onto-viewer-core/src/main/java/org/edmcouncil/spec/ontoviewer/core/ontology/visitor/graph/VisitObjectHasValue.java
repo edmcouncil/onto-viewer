@@ -19,18 +19,18 @@ public class VisitObjectHasValue {
 
   private static final Logger LOG = LoggerFactory.getLogger(VisitObjectHasValue.class);
 
-  public static Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLObjectHasValue axiom, Map<GraphNode, Set<ExpressionReturnedClass>> returnedVal, OntologyGraph vg, GraphNode node, GraphNodeType type, Boolean equivalentTo, Boolean not, LabelProvider labelProvider) {
+  public static Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLObjectHasValue axiom, Map<GraphNode, Set<ExpressionReturnedClass>> returnedVal, OntologyGraph ontologyGraph, GraphNode node, GraphNodeType type, Boolean equivalentTo, Boolean not, LabelProvider labelProvider) {
 
     LOG.debug("visit OWLObjectHasValue");
 
-    GraphObjGenerator gog = new GraphObjGenerator(vg, labelProvider);
+    GraphObjGenerator graphObjGenerator = new GraphObjGenerator(ontologyGraph, labelProvider);
     String propertyIri = OwlDataExtractor.extractAxiomPropertyIri(axiom);
     IRI datatypeIri = axiom.getFiller().signature().findFirst().get().getIRI();
-    GraphNode endNode = gog.createNode(datatypeIri.toString(), type, not);
-    GraphRelation rel = gog.createRelation(node, propertyIri, endNode, type, "");
-    rel.setIri(propertyIri);
-    vg.addNode(endNode);
-    vg.addRelation(rel);
+    GraphNode endNode = graphObjGenerator.createNode(datatypeIri.toString(), type, not);
+    GraphRelation graphRelation = graphObjGenerator.createRelation(node, propertyIri, endNode, type, "");
+    graphRelation.setIri(propertyIri);
+    ontologyGraph.addNode(endNode);
+    ontologyGraph.addRelation(graphRelation);
     return null;
   }
 }
