@@ -19,6 +19,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitIntersect
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitObjectAllValuesFrom;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitObjectComplementOf;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitObjectExaclyCardinality;
+import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitObjectHasValue;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitObjectMaxCardinality;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitObjectMinCardinality;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.graph.VisitObjectPropertyAssertionAxiom;
@@ -39,6 +40,7 @@ import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
 import org.semanticweb.owlapi.model.OWLObjectExactCardinality;
+import org.semanticweb.owlapi.model.OWLObjectHasValue;
 import org.semanticweb.owlapi.model.OWLObjectIntersectionOf;
 import org.semanticweb.owlapi.model.OWLObjectMaxCardinality;
 import org.semanticweb.owlapi.model.OWLObjectMinCardinality;
@@ -118,6 +120,11 @@ public class OntologyVisitors {
       }
 
       @Override
+      public Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLObjectHasValue axiom) {
+        return VisitObjectHasValue.visit(axiom, returnedVal, vg, node, type, equivalentTo, not, labelProvider);
+      }
+     
+      @Override
       public Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLObjectIntersectionOf axiom) {
         return VisitIntersectionOf.visit(axiom, returnedVal, vg, node, type, equivalentTo, not, labelProvider);
       }
@@ -172,7 +179,7 @@ public class OntologyVisitors {
       public Map<GraphNode, Set<ExpressionReturnedClass>> visit(OWLDataMinCardinality axiom) {
        return VisitDataMinCardinality.visit(axiom, returnedVal, vg, node, type, equivalentTo, not, labelProvider);
       }
-
+      
     };
   }
 
