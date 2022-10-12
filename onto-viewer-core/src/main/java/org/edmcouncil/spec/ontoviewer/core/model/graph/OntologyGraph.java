@@ -13,9 +13,10 @@ public class OntologyGraph {
   private GraphNode root;
   private int lastId = 0;
 
-  public OntologyGraph() {
+  public OntologyGraph(int lastId) {
     this.nodes = new HashSet<>();
     this.relations = new HashSet<>();
+    this.lastId = lastId;
   }
 
   public Set<GraphNode> getNodes() {

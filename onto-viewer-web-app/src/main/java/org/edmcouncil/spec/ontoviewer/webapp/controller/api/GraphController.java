@@ -23,11 +23,14 @@ public class GraphController extends BaseController {
   }
 
   @GetMapping
-  public ResponseEntity getEntityByIri(@RequestParam("iri") String iri)
+  public ResponseEntity getEntityByIri(
+      @RequestParam("iri") String iri, 
+      @RequestParam("lastId") int lastId,
+      @RequestParam("nodeId") int nodeId)
       throws NotFoundElementInOntologyException, OntoViewerException {
     checkIfApplicationIsReady();
 
-    var entityResult = graphService.handleGraph(iri.trim());
+    var entityResult = graphService.handleGraph(iri.trim(), nodeId, lastId);
     return ResponseEntity.ok(entityResult);
   }
 }

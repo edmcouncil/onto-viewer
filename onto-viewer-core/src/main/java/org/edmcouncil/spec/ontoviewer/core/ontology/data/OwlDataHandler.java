@@ -22,7 +22,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
@@ -182,11 +181,11 @@ public class OwlDataHandler {
       OwlDetailsProperties<PropertyValue> inheritedAxioms =
           handleInheritedAxioms(ontology, owlClass);
 
-      OntologyGraph ontologyGraph = new OntologyGraph();
+      OntologyGraph ontologyGraph = new OntologyGraph(0);
       if (configurationData.getToolkitConfig().isOntologyGraphEnabled()) {
         // 'Nothing' has all restrictions, we don't want to display that.
         if (!owlClass.getIRI().equals(OWLRDFVocabulary.OWL_NOTHING.getIRI())) {
-          ontologyGraph = graphDataHandler.handleGraph(owlClass, ontology);
+          ontologyGraph = graphDataHandler.handleGraph(owlClass, ontology, 0, 0);
         }
       }
       subclasses = filterSubclasses(subclasses);
@@ -336,7 +335,7 @@ public class OwlDataHandler {
 
       OwlDetailsProperties<PropertyValue> annotations =
           handleAnnotations(individual.getIRI(), ontology, resultDetails);
-      OntologyGraph ontologyGraph = graphDataHandler.handleGraph(individual, ontology);
+      OntologyGraph ontologyGraph = graphDataHandler.handleGraph(individual, ontology, 0, 0);
       if (ontologyGraph.isEmpty()) {
         resultDetails.setGraph(null);
       } else {
