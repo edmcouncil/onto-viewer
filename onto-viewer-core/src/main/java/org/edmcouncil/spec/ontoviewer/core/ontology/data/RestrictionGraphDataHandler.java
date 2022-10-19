@@ -52,7 +52,9 @@ public class RestrictionGraphDataHandler {
 
   public OntologyGraph handleGraph(
       OWLNamedIndividual obj,
-      OWLOntology ontology) {
+      OWLOntology ontology,
+      int nodeId,
+      int lastId) {
     Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj, Imports.INCLUDED).iterator();
 
     IRI elementIri = obj.getIRI();
@@ -61,11 +63,11 @@ public class RestrictionGraphDataHandler {
     GraphNodeType type = GraphNodeType.INTERNAL;
 
     if (vg == null) {
-      vg = new OntologyGraph();
+      vg = new OntologyGraph(lastId);
     }
 
     if (root == null) {
-      root = new GraphNode(vg.nextId());
+      root = new GraphNode(nodeId);
       root.setIri(elementIri.toString());
       root.setType(GraphNodeType.MAIN);
       String label = labelExtractor.getLabelOrDefaultFragment(elementIri);
@@ -90,24 +92,28 @@ public class RestrictionGraphDataHandler {
 
   public OntologyGraph handleGraph(
       OWLObjectProperty obj,
-      OWLOntology ontology) {
+      OWLOntology ontology,
+      int nodeId,
+      int lastId) {
 
     Iterator<OWLObjectPropertyAxiom> axiomsIterator = ontology.axioms(obj).iterator();
-    return handleGraph(axiomsIterator, obj.getIRI());
+    return handleGraph(axiomsIterator, obj.getIRI(), nodeId, lastId);
   }
 
   public OntologyGraph handleGraph(
       OWLDataProperty obj,
-      OWLOntology ontology) {
+      OWLOntology ontology,
+      int nodeId,
+      int lastId) {
 
     Iterator<OWLDataPropertyAxiom> axiomsIterator = ontology.axioms(obj).iterator();
-    return handleGraph(axiomsIterator, obj.getIRI());
+    return handleGraph(axiomsIterator, obj.getIRI(), nodeId, lastId);
   }
 
-  public OntologyGraph handleGraph(OWLClass obj, OWLOntology ontology) {
+  public OntologyGraph handleGraph(OWLClass obj, OWLOntology ontology, int nodeId, int lastId) {
     Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj, Imports.INCLUDED).iterator();
 
-    OntologyGraph vg = handleGraph(axiomsIterator, obj.getIRI());
+    OntologyGraph vg = handleGraph(axiomsIterator, obj.getIRI(), nodeId, lastId);
     vg = handleInheritedAxiomsGraph(obj, vg, ontology);
     vg = handleEquivalentClassesAxiomGraph(obj, vg, ontology);
 
@@ -116,8 +122,10 @@ public class RestrictionGraphDataHandler {
 
   private <T extends OWLAxiom> OntologyGraph handleGraph(
       Iterator<T> axiomsIterator,
-      IRI elementIri) {
-    return handleGraph(axiomsIterator, elementIri, null, null, GraphNodeType.INTERNAL);
+      IRI elementIri,
+      int nodeId,
+      int lastId) {
+    return handleGraph(axiomsIterator, elementIri, null, null, GraphNodeType.INTERNAL, nodeId, lastId);
   }
 
   private <T extends OWLAxiom> OntologyGraph handleGraph(
@@ -125,14 +133,16 @@ public class RestrictionGraphDataHandler {
       IRI elementIri,
       GraphNode root,
       OntologyGraph vg,
-      GraphNodeType type) {
+      GraphNodeType type,
+      int nodeId,
+      int lastId) {
 
     if (vg == null) {
-      vg = new OntologyGraph();
+      vg = new OntologyGraph(lastId);
     }
 
     if (root == null) {
-      root = new GraphNode(vg.nextId());
+      root = new GraphNode(nodeId);
       root.setIri(elementIri.toString());
       root.setType(GraphNodeType.MAIN);
       String label = labelExtractor.getLabelOrDefaultFragment(elementIri);
@@ -200,7 +210,7 @@ public class RestrictionGraphDataHandler {
     owlUtils.getSuperClasses(clazz, ontology, alreadySeen).forEach((owlClass) -> {
       Iterator<OWLClassAxiom> axiomsIterator =
           ontology.axioms(owlClass, Imports.INCLUDED).iterator();
-      handleGraph(axiomsIterator, owlClass.getIRI(), vg.getRoot(), vg, GraphNodeType.EXTERNAL);
+      handleGraph(axiomsIterator, owlClass.getIRI(), vg.getRoot(), vg, GraphNodeType.EXTERNAL, 0, 0);
     });
     return vg;
   }

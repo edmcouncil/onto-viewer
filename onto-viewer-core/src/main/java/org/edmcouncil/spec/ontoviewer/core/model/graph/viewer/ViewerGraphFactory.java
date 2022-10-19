@@ -37,6 +37,7 @@ public class ViewerGraphFactory {
 
     result.setNodes(allNodes);
     result.setEdges(allRelation);
+    result.setLastId(og.nextId());
     return result;
   }
 
