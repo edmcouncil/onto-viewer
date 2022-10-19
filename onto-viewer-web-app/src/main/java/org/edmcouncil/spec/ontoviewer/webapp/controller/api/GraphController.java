@@ -25,8 +25,8 @@ public class GraphController extends BaseController {
   @GetMapping
   public ResponseEntity getEntityByIri(
       @RequestParam("iri") String iri, 
-      @RequestParam("lastId") int lastId,
-      @RequestParam("nodeId") int nodeId)
+      @RequestParam(required = false, defaultValue = "0") int lastId,
+      @RequestParam(required = false, defaultValue = "0") int nodeId)
       throws NotFoundElementInOntologyException, OntoViewerException {
     checkIfApplicationIsReady();
 

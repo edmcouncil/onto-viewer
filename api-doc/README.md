@@ -8,3 +8,4 @@
 - [Modules](./MODULES.md)
 - [Stats](./STATS.md)
 - [Update](./UPDATE.md)
+- [Graph](./GRAPH.md)
