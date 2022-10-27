@@ -14,6 +14,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatu
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdateJobGenerator;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
+import org.edmcouncil.spec.ontoviewer.webapp.service.FallbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -40,6 +41,8 @@ public class Updater {
   private LuceneSearcher luceneSearcher;
   @Autowired
   private ApplicationConfigurationService applicationConfigurationService;
+  @Autowired
+  private FallbackService fallbackService;
 
   private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
@@ -64,7 +67,8 @@ public class Updater {
         scopeIriOntology,
         ontologyStatsManager,
         luceneSearcher,
-        applicationConfigurationService) {
+        applicationConfigurationService,
+        fallbackService) {
     };
     t.start();
 
