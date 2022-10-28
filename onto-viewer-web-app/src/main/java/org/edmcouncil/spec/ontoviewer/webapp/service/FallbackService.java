@@ -2,11 +2,13 @@ package org.edmcouncil.spec.ontoviewer.webapp.service;
 
 import java.io.IOException;
 import java.util.Collections;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.webapp.configuration.FallbackConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -23,16 +25,18 @@ public class FallbackService {
 
   private static final Logger LOG = LoggerFactory.getLogger(FallbackService.class);
   private final RestTemplate restTemplate;
+
   private String apiKey;
   private String fallbackUrl;
 
+  @Autowired
   public FallbackService(RestTemplateBuilder restTemplateBuilder,
       FileService fileService,
-      FallbackConfig fallbackConfig)
+     AppProperties appProperties)
       throws IOException {
     this.restTemplate = restTemplateBuilder.build();
     this.apiKey = fileService.getApiKeyFromFile();
-    this.fallbackUrl = fallbackConfig.getFallbackUrl();
+    this.fallbackUrl = appProperties.getFallback();
   }
 
   public boolean isFallbackEmpty() {
