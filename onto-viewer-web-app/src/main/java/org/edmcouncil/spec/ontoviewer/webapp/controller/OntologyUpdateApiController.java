@@ -68,7 +68,7 @@ public class OntologyUpdateApiController {
     if (applicationId != null && !applicationId.isEmpty() && applicationIdService.getId()
         .equals(applicationId)) {
       LOG.info(RequestConstants.APPLICATION_ID_THE_SAME_MESSAGE);
-      return ResponseEntity.ok(new BaseResponse(RequestConstants.APPLICATION_ID_THE_SAME_MESSAGE));
+      return ResponseEntity.ok(updateService.getUpdateStatus(null));
     }
     UpdateJob uj = updateService.startUpdate();
     return ResponseEntity.ok(uj);
