@@ -68,10 +68,7 @@ public class FallbackService {
   private void makeUpdateRequest() {
     String url = fallbackUrl.concat(fallbackUrl.endsWith("/") ? "" : "/").concat("api/update");
     HttpHeaders headers = createHeaders();
-  //  this.restTemplate.put(url, headers);
-
-    ResponseEntity<UpdateJob> response = getUpdateJobResponseEntity(
-        url, headers);
+    ResponseEntity<UpdateJob> response = getUpdateJobResponseEntity(url, headers);
 
     if (response.getStatusCode() == HttpStatus.OK) {
       LOG.info("Update response from next instance: {}", response.getBody());
