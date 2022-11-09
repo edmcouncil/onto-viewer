@@ -12,8 +12,8 @@ import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.IndividualDataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.individual.IndividualDataHelper;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.semanticweb.owlapi.model.IRI;
@@ -37,14 +37,14 @@ public class OntologyStatsManager {
   private static final Logger LOG = LoggerFactory.getLogger(OntologyStatsManager.class);
 
   private final ModuleHandler moduleHandler;
-  private final IndividualDataHandler individualDataHandler;
+  private final IndividualDataHelper individualDataHandler;
   private final LabelProvider labelProvider;
   private final String moduleClassIri;
 
   private OntologyStatsMapped ontologyStatsMapped;
 
   public OntologyStatsManager(ModuleHandler moduleHandler,
-      IndividualDataHandler individualDataHandler,
+      IndividualDataHelper individualDataHandler,
       LabelProvider labelProvider,
       ApplicationConfigurationService applicationConfigurationService) {
     this.moduleHandler = moduleHandler;

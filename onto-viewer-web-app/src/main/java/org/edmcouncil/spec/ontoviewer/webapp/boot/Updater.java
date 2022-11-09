@@ -6,7 +6,7 @@ import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
@@ -31,8 +31,6 @@ public class Updater {
   @Autowired
   private UpdateBlocker blocker;
   @Autowired
-  private DataHandler dataHandler;
-  @Autowired
   private ScopeIriOntology scopeIriOntology;
   @Autowired
   private OntologyStatsManager ontologyStatsManager;
@@ -40,7 +38,8 @@ public class Updater {
   private LuceneSearcher luceneSearcher;
   @Autowired
   private ApplicationConfigurationService applicationConfigurationService;
-
+  @Autowired
+  private ResourcesPopulate resourcesPopulate;
   private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
   @EventListener(ApplicationReadyEvent.class)
@@ -59,12 +58,11 @@ public class Updater {
         ontologyManager,
         fileSystemService,
         blocker,
-        dataHandler,
         job,
         scopeIriOntology,
         ontologyStatsManager,
         luceneSearcher,
-        applicationConfigurationService) {
+        applicationConfigurationService, resourcesPopulate) {
     };
     t.start();
 

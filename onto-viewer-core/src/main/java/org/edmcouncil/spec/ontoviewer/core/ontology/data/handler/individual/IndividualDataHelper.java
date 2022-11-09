@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
+package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.individual;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -21,15 +21,15 @@ import org.springframework.stereotype.Component;
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Component
-public class IndividualDataHandler {
+public class IndividualDataHelper {
 
-  private static final Logger LOG = LoggerFactory.getLogger(IndividualDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(IndividualDataHelper.class);
   private static final String instanceKey = ViewerIdentifierFactory
       .createId(ViewerIdentifierFactory.Type.function, OwlType.INSTANCES.name().toLowerCase());
 
   private final LabelProvider labelExtractor;
 
-  public IndividualDataHandler(LabelProvider labelExtractor) {
+  public IndividualDataHelper(LabelProvider labelExtractor) {
     this.labelExtractor = labelExtractor;
   }
 
@@ -49,12 +49,12 @@ public class IndividualDataHandler {
         .collect(Collectors.toSet());
 
     for (OWLNamedIndividual namedIndividual : listOfIndividuals) {
-        OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
-        s.setType(OwlType.INSTANCES);
-        String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual);
-        s.setValue(new Pair(label, namedIndividual.getIRI().toString()));
-        result.addProperty(instanceKey, s);
-        namedIndividual.getEntityType();
+      OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
+      s.setType(OwlType.INSTANCES);
+      String label = labelExtractor.getLabelOrDefaultFragment(namedIndividual);
+      s.setValue(new Pair(label, namedIndividual.getIRI().toString()));
+      result.addProperty(instanceKey, s);
+      namedIndividual.getEntityType();
     }
     result.sortPropertiesInAlphabeticalOrder();
     return result;
@@ -71,7 +71,21 @@ public class IndividualDataHandler {
             .forEach(_item -> result.add(individual));
       });
     }
+    return result;
+  }
 
+  /**
+   * This method is used to display Particular Individual
+   *
+   * @param ontology This is a loaded ontology.
+   * @param clazz    Clazz are all Instances.
+   * @return All instances of a given class;
+   */
+  public OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology,
+      OWLClass clazz) {
+    OwlDetailsProperties<PropertyValue> result =
+        handleClassIndividuals(ontology, clazz);
+    result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
 }
