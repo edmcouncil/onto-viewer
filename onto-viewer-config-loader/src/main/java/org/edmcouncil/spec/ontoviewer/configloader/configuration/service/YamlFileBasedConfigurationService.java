@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -219,13 +220,24 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
               ontologiesConfig.getDownloadDirectory().add(downloadDirectory);
             }
             if (zipUrl != null && zipUrl.length>0) {
-              ontologiesConfig.getZipUrls().clear();
               ontologiesConfig.getZipUrls().addAll(Arrays.asList(zipUrl));
             }
             break;
           }
           default:
             LOGGER.warn("Config key '{}' is not expected.", configKey);
+        }
+      }
+      OntologiesConfig ontologiesConfig = configurationDataCandidate.getOntologiesConfig();
+      if (!ontologiesConfig.getZipUrls().isEmpty() && !ontologiesConfig.getDownloadDirectory().isEmpty()) {
+        String downloadDirectory = ontologiesConfig.getDownloadDirectory().stream().findFirst().orElse("");
+        for (String fileUrl : ontologiesConfig.getZipUrls()) {
+          String[] zip = fileUrl.split("#");
+          if ((zip.length > 1) && (zip[1].length() > 0)) {
+            Path path = Paths.get(downloadDirectory.concat("/").concat(zip[1]));
+            LOGGER.info("CATALOG_FILE={}", path.normalize().toString());
+            ontologiesConfig.getCatalogPaths().add(path.normalize().toString());
+          }
         }
       }
     }
