@@ -12,7 +12,6 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.Parser;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -29,23 +28,26 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UsageExtractor {
 
   private static final Logger LOG = LoggerFactory.getLogger(UsageExtractor.class);
-  @Autowired
-  private ContainsVisitors containsVisitors;
-  @Autowired
-  private AxiomsHandler axiomsHandler;
-  @Autowired
-  private LabelProvider labelProvider;
-  @Autowired
-  private Parser parser;
-  @Autowired
-  private AxiomsHelper axiomsHelper;
+
+  private final ContainsVisitors containsVisitors;
+  private final LabelProvider labelProvider;
+  private final Parser parser;
+  private final AxiomsHelper axiomsHelper;
+
+  public UsageExtractor(ContainsVisitors containsVisitors, LabelProvider labelProvider,
+      Parser parser,
+      AxiomsHelper axiomsHelper) {
+    this.containsVisitors = containsVisitors;
+    this.labelProvider = labelProvider;
+    this.parser = parser;
+    this.axiomsHelper = axiomsHelper;
+  }
 
   public OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz,
       OWLOntology ontology) {

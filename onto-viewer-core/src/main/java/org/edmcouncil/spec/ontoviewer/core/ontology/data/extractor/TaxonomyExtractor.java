@@ -11,9 +11,6 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyImpl;
-import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.StringIdentifier;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassDataHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -23,7 +20,6 @@ import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,18 +27,16 @@ public class TaxonomyExtractor {
 
   private static final Logger LOG = LoggerFactory.getLogger(TaxonomyExtractor.class);
 
-  @Autowired
   private LabelProvider labelProvider;
-  @Autowired
-  private AxiomsHandler axiomsHandler;
-  @Autowired
-  private OntologyManager ontologyManager;
-  @Autowired
-  private StringIdentifier stringIdentifier;
-  @Autowired
   private ClassDataHelper extractSubAndSuper;
-  @Autowired
   private AxiomsHelper axiomsHelper;
+
+  public TaxonomyExtractor(LabelProvider labelProvider, ClassDataHelper extractSubAndSuper,
+      AxiomsHelper axiomsHelper) {
+    this.labelProvider = labelProvider;
+    this.extractSubAndSuper = extractSubAndSuper;
+    this.axiomsHelper = axiomsHelper;
+  }
 
   public OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, IRI objIri,
       OWLOntology ontology, OwlType type) {
@@ -176,6 +170,7 @@ public class TaxonomyExtractor {
         .distinct()
         .collect(Collectors.toList());
   }
+
   public boolean trackingThePath(OntologyModule node, IRI ontologyIri, List<String> track,
       IRI elementIri) {
     if (node == null) {
