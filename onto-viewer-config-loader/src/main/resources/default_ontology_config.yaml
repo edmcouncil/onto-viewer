@@ -7,5 +7,5 @@ ontologies:
       label: 'Release'
     - iri: 'https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional'
       label: 'Provisional'
-    - iri: 'https://spec.pistoiaalliance.org/idmp/ontology/META/ChangeManagement/Informative'
+    - iri: 'https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative'
       label: 'Informative'

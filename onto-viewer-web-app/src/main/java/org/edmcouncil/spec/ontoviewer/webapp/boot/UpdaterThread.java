@@ -18,6 +18,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
+import org.edmcouncil.spec.ontoviewer.webapp.service.FallbackService;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -37,6 +38,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private final OntologyStatsManager ontologyStatsManager;
   private final LuceneSearcher luceneSearcher;
   private final ApplicationConfigurationService applicationConfigurationService;
+  private final FallbackService fallbackService;
   private UpdateJob job;
   private final ResourcesPopulate resourcesPopulate;
 
@@ -48,7 +50,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       OntologyStatsManager osm,
       LuceneSearcher luceneSearcher,
       ApplicationConfigurationService applicationConfigurationService,
-      ResourcesPopulate resourcesPopulate) {
+      ResourcesPopulate resourcesPopulate,
+      FallbackService fallbackService) {
     this.ontologyManager = ontologyManager;
     this.fileSystemService = fileSystemService;
     this.blocker = blocker;
@@ -58,6 +61,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.luceneSearcher = luceneSearcher;
     this.applicationConfigurationService = applicationConfigurationService;
     this.resourcesPopulate = resourcesPopulate;
+    this.fallbackService = fallbackService;
     this.setName("UpdateThread-" + job.getId());
   }
 
@@ -174,8 +178,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       if (job.getId().equals(String.valueOf(0))) {
         blocker.setInitializeAppDone(Boolean.TRUE);
       }
-
       LOGGER.info("Application has started successfully.");
+      fallbackService.sendRequestToNextInstance(job.getId());
     } catch (InterruptUpdate ex) {
       LOGGER.error("{}", ex.getStackTrace());
       UpdaterOperation.setJobStatusToError(job, INTERRUPT_MESSAGE);

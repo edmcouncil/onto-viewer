@@ -19,6 +19,7 @@ public class AppProperties {
   private String defaultOntologyFileName;
   private String configPath;
   private Map<String, Object> search;
+  private String fallbackUrl;
 
   public String getConfigPath() {
     return configPath;
@@ -58,5 +59,13 @@ public class AppProperties {
 
   public void setSearch(Map<String, Object> search) {
     this.search = search;
+  }
+
+  public String getFallbackUrl() {
+    return fallbackUrl;
+  }
+
+  public void setFallbackUrl(String fallbackUrl) {
+    this.fallbackUrl = fallbackUrl;
   }
 }
