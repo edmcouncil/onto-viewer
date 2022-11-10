@@ -4,8 +4,11 @@ import static org.edmcouncil.spec.ontoviewer.webapp.common.RequestConstants.API_
 
 import java.util.Optional;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
+import org.edmcouncil.spec.ontoviewer.webapp.common.RequestConstants;
+import org.edmcouncil.spec.ontoviewer.webapp.model.BaseResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.service.ApiKeyService;
+import org.edmcouncil.spec.ontoviewer.webapp.service.ApplicationIdService;
 import org.edmcouncil.spec.ontoviewer.webapp.service.OntologyUpdateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,24 +30,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = {"/api/update"})
 public class OntologyUpdateApiController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(OntologyUpdateApiController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(OntologyUpdateApiController.class);
 
   private final ApiKeyService keyService;
   private final OntologyUpdateService updateService;
+  private final ApplicationIdService applicationIdService;
 
   public OntologyUpdateApiController(ApiKeyService keyService,
-      OntologyUpdateService updateService) {
+      OntologyUpdateService updateService, ApplicationIdService applicationIdService) {
     this.keyService = keyService;
     this.updateService = updateService;
+    this.applicationIdService = applicationIdService;
   }
 
   @PutMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity startUpdateKeyInHeader(
       @RequestHeader(value = "Accept", required = true) String acceptHeader,
       @RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
-      @RequestParam(value = "ApiKey", required = false) String apiKeyParam) {
+      @RequestParam(value = "ApiKey", required = false) String apiKeyParam,
+      @RequestHeader(value = RequestConstants.APPLICATION_ID, required = false) String applicationId) {
     if (!acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)) {
-      return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
+      return ResponseEntity.badRequest()
+          .body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
     }
 
     String key = "";
@@ -54,9 +61,14 @@ public class OntologyUpdateApiController {
       key = apiKeyParam;
     }
     if (!keyService.validateApiKey(key)) {
-      LOGGER.debug(API_KEY_NOT_VALID_MESSAGE);
+      LOG.debug(API_KEY_NOT_VALID_MESSAGE);
       return ResponseEntity.badRequest().body(
           new ErrorResponse(API_KEY_NOT_VALID_MESSAGE, null));
+    }
+    if (applicationId != null && !applicationId.isEmpty() && applicationIdService.getId()
+        .equals(applicationId)) {
+      LOG.info(RequestConstants.APPLICATION_ID_THE_SAME_MESSAGE);
+      return ResponseEntity.ok(updateService.getUpdateStatus(null));
     }
     UpdateJob uj = updateService.startUpdate();
     return ResponseEntity.ok(uj);
@@ -64,12 +76,14 @@ public class OntologyUpdateApiController {
 
   @ResponseBody
   @GetMapping(value = {"", "/{updateId}"}, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity getUpdateStatus(@RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
+  public ResponseEntity getUpdateStatus(
+      @RequestHeader(name = "X-API-Key", required = false) String apiKeyHeader,
       @RequestParam(value = "ApiKey", required = false) String apiKeyParam,
       @PathVariable Optional<String> updateId,
       @RequestHeader(value = "Accept", required = true) String acceptHeader) {
     if (!acceptHeader.contains(MediaType.APPLICATION_JSON_VALUE)) {
-      return ResponseEntity.badRequest().body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
+      return ResponseEntity.badRequest()
+          .body("Incorrect or missing header. `Accept: " + acceptHeader + "'");
     }
     String key = "";
     if (apiKeyHeader != null) {
@@ -79,7 +93,7 @@ public class OntologyUpdateApiController {
     }
 
     if (!keyService.validateApiKey(key)) {
-      LOGGER.debug(API_KEY_NOT_VALID_MESSAGE);
+      LOG.debug(API_KEY_NOT_VALID_MESSAGE);
       return ResponseEntity.badRequest().body(
           new ErrorResponse(API_KEY_NOT_VALID_MESSAGE, null));
     }
