@@ -162,7 +162,9 @@ public class DataHandler {
             owlOntology.signature(Imports.EXCLUDED)
                 .forEach(owlEntity -> {
                   var entityIri = owlEntity.getIRI();
-                  entityIriToOntologyIri.put(entityIri, ontologyIri);
+                  if (entityIri.getNamespace().equals(ontologyIri.getIRIString())) {
+                    entityIriToOntologyIri.put(entityIri, ontologyIri);
+                  }
                 });
           }
         });
