@@ -99,7 +99,7 @@ public class DataHandler {
     var stopwatch = Stopwatch.createStarted();
 
     this.entityIriToOntologyIriMap = populateEntityIriToOntologyIriMap();
-    this.moduleHandler.updateModules();
+    this.moduleHandler.refreshModulesHandlerData();
 
     LOGGER.info("Finished populating mapping entity IRIs to ontology IRIs in {} seconds.",
         stopwatch.elapsed(TimeUnit.SECONDS));

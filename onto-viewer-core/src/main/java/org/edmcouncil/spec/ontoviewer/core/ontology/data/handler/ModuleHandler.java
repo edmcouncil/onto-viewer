@@ -53,17 +53,18 @@ public class ModuleHandler {
       OwlType.INSTANCES.name().toLowerCase());
   private static final Pattern URL_PATTERN
       = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-  private final boolean automaticCreationOfModules;
+  private  boolean automaticCreationOfModules;
   private final OntologyManager ontologyManager;
   private final IndividualDataHandler individualDataHandler;
   private final LabelProvider labelProvider;
-  private final Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
-  private final Set<Pattern> ontologyModuleIgnorePatterns;
+  private  Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
+  private  Set<Pattern> ontologyModuleIgnorePatterns;
   private final OWLAnnotationProperty hasPartAnnotation;
   // Cache for ontologies' maturity level
   private final Map<IRI, MaturityLevel> maturityLevelsCache = new ConcurrentHashMap<>();
-  private final String moduleClassIri;
+  private String moduleClassIri;
   private final MaturityLevelFactory maturityLevelFactory;
+  private final ApplicationConfigurationService applicationConfigurationService;
 
   private List<OntologyModule> modules;
   private Map<IRI, OntologyModule> modulesMap;
@@ -76,31 +77,10 @@ public class ModuleHandler {
     this.ontologyManager = ontologyManager;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
-    this.automaticCreationOfModules = applicationConfigurationService.getConfigurationData()
-        .getOntologiesConfig()
-        .getAutomaticCreationOfModules();
-
-    this.ontologiesToIgnoreWhenGeneratingModules = applicationConfigurationService.getConfigurationData()
-        .getOntologiesConfig()
-        .getModuleToIgnore()
-        .stream()
-        .map(IRI::create)
-        .collect(Collectors.toSet());
-
-    this.ontologyModuleIgnorePatterns
-        = applicationConfigurationService.getConfigurationData()
-        .getOntologiesConfig()
-        .getModuleIgnorePatterns()
-        .stream()
-        .map(Pattern::compile)
-        .collect(Collectors.toSet());
     this.maturityLevelFactory = maturityLevelFactory;
+    this.applicationConfigurationService = applicationConfigurationService;
 
     this.hasPartAnnotation = OWLManager.getOWLDataFactory().getOWLAnnotationProperty(IRI.create(HAS_PART_IRI));
-    this.moduleClassIri = applicationConfigurationService
-        .getConfigurationData()
-        .getOntologiesConfig()
-        .getModuleClassIri();
   }
 
   public List<OntologyModule> getModules() {
@@ -244,8 +224,31 @@ public class ModuleHandler {
     return maturityLevelFactory.notSet();
   }
 
-  void updateModules() {
+  void refreshModulesHandlerData() {
     this.modules = null;
+    this.automaticCreationOfModules = applicationConfigurationService.getConfigurationData()
+        .getOntologiesConfig()
+        .getAutomaticCreationOfModules();
+
+    this.ontologiesToIgnoreWhenGeneratingModules = applicationConfigurationService.getConfigurationData()
+        .getOntologiesConfig()
+        .getModuleToIgnore()
+        .stream()
+        .map(IRI::create)
+        .collect(Collectors.toSet());
+
+    this.ontologyModuleIgnorePatterns
+        = applicationConfigurationService.getConfigurationData()
+        .getOntologiesConfig()
+        .getModuleIgnorePatterns()
+        .stream()
+        .map(Pattern::compile)
+        .collect(Collectors.toSet());
+
+    this.moduleClassIri = applicationConfigurationService
+        .getConfigurationData()
+        .getOntologiesConfig()
+        .getModuleClassIri();
     // If modules is empty is auto generated again while get
     getModules();
   }
