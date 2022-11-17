@@ -97,18 +97,18 @@ public class DetailsManager {
     OwlListDetails result = null;
 
     if (entityType == EntityType.CLASS) {
-      result = particularClassHandler.handleParticularClass(owlEntity.asOWLClass());
+      result = particularClassHandler.handle(owlEntity.asOWLClass());
     } else if (entityType == EntityType.NAMED_INDIVIDUAL) {
-      result = particularIndividualHandler.handleParticularIndividual(
+      result = particularIndividualHandler.handle(
           owlEntity.asOWLNamedIndividual());
     } else if (entityType == EntityType.OBJECT_PROPERTY) {
-      result = particularObjectPropertyHandler.handleParticularObjectProperty(
+      result = particularObjectPropertyHandler.handle(
           owlEntity.asOWLObjectProperty());
     } else if (entityType == EntityType.DATA_PROPERTY) {
       result = particularDataPropertyHandler.handleParticularDataProperty(
           owlEntity.asOWLDataProperty());
     } else if (entityType == EntityType.DATATYPE) {
-      result = particularDataTypeHandler.handleParticularDatatype(owlEntity.asOWLDatatype());
+      result = particularDataTypeHandler.handle(owlEntity.asOWLDatatype());
     }
 
     if (result == null) {
@@ -148,7 +148,7 @@ public class DetailsManager {
 
     // If '/' is at the end of the URL, we extract the ontology metadata
     if (iriString.endsWith("/")) {
-      result = metadataHandler.handleOntologyMetadata(iri);
+      result = metadataHandler.handle(iri);
     } else {
       result = getEntityListDetails(iri);
     }
@@ -168,7 +168,7 @@ public class DetailsManager {
   public OwlDetails getEntityDetailsByIri(String iriString)
       throws NotFoundElementInOntologyException {
     IRI iri = IRI.create(iriString);
-    OwlListDetails resultDetails = metadataHandler.handleOntologyMetadata(iri);
+    OwlListDetails resultDetails = metadataHandler.handle(iri);
     if (resultDetails == null) {
       resultDetails = getEntityListDetails(iri);
 
@@ -203,15 +203,15 @@ public class DetailsManager {
     OwlListDetails result = null;
 
     if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
-      result = particularClassHandler.handleParticularClass(iri);
+      result = particularClassHandler.handle(iri);
     } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri, INCLUDED)) {
       result = particularDataPropertyHandler.handleParticularDataProperty(iri);
     } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri, INCLUDED)) {
-      result = particularObjectPropertyHandler.handleParticularObjectProperty(iri);
+      result = particularObjectPropertyHandler.handle(iri);
     } else if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
-      result = particularIndividualHandler.handleParticularIndividual(iri);
+      result = particularIndividualHandler.handle(iri);
     } else if (ontologyManager.getOntology().containsDatatypeInSignature(iri, INCLUDED)) {
-      result = particularDataTypeHandler.handleParticularDatatype(iri);
+      result = particularDataTypeHandler.handle(iri);
     } else if (ontologyManager.getOntology().containsAnnotationPropertyInSignature(iri, INCLUDED)) {
       result = annotationsDataHandler.handleParticularAnnotationProperty(iri, getOntology());
     }

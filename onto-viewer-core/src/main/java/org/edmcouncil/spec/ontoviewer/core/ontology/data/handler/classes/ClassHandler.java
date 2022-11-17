@@ -51,7 +51,6 @@ public class ClassHandler {
   private final OntologyManager ontologyManager;
   private final LicenseHandler licenseHandler;
   private final CopyrightHandler copyrightHandler;
-  private final StringIdentifier stringIdentifier;
   private final AxiomsHandler axiomsHandler;
   private final UsageExtractor usageExtractor;
   private final TaxonomyExtractor taxonomyExtractor;
@@ -65,7 +64,7 @@ public class ClassHandler {
       ApplicationConfigurationService applicationConfigurationService,
       EntitiesCacheService entitiesCacheService, OntologyManager ontologyManager,
       LicenseHandler licenseHandler, CopyrightHandler copyrightHandler,
-      StringIdentifier stringIdentifier, AxiomsHandler axiomsHandler, UsageExtractor usageExtractor,
+      AxiomsHandler axiomsHandler, UsageExtractor usageExtractor,
       TaxonomyExtractor taxonomyExtractor, ClassDataHelper extractSubAndSuper,
       QnameHandler qnameHandler, AnnotationsDataHandler particularAnnotationPropertyHandler,
       IndividualDataHelper individualDataHelper, InheritedAxiomsHandler inheritedAxiomsHandler) {
@@ -76,7 +75,6 @@ public class ClassHandler {
     this.ontologyManager = ontologyManager;
     this.licenseHandler = licenseHandler;
     this.copyrightHandler = copyrightHandler;
-    this.stringIdentifier = stringIdentifier;
     this.axiomsHandler = axiomsHandler;
     this.usageExtractor = usageExtractor;
     this.taxonomyExtractor = taxonomyExtractor;
@@ -87,7 +85,7 @@ public class ClassHandler {
     this.inheritedAxiomsHandler = inheritedAxiomsHandler;
   }
 
-  public OwlListDetails handleParticularClass(OWLClass owlClass) {
+  public OwlListDetails handle(OWLClass owlClass) {
     var configurationData = applicationConfigurationService.getConfigurationData();
 
     var ontology = ontologyManager.getOntology();
@@ -97,9 +95,9 @@ public class ClassHandler {
     try {
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(owlClass));
 
-      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handleAxioms(owlClass, ontology);
+      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(owlClass, ontology);
       List<PropertyValue> subclasses = extractSubAndSuper.getSubclasses(axioms);
-      List<PropertyValue> subclasses2 = extractSubAndSuper.getSubclasses(owlClass);
+      List<PropertyValue> subclasses2 = extractSubAndSuper.getSuperClasses(owlClass);
       List<PropertyValue> taxElements2 = taxonomyExtractor.extractTaxonomyElements(subclasses2);
 
       OwlDetailsProperties<PropertyValue> directSubclasses = extractSubAndSuper.handleDirectSubclasses(
@@ -115,7 +113,7 @@ public class ClassHandler {
       }
 
       OwlDetailsProperties<PropertyValue> inheritedAxioms =
-          inheritedAxiomsHandler.handleInheritedAxioms(ontology, owlClass);
+          inheritedAxiomsHandler.handle(ontology, owlClass);
 
       OntologyGraph ontologyGraph = new OntologyGraph(0);
       if (configurationData.getToolkitConfig().isOntologyGraphEnabled()) {
@@ -126,21 +124,21 @@ public class ClassHandler {
       }
       subclasses = extractSubAndSuper.filterSubclasses(subclasses);
 
-      OwlTaxonomyImpl taxonomy = taxonomyExtractor.extractTaxonomy(taxElements2, owlClass.getIRI(),
+      OwlTaxonomyImpl taxonomy = taxonomyExtractor.extractTaxonomy(
+          taxElements2,
+          owlClass.getIRI(),
           ontology,
           AXIOM_CLASS);
       taxonomy.sort();
 
       OwlDetailsProperties<PropertyValue> annotations =
-          particularAnnotationPropertyHandler.handleAnnotations(owlClass.getIRI(), ontology,
+          particularAnnotationPropertyHandler.handleAnnotations(
+              owlClass.getIRI(),
+              ontology,
               resultDetails);
 
-      var copyright = copyrightHandler.getCopyright(classIri);
-      var license = licenseHandler.getLicense(classIri);
-      var qname = qnameHandler.getQName(classIri);
-
       for (PropertyValue subclass : subclasses) {
-        axioms.addProperty(stringIdentifier.subClassOfIriString, subclass);
+        axioms.addProperty(StringIdentifier.subClassOfIriString, subclass);
       }
 
       resultDetails.setTaxonomy(taxonomy);
@@ -150,9 +148,9 @@ public class ClassHandler {
       resultDetails.addAllProperties(individuals);
       resultDetails.addAllProperties(inheritedAxioms);
       resultDetails.addAllProperties(usage);
-      resultDetails.addAllProperties(copyright);
-      resultDetails.addAllProperties(license);
-      resultDetails.setqName(qname);
+      resultDetails.addAllProperties(copyrightHandler.getCopyright(classIri));
+      resultDetails.addAllProperties(licenseHandler.getLicense(classIri));
+      resultDetails.setqName(qnameHandler.getQName(classIri));
       if (ontologyGraph.isEmpty()) {
         resultDetails.setGraph(null);
       } else {
@@ -165,7 +163,7 @@ public class ClassHandler {
     return resultDetails;
   }
 
-  public OwlListDetails handleParticularClass(IRI classIri) {
+  public OwlListDetails handle(IRI classIri) {
     var resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(classIri, OwlType.CLASS);
@@ -174,7 +172,7 @@ public class ClassHandler {
       if (entityEntry != null && entityEntry.isPresent()) {
         var owlClass = entityEntry.getEntityAs(OWLClass.class);
 
-        resultDetails = handleParticularClass(owlClass);
+        resultDetails = handle(owlClass);
       } else {
         LOG.warn("Entity with IRI '{}' not found (is NULL or not present: {}).",
             classIri, entityEntry);

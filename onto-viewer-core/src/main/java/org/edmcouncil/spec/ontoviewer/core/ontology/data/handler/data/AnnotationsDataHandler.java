@@ -42,7 +42,6 @@ import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -53,7 +52,7 @@ public class AnnotationsDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final IRI COMMENT_IRI = OWLRDFVocabulary.RDFS_COMMENT.getIRI();
-
+  private static final String FIBO_QNAME = "QName:";
   private final OwlDataExtractor dataExtractor;
   private final CustomDataFactory customDataFactory;
   private final ScopeIriOntology scopeIriOntology;
@@ -66,7 +65,6 @@ public class AnnotationsDataHandler {
   private final CopyrightHandler copyrightHandler;
   private final ClassDataHelper extractSubAndSuper;
   private final TaxonomyExtractor taxonomyExtractor;
-  private final String FIBO_QNAME = "QName:";
 
   public AnnotationsDataHandler(OwlDataExtractor dataExtractor, CustomDataFactory customDataFactory,
       ScopeIriOntology scopeIriOntology, MaturityLevelFactory maturityLevelFactory,
@@ -251,7 +249,7 @@ public class AnnotationsDataHandler {
           OwlDetailsProperties<PropertyValue> directSubAnnotationProperty =
               handleDirectSubAnnotationProperty(ontology, annotationProperty);
 
-          OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handleAxioms(
+          OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(
               annotationProperty, ontology);
 
           List<PropertyValue> subElements =

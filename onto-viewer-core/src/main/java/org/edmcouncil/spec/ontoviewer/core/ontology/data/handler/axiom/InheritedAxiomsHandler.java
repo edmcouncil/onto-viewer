@@ -43,7 +43,7 @@ public class InheritedAxiomsHandler {
 //   * @param clazz Clazz are all properties of Inherited Axioms.
 //   * @return Class and properties of Inherited Axioms.
 //   */
-  public OwlDetailsProperties<PropertyValue> handleInheritedAxioms(OWLOntology ontology,
+  public OwlDetailsProperties<PropertyValue> handle(OWLOntology ontology,
       OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     String subClassOfKey = ViewerIdentifierFactory.createId(
@@ -62,7 +62,7 @@ public class InheritedAxiomsHandler {
 
     rset.stream()
         .forEachOrdered((c) -> {
-          OwlDetailsProperties<PropertyValue> handleAxioms = axiomsHandler.handleAxioms(c,
+          OwlDetailsProperties<PropertyValue> handleAxioms = axiomsHandler.handle(c,
               ontology);
           for (Map.Entry<String, List<PropertyValue>> entry : handleAxioms.getProperties()
               .entrySet()) {

@@ -37,16 +37,13 @@ public class ClassDataHelper {
 
   private final OntologyManager ontologyManager;
   private final LabelProvider labelProvider;
-  private final StringIdentifier stringIdentifier;
 
-  public ClassDataHelper(OntologyManager ontologyManager, LabelProvider labelProvider,
-      StringIdentifier stringIdentifier) {
+  public ClassDataHelper(OntologyManager ontologyManager, LabelProvider labelProvider) {
     this.ontologyManager = ontologyManager;
     this.labelProvider = labelProvider;
-    this.stringIdentifier = stringIdentifier;
   }
 
-  public List<PropertyValue> getSubclasses(OWLClass clazz) {
+  public List<PropertyValue> getSuperClasses(OWLClass clazz) {
     List<OWLClassExpression> subClasses = EntitySearcher
         .getSuperClasses(clazz, ontologyManager.getOntologyWithImports())
         .collect(Collectors.toList());
@@ -81,7 +78,7 @@ public class ClassDataHelper {
   public List<PropertyValue> getSubclasses(OwlDetailsProperties<PropertyValue> axioms) {
     return axioms
         .getProperties()
-        .getOrDefault(stringIdentifier.subClassOfIriString, new ArrayList<>(0));
+        .getOrDefault(StringIdentifier.subClassOfIriString, new ArrayList<>(0));
   }
 
   public List<PropertyValue> filterSubclasses(List<PropertyValue> subclasses) {
@@ -127,7 +124,7 @@ public class ClassDataHelper {
     OWLProperty prop = null;
     switch (type) {
       case AXIOM_CLASS:
-        return getSubclasses(entity.asOWLClass());
+        return getSuperClasses(entity.asOWLClass());
       case AXIOM_DATA_PROPERTY:
         prop =
             entity.asOWLDataProperty();

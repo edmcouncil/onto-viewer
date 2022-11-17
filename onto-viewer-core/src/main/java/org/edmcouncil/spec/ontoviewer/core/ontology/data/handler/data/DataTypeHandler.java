@@ -40,7 +40,7 @@ public class DataTypeHandler {
     this.annotationsDataHandler = annotationsDataHandler;
   }
 
-  public OwlListDetails handleParticularDatatype(IRI iri) {
+  public OwlListDetails handle(IRI iri) {
     OwlListDetails resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.DATATYPE);
@@ -49,7 +49,7 @@ public class DataTypeHandler {
       if (entityEntry.isPresent()) {
         var datatype = entityEntry.getEntityAs(OWLDatatype.class);
 
-        resultDetails = handleParticularDatatype(datatype);
+        resultDetails = handle(datatype);
       }
     } catch (OntoViewerException ex) {
       LOG.warn("Unable to handle datatype {}. Details: {}", iri, ex.getMessage());
@@ -57,13 +57,13 @@ public class DataTypeHandler {
     return resultDetails;
   }
 
-  public OwlListDetails handleParticularDatatype(OWLDatatype datatype) {
+  public OwlListDetails handle(OWLDatatype datatype) {
     var ontology = ontologyManager.getOntology();
     var resultDetails = new OwlListDetails();
     var iri = datatype.getIRI();
-    var qname = qnameHandler.getQName(iri);
+
     try {
-      resultDetails.setqName(qname);
+      resultDetails.setqName(qnameHandler.getQName(iri));
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
       resultDetails.addAllProperties(
           annotationsDataHandler.handleAnnotations(iri, ontology, resultDetails));

@@ -45,13 +45,12 @@ public class ObjectDataHandler {
   private final AnnotationsDataHandler annotationsDataHandler;
   private final ClassDataHelper extractSubAndSuper;
   private final TaxonomyExtractor taxonomyExtractor;
-  private final StringIdentifier stringIdentifier;
 
   public ObjectDataHandler(EntitiesCacheService entitiesCacheService, LabelProvider labelProvider,
       AxiomsHandler axiomsHandler, OntologyManager ontologyManager, QnameHandler qnameHandler,
       LicenseHandler licenseHandler, CopyrightHandler copyrightHandler,
       AnnotationsDataHandler annotationsDataHandler, ClassDataHelper extractSubAndSuper,
-      TaxonomyExtractor taxonomyExtractor, StringIdentifier stringIdentifier) {
+      TaxonomyExtractor taxonomyExtractor) {
     this.entitiesCacheService = entitiesCacheService;
     this.labelProvider = labelProvider;
     this.axiomsHandler = axiomsHandler;
@@ -62,10 +61,9 @@ public class ObjectDataHandler {
     this.annotationsDataHandler = annotationsDataHandler;
     this.extractSubAndSuper = extractSubAndSuper;
     this.taxonomyExtractor = taxonomyExtractor;
-    this.stringIdentifier = stringIdentifier;
   }
 
-  public OwlListDetails handleParticularObjectProperty(IRI iri) {
+  public OwlListDetails handle(IRI iri) {
     OwlListDetails resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.OBJECT_PROPERTY);
@@ -74,7 +72,7 @@ public class ObjectDataHandler {
       if (entityEntry.isPresent()) {
         var objectProperty = entityEntry.getEntityAs(OWLObjectProperty.class);
 
-        resultDetails = handleParticularObjectProperty(objectProperty);
+        resultDetails = handle(objectProperty);
       }
     } catch (OntoViewerException ex) {
       LOG.warn("Unable to handle object property {}. Details: {}", iri, ex.getMessage());
@@ -83,7 +81,7 @@ public class ObjectDataHandler {
     return resultDetails;
   }
 
-  public OwlListDetails handleParticularObjectProperty(OWLObjectProperty objectProperty) {
+  public OwlListDetails handle(OWLObjectProperty objectProperty) {
     var ontology = ontologyManager.getOntology();
     var iri = objectProperty.getIRI();
     var resultDetails = new OwlListDetails();
@@ -91,7 +89,7 @@ public class ObjectDataHandler {
     try {
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(objectProperty.getIRI()));
 
-      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handleAxioms(objectProperty,
+      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(objectProperty,
           ontology);
       OwlDetailsProperties<PropertyValue> directSubObjectProperty =
           handleDirectSubObjectProperty(ontology, objectProperty);
@@ -111,7 +109,7 @@ public class ObjectDataHandler {
               resultDetails);
 
       for (PropertyValue subElement : subElements) {
-        axioms.addProperty(stringIdentifier.subObjectPropertyOfIriString, subElement);
+        axioms.addProperty(StringIdentifier.subObjectPropertyOfIriString, subElement);
       }
       var qname = qnameHandler.getQName(iri);
       resultDetails.setqName(qname);

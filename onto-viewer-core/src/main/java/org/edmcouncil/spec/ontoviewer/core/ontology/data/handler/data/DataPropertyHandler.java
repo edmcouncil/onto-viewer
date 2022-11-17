@@ -14,7 +14,6 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDirectedSubClassesP
 import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.StringIdentifier;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassDataHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.LicenseHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.TaxonomyExtractor;
@@ -29,7 +28,6 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -92,21 +90,22 @@ public class DataPropertyHandler {
     try {
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(dataProperty.getIRI()));
 
-      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handleAxioms(dataProperty,
+      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(dataProperty,
           ontology);
       OwlDetailsProperties<PropertyValue> directSubDataProperty = handleDirectSubDataProperty(
           ontology, dataProperty);
 
-      List<PropertyValue> subElements =
+      List<PropertyValue> superElements =
           extractSubAndSuper.getSuperElements(dataProperty, ontology, AXIOM_DATA_PROPERTY);
       OwlTaxonomyImpl taxonomy =
-          taxonomyExtractor.extractTaxonomy(subElements, iri, ontology, AXIOM_DATA_PROPERTY);
+          taxonomyExtractor.extractTaxonomy(superElements, iri, ontology, AXIOM_DATA_PROPERTY);
       taxonomy.sort();
 
       OwlDetailsProperties<PropertyValue> annotations =
           particularAnnotationPropertyHandler.handleAnnotations(dataProperty.getIRI(), ontology,
               resultDetails);
       var qname = qnameHandler.getQName(iri);
+
       resultDetails.setqName(qname);
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);

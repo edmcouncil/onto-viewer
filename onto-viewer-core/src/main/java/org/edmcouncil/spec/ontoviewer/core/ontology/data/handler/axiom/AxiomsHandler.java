@@ -31,51 +31,48 @@ import org.springframework.stereotype.Component;
 public class AxiomsHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
-
-  private final StringIdentifier stringIdentifier;
   private final AxiomsHelper axiomsHelper;
 
-  public AxiomsHandler(StringIdentifier stringIdentifier, AxiomsHelper axiomsHelper) {
-    this.stringIdentifier = stringIdentifier;
+  public AxiomsHandler(AxiomsHelper axiomsHelper) {
     this.axiomsHelper = axiomsHelper;
   }
 
-  public OwlDetailsProperties<PropertyValue> handleAxioms(
+  public OwlDetailsProperties<PropertyValue> handle(
       OWLNamedIndividual obj,
       OWLOntology ontology) {
 
     Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handle(axiomsIterator, obj.getIRI());
   }
 
-  public OwlDetailsProperties<PropertyValue> handleAxioms(
+  public OwlDetailsProperties<PropertyValue> handle(
       OWLObjectProperty obj,
       OWLOntology ontology) {
 
     Iterator<OWLObjectPropertyAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handle(axiomsIterator, obj.getIRI());
   }
 
-  public OwlDetailsProperties<PropertyValue> handleAxioms(
+  public OwlDetailsProperties<PropertyValue> handle(
       OWLDataProperty obj,
       OWLOntology ontology) {
     Iterator<OWLDataPropertyAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handle(axiomsIterator, obj.getIRI());
   }
 
-  public OwlDetailsProperties<PropertyValue> handleAxioms(OWLClass obj, OWLOntology ontology) {
+  public OwlDetailsProperties<PropertyValue> handle(OWLClass obj, OWLOntology ontology) {
     Iterator<OWLClassAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handle(axiomsIterator, obj.getIRI());
   }
 
-  public OwlDetailsProperties<PropertyValue> handleAxioms(
+  public OwlDetailsProperties<PropertyValue> handle(
       OWLAnnotationProperty obj,
       OWLOntology ontology) {
     Iterator<OWLAnnotationAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
-    return handleAxioms(axiomsIterator, obj.getIRI());
+    return handle(axiomsIterator, obj.getIRI());
   }
 
-  private <T extends OWLAxiom> OwlDetailsProperties<PropertyValue> handleAxioms(
+  private <T extends OWLAxiom> OwlDetailsProperties<PropertyValue> handle(
       Iterator<T> axiomsIterator,
       IRI elementIri) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
@@ -99,7 +96,7 @@ public class AxiomsHandler {
         continue;
       }
       start = opv.getLastId();
-      if (!key.equals(stringIdentifier.subClassOfIriString) || !opv.getType().equals(TAXONOMY)) {
+      if (!key.equals(StringIdentifier.subClassOfIriString) || !opv.getType().equals(TAXONOMY)) {
         result.addProperty(key, opv);
       }
     }

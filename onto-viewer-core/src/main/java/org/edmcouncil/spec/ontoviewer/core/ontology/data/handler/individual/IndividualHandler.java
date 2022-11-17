@@ -53,7 +53,7 @@ public class IndividualHandler {
     this.graphDataHandler = graphDataHandler;
   }
 
-  public OwlListDetails handleParticularIndividual(OWLNamedIndividual individual) {
+  public OwlListDetails handle(OWLNamedIndividual individual) {
     var ontology = ontologyManager.getOntology();
     var iri = individual.getIRI();
 
@@ -62,7 +62,7 @@ public class IndividualHandler {
     try {
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(individual.getIRI()));
 
-      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handleAxioms(individual, ontology);
+      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(individual, ontology);
 
       OwlDetailsProperties<PropertyValue> annotations =
           annotationsDataHandler.handleAnnotations(individual.getIRI(), ontology, resultDetails);
@@ -89,7 +89,7 @@ public class IndividualHandler {
     return resultDetails;
   }
 
-  public OwlListDetails handleParticularIndividual(IRI iri) {
+  public OwlListDetails handle(IRI iri) {
     OwlListDetails resultDetails = new OwlListDetails();
 
     var entityEntry = entitiesCacheService.getEntityEntry(iri, OwlType.INDIVIDUAL);
@@ -98,7 +98,7 @@ public class IndividualHandler {
       if (entityEntry.isPresent()) {
         var individual = entityEntry.getEntityAs(OWLNamedIndividual.class);
 
-        resultDetails = handleParticularIndividual(individual);
+        resultDetails = handle(individual);
       }
     } catch (OntoViewerException ex) {
       LOG.warn("Unable to handle individual {}. Details: {}", iri, ex.getMessage(), ex);

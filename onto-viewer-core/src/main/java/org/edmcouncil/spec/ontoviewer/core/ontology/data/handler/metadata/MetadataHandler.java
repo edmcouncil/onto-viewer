@@ -44,9 +44,9 @@ public class MetadataHandler {
 
   private final Map<IRI, OntologyResources> resources = new HashMap<>();
 
-  public OwlListDetails handleOntologyMetadata(IRI iri) {
+  public OwlListDetails handle(IRI iri) {
     OwlListDetails ontologyDetails = new OwlListDetails();
-    OwlDetailsProperties<PropertyValue> metadata = handleOntologyMetadata(iri,
+    OwlDetailsProperties<PropertyValue> metadata = handle(iri,
         ontologyDetails);
     if (metadata != null && !metadata.getProperties().keySet().isEmpty()) {
       ontologyDetails.addAllProperties(metadata);
@@ -59,7 +59,7 @@ public class MetadataHandler {
     return null;
   }
 
-  public OwlDetailsProperties<PropertyValue> handleOntologyMetadata(IRI iri,
+  public OwlDetailsProperties<PropertyValue> handle(IRI iri,
       OwlListDetails details) {
     OWLOntology ontology = ontologyManager.getOntology();
     OWLOntologyManager manager = ontology.getOWLOntologyManager();

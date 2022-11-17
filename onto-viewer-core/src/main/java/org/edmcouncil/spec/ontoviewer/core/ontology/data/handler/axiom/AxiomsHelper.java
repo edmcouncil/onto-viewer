@@ -23,20 +23,15 @@ import org.springframework.stereotype.Component;
 public class AxiomsHelper {
 
   private static final Logger LOG = LoggerFactory.getLogger(AxiomsHelper.class);
-
-  private final OwlUtils owlUtils;
-  private final Parser parser;
-
-  public AxiomsHelper(OwlUtils owlUtils, Parser parser) {
-    this.owlUtils = owlUtils;
-    this.parser = parser;
-  }
-
-  private final Set<String> unwantedTypes = new HashSet<>();
-  private final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range",
+  private static final String INVERSE_OF_SUBJECT = "InverseOf";
+  private static final Set<String> SUBJECTS_TO_HIDE = ImmutableSet.of("SubClassOf", "Domain", "Range",
       "SubPropertyOf:",
       "Range:", "Functional:", "Transitive:", "Symmetric:", "Asymmetric", "Reflexive",
       "Irreflexive");
+  private final OwlUtils owlUtils;
+  private final Parser parser;
+  private final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
+  private final Set<String> unwantedTypes = new HashSet<>();
   public final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
   {
@@ -48,8 +43,10 @@ public class AxiomsHelper {
     unwantedTypes.add("^^dateTime");
   }
 
-  private final String INVERSE_OF_SUBJECT = "InverseOf";
-  private final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
+  public AxiomsHelper(OwlUtils owlUtils, Parser parser) {
+    this.owlUtils = owlUtils;
+    this.parser = parser;
+  }
 
   //TODO: refactor this method
   private <T extends OWLAxiom> void processingAxioms(
