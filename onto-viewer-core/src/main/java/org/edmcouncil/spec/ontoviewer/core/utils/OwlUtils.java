@@ -2,17 +2,13 @@ package org.edmcouncil.spec.ontoviewer.core.utils;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.OntologyVisitors;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
@@ -26,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OwlUtils {
 
-  private static final Logger LOG = LoggerFactory.getLogger(OwlDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(OwlUtils.class);
 
   @Autowired
   private OntologyVisitors ontologyVisitors;

@@ -21,7 +21,7 @@ import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntologyCatalogParser;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
@@ -53,30 +53,29 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private final ApplicationConfigurationService applicationConfigurationService;
   private final OntologyManager ontologyManager;
-  private final DataHandler dataHandler;
   private final OntologyTableDataExtractor ontologyTableDataExtractor;
   private final OntologyConsistencyChecker ontologyConsistencyChecker;
   private final OntologyImportsMerger ontologyImportsMerger;
   private final StandardEnvironment environment;
   private final ApplicationConfigProperties applicationConfigProperties;
   private final FileSystemService fileSystemService;
+  private final ResourcesPopulate resourcesPopulate;
 
   public OntoViewerToolkitCommandLine(
       ApplicationConfigurationService applicationConfigurationService,
       OntologyManager ontologyManager,
-      DataHandler dataHandler,
       OntologyTableDataExtractor ontologyTableDataExtractor,
       OntologyConsistencyChecker ontologyConsistencyChecker,
       OntologyImportsMerger ontologyImportsMerger,
       StandardEnvironment environment,
       ApplicationConfigProperties applicationConfigProperties,
-      FileSystemService fileSystemService) {
+      FileSystemService fileSystemService, ResourcesPopulate resourcesPopulate) {
     this.applicationConfigurationService = applicationConfigurationService;
+    this.resourcesPopulate = resourcesPopulate;
     // We don't need the default paths configuration in OV Toolkit
     applicationConfigurationService.getConfigurationData().getOntologiesConfig().getPaths().clear();
 
     this.ontologyManager = ontologyManager;
-    this.dataHandler = dataHandler;
     this.ontologyTableDataExtractor = ontologyTableDataExtractor;
     this.ontologyConsistencyChecker = ontologyConsistencyChecker;
     this.ontologyImportsMerger = ontologyImportsMerger;
@@ -252,7 +251,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       ontologyManager.updateOntology(loadedOntology);
       ontologyManager.setLocationToIriMapping(loadedOntologyData.getPathsToIrisMapping());
       if (shouldPopulateOntologyResources(goal)) {
-        dataHandler.populateOntologyResources();
+        resourcesPopulate.populateOntologyResources();
       }
     } catch (Exception ex) {
       var message = String.format(

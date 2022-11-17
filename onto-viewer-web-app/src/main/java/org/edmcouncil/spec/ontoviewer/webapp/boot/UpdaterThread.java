@@ -7,7 +7,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DataHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
@@ -34,33 +34,33 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private final OntologyManager ontologyManager;
   private final FileSystemService fileSystemService;
   private final UpdateBlocker blocker;
-  private final DataHandler dataHandler;
   private final ScopeIriOntology scopeIriOntology;
   private final OntologyStatsManager ontologyStatsManager;
   private final LuceneSearcher luceneSearcher;
   private final ApplicationConfigurationService applicationConfigurationService;
   private final FallbackService fallbackService;
   private UpdateJob job;
+  private final ResourcesPopulate resourcesPopulate;
 
   protected UpdaterThread(OntologyManager ontologyManager,
       FileSystemService fileSystemService,
       UpdateBlocker blocker,
-      DataHandler dataHandler,
       UpdateJob job,
       ScopeIriOntology scopeIriOntology,
       OntologyStatsManager osm,
       LuceneSearcher luceneSearcher,
       ApplicationConfigurationService applicationConfigurationService,
+      ResourcesPopulate resourcesPopulate,
       FallbackService fallbackService) {
     this.ontologyManager = ontologyManager;
     this.fileSystemService = fileSystemService;
     this.blocker = blocker;
     this.job = job;
-    this.dataHandler = dataHandler;
     this.scopeIriOntology = scopeIriOntology;
     this.ontologyStatsManager = osm;
     this.luceneSearcher = luceneSearcher;
     this.applicationConfigurationService = applicationConfigurationService;
+    this.resourcesPopulate = resourcesPopulate;
     this.fallbackService = fallbackService;
     this.setName("UpdateThread-" + job.getId());
   }
@@ -164,7 +164,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       luceneSearcher.populateIndex();
 
       //load ontology resource must be here, data handler use label provider
-      dataHandler.populateOntologyResources();
+      resourcesPopulate.populateOntologyResources();
 
       ontologyStatsManager.clear();
       ontologyStatsManager.generateStats(ontology);

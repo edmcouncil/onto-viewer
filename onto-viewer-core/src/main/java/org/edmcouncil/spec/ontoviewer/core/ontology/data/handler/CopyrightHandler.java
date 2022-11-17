@@ -12,6 +12,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -19,7 +20,6 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author patrycja.miazek (patrycja.miazek@makolab.com)
  */
 @Service
@@ -29,9 +29,12 @@ public class CopyrightHandler {
   private final ApplicationConfig applicationConfig;
   private final ModuleHandler moduleHandler;
 
-  public CopyrightHandler(OntologyManager ontologyManager, ApplicationConfigurationService applicationConfigurationService, ModuleHandler moduleHandler) {
+  public CopyrightHandler(OntologyManager ontologyManager,
+      ApplicationConfigurationService applicationConfigurationService,
+      ModuleHandler moduleHandler) {
     this.ontologyManager = ontologyManager;
-    this.applicationConfig = applicationConfigurationService.getConfigurationData().getApplicationConfig();
+    this.applicationConfig = applicationConfigurationService.getConfigurationData()
+        .getApplicationConfig();
     this.moduleHandler = moduleHandler;
   }
 
@@ -45,7 +48,8 @@ public class CopyrightHandler {
       var ontologyIriOptional = currentOntology.getOntologyID().getOntologyIRI();
       if (ontologyIriOptional.isPresent()) {
         var currentOntologyIri = ontologyIriOptional.get();
-        var createIri = IRI.create(ontologyIri.getIRIString().substring(0, ontologyIri.getIRIString().length() - 1));
+        var createIri = IRI.create(
+            ontologyIri.getIRIString().substring(0, ontologyIri.getIRIString().length() - 1));
 
         if ((currentOntologyIri.equals(ontologyIri)
             || currentOntologyIri.equals(createIri))
@@ -53,7 +57,8 @@ public class CopyrightHandler {
 
           visitedOntologies.add(currentOntologyIri.toString());
 
-          for (OWLAnnotation annotation : currentOntology.annotations().collect(Collectors.toList())) {
+          for (OWLAnnotation annotation : currentOntology.annotations()
+              .collect(Collectors.toList())) {
             for (String copyrightIri : applicationConfig.getCopyright()) {
               if (copyrightIri.equals(annotation.getProperty().getIRI().toString())) {
 
@@ -82,7 +87,8 @@ public class CopyrightHandler {
   }
 
   public boolean isCopyrightExist(OwlDetailsProperties<PropertyValue> owlDetailsProperties) {
-    for (Map.Entry<String, List<PropertyValue>> entry : owlDetailsProperties.getProperties().entrySet()) {
+    for (Map.Entry<String, List<PropertyValue>> entry : owlDetailsProperties.getProperties()
+        .entrySet()) {
       if (applicationConfig.getCopyright().contains(entry.getKey())) {
         return true;
       }
