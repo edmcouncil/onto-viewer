@@ -5,7 +5,7 @@ import java.util.List;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.ViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ModuleHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.searcher.model.SearcherResult;
 import org.edmcouncil.spec.ontoviewer.core.service.EntityService;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;

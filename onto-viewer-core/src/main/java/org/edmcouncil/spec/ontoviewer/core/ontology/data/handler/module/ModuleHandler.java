@@ -1,4 +1,4 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
+package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +22,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.individual.IndividualDataHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -56,7 +57,7 @@ public class ModuleHandler {
   private final MaturityLevelFactory maturityLevelFactory;
   private final ApplicationConfigurationService applicationConfigurationService;
   private final OntologyManager ontologyManager;
-  private final IndividualDataHandler individualDataHandler;
+  private final IndividualDataHelper individualDataHelper;
   private final LabelProvider labelProvider;
   private final OWLAnnotationProperty hasPartAnnotation;
   // Cache for ontologies' maturity level
@@ -69,12 +70,12 @@ public class ModuleHandler {
   private Map<IRI, OntologyModule> modulesMap;
 
   public ModuleHandler(OntologyManager ontologyManager,
-                       IndividualDataHandler individualDataHandler,
-                       LabelProvider labelProvider,
-                       ApplicationConfigurationService applicationConfigurationService,
-                       MaturityLevelFactory maturityLevelFactory) {
+      IndividualDataHelper individualDataHelper,
+      LabelProvider labelProvider,
+      ApplicationConfigurationService applicationConfigurationService,
+      MaturityLevelFactory maturityLevelFactory) {
     this.ontologyManager = ontologyManager;
-    this.individualDataHandler = individualDataHandler;
+    this.individualDataHelper = individualDataHelper;
     this.labelProvider = labelProvider;
     this.maturityLevelFactory = maturityLevelFactory;
     this.applicationConfigurationService = applicationConfigurationService;
@@ -91,20 +92,20 @@ public class ModuleHandler {
       if (moduleClassIri != null) {
         IRI moduleIri = IRI.create(moduleClassIri);
         Optional<OWLClass> moduleClassOptional = ontology
-                .classesInSignature(Imports.INCLUDED)
-                .filter(c -> c.getIRI().equals(moduleIri))
-                .findFirst();
+            .classesInSignature(Imports.INCLUDED)
+            .filter(c -> c.getIRI().equals(moduleIri))
+            .findFirst();
 
         if (moduleClassOptional.isPresent()) {
           OwlDetailsProperties<PropertyValue> moduleClass
-                  = individualDataHandler.handleClassIndividuals(ontology, moduleClassOptional.get());
+              = individualDataHelper.handleClassIndividuals(ontology, moduleClassOptional.get());
 
           if (!moduleClass.getProperties().isEmpty()) {
             Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
-                    .stream()
-                    .map(OwlListElementIndividualProperty.class::cast)
-                    .map(individualProperty -> individualProperty.getValue().getIri())
-                    .collect(Collectors.toSet());
+                .stream()
+                .map(OwlListElementIndividualProperty.class::cast)
+                .map(individualProperty -> individualProperty.getValue().getIri())
+                .collect(Collectors.toSet());
 
             List<String> rootModulesIris = getRootModulesIris(modulesIris);
 
@@ -223,7 +224,7 @@ public class ModuleHandler {
     return maturityLevelFactory.notSet();
   }
 
-  void refreshModulesHandlerData() {
+  public void refreshModulesHandlerData() {
     this.modules = null;
     this.automaticCreationOfModules = applicationConfigurationService.getConfigurationData()
         .getOntologiesConfig()

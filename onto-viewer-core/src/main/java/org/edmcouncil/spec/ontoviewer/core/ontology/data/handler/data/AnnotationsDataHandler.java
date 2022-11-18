@@ -1,26 +1,44 @@
-package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
+package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data;
 
+import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_ANNOTATION_PROPERTY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
+import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDirectedSubClassesProperty;
+import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassDataHelper;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.LicenseHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.TaxonomyExtractor;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.QnameHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
+import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
+import org.edmcouncil.spec.ontoviewer.core.service.EntitiesCacheService;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
+import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,25 +52,44 @@ public class AnnotationsDataHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(AnnotationsDataHandler.class);
   private static final IRI COMMENT_IRI = OWLRDFVocabulary.RDFS_COMMENT.getIRI();
-
-  private final String FIBO_QNAME = "QName:";
+  private static final String FIBO_QNAME = "QName:";
   private final OwlDataExtractor dataExtractor;
   private final CustomDataFactory customDataFactory;
   private final ScopeIriOntology scopeIriOntology;
   private final MaturityLevelFactory maturityLevelFactory;
+  private final EntitiesCacheService entitiesCacheService;
+  private final LabelProvider labelProvider;
+  private final AxiomsHandler axiomsHandler;
+  private final QnameHandler qnameHandler;
+  private final LicenseHandler licenseHandler;
+  private final CopyrightHandler copyrightHandler;
+  private final ClassDataHelper extractSubAndSuper;
+  private final TaxonomyExtractor taxonomyExtractor;
 
   public AnnotationsDataHandler(OwlDataExtractor dataExtractor, CustomDataFactory customDataFactory,
-      ScopeIriOntology scopeIriOntology, MaturityLevelFactory maturityLevelFactory) {
+      ScopeIriOntology scopeIriOntology, MaturityLevelFactory maturityLevelFactory,
+      EntitiesCacheService entitiesCacheService, LabelProvider labelProvider,
+      AxiomsHandler axiomsHandler, QnameHandler qnameHandler, LicenseHandler licenseHandler,
+      CopyrightHandler copyrightHandler, ClassDataHelper extractSubAndSuper,
+      TaxonomyExtractor taxonomyExtractor) {
     this.dataExtractor = dataExtractor;
     this.customDataFactory = customDataFactory;
     this.scopeIriOntology = scopeIriOntology;
     this.maturityLevelFactory = maturityLevelFactory;
+    this.entitiesCacheService = entitiesCacheService;
+    this.labelProvider = labelProvider;
+    this.axiomsHandler = axiomsHandler;
+    this.qnameHandler = qnameHandler;
+    this.licenseHandler = licenseHandler;
+    this.copyrightHandler = copyrightHandler;
+    this.extractSubAndSuper = extractSubAndSuper;
+    this.taxonomyExtractor = taxonomyExtractor;
   }
 
   /**
-   * @param iri IRI element with annotations to capture
+   * @param iri      IRI element with annotations to capture
    * @param ontology Loaded ontology
-   * @param details <i>QName</i> will be set for this object if found
+   * @param details  <i>QName</i> will be set for this object if found
    * @return Processed annotations
    */
   public OwlDetailsProperties<PropertyValue> handleAnnotations(IRI iri,
@@ -109,7 +146,7 @@ public class AnnotationsDataHandler {
 
   /**
    * @param annotations Stream of OWL annotations
-   * @param details <i>QName</i> will be set for this object if found
+   * @param details     <i>QName</i> will be set for this object if found
    * @return Processed annotations
    */
   public OwlDetailsProperties<PropertyValue> handleOntologyAnnotations(
@@ -156,7 +193,8 @@ public class AnnotationsDataHandler {
           }
         }
       }
-      LOG.debug("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ", propertyValue,
+      LOG.debug("[Data Handler] Find annotation, value: \"{}\", propertyIRI: \"{}\" ",
+          propertyValue,
           propertyiri);
 
       result.addProperty(propertyiri.toString(), propertyValue);
@@ -165,7 +203,8 @@ public class AnnotationsDataHandler {
     return result;
   }
 
-  private void setMaturityLevel(OwlListDetails details, IRI propertyIri, OwlAnnotationIri propertyValue) {
+  private void setMaturityLevel(OwlListDetails details, IRI propertyIri,
+      OwlAnnotationIri propertyValue) {
     var levelString = maturityLevelFactory.getMaturityLevels()
         .stream()
         .map(maturityLevel -> maturityLevel.getIri())
@@ -192,5 +231,87 @@ public class AnnotationsDataHandler {
         opv.setType(OwlType.ANY_URI);
       }
     }
+  }
+
+  public OwlListDetails handleParticularAnnotationProperty(IRI iri, OWLOntology ontology) {
+    OwlListDetails resultDetails = new OwlListDetails();
+
+    var entityEntry =
+        entitiesCacheService.getEntityEntry(iri, OwlType.ANNOTATION_PROPERTY);
+
+    try {
+      if (entityEntry.isPresent()) {
+        var annotationProperty = entityEntry.getEntityAs(OWLAnnotationProperty.class);
+
+        if (annotationProperty.getIRI().equals(iri)) {
+          resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
+
+          OwlDetailsProperties<PropertyValue> directSubAnnotationProperty =
+              handleDirectSubAnnotationProperty(ontology, annotationProperty);
+
+          OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(
+              annotationProperty, ontology);
+
+          List<PropertyValue> subElements =
+              extractSubAndSuper.getSuperElements(annotationProperty, ontology,
+                  AXIOM_ANNOTATION_PROPERTY);
+          OwlTaxonomyImpl taxonomy =
+              taxonomyExtractor.extractTaxonomy(subElements, iri, ontology,
+                  AXIOM_ANNOTATION_PROPERTY);
+          taxonomy.sort();
+
+          OwlDetailsProperties<PropertyValue> annotations =
+              handleAnnotations(annotationProperty.getIRI(), ontology, resultDetails);
+
+          var qname = qnameHandler.getQName(iri);
+          resultDetails.setqName(qname);
+          resultDetails.addAllProperties(annotations);
+          resultDetails.addAllProperties(directSubAnnotationProperty);
+          resultDetails.addAllProperties(axioms);
+          resultDetails.setTaxonomy(taxonomy);
+          resultDetails.addAllProperties(licenseHandler.getLicense(iri));
+          resultDetails.addAllProperties(copyrightHandler.getCopyright(iri));
+        }
+      }
+    } catch (OntoViewerException ex) {
+      LOG.warn("Unable to handle annotation property {}. Details: {}", iri, ex.getMessage());
+    }
+
+    return resultDetails;
+  }
+
+  /**
+   * This method is used to display sub-annotation property
+   *
+   * @param ontology           This is a loaded ontology.
+   * @param annotationProperty AnnotationProperty are all properties of direct
+   *                           subAnnotationProperty.
+   * @return Properties of direct subAnnotationProperty.
+   */
+  public OwlDetailsProperties<PropertyValue> handleDirectSubAnnotationProperty(OWLOntology ontology,
+      OWLAnnotationProperty annotationProperty) {
+    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+
+    //  Iterator<OWLSubAnnotationPropertyOfAxiom> iterator = ontology.subAnnotationPropertyOfAxioms(annotationProperty).iterator();
+    Iterator<OWLAnnotationProperty> iterator = EntitySearcher.getSubProperties(annotationProperty,
+        ontology).iterator();
+    while (iterator.hasNext()) {
+
+      LOG.debug("OwlDataHandler -> handleDirectSubAnnotationProperty {}", iterator.hasNext());
+      OWLAnnotationProperty next = iterator.next();
+
+      IRI iri = next.getIRI();
+
+      OwlDirectedSubClassesProperty r = new OwlDirectedSubClassesProperty();
+
+      r.setType(OwlType.DIRECT_SUBCLASSES);
+      r.setValue(new Pair(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
+
+      String key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.function,
+          OwlType.DIRECT_SUB_ANNOTATION_PROPERTY.name().toLowerCase());
+      result.addProperty(key, r);
+    }
+    result.sortPropertiesInAlphabeticalOrder();
+    return result;
   }
 }
