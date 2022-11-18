@@ -2,7 +2,6 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.visitor;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.OwlDataHandler;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiomVisitorEx;
@@ -23,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContainsVisitors {
 
-  private static final Logger LOG = LoggerFactory.getLogger(OwlDataHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ContainsVisitors.class);
 
   public final OWLObjectVisitorEx<Boolean> isRestrictionVisitor
       = new OWLObjectVisitorEx<Boolean>() {
@@ -130,7 +129,6 @@ public class ContainsVisitors {
         LOG.debug("Unsupported axiom type ObjectProperty: " + object.getClass().getName());
         return false;
       }
-
     };
   }
 }

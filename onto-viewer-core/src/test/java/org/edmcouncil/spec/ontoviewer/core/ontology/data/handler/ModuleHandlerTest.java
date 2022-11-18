@@ -11,8 +11,10 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFil
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.BaseTest;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.individual.IndividualDataHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.junit.jupiter.api.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -135,12 +137,10 @@ class ModuleHandlerTest extends BaseTest {
             IRI.create("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/"),
             IRI.create("file://some_random_path.rdf")));
     var labelProvider = new LabelProvider(configurationService, ontologyManager);
-    var individualDataHandler = new IndividualDataHandler(labelProvider);
+    var individualDataHelper = new IndividualDataHelper(labelProvider);
     var maturityLevelFactory = new MaturityLevelFactory(configurationService);
-    return new ModuleHandler(ontologyManager,
-        individualDataHandler,
-        labelProvider,
-        configurationService, maturityLevelFactory);
+    return new ModuleHandler(ontologyManager, individualDataHelper, labelProvider,
+        maturityLevelFactory, configurationService);
   }
 
   private OntologyManager getOntologyManager(String... ontologyPaths) {
