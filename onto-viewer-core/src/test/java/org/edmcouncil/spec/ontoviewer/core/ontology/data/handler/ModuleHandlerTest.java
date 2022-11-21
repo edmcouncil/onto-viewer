@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlFileBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
@@ -139,8 +140,10 @@ class ModuleHandlerTest extends BaseTest {
     var labelProvider = new LabelProvider(configurationService, ontologyManager);
     var individualDataHelper = new IndividualDataHelper(labelProvider);
     var maturityLevelFactory = new MaturityLevelFactory(configurationService);
-    return new ModuleHandler(ontologyManager, individualDataHelper, labelProvider,
-        maturityLevelFactory, configurationService);
+    var moduleHandler = new ModuleHandler(ontologyManager, individualDataHelper, labelProvider,
+        configurationService, maturityLevelFactory);
+    moduleHandler.refreshModulesHandlerData();
+    return moduleHandler;
   }
 
   private OntologyManager getOntologyManager(String... ontologyPaths) {

@@ -34,7 +34,7 @@ public class ResourcesPopulate {
     var stopwatch = Stopwatch.createStarted();
 
     moduleHelper.setEntityIriToOntologyIriMap(populateEntityIriToOntologyIriMap());
-    this.moduleHandler.updateModules();
+    this.moduleHandler.refreshModulesHandlerData();
 
     LOGGER.info("Finished populating mapping entity IRIs to ontology IRIs in {} seconds.",
         stopwatch.elapsed(TimeUnit.SECONDS));
