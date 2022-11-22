@@ -2,13 +2,20 @@
 
 [Back to README](./README.md)
 
-####  /api/missingImports (GET)
+###  /api/missingImports (GET)
 
-#### Description
+### Description
 
 Return the iri and the cause of the unimported ontology.
 
-#### Example Response
+ ### Example curl (linux)
+  
+```
+curl --location --request GET '<host_and_port/api/missingImports' \
+--header 'Accept: application/json'
+```
+
+### Example Response
 
 ```json
 [

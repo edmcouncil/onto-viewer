@@ -4,12 +4,25 @@
 
 ## Add a new update request to the queue 
 
-#### /api/update?ApiKey={API_KEY} (PUT)
+### /api/update?ApiKey={API_KEY} (PUT)
 
-#### Description 
+### Description 
 Add a new update request to the queue and return information about it. Request should provide an API key through a request param (ApiKey) or a request header (X-API-KEY).
-			
-#### Example Response
+
+ ### Example curl (linux)
+  
+```
+curl --location --request PUT '<host_and_port>/ontology/api/update' \
+--header 'Accept: application/json' \
+--header 'X-API-Key: <api-key>'
+```
+  
+```
+curl --location --request PUT '<host_and_port>/api/update/?ApiKey=<api-key>' \
+--header 'Accept: application/json' 
+```
+
+### Example Response
 
 ```json
 {
@@ -23,9 +36,9 @@ Add a new update request to the queue and return information about it. Request s
 
 ## Get update status
 
-##### /api/update/<updateId,optional>?ApiKey=<apiKey,optional> (GET)
+#### /api/update/<updateId,optional>?ApiKey=<apiKey,optional> (GET)
 
-#### Description
+### Description
 
 Returns an update status for the given `updateId`.  If the `updateId` is not present, the application returns the last
 update object.  Request should provide an API key through a request param (`ApiKey`) or a request header (`X-API-KEY`).
@@ -38,7 +51,16 @@ Response returns one of the following statuses:
 - ERROR
 - INTERRUPT_IN_PROGRESS
 
-#### Example Response
+
+ ### Example curl (linux)
+  
+```
+curl --location --request GET '<host_and_port>' \
+--header 'Accept: application/json' \
+--header 'X-API-Key: <api-key>'
+```
+
+### Example Response
 
 ```json
 {
@@ -50,13 +72,21 @@ Response returns one of the following statuses:
 ```
 
 
-### /api/update?ApiKey=<apiKey,optional> (PUT)
+#### /api/update?ApiKey=<apiKey,optional> (PUT)
 
-#### Description
+### Description
 
 Starts an update of the application, i.e. the application reloads ontologies.
 
-#### Example Response
+ ### Example curl (linux)
+  
+```
+curl --location --request PUT '<host_and_port>/api' \
+--header 'Accept: application/json' \
+--header 'X-API-Key: <api-key>'
+```
+
+### Example Response
 
 ```json
 {

@@ -2,13 +2,20 @@
 
 [Back to README](./README.md)
 
-#### /api/stats (GET)
+### /api/stats (GET)
 
-#### Description
+### Description
 
 Return stats of ontologies read in the application.
 
-#### Example Response
+ ### Example curl (linux)
+  
+```
+curl --location --request GET '<host_and_port>/api/stats' \
+--header 'Accept: application/json'
+```
+
+### Example Response
 
 ```json
 {

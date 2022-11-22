@@ -2,13 +2,20 @@
 
  [Back to README](./README.md)
 
-#### /api/module (GET)
+### /api/module (GET)
 
-#### Description
+### Description
 
 Return a list of modules and submodules from ontology.
 
-#### Example Response
+ ### Example curl (linux)
+  
+```
+curl --location --request GET '<host_and_port>/api/module' \
+--header 'Accept: application/json'
+```
+
+### Example Response
 
 ```json
 [

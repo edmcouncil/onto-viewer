@@ -4,15 +4,21 @@
 
 #### /api/graph (GET)
 
-#### Request Parameters
+### Request Parameters
 - **iri** - required; resource iri.
 - **nodeId** - optional (defult: 0); id of element that will be root node. 
 - **lastId** - optional (defult: 0); last element from the previous graph.
 
-#### Description
+### Description
   Return graph for specific given `iri`. It can be used to expand graph on website, some data like `nodeId` and `lastId` must be given from existing/previous graph.
 
-#### Example Response
+ ### Example curl (linux)
+  
+```
+curl --location --request GET '<host_and_port>/api/graph?iri=https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/ReligiousObjective&nodeId=500&lastId=1000'
+```
+
+### Example Response
 ```
 {
     "lastId": 1003,
