@@ -266,7 +266,7 @@ public class LuceneSearcher {
     var totalHits = (int) topDocs.totalHits.value;
 
     var pageStart = (page - 1) * PAGE_SIZE;
-    var pageEnd = Math.min(pageStart + PAGE_SIZE - 1, totalHits);
+    var pageEnd = Math.min(pageStart + PAGE_SIZE, totalHits);
     if (pageStart > totalHits) {
       return new FindResults(page, PAGE_SIZE, totalHits, findResults);
     }
