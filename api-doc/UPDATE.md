@@ -4,7 +4,7 @@
 
 ## Add a new update request to the queue 
 
-### /api/update?ApiKey={API_KEY} (PUT)
+#### /api/update?ApiKey={API_KEY} (PUT)
 
 ### Description 
 Add a new update request to the queue and return information about it. Request should provide an API key through a request param (ApiKey) or a request header (X-API-KEY).
