@@ -121,8 +121,6 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
         break;
       }
       case EXTRACT_DATA: {
-        addRequiredItemsToGroupsForExactData();
-
         var ontologyTableData = ontologyTableDataExtractor.extractEntityData();
 
         var optionOutputPath = commandLineOptions.getOption(OptionDefinition.OUTPUT)
@@ -284,17 +282,5 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     var applicationVersion = applicationConfigProperties.getApplicationVersion();
     var commitId = applicationConfigProperties.getCommitId();
     return String.format("%s %s (%s)", applicationName, applicationVersion, commitId);
-  }
-
-  private void addRequiredItemsToGroupsForExactData() {
-    var glossaryGroup = applicationConfigurationService.getConfigurationData().getGroupsConfig()
-        .getGroups()
-        .get("Glossary");
-
-    glossaryGroup.add("https://www.omg.org/spec/Commons/AnnotationVocabulary/synonym");
-    glossaryGroup.add("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym");
-    glossaryGroup.add("http://www.w3.org/2004/02/skos/core#definition");
-    glossaryGroup.add("http://www.w3.org/2004/02/skos/core#example");
-    glossaryGroup.add("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote");
   }
 }
