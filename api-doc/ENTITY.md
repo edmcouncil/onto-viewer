@@ -2,7 +2,7 @@
 
  [Back to README](./README.md)
 
- `/api/entity?iri=<iri>`
+ #### /api/entity?iri=`<iri>` (GET)
 
 ### Description
 
