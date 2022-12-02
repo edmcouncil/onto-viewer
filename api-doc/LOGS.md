@@ -15,10 +15,22 @@
 
 ## API key required in header
 #### /api/logs (GET)
-
+  ### Example curl (linux)
+  
+```
+curl --location --request GET '<host_and_port>/api/logs?date=2022-11-22' \
+--header 'X-API-Key: <api-key>' \
+--header 'Accept: text/plain'
+```
 ## API key required in path
-
 #### /api/logs?ApiKey={API_KEY} (GET)
+
+  ### Example curl (linux)
+  
+```
+curl --location -g --request GET '<host_and_port>/api/logs?ApiKey=<api-key>&date=2022-11-22' \
+--header 'Accept: text/plain'
+```
 
 #### Example Response
 ```
