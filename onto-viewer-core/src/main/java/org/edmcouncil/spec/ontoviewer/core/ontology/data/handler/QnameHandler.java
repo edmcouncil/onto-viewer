@@ -1,15 +1,14 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
 import java.util.Map;
-import java.util.stream.Collectors;
+
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
-import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
+import org.edmcouncil.spec.ontoviewer.core.utils.OntologyUtils;
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLDocumentFormat;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,39 +16,34 @@ public class QnameHandler {
 
   private final ModuleHandler moduleHandler;
   private final ApplicationConfigurationService applicationConfigurationService;
-  private final OntologyManager ontologyManager;
+
+  private final OntologyUtils ontologyUtils;
+
 
   public QnameHandler(ModuleHandler moduleHandler,
       ApplicationConfigurationService applicationConfigurationService,
-      OntologyManager ontologyManager) {
+      OntologyUtils ontologyUtils) {
     this.moduleHandler = moduleHandler;
     this.applicationConfigurationService = applicationConfigurationService;
-    this.ontologyManager = ontologyManager;
+
+    this.ontologyUtils = ontologyUtils;
   }
 
   public String getQName(IRI classIri) {
     IRI ontologyIri = moduleHandler.getOntologyIri(classIri);
     if (applicationConfigurationService.getConfigurationData().getApplicationConfig()
         .isDisplayQName()) {
-      for (OWLOntology currentOntology : ontologyManager.getOntology().getOWLOntologyManager()
-          .ontologies()
-          .collect(Collectors.toSet())) {
-        var ontologyIriOptional = currentOntology.getOntologyID().getOntologyIRI();
-        if (ontologyIriOptional.isPresent()) {
-          var currentOntologyIri = ontologyIriOptional.get();
-          if (currentOntologyIri.equals(ontologyIri)
-              || currentOntologyIri.equals(
-              IRI.create(ontologyIri.getIRIString()
-                  .substring(0, ontologyIri.getIRIString().length() - 1)))) {
-            String qNameOntology = getQnameOntology(currentOntology);
-            if (qNameOntology == null) {
-              return "";
-            }
-            String iriFragment = StringUtils.getIdentifier(classIri);
-            String result = qNameOntology + iriFragment;
-            return result;
-          }
+      var optionalOntology = ontologyUtils.getOntologyByIRI(ontologyIri);
+      if (optionalOntology.isPresent()) {
+        var ontology = optionalOntology.get();
+
+        String qNameOntology = getQnameOntology(ontology);
+        if (qNameOntology == null) {
+          return "";
         }
+        String iriFragment = StringUtils.getIdentifier(classIri);
+        String result = qNameOntology + iriFragment;
+        return result;
       }
     }
     return null;

@@ -12,6 +12,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.Parser;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -39,14 +40,18 @@ public class UsageExtractor {
   private final LabelProvider labelProvider;
   private final Parser parser;
   private final AxiomsHelper axiomsHelper;
+  private final DeprecatedHandler deprecatedHandler;
 
-  public UsageExtractor(ContainsVisitors containsVisitors, LabelProvider labelProvider,
+  public UsageExtractor(ContainsVisitors containsVisitors,
+      LabelProvider labelProvider,
       Parser parser,
-      AxiomsHelper axiomsHelper) {
+      AxiomsHelper axiomsHelper,
+      DeprecatedHandler deprecatedHandler) {
     this.containsVisitors = containsVisitors;
     this.labelProvider = labelProvider;
     this.parser = parser;
     this.axiomsHelper = axiomsHelper;
+    this.deprecatedHandler = deprecatedHandler;
   }
 
   public OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz,
@@ -122,6 +127,7 @@ public class UsageExtractor {
       OwlAxiomPropertyEntity prop = new OwlAxiomPropertyEntity();
       prop.setIri(entry.getKey().toString());
       prop.setLabel(labelProvider.getLabelOrDefaultFragment(entry.getKey()));
+      prop.setDeprecated(deprecatedHandler.getDeprecatedForEntity(entry.getKey()));
       opv.addEntityValues("%arg00%", prop);
 
       opv.setValue(sb.toString());
@@ -192,6 +198,7 @@ public class UsageExtractor {
       OwlAxiomPropertyEntity prop = new OwlAxiomPropertyEntity();
       prop.setIri(entry.getKey().toString());
       prop.setLabel(labelProvider.getLabelOrDefaultFragment(entry.getKey()));
+      prop.setDeprecated(deprecatedHandler.getDeprecatedForEntity(entry.getKey()));
       opv.addEntityValues("%arg00%", prop);
 
       opv.setValue(sbo.toString());
@@ -260,6 +267,7 @@ public class UsageExtractor {
       OwlAxiomPropertyEntity prop = new OwlAxiomPropertyEntity();
       prop.setIri(entry.getKey().toString());
       prop.setLabel(labelProvider.getLabelOrDefaultFragment(entry.getKey()));
+      prop.setDeprecated(deprecatedHandler.getDeprecatedForEntity(entry.getKey()));
       opv.addEntityValues("%arg00%", prop);
 
       opv.setValue(sbd.toString());

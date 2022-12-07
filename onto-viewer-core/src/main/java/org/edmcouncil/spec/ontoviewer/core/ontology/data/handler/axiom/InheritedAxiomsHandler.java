@@ -11,6 +11,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.utils.OwlUtils;
@@ -27,13 +28,15 @@ public class InheritedAxiomsHandler {
   private final LabelProvider labelProvider;
   private final OwlUtils owlUtils;
   private final AxiomsHandler axiomsHandler;
+  private final DeprecatedHandler deprecatedHandler;
 
   public InheritedAxiomsHandler(Parser parser, LabelProvider labelProvider, OwlUtils owlUtils,
-      AxiomsHandler axiomsHandler) {
+      AxiomsHandler axiomsHandler, DeprecatedHandler deprecatedHandler) {
     this.parser = parser;
     this.labelProvider = labelProvider;
     this.owlUtils = owlUtils;
     this.axiomsHandler = axiomsHandler;
+    this.deprecatedHandler = deprecatedHandler;
   }
 
   //  /**
@@ -117,6 +120,7 @@ public class InheritedAxiomsHandler {
       OwlAxiomPropertyEntity prop = new OwlAxiomPropertyEntity();
       prop.setIri(entry.getKey().toString());
       prop.setLabel(labelProvider.getLabelOrDefaultFragment(entry.getKey()));
+      prop.setDeprecated(deprecatedHandler.getDeprecatedForEntity(entry.getKey()));
       opv.addEntityValues("%arg00%", prop);
 
       opv.setValue(sb.toString());
