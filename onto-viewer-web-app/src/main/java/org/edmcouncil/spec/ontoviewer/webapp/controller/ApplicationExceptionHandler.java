@@ -1,6 +1,8 @@
 package org.edmcouncil.spec.ontoviewer.webapp.controller;
 
+import okhttp3.Response;
 import org.edmcouncil.spec.ontoviewer.core.exception.ApplicationNotInitializedException;
+import org.edmcouncil.spec.ontoviewer.core.exception.IntegrationNotConfiguredException;
 import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
 import org.edmcouncil.spec.ontoviewer.core.exception.RequestHandlingException;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
@@ -40,5 +42,13 @@ public class ApplicationExceptionHandler {
         "Element not found.",
         exception.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(value = IntegrationNotConfiguredException.class)
+  ResponseEntity<ErrorResponse> handleIntegrationNotConfiguredException(IntegrationNotConfiguredException exception) {
+    var errorResponse = new ErrorResponse(
+        "Integration is not configured",
+        exception.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.SERVICE_UNAVAILABLE);
   }
 }
