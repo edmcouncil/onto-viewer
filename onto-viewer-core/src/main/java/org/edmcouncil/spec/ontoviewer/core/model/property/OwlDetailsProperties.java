@@ -35,17 +35,23 @@ public class OwlDetailsProperties<T> {
     }
 
     boolean notYetAdded = true;
-    if (property instanceof OwlAxiomPropertyValue) {
-      var propertyAsOwlAxiom = (OwlAxiomPropertyValue) property;
-
-      for (T currentProperty : propertiesList) {
-        if (currentProperty instanceof OwlAxiomPropertyValue) {
-          var owlAxiomPropertyValue = (OwlAxiomPropertyValue) currentProperty;
-          if (propertyAsOwlAxiom.getFullRenderedString().equals(
-              owlAxiomPropertyValue.getFullRenderedString())) {
-            notYetAdded = false;
-            break;
-          }
+    for (T currentProperty : propertiesList) {
+      if (property instanceof OwlAxiomPropertyValue
+          && currentProperty instanceof OwlAxiomPropertyValue) {
+        var propertyAsOwlAxiom = (OwlAxiomPropertyValue) property;
+        var owlAxiomPropertyValue = (OwlAxiomPropertyValue) currentProperty;
+        if (propertyAsOwlAxiom.getFullRenderedString().equals(
+            owlAxiomPropertyValue.getFullRenderedString())) {
+          notYetAdded = false;
+          break;
+        }
+      } else if (property instanceof OwlAnnotationPropertyValueWithSubAnnotations
+          && currentProperty instanceof OwlAnnotationPropertyValueWithSubAnnotations) {
+        var owlAxiomPropertyValue = (OwlAnnotationPropertyValueWithSubAnnotations) currentProperty;
+        if (((OwlAnnotationPropertyValueWithSubAnnotations) currentProperty).getValue().equals(
+            owlAxiomPropertyValue.getValue())) {
+          notYetAdded = false;
+          break;
         }
       }
     }
@@ -121,7 +127,8 @@ public class OwlDetailsProperties<T> {
 
   @Override
   public String toString() {
-    return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties=" + properties.toString() + '}';
+    return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties="
+        + properties.toString() + '}';
   }
 
   public void release() {
