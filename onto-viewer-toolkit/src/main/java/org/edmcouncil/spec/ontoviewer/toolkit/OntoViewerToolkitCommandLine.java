@@ -105,22 +105,29 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     populateConfiguration(commandLineOptions);
 
     var goal = resolveGoal();
-    loadOntology(goal);
 
     LOGGER.info("Running goal '{}'...", goal.getName());
     switch (goal) {
       case CONSISTENCY_CHECK: {
-        var consistencyResult = ontologyConsistencyChecker.checkOntologyConsistency();
+        var consistencyResult = false;
+        try {
+          loadOntology(goal);
+          consistencyResult = ontologyConsistencyChecker.checkOntologyConsistency();
+        } catch (Exception ex) {
+          LOGGER.error("Exception occurred while checking ontology consistency check: {}", ex.getMessage(), ex);
+        }
 
         var optionOutputPath = commandLineOptions.getOption(OptionDefinition.OUTPUT)
-            .orElseThrow(() ->
-                new OntoViewerToolkitRuntimeException("There is no option for output path set."));
-        var outputPath = Path.of(optionOutputPath);
-        new TextWriter().write(outputPath, consistencyResult);
+              .orElseThrow(() ->
+                  new OntoViewerToolkitRuntimeException("There is no option for output path set."));
+          var outputPath = Path.of(optionOutputPath);
+          new TextWriter().write(outputPath, consistencyResult);
 
         break;
       }
       case EXTRACT_DATA: {
+        loadOntology(goal);
+
         addRequiredItemsToGroupsForExactData();
 
         var ontologyTableData = ontologyTableDataExtractor.extractEntityData();
@@ -134,6 +141,8 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
         break;
       }
       case MERGE_IMPORTS:
+        loadOntology(goal);
+
         var newOntologyIriOptional = commandLineOptions.getOption(ONTOLOGY_IRI);
         if (newOntologyIriOptional.isEmpty()) {
           throw new OntoViewerToolkitRuntimeException("'ontology-iri' for 'merge-imports' goal should be provided");
