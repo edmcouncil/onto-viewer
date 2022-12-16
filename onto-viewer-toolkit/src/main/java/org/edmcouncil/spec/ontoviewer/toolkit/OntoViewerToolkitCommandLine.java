@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
@@ -24,6 +25,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.LoadedOntologyData;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
@@ -126,6 +128,17 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
         var outputPath = Path.of(optionOutputPath);
         var loadingDetails = loadedOntologyData != null ? loadedOntologyData.getLoadingDetails() : null;
         var consistencyCheckResult = new ConsistencyCheckResult(consistencyResult, loadingDetails);
+        if (!consistencyCheckResult.getLoadingDetails().getMissingImports().isEmpty()) {
+          var missingOntologies = consistencyCheckResult.getLoadingDetails().getMissingImports()
+              .stream()
+              .map(MissingImport::getIri)
+              .collect(Collectors.toList());
+          LOGGER.info("Consistency check result {} with missing imports: {}",
+              consistencyCheckResult.isConsistent(),
+              missingOntologies);
+        } else {
+          LOGGER.info("Consistency check result: {}", consistencyCheckResult.isConsistent());
+        }
         new TextWriter().write(outputPath, consistencyCheckResult);
 
         break;
