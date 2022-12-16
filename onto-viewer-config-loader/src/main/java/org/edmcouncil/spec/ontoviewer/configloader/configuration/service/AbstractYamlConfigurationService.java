@@ -15,6 +15,8 @@ import org.apache.commons.io.IOUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.*;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.GroupsConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.Integration;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.IntegrationsConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
@@ -87,7 +89,12 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
           var ontologiesConfig = handleOntologies((Map<String, Object>) entry.getValue());
           configuration.setOntologiesConfig(ontologiesConfig);
           break;
-      
+        case INTEGRATIONS:
+          @SuppressWarnings("unchecked")
+          var integrationsMap = (List<Map<String, Object>>) entry.getValue();
+          var integrationsConfig = handleIntegrationsConfig(integrationsMap);
+          configuration.setIntegrationsConfig(integrationsConfig);
+          break;
         default:
           LOGGER.warn("Unknown top-level configuration key {}.", configurationKey);
       }
@@ -247,6 +254,34 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
 
     return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns,
         moduleToIgnore, maturityLevelDefinition, automaticCreationOfModules, moduleClassIri);
+  }
+
+  protected IntegrationsConfig handleIntegrationsConfig(List<Map<String, Object>> integrationsList) {
+    Map<String, Integration> integrations = new HashMap<>();
+    if (integrationsList == null) {
+      return new IntegrationsConfig(integrations);
+    }
+
+    for (Map<String, Object> integrationMap : integrationsList) {
+      var integrationId = integrationMap.get(INTEGRATION_ID.getLabel());
+      var integrationUrl = integrationMap.get(INTEGRATION_URL.getLabel());
+      var integrationAccessToken = integrationMap.get(INTEGRATION_ACCESS_TOKEN.getLabel());
+
+      if (integrationId == null || integrationUrl == null || integrationAccessToken == null) {
+        LOGGER.error("Missing data while reading integrations config: "
+            + "integrationId={}, integrationUrl={}, integrationAccessToken=[----]",
+            integrationId, integrationUrl);
+        continue;
+      }
+
+      var integration = new Integration(
+          integrationId.toString(),
+          integrationUrl.toString(),
+          integrationAccessToken.toString());
+      integrations.put(integrationId.toString(), integration);
+    }
+
+    return new IntegrationsConfig(integrations);
   }
 
   protected List<Pair> getMaturityLevelDefinitionNameList(Object maturityLevelDefinitionNameList) {

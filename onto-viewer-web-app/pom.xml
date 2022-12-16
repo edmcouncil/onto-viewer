@@ -81,6 +81,10 @@
       <artifactId>lucene-highlighter</artifactId>
       <version>${lucene.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+    </dependency>
 
     <!-- Testing -->
     <dependency>

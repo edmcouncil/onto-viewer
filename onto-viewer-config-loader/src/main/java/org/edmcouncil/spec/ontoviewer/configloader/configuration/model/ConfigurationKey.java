@@ -45,7 +45,13 @@ public enum ConfigurationKey {
   COPYRIGHT("copyright"),
   DISPLAY_LICENSE("display_license"),
   DISPLAY_COPYRIGHT("display_copyright"),
-  DISPLAY_QNAME("display_qname");
+  DISPLAY_QNAME("display_qname"),
+  // Integration Config
+  INTEGRATIONS("integrations"),
+  INTEGRATION("integration"),
+  INTEGRATION_ID("id"),
+  INTEGRATION_URL("url"),
+  INTEGRATION_ACCESS_TOKEN("accessToken");
 
   private final String label;
   ConfigurationKey(String label) {

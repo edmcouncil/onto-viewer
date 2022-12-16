@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -23,6 +24,7 @@ import org.apache.commons.io.IOUtils;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.GroupsConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.IntegrationsConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
@@ -39,7 +41,13 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   private static final Logger LOGGER = LoggerFactory.getLogger(YamlFileBasedConfigurationService.class);
   private static final Set<String> SUPPORTED_EXTENSIONS = Set.of("yaml", "yml");
   private static final Set<String> CONFIG_FILES_NAMES =
-      Set.of("groups_config.yaml", "label_config.yaml", "ontology_config.yaml", "search_config.yaml", "application_config.yaml");
+      Set.of(
+          "groups_config.yaml",
+          "label_config.yaml",
+          "ontology_config.yaml",
+          "search_config.yaml",
+          "application_config.yaml",
+          "integration_config.yaml");
 
   private final FileSystemService fileSystemService;
 
@@ -182,50 +190,65 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     if (configuration != null) {
       for (Entry<String, Object> configEntry : configuration.entrySet()) {
         ConfigurationKey configKey = byName(configEntry.getKey());
+        Object configEntryValue = configEntry.getValue();
 
-        @SuppressWarnings("unchecked")
-        var configEntryValue = (Map<String, Object>) configEntry.getValue();
+        if (configEntryValue instanceof Map) {
+          @SuppressWarnings("unchecked")
+          var configMap = (Map<String, Object>) configEntryValue;
 
-        switch (configKey) {
-          case GROUPS_CONFIG: {
-            GroupsConfig groupsConfig = handleGroupsConfig(configEntryValue);
-            configurationDataCandidate.setGroupsConfig(groupsConfig);
-            break;
-          }
-          case LABEL_CONFIG: {
-            LabelConfig labelConfig = handleLabelConfig(configEntryValue);
-            configurationDataCandidate.setLabelConfig(labelConfig);
-            break;
-          }
-          case SEARCH_CONFIG: {
-            SearchConfig searchConfig = handleSearchConfig(configEntryValue);
-            configurationDataCandidate.setSearchConfig(searchConfig);
-            break;
-          }
-          case APPLICATION_CONFIG: {
-            ApplicationConfig applicationConfig = handleApplicationConfig(configEntryValue);
-            configurationDataCandidate.setApplicationConfig(applicationConfig);
-            break;
-          }
-          case ONTOLOGIES: {
-            OntologiesConfig ontologiesConfig = handleOntologies(configEntryValue);
-            configurationDataCandidate.setOntologiesConfig(ontologiesConfig);
+          switch (configKey) {
+            case GROUPS_CONFIG: {
+              GroupsConfig groupsConfig = handleGroupsConfig(configMap);
+              configurationDataCandidate.setGroupsConfig(groupsConfig);
+              break;
+            }
+            case LABEL_CONFIG: {
+              LabelConfig labelConfig = handleLabelConfig(configMap);
+              configurationDataCandidate.setLabelConfig(labelConfig);
+              break;
+            }
+            case SEARCH_CONFIG: {
+              SearchConfig searchConfig = handleSearchConfig(configMap);
+              configurationDataCandidate.setSearchConfig(searchConfig);
+              break;
+            }
+            case APPLICATION_CONFIG: {
+              ApplicationConfig applicationConfig = handleApplicationConfig(configMap);
+              configurationDataCandidate.setApplicationConfig(applicationConfig);
+              break;
+            }
+            case ONTOLOGIES: {
+              OntologiesConfig ontologiesConfig = handleOntologies(configMap);
+              configurationDataCandidate.setOntologiesConfig(ontologiesConfig);
 
-            if (catalogPath != null && !catalogPath.isBlank()) {
-              ontologiesConfig.getCatalogPaths().clear();
-              ontologiesConfig.getCatalogPaths().add(catalogPath);
+              if (catalogPath != null && !catalogPath.isBlank()) {
+                ontologiesConfig.getCatalogPaths().clear();
+                ontologiesConfig.getCatalogPaths().add(catalogPath);
+              }
+              if (downloadDirectory != null && !downloadDirectory.isBlank()) {
+                ontologiesConfig.getDownloadDirectory().clear();
+                ontologiesConfig.getDownloadDirectory().add(downloadDirectory);
+              }
+              if (zipUrl != null && zipUrl.length > 0) {
+                ontologiesConfig.getZipUrls().addAll(Arrays.asList(zipUrl));
+              }
+              break;
             }
-            if (downloadDirectory != null && !downloadDirectory.isBlank()) {
-              ontologiesConfig.getDownloadDirectory().clear();
-              ontologiesConfig.getDownloadDirectory().add(downloadDirectory);
-            }
-            if (zipUrl != null && zipUrl.length>0) {
-              ontologiesConfig.getZipUrls().addAll(Arrays.asList(zipUrl));
-            }
-            break;
+            default:
+              LOGGER.warn("Config key '{}' is not expected.", configKey);
           }
-          default:
-            LOGGER.warn("Config key '{}' is not expected.", configKey);
+        } else if (configEntryValue instanceof List) {
+          @SuppressWarnings("unchecked")
+          var configList = (List<Map<String, Object>>) configEntryValue;
+
+          switch (configKey) {
+            case INTEGRATIONS:
+              IntegrationsConfig integrationsConfig = handleIntegrationsConfig(configList);
+              configurationDataCandidate.setIntegrationsConfig(integrationsConfig);
+              break;
+            default:
+              LOGGER.warn("Config key '{}' is not expected.", configKey);
+          }
         }
       }
       OntologiesConfig ontologiesConfig = configurationDataCandidate.getOntologiesConfig();
@@ -235,7 +258,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
           String[] zip = fileUrl.split("#");
           if ((zip.length > 1) && (zip[1].length() > 0)) {
             Path path = Paths.get(downloadDirectory.concat("/").concat(zip[1]));
-            LOGGER.info("CATALOG_FILE={}", path.normalize().toString());
+            LOGGER.info("CATALOG_FILE={}", path.normalize());
             ontologiesConfig.getCatalogPaths().add(path.normalize().toString());
           }
         }
