@@ -1,13 +1,9 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.io;
 
-import static java.nio.file.StandardOpenOption.CREATE;
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
-import static java.nio.file.StandardOpenOption.WRITE;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
+import org.edmcouncil.spec.ontoviewer.toolkit.model.ConsistencyCheckResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,17 +11,14 @@ public class TextWriter {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(TextWriter.class);
 
-  public void write(Path outputPath, boolean consistencyResult) {
-    var result = Boolean.toString(consistencyResult);
+  public void write(Path outputPath, ConsistencyCheckResult consistencyCheckResult) {
+    var objectMapper = new ObjectMapper();
     try {
-      Files.write(
-          outputPath,
-          result.getBytes(StandardCharsets.UTF_8),
-          WRITE, CREATE, TRUNCATE_EXISTING);
+      objectMapper.writeValue(outputPath.toFile(), consistencyCheckResult);
     } catch (IOException ex) {
       LOGGER.error(
           String.format("Exception thrown while writing consistency result '%s' to the output path '%s'. Details: %s",
-              consistencyResult,
+              consistencyCheckResult,
               outputPath,
               ex.getMessage()
           ), ex);

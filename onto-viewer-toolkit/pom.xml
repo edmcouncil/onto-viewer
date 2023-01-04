@@ -18,6 +18,7 @@
     <commons.cli.version>1.4</commons.cli.version>
     <commons.csv.version>1.9.0</commons.csv.version>
     <openllet.version>2.6.5</openllet.version>
+    <jackson.version>2.14.1</jackson.version>
   </properties>
 
   <dependencies>
@@ -51,6 +52,7 @@
       <artifactId>openllet-explanation</artifactId>
       <version>${openllet.version}</version>
     </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
