@@ -144,12 +144,9 @@ public class AnnotationsDataHandler {
 
   private PropertyValue extractSubAnnotation(OWLAnnotation owlAnnotation) {
     String value = owlAnnotation.annotationValue().toString();
-
     PropertyValue annotationValue = new OwlAnnotationPropertyValue();
     annotationValue.setType(dataExtractor.extractAnnotationType(owlAnnotation));
-    //annotationValue.se
     annotationValue = getAnnotationPropertyValue(owlAnnotation, value, annotationValue);
-
     return annotationValue;
   }
 
@@ -181,7 +178,6 @@ public class AnnotationsDataHandler {
         annotationPropertyValue = customDataFactory.createAnnotationIri(value);
       }
     }
-
     return annotationPropertyValue;
   }
 
@@ -359,6 +355,4 @@ public class AnnotationsDataHandler {
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
-
-
 }

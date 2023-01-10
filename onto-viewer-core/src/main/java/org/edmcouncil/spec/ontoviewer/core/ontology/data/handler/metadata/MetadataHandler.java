@@ -64,6 +64,7 @@ public class MetadataHandler {
     OWLOntology ontology = ontologyManager.getOntology();
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
+
     for (OWLOntology currentOntology : manager.ontologies().collect(Collectors.toSet())) {
       var ontologyIriOptional = currentOntology.getOntologyID().getOntologyIRI();
       if (ontologyIriOptional.isPresent()) {

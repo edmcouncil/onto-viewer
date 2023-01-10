@@ -40,4 +40,31 @@ public class ExpressionReturnedClass {
     return "ExpressionReturnedClass{" + "owlClassExpression=" + owlClassExpression + ", not=" + not + ", equivalent=" + equivalent + '}';
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    ExpressionReturnedClass that = (ExpressionReturnedClass) o;
+
+    if (!owlClassExpression.equals(that.owlClassExpression)) {
+      return false;
+    }
+    if (!not.equals(that.not)) {
+      return false;
+    }
+    return equivalent.equals(that.equivalent);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = owlClassExpression.hashCode();
+    result = 31 * result + not.hashCode();
+    result = 31 * result + equivalent.hashCode();
+    return result;
+  }
 }

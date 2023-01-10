@@ -48,9 +48,15 @@ public class OwlDetailsProperties<T> {
       } else if (property instanceof OwlAnnotationPropertyValueWithSubAnnotations
           && currentProperty instanceof OwlAnnotationPropertyValueWithSubAnnotations) {
         var owlAxiomPropertyValue = (OwlAnnotationPropertyValueWithSubAnnotations) currentProperty;
-        if (((OwlAnnotationPropertyValueWithSubAnnotations) currentProperty).getValue().equals(
-            owlAxiomPropertyValue.getValue())) {
+        var propertyAsOwlAxiomPropertyValue = (OwlAnnotationPropertyValueWithSubAnnotations) property;
+
+        if (owlAxiomPropertyValue.getValue().equals(propertyAsOwlAxiomPropertyValue.getValue())) {
           notYetAdded = false;
+          if (propertyAsOwlAxiomPropertyValue.getSubAnnotations() != null
+              && !propertyAsOwlAxiomPropertyValue.getSubAnnotations().isEmpty()) {
+            int index = propertiesList.indexOf(currentProperty);
+            propertiesList.set(index, property);
+          }
           break;
         }
       }
