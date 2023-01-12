@@ -204,6 +204,10 @@ public class DetailsManager {
 
     if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
       result = particularClassHandler.handle(iri);
+      if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
+        var individualResult = particularIndividualHandler.handle(iri);
+        mergeProperties(result, individualResult);
+      }
     } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri, INCLUDED)) {
       result = particularDataPropertyHandler.handleParticularDataProperty(iri);
     } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri, INCLUDED)) {
@@ -287,5 +291,9 @@ public class DetailsManager {
         "Glossary",
         "generated description",
         descriptionValue)));
+  }
+
+  private void mergeProperties(OwlListDetails result, OwlListDetails otherResult) {
+    result.addAllProperties(otherResult.getAllProperties());
   }
 }
