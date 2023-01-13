@@ -59,6 +59,10 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     var configuration = new ConfigurationData();
 
     for (Entry<String, Object> entry : defaultConfiguration.entrySet()) {
+      if (!ConfigurationKey.isDefined(entry.getKey())) {
+        continue;
+      }
+
       var configurationKey = byName(entry.getKey());
       switch (configurationKey) {
         case GROUPS_CONFIG:
