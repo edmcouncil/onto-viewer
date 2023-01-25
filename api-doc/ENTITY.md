@@ -2,116 +2,64 @@
 
  [Back to README](./README.md)
 
-#### /api/entity?iri=<iri>
+ #### /api/entity?iri=`<iri>` (GET)
 
-#### Description
+### Description
 
 Returns a named entity of any type (class, individual, ontology etc.) from ontologies with the given `iri`.  If an entity is not present, `404` is returned.
 
-#### Example Response
+### Example curl (linux)
+
+```
+curl --location --request GET '<host_and_port>/api/entity?iri=http://www.w3.org/2000/01/rdf-schema%23label' \
+--header 'Accept: application/json'
+```
+
+### Example Response
 
 (Some parts of the response were removed for the brevity sake.)
 
 ```json
-"type":"details",
-   "result":{
-      "label":"mortgage",
-      "iri":"https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/Mortgage",
-      "qName":"",
-      "taxonomy":{
-         "value":[
-            [
-               {
-                  "iri":"http://www.w3.org/2002/07/owl#Thing",
-                  "label":"Thing"
-               },
-               {
-                  "iri":"https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/CollateralizedSecuredLoan",
-                  "label":"CollateralizedSecuredLoan"
-               },
-               {
-                  "iri":"https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/Mortgage",
-                  "label":"mortgage"
-               }
+{
+    "type": "details",
+    "result": {
+        "label": "label",
+        "iri": "http://www.w3.org/2000/01/rdf-schema#label",
+        "qName": null,
+        "taxonomy": {
+            "value": [
+                [
+                    {
+                        "iri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+                        "label": "Property"
+                    },
+                    {
+                        "iri": "http://www.w3.org/2000/01/rdf-schema#label",
+                        "label": "label"
+                    }
+                ]
             ]
-         ]
-      },
-      "locationInModules":[
-         "https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/"
-      ],
-      "graph":{
-         "lastId":0,
-         "nodes":[
-            
-         ],
-         "edges":[
-            
-         ],
-         "root":null
-      },
-      "maturityLevel":{
-         "label":"provisional",
-         "iri":"https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional",
-         "icon":"develop"
-      },
-      "properties":{
-         "Glossary":{
-            "label":[
-               {
-                  "type":"STRING",
-                  "value":"mortgage"
-               }
-            ],
-            "definition":[
-               {
-                  "type":"STRING",
-                  "value":"a loan contract that is secured by real property"
-               }
-            ],
-            "editorial note":[
-               
-            ],
-            "generated description":[
-               
-            ]
-         },
-         "Ontological characteristic":{
-            "Direct subclasses":[
-               
-            ],
-            "Equivalent classes (necessary and sufficient criteria)":[
-               
-            ],
-            "IS-A restrictions":[
-               
-            ],
-            "IS-A restrictions inherited from superclasses":[
-               
-            ],
-            "Usage":[
-               
-            ]
-         },
-         "Meta-information":{
-            "is defined by":[
-               {
-                  "type":"IRI",
-                  "value":{
-                     "iri":"https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
-                     "label":"MortgageLoans"
-                  }
-               }
-            ]
-         },
-         "other":{
-            "adapted from":[
-               {
-                  "type":"STRING",
-                  "value":"the Cambridge Business English Dictionary"
-               }
-            ]
-         }
-      }
-   }
+        },
+        "locationInModules": [
+            "https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/FNDDomain",
+            "https://spec.edmcouncil.org/fibo/ontology/FND/Places/MetadataFNDPlaces/PlacesModule",
+            "https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/"
+        ],
+        "graph": null,
+        "maturityLevel": {
+            "label": "Not Set",
+            "iri": "https://spec.edmcouncil.org/ontoviewer/NotSet"
+        },
+        "properties": {
+            "Glossary": {
+                "generated description": [
+                    {
+                        "type": "STRING",
+                        "value": "Own descriptions:\n- Label is a kind of Property."
+                    }
+                ]
+            }
+        }
+    }
 }
 ```

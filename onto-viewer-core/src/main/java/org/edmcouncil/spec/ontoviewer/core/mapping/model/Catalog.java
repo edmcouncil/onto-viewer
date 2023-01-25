@@ -5,7 +5,7 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-@Root
+@Root(strict = false)
 public class Catalog {
 
   @Attribute

@@ -2,7 +2,6 @@ package org.edmcouncil.spec.ontoviewer.webapp.service;
 
 import com.google.common.collect.Lists;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -24,15 +23,15 @@ public class LogsService {
 
   private static final Logger LOG = LoggerFactory.getLogger(LogsApiController.class);
   private static final String DATE_FORMAT_STRING = "yyyy-MM-dd";
+  private static final DateFormat DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_STRING);
 
   private final FileSystemService fileSystemService;
-  private final DateFormat DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT_STRING);
 
   public LogsService(FileSystemService fileSystemService) {
     this.fileSystemService = fileSystemService;
   }
 
-  public List<String> getLogs(String date) throws FileNotFoundException, IOException {
+  public List<String> getLogs(String date) throws IOException {
     Path logsDirectoryPath = fileSystemService.getViewerHomeDir().resolve("logs");
     Path logFilePath = null;
 

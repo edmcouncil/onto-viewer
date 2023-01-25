@@ -1,8 +1,10 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class ConfigurationData {
 
@@ -11,6 +13,7 @@ public class ConfigurationData {
   private SearchConfig searchConfig;
   private OntologiesConfig ontologiesConfig;
   private ApplicationConfig applicationConfig;
+  private IntegrationsConfig integrationsConfig = new IntegrationsConfig(Collections.emptyMap());
   private ToolkitConfig toolkitConfig = new ToolkitConfig();
 
   public GroupsConfig getGroupsConfig() {
@@ -61,6 +64,14 @@ public class ConfigurationData {
     this.toolkitConfig = toolkitConfig;
   }
 
+  public IntegrationsConfig getIntegrationsConfig() {
+    return integrationsConfig;
+  }
+
+  public void setIntegrationsConfig(IntegrationsConfig integrationsConfig) {
+    this.integrationsConfig = integrationsConfig;
+  }
+
   public static class ApplicationConfig {
 
     private final List<String> license;
@@ -69,7 +80,8 @@ public class ConfigurationData {
     private final boolean displayLicense;
     private final boolean displayCopyright;
 
-    public ApplicationConfig(List<String> license, List<String> copyright, boolean displayLicense, boolean displayCopyright, boolean displayQName) {
+    public ApplicationConfig(List<String> license, List<String> copyright, boolean displayLicense,
+        boolean displayCopyright, boolean displayQName) {
       this.license = license;
       this.copyright = copyright;
       this.displayLicense = displayLicense;
@@ -127,8 +139,7 @@ public class ConfigurationData {
     private List<UserDefaultName> defaultNames;
 
     public LabelConfig(boolean displayLabel, LabelPriority labelPriority, boolean forceLabelLang, String labelLang,
-        MissingLanguageAction missingLanguageAction,
-        List<UserDefaultName> defaultNames) {
+        MissingLanguageAction missingLanguageAction, List<UserDefaultName> defaultNames) {
       this.displayLabel = displayLabel;
       this.labelPriority = labelPriority;
       this.forceLabelLang = forceLabelLang;
@@ -232,15 +243,9 @@ public class ConfigurationData {
     private final String moduleClassIri;
     private List<Pair> maturityLevelDefinition;
 
-    public OntologiesConfig(List<String> urls,
-        List<String> paths,
-        List<String> catalogPaths,
-        List<String> downloadDirectory,
-        List<String> zipUrls,
-        List<String> moduleIgnorePatterns,
-        List<String> moduleToIgnore,
-        List<Pair> maturityLevelDefinition,
-        boolean automaticCreationOfModules,
+    public OntologiesConfig(List<String> urls, List<String> paths, List<String> catalogPaths,
+        List<String> downloadDirectory, List<String> zipUrls, List<String> moduleIgnorePatterns,
+        List<String> moduleToIgnore, List<Pair> maturityLevelDefinition, boolean automaticCreationOfModules,
         String moduleClassIri) {
       this.urls = urls;
       this.paths = paths;
@@ -370,6 +375,77 @@ public class ConfigurationData {
 
     public void setIndividualsEnabled(boolean individualsEnabled) {
       this.individualsEnabled = individualsEnabled;
+    }
+  }
+
+  public static class IntegrationsConfig {
+
+    private Map<String, Integration> integrations;
+
+    public IntegrationsConfig(Map<String, Integration> integrations) {
+      this.integrations = integrations;
+    }
+
+    public Map<String, Integration> getIntegrations() {
+      return integrations;
+    }
+
+    public void setIntegrations(Map<String, Integration> integrations) {
+      this.integrations = integrations;
+    }
+
+    public Optional<Integration> getIntegration(String id) {
+      var integration = integrations.get(id);
+      if (integration == null) {
+        return Optional.empty();
+      }
+      return Optional.of(integration);
+    }
+
+    public Optional<Integration> getIntegrationIgnoreCase(String id) {
+      var keyOptional = integrations.keySet()
+          .stream()
+          .filter(key -> key.equalsIgnoreCase(id))
+          .findFirst();
+
+      return keyOptional.map(s -> integrations.get(s));
+    }
+  }
+
+  public static class Integration {
+
+    private String id;
+    private String url;
+    private String accessToken;
+
+    public Integration(String id, String url, String accessToken) {
+      this.id = id;
+      this.url = url;
+      this.accessToken = accessToken;
+    }
+
+    public String getId() {
+      return id;
+    }
+
+    public void setId(String id) {
+      this.id = id;
+    }
+
+    public String getUrl() {
+      return url;
+    }
+
+    public void setUrl(String url) {
+      this.url = url;
+    }
+
+    public String getAccessToken() {
+      return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+      this.accessToken = accessToken;
     }
   }
 }

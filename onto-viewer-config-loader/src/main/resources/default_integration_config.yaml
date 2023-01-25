@@ -1,0 +1,4 @@
+# integrations:
+#   - id: dwDescribe
+#   - url: https://api.data.world/v0/sparql/edm-council/idmp-ontology-development-dataset
+#   - accessToken: myAccessToken

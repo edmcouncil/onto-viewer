@@ -5,7 +5,7 @@
 ## Health 
 #### /actuator/health (GET)
 
-#### Description
+### Description
 
 Return custom health check with additional information about initialization and update.
 
@@ -14,6 +14,14 @@ Detailed fields description:
 - "INITIALIZATION_DONE" - `true` means that the application is initialized and ready to serve data.
 - "UPDATE_ONTOLOGY_IN_PROGRESS" - `true` means that ontologies are being updated right now and the application may work incorrectly until the update is done.
 - "BLOCKED" - `true` means that the resources are being replaced with new ones and the application won't serve data right now.
+- MISSING_IMPORTS
+
+### Example curl (linux)
+
+```
+curl --location --request GET '<host_and_port>/actuator/health' \
+--header 'Accept: application/json'
+```
 
 #### Example Response
 
@@ -37,11 +45,18 @@ Detailed fields description:
 
 #### /actuator/info (GET)
 
-#### Description
+### Description
 
 Returns detailed information about the version of the application and other related metadata.
 
-#### Example Response
+### Example curl (linux)
+
+```
+curl --location --request GET '<host_and_port>/actuator/info' \
+--header 'Accept: application/json'
+```
+
+### Example Response
 
 ```json
 {
