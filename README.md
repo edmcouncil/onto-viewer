@@ -98,8 +98,8 @@ Assuming you have installed both Docker and docker-compose, to run the Onto View
 ```
 where `root-dir` is any folder on your local machine.  In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files.  You can find samples of these files in the [onto-viewer-config-loader/src/main/resources](https://github.com/edmcouncil/onto-viewer/tree/update-readme-and-docker-files/onto-viewer-config-loader/src/main/resources).  Note that the `onto-viewer/docker/runtime/` folder is excluded from Git, so you can freely put there any file you want.
 
-Install strapi with the development database in the strapi-dashboard folder and the general folder in onto-viewer web according to the instructions [README.md](https://github.com/edmcouncil/html-pages/blob/develop/general/README.md). Configure strapi without running it.
-Replace nuxt.config.js from onto-viewer-web to \onto-viewer\docker\web.
+Install Strapi with the development database in the `strapi-dashboard` directory and the general folder in `onto-viewer-web` according to the instructions [README.md](https://github.com/edmcouncil/html-pages/blob/develop/general/README.md). Configure Strapi without running it.
+Replace `nuxt.config.js` from `onto-viewer-web` to `\onto-viewer\docker\web`.
 
 Then, from the `onto-viewer/` folder run the following command to start the applications:
 
