@@ -104,7 +104,7 @@ Replace nuxt.config.js from onto-viewer-web to \onto-viewer\docker\web.
 Then, from the `onto-viewer/` folder run the following command to start the applications:
 
 ```
-docker-compose up --build
+docker-compose up --build -d
 ```
 To list applications that have started, use ```docker-compose ps```.
 
