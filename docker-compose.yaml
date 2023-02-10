@@ -18,25 +18,32 @@ services:
     ports:
       - "6101:8080"
     volumes:
-      - ./docker/init-onto-viewer.sh:/opt/fibo/init-onto-viewer.sh
-      - .:/opt/fibo/src
-      - ./docker/runtime/.m2:/opt/fibo/.m2
-      - ./docker/runtime/server:/opt/fibo/app_home
+      - ./docker/init-onto-viewer.sh:/opt/develop/init-onto-viewer.sh
+      - .:/opt/develop/src
+      - ./docker/runtime/.m2:/opt/develop/.m2
+      - ./docker/runtime/server:/opt/develop/app_home
     networks:
       - default
 
   onto-viewer-web:
     container_name: onto-viewer-web
     build:
-      context: ../html-pages/fibo
-      dockerfile: ../Dockerfile
+      context: ../onto-viewer-web
+      dockerfile: Dockerfile
     ports:
-      - "6201:8080"
-    volumes:
-      - ../html-pages/fibo:/project
-      - ./docker/web/vue.config.js:/project/vue.config.js
-      - /project/node_modules
+      - "3000:3000"
     depends_on:
       - onto-viewer-server
+      - strapi
+    networks:
+      - default
+
+  strapi:
+    container_name: onto-viewer-strapi
+    build:
+      context: ../strapi-dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "1337:1337"
     networks:
       - default

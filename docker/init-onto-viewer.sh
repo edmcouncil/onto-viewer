@@ -19,4 +19,4 @@ cd "$INIT_DIR"
 cp "$INSTALL_DIR"/onto-viewer-web-app/target/onto-viewer-web-app-*.war app.war
 
 echo "[INFO] Starting app.war..."
-java -jar app.war --server.servlet.context-path=/fibo/ontology --app.defaultHomePath="$INIT_DIR/app_home"
+java -jar app.war --server.servlet.context-path=/dev/ontology --app.defaultHomePath="$INIT_DIR/app_home"
