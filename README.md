@@ -33,73 +33,71 @@ java -jar app-v-0.1.0.war
 
  ## Running in Docker
 
+
 To run the application using Docker you have to install Docker and docker-compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker-compose see [here](https://docs.docker.com/compose/install/). 
 
-Assuming you have installed both Docker and docker-compose, to run the Onto Viewer application together with its front-end on your local machine, please make sure that you have the following folder setup:
+Create `onto-viewer-web` and `strapi-dashboard` directories next to onto-viewer root folder.
+Install Strapi with the development database in the `strapi-dashboard` directory and copy the general templates in nuxt from `general` directory into `onto-viewer-web` and configure then according to the instructions [README.md](https://github.com/edmcouncil/html-pages/blob/develop/general/README.md). 
+Replace `nuxt.config.js` from `onto-viewer-web` to `\onto-viewer\docker\web`. 
+
+In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files.  You can find samples of these files in the [onto-viewer-config-loader/src/main/resources](https://github.com/edmcouncil/onto-viewer/tree/update-readme-and-docker-files/onto-viewer-config-loader/src/main/resources).  Note that the `onto-viewer/docker/runtime/` folder is excluded from Git, so you can freely put there any file you want.
+
+Assuming you have installed Docker and docker-compose, installed and configured Strapi and general html templates to run the Onto Viewer application together with its front-end on your local machine, please make sure that you have the following folder setup:
 
 ```
-+---onto-viewer
-|   |   .gitignore
-|   |   CHANGELOG.md
-|   |   CODE_OF_CONDUCT.md
-|   |   CONTRIBUTING.md
-|   |   DCO
-|   |   docker-compose.yaml
-|   |   LICENSE
-|   |   pom.xml
-|   |   README.md   
-|   +---api-doc
-|   +---docker
-|   |   |   init-onto-viewer.sh
-|   |   +---runtime
-|   |   |   \---server  
-|   |   |       +---config
-|   |   |       |       application_config.yaml
-|   |   |       |       groups_config.yaml
-|   |   |       |       label_config.yaml
-|   |   |       |       ontology_config.yaml
-|   |   |       |       search_config.yaml     
-|   |   |       |       
-|   |   |       \---ontologies
-|   |   +---server
-|   |   |       Dockerfile      
-|   |   \---web
-|   |           nuxt.config.js         
-|   +---onto-viewer-config-loader
-|   +---onto-viewer-core
-|   +---onto-viewer-toolkit
-|   +---onto-viewer-web-app
-|   \---style          
-+---onto-viewer-web
-|   |   .dockerignore
-|   |   ...
-|   |   Dockerfile
-|   |   jsconfig.json
-|   |   nuxt.config.js
-|   |   ...
-|   +---api
+onto-viewer
+|   .gitignore
+|   CHANGELOG.md
+|   CODE_OF_CONDUCT.md
+|   CONTRIBUTING.md
+|   DCO
+|   docker-compose.yaml
+|   LICENSE
+|   pom.xml
+|   README.md   
+|   api-doc/
+|   docker/
+|   |   init-onto-viewer.sh
+|   runtime/
+|   |   server/ 
+|   |       config <- config files go here    
+|   |       ontologies <- ontologies go here
+|   server
+|   |   Dockerfile      
+|   web
+|   |   nuxt.config.js         
+|   onto-viewer-config-loader
+|   onto-viewer-core
+|   onto-viewer-toolkit
+|   onto-viewer-web-app 
+|   style          
+onto-viewer-web <- installed and configured general tempaltes from general directory
+|   .dockerignore
+|   ...
+|   Dockerfile
+|   jsconfig.json
+|   nuxt.config.js
+|   ...
+|   api
 |	...
-|   +---store
-|   \---strapi
-\---strapi-dashboard
-    |   .dockerignore
-    |	...
-    |   Dockerfile
-    |   favicon.png
-    |   package-lock.json
-    |   package.json
-    |   README.md
-    |   yarn.lock
-    +---.tmp    
-    +---config
-    +---database
-    +---public
-    \---src
+|   store
+|   strapi
+strapi-dashboard <- installed and configured Strapi
+|   .dockerignore
+|	...
+|   Dockerfile
+|   favicon.png
+|   package-lock.json
+|   package.json
+|   README.md
+|   yarn.lock
+|   .tmp/   
+|   config/
+|   database/
+|   public/
+|   src/
 ```
-where `root-dir` is any folder on your local machine.  In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files.  You can find samples of these files in the [onto-viewer-config-loader/src/main/resources](https://github.com/edmcouncil/onto-viewer/tree/update-readme-and-docker-files/onto-viewer-config-loader/src/main/resources).  Note that the `onto-viewer/docker/runtime/` folder is excluded from Git, so you can freely put there any file you want.
-
-Install Strapi with the development database in the `strapi-dashboard` directory and the general folder in `onto-viewer-web` according to the instructions [README.md](https://github.com/edmcouncil/html-pages/blob/develop/general/README.md). Configure Strapi without running it.
-Replace `nuxt.config.js` from `onto-viewer-web` to `\onto-viewer\docker\web`.
+  
 
 Then, from the `onto-viewer/` folder run the following command to start the applications:
 
