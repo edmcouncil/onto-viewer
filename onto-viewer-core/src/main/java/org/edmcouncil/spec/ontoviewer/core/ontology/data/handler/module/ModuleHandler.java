@@ -29,11 +29,13 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.utils.PathUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.model.EntityType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.parameters.Imports;
@@ -213,15 +215,54 @@ public class ModuleHandler {
   }
 
   public MaturityLevel getMaturityLevelForElement(IRI entityIri) {
+    //check if the searched maturity level belongs to the module
     OntologyModule ontologyModule = modulesMap.get(entityIri);
     if (ontologyModule != null) {
       return ontologyModule.getMaturityLevel();
     }
+    var ontology = ontologyManager.getOntology();
+
+    Optional<OWLEntity> entity = ontology
+        .signature(Imports.INCLUDED)
+        .filter(c -> c.getIRI().equals(entityIri))
+        .findFirst();
+    
+    //check if the entity has its own level of maturity  
+    if (entity.isPresent()){
+      var maturityLevelOptional =  getMaturityLevelForEntity(entity, ontology);
+      if (maturityLevelOptional.isPresent()) {
+        return maturityLevelOptional.get();
+      }
+    }
+    
+    //in this case we can get maturity level from ontology
     IRI ontologyIri = getOntologyIri(entityIri);
     if (ontologyIri != null) {
       return getMaturityLevelForModule(ontologyIri);
     }
     return maturityLevelFactory.notSet();
+  }
+
+  private Optional<MaturityLevel> getMaturityLevelForEntity(Optional<OWLEntity> entity, OWLOntology ontology) {
+    Set<OWLAnnotation> annotationsInEntity = EntitySearcher
+            .getAnnotations(entity.get(), ontology).collect(Collectors.toSet());
+    var levelString = maturityLevelFactory.getMaturityLevels()
+            .stream()
+            .map(maturityLevel -> maturityLevel.getIri())
+            .collect(Collectors.toSet());
+    for (OWLAnnotation annotation : annotationsInEntity) {
+      var annotationValue = annotation.annotationValue();
+      if (annotationValue.isIRI()
+              && annotationValue.asIRI().isPresent()
+              && levelString.contains(annotationValue.asIRI().get().getIRIString())) {
+        String annotationIri = annotationValue.asIRI().get().toString();
+        var maturityLvlOptional = maturityLevelFactory.getByIri(annotationIri);
+        if (maturityLvlOptional.isPresent()) {
+          return maturityLvlOptional;
+        }
+      }
+    }
+    return Optional.empty();
   }
 
   public void refreshModulesHandlerData() {
