@@ -229,7 +229,7 @@ public class ModuleHandler {
     
     //check if the entity has its own level of maturity  
     if (entity.isPresent()){
-      var maturityLevelOptional =  getMaturityLevelForEntity(entity, ontology);
+      var maturityLevelOptional =  getMaturityLevelForEntity(entity);
       if (maturityLevelOptional.isPresent()) {
         return maturityLevelOptional.get();
       }
@@ -243,24 +243,50 @@ public class ModuleHandler {
     return maturityLevelFactory.notSet();
   }
 
-  private Optional<MaturityLevel> getMaturityLevelForEntity(Optional<OWLEntity> entity, OWLOntology ontology) {
-    Set<OWLAnnotation> annotationsInEntity = EntitySearcher
-            .getAnnotations(entity.get(), ontology).collect(Collectors.toSet());
-    var levelString = maturityLevelFactory.getMaturityLevels()
+  private Optional<MaturityLevel> getMaturityLevelForEntity(Optional<OWLEntity> entity) {
+    
+    var ontologies = ontologyManager.getOntologyWithImports();
+    Set<OWLAnnotation> annotationsInEntity = null;
+    
+    for (OWLOntology owlOntology : ontologies.toList()) {
+      annotationsInEntity = EntitySearcher
+            .getAnnotations(entity.get(), owlOntology).collect(Collectors.toSet());
+      if (!annotationsInEntity.isEmpty()) break;
+    }
+    var levelStringIri = maturityLevelFactory.getMaturityLevels()
             .stream()
             .map(maturityLevel -> maturityLevel.getIri())
             .collect(Collectors.toSet());
+    var levelStringLabels = maturityLevelFactory.getMaturityLevels()
+            .stream()
+            .map(maturityLevel -> maturityLevel.getLabel())
+            .collect(Collectors.toSet());
+    
     for (OWLAnnotation annotation : annotationsInEntity) {
       var annotationValue = annotation.annotationValue();
-      if (annotationValue.isIRI()
+      
+      if(annotationValue.isLiteral()
+              && annotationValue.asLiteral().isPresent()
+              && annotationValue.asLiteral().get().isLiteral()
+              && levelStringLabels.contains(annotationValue.asLiteral().get().getLiteral())){
+        
+        String releaseLabel = annotationValue.asLiteral().get().getLiteral();
+        var maturityLvlOptional = maturityLevelFactory.getByLabel(releaseLabel);
+         if (maturityLvlOptional.isPresent()) {
+          return maturityLvlOptional;
+        }
+         
+      } else if (annotationValue.isIRI()
               && annotationValue.asIRI().isPresent()
-              && levelString.contains(annotationValue.asIRI().get().getIRIString())) {
-        String annotationIri = annotationValue.asIRI().get().toString();
-        var maturityLvlOptional = maturityLevelFactory.getByIri(annotationIri);
+              && levelStringIri.contains(annotationValue.asIRI().get().getIRIString())) {
+        
+        String releaseIri = annotationValue.asIRI().get().toString();
+        var maturityLvlOptional = maturityLevelFactory.getByIri(releaseIri);
         if (maturityLvlOptional.isPresent()) {
           return maturityLvlOptional;
         }
       }
+      
     }
     return Optional.empty();
   }
