@@ -248,7 +248,7 @@ public class ModuleHandler {
     var ontologies = ontologyManager.getOntologyWithImports();
     Set<OWLAnnotation> annotationsInEntity = null;
     
-    for (OWLOntology owlOntology : ontologies.toList()) {
+    for (OWLOntology owlOntology : ontologies.collect(Collectors.toSet())) {
       annotationsInEntity = EntitySearcher
             .getAnnotations(entity.get(), owlOntology).collect(Collectors.toSet());
       if (!annotationsInEntity.isEmpty()) break;
