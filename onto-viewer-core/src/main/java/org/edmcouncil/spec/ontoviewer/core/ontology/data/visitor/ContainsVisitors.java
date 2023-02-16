@@ -25,7 +25,7 @@ public class ContainsVisitors {
   private static final Logger LOG = LoggerFactory.getLogger(ContainsVisitors.class);
 
   public final OWLObjectVisitorEx<Boolean> isRestrictionVisitor
-      = new OWLObjectVisitorEx<Boolean>() {
+          = new OWLObjectVisitorEx<Boolean>() {
     @Override
     public Boolean visit(OWLSubClassOfAxiom subClassAxiom) {
       OWLClassExpression superClass = subClassAxiom.getSuperClass();

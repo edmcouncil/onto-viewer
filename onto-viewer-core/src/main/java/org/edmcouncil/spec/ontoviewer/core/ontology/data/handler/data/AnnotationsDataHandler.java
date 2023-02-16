@@ -3,8 +3,12 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data;
 import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.AXIOM_ANNOTATION_PROPERTY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,6 +19,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValueWithSubAnnotations;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDirectedSubClassesProperty;
 import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyImpl;
@@ -32,6 +37,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.factory.CustomDataFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.service.EntitiesCacheService;
+import org.semanticweb.owlapi.model.HasAnnotationValue;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
@@ -101,39 +107,31 @@ public class AnnotationsDataHandler {
         .annotationAssertionAxioms(iri, INCLUDED)
         .collect(Collectors.toSet());
     for (OWLAnnotationAssertionAxiom annotationAssertion : annotationAssertions) {
+      Map<String, PropertyValue> annotationsForAnnotationAssertion = new LinkedHashMap<>();
       IRI propertyIri = annotationAssertion.getProperty().getIRI();
 
-      String value = annotationAssertion.annotationValue().toString(); // TODO
-      PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValue();
-      annotationPropertyValue.setType(dataExtractor.extractAnnotationType(annotationAssertion));
+      for (OWLAnnotation owlAnnotation : annotationAssertion.annotations()
+          .collect(Collectors.toSet())) {
 
-      if (annotationAssertion.getValue().isIRI()) {
-        if (scopeIriOntology.scopeIri(value)) {
-          annotationPropertyValue = customDataFactory.createAnnotationIri(value);
-        } else {
-          annotationPropertyValue = customDataFactory.createAnnotationAnyUri(value);
-        }
-      } else if (annotationAssertion.getValue().isLiteral()) {
-        Optional<OWLLiteral> asLiteral = annotationAssertion.getValue().asLiteral();
-        if (asLiteral.isPresent()) {
-          value = asLiteral.get().getLiteral();
-
-          if (propertyIri.equals(COMMENT_IRI) && value.contains(FIBO_QNAME)) {
-            details.setqName(value);
-            continue;
-          }
-
-          String lang = asLiteral.get().getLang();
-          value = lang.isEmpty() ? value : value.concat(" @").concat(lang);
-
-          checkUriAsIri(annotationPropertyValue, value);
-          annotationPropertyValue.setValue(value);
-          if (annotationPropertyValue.getType() == OwlType.IRI) {
-            annotationPropertyValue = customDataFactory.createAnnotationIri(value);
-          }
-        }
+        var annotationValue = extractSubAnnotation(owlAnnotation);
+        annotationsForAnnotationAssertion.put(owlAnnotation.getProperty().getIRI().getIRIString(),
+            annotationValue);
       }
 
+      String value = annotationAssertion.annotationValue().toString();
+      PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValueWithSubAnnotations();
+      ((OwlAnnotationPropertyValueWithSubAnnotations) annotationPropertyValue).setSubAnnotations(
+          annotationsForAnnotationAssertion);
+
+      annotationPropertyValue.setType(dataExtractor.extractAnnotationType(annotationAssertion));
+
+      annotationPropertyValue = getAnnotationPropertyValue(annotationAssertion, value,
+          annotationPropertyValue);
+
+      if (propertyIri.equals(COMMENT_IRI) && value.contains(FIBO_QNAME)) {
+        details.setqName(value);
+        continue;
+      }
       LOG.debug("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\" ",
           annotationPropertyValue,
           propertyIri);
@@ -142,6 +140,54 @@ public class AnnotationsDataHandler {
     }
     result.sortPropertiesInAlphabeticalOrder();
     return result;
+  }
+
+  private PropertyValue extractSubAnnotation(OWLAnnotation owlAnnotation) {
+    String value = owlAnnotation.annotationValue().toString();
+    PropertyValue annotationValue = new OwlAnnotationPropertyValue();
+    annotationValue.setType(dataExtractor.extractAnnotationType(owlAnnotation));
+    annotationValue = getAnnotationPropertyValue(owlAnnotation, value, annotationValue);
+    return annotationValue;
+  }
+
+  private <T extends HasAnnotationValue> PropertyValue getAnnotationPropertyValue(
+      T annotationAssertion,
+      String value, PropertyValue annotationPropertyValue) {
+    if (annotationAssertion.annotationValue().isIRI()) {
+      annotationPropertyValue = getPropertyValueAsIri(value, annotationPropertyValue);
+    } else if (annotationAssertion.annotationValue().isLiteral()) {
+      annotationPropertyValue = getPropertyValueAsLiteral(value, annotationPropertyValue,
+          annotationAssertion);
+    }
+    return annotationPropertyValue;
+  }
+
+  private <T extends HasAnnotationValue> PropertyValue getPropertyValueAsLiteral(String value,
+      PropertyValue annotationPropertyValue,
+      T annotationAssertion) {
+    Optional<OWLLiteral> asLiteral = annotationAssertion.annotationValue().asLiteral();
+    if (asLiteral.isPresent()) {
+      value = asLiteral.get().getLiteral();
+
+      String lang = asLiteral.get().getLang();
+      value = lang.isEmpty() ? value : value.concat(" @").concat(lang);
+
+      checkUriAsIri(annotationPropertyValue, value);
+      annotationPropertyValue.setValue(value);
+      if (annotationPropertyValue.getType() == OwlType.IRI) {
+        annotationPropertyValue = customDataFactory.createAnnotationIri(value);
+      }
+    }
+    return annotationPropertyValue;
+  }
+
+  private PropertyValue getPropertyValueAsIri(String value, PropertyValue annotationPropertyValue) {
+    if (scopeIriOntology.scopeIri(value)) {
+      annotationPropertyValue = customDataFactory.createAnnotationIri(value);
+    } else {
+      annotationPropertyValue = customDataFactory.createAnnotationAnyUri(value);
+    }
+    return annotationPropertyValue;
   }
 
   /**
@@ -162,12 +208,7 @@ public class AnnotationsDataHandler {
       propertyValue.setType(extractAnnotationType);
 
       if (next.getValue().isIRI()) {
-        if (scopeIriOntology.scopeIri(value)) {
-          propertyValue = customDataFactory.createAnnotationIri(value);
-
-        } else {
-          propertyValue = customDataFactory.createAnnotationAnyUri(value);
-        }
+        propertyValue = getPropertyValueAsIri(value, propertyValue);
 
         if (propertyValue instanceof OwlAnnotationIri) {
           setMaturityLevel(details, propertyiri, (OwlAnnotationIri) propertyValue);
