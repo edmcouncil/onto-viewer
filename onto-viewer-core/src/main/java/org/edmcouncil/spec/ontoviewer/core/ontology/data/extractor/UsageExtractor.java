@@ -80,11 +80,15 @@ public class UsageExtractor {
       LOG.debug("OwlDataHandler -> extractUsage {}", axiom.toString());
       LOG.debug("OwlDataHandler -> extractUsageAx {}", axiom.getSubClass());
 
-      IRI iri = axiom.getSubClass().asOWLClass().getIRI();
-      if (iri.equals(clazz.getIRI())) {
+      IRI iri = null;
+      if(axiom.getSubClass().isOWLClass()){
+        iri = axiom.getSubClass().asOWLClass().getIRI();
+        if (iri.equals(clazz.getIRI())) {
+          continue;
+        }
+      } else {
         continue;
       }
-
       String iriFragment = iri.getFragment();
       String splitFragment = StringUtils.getIdentifier(iri);
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
