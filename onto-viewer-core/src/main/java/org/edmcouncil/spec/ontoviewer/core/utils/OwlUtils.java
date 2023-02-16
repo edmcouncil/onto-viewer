@@ -13,7 +13,6 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.search.EntitySearcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,8 +23,11 @@ public class OwlUtils {
 
   private static final Logger LOG = LoggerFactory.getLogger(OwlUtils.class);
 
-  @Autowired
-  private OntologyVisitors ontologyVisitors;
+  private final OntologyVisitors ontologyVisitors;
+
+  public OwlUtils(OntologyVisitors ontologyVisitors) {
+    this.ontologyVisitors = ontologyVisitors;
+  }
 
   public final <T extends OWLAxiom> Boolean isRestriction(T axiom) {
     Boolean isRestriction = axiom.accept(ontologyVisitors.isRestrictionVisitor);

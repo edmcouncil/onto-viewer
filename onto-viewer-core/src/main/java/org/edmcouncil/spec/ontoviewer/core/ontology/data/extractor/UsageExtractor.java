@@ -34,6 +34,7 @@ import org.springframework.stereotype.Component;
 public class UsageExtractor {
 
   private static final Logger LOG = LoggerFactory.getLogger(UsageExtractor.class);
+  private static final String BR_LITERAL = " <br />";
 
   private final ContainsVisitors containsVisitors;
   private final LabelProvider labelProvider;
@@ -94,7 +95,8 @@ public class UsageExtractor {
           iriFragment,
           splitFragment,
           fixRenderedIri,
-          key, start, false);
+          start,
+          false);
       start = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = values.getOrDefault(iri, new LinkedList<>());
       ll.add(opv);
@@ -106,7 +108,7 @@ public class UsageExtractor {
 
     for (Map.Entry<IRI, List<OwlAxiomPropertyValue>> entry : values.entrySet()) {
       OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
-      sb.append("%arg00%").append(" <br />"); //<br />
+      sb.append("%arg00%").append(BR_LITERAL); //<br />
       int i = 0;
       for (OwlAxiomPropertyValue owlAxiomPropertyValue : entry.getValue()) {
         i++;
@@ -162,9 +164,8 @@ public class UsageExtractor {
       String splitFragment = StringUtils.getIdentifier(rangeEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment,
-          splitFragment, fixRenderedIri, key,
-          startR, false);
+      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
+          fixRenderedIri, startR, false);
       startR = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = valuesO.getOrDefault(rangeEntity, new LinkedList<>());
       ll.add(opv);
@@ -230,9 +231,8 @@ public class UsageExtractor {
       String splitFragment = StringUtils.getIdentifier(domainEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment,
-          splitFragment, fixRenderedIri, key,
-          startD, false);
+      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
+          fixRenderedIri, startD, false);
       startD = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = valuesD.getOrDefault(domainEntity, new LinkedList());
       ll.add(opv);

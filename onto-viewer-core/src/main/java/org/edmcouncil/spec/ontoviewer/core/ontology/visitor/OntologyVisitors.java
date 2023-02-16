@@ -52,7 +52,6 @@ import org.semanticweb.owlapi.model.OWLRestriction;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -63,11 +62,15 @@ import org.springframework.stereotype.Component;
 public class OntologyVisitors {
 
   private static final Logger LOG = LoggerFactory.getLogger(OntologyVisitors.class);
-  @Autowired
-    private LabelProvider labelProvider;
 
-  public final OWLObjectVisitorEx<Boolean> isRestrictionVisitor
-      = new OWLObjectVisitorEx<Boolean>() {
+  private final LabelProvider labelProvider;
+
+  public OntologyVisitors(LabelProvider labelProvider) {
+    this.labelProvider = labelProvider;
+  }
+
+  public final OWLObjectVisitorEx<Boolean> isRestrictionVisitor = new OWLObjectVisitorEx<>() {
+
     @Override
     public Boolean visit(OWLSubClassOfAxiom subClassAxiom) {
       OWLClassExpression superClass = subClassAxiom.getSuperClass();

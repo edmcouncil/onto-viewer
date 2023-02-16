@@ -97,11 +97,10 @@ public class ClassHandler {
 
       OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(owlClass, ontology);
       List<PropertyValue> subclasses = extractSubAndSuper.getSubclasses(axioms);
-      List<PropertyValue> subclasses2 = extractSubAndSuper.getSuperClasses(owlClass);
-      List<PropertyValue> taxElements2 = taxonomyExtractor.extractTaxonomyElements(subclasses2);
+      List<PropertyValue> superClasses = extractSubAndSuper.getSuperClasses(owlClass);
+      List<PropertyValue> taxElements2 = taxonomyExtractor.extractTaxonomyElements(superClasses);
 
-      OwlDetailsProperties<PropertyValue> directSubclasses = extractSubAndSuper.handleDirectSubclasses(
-          owlClass);
+      OwlDetailsProperties<PropertyValue> directSubclasses = extractSubAndSuper.handleDirectSubclasses(owlClass);
       OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
       if (configurationData.getToolkitConfig().isIndividualsEnabled()) {
         individuals = individualDataHelper.handleInstances(ontology, owlClass);
@@ -112,8 +111,7 @@ public class ClassHandler {
         usage = usageExtractor.extractUsageForClasses(owlClass, ontology);
       }
 
-      OwlDetailsProperties<PropertyValue> inheritedAxioms =
-          inheritedAxiomsHandler.handle(ontology, owlClass);
+      OwlDetailsProperties<PropertyValue> inheritedAxioms = inheritedAxiomsHandler.handle(ontology, owlClass);
 
       OntologyGraph ontologyGraph = new OntologyGraph(0);
       if (configurationData.getToolkitConfig().isOntologyGraphEnabled()) {

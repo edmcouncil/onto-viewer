@@ -4,7 +4,6 @@ import com.github.jsonldjava.shaded.com.google.common.collect.ImmutableSet;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
@@ -14,7 +13,6 @@ import org.semanticweb.owlapi.io.OWLObjectRenderer;
 import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLObjectRendererImpl;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
-import org.semanticweb.owlapi.model.OWLEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -51,7 +49,7 @@ public class AxiomsHelper {
   //TODO: refactor this method
   private <T extends OWLAxiom> void processingAxioms(
       T axiom,
-      Boolean fixRenderedIri,
+      boolean fixRenderedIri,
       String iriFragment,
       String splitFragment,
       OwlAxiomPropertyValue opv,
@@ -64,90 +62,57 @@ public class AxiomsHelper {
     String openingCurlyBrackets = "{";
     String closingCurlyBrackets = "}";
     String comma = ",";
-    Iterator<OWLEntity> iterator = axiom.signature().iterator();
-    LOG.trace("Rendered Val: {}", renderedVal);
 
-    while (iterator.hasNext()) {
-      OWLEntity next = iterator.next();
-      String eSignature = rendering.render(next);
+    axiom.signature().forEach(owlEntity -> {
+      String eSignature = rendering.render(owlEntity);
       eSignature = fixRenderedIri && iriFragment.equals(eSignature) ? splitFragment : eSignature;
-      String key = null;
-      LOG.debug("Processing Item: {}", next);
-      LOG.trace("OWL Entity splitted: {}", Arrays.asList(splitted));
+      String key;
 
-      for (int countingArg = startCountingArgs; countingArg < startCountingArgs + splitted.length;
-          countingArg++) {
+      for (int countingArg = startCountingArgs; countingArg < startCountingArgs + splitted.length; countingArg++) {
         int fixedIValue = countingArg - startCountingArgs;
         String string = splitted[fixedIValue].trim();
-        LOG.trace("Splitted string i: '{}', str: '{}'", fixedIValue, string);
-        //more than 1 because when it's 1, it's a number
-        Boolean hasOpeningBrackets = string.length() > 1 ? string.contains("(") : false;
+
+        // more than 1 because when it's 1, it's a number
+        boolean hasOpeningBrackets = string.length() > 1 && string.contains("(");
         int countOpeningBrackets = StringUtils.countLetter(string, '(');
 
-        Boolean hasClosingBrackets =
-            string.length() > 1 ? string.endsWith(closingBrackets) : false;
+        boolean hasClosingBrackets = string.length() > 1 && string.endsWith(closingBrackets);
         int countClosingBrackets = StringUtils.countLetter(string, ')');
 
-        Boolean hasOpeningCurlyBrackets = string.length() > 1 ? string.contains("{") : false;
+        boolean hasOpeningCurlyBrackets = string.length() > 1 && string.contains("{");
         int countOpeningCurlyBrackets = StringUtils.countLetter(string, '{');
 
-        Boolean hasClosingCurlyBrackets = string.length() > 1 ? string.contains("}") : false;
+        boolean hasClosingCurlyBrackets = string.length() > 1 && string.contains("}");
         int countClosingCurlyBrackets = StringUtils.countLetter(string, '}');
 
-        Boolean hasComma = string.length() > 1 ? string.contains(",") : false;
+        boolean hasComma = string.length() > 1 && string.contains(",");
         int countComma = StringUtils.countLetter(string, ',');
 
         if (hasOpeningBrackets) {
-          String newString = string.substring(countOpeningBrackets);
-          LOG.trace("Old string: '{}', new string '{}', count opening parenthesis '{}'", string,
-              newString,
-              countOpeningBrackets);
-          string = newString;
+          string = string.substring(countOpeningBrackets);
         }
         if (hasClosingBrackets) {
-          String newString = string.substring(0, string.length() - countClosingBrackets);
-          LOG.trace("Old string: '{}', new string '{}', count closing parenthesis '{}'", string,
-              newString,
-              countClosingBrackets);
-
-          string = newString;
+          string = string.substring(0, string.length() - countClosingBrackets);
         }
         if (hasOpeningCurlyBrackets) {
-          String newString = string.substring(countOpeningCurlyBrackets);
-          LOG.trace("Old string: '{}', new string '{}', count opening curly brackets '{}'", string,
-              newString,
-              countOpeningCurlyBrackets);
-          string = newString;
+          string = string.substring(countOpeningCurlyBrackets);
         }
         if (hasClosingCurlyBrackets) {
-          String newString = string.substring(0, string.length() - countClosingCurlyBrackets);
-          LOG.trace("Old string: '{}', new string '{}', count closing curly brackets '{}'", string,
-              newString,
-              countClosingCurlyBrackets);
-
-          string = newString;
+          string = string.substring(0, string.length() - countClosingCurlyBrackets);
         }
         if (hasComma) {
-          String newString = string.substring(0, string.length() - countComma);
-          LOG.trace("Old string: '{}', new string '{}', count comma '{}'", string,
-              newString,
-              countComma);
-
-          string = newString;
+          string = string.substring(0, string.length() - countComma);
         }
         if (string.equals(eSignature)) {
-          LOG.trace("Find match for processing item {}", string);
           String generatedKey = String.format(argPattern, countingArg);
           key = generatedKey;
           String textToReplace = generatedKey;
           if (hasOpeningBrackets) {
-            String prefix = String.join("",
-                Collections.nCopies(countOpeningBrackets, openingBrackets));
+            String prefix = String.join("", Collections.nCopies(countOpeningBrackets, openingBrackets));
             textToReplace = prefix + textToReplace;
           }
           if (hasClosingBrackets) {
-            String postfix = String.join("",
-                Collections.nCopies(countClosingBrackets, closingBrackets));
+            String postfix = String.join("", Collections.nCopies(countClosingBrackets, closingBrackets));
             textToReplace = textToReplace + postfix;
           }
           if (hasOpeningCurlyBrackets) {
@@ -164,26 +129,24 @@ public class AxiomsHelper {
             String postfix = String.join("", Collections.nCopies(countComma, comma));
             textToReplace = textToReplace + postfix;
           }
-          LOG.trace("Prepared text: {} for: {}", textToReplace, splitted[fixedIValue]);
-          splitted[fixedIValue] = textToReplace;
-          String eIri = next.getIRI().toString();
 
-          parser.parseToIri(argPattern, opv, key, splitted, fixedIValue, generatedKey, eIri,
-              countOpeningBrackets, countClosingBrackets, countComma);
+          splitted[fixedIValue] = textToReplace;
+          String eIri = owlEntity.getIRI().toString();
+
+          parser.parseToIri(opv, key, splitted, fixedIValue, generatedKey, eIri, countOpeningBrackets,
+              countClosingBrackets, countComma);
         }
         opv.setLastId(countingArg);
       }
-    }
+    });
 
     parser.checkAndParseUriInLiteral(splitted, argPattern, opv);
 
     String value = String.join(" ", splitted).trim();
 
-    LOG.debug("Prepared value for axiom : {}", value);
     opv.setValue(value);
     String fullRenderedString = parser.parseRenderedString(opv);
     opv.setFullRenderedString(fullRenderedString);
-    LOG.debug("Full Rendered String: {}", fullRenderedString);
   }
 
   public <T extends OWLAxiom> OwlAxiomPropertyValue prepareAxiomPropertyValue(
@@ -191,12 +154,10 @@ public class AxiomsHelper {
       String iriFragment,
       String splitFragment,
       Boolean fixRenderedIri,
-      String key,
       int startCountingArgs,
       boolean bypassClass
   ) {
     String value = rendering.render(axiom);
-    LOG.debug("Rendered default value: {}", value);
     for (String unwantedType : unwantedTypes) {
       value = value.replaceAll(unwantedType, "");
     }

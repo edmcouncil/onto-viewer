@@ -38,15 +38,9 @@ public class OwlListDetails extends OwlDetails {
     if (axioms == null) {
       return;
     }
-    axioms.getProperties().entrySet().forEach((entry) -> {
-      entry.getValue().forEach((propertyValue) -> {
-        properties.addProperty(entry.getKey(), propertyValue);
-      });
-    });
-  }
-
-  public void release() {
-    properties.release();
+    axioms.getProperties()
+        .forEach((key, value) ->
+            value.forEach(propertyValue -> properties.addProperty(key, propertyValue)));
   }
 
   @Override

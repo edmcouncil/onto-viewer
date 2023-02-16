@@ -1,12 +1,15 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
+import org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
@@ -18,7 +21,9 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.StringIdentifie
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
+import org.semanticweb.owlapi.model.AsOWLClass;
 import org.semanticweb.owlapi.model.ClassExpressionType;
+import org.semanticweb.owlapi.model.EntityType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
@@ -44,34 +49,40 @@ public class ClassDataHelper {
   }
 
   public List<PropertyValue> getSuperClasses(OWLClass clazz) {
-    List<OWLClassExpression> subClasses = EntitySearcher
+    List<OWLClassExpression> superClasses = EntitySearcher
         .getSuperClasses(clazz, ontologyManager.getOntologyWithImports())
         .collect(Collectors.toList());
 
     List<PropertyValue> result = new LinkedList<>();
-    for (OWLClassExpression subClassExpression : subClasses) {
-      Optional<OWLEntity> entityOptional = subClassExpression.signature().findFirst();
+    for (OWLClassExpression superClassExpression : superClasses) {
+      Optional<OWLEntity> entityOptional = superClassExpression.signature().findFirst();
 
-      if (subClassExpression.getClassExpressionType() != ClassExpressionType.OWL_CLASS ||
-          entityOptional.isEmpty() ||
-          entityOptional.get().getIRI().equals(clazz.getIRI())) {
+      if (entityOptional.isEmpty()) {
         continue;
       }
 
-      var entityIri = entityOptional.get().getIRI();
+      var entity = entityOptional.get();
+      var entityIri = entity.getIRI();
+      if (superClassExpression.getClassExpressionType() != ClassExpressionType.OWL_CLASS ||
+          entityIri.equals(clazz.getIRI())) {
+        continue;
+      }
 
       String key = StringUtils.getIdentifier(entityIri);
 
-      OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue();
-      axiomPropertyValue.setType(OwlType.TAXONOMY);
-      axiomPropertyValue.setValue(key);
-
       OwlAxiomPropertyEntity propertyEntity = new OwlAxiomPropertyEntity(
           entityIri.toString(),
-          labelProvider.getLabelOrDefaultFragment(entityIri));
-      axiomPropertyValue.addEntityValues(key, propertyEntity);
+          labelProvider.getLabelOrDefaultFragment(entityIri),
+          OntoViewerEntityType.fromEntityType(entity));
+      Map<String, OwlAxiomPropertyEntity> entityMapping = new HashMap<>();
+      entityMapping.put(key, propertyEntity);
+
+      OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue(
+          key, OwlType.TAXONOMY, 0, null, entityMapping, false);
+
       result.add(axiomPropertyValue);
     }
+
     return result.stream().distinct().collect(Collectors.toList());
   }
 
@@ -82,10 +93,9 @@ public class ClassDataHelper {
   }
 
   public List<PropertyValue> filterSubclasses(List<PropertyValue> subclasses) {
-    List<PropertyValue> result = subclasses.stream()
-        .filter((pv) -> (!pv.getType().equals(OwlType.TAXONOMY)))
+    return subclasses.stream()
+        .filter(predicate -> (!predicate.getType().equals(OwlType.TAXONOMY)))
         .collect(Collectors.toList());
-    return result;
   }
 
   /**
@@ -99,20 +109,19 @@ public class ClassDataHelper {
 
     var subClasses = EntitySearcher
         .getSubClasses(clazz, ontologyManager.getOntologyWithImports())
+        .filter(AsOWLClass::isOWLClass)
         .collect(Collectors.toSet());
 
     for (OWLClassExpression subClass : subClasses) {
-      if (subClass.isOWLClass()) {
-        IRI iri = subClass.asOWLClass().getIRI();
-        OwlDirectedSubClassesProperty subClassProperty = new OwlDirectedSubClassesProperty();
-        subClassProperty.setType(OwlType.DIRECT_SUBCLASSES);
-        subClassProperty.setValue(
-            new Pair(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
-        String key = ViewerIdentifierFactory.createId(
-            ViewerIdentifierFactory.Type.function,
-            OwlType.DIRECT_SUBCLASSES.name().toLowerCase());
-        result.addProperty(key, subClassProperty);
-      }
+      IRI iri = subClass.asOWLClass().getIRI();
+      OwlDirectedSubClassesProperty subClassProperty = new OwlDirectedSubClassesProperty();
+      subClassProperty.setType(OwlType.DIRECT_SUBCLASSES);
+      subClassProperty.setValue(
+          new Pair(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
+      String key = ViewerIdentifierFactory.createId(
+          ViewerIdentifierFactory.Type.function,
+          OwlType.DIRECT_SUBCLASSES.name().toLowerCase());
+      result.addProperty(key, subClassProperty);
     }
     result.sortPropertiesInAlphabeticalOrder();
     return result;
@@ -126,8 +135,7 @@ public class ClassDataHelper {
       case AXIOM_CLASS:
         return getSuperClasses(entity.asOWLClass());
       case AXIOM_DATA_PROPERTY:
-        prop =
-            entity.asOWLDataProperty();
+        prop = entity.asOWLDataProperty();
         propertyStream = EntitySearcher.getSuperProperties(prop, ontology.importsClosure());
         break;
       case AXIOM_OBJECT_PROPERTY:
@@ -140,8 +148,8 @@ public class ClassDataHelper {
         break;
 
     }
-    List<PropertyValue> resultProperties = new LinkedList<>();
 
+    List<PropertyValue> resultProperties = new LinkedList<>();
     for (OWLProperty owlProperty : propertyStream.collect(Collectors.toSet())) {
       LOGGER.trace("{} Sub Property Of {}", StringUtils.getIdentifier(entity.getIRI()),
           StringUtils.getIdentifier(owlProperty.getIRI()));

@@ -57,14 +57,6 @@ public class OwlDetailsProperties<T> {
     properties.put(key, propertiesList);
   }
 
-  public void addTaxonomy(String tax) {
-    if (this.taxonomy == null) {
-      this.taxonomy = new LinkedList();
-    }
-
-    this.taxonomy.add(tax);
-  }
-
   public List getTaxonomy() {
     return taxonomy == null ? new ArrayList(0) : taxonomy;
   }
@@ -81,6 +73,13 @@ public class OwlDetailsProperties<T> {
     Map<String, List<T>> result = new LinkedHashMap<>();
     keys.forEach((key) -> result.put(key, properties.get(key)));
     properties = result;
+  }
+
+  public void sortPropertiesInAlphabeticalOrder() {
+    for (Map.Entry<String, List<T>> entry : properties.entrySet()) {
+      List<T> value = entry.getValue();
+      value.sort(ComparatorWithAlphabeticalOrder.get());
+    }
   }
 
   @Override
@@ -112,20 +111,8 @@ public class OwlDetailsProperties<T> {
     return true;
   }
 
-  public void sortPropertiesInAlphabeticalOrder() {
-    for (Map.Entry<String, List<T>> entry : properties.entrySet()) {
-      List<T> value = entry.getValue();
-      value.sort(ComparatorWithAlphabeticalOrder.get());
-    }
-  }
-
   @Override
   public String toString() {
     return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties=" + properties.toString() + '}';
-  }
-
-  public void release() {
-    taxonomy = null;
-    properties = null;
   }
 }

@@ -20,7 +20,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.Annotation
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.metadata.MetadataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.DataPropertyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.DataTypeHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.individual.IndividualHandler;
@@ -51,7 +50,6 @@ public class DetailsManager {
   private final ClassHandler particularClassHandler;
   private final ChangerIriToLabelService changerIriToLabelService;
   private final DescriptionGenerator descriptionGenerator;
-  private final ModuleHandler moduleHandler;
   private final ModuleHelper moduleHelper;
   private final AnnotationsDataHandler annotationsDataHandler;
   private final DataTypeHandler particularDataTypeHandler;
@@ -64,7 +62,7 @@ public class DetailsManager {
       OntologyManager ontologyManager,
       ClassHandler particularClassHandler,
       ChangerIriToLabelService changerIriToLabelService,
-      DescriptionGenerator descriptionGenerator, ModuleHandler moduleHandler,
+      DescriptionGenerator descriptionGenerator,
       ModuleHelper moduleHelper,
       AnnotationsDataHandler annotationsDataHandler,
       DataTypeHandler particularDataTypeHandler,
@@ -76,7 +74,6 @@ public class DetailsManager {
     this.particularClassHandler = particularClassHandler;
     this.changerIriToLabelService = changerIriToLabelService;
     this.descriptionGenerator = descriptionGenerator;
-    this.moduleHandler = moduleHandler;
     this.moduleHelper = moduleHelper;
     this.annotationsDataHandler = annotationsDataHandler;
     this.particularDataTypeHandler = particularDataTypeHandler;
@@ -176,7 +173,8 @@ public class DetailsManager {
         throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_ENTITY_MESSAGE, iri));
       }
     }
-    return setGroupedDetailsIfEnabled(iriString, resultDetails);
+    OwlDetails owlDetails = setGroupedDetailsIfEnabled(iriString, resultDetails);
+    return owlDetails;
   }
 
   private OwlDetails setGroupedDetailsIfEnabled(String iriString, OwlListDetails result) {
