@@ -37,7 +37,7 @@ java -jar app-v-0.1.0.war
 To run the application using Docker you have to install Docker and docker-compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker-compose see [here](https://docs.docker.com/compose/install/). 
 
 1. Create onto-viewer-web and strapi-dashboard directories next to onto-viewer root folder.
-2. Install Strapi with the development database in the strapi-dashboard directory. To this end, `run npx create-strapi-app@latest strapi-dashboard --quickstart `command.
+2. Install Strapi with the development database in the strapi-dashboard directory. To this end, run `npx create-strapi-app@latest strapi-dashboard --quickstart `command.
 3. Copy files and folders from html-pages repository:
 - `html-pages/general/strapi/.tmp/` > `strapi-dashboard/.tmp/`
 - `html-pages/general/strapi/src/` > `strapi-dashboard/src/`
