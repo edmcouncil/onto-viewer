@@ -8,6 +8,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.Applica
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlMemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.EntityData;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.OntoViewerToolkitApplication;
 import org.edmcouncil.spec.ontoviewer.toolkit.OntoViewerToolkitCommandLine;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,9 @@ class OntologyTableDataExtractorTest {
   private OntologyTableDataExtractor ontologyTableDataExtractor;
   @Autowired
   private OntologyManager ontologyManager;
-
+  @Autowired
+  private VersionIriHandler versionIriHandler;
+  
   @MockBean
   private OntoViewerToolkitCommandLine ontoViewerToolkitCommandLine;
 
@@ -43,6 +46,7 @@ class OntologyTableDataExtractorTest {
   void setUp() throws OWLOntologyCreationException {
     var ontologyInputStream = getClass().getResourceAsStream("/ontologies/test1.rdf");
     ontologyManager.updateOntology(readOntology(ontologyInputStream));
+    versionIriHandler.init(ontologyManager);
   }
 
   @Test
@@ -56,7 +60,8 @@ class OntologyTableDataExtractorTest {
         "A is a kind of Thing.",
         "'A' example",
         "'A' explanatory note",
-        "Not Set");
+        "Not Set",
+        null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -75,7 +80,8 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "",
-        "Not Set");
+        "Not Set",
+        null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -94,7 +100,8 @@ class OntologyTableDataExtractorTest {
         "'B1' object property label is a kind of topObjectProperty.",
         "",
         "",
-        "Not Set");
+        "Not Set",
+        null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -113,7 +120,8 @@ class OntologyTableDataExtractorTest {
         "'C1' data property label is a kind of topDataProperty.",
         "",
         "'C1' explanatory note",
-        "Not Set");
+        "Not Set",
+        null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -137,7 +145,7 @@ class OntologyTableDataExtractorTest {
   }
 
   private EntityData createEntityData(String iri, String termLabel, String typeLabel, String ontology, String synonyms,
-      String definition, String generatedDescription, String examples, String explanations, String maturity) {
+      String definition, String generatedDescription, String examples, String explanations, String maturity, String iriVersion) {
     var entityData = new EntityData();
     entityData.setIri(iri);
     entityData.setTermLabel(termLabel);
@@ -149,6 +157,7 @@ class OntologyTableDataExtractorTest {
     entityData.setExamples(examples);
     entityData.setExplanations(explanations);
     entityData.setMaturity(maturity);
+    entityData.setIriVersion(iriVersion);
     return entityData;
   }
 
