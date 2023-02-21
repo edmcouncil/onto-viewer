@@ -134,7 +134,7 @@ public class DetailsManager {
     result.setVersionIri(versionIriHandler.getVersionIri(entityIri));
     result.setMaturityLevel(moduleHelper.getMaturityLevel(entityIri));
 
-    ConfigurationDaata coreConfiguration = applicationConfigurationService.getConfigurationData();
+    ConfigurationData coreConfiguration = applicationConfigurationService.getConfigurationData();
     if (applicationConfigurationService.hasConfiguredGroups()) {
       OwlGroupedDetails newResult = groupDetails(result, coreConfiguration);
       addGeneratedDescription(newResult);

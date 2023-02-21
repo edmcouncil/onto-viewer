@@ -46,7 +46,9 @@ public class VersionIriHandler {
     }
     var ontologyIri = moduleHandler.getOntologyIri(iri);
     versionIriString = ontologyToVersionIriMap.get(ontologyIri.getIRIString());
-    versionIriString = versionIriString.concat(iri.getFragment());
+    if (versionIriString != null) {
+      versionIriString = versionIriString.concat(iri.getFragment());
+    }
     return versionIriString;
   }
 }
