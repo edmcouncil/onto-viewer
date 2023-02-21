@@ -131,12 +131,10 @@ public class DetailsManager {
           moduleHelper.getElementLocationInModules(
               entityIri.getIRIString()));
     }
-   var tmp = versionIriHandler.getVersionIri(entityIri);
-    LOGGER.info("tmp {}", tmp);
     result.setVersionIri(versionIriHandler.getVersionIri(entityIri));
     result.setMaturityLevel(moduleHelper.getMaturityLevel(entityIri));
 
-    ConfigurationData coreConfiguration = applicationConfigurationService.getConfigurationData();
+    ConfigurationDaata coreConfiguration = applicationConfigurationService.getConfigurationData();
     if (applicationConfigurationService.hasConfiguredGroups()) {
       OwlGroupedDetails newResult = groupDetails(result, coreConfiguration);
       addGeneratedDescription(newResult);
@@ -163,8 +161,6 @@ public class DetailsManager {
       throw new NotFoundElementInOntologyException(
           String.format(NOT_FOUND_ENTITY_MESSAGE, iriString));
     }
-    var tmp = versionIriHandler.getVersionIri(iri);
-    LOGGER.info("tmp {}", tmp);
     result.setVersionIri(versionIriHandler.getVersionIri(iri));
 
     return setGroupedDetailsIfEnabled(iriString, result);
