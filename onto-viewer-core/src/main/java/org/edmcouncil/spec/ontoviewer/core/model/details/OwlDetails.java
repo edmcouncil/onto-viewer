@@ -18,6 +18,7 @@ public class OwlDetails {
   private List<String> locationInModules;
   private VisGraph graph;
   private MaturityLevel maturityLevel;
+  private String versionIri;
 
   public VisGraph getGraph() {
     return graph;
@@ -109,8 +110,17 @@ public class OwlDetails {
     return true;
   }
 
+  public void setVersionIri(String versionIri) {
+    this.versionIri = versionIri;
+  }
+
+  public String getVersionIri() {
+    return versionIri;
+  }
+
   @Override
   public String toString() {
     return "{" + "label=" + label + ", iri=" + iri + '}';
   }
+
 }

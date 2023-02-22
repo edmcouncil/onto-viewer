@@ -17,6 +17,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.InterruptUpdat
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.FallbackService;
 import org.semanticweb.owlapi.model.IRI;
@@ -41,6 +42,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private final FallbackService fallbackService;
   private UpdateJob job;
   private final ResourcesPopulate resourcesPopulate;
+  private final VersionIriHandler versionIriHandler;
 
   protected UpdaterThread(OntologyManager ontologyManager,
       FileSystemService fileSystemService,
@@ -51,7 +53,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       LuceneSearcher luceneSearcher,
       ApplicationConfigurationService applicationConfigurationService,
       ResourcesPopulate resourcesPopulate,
-      FallbackService fallbackService) {
+      FallbackService fallbackService, VersionIriHandler versionIriHandler) {
     this.ontologyManager = ontologyManager;
     this.fileSystemService = fileSystemService;
     this.blocker = blocker;
@@ -62,6 +64,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.applicationConfigurationService = applicationConfigurationService;
     this.resourcesPopulate = resourcesPopulate;
     this.fallbackService = fallbackService;
+    this.versionIriHandler = versionIriHandler;
     this.setName("UpdateThread-" + job.getId());
   }
 
@@ -160,6 +163,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       ontologyManager.setMissingImports(missingImports);
       ontologyManager.setIriToPathMapping(iriToPathMapping);
+
+      versionIriHandler.init(ontologyManager);
 
       luceneSearcher.populateIndex();
 
