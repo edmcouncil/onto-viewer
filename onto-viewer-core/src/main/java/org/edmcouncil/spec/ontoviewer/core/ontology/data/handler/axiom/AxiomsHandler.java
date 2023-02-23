@@ -45,24 +45,24 @@ public class AxiomsHandler {
   }
 
   public OwlDetailsProperties<PropertyValue> handle(
-          OWLNamedIndividual obj,
-          OWLOntology ontology) {
+      OWLNamedIndividual obj,
+      OWLOntology ontology) {
 
     Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
   }
 
   public OwlDetailsProperties<PropertyValue> handle(
-          OWLObjectProperty obj,
-          OWLOntology ontology) {
+      OWLObjectProperty obj,
+      OWLOntology ontology) {
 
     Iterator<OWLObjectPropertyAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
   }
 
   public OwlDetailsProperties<PropertyValue> handle(
-          OWLDataProperty obj,
-          OWLOntology ontology) {
+      OWLDataProperty obj,
+      OWLOntology ontology) {
     Iterator<OWLDataPropertyAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
   }
@@ -88,15 +88,15 @@ public class AxiomsHandler {
   }
 
   public OwlDetailsProperties<PropertyValue> handle(
-          OWLAnnotationProperty obj,
-          OWLOntology ontology) {
+      OWLAnnotationProperty obj,
+      OWLOntology ontology) {
     Iterator<OWLAnnotationAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
   }
 
   private <T extends OWLAxiom> OwlDetailsProperties<PropertyValue> handle(
-          Iterator<T> axiomsIterator,
-          IRI elementIri) {
+      Iterator<T> axiomsIterator,
+      IRI elementIri) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     String iriFragment = elementIri.getFragment();
     String splitFragment = StringUtils.getIdentifier(elementIri);
@@ -117,8 +117,8 @@ public class AxiomsHandler {
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
       OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment,
-              splitFragment,
-              fixRenderedIri, key, start, true);
+        splitFragment,
+        fixRenderedIri, key, start, true);
 
       if (opv == null) {
         continue;

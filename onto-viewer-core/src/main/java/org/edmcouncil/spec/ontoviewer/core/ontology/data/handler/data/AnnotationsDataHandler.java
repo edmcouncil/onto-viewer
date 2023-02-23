@@ -115,7 +115,7 @@ public class AnnotationsDataHandler {
         annotationsForAnnotationAssertion.put(owlAnnotation.getProperty().getIRI().getIRIString(),
             annotationValue);
       }
- 
+
       String value = annotationAssertion.annotationValue().toString();
       PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValueWithSubAnnotations();
       ((OwlAnnotationPropertyValueWithSubAnnotations) annotationPropertyValue).setSubAnnotations(
@@ -125,7 +125,7 @@ public class AnnotationsDataHandler {
 
       annotationPropertyValue = getAnnotationPropertyValue(annotationAssertion, value,
           annotationPropertyValue);
-      
+
       if (propertyIri.equals(COMMENT_IRI) && value.contains(FIBO_QNAME)) {
         details.setqName(value);
         continue;
