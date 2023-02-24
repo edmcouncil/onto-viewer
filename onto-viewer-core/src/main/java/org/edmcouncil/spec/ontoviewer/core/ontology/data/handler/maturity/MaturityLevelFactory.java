@@ -41,6 +41,15 @@ public class MaturityLevelFactory {
     }
     return Optional.empty();
   }
+  
+    public Optional<MaturityLevel> getByLabel(String maturityLevelLabel) {
+    for (MaturityLevel value : maturityLevels) {
+      if (value.getLabel().equals(maturityLevelLabel)) {
+        return Optional.of(value);
+      }
+    }
+    return Optional.empty();
+  }
 
   public List<MaturityLevel> getMaturityLevels() {
     return maturityLevels;

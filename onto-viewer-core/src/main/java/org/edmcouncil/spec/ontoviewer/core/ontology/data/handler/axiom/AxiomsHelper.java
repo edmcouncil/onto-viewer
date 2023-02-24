@@ -15,6 +15,7 @@ import org.semanticweb.owlapi.manchestersyntax.renderer.ManchesterOWLSyntaxOWLOb
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -210,7 +211,16 @@ public class AxiomsHelper {
 
     boolean isRestriction = owlUtils.isRestriction(axiom);
     if (!isRestriction && axiom.getAxiomType().equals(AxiomType.SUBCLASS_OF)) {
-      axiomPropertyValue.setType(OwlType.TAXONOMY);
+      OwlType type = OwlType.TAXONOMY;
+      
+      if(axiom instanceof OWLSubClassOfAxiom){
+        OWLSubClassOfAxiom clazzAxiom = (OWLSubClassOfAxiom)axiom;
+        if(clazzAxiom.isGCI()){
+          type = OwlType.AXIOM;
+        }
+      } 
+      
+      axiomPropertyValue.setType(type);
     }
 
     processingAxioms(axiom, fixRenderedIri, iriFragment, splitFragment, axiomPropertyValue, value,
