@@ -77,8 +77,8 @@ public class UsageExtractor {
 
     int start = 0;
     for (OWLSubClassOfAxiom axiom : axioms) {
-      LOG.debug("OwlDataHandler -> extractUsage {}", axiom.toString());
-      LOG.debug("OwlDataHandler -> extractUsageAx {}", axiom.getSubClass());
+      LOG.debug("Extract Usage as String {}", axiom.toString());
+      LOG.debug("Extract Usage subCLass {}", axiom.getSubClass());
 
       IRI iri = null;
       if(axiom.getSubClass().isOWLClass()){
@@ -87,6 +87,7 @@ public class UsageExtractor {
           continue;
         }
       } else {
+        //bypassing GCI
         continue;
       }
       String iriFragment = iri.getFragment();
