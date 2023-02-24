@@ -61,38 +61,38 @@ public class InheritedAxiomsHandler {
     Map<IRI, Set<OwlAxiomPropertyValue>> values = new HashMap<>();
 
     rset.stream()
-        .forEachOrdered((c) -> {
-          OwlDetailsProperties<PropertyValue> handleAxioms = axiomsHandler.handle(c,
-              ontology);
-          for (Map.Entry<String, List<PropertyValue>> entry : handleAxioms.getProperties()
-              .entrySet()) {
+      .forEachOrdered((c) -> {
+        OwlDetailsProperties<PropertyValue> handleAxioms = axiomsHandler
+           .handle(c, ontology);
+        for (Map.Entry<String, List<PropertyValue>> entry : handleAxioms.getProperties()
+            .entrySet()) {
 
-            if (entry.getKey().equals(subClassOfKey) || entry.getKey().equals(equivalentClassKey)) {
+          if (entry.getKey().equals(subClassOfKey) || entry.getKey().equals(equivalentClassKey)) {
 
-              for (PropertyValue propertyValue : entry.getValue()) {
-                if (propertyValue.getType() != OwlType.TAXONOMY) {
+            for (PropertyValue propertyValue : entry.getValue()) {
+              if (propertyValue.getType() != OwlType.TAXONOMY) {
 
-                  if (entry.getKey().equals(equivalentClassKey)) {
-                    OwlAxiomPropertyValue opv = (OwlAxiomPropertyValue) propertyValue;
-                    String val = opv.getValue();
-                    String[] value = val.split(" ");
-                    value[0] = value[1] = "";
-                    val = String.join(" ", value);
-                    opv.setValue(val);
-                  }
+                if (entry.getKey().equals(equivalentClassKey)) {
                   OwlAxiomPropertyValue opv = (OwlAxiomPropertyValue) propertyValue;
-
-                  Set<OwlAxiomPropertyValue> owlAxiomPropertyValues = values.getOrDefault(
-                      c.getIRI(), new LinkedHashSet<>());
-
-                  owlAxiomPropertyValues.add(opv);
-                  values.put(c.getIRI(), owlAxiomPropertyValues);
-
+                  String val = opv.getValue();
+                  String[] value = val.split(" ");
+                  value[0] = value[1] = "";
+                  val = String.join(" ", value);
+                  opv.setValue(val);
                 }
+                OwlAxiomPropertyValue opv = (OwlAxiomPropertyValue) propertyValue;
+
+                Set<OwlAxiomPropertyValue> owlAxiomPropertyValues = values.getOrDefault(
+                    c.getIRI(), new LinkedHashSet<>());
+
+                owlAxiomPropertyValues.add(opv);
+                values.put(c.getIRI(), owlAxiomPropertyValues);
+
               }
             }
           }
-        });
+        }
+      });
 
     StringBuilder sb = new StringBuilder();
 

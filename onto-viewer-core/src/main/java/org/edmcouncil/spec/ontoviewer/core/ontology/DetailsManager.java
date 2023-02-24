@@ -17,6 +17,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHelper;
@@ -58,6 +59,7 @@ public class DetailsManager {
   private final DataPropertyHandler particularDataPropertyHandler;
   private final IndividualHandler particularIndividualHandler;
   private final MetadataHandler metadataHandler;
+  private final VersionIriHandler versionIriHandler;
 
   public DetailsManager(ApplicationConfigurationService applicationConfigurationService,
       OntologyManager ontologyManager,
@@ -69,7 +71,8 @@ public class DetailsManager {
       DataTypeHandler particularDataTypeHandler,
       ObjectDataHandler particularObjectPropertyHandler,
       DataPropertyHandler particularDataPropertyHandler,
-      IndividualHandler particularIndividualHandler, MetadataHandler metadataHandler) {
+      IndividualHandler particularIndividualHandler, MetadataHandler metadataHandler,
+      VersionIriHandler versionIriHandler) {
     this.applicationConfigurationService = applicationConfigurationService;
     this.ontologyManager = ontologyManager;
     this.particularClassHandler = particularClassHandler;
@@ -82,6 +85,7 @@ public class DetailsManager {
     this.particularDataPropertyHandler = particularDataPropertyHandler;
     this.particularIndividualHandler = particularIndividualHandler;
     this.metadataHandler = metadataHandler;
+    this.versionIriHandler = versionIriHandler;
   }
 
   public OWLOntology getOntology() {
@@ -122,7 +126,7 @@ public class DetailsManager {
           moduleHelper.getElementLocationInModules(
               entityIri.getIRIString()));
     }
-
+    result.setVersionIri(versionIriHandler.getVersionIri(entityIri));
     result.setMaturityLevel(moduleHelper.getMaturityLevel(entityIri));
 
     ConfigurationData coreConfiguration = applicationConfigurationService.getConfigurationData();
@@ -152,6 +156,7 @@ public class DetailsManager {
       throw new NotFoundElementInOntologyException(
           String.format(NOT_FOUND_ENTITY_MESSAGE, iriString));
     }
+    result.setVersionIri(versionIriHandler.getVersionIri(iri));
 
     return setGroupedDetailsIfEnabled(iriString, result);
   }
@@ -171,6 +176,7 @@ public class DetailsManager {
         throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_ENTITY_MESSAGE, iri));
       }
     }
+    resultDetails.setVersionIri(versionIriHandler.getVersionIri(iri));
     return setGroupedDetailsIfEnabled(iriString, resultDetails);
   }
 
@@ -240,6 +246,7 @@ public class DetailsManager {
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
     groupedDetails.setMaturityLevel(owlDetails.getMaturityLevel());
+    groupedDetails.setVersionIri(owlDetails.getVersionIri());
     groupedDetails.sortProperties(groups);
 
     if (configurationData.getToolkitConfig().isRunningToolkit()) {
