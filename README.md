@@ -43,6 +43,7 @@ To run the application using Docker you have to install Docker and docker-compos
 - `html-pages/general/strapi/src/` > `strapi-dashboard/src/`
 - `html-pages/general` > `onto-viewer-web/`
 - `html-pages/general/strapi/Dockerfile` > `strapi-dashboard/Dockerfile`
+- `onto-viewer/docker/web/.dockerignore` > `strapi-dashboard/.dockerignore`
 4. Replace:
 `onto-viewer-web/nuxt.config.js` > `/onto-viewer/docker/web/nuxt.config.js`
 5. Copy Dockerfile:

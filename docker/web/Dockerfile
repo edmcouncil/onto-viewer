@@ -16,7 +16,7 @@ RUN npm install
 # since it builds the server as well
  RUN npm run build
 
-# expose 5000 on container
+# expose 3000 on container
 EXPOSE 3000
 
 # set app serving to permissive / assigned
