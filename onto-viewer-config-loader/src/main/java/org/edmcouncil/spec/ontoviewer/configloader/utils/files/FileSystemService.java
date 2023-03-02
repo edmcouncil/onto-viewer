@@ -40,4 +40,8 @@ public interface FileSystemService {
     }
     return dirToCreate;
   }
+
+  default String readFileContent(Path path) throws IOException {
+    return Files.readString(path);
+  }
 }

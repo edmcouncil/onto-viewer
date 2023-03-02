@@ -325,10 +325,13 @@ public class ModuleHandler {
       var ontologies = ontologyManager.getOntologyWithImports().collect(Collectors.toSet());
 
       for (OWLOntology ontology : ontologies) {
-        var maturityLevelOptional = getMaturityLevelForParticularOntology(ontology, ontologyIri);
-        if (maturityLevelOptional.isPresent()) {
-          maturityLevelsCache.put(ontologyIri, maturityLevelOptional.get());
-          break;
+        var currentOntologyIri = ontology.getOntologyID().getOntologyIRI();
+        if (currentOntologyIri.isPresent() && currentOntologyIri.get().equals(ontologyIri)) {
+          var maturityLevelOptional = getMaturityLevelForParticularOntology(ontology);
+          if (maturityLevelOptional.isPresent()) {
+            maturityLevelsCache.put(ontologyIri, maturityLevelOptional.get());
+            break;
+          }
         }
       }
     }
@@ -352,24 +355,19 @@ public class ModuleHandler {
     return elementIri;
   }
 
-  private Optional<MaturityLevel> getMaturityLevelForParticularOntology(
-      OWLOntology ontology,
-      IRI ontologyIri) {
-    var currentOntologyIri = ontology.getOntologyID().getOntologyIRI();
-    if (currentOntologyIri.isPresent() && currentOntologyIri.get().equals(ontologyIri)) {
-      var levelString = maturityLevelFactory.getMaturityLevels()
-          .stream()
-          .map(maturityLevel -> maturityLevel.getIri())
-          .collect(Collectors.toSet());
-      for (OWLAnnotation annotation : ontology.annotationsAsList()) {
-        var annotationValue = annotation.annotationValue();
+  private Optional<MaturityLevel> getMaturityLevelForParticularOntology(OWLOntology ontology) {
+    var levelString = maturityLevelFactory.getMaturityLevels()
+        .stream()
+        .map(MaturityLevel::getIri)
+        .collect(Collectors.toSet());
+    for (OWLAnnotation annotation : ontology.annotationsAsList()) {
+      var annotationValue = annotation.annotationValue();
 
-        if (annotationValue.isIRI()
-            && annotationValue.asIRI().isPresent()
-            && levelString.contains(annotationValue.asIRI().get().getIRIString())) {
-          String annotationIri = annotationValue.asIRI().get().toString();
-          return maturityLevelFactory.getByIri(annotationIri);
-        }
+      if (annotationValue.isIRI()
+          && annotationValue.asIRI().isPresent()
+          && levelString.contains(annotationValue.asIRI().get().getIRIString())) {
+        String annotationIri = annotationValue.asIRI().get().toString();
+        return maturityLevelFactory.getByIri(annotationIri);
       }
     }
 

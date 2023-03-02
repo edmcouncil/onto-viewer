@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.core.ontology;
 
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.Annotation
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.metadata.MetadataHandler;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.DataPropertyHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.DataTypeHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.individual.IndividualHandler;
@@ -52,7 +52,6 @@ public class DetailsManager {
   private final ClassHandler particularClassHandler;
   private final ChangerIriToLabelService changerIriToLabelService;
   private final DescriptionGenerator descriptionGenerator;
-  private final ModuleHandler moduleHandler;
   private final ModuleHelper moduleHelper;
   private final AnnotationsDataHandler annotationsDataHandler;
   private final DataTypeHandler particularDataTypeHandler;
@@ -66,7 +65,7 @@ public class DetailsManager {
       OntologyManager ontologyManager,
       ClassHandler particularClassHandler,
       ChangerIriToLabelService changerIriToLabelService,
-      DescriptionGenerator descriptionGenerator, ModuleHandler moduleHandler,
+      DescriptionGenerator descriptionGenerator,
       ModuleHelper moduleHelper,
       AnnotationsDataHandler annotationsDataHandler,
       DataTypeHandler particularDataTypeHandler,
@@ -79,7 +78,6 @@ public class DetailsManager {
     this.particularClassHandler = particularClassHandler;
     this.changerIriToLabelService = changerIriToLabelService;
     this.descriptionGenerator = descriptionGenerator;
-    this.moduleHandler = moduleHandler;
     this.moduleHelper = moduleHelper;
     this.annotationsDataHandler = annotationsDataHandler;
     this.particularDataTypeHandler = particularDataTypeHandler;
@@ -103,14 +101,11 @@ public class DetailsManager {
     if (entityType == EntityType.CLASS) {
       result = particularClassHandler.handle(owlEntity.asOWLClass());
     } else if (entityType == EntityType.NAMED_INDIVIDUAL) {
-      result = particularIndividualHandler.handle(
-          owlEntity.asOWLNamedIndividual());
+      result = particularIndividualHandler.handle(owlEntity.asOWLNamedIndividual());
     } else if (entityType == EntityType.OBJECT_PROPERTY) {
-      result = particularObjectPropertyHandler.handle(
-          owlEntity.asOWLObjectProperty());
+      result = particularObjectPropertyHandler.handle(owlEntity.asOWLObjectProperty());
     } else if (entityType == EntityType.DATA_PROPERTY) {
-      result = particularDataPropertyHandler.handleParticularDataProperty(
-          owlEntity.asOWLDataProperty());
+      result = particularDataPropertyHandler.handleParticularDataProperty(owlEntity.asOWLDataProperty());
     } else if (entityType == EntityType.DATATYPE) {
       result = particularDataTypeHandler.handle(owlEntity.asOWLDatatype());
     }
@@ -254,6 +249,10 @@ public class DetailsManager {
     groupedDetails.setVersionIri(owlDetails.getVersionIri());
     groupedDetails.sortProperties(groups);
 
+    if (configurationData.getToolkitConfig().isRunningToolkit()) {
+      groupedDetails.setToolkitProperties(new HashMap<>(groupedDetails.getProperties()));
+    }
+
     // first must be sorted next we need to change keys
     groupedDetails = changerIriToLabelService.changeIriKeysInGroupedDetails(groupedDetails);
 
@@ -288,11 +287,10 @@ public class DetailsManager {
     Optional<List<OwlAnnotationPropertyValue>> description
         = descriptionGenerator.prepareDescriptionString(groupedDetails);
 
-    description.ifPresent(descriptionValueList
-        -> descriptionValueList.forEach(descriptionValue
-        -> groupedDetails.addProperty(
-        "Glossary",
-        "generated description",
-        descriptionValue)));
+    description.ifPresent(descriptionValueList -> descriptionValueList.forEach(
+        descriptionValue -> groupedDetails.addProperty(
+            "Glossary",
+            "generated description",
+            descriptionValue)));
   }
 }
