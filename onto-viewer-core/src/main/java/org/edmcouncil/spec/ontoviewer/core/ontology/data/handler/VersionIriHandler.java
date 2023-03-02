@@ -15,15 +15,19 @@ import org.springframework.stereotype.Component;
 public class VersionIriHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(VersionIriHandler.class);
-  private Map<String, String> ontologyToVersionIriMap;
-  private ModuleHandler moduleHandler;
 
-  public VersionIriHandler(ModuleHandler moduleHandler) {
+  private final ModuleHandler moduleHandler;
+  private final OntologyManager ontologyManager;
+  private final Map<String, String> ontologyToVersionIriMap = new HashMap<>();
+
+  private boolean initialized = false;
+
+  public VersionIriHandler(ModuleHandler moduleHandler, OntologyManager ontologyManager) {
     this.moduleHandler = moduleHandler;
+    this.ontologyManager = ontologyManager;
   }
 
   public void init(OntologyManager ontologyManager) {
-    ontologyToVersionIriMap = new HashMap<>();
     for (OWLOntology ontology : ontologyManager.getOntologyWithImports()
         .collect(Collectors.toList())) {
       var optionalVersionIri = ontology.getOntologyID().getVersionIRI();
@@ -37,9 +41,15 @@ public class VersionIriHandler {
         }
       }
     }
+
+    initialized = true;
   }
 
   public String getVersionIri(IRI iri) {
+    if (!initialized) {
+      init(ontologyManager);
+    }
+
     String versionIriString = ontologyToVersionIriMap.get(iri.toString());
     if (versionIriString != null && !versionIriString.isEmpty()) {
       return versionIriString;
