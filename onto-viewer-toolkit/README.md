@@ -61,7 +61,6 @@ java -jar onto-viewer-toolkit.jar \
 java -jar onto-viewer-toolkit.jar \
     --goal extract-data \
     --data my-ontology.rdf \
-    --ontology-iri http://example.com/my-merged-ontology/ \
     --maturity-level https://spec.industrialontologies.org/ontology/core/meta/AnnotationVocabulary/Provisional=Provisional \
     --output extracted-data.csv
 ```
@@ -72,7 +71,6 @@ java -jar onto-viewer-toolkit.jar \
 java -jar onto-viewer-toolkit.jar \
     --goal extract-data \
     --data my-ontology.rdf \
-    --ontology-iri http://example.com/my-merged-ontology/ \
     --extract-data-column synonym=https://spec.industrialontologies.org/ontology/core/meta/AnnotationVocabulary/synonym,https://www.omg.org/spec/Commons/AnnotationVocabulary/synonym,https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym \
     --extract-data-column definition=https://spec.industrialontologies.org/ontology/core/meta/AnnotationVocabulary/naturalLanguageDefinition \
     --extract-data-column example=http://www.w3.org/2004/02/skos/core#example \
