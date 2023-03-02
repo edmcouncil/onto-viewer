@@ -36,7 +36,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.error.YAMLException;
 
 public class YamlFileBasedConfigurationService extends AbstractYamlConfigurationService {
 
@@ -172,8 +171,9 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     try {
       // We want to check if the input config content is a valid YAML
       var yaml = new Yaml();
-      yaml.load(configContent);
-    } catch (YAMLException ex) {
+      // We need to add 'foo: bar' because without that, YAML scanner may not raise exception for incorrect input
+      yaml.load(configContent + "\n\nfoo: bar");
+    } catch (RuntimeException ex) {
       LOGGER.warn("YAML config file '{}' from URL '{}' isn't correct. Ignoring it. YAML reading exception: {}",
           configEntry.getKey(),
           configEntry.getValue(),
