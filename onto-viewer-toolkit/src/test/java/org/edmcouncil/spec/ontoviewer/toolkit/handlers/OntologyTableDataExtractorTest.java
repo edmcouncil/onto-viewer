@@ -85,11 +85,8 @@ class OntologyTableDataExtractorTest {
         "'A' example",
         "'A' explanatory note",
         "Not Set",
-<<<<<<< HEAD
-        false);
-=======
+        false, 
         null);
->>>>>>> 7b4d806a0a913744b78bfa88f98292c43e6e9357
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -108,13 +105,9 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "",
-<<<<<<< HEAD
         "Not Set", 
-        false);
-=======
-        "Not Set",
+        false, 
         null);
->>>>>>> 7b4d806a0a913744b78bfa88f98292c43e6e9357
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -134,11 +127,8 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "Not Set",
-<<<<<<< HEAD
-        false);
-=======
+        false,
         null);
->>>>>>> 7b4d806a0a913744b78bfa88f98292c43e6e9357
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -158,11 +148,8 @@ class OntologyTableDataExtractorTest {
         "",
         "'C1' explanatory note",
         "Not Set",
-<<<<<<< HEAD
-        false);
-=======
+        false, 
         null);
->>>>>>> 7b4d806a0a913744b78bfa88f98292c43e6e9357
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -186,11 +173,7 @@ class OntologyTableDataExtractorTest {
   }
 
   private EntityData createEntityData(String iri, String termLabel, String typeLabel, String ontology, String synonyms,
-<<<<<<< HEAD
-      String definition, String generatedDescription, String examples, String explanations, String maturity, Boolean deprecated) {
-=======
-      String definition, String generatedDescription, String examples, String explanations, String maturity, String iriVersion) {
->>>>>>> 7b4d806a0a913744b78bfa88f98292c43e6e9357
+      String definition, String generatedDescription, String examples, String explanations, String maturity, Boolean deprecated, String iriVersion) {
     var entityData = new EntityData();
     entityData.setIri(iri);
     entityData.setTermLabel(termLabel);
@@ -202,11 +185,8 @@ class OntologyTableDataExtractorTest {
     entityData.setExamples(examples);
     entityData.setExplanations(explanations);
     entityData.setMaturity(maturity);
-<<<<<<< HEAD
     entityData.setDeprecated(deprecated);
-=======
     entityData.setIriVersion(iriVersion);
->>>>>>> 7b4d806a0a913744b78bfa88f98292c43e6e9357
     return entityData;
   }
 
