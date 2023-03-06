@@ -56,7 +56,8 @@ class OntologyTableDataExtractorTest {
         "A is a kind of Thing.",
         "'A' example",
         "'A' explanatory note",
-        "Not Set");
+        "Not Set",
+        false);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -75,7 +76,8 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "",
-        "Not Set");
+        "Not Set", 
+        false);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -94,7 +96,8 @@ class OntologyTableDataExtractorTest {
         "'B1' object property label is a kind of topObjectProperty.",
         "",
         "",
-        "Not Set");
+        "Not Set",
+        false);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -113,7 +116,8 @@ class OntologyTableDataExtractorTest {
         "'C1' data property label is a kind of topDataProperty.",
         "",
         "'C1' explanatory note",
-        "Not Set");
+        "Not Set",
+        false);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -137,7 +141,7 @@ class OntologyTableDataExtractorTest {
   }
 
   private EntityData createEntityData(String iri, String termLabel, String typeLabel, String ontology, String synonyms,
-      String definition, String generatedDescription, String examples, String explanations, String maturity) {
+      String definition, String generatedDescription, String examples, String explanations, String maturity, Boolean deprecated) {
     var entityData = new EntityData();
     entityData.setIri(iri);
     entityData.setTermLabel(termLabel);
@@ -149,6 +153,7 @@ class OntologyTableDataExtractorTest {
     entityData.setExamples(examples);
     entityData.setExplanations(explanations);
     entityData.setMaturity(maturity);
+    entityData.setDeprecated(deprecated);
     return entityData;
   }
 

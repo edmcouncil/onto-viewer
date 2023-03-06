@@ -15,6 +15,7 @@ public class EntityData {
   private String examples;
   private String explanations;
   private String maturity;
+  private Boolean deprecated;
 
   public String getIri() {
     return iri;
@@ -96,6 +97,14 @@ public class EntityData {
     this.maturity = maturity;
   }
 
+  public Boolean getDeprecated() {
+    return deprecated;
+  }
+  
+  public void setDeprecated(Boolean deprecated) {
+    this.deprecated = deprecated;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -134,4 +143,6 @@ public class EntityData {
         .add("maturity='" + maturity + "'")
         .toString();
   }
+
+ 
 }

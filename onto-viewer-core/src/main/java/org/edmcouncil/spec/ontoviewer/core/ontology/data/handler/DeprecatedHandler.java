@@ -2,9 +2,6 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.edmcouncil.spec.ontoviewer.core.cache.CacheConfig;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
@@ -13,9 +10,8 @@ import org.semanticweb.owlapi.model.*;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
-
 import java.util.stream.Collectors;
-import org.semanticweb.owlapi.search.EntitySearcher;
+import java.util.ArrayList;
 
 /**
  * Created by Michał Daniel (michal.daniel@makolab.com)
@@ -23,7 +19,7 @@ import org.semanticweb.owlapi.search.EntitySearcher;
 @Component
 public class DeprecatedHandler {
 
-  private final ArrayList<String> deprecatedList ;
+  private final ArrayList<String> deprecatedList;
   private final CacheManager cacheManager;
   private final OntologyUtils ontologyUtils;
   private final OntologyManager ontologyManager;

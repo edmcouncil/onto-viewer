@@ -18,6 +18,9 @@ public class OwlDetails {
   private List<String> locationInModules;
   private VisGraph graph;
   private MaturityLevel maturityLevel;
+  private Boolean deprecated;
+
+
 
   public VisGraph getGraph() {
     return graph;
@@ -74,6 +77,14 @@ public class OwlDetails {
   public MaturityLevel getMaturityLevel() {
     return maturityLevel;
   }
+  
+    public Boolean getDeprecated() {
+    return deprecated;
+  }
+
+  public void setDeprecated(Boolean deprecated) {
+    this.deprecated = deprecated;
+  }
 
   @Override
   public int hashCode() {
@@ -82,6 +93,7 @@ public class OwlDetails {
     hash = 59 * hash + Objects.hashCode(this.qName);
     hash = 59 * hash + Objects.hashCode(this.iri);
     hash = 59 * hash + Objects.hashCode(this.taxonomy);
+    hash = 59 * hash + Objects.hashCode(this.deprecated);
     return hash;
   }
 
@@ -104,6 +116,9 @@ public class OwlDetails {
       return false;
     }
     if (!Objects.equals(this.taxonomy, other.taxonomy)) {
+      return false;
+    }
+    if (!Objects.equals(this.deprecated, other.deprecated)) {
       return false;
     }
     return true;
