@@ -8,6 +8,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
@@ -46,7 +47,8 @@ public class Updater {
   private FallbackService fallbackService;
   @Autowired
   private DeprecatedHandler deprecatedHandler;
-
+  @Autowired
+  private VersionIriHandler versionIriHandler;
   private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
   @EventListener(ApplicationReadyEvent.class)
@@ -72,7 +74,8 @@ public class Updater {
         applicationConfigurationService, 
         resourcesPopulate, 
         fallbackService,
-        deprecatedHandler) {
+        deprecatedHandler,
+        versionIriHandler) {
     };
     t.start();
 
@@ -105,6 +108,7 @@ public class Updater {
     jobs.values().stream()
         .filter((value) -> !(value.getId().equals(String.valueOf(0))))
         .filter((value) -> (value.getStatus() == UpdateJobStatus.IN_PROGRESS))
-        .forEachOrdered((value) -> UpdaterOperation.setJobStatusToInterrupt(value, INTERRUPT_MESSAGE));
+        .forEachOrdered(
+            (value) -> UpdaterOperation.setJobStatusToInterrupt(value, INTERRUPT_MESSAGE));
   }
 }

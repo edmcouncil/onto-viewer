@@ -5,7 +5,6 @@ import static org.edmcouncil.spec.ontoviewer.webapp.common.RequestConstants.API_
 import java.util.Optional;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.webapp.common.RequestConstants;
-import org.edmcouncil.spec.ontoviewer.webapp.model.BaseResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.model.ErrorResponse;
 import org.edmcouncil.spec.ontoviewer.webapp.service.ApiKeyService;
 import org.edmcouncil.spec.ontoviewer.webapp.service.ApplicationIdService;
@@ -37,7 +36,8 @@ public class OntologyUpdateApiController {
   private final ApplicationIdService applicationIdService;
 
   public OntologyUpdateApiController(ApiKeyService keyService,
-      OntologyUpdateService updateService, ApplicationIdService applicationIdService) {
+      OntologyUpdateService updateService,
+      ApplicationIdService applicationIdService) {
     this.keyService = keyService;
     this.updateService = updateService;
     this.applicationIdService = applicationIdService;

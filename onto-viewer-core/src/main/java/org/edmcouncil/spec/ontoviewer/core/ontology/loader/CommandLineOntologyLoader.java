@@ -3,12 +3,14 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.loader;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.LoadedOntologyData.LoadingDetails;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.OntologySource.SourceType;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
@@ -64,7 +66,11 @@ public class CommandLineOntologyLoader extends AbstractOntologyLoader {
       }
     });
 
-    return loadOntologiesFromIris(owlOntologyManager, ontologySources);
+    var loadedOntologyData = loadOntologiesFromIris(owlOntologyManager, ontologySources);
+    loadedOntologyData = new LoadedOntologyData(
+        loadedOntologyData,
+        new LoadingDetails(new ArrayList<>(missingImportListenerImpl.getNotImportUri())));
+    return loadedOntologyData;
   }
 
   private Set<OntologySource> prepareOntologySources() {

@@ -58,7 +58,6 @@ public class ClassHandler {
   private final AnnotationsDataHandler particularAnnotationPropertyHandler;
   private final IndividualDataHelper individualDataHelper;
   private final InheritedAxiomsHandler inheritedAxiomsHandler;
-
   public ClassHandler(LabelProvider labelProvider, RestrictionGraphDataHandler graphDataHandler,
       ApplicationConfigurationService applicationConfigurationService,
       EntitiesCacheService entitiesCacheService, OntologyManager ontologyManager,
@@ -94,7 +93,7 @@ public class ClassHandler {
     try {
       resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(owlClass));
 
-      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(owlClass, ontology);
+      OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(owlClass, ontology, true);
       List<PropertyValue> subclasses = extractSubAndSuper.getSubclasses(axioms);
       List<PropertyValue> subclasses2 = extractSubAndSuper.getSuperClasses(owlClass);
       List<PropertyValue> taxElements2 = taxonomyExtractor.extractTaxonomyElements(subclasses2);
@@ -139,7 +138,6 @@ public class ClassHandler {
       for (PropertyValue subclass : subclasses) {
         axioms.addProperty(StringIdentifier.subClassOfIriString, subclass);
       }
-
       resultDetails.setTaxonomy(taxonomy);
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);

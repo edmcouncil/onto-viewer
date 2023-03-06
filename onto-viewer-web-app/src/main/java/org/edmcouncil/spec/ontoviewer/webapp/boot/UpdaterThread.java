@@ -18,6 +18,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.InterruptUpdat
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.FallbackService;
 import org.semanticweb.owlapi.model.IRI;
@@ -43,6 +44,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private UpdateJob job;
   private final ResourcesPopulate resourcesPopulate;
   private final DeprecatedHandler deprecatedHandler;
+  private final VersionIriHandler versionIriHandler;
 
   protected UpdaterThread(OntologyManager ontologyManager,
       FileSystemService fileSystemService,
@@ -54,7 +56,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       ApplicationConfigurationService applicationConfigurationService,
       ResourcesPopulate resourcesPopulate,
       FallbackService fallbackService,
-      DeprecatedHandler deprecatedHandler) {
+      DeprecatedHandler deprecatedHandler,
+      VersionIriHandler versionIriHandler) {
     this.ontologyManager = ontologyManager;
     this.fileSystemService = fileSystemService;
     this.blocker = blocker;
@@ -66,6 +69,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.resourcesPopulate = resourcesPopulate;
     this.fallbackService = fallbackService;
     this.deprecatedHandler = deprecatedHandler;
+    this.versionIriHandler = versionIriHandler;
     this.setName("UpdateThread-" + job.getId());
   }
 
@@ -161,10 +165,12 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       scopeIriOntology.setScopes(scopes);
 
       ontologyManager.updateOntology(ontology);
-      deprecatedHandler.init();
 
       ontologyManager.setMissingImports(missingImports);
       ontologyManager.setIriToPathMapping(iriToPathMapping);
+
+      versionIriHandler.init(ontologyManager);
+      deprecatedHandler.init();
 
       luceneSearcher.populateIndex();
 

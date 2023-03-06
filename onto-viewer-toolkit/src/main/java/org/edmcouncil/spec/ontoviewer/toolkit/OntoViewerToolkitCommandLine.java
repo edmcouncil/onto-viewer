@@ -1,5 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.toolkit;
 
+import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.EXTRACT_DATA_COLUMN;
+import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.MATURITY_LEVEL;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_IRI;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_MAPPING;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_VERSION_IRI;
@@ -12,9 +14,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.PairWithList;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.exception.OntoViewerException;
@@ -23,6 +31,8 @@ import org.edmcouncil.spec.ontoviewer.core.mapping.model.Uri;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.CommandLineOntologyLoader;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.LoadedOntologyData;
+import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
@@ -31,6 +41,7 @@ import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyImportsMerger;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.TextWriter;
+import org.edmcouncil.spec.ontoviewer.toolkit.model.ConsistencyCheckResult;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.Goal;
@@ -105,23 +116,44 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     populateConfiguration(commandLineOptions);
 
     var goal = resolveGoal();
-    loadOntology(goal);
 
     LOGGER.info("Running goal '{}'...", goal.getName());
     switch (goal) {
       case CONSISTENCY_CHECK: {
-        var consistencyResult = ontologyConsistencyChecker.checkOntologyConsistency();
+        var consistencyResult = false;
+        LoadedOntologyData loadedOntologyData = null;
+        try {
+          loadedOntologyData = loadOntology(goal);
+          consistencyResult = ontologyConsistencyChecker.checkOntologyConsistency();
+        } catch (Exception ex) {
+          LOGGER.error("Exception occurred while checking ontology consistency check: {}", ex.getMessage(), ex);
+        }
 
         var optionOutputPath = commandLineOptions.getOption(OptionDefinition.OUTPUT)
             .orElseThrow(() ->
                 new OntoViewerToolkitRuntimeException("There is no option for output path set."));
         var outputPath = Path.of(optionOutputPath);
-        new TextWriter().write(outputPath, consistencyResult);
+        var loadingDetails = loadedOntologyData != null ? loadedOntologyData.getLoadingDetails() : null;
+        var consistencyCheckResult = new ConsistencyCheckResult(consistencyResult, loadingDetails);
+        if (!consistencyCheckResult.getLoadingDetails().getMissingImports().isEmpty()) {
+          var missingOntologies = consistencyCheckResult.getLoadingDetails().getMissingImports()
+              .stream()
+              .map(MissingImport::getIri)
+              .collect(Collectors.toList());
+          LOGGER.info("Consistency check result {} with missing imports: {}",
+              consistencyCheckResult.isConsistent(),
+              missingOntologies);
+        } else {
+          LOGGER.info("Consistency check result: {}", consistencyCheckResult.isConsistent());
+        }
+        new TextWriter().write(outputPath, consistencyCheckResult);
 
         break;
       }
       case EXTRACT_DATA: {
-        addRequiredItemsToGroupsForExactData();
+        loadOntology(goal);
+
+        addRequiredItemsToGroupsForExtractData();
 
         var ontologyTableData = ontologyTableDataExtractor.extractEntityData();
 
@@ -134,6 +166,8 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
         break;
       }
       case MERGE_IMPORTS:
+        loadOntology(goal);
+
         var newOntologyIriOptional = commandLineOptions.getOption(ONTOLOGY_IRI);
         if (newOntologyIriOptional.isEmpty()) {
           throw new OntoViewerToolkitRuntimeException("'ontology-iri' for 'merge-imports' goal should be provided");
@@ -176,6 +210,8 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
   private void populateConfiguration(CommandLineOptions commandLineOptions) {
     var configurationData = applicationConfigurationService.getConfigurationData();
+
+    configurationData.getToolkitConfig().setRunningToolkit(true);
 
     var ontologyMappingOption = commandLineOptions.getOption(ONTOLOGY_MAPPING);
     if (ontologyMappingOption.isPresent()) {
@@ -224,6 +260,43 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     var filterPattern = commandLineOptions.getOption(OptionDefinition.FILTER_PATTERN).orElse("");
     configurationData.getToolkitConfig().setFilterPattern(filterPattern);
 
+    var matureLevelOptions = commandLineOptions.getOptions(MATURITY_LEVEL);
+    if (matureLevelOptions != null && !matureLevelOptions.isEmpty()) {
+      var matureLevels = matureLevelOptions.stream()
+          .map(matureLevelOption -> {
+            if (matureLevelOption.contains("=")) {
+              var matureLevelPair = matureLevelOption.split("=");
+              if (matureLevelPair.length == 2) {
+                return new Pair(matureLevelPair[1], matureLevelPair[0]);
+              }
+            }
+            return null;
+          })
+          .filter(Objects::nonNull)
+          .collect(Collectors.toList());
+
+      configurationData.getOntologiesConfig().setMaturityLevelDefinition(matureLevels);
+    }
+
+    var extractDataColumnsOptions = commandLineOptions.getOptions(EXTRACT_DATA_COLUMN);
+    if (extractDataColumnsOptions != null && !extractDataColumnsOptions.isEmpty()) {
+      var extractDataColumns = extractDataColumnsOptions.stream()
+          .map(extractDataColumn -> {
+            if (extractDataColumn.contains("=")) {
+              var extractDataColumnPair = extractDataColumn.split("=");
+              if (extractDataColumnPair.length == 2) {
+                var iris = List.of(extractDataColumnPair[1].split(","));
+                return new PairWithList(extractDataColumnPair[0], iris);
+              }
+            }
+            return null;
+          })
+          .filter(Objects::nonNull)
+          .collect(Collectors.toMap(PairWithList::getLabel, PairWithList::getIris));
+
+      configurationData.getToolkitConfig().setExtractDataColumns(extractDataColumns);
+    }
+
     var goal = commandLineOptions.getOption(OptionDefinition.GOAL).or(() -> {
       LOGGER.error("Unable to detect correct goal.");
       System.exit(1);
@@ -239,7 +312,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     return Goal.byName(goal);
   }
 
-  private void loadOntology(Goal goal) throws OntoViewerToolkitException {
+  private LoadedOntologyData loadOntology(Goal goal) throws OntoViewerToolkitException {
     try {
       var ontologyLoader = new CommandLineOntologyLoader(
           applicationConfigurationService.getConfigurationData(),
@@ -253,6 +326,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       if (shouldPopulateOntologyResources(goal)) {
         resourcesPopulate.populateOntologyResources();
       }
+      return loadedOntologyData;
     } catch (Exception ex) {
       var message = String.format(
           "Exception occurred while loading ontology. Details: %s",
@@ -286,15 +360,24 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     return String.format("%s %s (%s)", applicationName, applicationVersion, commitId);
   }
 
-  private void addRequiredItemsToGroupsForExactData() {
+  private void addRequiredItemsToGroupsForExtractData() {
     var glossaryGroup = applicationConfigurationService.getConfigurationData().getGroupsConfig()
         .getGroups()
         .get("Glossary");
 
-    glossaryGroup.add("https://www.omg.org/spec/Commons/AnnotationVocabulary/synonym");
-    glossaryGroup.add("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym");
-    glossaryGroup.add("http://www.w3.org/2004/02/skos/core#definition");
-    glossaryGroup.add("http://www.w3.org/2004/02/skos/core#example");
-    glossaryGroup.add("https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote");
+    var extractDataColumns =
+        applicationConfigurationService.getConfigurationData().getToolkitConfig().getExtractDataColumns();
+    extractDataColumns.putIfAbsent("definition", List.of("http://www.w3.org/2004/02/skos/core#definition"));
+    extractDataColumns.putIfAbsent("example", List.of("http://www.w3.org/2004/02/skos/core#example"));
+    extractDataColumns.putIfAbsent("explanatoryNote", List.of(
+        "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote"));
+    extractDataColumns.putIfAbsent("synonym",
+        List.of(
+            "https://www.omg.org/spec/Commons/AnnotationVocabulary/synonym",
+            "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym"));
+
+    for (Entry<String, List<String>> extractDataColumn : extractDataColumns.entrySet()) {
+      glossaryGroup.addAll(extractDataColumn.getValue());
+    }
   }
 }

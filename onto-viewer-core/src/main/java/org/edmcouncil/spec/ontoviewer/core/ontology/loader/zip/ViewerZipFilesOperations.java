@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
  * @author Michal Daniel(michal.daniel@makolab.com)
  */
 public class ViewerZipFilesOperations {
@@ -26,26 +25,27 @@ public class ViewerZipFilesOperations {
   private static final Logger LOGGER = LoggerFactory.getLogger(ViewerZipFilesOperations.class);
 
   @SuppressWarnings("null")
-  public Set<MissingImport> prepareZipToLoad(ConfigurationData config, FileSystemService fileSystemService) {
+  public Set<MissingImport> prepareZipToLoad(ConfigurationData config,
+      FileSystemService fileSystemService) {
+
     Set<MissingImport> missingImports = new LinkedHashSet<>();
     List<String> zipUrls = config.getOntologiesConfig().getZipUrls();
     List<String> downloadDirectories = config.getOntologiesConfig().getDownloadDirectory();
     LOGGER.trace("Ontology ZIP URLS : {}", zipUrls);
     LOGGER.trace("Ontology Download Dir : {}", downloadDirectories);
-    String downloadDirectory = downloadDirectories.stream().findFirst().orElse("");
-   
-    try {
-      var downloadDirectoryPath = fileSystemService.getPathToFile(downloadDirectory);
-      if (!downloadDirectoryPath.toFile().exists()) {
-        fileSystemService.createDir(downloadDirectoryPath);
-      }
-    } catch (IOException ex) {
-      LOGGER.info("The directory has not been created. Exception: {}", ex.toString());
-    }
+    String downloadDirectory = downloadDirectories.stream().findFirst().orElse("download");
 
     //checking if zip files can be downloaded at all
-    if(!zipUrls.isEmpty()
-        && !downloadDirectory.isEmpty()){
+    if (!zipUrls.isEmpty()) {
+      try {
+        var downloadDirectoryPath = fileSystemService.getPathToFile(downloadDirectory);
+        if (!downloadDirectoryPath.toFile().exists()) {
+          fileSystemService.createDir(downloadDirectoryPath);
+        }
+      } catch (IOException ex) {
+        LOGGER.info("The directory has not been created. Exception: {}", ex.toString());
+      }
+
       Path downloadDir = null;
       try {
         downloadDir = fileSystemService.getPathToFile(downloadDirectory);
@@ -57,7 +57,8 @@ public class ViewerZipFilesOperations {
         missingImports.add(missingImport);
       }
 
-      if(downloadDir != null && downloadDir.toFile().exists() && downloadDir.toFile().isDirectory()){
+      if (downloadDir != null && downloadDir.toFile().exists() && downloadDir.toFile()
+          .isDirectory()) {
         try {
           clearDirectory(downloadDir.toFile());
         } catch (IOException ex) {
@@ -75,7 +76,7 @@ public class ViewerZipFilesOperations {
             missingImport.setCause(ex.toString());
             missingImports.add(missingImport);
           }
-          if(downloadedFile != null){
+          if (downloadedFile != null) {
             try {
               unzipFolder(downloadedFile.toPath(), downloadDir);
             } catch (ZipException ex) {
@@ -85,7 +86,7 @@ public class ViewerZipFilesOperations {
               missingImport.setCause(ex.toString());
               missingImports.add(missingImport);
             }
-            if(!downloadedFile.delete()){
+            if (!downloadedFile.delete()) {
               LOGGER.error("Can not delete file: {}", downloadedFile.toPath().toString());
             }
           }
@@ -101,27 +102,29 @@ public class ViewerZipFilesOperations {
     return missingImports;
   }
 
-  private File downloadFileFromUrlToDir(String fileUrl, Path downloadDir) throws MalformedURLException, IOException{
+  private File downloadFileFromUrlToDir(String fileUrl, Path downloadDir)
+      throws MalformedURLException, IOException {
     File outputFile = downloadDir
-      .resolve(fileUrl.substring(fileUrl.lastIndexOf("/")+1))
-      .toFile();
+        .resolve(fileUrl.substring(fileUrl.lastIndexOf("/") + 1))
+        .toFile();
     FileUtils.copyURLToFile(new URL(fileUrl), outputFile);
     return outputFile;
   }
 
-  private void unzipFolder(Path source, Path target) throws ZipException{
+  private void unzipFolder(Path source, Path target) throws ZipException {
     new ZipFile(source.toFile())
-                .extractAll(target.toString());
+        .extractAll(target.toString());
   }
 
   private void clearDirectory(File downloadDir) throws IOException {
     File[] allContents = downloadDir.listFiles();
     if (allContents != null) {
-        for (File file : allContents) {
-          if(file.isDirectory())
-            FileUtils.deleteDirectory(file);
-          file.delete();
+      for (File file : allContents) {
+        if (file.isDirectory()) {
+          FileUtils.deleteDirectory(file);
         }
+        file.delete();
+      }
     }
   }
 }

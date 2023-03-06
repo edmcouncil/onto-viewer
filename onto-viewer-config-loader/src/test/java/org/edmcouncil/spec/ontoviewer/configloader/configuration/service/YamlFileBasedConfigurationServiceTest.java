@@ -44,7 +44,7 @@ class YamlFileBasedConfigurationServiceTest {
     assertFalse(configurationData.getLabelConfig().isForceLabelLang());
     assertEquals("en", configurationData.getLabelConfig().getLabelLang());
     assertEquals(MissingLanguageAction.FIRST, configurationData.getLabelConfig().getMissingLanguageAction());
-    assertEquals(44, configurationData.getLabelConfig().getDefaultNames().size());
+    assertEquals(45, configurationData.getLabelConfig().getDefaultNames().size());
 
     // Ontology Config
     assertEquals("ontologies", configurationData.getOntologiesConfig().getPaths().get(0));
@@ -85,7 +85,7 @@ class YamlFileBasedConfigurationServiceTest {
     assertFalse(configurationData.getLabelConfig().isForceLabelLang());
     assertEquals("en", configurationData.getLabelConfig().getLabelLang());
     assertEquals(MissingLanguageAction.FIRST, configurationData.getLabelConfig().getMissingLanguageAction());
-    assertEquals(44, configurationData.getLabelConfig().getDefaultNames().size());
+    assertEquals(45, configurationData.getLabelConfig().getDefaultNames().size());
 
     // Ontology Config
     assertEquals("ontologies", configurationData.getOntologiesConfig().getPaths().get(0));
@@ -159,7 +159,7 @@ class YamlFileBasedConfigurationServiceTest {
     assertFalse(configurationData.getLabelConfig().isForceLabelLang());
     assertEquals("en", configurationData.getLabelConfig().getLabelLang());
     assertEquals(MissingLanguageAction.FIRST, configurationData.getLabelConfig().getMissingLanguageAction());
-    assertEquals(44, configurationData.getLabelConfig().getDefaultNames().size());
+    assertEquals(45, configurationData.getLabelConfig().getDefaultNames().size());
 
     // Ontology Config
     var ontologiesConfig = configurationData.getOntologiesConfig();
@@ -202,7 +202,7 @@ class YamlFileBasedConfigurationServiceTest {
     assertFalse(configurationData.getLabelConfig().isForceLabelLang());
     assertEquals("en", configurationData.getLabelConfig().getLabelLang());
     assertEquals(MissingLanguageAction.FIRST, configurationData.getLabelConfig().getMissingLanguageAction());
-    assertEquals(44, configurationData.getLabelConfig().getDefaultNames().size());
+    assertEquals(45, configurationData.getLabelConfig().getDefaultNames().size());
 
     // Ontology Config
     assertEquals("ontologies", configurationData.getOntologiesConfig().getPaths().get(0));
@@ -241,7 +241,7 @@ class YamlFileBasedConfigurationServiceTest {
     assertFalse(configurationData.getLabelConfig().isForceLabelLang());
     assertEquals("en", configurationData.getLabelConfig().getLabelLang());
     assertEquals(MissingLanguageAction.FIRST, configurationData.getLabelConfig().getMissingLanguageAction());
-    assertEquals(44, configurationData.getLabelConfig().getDefaultNames().size());
+    assertEquals(45, configurationData.getLabelConfig().getDefaultNames().size());
 
     // Ontology Config
     assertEquals("ontologies", configurationData.getOntologiesConfig().getPaths().get(0));
