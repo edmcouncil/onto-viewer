@@ -3,6 +3,8 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import org.eclipse.rdf4j.model.vocabulary.OWL;
 import org.edmcouncil.spec.ontoviewer.core.cache.CacheConfig;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
@@ -13,6 +15,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
+import org.semanticweb.owlapi.search.EntitySearcher;
 
 /**
  * Created by Michał Daniel (michal.daniel@makolab.com)
@@ -40,6 +43,27 @@ public class DeprecatedHandler {
   private Cache getCache() {
     return cacheManager.getCache(CacheConfig.CacheNames.DEPRECATED.label);
   }
+  
+  public void init(){
+    var ontologies = ontologyManager.getOntologyWithImports().collect(Collectors.toSet());
+   Cache cache = getCache();
+    for (OWLOntology ontology : ontologies) {
+      var set = ontology.signature().collect(Collectors.toSet());
+      for (OWLEntity owlEntity : set) {
+        var annotationAssertions = ontology
+        .annotationAssertionAxioms(owlEntity.getIRI(), INCLUDED)
+        .collect(Collectors.toSet());
+        
+        for (OWLAnnotationAssertionAxiom annotationAssertion : annotationAssertions) {
+          IRI propertyIri = annotationAssertion.getProperty().getIRI();
+
+          if(deprecatedList.contains(propertyIri.getIRIString())){
+            extractDeprecatedFromAnnotation(owlEntity.getIRI(), cache, annotationAssertion.getAnnotation());
+          }
+        }
+      }
+    }
+  }
 
   public Boolean getDeprecatedFromOntology(IRI ontologyIri) {
     Cache cache = getCache();
@@ -58,29 +82,14 @@ public class DeprecatedHandler {
         }
       }
     }
-
     return false;
   }
 
   public Boolean getDeprecatedForEntity(IRI entityIri) {
-    //System.out.println("yyyyy");
     Cache cache = getCache();
     Boolean val = cache.get(entityIri.getIRIString(), Boolean.class);
     if (val != null) {
       return val;
-    }
-    OWLOntology ontology = ontologyManager.getOntology();
-
-    var annotationAssertions = ontology
-        .annotationAssertionAxioms(entityIri, INCLUDED)
-        .collect(Collectors.toSet());
-
-    for (OWLAnnotationAssertionAxiom annotationAssertion : annotationAssertions) {
-      IRI propertyIri = annotationAssertion.getProperty().getIRI();
-
-      if(deprecatedList.contains(propertyIri.getIRIString())){
-        return extractDeprecatedFromAnnotation(entityIri, cache, annotationAssertion.getAnnotation());
-      }
     }
     return false;
   }

@@ -7,6 +7,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
@@ -41,6 +42,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private final FallbackService fallbackService;
   private UpdateJob job;
   private final ResourcesPopulate resourcesPopulate;
+  private final DeprecatedHandler deprecatedHandler;
 
   protected UpdaterThread(OntologyManager ontologyManager,
       FileSystemService fileSystemService,
@@ -51,7 +53,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       LuceneSearcher luceneSearcher,
       ApplicationConfigurationService applicationConfigurationService,
       ResourcesPopulate resourcesPopulate,
-      FallbackService fallbackService) {
+      FallbackService fallbackService,
+      DeprecatedHandler deprecatedHandler) {
     this.ontologyManager = ontologyManager;
     this.fileSystemService = fileSystemService;
     this.blocker = blocker;
@@ -62,6 +65,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.applicationConfigurationService = applicationConfigurationService;
     this.resourcesPopulate = resourcesPopulate;
     this.fallbackService = fallbackService;
+    this.deprecatedHandler = deprecatedHandler;
     this.setName("UpdateThread-" + job.getId());
   }
 
@@ -157,6 +161,7 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       scopeIriOntology.setScopes(scopes);
 
       ontologyManager.updateOntology(ontology);
+      deprecatedHandler.init();
 
       ontologyManager.setMissingImports(missingImports);
       ontologyManager.setIriToPathMapping(iriToPathMapping);
