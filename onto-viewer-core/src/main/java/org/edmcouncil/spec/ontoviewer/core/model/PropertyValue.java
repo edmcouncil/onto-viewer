@@ -12,4 +12,5 @@ public interface PropertyValue<T> {
   T getValue();
 
   void setValue(T value);
+
 }

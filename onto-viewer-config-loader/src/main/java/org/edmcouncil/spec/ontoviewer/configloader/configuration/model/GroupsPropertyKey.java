@@ -9,6 +9,7 @@ public enum GroupsPropertyKey {
   GLOSSARY("Glossary"),
   ONTOLOGICAL_CHARACTERISTIC("Ontological characteristic"),
   SYNONYM("synonym"),
+  USAGE_NOTE("usageNote"),
   THIS_ONTOLOGY_CONTAINS("This ontology contains");
 
   private final String key;

@@ -27,9 +27,9 @@ public class TaxonomyExtractor {
 
   private static final Logger LOG = LoggerFactory.getLogger(TaxonomyExtractor.class);
 
-  private LabelProvider labelProvider;
-  private ClassDataHelper extractSubAndSuper;
-  private AxiomsHelper axiomsHelper;
+  private final LabelProvider labelProvider;
+  private final ClassDataHelper extractSubAndSuper;
+  private final AxiomsHelper axiomsHelper;
 
   public TaxonomyExtractor(LabelProvider labelProvider, ClassDataHelper extractSubAndSuper,
       AxiomsHelper axiomsHelper) {

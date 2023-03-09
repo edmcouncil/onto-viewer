@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map.Entry;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ToolkitConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlMemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.EntityData;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.OntoViewerToolkitApplication;
 import org.edmcouncil.spec.ontoviewer.toolkit.OntoViewerToolkitCommandLine;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,9 +35,13 @@ class OntologyTableDataExtractorTest {
   private static final int NUMBER_OF_ENTITIES = 5;
 
   @Autowired
+  private ApplicationConfigurationService applicationConfigurationService;
+  @Autowired
   private OntologyTableDataExtractor ontologyTableDataExtractor;
   @Autowired
   private OntologyManager ontologyManager;
+  @Autowired
+  private VersionIriHandler versionIriHandler;
 
   @MockBean
   private OntoViewerToolkitCommandLine ontoViewerToolkitCommandLine;
@@ -43,6 +50,27 @@ class OntologyTableDataExtractorTest {
   void setUp() throws OWLOntologyCreationException {
     var ontologyInputStream = getClass().getResourceAsStream("/ontologies/test1.rdf");
     ontologyManager.updateOntology(readOntology(ontologyInputStream));
+
+    var toolkitConfig = applicationConfigurationService.getConfigurationData().getToolkitConfig();
+    toolkitConfig.setRunningToolkit(true);
+
+    var extractDataColumns = toolkitConfig.getExtractDataColumns();
+    extractDataColumns.putIfAbsent("definition", List.of("http://www.w3.org/2004/02/skos/core#definition"));
+    extractDataColumns.putIfAbsent("example", List.of("http://www.w3.org/2004/02/skos/core#example"));
+    extractDataColumns.putIfAbsent("explanatoryNote", List.of(
+        "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/explanatoryNote"));
+    extractDataColumns.putIfAbsent("synonym",
+        List.of(
+            "https://www.omg.org/spec/Commons/AnnotationVocabulary/synonym",
+            "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym"));
+
+    var glossaryGroup = applicationConfigurationService.getConfigurationData().getGroupsConfig()
+        .getGroups()
+        .get("Glossary");
+    for (Entry<String, List<String>> extractDataColumn : extractDataColumns.entrySet()) {
+      glossaryGroup.addAll(extractDataColumn.getValue());
+    }
+    versionIriHandler.init(ontologyManager);
   }
 
   @Test
@@ -56,7 +84,9 @@ class OntologyTableDataExtractorTest {
         "A is a kind of Thing.",
         "'A' example",
         "'A' explanatory note",
-        "Not Set");
+        "Not Set",
+        false, 
+        null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -75,7 +105,9 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "",
-        "Not Set");
+        "Not Set", 
+        false, 
+        null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -94,7 +126,9 @@ class OntologyTableDataExtractorTest {
         "'B1' object property label is a kind of topObjectProperty.",
         "",
         "",
-        "Not Set");
+        "Not Set",
+        false,
+        null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -113,7 +147,9 @@ class OntologyTableDataExtractorTest {
         "'C1' data property label is a kind of topDataProperty.",
         "",
         "'C1' explanatory note",
-        "Not Set");
+        "Not Set",
+        false, 
+        null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
 
@@ -137,7 +173,7 @@ class OntologyTableDataExtractorTest {
   }
 
   private EntityData createEntityData(String iri, String termLabel, String typeLabel, String ontology, String synonyms,
-      String definition, String generatedDescription, String examples, String explanations, String maturity) {
+      String definition, String generatedDescription, String examples, String explanations, String maturity, Boolean deprecated, String iriVersion) {
     var entityData = new EntityData();
     entityData.setIri(iri);
     entityData.setTermLabel(termLabel);
@@ -149,6 +185,8 @@ class OntologyTableDataExtractorTest {
     entityData.setExamples(examples);
     entityData.setExplanations(explanations);
     entityData.setMaturity(maturity);
+    entityData.setDeprecated(deprecated);
+    entityData.setIriVersion(iriVersion);
     return entityData;
   }
 

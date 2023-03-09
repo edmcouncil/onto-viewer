@@ -35,17 +35,29 @@ public class OwlDetailsProperties<T> {
     }
 
     boolean notYetAdded = true;
-    if (property instanceof OwlAxiomPropertyValue) {
-      var propertyAsOwlAxiom = (OwlAxiomPropertyValue) property;
+    for (T currentProperty : propertiesList) {
+      if (property instanceof OwlAxiomPropertyValue
+          && currentProperty instanceof OwlAxiomPropertyValue) {
+        var propertyAsOwlAxiom = (OwlAxiomPropertyValue) property;
+        var owlAxiomPropertyValue = (OwlAxiomPropertyValue) currentProperty;
+        if (propertyAsOwlAxiom.getFullRenderedString().equals(
+            owlAxiomPropertyValue.getFullRenderedString())) {
+          notYetAdded = false;
+          break;
+        }
+      } else if (property instanceof OwlAnnotationPropertyValueWithSubAnnotations
+          && currentProperty instanceof OwlAnnotationPropertyValueWithSubAnnotations) {
+        var owlAxiomPropertyValue = (OwlAnnotationPropertyValueWithSubAnnotations) currentProperty;
+        var propertyAsOwlAxiomPropertyValue = (OwlAnnotationPropertyValueWithSubAnnotations) property;
 
-      for (T currentProperty : propertiesList) {
-        if (currentProperty instanceof OwlAxiomPropertyValue) {
-          var owlAxiomPropertyValue = (OwlAxiomPropertyValue) currentProperty;
-          if (propertyAsOwlAxiom.getFullRenderedString().equals(
-              owlAxiomPropertyValue.getFullRenderedString())) {
-            notYetAdded = false;
-            break;
+        if (owlAxiomPropertyValue.getValue().equals(propertyAsOwlAxiomPropertyValue.getValue())) {
+          notYetAdded = false;
+          if (propertyAsOwlAxiomPropertyValue.getSubAnnotations() != null
+              && !propertyAsOwlAxiomPropertyValue.getSubAnnotations().isEmpty()) {
+            int index = propertiesList.indexOf(currentProperty);
+            propertiesList.set(index, property);
           }
+          break;
         }
       }
     } else if (property instanceof OwlAnnotationPropertyValue) {
@@ -133,7 +145,8 @@ public class OwlDetailsProperties<T> {
 
   @Override
   public String toString() {
-    return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties=" + properties.toString() + '}';
+    return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties="
+        + properties.toString() + '}';
   }
 
   public void release() {
