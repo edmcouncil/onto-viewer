@@ -6,6 +6,7 @@ import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
@@ -45,6 +46,8 @@ public class Updater {
   @Autowired
   private FallbackService fallbackService;
   @Autowired
+  private DeprecatedHandler deprecatedHandler;
+  @Autowired
   private VersionIriHandler versionIriHandler;
   private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
@@ -68,7 +71,11 @@ public class Updater {
         scopeIriOntology,
         ontologyStatsManager,
         luceneSearcher,
-        applicationConfigurationService, resourcesPopulate, fallbackService, versionIriHandler) {
+        applicationConfigurationService, 
+        resourcesPopulate, 
+        fallbackService,
+        deprecatedHandler,
+        versionIriHandler) {
     };
     t.start();
 

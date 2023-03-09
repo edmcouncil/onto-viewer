@@ -1,6 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -397,6 +396,7 @@ public class ConfigurationData {
     public void setExtractDataColumns(Map<String, List<String>> extractDataColumns) {
       this.extractDataColumns = extractDataColumns;
     }
+
   }
 
   public static class IntegrationsConfig {

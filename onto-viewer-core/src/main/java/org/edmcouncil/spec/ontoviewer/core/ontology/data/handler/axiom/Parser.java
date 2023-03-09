@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.utils.UrlChecker;
@@ -19,10 +20,13 @@ public class Parser {
 
   private final LabelProvider labelProvider;
   private final ScopeIriOntology scopeIriOntology;
+  private final DeprecatedHandler deprecatedHandler;
 
-  public Parser(LabelProvider labelProvider, ScopeIriOntology scopeIriOntology) {
+  public Parser(LabelProvider labelProvider, ScopeIriOntology scopeIriOntology,
+      DeprecatedHandler deprecatedHandler) {
     this.labelProvider = labelProvider;
     this.scopeIriOntology = scopeIriOntology;
+    this.deprecatedHandler = deprecatedHandler;
   }
 
   private void parseUrl(String probablyUrl, String[] splited, int j) {
@@ -35,12 +39,14 @@ public class Parser {
       int countClosingParenthesis, int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
     if (iriString.contains("<") && iriString.contains(">")) {
-      iriString = iriString.toString().replace("<", "").replace(">", "");
+      iriString = iriString.replace("<", "").replace(">", "");
     }
     axiomPropertyEntity.setIri(iriString);
     LOG.debug("Probably iriString {}", iriString);
-    String label = labelProvider.getLabelOrDefaultFragment(IRI.create(iriString));
+    var iri = IRI.create(iriString);
+    String label = labelProvider.getLabelOrDefaultFragment(iri);
     axiomPropertyEntity.setLabel(label);
+    axiomPropertyEntity.setDeprecated(deprecatedHandler.getDeprecatedForEntity(iri));
     opv.addEntityValues(key, axiomPropertyEntity);
     splited[j] = generatedKey;
 

@@ -15,6 +15,7 @@ public class EntityData {
   private String examples;
   private String explanations;
   private String maturity;
+  private Boolean deprecated;
   private String versionIri;
 
   public String getIri() {
@@ -97,6 +98,14 @@ public class EntityData {
     this.maturity = maturity;
   }
 
+  public Boolean getDeprecated() {
+    return deprecated;
+  }
+  
+  public void setDeprecated(Boolean deprecated) {
+    this.deprecated = deprecated;
+  }
+
   public String getIriVersion() {
     return versionIri;
   }
@@ -144,4 +153,6 @@ public class EntityData {
         .add("iriVersion='" + versionIri + "'")
         .toString();
   }
+
+ 
 }

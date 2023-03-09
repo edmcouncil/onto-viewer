@@ -85,6 +85,7 @@ class OntologyTableDataExtractorTest {
         "'A' example",
         "'A' explanatory note",
         "Not Set",
+        false, 
         null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
@@ -104,7 +105,8 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "",
-        "Not Set",
+        "Not Set", 
+        false, 
         null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
@@ -125,6 +127,7 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "Not Set",
+        false,
         null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
@@ -145,6 +148,7 @@ class OntologyTableDataExtractorTest {
         "",
         "'C1' explanatory note",
         "Not Set",
+        false, 
         null);
 
     var actualResult = ontologyTableDataExtractor.extractEntityData();
@@ -169,7 +173,7 @@ class OntologyTableDataExtractorTest {
   }
 
   private EntityData createEntityData(String iri, String termLabel, String typeLabel, String ontology, String synonyms,
-      String definition, String generatedDescription, String examples, String explanations, String maturity, String iriVersion) {
+      String definition, String generatedDescription, String examples, String explanations, String maturity, Boolean deprecated, String iriVersion) {
     var entityData = new EntityData();
     entityData.setIri(iri);
     entityData.setTermLabel(termLabel);
@@ -181,6 +185,7 @@ class OntologyTableDataExtractorTest {
     entityData.setExamples(examples);
     entityData.setExplanations(explanations);
     entityData.setMaturity(maturity);
+    entityData.setDeprecated(deprecated);
     entityData.setIriVersion(iriVersion);
     return entityData;
   }

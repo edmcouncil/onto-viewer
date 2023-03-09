@@ -43,7 +43,6 @@ public class ClassHandler {
 
   private static final Logger LOG = LoggerFactory.getLogger(ClassHandler.class);
 
-
   private final LabelProvider labelProvider;
   private final RestrictionGraphDataHandler graphDataHandler;
   private final ApplicationConfigurationService applicationConfigurationService;

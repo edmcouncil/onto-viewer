@@ -99,17 +99,13 @@ public class ContainsVisitors {
 
       @Override
       public Boolean visit(OWLSubClassOfAxiom ax) {
-
         for (OWLEntity owlEntity : ax.signature().collect(Collectors.toList())) {
           if (owlEntity.getIRI().equals(iri)) {
             LOG.debug("ContainsVisitors -> visitSubClassOf {}", owlEntity.getIRI());
             return true;
-
           }
-
         }
         return false;
-
       }
 
       @Override

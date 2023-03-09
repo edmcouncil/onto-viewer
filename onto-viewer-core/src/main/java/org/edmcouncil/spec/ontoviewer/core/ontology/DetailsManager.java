@@ -17,6 +17,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlListDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassHandler;
@@ -59,6 +60,7 @@ public class DetailsManager {
   private final DataPropertyHandler particularDataPropertyHandler;
   private final IndividualHandler particularIndividualHandler;
   private final MetadataHandler metadataHandler;
+  private final DeprecatedHandler deprecatedHandler;
   private final VersionIriHandler versionIriHandler;
 
   public DetailsManager(ApplicationConfigurationService applicationConfigurationService,
@@ -71,7 +73,9 @@ public class DetailsManager {
       DataTypeHandler particularDataTypeHandler,
       ObjectDataHandler particularObjectPropertyHandler,
       DataPropertyHandler particularDataPropertyHandler,
-      IndividualHandler particularIndividualHandler, MetadataHandler metadataHandler,
+      IndividualHandler particularIndividualHandler, 
+      MetadataHandler metadataHandler,
+      DeprecatedHandler deprecatedHandler,
       VersionIriHandler versionIriHandler) {
     this.applicationConfigurationService = applicationConfigurationService;
     this.ontologyManager = ontologyManager;
@@ -85,6 +89,7 @@ public class DetailsManager {
     this.particularDataPropertyHandler = particularDataPropertyHandler;
     this.particularIndividualHandler = particularIndividualHandler;
     this.metadataHandler = metadataHandler;
+    this.deprecatedHandler = deprecatedHandler;
     this.versionIriHandler = versionIriHandler;
   }
 
@@ -128,6 +133,7 @@ public class DetailsManager {
     }
     result.setVersionIri(versionIriHandler.getVersionIri(entityIri));
     result.setMaturityLevel(moduleHelper.getMaturityLevel(entityIri));
+    result.setDeprecated(deprecatedHandler.getDeprecatedForEntity(entityIri));
 
     ConfigurationData coreConfiguration = applicationConfigurationService.getConfigurationData();
     if (applicationConfigurationService.hasConfiguredGroups()) {
@@ -156,8 +162,8 @@ public class DetailsManager {
       throw new NotFoundElementInOntologyException(
           String.format(NOT_FOUND_ENTITY_MESSAGE, iriString));
     }
+    result.setDeprecated(deprecatedHandler.getDeprecatedForEntity(iri));
     result.setVersionIri(versionIriHandler.getVersionIri(iri));
-
     return setGroupedDetailsIfEnabled(iriString, result);
   }
 
@@ -176,6 +182,7 @@ public class DetailsManager {
         throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_ENTITY_MESSAGE, iri));
       }
     }
+    resultDetails.setDeprecated(deprecatedHandler.getDeprecatedForEntity(iri));
     resultDetails.setVersionIri(versionIriHandler.getVersionIri(iri));
     return setGroupedDetailsIfEnabled(iriString, resultDetails);
   }
@@ -246,6 +253,7 @@ public class DetailsManager {
     groupedDetails.setGraph(owlDetails.getGraph());
     groupedDetails.setqName(owlDetails.getqName());
     groupedDetails.setMaturityLevel(owlDetails.getMaturityLevel());
+    groupedDetails.setDeprecated(owlDetails.getDeprecated());
     groupedDetails.setVersionIri(owlDetails.getVersionIri());
     groupedDetails.sortProperties(groups);
 

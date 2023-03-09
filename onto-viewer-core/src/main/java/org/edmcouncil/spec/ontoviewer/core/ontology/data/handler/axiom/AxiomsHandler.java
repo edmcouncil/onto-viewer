@@ -116,9 +116,8 @@ public class AxiomsHandler {
       }
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
-      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment,
-        splitFragment,
-        fixRenderedIri, key, start, true);
+      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom,
+          iriFragment, splitFragment, fixRenderedIri, key, start, true);
 
       if (opv == null) {
         continue;
