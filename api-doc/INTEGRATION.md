@@ -10,7 +10,13 @@
 #### Description
 
 Return a result of `DESCRIBE` from data.world SPARQL endpoint with the given.  The data.world endpoint URL should be set
-by the `integration_config.yaml` configuration.
+by the `integration_config.yaml` configuration.  Here is an example of the `integration_config.yaml`:
+
+```yaml
+integrations:
+  - id: dwDescribe
+    url: https://api.data.world/v0/sparql/edm-council/idmp-ontology-development-dataset
+```
 
 #### Example Response
 
