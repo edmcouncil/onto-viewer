@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.webapp.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.Integration;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.IntegrationsConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.exception.IntegrationNotConfiguredException;
 import org.edmcouncil.spec.ontoviewer.core.exception.RequestHandlingException;
 import org.slf4j.Logger;
@@ -22,6 +24,7 @@ public class IntegrationService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(IntegrationService.class);
   private static final String ACCESSTOKEN_KEY = "ACCESSTOKEN";
+  private static final String ACCESSTOKEN_FILE_KEY = "ACCESSTOKENFILE";
   private static final String ACCEPT = "Accept";
   private static final String AUTHORIZATION = "Authorization";
   private static final String DATA_WORLD_DESCRIBE_ID = "dwDescribe";
@@ -32,14 +35,18 @@ public class IntegrationService {
 
   private final ApplicationConfigurationService applicationConfigurationService;
   private final ConfigurableEnvironment environment;
+  private final FileSystemService fileSystemService;
+
   private final OkHttpClient httpClient = new OkHttpClient();
 
   private IntegrationsConfig integrationsConfig;
 
   public IntegrationService(ApplicationConfigurationService applicationConfigurationService,
-      ConfigurableEnvironment environment) {
+      ConfigurableEnvironment environment,
+      FileSystemService fileSystemService) {
     this.applicationConfigurationService = applicationConfigurationService;
     this.environment = environment;
+    this.fileSystemService = fileSystemService;
   }
 
   @PostConstruct
@@ -117,6 +124,24 @@ public class IntegrationService {
                   integration.setAccessToken(value.toString());
                   break;
                 }
+                case ACCESSTOKEN_FILE_KEY:
+                  var accessTokenFileValue = value.toString();
+                  try {
+                    var pathToAccessToken = fileSystemService.getPathToFile(accessTokenFileValue);
+                    var accessToken = fileSystemService.readFileContent(pathToAccessToken).trim();
+                    if (!accessToken.isBlank()) {
+                      integration.setAccessToken(accessToken);
+                    }
+                  } catch (IOException ex) {
+                    LOGGER.warn(
+                        "Exception {} thrown while reading file content for integration variable '{}' with value '{}'. "
+                            + "Message: {}",
+                        ex.getClass().getSimpleName(),
+                        key,
+                        value,
+                        ex.getMessage());
+                  }
+                  break;
                 case URL_KEY: {
                   integration.setUrl(value.toString());
                   break;

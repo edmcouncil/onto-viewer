@@ -12,6 +12,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.Parser;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
@@ -39,14 +40,18 @@ public class UsageExtractor {
   private final LabelProvider labelProvider;
   private final Parser parser;
   private final AxiomsHelper axiomsHelper;
+  private final DeprecatedHandler deprecatedHandler;
 
-  public UsageExtractor(ContainsVisitors containsVisitors, LabelProvider labelProvider,
+  public UsageExtractor(ContainsVisitors containsVisitors,
+      LabelProvider labelProvider,
       Parser parser,
-      AxiomsHelper axiomsHelper) {
+      AxiomsHelper axiomsHelper,
+      DeprecatedHandler deprecatedHandler) {
     this.containsVisitors = containsVisitors;
     this.labelProvider = labelProvider;
     this.parser = parser;
     this.axiomsHelper = axiomsHelper;
+    this.deprecatedHandler = deprecatedHandler;
   }
 
   public OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz,
@@ -77,14 +82,19 @@ public class UsageExtractor {
 
     int start = 0;
     for (OWLSubClassOfAxiom axiom : axioms) {
-      LOG.debug("OwlDataHandler -> extractUsage {}", axiom.toString());
-      LOG.debug("OwlDataHandler -> extractUsageAx {}", axiom.getSubClass());
+      LOG.debug("Extract Usage as String {}", axiom.toString());
+      LOG.debug("Extract Usage subCLass {}", axiom.getSubClass());
 
-      IRI iri = axiom.getSubClass().asOWLClass().getIRI();
-      if (iri.equals(clazz.getIRI())) {
+      IRI iri = null;
+      if(axiom.getSubClass().isOWLClass()){
+        iri = axiom.getSubClass().asOWLClass().getIRI();
+        if (iri.equals(clazz.getIRI())) {
+          continue;
+        }
+      } else {
+        //bypassing GCI
         continue;
       }
-
       String iriFragment = iri.getFragment();
       String splitFragment = StringUtils.getIdentifier(iri);
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
@@ -137,6 +147,7 @@ public class UsageExtractor {
       OwlAxiomPropertyEntity prop = new OwlAxiomPropertyEntity();
       prop.setIri(entry.getKey().toString());
       prop.setLabel(labelProvider.getLabelOrDefaultFragment(entry.getKey()));
+      prop.setDeprecated(deprecatedHandler.getDeprecatedForEntity(entry.getKey()));
       opv.addEntityValues("%arg00%", prop);
 
       opv.setValue(sb.toString());
@@ -185,7 +196,6 @@ public class UsageExtractor {
 
       valuesO.put(rangeEntity.getIRI(), ll);
     }
-    axiomGenerate(result, key, valuesO);
   }
 
   private void extractDomainOfObjectProperty(OWLClass clazz, OWLOntology ontology,
@@ -220,6 +230,41 @@ public class UsageExtractor {
 
       valuesD.put(domainEntity.getIRI(), ll);
     }
+
     axiomGenerate(result, key, valuesD);
+
+    StringBuilder sbd = new StringBuilder();
+
+    for (Map.Entry<IRI, List<OwlAxiomPropertyValue>> entry : valuesD.entrySet()) {
+      OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
+      sbd.append("%arg00%").append(" <br />");
+      int i = 0;
+      for (OwlAxiomPropertyValue owlAxiomPropertyValue : entry.getValue()) {
+        i++;
+        sbd.append("- ").append(owlAxiomPropertyValue.getValue());
+        if (i < entry.getValue().size()) {
+          sbd.append("<br />");
+        }
+        for (Map.Entry<String, OwlAxiomPropertyEntity> maping : owlAxiomPropertyValue.getEntityMaping()
+            .entrySet()) {
+          opv.addEntityValues(maping.getKey(), maping.getValue());
+        }
+      }
+      OwlAxiomPropertyEntity prop = new OwlAxiomPropertyEntity();
+      prop.setIri(entry.getKey().toString());
+      prop.setLabel(labelProvider.getLabelOrDefaultFragment(entry.getKey()));
+      prop.setDeprecated(deprecatedHandler.getDeprecatedForEntity(entry.getKey()));
+      opv.addEntityValues("%arg00%", prop);
+
+      opv.setValue(sbd.toString());
+      opv.setType(OwlType.AXIOM);
+
+      LOG.debug("Generated big axiom: {}", sbd);
+      sbd = new StringBuilder();
+      String fullRenderedString = parser.parseRenderedString(opv);
+      opv.setFullRenderedString(fullRenderedString);
+
+      result.addProperty(key, opv);
+    }
   }
 }

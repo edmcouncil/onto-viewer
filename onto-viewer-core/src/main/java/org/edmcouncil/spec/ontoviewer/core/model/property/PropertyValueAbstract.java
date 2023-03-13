@@ -11,7 +11,7 @@ public abstract class PropertyValueAbstract<T> implements PropertyValue<T> {
 
   private OwlType type;
   private T value;
-  
+
   @Override
   public OwlType getType() {
     return this.type;

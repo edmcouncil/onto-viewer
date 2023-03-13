@@ -267,11 +267,15 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
       var integrationUrl = integrationMap.get(INTEGRATION_URL.getLabel());
       var integrationAccessToken = integrationMap.get(INTEGRATION_ACCESS_TOKEN.getLabel());
 
-      if (integrationId == null || integrationUrl == null || integrationAccessToken == null) {
+      if (integrationId == null || integrationUrl == null) {
         LOGGER.error("Missing data while reading integrations config: "
-            + "integrationId={}, integrationUrl={}, integrationAccessToken=[----]",
+            + "integrationId={}, integrationUrl={}",
             integrationId, integrationUrl);
         continue;
+      }
+
+      if (integrationAccessToken == null) {
+        integrationAccessToken = "";
       }
 
       var integration = new Integration(

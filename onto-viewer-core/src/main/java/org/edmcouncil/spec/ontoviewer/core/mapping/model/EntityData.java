@@ -15,6 +15,8 @@ public class EntityData {
   private String examples;
   private String explanations;
   private String maturity;
+  private Boolean deprecated;
+  private String versionIri;
 
   public String getIri() {
     return iri;
@@ -96,6 +98,22 @@ public class EntityData {
     this.maturity = maturity;
   }
 
+  public Boolean getDeprecated() {
+    return deprecated;
+  }
+  
+  public void setDeprecated(Boolean deprecated) {
+    this.deprecated = deprecated;
+  }
+
+  public String getIriVersion() {
+    return versionIri;
+  }
+
+  public void setIriVersion(String iriVersion) {
+    this.versionIri = iriVersion;
+  }
+  
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -110,13 +128,13 @@ public class EntityData {
         && Objects.equals(synonyms, that.synonyms) && Objects.equals(definition, that.definition)
         && Objects.equals(generatedDefinition, that.generatedDefinition) && Objects.equals(examples,
         that.examples) && Objects.equals(explanations, that.explanations) && Objects.equals(maturity,
-        that.maturity);
+        that.maturity) && Objects.equals(versionIri, that.versionIri);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(iri, termLabel, typeLabel, ontology, synonyms, definition, generatedDefinition, examples,
-        explanations, maturity);
+        explanations, maturity, versionIri);
   }
 
   @Override
@@ -132,6 +150,9 @@ public class EntityData {
         .add("examples='" + examples + "'")
         .add("explanations='" + explanations + "'")
         .add("maturity='" + maturity + "'")
+        .add("iriVersion='" + versionIri + "'")
         .toString();
   }
+
+ 
 }

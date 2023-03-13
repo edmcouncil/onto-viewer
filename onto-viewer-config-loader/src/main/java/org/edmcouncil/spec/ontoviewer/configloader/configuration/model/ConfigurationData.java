@@ -315,18 +315,30 @@ public class ConfigurationData {
 
   public static class ToolkitConfig {
 
+    private boolean runningToolkit;
     private String filterPattern;
     private String goal;
     private boolean locationInModulesEnabled;
     private boolean usageEnabled;
     private boolean ontologyGraphEnabled;
     private boolean individualsEnabled;
+    private Map<String, List<String>> extractDataColumns;
 
     public ToolkitConfig() {
+      this.runningToolkit = false;
       this.locationInModulesEnabled = true;
       this.usageEnabled = true;
       this.ontologyGraphEnabled = true;
       this.individualsEnabled = true;
+      this.extractDataColumns = new HashMap<>();
+    }
+
+    public boolean isRunningToolkit() {
+      return runningToolkit;
+    }
+
+    public void setRunningToolkit(boolean runningToolkit) {
+      this.runningToolkit = runningToolkit;
     }
 
     public String getFilterPattern() {
@@ -376,6 +388,15 @@ public class ConfigurationData {
     public void setIndividualsEnabled(boolean individualsEnabled) {
       this.individualsEnabled = individualsEnabled;
     }
+
+    public Map<String, List<String>> getExtractDataColumns() {
+      return extractDataColumns;
+    }
+
+    public void setExtractDataColumns(Map<String, List<String>> extractDataColumns) {
+      this.extractDataColumns = extractDataColumns;
+    }
+
   }
 
   public static class IntegrationsConfig {

@@ -25,7 +25,7 @@ public class ContainsVisitors {
   private static final Logger LOG = LoggerFactory.getLogger(ContainsVisitors.class);
 
   public final OWLObjectVisitorEx<Boolean> isRestrictionVisitor
-      = new OWLObjectVisitorEx<Boolean>() {
+          = new OWLObjectVisitorEx<Boolean>() {
     @Override
     public Boolean visit(OWLSubClassOfAxiom subClassAxiom) {
       OWLClassExpression superClass = subClassAxiom.getSuperClass();
@@ -99,17 +99,13 @@ public class ContainsVisitors {
 
       @Override
       public Boolean visit(OWLSubClassOfAxiom ax) {
-
         for (OWLEntity owlEntity : ax.signature().collect(Collectors.toList())) {
           if (owlEntity.getIRI().equals(iri)) {
             LOG.debug("ContainsVisitors -> visitSubClassOf {}", owlEntity.getIRI());
             return true;
-
           }
-
         }
         return false;
-
       }
 
       @Override
