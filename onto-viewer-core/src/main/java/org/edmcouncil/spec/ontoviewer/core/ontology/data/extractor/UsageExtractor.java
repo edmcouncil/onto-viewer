@@ -111,16 +111,31 @@ public class UsageExtractor {
 
       values.put(iri, ll);
     }
+      axiomGenerate(result, key, values );
+  }
 
+  public void axiomGenerate(OwlDetailsProperties<PropertyValue> result, String key,
+      Map<IRI, List<OwlAxiomPropertyValue>> values) {
+    axiomGenerate(result, key, values, true);
+  }
+
+  public void axiomGenerate(OwlDetailsProperties<PropertyValue> result, String key,
+      Map<IRI, List<OwlAxiomPropertyValue>> values, boolean addClassSource) {
     StringBuilder sb = new StringBuilder();
 
     for (Map.Entry<IRI, List<OwlAxiomPropertyValue>> entry : values.entrySet()) {
       OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
-      sb.append("%arg00%").append(" <br />"); //<br />
+      if (addClassSource) {
+        sb.append("%arg00%").append(" <br />");
+      }
       int i = 0;
       for (OwlAxiomPropertyValue owlAxiomPropertyValue : entry.getValue()) {
         i++;
-        sb.append("- ").append(owlAxiomPropertyValue.getValue());
+        if (addClassSource) {
+          sb.append("- ").append(owlAxiomPropertyValue.getValue());
+        } else {
+          sb.append(owlAxiomPropertyValue.getValue());
+        }
         if (i < entry.getValue().size()) {
           sb.append("<br />");
         }
@@ -138,7 +153,6 @@ public class UsageExtractor {
       opv.setValue(sb.toString());
       opv.setType(OwlType.AXIOM);
 
-      LOG.debug("Generated big axiom: {}", sb);
       sb = new StringBuilder();
 
       String fullRenderedString = parser.parseRenderedString(opv);
@@ -182,41 +196,6 @@ public class UsageExtractor {
 
       valuesO.put(rangeEntity.getIRI(), ll);
     }
-
-    StringBuilder sbo = new StringBuilder();
-
-    for (Map.Entry<IRI, List<OwlAxiomPropertyValue>> entry : valuesO.entrySet()) {
-      OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
-      sbo.append("%arg00%").append(" <br />"); //<br />
-      int i = 0;
-      for (OwlAxiomPropertyValue owlAxiomPropertyValue : entry.getValue()) {
-        i++;
-        sbo.append("- ").append(owlAxiomPropertyValue.getValue());
-        if (i < entry.getValue().size()) {
-          sbo.append("<br />");
-        }
-        for (Map.Entry<String, OwlAxiomPropertyEntity> maping : owlAxiomPropertyValue.getEntityMaping()
-            .entrySet()) {
-          opv.addEntityValues(maping.getKey(), maping.getValue());
-        }
-      }
-      OwlAxiomPropertyEntity prop = new OwlAxiomPropertyEntity();
-      prop.setIri(entry.getKey().toString());
-      prop.setLabel(labelProvider.getLabelOrDefaultFragment(entry.getKey()));
-      prop.setDeprecated(deprecatedHandler.getDeprecatedForEntity(entry.getKey()));
-      opv.addEntityValues("%arg00%", prop);
-
-      opv.setValue(sbo.toString());
-      opv.setType(OwlType.AXIOM);
-
-      LOG.debug("Generated big axiom: {}", sbo.toString());
-      sbo = new StringBuilder();
-
-      String fullRenderedString = parser.parseRenderedString(opv);
-      opv.setFullRenderedString(fullRenderedString);
-
-      result.addProperty(key, opv);
-    }
   }
 
   private void extractDomainOfObjectProperty(OWLClass clazz, OWLOntology ontology,
@@ -251,6 +230,8 @@ public class UsageExtractor {
 
       valuesD.put(domainEntity.getIRI(), ll);
     }
+
+    axiomGenerate(result, key, valuesD);
 
     StringBuilder sbd = new StringBuilder();
 
