@@ -59,16 +59,16 @@ public class OwlDetailsProperties<T> {
           }
           break;
         }
-      }
-    } else if (property instanceof OwlAnnotationPropertyValue) {
-      var propertyAsOwlAnnotation = (OwlAnnotationPropertyValue) property;
+      } else if (property instanceof OwlAnnotationPropertyValue) {
+        var propertyAsOwlAnnotation = (OwlAnnotationPropertyValue) property;
 
-      for (T currentProperty : propertiesList) {
-        if (currentProperty instanceof OwlAnnotationPropertyValue) {
-          var owlAxiomPropertyValue = (OwlAnnotationPropertyValue) currentProperty;
-          if (propertyAsOwlAnnotation.equals(owlAxiomPropertyValue)) {
-            notYetAdded = false;
-            break;
+        for (T annotationPropertyValue : propertiesList) {
+          if (annotationPropertyValue instanceof OwlAnnotationPropertyValue) {
+            var owlAxiomPropertyValue = (OwlAnnotationPropertyValue) annotationPropertyValue;
+            if (propertyAsOwlAnnotation.equals(owlAxiomPropertyValue)) {
+              notYetAdded = false;
+              break;
+            }
           }
         }
       }
