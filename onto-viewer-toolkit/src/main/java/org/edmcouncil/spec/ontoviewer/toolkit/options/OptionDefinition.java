@@ -10,6 +10,8 @@ public enum OptionDefinition {
     "specify which goal should be executed by toolkit", Goal.EXTRACT_DATA.getName()),
   MATURITY_LEVEL("maturity-level", true, false,
       "override default maturity levels; should have format '<maturityLevelIri>=<label>'"),
+  MATURITY_LEVEL_PROPERTY("maturity-level-property", true, false,
+      "set maturity level property that is used to extract maturity levels"),
   ONTOLOGY_IRI("ontology-iri", true, false, "new IRI for merged ontology"),
   ONTOLOGY_MAPPING("ontology-mapping", true, false,
       "path to the catalog file with ontology mapping", null),
