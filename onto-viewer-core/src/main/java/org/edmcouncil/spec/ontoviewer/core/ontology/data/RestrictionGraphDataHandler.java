@@ -2,11 +2,13 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNode;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphNodeType;
+import org.edmcouncil.spec.ontoviewer.core.model.graph.GraphRelation;
 import org.edmcouncil.spec.ontoviewer.core.model.graph.OntologyGraph;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.ExpressionReturnedClass;
@@ -163,6 +165,11 @@ public class RestrictionGraphDataHandler {
         Map<GraphNode, Set<ExpressionReturnedClass>> qrestrictions = axiomEl.getSuperClass()
                 .accept(ontologyVisitors.superClassAxiom(vg, root, type, Boolean.FALSE));
 
+        Set<GraphRelation> doubledRelation = getDobuleRelation(vg);
+        for (GraphRelation graphRelation : doubledRelation) {
+          vg.getRelations().remove(graphRelation);
+          vg.getNodes().remove(graphRelation.getEnd());
+        }
         if (qrestrictions != null && !qrestrictions.isEmpty()) {
           for (Map.Entry<GraphNode, Set<ExpressionReturnedClass>> entry : qrestrictions.entrySet()) {
             for (ExpressionReturnedClass classExpression : entry.getValue()) {
@@ -176,6 +183,28 @@ public class RestrictionGraphDataHandler {
     return vg;
   }
 
+  private static Set<GraphRelation> getDobuleRelation(OntologyGraph vg) {
+    Set<GraphRelation> doubledRelation = new HashSet<>();
+    for (GraphRelation relation : vg.getRelations()) {
+      for (GraphRelation secondRelation : vg.getRelations()) {
+        if (relation.getId() == secondRelation.getId() || doubledRelation.contains(relation)) {
+          continue;
+        }
+        if (relation.getLabel().equals(secondRelation.getLabel())
+            && relation.getIri().equals(secondRelation.getIri())) {
+          if (relation.getEnd().getLabel().equals(secondRelation.getEnd().getLabel())
+              && relation.getEnd().getIri().equals(secondRelation.getEnd().getIri())
+              && relation.getEnd().getType().equals(secondRelation.getEnd().getType())
+              && relation.getEnd().getCardinality() == secondRelation.getEnd().getCardinality()
+              && relation.getEnd().isOptional() == secondRelation.getEnd().isOptional()) {
+            doubledRelation.add(secondRelation);
+          }
+        }
+      }
+    }
+    return doubledRelation;
+  }
+
   public void handleRecursivelyRestrictions(
           OWLClassExpression expression,
           OntologyGraph vg,
@@ -185,7 +214,7 @@ public class RestrictionGraphDataHandler {
           Boolean not
   ) {
 
-    LOG.debug("[Expression] Process expression: {}", expression.toString());
+    LOG.info("[Expression] Process expression: {}", expression.toString());
 
     if (expression == null) {
       return;
@@ -212,6 +241,11 @@ public class RestrictionGraphDataHandler {
               = ontology.axioms(owlClass, Imports.INCLUDED).iterator();
       handleGraph(axiomsIterator, owlClass.getIRI(), vg.getRoot(), vg, GraphNodeType.EXTERNAL, 0, 0);
     });
+    Set<GraphRelation> doubledRelation = getDobuleRelation(vg);
+    for (GraphRelation graphRelation : doubledRelation) {
+      vg.getRelations().remove(graphRelation);
+      vg.getNodes().remove(graphRelation.getEnd());
+    }
     return vg;
   }
 
@@ -245,10 +279,6 @@ public class RestrictionGraphDataHandler {
 
             handleRecursivelyRestrictions(classExpression.getOwlClassExpression(), vg, entry.getKey(), GraphNodeType.INTERNAL, classExpression.getEquivalent(), false);
 
-//            if (isFirstEquivalentMarked == false) {
-//              isFirstEquivalentMarked = true;
-//
-//            }
           }
         }
       }

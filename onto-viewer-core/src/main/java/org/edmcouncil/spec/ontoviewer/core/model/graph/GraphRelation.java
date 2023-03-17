@@ -1,5 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.core.model.graph;
 
+import java.util.Objects;
+
 /**
  *
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -63,5 +65,39 @@ public class GraphRelation extends GraphElement {
     return "{" + "start=" + start + ", end=" + end + " " + super.toString();
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
+    GraphRelation that = (GraphRelation) o;
+
+    if (optional != that.optional) {
+      return false;
+    }
+    if (!start.equals(that.start)) {
+      return false;
+    }
+    if (!end.equals(that.end)) {
+      return false;
+    }
+    if (endNodeType != that.endNodeType) {
+      return false;
+    }
+    return Objects.equals(equivalentTo, that.equivalentTo);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = start.hashCode();
+    result = 31 * result + end.hashCode();
+    result = 31 * result + (optional ? 1 : 0);
+    result = 31 * result + (endNodeType != null ? endNodeType.hashCode() : 0);
+    result = 31 * result + (equivalentTo != null ? equivalentTo.hashCode() : 0);
+    return result;
+  }
 }
