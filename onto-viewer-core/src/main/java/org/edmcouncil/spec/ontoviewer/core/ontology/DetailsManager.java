@@ -127,9 +127,7 @@ public class DetailsManager {
         .getToolkitConfig()
         .isLocationInModulesEnabled();
     if (locationInModulesEnabled) {
-      result.setLocationInModules(
-          moduleHelper.getElementLocationInModules(
-              entityIri.getIRIString()));
+      result.setLocationInModules(moduleHelper.getElementLocationInModules(entityIri));
     }
     result.setVersionIri(versionIriHandler.getVersionIri(entityIri));
     result.setMaturityLevel(moduleHelper.getMaturityLevel(entityIri));
@@ -164,7 +162,7 @@ public class DetailsManager {
     }
     result.setDeprecated(deprecatedHandler.getDeprecatedForEntity(iri));
     result.setVersionIri(versionIriHandler.getVersionIri(iri));
-    return setGroupedDetailsIfEnabled(iriString, result);
+    return setGroupedDetailsIfEnabled(iri, result);
   }
 
   public List<OntologyModule> getAllModulesData() {
@@ -184,15 +182,15 @@ public class DetailsManager {
     }
     resultDetails.setDeprecated(deprecatedHandler.getDeprecatedForEntity(iri));
     resultDetails.setVersionIri(versionIriHandler.getVersionIri(iri));
-    return setGroupedDetailsIfEnabled(iriString, resultDetails);
+    return setGroupedDetailsIfEnabled(iri, resultDetails);
   }
 
-  private OwlDetails setGroupedDetailsIfEnabled(String iriString, OwlListDetails result) {
+  private OwlDetails setGroupedDetailsIfEnabled(IRI iri, OwlListDetails result) {
     var locationInModulesEnabled = applicationConfigurationService.getConfigurationData()
         .getToolkitConfig()
         .isLocationInModulesEnabled();
     if (locationInModulesEnabled) {
-      result.setLocationInModules(moduleHelper.getElementLocationInModules(iriString));
+      result.setLocationInModules(moduleHelper.getElementLocationInModules(iri));
     }
 
     ConfigurationData configurationData = applicationConfigurationService.getConfigurationData();

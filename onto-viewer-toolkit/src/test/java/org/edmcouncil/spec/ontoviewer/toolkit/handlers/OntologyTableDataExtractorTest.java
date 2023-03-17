@@ -84,7 +84,7 @@ class OntologyTableDataExtractorTest {
         "A is a kind of Thing.",
         "'A' example",
         "'A' explanatory note",
-        "Not Set",
+        "Release",
         false, 
         null);
 
@@ -105,7 +105,7 @@ class OntologyTableDataExtractorTest {
         "",
         "",
         "",
-        "Not Set", 
+        "Release",
         false, 
         null);
 
@@ -126,7 +126,7 @@ class OntologyTableDataExtractorTest {
         "'B1' object property label is a kind of topObjectProperty.",
         "",
         "",
-        "Not Set",
+        "Release",
         false,
         null);
 
@@ -147,7 +147,7 @@ class OntologyTableDataExtractorTest {
         "'C1' data property label is a kind of topDataProperty.",
         "",
         "'C1' explanatory note",
-        "Not Set",
+        "Release",
         false, 
         null);
 

@@ -23,16 +23,11 @@ public class ModuleHelper {
   }
 
   public MaturityLevel getMaturityLevel(IRI iri) {
-    return moduleHandler.getMaturityLevelForElement(iri);
+    return moduleHandler.getMaturityLevelForEntity(iri);
   }
 
   public List<OntologyModule> getAllModules() {
     return moduleHandler.getModules();
-  }
-
-  public List<String> getElementLocationInModules(String iriString) { // TODO use 'IRI'
-    LOG.debug("[Data Handler] Handle location for element {}", iriString);
-    return getElementLocationInModules(IRI.create(iriString));
   }
 
   public List<String> getElementLocationInModules(IRI elementIri) {

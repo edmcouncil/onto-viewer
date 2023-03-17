@@ -264,7 +264,9 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
               break;
             }
             case ONTOLOGIES: {
-              OntologiesConfig ontologiesConfig = handleOntologies(configMap);
+              OntologiesConfig ontologiesConfig = handleOntologyConfig(
+                  configMap,
+                  configurationDataCandidate.getOntologiesConfig());
               configurationDataCandidate.setOntologiesConfig(ontologiesConfig);
 
               if (catalogPath != null && !catalogPath.isBlank()) {
