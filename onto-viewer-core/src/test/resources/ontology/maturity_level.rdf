@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.example.com/modules/"
+     xml:base="http://www.example.com/modules/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:AnnotationVocabulary="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/">
+    <owl:Ontology rdf:about="http://www.example.com/modules">
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/hasPart -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/hasPart"/>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel -->
+
+    <owl:AnnotationProperty rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.com/modules/ClassA -->
+
+    <owl:Class rdf:about="http://www.example.com/modules/ClassA">
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.example.com/modules/ClassB -->
+
+    <owl:Class rdf:about="http://www.example.com/modules/ClassB"/>
+    
+
+
+    <!-- http://www.omg.org/techprocess/ab/SpecificationMetadata/Module -->
+
+    <owl:Class rdf:about="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/MaturityLevel -->
+
+    <owl:Class rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/MaturityLevel"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.example.com/modules/ModuleA -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_1"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_2"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_3"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/modules/ModuleA_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_1">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleA_1_a"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/modules/ModuleA_1_a -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_1_a">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/modules/ModuleA_2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_2">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/modules/ModuleA_3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleA_3">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/modules/ModuleB -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleB_1"/>
+        <terms:hasPart rdf:resource="http://www.example.com/modules/ModuleB_2"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/modules/ModuleB_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB_1">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/modules/ModuleB_2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleB_2">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.example.com/modules/ModuleC -->
+
+    <owl:NamedIndividual rdf:about="http://www.example.com/modules/ModuleC">
+        <rdf:type rdf:resource="http://www.omg.org/techprocess/ab/SpecificationMetadata/Module"/>
+        <AnnotationVocabulary:hasMaturityLevel rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative -->
+
+    <owl:NamedIndividual rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/MaturityLevel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional -->
+
+    <owl:NamedIndividual rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/MaturityLevel"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release -->
+
+    <owl:NamedIndividual rdf:about="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release">
+        <rdf:type rdf:resource="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/MaturityLevel"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

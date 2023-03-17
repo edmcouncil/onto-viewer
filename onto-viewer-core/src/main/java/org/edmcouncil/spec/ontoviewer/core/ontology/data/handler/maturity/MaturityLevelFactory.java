@@ -14,7 +14,8 @@ import org.springframework.stereotype.Component;
 public class MaturityLevelFactory {
 
   public static final MaturityLevel MIXED = new MaturityLevel("Mixed", "https://spec.edmcouncil.org/ontoviewer/Mixed");
-  public static final MaturityLevel NOT_SET = new MaturityLevel("Not Set", "https://spec.edmcouncil.org/ontoviewer/NotSet");
+  public static final MaturityLevel NOT_SET = new MaturityLevel("Not Set",
+      "https://spec.edmcouncil.org/ontoviewer/NotSet");
 
   private final ApplicationConfigurationService applicationConfigurationService;
   private List<MaturityLevel> maturityLevels = null;
@@ -39,8 +40,8 @@ public class MaturityLevelFactory {
     }
     return Optional.empty();
   }
-  
-    public Optional<MaturityLevel> getByLabel(String maturityLevelLabel) {
+
+  public Optional<MaturityLevel> getByLabel(String maturityLevelLabel) {
     for (MaturityLevel value : maturityLevels) {
       if (value.getLabel().equals(maturityLevelLabel)) {
         return Optional.of(value);
@@ -58,5 +59,12 @@ public class MaturityLevelFactory {
       }
     }
     return maturityLevels;
+  }
+
+  public Optional<MaturityLevel> getMaturityLevel(String candidateIriString) {
+    return getMaturityLevels()
+        .stream()
+        .filter(maturityLevelCandidate -> maturityLevelCandidate.getIri().equals(candidateIriString))
+        .findFirst();
   }
 }

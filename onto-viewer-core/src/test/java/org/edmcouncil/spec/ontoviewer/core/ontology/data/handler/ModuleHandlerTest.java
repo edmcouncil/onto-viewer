@@ -16,22 +16,24 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.Maturi
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
-import org.edmcouncil.spec.ontoviewer.core.utils.OntologyUtils;
 import org.junit.jupiter.api.Test;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 
 class ModuleHandlerTest extends BaseTest {
 
   private static final String ROOT_IRI = "http://www.example.com/modules/";
 
-  private static final MaturityLevel PROVISIONAL = new MaturityLevel("Provisional", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional");
-  private static final MaturityLevel RELEASE = new MaturityLevel("Release", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release");
-  private static final MaturityLevel INFORMATIVE = new MaturityLevel("Informative", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative");
+  private static final String ANNOTATION_PREFIX =
+      "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/";
+  private static final String PROVISIONAL = "Provisional";
+  private static final MaturityLevel PROVISIONAL_ML = new MaturityLevel(PROVISIONAL, ANNOTATION_PREFIX + PROVISIONAL);
+  private static final String RELEASE = "Release";
+  private static final MaturityLevel RELEASE_ML = new MaturityLevel(RELEASE, ANNOTATION_PREFIX + RELEASE);
+  private static final String INFORMATIVE = "Informative";
+  private static final MaturityLevel INFORMATIVE_ML = new MaturityLevel(INFORMATIVE, ANNOTATION_PREFIX + INFORMATIVE);
 
   @Test
   void shouldReturnListOfModulesDefinedInOntologyWithoutMaturityLevel() {
@@ -86,18 +88,18 @@ class ModuleHandlerTest extends BaseTest {
             List.of(
                 createModuleWithIriAsLabel("ModuleA_1/",
                     List.of(
-                        createModuleWithIriAsLabel("ModuleA_1_a/", emptyList(), PROVISIONAL)
+                        createModuleWithIriAsLabel("ModuleA_1_a/", emptyList(), PROVISIONAL_ML)
                     ),
-                    PROVISIONAL
+                    PROVISIONAL_ML
                 ),
-                createModuleWithIriAsLabel("ModuleA_2/", emptyList(), INFORMATIVE)
+                createModuleWithIriAsLabel("ModuleA_2/", emptyList(), INFORMATIVE_ML)
             ),
-            RELEASE
+            RELEASE_ML
         ),
         createModuleWithIriAsLabel("ModuleB/",
             List.of(
-                createModuleWithIriAsLabel("ModuleB_1/", emptyList(), PROVISIONAL),
-                createModuleWithIriAsLabel("ModuleB_2/", emptyList(), RELEASE)
+                createModuleWithIriAsLabel("ModuleB_1/", emptyList(), PROVISIONAL_ML),
+                createModuleWithIriAsLabel("ModuleB_2/", emptyList(), RELEASE_ML)
             ),
             MaturityLevelFactory.MIXED
         )
@@ -114,9 +116,29 @@ class ModuleHandlerTest extends BaseTest {
         new OntologyModule("https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/",
             "MortgageLoans",
             emptyList(),
-            PROVISIONAL)
+            PROVISIONAL_ML)
     );
     assertEquals(expectedModules, actualModules);
+  }
+
+  @Test
+  void shouldReturnEntityMaturityLevelForEntityWhenExplicitlyStated() {
+    var moduleHandler = prepareModuleHandler("/ontology/maturity_level.rdf");
+    IRI entityIri = IRI.create(ROOT_IRI + "ClassA");
+
+    MaturityLevel actualMaturityLevel = moduleHandler.getMaturityLevelForEntity(entityIri);
+
+    assertEquals(RELEASE_ML, actualMaturityLevel);
+  }
+
+  @Test
+  void shouldReturnEntityMaturityLevelForEntityFromOntology() {
+    var moduleHandler = prepareModuleHandler("/ontology/maturity_level.rdf");
+    IRI entityIri = IRI.create(ROOT_IRI + "ClassB");
+
+    MaturityLevel actualMaturityLevel = moduleHandler.getMaturityLevelForEntity(entityIri);
+
+    assertEquals(INFORMATIVE_ML, actualMaturityLevel);
   }
 
   private ModuleHandler prepareModuleHandler(String... ontologyPaths) {
@@ -129,9 +151,9 @@ class ModuleHandlerTest extends BaseTest {
 
     var configurationMaturity = configurationService.getConfigurationData();
     List<Pair> definition = new ArrayList<>();
-    definition.add(new Pair("Release", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Release"));
-    definition.add(new Pair("Provisional", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Provisional"));
-    definition.add(new Pair("Informative", "https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/Informative"));
+    definition.add(new Pair(RELEASE, RELEASE_ML.getIri()));
+    definition.add(new Pair(PROVISIONAL, PROVISIONAL_ML.getIri()));
+    definition.add(new Pair(INFORMATIVE, INFORMATIVE_ML.getIri()));
 
     configurationMaturity.getOntologiesConfig().setMaturityLevelDefinition(definition);
 
@@ -142,8 +164,9 @@ class ModuleHandlerTest extends BaseTest {
     var labelProvider = new LabelProvider(configurationService, ontologyManager);
     var individualDataHelper = new IndividualDataHelper(labelProvider);
     var maturityLevelFactory = new MaturityLevelFactory(configurationService);
-    var moduleHandler = new ModuleHandler(ontologyManager, individualDataHelper, labelProvider,
-        configurationService, maturityLevelFactory);
+    var maturityLevelHandler = new MaturityLevelHandler(configurationService, ontologyManager, maturityLevelFactory);
+    var moduleHandler = new ModuleHandler(configurationService, ontologyManager, individualDataHelper, labelProvider,
+        maturityLevelFactory, maturityLevelHandler);
     moduleHandler.refreshModulesHandlerData();
     return moduleHandler;
   }

@@ -2,6 +2,7 @@ package org.edmcouncil.spec.ontoviewer.toolkit;
 
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.EXTRACT_DATA_COLUMN;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.MATURITY_LEVEL;
+import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.MATURITY_LEVEL_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_IRI;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_MAPPING;
 import static org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition.ONTOLOGY_VERSION_IRI;
@@ -295,6 +296,12 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
           .collect(Collectors.toMap(PairWithList::getLabel, PairWithList::getIris));
 
       configurationData.getToolkitConfig().setExtractDataColumns(extractDataColumns);
+    }
+
+    var maturityLevelPropertyOptions = commandLineOptions.getOptions(MATURITY_LEVEL_PROPERTY);
+    if (maturityLevelPropertyOptions != null && !maturityLevelPropertyOptions.isEmpty()) {
+      var maturityLevelProperty = maturityLevelPropertyOptions.get(0);
+      configurationData.getOntologiesConfig().setMaturityLevelProperty(maturityLevelProperty);
     }
 
     var goal = commandLineOptions.getOption(OptionDefinition.GOAL).or(() -> {

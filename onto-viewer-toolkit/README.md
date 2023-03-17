@@ -13,17 +13,18 @@ OntoViewer Toolkit can be run with a few different goals that are described belo
 
 ## Options
 
-| Name                  | Description                                                                                                                                             | Example                                                                    |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| `data`                | Path to the input ontology                                                                                                                              | `ontology/example.rdf`                                                     |
-| `extract-data-column` | Used for specifying property IRI for specific column in extract-data output. Supported values: definition, example, explanatoryNote, synonym, usageNote | `synonym=http://example.com/synonym`                                       |
-| `filter-pattern`  | String that should be within entity's IRI to include it                                                                                                 | `test`                                                                     |
-| `goal`    | Specify which goal should be executed by the toolkit                                                                                                    | `extract-data`                                                             |
-| `maturity-level` | Override default maturity levels; should have format 'maturityLevelIri=label'                                                                           | `maturity-level https://example.com/Provisional=Provisional` |
-| `ontology-iri` | New IRI for merged ontology                                                                                                                             | `http://example.com/ontology` |
-| `ontology-mapping` | Path to the catalog file with ontology mapping                                                                                                          | `catalog-v001.xml` |
-| `ontology-version-iri` | New version IRI for merged ontology                                                                                                                     | `http://example.com/ontology1/v1` |
-| `output` | Path where the result will be saved                                                                                                                     | `output.rdf` |
+| Name                      | Description                                                                                                                                            | Example                                                        |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| `data`                    | Path to the input ontology                                                                                                                             | `ontology/example.rdf`                                         |
+| `extract-data-column`     | Used for specifying property IRI for specific column in extract-data output. Supported values: definition, example, explanatoryNote, synonym, usageNote | `synonym=http://example.com/synonym`                           |
+| `filter-pattern`          | String that should be within entity's IRI to include it                                                                                                | `test`                                                         |
+| `goal`                    | Specify which goal should be executed by the toolkit                                                                                                   | `extract-data`                                                 |
+| `maturity-level`          | Override default maturity levels; should have format 'maturityLevelIri=label'                                                                          | `https://example.com/Provisional=Provisional`   |
+| `maturity-level-property` | Override default maturity level property                                                                   | `https://example.com/hasMaturityLevel` |
+| `ontology-iri`            | New IRI for merged ontology                                                                                                                            | `http://example.com/ontology`                                  |
+| `ontology-mapping`        | Path to the catalog file with ontology mapping                                                                                                         | `catalog-v001.xml`                                             |
+| `ontology-version-iri`    | New version IRI for merged ontology                                                                                                                    | `http://example.com/ontology1/v1`                              |
+| `output`                  | Path where the result will be saved                                                                                                                    | `output.rdf`                                                   |
 
 
 
@@ -64,6 +65,19 @@ java -jar onto-viewer-toolkit.jar \
     --maturity-level https://spec.industrialontologies.org/ontology/core/meta/AnnotationVocabulary/Provisional=Provisional \
     --output extracted-data.csv
 ```
+
+
+#### `extract-data with maturity-level and maturity-level-property`
+
+```bash
+java -jar onto-viewer-toolkit.jar \
+    --goal extract-data \
+    --data my-ontology.rdf \
+    --maturity-level https://spec.industrialontologies.org/ontology/core/meta/AnnotationVocabulary/Provisional=Provisional \
+    --maturity-level-property https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/hasMaturityLevel \
+    --output extracted-data.csv
+```
+
 
 #### `extract-data with extract-data-column`
 

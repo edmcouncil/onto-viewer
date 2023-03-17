@@ -39,8 +39,9 @@ public class OntologyStatsManager {
   private final ModuleHandler moduleHandler;
   private final IndividualDataHelper individualDataHandler;
   private final LabelProvider labelProvider;
-  private final String moduleClassIri;
+  private final ApplicationConfigurationService applicationConfigurationService;
 
+  private String moduleClassIri;
   private OntologyStatsMapped ontologyStatsMapped;
 
   public OntologyStatsManager(ModuleHandler moduleHandler,
@@ -50,10 +51,7 @@ public class OntologyStatsManager {
     this.moduleHandler = moduleHandler;
     this.individualDataHandler = individualDataHandler;
     this.labelProvider = labelProvider;
-    this.moduleClassIri = applicationConfigurationService
-        .getConfigurationData()
-        .getOntologiesConfig()
-        .getModuleClassIri();
+    this.applicationConfigurationService = applicationConfigurationService;
   }
 
   public OntologyStatsMapped getOntologyStats() {
@@ -165,14 +163,23 @@ public class OntologyStatsManager {
     osm.setStats(stats);
 
     ontologyStatsMapped = osm;
-
   }
 
   private Optional<OWLClass> getModuleClazz(OWLOntology ontology) {
-    IRI moduleIri = IRI.create(moduleClassIri);
+    IRI moduleIri = IRI.create(getModuleClassIri());
     return ontology
         .classesInSignature(Imports.INCLUDED)
         .filter(c -> c.getIRI().equals(moduleIri))
         .findFirst();
+  }
+
+  private String getModuleClassIri() {
+    if (moduleClassIri == null) {
+      this.moduleClassIri = applicationConfigurationService
+          .getConfigurationData()
+          .getOntologiesConfig()
+          .getModuleClassIri();
+    }
+    return moduleClassIri;
   }
 }

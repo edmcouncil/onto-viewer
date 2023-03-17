@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -242,11 +243,24 @@ public class ConfigurationData {
     private final List<String> zipUrls;
     private final String moduleClassIri;
     private List<Pair> maturityLevelDefinition;
+    private String maturityLevelProperty;
+
+    public OntologiesConfig() {
+      urls = new ArrayList<>();
+      paths = new ArrayList<>();
+      catalogPaths = new ArrayList<>();
+      moduleIgnorePatterns = new ArrayList<>();
+      moduleToIgnore = new ArrayList<>();
+      ontologyMappings = new HashMap<>();
+      downloadDirectory = new ArrayList<>();
+      zipUrls = new ArrayList<>();
+      moduleClassIri = "";
+    }
 
     public OntologiesConfig(List<String> urls, List<String> paths, List<String> catalogPaths,
         List<String> downloadDirectory, List<String> zipUrls, List<String> moduleIgnorePatterns,
         List<String> moduleToIgnore, List<Pair> maturityLevelDefinition, boolean automaticCreationOfModules,
-        String moduleClassIri) {
+        String moduleClassIri, String maturityLevelProperty) {
       this.urls = urls;
       this.paths = paths;
       this.catalogPaths = catalogPaths;
@@ -258,6 +272,7 @@ public class ConfigurationData {
       this.downloadDirectory = downloadDirectory;
       this.zipUrls = zipUrls;
       this.moduleClassIri = moduleClassIri;
+      this.maturityLevelProperty = maturityLevelProperty;
     }
 
     public List<String> getUrls() {
@@ -310,6 +325,14 @@ public class ConfigurationData {
 
     public String getModuleClassIri() {
       return moduleClassIri;
+    }
+
+    public String getMaturityLevelProperty() {
+      return maturityLevelProperty;
+    }
+
+    public void setMaturityLevelProperty(String maturityLevelProperty) {
+      this.maturityLevelProperty = maturityLevelProperty;
     }
   }
 
