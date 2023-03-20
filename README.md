@@ -1,4 +1,4 @@
-<img src="https://spec.edmcouncil.org/fibo/htmlpages/develop/latest/img/logo.66a988fe.png" width="150" align="right"/>
+<img src="https://github.com/edmcouncil/html-pages/raw/develop/general/assets/img/EDM-council-RGB_200w.png" width="200" align="right"/>
 
 # Onto Viewer
 
@@ -36,19 +36,17 @@ java -jar app-v-0.1.0.war
 
 To run the application using Docker you have to install Docker and docker-compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker-compose see [here](https://docs.docker.com/compose/install/). 
 
-1. Create onto-viewer-web and strapi-dashboard directories next to onto-viewer root folder.
-2. Install Strapi with the development database in the strapi-dashboard directory. To this end, run `npx create-strapi-app@latest strapi-dashboard --quickstart --no-run`command.
+1. Create onto-viewer-web directory next to onto-viewer root folder.
+2. Install Strapi with the development database in the root directory. To this end, run `npx create-strapi-app@latest strapi-dashboard --quickstart --no-run`command.
 3. Copy files and folders from html-pages repository:
 - `html-pages/general/strapi/.tmp/` > `strapi-dashboard/.tmp/`
 - `html-pages/general/strapi/src/` > `strapi-dashboard/src/`
 - `html-pages/general` > `onto-viewer-web/`
 - `html-pages/general/strapi/Dockerfile` > `strapi-dashboard/Dockerfile`
 - `onto-viewer/docker/web/.dockerignore` > `strapi-dashboard/.dockerignore`
-4. Replace:
-`onto-viewer-web/nuxt.config.js` > `/onto-viewer/docker/web/nuxt.config.js`
-5. Copy Dockerfile:
-`/onto-viewer/docker/web/Dockerfile` > `onto-viewer-web/Dockerfile`
-6. In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`. Note that the `onto-viewer/docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
+- `onto-viewer/docker/web/nuxt.config.js` > `onto-viewer-web/nuxt.config.js`
+- `onto-viewer/docker/web/Dockerfile` > `onto-viewer-web/Dockerfile`
+4. In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`. Note that the `onto-viewer/docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
 The final folder system should look like shown below:
 
 ```
