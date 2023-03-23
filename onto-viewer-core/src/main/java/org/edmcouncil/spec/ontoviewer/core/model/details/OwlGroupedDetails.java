@@ -12,6 +12,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlGroupedDetailsPrope
 public class OwlGroupedDetails extends OwlDetails {
 
   private OwlGroupedDetailsProperties<PropertyValue> properties;
+  private Map<String, Map<String, List<PropertyValue>>> toolkitProperties;
 
   public OwlGroupedDetails() {
     properties = new OwlGroupedDetailsProperties<>();
@@ -27,6 +28,18 @@ public class OwlGroupedDetails extends OwlDetails {
 
   public void addProperty(String groupKey, String propertyKey, PropertyValue property) {
     properties.addProperty(groupKey, propertyKey, property);
+  }
+
+  public void sortProperties(Map<String, List<String>> groups) {
+    properties.sort(groups);
+  }
+
+  public Map<String, Map<String, List<PropertyValue>>> getToolkitProperties() {
+    return toolkitProperties;
+  }
+
+  public void setToolkitProperties(Map<String, Map<String, List<PropertyValue>>> properties) {
+    this.toolkitProperties = properties;
   }
 
   @Override
@@ -54,9 +67,5 @@ public class OwlGroupedDetails extends OwlDetails {
     }
 
     return true;
-  }
-
-  public void sortProperties(Map<String, List<String>> groups) {
-    properties.sort(groups);
   }
 }

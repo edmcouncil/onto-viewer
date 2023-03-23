@@ -1,22 +1,19 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
-import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
+import org.edmcouncil.spec.ontoviewer.core.utils.OntologyUtils;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,54 +22,42 @@ import org.springframework.stereotype.Service;
 @Service
 public class CopyrightHandler {
 
-  private final OntologyManager ontologyManager;
   private final ApplicationConfig applicationConfig;
   private final ModuleHandler moduleHandler;
+  private final OntologyUtils ontologyUtils;
 
-  public CopyrightHandler(OntologyManager ontologyManager,
-      ApplicationConfigurationService applicationConfigurationService,
-      ModuleHandler moduleHandler) {
-    this.ontologyManager = ontologyManager;
+  public CopyrightHandler(ApplicationConfigurationService applicationConfigurationService,
+      ModuleHandler moduleHandler,
+      OntologyUtils ontologyUtils) {
     this.applicationConfig = applicationConfigurationService.getConfigurationData()
         .getApplicationConfig();
     this.moduleHandler = moduleHandler;
+    this.ontologyUtils = ontologyUtils;
   }
 
   public OwlDetailsProperties<PropertyValue> getCopyrightFromOntology(IRI ontologyIri) {
 
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
-    OWLOntologyManager manager = ontologyManager.getOntology().getOWLOntologyManager();
-    Set<String> visitedOntologies = new HashSet<>();
 
-    for (OWLOntology currentOntology : manager.ontologies().collect(Collectors.toSet())) {
-      var ontologyIriOptional = currentOntology.getOntologyID().getOntologyIRI();
-      if (ontologyIriOptional.isPresent()) {
-        var currentOntologyIri = ontologyIriOptional.get();
-        var createIri = IRI.create(
-            ontologyIri.getIRIString().substring(0, ontologyIri.getIRIString().length() - 1));
+    var optionalOntology = ontologyUtils.getOntologyByIRI(ontologyIri);
+    if (optionalOntology.isPresent()) {
+      var ontology = optionalOntology.get();
 
-        if ((currentOntologyIri.equals(ontologyIri)
-            || currentOntologyIri.equals(createIri))
-            && !visitedOntologies.contains(currentOntologyIri.toString())) {
+      for (OWLAnnotation annotation : ontology.annotations()
+          .collect(Collectors.toList())) {
+        for (String copyrightIri : applicationConfig.getCopyright()) {
+          if (copyrightIri.equals(annotation.getProperty().getIRI().toString())) {
 
-          visitedOntologies.add(currentOntologyIri.toString());
-
-          for (OWLAnnotation annotation : currentOntology.annotations()
-              .collect(Collectors.toList())) {
-            for (String copyrightIri : applicationConfig.getCopyright()) {
-              if (copyrightIri.equals(annotation.getProperty().getIRI().toString())) {
-
-                String copyright = annotation.getValue().toString();
-                copyright = copyright.replace("\"^^xsd:string", "").replace("\"", "");
-                PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValue();
-                annotationPropertyValue.setType(OwlType.STRING);
-                annotationPropertyValue.setValue(copyright);
-                result.addProperty(copyrightIri, annotationPropertyValue);
-              }
-            }
+            String copyright = annotation.getValue().toString();
+            copyright = copyright.replace("\"^^xsd:string", "").replace("\"", "");
+            PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValue();
+            annotationPropertyValue.setType(OwlType.STRING);
+            annotationPropertyValue.setValue(copyright);
+            result.addProperty(copyrightIri, annotationPropertyValue);
           }
         }
       }
+      return result;
     }
     return result;
   }

@@ -5,6 +5,7 @@ import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.utils.UrlChecker;
@@ -16,14 +17,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class Parser {
 
-  private static final Logger LOG = LoggerFactory.getLogger(Parser.class);
-
   private final LabelProvider labelProvider;
   private final ScopeIriOntology scopeIriOntology;
+  private final DeprecatedHandler deprecatedHandler;
 
-  public Parser(LabelProvider labelProvider, ScopeIriOntology scopeIriOntology) {
+  public Parser(LabelProvider labelProvider, ScopeIriOntology scopeIriOntology,
+      DeprecatedHandler deprecatedHandler) {
     this.labelProvider = labelProvider;
     this.scopeIriOntology = scopeIriOntology;
+    this.deprecatedHandler = deprecatedHandler;
   }
 
   private void parseUrl(String probablyUrl, String[] splitted, int j) {
@@ -34,13 +36,20 @@ public class Parser {
   public void parseToIri(OwlAxiomPropertyValue opv, String key, String[] splitted, int j, String generatedKey,
       String iriString, int countOpeningParenthesis, int countClosingParenthesis, int countComma) {
     if (iriString.contains("<") && iriString.contains(">")) {
-      iriString = iriString.replace("<", "")
+      iriString = iriString
+          .replace("<", "")
           .replace(">", "");
     }
 
-    String label = labelProvider.getLabelOrDefaultFragment(IRI.create(iriString));
+    var iri = IRI.create(iriString);
+    String label = labelProvider.getLabelOrDefaultFragment(iri);
 
-    var axiomPropertyEntity = new OwlAxiomPropertyEntity(iriString, label, OntoViewerEntityType.CLASS);
+    var axiomPropertyEntity = new OwlAxiomPropertyEntity(
+        iriString,
+        label,
+        OntoViewerEntityType.CLASS,
+        deprecatedHandler.getDeprecatedForEntity(iri));
+
     opv.addEntityValues(key, axiomPropertyEntity);
     splitted[j] = generatedKey;
 

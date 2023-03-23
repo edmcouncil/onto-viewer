@@ -86,7 +86,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
           break;
         case ONTOLOGIES:
           @SuppressWarnings("unchecked")
-          var ontologiesConfig = handleOntologies((Map<String, Object>) entry.getValue());
+          var ontologiesConfig = handleOntologyConfig((Map<String, Object>) entry.getValue(), new OntologiesConfig());
           configuration.setOntologiesConfig(ontologiesConfig);
           break;
         case INTEGRATIONS:
@@ -137,8 +137,8 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
 
     return new GroupsConfig(priorityList, groups);
   }
-  
-  protected ApplicationConfig handleApplicationConfig(Map<String, Object> applicationConfig){
+
+  protected ApplicationConfig handleApplicationConfig(Map<String, Object> applicationConfig) {
 
     var licenseObject = applicationConfig.get(LICENSE.getLabel());
     List<String> license = getListOfStringsFromObject(licenseObject);
@@ -157,7 +157,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
 
     return new ApplicationConfig(license, copyright, displayLicense, displayCopyright, displayQName);
   }
-  
+
   protected LabelConfig handleLabelConfig(Map<String, Object> labelConfig) {
     var displayLabelObject = labelConfig.get(DISPLAY_LABEL.getLabel());
     boolean displayLabel = getBooleanFromObject(displayLabelObject, DISPLAY_LABEL_DEFAULT);
@@ -217,7 +217,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     return new SearchConfig(searchDescriptions, fuzzyDistance, reindexOnStart, findProperties);
   }
 
-  protected OntologiesConfig handleOntologies(Map<String, Object> ontologies) {
+  protected OntologiesConfig handleOntologyConfig(Map<String, Object> ontologies, OntologiesConfig ontologiesConfig) {
     List<String> urls = new ArrayList<>();
     List<String> paths = new ArrayList<>();
     List<String> zips = new ArrayList<>();
@@ -246,14 +246,21 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     List<String> catalogPaths = getListOfStringsFromObject(ontologies.get(CATALOG_PATH.getLabel()));
     List<String> moduleIgnorePatterns = getListOfStringsFromObject(ontologies.get(MODULE_IGNORE_PATTERN.getLabel()));
     List<String> moduleToIgnore = getListOfStringsFromObject(ontologies.get(MODULE_TO_IGNORE.getLabel()));
-    boolean automaticCreationOfModules = 
-        getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()), AUTOMATIC_CREATION_OF_MODULES_DEFULT);
-     List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
-     String moduleClassIri = getStringsFromObject(ontologies.get(MODULE_CLASS_IRI.getLabel()));
-     List<Pair> maturityLevelDefinition = getMaturityLevelDefinitionNameList(ontologies.get(MATURITY_LEVEL_DEFINITION.getLabel()));
+    boolean automaticCreationOfModules =
+        getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()),
+            AUTOMATIC_CREATION_OF_MODULES_DEFULT);
+    List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
+    String moduleClassIri = getStringsFromObject(
+        ontologies.get(MODULE_CLASS_IRI.getLabel()),
+        ontologiesConfig.getModuleClassIri());
+    List<Pair> maturityLevelDefinition = getMaturityLevelDefinitionNameList(
+        ontologies.get(MATURITY_LEVEL_DEFINITION.getLabel()));
+    String maturityLevelProperty = getStringsFromObject(
+        ontologies.get(MATURITY_LEVEL_PROPERTY.getLabel()),
+        ontologiesConfig.getMaturityLevelProperty());
 
     return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns,
-        moduleToIgnore, maturityLevelDefinition, automaticCreationOfModules, moduleClassIri);
+        moduleToIgnore, maturityLevelDefinition, automaticCreationOfModules, moduleClassIri, maturityLevelProperty);
   }
 
   protected IntegrationsConfig handleIntegrationsConfig(List<Map<String, Object>> integrationsList) {
@@ -267,11 +274,15 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
       var integrationUrl = integrationMap.get(INTEGRATION_URL.getLabel());
       var integrationAccessToken = integrationMap.get(INTEGRATION_ACCESS_TOKEN.getLabel());
 
-      if (integrationId == null || integrationUrl == null || integrationAccessToken == null) {
+      if (integrationId == null || integrationUrl == null) {
         LOGGER.error("Missing data while reading integrations config: "
-            + "integrationId={}, integrationUrl={}, integrationAccessToken=[----]",
+            + "integrationId={}, integrationUrl={}",
             integrationId, integrationUrl);
         continue;
+      }
+
+      if (integrationAccessToken == null) {
+        integrationAccessToken = "";
       }
 
       var integration = new Integration(
@@ -407,10 +418,10 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     return findProperties;
   }
 
-  private String getStringsFromObject(Object stringAsObject) {
-    if (stringAsObject!=null) {
+  private String getStringsFromObject(Object stringAsObject, String defaultValue) {
+    if (stringAsObject != null) {
       return stringAsObject.toString();
     }
-    return null;
+    return defaultValue;
   }
 }

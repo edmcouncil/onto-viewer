@@ -4,6 +4,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.OwlSimpleProperty;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationIri;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
 import org.slf4j.Logger;
@@ -20,23 +21,27 @@ public class CustomDataFactory {
   private static final Logger LOG = LoggerFactory.getLogger(CustomDataFactory.class);
 
   private final LabelProvider labelExtractor;
+  private final DeprecatedHandler deprecatedHandler;
 
-  public CustomDataFactory(LabelProvider labelExtractor) {
+  public CustomDataFactory(LabelProvider labelExtractor, DeprecatedHandler deprecatedHandler) {
     this.labelExtractor = labelExtractor;
+    this.deprecatedHandler = deprecatedHandler;
   }
 
   /**
    *
-   * @param iri IRI element for which we create annotationIRI
+   * @param iriString IRI element for which we create annotationIRI
    * @return AnnotationIri contains iri and label
    */
-  public OwlAnnotationIri createAnnotationIri(String iri) {
-    LOG.debug("[Custom Data Factory] Create annotation for IRI: {}", iri);
+  public OwlAnnotationIri createAnnotationIri(String iriString) {
+    LOG.debug("[Custom Data Factory] Create annotation for IRI: {}", iriString);
 
     OwlAnnotationIri owlAnnotationIri = new OwlAnnotationIri();
     OwlSimpleProperty simpleProperty = new OwlSimpleProperty();
-    simpleProperty.setLabel(labelExtractor.getLabelOrDefaultFragment(IRI.create(iri)));
-    simpleProperty.setIri(iri);
+    var iri = IRI.create(iriString);
+    simpleProperty.setLabel(labelExtractor.getLabelOrDefaultFragment(iri));
+    simpleProperty.setIri(iriString);
+    simpleProperty.setDeprecated(deprecatedHandler.getDeprecatedForEntity(iri));
     owlAnnotationIri.setValue(simpleProperty);
     owlAnnotationIri.setType(OwlType.IRI);
     return owlAnnotationIri;

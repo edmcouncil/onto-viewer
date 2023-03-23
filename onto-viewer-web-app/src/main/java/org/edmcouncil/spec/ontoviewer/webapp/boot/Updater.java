@@ -6,7 +6,9 @@ import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
@@ -22,6 +24,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Updater {
+
+  private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
   private final Map<String, UpdateJob> jobs = new HashMap<>();
 
@@ -43,8 +47,10 @@ public class Updater {
   private ResourcesPopulate resourcesPopulate;
   @Autowired
   private FallbackService fallbackService;
-
-  private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
+  @Autowired
+  private DeprecatedHandler deprecatedHandler;
+  @Autowired
+  private VersionIriHandler versionIriHandler;
 
   @EventListener(ApplicationReadyEvent.class)
   public void afterStart() {
@@ -66,10 +72,13 @@ public class Updater {
         scopeIriOntology,
         ontologyStatsManager,
         luceneSearcher,
-        applicationConfigurationService, resourcesPopulate, fallbackService) {
+        applicationConfigurationService,
+        resourcesPopulate,
+        fallbackService,
+        deprecatedHandler,
+        versionIriHandler) {
     };
     t.start();
-
   }
 
   public UpdateJob getJobWithId(String id) {
@@ -90,15 +99,15 @@ public class Updater {
 
   private void interruptOtherWaitingJobs() {
     jobs.values().stream()
-        .filter((value) -> !(value.getId().equals(String.valueOf(0))))
-        .filter((value) -> (value.getStatus() == UpdateJobStatus.WAITING))
-        .forEachOrdered((value) -> UpdaterOperation.setJobStatusToError(value, INTERRUPT_MESSAGE));
+        .filter(value -> !(value.getId().equals(String.valueOf(0))))
+        .filter(value -> (value.getStatus() == UpdateJobStatus.WAITING))
+        .forEachOrdered(value -> UpdaterOperation.setJobStatusToError(value, INTERRUPT_MESSAGE));
   }
 
   private void interruptWorkingJob() {
     jobs.values().stream()
-        .filter((value) -> !(value.getId().equals(String.valueOf(0))))
-        .filter((value) -> (value.getStatus() == UpdateJobStatus.IN_PROGRESS))
-        .forEachOrdered((value) -> UpdaterOperation.setJobStatusToInterrupt(value, INTERRUPT_MESSAGE));
+        .filter(value -> !(value.getId().equals(String.valueOf(0))))
+        .filter(value -> (value.getStatus() == UpdateJobStatus.IN_PROGRESS))
+        .forEachOrdered(value -> UpdaterOperation.setJobStatusToInterrupt(value, INTERRUPT_MESSAGE));
   }
 }

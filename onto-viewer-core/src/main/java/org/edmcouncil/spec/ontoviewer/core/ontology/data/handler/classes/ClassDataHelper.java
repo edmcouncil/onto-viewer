@@ -17,6 +17,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDirectedSubClassesProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.StringIdentifier;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -42,10 +43,13 @@ public class ClassDataHelper {
 
   private final OntologyManager ontologyManager;
   private final LabelProvider labelProvider;
+  private final DeprecatedHandler deprecatedHandler;
 
-  public ClassDataHelper(OntologyManager ontologyManager, LabelProvider labelProvider) {
+  public ClassDataHelper(OntologyManager ontologyManager, LabelProvider labelProvider,
+      DeprecatedHandler deprecatedHandler) {
     this.ontologyManager = ontologyManager;
     this.labelProvider = labelProvider;
+    this.deprecatedHandler = deprecatedHandler;
   }
 
   public List<PropertyValue> getSuperClasses(OWLClass clazz) {
@@ -73,12 +77,17 @@ public class ClassDataHelper {
       OwlAxiomPropertyEntity propertyEntity = new OwlAxiomPropertyEntity(
           entityIri.toString(),
           labelProvider.getLabelOrDefaultFragment(entityIri),
-          OntoViewerEntityType.fromEntityType(entity));
+          OntoViewerEntityType.fromEntityType(entity),
+          deprecatedHandler.getDeprecatedForEntity(entityIri));
+
+
       Map<String, OwlAxiomPropertyEntity> entityMapping = new HashMap<>();
       entityMapping.put(key, propertyEntity);
 
       OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue(
           key, OwlType.TAXONOMY, 0, null, entityMapping, false);
+      // TODO
+      axiomPropertyValue.addEntityValues(key, propertyEntity);
 
       result.add(axiomPropertyValue);
     }
@@ -159,10 +168,11 @@ public class ClassDataHelper {
       OwlAxiomPropertyValue pv = new OwlAxiomPropertyValue();
       OwlAxiomPropertyEntity entitySubClass = new OwlAxiomPropertyEntity();
       OwlAxiomPropertyEntity entitySuperClass = new OwlAxiomPropertyEntity();
-      entitySubClass.setIri(subClazzIri.getIRIString());
-      entitySubClass.setLabel(labelProvider.getLabelOrDefaultFragment(subClazzIri));
+
+      // TODO
       entitySuperClass.setIri(superClazzIri.getIRIString());
       entitySuperClass.setLabel(labelProvider.getLabelOrDefaultFragment(superClazzIri));
+      entitySuperClass.setDeprecated(deprecatedHandler.getDeprecatedForEntity(superClazzIri));
 
       pv.setType(OwlType.TAXONOMY);
       pv.addEntityValues(labelProvider.getLabelOrDefaultFragment(subClazzIri), entitySubClass);

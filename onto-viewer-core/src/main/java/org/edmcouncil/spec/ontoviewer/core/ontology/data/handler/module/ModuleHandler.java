@@ -22,6 +22,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.MaturityLevelHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.individual.IndividualDataHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevelFactory;
@@ -38,14 +39,11 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.parameters.Imports;
 import org.semanticweb.owlapi.search.EntitySearcher;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ModuleHandler {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ModuleHandler.class);
   private static final String ONTOLOGY_IRI_GROUP_NAME = "ontologyIri";
   private static final Pattern ONTOLOGY_IRI_PATTERN = Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
   private static final String HAS_PART_IRI = "http://purl.org/dc/terms/hasPart";
@@ -54,174 +52,39 @@ public class ModuleHandler {
       OwlType.INSTANCES.name().toLowerCase());
   private static final Pattern URL_PATTERN
       = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
-  private final MaturityLevelFactory maturityLevelFactory;
+
   private final ApplicationConfigurationService applicationConfigurationService;
+  private final MaturityLevelFactory maturityLevelFactory;
   private final OntologyManager ontologyManager;
   private final IndividualDataHelper individualDataHelper;
   private final LabelProvider labelProvider;
   private final OWLAnnotationProperty hasPartAnnotation;
+  private final MaturityLevelHandler maturityLevelHandler;
+
   // Cache for ontologies' maturity level
   private final Map<IRI, MaturityLevel> maturityLevelsCache = new ConcurrentHashMap<>();
-  private  Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
-  private  Set<Pattern> ontologyModuleIgnorePatterns;
+
+  private Set<IRI> ontologiesToIgnoreWhenGeneratingModules;
+  private Set<Pattern> ontologyModuleIgnorePatterns;
   private String moduleClassIri;
-  private  boolean automaticCreationOfModules;
+  private boolean automaticCreationOfModules;
   private List<OntologyModule> modules;
   private Map<IRI, OntologyModule> modulesMap;
 
-  public ModuleHandler(OntologyManager ontologyManager,
+  public ModuleHandler(ApplicationConfigurationService applicationConfigurationService,
+      OntologyManager ontologyManager,
       IndividualDataHelper individualDataHelper,
       LabelProvider labelProvider,
-      ApplicationConfigurationService applicationConfigurationService,
-      MaturityLevelFactory maturityLevelFactory) {
+      MaturityLevelFactory maturityLevelFactory,
+      MaturityLevelHandler maturityLevelHandler) {
+    this.applicationConfigurationService = applicationConfigurationService;
     this.ontologyManager = ontologyManager;
     this.individualDataHelper = individualDataHelper;
     this.labelProvider = labelProvider;
     this.maturityLevelFactory = maturityLevelFactory;
-    this.applicationConfigurationService = applicationConfigurationService;
+    this.maturityLevelHandler = maturityLevelHandler;
 
     this.hasPartAnnotation = OWLManager.getOWLDataFactory().getOWLAnnotationProperty(IRI.create(HAS_PART_IRI));
-  }
-
-  public List<OntologyModule> getModules() {
-    if (modules == null) {
-      var ontology = ontologyManager.getOntology();
-
-      modules = new ArrayList<>();
-
-      if (moduleClassIri != null) {
-        IRI moduleIri = IRI.create(moduleClassIri);
-        Optional<OWLClass> moduleClassOptional = ontology
-            .classesInSignature(Imports.INCLUDED)
-            .filter(c -> c.getIRI().equals(moduleIri))
-            .findFirst();
-
-        if (moduleClassOptional.isPresent()) {
-          OwlDetailsProperties<PropertyValue> moduleClass
-              = individualDataHelper.handleClassIndividuals(ontology, moduleClassOptional.get());
-
-          if (!moduleClass.getProperties().isEmpty()) {
-            Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
-                .stream()
-                .map(OwlListElementIndividualProperty.class::cast)
-                .map(individualProperty -> individualProperty.getValue().getIri())
-                .collect(Collectors.toSet());
-
-            List<String> rootModulesIris = getRootModulesIris(modulesIris);
-
-            this.modules = prepareModuleObjects(rootModulesIris);
-            this.modules.forEach(this::checkAndCompleteMaturityLevel);
-          }
-        }
-      }
-      if (automaticCreationOfModules) {
-        addMissingModules(modules);
-      }
-
-      modulesMap = prepareModulesMap(modules);
-    }
-    return modules;
-  }
-
-  public List<String> getRootModulesIris(Set<String> modulesIris) {
-    Map<String, Integer> referenceCount = new LinkedHashMap<>();
-
-    modulesIris.forEach(moduleIri -> {
-      Set<String> subModules = getSubModules(IRI.create(moduleIri));
-      referenceCount.putIfAbsent(moduleIri, 0);
-
-      subModules.forEach(partModule -> {
-        int counter = referenceCount.getOrDefault(partModule, 0);
-        counter++;
-        referenceCount.put(partModule, counter);
-      });
-    });
-
-    return referenceCount.entrySet()
-        .stream()
-        .filter(moduleEntry -> moduleEntry.getValue() == 0)
-        .map(Entry::getKey)
-        .collect(Collectors.toList());
-  }
-
-  public List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
-    Map<String, Integer> referenceCount = new LinkedHashMap<>();
-    modulesIriSet.forEach(moduleIri -> {
-      Set<String> hasPartModules = getHasPartElements(IRI.create(moduleIri), ontology);
-      referenceCount.putIfAbsent(moduleIri, 0);
-      hasPartModules.forEach(partModule -> {
-        Integer c = referenceCount.getOrDefault(partModule, 0);
-        c++;
-        referenceCount.put(partModule, c);
-      });
-    });
-
-    return referenceCount.entrySet()
-        .stream()
-        .filter(r -> r.getValue() == 0)
-        .map(Entry::getKey)
-        .collect(Collectors.toList());
-  }
-
-  private List<OntologyModule> getSubModules(String moduleIri) {
-    Set<String> hasPartModules = getSubModules(IRI.create(moduleIri));
-
-    return prepareModuleObjects(hasPartModules);
-  }
-
-  private List<OntologyModule> prepareModuleObjects(Collection<String> modulesIris) {
-    return modulesIris.stream()
-        .map(moduleIri -> {
-          OntologyModule module = new OntologyModule();
-          module.setIri(moduleIri);
-          module.setLabel(labelProvider.getLabelOrDefaultFragment(IRI.create(moduleIri)));
-          module.setMaturityLevel(getMaturityLevelForOntology(IRI.create(moduleIri)));
-          module.setSubModule(getSubModules(moduleIri));
-          return module;
-        })
-        .sorted()
-        .collect(Collectors.toList());
-  }
-
-  public Set<String> getSubModules(IRI moduleIri) {
-    var ontology = ontologyManager.getOntology();
-
-    Optional<OWLNamedIndividual> individual = ontology
-        .individualsInSignature(Imports.INCLUDED)
-        .filter(c -> c.getIRI().equals(moduleIri))
-        .findFirst();
-
-    if (individual.isEmpty()) {
-      return new HashSet<>(0);
-    }
-
-    return EntitySearcher
-        .getAnnotations(
-            individual.get(),
-            ontology.importsClosure(),
-            hasPartAnnotation)
-        .map(owlAnnotation -> owlAnnotation.annotationValue().toString())
-        .collect(Collectors.toSet());
-  }
-
-  public MaturityLevel getMaturityLevelForModule(IRI moduleIri) {
-    OntologyModule ontologyModule = modulesMap.get(moduleIri);
-    if (ontologyModule != null) {
-      return ontologyModule.getMaturityLevel();
-    }
-    return maturityLevelFactory.notSet();
-  }
-
-  public MaturityLevel getMaturityLevelForElement(IRI entityIri) {
-    OntologyModule ontologyModule = modulesMap.get(entityIri);
-    if (ontologyModule != null) {
-      return ontologyModule.getMaturityLevel();
-    }
-    IRI ontologyIri = getOntologyIri(entityIri);
-    if (ontologyIri != null) {
-      return getMaturityLevelForModule(ontologyIri);
-    }
-    return maturityLevelFactory.notSet();
   }
 
   public void refreshModulesHandlerData() {
@@ -249,26 +112,137 @@ public class ModuleHandler {
         .getConfigurationData()
         .getOntologiesConfig()
         .getModuleClassIri();
+
     // If modules is empty is auto generated again while get
     getModules();
   }
 
-  private MaturityLevel getMaturityLevelForOntology(IRI ontologyIri) {
-    if (!maturityLevelsCache.containsKey(ontologyIri)) {
-      var ontologies = ontologyManager.getOntologyWithImports().collect(Collectors.toSet());
+  public List<OntologyModule> getModules() {
+    if (modules == null) {
+      var ontology = ontologyManager.getOntology();
 
-      for (OWLOntology ontology : ontologies) {
-        var maturityLevelOptional = getMaturityLevelForParticularOntology(ontology, ontologyIri);
-        if (maturityLevelOptional.isPresent()) {
-          maturityLevelsCache.put(ontologyIri, maturityLevelOptional.get());
-          break;
+      modules = new ArrayList<>();
+
+      if (moduleClassIri != null) {
+        IRI moduleIri = IRI.create(moduleClassIri);
+        Optional<OWLClass> moduleClassOptional = ontology
+            .classesInSignature(Imports.INCLUDED)
+            .filter(c -> c.getIRI().equals(moduleIri))
+            .findFirst();
+
+        if (moduleClassOptional.isPresent()) {
+          OwlDetailsProperties<PropertyValue> moduleClass =
+              individualDataHelper.handleClassIndividuals(ontology, moduleClassOptional.get());
+
+          if (!moduleClass.getProperties().isEmpty()) {
+            Set<String> modulesIris = moduleClass.getProperties().get(INSTANCE_KEY)
+                .stream()
+                .map(OwlListElementIndividualProperty.class::cast)
+                .map(individualProperty -> individualProperty.getValue().getIri())
+                .collect(Collectors.toSet());
+
+            List<String> rootModulesIris = getRootModulesIris(modulesIris);
+
+            this.modules = prepareModuleObjects(rootModulesIris);
+            this.modules.forEach(this::checkAndCompleteMaturityLevel);
+          }
         }
       }
+      if (automaticCreationOfModules) {
+        addMissingModules(modules);
+      }
+
+      modulesMap = prepareModulesMap(modules);
     }
 
-    return maturityLevelsCache.computeIfAbsent(
-        ontologyIri,
-        iri -> maturityLevelFactory.notSet());
+    return modules;
+  }
+
+  public List<String> getRootModulesIris(Set<String> modulesIriSet, OWLOntology ontology) {
+    Map<String, Integer> referenceCount = new LinkedHashMap<>();
+    modulesIriSet.forEach(moduleIri -> {
+      Set<String> hasPartModules = getHasPartElements(IRI.create(moduleIri), ontology);
+      referenceCount.putIfAbsent(moduleIri, 0);
+
+      hasPartModules.forEach(partModule -> {
+        Integer counter = referenceCount.getOrDefault(partModule, 0);
+        counter++;
+        referenceCount.put(partModule, counter);
+      });
+    });
+
+    return referenceCount.entrySet()
+        .stream()
+        .filter(moduleEntry -> moduleEntry.getValue() == 0)
+        .map(Entry::getKey)
+        .collect(Collectors.toList());
+  }
+
+  private List<String> getRootModulesIris(Set<String> modulesIris) {
+    Map<String, Integer> referenceCount = new LinkedHashMap<>();
+
+    modulesIris.forEach(moduleIri -> {
+      Set<String> subModules = getSubModules(IRI.create(moduleIri));
+      referenceCount.putIfAbsent(moduleIri, 0);
+
+      subModules.forEach(partModule -> {
+        int counter = referenceCount.getOrDefault(partModule, 0);
+        counter++;
+        referenceCount.put(partModule, counter);
+      });
+    });
+
+    return referenceCount.entrySet()
+        .stream()
+        .filter(moduleEntry -> moduleEntry.getValue() == 0)
+        .map(Entry::getKey)
+        .collect(Collectors.toList());
+  }
+
+  private List<OntologyModule> getSubModules(String moduleIri) {
+    Set<String> hasPartModules = getSubModules(IRI.create(moduleIri));
+
+    return prepareModuleObjects(hasPartModules);
+  }
+
+  private List<OntologyModule> prepareModuleObjects(Collection<String> modulesIris) {
+    return modulesIris.stream()
+        .map(moduleIri -> {
+          OntologyModule module = new OntologyModule();
+          module.setIri(moduleIri);
+          module.setLabel(labelProvider.getLabelOrDefaultFragment(IRI.create(moduleIri)));
+          module.setMaturityLevel(getMaturityLevelForOntology(IRI.create(moduleIri)));
+          module.setSubModule(getSubModules(moduleIri));
+          return module;
+        })
+        .sorted()
+        .collect(Collectors.toList());
+  }
+
+  private Set<String> getSubModules(IRI moduleIri) {
+    var ontology = ontologyManager.getOntology();
+
+    Optional<OWLNamedIndividual> individual = ontology
+        .individualsInSignature(Imports.INCLUDED)
+        .filter(c -> c.getIRI().equals(moduleIri))
+        .findFirst();
+
+    return individual.map(owlNamedIndividual -> EntitySearcher
+            .getAnnotations(
+                owlNamedIndividual,
+                ontology.importsClosure(),
+                hasPartAnnotation)
+            .map(owlAnnotation -> owlAnnotation.annotationValue().toString())
+            .collect(Collectors.toSet()))
+        .orElseGet(() -> new HashSet<>(0));
+  }
+
+  public MaturityLevel getMaturityLevelForModule(IRI moduleIri) {
+    OntologyModule ontologyModule = modulesMap.get(moduleIri);
+    if (ontologyModule != null) {
+      return ontologyModule.getMaturityLevel();
+    }
+    return maturityLevelFactory.notSet();
   }
 
   public IRI getOntologyIri(IRI elementIri) {
@@ -285,28 +259,26 @@ public class ModuleHandler {
     return elementIri;
   }
 
-  private Optional<MaturityLevel> getMaturityLevelForParticularOntology(
-      OWLOntology ontology,
-      IRI ontologyIri) {
-    var currentOntologyIri = ontology.getOntologyID().getOntologyIRI();
-    if (currentOntologyIri.isPresent() && currentOntologyIri.get().equals(ontologyIri)) {
-      var levelString = maturityLevelFactory.getMaturityLevels()
-          .stream()
-          .map(maturityLevel -> maturityLevel.getIri())
-          .collect(Collectors.toSet());
-      for (OWLAnnotation annotation : ontology.annotationsAsList()) {
-        var annotationValue = annotation.annotationValue();
+  public MaturityLevel getMaturityLevelForEntity(IRI entityIri) {
+    MaturityLevel maturityLevel = maturityLevelHandler.getMaturityLevelForElement(entityIri);
 
-        if (annotationValue.isIRI()
-            && annotationValue.asIRI().isPresent()
-            && levelString.contains(annotationValue.asIRI().get().getIRIString())) {
-          String annotationIri = annotationValue.asIRI().get().toString();
-          return maturityLevelFactory.getByIri(annotationIri);
-        }
-      }
+    if (maturityLevel != MaturityLevelFactory.NOT_SET) {
+      return maturityLevel;
     }
 
-    return Optional.empty();
+    // Check if the searched maturity level belongs to the module
+    OntologyModule ontologyModule = modulesMap.get(entityIri);
+    if (ontologyModule != null) {
+      return ontologyModule.getMaturityLevel();
+    }
+
+    // In this case we can extract maturity level from ontology
+    IRI ontologyIri = getOntologyIri(entityIri);
+    if (ontologyIri != null) {
+      return getMaturityLevelForModule(ontologyIri);
+    }
+
+    return maturityLevelFactory.notSet();
   }
 
   private void checkAndCompleteMaturityLevel(OntologyModule module) {
@@ -377,10 +349,15 @@ public class ModuleHandler {
           module.setIri(ontologyIri.toString());
           module.setLabel(labelProvider.getLabelOrDefaultFragment(ontologyIri));
           module.setSubModule(new ArrayList<>());
-          module.setMaturityLevel(getMaturityLevelForOntology(ontologyIri));
-          if ("".equals(module.getMaturityLevel().getLabel())) {
+
+          Optional<MaturityLevel> maturityLevelOptional =
+              maturityLevelHandler.getMaturityLevelForParticularOntology(owlOntology);
+          if (maturityLevelOptional.isPresent()) {
+            module.setMaturityLevel(maturityLevelOptional.get());
+          } else {
             module.setMaturityLevel(maturityLevelFactory.notSet());
           }
+
           return module;
         })
         .filter(ontologyModule -> !ontologyModule.getLabel().isEmpty())
@@ -471,5 +448,26 @@ public class ModuleHandler {
     }
 
     return result;
+  }
+
+  private MaturityLevel getMaturityLevelForOntology(IRI ontologyIri) {
+    if (!maturityLevelsCache.containsKey(ontologyIri)) {
+      var ontologies = ontologyManager.getOntologyWithImports().collect(Collectors.toSet());
+
+      for (OWLOntology ontology : ontologies) {
+        var currentOntologyIri = ontology.getOntologyID().getOntologyIRI();
+        if (currentOntologyIri.isPresent() && currentOntologyIri.get().equals(ontologyIri)) {
+          var maturityLevelOptional = maturityLevelHandler.getMaturityLevelForParticularOntology(ontology);
+          if (maturityLevelOptional.isPresent()) {
+            maturityLevelsCache.put(ontologyIri, maturityLevelOptional.get());
+            break;
+          }
+        }
+      }
+    }
+
+    return maturityLevelsCache.computeIfAbsent(
+        ontologyIri,
+        iri -> maturityLevelFactory.notSet());
   }
 }

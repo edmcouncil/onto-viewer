@@ -9,14 +9,17 @@ public class OwlAxiomPropertyEntity {
 
   private String iri;
   private String label;
+  private boolean deprecated;
   private OntoViewerEntityType entityType;
 
   public OwlAxiomPropertyEntity() {
   }
 
-  public OwlAxiomPropertyEntity(String iri, String label, OntoViewerEntityType entityType) {
+  // TODO
+  public OwlAxiomPropertyEntity(String iri, String label, OntoViewerEntityType entityType, boolean deprecated) {
     this.iri = iri;
     this.label = label;
+    this.deprecated = deprecated;
     this.entityType = entityType;
   }
 
@@ -36,6 +39,14 @@ public class OwlAxiomPropertyEntity {
     this.label = label;
   }
 
+  public boolean isDeprecated() {
+    return deprecated;
+  }
+
+  public void setDeprecated(boolean deprecated) {
+    this.deprecated = deprecated;
+  }
+
   public OntoViewerEntityType getEntityType() {
     return entityType;
   }
@@ -46,6 +57,11 @@ public class OwlAxiomPropertyEntity {
 
   @Override
   public String toString() {
-    return "OwlAxiomPropertyEntity{" + "iri=" + iri + ", label=" + label + '}';
+    // TODO
+    return "OwlAxiomPropertyEntity{" +
+        "iri='" + iri + '\'' +
+        ", label='" + label + '\'' +
+        ", deprecated=" + deprecated +
+        '}';
   }
 }

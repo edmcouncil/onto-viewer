@@ -39,6 +39,7 @@ public enum ConfigurationKey {
   AUTOMATIC_CREATION_OF_MODULES("automatic_creation_of_modules"),
   MODULE_CLASS_IRI("module_class_iri"),
   MATURITY_LEVEL_DEFINITION("maturity_level_definition"),
+  MATURITY_LEVEL_PROPERTY("maturity_level_property"),
   //ApplicationConfig
   APPLICATION_CONFIG("application_config"),
   LICENSE("license"),

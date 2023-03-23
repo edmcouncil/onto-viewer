@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -242,11 +243,24 @@ public class ConfigurationData {
     private final List<String> zipUrls;
     private final String moduleClassIri;
     private List<Pair> maturityLevelDefinition;
+    private String maturityLevelProperty;
+
+    public OntologiesConfig() {
+      urls = new ArrayList<>();
+      paths = new ArrayList<>();
+      catalogPaths = new ArrayList<>();
+      moduleIgnorePatterns = new ArrayList<>();
+      moduleToIgnore = new ArrayList<>();
+      ontologyMappings = new HashMap<>();
+      downloadDirectory = new ArrayList<>();
+      zipUrls = new ArrayList<>();
+      moduleClassIri = "";
+    }
 
     public OntologiesConfig(List<String> urls, List<String> paths, List<String> catalogPaths,
         List<String> downloadDirectory, List<String> zipUrls, List<String> moduleIgnorePatterns,
         List<String> moduleToIgnore, List<Pair> maturityLevelDefinition, boolean automaticCreationOfModules,
-        String moduleClassIri) {
+        String moduleClassIri, String maturityLevelProperty) {
       this.urls = urls;
       this.paths = paths;
       this.catalogPaths = catalogPaths;
@@ -258,6 +272,7 @@ public class ConfigurationData {
       this.downloadDirectory = downloadDirectory;
       this.zipUrls = zipUrls;
       this.moduleClassIri = moduleClassIri;
+      this.maturityLevelProperty = maturityLevelProperty;
     }
 
     public List<String> getUrls() {
@@ -311,22 +326,42 @@ public class ConfigurationData {
     public String getModuleClassIri() {
       return moduleClassIri;
     }
+
+    public String getMaturityLevelProperty() {
+      return maturityLevelProperty;
+    }
+
+    public void setMaturityLevelProperty(String maturityLevelProperty) {
+      this.maturityLevelProperty = maturityLevelProperty;
+    }
   }
 
   public static class ToolkitConfig {
 
+    private boolean runningToolkit;
     private String filterPattern;
     private String goal;
     private boolean locationInModulesEnabled;
     private boolean usageEnabled;
     private boolean ontologyGraphEnabled;
     private boolean individualsEnabled;
+    private Map<String, List<String>> extractDataColumns;
 
     public ToolkitConfig() {
+      this.runningToolkit = false;
       this.locationInModulesEnabled = true;
       this.usageEnabled = true;
       this.ontologyGraphEnabled = true;
       this.individualsEnabled = true;
+      this.extractDataColumns = new HashMap<>();
+    }
+
+    public boolean isRunningToolkit() {
+      return runningToolkit;
+    }
+
+    public void setRunningToolkit(boolean runningToolkit) {
+      this.runningToolkit = runningToolkit;
     }
 
     public String getFilterPattern() {
@@ -375,6 +410,14 @@ public class ConfigurationData {
 
     public void setIndividualsEnabled(boolean individualsEnabled) {
       this.individualsEnabled = individualsEnabled;
+    }
+
+    public Map<String, List<String>> getExtractDataColumns() {
+      return extractDataColumns;
+    }
+
+    public void setExtractDataColumns(Map<String, List<String>> extractDataColumns) {
+      this.extractDataColumns = extractDataColumns;
     }
   }
 

@@ -12,6 +12,7 @@ import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -46,13 +47,14 @@ public class OntologyTableDataExtractor {
   private static final Logger LOGGER = LoggerFactory.getLogger(OntologyTableDataExtractor.class);
   private static final String EQUIVALENT_TO = "EquivalentTo";
   private static final String ONTOLOGY_IRI_GROUP_NAME = "ontologyIri";
-  private static final Pattern ONTOLOGY_IRI_PATTERN =
-      Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
+  private static final Pattern ONTOLOGY_IRI_PATTERN = Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
   private static final String UNKNOWN_LABEL = "UNKNOWN";
 
   private final ApplicationConfigurationService applicationConfigurationService;
   private final DetailsManager detailsManager;
   private final LabelProvider labelProvider;
+
+  private Map<String, List<String>> extractDataColumns;
 
   public OntologyTableDataExtractor(ApplicationConfigurationService applicationConfigurationService,
       DetailsManager detailsManager,
@@ -63,6 +65,9 @@ public class OntologyTableDataExtractor {
   }
 
   public List<EntityData> extractEntityData() {
+    this.extractDataColumns =
+        applicationConfigurationService.getConfigurationData().getToolkitConfig().getExtractDataColumns();
+
     var result = new ArrayList<EntityData>();
     var ontology = detailsManager.getOntology();
 
@@ -98,9 +103,7 @@ public class OntologyTableDataExtractor {
     return result;
   }
 
-  private List<EntityData> getEntities(
-      Stream<? extends OWLEntity> entities,
-      OntoViewerEntityType type) {
+  private List<EntityData> getEntities(Stream<? extends OWLEntity> entities, OntoViewerEntityType type) {
     var filterPattern = applicationConfigurationService.getConfigurationData()
         .getToolkitConfig()
         .getFilterPattern();
@@ -140,7 +143,7 @@ public class OntologyTableDataExtractor {
       throws OntoViewerToolkitRuntimeException {
     if (owlDetails instanceof OwlGroupedDetails) {
       var groupedOwlDetails = (OwlGroupedDetails) owlDetails;
-      var properties = groupedOwlDetails.getProperties();
+      var properties = groupedOwlDetails.getToolkitProperties();
 
       var entityData = new EntityData();
       entityData.setIri(owlDetails.getIri());
@@ -153,7 +156,7 @@ public class OntologyTableDataExtractor {
           cleanString(
               cleanGeneratedDescription(
                   entityData.getTermLabel(),
-                  getProperty(properties, GroupsPropertyKey.GENERATED_DESCRIPTION))));
+                  getPropertyGeneratedDescription(groupedOwlDetails.getProperties()))));
       entityData.setExamples(cleanString(getProperty(properties, GroupsPropertyKey.EXAMPLE)));
       entityData.setExplanations(
           cleanString(getProperty(properties, GroupsPropertyKey.EXPLANATORY_NOTE)));
@@ -166,16 +169,40 @@ public class OntologyTableDataExtractor {
     }
   }
 
-  private String getProperty(Map<String, Map<String, List<PropertyValue>>> properties,
-      GroupsPropertyKey propertyKey) {
-    var propertyValues =
-        properties
-            .getOrDefault(GroupsPropertyKey.GLOSSARY.getKey(), Collections.emptyMap())
-            .get(propertyKey.getKey());
-    if (propertyValues == null || propertyValues.isEmpty()) {
+  private String getPropertyGeneratedDescription(Map<String, Map<String, List<PropertyValue>>> properties) {
+    var glossary = properties.getOrDefault(GroupsPropertyKey.GLOSSARY.getKey(), new HashMap<>());
+    var generatedDescriptionValues =
+        glossary.getOrDefault(GroupsPropertyKey.GENERATED_DESCRIPTION.getKey(), Collections.emptyList());
+    if (!generatedDescriptionValues.isEmpty()) {
+      return generatedDescriptionValues.stream()
+          .map(propertyValue -> propertyValue.getValue().toString())
+          .collect(Collectors.joining(" "));
+    }
+    return "";
+  }
+
+  private String getProperty(Map<String, Map<String, List<PropertyValue>>> properties, GroupsPropertyKey propertyKey) {
+    if (properties == null) {
+      return "";
+    }
+
+    List<PropertyValue> propertyValues = new ArrayList<>();
+
+    var propertyIris = extractDataColumns.getOrDefault(propertyKey.getKey(), Collections.emptyList());
+    for (String propertyIri : propertyIris) {
+      var propertyValuesForIri = properties
+          .getOrDefault(GroupsPropertyKey.GLOSSARY.getKey(), Collections.emptyMap())
+          .get(propertyIri);
+      if (propertyValuesForIri != null) {
+        propertyValues.addAll(propertyValuesForIri);
+      }
+    }
+
+    if (propertyValues.isEmpty()) {
       return "";
     } else {
       return propertyValues.stream()
+          .filter(Objects::nonNull)
           .map(propertyValue -> propertyValue.getValue().toString())
           .collect(Collectors.joining(" "));
     }
@@ -209,7 +236,8 @@ public class OntologyTableDataExtractor {
         return cleanedText;
       }
       var startingLabel = term.substring(0, 1).toUpperCase() + term.substring(1);
-      cleanedText = cleanedText.replaceAll(startingLabel, "It")
+      cleanedText = cleanedText
+          .replaceAll(startingLabel, "It")
           .replaceFirst("It", startingLabel);
     }
     return cleanedText;

@@ -16,6 +16,7 @@ public class ModuleHelper {
 
   private static final Logger LOG = LoggerFactory.getLogger(ModuleHelper.class);
   private final ModuleHandler moduleHandler;
+
   private Map<IRI, IRI> entityIriToOntologyIriMap;
 
   public ModuleHelper(ModuleHandler moduleHandler) {
@@ -23,16 +24,11 @@ public class ModuleHelper {
   }
 
   public MaturityLevel getMaturityLevel(IRI iri) {
-    return moduleHandler.getMaturityLevelForElement(iri);
+    return moduleHandler.getMaturityLevelForEntity(iri);
   }
 
   public List<OntologyModule> getAllModules() {
     return moduleHandler.getModules();
-  }
-
-  public List<String> getElementLocationInModules(String iriString) { // TODO use 'IRI'
-    LOG.debug("[Data Handler] Handle location for element {}", iriString);
-    return getElementLocationInModules(IRI.create(iriString));
   }
 
   public List<String> getElementLocationInModules(IRI elementIri) {
@@ -88,9 +84,7 @@ public class ModuleHelper {
     return entityIriToOntologyIriMap.get(elementIri);
   }
 
-
-  public void setEntityIriToOntologyIriMap(
-      Map<IRI, IRI> entityIriToOntologyIriMap) {
+  public void setEntityIriToOntologyIriMap(Map<IRI, IRI> entityIriToOntologyIriMap) {
     this.entityIriToOntologyIriMap = entityIriToOntologyIriMap;
   }
 }
