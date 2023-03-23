@@ -18,6 +18,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdateJobGenera
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.FallbackService;
+import org.edmcouncil.spec.ontoviewer.webapp.service.IntegrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -52,6 +53,8 @@ public class Updater {
   private VersionIriHandler versionIriHandler;
   @Autowired
   private LabelProvider labelProvider;
+  @Autowired
+  private IntegrationService integrationService;
   private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
   @EventListener(ApplicationReadyEvent.class)
@@ -79,7 +82,8 @@ public class Updater {
         fallbackService,
         deprecatedHandler,
         versionIriHandler,
-        labelProvider) {
+        labelProvider,
+        integrationService) {
     };
     t.start();
 
