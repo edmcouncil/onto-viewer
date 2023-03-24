@@ -1,4 +1,4 @@
-<img src="https://spec.edmcouncil.org/fibo/htmlpages/develop/latest/img/logo.66a988fe.png" width="150" align="right"/>
+<img src="https://github.com/edmcouncil/html-pages/raw/develop/general/assets/img/EDM-council-RGB_200w.png" width="200" align="right"/>
 
 # Onto Viewer
 
@@ -30,48 +30,97 @@ java -jar app-v-0.1.0.war
 ```
 
 
-<!--
+
  ## Running in Docker
+
 
 To run the application using Docker you have to install Docker and docker-compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker-compose see [here](https://docs.docker.com/compose/install/). 
 
-Assuming you have installed both Docker and docker-compose, to run the Onto Viewer application together with its front-end on your local machine, please make sure that you have the following folder setup:
+1. Create onto-viewer-web directory next to onto-viewer root folder.
+2. Install Strapi with the development database in the root directory. To this end, run `npx create-strapi-app@latest strapi-dashboard --quickstart --no-run`command.
+3. Copy files and folders from html-pages repository:
+- `html-pages/general/strapi/.tmp/` > `strapi-dashboard/.tmp/`
+- `html-pages/general/strapi/src/` > `strapi-dashboard/src/`
+- `html-pages/general` > `onto-viewer-web/`
+- `html-pages/general/strapi/Dockerfile` > `strapi-dashboard/Dockerfile`
+- `onto-viewer/docker/web/.dockerignore` > `strapi-dashboard/.dockerignore`
+- `onto-viewer/docker/web/nuxt.config.js` > `onto-viewer-web/nuxt.config.js`
+- `onto-viewer/docker/web/Dockerfile` > `onto-viewer-web/Dockerfile`
+4. In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`. Note that the `onto-viewer/docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
+The final folder system should look like shown below:
 
 ```
-root-dir/
-    onto-viewer/                 (https://github.com/edmcouncil/onto-viewer)
-        docker/
-            runtime/
-                server/
-                    config/      <- config files go here
-                        ...
-                    ontologies/  <- ontologies go here
-                        ...
-        docker-compose.yaml
-        ...
-    html-pages/                  (https://github.com/edmcouncil/html-pages)
-        ...
+onto-viewer
+|   .gitignore
+|   CHANGELOG.md
+|   CODE_OF_CONDUCT.md
+|   CONTRIBUTING.md
+|   DCO
+|   docker-compose.yaml
+|   LICENSE
+|   pom.xml
+|   README.md   
+|   api-doc/
+|   docker/
+|   |   init-onto-viewer.sh
+|   runtime/
+|   |   server/ 
+|   |       config <- config files go here    
+|   |       ontologies <- ontologies go here
+|   server
+|   |   Dockerfile      
+|   web
+|   |   nuxt.config.js         
+|   onto-viewer-config-loader
+|   onto-viewer-core
+|   onto-viewer-toolkit
+|   onto-viewer-web-app 
+|   style          
+onto-viewer-web <- installed and configured general tempaltes from general directory
+|   .dockerignore
+|   ...
+|   Dockerfile
+|   jsconfig.json
+|   nuxt.config.js
+|   ...
+|   api
+|	...
+|   store
+|   strapi
+strapi-dashboard <- installed and configured Strapi
+|   .dockerignore
+|	...
+|   Dockerfile
+|   favicon.png
+|   package-lock.json
+|   package.json
+|   README.md
+|   yarn.lock
+|   .tmp/   
+|   config/
+|   database/
+|   public/
+|   src/
 ```
-
-where `root-dir` is any folder on your local machine.  In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files.  You can find samples of these files in the `onto-viewer/onto-viewer-web-app` folder.  Note that the `onto-viewer/docker/runtime/` folder is excluded from Git, so you can freely put there any file you want.
+  
 
 Then, from the `onto-viewer/` folder run the following command to start the applications:
 
 ```
-docker-compose up -d
+docker-compose up --build -d
 ```
 To list applications that have started, use ```docker-compose ps```.
 
 Please note that it takes a while to for all services to start depending on how many ontologies you provided.
 
-After all ontologies are loaded, the Onto viewer will be accessible from http://localhost:6201/fibo/ontology. To see an alternative view that is served by the module [onto-viewer-web-app](https://github.com/edmcouncil/onto-viewer/tree/develop/onto-viewer-web-app) (and not by [html-pages app](https://github.com/edmcouncil/html-pages)) go to http://localhost:6101/fibo/ontology.
+After all ontologies are loaded, the Onto viewer will be accessible from http://localhost:3000/dev/ontology. 
 
 To stop the applications run:
 
 ```
 docker-compose down
 ```
- -->
+
 
 # Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
@@ -95,3 +144,4 @@ mvn -P integration-tests verify
 
 Please read [CHANGELOG.md](CHANGELOG.md) for details.
  -->
+
