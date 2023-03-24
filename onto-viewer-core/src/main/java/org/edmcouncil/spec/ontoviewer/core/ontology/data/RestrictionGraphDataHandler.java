@@ -86,9 +86,12 @@ public class RestrictionGraphDataHandler {
       for (OWLEntity oWLEntity : axiom.signature().collect(Collectors.toList())) {
         LOG.debug(oWLEntity.toString());
       }
-
     }
-
+    Set<GraphRelation> doubledRelation = getDobuleRelation(vg);
+    for (GraphRelation graphRelation : doubledRelation) {
+      vg.getRelations().remove(graphRelation);
+      vg.getNodes().remove(graphRelation.getEnd());
+    }
     return vg;
   }
 
