@@ -117,24 +117,32 @@ public class MaturityLevelHandler {
   private Optional<MaturityLevel> getMaturityLevelForEntityFromOntology(OWLEntity entity) {
     List<OWLOntology> ontologies = ontologyManager.getOntologyWithImports().collect(Collectors.toList());
     for (OWLOntology ontology : ontologies) {
-      boolean entityInOntologyPresent = ontology.entitiesInSignature(entity.getIRI(), Imports.EXCLUDED)
-          .findAny()
-          .isPresent();
-      if (entityInOntologyPresent) {
-        var maturityLevelProperties = ontology
-            .annotations(getMaturityLevelProperty())
-            .collect(Collectors.toList());
+      Optional<IRI> ontologyIriOptional = ontology.getOntologyID().getOntologyIRI();
+      if (ontologyIriOptional.isEmpty()) {
+        continue;
+      }
+      IRI ontologyIri = ontologyIriOptional.get();
+      if (entity.getIRI().getIRIString().startsWith(ontologyIri.getIRIString())) {
+        boolean entityInOntologyPresent = ontology.entitiesInSignature(entity.getIRI(), Imports.EXCLUDED)
+            .findAny()
+            .isPresent();
 
-        if (maturityLevelProperties.isEmpty()) {
-          break;
-        } else {
-          for (OWLAnnotation maturityLevelProperty : maturityLevelProperties) {
-            if (maturityLevelProperty.getValue().isIRI() && maturityLevelProperty.getValue().asIRI().isPresent()) {
-              var maturityLevelPropertyValueIri = maturityLevelProperty.getValue().asIRI().get();
-              var maturityLevelOptional =
-                  maturityLevelFactory.getMaturityLevel(maturityLevelPropertyValueIri.getIRIString());
-              if (maturityLevelOptional.isPresent()) {
-                return maturityLevelOptional;
+        if (entityInOntologyPresent) {
+          var maturityLevelProperties = ontology
+              .annotations(getMaturityLevelProperty())
+              .collect(Collectors.toList());
+
+          if (maturityLevelProperties.isEmpty()) {
+            break;
+          } else {
+            for (OWLAnnotation maturityLevelProperty : maturityLevelProperties) {
+              if (maturityLevelProperty.getValue().isIRI() && maturityLevelProperty.getValue().asIRI().isPresent()) {
+                var maturityLevelPropertyValueIri = maturityLevelProperty.getValue().asIRI().get();
+                var maturityLevelOptional =
+                    maturityLevelFactory.getMaturityLevel(maturityLevelPropertyValueIri.getIRIString());
+                if (maturityLevelOptional.isPresent()) {
+                  return maturityLevelOptional;
+                }
               }
             }
           }
