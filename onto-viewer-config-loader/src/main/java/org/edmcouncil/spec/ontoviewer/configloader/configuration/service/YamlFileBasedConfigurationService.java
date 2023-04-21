@@ -235,6 +235,9 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
     if (configuration != null) {
       for (Entry<String, Object> configEntry : configuration.entrySet()) {
+        if (!ConfigurationKey.isDefined(configEntry.getKey())) {
+          continue;
+        }
         ConfigurationKey configKey = byName(configEntry.getKey());
         Object configEntryValue = configEntry.getValue();
 

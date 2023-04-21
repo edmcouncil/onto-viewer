@@ -8,7 +8,13 @@ import org.edmcouncil.spec.ontoviewer.core.model.EntityEntry;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.parameters.Imports;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +33,7 @@ public class EntitiesCacheService {
     var entityKey = new EntityKey(entityIri, owlType);
 
     if (!entityEntryMap.containsKey(entityKey)) {
-      var entity = obtainEntity(entityIri);
+      var entity = obtainEntity(entityIri, getOwlEntityType(owlType));
       EntityEntry entityEntry;
       if (entity != null) {
         entityEntry = new EntityEntry(Optional.of(entity));
@@ -40,9 +46,30 @@ public class EntitiesCacheService {
     return entityEntryMap.get(entityKey);
   }
 
-  private OWLEntity obtainEntity(IRI entityIri) {
+  private Class<? extends OWLEntity> getOwlEntityType(OwlType owlType) {
+    switch (owlType) {
+      case CLASS:
+        return OWLClass.class;
+      case INDIVIDUAL:
+        return OWLNamedIndividual.class;
+      case OBJECT_PROPERTY:
+        return OWLObjectProperty.class;
+      case DATA_PROPERTY:
+        return OWLDataProperty.class;
+      case ANNOTATION_PROPERTY:
+        return OWLAnnotationProperty.class;
+      case DATATYPE:
+        return OWLDatatype.class;
+      default:
+        // Shouldn't happen but for the sake of completeness it must be here
+        return OWLEntity.class;
+    }
+  }
+
+  private OWLEntity obtainEntity(IRI entityIri, Class<? extends OWLEntity> entityType) {
     return ontologyManager.getOntology()
         .entitiesInSignature(entityIri, Imports.INCLUDED)
+        .filter(owlEntity -> entityType.isAssignableFrom(owlEntity.getClass()))
         .findFirst()
         .orElse(null);
   }

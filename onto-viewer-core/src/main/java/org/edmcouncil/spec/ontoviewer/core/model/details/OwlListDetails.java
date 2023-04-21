@@ -22,6 +22,10 @@ public class OwlListDetails extends OwlDetails {
     return properties.getProperties();
   }
 
+  public OwlDetailsProperties<PropertyValue> getAllProperties() {
+    return properties;
+  }
+
   public void setProperties(OwlDetailsProperties<PropertyValue> properties) {
     this.properties = properties;
   }
