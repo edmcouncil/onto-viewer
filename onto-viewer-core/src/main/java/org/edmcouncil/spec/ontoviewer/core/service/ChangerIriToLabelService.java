@@ -1,7 +1,12 @@
 package org.edmcouncil.spec.ontoviewer.core.service;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValueWithSubAnnotations;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlGroupedDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
@@ -37,6 +42,22 @@ public class ChangerIriToLabelService {
         entryLVL2.getValue().forEach((propertyValue) -> {
           LOG.trace("\t\t\t LVL 3 added val: {}", propertyValue.toString());
           newProp.addProperty(entryLVL1.getKey(), newKey, propertyValue);
+
+          if (propertyValue instanceof OwlAnnotationPropertyValueWithSubAnnotations) {
+            var subAnnotation = (OwlAnnotationPropertyValueWithSubAnnotations) propertyValue;
+            if (!subAnnotation.getSubAnnotations().isEmpty()) {
+              LOG.trace("\t\t\t LVL 4 added val: {}", ((OwlAnnotationPropertyValueWithSubAnnotations) propertyValue).getSubAnnotations());
+              var subAnnotationMap = subAnnotation.getSubAnnotations();
+              Map subAnnotationMapNew = new LinkedHashMap<>();
+              for (Entry<String, PropertyValue> stringPropertyValueEntry : subAnnotationMap.entrySet()) {
+                String oldKey = stringPropertyValueEntry.getKey();
+                String newSubAnnotationKey = labelProvider.getLabelOrDefaultFragment(
+                    IRI.create(oldKey));
+                subAnnotationMapNew.put(newSubAnnotationKey, stringPropertyValueEntry.getValue());
+              }
+              subAnnotation.setSubAnnotations(subAnnotationMapNew);
+            }
+          }
         });
       });
     });
