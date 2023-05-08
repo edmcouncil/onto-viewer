@@ -9,6 +9,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.ontology.stats.OntologyStatsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJob;
@@ -17,6 +18,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdateJobGenera
 import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.FallbackService;
+import org.edmcouncil.spec.ontoviewer.webapp.service.IntegrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -51,6 +53,10 @@ public class Updater {
   private DeprecatedHandler deprecatedHandler;
   @Autowired
   private VersionIriHandler versionIriHandler;
+  @Autowired
+  private LabelProvider labelProvider;
+  @Autowired
+  private IntegrationService integrationService;
 
   @EventListener(ApplicationReadyEvent.class)
   public void afterStart() {
@@ -76,7 +82,9 @@ public class Updater {
         resourcesPopulate,
         fallbackService,
         deprecatedHandler,
-        versionIriHandler) {
+        versionIriHandler,
+        labelProvider,
+        integrationService) {
     };
     t.start();
   }

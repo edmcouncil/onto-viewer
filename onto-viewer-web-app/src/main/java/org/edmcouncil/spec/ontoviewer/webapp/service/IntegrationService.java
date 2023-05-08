@@ -161,4 +161,7 @@ public class IntegrationService {
       }
     });
   }
+  public void reload(){
+    setIntegrationProperties(environment);
+  }
 }

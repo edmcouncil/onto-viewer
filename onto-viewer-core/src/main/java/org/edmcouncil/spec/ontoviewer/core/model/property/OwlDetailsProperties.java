@@ -60,6 +60,18 @@ public class OwlDetailsProperties<T> {
           }
           break;
         }
+      } else if (property instanceof OwlAnnotationPropertyValue) {
+        var propertyAsOwlAnnotation = (OwlAnnotationPropertyValue) property;
+
+        for (T annotationPropertyValue : propertiesList) {
+          if (annotationPropertyValue instanceof OwlAnnotationPropertyValue) {
+            var owlAxiomPropertyValue = (OwlAnnotationPropertyValue) annotationPropertyValue;
+            if (propertyAsOwlAnnotation.equals(owlAxiomPropertyValue)) {
+              notYetAdded = false;
+              break;
+            }
+          }
+        }
       }
     }
 

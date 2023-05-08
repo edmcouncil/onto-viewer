@@ -9,6 +9,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.ResourcesPopulate;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.AutoOntologyLoader;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImport;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
@@ -21,6 +22,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperatio
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.VersionIriHandler;
 import org.edmcouncil.spec.ontoviewer.webapp.search.LuceneSearcher;
 import org.edmcouncil.spec.ontoviewer.webapp.service.FallbackService;
+import org.edmcouncil.spec.ontoviewer.webapp.service.IntegrationService;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -45,6 +47,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
   private final ResourcesPopulate resourcesPopulate;
   private final DeprecatedHandler deprecatedHandler;
   private final VersionIriHandler versionIriHandler;
+  private final LabelProvider labelProvider;
+  private final IntegrationService integrationService;
 
   protected UpdaterThread(OntologyManager ontologyManager,
       FileSystemService fileSystemService,
@@ -57,7 +61,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       ResourcesPopulate resourcesPopulate,
       FallbackService fallbackService,
       DeprecatedHandler deprecatedHandler,
-      VersionIriHandler versionIriHandler) {
+      VersionIriHandler versionIriHandler, LabelProvider labelProvider,
+      IntegrationService integrationService) {
     this.ontologyManager = ontologyManager;
     this.fileSystemService = fileSystemService;
     this.blocker = blocker;
@@ -70,6 +75,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
     this.fallbackService = fallbackService;
     this.deprecatedHandler = deprecatedHandler;
     this.versionIriHandler = versionIriHandler;
+    this.labelProvider = labelProvider;
+    this.integrationService = integrationService;
     this.setName("UpdateThread-" + job.getId());
   }
 
@@ -165,6 +172,8 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       scopeIriOntology.setScopes(scopes);
 
       ontologyManager.updateOntology(ontology);
+      labelProvider.reload();
+      integrationService.reload();
 
       ontologyManager.setMissingImports(missingImports);
       ontologyManager.setIriToPathMapping(iriToPathMapping);

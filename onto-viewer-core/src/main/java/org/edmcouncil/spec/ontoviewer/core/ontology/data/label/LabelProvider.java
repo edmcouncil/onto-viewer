@@ -224,4 +224,9 @@ public class LabelProvider {
     }
     return labelResult;
   }
+
+  public void reload() {
+    this.previouslyUsedLabels = getDefaultLabels();
+    loadConfig();
+  }
 }
