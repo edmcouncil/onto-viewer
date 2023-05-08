@@ -55,8 +55,7 @@ public class UsageExtractor {
     this.deprecatedHandler = deprecatedHandler;
   }
 
-  public OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz,
-      OWLOntology ontology) {
+  public OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz, OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     String key = ViewerIdentifierFactory.createId(
         ViewerIdentifierFactory.Type.function,
@@ -83,7 +82,7 @@ public class UsageExtractor {
 
     int start = 0;
     for (OWLSubClassOfAxiom axiom : axioms) {
-      LOG.debug("Extract Usage as String {}", axiom.toString());
+      LOG.debug("Extract Usage as String {}", axiom);
       LOG.debug("Extract Usage subCLass {}", axiom.getSubClass());
 
       IRI iri = null;
@@ -157,7 +156,7 @@ public class UsageExtractor {
 
       sb = new StringBuilder();
 
-      String fullRenderedString = parser.parseRenderedString(opv);
+      String fullRenderedString = parser.parseRenderedString(opv.getValue(), opv.getEntityMaping());
       opv.setFullRenderedString(fullRenderedString);
 
       result.addProperty(key, opv);
@@ -261,7 +260,7 @@ public class UsageExtractor {
 
       LOG.debug("Generated big axiom: {}", sbd);
       sbd = new StringBuilder();
-      String fullRenderedString = parser.parseRenderedString(opv);
+      String fullRenderedString = parser.parseRenderedString(opv.getValue(), opv.getEntityMaping());
       opv.setFullRenderedString(fullRenderedString);
 
       result.addProperty(key, opv);

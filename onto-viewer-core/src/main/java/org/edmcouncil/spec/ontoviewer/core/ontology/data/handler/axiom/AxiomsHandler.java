@@ -64,13 +64,12 @@ public class AxiomsHandler {
     Set<OWLClassAxiom> axiomsSet = ontology.axioms(obj, INCLUDED).collect(Collectors.toSet());
 
     if (extractGCI) {
-      ontology.importsClosure().forEach(currentOntology -> {
-        axiomsSet.addAll(
-          currentOntology.axioms(AxiomType.SUBCLASS_OF)
-            .filter(el -> el.isGCI())
-            .filter(el -> el.accept(containsVisitors.visitor(obj.getIRI())))
-            .collect(Collectors.toSet()));
-      });
+      ontology.importsClosure().forEach(currentOntology ->
+          axiomsSet.addAll(
+              currentOntology.axioms(AxiomType.SUBCLASS_OF)
+                  .filter(OWLSubClassOfAxiom::isGCI)
+                  .filter(el -> el.accept(containsVisitors.visitor(obj.getIRI())))
+                  .collect(Collectors.toSet())));
     }
 
     return handle(axiomsSet.iterator(), obj.getIRI());
@@ -104,18 +103,15 @@ public class AxiomsHandler {
       }
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
-//      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom,
-//          iriFragment, splitFragment, fixRenderedIri, key, start, true);
-
-      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(
+      OwlAxiomPropertyValue axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
           axiom, iriFragment, splitFragment, fixRenderedIri, start, true);
 
-      if (opv == null) {
+      if (axiomPropertyValue == null) {
         continue;
       }
-      start = opv.getLastId();
-      if (!key.equals(StringIdentifier.subClassOfIriString) || !opv.getType().equals(TAXONOMY)) {
-        result.addProperty(key, opv);
+      start = axiomPropertyValue.getLastId();
+      if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
+        result.addProperty(key, axiomPropertyValue);
       }
     }
     result.sortPropertiesInAlphabeticalOrder();

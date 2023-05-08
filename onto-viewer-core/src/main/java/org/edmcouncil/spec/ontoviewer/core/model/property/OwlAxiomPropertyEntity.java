@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.core.model.property;
 
+import java.util.StringJoiner;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType;
 
 /**
@@ -15,7 +16,6 @@ public class OwlAxiomPropertyEntity {
   public OwlAxiomPropertyEntity() {
   }
 
-  // TODO
   public OwlAxiomPropertyEntity(String iri, String label, OntoViewerEntityType entityType, boolean deprecated) {
     this.iri = iri;
     this.label = label;
@@ -57,11 +57,11 @@ public class OwlAxiomPropertyEntity {
 
   @Override
   public String toString() {
-    // TODO
-    return "OwlAxiomPropertyEntity{" +
-        "iri='" + iri + '\'' +
-        ", label='" + label + '\'' +
-        ", deprecated=" + deprecated +
-        '}';
+    return new StringJoiner(", ", OwlAxiomPropertyEntity.class.getSimpleName() + "[", "]")
+        .add("iri='" + iri + "'")
+        .add("label='" + label + "'")
+        .add("deprecated=" + deprecated)
+        .add("entityType=" + entityType)
+        .toString();
   }
 }

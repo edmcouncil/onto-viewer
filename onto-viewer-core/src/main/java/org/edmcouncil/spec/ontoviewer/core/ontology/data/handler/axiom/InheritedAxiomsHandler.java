@@ -135,7 +135,7 @@ public class InheritedAxiomsHandler {
 
       sb = new StringBuilder();
 
-      String fullRenderedString = parser.parseRenderedString(opv);
+      String fullRenderedString = parser.parseRenderedString(opv.getValue(), opv.getEntityMaping());
       opv.setFullRenderedString(fullRenderedString);
 
       result.addProperty(key, opv);

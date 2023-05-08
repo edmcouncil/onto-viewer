@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://trojczak.pl/ontology/sparseDisplayExample#"
+     xml:base="http://trojczak.pl/ontology/sparseDisplayExample"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://trojczak.pl/ontology/sparseDisplayExample"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/propA -->
+
+    <owl:ObjectProperty rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/propA"/>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/propA_1 -->
+
+    <owl:ObjectProperty rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/propA_1">
+        <rdfs:subPropertyOf rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propA"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/propA_2 -->
+
+    <owl:ObjectProperty rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/propA_2">
+        <rdfs:subPropertyOf rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propA"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/propB -->
+
+    <owl:ObjectProperty rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/propB"/>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/propB_1 -->
+
+    <owl:ObjectProperty rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/propB_1">
+        <rdfs:subPropertyOf rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassA -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassA"/>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1 -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1">
+        <rdfs:subClassOf rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA"/>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1_1 -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1_1">
+        <rdfs:subClassOf rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1"/>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassA_2 -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_2">
+        <rdfs:subClassOf rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA"/>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassB -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassB"/>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassB_1 -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassB_1">
+        <rdfs:subClassOf rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassB"/>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassP_all -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassP_all">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB"/>
+                <owl:allValuesFrom rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassB_1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB_1"/>
+                <owl:allValuesFrom rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassB"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassP_max -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassP_max">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassB"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB_1"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassB_1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassP_min -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassP_min">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassB"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB_1"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassB_1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassP_some -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassP_some">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propA"/>
+                <owl:someValuesFrom rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propA_1"/>
+                <owl:someValuesFrom rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassQ -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassQ">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB"/>
+                <owl:someValuesFrom rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB"/>
+                <owl:someValuesFrom rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1_1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://trojczak.pl/ontology/sparseDisplayExample/ClassR -->
+
+    <owl:Class rdf:about="http://trojczak.pl/ontology/sparseDisplayExample/ClassR">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB"/>
+                <owl:allValuesFrom rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/propB_1"/>
+                <owl:allValuesFrom rdf:resource="http://trojczak.pl/ontology/sparseDisplayExample/ClassA_1"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

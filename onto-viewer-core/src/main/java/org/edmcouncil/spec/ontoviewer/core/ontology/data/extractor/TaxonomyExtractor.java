@@ -87,7 +87,7 @@ public class TaxonomyExtractor {
       OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(objIri.getIRIString(), label);
       List<OwlTaxonomyElementImpl> currentTax = new LinkedList<>();
 
-      if (!axiomsHelper.unwantedEndOfLeafIri.contains(objIri.toString())) {
+      if (!axiomsHelper.getUnwantedEndOfLeafIri().contains(objIri.toString())) {
         switch (type) {
           case AXIOM_CLASS:
             label = labelProvider.getLabelOrDefaultFragment(

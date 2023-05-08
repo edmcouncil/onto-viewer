@@ -169,8 +169,7 @@ public class DetailsManager {
     return moduleHelper.getAllModules();
   }
 
-  public OwlDetails getEntityDetailsByIri(String iriString)
-      throws NotFoundElementInOntologyException {
+  public OwlDetails getEntityDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
     IRI iri = IRI.create(iriString);
     OwlListDetails resultDetails = metadataHandler.handle(iri);
     if (resultDetails == null) {

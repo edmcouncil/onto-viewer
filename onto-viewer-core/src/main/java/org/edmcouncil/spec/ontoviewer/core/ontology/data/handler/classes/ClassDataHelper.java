@@ -24,7 +24,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFact
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
 import org.semanticweb.owlapi.model.AsOWLClass;
 import org.semanticweb.owlapi.model.ClassExpressionType;
-import org.semanticweb.owlapi.model.EntityType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
@@ -84,8 +83,8 @@ public class ClassDataHelper {
       Map<String, OwlAxiomPropertyEntity> entityMapping = new HashMap<>();
       entityMapping.put(key, propertyEntity);
 
-      OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue(
-          key, OwlType.TAXONOMY, 0, null, entityMapping, false);
+      OwlAxiomPropertyValue axiomPropertyValue =
+          new OwlAxiomPropertyValue(key, OwlType.TAXONOMY, 0, null, entityMapping);
       // TODO
       axiomPropertyValue.addEntityValues(key, propertyEntity);
 

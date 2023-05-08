@@ -46,21 +46,18 @@ public class MetadataHandler {
 
   public OwlListDetails handle(IRI iri) {
     OwlListDetails ontologyDetails = new OwlListDetails();
-    OwlDetailsProperties<PropertyValue> metadata = handle(iri,
-        ontologyDetails);
+    OwlDetailsProperties<PropertyValue> metadata = handle(iri, ontologyDetails);
     if (metadata != null && !metadata.getProperties().keySet().isEmpty()) {
       ontologyDetails.addAllProperties(metadata);
       ontologyDetails.setIri(iri.toString());
       ontologyDetails.setLabel(labelProvider.getLabelOrDefaultFragment(iri));
-      ontologyDetails.setLocationInModules(
-          moduleHelper.getElementLocationInModules(iri));
+      ontologyDetails.setLocationInModules(moduleHelper.getElementLocationInModules(iri));
       return ontologyDetails;
     }
     return null;
   }
 
-  public OwlDetailsProperties<PropertyValue> handle(IRI iri,
-      OwlListDetails details) {
+  public OwlDetailsProperties<PropertyValue> handle(IRI iri, OwlListDetails details) {
     OWLOntology ontology = ontologyManager.getOntology();
     OWLOntologyManager manager = ontology.getOWLOntologyManager();
     OwlDetailsProperties<PropertyValue> annotations = null;
