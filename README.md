@@ -55,9 +55,8 @@ You can see all running containers and their status:
 $ docker compose ps
 
 NAME                   IMAGE                COMMAND                  SERVICE             CREATED             STATUS              PORTS
-html-pages-general-1   html-pages-general   "docker-entrypoint.s…"   general             20 seconds ago      Up 17 seconds       0.0.0.0:8081->3000/tcp
-html-pages-home-1      html-pages-home      "docker-entrypoint.s…"   home                7 hours ago         Up 4 minutes        0.0.0.0:8080->8080/tcp
-html-pages-strapi-1    html-pages-strapi    "docker-entrypoint.s…"   strapi              4 hours ago         Up 17 seconds       0.0.0.0:1337->1337/tcp
+onto-viewer-server-1   onto-viewer-server   "docker-entrypoint.s…"   onto-viewer-server  20 seconds ago      Up 17 seconds       0.0.0.0:8080->6101/tcp
+web-with-strapi-1      web-with-strapi      "docker-entrypoint.s…"   web-with-strapi     4 hours ago         Up 17 seconds       0.0.0.0:1337->1337/tcp
 ```
 
 If you want to see logs from one container use:
