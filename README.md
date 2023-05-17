@@ -36,90 +36,47 @@ java -jar app-v-0.1.0.war
 
 To run the application using Docker you have to install Docker and docker-compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker-compose see [here](https://docs.docker.com/compose/install/). 
 
-1. Create onto-viewer-web directory next to onto-viewer root folder.
-2. Install Strapi with the development database in the root directory. To this end, run `npx create-strapi-app@latest strapi-dashboard --quickstart --no-run`command.
-3. Copy files and folders from html-pages repository:
-- `html-pages/general/strapi/.tmp/` > `strapi-dashboard/.tmp/`
-- `html-pages/general/strapi/src/` > `strapi-dashboard/src/`
-- `html-pages/general` > `onto-viewer-web/`
-- `html-pages/general/strapi/Dockerfile` > `strapi-dashboard/Dockerfile`
-- `onto-viewer/docker/web/.dockerignore` > `strapi-dashboard/.dockerignore`
-- `onto-viewer/docker/web/nuxt.config.js` > `onto-viewer-web/nuxt.config.js`
-- `onto-viewer/docker/web/Dockerfile` > `onto-viewer-web/Dockerfile`
-4. In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`. Note that the `onto-viewer/docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
-The final folder system should look like shown below:
-
-```
-onto-viewer
-|   .gitignore
-|   CHANGELOG.md
-|   CODE_OF_CONDUCT.md
-|   CONTRIBUTING.md
-|   DCO
-|   docker-compose.yaml
-|   LICENSE
-|   pom.xml
-|   README.md   
-|   api-doc/
-|   docker/
-|   |   init-onto-viewer.sh
-|   runtime/
-|   |   server/ 
-|   |       config <- config files go here    
-|   |       ontologies <- ontologies go here
-|   server
-|   |   Dockerfile      
-|   web
-|   |   nuxt.config.js         
-|   onto-viewer-config-loader
-|   onto-viewer-core
-|   onto-viewer-toolkit
-|   onto-viewer-web-app 
-|   style          
-onto-viewer-web <- installed and configured general tempaltes from general directory
-|   .dockerignore
-|   ...
-|   Dockerfile
-|   jsconfig.json
-|   nuxt.config.js
-|   ...
-|   api
-|	...
-|   store
-|   strapi
-strapi-dashboard <- installed and configured Strapi
-|   .dockerignore
-|	...
-|   Dockerfile
-|   favicon.png
-|   package-lock.json
-|   package.json
-|   README.md
-|   yarn.lock
-|   .tmp/   
-|   config/
-|   database/
-|   public/
-|   src/
-```
-  
+ In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`. Note that the `onto-viewer/docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
 
 Then, from the `onto-viewer/` folder run the following command to start the applications:
 
 ```
 docker-compose up --build -d
 ```
-To list applications that have started, use ```docker-compose ps```.
 
 Please note that it takes a while to for all services to start depending on how many ontologies you provided.
 
 After all ontologies are loaded, the Onto viewer will be accessible from http://localhost:3000/dev/ontology. 
+
+
+You can see all running containers and their status:
+
+```
+$ docker compose ps
+
+NAME                   IMAGE                COMMAND                  SERVICE             CREATED             STATUS              PORTS
+html-pages-general-1   html-pages-general   "docker-entrypoint.s…"   general             20 seconds ago      Up 17 seconds       0.0.0.0:8081->3000/tcp
+html-pages-home-1      html-pages-home      "docker-entrypoint.s…"   home                7 hours ago         Up 4 minutes        0.0.0.0:8080->8080/tcp
+html-pages-strapi-1    html-pages-strapi    "docker-entrypoint.s…"   strapi              4 hours ago         Up 17 seconds       0.0.0.0:1337->1337/tcp
+```
+
+If you want to see logs from one container use:
+
+```
+# to view continuous log output
+$ docker logs --follow <container name>
+
+# to view specific amount of logs
+$ docker logs --tail <amount> <container name>
+```
 
 To stop the applications run:
 
 ```
 docker-compose down
 ```
+
+You could also run docker-compose without detached mode(without -d). If so, you'll just use '^C' to kill all containers.
 
 
 # Contributing

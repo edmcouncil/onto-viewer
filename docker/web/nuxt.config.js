@@ -18,7 +18,7 @@ process.env.VUE_APP_TAG = process.env.TAG || process.env.TAG_NAME || "latest";
 process.env.VUE_DIST_DIR = `/${process.env.VUE_APP_PRODUCT}/${process.env.VUE_APP_BRANCH}/${process.env.VUE_APP_TAG}`;
 process.env.VUE_ASSETS_DIR = `${process.env.VUE_DIST_DIR}/_nuxt/`;
 
-process.env.VUE_ONTOLOGY_NAME = process.env.ONTPUB_FAMILY || "iof";
+process.env.VUE_ONTOLOGY_NAME = process.env.ONTPUB_FAMILY || "dev";
 process.env.VUE_BASE_URL =
   process.env.BASE_URL ||
   "https://spec." +
@@ -81,7 +81,7 @@ export default {
     base: `/${process.env.VUE_ONTOLOGY_NAME}`,
   },
 
-//to removed
+  //to removed
   generate: {
     dir: `dist/${process.env.VUE_ONTOLOGY_NAME}${process.env.VUE_DIST_DIR}`,
     routes() {
@@ -182,8 +182,8 @@ export default {
   },
 
   proxy: [
-        "http://onto-viewer-server:8080/dev/ontology/api",
-        "http://onto-viewer-server:8080/dev/ontology/*/api",
+    `http://onto-viewer-server:8080/${process.env.VUE_ONTOLOGY_NAME}/ontology/api`,
+    `http://onto-viewer-server:8080/${process.env.VUE_ONTOLOGY_NAME}/ontology/*/api`,
   ],
 
   styleResources: {

@@ -12,11 +12,14 @@ version: "3.8"
 services:
   onto-viewer-server:
     container_name: onto-viewer-server
+    environment: 
+      - ONTPUB_FAMILY="${ONTPUB_FAMILY:-dev}"
     build:
       context: .
       dockerfile: ./docker/server/Dockerfile
     ports:
       - "6101:8080"
+
     volumes:
       - ./docker/init-onto-viewer.sh:/opt/develop/init-onto-viewer.sh
       - .:/opt/develop/src
@@ -24,26 +27,16 @@ services:
       - ./docker/runtime/server:/opt/develop/app_home
     networks:
       - default
-
-  onto-viewer-web:
-    container_name: onto-viewer-web
+  web-with-strapi: 
+    container_name: onto-viewer-web-with-strapi
+    environment: 
+      - PUBLIC_URL=0.0.0.0
+      - NUXT_PORT=3000
+      - ONTPUB_FAMILY=${ONTPUB_FAMILY:-dev}
     build:
-      context: ../onto-viewer-web
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - onto-viewer-server
-      - strapi
-    networks:
-      - default
-
-  strapi:
-    container_name: onto-viewer-strapi
-    build:
-      context: ../strapi-dashboard
-      dockerfile: Dockerfile
-    ports:
-      - "1337:1337"
+      context: ./docker/web
+    ports: 
+      - 3000:3000
+      - 1337:1337
     networks:
       - default

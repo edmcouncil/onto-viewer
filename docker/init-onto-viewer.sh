@@ -19,4 +19,5 @@ cd "$INIT_DIR"
 cp "$INSTALL_DIR"/onto-viewer-web-app/target/onto-viewer-web-app-*.war app.war
 
 echo "[INFO] Starting app.war..."
-java -jar app.war --server.servlet.context-path=/dev/ontology --app.defaultHomePath="$INIT_DIR/app_home"
+exec java ${UPDATE_URL:+ -Dapp.config.ontologies.download_directory=download -Dapp.config.updateUrl=${UPDATE_URL}} -jar app.war --server.servlet.context-path=/dev/ontology --app.defaultHomePath="$INIT_DIR/app_home"
+#java -jar app.war --server.servlet.context-path=/$ONTPUB_FAMILY/ontology --app.defaultHomePath="$INIT_DIR/app_home"
