@@ -34,14 +34,14 @@ java -jar app-v-0.1.0.war
  ## Running in Docker
 
 
-To run the application using Docker you have to install Docker and docker-compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker-compose see [here](https://docs.docker.com/compose/install/). 
+To run the application using Docker you have to install Docker and docker compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker compose see [here](https://docs.docker.com/compose/install/). 
 
  In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`. Note that the `onto-viewer/docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
 
 Then, from the `onto-viewer/` folder run the following command to start the applications:
 
 ```
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
 Please note that it takes a while to for all services to start depending on how many ontologies you provided.
@@ -52,7 +52,7 @@ After all ontologies are loaded, the Onto viewer will be accessible from http://
 You can see all running containers and their status:
 
 ```
-$ docker-compose ps
+$ docker compose ps
 
 NAME                   IMAGE                COMMAND                  SERVICE             CREATED             STATUS              PORTS
 onto-viewer-server-1   onto-viewer-server   "docker-entrypoint.s…"   onto-viewer-server  20 seconds ago      Up 17 seconds       0.0.0.0:8080->6101/tcp
@@ -64,20 +64,20 @@ If you want to see logs from one container use:
 ```
 # to view continuous log output
 # where "<container name>" is "onto-viewer-server" or "web-with-strapi"
-$ docker-compose logs --follow <container name> 
+$ docker compose logs --follow <container name> 
 
 # to view specific amount of logs
 # where "<amount>" is amount of logs and "<container name>" is "onto-viewer-server" or "web-with-strapi"
-$ docker-compose logs --tail <amount> <container name>
+$ docker compose logs --tail <amount> <container name>
 ```
 
 To stop the applications run:
 
 ```
-docker-compose down
+docker compose down
 ```
 
-You could also run docker-compose without detached mode(without -d). If so, you'll just use '^C' to kill all containers.
+You could also run docker compose without detached mode(without -d). If so, you'll just use '^C' to kill all containers.
 
 
 # Contributing
