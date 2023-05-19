@@ -204,11 +204,11 @@ public class AxiomsHelper {
   }
 
   private String fixRenderedValue(String axiomString, String iriFragment, String splitFragment,
-      Boolean fixRenderedIri) {
+      boolean fixRenderedIri) {
     String[] axiomParts = axiomString.split(" ");
     LOG.debug("Split fixRenderedValue: {}", Arrays.asList(axiomParts));
-    Boolean axiomIsInverseOf = INVERSE_OF_SUBJECT.contains(axiomParts[1]);
-    Boolean axiomSubject = axiomParts[0].contains(iriFragment);
+    boolean axiomIsInverseOf = INVERSE_OF_SUBJECT.contains(axiomParts[1]);
+    boolean axiomSubject = axiomParts[0].contains(iriFragment);
 
     if (axiomIsInverseOf) {
       if (axiomSubject) {
