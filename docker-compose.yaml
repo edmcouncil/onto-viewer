@@ -1,19 +1,11 @@
-# For this docker-compose.yaml file to work, the following folder outline is required:
-#
-#   aRootDir/
-#     onto-viewer/            (https://github.com/edmcouncil/onto-viewer)
-#       docker-compose.yaml   <- this file
-#         ...
-#     html-pages/             (https://github.com/edmcouncil/html-pages)
-#       ...
-
 version: "3.8"
 
 services:
   onto-viewer-server:
     container_name: onto-viewer-server
     environment: 
-      - ONTPUB_FAMILY="${ONTPUB_FAMILY:-dev}"
+      - ONTPUB_FAMILY=${ONTPUB_FAMILY:-dev}
+      - UPDATE_URL
     build:
       context: .
       dockerfile: ./docker/server/Dockerfile

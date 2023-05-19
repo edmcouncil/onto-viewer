@@ -9,7 +9,7 @@ npx create-strapi-app@latest strapi-dashboard --quickstart --no-run
 
 echo "[INFO] Copy database."
 mkdir ./strapi-dashboard/.tmp
-cp ./.tmp/data.db ./strapi-dashboard/.tmp/data.db
+cp ./.tmp/${ONTPUB_FAMILY:-data}.db ./strapi-dashboard/.tmp/data.db
 
 echo "[INFO] Copy structures."
 cp -R ./src/ ./strapi-dashboard

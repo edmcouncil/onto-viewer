@@ -52,7 +52,7 @@ After all ontologies are loaded, the Onto viewer will be accessible from http://
 You can see all running containers and their status:
 
 ```
-$ docker compose ps
+$ docker-compose ps
 
 NAME                   IMAGE                COMMAND                  SERVICE             CREATED             STATUS              PORTS
 onto-viewer-server-1   onto-viewer-server   "docker-entrypoint.s…"   onto-viewer-server  20 seconds ago      Up 17 seconds       0.0.0.0:8080->6101/tcp
@@ -63,10 +63,12 @@ If you want to see logs from one container use:
 
 ```
 # to view continuous log output
-$ docker logs --follow <container name>
+# where "<container name>" is "onto-viewer-server" or "web-with-strapi"
+$ docker-compose logs --follow <container name> 
 
 # to view specific amount of logs
-$ docker logs --tail <amount> <container name>
+# where "<amount>" is amount of logs and "<container name>" is "onto-viewer-server" or "web-with-strapi"
+$ docker-compose logs --tail <amount> <container name>
 ```
 
 To stop the applications run:
