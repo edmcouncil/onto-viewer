@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlLabeledMultiAxiom;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.DeprecatedHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
@@ -22,7 +23,9 @@ public class Parser {
   private final ScopeIriOntology scopeIriOntology;
   private final DeprecatedHandler deprecatedHandler;
 
-  public Parser(LabelProvider labelProvider, ScopeIriOntology scopeIriOntology,
+  public Parser(
+      LabelProvider labelProvider,
+      ScopeIriOntology scopeIriOntology,
       DeprecatedHandler deprecatedHandler) {
     this.labelProvider = labelProvider;
     this.scopeIriOntology = scopeIriOntology;
@@ -34,9 +37,17 @@ public class Parser {
     splited[j] = label;
   }
 
-  public void parseToIri(String probablyUrl, OwlAxiomPropertyValue opv, String key,
-      String[] splited, int j, String generatedKey, String iriString, int countOpeningParenthesis,
-      int countClosingParenthesis, int countComma) {
+  public void parseToIri(
+      String probablyUrl,
+      OwlAxiomPropertyValue opv,
+      String key,
+      String[] splited,
+      int j,
+      String generatedKey,
+      String iriString,
+      int countOpeningParenthesis,
+      int countClosingParenthesis,
+      int countComma) {
     OwlAxiomPropertyEntity axiomPropertyEntity = new OwlAxiomPropertyEntity();
     if (iriString.contains("<") && iriString.contains(">")) {
       iriString = iriString.replace("<", "").replace(">", "");
@@ -67,8 +78,8 @@ public class Parser {
     splited[j] = textToReplace;
   }
 
-  public void checkAndParseUriInLiteral(String[] splited, String argPattern,
-      OwlAxiomPropertyValue opv) {
+  public void checkAndParseUriInLiteral(
+      String[] splited, String argPattern, OwlAxiomPropertyValue opv) {
     for (int j = 0; j < splited.length; j++) {
       String str = splited[j].trim();
       String probablyUrl = splited[j].trim();
@@ -81,7 +92,7 @@ public class Parser {
         String key = generatedKey;
 
         if (scopeIriOntology.scopeIri(probablyUrl)) {
-          //Brace checking is not needed here, so the arguments are 0.
+          // Brace checking is not needed here, so the arguments are 0.
           parseToIri(probablyUrl, opv, key, splited, j, generatedKey, str, 0, 0, 0);
         } else {
           parseUrl(probablyUrl, splited, j);
@@ -104,5 +115,18 @@ public class Parser {
       LOG.debug("result: {}", result);
     }
     return result;
+  }
+
+  public String parseRenderedString(OwlLabeledMultiAxiom multiAxiom) {
+    StringBuilder result = new StringBuilder();
+    result.append(multiAxiom.getEntityLabel().getLabel()).append(": ");
+    for (OwlAxiomPropertyValue value : multiAxiom.getValue()) {
+      String axiomPropertyValue =
+          value.getFullRenderedString() == null
+              ? parseRenderedString(value)
+              : value.getFullRenderedString();
+      result.append(axiomPropertyValue).append(", ");
+    }
+    return result.toString();
   }
 }
