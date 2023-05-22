@@ -1,6 +1,7 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.service;
 
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.exception.UnableToLoadRemoteConfigurationException;
 
 public interface ApplicationConfigurationService {
 
@@ -10,5 +11,5 @@ public interface ApplicationConfigurationService {
 
   boolean hasConfiguredGroups();
 
-  void reloadConfiguration();
+  void reloadConfiguration() throws UnableToLoadRemoteConfigurationException;
 }

@@ -30,7 +30,7 @@ public interface FileSystemService {
     }
   }
 
-  Path getPathToConfigFile() throws IOException;
+  Path getPathToConfigFilesOrDefault() throws IOException;
 
   Path getPathToApiKey();
 

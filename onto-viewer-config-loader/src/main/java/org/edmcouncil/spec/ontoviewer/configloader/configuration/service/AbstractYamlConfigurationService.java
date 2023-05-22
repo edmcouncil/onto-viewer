@@ -20,6 +20,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.exception.UnableToLoadRemoteConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -48,7 +49,7 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   }
 
   @Override
-  public void reloadConfiguration() {
+  public void reloadConfiguration() throws UnableToLoadRemoteConfigurationException {
 
   }
 

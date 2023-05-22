@@ -30,6 +30,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.exception.UnableToLoadRemoteConfigurationException;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +77,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     LOGGER.debug("Loading configuration from YAML file...");
 
     try {
-      var configPath = fileSystemService.getPathToConfigFile();
+      var configPath = fileSystemService.getPathToConfigFilesOrDefault();
 
       LOGGER.debug("Configuration location: {} (isDirectory?={})", configPath, Files.isDirectory(configPath));
 
@@ -84,6 +85,10 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       if (Files.isDirectory(configPath)) {
         try (Stream<Path> configFilePathsStream = Files.walk(configPath, FileVisitOption.FOLLOW_LINKS)) {
           Set<Path> configFilePaths = configFilePathsStream.collect(Collectors.toSet());
+          Set<String> notExistingFiles = getNotExistingFiles(configFilePaths);
+            if (!notExistingFiles.isEmpty()){
+              LOGGER.warn("Missing config file: {}", notExistingFiles);
+            }
           for (Path configFilePath : configFilePaths) {
             if (configFilePath.toString().contains(".")) {
               if (Files.isRegularFile(configFilePath)
@@ -113,6 +118,26 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     }
   }
 
+  private static Set<String> getNotExistingFiles(Set<Path> configFilePaths) {
+    Set<String> configFilesNames =
+    configFilePaths.stream().map(filePath -> filePath.getFileName().toString()).collect(Collectors.toSet());
+    Map<String, Boolean> fileExist = new HashMap<>();
+    for (String configFilesName : CONFIG_FILES_NAMES) {
+      fileExist.put(configFilesName, false);
+      for (String filesName : configFilesNames) {
+        if (filesName.equals(configFilesName)){
+          fileExist.put(configFilesName,true);
+        }
+      }
+    }
+    return fileExist
+        .entrySet()
+        .stream()
+        .filter(f -> !f.getValue())
+        .map(e -> e.getKey())
+        .collect(Collectors.toSet());
+  }
+
   @Override
   public ConfigurationData getConfigurationData() {
     return configurationData;
@@ -125,7 +150,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   }
 
   @Override
-  public void reloadConfiguration() {
+  public void reloadConfiguration() throws UnableToLoadRemoteConfigurationException {
     if (StringUtils.hasText(updateUrl)) {
       String updateUrlPath = updateUrl;
       if (!updateUrlPath.endsWith("/")) {
@@ -156,7 +181,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   private String readConfigForFileName(String configFileName) {
     Path configFilePath = Path.of(configFileName);
     try {
-      configFilePath = fileSystemService.getPathToConfigFile().resolve(configFileName);
+      configFilePath = fileSystemService.getPathToConfigFilesOrDefault().resolve(configFileName);
       return Files.readString(configFilePath);
     } catch (IOException ex) {
       LOGGER.warn("Exception thrown while reading config content from path '{}'. Details: {}",
@@ -165,7 +190,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     return "";
   }
 
-  private String readRemoteConfigContent(Entry<String, String> configEntry) {
+  private String readRemoteConfigContent(Entry<String, String> configEntry) throws UnableToLoadRemoteConfigurationException {
     var configContent = downloadYamlFileContent(configEntry.getValue());
 
     try {
@@ -179,6 +204,8 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
           configEntry.getValue(),
           ex.getMessage());
       configContent = "";
+      String message="YAML config file '{}' from URL '{}' isn't correct. Ignoring it. YAML reading exception: {}";
+      throw new UnableToLoadRemoteConfigurationException(message, ex);
     }
 
     overrideConfigContent(configEntry.getKey(), configContent);
@@ -220,13 +247,14 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     }
 
     try {
-      var configPath = fileSystemService.getPathToConfigFile();
+      var configPath = fileSystemService.getPathToConfigFilesOrDefault();
       var configFilePath = configPath.resolve(configFileName);
       Files.write(configFilePath,
           configContent.getBytes(StandardCharsets.UTF_8),
           StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
     } catch (IOException ex) {
-      LOGGER.warn("Exception thrown while overriding configuration file '{}' with a new content.", configFileName);
+      LOGGER.error("Exception thrown while overriding configuration file '{}' with a message '{}'",
+          configFileName,ex.getMessage());
     }
   }
 
