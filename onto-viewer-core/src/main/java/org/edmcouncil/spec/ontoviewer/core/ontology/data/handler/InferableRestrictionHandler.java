@@ -7,10 +7,12 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlLabeledMultiAxiom;
 import org.edmcouncil.spec.ontoviewer.core.model.property.RestrictionType;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -178,6 +180,14 @@ public class InferableRestrictionHandler {
   private List<OwlAxiomPropertyValue> filterPropertiesWithRestrictions(Map<String, List<PropertyValue>> properties) {
     List<PropertyValue> mergedProperties = mergeProperties(properties);
     return mergedProperties.stream()
+        .flatMap(propertyValue -> {
+          if (propertyValue instanceof OwlLabeledMultiAxiom) {
+            OwlLabeledMultiAxiom owlLabeledMultiAxiom = (OwlLabeledMultiAxiom) propertyValue;
+            return owlLabeledMultiAxiom.getValue().stream();
+          } else {
+            return Stream.of(propertyValue);
+          }
+        })
         .filter(OwlAxiomPropertyValue.class::isInstance)
         .map(OwlAxiomPropertyValue.class::cast)
         .filter(axiomPropertyValue -> axiomPropertyValue.getRestrictionType() != RestrictionType.OTHER)
