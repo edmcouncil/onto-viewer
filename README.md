@@ -30,15 +30,15 @@ java -jar app-v-0.1.0.war
 ```
 
 
-
  ## Running in Docker
-
 
 To run the application using Docker you have to install Docker and docker compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker compose see [here](https://docs.docker.com/compose/install/). 
 
- In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`. Note that the `onto-viewer/docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
+The `onto-viewer/` folder is root/main project folder. All folders below are relative to this folder.
 
-Then, from the `onto-viewer/` folder run the following command to start the applications:
+ In the `docker/runtime/server/` folder, you must put configuration(in the `config` folder) and ontologies(in the `ontologies` folder) files if used. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`, you should rename the files - remove the default_ prefix. Note that the `docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
+
+Then, from the root folder run the following command to start the applications:
 
 ```
 docker compose up --build -d
@@ -46,7 +46,7 @@ docker compose up --build -d
 
 Please note that it takes a while to for all services to start depending on how many ontologies you provided.
 
-After all ontologies are loaded, the Onto viewer will be accessible from http://localhost:3000/dev/ontology. 
+After all ontologies are loaded, the Onto Viewer will be accessible from http://localhost:3000/dev/ontology. 
 
 
 You can see all running containers and their status:
@@ -95,11 +95,4 @@ mvn -P integration-tests verify
 
 # License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-
-<!--
- # Release notes
-
-Please read [CHANGELOG.md](CHANGELOG.md) for details.
- -->
 
