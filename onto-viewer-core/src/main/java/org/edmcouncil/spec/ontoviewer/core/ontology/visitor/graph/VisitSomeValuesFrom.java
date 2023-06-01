@@ -51,6 +51,7 @@ public class VisitSomeValuesFrom {
           case DATA_MAX_CARDINALITY:
           case OBJECT_INTERSECTION_OF:
           case OBJECT_UNION_OF:
+          case OBJECT_SOME_VALUES_FROM:
               
             GraphNode blankNode = gog.createBlankNode(type);
             GraphRelation relSomeVal = gog.createRelation(node, propertyIri, blankNode, type, RELATION_LABEL_POSTFIX);
