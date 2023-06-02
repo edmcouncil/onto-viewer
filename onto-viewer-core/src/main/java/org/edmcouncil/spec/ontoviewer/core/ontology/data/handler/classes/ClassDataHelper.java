@@ -135,48 +135,50 @@ public class ClassDataHelper {
     return result;
   }
 
-  public List<PropertyValue> getSuperElements(OWLEntity entity, OWLOntology ontology,
-      OwlType type) {
-    Stream<OWLProperty> propertyStream = null;
-    OWLProperty prop = null;
+  public List<PropertyValue> getSuperElements(OWLEntity entity, OWLOntology ontology, OwlType type) {
+    IRI entityIri = entity.getIRI();
+
+    Stream<OWLProperty> propertyStream;
     switch (type) {
       case AXIOM_CLASS:
         return getSuperClasses(entity.asOWLClass());
       case AXIOM_DATA_PROPERTY:
-        prop = entity.asOWLDataProperty();
-        propertyStream = EntitySearcher.getSuperProperties(prop, ontology.importsClosure());
+        propertyStream = EntitySearcher.getSuperProperties(entity.asOWLDataProperty(), ontology.importsClosure());
         break;
       case AXIOM_OBJECT_PROPERTY:
-        prop = entity.asOWLObjectProperty();
-        propertyStream = EntitySearcher.getSuperProperties(prop, ontology.importsClosure());
+        propertyStream = EntitySearcher.getSuperProperties(entity.asOWLObjectProperty(), ontology.importsClosure());
         break;
       case AXIOM_ANNOTATION_PROPERTY:
-        prop = entity.asOWLAnnotationProperty();
-        propertyStream = EntitySearcher.getSuperProperties(prop, ontology.importsClosure());
+        propertyStream = EntitySearcher.getSuperProperties(entity.asOWLAnnotationProperty(), ontology.importsClosure());
         break;
-
+      default:
+        propertyStream = Stream.empty();
     }
 
     List<PropertyValue> resultProperties = new LinkedList<>();
     for (OWLProperty owlProperty : propertyStream.collect(Collectors.toSet())) {
       LOGGER.trace("{} Sub Property Of {}", StringUtils.getIdentifier(entity.getIRI()),
           StringUtils.getIdentifier(owlProperty.getIRI()));
-      IRI subClazzIri = entity.getIRI();
-      IRI superClazzIri = owlProperty.getIRI();
+      IRI superEntityIri = owlProperty.getIRI();
 
-      OwlAxiomPropertyValue pv = new OwlAxiomPropertyValue();
-      OwlAxiomPropertyEntity entitySubClass = new OwlAxiomPropertyEntity();
-      OwlAxiomPropertyEntity entitySuperClass = new OwlAxiomPropertyEntity();
+      OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue();
 
-      // TODO
-      entitySuperClass.setIri(superClazzIri.getIRIString());
-      entitySuperClass.setLabel(labelProvider.getLabelOrDefaultFragment(superClazzIri));
-      entitySuperClass.setDeprecated(deprecatedHandler.getDeprecatedForEntity(superClazzIri));
+      OwlAxiomPropertyEntity entitySuperEntity = new OwlAxiomPropertyEntity();
+      entitySuperEntity.setIri(superEntityIri.getIRIString());
+      entitySuperEntity.setLabel(labelProvider.getLabelOrDefaultFragment(superEntityIri));
+      entitySuperEntity.setDeprecated(deprecatedHandler.getDeprecatedForEntity(superEntityIri));
 
-      pv.setType(OwlType.TAXONOMY);
-      pv.addEntityValues(labelProvider.getLabelOrDefaultFragment(subClazzIri), entitySubClass);
-      pv.addEntityValues(labelProvider.getLabelOrDefaultFragment(superClazzIri), entitySuperClass);
-      resultProperties.add(pv);
+      axiomPropertyValue.setType(OwlType.TAXONOMY);
+
+      OwlAxiomPropertyEntity entitySubEntity = new OwlAxiomPropertyEntity();
+      entitySubEntity.setIri(entityIri.getIRIString());
+      entitySubEntity.setEntityType(OntoViewerEntityType.fromEntityType(entity));
+      entitySubEntity.setLabel(labelProvider.getLabelOrDefaultFragment(entityIri));
+
+      axiomPropertyValue.addEntityValues(entitySubEntity.getLabel(), entitySubEntity);
+      axiomPropertyValue.addEntityValues(labelProvider.getLabelOrDefaultFragment(superEntityIri), entitySuperEntity);
+
+      resultProperties.add(axiomPropertyValue);
     }
     return resultProperties;
   }

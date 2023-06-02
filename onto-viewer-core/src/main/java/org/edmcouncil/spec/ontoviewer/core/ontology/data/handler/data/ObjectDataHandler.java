@@ -92,7 +92,8 @@ public class ObjectDataHandler {
         resultDetails = handle(objectProperty);
       }
     } catch (OntoViewerException ex) {
-      LOG.warn("Unable to handle object property {}. Details: {}", iri, ex.getMessage());
+      LOG.warn("Unable to handle object property {} due to exception of type {}. Details : {}",
+          iri, ex.getClass().getSimpleName(), ex.getMessage());
     }
 
     return resultDetails;

@@ -134,12 +134,11 @@ public class TaxonomyExtractor {
   }
 
   private IRI extractSubElementIri(OwlAxiomPropertyValue axiomProperty, IRI objIri) {
-    LOG.debug("Axiom Property SubElementIri {}", axiomProperty.toString());
+    LOG.debug("Axiom Property SubElementIri {}", axiomProperty);
     LOG.debug("extractSubElementIri -> obj {}", objIri);
-    for (Map.Entry<String, OwlAxiomPropertyEntity> entry : axiomProperty.getEntityMaping()
-        .entrySet()) {
-      LOG.debug("Axiom Property entry element {}", entry.toString());
-      if (!entry.getValue().getIri().equals(objIri.getIRIString())) {
+    for (Map.Entry<String, OwlAxiomPropertyEntity> entry : axiomProperty.getEntityMaping().entrySet()) {
+      LOG.debug("Axiom Property entry element {}", entry);
+      if (entry.getValue().getIri() != null && !entry.getValue().getIri().equals(objIri.getIRIString())) {
         return IRI.create(entry.getValue().getIri());
       }
     }
