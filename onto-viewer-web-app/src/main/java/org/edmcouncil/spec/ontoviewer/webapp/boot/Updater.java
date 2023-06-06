@@ -27,6 +27,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Updater {
 
+  private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
+
   private final Map<String, UpdateJob> jobs = new HashMap<>();
 
   @Autowired
@@ -55,7 +57,6 @@ public class Updater {
   private LabelProvider labelProvider;
   @Autowired
   private IntegrationService integrationService;
-  private static final String INTERRUPT_MESSAGE = "Interrupts this update. New update request.";
 
   @EventListener(ApplicationReadyEvent.class)
   public void afterStart() {
@@ -77,8 +78,8 @@ public class Updater {
         scopeIriOntology,
         ontologyStatsManager,
         luceneSearcher,
-        applicationConfigurationService, 
-        resourcesPopulate, 
+        applicationConfigurationService,
+        resourcesPopulate,
         fallbackService,
         deprecatedHandler,
         versionIriHandler,
@@ -86,7 +87,6 @@ public class Updater {
         integrationService) {
     };
     t.start();
-
   }
 
   public UpdateJob getJobWithId(String id) {
@@ -107,16 +107,15 @@ public class Updater {
 
   private void interruptOtherWaitingJobs() {
     jobs.values().stream()
-        .filter((value) -> !(value.getId().equals(String.valueOf(0))))
-        .filter((value) -> (value.getStatus() == UpdateJobStatus.WAITING))
-        .forEachOrdered((value) -> UpdaterOperation.setJobStatusToError(value, INTERRUPT_MESSAGE));
+        .filter(value -> !(value.getId().equals(String.valueOf(0))))
+        .filter(value -> (value.getStatus() == UpdateJobStatus.WAITING))
+        .forEachOrdered(value -> UpdaterOperation.setJobStatusToError(value, INTERRUPT_MESSAGE));
   }
 
   private void interruptWorkingJob() {
     jobs.values().stream()
-        .filter((value) -> !(value.getId().equals(String.valueOf(0))))
-        .filter((value) -> (value.getStatus() == UpdateJobStatus.IN_PROGRESS))
-        .forEachOrdered(
-            (value) -> UpdaterOperation.setJobStatusToInterrupt(value, INTERRUPT_MESSAGE));
+        .filter(value -> !(value.getId().equals(String.valueOf(0))))
+        .filter(value -> (value.getStatus() == UpdateJobStatus.IN_PROGRESS))
+        .forEachOrdered(value -> UpdaterOperation.setJobStatusToInterrupt(value, INTERRUPT_MESSAGE));
   }
 }

@@ -1,11 +1,10 @@
 package org.edmcouncil.spec.ontoviewer.toolkit.handlers;
 
-import static java.lang.Enum.valueOf;
-import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.CLASS;
-import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.DATATYPE;
-import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.DATA_PROPERTY;
-import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.INDIVIDUAL;
-import static org.edmcouncil.spec.ontoviewer.core.mapping.EntityType.OBJECT_PROPERTY;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType.CLASS;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType.DATATYPE;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType.DATA_PROPERTY;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType.INDIVIDUAL;
+import static org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType.OBJECT_PROPERTY;
 import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.INHERITED_DESCRIPTIONS_LABEL;
 import static org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerator.OWN_DESCRIPTIONS_LABEL;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
@@ -28,7 +27,7 @@ import java.util.stream.Stream;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.GroupsPropertyKey;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
-import org.edmcouncil.spec.ontoviewer.core.mapping.EntityType;
+import org.edmcouncil.spec.ontoviewer.core.mapping.OntoViewerEntityType;
 import org.edmcouncil.spec.ontoviewer.core.mapping.model.EntityData;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.details.OwlDetails;
@@ -48,8 +47,7 @@ public class OntologyTableDataExtractor {
   private static final Logger LOGGER = LoggerFactory.getLogger(OntologyTableDataExtractor.class);
   private static final String EQUIVALENT_TO = "EquivalentTo";
   private static final String ONTOLOGY_IRI_GROUP_NAME = "ontologyIri";
-  private static final Pattern ONTOLOGY_IRI_PATTERN =
-      Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
+  private static final Pattern ONTOLOGY_IRI_PATTERN = Pattern.compile("(?<ontologyIri>.*\\/)[^/]+$");
   private static final String UNKNOWN_LABEL = "UNKNOWN";
 
   private final ApplicationConfigurationService applicationConfigurationService;
@@ -105,7 +103,7 @@ public class OntologyTableDataExtractor {
     return result;
   }
 
-  private List<EntityData> getEntities(Stream<? extends OWLEntity> entities, EntityType type) {
+  private List<EntityData> getEntities(Stream<? extends OWLEntity> entities, OntoViewerEntityType type) {
     var filterPattern = applicationConfigurationService.getConfigurationData()
         .getToolkitConfig()
         .getFilterPattern();
@@ -141,7 +139,7 @@ public class OntologyTableDataExtractor {
     return entityData;
   }
 
-  private EntityData mapToEntityData(OwlDetails owlDetails, EntityType entityType)
+  private EntityData mapToEntityData(OwlDetails owlDetails, OntoViewerEntityType entityType)
       throws OntoViewerToolkitRuntimeException {
     if (owlDetails instanceof OwlGroupedDetails) {
       var groupedOwlDetails = (OwlGroupedDetails) owlDetails;
@@ -238,7 +236,8 @@ public class OntologyTableDataExtractor {
         return cleanedText;
       }
       var startingLabel = term.substring(0, 1).toUpperCase() + term.substring(1);
-      cleanedText = cleanedText.replaceAll(startingLabel, "It")
+      cleanedText = cleanedText
+          .replaceAll(startingLabel, "It")
           .replaceFirst("It", startingLabel);
     }
     return cleanedText;

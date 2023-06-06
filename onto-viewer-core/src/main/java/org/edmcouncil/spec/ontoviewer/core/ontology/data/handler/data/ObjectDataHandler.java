@@ -27,7 +27,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.QnameHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.StringIdentifier;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHelper;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.Parser;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassDataHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
@@ -47,7 +46,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ObjectDataHandler {
 
-  private static final Logger LOG = LoggerFactory.getLogger(DataTypeHandler.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ObjectDataHandler.class);
+
   private final EntitiesCacheService entitiesCacheService;
   private final LabelProvider labelProvider;
   private final AxiomsHandler axiomsHandler;
@@ -59,14 +59,13 @@ public class ObjectDataHandler {
   private final AnnotationsDataHandler annotationsDataHandler;
   private final ClassDataHelper extractSubAndSuper;
   private final TaxonomyExtractor taxonomyExtractor;
-  private final Parser parser;
   private final UsageExtractor usageExtractor;
 
   public ObjectDataHandler(EntitiesCacheService entitiesCacheService, LabelProvider labelProvider,
       AxiomsHandler axiomsHandler, AxiomsHelper axiomsHelper, OntologyManager ontologyManager, QnameHandler qnameHandler,
       LicenseHandler licenseHandler, CopyrightHandler copyrightHandler,
       AnnotationsDataHandler annotationsDataHandler, ClassDataHelper extractSubAndSuper,
-      TaxonomyExtractor taxonomyExtractor, Parser parser, UsageExtractor usageExtractor) {
+      TaxonomyExtractor taxonomyExtractor, UsageExtractor usageExtractor) {
     this.entitiesCacheService = entitiesCacheService;
     this.labelProvider = labelProvider;
     this.axiomsHandler = axiomsHandler;
@@ -78,7 +77,6 @@ public class ObjectDataHandler {
     this.annotationsDataHandler = annotationsDataHandler;
     this.extractSubAndSuper = extractSubAndSuper;
     this.taxonomyExtractor = taxonomyExtractor;
-    this.parser = parser;
     this.usageExtractor = usageExtractor;
   }
 
@@ -94,7 +92,8 @@ public class ObjectDataHandler {
         resultDetails = handle(objectProperty);
       }
     } catch (OntoViewerException ex) {
-      LOG.warn("Unable to handle object property {}. Details: {}", iri, ex.getMessage());
+      LOG.warn("Unable to handle object property {} due to exception of type {}. Details : {}",
+          iri, ex.getClass().getSimpleName(), ex.getMessage());
     }
 
     return resultDetails;
@@ -173,9 +172,9 @@ public class ObjectDataHandler {
             .collect(Collectors.toSet())));
 
     for (OWLSubPropertyChainOfAxiom owlSubPropertyChainOfAxiom : propertyChainOfAxiom) {
-      OWLEntity chain = owlSubPropertyChainOfAxiom.getSuperProperty().signature()
-          .filter(entity -> entity.getIRI()
-              .equals(objectProperty.getIRI()))
+      OWLEntity chain = owlSubPropertyChainOfAxiom.getSuperProperty()
+          .signature()
+          .filter(entity -> entity.getIRI().equals(objectProperty.getIRI()))
           .findFirst().get();
 
       IRI iri = objectProperty.getIRI();
@@ -184,11 +183,13 @@ public class ObjectDataHandler {
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
       int start = 0;
       OwlAxiomPropertyValue owlAxiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
-          owlSubPropertyChainOfAxiom, iriFragment,
-          splitFragment, fixRenderedIri, key,
-          start, false);
-      List<OwlAxiomPropertyValue> listAxiomPropertyValue = values.getOrDefault(chain,
-          new LinkedList<>());
+          owlSubPropertyChainOfAxiom,
+          iriFragment,
+          splitFragment,
+          fixRenderedIri,
+          start,
+          false);
+      List<OwlAxiomPropertyValue> listAxiomPropertyValue = values.getOrDefault(chain, new LinkedList<>());
       listAxiomPropertyValue.add(owlAxiomPropertyValue);
 
       values.put(chain.getIRI(), listAxiomPropertyValue);

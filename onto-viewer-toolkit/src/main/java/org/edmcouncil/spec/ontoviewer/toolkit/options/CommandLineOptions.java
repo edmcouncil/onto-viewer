@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public class CommandLineOptions {
 
+  @SuppressWarnings("java:S1640")
   private final Map<OptionDefinition, List<String>> options = new HashMap<>();
 
   public void setOption(OptionDefinition optionDefinition, String optionValue) {

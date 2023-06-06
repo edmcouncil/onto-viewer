@@ -419,7 +419,6 @@ public class ConfigurationData {
     public void setExtractDataColumns(Map<String, List<String>> extractDataColumns) {
       this.extractDataColumns = extractDataColumns;
     }
-
   }
 
   public static class IntegrationsConfig {

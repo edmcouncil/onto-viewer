@@ -101,7 +101,7 @@ public class InheritedAxiomsHandler {
             });
 
     for (Map.Entry<IRI, Set<OwlAxiomPropertyValue>> entry : values.entrySet()) {
-      
+
       OwlLabeledMultiAxiom owlLabeledMultiAxiom = new OwlLabeledMultiAxiom();
       owlLabeledMultiAxiom.setType(OwlType.OWL_LABELED_MULTI_AXIOM);
       owlLabeledMultiAxiom.setValue(List.copyOf(entry.getValue()));

@@ -16,6 +16,7 @@ public class ModuleHelper {
 
   private static final Logger LOG = LoggerFactory.getLogger(ModuleHelper.class);
   private final ModuleHandler moduleHandler;
+
   private Map<IRI, IRI> entityIriToOntologyIriMap;
 
   public ModuleHelper(ModuleHandler moduleHandler) {
@@ -83,9 +84,7 @@ public class ModuleHelper {
     return entityIriToOntologyIriMap.get(elementIri);
   }
 
-
-  public void setEntityIriToOntologyIriMap(
-      Map<IRI, IRI> entityIriToOntologyIriMap) {
+  public void setEntityIriToOntologyIriMap(Map<IRI, IRI> entityIriToOntologyIriMap) {
     this.entityIriToOntologyIriMap = entityIriToOntologyIriMap;
   }
 }

@@ -41,8 +41,7 @@ public class IndividualDataHelper {
    * @param clazz
    * @return
    */
-  public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology,
-      OWLClass clazz) {
+  public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology, OWLClass clazz) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
     Set<OWLNamedIndividual> listOfIndividuals = ontology.importsClosure()
@@ -82,10 +81,8 @@ public class IndividualDataHelper {
    * @param clazz    Clazz are all Instances.
    * @return All instances of a given class;
    */
-  public OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology,
-      OWLClass clazz) {
-    OwlDetailsProperties<PropertyValue> result =
-        handleClassIndividuals(ontology, clazz);
+  public OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLClass clazz) {
+    OwlDetailsProperties<PropertyValue> result = handleClassIndividuals(ontology, clazz);
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }

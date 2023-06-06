@@ -52,6 +52,7 @@ public class ModuleHandler {
       OwlType.INSTANCES.name().toLowerCase());
   private static final Pattern URL_PATTERN
       = Pattern.compile("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+
   private final ApplicationConfigurationService applicationConfigurationService;
   private final MaturityLevelFactory maturityLevelFactory;
   private final OntologyManager ontologyManager;
