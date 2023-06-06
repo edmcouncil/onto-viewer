@@ -1,34 +1,36 @@
-version: "3.8"
-
 services:
-  onto-viewer-server:
-    container_name: onto-viewer-server
-    environment: 
-      - ONTPUB_FAMILY=${ONTPUB_FAMILY:-dev}
-      - UPDATE_URL
+  fibo-strapi:
+    image: edmcouncil/fibo-strapi:latest
+    volumes:
+      - opt:/opt
+  fibo-pages:
+    image: edmcouncil/fibo-pages:latest
+    environment:
+      - STRAPI_URL=http://fibo-strapi:1337
+    volumes:
+      - opt:/opt
+    depends_on:
+      - fibo-strapi
+  fibo-viewer:
+    image: edmcouncil/onto-viewer:latest
     build:
       context: .
-      dockerfile: ./docker/server/Dockerfile
-    ports:
-      - "6101:8080"
-
+      dockerfile: ./Dockerfile.onto-viewer
+    environment:
+      - ONTPUB_FAMILY=fibo
+      - UPDATE_URL=${FIBO_UPDATE_URL:-https://spec.edmcouncil.org/fibo/ontology/etc/onto-viewer-web-app/config/}
+  spec:
+    image: edmcouncil/spec:latest
+    environment:
+      - FAMILY_REGEX=fibo
     volumes:
-      - ./docker/init-onto-viewer.sh:/opt/develop/init-onto-viewer.sh
-      - .:/opt/develop/src
-      - ./docker/runtime/.m2:/opt/develop/.m2
-      - ./docker/runtime/server:/opt/develop/app_home
-    networks:
-      - default
-  web-with-strapi: 
-    container_name: onto-viewer-web-with-strapi
-    environment: 
-      - PUBLIC_URL=0.0.0.0
-      - NUXT_PORT=3000
-      - ONTPUB_FAMILY=${ONTPUB_FAMILY:-dev}
-    build:
-      context: ./docker/web
-    ports: 
-      - 3000:3000
-      - 1337:1337
-    networks:
-      - default
+      - opt:/opt
+    depends_on:
+      - fibo-strapi
+      - fibo-pages
+      - fibo-viewer
+    ports:
+      - 8080:80
+
+volumes:
+  opt:
