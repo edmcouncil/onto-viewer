@@ -30,55 +30,90 @@ java -jar app-v-0.1.0.war
 ```
 
 
- ## Running in Docker
+## Run with docker
+Requirements:
+- [git](https://git-scm.com/) ([install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
+- [docker](https://www.docker.com/) - install:
+  * [Docker Desktop](https://docs.docker.com/desktop/) or ...
+  * [Docker Engine](https://docs.docker.com/engine/) with [Docker Compose plugin](https://docs.docker.com/compose/install/linux/)
+- free port **8080/tcp**
 
-To run the application using Docker you have to install Docker and docker compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker compose see [here](https://docs.docker.com/compose/install/). 
+How to start:
+Clone the [edmcouncil/onto-viewer](https://github.com/edmcouncil/onto-viewer) repository to the *onto-viewer* directory,
+go to the *onto-viewer* directory (run all subsequent commands inside this directory),
+then build the images (or pull from the registry if available) and run the containers:
+```bash
+# clone the repository
+git clone https://github.com/edmcouncil/onto-viewer onto-viewer
 
-The `onto-viewer/` folder is root/main project folder. All folders below are relative to this folder.
+# got to the onto-viewer directory
+cd onto-viewer
 
- In the `docker/runtime/server/` folder, you must put configuration(in the `config` folder) and ontologies(in the `ontologies` folder) files if used. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`, you should rename the files - remove the default_ prefix. Note that the `docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
+# build images
+docker compose build
+# alternatively pull images from registry if available
+#docker compose pull --ignore-pull-failures
 
-Then, from the root folder run the following command to start the applications:
-
-```
-docker compose up --build -d
-```
-
-Please note that it takes a while to for all services to start depending on how many ontologies you provided.
-
-After all ontologies are loaded, the Onto Viewer will be accessible from http://localhost:3000/dev/ontology. 
-
-
-You can see all running containers and their status:
-
-```
-$ docker compose ps
-
-NAME                   IMAGE                COMMAND                  SERVICE             CREATED             STATUS              PORTS
-onto-viewer-server-1   onto-viewer-server   "docker-entrypoint.s…"   onto-viewer-server  20 seconds ago      Up 17 seconds       0.0.0.0:8080->6101/tcp
-web-with-strapi-1      web-with-strapi      "docker-entrypoint.s…"   web-with-strapi     4 hours ago         Up 17 seconds       0.0.0.0:1337->1337/tcp
-```
-
-If you want to see logs from one container use:
-
-```
-# to view continuous log output
-# where "<container name>" is "onto-viewer-server" or "web-with-strapi"
-$ docker compose logs --follow <container name> 
-
-# to view specific amount of logs
-# where "<amount>" is amount of logs and "<container name>" is "onto-viewer-server" or "web-with-strapi"
-$ docker compose logs --tail <amount> <container name>
+# run the containers
+docker compose up -d
 ```
 
-To stop the applications run:
+After some time, check the status of running containers:
+```
+docker compose ps
+```
+
+if they work correctly, the following message will appear:
+```
+NAME                        IMAGE                           COMMAND                  SERVICE             CREATED             STATUS                   PORTS
+onto-viewer-fibo-pages-1    edmcouncil/fibo-pages:latest    "docker-entrypoint.s…"   fibo-pages          7 minutes ago       Up 6 minutes (healthy)   
+onto-viewer-fibo-strapi-1   edmcouncil/fibo-strapi:latest   "docker-entrypoint.s…"   fibo-strapi         7 minutes ago       Up 6 minutes (healthy)   
+onto-viewer-fibo-viewer-1   edmcouncil/onto-viewer:latest   "sh entrypoint.sh"       fibo-viewer         7 minutes ago       Up 6 minutes (healthy)   
+onto-viewer-spec-1          edmcouncil/spec:latest          "/docker-entrypoint.…"   spec                7 minutes ago       Up 6 minutes (healthy)   0.0.0.0:8080->80/tcp, :::8080->80/tcp
 
 ```
+
+The services provide endpoints at the following URLs:
+- [http://localhost:8080](http://localhost:8080) :- [html-pages home page](https://github.com/edmcouncil/html-pages/blob/develop/home/README.md)
+- [http://localhost:8080/fibo](http://localhost:8080/fibo) :- [html-pages general template](https://github.com/edmcouncil/html-pages/tree/develop/general) for [FIBO](https://github.com/edmcouncil/fibo) ontology
+- [http://localhost:8080/fibo/ontology](http://localhost:8080/fibo/ontology) :- onto-viewer for [FIBO](https://github.com/edmcouncil/fibo) ontology
+- [http://localhost:8080/fibo/strapi/admin](http://localhost:8080/fibo/strapi/admin) :- [Strapi admin panel](https://docs.strapi.io/user-docs/intro#accessing-the-admin-panel) for for [FIBO](https://github.com/edmcouncil/fibo) ontology (Email: *edmc-strapi@dev.com*, Password: *devDBonly1*)
+
+It is possible to run containers with the `dev` ontology (instead of `FIBO`):
+- use the `docker-compose.dev.yaml` file (instead of the default `docker-compose.yaml`):
+  ```
+  echo COMPOSE_FILE=docker-compose.dev.yaml >> .env
+  ```
+
+- optionally place the ontology files in the `onto-viewer-web-app/ontologies` subdirectory
+  and uncomment the following entry 
+  (see [comment](./docker-compose.dev.yaml#L31) in the `docker-compose.dev.yaml` file):
+  ```
+     - ./onto-viewer-web-app/ontologies:/opt/viewer/ontologies
+  ```
+
+- build the images and run the containers. After all ontologies are loaded,
+  the Onto Viewer will be accessible from `http://localhost:8080/dev/ontology`
+
+
+If you want to see the logs use:
+```bash
+# to view continuous log output for <SERVICE>=fibo-viewer
+docker compose logs --follow fibo-viewer
+
+# to view *100* latest log lines for <SERVICE>=fibo-viewer
+docker compose logs --tail 100 fibo-strapi
+```
+
+Stop the services with the command:
+```bash
 docker compose down
 ```
 
-You could also run docker compose without detached mode(without -d). If so, you'll just use '^C' to kill all containers.
-
+Remove all images and volumes with the command:
+```bash
+docker compose down --rmi all -v
+```
 
 # Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
