@@ -21,6 +21,7 @@ public class OntologyManager {
   private Map<String, IRI> locationToIriMapping = new HashMap<>();
   private Set<OWLOntology> ontologies;
   private Set<MissingImport> missingImports;
+  private Map<String, String> sourceNamespacesMap = new HashMap<>();
 
   public OWLOntology getOntology() {
     return ontology;
@@ -62,5 +63,13 @@ public class OntologyManager {
 
   public void setMissingImports(Set<MissingImport> missingImports) {
     this.missingImports = missingImports;
+  }
+
+  public Map<String, String> getSourceNamespacesMap() {
+    return sourceNamespacesMap;
+  }
+
+  public void setSourceNamespacesMap(Map<String, String> sourceNamespacesMap) {
+    this.sourceNamespacesMap = sourceNamespacesMap;
   }
 }

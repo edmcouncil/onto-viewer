@@ -16,9 +16,11 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImpor
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.listener.MissingImportListenerImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.loader.zip.ViewerZipFilesOperations;
 import org.semanticweb.owlapi.apibinding.OWLManager;
+import org.semanticweb.owlapi.formats.PrefixDocumentFormat;
 import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
+import org.semanticweb.owlapi.model.OWLDocumentFormat;
 import org.semanticweb.owlapi.model.OWLOntologyAlreadyExistsException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyDocumentAlreadyExistsException;
@@ -120,12 +122,18 @@ public class CommandLineOntologyLoader extends AbstractOntologyLoader {
     ontologyManager.addMissingImportListener(missingImportListenerImpl);
 
     var umbrellaOntology = ontologyManager.createOntology();
+    Map<String, String> sourceNamespacesMap = new HashMap<>();
 
     for (OntologySource ontologySource : ontologySources) {
       LOGGER.debug("Loading ontology from IRI '{}'...", ontologySource);
 
       try {
         var currentOntology = ontologyManager.loadOntology(ontologySource.getAsIri());
+        OWLDocumentFormat ontologyFormat = ontologyManager.getOntologyFormat(currentOntology);
+        if (ontologyFormat != null) {
+          sourceNamespacesMap.putAll(ontologyFormat.asPrefixOWLDocumentFormat().getPrefixName2PrefixMap());
+        }
+
         var ontologyIri = currentOntology.getOntologyID().getOntologyIRI().orElse(ontologySource.getAsIri());
         ontologyIrisToPaths.put(ontologyIri, ontologySource.getAsIri());
         ontologyPathsToIris.put(ontologySource.getOriginalLocation(), ontologyIri);
@@ -145,6 +153,6 @@ public class CommandLineOntologyLoader extends AbstractOntologyLoader {
       }
     }
 
-    return new LoadedOntologyData(umbrellaOntology, ontologyIrisToPaths, ontologyPathsToIris);
+    return new LoadedOntologyData(umbrellaOntology, ontologyIrisToPaths, ontologyPathsToIris, sourceNamespacesMap);
   }
 }
