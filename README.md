@@ -96,7 +96,7 @@ It is possible to run containers with the `dev` ontology (instead of `FIBO`):
   and uncomment the following entry 
   (see [comment](./docker-compose.dev.yaml#L31) in the `docker-compose.dev.yaml` file):
   ```
-     - ./onto-viewer-web-app/ontologies:/opt/viewer/config
+     - ./onto-viewer-web-app/config:/opt/viewer/config
   ```
 
 - build the images and run the containers. After all ontologies are loaded,
