@@ -85,11 +85,18 @@ It is possible to run containers with the `dev` ontology (instead of `FIBO`):
   echo COMPOSE_FILE=docker-compose.dev.yaml >> .env
   ```
 
-- optionally place the ontology files in the `onto-viewer-web-app/ontologies` subdirectory
+- place the ontology files in the `onto-viewer-web-app/ontologies` subdirectory
   and uncomment the following entry 
   (see [comment](./docker-compose.dev.yaml#L31) in the `docker-compose.dev.yaml` file):
   ```
      - ./onto-viewer-web-app/ontologies:/opt/viewer/ontologies
+  ```
+
+- place the config files in the `onto-viewer-web-app/config` subdirectory
+  and uncomment the following entry 
+  (see [comment](./docker-compose.dev.yaml#L31) in the `docker-compose.dev.yaml` file):
+  ```
+     - ./onto-viewer-web-app/ontologies:/opt/viewer/config
   ```
 
 - build the images and run the containers. After all ontologies are loaded,

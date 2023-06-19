@@ -218,6 +218,7 @@ lucene_index/
 download/
 onto-viewer-web-app/config/
 onto-viewer-web-app/ontologies/*
+docker-compose.dev.yaml
 
 # Mac
 .DS_Store

@@ -28,9 +28,10 @@ services:
       dockerfile: ./Dockerfile.onto-viewer
     environment:
       - ONTPUB_FAMILY=dev
-    # uncomment to use custom ontology files located in the "./onto-viewer-web-app/ontologies" directory
+    # uncomment to use custom ontology and config files located in, respectively, "./onto-viewer-web-app/ontologies" and "./onto-viewer-web-app/config" folders
     #volumes:
-    #  - ./onto-viewer-web-app/ontologies:/opt/viewer/ontologies
+      # - ./onto-viewer-web-app/ontologies:/opt/viewer/ontologies
+      # - ./onto-viewer-web-app/config:/opt/viewer/config
   spec:
     image: edmcouncil/spec:${HTML_BRANCH:-latest}
     build:
