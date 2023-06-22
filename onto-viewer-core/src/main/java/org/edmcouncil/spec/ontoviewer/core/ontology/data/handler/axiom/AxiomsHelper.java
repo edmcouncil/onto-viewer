@@ -37,7 +37,6 @@ public class AxiomsHelper {
   private final Parser parser;
 
  private final  OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
-  //private final OWLObjectRenderer rendering = new Renderer();
   private final Set<String> unwantedTypes = new HashSet<>();
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
@@ -59,11 +58,9 @@ public class AxiomsHelper {
       String iriFragment,
       String splitFragment,
       Boolean fixRenderedIri,
-      int startCountingArgs,
       boolean bypassClass
   ) {
     String value = rendering.render(axiom);
-    LOG.info("value: {}", value);
     for (String unwantedType : unwantedTypes) {
       value = value.replaceAll(unwantedType, "");
     }
@@ -109,12 +106,7 @@ public class AxiomsHelper {
   private <T extends OWLAxiom> void processingAxioms(
       OwlAxiomPropertyValue axiomPropertyValue,
       T axiom,
-//      boolean fixRenderedIri,
-//      String iriFragment,
-//      String splitFragment,
-      String renderedVal
-     // int startCountingArgs
-  ) {
+      String renderedVal) {
     String argPattern = "/arg%s/";
     String[] splitted = renderedVal.split(" ");
     String openingBrackets = "(";
@@ -125,12 +117,9 @@ public class AxiomsHelper {
 
     axiom.signature().forEach(owlEntity -> {
       String eSignature = rendering.render(owlEntity);
-     // eSignature = fixRenderedIri && iriFragment.equals(eSignature) ? splitFragment : eSignature;
       String key;
 
-    //  for (int countingArg = startCountingArgs; countingArg < startCountingArgs + splitted.length; countingArg++) {
         for (int countingArg = 0; countingArg < splitted.length; countingArg++) {
-       // int fixedIValue = countingArg - startCountingArgs;
         String string = splitted[countingArg].trim();
 
         // more than 1 because when it's 1, it's a number
@@ -190,7 +179,6 @@ public class AxiomsHelper {
           }
 
           splitted[countingArg] = textToReplace;
-      //    String eIri = owlEntity.getIRI().toString(); //sprawdz czy można skorzystać z eSignature
 
           parser.parseToIri(owlEntity, axiomPropertyValue, key);
         }

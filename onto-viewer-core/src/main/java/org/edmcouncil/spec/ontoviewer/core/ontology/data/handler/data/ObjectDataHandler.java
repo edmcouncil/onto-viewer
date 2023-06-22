@@ -181,13 +181,11 @@ public class ObjectDataHandler {
       String iriFragment = iri.getFragment();
       String splitFragment = StringUtils.getIdentifier(iri);
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
-      int start = 0;
       OwlAxiomPropertyValue owlAxiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
           owlSubPropertyChainOfAxiom,
           iriFragment,
           splitFragment,
           fixRenderedIri,
-          start,
           false);
       List<OwlAxiomPropertyValue> listAxiomPropertyValue = values.getOrDefault(chain, new LinkedList<>());
       listAxiomPropertyValue.add(owlAxiomPropertyValue);
