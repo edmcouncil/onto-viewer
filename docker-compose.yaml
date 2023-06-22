@@ -25,7 +25,6 @@ services:
     image: edmcouncil/onto-viewer:${TAG:-latest}
     build:
       context: .
-      dockerfile: ./Dockerfile.onto-viewer
     environment:
       - ONTPUB_FAMILY=fibo
       - UPDATE_URL=${FIBO_UPDATE_URL:-https://spec.edmcouncil.org/fibo/ontology/etc/onto-viewer-web-app/config/}

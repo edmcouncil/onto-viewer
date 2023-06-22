@@ -216,9 +216,8 @@ catalog-v001.xml
 docker/runtime/
 lucene_index/
 download/
-onto-viewer-web-app/config/
+onto-viewer-web-app/config/*
 onto-viewer-web-app/ontologies/*
-docker-compose.dev.yaml
 
 # Mac
 .DS_Store

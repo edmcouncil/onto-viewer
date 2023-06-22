@@ -35,8 +35,7 @@ Requirements:
 - [git](https://git-scm.com/) ([install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
 - [docker](https://www.docker.com/) - install:
   * [Docker Desktop](https://docs.docker.com/desktop/) or ...
-  * [Docker Engine](https://docs.docker.com/engine/) with [Docker Compose plugin](https://docs.docker.com/compose/install/linux/)
-- free port **8080/tcp**
+  * [Docker Engine](https://docs.docker.com/engine/) with [Docker Compose plugin](https://docs.docker.com/compose/)
 
 How to start:
 Clone the [edmcouncil/onto-viewer](https://github.com/edmcouncil/onto-viewer) repository to the *onto-viewer* directory,
@@ -80,28 +79,18 @@ The services provide endpoints at the following URLs:
 - [http://localhost:8080/fibo/strapi/admin](http://localhost:8080/fibo/strapi/admin) :- [Strapi admin panel](https://docs.strapi.io/user-docs/intro#accessing-the-admin-panel) for for [FIBO](https://github.com/edmcouncil/fibo) ontology (Email: *edmc-strapi@dev.com*, Password: *devDBonly1*)
 
 It is possible to run containers with the `dev` ontology (instead of `FIBO`):
-- use the `docker-compose.dev.yaml` file (instead of the default `docker-compose.yaml`):
-  ```
-  echo COMPOSE_FILE=docker-compose.dev.yaml >> .env
-  ```
-
 - place the ontology files in the `onto-viewer-web-app/ontologies` subdirectory
-  and uncomment the following entry 
-  (see [comment](./docker-compose.dev.yaml#L31) in the `docker-compose.dev.yaml` file):
-  ```
-     - ./onto-viewer-web-app/ontologies:/opt/viewer/ontologies
+  and the config files in the `onto-viewer-web-app/config` subdirectory
+
+- using the `docker-compose.dev.yaml` compose file (instead of the default `docker-compose.yaml`),
+  build the images,then run the containers:
+  ```bash
+  echo COMPOSE_FILE=docker-compose.dev.yaml >> .env
+  docker compose build
+  docker compose up -d
   ```
 
-- place the config files in the `onto-viewer-web-app/config` subdirectory
-  and uncomment the following entry 
-  (see [comment](./docker-compose.dev.yaml#L31) in the `docker-compose.dev.yaml` file):
-  ```
-     - ./onto-viewer-web-app/config:/opt/viewer/config
-  ```
-
-- build the images and run the containers. After all ontologies are loaded,
-  the Onto Viewer will be accessible from `http://localhost:8080/dev/ontology`
-
+  once all services are up and running, Onto Viewer will be available at `http://localhost:8080/dev/ontology`
 
 If you want to see the logs use:
 ```bash
