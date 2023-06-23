@@ -21,6 +21,7 @@ import org.semanticweb.owlapi.model.AddImport;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
 import org.semanticweb.owlapi.model.OWLDocumentFormat;
+import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyAlreadyExistsException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyDocumentAlreadyExistsException;
@@ -32,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 public class CommandLineOntologyLoader extends AbstractOntologyLoader {
 
+  private static final IRI ANONYMOUS_ONTOLOGY = IRI.create("https://ontoviewer.spec.edmcouncil.org/anonymous/");
   private static final Logger LOGGER = LoggerFactory.getLogger(CommandLineOntologyLoader.class);
 
   private final ConfigurationData configurationData;
@@ -123,16 +125,14 @@ public class CommandLineOntologyLoader extends AbstractOntologyLoader {
 
     var umbrellaOntology = ontologyManager.createOntology();
     Map<String, String> sourceNamespacesMap = new HashMap<>();
+    Set<IRI> seenOntologies = new HashSet<>();
 
     for (OntologySource ontologySource : ontologySources) {
       LOGGER.debug("Loading ontology from IRI '{}'...", ontologySource);
 
       try {
         var currentOntology = ontologyManager.loadOntology(ontologySource.getAsIri());
-        OWLDocumentFormat ontologyFormat = ontologyManager.getOntologyFormat(currentOntology);
-        if (ontologyFormat != null) {
-          sourceNamespacesMap.putAll(ontologyFormat.asPrefixOWLDocumentFormat().getPrefixName2PrefixMap());
-        }
+        gatherNamespacesFromOntologies(ontologyManager, sourceNamespacesMap, currentOntology, seenOntologies);
 
         var ontologyIri = currentOntology.getOntologyID().getOntologyIRI().orElse(ontologySource.getAsIri());
         ontologyIrisToPaths.put(ontologyIri, ontologySource.getAsIri());
@@ -154,5 +154,23 @@ public class CommandLineOntologyLoader extends AbstractOntologyLoader {
     }
 
     return new LoadedOntologyData(umbrellaOntology, ontologyIrisToPaths, ontologyPathsToIris, sourceNamespacesMap);
+  }
+
+  private void gatherNamespacesFromOntologies(OWLOntologyManager ontologyManager,
+      Map<String, String> sourceNamespacesMap,
+      OWLOntology ontology,
+      Set<IRI> seenOntologies) {
+    var ontologIri = ontology.getOntologyID().getOntologyIRI().orElse(ANONYMOUS_ONTOLOGY);
+    if (!seenOntologies.contains(ontologIri) || ontologIri.equals(ANONYMOUS_ONTOLOGY)) {
+      OWLDocumentFormat ontologyFormat = ontologyManager.getOntologyFormat(ontology);
+      if (ontologyFormat != null) {
+        sourceNamespacesMap.putAll(ontologyFormat.asPrefixOWLDocumentFormat().getPrefixName2PrefixMap());
+      }
+
+      seenOntologies.add(ontologIri);
+
+      ontology.imports().forEach(importedOntology ->
+          gatherNamespacesFromOntologies(ontologyManager, sourceNamespacesMap, importedOntology, seenOntologies));
+    }
   }
 }
