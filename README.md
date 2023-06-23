@@ -78,8 +78,8 @@ The services provide endpoints at the following URLs:
 - [http://localhost:8080/fibo/ontology](http://localhost:8080/fibo/ontology) :- onto-viewer for [FIBO](https://github.com/edmcouncil/fibo) ontology
 - [http://localhost:8080/fibo/strapi/admin](http://localhost:8080/fibo/strapi/admin) :- [Strapi admin panel](https://docs.strapi.io/user-docs/intro#accessing-the-admin-panel) for for [FIBO](https://github.com/edmcouncil/fibo) ontology (Email: *edmc-strapi@dev.com*, Password: *devDBonly1*)
 
-It is possible to run containers with the `dev` ontology (instead of `FIBO`):
-- place the ontology files in the `onto-viewer-web-app/ontologies` subdirectory
+It is possible to run containers with any ontology (instead of `FIBO`):
+- place the ontology files of your choice in the `onto-viewer-web-app/ontologies` subdirectory
   and the config files in the `onto-viewer-web-app/config` subdirectory
 
 - using the `docker-compose.dev.yaml` compose file (instead of the default `docker-compose.yaml`),
@@ -90,7 +90,7 @@ It is possible to run containers with the `dev` ontology (instead of `FIBO`):
   docker compose up -d
   ```
 
-  once all services are up and running, Onto Viewer will be available at `http://localhost:8080/dev/ontology`
+  once all services are up and running, onto-viewer with your ontology will be available at `http://localhost:8080/dev/ontology`
 
 If you want to see the logs use:
 ```bash
