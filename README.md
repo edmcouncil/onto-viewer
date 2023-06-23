@@ -37,6 +37,8 @@ Requirements:
   * [Docker Desktop](https://docs.docker.com/desktop/) or ...
   * [Docker Engine](https://docs.docker.com/engine/) with [Docker Compose plugin](https://docs.docker.com/compose/)
 
+### ... with FIBO
+
 How to start:
 Clone the [edmcouncil/onto-viewer](https://github.com/edmcouncil/onto-viewer) repository to the *onto-viewer* directory,
 go to the *onto-viewer* directory (run all subsequent commands inside this directory),
@@ -77,6 +79,9 @@ The services provide endpoints at the following URLs:
 - [http://localhost:8080/fibo](http://localhost:8080/fibo) :- [html-pages general template](https://github.com/edmcouncil/html-pages/tree/develop/general) for [FIBO](https://github.com/edmcouncil/fibo) ontology
 - [http://localhost:8080/fibo/ontology](http://localhost:8080/fibo/ontology) :- onto-viewer for [FIBO](https://github.com/edmcouncil/fibo) ontology
 - [http://localhost:8080/fibo/strapi/admin](http://localhost:8080/fibo/strapi/admin) :- [Strapi admin panel](https://docs.strapi.io/user-docs/intro#accessing-the-admin-panel) for for [FIBO](https://github.com/edmcouncil/fibo) ontology (Email: *edmc-strapi@dev.com*, Password: *devDBonly1*)
+
+
+### ... with an ontology of your choice
 
 It is possible to run containers with any ontology (instead of `FIBO`):
 - place the ontology files of your choice in the `onto-viewer-web-app/ontologies` subdirectory
