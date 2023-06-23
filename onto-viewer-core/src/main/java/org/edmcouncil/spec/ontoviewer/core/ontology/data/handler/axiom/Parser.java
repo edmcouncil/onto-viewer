@@ -39,13 +39,6 @@ public class Parser {
       OWLEntity owlEntity,
       OwlAxiomPropertyValue opv,
       String key
-     // String[] splitted,
-     // int j
-
-     // String generatedKey,
-     // int countOpeningParenthesis,
-   //   int countClosingParenthesis,
-    //  int countComma
       ) {
     String iriString= owlEntity.getIRI().getIRIString();
     if (iriString.contains("<") && iriString.contains(">")) {
@@ -64,23 +57,6 @@ public class Parser {
         deprecatedHandler.getDeprecatedForEntity(iri));
 
     opv.addEntityValues(key, axiomPropertyEntity);
-  //  splitted[j] = generatedKey;
-//
-//    String textToReplace = generatedKey;
-//
-//    if (countOpeningParenthesis > 0) {
-//      String prefix = String.join("", Collections.nCopies(countOpeningParenthesis, "("));
-//      textToReplace = prefix + textToReplace;
-//    }
-//    if (countClosingParenthesis > 0) {
-//      String postfix = String.join("", Collections.nCopies(countClosingParenthesis, ")"));
-//      textToReplace = textToReplace + postfix;
-//    }
-//    if (countComma > 0) {
-//      String postfix = String.join("", Collections.nCopies(countComma, ","));
-//      textToReplace = textToReplace + postfix;
-//    }
-//    //splitted[j] = textToReplace;
   }
 
   public void checkAndParseUriInLiteral(OWLEntity owlEntity, String[] splitted, String argPattern, OwlAxiomPropertyValue opv) {
