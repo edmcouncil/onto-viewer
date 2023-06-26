@@ -30,97 +30,91 @@ java -jar app-v-0.1.0.war
 ```
 
 
+## Run with docker
+Requirements:
+- [git](https://git-scm.com/) ([install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
+- [docker](https://www.docker.com/) - install:
+  * [Docker Desktop](https://docs.docker.com/desktop/) or ...
+  * [Docker Engine](https://docs.docker.com/engine/) with [Docker Compose plugin](https://docs.docker.com/compose/)
 
- ## Running in Docker
+### ... with FIBO
 
+How to start:
+Clone the [edmcouncil/onto-viewer](https://github.com/edmcouncil/onto-viewer) repository to the *onto-viewer* directory,
+go to the *onto-viewer* directory (run all subsequent commands inside this directory),
+then build the images (or pull from the registry if available) and run the containers:
+```bash
+# clone the repository
+git clone https://github.com/edmcouncil/onto-viewer onto-viewer
 
-To run the application using Docker you have to install Docker and docker-compose on your local computer.  To install Docker see [here](https://docs.docker.com/get-docker/) and to install docker-compose see [here](https://docs.docker.com/compose/install/). 
+# got to the onto-viewer directory
+cd onto-viewer
 
-1. Create onto-viewer-web directory next to onto-viewer root folder.
-2. Install Strapi with the development database in the root directory. To this end, run `npx create-strapi-app@latest strapi-dashboard --quickstart --no-run`command.
-3. Copy files and folders from html-pages repository:
-- `html-pages/general/strapi/.tmp/` > `strapi-dashboard/.tmp/`
-- `html-pages/general/strapi/src/` > `strapi-dashboard/src/`
-- `html-pages/general` > `onto-viewer-web/`
-- `html-pages/general/strapi/Dockerfile` > `strapi-dashboard/Dockerfile`
-- `onto-viewer/docker/web/.dockerignore` > `strapi-dashboard/.dockerignore`
-- `onto-viewer/docker/web/nuxt.config.js` > `onto-viewer-web/nuxt.config.js`
-- `onto-viewer/docker/web/Dockerfile` > `onto-viewer-web/Dockerfile`
-4. In the `onto-viewer/docker/runtime/server/` folder, you must put configuration and ontologies files. You can find samples of these files in the `onto-viewer-config-loader/src/main/resources`. Note that the `onto-viewer/docker/runtime/ `folder is excluded from Git, so you can freely put there any file you want.
-The final folder system should look like shown below:
+# build images
+docker compose build
+# alternatively pull images from registry if available
+#docker compose pull --ignore-pull-failures
 
-```
-onto-viewer
-|   .gitignore
-|   CHANGELOG.md
-|   CODE_OF_CONDUCT.md
-|   CONTRIBUTING.md
-|   DCO
-|   docker-compose.yaml
-|   LICENSE
-|   pom.xml
-|   README.md   
-|   api-doc/
-|   docker/
-|   |   init-onto-viewer.sh
-|   runtime/
-|   |   server/ 
-|   |       config <- config files go here    
-|   |       ontologies <- ontologies go here
-|   server
-|   |   Dockerfile      
-|   web
-|   |   nuxt.config.js         
-|   onto-viewer-config-loader
-|   onto-viewer-core
-|   onto-viewer-toolkit
-|   onto-viewer-web-app 
-|   style          
-onto-viewer-web <- installed and configured general tempaltes from general directory
-|   .dockerignore
-|   ...
-|   Dockerfile
-|   jsconfig.json
-|   nuxt.config.js
-|   ...
-|   api
-|	...
-|   store
-|   strapi
-strapi-dashboard <- installed and configured Strapi
-|   .dockerignore
-|	...
-|   Dockerfile
-|   favicon.png
-|   package-lock.json
-|   package.json
-|   README.md
-|   yarn.lock
-|   .tmp/   
-|   config/
-|   database/
-|   public/
-|   src/
-```
-  
-
-Then, from the `onto-viewer/` folder run the following command to start the applications:
-
-```
-docker-compose up --build -d
-```
-To list applications that have started, use ```docker-compose ps```.
-
-Please note that it takes a while to for all services to start depending on how many ontologies you provided.
-
-After all ontologies are loaded, the Onto viewer will be accessible from http://localhost:3000/dev/ontology. 
-
-To stop the applications run:
-
-```
-docker-compose down
+# run the containers
+docker compose up -d
 ```
 
+After some time, check the status of running containers:
+```
+docker compose ps
+```
+
+if they work correctly, the following message will appear:
+```
+NAME                        IMAGE                           COMMAND                  SERVICE             CREATED             STATUS                   PORTS
+onto-viewer-fibo-pages-1    edmcouncil/fibo-pages:latest    "docker-entrypoint.s…"   fibo-pages          7 minutes ago       Up 6 minutes (healthy)   
+onto-viewer-fibo-strapi-1   edmcouncil/fibo-strapi:latest   "docker-entrypoint.s…"   fibo-strapi         7 minutes ago       Up 6 minutes (healthy)   
+onto-viewer-fibo-viewer-1   edmcouncil/onto-viewer:latest   "sh entrypoint.sh"       fibo-viewer         7 minutes ago       Up 6 minutes (healthy)   
+onto-viewer-spec-1          edmcouncil/spec:latest          "/docker-entrypoint.…"   spec                7 minutes ago       Up 6 minutes (healthy)   0.0.0.0:8080->80/tcp, :::8080->80/tcp
+
+```
+
+The services provide endpoints at the following URLs:
+- [http://localhost:8080](http://localhost:8080) :- [html-pages home page](https://github.com/edmcouncil/html-pages/blob/develop/home/README.md)
+- [http://localhost:8080/fibo](http://localhost:8080/fibo) :- [html-pages general template](https://github.com/edmcouncil/html-pages/tree/develop/general) for [FIBO](https://github.com/edmcouncil/fibo) ontology
+- [http://localhost:8080/fibo/ontology](http://localhost:8080/fibo/ontology) :- onto-viewer for [FIBO](https://github.com/edmcouncil/fibo) ontology
+- [http://localhost:8080/fibo/strapi/admin](http://localhost:8080/fibo/strapi/admin) :- [Strapi admin panel](https://docs.strapi.io/user-docs/intro#accessing-the-admin-panel) for for [FIBO](https://github.com/edmcouncil/fibo) ontology (Email: *edmc-strapi@dev.com*, Password: *devDBonly1*)
+
+
+### ... with an ontology of your choice
+
+It is possible to run containers with any ontology (instead of `FIBO`):
+- place the ontology files of your choice in the `onto-viewer-web-app/ontologies` subdirectory
+  and the config files in the `onto-viewer-web-app/config` subdirectory
+
+- using the `docker-compose.dev.yaml` compose file (instead of the default `docker-compose.yaml`),
+  build the images,then run the containers:
+  ```bash
+  echo COMPOSE_FILE=docker-compose.dev.yaml >> .env
+  docker compose build
+  docker compose up -d
+  ```
+
+  once all services are up and running, onto-viewer with your ontology will be available at `http://localhost:8080/dev/ontology`
+
+If you want to see the logs use:
+```bash
+# to view continuous log output for <SERVICE>=fibo-viewer
+docker compose logs --follow fibo-viewer
+
+# to view *100* latest log lines for <SERVICE>=fibo-viewer
+docker compose logs --tail 100 fibo-strapi
+```
+
+Stop the services with the command:
+```bash
+docker compose down
+```
+
+Remove all images and volumes with the command:
+```bash
+docker compose down --rmi all -v
+```
 
 # Contributing
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
@@ -137,11 +131,4 @@ mvn -P integration-tests verify
 
 # License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-
-<!--
- # Release notes
-
-Please read [CHANGELOG.md](CHANGELOG.md) for details.
- -->
 
