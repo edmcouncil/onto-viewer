@@ -24,9 +24,11 @@ public class FileSystemManager implements FileSystemService {
   private String configDownloadPath;
 
   public FileSystemManager(AppProperties appProperties) {
-    defaultHomePath = appProperties.getDefaultHomePath()!=null?appProperties.getDefaultHomePath():"";
+    defaultHomePath =
+        appProperties.getDefaultHomePath() != null ? appProperties.getDefaultHomePath() : "";
     defaultOntologyFileName = appProperties.getDefaultOntologyFileName();
-    if (appProperties.getConfigDownloadPath() == null || appProperties.getConfigDownloadPath().isEmpty()) {
+    if (appProperties.getConfigDownloadPath() == null
+        || appProperties.getConfigDownloadPath().isEmpty()) {
       configDownloadPath = DEFAULT_CONFIG_LOCATION;
     } else {
       configDownloadPath = appProperties.getConfigDownloadPath();
@@ -66,12 +68,13 @@ public class FileSystemManager implements FileSystemService {
 
   @Override
   public Path getPathToConfigDownloadDirectory() throws IOException {
-        var path = Paths.get(configDownloadPath);
+    var path = Paths.get(configDownloadPath);
     if (path.isAbsolute()) {
       return path;
     } else {
       var homePath = getViewerHomeDir();
-      var configDirPath = createDirIfNotExists(createDirIfNotExists(homePath).resolve(configDownloadPath));
+      var configDirPath =
+          createDirIfNotExists(createDirIfNotExists(homePath).resolve(configDownloadPath));
       return configDirPath;
     }
   }
@@ -85,5 +88,4 @@ public class FileSystemManager implements FileSystemService {
   public Path getPathToDefaultConfigDirectory() throws IOException {
     return getPathToFile(DEFAULT_CONFIG_LOCATION).toAbsolutePath();
   }
-
 }

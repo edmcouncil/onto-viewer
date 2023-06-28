@@ -247,21 +247,6 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     this.configurationData = populateConfiguration(configuration);
   }
 
-  private String readConfigForFileName(String configFileName) {
-    Path configFilePath = Path.of(configFileName);
-    try {
-      configFilePath = fileSystemService.getPathToConfigDownloadDirectory().resolve(configFileName);
-      return Files.readString(configFilePath);
-    } catch (IOException ex) {
-      LOGGER.warn(
-          "Exception thrown while reading config content from path '{}'. Details: {}",
-          configFilePath,
-          ex.getMessage(),
-          ex);
-    }
-    return "";
-  }
-
   private String readRemoteConfigContent(Entry<String, String> configEntry) {
     var configContent = downloadYamlFileContent(configEntry.getValue());
 
@@ -287,7 +272,11 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   private String downloadYamlFileContent(String url) {
     Request request =
-        new Request.Builder().url(url).get().addHeader(ACCEPT_HEADER, YAML_MIME_TYPE).build();
+        new Request.Builder()
+        .url(url)
+        .get()
+        .addHeader(ACCEPT_HEADER, YAML_MIME_TYPE)
+        .build();
 
     try (Response response = httpClient.newCall(request).execute()) {
       var responseCode = response.code();
