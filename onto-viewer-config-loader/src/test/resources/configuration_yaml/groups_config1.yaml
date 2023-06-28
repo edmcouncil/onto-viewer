@@ -1,9 +1,4 @@
 groups_config:
-  priority_list:
-    - http://www.w3.org/2000/01/rdf-schema#subClassOf
-    - http://www.w3.org/2000/01/rdf-schema#seeAlso
-    - http://www.w3.org/2000/01/rdf-schema#somethingElse
-    - http://www.w3.org/2000/01/rdf-schema#somethingElse2
   groups:
     - name: Glossary
       items:
@@ -60,3 +55,6 @@ groups_config:
         - 'http://www.w3.org/2000/01/rdf-schema#isDefinedBy'
         - 'http://www.w3.org/2000/01/rdf-schema#seeAlso'
         - 'http://www.w3.org/2004/02/skos/core#historyNote'
+    - name: Usage
+      items:
+        - '@viewer.function.usage_classes'

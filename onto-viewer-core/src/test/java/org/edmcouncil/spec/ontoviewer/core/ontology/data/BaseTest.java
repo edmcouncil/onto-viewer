@@ -63,7 +63,7 @@ public abstract class BaseTest {
     }
 
     var appProperties = new AppProperties();
-    appProperties.setConfigPath(configDir.toString());
+    appProperties.setConfigDownloadPath(configDir.toString());
     return new FileSystemManager(appProperties);
   }
 }

@@ -1,10 +1,10 @@
 package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.exception.UnableToLoadRemoteConfigurationException;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
@@ -206,15 +206,12 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       UpdaterOperation.setJobStatusToError(job, INTERRUPT_MESSAGE);
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
-    } catch (NullPointerException | UnloadableImportException ex) {
+    } catch (NullPointerException | UnloadableImportException | IOException ex) {
       ex.printStackTrace();
       UpdaterOperation.setJobStatusToError(job, ex.getMessage());
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
-    } catch (UnableToLoadRemoteConfigurationException e) {
-      LOGGER.error("{}", e.getStackTrace());
-
-    }
+    } 
   }
 
   @Override

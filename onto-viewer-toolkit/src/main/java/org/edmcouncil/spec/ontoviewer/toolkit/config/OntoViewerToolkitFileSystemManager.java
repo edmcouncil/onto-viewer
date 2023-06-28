@@ -19,12 +19,17 @@ public class OntoViewerToolkitFileSystemManager implements FileSystemService {
   }
 
   @Override
-  public Path getPathToConfigFilesOrDefault() throws IOException {
+  public Path getPathToConfigDownloadDirectory() throws IOException {
     return null;
   }
 
   @Override
   public Path getPathToApiKey() {
+    return null;
+  }
+
+  @Override
+  public Path getPathToDefaultConfigDirectory() throws IOException {
     return null;
   }
 }

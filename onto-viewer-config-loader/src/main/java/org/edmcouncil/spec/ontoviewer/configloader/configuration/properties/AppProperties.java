@@ -1,12 +1,12 @@
 package org.edmcouncil.spec.ontoviewer.configloader.configuration.properties;
 
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
+ *
  * @author Michał Daniel (michal.daniel@makolab.com)
  */
 @Component
@@ -17,18 +17,16 @@ public class AppProperties {
   private String defaultHomePath;
   private String viewerConfigFileName;
   private String defaultOntologyFileName;
-  private String configPath;
+  private String configDownloadPath;
   private Map<String, Object> search;
   private String fallbackUrl;
-  @Value("${app.config.updateUrl:}")
-  private String[] configUpdateUrls;
 
-  public String getConfigPath() {
-    return configPath;
+  public String getConfigDownloadPath() {
+    return configDownloadPath;
   }
 
-  public void setConfigPath(String configPath) {
-    this.configPath = configPath;
+  public void setConfigDownloadPath(String configPath) {
+    this.configDownloadPath = configPath;
   }
 
   public String getDefaultHomePath() {
@@ -69,13 +67,5 @@ public class AppProperties {
 
   public void setFallbackUrl(String fallbackUrl) {
     this.fallbackUrl = fallbackUrl;
-  }
-
-  public String[] getConfigUpdateUrls() {
-    return configUpdateUrls;
-  }
-
-  public void setConfigUpdateUrls(String[] configUpdateUrls) {
-    this.configUpdateUrls = configUpdateUrls;
   }
 }
