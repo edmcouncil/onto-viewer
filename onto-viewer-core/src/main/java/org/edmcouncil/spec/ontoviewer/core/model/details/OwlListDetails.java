@@ -22,6 +22,10 @@ public class OwlListDetails extends OwlDetails {
     return properties.getProperties();
   }
 
+  public OwlDetailsProperties<PropertyValue> getAllProperties() {
+    return properties;
+  }
+
   public void setProperties(OwlDetailsProperties<PropertyValue> properties) {
     this.properties = properties;
   }
@@ -38,15 +42,9 @@ public class OwlListDetails extends OwlDetails {
     if (axioms == null) {
       return;
     }
-    axioms.getProperties().entrySet().forEach((entry) -> {
-      entry.getValue().forEach((propertyValue) -> {
-        properties.addProperty(entry.getKey(), propertyValue);
-      });
-    });
-  }
-
-  public void release() {
-    properties.release();
+    axioms.getProperties()
+        .forEach((key, value) ->
+            value.forEach(propertyValue -> properties.addProperty(key, propertyValue)));
   }
 
   @Override

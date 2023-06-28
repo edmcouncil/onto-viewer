@@ -28,14 +28,11 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AxiomsHandler {
 
-  private static final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
   private final AxiomsHelper axiomsHelper;
   private final ContainsVisitors containsVisitors;
 
@@ -44,25 +41,17 @@ public class AxiomsHandler {
     this.containsVisitors = containsVisitors;
   }
 
-  public OwlDetailsProperties<PropertyValue> handle(
-      OWLNamedIndividual obj,
-      OWLOntology ontology) {
-
+  public OwlDetailsProperties<PropertyValue> handle(OWLNamedIndividual obj, OWLOntology ontology) {
     Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
   }
 
-  public OwlDetailsProperties<PropertyValue> handle(
-      OWLObjectProperty obj,
-      OWLOntology ontology) {
-
+  public OwlDetailsProperties<PropertyValue> handle(OWLObjectProperty obj, OWLOntology ontology) {
     Iterator<OWLObjectPropertyAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
   }
 
-  public OwlDetailsProperties<PropertyValue> handle(
-      OWLDataProperty obj,
-      OWLOntology ontology) {
+  public OwlDetailsProperties<PropertyValue> handle(OWLDataProperty obj, OWLOntology ontology) {
     Iterator<OWLDataPropertyAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
   }
@@ -75,21 +64,18 @@ public class AxiomsHandler {
     Set<OWLClassAxiom> axiomsSet = ontology.axioms(obj, INCLUDED).collect(Collectors.toSet());
 
     if (extractGCI) {
-      ontology.importsClosure().forEach(currentOntology -> {
-        axiomsSet.addAll(
-          currentOntology.axioms(AxiomType.SUBCLASS_OF)
-            .filter(el -> el.isGCI())
-            .filter(el -> el.accept(containsVisitors.visitor(obj.getIRI())))
-            .collect(Collectors.toSet()));
-      });
+      ontology.importsClosure().forEach(currentOntology ->
+          axiomsSet.addAll(
+              currentOntology.axioms(AxiomType.SUBCLASS_OF)
+                  .filter(OWLSubClassOfAxiom::isGCI)
+                  .filter(el -> el.accept(containsVisitors.visitor(obj.getIRI())))
+                  .collect(Collectors.toSet())));
     }
 
     return handle(axiomsSet.iterator(), obj.getIRI());
   }
 
-  public OwlDetailsProperties<PropertyValue> handle(
-      OWLAnnotationProperty obj,
-      OWLOntology ontology) {
+  public OwlDetailsProperties<PropertyValue> handle(OWLAnnotationProperty obj, OWLOntology ontology) {
     Iterator<OWLAnnotationAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
   }
@@ -98,9 +84,10 @@ public class AxiomsHandler {
       Iterator<T> axiomsIterator,
       IRI elementIri) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+
     String iriFragment = elementIri.getFragment();
     String splitFragment = StringUtils.getIdentifier(elementIri);
-    Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
+    boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
     int start = 0;
 
@@ -116,15 +103,15 @@ public class AxiomsHandler {
       }
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
-      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom,
-          iriFragment, splitFragment, fixRenderedIri, key, start, true);
+      OwlAxiomPropertyValue axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
+          axiom, iriFragment, splitFragment, fixRenderedIri, start, true);
 
-      if (opv == null) {
+      if (axiomPropertyValue == null) {
         continue;
       }
-      start = opv.getLastId();
-      if (!key.equals(StringIdentifier.subClassOfIriString) || !opv.getType().equals(TAXONOMY)) {
-        result.addProperty(key, opv);
+      start = axiomPropertyValue.getLastId();
+      if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
+        result.addProperty(key, axiomPropertyValue);
       }
     }
     result.sortPropertiesInAlphabeticalOrder();

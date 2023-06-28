@@ -72,4 +72,14 @@ public enum ConfigurationKey {
 
     throw new IllegalArgumentException(String.format("ConfigurationName enum with name '%s' not found.", name));
   }
+
+  public static boolean isDefined(String name) {
+    for (ConfigurationKey configurationKey : values()) {
+      if (configurationKey.label.equals(name)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

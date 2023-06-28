@@ -73,7 +73,7 @@ public class DetailsManager {
       DataTypeHandler particularDataTypeHandler,
       ObjectDataHandler particularObjectPropertyHandler,
       DataPropertyHandler particularDataPropertyHandler,
-      IndividualHandler particularIndividualHandler, 
+      IndividualHandler particularIndividualHandler,
       MetadataHandler metadataHandler,
       DeprecatedHandler deprecatedHandler,
       VersionIriHandler versionIriHandler) {
@@ -169,8 +169,7 @@ public class DetailsManager {
     return moduleHelper.getAllModules();
   }
 
-  public OwlDetails getEntityDetailsByIri(String iriString)
-      throws NotFoundElementInOntologyException {
+  public OwlDetails getEntityDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
     IRI iri = IRI.create(iriString);
     OwlListDetails resultDetails = metadataHandler.handle(iri);
     if (resultDetails == null) {
@@ -210,6 +209,10 @@ public class DetailsManager {
 
     if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
       result = particularClassHandler.handle(iri);
+      if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
+        var individualResult = particularIndividualHandler.handle(iri);
+        mergeProperties(result, individualResult);
+      }
     } else if (ontologyManager.getOntology().containsDataPropertyInSignature(iri, INCLUDED)) {
       result = particularDataPropertyHandler.handleParticularDataProperty(iri);
     } else if (ontologyManager.getOntology().containsObjectPropertyInSignature(iri, INCLUDED)) {
@@ -298,5 +301,9 @@ public class DetailsManager {
             "Glossary",
             "generated description",
             descriptionValue)));
+  }
+
+  private void mergeProperties(OwlListDetails result, OwlListDetails otherResult) {
+    result.addAllProperties(otherResult.getAllProperties());
   }
 }

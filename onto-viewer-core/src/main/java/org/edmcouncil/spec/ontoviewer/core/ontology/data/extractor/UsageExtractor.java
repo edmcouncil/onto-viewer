@@ -35,6 +35,7 @@ import org.springframework.stereotype.Component;
 public class UsageExtractor {
 
   private static final Logger LOG = LoggerFactory.getLogger(UsageExtractor.class);
+  private static final String BR_LITERAL = " <br />";
 
   private final ContainsVisitors containsVisitors;
   private final LabelProvider labelProvider;
@@ -54,8 +55,7 @@ public class UsageExtractor {
     this.deprecatedHandler = deprecatedHandler;
   }
 
-  public OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz,
-      OWLOntology ontology) {
+  public OwlDetailsProperties<PropertyValue> extractUsageForClasses(OWLClass clazz, OWLOntology ontology) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
     String key = ViewerIdentifierFactory.createId(
         ViewerIdentifierFactory.Type.function,
@@ -82,7 +82,7 @@ public class UsageExtractor {
 
     int start = 0;
     for (OWLSubClassOfAxiom axiom : axioms) {
-      LOG.debug("Extract Usage as String {}", axiom.toString());
+      LOG.debug("Extract Usage as String {}", axiom);
       LOG.debug("Extract Usage subCLass {}", axiom.getSubClass());
 
       IRI iri = null;
@@ -104,7 +104,8 @@ public class UsageExtractor {
           iriFragment,
           splitFragment,
           fixRenderedIri,
-          key, start, false);
+          start,
+          false);
       start = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = values.getOrDefault(iri, new LinkedList<>());
       ll.add(opv);
@@ -126,7 +127,7 @@ public class UsageExtractor {
     for (Map.Entry<IRI, List<OwlAxiomPropertyValue>> entry : values.entrySet()) {
       OwlAxiomPropertyValue opv = new OwlAxiomPropertyValue();
       if (addClassSource) {
-        sb.append("%arg00%").append(" <br />");
+        sb.append("%arg00%").append(BR_LITERAL);
       }
       int i = 0;
       for (OwlAxiomPropertyValue owlAxiomPropertyValue : entry.getValue()) {
@@ -155,7 +156,7 @@ public class UsageExtractor {
 
       sb = new StringBuilder();
 
-      String fullRenderedString = parser.parseRenderedString(opv);
+      String fullRenderedString = parser.parseRenderedString(opv.getValue(), opv.getEntityMaping());
       opv.setFullRenderedString(fullRenderedString);
 
       result.addProperty(key, opv);
@@ -187,9 +188,8 @@ public class UsageExtractor {
       String splitFragment = StringUtils.getIdentifier(rangeEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment,
-          splitFragment, fixRenderedIri, key,
-          startR, false);
+      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
+          fixRenderedIri, startR, false);
       startR = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = valuesO.getOrDefault(rangeEntity, new LinkedList<>());
       ll.add(opv);
@@ -221,9 +221,8 @@ public class UsageExtractor {
       String splitFragment = StringUtils.getIdentifier(domainEntity.getIRI().toString());
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment,
-          splitFragment, fixRenderedIri, key,
-          startD, false);
+      OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
+          fixRenderedIri, startD, false);
       startD = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = valuesD.getOrDefault(domainEntity, new LinkedList());
       ll.add(opv);
@@ -261,7 +260,7 @@ public class UsageExtractor {
 
       LOG.debug("Generated big axiom: {}", sbd);
       sbd = new StringBuilder();
-      String fullRenderedString = parser.parseRenderedString(opv);
+      String fullRenderedString = parser.parseRenderedString(opv.getValue(), opv.getEntityMaping());
       opv.setFullRenderedString(fullRenderedString);
 
       result.addProperty(key, opv);

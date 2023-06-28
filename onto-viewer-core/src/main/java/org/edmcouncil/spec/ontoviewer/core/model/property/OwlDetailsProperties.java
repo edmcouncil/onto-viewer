@@ -17,6 +17,7 @@ import org.edmcouncil.spec.ontoviewer.core.comparator.ComparatorWithPriority;
  */
 public class OwlDetailsProperties<T> {
 
+  // TODO
   private List taxonomy;
   private Map<String, List<T>> properties;
 
@@ -59,6 +60,18 @@ public class OwlDetailsProperties<T> {
           }
           break;
         }
+      } else if (property instanceof OwlAnnotationPropertyValue) {
+        var propertyAsOwlAnnotation = (OwlAnnotationPropertyValue) property;
+
+        for (T annotationPropertyValue : propertiesList) {
+          if (annotationPropertyValue instanceof OwlAnnotationPropertyValue) {
+            var owlAxiomPropertyValue = (OwlAnnotationPropertyValue) annotationPropertyValue;
+            if (propertyAsOwlAnnotation.equals(owlAxiomPropertyValue)) {
+              notYetAdded = false;
+              break;
+            }
+          }
+        }
       }
     }
 
@@ -69,14 +82,7 @@ public class OwlDetailsProperties<T> {
     properties.put(key, propertiesList);
   }
 
-  public void addTaxonomy(String tax) {
-    if (this.taxonomy == null) {
-      this.taxonomy = new LinkedList();
-    }
-
-    this.taxonomy.add(tax);
-  }
-
+  // TODO
   public List getTaxonomy() {
     return taxonomy == null ? new ArrayList(0) : taxonomy;
   }
@@ -93,6 +99,13 @@ public class OwlDetailsProperties<T> {
     Map<String, List<T>> result = new LinkedHashMap<>();
     keys.forEach((key) -> result.put(key, properties.get(key)));
     properties = result;
+  }
+
+  public void sortPropertiesInAlphabeticalOrder() {
+    for (Map.Entry<String, List<T>> entry : properties.entrySet()) {
+      List<T> value = entry.getValue();
+      value.sort(ComparatorWithAlphabeticalOrder.get());
+    }
   }
 
   @Override
@@ -124,21 +137,9 @@ public class OwlDetailsProperties<T> {
     return true;
   }
 
-  public void sortPropertiesInAlphabeticalOrder() {
-    for (Map.Entry<String, List<T>> entry : properties.entrySet()) {
-      List<T> value = entry.getValue();
-      value.sort(ComparatorWithAlphabeticalOrder.get());
-    }
-  }
-
   @Override
   public String toString() {
     return "OwlDetailsProperties{" + "taxonomy=" + taxonomy + ", properties="
         + properties.toString() + '}';
-  }
-
-  public void release() {
-    taxonomy = null;
-    properties = null;
   }
 }

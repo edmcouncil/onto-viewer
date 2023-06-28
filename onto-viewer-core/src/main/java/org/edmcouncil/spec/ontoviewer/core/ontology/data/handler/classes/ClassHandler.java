@@ -15,6 +15,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.graph.vis.VisGraph;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyImpl;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.InferableRestrictionHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.StringIdentifier;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom.AxiomsHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.CopyrightHandler;
@@ -58,6 +59,8 @@ public class ClassHandler {
   private final AnnotationsDataHandler particularAnnotationPropertyHandler;
   private final IndividualDataHelper individualDataHelper;
   private final InheritedAxiomsHandler inheritedAxiomsHandler;
+  private final InferableRestrictionHandler inferableRestrictionHandler;
+
   public ClassHandler(LabelProvider labelProvider, RestrictionGraphDataHandler graphDataHandler,
       ApplicationConfigurationService applicationConfigurationService,
       EntitiesCacheService entitiesCacheService, OntologyManager ontologyManager,
@@ -65,7 +68,8 @@ public class ClassHandler {
       AxiomsHandler axiomsHandler, UsageExtractor usageExtractor,
       TaxonomyExtractor taxonomyExtractor, ClassDataHelper extractSubAndSuper,
       QnameHandler qnameHandler, AnnotationsDataHandler particularAnnotationPropertyHandler,
-      IndividualDataHelper individualDataHelper, InheritedAxiomsHandler inheritedAxiomsHandler) {
+      IndividualDataHelper individualDataHelper, InheritedAxiomsHandler inheritedAxiomsHandler,
+      InferableRestrictionHandler inferableRestrictionHandler) {
     this.labelProvider = labelProvider;
     this.graphDataHandler = graphDataHandler;
     this.applicationConfigurationService = applicationConfigurationService;
@@ -81,6 +85,7 @@ public class ClassHandler {
     this.particularAnnotationPropertyHandler = particularAnnotationPropertyHandler;
     this.individualDataHelper = individualDataHelper;
     this.inheritedAxiomsHandler = inheritedAxiomsHandler;
+    this.inferableRestrictionHandler = inferableRestrictionHandler;
   }
 
   public OwlListDetails handle(OWLClass owlClass) {
@@ -95,11 +100,10 @@ public class ClassHandler {
 
       OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(owlClass, ontology, true);
       List<PropertyValue> subclasses = extractSubAndSuper.getSubclasses(axioms);
-      List<PropertyValue> subclasses2 = extractSubAndSuper.getSuperClasses(owlClass);
-      List<PropertyValue> taxElements2 = taxonomyExtractor.extractTaxonomyElements(subclasses2);
+      List<PropertyValue> superClasses = extractSubAndSuper.getSuperClasses(owlClass);
+      List<PropertyValue> taxElements2 = taxonomyExtractor.extractTaxonomyElements(superClasses);
 
-      OwlDetailsProperties<PropertyValue> directSubclasses = extractSubAndSuper.handleDirectSubclasses(
-          owlClass);
+      OwlDetailsProperties<PropertyValue> directSubclasses = extractSubAndSuper.handleDirectSubclasses(owlClass);
       OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
       if (configurationData.getToolkitConfig().isIndividualsEnabled()) {
         individuals = individualDataHelper.handleInstances(ontology, owlClass);
@@ -110,8 +114,7 @@ public class ClassHandler {
         usage = usageExtractor.extractUsageForClasses(owlClass, ontology);
       }
 
-      OwlDetailsProperties<PropertyValue> inheritedAxioms =
-          inheritedAxiomsHandler.handle(ontology, owlClass);
+      OwlDetailsProperties<PropertyValue> inheritedAxioms = inheritedAxiomsHandler.handle(ontology, owlClass);
 
       OntologyGraph ontologyGraph = new OntologyGraph(0);
       if (configurationData.getToolkitConfig().isOntologyGraphEnabled()) {
@@ -148,6 +151,9 @@ public class ClassHandler {
       resultDetails.addAllProperties(copyrightHandler.getCopyright(classIri));
       resultDetails.addAllProperties(licenseHandler.getLicense(classIri));
       resultDetails.setqName(qnameHandler.getQName(classIri));
+
+      inferableRestrictionHandler.markInferableRestrictions(resultDetails.getProperties());
+
       if (ontologyGraph.isEmpty()) {
         resultDetails.setGraph(null);
       } else {
@@ -171,8 +177,7 @@ public class ClassHandler {
 
         resultDetails = handle(owlClass);
       } else {
-        LOG.warn("Entity with IRI '{}' not found (is NULL or not present: {}).",
-            classIri, entityEntry);
+        LOG.warn("Entity with IRI '{}' not found (is NULL or not present: {}).", classIri, entityEntry);
       }
     } catch (OntoViewerException ex) {
       LOG.warn("Unable to handle class {}. Details: {}", classIri, ex.getMessage(), ex);

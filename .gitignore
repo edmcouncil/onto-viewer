@@ -205,6 +205,7 @@ nbactions.xml
 **/api.key
 **/updateHistory.json
 /web-app/fiboMapper/fibo/**
+.env
 
 
 # Protege
@@ -215,7 +216,8 @@ catalog-v001.xml
 docker/runtime/
 lucene_index/
 download/
-onto-viewer-web-app/config/
+onto-viewer-web-app/config/*
+onto-viewer-web-app/ontologies/*
 
 # Mac
 .DS_Store

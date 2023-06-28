@@ -4,9 +4,9 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.Applica
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlMemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
-import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.RestrictionGraphDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.individual.IndividualDataHelper;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
