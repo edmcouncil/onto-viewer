@@ -14,20 +14,23 @@ public class LoadedOntologyData {
   private final Map<IRI, IRI> irisToPathsMapping;
   private final Map<String, IRI> pathsToIrisMapping;
   private final LoadingDetails loadingDetails;
+  private final Map<String, String> sourceNamespacesMap;
 
   public LoadedOntologyData(OWLOntology ontology, Map<IRI, IRI> irisToPathsMapping) {
     this.ontology = ontology;
     this.irisToPathsMapping = irisToPathsMapping;
     this.pathsToIrisMapping = new HashMap<>();
     this.loadingDetails = new LoadingDetails(Collections.emptyList());
+    this.sourceNamespacesMap = new HashMap<>();
   }
 
   public LoadedOntologyData(OWLOntology ontology, Map<IRI, IRI> irisToPathsMapping,
-      Map<String, IRI> pathsToIrisMapping) {
+      Map<String, IRI> pathsToIrisMapping, Map<String, String> sourceNamespacesMap) {
     this.ontology = ontology;
     this.irisToPathsMapping = irisToPathsMapping;
     this.pathsToIrisMapping = pathsToIrisMapping;
     this.loadingDetails = new LoadingDetails(Collections.emptyList());
+    this.sourceNamespacesMap = sourceNamespacesMap;
   }
 
   public LoadedOntologyData(LoadedOntologyData loadedOntologyData, LoadingDetails loadingDetails) {
@@ -35,6 +38,7 @@ public class LoadedOntologyData {
     this.irisToPathsMapping = loadedOntologyData.getIrisToPathsMapping();
     this.pathsToIrisMapping = loadedOntologyData.getPathsToIrisMapping();
     this.loadingDetails = loadingDetails;
+    this.sourceNamespacesMap = loadedOntologyData.getSourceNamespacesMap();
   }
 
   public OWLOntology getOntology() {
@@ -51,6 +55,10 @@ public class LoadedOntologyData {
 
   public LoadingDetails getLoadingDetails() {
     return loadingDetails;
+  }
+
+  public Map<String, String> getSourceNamespacesMap() {
+    return sourceNamespacesMap;
   }
 
   public static class LoadingDetails {

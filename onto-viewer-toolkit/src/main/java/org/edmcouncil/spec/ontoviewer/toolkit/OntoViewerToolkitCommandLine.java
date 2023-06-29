@@ -190,9 +190,12 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
         if (outputOption.isPresent()) {
           var output = outputOption.get();
           LOGGER.info("Saving merged ontology to '{}'...", output);
+          RDFXMLDocumentFormat outputDocumentFormat = new RDFXMLDocumentFormat();
+          ontologyManager.getSourceNamespacesMap().forEach(outputDocumentFormat::setPrefix);
+
           owlOntologyManager.saveOntology(
               mergedOntology,
-              new RDFXMLDocumentFormat(),
+              outputDocumentFormat,
               IRI.create(new File(output)));
         } else {
           throw new OntoViewerToolkitRuntimeException("Error: 'output' argument is not present.");
@@ -330,6 +333,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
 
       ontologyManager.updateOntology(loadedOntology);
       ontologyManager.setLocationToIriMapping(loadedOntologyData.getPathsToIrisMapping());
+      ontologyManager.setSourceNamespacesMap(loadedOntologyData.getSourceNamespacesMap());
       if (shouldPopulateOntologyResources(goal)) {
         resourcesPopulate.populateOntologyResources();
       }
