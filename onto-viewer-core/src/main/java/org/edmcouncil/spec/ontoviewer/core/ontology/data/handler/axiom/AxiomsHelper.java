@@ -158,23 +158,19 @@ public class AxiomsHelper {
           key = generatedKey;
           String textToReplace = generatedKey;
           if (hasOpeningBrackets) {
-            String prefix = String.join("",
-                Collections.nCopies(countOpeningBrackets, openingBrackets));
+            String prefix = String.join("", Collections.nCopies(countOpeningBrackets, openingBrackets));
             textToReplace = prefix + textToReplace;
           }
           if (hasClosingBrackets) {
-            String postfix = String.join("",
-                Collections.nCopies(countClosingBrackets, closingBrackets));
+            String postfix = String.join("", Collections.nCopies(countClosingBrackets, closingBrackets));
             textToReplace = textToReplace + postfix;
           }
           if (hasOpeningCurlyBrackets) {
-            String prefix = String.join("",
-                Collections.nCopies(countOpeningCurlyBrackets, openingCurlyBrackets));
+            String prefix = String.join("", Collections.nCopies(countOpeningCurlyBrackets, openingCurlyBrackets));
             textToReplace = prefix + textToReplace;
           }
           if (hasClosingCurlyBrackets) {
-            String postfix = String.join("",
-                Collections.nCopies(countClosingCurlyBrackets, closingCurlyBrackets));
+            String postfix = String.join("", Collections.nCopies(countClosingCurlyBrackets, closingCurlyBrackets));
             textToReplace = textToReplace + postfix;
           }
           if (hasComma) {
