@@ -17,6 +17,8 @@ import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.semanticweb.owlapi.util.SimpleRenderer;
+import org.semanticweb.owlapi.util.SimpleShortFormProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -34,7 +36,7 @@ public class AxiomsHelper {
   private final OwlUtils owlUtils;
   private final Parser parser;
 
-  private final OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
+ private final  OWLObjectRenderer rendering = new ManchesterOWLSyntaxOWLObjectRendererImpl();
   private final Set<String> unwantedTypes = new HashSet<>();
   private final Set<String> unwantedEndOfLeafIri = new HashSet<>();
 
@@ -48,6 +50,7 @@ public class AxiomsHelper {
 
     unwantedTypes.add("^^anyURI");
     unwantedTypes.add("^^dateTime");
+    rendering.setShortFormProvider(new IriAsShortProvider());
   }
 
   public <T extends OWLAxiom> OwlAxiomPropertyValue prepareAxiomPropertyValue(
@@ -55,7 +58,6 @@ public class AxiomsHelper {
       String iriFragment,
       String splitFragment,
       Boolean fixRenderedIri,
-      int startCountingArgs,
       boolean bypassClass
   ) {
     String value = rendering.render(axiom);
@@ -91,7 +93,7 @@ public class AxiomsHelper {
     }
     axiomPropertyValue.setRestrictionType(restrictionType);
 
-    processingAxioms(axiomPropertyValue, axiom, fixRenderedIri, iriFragment, splitFragment, value, startCountingArgs);
+    processingAxioms(axiomPropertyValue, axiom, value);
 
     return axiomPropertyValue;
   }
@@ -104,11 +106,7 @@ public class AxiomsHelper {
   private <T extends OWLAxiom> void processingAxioms(
       OwlAxiomPropertyValue axiomPropertyValue,
       T axiom,
-      boolean fixRenderedIri,
-      String iriFragment,
-      String splitFragment,
-      String renderedVal,
-      int startCountingArgs) {
+      String renderedVal) {
     String argPattern = "/arg%s/";
     String[] splitted = renderedVal.split(" ");
     String openingBrackets = "(";
@@ -119,12 +117,10 @@ public class AxiomsHelper {
 
     axiom.signature().forEach(owlEntity -> {
       String eSignature = rendering.render(owlEntity);
-      eSignature = fixRenderedIri && iriFragment.equals(eSignature) ? splitFragment : eSignature;
       String key;
 
-      for (int countingArg = startCountingArgs; countingArg < startCountingArgs + splitted.length; countingArg++) {
-        int fixedIValue = countingArg - startCountingArgs;
-        String string = splitted[fixedIValue].trim();
+      for (int countingArg = 0; countingArg < splitted.length; countingArg++) {
+        String string = splitted[countingArg].trim();
 
         // more than 1 because when it's 1, it's a number
         boolean hasOpeningBrackets = string.length() > 1 && string.contains("(");
@@ -182,24 +178,22 @@ public class AxiomsHelper {
             textToReplace = textToReplace + postfix;
           }
 
-          splitted[fixedIValue] = textToReplace;
-          String eIri = owlEntity.getIRI().toString();
+          splitted[countingArg] = textToReplace;
 
-          parser.parseToIri(owlEntity, axiomPropertyValue, key, splitted, fixedIValue, generatedKey, eIri,
-              countOpeningBrackets, countClosingBrackets, countComma);
+          parser.parseToIri(owlEntity, axiomPropertyValue, key);
         }
         axiomPropertyValue.setLastId(countingArg);
       }
     });
 
-    // TODO
     parser.checkAndParseUriInLiteral(null, splitted, argPattern, axiomPropertyValue);
 
     String value = String.join(" ", splitted).trim();
 
     axiomPropertyValue.setValue(value);
     String fullRenderedString =
-        parser.parseRenderedString(axiomPropertyValue.getValue(), axiomPropertyValue.getEntityMaping());
+        parser.parseRenderedString(axiomPropertyValue.getValue(),
+            axiomPropertyValue.getEntityMaping());
     axiomPropertyValue.setFullRenderedString(fullRenderedString);
   }
 

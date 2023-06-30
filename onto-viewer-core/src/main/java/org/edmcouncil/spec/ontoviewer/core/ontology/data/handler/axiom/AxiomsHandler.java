@@ -89,7 +89,6 @@ public class AxiomsHandler {
     String splitFragment = StringUtils.getIdentifier(elementIri);
     boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
-    int start = 0;
 
     while (axiomsIterator.hasNext()) {
       T axiom = axiomsIterator.next();
@@ -104,12 +103,11 @@ public class AxiomsHandler {
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
       OwlAxiomPropertyValue axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
-          axiom, iriFragment, splitFragment, fixRenderedIri, start, true);
+          axiom, iriFragment, splitFragment, fixRenderedIri, true);
 
       if (axiomPropertyValue == null) {
         continue;
       }
-      start = axiomPropertyValue.getLastId();
       if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
         result.addProperty(key, axiomPropertyValue);
       }

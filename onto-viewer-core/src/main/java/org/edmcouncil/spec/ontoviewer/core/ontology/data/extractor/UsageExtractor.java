@@ -80,7 +80,6 @@ public class UsageExtractor {
               .collect(Collectors.toSet()));
     });
 
-    int start = 0;
     for (OWLSubClassOfAxiom axiom : axioms) {
       LOG.debug("Extract Usage as String {}", axiom);
       LOG.debug("Extract Usage subCLass {}", axiom.getSubClass());
@@ -104,9 +103,7 @@ public class UsageExtractor {
           iriFragment,
           splitFragment,
           fixRenderedIri,
-          start,
           false);
-      start = opv.getLastId() + 1;
       List<OwlAxiomPropertyValue> ll = values.getOrDefault(iri, new LinkedList<>());
       ll.add(opv);
 
@@ -173,7 +170,6 @@ public class UsageExtractor {
           .collect(Collectors.toSet()));
     });
 
-    int startR = 0;
 
     LOG.debug("How many range is found for x : {}", ops.size());
 
@@ -189,8 +185,7 @@ public class UsageExtractor {
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
       OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
-          fixRenderedIri, startR, false);
-      startR = opv.getLastId() + 1;
+          fixRenderedIri, false);
       List<OwlAxiomPropertyValue> ll = valuesO.getOrDefault(rangeEntity, new LinkedList<>());
       ll.add(opv);
 
@@ -208,7 +203,6 @@ public class UsageExtractor {
               .filter(el -> el.accept(containsVisitors.visitorObjectProperty(clazz.getIRI())))
               .collect(Collectors.toSet()));
     });
-    int startD = 0;
 
     for (OWLObjectPropertyDomainAxiom axiom : opd) {
       OWLEntity domainEntity
@@ -222,8 +216,7 @@ public class UsageExtractor {
       Boolean fixRenderedIri = !iriFragment.equals(splitFragment);
 
       OwlAxiomPropertyValue opv = axiomsHelper.prepareAxiomPropertyValue(axiom, iriFragment, splitFragment,
-          fixRenderedIri, startD, false);
-      startD = opv.getLastId() + 1;
+          fixRenderedIri, false);
       List<OwlAxiomPropertyValue> ll = valuesD.getOrDefault(domainEntity, new LinkedList());
       ll.add(opv);
 
