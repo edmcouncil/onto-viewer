@@ -38,9 +38,8 @@ public class Parser {
   public void parseToIri(
       OWLEntity owlEntity,
       OwlAxiomPropertyValue opv,
-      String key
-      ) {
-    String iriString= owlEntity.getIRI().getIRIString();
+      String key) {
+    String iriString = owlEntity.getIRI().getIRIString();
     if (iriString.contains("<") && iriString.contains(">")) {
       iriString = iriString
           .replace("<", "")

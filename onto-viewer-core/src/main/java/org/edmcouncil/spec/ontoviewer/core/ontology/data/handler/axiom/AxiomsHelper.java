@@ -119,7 +119,7 @@ public class AxiomsHelper {
       String eSignature = rendering.render(owlEntity);
       String key;
 
-        for (int countingArg = 0; countingArg < splitted.length; countingArg++) {
+      for (int countingArg = 0; countingArg < splitted.length; countingArg++) {
         String string = splitted[countingArg].trim();
 
         // more than 1 because when it's 1, it's a number
@@ -158,19 +158,23 @@ public class AxiomsHelper {
           key = generatedKey;
           String textToReplace = generatedKey;
           if (hasOpeningBrackets) {
-            String prefix = String.join("", Collections.nCopies(countOpeningBrackets, openingBrackets));
+            String prefix = String.join("",
+                Collections.nCopies(countOpeningBrackets, openingBrackets));
             textToReplace = prefix + textToReplace;
           }
           if (hasClosingBrackets) {
-            String postfix = String.join("", Collections.nCopies(countClosingBrackets, closingBrackets));
+            String postfix = String.join("",
+                Collections.nCopies(countClosingBrackets, closingBrackets));
             textToReplace = textToReplace + postfix;
           }
           if (hasOpeningCurlyBrackets) {
-            String prefix = String.join("", Collections.nCopies(countOpeningCurlyBrackets, openingCurlyBrackets));
+            String prefix = String.join("",
+                Collections.nCopies(countOpeningCurlyBrackets, openingCurlyBrackets));
             textToReplace = prefix + textToReplace;
           }
           if (hasClosingCurlyBrackets) {
-            String postfix = String.join("", Collections.nCopies(countClosingCurlyBrackets, closingCurlyBrackets));
+            String postfix = String.join("",
+                Collections.nCopies(countClosingCurlyBrackets, closingCurlyBrackets));
             textToReplace = textToReplace + postfix;
           }
           if (hasComma) {
@@ -192,7 +196,8 @@ public class AxiomsHelper {
 
     axiomPropertyValue.setValue(value);
     String fullRenderedString =
-        parser.parseRenderedString(axiomPropertyValue.getValue(), axiomPropertyValue.getEntityMaping());
+        parser.parseRenderedString(axiomPropertyValue.getValue(),
+            axiomPropertyValue.getEntityMaping());
     axiomPropertyValue.setFullRenderedString(fullRenderedString);
   }
 
