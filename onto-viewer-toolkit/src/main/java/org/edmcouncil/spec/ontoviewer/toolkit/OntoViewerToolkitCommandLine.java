@@ -38,6 +38,7 @@ import org.edmcouncil.spec.ontoviewer.toolkit.config.ApplicationConfigProperties
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitException;
 import org.edmcouncil.spec.ontoviewer.toolkit.exception.OntoViewerToolkitRuntimeException;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyConsistencyChecker;
+import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyHandlingService;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyImportsMerger;
 import org.edmcouncil.spec.ontoviewer.toolkit.handlers.OntologyTableDataExtractor;
 import org.edmcouncil.spec.ontoviewer.toolkit.io.CsvWriter;
@@ -47,7 +48,6 @@ import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptions;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.CommandLineOptionsHandler;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.Goal;
 import org.edmcouncil.spec.ontoviewer.toolkit.options.OptionDefinition;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.RDFXMLDocumentFormat;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.parameters.Imports;
@@ -72,6 +72,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
   private final ApplicationConfigProperties applicationConfigProperties;
   private final FileSystemService fileSystemService;
   private final ResourcesPopulate resourcesPopulate;
+  private final OntologyHandlingService ontologyHandlingService;
 
   public OntoViewerToolkitCommandLine(
       ApplicationConfigurationService applicationConfigurationService,
@@ -81,7 +82,9 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
       OntologyImportsMerger ontologyImportsMerger,
       StandardEnvironment environment,
       ApplicationConfigProperties applicationConfigProperties,
-      FileSystemService fileSystemService, ResourcesPopulate resourcesPopulate) {
+      FileSystemService fileSystemService,
+      ResourcesPopulate resourcesPopulate,
+      OntologyHandlingService ontologyHandlingService) {
     this.applicationConfigurationService = applicationConfigurationService;
     this.resourcesPopulate = resourcesPopulate;
     // We don't need the default paths configuration in OV Toolkit
@@ -94,6 +97,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     this.environment = environment;
     this.applicationConfigProperties = applicationConfigProperties;
     this.fileSystemService = fileSystemService;
+    this.ontologyHandlingService = ontologyHandlingService;
   }
 
   @Override
@@ -185,13 +189,14 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
             newOntologyIri,
             newOntologyVersionIri);
 
-        var owlOntologyManager = OWLManager.createOWLOntologyManager();
+        var owlOntologyManager = ontologyHandlingService.getOwlOntologyManager();
         var outputOption = commandLineOptions.getOption(OUTPUT);
         if (outputOption.isPresent()) {
           var output = outputOption.get();
           LOGGER.info("Saving merged ontology to '{}'...", output);
           RDFXMLDocumentFormat outputDocumentFormat = new RDFXMLDocumentFormat();
           ontologyManager.getSourceNamespacesMap().forEach(outputDocumentFormat::setPrefix);
+          outputDocumentFormat.setDefaultPrefix(newOntologyIri);
 
           owlOntologyManager.saveOntology(
               mergedOntology,
