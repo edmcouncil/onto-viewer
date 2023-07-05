@@ -57,7 +57,7 @@ public class FileSystemManager implements FileSystemService {
             defaultHomePath);
         break;
     }
-    return userHomeDir;
+    return userHomeDir.toAbsolutePath();
   }
 
   @Override
