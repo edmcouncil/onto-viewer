@@ -47,7 +47,7 @@ public class FileSystemManager implements FileSystemService {
         break;
       case "*":
         userHomeDir = Paths.get("");
-        LOG.trace("Working directory is '{}'.", userHomeDir.toAbsolutePath());
+        LOG.trace("Working directory is '{}'.", userHomeDir);
         break;
       default:
         userHomeDir = Paths.get(defaultHomePath);
@@ -57,7 +57,7 @@ public class FileSystemManager implements FileSystemService {
             defaultHomePath);
         break;
     }
-    return userHomeDir.toAbsolutePath();
+    return userHomeDir;
   }
 
   @Override
@@ -86,6 +86,6 @@ public class FileSystemManager implements FileSystemService {
 
   @Override
   public Path getPathToDefaultConfigDirectory() throws IOException {
-    return getPathToFile(DEFAULT_CONFIG_LOCATION).toAbsolutePath();
+    return getPathToFile(DEFAULT_CONFIG_LOCATION);
   }
 }

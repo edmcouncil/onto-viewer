@@ -99,7 +99,12 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       LOGGER.warn(
           "Config URL is not set. Using default value: `{}`", defaultConfigLocation.toString());
       configChecklist.setConfigPathIsSet(false);
-      configURL = new URL("file://" + defaultConfigLocation.toFile().toString());
+      if(defaultConfigLocation.toString().startsWith("file://")){
+        configURL = new URL(defaultConfigLocation.toString());
+      }else {
+        configURL = new URL("file://" + defaultConfigLocation.toString());
+      }
+      
     }
 
     if (configURL.getProtocol().equals("file")) {

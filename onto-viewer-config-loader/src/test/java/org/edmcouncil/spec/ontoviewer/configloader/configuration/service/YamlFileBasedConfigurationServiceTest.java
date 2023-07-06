@@ -310,7 +310,7 @@ class YamlFileBasedConfigurationServiceTest {
 
     var appProperties = new AppProperties();
     appProperties.setConfigDownloadPath(configDir.toString());
-    appProperties.setDefaultHomePath(homeDir.toAbsolutePath().toString());
+    appProperties.setDefaultHomePath(homeDir.toString());
     return new FileSystemManager(appProperties);
   }
 
