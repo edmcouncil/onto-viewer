@@ -3,6 +3,7 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ class ModuleHandlerTest extends BaseTest {
   private static final MaturityLevel INFORMATIVE_ML = new MaturityLevel(INFORMATIVE, ANNOTATION_PREFIX + INFORMATIVE);
 
   @Test
-  void shouldReturnListOfModulesDefinedInOntologyWithoutMaturityLevel() {
+  void shouldReturnListOfModulesDefinedInOntologyWithoutMaturityLevel() throws IOException {
     var moduleHandler = prepareModuleHandler("/ontology/modules.rdf");
 
     var actualModules = moduleHandler.getModules();
@@ -69,7 +70,7 @@ class ModuleHandlerTest extends BaseTest {
   }
 
   @Test
-  void shouldReturnListOfModulesFromOntologyFiles() {
+  void shouldReturnListOfModulesFromOntologyFiles() throws IOException {
     var moduleHandler = prepareModuleHandler(
         "/ontology/modules/ModuleA.rdf",
         "/ontology/modules/ModuleA_1.rdf",
@@ -109,7 +110,7 @@ class ModuleHandlerTest extends BaseTest {
   }
 
   @Test
-  void shouldReturnListOfModulesWhenNotDefinedInOntology() {
+  void shouldReturnListOfModulesWhenNotDefinedInOntology() throws IOException {
     var moduleHandler = prepareModuleHandler("/ontology/MortgageLoansWithoutImports.rdf");
     var actualModules = moduleHandler.getModules();
     var expectedModules = List.of(
@@ -122,7 +123,7 @@ class ModuleHandlerTest extends BaseTest {
   }
 
   @Test
-  void shouldReturnEntityMaturityLevelForEntityWhenExplicitlyStated() {
+  void shouldReturnEntityMaturityLevelForEntityWhenExplicitlyStated() throws IOException {
     var moduleHandler = prepareModuleHandler("/ontology/maturity_level.rdf");
     IRI entityIri = IRI.create(ROOT_IRI + "ClassA");
 
@@ -132,7 +133,7 @@ class ModuleHandlerTest extends BaseTest {
   }
 
   @Test
-  void shouldReturnEntityMaturityLevelForEntityFromOntology() {
+  void shouldReturnEntityMaturityLevelForEntityFromOntology() throws IOException {
     var moduleHandler = prepareModuleHandler("/ontology/maturity_level.rdf");
     IRI entityIri = IRI.create(ROOT_IRI + "ClassB");
 
@@ -141,7 +142,7 @@ class ModuleHandlerTest extends BaseTest {
     assertEquals(INFORMATIVE_ML, actualMaturityLevel);
   }
 
-  private ModuleHandler prepareModuleHandler(String... ontologyPaths) {
+  private ModuleHandler prepareModuleHandler(String... ontologyPaths) throws IOException {
     var configurationService = new YamlFileBasedConfigurationService(prepareFileSystem());
     configurationService.init();
 

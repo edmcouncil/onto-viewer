@@ -40,7 +40,7 @@ class LuceneSearcherTest {
 
     var appProperties = new AppProperties();
     appProperties.setDefaultHomePath(tempHomePath.toString());
-    appProperties.setConfigPath("config");
+    appProperties.setConfigDownloadPath("config");
     appProperties.setSearch(Map.of("reindexOnStart", "true"));
 
     var fileSystemService = new FileSystemManager(appProperties);

@@ -17,16 +17,16 @@ public class AppProperties {
   private String defaultHomePath;
   private String viewerConfigFileName;
   private String defaultOntologyFileName;
-  private String configPath;
+  private String configDownloadPath;
   private Map<String, Object> search;
   private String fallbackUrl;
 
-  public String getConfigPath() {
-    return configPath;
+  public String getConfigDownloadPath() {
+    return configDownloadPath;
   }
 
-  public void setConfigPath(String configPath) {
-    this.configPath = configPath;
+  public void setConfigDownloadPath(String configPath) {
+    this.configDownloadPath = configPath;
   }
 
   public String getDefaultHomePath() {

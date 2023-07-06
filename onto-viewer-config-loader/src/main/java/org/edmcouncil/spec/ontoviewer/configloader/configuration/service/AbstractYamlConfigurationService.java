@@ -11,8 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+
 import org.apache.commons.io.IOUtils;
-import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.*;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.GroupsConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.Integration;
@@ -20,6 +21,12 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.LabelConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.SearchConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.FindProperty;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.LabelPriority;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.MissingLanguageAction;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Pair;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.UserDefaultName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -29,7 +36,8 @@ import org.yaml.snakeyaml.Yaml;
 
 public abstract class AbstractYamlConfigurationService implements ApplicationConfigurationService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractYamlConfigurationService.class);
+  private static final Logger LOGGER =
+      LoggerFactory.getLogger(AbstractYamlConfigurationService.class);
   private static final int FUZZY_DISTANCE_DEFAULT = 3;
   private static final boolean REINDEX_ON_START_DEFAULT = false;
   private static final boolean DISPLAY_LABEL_DEFAULT = true;
@@ -43,14 +51,12 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
   private static final boolean DISPLAY_QNAME_DEFAULT = true;
 
   @Override
-  public void init() {
+  public void init() throws IOException {
     // Default empty implementation
   }
 
   @Override
-  public void reloadConfiguration() {
-
-  }
+  public void reloadConfiguration() throws IOException {}
 
   protected ConfigurationData readDefaultConfiguration() {
     String defaultConfigContent = readDefaultConfigContent();
@@ -90,7 +96,8 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
           break;
         case ONTOLOGIES:
           @SuppressWarnings("unchecked")
-          var ontologiesConfig = handleOntologyConfig((Map<String, Object>) entry.getValue(), new OntologiesConfig());
+          var ontologiesConfig =
+              handleOntologyConfig((Map<String, Object>) entry.getValue(), new OntologiesConfig());
           configuration.setOntologiesConfig(ontologiesConfig);
           break;
         case INTEGRATIONS:
@@ -117,14 +124,36 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
         if (resource == null) {
           continue;
         }
-        sb.append(IOUtils.toString(resource.getInputStream(), StandardCharsets.UTF_8))
-            .append("\n");
+        sb.append(IOUtils.toString(resource.getInputStream(), StandardCharsets.UTF_8)).append("\n");
       }
     } catch (IOException ex) {
       throw new IllegalStateException("Exception thrown while reading default configuration", ex);
     }
 
     return sb.toString();
+  }
+
+  protected String readDefaultConfigContent(String fileName) {
+    StringBuilder sb = new StringBuilder();
+
+    try {
+      ResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
+      Resource[] resources = patternResolver.getResources("classpath*:/default_*_config.yaml");
+      String defaultConfigName = "default_" + fileName;
+      for (Resource resource : resources) {
+        if (resource == null) {
+          continue;
+        }
+        if (resource.getFilename().equalsIgnoreCase(defaultConfigName))
+          sb.append(IOUtils.toString(resource.getInputStream(), StandardCharsets.UTF_8))
+              .append("\n");
+        return sb.toString();
+      }
+    } catch (IOException ex) {
+      throw new IllegalStateException("Exception thrown while reading default configuration", ex);
+    }
+
+    return null;
   }
 
   protected GroupsConfig handleGroupsConfig(Map<String, Object> groupsConfig) {
@@ -154,12 +183,14 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     boolean displayLicense = getBooleanFromObject(displayLicenseObject, DISPLAY_LICENSE_DEFAULT);
 
     var displayCopyrightObject = applicationConfig.get(DISPLAY_COPYRIGHT.getLabel());
-    boolean displayCopyright = getBooleanFromObject(displayCopyrightObject, DISPLAY_COPYRIGHT_DEFAULT);
+    boolean displayCopyright =
+        getBooleanFromObject(displayCopyrightObject, DISPLAY_COPYRIGHT_DEFAULT);
 
     var displayQNameObject = applicationConfig.get(DISPLAY_QNAME.getLabel());
     boolean displayQName = getBooleanFromObject(displayQNameObject, DISPLAY_QNAME_DEFAULT);
 
-    return new ApplicationConfig(license, copyright, displayLicense, displayCopyright, displayQName);
+    return new ApplicationConfig(
+        license, copyright, displayLicense, displayCopyright, displayQName);
   }
 
   protected LabelConfig handleLabelConfig(Map<String, Object> labelConfig) {
@@ -167,12 +198,15 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     boolean displayLabel = getBooleanFromObject(displayLabelObject, DISPLAY_LABEL_DEFAULT);
 
     var labelPriorityObject = labelConfig.get(LABEL_PRIORITY.getLabel());
-    String labelPriorityString = labelPriorityObject != null ? labelPriorityObject.toString() : LABEL_PRIORITY_DEFAULT;
+    String labelPriorityString =
+        labelPriorityObject != null ? labelPriorityObject.toString() : LABEL_PRIORITY_DEFAULT;
     LabelPriority labelPriority = LabelPriority.USER_DEFINED;
     try {
       labelPriority = LabelPriority.valueOf(labelPriorityString);
     } catch (IllegalArgumentException ex) {
-      LOGGER.warn("'{}' string is not a valid value for label priority. Using the default value: USER_DEFINED",
+      LOGGER.warn(
+          "'{}' string is not a valid value for label priority. Using the default value:"
+              + " USER_DEFINED",
           labelPriorityString);
     }
 
@@ -184,12 +218,16 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
 
     var missingLanguageActionObject = labelConfig.get(MISSING_LANGUAGE_ACTION.getLabel());
     String missingLanguageActionString =
-        missingLanguageActionObject != null ? missingLanguageActionObject.toString() : MISSING_LANGUAGE_ACTION_DEFAULT;
+        missingLanguageActionObject != null
+            ? missingLanguageActionObject.toString()
+            : MISSING_LANGUAGE_ACTION_DEFAULT;
     MissingLanguageAction missingLanguageAction = MissingLanguageAction.FIRST;
     try {
       missingLanguageAction = MissingLanguageAction.valueOf(missingLanguageActionString);
     } catch (IllegalArgumentException ex) {
-      LOGGER.warn("'{}' string is not a valid value for missing language action. Using the default value: FIRST",
+      LOGGER.warn(
+          "'{}' string is not a valid value for missing language action. Using the default value:"
+              + " FIRST",
           missingLanguageActionString);
     }
 
@@ -221,7 +259,8 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
     return new SearchConfig(searchDescriptions, fuzzyDistance, reindexOnStart, findProperties);
   }
 
-  protected OntologiesConfig handleOntologyConfig(Map<String, Object> ontologies, OntologiesConfig ontologiesConfig) {
+  protected OntologiesConfig handleOntologyConfig(
+      Map<String, Object> ontologies, OntologiesConfig ontologiesConfig) {
     List<String> urls = new ArrayList<>();
     List<String> paths = new ArrayList<>();
     List<String> zips = new ArrayList<>();
@@ -240,34 +279,52 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
           } else if (sourceEntryKey.equals(ConfigurationKey.ZIP.getLabel())) {
             zips.add(sourceEntry.getValue());
           } else {
-            LOGGER.warn("Unknown key '{}' with value '{}' in the ontologies source configuration.",
-                sourceEntry.getKey(), sourceEntry.getValue());
+            LOGGER.warn(
+                "Unknown key '{}' with value '{}' in the ontologies source configuration.",
+                sourceEntry.getKey(),
+                sourceEntry.getValue());
           }
         }
       }
     }
 
     List<String> catalogPaths = getListOfStringsFromObject(ontologies.get(CATALOG_PATH.getLabel()));
-    List<String> moduleIgnorePatterns = getListOfStringsFromObject(ontologies.get(MODULE_IGNORE_PATTERN.getLabel()));
-    List<String> moduleToIgnore = getListOfStringsFromObject(ontologies.get(MODULE_TO_IGNORE.getLabel()));
+    List<String> moduleIgnorePatterns =
+        getListOfStringsFromObject(ontologies.get(MODULE_IGNORE_PATTERN.getLabel()));
+    List<String> moduleToIgnore =
+        getListOfStringsFromObject(ontologies.get(MODULE_TO_IGNORE.getLabel()));
     boolean automaticCreationOfModules =
-        getBooleanFromObject(ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()),
+        getBooleanFromObject(
+            ontologies.get(AUTOMATIC_CREATION_OF_MODULES.getLabel()),
             AUTOMATIC_CREATION_OF_MODULES_DEFULT);
-    List<String> downloadDirectory = getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
-    String moduleClassIri = getStringsFromObject(
-        ontologies.get(MODULE_CLASS_IRI.getLabel()),
-        ontologiesConfig.getModuleClassIri());
-    List<Pair> maturityLevelDefinition = getMaturityLevelDefinitionNameList(
-        ontologies.get(MATURITY_LEVEL_DEFINITION.getLabel()));
-    String maturityLevelProperty = getStringsFromObject(
-        ontologies.get(MATURITY_LEVEL_PROPERTY.getLabel()),
-        ontologiesConfig.getMaturityLevelProperty());
+    List<String> downloadDirectory =
+        getListOfStringsFromObject(ontologies.get(DOWNLOAD_DIRECTORY.getLabel()));
+    String moduleClassIri =
+        getStringsFromObject(
+            ontologies.get(MODULE_CLASS_IRI.getLabel()), ontologiesConfig.getModuleClassIri());
+    List<Pair> maturityLevelDefinition =
+        getMaturityLevelDefinitionNameList(ontologies.get(MATURITY_LEVEL_DEFINITION.getLabel()));
+    String maturityLevelProperty =
+        getStringsFromObject(
+            ontologies.get(MATURITY_LEVEL_PROPERTY.getLabel()),
+            ontologiesConfig.getMaturityLevelProperty());
 
-    return new OntologiesConfig(urls, paths, catalogPaths, downloadDirectory, zips, moduleIgnorePatterns,
-        moduleToIgnore, maturityLevelDefinition, automaticCreationOfModules, moduleClassIri, maturityLevelProperty);
+    return new OntologiesConfig(
+        urls,
+        paths,
+        catalogPaths,
+        downloadDirectory,
+        zips,
+        moduleIgnorePatterns,
+        moduleToIgnore,
+        maturityLevelDefinition,
+        automaticCreationOfModules,
+        moduleClassIri,
+        maturityLevelProperty);
   }
 
-  protected IntegrationsConfig handleIntegrationsConfig(List<Map<String, Object>> integrationsList) {
+  protected IntegrationsConfig handleIntegrationsConfig(
+      List<Map<String, Object>> integrationsList) {
     Map<String, Integration> integrations = new HashMap<>();
     if (integrationsList == null) {
       return new IntegrationsConfig(integrations);
@@ -279,9 +336,11 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
       var integrationAccessToken = integrationMap.get(INTEGRATION_ACCESS_TOKEN.getLabel());
 
       if (integrationId == null || integrationUrl == null) {
-        LOGGER.error("Missing data while reading integrations config: "
-            + "integrationId={}, integrationUrl={}",
-            integrationId, integrationUrl);
+        LOGGER.error(
+            "Missing data while reading integrations config: "
+                + "integrationId={}, integrationUrl={}",
+            integrationId,
+            integrationUrl);
         continue;
       }
 
@@ -289,10 +348,11 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
         integrationAccessToken = "";
       }
 
-      var integration = new Integration(
-          integrationId.toString(),
-          integrationUrl.toString(),
-          integrationAccessToken.toString());
+      var integration =
+          new Integration(
+              integrationId.toString(),
+              integrationUrl.toString(),
+              integrationAccessToken.toString());
       integrations.put(integrationId.toString(), integration);
     }
 
@@ -329,14 +389,15 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
         var groupItems = groupItem.getOrDefault(ITEMS.getLabel(), new ArrayList<>());
         if (groupItems instanceof List) {
           var rawGroupItemsList = (List<?>) groupItems;
-          var groupItemsList = rawGroupItemsList.stream()
-              .map(Object::toString)
-              .collect(Collectors.toList());
+          var groupItemsList =
+              rawGroupItemsList.stream().map(Object::toString).collect(Collectors.toList());
           groupsMap.put(groupName.toString(), groupItemsList);
         }
       } else {
-        LOGGER.warn("For a group list item the expected key '{}' was not present. Item details: {}",
-            NAME.getLabel(), groupItem);
+        LOGGER.warn(
+            "For a group list item the expected key '{}' was not present. Item details: {}",
+            NAME.getLabel(),
+            groupItem);
       }
     }
 

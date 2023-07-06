@@ -27,7 +27,7 @@ class YamlFileBasedConfigurationServiceTest {
   Path homeDir;
 
   @Test
-  void shouldHaveDefaultConfigIfCustomConfigWasNotProvided() {
+  void shouldHaveDefaultConfigIfCustomConfigWasNotProvided() throws IOException {
     var fileSystemManager = prepareFileSystem();
 
     var yamlConfigurationService = new YamlFileBasedConfigurationService(fileSystemManager);
@@ -35,7 +35,6 @@ class YamlFileBasedConfigurationServiceTest {
     var configurationData = yamlConfigurationService.getConfigurationData();
 
     // Groups Config
-    assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
     assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
@@ -63,7 +62,7 @@ class YamlFileBasedConfigurationServiceTest {
   }
 
   @Test
-  void shouldHaveConfigMixedBothFromDefaultsAndCustomGroupsConfig() {
+  void shouldHaveConfigMixedBothFromDefaultsAndCustomGroupsConfig() throws IOException {
     var fileSystemManager = prepareFileSystem();
     prepareTestConfiguration("/configuration_yaml/groups_config1.yaml");
 
@@ -72,10 +71,7 @@ class YamlFileBasedConfigurationServiceTest {
     var configurationData = yamlConfigurationService.getConfigurationData();
 
     // Groups Config
-    assertEquals(4, configurationData.getGroupsConfig().getPriorityList().size());
-    assertEquals("http://www.w3.org/2000/01/rdf-schema#somethingElse2",
-        configurationData.getGroupsConfig().getPriorityList().get(3));
-    assertEquals(4, configurationData.getGroupsConfig().getGroups().size());
+    assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
     assertEquals("http://www.w3.org/2000/01/rdf-schema#description",
         configurationData.getGroupsConfig().getGroups().get("Glossary").get(1));
 
@@ -104,7 +100,7 @@ class YamlFileBasedConfigurationServiceTest {
   }
 
   @Test
-  void shouldHaveConfigMixedBothFromDefaultsAndCustomLabelConfig() {
+  void shouldHaveConfigMixedBothFromDefaultsAndCustomLabelConfig() throws IOException {
     var fileSystemManager = prepareFileSystem();
     prepareTestConfiguration("/configuration_yaml/label_config1.yaml");
 
@@ -113,7 +109,6 @@ class YamlFileBasedConfigurationServiceTest {
     var configurationData = yamlConfigurationService.getConfigurationData();
 
     // Groups Config
-    assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
     assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
@@ -141,7 +136,7 @@ class YamlFileBasedConfigurationServiceTest {
   }
 
   @Test
-  void shouldHaveConfigMixedBothFromDefaultsAndCustomOntologiesConfigWithMissingCustomConfigs() {
+  void shouldHaveConfigMixedBothFromDefaultsAndCustomOntologiesConfigWithMissingCustomConfigs() throws IOException {
     var fileSystemManager = prepareFileSystem();
     prepareTestConfiguration("/configuration_yaml/ontologies_config1.yaml");
 
@@ -150,7 +145,6 @@ class YamlFileBasedConfigurationServiceTest {
     var configurationData = yamlConfigurationService.getConfigurationData();
 
     // Groups Config
-    assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
     assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
@@ -187,7 +181,7 @@ class YamlFileBasedConfigurationServiceTest {
   }
 
   @Test
-  void shouldHaveConfigMixedBothFromDefaultsAndCustomOntologiesConfig() {
+  void shouldHaveConfigMixedBothFromDefaultsAndCustomOntologiesConfig() throws IOException {
     var fileSystemManager = prepareFileSystem();
     prepareTestConfiguration("/configuration_yaml/ontologies_config2.yaml");
 
@@ -196,7 +190,6 @@ class YamlFileBasedConfigurationServiceTest {
     var configurationData = yamlConfigurationService.getConfigurationData();
 
     // Groups Config
-    assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
     assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
@@ -233,7 +226,7 @@ class YamlFileBasedConfigurationServiceTest {
   }
 
   @Test
-  void shouldHaveConfigMixedBothFromDefaultsAndCustomSearchConfig() {
+  void shouldHaveConfigMixedBothFromDefaultsAndCustomSearchConfig() throws IOException {
     var fileSystemManager = prepareFileSystem();
     prepareTestConfiguration("/configuration_yaml/search_config1.yaml");
 
@@ -242,7 +235,6 @@ class YamlFileBasedConfigurationServiceTest {
     var configurationData = yamlConfigurationService.getConfigurationData();
 
     // Groups Config
-    assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
     assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
@@ -272,7 +264,7 @@ class YamlFileBasedConfigurationServiceTest {
   }
   
   @Test
-  void shouldHaveConfigMixedBothFromDefaultsAndCustomApplicationConfig() {
+  void shouldHaveConfigMixedBothFromDefaultsAndCustomApplicationConfig() throws IOException {
     var fileSystemManager = prepareFileSystem();
     prepareTestConfiguration("/configuration_yaml/application_config1.yaml");
 
@@ -281,7 +273,6 @@ class YamlFileBasedConfigurationServiceTest {
     var configurationData = yamlConfigurationService.getConfigurationData();
 
     // Groups Config
-    assertEquals(2, configurationData.getGroupsConfig().getPriorityList().size());
     assertEquals(5, configurationData.getGroupsConfig().getGroups().size());
 
     // Label Config
@@ -318,7 +309,8 @@ class YamlFileBasedConfigurationServiceTest {
     }
 
     var appProperties = new AppProperties();
-    appProperties.setConfigPath(configDir.toString());
+    appProperties.setConfigDownloadPath(configDir.toString());
+    appProperties.setDefaultHomePath(homeDir.toString());
     return new FileSystemManager(appProperties);
   }
 

@@ -4,6 +4,7 @@ import static org.awaitility.Awaitility.await;
 
 import java.util.concurrent.TimeUnit;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.OntologiesConfig;
+import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.YamlMemoryBasedConfigurationService;
 import org.edmcouncil.spec.ontoviewer.webapp.boot.UpdateBlocker;
