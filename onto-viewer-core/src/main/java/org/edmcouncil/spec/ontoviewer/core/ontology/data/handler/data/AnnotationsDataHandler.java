@@ -148,7 +148,7 @@ public class AnnotationsDataHandler {
     return annotationValue;
   }
 
-  private <T extends HasAnnotationValue> PropertyValue getAnnotationPropertyValue(
+  public  <T extends HasAnnotationValue> PropertyValue getAnnotationPropertyValue(
       T annotationAssertion,
       String value, PropertyValue annotationPropertyValue) {
     if (annotationAssertion.annotationValue().isIRI()) {

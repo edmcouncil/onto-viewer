@@ -7,14 +7,19 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValueWithSubAnnotations;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.OwlDataExtractor;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.StringIdentifier;
+import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.visitor.ContainsVisitors;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -28,13 +33,17 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AxiomsHandler {
-
+private static  final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
   private final AxiomsHelper axiomsHelper;
   private final ContainsVisitors containsVisitors;
+  private OwlDataExtractor dataExtractor;
+  private AnnotationsDataHandler annotationsDataHandler;
 
   public AxiomsHandler(AxiomsHelper axiomsHelper, ContainsVisitors containsVisitors) {
     this.axiomsHelper = axiomsHelper;
@@ -100,6 +109,19 @@ public class AxiomsHandler {
           key = "gci";
         }
       }
+
+      var annotationsAxiom = axiom.annotations().collect(Collectors.toList());
+      if (annotationsAxiom.size() > 0) {
+
+//        for (OWLAnnotationAssertionAxiom annotationAssertion : annotationAssertions) {
+//        String value = annotationAssertion.annotationValue().toString();
+//        PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValueWithSubAnnotations();
+//        annotationPropertyValue.setType(dataExtractor.extractAnnotationType(annotationAssertion));
+//        annotationPropertyValue = annotationsDataHandler.getAnnotationPropertyValue(annotationAssertion, value,
+//            annotationPropertyValue);
+//      }
+      LOG.info("anotated: {}", axiom.annotations().collect(Collectors.toList()));
+
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
       OwlAxiomPropertyValue axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
@@ -113,6 +135,7 @@ public class AxiomsHandler {
       }
     }
     result.sortPropertiesInAlphabeticalOrder();
-    return result;
   }
+    return result;
+}
 }
