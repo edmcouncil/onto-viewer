@@ -102,7 +102,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       if(defaultConfigLocation.toString().startsWith("file://")){
         configURL = new URL(defaultConfigLocation.toString());
       }else {
-        configURL = new URL("file://" + defaultConfigLocation.toString());
+        configURL = new URL("file:/" + defaultConfigLocation.toString());
       }
       
     }
@@ -118,7 +118,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   private void loadConfigFromFiles(ConfigChecklist configChecklist, String configURL) {
     try {
       String configURLString = configURL.toString().replace("file://", "");
-      Path configPath = fileSystemService.getPathToFile(configURLString);
+      Path configPath = fileSystemService.getPathToFile("config");
       if (Files.notExists(configPath)) {
         configChecklist.setDefaultConfigPathIsSet(false);
 
