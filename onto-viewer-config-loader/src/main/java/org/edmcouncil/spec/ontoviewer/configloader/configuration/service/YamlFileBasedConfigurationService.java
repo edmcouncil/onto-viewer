@@ -102,7 +102,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       if(defaultConfigLocation.toString().startsWith("file://")){
         configURL = new URL(defaultConfigLocation.toString());
       }else {
-        configURL = new URL("file:/" + defaultConfigLocation.toString());
+        configURL = new URL("file://" + defaultConfigLocation.toString());
       }
       
     }
