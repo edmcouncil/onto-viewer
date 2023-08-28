@@ -140,6 +140,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       String configURLString = configURL.toString().replace(FILE_PROTOCOL, "");
       Path configPath = fileSystemService.getPathToFile(configURLString);
       if (Files.notExists(configPath)) {
+        configChecklist.setDefaultConfigPathIsSet(false);
         if (configChecklist.isConfigPathIsSet()) {
           throw new UnableToLoadConfigurationException(
                   "The configuration folder specified by the user does not exist");
@@ -468,10 +469,17 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
     private boolean configPathIsSet = true;
 
+    private boolean defaultConfigPathIsSet = true;
+
     private boolean remotePathIsSet = false;
 
     public void setConfigPathIsSet(boolean b) {
       this.configPathIsSet = b;
+    }
+
+
+    public void setDefaultConfigPathIsSet(boolean b) {
+      this.defaultConfigPathIsSet = b;
     }
     
     public void setRemotePathIsSet(boolean b) {
@@ -480,6 +488,10 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
     public boolean isConfigPathIsSet() {
       return configPathIsSet;
+    }
+
+    public boolean isDefaultConfigPathIsSet() {
+      return defaultConfigPathIsSet;
     }
 
     public boolean isRemotePathIsSet() {
