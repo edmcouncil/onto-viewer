@@ -61,7 +61,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   private static final String TEST_FILE_NAME = "test_config.yaml";
 
-  private static final String FILE_PROTOCOL = "file://";
+  private static final String FILE_PREFIX = "file:/";
   private static final String HTTP_PROTOCOL = "http";
   private static final String HTTPS_PROTOCOL = "https";
 
@@ -125,7 +125,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     var defaultConfigLocation = fileSystemService.getPathToDefaultConfigDirectory();
     LOGGER.warn("Config URL is not set. Using default value: `{}`", defaultConfigLocation);
     configChecklist.setConfigPathIsSet(false);
-    return new URL(FILE_PROTOCOL + defaultConfigLocation);
+    return new URL(FILE_PREFIX + defaultConfigLocation);
   }
 
   private void checkUrlProtocol(URL configURL, ConfigChecklist configChecklist) {
@@ -137,7 +137,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   private void loadConfigFromFiles(ConfigChecklist configChecklist, URL configURL) {
     try {
-      String configURLString = configURL.toString().replace(FILE_PROTOCOL, "");
+      String configURLString = configURL.toString().replace(FILE_PREFIX, "");
       Path configPath = fileSystemService.getPathToFile(configURLString);
       if (Files.notExists(configPath)) {
         configChecklist.setDefaultConfigPathIsSet(false);
