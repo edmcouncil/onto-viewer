@@ -32,6 +32,7 @@ import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Configura
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationKey;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.exception.UnableToLoadConfigurationException;
 import org.edmcouncil.spec.ontoviewer.configloader.utils.files.FileSystemService;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,20 +46,24 @@ import okhttp3.Response;
 public class YamlFileBasedConfigurationService extends AbstractYamlConfigurationService {
 
   private static final Logger LOGGER =
-      LoggerFactory.getLogger(YamlFileBasedConfigurationService.class);
+          LoggerFactory.getLogger(YamlFileBasedConfigurationService.class);
   private static final String ACCEPT_HEADER = "Accept";
   private static final String YAML_MIME_TYPE = "application/yaml";
   private static final Set<String> SUPPORTED_EXTENSIONS = Set.of("yaml", "yml");
   private static final Set<String> CONFIG_FILES_NAMES =
-      Set.of(
-          "groups_config.yaml",
-          "label_config.yaml",
-          "ontology_config.yaml",
-          "search_config.yaml",
-          "application_config.yaml",
-          "integration_config.yaml");
+          Set.of(
+                  "groups_config.yaml",
+                  "label_config.yaml",
+                  "ontology_config.yaml",
+                  "search_config.yaml",
+                  "application_config.yaml",
+                  "integration_config.yaml");
 
   private static final String TEST_FILE_NAME = "test_config.yaml";
+
+  private static final String FILE_PREFIX = "file:/";
+  private static final String HTTP_PROTOCOL = "http";
+  private static final String HTTPS_PROTOCOL = "https";
 
   private final OkHttpClient httpClient = new OkHttpClient();
   private final FileSystemService fileSystemService;
@@ -89,44 +94,57 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   @Override
   public void reloadConfiguration() throws IOException {
+
     LOGGER.debug("Start loading configuration...");
     ConfigChecklist configChecklist = new ConfigChecklist();
-    URL configURL = null;
-    if (StringUtils.hasText(updateUrl)) {
-      configURL = new URL(updateUrl);
-    } else {
-      var defaultConfigLocation = fileSystemService.getPathToDefaultConfigDirectory();
-      LOGGER.warn(
-          "Config URL is not set. Using default value: `{}`", defaultConfigLocation.toString());
-      configChecklist.setConfigPathIsSet(false);
-      if(defaultConfigLocation.toString().startsWith("file://")){
-        configURL = new URL(defaultConfigLocation.toString());
-      }else {
-        configURL = new URL("file://" + defaultConfigLocation.toString());
-      }
-      
-    }
+    URL configURL = getConfigURL(configChecklist);
 
-    if (configURL.getProtocol().equals("file")) {
-      loadConfigFromFiles(configChecklist, configURL.toString());
-    } else {
+    checkUrlProtocol(configURL, configChecklist);
+
+    if (configChecklist.isRemotePathIsSet()) {
       loadRemoteConfig();
+    } else {
+      loadConfigFromFiles(configChecklist, configURL);
     }
     LOGGER.debug("End loading configuration.");
   }
 
-  private void loadConfigFromFiles(ConfigChecklist configChecklist, String configURL) {
+  @NotNull
+  private URL getConfigURL(ConfigChecklist configChecklist) throws IOException {
+    URL configURL;
+    if (StringUtils.hasText(updateUrl)) {
+      configURL = new URL(updateUrl);
+    } else {
+      configURL = getDefaultConfig(configChecklist);
+    }
+    return configURL;
+  }
+
+  @NotNull
+  private URL getDefaultConfig(ConfigChecklist configChecklist) throws IOException {
+    var defaultConfigLocation = fileSystemService.getPathToDefaultConfigDirectory();
+    LOGGER.warn("Config URL is not set. Using default value: `{}`", defaultConfigLocation);
+    configChecklist.setConfigPathIsSet(false);
+    return new URL(FILE_PREFIX + defaultConfigLocation);
+  }
+
+  private void checkUrlProtocol(URL configURL, ConfigChecklist configChecklist) {
+    if ( (configURL.getProtocol().startsWith(HTTP_PROTOCOL)
+            || configURL.getProtocol().startsWith(HTTPS_PROTOCOL))) {
+      configChecklist.setRemotePathIsSet(true);
+    }
+  }
+
+  private void loadConfigFromFiles(ConfigChecklist configChecklist, URL configURL) {
     try {
-      String configURLString = configURL.toString().replace("file://", "");
-      Path configPath = fileSystemService.getPathToFile("config");
+      String configURLString = configURL.toString().replace(FILE_PREFIX, "");
+      Path configPath = fileSystemService.getPathToFile(configURLString);
       if (Files.notExists(configPath)) {
         configChecklist.setDefaultConfigPathIsSet(false);
-
         if (configChecklist.isConfigPathIsSet()) {
           throw new UnableToLoadConfigurationException(
-              "The configuration folder specified by the user does not exist");
+                  "The configuration folder specified by the user does not exist");
         }
-
         LOGGER.warn("Config directory not exists: `{}`. Load default config files.", configPath);
         this.configurationData = readDefaultConfiguration();
         return;
@@ -146,18 +164,14 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     }
   }
 
-  private String loadConfigFromLocalFilesOrDefaultConfigIfNotExist(Path configPath)
-      throws IOException {
+  private String loadConfigFromLocalFilesOrDefaultConfigIfNotExist(Path configPath) throws IOException {
     StringBuilder sb = new StringBuilder();
     if (Files.isDirectory(configPath)) {
-      try (Stream<Path> configFilePathsStream =
-          Files.walk(configPath, FileVisitOption.FOLLOW_LINKS)) {
+      try (Stream<Path> configFilePathsStream = Files.walk(configPath, FileVisitOption.FOLLOW_LINKS)) {
         Set<Path> configFilePaths = configFilePathsStream.collect(Collectors.toSet());
-
         Set<String> notExistingFiles = getNotExistingAndEmptyFiles(configFilePaths);
         if (!notExistingFiles.isEmpty()) {
-          LOGGER.warn(
-              "Missing config file(s): `{}`. Reading for them default files.", notExistingFiles);
+          LOGGER.warn("Missing config file(s): `{}`. Reading for them default files.", notExistingFiles);
           for (var file : notExistingFiles) {
             var fileContent = readDefaultConfigContent(file);
             if (StringUtils.hasText(fileContent)) {
@@ -171,14 +185,14 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
         for (Path configFilePath : configFilePaths) {
           if (configFilePath.toString().contains(".")) {
             if (Files.isRegularFile(configFilePath)
-                && SUPPORTED_EXTENSIONS.contains(getExtension(configFilePath.toString()))) {
+                    && SUPPORTED_EXTENSIONS.contains(getExtension(configFilePath.toString()))) {
               String configContent = Files.readString(configFilePath);
               sb.append(configContent).append("\n");
             } else {
               LOGGER.warn(
-                  "Config path '{}' is not a regular file or doesn't end with '{}'.",
-                  configFilePath,
-                  SUPPORTED_EXTENSIONS);
+                      "Config path '{}' is not a regular file or doesn't end with '{}'.",
+                      configFilePath,
+                      SUPPORTED_EXTENSIONS);
             }
           } else {
             if (!Files.isDirectory(configFilePath))
@@ -200,7 +214,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   @Override
   public boolean hasConfiguredGroups() {
     return configurationData.getGroupsConfig().getGroups() != null
-        && !configurationData.getGroupsConfig().getGroups().isEmpty();
+            && !configurationData.getGroupsConfig().getGroups().isEmpty();
   }
 
   private void loadRemoteConfig() {
@@ -227,16 +241,16 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
     if (notExistingRemoteConfigFiles.size() == configFileToUrl.size()) {
       String msg =
-          String.format(
-              "The remote configuration specified by the user does not contains any config files:"
-                  + " %s",
-              notExistingRemoteConfigFiles.toString());
+              String.format(
+                      "The remote configuration specified by the user does not contains any config files:"
+                              + " %s",
+                      notExistingRemoteConfigFiles.toString());
       LOGGER.error(msg);
       throw new IllegalStateException(msg);
     } else if (notExistingRemoteConfigFiles.size() > 0) {
       LOGGER.warn(
-          "Missing remote config file(s): `{}`. Reading default file.",
-          notExistingRemoteConfigFiles.toString());
+              "Missing remote config file(s): `{}`. Reading default file.",
+              notExistingRemoteConfigFiles);
       for (Entry<String, String> entry : notExistingRemoteConfigFiles.entrySet()) {
         var fileContent = readDefaultConfigContent(entry.getKey());
         if (StringUtils.hasText(fileContent)) {
@@ -263,35 +277,35 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       yaml.load(configContent + "\n\nfoo: bar");
     } catch (RuntimeException ex) {
       LOGGER.warn(
-          "YAML config file '{}' from URL '{}' isn't correct. Ignoring it. YAML reading exception:"
-              + " {}",
-          configEntry.getKey(),
-          configEntry.getValue(),
-          ex.getMessage());
+              "YAML config file '{}' from URL '{}' isn't correct. Ignoring it. YAML reading exception:"
+                      + " {}",
+              configEntry.getKey(),
+              configEntry.getValue(),
+              ex.getMessage());
       configContent = "";
     }
-    if (configContent != null && !configContent.isEmpty())
+    if (!configContent.isEmpty()) // configContent != null && !configContent.isEmpty()
       overrideConfigContent(configEntry.getKey(), configContent);
     return configContent;
   }
 
   private String downloadYamlFileContent(String url) {
     Request request =
-        new Request.Builder()
-        .url(url)
-        .get()
-        .addHeader(ACCEPT_HEADER, YAML_MIME_TYPE)
-        .build();
+            new Request.Builder()
+                    .url(url)
+                    .get()
+                    .addHeader(ACCEPT_HEADER, YAML_MIME_TYPE)
+                    .build();
 
     try (Response response = httpClient.newCall(request).execute()) {
       var responseCode = response.code();
       var responseBody = response.body().string();
       if (!response.isSuccessful()) {
         LOGGER.warn(
-            "Request downloading configuration file from URL '{}' wasn't successful. "
-                + "The response ended with code {}",
-            url,
-            responseCode);
+                "Request downloading configuration file from URL '{}' wasn't successful. "
+                        + "The response ended with code {}",
+                url,
+                responseCode);
 
         return "";
       }
@@ -299,10 +313,10 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       return responseBody;
     } catch (Exception ex) {
       LOGGER.warn(
-          "Exception occurred while handling configuration request from URL '{}' data.world"
-              + " describe query: {}",
-          url,
-          ex.getMessage());
+              "Exception occurred while handling configuration request from URL '{}' data.world"
+                      + " describe query: {}",
+              url,
+              ex.getMessage());
     }
 
     return "";
@@ -317,15 +331,15 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       var configPath = fileSystemService.getPathToConfigDownloadDirectory();
       var configFilePath = configPath.resolve(configFileName);
       Files.write(
-          configFilePath,
-          configContent.getBytes(StandardCharsets.UTF_8),
-          StandardOpenOption.CREATE,
-          StandardOpenOption.WRITE,
-          StandardOpenOption.TRUNCATE_EXISTING);
+              configFilePath,
+              configContent.getBytes(StandardCharsets.UTF_8),
+              StandardOpenOption.CREATE,
+              StandardOpenOption.WRITE,
+              StandardOpenOption.TRUNCATE_EXISTING);
     } catch (IOException ex) {
       LOGGER.warn(
-          "Exception thrown while overriding configuration file '{}' with a new content.",
-          configFileName);
+              "Exception thrown while overriding configuration file '{}' with a new content.",
+              configFileName);
       LOGGER.warn(ex.toString());
     }
   }
@@ -347,49 +361,49 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
           switch (configKey) {
             case GROUPS_CONFIG:
-              {
-                GroupsConfig groupsConfig = handleGroupsConfig(configMap);
-                configurationDataCandidate.setGroupsConfig(groupsConfig);
-                break;
-              }
+            {
+              GroupsConfig groupsConfig = handleGroupsConfig(configMap);
+              configurationDataCandidate.setGroupsConfig(groupsConfig);
+              break;
+            }
             case LABEL_CONFIG:
-              {
-                LabelConfig labelConfig = handleLabelConfig(configMap);
-                configurationDataCandidate.setLabelConfig(labelConfig);
-                break;
-              }
+            {
+              LabelConfig labelConfig = handleLabelConfig(configMap);
+              configurationDataCandidate.setLabelConfig(labelConfig);
+              break;
+            }
             case SEARCH_CONFIG:
-              {
-                SearchConfig searchConfig = handleSearchConfig(configMap);
-                configurationDataCandidate.setSearchConfig(searchConfig);
-                break;
-              }
+            {
+              SearchConfig searchConfig = handleSearchConfig(configMap);
+              configurationDataCandidate.setSearchConfig(searchConfig);
+              break;
+            }
             case APPLICATION_CONFIG:
-              {
-                ApplicationConfig applicationConfig = handleApplicationConfig(configMap);
-                configurationDataCandidate.setApplicationConfig(applicationConfig);
-                break;
-              }
+            {
+              ApplicationConfig applicationConfig = handleApplicationConfig(configMap);
+              configurationDataCandidate.setApplicationConfig(applicationConfig);
+              break;
+            }
             case ONTOLOGIES:
-              {
-                OntologiesConfig ontologiesConfig =
-                    handleOntologyConfig(
-                        configMap, configurationDataCandidate.getOntologiesConfig());
-                configurationDataCandidate.setOntologiesConfig(ontologiesConfig);
+            {
+              OntologiesConfig ontologiesConfig =
+                      handleOntologyConfig(
+                              configMap, configurationDataCandidate.getOntologiesConfig());
+              configurationDataCandidate.setOntologiesConfig(ontologiesConfig);
 
-                if (catalogPath != null && !catalogPath.isBlank()) {
-                  ontologiesConfig.getCatalogPaths().clear();
-                  ontologiesConfig.getCatalogPaths().add(catalogPath);
-                }
-                if (downloadDirectory != null && !downloadDirectory.isBlank()) {
-                  ontologiesConfig.getDownloadDirectory().clear();
-                  ontologiesConfig.getDownloadDirectory().add(downloadDirectory);
-                }
-                if (zipUrl != null && zipUrl.length > 0) {
-                  ontologiesConfig.getZipUrls().addAll(Arrays.asList(zipUrl));
-                }
-                break;
+              if (catalogPath != null && !catalogPath.isBlank()) {
+                ontologiesConfig.getCatalogPaths().clear();
+                ontologiesConfig.getCatalogPaths().add(catalogPath);
               }
+              if (downloadDirectory != null && !downloadDirectory.isBlank()) {
+                ontologiesConfig.getDownloadDirectory().clear();
+                ontologiesConfig.getDownloadDirectory().add(downloadDirectory);
+              }
+              if (zipUrl != null && zipUrl.length > 0) {
+                ontologiesConfig.getZipUrls().addAll(Arrays.asList(zipUrl));
+              }
+              break;
+            }
             default:
               LOGGER.warn("Config key '{}' is not expected.", configKey);
           }
@@ -409,9 +423,9 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       }
       OntologiesConfig ontologiesConfig = configurationDataCandidate.getOntologiesConfig();
       if (!ontologiesConfig.getZipUrls().isEmpty()
-          && !ontologiesConfig.getDownloadDirectory().isEmpty()) {
+              && !ontologiesConfig.getDownloadDirectory().isEmpty()) {
         String downloadDirectory =
-            ontologiesConfig.getDownloadDirectory().stream().findFirst().orElse("");
+                ontologiesConfig.getDownloadDirectory().stream().findFirst().orElse("");
         for (String fileUrl : ontologiesConfig.getZipUrls()) {
           String[] zip = fileUrl.split("#");
           if ((zip.length > 1) && (zip[1].length() > 0)) {
@@ -427,7 +441,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
   }
 
   private static Set<String> getNotExistingAndEmptyFiles(Set<Path> configFilePaths)
-      throws IOException {
+          throws IOException {
     Map<String, Boolean> validFiles = new HashMap<>();
 
     for (String configFilesName : CONFIG_FILES_NAMES) {
@@ -446,22 +460,30 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       }
     }
     return validFiles.entrySet().stream()
-        .filter(f -> !f.getValue())
-        .map(e -> e.getKey())
-        .collect(Collectors.toSet());
+            .filter(f -> !f.getValue())
+            .map(Entry::getKey)
+            .collect(Collectors.toSet());
   }
 
   class ConfigChecklist {
 
     private boolean configPathIsSet = true;
+
     private boolean defaultConfigPathIsSet = true;
+
+    private boolean remotePathIsSet = false;
 
     public void setConfigPathIsSet(boolean b) {
       this.configPathIsSet = b;
     }
 
+
     public void setDefaultConfigPathIsSet(boolean b) {
       this.defaultConfigPathIsSet = b;
+    }
+    
+    public void setRemotePathIsSet(boolean b) {
+      this.remotePathIsSet = b;
     }
 
     public boolean isConfigPathIsSet() {
@@ -470,6 +492,10 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
     public boolean isDefaultConfigPathIsSet() {
       return defaultConfigPathIsSet;
+    }
+
+    public boolean isRemotePathIsSet() {
+      return remotePathIsSet;
     }
   }
 }
