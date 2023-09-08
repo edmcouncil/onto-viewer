@@ -422,10 +422,9 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
         }
       }
       OntologiesConfig ontologiesConfig = configurationDataCandidate.getOntologiesConfig();
-      if (!ontologiesConfig.getZipUrls().isEmpty()
-              && !ontologiesConfig.getDownloadDirectory().isEmpty()) {
+      if (!ontologiesConfig.getZipUrls().isEmpty()) {
         String downloadDirectory =
-                ontologiesConfig.getDownloadDirectory().stream().findFirst().orElse("");
+                ontologiesConfig.getDownloadDirectory().stream().findFirst().orElseGet(() -> { LOGGER.warn("use default 'download' directory"); return "download"; });
         for (String fileUrl : ontologiesConfig.getZipUrls()) {
           String[] zip = fileUrl.split("#");
           if ((zip.length > 1) && (zip[1].length() > 0)) {
