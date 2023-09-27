@@ -63,7 +63,6 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
 
     var yaml = new Yaml();
     Map<String, Object> defaultConfiguration = yaml.load(defaultConfigContent);
-
     var configuration = new ConfigurationData();
 
     for (Entry<String, Object> entry : defaultConfiguration.entrySet()) {
@@ -144,16 +143,16 @@ public abstract class AbstractYamlConfigurationService implements ApplicationCon
         if (resource == null) {
           continue;
         }
-        if (resource.getFilename().equalsIgnoreCase(defaultConfigName))
+        if (resource.getFilename().equalsIgnoreCase(defaultConfigName)) {
           sb.append(IOUtils.toString(resource.getInputStream(), StandardCharsets.UTF_8))
-              .append("\n");
-        return sb.toString();
+                  .append("\n");
+        }
       }
+      return sb.toString();
     } catch (IOException ex) {
       throw new IllegalStateException("Exception thrown while reading default configuration", ex);
     }
 
-    return null;
   }
 
   protected GroupsConfig handleGroupsConfig(Map<String, Object> groupsConfig) {

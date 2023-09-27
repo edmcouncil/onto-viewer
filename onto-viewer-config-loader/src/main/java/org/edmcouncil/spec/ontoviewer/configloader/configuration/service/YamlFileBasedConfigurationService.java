@@ -61,7 +61,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
   private static final String TEST_FILE_NAME = "test_config.yaml";
 
-  private static final String FILE_PREFIX = "file:/";
+  private static final String FILE_PREFIX = "file:";
   private static final String HTTP_PROTOCOL = "http";
   private static final String HTTPS_PROTOCOL = "https";
 
@@ -98,9 +98,8 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     LOGGER.debug("Start loading configuration...");
     ConfigChecklist configChecklist = new ConfigChecklist();
     URL configURL = getConfigURL(configChecklist);
-
     checkUrlProtocol(configURL, configChecklist);
-
+    configURL.openConnection();
     if (configChecklist.isRemotePathIsSet()) {
       loadRemoteConfig();
     } else {
@@ -149,14 +148,11 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
         this.configurationData = readDefaultConfiguration();
         return;
       }
-
       String configContent = loadConfigFromLocalFilesOrDefaultConfigIfNotExist(configPath);
 
       var yaml = new Yaml();
       Map<String, Object> configuration = yaml.load(configContent);
-
       this.configurationData = populateConfiguration(configuration);
-
     } catch (IOException ex) {
       throw new IllegalStateException("Exception was thrown while loading config file.", ex);
     } catch (UnableToLoadConfigurationException ex) {
@@ -170,8 +166,34 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       try (Stream<Path> configFilePathsStream = Files.walk(configPath, FileVisitOption.FOLLOW_LINKS)) {
         Set<Path> configFilePaths = configFilePathsStream.collect(Collectors.toSet());
         Set<String> notExistingFiles = getNotExistingAndEmptyFiles(configFilePaths);
+
+        if (notExistingFiles.size() == CONFIG_FILES_NAMES.size()){
+          LOGGER.error("The configuration specified by the user does not contains any config files.");
+        }
+
+        for (Path configFilePath : configFilePaths) {
+          if (isConfigFilePath(configFilePath)) {
+            if (configFilePath.toString().contains(".")) {
+              if (Files.isRegularFile(configFilePath)
+                      && SUPPORTED_EXTENSIONS.contains(getExtension(configFilePath.toString()))) {
+                String configContent = Files.readString(configFilePath);
+                sb.append(configContent).append("\n");
+              } else {
+                LOGGER.warn(
+                        "Config path '{}' is not a regular file or doesn't end with '{}'.",
+                        configFilePath,
+                        SUPPORTED_EXTENSIONS);
+              }
+            } else {
+              if (!Files.isDirectory(configFilePath))
+                LOGGER.warn("Config path '{}' doesn't end with a file extension.", configFilePath);
+            }
+          }
+        }
+
         if (!notExistingFiles.isEmpty()) {
           LOGGER.warn("Missing config file(s): `{}`. Reading for them default files.", notExistingFiles);
+
           for (var file : notExistingFiles) {
             var fileContent = readDefaultConfigContent(file);
             if (StringUtils.hasText(fileContent)) {
@@ -182,23 +204,6 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
           }
         }
 
-        for (Path configFilePath : configFilePaths) {
-          if (configFilePath.toString().contains(".")) {
-            if (Files.isRegularFile(configFilePath)
-                    && SUPPORTED_EXTENSIONS.contains(getExtension(configFilePath.toString()))) {
-              String configContent = Files.readString(configFilePath);
-              sb.append(configContent).append("\n");
-            } else {
-              LOGGER.warn(
-                      "Config path '{}' is not a regular file or doesn't end with '{}'.",
-                      configFilePath,
-                      SUPPORTED_EXTENSIONS);
-            }
-          } else {
-            if (!Files.isDirectory(configFilePath))
-              LOGGER.warn("Config path '{}' doesn't end with a file extension.", configFilePath);
-          }
-        }
       }
     } else {
       sb.append(Files.readString(configPath));
@@ -206,6 +211,18 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     return sb.toString();
   }
 
+  private boolean isConfigFilePath(Path configFilePath) {
+    var filesName = configFilePath.getFileName().toString();
+    if (TEST_FILE_NAME.equals(filesName)){
+      return true;
+    }
+    for (String configFilesName : CONFIG_FILES_NAMES){
+      if(configFilesName.equals(filesName)){
+        return true;
+      }
+    }
+    return false;
+  }
   @Override
   public ConfigurationData getConfigurationData() {
     return configurationData;
