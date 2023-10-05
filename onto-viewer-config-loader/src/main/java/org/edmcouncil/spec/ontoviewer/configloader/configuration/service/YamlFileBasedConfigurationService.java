@@ -5,12 +5,10 @@ import static org.edmcouncil.spec.ontoviewer.configloader.configuration.model.Co
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -149,7 +147,6 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
         return;
       }
       String configContent = loadConfigFromLocalFilesOrDefaultConfigIfNotExist(configPath);
-
       var yaml = new Yaml();
       Map<String, Object> configuration = yaml.load(configContent);
       this.configurationData = populateConfiguration(configuration);
@@ -166,8 +163,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
       try (Stream<Path> configFilePathsStream = Files.walk(configPath, FileVisitOption.FOLLOW_LINKS)) {
         Set<Path> configFilePaths = configFilePathsStream.collect(Collectors.toSet());
         Set<String> notExistingFiles = getNotExistingAndEmptyFiles(configFilePaths);
-
-        if (notExistingFiles.size() == CONFIG_FILES_NAMES.size()){
+        if (notExistingFiles.size() == CONFIG_FILES_NAMES.size() && !configPath.toString().equals("config")){
           LOGGER.error("The configuration specified by the user does not contains any config files.");
         }
 
@@ -233,7 +229,6 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     return configurationData.getGroupsConfig().getGroups() != null
             && !configurationData.getGroupsConfig().getGroups().isEmpty();
   }
-
   private void loadRemoteConfig() {
     String updateUrlPath = updateUrl;
     if (!updateUrlPath.endsWith("/")) {
@@ -277,9 +272,9 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
         }
       }
     }
+    System.out.println(sb.toString());
     var yaml = new Yaml();
     Map<String, Object> configuration = yaml.load(sb.toString());
-
     this.configurationData = populateConfiguration(configuration);
   }
 
@@ -301,8 +296,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
               ex.getMessage());
       configContent = "";
     }
-    if (!configContent.isEmpty()) // configContent != null && !configContent.isEmpty()
-      overrideConfigContent(configEntry.getKey(), configContent);
+
     return configContent;
   }
 
@@ -338,29 +332,6 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
 
     return "";
   }
-
-  private void overrideConfigContent(String configFileName, String configContent) {
-    if (configContent.isBlank()) {
-      return;
-    }
-
-    try {
-      var configPath = fileSystemService.getPathToConfigDownloadDirectory();
-      var configFilePath = configPath.resolve(configFileName);
-      Files.write(
-              configFilePath,
-              configContent.getBytes(StandardCharsets.UTF_8),
-              StandardOpenOption.CREATE,
-              StandardOpenOption.WRITE,
-              StandardOpenOption.TRUNCATE_EXISTING);
-    } catch (IOException ex) {
-      LOGGER.warn(
-              "Exception thrown while overriding configuration file '{}' with a new content.",
-              configFileName);
-      LOGGER.warn(ex.toString());
-    }
-  }
-
   private ConfigurationData populateConfiguration(Map<String, Object> configuration) {
     ConfigurationData configurationDataCandidate = readDefaultConfiguration();
 
@@ -497,7 +468,7 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
     public void setDefaultConfigPathIsSet(boolean b) {
       this.defaultConfigPathIsSet = b;
     }
-    
+
     public void setRemotePathIsSet(boolean b) {
       this.remotePathIsSet = b;
     }
