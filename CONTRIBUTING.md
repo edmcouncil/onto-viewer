@@ -1,4 +1,4 @@
-<img src="https://spec.edmcouncil.org/fibo/htmlpages/master/latest/img/logo.66a988fe.png" width="150" align="right"/>
+<img src="https://github.com/edmcouncil/html-pages/raw/develop/general/assets/img/EDM-council-RGB_200w.png" width="200" align="right"/>
 
 # How to contribute
 Since the first release of onto-viewer, [this  repository](https://github.com/edmcouncil/onto-viewer) is considered to be the only official space for the community discussion. So, this repository is where the project community develops the new proposals and discusses changes (via GitHub issues).
