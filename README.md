@@ -99,11 +99,11 @@ It is possible to run containers with any ontology (instead of `FIBO`):
 
 If you want to see the logs use:
 ```bash
-# to view continuous log output for <SERVICE>=fibo-viewer
-docker compose logs --follow fibo-viewer
+# to view continuous log output for <SERVICE>=dev-viewer
+docker compose logs --follow dev-viewer
 
-# to view *100* latest log lines for <SERVICE>=fibo-viewer
-docker compose logs --tail 100 fibo-strapi
+# to view *100* latest log lines for <SERVICE>=dev-viewer
+docker compose logs --tail 100 dev-viewer
 ```
 
 Stop the services with the command:
