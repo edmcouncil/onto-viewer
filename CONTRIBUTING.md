@@ -52,11 +52,6 @@ This module is responsible for displaying the input data from the Fibo-Viewer-Co
 * The graphs are displayed by vis-network.
 
 
-web-app folder condains XML file "fibo\_viewer\_config.xml" that defines the FIBO Viewer configuration. Let us walk through the file.
-
-
-
-
 ### Load FIBO
 
 FIBO can be loaded from the "AboutFIBOProd" file located in a folder. To load FIBO from the file on your disc, provide the path to the file as follows:
@@ -195,34 +190,9 @@ Between the uriNamespace tags that are wrapped in the scopeIri tags, there are d
 
 ### Grouping
 
-In the fibo\_vierwer\_config.xml file, there are tags that are responsible for displaying group names and the list of grouped items. Group elements must have a packaging tag.
+In the groups_config.yaml file, there are tags that are responsible for displaying group names and the list of grouped items. Group elements must have a packaging tag.
 
-```
-<groups>
-    <group>
-      <groupName>Natural Language characteristic</groupName>
-      <groupItem>http://www.w3.org/2000/01/rdf-schema#label</groupItem>
-      <groupItem>https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/synonym</groupItem>
-      ...
-    </group>
-
-    <group>
-      <groupName>Ontological characteristic</groupName>
-      <groupItem>@viewer.axiom.EquivalentClasses</groupItem>
-      <groupItem>@viewer.axiom.SubClassOf</groupItem>
-      ...
-    </group>
-</groups>    
-```
-
-To display items, enter their local IDs or IRIs between groupItem tags. Each list of groups should be wrapped into groups tags. The display order of groups and their items is determined by order of these elements in the config file or the priority list:
-
-```
-<priorityList>
-    <priority>http://www.w3.org/2000/01/rdf-schema#subClassOf</priority>
-    <priority>http://www.w3.org/2000/01/rdf-schema#seeAlso</priority>
-</priorityList>
-```
+To display items, enter their local IDs or IRIs between groupItem tags. Each list of groups should be wrapped into groups tags. The display order of groups and their items is determined by order of these elements in the config file or the priority list.
 
 # Release Management
 Release management (corresponding to software versioning in source code management) will follow the widely accepted  [Git's branching model](https://nvie.com/posts/a-successful-git-branching-model/).
