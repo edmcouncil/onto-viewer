@@ -1,6 +1,6 @@
 services:
   dev-strapi:
-    image: edmcouncil/dev-strapi:${HTML_BRANCH:-latest}
+    image: edmcouncil/dev-strapi:${HTML_BRANCH:-develop}
     build:
       context: https://github.com/edmcouncil/html-pages.git#${HTML_BRANCH:-develop}:general/strapi
       args:
@@ -9,7 +9,7 @@ services:
     volumes:
       - spec_root:/opt/html-pages
   dev-pages:
-    image: edmcouncil/dev-pages:${HTML_BRANCH:-latest}
+    image: edmcouncil/dev-pages:${HTML_BRANCH:-develop}
     build:
       context: https://github.com/edmcouncil/html-pages.git#${HTML_BRANCH:-develop}:general
       args:
@@ -22,7 +22,7 @@ services:
     depends_on:
       - dev-strapi
   dev-viewer:
-    image: edmcouncil/onto-viewer:${TAG:-latest}
+    image: edmcouncil/onto-viewer:${VIEWER_BRANCH:-develop}
     build:
       context: .
     environment:
@@ -31,7 +31,7 @@ services:
       - ./onto-viewer-web-app/ontologies:/opt/viewer/ontologies
       - ./onto-viewer-web-app/config:/opt/viewer/config
   spec:
-    image: edmcouncil/spec:${HTML_BRANCH:-latest}
+    image: edmcouncil/spec:${HTML_BRANCH:-develop}
     build:
       context: https://github.com/edmcouncil/html-pages.git#${HTML_BRANCH:-develop}:home
       args:
