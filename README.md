@@ -80,6 +80,16 @@ The services provide endpoints at the following URLs:
 - [http://localhost:8080/fibo/ontology](http://localhost:8080/fibo/ontology) :- onto-viewer for [FIBO](https://github.com/edmcouncil/fibo) ontology
 - [http://localhost:8080/fibo/strapi/admin](http://localhost:8080/fibo/strapi/admin) :- [Strapi admin panel](https://docs.strapi.io/user-docs/intro#accessing-the-admin-panel) for for [FIBO](https://github.com/edmcouncil/fibo) ontology (Email: *edmc-strapi@dev.com*, Password: *devDBonly1*)
 
+It is also possible to build (or pull from the registry, if available) Docker images
+with tag names other than the default `develop` - use environment variables:
+- `VIEWER_BRANCH` for `edmcouncil/onto-viewer`, e.g. for [edmcouncil/onto-viewer:build-dev](https://github.com/edmcouncil/onto-viewer/tree/build-dev):
+  ```bash
+  echo VIEWER_BRANCH=build-dev >> .env
+  ```
+- `HTML_BRANCH` for `edmcouncil/html-pages`, e.g. for [edmcouncil/html-pages:build-dev](https://github.com/edmcouncil/html-pages/tree/build-dev):
+  ```bash
+  echo HTML_BRANCH=build-dev >> .env
+  ```
 
 ### ... with an ontology of your choice
 
