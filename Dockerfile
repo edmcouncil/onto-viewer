@@ -15,7 +15,6 @@ RUN	apk --no-cache add --upgrade bash curl jq && \
 WORKDIR	/opt/viewer
 COPY	./onto-viewer-web-app/entrypoint.sh			/opt/viewer/entrypoint.sh
 COPY	./onto-viewer-web-app/integration_tests/ontologies	/opt/viewer/ontologies
-COPY	./onto-viewer-web-app/staticOntologies			/opt/viewer/staticOntologies
 COPY	--from=build-onto-viewer /onto-viewer-web-app.war	/opt/viewer/onto-viewer.war
 CMD	["sh", "entrypoint.sh"]
 HEALTHCHECK --start-period=60s --interval=15s --timeout=1s --retries=60 CMD test "$(curl -q http://localhost/${ONTPUB_FAMILY}/ontology/actuator/health | jq -e ".components.custom.details.INITIALIZATION_DONE")" = "true"
