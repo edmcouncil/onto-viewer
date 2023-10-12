@@ -206,7 +206,7 @@ nbactions.xml
 **/updateHistory.json
 /web-app/fiboMapper/fibo/**
 .env
-
+.vscode/
 
 # Protege
 catalog-v001.xml
