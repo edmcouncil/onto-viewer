@@ -22,6 +22,12 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: edmcouncil/onto-viewer
       -
         name: Build and push
         uses: docker/build-push-action@v5
@@ -29,4 +35,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: edmcouncil/onto-viewer:develop_test
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
