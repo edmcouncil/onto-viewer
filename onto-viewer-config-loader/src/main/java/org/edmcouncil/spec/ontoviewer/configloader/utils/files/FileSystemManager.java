@@ -1,7 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.configloader.utils.files;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.properties.AppProperties;
@@ -15,20 +14,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileSystemManager implements FileSystemService {
 
-  private static final String WEASEL_DEFAULT_HOME_DIR_NAME = ".weasel";
+  private static final String VIEWER_DEFAULT_HOME_DIR_NAME = ".onto-viewer";
+  private static final String DEFAULT_CONFIG_LOCATION = "config";
 
   private static final Logger LOG = LoggerFactory.getLogger(FileSystemManager.class);
 
   private final String defaultHomePath;
-  private final String viewerConfigFileName;
   private final String defaultOntologyFileName;
-  private final String configPath;
+  private String configDownloadPath;
 
   public FileSystemManager(AppProperties appProperties) {
-    defaultHomePath = appProperties.getDefaultHomePath();
-    viewerConfigFileName = appProperties.getViewerConfigFileName();
+    defaultHomePath =
+        appProperties.getDefaultHomePath() != null ? appProperties.getDefaultHomePath() : "";
     defaultOntologyFileName = appProperties.getDefaultOntologyFileName();
-    configPath = appProperties.getConfigPath();
+    if (appProperties.getConfigDownloadPath() == null
+        || appProperties.getConfigDownloadPath().isEmpty()) {
+      configDownloadPath = DEFAULT_CONFIG_LOCATION;
+    } else {
+      configDownloadPath = appProperties.getConfigDownloadPath();
+    }
   }
 
   @Override
@@ -39,16 +43,17 @@ public class FileSystemManager implements FileSystemService {
         String userHomeProperty = System.getProperty("user.home");
         userHomeDir = Paths.get(userHomeProperty);
         LOG.trace("User home dir is '{}'.", userHomeDir);
-        userHomeDir = userHomeDir.resolve(WEASEL_DEFAULT_HOME_DIR_NAME);
+        userHomeDir = userHomeDir.resolve(VIEWER_DEFAULT_HOME_DIR_NAME);
         break;
       case "*":
         userHomeDir = Paths.get("");
-        LOG.trace("Working directory is '{}'.", userHomeDir.toAbsolutePath());
+        LOG.trace("Working directory is '{}'.", userHomeDir);
         break;
       default:
         userHomeDir = Paths.get(defaultHomePath);
         LOG.debug(
-            "Application working directory determined on 'app.defaultHomePath' from the property file: {}",
+            "Application working directory determined on 'app.defaultHomePath' from the property"
+                + " file: {}",
             defaultHomePath);
         break;
     }
@@ -62,19 +67,25 @@ public class FileSystemManager implements FileSystemService {
   }
 
   @Override
-  public Path getPathToConfigFile() throws IOException {
-    var path = Paths.get(configPath);
+  public Path getPathToConfigDownloadDirectory() throws IOException {
+    var path = Paths.get(configDownloadPath);
     if (path.isAbsolute()) {
       return path;
     } else {
       var homePath = getViewerHomeDir();
-      var configDirPath = createDirIfNotExists(homePath).resolve(configPath);
-      return createDirIfNotExists(configDirPath);
+      var configDirPath =
+          createDirIfNotExists(createDirIfNotExists(homePath).resolve(configDownloadPath));
+      return configDirPath;
     }
   }
 
   @Override
   public Path getPathToApiKey() {
     return getViewerHomeDir().resolve("api.key");
+  }
+
+  @Override
+  public Path getPathToDefaultConfigDirectory() throws IOException {
+    return getPathToFile(DEFAULT_CONFIG_LOCATION);
   }
 }

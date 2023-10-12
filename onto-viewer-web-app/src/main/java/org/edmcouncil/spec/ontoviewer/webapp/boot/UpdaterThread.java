@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -205,12 +206,12 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       UpdaterOperation.setJobStatusToError(job, INTERRUPT_MESSAGE);
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
-    } catch (NullPointerException | UnloadableImportException ex) {
+    } catch (NullPointerException | UnloadableImportException | IOException ex) {
       ex.printStackTrace();
       UpdaterOperation.setJobStatusToError(job, ex.getMessage());
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
-    }
+    } 
   }
 
   @Override

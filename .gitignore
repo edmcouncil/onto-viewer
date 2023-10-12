@@ -221,3 +221,6 @@ onto-viewer-web-app/ontologies/*
 
 # Mac
 .DS_Store
+
+#VS CODE
+.vscode/
