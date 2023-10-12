@@ -29,4 +29,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/edmcouncil/onto-viewer:develop_test
+          tags: edmcouncil/onto-viewer:develop_test
