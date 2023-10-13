@@ -272,7 +272,6 @@ public class YamlFileBasedConfigurationService extends AbstractYamlConfiguration
         }
       }
     }
-    System.out.println(sb.toString());
     var yaml = new Yaml();
     Map<String, Object> configuration = yaml.load(sb.toString());
     this.configurationData = populateConfiguration(configuration);
