@@ -109,6 +109,7 @@ private static  final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
       T axiom = axiomsIterator.next();
 
       String key = axiom.getAxiomType().getName();
+      key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
       if (axiom instanceof OWLSubClassOfAxiom) {
         OWLSubClassOfAxiom clazzAxiom = (OWLSubClassOfAxiom) axiom;
         if (clazzAxiom.isGCI()) {
@@ -117,6 +118,7 @@ private static  final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
       }
 
       var axiomAnnotations = axiom.annotations().collect(Collectors.toList());
+      OwlAxiomPropertyValue axiomPropertyValue;
       if (axiomAnnotations.size() > 0) {
         LinkedList annotationPropertyValues = new LinkedList();
         for (OWLAnnotation owlAnnotation : axiomAnnotations) {
@@ -135,18 +137,20 @@ private static  final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
       }
       LOG.info("anotated: {}", axiom.annotations().collect(Collectors.toList()));
 
-      key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
-
-      OwlAxiomPropertyValue axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
+      axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
           axiom, iriFragment, splitFragment, fixRenderedIri, true, annotationPropertyValues);
-
-      if (axiomPropertyValue == null) {
-        continue;
+    }
+      else
+      {
+        axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
+                axiom, iriFragment, splitFragment, fixRenderedIri, true);
       }
+    if (axiomPropertyValue == null) {
+      continue;
+    }
 
-      if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
-        result.addProperty(key, axiomPropertyValue);
-      }
+    if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
+      result.addProperty(key, axiomPropertyValue);
     }
     result.sortPropertiesInAlphabeticalOrder();
   }
