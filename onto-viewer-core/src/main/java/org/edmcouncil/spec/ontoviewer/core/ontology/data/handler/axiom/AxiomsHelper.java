@@ -1,11 +1,11 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.axiom;
 
 import com.github.jsonldjava.shaded.com.google.common.collect.ImmutableSet;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
+
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.RestrictionType;
 import org.edmcouncil.spec.ontoviewer.core.utils.OwlUtils;
@@ -54,11 +54,25 @@ public class AxiomsHelper {
   }
 
   public <T extends OWLAxiom> OwlAxiomPropertyValue prepareAxiomPropertyValue(
-      T axiom,
-      String iriFragment,
-      String splitFragment,
-      Boolean fixRenderedIri,
-      boolean bypassClass
+          T axiom,
+          String iriFragment,
+          String splitFragment,
+          Boolean fixRenderedIri,
+          boolean bypassClass,
+          List<PropertyValue> annotationPropertyValues
+  )
+  {
+    OwlAxiomPropertyValue axiomPropertyValue = prepareAxiomPropertyValue(axiom, iriFragment, splitFragment, fixRenderedIri, bypassClass);
+    axiomPropertyValue.setAnnotationPropertyValues(annotationPropertyValues);
+    return axiomPropertyValue;
+  }
+
+  public <T extends OWLAxiom> OwlAxiomPropertyValue prepareAxiomPropertyValue(
+          T axiom,
+          String iriFragment,
+          String splitFragment,
+          Boolean fixRenderedIri,
+          boolean bypassClass
   ) {
     String value = rendering.render(axiom);
     for (String unwantedType : unwantedTypes) {
