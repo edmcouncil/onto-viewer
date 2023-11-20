@@ -4,9 +4,13 @@ import static org.edmcouncil.spec.ontoviewer.core.model.OwlType.TAXONOMY;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValueWithSubAnnotations;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
@@ -16,6 +20,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.Annotation
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.visitor.ContainsVisitors;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
+import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -42,8 +47,9 @@ public class AxiomsHandler {
 private static  final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
   private final AxiomsHelper axiomsHelper;
   private final ContainsVisitors containsVisitors;
-  private OwlDataExtractor dataExtractor;
+  private OwlDataExtractor dataExtractor = new OwlDataExtractor();
   private AnnotationsDataHandler annotationsDataHandler;
+
 
   public AxiomsHandler(AxiomsHelper axiomsHelper, ContainsVisitors containsVisitors) {
     this.axiomsHelper = axiomsHelper;
@@ -110,26 +116,34 @@ private static  final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
         }
       }
 
-      var annotationsAxiom = axiom.annotations().collect(Collectors.toList());
-      if (annotationsAxiom.size() > 0) {
+      var axiomAnnotations = axiom.annotations().collect(Collectors.toList());
+      if (axiomAnnotations.size() > 0) {
+        LinkedList annotationPropertyValues = new LinkedList();
+        for (OWLAnnotation owlAnnotation : axiomAnnotations) {
+          String value = owlAnnotation.annotationValue().toString();
+          PropertyValue annotationValue = new OwlAnnotationPropertyValue();
+          annotationValue.setType(dataExtractor.extractAnnotationType(owlAnnotation));
+          annotationValue.setValue(value);
+          Map<String, PropertyValue> annotationMap = new LinkedHashMap<>();
+          annotationMap.put(owlAnnotation.getProperty().getIRI().getIRIString(), annotationValue);
+          OwlAnnotationPropertyValueWithSubAnnotations annotationPropertyValue = new OwlAnnotationPropertyValueWithSubAnnotations();
+          annotationPropertyValue.setType(OwlType.AXIOM);
+          annotationPropertyValue.setValue(annotationValue.toString());
+          annotationPropertyValue.setSubAnnotations(annotationMap);
+          annotationPropertyValues.add(annotationPropertyValue);
 
-//        for (OWLAnnotationAssertionAxiom annotationAssertion : annotationAssertions) {
-//        String value = annotationAssertion.annotationValue().toString();
-//        PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValueWithSubAnnotations();
-//        annotationPropertyValue.setType(dataExtractor.extractAnnotationType(annotationAssertion));
-//        annotationPropertyValue = annotationsDataHandler.getAnnotationPropertyValue(annotationAssertion, value,
-//            annotationPropertyValue);
-//      }
+      }
       LOG.info("anotated: {}", axiom.annotations().collect(Collectors.toList()));
 
       key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
 
       OwlAxiomPropertyValue axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
-          axiom, iriFragment, splitFragment, fixRenderedIri, true);
+          axiom, iriFragment, splitFragment, fixRenderedIri, true, annotationPropertyValues);
 
       if (axiomPropertyValue == null) {
         continue;
       }
+
       if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
         result.addProperty(key, axiomPropertyValue);
       }

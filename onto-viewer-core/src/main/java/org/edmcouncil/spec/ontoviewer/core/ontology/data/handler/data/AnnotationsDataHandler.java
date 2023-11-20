@@ -140,7 +140,7 @@ public class AnnotationsDataHandler {
     return result;
   }
 
-  private PropertyValue extractSubAnnotation(OWLAnnotation owlAnnotation) {
+  public PropertyValue extractSubAnnotation(OWLAnnotation owlAnnotation) {
     String value = owlAnnotation.annotationValue().toString();
     PropertyValue annotationValue = new OwlAnnotationPropertyValue();
     annotationValue.setType(dataExtractor.extractAnnotationType(owlAnnotation));

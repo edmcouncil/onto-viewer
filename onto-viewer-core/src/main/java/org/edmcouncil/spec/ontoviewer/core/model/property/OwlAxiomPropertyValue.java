@@ -18,7 +18,7 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
   private Map<String, OwlAxiomPropertyEntity> entityMaping = new HashMap<>();
   private boolean inferable = false;
   private RestrictionType restrictionType = RestrictionType.OTHER;
-  private List <PropertyValue> annotations = new LinkedList();
+  private List <PropertyValue> annotationPropertyValues = new LinkedList();
 
   public OwlAxiomPropertyValue() {
     super();
@@ -31,6 +31,16 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
     this.lastId = lastId;
     this.fullRenderedString = fullRenderedString;
     this.entityMaping = entityMaping;
+  }
+
+  public OwlAxiomPropertyValue(String value, OwlType type, int lastId, String fullRenderedString,
+                               Map<String, OwlAxiomPropertyEntity> entityMaping, List <PropertyValue> annotationPropertyValues) {
+    this.value = value;
+    this.type = type;
+    this.lastId = lastId;
+    this.fullRenderedString = fullRenderedString;
+    this.entityMaping = entityMaping;
+    this.annotationPropertyValues = annotationPropertyValues;
   }
 
   public OwlAxiomPropertyValue(String value, OwlType type, int lastId, String fullRenderedString,
@@ -67,6 +77,10 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
   public String getFullRenderedString() {
     return fullRenderedString;
   }
+
+  public void setAnnotationPropertyValues(List <PropertyValue> annotationPropertyValues) { this.annotationPropertyValues = annotationPropertyValues;}
+
+  public List <PropertyValue> getAnnotationPropertyValues() { return annotationPropertyValues;}
 
   public boolean isInferable() {
     return inferable;

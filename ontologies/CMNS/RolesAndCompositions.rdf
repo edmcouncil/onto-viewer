@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
+	<!ENTITY cmns-cxtdsg "https://www.omg.org/spec/Commons/ContextualDesignators/">
+	<!ENTITY cmns-rlcmp "https://www.omg.org/spec/Commons/RolesAndCompositions/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/Commons/RolesAndCompositions/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
+	xmlns:cmns-cxtdsg="https://www.omg.org/spec/Commons/ContextualDesignators/"
+	xmlns:cmns-rlcmp="https://www.omg.org/spec/Commons/RolesAndCompositions/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/RolesAndCompositions/">
+		<rdfs:label>Commons Roles and Compositions Ontology</rdfs:label>
+		<dct:abstract>This ontology defines the high-level things defining roles, which enable specification of the various participants in something, and the notion of a composition, i.e., relating something that is a specification for a &apos;whole&apos;, such as a product or recipe, to its ingredients or constituents, potentially with respect to some context-specific requirements.</dct:abstract>
+		<dct:contributor>Dean Allemang, Working Ontologist</dct:contributor>
+		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/ContextualDesignators/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/DatesAndTimes/"/>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230801/RolesAndCompositions/"/>
+		<skos:note>This ontology was derived from the Financial Industry Business Ontology (FIBO) and extended based on usage in other projects, such as the Pistoia Alliance Identification of Medicinal Products (IDMP) ontology project.</skos:note>
+		<cmns-av:copyright>Copyright (c) 2020-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2023 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2020-2023 Working Ontologist LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2023 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-rlcmp;Composition">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:allValuesFrom rdf:resource="&cmns-col;Constituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;hasRole"/>
+				<owl:allValuesFrom rdf:resource="&cmns-rlcmp;Role"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:onClass rdf:resource="&cmns-cxtdsg;Context"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>composition</rdfs:label>
+		<skos:definition>distinct thing resulting from bringing together other things, possibly in specific roles, for a particular purpose</skos:definition>
+		<cmns-av:adaptedFrom>ISO/IEC 18384-1:2016, Information technology - Reference Architecture for Service Oriented Architecture (SOA RA) - Part 1: Terminology and concepts for SOA, clause 2.5 and ISO/IEC 18384-3:2016, Information technology - Reference Architecture for Service Oriented Architecture (SOA RA) - Part 3: Service Oriented Architecture ontology, clause 8.2</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19807-1:2019(en), Nanotechnologies - Magnetic nanomaterials - Part 1: Specification of characteristics and measurements for magnetic nanosuspensions, clause 3.4</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The composition may be specified based on the roles that the things play in the composition, such as the roles that various ingredients play in a recipe or pharmaceutical product, and such things may or may not be transformed in some way through the process of combining them. Quantification including the nature and amount of each thing, potentially including the ratio of the quantities, may be required depending kind of composition.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>The properties hasConstituent and hasRole are included in value restrictions rather than via number restrictions to facilitate their use in complex property chains and other axioms as needed for some applications.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-rlcmp;FunctionalRole">
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Role"/>
+		<rdfs:label>functional role</rdfs:label>
+		<skos:definition>role representing an underlying functionality that something, such as a person, organization, process, or service, is expected to perform or deliver</skos:definition>
+		<skos:note>Functional roles can be assigned to be performed during an act.</skos:note>
+		<cmns-av:adaptedFrom>ISO 21298:2017(en), Health informatics - Functional and structural roles, clause 3.9</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/IEC 19763-8:2015(en), Information technology - Metamodel framework for interoperability (MFI) - Part 8: Metamodel for role and goal model registration, clause 3.1.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-rlcmp;ProcessRole">
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Role"/>
+		<rdfs:label>process role</rdfs:label>
+		<skos:definition>role that associates resources and participants to a structured set of activities involving various enterprise entities, that is designed and organised for a given purpose</skos:definition>
+		<cmns-av:adaptedFrom>ISO 12651-2:2014(en), Electronic document management - Vocabulary - Part 2: Workflow management, clause 3.33</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 18629-1:2004(en), Industrial automation systems and integration - Process specification language - Part 1: Overview and basic principles</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-rlcmp;Role">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-rlcmp;isPlayedBy"/>
+				<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>role</rdfs:label>
+		<skos:definition>named specific behavior of something participating in a particular context</skos:definition>
+		<cmns-av:adaptedFrom>ISO/IEC 19763-8:2015(en), Information technology - Metamodel framework for interoperability (MFI) - Part 8: Metamodel for role and goal model registration, clause 3.1.7</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-rlcmp;StructuralRole">
+		<rdfs:subClassOf rdf:resource="&cmns-rlcmp;Role"/>
+		<rdfs:label>structural role</rdfs:label>
+		<dct:source>ISO 21298:2017(en), Health informatics - Functional and structural roles, clause 3.26</dct:source>
+		<skos:definition>role specifying relations between entities in the sense of competence, often reflecting organizational or structural relations (hierarchies)</skos:definition>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rlcmp;hasRole">
+		<rdfs:label>has role</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-rlcmp;Role"/>
+		<skos:definition>identifies something or someone playing a part in something, such as a composition</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rlcmp;isManifestedIn">
+		<rdfs:label>is manifested in</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-rlcmp;Role"/>
+		<owl:inverseOf rdf:resource="&cmns-rlcmp;manifests"/>
+		<skos:definition>indicates something in which the role is realized, appears, or occurs</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rlcmp;isPlayedBy">
+		<rdfs:label>is played by</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-rlcmp;Role"/>
+		<owl:inverseOf rdf:resource="&cmns-rlcmp;playsRole"/>
+		<skos:definition>indicates something or someone, such as a person, organization, or other thing filling a role</skos:definition>
+		<skos:example>A party, counterparty, or third party to a contract is played by an organization or person; an issuer of a financial instrument is typically played by an organization; an ingredient in a recipe may be played by a substance.</skos:example>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rlcmp;isRoleIn">
+		<rdfs:label>is role in</rdfs:label>
+		<rdfs:domain rdf:resource="&cmns-rlcmp;Role"/>
+		<owl:inverseOf rdf:resource="&cmns-rlcmp;hasRole"/>
+		<skos:definition>identifies something, such as a composition, situation, or contract, involving the role</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rlcmp;manifests">
+		<rdfs:label>manifests</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-rlcmp;Role"/>
+		<skos:definition>indicates a role that realizes, displays, or shows something, typically in some context</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rlcmp;playsRole">
+		<rdfs:label>plays role</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-rlcmp;Role"/>
+		<skos:definition>indicates a part that someone or something plays under some circumstance</skos:definition>
+		<skos:example>an organization may play the role of employer, issuer, regulatory agency, bank, custodian, manufacturer, vendor, etc.; a person may play the role of employee, examiner, banker, seller, buyer, etc.</skos:example>
+	</owl:ObjectProperty>
+
+</rdf:RDF>

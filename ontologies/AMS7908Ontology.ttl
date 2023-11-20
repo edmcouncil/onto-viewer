@@ -1,0 +1,446 @@
+@prefix : <https://spec.sae.com/sae/ontology/AMS7908Ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sae-fnd: <https://spec.sae.com/sae/ontology/foundations/> .
+@prefix sae-ams7908: <https://spec.sae.com/sae/ontology/AMS7908Ontology/> .
+@prefix cmns-col: <https://www.omg.org/spec/Commons/Collections/> .
+@base <https://spec.sae.com/sae/ontology/AMS7908Ontology/> .
+
+<https://spec.sae.com/sae/ontology/AMS7908Ontology/> rdf:type owl:Ontology ;
+                                                      owl:imports sae-fnd: .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2002/07/owl#qualifiedCardinality
+owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/Aluminium
+sae-ams7908:Aluminium rdf:type owl:Class ;
+                      rdfs:subClassOf sae-ams7908:Matter .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/AluminumConstituentOfBerylliumNearNetPreform
+sae-ams7908:AluminumConstituentOfBerylliumNearNetPreform rdf:type owl:Class ;
+                                                         rdfs:subClassOf sae-ams7908:Aluminium ,
+                                                                         sae-fnd:MaterialConstituent ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty <https://www.omg.org/spec/Commons/Collections/isConstituentOf> ;
+                                                                           owl:someValuesFrom sae-ams7908:BerylliumNearNetPreform
+                                                                         ] ,
+                                                                         _:genid2 ;
+                                                         rdfs:label "aluminium constituent of beryllium near-net preform"@en .
+
+_:genid2 rdf:type owl:Restriction ;
+          owl:onProperty sae-fnd:hasPercentageInComposition ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange [ rdf:type rdfs:Datatype ;
+                            owl:onDatatype xsd:decimal ;
+                            owl:withRestrictions ( [ xsd:maxInclusive 0.1
+                                                   ]
+                                                 )
+                          ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource sae-ams7908:AluminumConstituentOfBerylliumNearNetPreform ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget _:genid2 ;
+   sae-fnd:hasDiscoveryMethod sae-fnd:SpectrochemicalMethod
+ ] .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/Beryllium
+sae-ams7908:Beryllium rdf:type owl:Class ;
+                      rdfs:subClassOf sae-ams7908:Matter .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/BerylliumConstituentOfBerylliumNearNetPreform
+sae-ams7908:BerylliumConstituentOfBerylliumNearNetPreform rdf:type owl:Class ;
+                                                          rdfs:subClassOf sae-ams7908:Beryllium ,
+                                                                          sae-fnd:MaterialConstituent ,
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty <https://www.omg.org/spec/Commons/Collections/isConstituentOf> ;
+                                                                            owl:someValuesFrom sae-ams7908:BerylliumNearNetPreform
+                                                                          ] ,
+                                                                          _:genid8 ;
+                                                          rdfs:label "beryllium constituent of beryllium near-net preform"@en .
+
+_:genid8 rdf:type owl:Restriction ;
+          owl:onProperty sae-fnd:hasPercentageInComposition ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange [ rdf:type rdfs:Datatype ;
+                            owl:onDatatype xsd:decimal ;
+                            owl:withRestrictions ( [ xsd:minExclusive 98.5
+                                                   ]
+                                                 )
+                          ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource sae-ams7908:BerylliumConstituentOfBerylliumNearNetPreform ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget _:genid8 ;
+   sae-fnd:hasDiscoveryMethod sae-fnd:Difference
+ ] .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/BerylliumNearNetPreform
+sae-ams7908:BerylliumNearNetPreform rdf:type owl:Class ;
+                                    rdfs:subClassOf sae-fnd:MaterialComposition ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty cmns-col:hasConstituent ;
+                                                      owl:someValuesFrom sae-ams7908:BerylliumConstituentOfBerylliumNearNetPreform
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty cmns-col:hasConstituent ;
+                                                      owl:someValuesFrom sae-ams7908:BerylliumOxideConstituentOfBerylliumNearNetPreform
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty cmns-col:hasConstituent ;
+                                                      owl:someValuesFrom sae-ams7908:CarbonConstituentOfBerylliumNearNetPreform
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty cmns-col:hasConstituent ;
+                                                      owl:someValuesFrom sae-ams7908:IronConstituentOfBerylliumNearNetPreform
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty cmns-col:hasConstituent ;
+                                                      owl:someValuesFrom sae-ams7908:MagnesiumConstituentOfBerylliumNearNetPreform
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty cmns-col:hasConstituent ;
+                                                      owl:someValuesFrom sae-ams7908:OtherConstituentOfBerylliumNearNetPreform
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty cmns-col:hasConstituent ;
+                                                      owl:someValuesFrom sae-ams7908:SiliconConstituentOfBerylliumNearNetPreform
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty sae-fnd:isObjectOf ;
+                                                      owl:someValuesFrom sae-ams7908:BerylliumNearNetPreformHasProperty
+                                                    ] ;
+                                    rdfs:label "beryllium near-net preform"@en .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/BerylliumNearNetPreformHasElongationIn4D
+sae-ams7908:BerylliumNearNetPreformHasElongationIn4D rdf:type owl:Class ;
+                                                     rdfs:subClassOf sae-ams7908:BerylliumNearNetPreformHasProperty ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasQuantityKind> ;
+                                                                       owl:hasValue sae-fnd:ElongationIn4D
+                                                                     ] ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasNumericValue> ;
+                                                                       owl:hasValue 3
+                                                                     ] ;
+                                                     rdfs:label "beryllium near-net preform has elongation in 4D" .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/BerylliumNearNetPreformHasProperty
+sae-ams7908:BerylliumNearNetPreformHasProperty rdf:type owl:Class ;
+                                               rdfs:subClassOf sae-fnd:ObjectHasProperty ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty sae-fnd:hasObject ;
+                                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onClass sae-ams7908:BerylliumNearNetPreform
+                                                               ] ;
+                                               rdfs:label "beryllium near-net preform has property"@en .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/BerylliumNearNetPreformHasTensileStrength
+sae-ams7908:BerylliumNearNetPreformHasTensileStrength rdf:type owl:Class ;
+                                                      rdfs:subClassOf sae-ams7908:BerylliumNearNetPreformHasProperty ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty sae-fnd:hasQuantityValue ;
+                                                                        owl:hasValue sae-ams7908:AMS7908BerylliumCompositionTensileStrengthImperialSystemValue
+                                                                      ] ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty sae-fnd:hasQuantityValue ;
+                                                                        owl:hasValue sae-ams7908:AMS7908BerylliumCompositionTensileStrengthSIValue
+                                                                      ] ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasQuantityKind> ;
+                                                                        owl:hasValue sae-fnd:TensileStrength
+                                                                      ] ;
+                                                      rdfs:label "beryllium near-net preform has tensile strength"@en .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/BerylliumNearNetPreformHasYieldStrengthAt0.2PercentageOffset
+sae-ams7908:BerylliumNearNetPreformHasYieldStrengthAt0.2PercentageOffset rdf:type owl:Class ;
+                                                                         rdfs:subClassOf sae-ams7908:BerylliumNearNetPreformHasProperty ,
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty sae-fnd:hasQuantityValue ;
+                                                                                           owl:hasValue sae-ams7908:AMS7908BerylliumCompositionYieldStrengthAt0.2PercentageOffsetSIValue
+                                                                                         ] ,
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasQuantityKind> ;
+                                                                                           owl:hasValue sae-fnd:YieldStrengthAt0.2PercentageOffset
+                                                                                         ] ;
+                                                                         rdfs:label "beryllium near-net preform has yield strength at 0.2 percentage offset"@en .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/BerylliumOxide
+sae-ams7908:BerylliumOxide rdf:type owl:Class ;
+                           rdfs:subClassOf sae-ams7908:Matter .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/BerylliumOxideConstituentOfBerylliumNearNetPreform
+sae-ams7908:BerylliumOxideConstituentOfBerylliumNearNetPreform rdf:type owl:Class ;
+                                                               rdfs:subClassOf sae-ams7908:BerylliumOxide ,
+                                                                               sae-fnd:MaterialConstituent ,
+                                                                               [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty <https://www.omg.org/spec/Commons/Collections/isConstituentOf> ;
+                                                                                 owl:someValuesFrom sae-ams7908:BerylliumNearNetPreform
+                                                                               ] ,
+                                                                               _:genid30 ;
+                                                               rdfs:label "beryllium oxide constituent of beryllium near-net preform"@en .
+
+_:genid30 rdf:type owl:Restriction ;
+           owl:onProperty sae-fnd:hasPercentageInComposition ;
+           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+           owl:onDataRange [ rdf:type rdfs:Datatype ;
+                             owl:onDatatype xsd:decimal ;
+                             owl:withRestrictions ( [ xsd:maxInclusive 1.5
+                                                    ]
+                                                  )
+                           ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource sae-ams7908:BerylliumOxideConstituentOfBerylliumNearNetPreform ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget _:genid30 ;
+   sae-fnd:hasDiscoveryMethod sae-fnd:GasFusion
+ ] .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/Carbon
+sae-ams7908:Carbon rdf:type owl:Class ;
+                   rdfs:subClassOf sae-ams7908:Matter .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/CarbonConstituentOfBerylliumNearNetPreform
+sae-ams7908:CarbonConstituentOfBerylliumNearNetPreform rdf:type owl:Class ;
+                                                       rdfs:subClassOf sae-ams7908:Carbon ,
+                                                                       sae-fnd:MaterialConstituent ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <https://www.omg.org/spec/Commons/Collections/isConstituentOf> ;
+                                                                         owl:someValuesFrom sae-ams7908:BerylliumNearNetPreform
+                                                                       ] ,
+                                                                       _:genid36 ;
+                                                       rdfs:label "carbon constituent of beryllium near-net preform"@en .
+
+_:genid36 rdf:type owl:Restriction ;
+           owl:onProperty sae-fnd:hasPercentageInComposition ;
+           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+           owl:onDataRange [ rdf:type rdfs:Datatype ;
+                             owl:onDatatype xsd:decimal ;
+                             owl:withRestrictions ( [ xsd:maxInclusive 0.15
+                                                    ]
+                                                  )
+                           ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource sae-ams7908:CarbonConstituentOfBerylliumNearNetPreform ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget _:genid36 ;
+   sae-fnd:hasDiscoveryMethod sae-fnd:Combustion
+ ] .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/Iron
+sae-ams7908:Iron rdf:type owl:Class ;
+                 rdfs:subClassOf sae-ams7908:Matter .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/IronConstituentOfBerylliumNearNetPreform
+sae-ams7908:IronConstituentOfBerylliumNearNetPreform rdf:type owl:Class ;
+                                                     rdfs:subClassOf sae-ams7908:Iron ,
+                                                                     sae-fnd:MaterialConstituent ,
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <https://www.omg.org/spec/Commons/Collections/isConstituentOf> ;
+                                                                       owl:someValuesFrom sae-ams7908:BerylliumNearNetPreform
+                                                                     ] ,
+                                                                     _:genid42 ;
+                                                     rdfs:label "iron constituent of beryllium near-net preform"@en .
+
+_:genid42 rdf:type owl:Restriction ;
+           owl:onProperty sae-fnd:hasPercentageInComposition ;
+           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+           owl:onDataRange [ rdf:type rdfs:Datatype ;
+                             owl:onDatatype xsd:decimal ;
+                             owl:withRestrictions ( [ xsd:maxInclusive 0.13
+                                                    ]
+                                                  )
+                           ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource sae-ams7908:IronConstituentOfBerylliumNearNetPreform ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget _:genid42 ;
+   sae-fnd:hasDiscoveryMethod sae-fnd:SpectrochemicalMethod
+ ] .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/Magnesium
+sae-ams7908:Magnesium rdf:type owl:Class ;
+                      rdfs:subClassOf sae-ams7908:Matter .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/MagnesiumConstituentOfBerylliumNearNetPreform
+sae-ams7908:MagnesiumConstituentOfBerylliumNearNetPreform rdf:type owl:Class ;
+                                                          rdfs:subClassOf sae-ams7908:Magnesium ,
+                                                                          sae-fnd:MaterialConstituent ,
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty <https://www.omg.org/spec/Commons/Collections/isConstituentOf> ;
+                                                                            owl:someValuesFrom sae-ams7908:BerylliumNearNetPreform
+                                                                          ] ,
+                                                                          _:genid48 ;
+                                                          rdfs:label "magnesium constituent of beryllium near-net preform"@en .
+
+_:genid48 rdf:type owl:Restriction ;
+           owl:onProperty sae-fnd:hasPercentageInComposition ;
+           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+           owl:onDataRange [ rdf:type rdfs:Datatype ;
+                             owl:onDatatype xsd:decimal ;
+                             owl:withRestrictions ( [ xsd:maxInclusive 0.08
+                                                    ]
+                                                  )
+                           ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource sae-ams7908:MagnesiumConstituentOfBerylliumNearNetPreform ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget _:genid48 ;
+   sae-fnd:hasDiscoveryMethod sae-fnd:SpectrochemicalMethod
+ ] .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/Matter
+sae-ams7908:Matter rdf:type owl:Class .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/OtherConstituentOfBerylliumNearNetPreform
+sae-ams7908:OtherConstituentOfBerylliumNearNetPreform rdf:type owl:Class ;
+                                                      rdfs:subClassOf sae-fnd:MaterialConstituent ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty <https://www.omg.org/spec/Commons/Collections/isConstituentOf> ;
+                                                                        owl:someValuesFrom sae-ams7908:BerylliumNearNetPreform
+                                                                      ] ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty sae-fnd:hasPercentageInComposition ;
+                                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                        owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                                          owl:onDatatype xsd:decimal ;
+                                                                                          owl:withRestrictions ( [ xsd:maxInclusive 0.04
+                                                                                                                 ]
+                                                                                                               )
+                                                                                        ]
+                                                                      ] ;
+                                                      rdfs:label "other constituent of beryllium near-net preform"@en .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/Silicon
+sae-ams7908:Silicon rdf:type owl:Class ;
+                    rdfs:subClassOf sae-ams7908:Matter .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/SiliconConstituentOfBerylliumNearNetPreform
+sae-ams7908:SiliconConstituentOfBerylliumNearNetPreform rdf:type owl:Class ;
+                                                        rdfs:subClassOf sae-ams7908:Silicon ,
+                                                                        sae-fnd:MaterialConstituent ,
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty <https://www.omg.org/spec/Commons/Collections/isConstituentOf> ;
+                                                                          owl:someValuesFrom sae-ams7908:BerylliumNearNetPreform
+                                                                        ] ,
+                                                                        _:genid59 ;
+                                                        rdfs:label "silicon constituent of beryllium near-net preform"@en .
+
+_:genid59 rdf:type owl:Restriction ;
+           owl:onProperty sae-fnd:hasPercentageInComposition ;
+           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+           owl:onDataRange [ rdf:type rdfs:Datatype ;
+                             owl:onDatatype xsd:decimal ;
+                             owl:withRestrictions ( [ xsd:maxInclusive 0.06
+                                                    ]
+                                                  )
+                           ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource sae-ams7908:SiliconConstituentOfBerylliumNearNetPreform ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget _:genid59 ;
+   sae-fnd:hasDiscoveryMethod sae-fnd:SpectrochemicalMethod
+ ] .
+
+
+###  https://www.omg.org/spec/Commons/Collections/Constituent
+<https://www.omg.org/spec/Commons/Collections/Constituent> rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/AMS7908BerylliumCompositionTensileStrengthImperialSystemValue
+sae-ams7908:AMS7908BerylliumCompositionTensileStrengthImperialSystemValue rdf:type owl:NamedIndividual ,
+                                                                                   <https://www.omg.org/spec/Commons/QuantitiesAndUnits/Constant> ;
+                                                                          sae-fnd:hasQuantityValue sae-fnd:KSI ;
+                                                                          <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasNumericValue> 60 ;
+                                                                          rdfs:label "imperial system value of beryllium tensile strength as specified by AMS7908"@en .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/AMS7908BerylliumCompositionTensileStrengthSIValue
+sae-ams7908:AMS7908BerylliumCompositionTensileStrengthSIValue rdf:type owl:NamedIndividual ,
+                                                                       <https://www.omg.org/spec/Commons/QuantitiesAndUnits/Constant> ;
+                                                              <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasMeasurementUnit> sae-fnd:MPa ;
+                                                              <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasNumericValue> 414 ;
+                                                              rdfs:label "SI value of beryllium tensile strength as specified by AMS7908"@en .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/AMS7908BerylliumCompositionYieldStrengthAt0.2PercentageOffsetSIValue
+sae-ams7908:AMS7908BerylliumCompositionYieldStrengthAt0.2PercentageOffsetSIValue rdf:type owl:NamedIndividual ,
+                                                                                          <https://www.omg.org/spec/Commons/QuantitiesAndUnits/Constant> ;
+                                                                                 <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasMeasurementUnit> sae-fnd:MPa ;
+                                                                                 <https://www.omg.org/spec/Commons/QuantitiesAndUnits/hasNumericValue> 296 ;
+                                                                                 rdfs:label "SI value of beryllium yield strength at 0.2 percentage offset as specified by AMS7908"@en .
+
+
+###  https://spec.sae.com/sae/ontology/AMS7908Ontology/AMS7908Standard
+sae-ams7908:AMS7908Standard rdf:type owl:NamedIndividual ,
+                                     sae-fnd:Standard ;
+                            rdfs:label "AMS7908 standard"@en .
+
+
+###  https://www.omg.org/spec/Commons/QuantitiesAndUnits/InternationalSystemOfUnits
+<https://www.omg.org/spec/Commons/QuantitiesAndUnits/InternationalSystemOfUnits> <https://www.omg.org/spec/Commons/Designators/defines> sae-fnd:MPa .
+
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+   owl:members ( sae-ams7908:Aluminium
+                 sae-ams7908:Beryllium
+                 sae-ams7908:BerylliumOxide
+                 sae-ams7908:Carbon
+                 sae-ams7908:Iron
+                 sae-ams7908:Magnesium
+                 sae-ams7908:Silicon
+               )
+ ] .
+
+
+###  Generated by the OWL API (version 4.5.24.2023-01-14T21:28:32Z) https://github.com/owlcs/owlapi

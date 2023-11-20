@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
+	<!ENTITY cmns-doc "https://www.omg.org/spec/Commons/Documents/">
+	<!ENTITY dct "http://purl.org/dc/terms/">
+	<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+	<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+	<!ENTITY skos "http://www.w3.org/2004/02/skos/core#">
+	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+<rdf:RDF xml:base="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
+	xmlns:cmns-doc="https://www.omg.org/spec/Commons/Documents/"
+	xmlns:dct="http://purl.org/dc/terms/"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+	
+	<owl:Ontology rdf:about="https://www.omg.org/spec/Commons/Documents/">
+		<rdfs:label>Commons Documents Ontology</rdfs:label>
+		<dct:abstract>This ontology defines high-level concepts for representation of documents, including legal documents and records, such as a transaction record, purchase history, or payment history. It is deliberately lightweight in order to accommodate mappings to other document and bibliographic ontologies.</dct:abstract>
+		<dct:contributor>Davide Sottara, Mayo Clinic</dct:contributor>
+		<dct:contributor>Elisa Kendall, Thematix Partners LLC</dct:contributor>
+		<dct:contributor>Evan Wallace, U.S. National Institute of Standards and Technology (NIST)</dct:contributor>
+		<dct:contributor>Pete Rivett, Federated Knowledge LLC</dct:contributor>
+		<dct:license rdf:datatype="&xsd;anyURI">https://opensource.org/licenses/MIT</dct:license>
+		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/AnnotationVocabulary/"/>
+		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20230801/Documents/"/>
+		<skos:note>This ontology was derived from the Financial Industry Business Ontology (FIBO), and generalized for use in other domain areas.</skos:note>
+		<cmns-av:copyright>Copyright (c) 2014-2023 EDM Council, Inc.</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Federated Knowledge LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Mayo Clinic</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2022-2023 Thematix Partners LLC</cmns-av:copyright>
+		<cmns-av:copyright>Copyright (c) 2023 Object Management Group, Inc.</cmns-av:copyright>
+	</owl:Ontology>
+	
+	<owl:Class rdf:about="&cmns-doc;Certificate">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:label>certificate</rdfs:label>
+		<skos:definition>document attesting to the truth of some fact or set of facts</skos:definition>
+		<cmns-av:adaptedFrom>ISO 5127 - Information and documentation - Foundation and vocabulary, Second edition, 2017-05, clause 3.1.1.38</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>A certificate may or may not also be a legal document, depending on the issuing authority and how it can be used.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>Certificates, such as electronic certificates, including public keys, may be issued by some certificate authority.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;Document">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;isAbout"/>
+				<owl:minCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>document</rdfs:label>
+		<rdfs:seeAlso rdf:resource="https://www.ifla.org/wp-content/uploads/2019/05/assets/cataloguing/frbr/frbroo_v2.2.pdf"/>
+		<skos:definition>unitary expression of some realization of an intellectual or artistic work</skos:definition>
+		<skos:note>See also ISO 25964–1:2011, definition 2.15; ISO 11005:2010, definition 3.1; ISO 15489–1:2016, definition 3.10; IEC 82045–1:2001, definition 3.2.3; ISO 9000:2015, definition 3.7.2</skos:note>
+		<skos:note>The definition of document provided herein roughly corresponds to the concept of an expression in FRBR. A document is a realization of something that typically takes the form of alpha-numeric, musical, or choreographic notation, sound, image, etc., or any combination of such forms. A manifestation of the document must be inscribed, encoded, engraved, recorded, or otherwise imprinted in some medium. The concept of a manifestation of an expression corresponds to the ISO 5127 notion of a document. Documents can differ extensively in form and characteristics.</skos:note>
+		<skos:note>The manifestation of a document (FRBR expression) refers not only to written and printed materials in paper or microform versions (for example, conventional books, journals, diagrams, maps), but also to non-printed media such as machine-readable and digitized records, Internet and intranet resources, films, sound recordings, buildings, sites, monuments, three-dimensional objects or realia [when used to carry some sort of engraving]; and to collections of such items or parts of such items. (Note taken from ISO 25964–1:2011, definition 2.15.) Also, software, since recorded, can be considered a document.</skos:note>
+		<cmns-av:adaptedFrom>&apos;Functional Requirements for Bibliographic Records&apos;, Final Report, IFLA (International Federation of Library Associations and Institutions) Study Group on the Functional Requirements for Bibliographic Records, September 1997 - see https://repository.ifla.org/bitstream/123456789/811/2/ifla-functional-requirements-for-bibliographic-records-frbr.pdf</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 5127 - Information and documentation - Foundation and vocabulary, Second edition, 2017-05, clause 3.1.1.38</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>A document, especially a legal document, may serve to establish one or several facts, and can be relied upon as a proof thereof.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>This definition of document corresponds to a subclass of expression in FRBR. The notion of being a unitary expression is the differentiator between an FRBR expression and document in this sense.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;LegalDocument">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:label>legal document</rdfs:label>
+		<skos:definition>document specifying the terms of, or provides evidence for, an agreement, attestation, certification, conditions, permissions, and/or decisions of legal persons, government entities, or courts of law, drawn up in accordance with certain rules that apply in the relevant jurisdiction(s)</skos:definition>
+		<skos:example>Examples include some certificates, deeds, bonds, business documents (such as articles of incorporation, bylaws, partnership agreements), contracts, certain identity documents, wills, trusts, legislative acts, notarial acts, court writs or processes (such as related complaints and pleadings in the context of litigation as well as other documents relevant to some legal issue), and any law passed by a competent legislative body in municipal (domestic) or international law.</skos:example>
+		<skos:note>A legal document bears the original, official, or legal form of something, that can be fully attributed to its author(s), that records and formally expresses a legally enforceable act, process, or contractual duty, obligation, or right and that can be used to furnish decisive evidence for that act, process, or agreement.</skos:note>
+		<skos:note>Many legal documents only become &apos;legal&apos; once they are signed and dated, and possibly notarized.</skos:note>
+		<cmns-av:adaptedFrom>ISO 5127 - Information and documentation - Foundation and vocabulary, Second edition, 2017-05, clause 3.4.6.02</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;Notice">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:label>notice</rdfs:label>
+		<skos:definition>announcement, communication, intimation, or advance warning of something, usually, but not necessarily, to allow preparations to be made</skos:definition>
+		<skos:example>registered trademark notice, disclaimer, copyright notice, overdue notice, recall notice</skos:example>
+		<skos:note>Although many notices are delivered electronically, certain legal notices must be given given in writing, often by regular mail or hand delivery, with the sender retaining sufficient proof of having given such notice (e.g., through a certificate of service).</skos:note>
+		<cmns-av:adaptedFrom>ISO 5127 - Information and documentation - Foundation and vocabulary, Second edition, 2017-05</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;Record">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:label>record</rdfs:label>
+		<skos:definition>memorialization and objective evidence of activities performed, events occurred, results achieved, or statements made, regardless of its characteristics, media, physical form, or the manner in which it is recorded or stored</skos:definition>
+		<skos:note>Records are created or received by an organization in routine transaction of its business or in pursuance of its legal obligations.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;Reference">
+		<rdfs:label>reference</rdfs:label>
+		<skos:definition>source that may be used to ascertain, interpret, or understand something</skos:definition>
+		<cmns-av:explanatoryNote>In linguistics, a reference characterizes, provides context for, or specifies the relationship of one linguistic expression to another, i.e., provides the information necessary to interpret the dependent expression.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>References may be rendered in the form of a document, but may also take other forms, such as reference materials, scientific equations, and constants, including in some cases physical things, used as the basis for units of measure.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;ReferenceDocument">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
+		<rdfs:label>reference document</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-doc;Document">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-doc;isReferredToBy"/>
+						<owl:someValuesFrom rdf:resource="&owl;Thing"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>document that is used as a reference for something</skos:definition>
+		<cmns-av:adaptedFrom>ISO/IEC 11179-3 Information technology - Metadata registries (MDR) - Part 3: Registry metamodel and basic attributes, Third edition, 2013-02-15</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>A reference document is typically one that provides pertinent details for consultation about a subject.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;Specification">
+		<rdfs:label>specification</rdfs:label>
+		<skos:definition>explicit requirement or set of requirements to be satisfied by something, such as a product, material, model, process or system</skos:definition>
+		<cmns-av:abbreviation xml:lang="en">spec</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>ISO 6707-2:2017 Buildings and civil engineering works - Vocabulary - Part 2: Contract and communication terms, clause 3.2.22</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-doc;TechnicalSpecificationDocument">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:label>technical specification document</rdfs:label>
+		<skos:definition>document that sets out detailed requirements to be satisfied by a product, material, process or system and the procedures for checking conformity to these requirements</skos:definition>
+		<skos:note>Technical specifications may evolve from a functional specification and define the technical requirements for the selected solution as part of a business agreement.</skos:note>
+		<cmns-av:adaptedFrom>ISO 10795:2019 Space systems - Programme management and quality - Vocabulary, clause 3.238</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO 6707-2:2017 Buildings and civil engineering works - Vocabulary - Part 2: Contract and communication terms, clause 3.2.22</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>A technical specification is a specification expressing technical requirements, such as one for designing and developing a solution to be implemented.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;hasDataSource">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
+		<rdfs:label>has data source</rdfs:label>
+		<skos:definition>relates something, such as an agreement, contract, document, record, report, or process, to a source of data used to analyze, develop, explain, produce, or otherwise create it</skos:definition>
+		<cmns-av:usageNote>Although in many cases an annotation property, such as dct:source, is sufficient for this purpose, there are occasions when a more complete description of a source is required, such as to meet data lineage requirements, for which this property may be used.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;isAbout">
+		<rdfs:label>is about</rdfs:label>
+		<skos:definition>indicates the subject or topic of something, such as a document</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;isReferredToBy">
+		<rdfs:label>is referred to by</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-doc;refersTo"/>
+		<skos:definition>indicates something that is referenced as a source for information or explanation</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;isSpecifiedIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
+		<rdfs:label>is specified in</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-doc;specifies"/>
+		<skos:definition>indicates the explicit source for some requirement, fact, or set of facts</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;records">
+		<rdfs:label>records</rdfs:label>
+		<skos:definition>documents for later reference</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;refersTo">
+		<rdfs:label>refers to</rdfs:label>
+		<skos:definition>makes reference to as a source for information or explanation</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;specifies">
+		<rdfs:label>specifies</rdfs:label>
+		<skos:definition>mentions, names or states something clearly and definitively</skos:definition>
+		<cmns-av:explanatoryNote>Specifies may be used to refer to a requirement, fact, or set of facts.</cmns-av:explanatoryNote>
+	</owl:ObjectProperty>
+
+</rdf:RDF>
