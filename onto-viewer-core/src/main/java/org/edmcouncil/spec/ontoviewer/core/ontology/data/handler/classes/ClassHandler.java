@@ -29,6 +29,8 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor.TaxonomyExtra
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.service.EntitiesCacheService;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.NodeID;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.vocab.OWLRDFVocabulary;
 import org.slf4j.Logger;
@@ -88,7 +90,9 @@ public class ClassHandler {
     this.inferableRestrictionHandler = inferableRestrictionHandler;
   }
 
+  //FIXME HANDLE NODEID OWCLANS ZWTJKTY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
   public OwlListDetails handle(OWLClass owlClass) {
+    System.out.println("8 - ClassHandler -> handle(OWLClass owlClass) " + owlClass);
     var configurationData = applicationConfigurationService.getConfigurationData();
 
     var ontology = ontologyManager.getOntology();
@@ -96,7 +100,7 @@ public class ClassHandler {
     var resultDetails = new OwlListDetails();
 
     try {
-      resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(owlClass));
+      resultDetails.setLabel(labelProvider.getLabelOrDefaultFragment(owlClass));// todo ustawienie label
 
       OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(owlClass, ontology, true);
       List<PropertyValue> subclasses = extractSubAndSuper.getSubclasses(axioms);
@@ -104,10 +108,13 @@ public class ClassHandler {
       List<PropertyValue> taxElements2 = taxonomyExtractor.extractTaxonomyElements(superClasses);
 
       OwlDetailsProperties<PropertyValue> directSubclasses = extractSubAndSuper.handleDirectSubclasses(owlClass);
+      
+      //todo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
       if (configurationData.getToolkitConfig().isIndividualsEnabled()) {
-        individuals = individualDataHelper.handleInstances(ontology, owlClass);
+        individuals = individualDataHelper.handleInstances(ontology, owlClass); //todo ti pobieramy instacje propetis
       }
+      //todo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
       OwlDetailsProperties<PropertyValue> usage = new OwlDetailsProperties<>();
       if (configurationData.getToolkitConfig().isUsageEnabled()) {
@@ -145,7 +152,7 @@ public class ClassHandler {
       resultDetails.addAllProperties(axioms);
       resultDetails.addAllProperties(annotations);
       resultDetails.addAllProperties(directSubclasses);
-      resultDetails.addAllProperties(individuals);
+      resultDetails.addAllProperties(individuals); //todo dodanie
       resultDetails.addAllProperties(inheritedAxioms);
       resultDetails.addAllProperties(usage);
       resultDetails.addAllProperties(copyrightHandler.getCopyright(classIri));
@@ -166,15 +173,16 @@ public class ClassHandler {
     return resultDetails;
   }
 
-  public OwlListDetails handle(IRI classIri) {
-    var resultDetails = new OwlListDetails();
 
+  public OwlListDetails handle(IRI classIri) {
+    System.out.println("7 - ClassHandler -> handle(IRI classIri): " + classIri);
+    var resultDetails = new OwlListDetails();
     var entityEntry = entitiesCacheService.getEntityEntry(classIri, OwlType.CLASS);
 
-    try {
+    try { 
       if (entityEntry != null && entityEntry.isPresent()) {
         var owlClass = entityEntry.getEntityAs(OWLClass.class);
-
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         resultDetails = handle(owlClass);
       } else {
         LOG.warn("Entity with IRI '{}' not found (is NULL or not present: {}).", classIri, entityEntry);
@@ -183,5 +191,62 @@ public class ClassHandler {
       LOG.warn("Unable to handle class {}. Details: {}", classIri, ex.getMessage(), ex);
     }
     return resultDetails;
+  }
+
+  
+  //FIXME INNNINNNNNNNNNNNNNNNNNNIN  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  public OwlListDetails handle(OWLAnonymousIndividual anonymousIndividual) {
+    System.out.println("Handling OWLAnonymousIndividual: " + anonymousIndividual);
+
+    var resultDetails = new OwlListDetails();
+    var entityEntry = entitiesCacheService.getEntityEntry(anonymousIndividual);
+
+
+      if (entityEntry != null && entityEntry.isPresent()) {
+        resultDetails = handleAnonymousIndividual(anonymousIndividual);
+      } else {
+        resultDetails = handleAnonymousIndividual(anonymousIndividual);
+        LOG.warn("ZZZZZ Anonymous individual not found or not present: {}", anonymousIndividual);
+      }
+
+
+    return resultDetails;
+  }
+
+
+  public OwlListDetails handleAnonymousIndividual(OWLAnonymousIndividual owlAnonymousIndividual) {
+    //FIXME HANDLE NODEID 
+    var configurationData = applicationConfigurationService.getConfigurationData();
+//    var classIri = owlClass.getIRI(); !!!!!!!!!!!!!!!!!!!
+    var resultDetails = new OwlListDetails();
+    
+    
+    
+//    var entityEntry = entitiesCacheService.getEntityEntry(classIri, OwlType.CLASS);
+//        resultDetails = handle(owlAnonymousIndividual);
+
+    resultDetails.setLabel(labelProvider.getLabelOrDefaultNodeID(owlAnonymousIndividual));// todo ustawienie label OLD
+
+
+//    OwlTaxonomyImpl taxonomy = taxonomyExtractor.extractTaxonomy(
+//            taxElements2,
+//            owlClass.getIRI(),
+//            ontology,
+//            AXIOM_CLASS);
+//    taxonomy.sort();
+
+//    resultDetails.setTaxonomy(taxonomy);
+//    resultDetails.addAllProperties(axioms);
+//    resultDetails.addAllProperties(annotations);
+//    resultDetails.addAllProperties(directSubclasses);
+//    resultDetails.addAllProperties(individuals); //todo dodanie
+//    resultDetails.addAllProperties(inheritedAxioms);
+//    resultDetails.addAllProperties(usage);
+//    resultDetails.addAllProperties(copyrightHandler.getCopyright(classIri));
+//    resultDetails.addAllProperties(licenseHandler.getLicense(classIri));
+//    resultDetails.setqName(qnameHandler.getQName(classIri));    
+
+    return resultDetails;
+
   }
 }

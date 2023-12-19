@@ -15,6 +15,7 @@ import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.EntityType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -47,7 +48,7 @@ public class LabelProvider {
   private List<UserDefaultName> userDefaultNames;
 
   public LabelProvider(ApplicationConfigurationService applicationConfigurationService,
-      OntologyManager ontologyManager) {
+                       OntologyManager ontologyManager) {
     this.applicationConfigurationService = applicationConfigurationService;
     this.ontologyManager = ontologyManager;
 
@@ -130,6 +131,39 @@ public class LabelProvider {
       }
     }
     previouslyUsedLabels.put(entity.getIRI().toString(), labelResult);
+    return labelResult;
+  }
+  
+  public String getLabelOrDefaultNodeID(OWLAnonymousIndividual anonymousIndividual) {
+    if (anonymousIndividual == null) {
+      return null;
+    }
+
+    OWLDataFactory factory = new OWLDataFactoryImpl();
+    Map<String, String> labels = new HashMap<>();
+    if (shouldDisplayLabel) {
+      var ontologies = ontologyManager.getOntologyWithImports();
+      EntitySearcher.getAnnotations(anonymousIndividual, ontologies, factory.getRDFSLabel())
+              .filter(annotation -> annotation.getValue().isLiteral())
+              .forEachOrdered(annotation -> {
+                String label = annotation.getValue().asLiteral().orElseThrow().getLiteral();
+                String lang = annotation.getValue().asLiteral().orElseThrow().getLang();
+                labelProcessing(lang, labels, label, IRI.create(anonymousIndividual.getID().toString()));
+              });
+    }
+
+    String labelResult = null;
+
+    if (labelResult == null) {
+      if (labels.size() == 1) {
+        labelResult = labels.entrySet().stream().findFirst().get().getKey();
+      } else if (labels.size() > 1) {
+        labelResult = getTheRightLabel(labels, IRI.create(anonymousIndividual.getID().toString()));
+      } else {
+        labelResult = anonymousIndividual.getID().toString().replaceFirst("_:","");
+      }
+    }
+    previouslyUsedLabels.put(anonymousIndividual.getID().toString(), labelResult);
     return labelResult;
   }
 

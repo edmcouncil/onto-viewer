@@ -3,11 +3,15 @@ package org.edmcouncil.spec.ontoviewer.core.ontology;
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.exception.NotFoundElementInOntologyException;
@@ -31,7 +35,10 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.generator.DescriptionGenerat
 import org.edmcouncil.spec.ontoviewer.core.service.ChangerIriToLabelService;
 import org.semanticweb.owlapi.model.EntityType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.NodeID;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLEntity;
+import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +54,7 @@ public class DetailsManager {
   private static final Logger LOGGER = LoggerFactory.getLogger(DetailsManager.class);
   private static final String DEFAULT_GROUP_NAME = "other";
   private static final String NOT_FOUND_ENTITY_MESSAGE = "Not found element with IRI: %s";
+  private static final String NOT_FOUND_BNODE_MESSAGE = "Not found element with nodeID: %s";
 
   private final ApplicationConfigurationService applicationConfigurationService;
   private final OntologyManager ontologyManager;
@@ -170,18 +178,52 @@ public class DetailsManager {
   }
 
   public OwlDetails getEntityDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
-    IRI iri = IRI.create(iriString);
-    OwlListDetails resultDetails = metadataHandler.handle(iri);
-    if (resultDetails == null) {
-      resultDetails = getEntityListDetails(iri);
+    System.out.println("3 - DetailsManager -> getEntityDetailsByIri() " + iriString);
+    OwlListDetails resultDetails;
+    IRI iri;
+    NodeID nodeID;
+    
+    
+    if (isIri(iriString)){
+      iri = IRI.create(iriString);
+      resultDetails = metadataHandler.handle(iri);
 
       if (resultDetails == null) {
-        throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_ENTITY_MESSAGE, iri));
+        resultDetails = getEntityListDetails(iri); 
+        
+        if (resultDetails == null) {
+          throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_ENTITY_MESSAGE, iri));
+        }
       }
+      resultDetails.setDeprecated(deprecatedHandler.getDeprecatedForEntity(iri));
+      resultDetails.setVersionIri(versionIriHandler.getVersionIri(iri));
+      OwlDetails owlDetails = setGroupedDetailsIfEnabled(iri, resultDetails);
+      return owlDetails;
+
+    } else if (isBlankNode(iriString)) { 
+      nodeID = NodeID.getNodeID(iriString);
+      resultDetails = getBlankNodeListDetails(nodeID);
+
+      if (resultDetails == null) {
+        throw new NotFoundElementInOntologyException(String.format(NOT_FOUND_BNODE_MESSAGE, nodeID));
+      }
+      
+      resultDetails.setDeprecated(deprecatedHandler.getDeprecatedForEntity(IRI.create(iriString)));
+      resultDetails.setVersionIri(versionIriHandler.getVersionIri(IRI.create(iriString)));
+      OwlDetails owlDetails = setGroupedDetailsIfEnabled(IRI.create(iriString), resultDetails);
+      return owlDetails;
     }
-    resultDetails.setDeprecated(deprecatedHandler.getDeprecatedForEntity(iri));
-    resultDetails.setVersionIri(versionIriHandler.getVersionIri(iri));
-    return setGroupedDetailsIfEnabled(iri, resultDetails);
+    return null;
+  }
+
+  
+  
+  private boolean isBlankNode(String blankNodeId) {
+    return blankNodeId.startsWith("_:genid");
+  }
+
+  private boolean isIri(String iriString) {
+    return iriString.startsWith("http://") || iriString.startsWith("https://");
   }
 
   private OwlDetails setGroupedDetailsIfEnabled(IRI iri, OwlListDetails result) {
@@ -204,10 +246,14 @@ public class DetailsManager {
     return result;
   }
 
+  //FIXME 1111111111111111111111111111!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   private OwlListDetails getEntityListDetails(IRI iri) {
+    System.out.println("6 - DetailsManager -> getEntityListDetails(IRI iri): " + iri);
     OwlListDetails result = null;
-
+//////////////////////////TODO tu SZUKAMY!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
     if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
+      System.out.println("AAAAAAAAAAAAAAA");
       result = particularClassHandler.handle(iri);
       if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
         var individualResult = particularIndividualHandler.handle(iri);
@@ -233,6 +279,49 @@ public class DetailsManager {
     return result;
   }
 
+
+  private OwlListDetails getBlankNodeListDetails(NodeID nodeID) {
+    System.out.println("6 - DetailsManager -> getBlankNodeListDetails(NodeID nodeID) " + nodeID);
+    OwlListDetails result = null;
+//////////////////////////TODO tu SZUKAMY!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    Optional<OWLAnonymousIndividual> specificBNode = getSpecificBNode(ontologyManager.getOntology(), nodeID);
+    
+    if (!specificBNode.isPresent()){
+      return result;
+    }
+
+    OWLAnonymousIndividual owlAnonymousIndividual = specificBNode.get(); //TODO TUTAJ MAMY BNODE
+
+    
+    //TODO TUTAJ ROBIMY ma OwlListDetails result
+
+    result = particularClassHandler.handle(owlAnonymousIndividual);
+
+    if (result != null) {
+      result.setIri(nodeID.getID());
+//      result.setMaturityLevel(moduleHelper.getMaturityLevel(nodeID.));
+    }
+    
+    return result;
+  }
+  
+  
+  
+
+//TODO zwracamy bnode
+  private Optional<OWLAnonymousIndividual> getSpecificBNode(OWLOntology ontology, NodeID nodeID) {
+    for (var currentOntology : ontology.importsClosure().collect(Collectors.toSet())) {
+      Set<OWLAnonymousIndividual> matchedIndividuals = currentOntology.referencedAnonymousIndividuals()
+              .filter(individual -> individual.toStringID().equals(nodeID.getID()))
+              .collect(Collectors.toSet());
+
+      if (!matchedIndividuals.isEmpty()) {
+        return matchedIndividuals.stream().findFirst();
+      }
+    }
+    return Optional.empty();
+  }
+  
   private OwlGroupedDetails groupDetails(OwlListDetails owlDetails,
       ConfigurationData configurationData) {
     var groupedDetails = new OwlGroupedDetails();

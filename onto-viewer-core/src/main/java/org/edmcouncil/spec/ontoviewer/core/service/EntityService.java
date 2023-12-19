@@ -17,6 +17,7 @@ public class EntityService {
   }
 
   public SearcherResult<OwlDetails> getEntityDetailsByIri(String iri) throws NotFoundElementInOntologyException {
+    System.out.println("2 - EntityService -> getEntityDetailsByIri(): " + iri);
     OwlDetails ontologyDetails = detailsManager.getEntityDetailsByIri(iri);
     return ResultFactory.createDetailsResult(ontologyDetails);
   }
