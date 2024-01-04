@@ -205,11 +205,14 @@ public class ClassHandler {
       if (entityEntry != null && entityEntry.isPresent()) {
         resultDetails = handleAnonymousIndividual(anonymousIndividual);
       } else {
-        resultDetails = handleAnonymousIndividual(anonymousIndividual);
         LOG.warn("ZZZZZ Anonymous individual not found or not present: {}", anonymousIndividual);
       }
+    resultDetails = handleAnonymousIndividual(anonymousIndividual);
 
-
+    System.out.println(resultDetails);
+      int z = 3;
+      z++;
+    System.out.println(z);
     return resultDetails;
   }
 
@@ -217,7 +220,9 @@ public class ClassHandler {
   public OwlListDetails handleAnonymousIndividual(OWLAnonymousIndividual owlAnonymousIndividual) {
     //FIXME HANDLE NODEID 
     var configurationData = applicationConfigurationService.getConfigurationData();
-//    var classIri = owlClass.getIRI(); !!!!!!!!!!!!!!!!!!!
+    
+    var ontology = ontologyManager.getOntology();
+    var classIri = owlAnonymousIndividual.asIRI().get();
     var resultDetails = new OwlListDetails();
     
     
@@ -226,6 +231,8 @@ public class ClassHandler {
 //        resultDetails = handle(owlAnonymousIndividual);
 
     resultDetails.setLabel(labelProvider.getLabelOrDefaultNodeID(owlAnonymousIndividual));// todo ustawienie label OLD
+
+//    OwlDetailsProperties<PropertyValue> axioms = axiomsHandler.handle(owlAnonymousIndividual, ontology, true);
 
 
 //    OwlTaxonomyImpl taxonomy = taxonomyExtractor.extractTaxonomy(
