@@ -28,7 +28,6 @@ public class EntityApiController extends BaseController {
       throws NotFoundElementInOntologyException {
     checkIfApplicationIsReady();
 
-    System.out.println("1 - EntityApiController -> getEntityByIri():" + iri);
     SearcherResult<OwlDetails> entityResult = entityService.getEntityDetailsByIri(iri.trim());
     return ResponseEntity.ok(entityResult);
   }

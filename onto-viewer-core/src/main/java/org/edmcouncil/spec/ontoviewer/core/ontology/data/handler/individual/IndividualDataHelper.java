@@ -7,6 +7,8 @@ import org.edmcouncil.spec.ontoviewer.core.model.property.OwlDetailsProperties;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlListElementIndividualProperty;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.factory.ViewerIdentifierFactory;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -55,11 +57,34 @@ public class IndividualDataHelper {
       if (individual.isNamed()) {
         label = labelExtractor.getLabelOrDefaultFragment(individual.asOWLNamedIndividual());
       } else {
-        label = labelExtractor.getLabelOrDefaultNodeID(individual.asOWLAnonymousIndividual());
+        label = labelExtractor.getLabelOrDefaultFragment(individual.asOWLAnonymousIndividual());
       }
       String iri = individual.isNamed() ? individual.asOWLNamedIndividual().getIRI().toString() : individual.asOWLAnonymousIndividual().toStringID();
 
       s.setValue(new Pair(label.replaceFirst("^_:",""), iri));
+      result.addProperty(instanceKey, s);
+    }
+    result.sortPropertiesInAlphabeticalOrder();
+    return result;
+  }
+
+
+  public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology, OWLAnonymousIndividual anonymousIndividual) {
+    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+
+    Set<OWLAxiom> relatedAxioms = ontology.importsClosure()
+            .flatMap(ont -> ont.axioms(anonymousIndividual))
+            .collect(Collectors.toSet());
+
+    for (OWLAxiom axiom : relatedAxioms) {
+      OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
+      s.setType(OwlType.INSTANCES);
+
+      String label = axiom.toString();  
+
+      String iri = anonymousIndividual.getID().toString();
+
+      s.setValue(new Pair(label, iri));
       result.addProperty(instanceKey, s);
     }
     result.sortPropertiesInAlphabeticalOrder();
@@ -87,11 +112,6 @@ public class IndividualDataHelper {
       });
     }
     
-    
-    int number = 4;
-    System.out.println(number);
-    
-    
     return result;
   }
 
@@ -103,8 +123,13 @@ public class IndividualDataHelper {
    * @return All instances of a given class;
    */
   public OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLClass clazz) {
-//    OwlDetailsProperties<PropertyValue> propertyValueOwlDetailsProperties = handleClassIndividualsAnonymous(ontology, clazz);
     OwlDetailsProperties<PropertyValue> result = handleClassIndividuals(ontology, clazz);
     return result;
   }
+
+  public OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLAnonymousIndividual anonymousIndividual) {
+    OwlDetailsProperties<PropertyValue> result = handleClassIndividuals(ontology, anonymousIndividual);
+    return result;
+  }
+  
 }

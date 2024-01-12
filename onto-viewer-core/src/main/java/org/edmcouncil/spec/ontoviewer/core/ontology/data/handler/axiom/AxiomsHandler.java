@@ -17,6 +17,7 @@ import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAxiom;
@@ -75,6 +76,20 @@ public class AxiomsHandler {
     return handle(axiomsSet.iterator(), obj.getIRI());
   }
 
+  public OwlDetailsProperties<PropertyValue> handle(OWLAnonymousIndividual anonymousIndividual, OWLOntology ontology, boolean extractGCI) {
+    Set<OWLAxiom> axiomsSet = ontology.referencingAxioms(anonymousIndividual, INCLUDED).collect(Collectors.toSet());
+
+    if (extractGCI) {
+      ontology.importsClosure().forEach(currentOntology ->
+              axiomsSet.addAll(
+                      currentOntology.axioms(AxiomType.CLASS_ASSERTION)
+                              .filter(ax -> ax.getIndividualsInSignature().contains(anonymousIndividual))
+                              .collect(Collectors.toSet())));
+    }
+
+    return handle(axiomsSet.iterator(), anonymousIndividual);
+  }
+
   public OwlDetailsProperties<PropertyValue> handle(OWLAnnotationProperty obj, OWLOntology ontology) {
     Iterator<OWLAnnotationAxiom> axiomsIterator = ontology.axioms(obj, INCLUDED).iterator();
     return handle(axiomsIterator, obj.getIRI());
@@ -115,4 +130,39 @@ public class AxiomsHandler {
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
+
+  private <T extends OWLAxiom> OwlDetailsProperties<PropertyValue> handle(
+          Iterator<T> axiomsIterator,
+          OWLAnonymousIndividual anonymousIndividual) {
+    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+    
+    String anonymousId = anonymousIndividual.getID().toString();
+
+    while (axiomsIterator.hasNext()) {
+      T axiom = axiomsIterator.next();
+
+      String key = axiom.getAxiomType().getName();
+      if (axiom instanceof OWLSubClassOfAxiom) {
+        OWLSubClassOfAxiom clazzAxiom = (OWLSubClassOfAxiom) axiom;
+        if (clazzAxiom.isGCI()) {
+          key = "gci";
+        }
+      }
+      key = ViewerIdentifierFactory.createId(ViewerIdentifierFactory.Type.axiom, key);
+
+     
+      OwlAxiomPropertyValue axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
+              axiom, anonymousId, anonymousId, false, true); 
+
+      if (axiomPropertyValue == null) {
+        continue;
+      }
+      if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
+        result.addProperty(key, axiomPropertyValue);
+      }
+    }
+    result.sortPropertiesInAlphabeticalOrder();
+    return result;
+  }
+  
 }

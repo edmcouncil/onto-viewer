@@ -178,11 +178,9 @@ public class DetailsManager {
   }
 
   public OwlDetails getEntityDetailsByIri(String iriString) throws NotFoundElementInOntologyException {
-    System.out.println("3 - DetailsManager -> getEntityDetailsByIri() " + iriString);
     OwlListDetails resultDetails;
     IRI iri;
     NodeID nodeID;
-    
     
     if (isIri(iriString)){
       iri = IRI.create(iriString);
@@ -246,14 +244,9 @@ public class DetailsManager {
     return result;
   }
 
-  //FIXME 1111111111111111111111111111!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   private OwlListDetails getEntityListDetails(IRI iri) {
-    System.out.println("6 - DetailsManager -> getEntityListDetails(IRI iri): " + iri);
     OwlListDetails result = null;
-//////////////////////////TODO tu SZUKAMY!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    System.out.println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
     if (ontologyManager.getOntology().containsClassInSignature(iri, INCLUDED)) {
-      System.out.println("AAAAAAAAAAAAAAA");
       result = particularClassHandler.handle(iri);
       if (ontologyManager.getOntology().containsIndividualInSignature(iri, INCLUDED)) {
         var individualResult = particularIndividualHandler.handle(iri);
@@ -281,25 +274,20 @@ public class DetailsManager {
 
 
   private OwlListDetails getBlankNodeListDetails(NodeID nodeID) {
-    System.out.println("6 - DetailsManager -> getBlankNodeListDetails(NodeID nodeID) " + nodeID);
     OwlListDetails result = null;
-//////////////////////////TODO tu SZUKAMY!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     Optional<OWLAnonymousIndividual> specificBNode = getSpecificBNode(ontologyManager.getOntology(), nodeID);
     
     if (!specificBNode.isPresent()){
       return result;
     }
 
-    OWLAnonymousIndividual owlAnonymousIndividual = specificBNode.get(); //TODO TUTAJ MAMY BNODE
-
+    OWLAnonymousIndividual owlAnonymousIndividual = specificBNode.get(); 
     
-    //TODO TUTAJ ROBIMY ma OwlListDetails result
-
     result = particularClassHandler.handle(owlAnonymousIndividual);
 
     if (result != null) {
       result.setIri(nodeID.getID());
-//      result.setMaturityLevel(moduleHelper.getMaturityLevel(nodeID.));
+//      result.setMaturityLevel(moduleHelper.getMaturityLevel(owlAnonymousIndividual));
     }
     
     return result;
@@ -307,8 +295,7 @@ public class DetailsManager {
   
   
   
-
-//TODO zwracamy bnode
+  
   private Optional<OWLAnonymousIndividual> getSpecificBNode(OWLOntology ontology, NodeID nodeID) {
     for (var currentOntology : ontology.importsClosure().collect(Collectors.toSet())) {
       Set<OWLAnonymousIndividual> matchedIndividuals = currentOntology.referencedAnonymousIndividuals()

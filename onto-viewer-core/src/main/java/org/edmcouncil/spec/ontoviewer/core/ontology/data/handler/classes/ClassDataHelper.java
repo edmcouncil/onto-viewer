@@ -25,6 +25,8 @@ import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
 import org.semanticweb.owlapi.model.AsOWLClass;
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLEntity;
@@ -94,6 +96,44 @@ public class ClassDataHelper {
     return result.stream().distinct().collect(Collectors.toList());
   }
 
+  public List<PropertyValue> getSuperClasses(OWLAnonymousIndividual anonymousIndividual) {
+    List<OWLClassExpression> superClasses = EntitySearcher
+            .getTypes(anonymousIndividual, ontologyManager.getOntologyWithImports())
+            .collect(Collectors.toList());
+
+    List<PropertyValue> result = new LinkedList<>();
+    for (OWLClassExpression superClassExpression : superClasses) {
+
+      String key = null;
+      String label = null;
+      if (superClassExpression.isClassExpressionLiteral() && superClassExpression.asOWLClass().isOWLClass()) {
+        IRI entityIri = superClassExpression.asOWLClass().getIRI();
+        key = StringUtils.getIdentifier(entityIri);
+        label = labelProvider.getLabelOrDefaultFragment(entityIri);
+      } else {
+        
+        continue;
+      }
+
+      OwlAxiomPropertyEntity propertyEntity = new OwlAxiomPropertyEntity(
+              key,
+              label,
+              OntoViewerEntityType.CLASS, 
+              false); 
+
+      Map<String, OwlAxiomPropertyEntity> entityMapping = new HashMap<>();
+      entityMapping.put(key, propertyEntity);
+
+      OwlAxiomPropertyValue axiomPropertyValue =
+              new OwlAxiomPropertyValue(key, OwlType.TAXONOMY, 0, null, entityMapping);
+      axiomPropertyValue.addEntityValues(key, propertyEntity);
+
+      result.add(axiomPropertyValue);
+    }
+
+    return result.stream().distinct().collect(Collectors.toList());
+  }
+
   public List<PropertyValue> getSubclasses(OwlDetailsProperties<PropertyValue> axioms) {
     return axioms
         .getProperties()
@@ -134,7 +174,37 @@ public class ClassDataHelper {
     result.sortPropertiesInAlphabeticalOrder();
     return result;
   }
+  
+  public OwlDetailsProperties<PropertyValue> handleDirectSubclasses(OWLAnonymousIndividual anonymousIndividual) {
+    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
+    var types = EntitySearcher
+            .getTypes(anonymousIndividual, ontologyManager.getOntologyWithImports())
+            .collect(Collectors.toSet());
+
+    for (OWLClassExpression type : types) {
+      if (!type.isClassExpressionLiteral()) {
+        continue;
+      }
+
+      OWLClass owlClass = type.asOWLClass();
+      IRI iri = owlClass.getIRI();
+      OwlDirectedSubClassesProperty typeProperty = new OwlDirectedSubClassesProperty();
+      typeProperty.setType(OwlType.DIRECT_TYPES);
+      
+      typeProperty.setValue(
+              new Pair(labelProvider.getLabelOrDefaultFragment(iri), iri.toString()));
+      String key = ViewerIdentifierFactory.createId(
+              ViewerIdentifierFactory.Type.function,
+              OwlType.DIRECT_TYPES.name().toLowerCase());
+      result.addProperty(key, typeProperty);
+    }
+    result.sortPropertiesInAlphabeticalOrder();
+    return result;
+  }
+  
+  
+  
   public List<PropertyValue> getSuperElements(OWLEntity entity, OWLOntology ontology, OwlType type) {
     IRI entityIri = entity.getIRI();
 

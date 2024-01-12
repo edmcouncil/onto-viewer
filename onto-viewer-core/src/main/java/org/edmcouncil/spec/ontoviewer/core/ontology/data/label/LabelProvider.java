@@ -134,7 +134,7 @@ public class LabelProvider {
     return labelResult;
   }
   
-  public String getLabelOrDefaultNodeID(OWLAnonymousIndividual anonymousIndividual) {
+  public String getLabelOrDefaultFragment(OWLAnonymousIndividual anonymousIndividual) {
     if (anonymousIndividual == null) {
       return null;
     }
