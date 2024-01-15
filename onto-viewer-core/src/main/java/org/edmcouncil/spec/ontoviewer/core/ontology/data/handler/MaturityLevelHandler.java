@@ -10,7 +10,10 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.Maturi
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
+import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.parameters.Imports;
@@ -58,6 +61,91 @@ public class MaturityLevelHandler {
     }
 
     return maturityLevelFactory.notSet();
+  }
+
+  public MaturityLevel getMaturityLevelForElement(OWLAnonymousIndividual anonymousIndividual) {
+
+    boolean containsAnonymousIndividual = ontologyManager.getOntology().axioms(Imports.INCLUDED)
+            .flatMap(OWLAxiom::anonymousIndividuals)
+            .anyMatch(ind -> ind.equals(anonymousIndividual));
+
+    if (!containsAnonymousIndividual) {
+      return maturityLevelFactory.notSet();
+    }
+    
+    var maturityLevelOptional = getMaturityLevelForAnonymousIndividual(anonymousIndividual);
+    if (maturityLevelOptional.isPresent() && !maturityLevelOptional.get().equals(maturityLevelFactory.notSet())) {
+      return maturityLevelOptional.get();
+    }
+
+    maturityLevelOptional = getMaturityLevelForAnonymousIndividualFromOntology(anonymousIndividual);
+    if (maturityLevelOptional.isPresent() && !maturityLevelOptional.get().equals(maturityLevelFactory.notSet())) {
+      return maturityLevelOptional.get();
+    }
+
+    return maturityLevelFactory.notSet();
+  }
+
+  private Optional<MaturityLevel> getMaturityLevelForAnonymousIndividual(OWLAnonymousIndividual anonymousIndividual) {
+    
+    var relatedAxioms = ontologyManager.getOntology().axioms(Imports.INCLUDED)
+            .filter(axiom -> axiom.individualsInSignature().anyMatch(ind -> ind.equals(anonymousIndividual)))
+            .collect(Collectors.toList());
+
+    MaturityLevel maturityLevel = null;
+
+    for (OWLAxiom axiom : relatedAxioms) {
+      if (axiom instanceof OWLAnnotationAssertionAxiom) {
+        OWLAnnotationAssertionAxiom annotationAxiom = (OWLAnnotationAssertionAxiom) axiom;
+        if (annotationAxiom.getSubject().equals(anonymousIndividual)) {
+          for (OWLAnnotation annotation : annotationAxiom.getAnnotations()) {
+            if (annotation.getProperty().equals(maturityLevelAnnotationProperty) && annotation.getValue().isIRI()) {
+              var maturityLevelPropertyValueIri = annotation.getValue().asIRI().get();
+              var maturityLevelOptional = maturityLevelFactory.getMaturityLevels()
+                      .stream()
+                      .filter(maturityLevelCandidate ->
+                              maturityLevelCandidate.getIri().equals(maturityLevelPropertyValueIri.getIRIString()))
+                      .findFirst();
+              if (maturityLevelOptional.isPresent()) {
+                maturityLevel = maturityLevelOptional.get();
+                break;
+              }
+            }
+          }
+        }
+      }
+      if (maturityLevel != null) {
+        break;
+      }
+    }
+
+    return maturityLevel != null ? Optional.of(maturityLevel) : Optional.empty();
+  }
+  
+  private Optional<MaturityLevel> getMaturityLevelForAnonymousIndividualFromOntology(OWLAnonymousIndividual anonymousIndividual) {
+    List<OWLOntology> ontologies = ontologyManager.getOntologyWithImports().collect(Collectors.toList());
+
+    for (OWLOntology ontology : ontologies) {
+      for (OWLAxiom axiom : ontology.getAxioms()) {
+        if (axiom instanceof OWLAnnotationAssertionAxiom) {
+          OWLAnnotationAssertionAxiom annotationAxiom = (OWLAnnotationAssertionAxiom) axiom;
+          if (annotationAxiom.getSubject().equals(anonymousIndividual)) {
+            for (OWLAnnotation annotation : annotationAxiom.getAnnotations(getMaturityLevelProperty())) {
+              if (annotation.getValue().isIRI() && annotation.getValue().asIRI().isPresent()) {
+                var maturityLevelPropertyValueIri = annotation.getValue().asIRI().get();
+                var maturityLevelOptional =
+                        maturityLevelFactory.getMaturityLevel(maturityLevelPropertyValueIri.getIRIString());
+                if (maturityLevelOptional.isPresent()) {
+                  return maturityLevelOptional;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return Optional.empty();
   }
 
   public Optional<MaturityLevel> getMaturityLevelForParticularOntology(OWLOntology ontology) {

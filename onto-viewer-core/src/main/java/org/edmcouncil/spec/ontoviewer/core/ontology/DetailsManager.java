@@ -287,7 +287,7 @@ public class DetailsManager {
 
     if (result != null) {
       result.setIri(nodeID.getID());
-//      result.setMaturityLevel(moduleHelper.getMaturityLevel(owlAnonymousIndividual));
+      result.setMaturityLevel(moduleHelper.getMaturityLevel(owlAnonymousIndividual));
     }
     
     return result;
