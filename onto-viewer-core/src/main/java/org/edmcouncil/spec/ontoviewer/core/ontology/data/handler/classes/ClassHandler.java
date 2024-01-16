@@ -213,17 +213,13 @@ public class ClassHandler {
     
     List<PropertyValue> subclasses = extractSubAndSuper.getSubclasses(axioms);
 
-    List<PropertyValue> superClasses = extractSubAndSuper.getSuperClasses(owlAnonymousIndividual);
-    List<PropertyValue> taxElements2 = taxonomyExtractor.extractTaxonomyElements(superClasses);
-
     OwlDetailsProperties<PropertyValue> directSubclasses = extractSubAndSuper.handleDirectSubclasses(owlAnonymousIndividual);
 
-    OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
-    if (configurationData.getToolkitConfig().isIndividualsEnabled()) {
-      individuals = individualDataHelper.handleInstances(ontology, owlAnonymousIndividual);
-    }
+//    OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
+//    if (configurationData.getToolkitConfig().isIndividualsEnabled()) {
+//      individuals = individualDataHelper.handleInstances(ontology, owlAnonymousIndividual);
+//    }
     
-
     OntologyGraph ontologyGraph = new OntologyGraph(0);
     if (configurationData.getToolkitConfig().isOntologyGraphEnabled()) {
       ontologyGraph = graphDataHandler.handleGraph(owlAnonymousIndividual, ontology, 0, 0);
@@ -235,25 +231,16 @@ public class ClassHandler {
       axioms.addProperty(StringIdentifier.subClassOfIriString, subclass);
     }
 
-//    OwlTaxonomyImpl taxonomy = taxonomyExtractor.extractTaxonomy(
-//            taxElements2,
-//            owlAnonymousIndividual,
-//            ontology,
-//            AXIOM_CLASS);
-//    taxonomy.sort();
-
     OwlDetailsProperties<PropertyValue> annotations =
             particularAnnotationPropertyHandler.handleAnnotations(
                     owlAnonymousIndividual,
                     ontology,
                     resultDetails);
     
-    
-//    resultDetails.setTaxonomy(taxonomy);
     resultDetails.addAllProperties(axioms);
     resultDetails.addAllProperties(annotations);
     resultDetails.addAllProperties(directSubclasses);
-    resultDetails.addAllProperties(individuals);
+//    resultDetails.addAllProperties(individuals);
 
     IRI classIri = getIri(resultDetails);
     if (classIri != null) {

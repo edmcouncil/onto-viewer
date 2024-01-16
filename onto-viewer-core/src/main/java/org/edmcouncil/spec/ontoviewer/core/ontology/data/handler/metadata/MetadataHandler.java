@@ -15,7 +15,6 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHa
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.NodeID;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.springframework.stereotype.Component;
@@ -46,11 +45,9 @@ public class MetadataHandler {
   private final Map<IRI, OntologyResources> resources = new HashMap<>();
 
   public OwlListDetails handle(IRI iri) {
-    System.out.println("4 - MetadataHandler -> handle(IRI iri): " + iri);
     
     OwlListDetails ontologyDetails = new OwlListDetails();
     OwlDetailsProperties<PropertyValue> metadata = handle(iri, ontologyDetails);
-    System.out.println(metadata);
     if (metadata != null && !metadata.getProperties().keySet().isEmpty()) {
       ontologyDetails.addAllProperties(metadata);
       ontologyDetails.setIri(iri.toString());
@@ -62,7 +59,6 @@ public class MetadataHandler {
   }
 
   public OwlDetailsProperties<PropertyValue> handle(IRI iri, OwlListDetails details) {
-    System.out.println("5 - MetadataHandler -> handle(IRI iri, OwlListDetails details): " + iri + ",  " + details);
     
     OWLOntology ontology = ontologyManager.getOntology();
     OWLOntologyManager manager = ontology.getOWLOntologyManager();

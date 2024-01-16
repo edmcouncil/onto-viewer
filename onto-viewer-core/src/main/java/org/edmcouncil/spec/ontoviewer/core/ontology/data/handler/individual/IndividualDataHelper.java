@@ -72,17 +72,24 @@ public class IndividualDataHelper {
   public OwlDetailsProperties<PropertyValue> handleClassIndividuals(OWLOntology ontology, OWLAnonymousIndividual anonymousIndividual) {
     OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
 
+//    Set<OWLAnonymousIndividual> listOfAnonymousIndividuals = ontology.importsClosure()
+//            .flatMap(currentOntology -> getInstancesByAnonymousIndividuals(currentOntology, anonymousIndividual).stream())
+//            .collect(Collectors.toSet());
+
     Set<OWLAxiom> relatedAxioms = ontology.importsClosure()
             .flatMap(ont -> ont.axioms(anonymousIndividual))
             .collect(Collectors.toSet());
 
+    
     for (OWLAxiom axiom : relatedAxioms) {
       OwlListElementIndividualProperty s = new OwlListElementIndividualProperty();
       s.setType(OwlType.INSTANCES);
+      
+      
+      
+      String label = "z";
 
-      String label = axiom.toString();  
-
-      String iri = anonymousIndividual.getID().toString();
+      String iri ="z";
 
       s.setValue(new Pair(label, iri));
       result.addProperty(instanceKey, s);
@@ -115,6 +122,21 @@ public class IndividualDataHelper {
     return result;
   }
 
+//  private Set<OWLAnonymousIndividual> getInstancesByAnonymousIndividuals(OWLOntology ontology, OWLAnonymousIndividual anonymousIndividual) {
+//    Set<OWLAxiom> result = new LinkedHashSet<>();
+//  
+//    ontology.importsClosure().forEach(currentOntology -> {
+//      Set<OWLAxiom> axioms = currentOntology.axioms().collect(Collectors.toSet());
+//      for (OWLAxiom axiom : axioms) {
+//        if (axiom.getIndividualsInSignature().contains(anonymousIndividual)) {
+//          result.add(axiom);
+//        }
+//      }
+//    });
+//    
+//    return result;
+//  }
+
   /**
    * This method is used to display Particular Individual
    *
@@ -127,6 +149,13 @@ public class IndividualDataHelper {
     return result;
   }
 
+  /**
+   * This method is used to display Particular Individual
+   *
+   * @param ontology This is a loaded ontology.
+   * @param anonymousIndividual anonymousIndividual are all Instances.
+   * @return All instances of a given anonymous;
+   */
   public OwlDetailsProperties<PropertyValue> handleInstances(OWLOntology ontology, OWLAnonymousIndividual anonymousIndividual) {
     OwlDetailsProperties<PropertyValue> result = handleClassIndividuals(ontology, anonymousIndividual);
     return result;
