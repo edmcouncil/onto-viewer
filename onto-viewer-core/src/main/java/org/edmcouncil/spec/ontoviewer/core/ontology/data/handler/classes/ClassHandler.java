@@ -214,11 +214,6 @@ public class ClassHandler {
     List<PropertyValue> subclasses = extractSubAndSuper.getSubclasses(axioms);
 
     OwlDetailsProperties<PropertyValue> directSubclasses = extractSubAndSuper.handleDirectSubclasses(owlAnonymousIndividual);
-
-//    OwlDetailsProperties<PropertyValue> individuals = new OwlDetailsProperties<>();
-//    if (configurationData.getToolkitConfig().isIndividualsEnabled()) {
-//      individuals = individualDataHelper.handleInstances(ontology, owlAnonymousIndividual);
-//    }
     
     OntologyGraph ontologyGraph = new OntologyGraph(0);
     if (configurationData.getToolkitConfig().isOntologyGraphEnabled()) {
@@ -240,7 +235,6 @@ public class ClassHandler {
     resultDetails.addAllProperties(axioms);
     resultDetails.addAllProperties(annotations);
     resultDetails.addAllProperties(directSubclasses);
-//    resultDetails.addAllProperties(individuals);
 
     IRI classIri = getIri(resultDetails);
     if (classIri != null) {
@@ -257,7 +251,6 @@ public class ClassHandler {
     }
 
     return resultDetails;
-
   }
 
   private static IRI getIri(OwlListDetails resultDetails) {

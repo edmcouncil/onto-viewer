@@ -1,10 +1,8 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology;
 
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
-
-import java.util.Arrays;
+;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
@@ -40,7 +37,6 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.NodeID;
 import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLEntity;
-import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -300,14 +296,6 @@ public class DetailsManager {
       Set<OWLAnonymousIndividual> matchedIndividuals = currentOntology.referencedAnonymousIndividuals()
               .filter(individual -> individual.toStringID().equals(nodeID.getID()))
               .collect(Collectors.toSet());
-      
-//todo del this part of code
-      
-//      Set<OWLAnonymousIndividual> owlAnonymousIndividuals = currentOntology.referencedAnonymousIndividuals().collect(Collectors.toSet());
-//      owlAnonymousIndividuals.stream().forEach( owlAnonymousIndividual -> {
-//        System.out.println(owlAnonymousIndividual.getID()); });
-
-//todo del this part of code
 
       if (!matchedIndividuals.isEmpty()) {
         return matchedIndividuals.stream().findFirst();
