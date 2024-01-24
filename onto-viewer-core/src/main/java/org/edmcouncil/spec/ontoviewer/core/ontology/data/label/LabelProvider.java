@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.LabelPriority;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.MissingLanguageAction;
@@ -15,6 +16,7 @@ import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.EntityType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.NodeID;
 import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLEntity;
@@ -165,6 +167,59 @@ public class LabelProvider {
     }
     previouslyUsedLabels.put(anonymousIndividual.getID().toString(), labelResult);
     return labelResult;
+  }
+
+  public String getLabelOrDefaultFragment(NodeID nodeID) {
+    if (nodeID == null) {
+      return null;
+    }
+    OWLAnonymousIndividual anonymousIndividual;
+    Optional<OWLAnonymousIndividual> specificBNode = getSpecificBNode(nodeID);
+    
+    if (specificBNode.isPresent()) {
+      anonymousIndividual = specificBNode.get();
+
+      OWLDataFactory factory = new OWLDataFactoryImpl();
+      Map<String, String> labels = new HashMap<>();
+      if (shouldDisplayLabel) {
+        var ontologies = ontologyManager.getOntologyWithImports();
+        EntitySearcher.getAnnotations(anonymousIndividual, ontologies, factory.getRDFSLabel())
+                .filter(annotation -> annotation.getValue().isLiteral())
+                .forEachOrdered(annotation -> {
+                  String label = annotation.getValue().asLiteral().orElseThrow().getLiteral();
+                  String lang = annotation.getValue().asLiteral().orElseThrow().getLang();
+                  labelProcessing(lang, labels, label, IRI.create(anonymousIndividual.getID().toString()));
+                });
+      }
+
+      String labelResult = null;
+
+      if (labelResult == null) {
+        if (labels.size() == 1) {
+          labelResult = labels.entrySet().stream().findFirst().get().getKey();
+        } else if (labels.size() > 1) {
+          labelResult = getTheRightLabel(labels, IRI.create(anonymousIndividual.getID().toString()));
+        } else {
+          labelResult = anonymousIndividual.getID().toString().replaceFirst("_:", "");
+        }
+      }
+      previouslyUsedLabels.put(anonymousIndividual.getID().toString(), labelResult);
+      return labelResult;
+    }
+    return nodeID.toString();
+  }
+
+  private Optional<OWLAnonymousIndividual> getSpecificBNode(NodeID nodeID) {
+    for (var currentOntology : ontologyManager.getOntology().importsClosure().collect(Collectors.toSet())) {
+      Set<OWLAnonymousIndividual> matchedIndividuals = currentOntology.referencedAnonymousIndividuals()
+              .filter(individual -> individual.toStringID().equals(nodeID.getID()))
+              .collect(Collectors.toSet());
+
+      if (!matchedIndividuals.isEmpty()) {
+        return matchedIndividuals.stream().findFirst();
+      }
+    }
+    return Optional.empty();
   }
 
   private void loadConfig() {
