@@ -234,9 +234,9 @@ public class ClassHandler {
     
     resultDetails.addAllProperties(axioms);
     resultDetails.addAllProperties(annotations);
-    resultDetails.addAllProperties(directSubclasses);
+//    resultDetails.addAllProperties(directSubclasses);
 
-    IRI classIri = getIri(resultDetails);
+    IRI classIri = getIri(directSubclasses);
     if (classIri != null) {
       resultDetails.addAllProperties(copyrightHandler.getCopyright(classIri));
       resultDetails.addAllProperties(licenseHandler.getLicense(classIri));
@@ -253,8 +253,8 @@ public class ClassHandler {
     return resultDetails;
   }
 
-  private static IRI getIri(OwlListDetails resultDetails) {
-    String iri = ((Pair) resultDetails.getAllProperties().getProperties().get("@viewer.function.direct_types").get(0).getValue()).getIri();
+  private static IRI getIri(OwlDetailsProperties<PropertyValue> directSubclasses) {
+    String iri = ((Pair) directSubclasses.getProperties().get("@viewer.function.direct_types").get(0).getValue()).getIri();
     if (iri != null) {
       return IRI.create(iri);
     } else {
