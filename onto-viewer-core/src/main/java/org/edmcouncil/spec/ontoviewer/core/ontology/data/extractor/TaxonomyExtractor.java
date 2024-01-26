@@ -3,6 +3,7 @@ package org.edmcouncil.spec.ontoviewer.core.ontology.data.extractor;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
@@ -16,6 +17,8 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.classes.ClassDa
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.utils.StringUtils;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
@@ -41,6 +44,12 @@ public class TaxonomyExtractor {
   public OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, IRI objIri,
       OWLOntology ontology, OwlType type) {
     return extractTaxonomy(subElements, objIri, ontology, type, 0);
+  }
+
+  //Todo this method is to be checked and fixed
+  public OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, OWLAnonymousIndividual anonymousIndividual,
+                                         OWLOntology ontology, OwlType type) {
+    return extractTaxonomy(subElements, anonymousIndividual, ontology, type, 0);
   }
 
   private OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, IRI objIri,
@@ -133,6 +142,57 @@ public class TaxonomyExtractor {
     return taxonomy;
   }
 
+  private OwlTaxonomyImpl extractTaxonomy(List<PropertyValue> subElements, OWLAnonymousIndividual anonymousIndividual,
+                                         OWLOntology ontology, OwlType type, int depth) {
+    OwlTaxonomyImpl taxonomy = new OwlTaxonomyImpl();
+    if (!subElements.isEmpty()) {
+      for (PropertyValue property : subElements) {
+        // TODO: Replace this hack with proper handling of circular taxonomies etc.
+        if (depth > 40) {
+          LOG.debug("Depth > 40 for extracting taxonomy for anonymous individual (type: {}) "
+                  + "and current taxonomy: {}", type, taxonomy);
+          continue;
+        }
+
+        if (property.getType().equals(OwlType.TAXONOMY)) {
+          OwlAxiomPropertyValue axiomProperty = (OwlAxiomPropertyValue) property;
+          LOG.debug("Axiom Property {}", axiomProperty);
+          IRI subElementIri = IRI.create(extractSubElementNodeId(axiomProperty, anonymousIndividual));
+
+          OWLEntity entity = createEntity(ontology, subElementIri, type);
+          
+          List<PropertyValue> subTax = extractSubAndSuper.getSuperElements(entity, ontology, type);
+
+          OwlTaxonomyImpl subClassTax =
+                  extractTaxonomy(subTax, anonymousIndividual, ontology, type, depth++);
+
+          String label = labelProvider.getLabelOrDefaultFragment(anonymousIndividual);
+
+          OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(anonymousIndividual.toStringID(), label);
+
+          if (subClassTax.getValue().isEmpty()) {
+            List<OwlTaxonomyElementImpl> currentTax = new LinkedList<>();
+            currentTax.add(taxEl);
+            taxonomy.addTaxonomy(currentTax);
+          } else {
+            taxonomy.addTaxonomy(subClassTax, taxEl);
+          }
+        }
+      }
+    } else {
+      LOG.trace("\t\tEnd leaf on {}", anonymousIndividual);
+      String label = labelProvider.getLabelOrDefaultFragment(anonymousIndividual);
+
+      OwlTaxonomyElementImpl taxEl = new OwlTaxonomyElementImpl(anonymousIndividual.toStringID(), label);
+      List<OwlTaxonomyElementImpl> currentTax = new LinkedList<>();
+      currentTax.add(taxEl);
+
+      taxonomy.addTaxonomy(currentTax);
+    }
+
+    return taxonomy;
+  }
+  
   private IRI extractSubElementIri(OwlAxiomPropertyValue axiomProperty, IRI objIri) {
     LOG.debug("Axiom Property SubElementIri {}", axiomProperty);
     LOG.debug("extractSubElementIri -> obj {}", objIri);
@@ -144,6 +204,33 @@ public class TaxonomyExtractor {
     }
     return null;
   }
+
+  private String extractSubElementNodeId(OwlAxiomPropertyValue axiomProperty, OWLAnonymousIndividual anonymousIndividual) {
+    LOG.debug("Axiom Property SubElementNodeId {}", axiomProperty);
+    LOG.debug("extractSubElementNodeId -> anonymous individual {}", anonymousIndividual);
+
+    String anonymousIndividualId = anonymousIndividual.getID().getID();
+
+    for (Map.Entry<String, OwlAxiomPropertyEntity> entry : axiomProperty.getEntityMaping().entrySet()) {
+      LOG.debug("Axiom Property entry element {}", entry);
+      String currentEntityId = extractEntityNodeId(entry.getValue());
+
+      if (currentEntityId != null && !currentEntityId.equals(anonymousIndividualId)) {
+        return currentEntityId;
+      }
+    }
+    return null;
+  }
+
+  private String extractEntityNodeId(OwlAxiomPropertyEntity entity) {
+    if (entity instanceof OWLAnonymousIndividual) {
+      return ((OWLAnonymousIndividual) entity).getID().getID();
+    } else if (entity instanceof OWLEntity) {
+      return ((OWLEntity) entity).getIRI().toString();
+    }
+    return null;
+  }
+
 
   private OWLEntity createEntity(OWLOntology ontology, IRI sci, OwlType type) {
     switch (type) {

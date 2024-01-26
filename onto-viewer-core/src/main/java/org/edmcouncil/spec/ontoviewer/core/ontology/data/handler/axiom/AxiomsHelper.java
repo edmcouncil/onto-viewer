@@ -52,7 +52,7 @@ public class AxiomsHelper {
     unwantedTypes.add("^^dateTime");
     rendering.setShortFormProvider(new IriAsShortProvider());
   }
-
+//todo 
   public <T extends OWLAxiom> OwlAxiomPropertyValue prepareAxiomPropertyValue(
       T axiom,
       String iriFragment,
@@ -114,6 +114,7 @@ public class AxiomsHelper {
     String openingCurlyBrackets = "{";
     String closingCurlyBrackets = "}";
     String comma = ",";
+    String anonymousPrefix = "_:genid";
 
     axiom.signature().forEach(owlEntity -> {
       String eSignature = rendering.render(owlEntity);
@@ -121,7 +122,6 @@ public class AxiomsHelper {
 
       for (int countingArg = 0; countingArg < splitted.length; countingArg++) {
         String string = splitted[countingArg].trim();
-
         // more than 1 because when it's 1, it's a number
         boolean hasOpeningBrackets = string.length() > 1 && string.contains("(");
         int countOpeningBrackets = StringUtils.countLetter(string, '(');
@@ -138,6 +138,7 @@ public class AxiomsHelper {
         boolean hasComma = string.length() > 1 && string.contains(",");
         int countComma = StringUtils.countLetter(string, ',');
 
+        boolean isAnonymous = string.startsWith(anonymousPrefix);
         if (hasOpeningBrackets) {
           string = string.substring(countOpeningBrackets);
         }
@@ -153,7 +154,7 @@ public class AxiomsHelper {
         if (hasComma) {
           string = string.substring(0, string.length() - countComma);
         }
-        if (string.equals(eSignature)) {
+        if (string.equals(eSignature) || isAnonymous) {
           String generatedKey = String.format(argPattern, countingArg);
           key = generatedKey;
           String textToReplace = generatedKey;
@@ -177,10 +178,19 @@ public class AxiomsHelper {
             String postfix = String.join("", Collections.nCopies(countComma, comma));
             textToReplace = textToReplace + postfix;
           }
+          if (isAnonymous) {
+            String postfix = String.join("", Collections.nCopies(countComma, comma));
+            textToReplace = textToReplace + postfix;
+          }
 
           splitted[countingArg] = textToReplace;
 
-          parser.parseToIri(owlEntity, axiomPropertyValue, key);
+          if (isAnonymous){
+            parser.parseToIri(string, axiomPropertyValue, key);
+          }
+          else {
+            parser.parseToIri(owlEntity, axiomPropertyValue, key);
+          }
         }
         axiomPropertyValue.setLastId(countingArg);
       }

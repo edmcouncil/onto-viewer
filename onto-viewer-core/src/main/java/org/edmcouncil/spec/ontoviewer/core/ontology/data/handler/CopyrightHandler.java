@@ -1,9 +1,5 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.model.ConfigurationData.ApplicationConfig;
 import org.edmcouncil.spec.ontoviewer.configloader.configuration.service.ApplicationConfigurationService;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
@@ -15,6 +11,10 @@ import org.edmcouncil.spec.ontoviewer.core.utils.OntologyUtils;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author patrycja.miazek (patrycja.miazek@makolab.com)

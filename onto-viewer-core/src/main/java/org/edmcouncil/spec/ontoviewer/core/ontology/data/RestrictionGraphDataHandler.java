@@ -14,6 +14,7 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.visitor.OntologyVisitors;
 import org.edmcouncil.spec.ontoviewer.core.utils.OwlUtils;
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassAxiom;
@@ -116,6 +117,34 @@ public class RestrictionGraphDataHandler {
     OntologyGraph vg = handleGraph(axiomsIterator, obj.getIRI(), nodeId, lastId);
     vg = handleInheritedAxiomsGraph(obj, vg, ontology);
     vg = handleEquivalentClassesAxiomGraph(obj, vg, ontology);
+
+    return vg;
+  }
+
+  public OntologyGraph handleGraph(
+          OWLAnonymousIndividual anonInd,
+          OWLOntology ontology,
+          int nodeId,
+          int lastId) {
+    Iterator<OWLIndividualAxiom> axiomsIterator = ontology.axioms(anonInd, Imports.INCLUDED).iterator();
+
+    OntologyGraph vg = new OntologyGraph(lastId);
+    GraphNode root = new GraphNode(nodeId);
+    root.setIri(anonInd.toStringID());
+    root.setType(GraphNodeType.MAIN);
+    root.setLabel(labelExtractor.getLabelOrDefaultFragment(anonInd)); 
+    vg.addNode(root);
+
+    vg.setRoot(root);
+
+    while (axiomsIterator.hasNext()) {
+      OWLIndividualAxiom axiom = axiomsIterator.next();
+      axiom.accept(ontologyVisitors.individualCompleteGraphNode(vg, root, GraphNodeType.INTERNAL));
+      LOG.debug(axiom.getAxiomType().getName());
+      for (OWLEntity oWLEntity : axiom.signature().collect(Collectors.toList())) {
+        LOG.debug(oWLEntity.toString());
+      }
+    }
 
     return vg;
   }
