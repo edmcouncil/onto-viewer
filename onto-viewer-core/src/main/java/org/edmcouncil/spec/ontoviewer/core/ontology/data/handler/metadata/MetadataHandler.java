@@ -14,6 +14,9 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHe
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.module.ModuleHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.data.AnnotationsDataHandler;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
+import org.edmcouncil.spec.ontoviewer.core.ontology.updater.model.UpdateJobStatus;
+import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdateJobIdGenerator;
+import org.edmcouncil.spec.ontoviewer.core.ontology.updater.util.UpdaterOperation;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -43,6 +46,8 @@ public class MetadataHandler {
   }
 
   private final Map<IRI, OntologyResources> resources = new HashMap<>();
+
+  private long numberOfResourcesUpdates = 0;
 
   public OwlListDetails handle(IRI iri) {
     
@@ -94,6 +99,9 @@ public class MetadataHandler {
   }
 
   private OntologyResources getOntologyResources(IRI ontologyIri) {
+
+    clearResourcesAfterUpdate();
+
     if (!resources.containsKey(ontologyIri)) {
       var owlOntologyOptional = ontologyManager.getOntologyWithImports()
           .filter(owlOntology -> {
@@ -110,5 +118,14 @@ public class MetadataHandler {
       }
     }
     return resources.get(ontologyIri);
+  }
+
+  private void clearResourcesAfterUpdate() {
+    final long numberOfOntologyUpdates = UpdateJobIdGenerator.getCurrentID();
+    final UpdateJobStatus statusOfLastUpdate = UpdaterOperation.getLastStatusFromLastJob();
+    if (numberOfOntologyUpdates > numberOfResourcesUpdates && UpdateJobStatus.DONE.equals(statusOfLastUpdate)) {
+      resources.clear();
+      numberOfResourcesUpdates = numberOfOntologyUpdates;
+    }
   }
 }

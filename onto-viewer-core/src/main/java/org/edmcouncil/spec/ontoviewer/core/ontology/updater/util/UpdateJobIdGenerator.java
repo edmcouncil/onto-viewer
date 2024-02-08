@@ -16,6 +16,10 @@ public class UpdateJobIdGenerator {
     return id++;
   }
 
+  public static long getCurrentID(){
+    return id;
+  }
+
   public static String nextStringId() {
     long tmp = id++;
     return String.valueOf(tmp);
