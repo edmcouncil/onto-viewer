@@ -1,20 +1,22 @@
 <img src="https://github.com/edmcouncil/html-pages/raw/develop/general/assets/img/EDM-council-RGB_200w.png" width="200" align="right"/>
 
-# Onto Viewer
+# onto-viewer
 
-Onto Viewer is an open-source project that is hosted by EDM Council. The project started in May 2019. Onto Viewer is a Java application that is specifically designed to access both the ontology structure and its content in the easiest possible way. Onto Viewer servers REST API.
-
-## Onto website
-Onto viewer is used in the ontology view in html-pages.
-
-* https://github.com/edmcouncil/html-pages
+onto-viewer is an open-source Java application that provides a number of REST API endpoints to access the content of OWL ontologies. If run together with [html-pages frontend](https://github.com/edmcouncil/html-pages), it will visualise them as a web application.
 
 
-# How to run Onto Viewer
+## How to customise your ontology to be properly displayed by onto-viewer
+
+1. We require that all ontologies' IRIs end with '/' (e.g., https://www.omg.org/spec/Commons/Classifiers/) as per the recommendation from https://www.w3.org/TR/cooluris/.
+1. We require that all ontologies are "registered" in the meta file(s), which store the relevant metadata, in particular allow for custom modularisation - see https://github.com/edmcouncil/idmp/blob/master/ISO/MetadataISO.rdf for an example of such file.
+1. We recommend that all imported ontologies and locally cached and their local references are listed in catalog-v001.xml file. 
+
+
+# How to run onto-viewer
 
 ## Running locally
 
-To run the Onto Viewer locally: 
+To run the onto-viewer locally: 
 
 * Download the file named "onto-viewer.zip" from the [latest release](https://github.com/edmcouncil/onto-viewer/releases). 
 * Unzip the file. 
