@@ -5,6 +5,16 @@
 onto-viewer is an open-source Java application that provides a number of REST API endpoints to access the content of OWL ontologies. If run together with [html-pages frontend](https://github.com/edmcouncil/html-pages), it will visualise them as a web application.
 
 
+# Table of contents
+
+* [How to run onto-viewer](#how-to-run-onto-viewer)
+	* [How to customise your ontology to be properly displayed by onto-viewer](#how-to-customise-ontologies)
+	* [How to run it locally](#how-to-run-locally)
+	* [How to run it using docker](#how-to-run-docker)
+* [Contributing](#contributing)
+  * [Development](#development)
+* [License](#license)
+
 
 # How to run onto-viewer
 
@@ -132,7 +142,7 @@ docker compose down --rmi all -v
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 
-# Development
+## Development
 
 To run integration tests, use the following command:
 
