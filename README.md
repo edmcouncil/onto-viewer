@@ -14,7 +14,7 @@ onto-viewer is an open-source Java application that provides a number of REST AP
 1. We require that all ontologies are "registered" in the meta file(s), which store the relevant metadata, in particular allow for custom modularisation - see https://github.com/edmcouncil/idmp/blob/master/ISO/MetadataISO.rdf for an example of such file.
 1. We recommend that all imported ontologies and locally cached and their local references are listed in catalog-v001.xml file. 
 
-## Running locally
+## How to run it locally
 
 To run the onto-viewer locally: 
 
@@ -32,7 +32,7 @@ java -jar app-v-0.1.0.war
 ```
 
 
-## Run with docker
+## How to run it using docker
 Requirements:
 - [git](https://git-scm.com/) ([install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git))
 - [docker](https://www.docker.com/) - install:
