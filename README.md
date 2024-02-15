@@ -20,7 +20,7 @@ onto-viewer is an open-source Java application that provides a number of REST AP
 
 ## How to customise your ontology to be properly displayed by onto-viewer
 
-1. We require that all ontologies' IRIs end with '/' (e.g., https://www.omg.org/spec/Commons/Classifiers/) as per the recommendation from https://www.w3.org/TR/cooluris/.
+1. We require each _ontology IRI_ to follow the convention described in [Vocabularies that use a 'slash namespace'](https://www.w3.org/TR/swbp-vocab-pub/#slash), i.e. end with a forward slash character `/` (e.g., `https://www.omg.org/spec/Commons/Classifiers/`).
 1. We require that all ontologies are "registered" in the meta file(s), which store the relevant metadata, in particular allow for custom modularisation - see https://github.com/edmcouncil/idmp/blob/master/ISO/MetadataISO.rdf for an example of such file.
 1. We recommend that all imported ontologies and locally cached and their local references are listed in catalog-v001.xml file. 
 
