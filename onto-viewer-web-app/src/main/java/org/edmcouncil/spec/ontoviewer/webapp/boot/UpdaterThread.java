@@ -121,7 +121,10 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       LOGGER.info("File system manager created ? : {}", fileSystemService != null);
 
-      applicationConfigurationService.reloadConfiguration();
+      if (ignoreInitialReloadConfiguration()) {
+        applicationConfigurationService.reloadConfiguration();
+      }
+
       ConfigurationData configurationData = applicationConfigurationService.getConfigurationData();
 
       if (isInterrupt()) {
@@ -227,6 +230,10 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
   private Boolean isInterrupt() {
     return job.getStatus() == UpdateJobStatus.ERROR
-        || job.getStatus() == UpdateJobStatus.INTERRUPT_IN_PROGRESS;
+            || job.getStatus() == UpdateJobStatus.INTERRUPT_IN_PROGRESS;
+  }
+
+  private boolean ignoreInitialReloadConfiguration() {
+    return !job.getId().equals("0");
   }
 }
