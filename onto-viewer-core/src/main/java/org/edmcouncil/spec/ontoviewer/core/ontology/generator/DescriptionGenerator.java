@@ -19,6 +19,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.details.OwlGroupedDetails;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAnnotationPropertyValue;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyEntity;
 import org.edmcouncil.spec.ontoviewer.core.model.property.OwlAxiomPropertyValue;
+import org.edmcouncil.spec.ontoviewer.core.model.property.OwlLabeledMultiAxiom;
 import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyElementImpl;
 import org.edmcouncil.spec.ontoviewer.core.model.taxonomy.OwlTaxonomyImpl;
 import org.slf4j.Logger;
@@ -200,6 +201,21 @@ public class DescriptionGenerator {
           LOGGER.warn("Exception thrown while processing property '{}'. Details: {}", axiomProperty,
               ex.getMessage());
         }
+      } else if (property instanceof OwlLabeledMultiAxiom){
+      
+        OwlLabeledMultiAxiom axiomProperty = (OwlLabeledMultiAxiom) property;
+       
+        if (axiomProperty.getType() == OwlType.TAXONOMY) {
+          // We don't want to generate descriptions from super- and subclasses.
+          continue;
+        }
+
+        try {
+          handleProperty(manager, axiomProperty.getFullRenderedString());
+        } catch (GeneratorException ex) {
+          LOGGER.warn("Exception thrown while processing property '{}'. Details: {}", axiomProperty,
+                  ex.getMessage());
+        }
       }
     }
   }
@@ -247,6 +263,12 @@ public class DescriptionGenerator {
           .append(editedPattern.replaceFirst("<br />-", " ").replaceAll("<br />-", ", "));
     }
     manager.getSb().append(".\n");
+  }
+
+  private void handleProperty(GeneratorManager manager, String property) throws GeneratorException {
+    manager.getSb().append(property);
+    System.out.println(property);
+    manager.getSb().append("\n");
   }
 
   private String extractCenterOfPattern(String propertyPattern) throws GeneratorException {
