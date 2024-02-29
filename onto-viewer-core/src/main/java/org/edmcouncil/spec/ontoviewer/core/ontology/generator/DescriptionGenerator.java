@@ -266,10 +266,23 @@ public class DescriptionGenerator {
   }
 
   private void handleProperty(GeneratorManager manager, String property) throws GeneratorException {
-    manager.getSb().append(property);
-    System.out.println(property);
+
+    String withCapitalFirstLetter = property.substring(0,1).toUpperCase() + property.substring(1);
+    String withPrefix = "- " + withCapitalFirstLetter;
+
+    if (withPrefix.endsWith(" ")) {
+      withPrefix = withPrefix.substring(0, withPrefix.length() - 1) + "";
+    }
+
+    if (withPrefix.endsWith(",")) {
+      withPrefix = withPrefix.substring(0, withPrefix.length() - 1) + ".";
+    }
+    
+    manager.getSb().append(withPrefix);
     manager.getSb().append("\n");
   }
+  
+  
 
   private String extractCenterOfPattern(String propertyPattern) throws GeneratorException {
     var pattern = Pattern.compile(PROPERTY_PATTERN);
