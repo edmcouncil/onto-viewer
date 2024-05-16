@@ -29,11 +29,10 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
     this.entityMaping = entityMaping;
   }
 
-  public OwlAxiomPropertyValue(String value, OwlType type, int lastId, String fullRenderedString,
+  public OwlAxiomPropertyValue(String value, OwlType type, String fullRenderedString,
       Map<String, OwlAxiomPropertyEntity> entityMaping, boolean inferable, RestrictionType restrictionType) {
     this.value = value;
     this.type = type;
-    this.lastId = lastId;
     this.fullRenderedString = fullRenderedString;
     this.entityMaping = entityMaping;
     this.inferable = inferable;
@@ -46,10 +45,6 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
 
   public Map<String, OwlAxiomPropertyEntity> getEntityMaping() {
     return this.entityMaping;
-  }
-
-  public int getLastId() {
-    return this.lastId;
   }
 
   public void setLastId(int lastId) {
@@ -97,15 +92,13 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
       return false;
     }
     OwlAxiomPropertyValue that = (OwlAxiomPropertyValue) o;
-    return lastId == that.lastId
-        && inferable == that.inferable
+    return inferable == that.inferable
         && Objects.equals(fullRenderedString, that.fullRenderedString)
-        && Objects.equals(entityMaping, that.entityMaping)
         && restrictionType == that.restrictionType;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), lastId, fullRenderedString, entityMaping, inferable, restrictionType);
+    return Objects.hash(super.hashCode(), fullRenderedString, inferable, restrictionType);
   }
 }
