@@ -194,8 +194,12 @@ public class InferableRestrictionHandler {
   private Set<PropertyValue> mergeProperties(Map<String, List<PropertyValue>> properties) {
     Set<PropertyValue> mergedProperties = new HashSet<>();
     for (List<PropertyValue> values : properties.values()) {
-      mergedProperties.addAll(values);
+      for (PropertyValue value : values) {
+        if (!(properties.get("@viewer.function.anonymous_ancestor").contains(value))) {
+          mergedProperties.add(value);
+          }
+        }
+      }
+      return mergedProperties;
     }
-    return mergedProperties;
   }
-}
