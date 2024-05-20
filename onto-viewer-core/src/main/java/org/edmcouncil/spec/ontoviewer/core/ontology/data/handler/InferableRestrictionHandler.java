@@ -1,9 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.core.ontology.data.handler;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -178,7 +175,7 @@ public class InferableRestrictionHandler {
   }
 
   private List<OwlAxiomPropertyValue> filterPropertiesWithRestrictions(Map<String, List<PropertyValue>> properties) {
-    List<PropertyValue> mergedProperties = mergeProperties(properties);
+    Set<PropertyValue> mergedProperties = mergeProperties(properties);
     return mergedProperties.stream()
         .flatMap(propertyValue -> {
           if (propertyValue instanceof OwlLabeledMultiAxiom) {
@@ -194,8 +191,8 @@ public class InferableRestrictionHandler {
         .collect(Collectors.toList());
   }
 
-  private List<PropertyValue> mergeProperties(Map<String, List<PropertyValue>> properties) {
-    List<PropertyValue> mergedProperties = new ArrayList<>();
+  private Set<PropertyValue> mergeProperties(Map<String, List<PropertyValue>> properties) {
+    Set<PropertyValue> mergedProperties = new HashSet<>();
     for (List<PropertyValue> values : properties.values()) {
       mergedProperties.addAll(values);
     }
