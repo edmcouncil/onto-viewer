@@ -8,5 +8,6 @@ public class OntoViewerToolkitApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(OntoViewerToolkitApplication.class, args);
+    System.exit(0);
   }
 }

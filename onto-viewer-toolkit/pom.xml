@@ -53,6 +53,12 @@
       <version>${openllet.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>net.sourceforge.owlapi</groupId>
+      <artifactId>org.semanticweb.hermit</artifactId>
+      <version>1.4.5.519</version>
+    </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
