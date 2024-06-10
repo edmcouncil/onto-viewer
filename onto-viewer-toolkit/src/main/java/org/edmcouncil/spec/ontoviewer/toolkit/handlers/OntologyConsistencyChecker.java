@@ -10,14 +10,19 @@ import java.util.concurrent.TimeoutException;
 
 import openllet.owlapi.OpenlletReasonerFactory;
 import org.edmcouncil.spec.ontoviewer.core.ontology.DetailsManager;
+import org.edmcouncil.spec.ontoviewer.toolkit.OntoViewerToolkitCommandLine;
 import org.semanticweb.HermiT.Configuration;
 import org.semanticweb.HermiT.Reasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OntologyConsistencyChecker {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OntoViewerToolkitCommandLine.class);
 
-  private final DetailsManager detailsManager;
+    private final DetailsManager detailsManager;
 
   public OntologyConsistencyChecker(DetailsManager detailsManager) {
     this.detailsManager = detailsManager;
@@ -25,29 +30,52 @@ public class OntologyConsistencyChecker {
 
   public boolean checkOntologyConsistency() {
     var ontology = detailsManager.getOntology();
-    var reasoner1 = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
-    var reasoner2 = new Reasoner(new Configuration(), ontology);
-
-    // Create an executor service to run tasks concurrently
-    ExecutorService executor = Executors.newFixedThreadPool(2);
-
-    // Create CompletableFutures for the isConsistent calls
-    CompletableFuture<Boolean> future1 = CompletableFuture.supplyAsync(reasoner1::isConsistent, executor);
-    CompletableFuture<Boolean> future2 = CompletableFuture.supplyAsync(reasoner2::isConsistent, executor);
-
-    // Use the anyOf method to return the result of the first completed future
-    CompletableFuture<Object> firstCompleted = CompletableFuture.anyOf(future1, future2);
-
+    boolean reasoner1IsReady = false;
+    boolean reasoner2IsReady = false;
+    OWLReasoner reasoner1 = null;
+    OWLReasoner reasoner2 = null;
     try {
-        // Get the result of the first completed future
-        Boolean result = (Boolean) firstCompleted.get();
-        return result;
-    } catch (InterruptedException | ExecutionException e) {
-        e.printStackTrace();
-        return false; // or handle the exception as needed
-    } finally {
-        // Shutdown the executor service
-        executor.shutdown();
+        reasoner1 = OpenlletReasonerFactory.getInstance().createReasoner(ontology);
+        reasoner1IsReady = true;
     }
+    catch (Exception ex) {
+    }
+    try {
+        reasoner2 = new Reasoner(new Configuration(), ontology);
+        reasoner2IsReady = true;
+      }
+    catch (Exception ex) {
+        LOGGER.error("Exception occurred while checking ontology consistency check: {}", ex.getMessage(), ex);
+      }
+
+    if (reasoner1IsReady & reasoner2IsReady) {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+        CompletableFuture<Boolean> future1 = CompletableFuture.supplyAsync(reasoner1::isConsistent, executor);
+        CompletableFuture<Boolean> future2 = CompletableFuture.supplyAsync(reasoner2::isConsistent, executor);
+        CompletableFuture<Object> firstCompleted = CompletableFuture.anyOf(future1, future2);
+
+        try {
+            Boolean result = (Boolean) firstCompleted.get();
+            future1.complete(true);
+            future2.complete(true);
+            executor.shutdownNow();
+            return result;
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            executor.shutdown();
+        }
+    }
+
+    if (reasoner1IsReady) {
+        return reasoner1.isConsistent();
+    }
+
+    if (reasoner2IsReady) {
+        return reasoner2.isConsistent();
+    }
+
+    return false;
   }
 }
