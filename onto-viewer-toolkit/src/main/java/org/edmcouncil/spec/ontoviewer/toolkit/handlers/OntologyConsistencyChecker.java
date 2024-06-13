@@ -44,8 +44,9 @@ public class OntologyConsistencyChecker {
         reasoner2 = new Reasoner(new Configuration(), ontology);
         reasoner2IsReady = true;
       }
-    catch (Exception ex) {
-        LOGGER.error("Exception occurred while checking ontology consistency check: {}", ex.getMessage(), ex);
+    catch (Exception exception) {
+        StackTraceElement[] exceptionElements = exception.getStackTrace();
+        LOGGER.error("Exception occurred while checking ontology consistency check: {}", exceptionElements[0]);
       }
 
     if (reasoner1IsReady & reasoner2IsReady) {
@@ -60,8 +61,9 @@ public class OntologyConsistencyChecker {
             future2.complete(true);
             executor.shutdownNow();
             return result;
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+        } catch (InterruptedException | ExecutionException exception) {
+            StackTraceElement[] exceptionElements = exception.getStackTrace();
+            LOGGER.error("Exception occurred while checking ontology consistency check: {}", exceptionElements[0]);
             return false;
         } finally {
             executor.shutdown();
