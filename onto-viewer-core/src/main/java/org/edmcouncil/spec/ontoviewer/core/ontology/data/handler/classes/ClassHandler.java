@@ -240,7 +240,7 @@ public class ClassHandler {
     if (classIri != null) {
       resultDetails.addAllProperties(copyrightHandler.getCopyright(classIri));
       resultDetails.addAllProperties(licenseHandler.getLicense(classIri));
-      resultDetails.setqName(qnameHandler.getQName(classIri));
+      resultDetails.setqName(new String());
     }
     
     if (ontologyGraph.isEmpty()) {
