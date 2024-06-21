@@ -81,13 +81,10 @@ public class ClassDataHelper {
           OntoViewerEntityType.fromEntityType(entity),
           deprecatedHandler.getDeprecatedForEntity(entityIri));
 
-
-      Map<String, OwlAxiomPropertyEntity> entityMapping = new HashMap<>();
-      entityMapping.put(key, propertyEntity);
-
-      OwlAxiomPropertyValue axiomPropertyValue =
-          new OwlAxiomPropertyValue(key, OwlType.TAXONOMY, 0, null, entityMapping);
-      // TODO
+      OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue();
+      axiomPropertyValue.setValue(key);
+      axiomPropertyValue.setType(OwlType.TAXONOMY);
+      axiomPropertyValue.setFullRenderedString(null);
       axiomPropertyValue.addEntityValues(key, propertyEntity);
 
       result.add(axiomPropertyValue);
@@ -121,11 +118,10 @@ public class ClassDataHelper {
               OntoViewerEntityType.CLASS, 
               false); 
 
-      Map<String, OwlAxiomPropertyEntity> entityMapping = new HashMap<>();
-      entityMapping.put(key, propertyEntity);
-
-      OwlAxiomPropertyValue axiomPropertyValue =
-              new OwlAxiomPropertyValue(key, OwlType.TAXONOMY, 0, null, entityMapping);
+      OwlAxiomPropertyValue axiomPropertyValue = new OwlAxiomPropertyValue();
+      axiomPropertyValue.setValue(key);
+      axiomPropertyValue.setType(OwlType.TAXONOMY);
+      axiomPropertyValue.setFullRenderedString(null);
       axiomPropertyValue.addEntityValues(key, propertyEntity);
 
       result.add(axiomPropertyValue);
