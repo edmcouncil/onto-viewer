@@ -40,14 +40,14 @@ class InferableRestrictionHandlerTest {
 
     List<PropertyValue> propertyValueList = new ArrayList<>();
     propertyValueList.add(
-        new OwlAxiomPropertyValue("/arg2/ some /arg4/", OwlType.AXIOM, 4, "propA some ClassA",
+        new OwlAxiomPropertyValue("/arg2/ some /arg4/", OwlType.AXIOM, "propA some ClassA",
             Map.of(
                 "/arg2/", prepareObjectPropertyAxiomPropertyEntity("propA"),
                 "/arg4/", prepareClassAxiomPropertyEntity("ClassA")),
             false,
             RestrictionType.EXISTENTIAL_QUANTIFICATION));
     propertyValueList.add(
-        new OwlAxiomPropertyValue("/arg2/ some /arg4/", OwlType.AXIOM, 4, "propA_1 some ClassA_1",
+        new OwlAxiomPropertyValue("/arg2/ some /arg4/", OwlType.AXIOM, "propA_1 some ClassA_1",
             Map.of(
                 "/arg2/", prepareObjectPropertyAxiomPropertyEntity("propA_1"),
                 "/arg4/", prepareClassAxiomPropertyEntity("ClassA_1")),
@@ -67,14 +67,14 @@ class InferableRestrictionHandlerTest {
 
     List<PropertyValue> propertyValueList = new ArrayList<>();
     propertyValueList.add(
-        new OwlAxiomPropertyValue("/arg2/ only /arg4/", OwlType.AXIOM, 4, "propB only ClassB_1",
+        new OwlAxiomPropertyValue("/arg2/ only /arg4/", OwlType.AXIOM, "propB only ClassB_1",
             Map.of(
                 "/arg2/", prepareObjectPropertyAxiomPropertyEntity("propB"),
                 "/arg4/", prepareClassAxiomPropertyEntity("ClassB_1")),
             false,
             RestrictionType.UNIVERSAL_QUANTIFICATION));
     propertyValueList.add(
-        new OwlAxiomPropertyValue("/arg2/ only /arg4/", OwlType.AXIOM, 4, "propB_1 only ClassB",
+        new OwlAxiomPropertyValue("/arg2/ only /arg4/", OwlType.AXIOM, "propB_1 only ClassB",
             Map.of(
                 "/arg2/", prepareObjectPropertyAxiomPropertyEntity("propB_1"),
                 "/arg4/", prepareClassAxiomPropertyEntity("ClassB")),
@@ -94,14 +94,14 @@ class InferableRestrictionHandlerTest {
 
     List<PropertyValue> propertyValueList = new ArrayList<>();
     propertyValueList.add(
-        new OwlAxiomPropertyValue("/arg2/ min 1 /arg4/", OwlType.AXIOM, 4, "propB min 1 ClassB",
+        new OwlAxiomPropertyValue("/arg2/ min 1 /arg4/", OwlType.AXIOM, "propB min 1 ClassB",
             Map.of(
                 "/arg2/", prepareObjectPropertyAxiomPropertyEntity("propB"),
                 "/arg4/", prepareClassAxiomPropertyEntity("ClassB")),
             false,
             RestrictionType.OBJECT_MINIMUM_CARDINALITY));
     propertyValueList.add(
-        new OwlAxiomPropertyValue("/arg2/ min 3 /arg4/", OwlType.AXIOM, 4, "propB_1 min 3 ClassB_1",
+        new OwlAxiomPropertyValue("/arg2/ min 3 /arg4/", OwlType.AXIOM, "propB_1 min 3 ClassB_1",
             Map.of(
                 "/arg2/", prepareObjectPropertyAxiomPropertyEntity("propB_1"),
                 "/arg4/", prepareClassAxiomPropertyEntity("ClassB_1")),
@@ -121,14 +121,14 @@ class InferableRestrictionHandlerTest {
 
     List<PropertyValue> propertyValueList = new ArrayList<>();
     propertyValueList.add(
-        new OwlAxiomPropertyValue("/arg2/ max 3 /arg4/", OwlType.AXIOM, 4, "propB max 3 ClassB",
+        new OwlAxiomPropertyValue("/arg2/ max 3 /arg4/", OwlType.AXIOM, "propB max 3 ClassB",
             Map.of(
                 "/arg2/", prepareObjectPropertyAxiomPropertyEntity("propB"),
                 "/arg4/", prepareClassAxiomPropertyEntity("ClassB")),
             false,
             RestrictionType.OBJECT_MAXIMUM_CARDINALITY));
     propertyValueList.add(
-        new OwlAxiomPropertyValue("/arg2/ max 1 /arg4/", OwlType.AXIOM, 4, "propB_1 max 1 ClassB_1",
+        new OwlAxiomPropertyValue("/arg2/ max 1 /arg4/", OwlType.AXIOM, "propB_1 max 1 ClassB_1",
             Map.of(
                 "/arg2/", prepareObjectPropertyAxiomPropertyEntity("propB_1"),
                 "/arg4/", prepareClassAxiomPropertyEntity("ClassB_1")),

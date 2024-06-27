@@ -192,7 +192,6 @@ public class AxiomsHelper {
             parser.parseToIri(owlEntity, axiomPropertyValue, key);
           }
         }
-        axiomPropertyValue.setLastId(countingArg);
       }
     });
 
