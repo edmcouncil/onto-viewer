@@ -30,7 +30,7 @@
 
     <owlapi.version>5.1.16</owlapi.version>
     <hamcrest-library.version>2.2</hamcrest-library.version>
-    <json-path.version>2.5.0</json-path.version>
+    <json-path.version>2.9.0</json-path.version>
     <awaitility.version>4.0.3</awaitility.version>
     <guava.version>22.0</guava.version>
   </properties>

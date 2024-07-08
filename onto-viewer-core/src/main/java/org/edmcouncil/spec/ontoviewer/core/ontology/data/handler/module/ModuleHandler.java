@@ -33,6 +33,7 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -278,6 +279,16 @@ public class ModuleHandler {
       return getMaturityLevelForModule(ontologyIri);
     }
 
+    return maturityLevelFactory.notSet();
+  }
+
+  public MaturityLevel getMaturityLevelForEntity(OWLAnonymousIndividual owlAnonymousIndividual) {
+    MaturityLevel maturityLevel = maturityLevelHandler.getMaturityLevelForElement(owlAnonymousIndividual);
+
+    if (maturityLevel != MaturityLevelFactory.NOT_SET) {
+      return maturityLevel;
+    }
+    
     return maturityLevelFactory.notSet();
   }
 

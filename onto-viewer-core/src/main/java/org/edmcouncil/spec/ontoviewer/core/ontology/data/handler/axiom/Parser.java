@@ -11,6 +11,8 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.data.label.LabelProvider;
 import org.edmcouncil.spec.ontoviewer.core.ontology.scope.ScopeIriOntology;
 import org.edmcouncil.spec.ontoviewer.core.utils.UrlChecker;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.NodeID;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.springframework.stereotype.Component;
 
@@ -54,6 +56,22 @@ public class Parser {
         label,
         OntoViewerEntityType.fromEntityType(owlEntity),
         deprecatedHandler.getDeprecatedForEntity(iri));
+
+    opv.addEntityValues(key, axiomPropertyEntity);
+  }
+
+  public void parseToIri(String anonymousId,
+          OwlAxiomPropertyValue opv,
+          String key) {
+
+    String label = labelProvider.getLabelOrDefaultFragment(NodeID.getNodeID(anonymousId));
+    String iriString = anonymousId;
+    
+    var axiomPropertyEntity = new OwlAxiomPropertyEntity(
+            iriString,
+            label,
+            OntoViewerEntityType.fromEntityType(anonymousId),
+           false);
 
     opv.addEntityValues(key, axiomPropertyEntity);
   }

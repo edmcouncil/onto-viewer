@@ -8,6 +8,7 @@ public enum OntoViewerEntityType {
   DATATYPE("Datatype"),
   CLASS("Class"),
   INDIVIDUAL("Individual"),
+  ANONYMOUS_INDIVIDUAL("Anonymous individual"),
   OBJECT_PROPERTY("Object Property"),
   UNKNOWN("Unknown");
 
@@ -32,6 +33,14 @@ public enum OntoViewerEntityType {
       return OntoViewerEntityType.DATA_PROPERTY;
     } else if (entity.getEntityType().equals(EntityType.DATATYPE)) {
       return OntoViewerEntityType.DATATYPE;
+    } else {
+      return OntoViewerEntityType.UNKNOWN;
+    }
+  }
+
+  public static OntoViewerEntityType fromEntityType(String anonymous) {
+    if (anonymous.startsWith("_:genid")) {
+      return OntoViewerEntityType.ANONYMOUS_INDIVIDUAL;
     } else {
       return OntoViewerEntityType.UNKNOWN;
     }

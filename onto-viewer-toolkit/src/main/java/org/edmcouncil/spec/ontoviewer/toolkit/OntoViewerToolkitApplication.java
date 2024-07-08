@@ -7,6 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OntoViewerToolkitApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(OntoViewerToolkitApplication.class, args);
+    try {
+      SpringApplication.run(OntoViewerToolkitApplication.class, args);
+      System.exit(0);
+    }
+    catch (Exception exception) {
+      System.out.println(exception.getStackTrace());
+      System.exit(1);}
   }
 }

@@ -33,7 +33,7 @@ public class ViewerZipFilesOperations {
     List<String> downloadDirectories = config.getOntologiesConfig().getDownloadDirectory();
     LOGGER.trace("Ontology ZIP URLS : {}", zipUrls);
     LOGGER.trace("Ontology Download Dir : {}", downloadDirectories);
-    String downloadDirectory = downloadDirectories.stream().findFirst().orElse("download");
+    String downloadDirectory = downloadDirectories.stream().findFirst().orElseGet(() -> { LOGGER.warn("use default 'download' directory"); return "download"; });
 
     //checking if zip files can be downloaded at all
     if (!zipUrls.isEmpty()) {

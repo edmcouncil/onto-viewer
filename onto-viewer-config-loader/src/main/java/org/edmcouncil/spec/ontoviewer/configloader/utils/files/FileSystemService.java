@@ -30,7 +30,7 @@ public interface FileSystemService {
     }
   }
 
-  Path getPathToConfigFile() throws IOException;
+  Path getPathToConfigDownloadDirectory() throws IOException;
 
   Path getPathToApiKey();
 
@@ -44,4 +44,6 @@ public interface FileSystemService {
   default String readFileContent(Path path) throws IOException {
     return Files.readString(path);
   }
+
+  Path getPathToDefaultConfigDirectory() throws IOException;
 }

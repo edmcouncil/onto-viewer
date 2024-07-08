@@ -206,7 +206,7 @@ nbactions.xml
 **/updateHistory.json
 /web-app/fiboMapper/fibo/**
 .env
-
+.vscode/
 
 # Protege
 catalog-v001.xml
@@ -221,3 +221,6 @@ onto-viewer-web-app/ontologies/*
 
 # Mac
 .DS_Store
+
+#VS CODE
+.vscode/

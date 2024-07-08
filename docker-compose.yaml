@@ -1,6 +1,6 @@
 services:
   fibo-strapi:
-    image: edmcouncil/fibo-strapi:${HTML_BRANCH:-latest}
+    image: edmcouncil/fibo-strapi:${HTML_BRANCH:-develop}
     build:
       context: https://github.com/edmcouncil/html-pages.git#${HTML_BRANCH:-develop}:general/strapi
       args:
@@ -9,7 +9,7 @@ services:
     volumes:
       - spec_root:/opt/html-pages
   fibo-pages:
-    image: edmcouncil/fibo-pages:${HTML_BRANCH:-latest}
+    image: edmcouncil/fibo-pages:${HTML_BRANCH:-develop}
     build:
       context: https://github.com/edmcouncil/html-pages.git#${HTML_BRANCH:-develop}:general
       args:
@@ -22,14 +22,14 @@ services:
     depends_on:
       - fibo-strapi
   fibo-viewer:
-    image: edmcouncil/onto-viewer:${TAG:-latest}
+    image: edmcouncil/onto-viewer:${VIEWER_BRANCH:-develop}
     build:
       context: .
     environment:
       - ONTPUB_FAMILY=fibo
       - UPDATE_URL=${FIBO_UPDATE_URL:-https://spec.edmcouncil.org/fibo/ontology/etc/onto-viewer-web-app/config/}
   spec:
-    image: edmcouncil/spec:${HTML_BRANCH:-latest}
+    image: edmcouncil/spec:${HTML_BRANCH:-develop}
     build:
       context: https://github.com/edmcouncil/html-pages.git#${HTML_BRANCH:-develop}:home
       args:

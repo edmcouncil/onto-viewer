@@ -40,6 +40,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotation;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.search.EntitySearcher;
@@ -140,7 +141,43 @@ public class AnnotationsDataHandler {
     return result;
   }
 
-  public PropertyValue extractSubAnnotation(OWLAnnotation owlAnnotation) {
+  public OwlDetailsProperties<PropertyValue> handleAnnotations(
+          OWLAnonymousIndividual anonymousIndividual,
+          OWLOntology ontology,
+          OwlListDetails details) {
+    OwlDetailsProperties<PropertyValue> result = new OwlDetailsProperties<>();
+
+    var annotationAssertions = ontology.annotationAssertionAxioms(anonymousIndividual).collect(Collectors.toSet());
+    for (OWLAnnotationAssertionAxiom annotationAssertion : annotationAssertions) {
+      Map<String, PropertyValue> annotationsForAnnotationAssertion = new LinkedHashMap<>();
+      IRI propertyIri = annotationAssertion.getProperty().getIRI();
+
+      for (OWLAnnotation owlAnnotation : annotationAssertion.annotations().collect(Collectors.toSet())) {
+        var annotationValue = extractSubAnnotation(owlAnnotation);
+        annotationsForAnnotationAssertion.put(owlAnnotation.getProperty().getIRI().getIRIString(), annotationValue);
+      }
+
+      String value = annotationAssertion.annotationValue().toString();
+      PropertyValue annotationPropertyValue = new OwlAnnotationPropertyValueWithSubAnnotations();
+      ((OwlAnnotationPropertyValueWithSubAnnotations) annotationPropertyValue).setSubAnnotations(annotationsForAnnotationAssertion);
+
+      annotationPropertyValue.setType(dataExtractor.extractAnnotationType(annotationAssertion));
+
+      annotationPropertyValue = getAnnotationPropertyValue(annotationAssertion, value, annotationPropertyValue);
+
+      if (propertyIri.equals(COMMENT_IRI) && value.contains(FIBO_QNAME)) {
+        details.setqName(value);
+        continue;
+      }
+      LOG.debug("[Data Handler] Find annotation, value: \"{}\", property iri: \"{}\"", annotationPropertyValue, propertyIri);
+
+      result.addProperty(propertyIri.toString(), annotationPropertyValue);
+    }
+    result.sortPropertiesInAlphabeticalOrder();
+    return result;
+  }
+
+  private PropertyValue extractSubAnnotation(OWLAnnotation owlAnnotation) {
     String value = owlAnnotation.annotationValue().toString();
     PropertyValue annotationValue = new OwlAnnotationPropertyValue();
     annotationValue.setType(dataExtractor.extractAnnotationType(owlAnnotation));

@@ -1,5 +1,6 @@
 package org.edmcouncil.spec.ontoviewer.webapp.boot;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -120,7 +121,10 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
       LOGGER.info("File system manager created ? : {}", fileSystemService != null);
 
-      applicationConfigurationService.reloadConfiguration();
+      if (ignoreInitialReloadConfiguration()) {
+        applicationConfigurationService.reloadConfiguration();
+      }
+
       ConfigurationData configurationData = applicationConfigurationService.getConfigurationData();
 
       if (isInterrupt()) {
@@ -205,12 +209,12 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
       UpdaterOperation.setJobStatusToError(job, INTERRUPT_MESSAGE);
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
-    } catch (NullPointerException | UnloadableImportException ex) {
+    } catch (NullPointerException | UnloadableImportException | IOException ex) {
       ex.printStackTrace();
       UpdaterOperation.setJobStatusToError(job, ex.getMessage());
       blocker.setUpdateNow(Boolean.FALSE);
       this.interrupt();
-    }
+    } 
   }
 
   @Override
@@ -226,6 +230,10 @@ public abstract class UpdaterThread extends Thread implements Thread.UncaughtExc
 
   private Boolean isInterrupt() {
     return job.getStatus() == UpdateJobStatus.ERROR
-        || job.getStatus() == UpdateJobStatus.INTERRUPT_IN_PROGRESS;
+            || job.getStatus() == UpdateJobStatus.INTERRUPT_IN_PROGRESS;
+  }
+
+  private boolean ignoreInitialReloadConfiguration() {
+    return !job.getId().equals("0");
   }
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.edmcouncil.spec.ontoviewer.core.model.module.OntologyModule;
 import org.edmcouncil.spec.ontoviewer.core.ontology.data.handler.maturity.MaturityLevel;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,10 @@ public class ModuleHelper {
 
   public MaturityLevel getMaturityLevel(IRI iri) {
     return moduleHandler.getMaturityLevelForEntity(iri);
+  }
+
+  public MaturityLevel getMaturityLevel(OWLAnonymousIndividual owlAnonymousIndividual) {
+    return moduleHandler.getMaturityLevelForEntity(owlAnonymousIndividual);
   }
 
   public List<OntologyModule> getAllModules() {

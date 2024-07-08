@@ -9,6 +9,7 @@ import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
 import org.edmcouncil.spec.ontoviewer.core.ontology.OntologyManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationProperty;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDatatype;
@@ -30,20 +31,35 @@ public class EntitiesCacheService {
   }
 
   public EntityEntry getEntityEntry(IRI entityIri, OwlType owlType) {
-    var entityKey = new EntityKey(entityIri, owlType);
+    EntityKey entityKey = new EntityKey(entityIri, owlType);
+    return getOrCreateEntityEntry(entityKey);
+  }
 
-    if (!entityEntryMap.containsKey(entityKey)) {
-      var entity = obtainEntity(entityIri, getOwlEntityType(owlType));
-      EntityEntry entityEntry;
-      if (entity != null) {
-        entityEntry = new EntityEntry(Optional.of(entity));
-      } else {
-        entityEntry = new EntityEntry(Optional.empty());
-      }
-      entityEntryMap.put(entityKey, entityEntry);
-    }
+  public EntityEntry getEntityEntry(OWLAnonymousIndividual anonymousIndividual) {
+    EntityKey entityKey = new EntityKey(anonymousIndividual);
+    return getOrCreateEntityEntry(entityKey);
+  }
 
+  private EntityEntry getOrCreateEntityEntry(EntityKey entityKey) {
+    entityEntryMap.computeIfAbsent(entityKey, this::createEntityEntry);
     return entityEntryMap.get(entityKey);
+  }
+
+  private EntityEntry createEntityEntry(EntityKey key) {
+    Optional<? extends OWLEntity> entity = Optional.empty();
+    if (key.getIri() != null) {
+      entity = findEntityByIRI(key.getIri(), key.getOwlType());
+    } else if (key.getAnonymousIndividual() != null) {
+      //todo Handle the creation of EntityEntry for OWLAnonymousIndividual
+    }
+    return new EntityEntry((Optional<OWLEntity>) entity);
+  }
+
+  private Optional<? extends OWLEntity> findEntityByIRI(IRI entityIri, OwlType owlType) {
+    return ontologyManager.getOntology()
+            .entitiesInSignature(entityIri, Imports.INCLUDED)
+            .filter(owlEntity -> getOwlEntityType(owlType).isAssignableFrom(owlEntity.getClass()))
+            .findFirst();
   }
 
   private Class<? extends OWLEntity> getOwlEntityType(OwlType owlType) {
@@ -61,27 +77,26 @@ public class EntitiesCacheService {
       case DATATYPE:
         return OWLDatatype.class;
       default:
-        // Shouldn't happen but for the sake of completeness it must be here
         return OWLEntity.class;
     }
-  }
-
-  private OWLEntity obtainEntity(IRI entityIri, Class<? extends OWLEntity> entityType) {
-    return ontologyManager.getOntology()
-        .entitiesInSignature(entityIri, Imports.INCLUDED)
-        .filter(owlEntity -> entityType.isAssignableFrom(owlEntity.getClass()))
-        .findFirst()
-        .orElse(null);
   }
 
   static class EntityKey {
 
     private final IRI iri;
     private final OwlType owlType;
+    private final OWLAnonymousIndividual anonymousIndividual;
 
     public EntityKey(IRI iri, OwlType owlType) {
       this.iri = iri;
       this.owlType = owlType;
+      this.anonymousIndividual = null;
+    }
+
+    public EntityKey(OWLAnonymousIndividual anonymousIndividual) {
+      this.iri = null;
+      this.owlType = null;
+      this.anonymousIndividual = anonymousIndividual;
     }
 
     public IRI getIri() {
@@ -92,21 +107,23 @@ public class EntitiesCacheService {
       return owlType;
     }
 
+    public OWLAnonymousIndividual getAnonymousIndividual() {
+      return anonymousIndividual;
+    }
+
     @Override
     public boolean equals(Object o) {
-      if (this == o) {
-        return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-        return false;
-      }
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
       EntityKey entityKey = (EntityKey) o;
-      return Objects.equals(iri, entityKey.iri) && owlType == entityKey.owlType;
+      return Objects.equals(iri, entityKey.iri) &&
+              owlType == entityKey.owlType &&
+              Objects.equals(anonymousIndividual, entityKey.anonymousIndividual);
     }
 
     @Override
     public int hashCode() {
-      return Objects.hash(iri, owlType);
+      return Objects.hash(iri, owlType, anonymousIndividual);
     }
   }
 }
