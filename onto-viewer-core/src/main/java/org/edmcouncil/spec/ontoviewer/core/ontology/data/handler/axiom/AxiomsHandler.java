@@ -149,25 +149,25 @@ private static  final Logger LOG = LoggerFactory.getLogger(AxiomsHandler.class);
           annotationPropertyValue.setSubAnnotations(annotationMap);
           annotationPropertyValues.add(annotationPropertyValue);
 
-      }
-      LOG.info("anotated: {}", axiom.annotations().collect(Collectors.toList()));
+        }
+        LOG.info("anotated: {}", axiom.annotations().collect(Collectors.toList()));
 
-      axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
-          axiom, iriFragment, splitFragment, fixRenderedIri, true, annotationPropertyValues);
-    }
-      else
-      {
+        axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
+                axiom, iriFragment, splitFragment, fixRenderedIri, true, annotationPropertyValues);
+      } else {
         axiomPropertyValue = axiomsHelper.prepareAxiomPropertyValue(
                 axiom, iriFragment, splitFragment, fixRenderedIri, true);
       }
-    if (axiomPropertyValue == null) {
-      continue;
-    }
+      if (axiomPropertyValue == null) {
+        continue;
+      }
 
-    if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
-      result.addProperty(key, axiomPropertyValue);
+      if (!key.equals(StringIdentifier.subClassOfIriString) || !axiomPropertyValue.getType().equals(TAXONOMY)) {
+        result.addProperty(key, axiomPropertyValue);
+      }
+      result.sortPropertiesInAlphabeticalOrder();
     }
-    result.sortPropertiesInAlphabeticalOrder();
+    return result;
   }
 
   private <T extends OWLAxiom> OwlDetailsProperties<PropertyValue> handle(
