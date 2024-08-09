@@ -32,8 +32,8 @@ public class DescriptionGenerator {
   public static final String INHERITED_DESCRIPTIONS_LABEL = "Inherited descriptions:";
   public static final String OWN_DESCRIPTIONS_LABEL = "Own descriptions:";
 
-  static final String IS_A_RESTRICTIONS_LABEL = "IS-A restrictions";
-  static final String IS_A_RESTRICTIONS_INHERITED_LABEL = "IS-A restrictions inherited from superclasses";
+  static final String IS_A_RESTRICTIONS_LABEL = "OWL restrictions";
+  static final String IS_A_RESTRICTIONS_INHERITED_LABEL = "Inherited OWL restrictions";
   static final String ONTOLOGICAL_CHARACTERISTIC_LABEL = "Ontological characteristic";
 
   private static final Logger LOGGER = LoggerFactory.getLogger(DescriptionGenerator.class);
