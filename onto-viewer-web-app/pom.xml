@@ -16,7 +16,7 @@
   <name>Onto Viewer Web App</name>
 
   <properties>
-    <swagger.version>2.9.2</swagger.version>
+    <swagger.version>3.0.0</swagger.version>
     <lucene.version>8.11.0</lucene.version>
   </properties>
 
