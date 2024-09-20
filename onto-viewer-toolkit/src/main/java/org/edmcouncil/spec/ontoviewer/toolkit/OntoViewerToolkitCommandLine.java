@@ -125,11 +125,11 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
     LOGGER.info("Running goal '{}'...", goal.getName());
     switch (goal) {
       case CONSISTENCY_CHECK: {
-        var consistencyResult = false;
         LoadedOntologyData loadedOntologyData = null;
+        ConsistencyCheckResult consistencyCheckResult = null;
         try {
           loadedOntologyData = loadOntology(goal);
-          consistencyResult = ontologyConsistencyChecker.checkOntologyConsistency();
+          consistencyCheckResult = ontologyConsistencyChecker.checkOntologyConsistency();
         } catch (Exception ex) {
           LOGGER.error("Exception occurred while checking ontology consistency check: {}", ex.getMessage(), ex);
         }
@@ -139,9 +139,8 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
                 new OntoViewerToolkitRuntimeException("There is no option for output path set."));
         var outputPath = Path.of(optionOutputPath);
         var loadingDetails = loadedOntologyData != null ? loadedOntologyData.getLoadingDetails() : null;
-        var consistencyCheckResult = new ConsistencyCheckResult(consistencyResult, loadingDetails);
-        if (!consistencyCheckResult.getLoadingDetails().getMissingImports().isEmpty()) {
-          var missingOntologies = consistencyCheckResult.getLoadingDetails().getMissingImports()
+        if (!loadingDetails.getMissingImports().isEmpty()) {
+          var missingOntologies = loadingDetails.getMissingImports()
               .stream()
               .map(MissingImport::getIri)
               .collect(Collectors.toList());
@@ -149,7 +148,7 @@ public class OntoViewerToolkitCommandLine implements CommandLineRunner {
               consistencyCheckResult.isConsistent(),
               missingOntologies);
         } else {
-          LOGGER.info("Consistency check result: {}", consistencyCheckResult.isConsistent());
+          LOGGER.info("Consistency check result: {}", consistencyCheckResult);
         }
         new TextWriter().write(outputPath, consistencyCheckResult);
 
