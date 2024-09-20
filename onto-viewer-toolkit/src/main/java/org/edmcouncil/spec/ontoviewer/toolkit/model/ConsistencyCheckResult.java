@@ -6,26 +6,24 @@ import org.edmcouncil.spec.ontoviewer.core.ontology.loader.LoadedOntologyData.Lo
 public class ConsistencyCheckResult {
 
   private final boolean consistent;
-  private final LoadingDetails loadingDetails;
+  private final String inconsistencyExplanation;
 
-  public ConsistencyCheckResult(boolean consistent, LoadingDetails loadingDetails) {
+  public ConsistencyCheckResult(boolean consistent, String inconsistencyExplanation) {
     this.consistent = consistent;
-    this.loadingDetails = loadingDetails;
+    this.inconsistencyExplanation = inconsistencyExplanation;
   }
 
   public boolean isConsistent() {
     return consistent;
   }
 
-  public LoadingDetails getLoadingDetails() {
-    return loadingDetails;
-  }
+  public String explainInconsistency() { return inconsistencyExplanation; }
 
   @Override
   public String toString() {
     return new StringJoiner(", ", ConsistencyCheckResult.class.getSimpleName() + "[", "]")
         .add("consistent=" + consistent)
-        .add("loadingDetails=" + loadingDetails)
+        .add("inconsistency_explanation=" + inconsistencyExplanation)
         .toString();
   }
 }
