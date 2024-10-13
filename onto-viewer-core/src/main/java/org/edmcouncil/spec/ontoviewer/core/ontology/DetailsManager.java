@@ -69,6 +69,7 @@ public class DetailsManager {
   private final DeprecatedHandler deprecatedHandler;
   private final VersionIriHandler versionIriHandler;
 
+
   public DetailsManager(ApplicationConfigurationService applicationConfigurationService,
       OntologyManager ontologyManager,
       ClassHandler particularClassHandler,
