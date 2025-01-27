@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
@@ -44,6 +45,8 @@ public class DescriptionGenerator {
   private static final String IS_A_KIND_OF_LABEL = "is a kind of";
   private static final String EMPTY_RESULT_INDICATOR =
       OWN_DESCRIPTIONS_LABEL + "\n" + SPLIT_DELIMITER;
+
+  private static Pattern duplicatedWordsRegex = Pattern.compile("\\b(\\w+(\\s*\\w*))\\s+(\\1)\\b");
 
   static {
     REPLACEMENTS.put("[", "");
@@ -338,15 +341,38 @@ public class DescriptionGenerator {
   }
 
   private static String improveReadabilityOfRestriction(String restriction) {
-    if (restriction.contains("has at least 0")) {
-      // X 'has at least 0' Y   ->   X 'may have' Y
-      return restriction.replace("has at least 0", "may have");
-    } else if (restriction.contains("at least 0")) {
-      // X 'is' Y 'at least 0' Z   ->   X 'may be' Y Z
-      return restriction.replaceFirst(" is ", " may be ")
-          .replaceFirst("at least 0", "");
-    } else {
-      return restriction;
+    if (restriction.contains(" at least zero ")) {
+      restriction = restriction.replace("at least zero", "");
+      if (restriction.contains(" is ")) {
+        restriction = restriction.replace(" is ", " may be ");
+      }
+      else if (restriction.contains(" has ")) {
+        restriction = restriction.replace(" has ", " may have ");
+      }
+      else {
+        restriction = restriction.substring(0, 1).toLowerCase() + restriction.substring(1);
+        restriction = "Possibly " + restriction;
+      }
+      if (restriction.endsWith(" integer.")) {
+        restriction = restriction.replace(" integer", "");
+      }
+      if (restriction.endsWith(" boolean.")) {
+        restriction = restriction.replace(" boolean", "");
+      }
+      if (restriction.endsWith(" dateTime.")) {
+        restriction = restriction.replace(" dateTime", "");
+      }
     }
+    restriction = restriction.trim();
+    restriction = restriction.replace("  ", " ");
+    Matcher duplicatedWordsMatch = duplicatedWordsRegex.matcher(restriction);
+    Boolean matchFound = duplicatedWordsMatch.find();
+    if (matchFound) {
+      restriction = duplicatedWordsMatch.replaceFirst("$3"); // "number example input 6"
+    }
+    if (restriction.endsWith(" .")) {
+      restriction = restriction.replace(" .", ".");
+    }
+    return restriction;
   }
 }

@@ -19,6 +19,8 @@ label_config:
       name: Equivalent classes (necessary and sufficient criteria)
     - id: '@viewer.axiom.SubClassOf'
       name: OWL restrictions
+    - id: '@viewer.function.anonymous_ancestor'
+      git name: Inherited OWL restrictions
     - id: '@viewer.axiom.DisjointClasses'
       name: Disjoint classes
     - id: '@viewer.axiom.ClassAssertion'
