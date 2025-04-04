@@ -1,9 +1,12 @@
 package org.edmcouncil.spec.ontoviewer.core.model.property;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import org.edmcouncil.spec.ontoviewer.core.model.OwlType;
+import org.edmcouncil.spec.ontoviewer.core.model.PropertyValue;
 
 /**
  * @author Michał Daniel (michal.daniel@makolab.com)
@@ -14,6 +17,7 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
   private Map<String, OwlAxiomPropertyEntity> entityMaping = new HashMap<>();
   private boolean inferable = false;
   private RestrictionType restrictionType = RestrictionType.OTHER;
+  private List <PropertyValue> annotationPropertyValues = new LinkedList();
 
   public OwlAxiomPropertyValue() {
     super();
@@ -52,6 +56,10 @@ public class OwlAxiomPropertyValue extends PropertyValueAbstract<String> {
   public String getFullRenderedString() {
     return fullRenderedString;
   }
+
+  public void setAnnotationPropertyValues(List <PropertyValue> annotationPropertyValues) { this.annotationPropertyValues = annotationPropertyValues;}
+
+  public List <PropertyValue> getAnnotationPropertyValues() { return annotationPropertyValues;}
 
   public boolean isInferable() {
     return inferable;
